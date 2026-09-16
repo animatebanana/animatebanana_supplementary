@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+  <title>Examples — AnimateBanana</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@400..800&family=JetBrains+Mono:wght@400..700&family=Caveat:wght@500..700&display=swap">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css?v=2">
+  <link rel="stylesheet" href="assets/css/components/site-nav.css?v=2">
+  <link rel="stylesheet" href="assets/css/components/doodle-field.css">
+  <link rel="stylesheet" href="assets/css/components/gallery-grid.css">
+  <link rel="stylesheet" href="assets/css/components/example-viewer.css">
+  <link rel="stylesheet" href="assets/css/components/style-granularity-picker.css">
+  <link rel="stylesheet" href="assets/css/animation-styles/progressive.css">
+  <link rel="stylesheet" href="assets/css/animation-styles/alpha.css">
+  <link rel="stylesheet" href="assets/css/animation-styles/colorpop.css">
+  <link rel="stylesheet" href="assets/css/animation-styles/hopping.css">
+  <link rel="stylesheet" href="assets/css/animation-styles/sliding.css">
+  <style>
+    dialog#viewer-dialog { width: 100%; height: 100%; max-width: 100%; max-height: 100%; margin: 0; padding: 0; border: none; background: var(--bg); }
+    dialog#viewer-dialog::backdrop { background: rgba(36, 31, 23, 0.55); backdrop-filter: blur(3px); }
+    .viewer-dialog-inner { max-width: 940px; margin: 0 auto; padding: 16px var(--gap-page) 72px; }
+    .viewer-close {
+      display: block; margin: 18px var(--gap-page) 0 auto;
+      width: 38px; height: 38px; border-radius: 50%;
+      border: 1px solid var(--line); background: var(--surface);
+      box-shadow: var(--shadow-sm); cursor: pointer;
+      transition: transform var(--dur-fast) var(--ease-spring), background var(--dur-fast) var(--ease-out);
+    }
+    .viewer-close:hover { transform: rotate(90deg); background: var(--pink-soft); }
+  </style>
+</head>
+<body>
+  <site-nav current="examples"></site-nav>
+
+  <div class="page">
+    <div class="page-head">
+      <doodle-field density="sparse"></doodle-field>
+      <div class="kicker">Appendix · 01</div>
+      <h1>Example Gallery</h1>
+      <p>A curated set of examples from the AnimateBench benchmark. Click any card to open the full viewer.</p>
+    </div>
+    <gallery-grid></gallery-grid>
+
+    <footer class="site-footer">
+      <span>AnimateBanana — companion site to the paper. Anonymous submission.</span>
+      <nav aria-label="Footer">
+        <a href="index.html">Overview</a>
+        <a href="resources.html">Paper</a>
+        <a href="resources.html">Code</a>
+      </nav>
+    </footer>
+  </div>
+
+  <dialog id="viewer-dialog">
+    <button type="button" class="viewer-close" id="viewer-close" aria-label="Close viewer">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style="margin:auto;display:block;"><path d="M1 1L11 11M11 1L1 11" stroke="#2E2A22" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </button>
+    <div class="viewer-dialog-inner">
+      <example-viewer id="viewer"></example-viewer>
+    </div>
+  </dialog>
+
+  <script type="module" src="assets/js/components/site-nav.js?v=2"></script>
+  <script type="module" src="assets/js/components/doodle-field.js"></script>
+  <script type="module" src="assets/js/components/gallery-grid.js"></script>
+  <script type="module" src="assets/js/components/example-viewer.js"></script>
+  <script type="module" src="assets/js/pages/examples.js"></script>
+  <script type="module" src="assets/js/lib/reveal.js"></script>
+</body>
+</html>

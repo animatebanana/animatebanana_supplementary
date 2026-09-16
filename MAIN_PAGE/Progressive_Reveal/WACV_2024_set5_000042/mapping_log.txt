@@ -1,0 +1,26 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : Given an input RGB video depicting hand interactions, the pipeline processes the frames through two parallel streams.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : In the top stream, two-dimensional hand keypoints are tracked across the video frames to provide initial guidance.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : Concurrently, a neural regressor predicts initial hand pose, shape, and camera parameters.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : These regressed parameters produce an unrefined three-dimensional hand motion sequence in camera space.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : In the optimization phase, 2D pose detections and camera-space motion are combined with a learned generative motion prior to optimize the global trajectory.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : The result is a temporally stable and accurate three-dimensional hand motion reconstruction across the entire video.
+--------------------------------------------------------------------------------

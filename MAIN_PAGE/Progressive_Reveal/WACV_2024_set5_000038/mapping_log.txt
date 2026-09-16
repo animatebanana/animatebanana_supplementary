@@ -1,0 +1,98 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : The pipeline begins with reference collection generation, starting from an input caption describing a scene.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : A noun parser extracts the grammatical entity tokens directly from the prompt.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : This isolates the target conceptual categories, such as man, dog, and grass.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : In parallel, the full caption is fed into a text-to-image diffusion model.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : Cross-attention maps corresponding to the parsed nouns are extracted using DAAM.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : The diffusion model synthesizes a high-fidelity reference image depicting the scene.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : A frozen visual encoder processes the generated synthetic image.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 3.999s
+Narration   : This yields dense spatial feature maps across the synthetic image.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 4.499s
+Narration   : Meanwhile, the cross-attention heatmaps are thresholded to produce binary masks for each noun.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 4.999s
+Narration   : Region pooling then aggregates the visual features within each binary mask segment.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 5.499s
+Narration   : Concurrently, the parsed nouns and prompt templates are encoded by a frozen text encoder.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Timestamp   : 5.999s
+Narration   : This creates aligned pairs of contextual text embeddings and regional visual reference embeddings.
+--------------------------------------------------------------------------------
+Frame Image : frame_12.png
+Timestamp   : 6.499s
+Narration   : These paired representations are stored in dual text and visual reference memory collections.
+--------------------------------------------------------------------------------
+Frame Image : frame_13.png
+Timestamp   : 6.999s
+Narration   : During inference, an arbitrary set of textual target classes is provided for segmentation.
+--------------------------------------------------------------------------------
+Frame Image : frame_14.png
+Timestamp   : 7.499s
+Narration   : Each query class name is processed through the text encoder.
+--------------------------------------------------------------------------------
+Frame Image : frame_15.png
+Timestamp   : 7.999s
+Narration   : This generates query text embeddings representing each concept.
+--------------------------------------------------------------------------------
+Frame Image : frame_16.png
+Timestamp   : 8.499s
+Narration   : A reference retrieval module matches the query embeddings against the stored textual index.
+--------------------------------------------------------------------------------
+Frame Image : frame_17.png
+Timestamp   : 8.999s
+Narration   : The top matching visual reference embeddings are retrieved for each concept.
+--------------------------------------------------------------------------------
+Frame Image : frame_18.png
+Timestamp   : 9.499s
+Narration   : K-means clustering aggregates the retrieved references into compact visual prototypes.
+--------------------------------------------------------------------------------
+Frame Image : frame_19.png
+Timestamp   : 9.999s
+Narration   : An unlabeled test image is simultaneously provided to the visual processing stream.
+--------------------------------------------------------------------------------
+Frame Image : frame_20.png
+Timestamp   : 10.499s
+Narration   : The input image is processed concurrently by the visual encoder and the OpenCut segmentation model.
+--------------------------------------------------------------------------------
+Frame Image : frame_21.png
+Timestamp   : 10.999s
+Narration   : This extracts dense visual feature maps alongside candidate region proposal masks.
+--------------------------------------------------------------------------------
+Frame Image : frame_22.png
+Timestamp   : 11.499s
+Narration   : Region pooling aggregates the dense features across each proposed mask into a region embedding.
+--------------------------------------------------------------------------------
+Frame Image : frame_23.png
+Timestamp   : 11.999s
+Narration   : Finally, cosine similarity matching between region embeddings and visual prototypes assigns the final open-vocabulary segmentation labels.
+--------------------------------------------------------------------------------

@@ -1,0 +1,66 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : The framework begins with an input pose sequence comprising sparsely sampled keyframes alongside interpolated frames.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : These poses are mapped into the embedding space through a pose embedding layer with linear projection.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : This produces a sequence of projected embedding tokens representing the frames.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : The tokens are then fed into a stack of stacked MixSynthEncoder blocks.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : A top linear projection layer transforms the refined embedding features back into the pose dimension.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : This outputs the refined and fully recovered human pose sequence across the video.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : Looking inside the MixSynthEncoder, standard multi-head self-attention is replaced with MixSynth Attention.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 3.999s
+Narration   : The input first enters the MixSynth Attention module to synthesize spatial and temporal relations concurrently.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 4.499s
+Narration   : The attended features pass through a residual connection followed by layer normalization.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 4.999s
+Narration   : The normalized representations are then processed by a point-wise feed-forward network.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 5.499s
+Narration   : A second residual connection and layer normalization complete the encoder block.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Timestamp   : 5.999s
+Narration   : Within the synthetic attention operation, the input splits into two parallel branches.
+--------------------------------------------------------------------------------
+Frame Image : frame_12.png
+Timestamp   : 6.499s
+Narration   : The input features are arranged into temporal slices and transposed spatial slices.
+--------------------------------------------------------------------------------
+Frame Image : frame_13.png
+Timestamp   : 6.999s
+Narration   : Linear layers independently generate temporal and spatial synthetic attention matrices to model inter-frame and inter-joint importance.
+--------------------------------------------------------------------------------
+Frame Image : frame_14.png
+Timestamp   : 7.499s
+Narration   : The generated attention weights modulate the feature representations alongside skip connections.
+--------------------------------------------------------------------------------
+Frame Image : frame_15.png
+Timestamp   : 7.999s
+Narration   : Finally, the temporal and spatial branches are summed and fused by a linear layer to produce the output.
+--------------------------------------------------------------------------------

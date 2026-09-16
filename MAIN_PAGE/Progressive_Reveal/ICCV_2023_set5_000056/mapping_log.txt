@@ -1,0 +1,62 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : The legend outlines the foundational components, including the autoencoder modules, latent embeddings, noise representations, and network architectures.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : The pipeline begins by passing both the character image and the skeleton pose image into a pre-trained encoder.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : The encoder outputs a clean latent embedding for the character and an aligned pose latent embedding for the skeleton.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : The clean latent then undergoes the forward diffusion process to generate a noisy latent embedding.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : The primary UNet backbone receives text conditioning prompts across its cross-attention layers to guide generation.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : Rather than using cross-attention, the pose latent is directly concatenated with the noisy latent embedding and fed into the UNet.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : The model iteratively denoises the latent representation while maintaining native structural guidance from the skeleton.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 3.999s
+Narration   : Finally, the fully denoised clean latent is decoded to synthesize the output character matching the target pose.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 4.499s
+Narration   : In part a, the heatmap-guided denoising loss evaluates the difference between the ground-truth noise and the estimated noise.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 4.999s
+Narration   : Subtracting the estimated noise directly from the ground truth noise provides the original standard denoising loss.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 5.499s
+Narration   : In parallel, the noise difference is mapped through the decoder to create an image-space difference map.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Timestamp   : 5.999s
+Narration   : A pre-trained pose estimator module extracts body joint heatmaps to locate human regions with high synthesis errors.
+--------------------------------------------------------------------------------
+Frame Image : frame_12.png
+Timestamp   : 6.499s
+Narration   : Applying this heatmap soft mask scales the loss on human areas, which is combined with the original loss to form the total objective.
+--------------------------------------------------------------------------------
+Frame Image : frame_13.png
+Timestamp   : 6.999s
+Narration   : For comparison, part b illustrates the dual-branch ControlNet approach, which locks the original UNet backbone while adding a trainable branch.
+--------------------------------------------------------------------------------
+Frame Image : frame_14.png
+Timestamp   : 7.499s
+Narration   : In that design, pose condition features are extracted separately and added back into the frozen branch to produce the estimated noise.
+--------------------------------------------------------------------------------

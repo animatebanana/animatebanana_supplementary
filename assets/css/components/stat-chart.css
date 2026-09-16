@@ -1,0 +1,48 @@
+stat-chart {
+  display: block;
+  background: var(--surface);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-lg);
+  padding: 22px 24px 24px;
+}
+.sc-title {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 750;
+  letter-spacing: -0.025em;
+  margin-bottom: 18px;
+}
+.sc-rows { display: flex; flex-direction: column; gap: 12px; }
+.sc-row { display: grid; grid-template-columns: minmax(90px, 150px) 1fr 48px; align-items: center; gap: 14px; }
+.sc-label { font-size: var(--fs-xs); color: var(--ink-soft); }
+.sc-bar-track {
+  height: 14px;
+  border-radius: 4px;
+  background: var(--paper);
+  border: 1.5px solid var(--ink);
+  overflow: hidden;
+}
+.sc-bar {
+  position: relative;
+  height: 100%;
+  border-right: 1.5px solid var(--ink);
+  transform-origin: 0 50%;
+  animation: sc-grow 1s var(--ease-out) both;
+}
+/* Ink cross-hatch over the fill, to match the sketchbook numerals */
+.sc-bar::after { content: ''; position: absolute; inset: 0; background: var(--hatch-ink); }
+.sc-row:nth-child(2) .sc-bar { animation-delay: 60ms; }
+.sc-row:nth-child(3) .sc-bar { animation-delay: 120ms; }
+.sc-row:nth-child(4) .sc-bar { animation-delay: 180ms; }
+.sc-row:nth-child(5) .sc-bar { animation-delay: 240ms; }
+.sc-row:nth-child(n+6) .sc-bar { animation-delay: 300ms; }
+@keyframes sc-grow { from { transform: scaleX(0); } }
+@media (prefers-reduced-motion: reduce) { .sc-bar { animation: none; } }
+
+.sc-value {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}

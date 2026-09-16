@@ -1,0 +1,86 @@
+=== Hopping Bounding Box Sequence ===
+
+Frame Image : frame_00.png
+Timestamp   : 1.00s
+Narration   : The input video sequence is fed into the system.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 3.00s
+Narration   : It passes into the Video Network.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 5.00s
+Narration   : Simultaneously, the audio waveform is captured.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 7.00s
+Narration   : The waveform converts into spectrogram A.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 9.00s
+Narration   : Spectrogram A enters the Audio Network.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 11.00s
+Narration   : The Video Network yields visual feature embeddings.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 13.00s
+Narration   : The Audio Network yields audio feature embeddings.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 15.00s
+Narration   : In training, visual features route to the Vision modality head.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 17.00s
+Narration   : A fully connected layer generates the vision output.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 19.00s
+Narration   : Both feature streams merge into the Audio-Visual modality head.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 21.00s
+Narration   : Producing the audio-visual output.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Timestamp   : 23.00s
+Narration   : Audio features also enter the Audio modality head.
+--------------------------------------------------------------------------------
+Frame Image : frame_12.png
+Timestamp   : 25.00s
+Narration   : Yielding the audio output.
+--------------------------------------------------------------------------------
+Frame Image : frame_13.png
+Timestamp   : 27.00s
+Narration   : During inference, visual feature maps are extracted.
+--------------------------------------------------------------------------------
+Frame Image : frame_14.png
+Timestamp   : 29.00s
+Narration   : Along with the corresponding audio embeddings.
+--------------------------------------------------------------------------------
+Frame Image : frame_15.png
+Timestamp   : 31.00s
+Narration   : Both streams combine via a dot product operation.
+--------------------------------------------------------------------------------
+Frame Image : frame_16.png
+Timestamp   : 33.00s
+Narration   : This generates a localization heatmap for frame one.
+--------------------------------------------------------------------------------
+Frame Image : frame_17.png
+Timestamp   : 35.00s
+Narration   : As well as for frame t.
+--------------------------------------------------------------------------------
+Frame Image : frame_18.png
+Timestamp   : 37.00s
+Narration   : Through to frame N.
+--------------------------------------------------------------------------------
+Frame Image : frame_19.png
+Timestamp   : 39.00s
+Narration   : All frame heatmaps enter Time Average.
+--------------------------------------------------------------------------------
+Frame Image : frame_20.png
+Timestamp   : 41.00s
+Narration   : Producing the final averaged output heatmap.
+--------------------------------------------------------------------------------

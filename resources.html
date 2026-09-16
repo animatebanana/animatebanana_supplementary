@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+  <title>Resources — AnimateBanana</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@400..800&family=JetBrains+Mono:wght@400..700&family=Caveat:wght@500..700&display=swap">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css?v=2">
+  <link rel="stylesheet" href="assets/css/components/site-nav.css?v=2">
+  <link rel="stylesheet" href="assets/css/components/doodle-field.css">
+  <style>
+    .tier {
+      position: relative; border: 2px solid var(--ink); border-radius: var(--radius-lg);
+      padding: 28px 30px 30px 40px; margin-bottom: 24px; overflow: hidden; background: var(--surface);
+    }
+    .tier::before { content: ''; position: absolute; inset: 0 auto 0 0; width: 12px; border-right: 2px solid var(--ink); }
+    .tier-open { box-shadow: 6px 6px 0 var(--mint); }
+    .tier-open::before { background: var(--mint); }
+    .tier-closed { box-shadow: 6px 6px 0 var(--pink); }
+    .tier-closed::before { background: var(--pink); }
+    .tier h2 { font-size: clamp(1.6rem, 1.2rem + 1.4vw, 2.4rem); margin-bottom: 6px; }
+    .tier p.tier-sub { font-size: var(--fs-xs); color: var(--ink-soft); margin: 0 0 16px; }
+    .tier ul { margin: 0; padding-left: 20px; font-size: var(--fs-sm); line-height: 1.85; }
+    .tier code { font-family: var(--font-mono); font-size: var(--fs-xs); background: rgba(255,255,255,0.75); border: 1px solid var(--line); padding: 1px 6px; border-radius: 5px; }
+    .links-row { display: flex; gap: 12px; justify-content: center; padding: 28px 0 8px; flex-wrap: wrap; }
+  </style>
+</head>
+<body>
+  <site-nav current="resources"></site-nav>
+
+  <div class="page">
+    <div class="page-head">
+      <doodle-field density="sparse"></doodle-field>
+      <div class="kicker">Appendix · 08</div>
+      <h1>Resources &amp; Reproducibility</h1>
+      <p>Deliberately tiered — released openly vs. not initially exposed — stated out loud rather than left for a reviewer to wonder about.</p>
+    </div>
+
+    <div class="links-row">
+      <a class="btn" href="#">Paper (PDF)</a>
+      <a class="btn" href="#">Supplementary Material</a>
+      <a class="btn btn-primary" href="resources/reference_implementation/">Reference Implementation</a>
+    </div>
+
+    <div class="tier tier-open">
+      <h2>Released openly</h2>
+      <p class="tier-sub">Sufficient to understand and substantially reproduce the approach on ordinary cases.</p>
+      <ul>
+        <li>Agent instructions — <code>resources/prompts/diagram_transmuter.md</code>, <code>layout_parser.md</code>, <code>semantic_parser.md</code>, <code>animation_planner.md</code>, <code>narration_drafter.md</code>, <code>animation_designer.md</code>, and the three critics under <code>resources/prompts/critics/</code></li>
+        <li>Configuration — <code>resources/schemas/</code>, <code>resources/configs/animation_styles/</code>, <code>resources/configs/evaluation/</code></li>
+        <li>Representative intermediate and end-to-end outputs</li>
+        <li>Benchmark metadata and evaluation subset, as appropriate</li>
+        <li>A reference execution path sufficient for standard examples — <code>resources/reference_implementation/</code>, explicitly labelled <strong>reference implementation</strong>, not the full experimental system</li>
+      </ul>
+    </div>
+
+    <div class="tier tier-closed">
+      <h2>Not initially exposed</h2>
+      <p class="tier-sub">No need for the review artifact to expose the entire production system.</p>
+      <ul>
+        <li>Production orchestration and retry/fallback policies</li>
+        <li>Difficult-case recovery heuristics</li>
+        <li>Internal prompt-routing logic</li>
+        <li>Batching / caching infrastructure and the deployment stack</li>
+        <li>Optimisation specific to pathological diagrams, and other internal utilities</li>
+      </ul>
+    </div>
+
+    <p style="text-align:center;color:var(--ink-soft);font-size:12.5px;">
+      The released path is functional for ordinary cases; the paper documents the conceptual method required
+      for full reproducibility.
+    </p>
+
+    <footer class="site-footer">
+      <span>AnimateBanana — companion site to the paper. Anonymous submission.</span>
+      <nav aria-label="Footer">
+        <a href="index.html">Overview</a>
+        <a href="resources.html">Paper</a>
+        <a href="resources.html">Code</a>
+      </nav>
+    </footer>
+  </div>
+
+  <script type="module" src="assets/js/components/site-nav.js?v=2"></script>
+  <script type="module" src="assets/js/components/doodle-field.js"></script>
+  <script type="module" src="assets/js/lib/reveal.js"></script>
+</body>
+</html>

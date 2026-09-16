@@ -1,0 +1,50 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : The overall architecture begins with an input question and an input image.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : A YOLOv5 model processes the image to extract prominent object tags, such as dog and chair.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : In parallel, a Faster R-CNN model extracts localized visual feature regions from the image.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : The question and extracted object tags feed directly into the Knowledge Generation and Selection module.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : The VLC-BERT Transformer integrates the question, selected commonsense inferences, and image regions using multimodal attention.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : Finally, VLC-BERT produces the predicted answer to the question.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : Looking closer at Knowledge Generation and Selection, the framework utilizes a predefined set of commonsense relation types.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 3.999s
+Narration   : The question is converted into declarative form and concatenated with the object tags into a combined phrase.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 4.499s
+Narration   : This combined phrase and the relation set are supplied as input to the COMET transformer model.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 4.999s
+Narration   : COMET generates candidate completions across relations such as AtLocation, MadeOf, and UsedFor using beam search.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 5.499s
+Narration   : Relation-specific templates then convert these candidate tuples into natural language sentences and filter lexical duplicates.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Timestamp   : 5.999s
+Narration   : Semantic search via Sentence-BERT ranks all generated sentences against the question, yielding the top commonsense inferences.
+--------------------------------------------------------------------------------

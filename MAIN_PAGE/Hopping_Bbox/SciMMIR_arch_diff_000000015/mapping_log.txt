@@ -1,0 +1,50 @@
+=== Hopping Bounding Box Sequence ===
+
+Frame Image : frame_00.png
+Timestamp   : 1.00s
+Narration   : Diverse IoT devices, such as cameras, drones, and smartphones, generate continuous inference requests.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 3.00s
+Narration   : These requests arrive online with varying input shapes, model types, and target service level objectives.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 5.00s
+Narration   : Incoming requests are partitioned into model-specific batching queues.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 7.00s
+Narration   : A DNN model zoo supplies the corresponding heterogeneous neural network architectures to the framework.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 9.00s
+Narration   : The BCEdge framework coordinates the adaptive batching and concurrent execution pipeline on edge systems.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 11.00s
+Narration   : At its core, a deep reinforcement learning scheduler evaluates a utility metric balancing latency and throughput under constraints.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 13.00s
+Narration   : The scheduler automatically decides the number of concurrent model instances to run in parallel,
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 15.00s
+Narration   : while simultaneously tuning the dynamic batch size for each model.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 17.00s
+Narration   : The scheduled request batches are organized for concurrent inference across multiple model instances.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 19.00s
+Narration   : The executor dispatches these batches and returns the resulting predictions.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 21.00s
+Narration   : Runtime statistics (throughput, latency, utilization) are tracked by a predictor to continuously guide the scheduler.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Timestamp   : 23.00s
+Narration   : All accelerated workloads are efficiently executed on the underlying edge hardware.
+--------------------------------------------------------------------------------

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+  <title>Editability — AnimateBanana</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@400..800&family=JetBrains+Mono:wght@400..700&family=Caveat:wght@500..700&display=swap">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css?v=2">
+  <link rel="stylesheet" href="assets/css/components/site-nav.css?v=2">
+  <link rel="stylesheet" href="assets/css/components/doodle-field.css">
+  <link rel="stylesheet" href="assets/css/components/edit-diff.css?v=6">
+  <style>
+    /* the windows want more room than the standard page column */
+    .ed-page { max-width: 1560px; margin: 0 auto; padding: 0 clamp(14px, 2vw, 34px) 60px; }
+  </style>
+</head>
+<body>
+  <site-nav current="editability"></site-nav>
+
+  <div class="ed-page">
+    <div class="page-head">
+      <doodle-field density="sparse"></doodle-field>
+      <div class="kicker">Appendix &middot; 06</div>
+      <h1>Editability</h1>
+    </div>
+
+    <edit-diff src="data/editability.json"></edit-diff>
+
+    <footer class="site-footer">
+      <span>AnimateBanana &mdash; companion site to the paper. Anonymous submission.</span>
+      <nav aria-label="Footer">
+        <a href="index.html">Overview</a>
+        <a href="pipeline.html">Pipeline</a>
+        <a href="resources.html">Paper</a>
+        <a href="resources.html">Code</a>
+      </nav>
+    </footer>
+  </div>
+
+  <script type="module" src="assets/js/components/site-nav.js?v=2"></script>
+  <script type="module" src="assets/js/components/doodle-field.js"></script>
+  <script type="module" src="assets/js/components/edit-diff.js?v=6"></script>
+  <script type="module" src="assets/js/lib/reveal.js?v=6"></script>
+</body>
+</html>

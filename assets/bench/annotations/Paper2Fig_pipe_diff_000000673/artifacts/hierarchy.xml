@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram depth="1">
+  <raster_node id="node_original_image" depth="1" />
+  <raster_node id="node_saliency_map" depth="1" />
+  <standalone_node id="node_T" depth="1" />
+  <raster_node id="node_salient_image" depth="1" />
+  <raster_node id="node_nonsalient_image" depth="1" />
+  <standalone_node id="node_dsift_top" depth="1" />
+  <standalone_node id="node_dsift_bottom" depth="1" />
+
+  <composite_whole id="composite_spm_top" depth="1">
+    <composite_part id="spm_top_rect" depth="1" />
+    <composite_part id="spm_top_line_v" depth="1" />
+    <composite_part id="spm_top_line_h" depth="1" />
+    <composite_part id="spm_top_q1" depth="1" />
+    <composite_part id="spm_top_q2" depth="1" />
+    <composite_part id="spm_top_q3" depth="1" />
+    <composite_part id="spm_top_q4" depth="1" />
+  </composite_whole>
+
+  <composite_whole id="composite_spm_bottom" depth="1">
+    <composite_part id="spm_bottom_rect" depth="1" />
+    <composite_part id="spm_bottom_line_v" depth="1" />
+    <composite_part id="spm_bottom_line_h" depth="1" />
+    <composite_part id="spm_bottom_q1" depth="1" />
+    <composite_part id="spm_bottom_q2" depth="1" />
+    <composite_part id="spm_bottom_q3" depth="1" />
+    <composite_part id="spm_bottom_q4" depth="1" />
+  </composite_whole>
+
+  <standalone_node id="node_mkl_svm" depth="1" />
+
+  <edge id="edge_1" source="node_original_image" target="node_T" depth="1" />
+  <edge id="edge_2" source="node_saliency_map" target="node_T" depth="1" />
+  <edge id="edge_3" source="node_T" target="node_salient_image" depth="1" />
+  <edge id="edge_4" source="node_T" target="node_nonsalient_image" depth="1" />
+  <edge id="edge_5" source="node_salient_image" target="node_dsift_top" depth="1" />
+  <edge id="edge_6" source="node_nonsalient_image" target="node_dsift_bottom" depth="1" />
+  <edge id="edge_7" source="node_dsift_top" target="composite_spm_top" depth="1" />
+  <edge id="edge_8" source="node_dsift_bottom" target="composite_spm_bottom" depth="1" />
+  <edge id="edge_9" source="composite_spm_top" target="node_mkl_svm" depth="1" />
+  <edge id="edge_10" source="composite_spm_bottom" target="node_mkl_svm" depth="1" />
+</Diagram>

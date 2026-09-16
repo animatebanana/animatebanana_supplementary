@@ -1,0 +1,50 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : Input latent vectors are constructed in pairs sharing either the same identity code or the same appearance code.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : These latent vectors are mapped through fully connected stacks into distinct identity and appearance representations.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : The resulting representations are fed directly into the generator network.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : This synthesizes a batch of fingerprint images with specific combinations of identity and appearance attributes.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : To enforce disentanglement, pairs with the same identity but different appearances are evaluated.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : Both fingerprint images undergo downsampling and Gaussian smoothing.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : This blurring operation removes high-frequency biometric details while preserving low-frequency appearance features.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 3.999s
+Narration   : The mean squared error between the blurred images penalizes unwanted similarity, pushing different appearances apart.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 4.499s
+Narration   : Conversely, pairs sharing the same appearance latent but differing in identity are also sampled.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 4.999s
+Narration   : These images are similarly filtered through the blur transformation.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 5.499s
+Narration   : The filter isolates the underlying appearance profiles of the distinct fingerprints.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Timestamp   : 5.999s
+Narration   : The mean squared error loss encourages these blurred representations to be similar, pulling matching appearances together.
+--------------------------------------------------------------------------------

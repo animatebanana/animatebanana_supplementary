@@ -1,0 +1,58 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : The pipeline begins by taking the input image alongside a spatially augmented positive sample.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : A set of negative image samples capturing varied crowd scenes and weather conditions is also gathered.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : All image samples are passed into a shared VGG encoder.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : The encoder extracts deep image feature representations for the positive, input, and negative samples.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : Within the Contrastive Weather-adaptive Module, these features are fed into a weather encoder.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : The weather encoder outputs corresponding weight vectors for each branch.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : A weather bank maintains learned weather prototypes, regularized by a compact prototype loss.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 3.999s
+Narration   : The weight vectors and the weather bank are combined through matrix multiplication.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 4.499s
+Narration   : This multiplication yields patch-wise weather-adaptive queries across the positive, input, and negative branches.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 4.999s
+Narration   : A contrastive loss optimizes the queries, while the input weather query is forwarded through a multi-layer perceptron.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 5.499s
+Narration   : In the weather-aware crowd counting stage, a transformer decoder takes the weather query along with keys and values from the input features.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Timestamp   : 5.999s
+Narration   : The transformer decoder produces weather-aware crowd counting features.
+--------------------------------------------------------------------------------
+Frame Image : frame_12.png
+Timestamp   : 6.499s
+Narration   : A final decoder processes these crowd counting features.
+--------------------------------------------------------------------------------
+Frame Image : frame_13.png
+Timestamp   : 6.999s
+Narration   : Finally, the model generates the predicted crowd density map, trained under a Bayesian loss.
+--------------------------------------------------------------------------------

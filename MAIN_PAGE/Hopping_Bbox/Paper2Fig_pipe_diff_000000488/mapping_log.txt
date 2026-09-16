@@ -1,0 +1,34 @@
+=== Hopping Bounding Box Sequence ===
+
+Frame Image : frame_00.png
+Timestamp   : 1.50s
+Narration   : The framework categorizes language pairs into document-rich teacher languages...
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 4.50s
+Narration   : ...and document-poor student languages.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 7.50s
+Narration   : Training begins with multilingual sentence-level neural machine translation, or SenNMT...
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 10.50s
+Narration   : ...which is finetuned into a multilingual document-level translation model, DocNMT.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 13.50s
+Narration   : In the initial SenNMT stage, document-rich languages are pretrained using parallel sentence pairs...
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 16.50s
+Narration   : ...jointly with sentence pairs from document-poor languages.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 19.50s
+Narration   : For DocNMT, teacher languages are trained on full document pairs to capture cross-sentence contextual modeling.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 22.50s
+Narration   : Finally, zero-shot transfer empowers student languages to translate documents in context without ever seeing parallel document pairs during training.
+--------------------------------------------------------------------------------

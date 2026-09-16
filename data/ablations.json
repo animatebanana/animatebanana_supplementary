@@ -1,0 +1,110 @@
+{
+ "_note": "Numbers transcribed from the paper's ablation table. The FULL row is a PLACEHOLDER — fill it from the main results table. Everything else (deltas, bar lengths, ranking) is derived from these six columns, so never hand-edit a delta.",
+ "metrics": [
+  { "key": "VF",   "label": "Visual Fidelity",        "group": "gate",    "note": "share of animations in an accept band" },
+  { "key": "ASC",  "label": "Style Compliance",       "group": "gate",    "note": "share of animations in an accept band" },
+  { "key": "SSS",  "label": "Selection Sensibility",  "group": "quality", "note": "sequence-level Q" },
+  { "key": "GPS",  "label": "Granularity & Pacing",   "group": "quality", "note": "sequence-level Q" },
+  { "key": "NAS",  "label": "Narration Alignment",    "group": "quality", "note": "sequence-level Q" },
+  { "key": "AANS", "label": "Animated Narrative Score","group": "final",  "note": "G · Q_n, averaged over the benchmark" }
+ ],
+ "full": {
+  "id": "full",
+  "label": "AnimateBanana (full)",
+  "_placeholder": true,
+  "scores": { "VF": 0.9780, "ASC": 0.9450, "SSS": 0.8690, "GPS": 0.9010, "NAS": 0.8930, "AANS": 0.8910 }
+ },
+ "ablations": [
+  {
+   "id": "stage1_no_critic",
+   "label": "Stage 1 w/o Critic",
+   "stage": "stage1",
+   "removes": "critic",
+   "cuts": ["s1-critic"],
+   "question": "What does the Stage 1 critic catch?",
+   "note": "~ placeholder: what the un-critiqued Stage 1 output gets wrong, in one or two sentences.",
+   "scores": { "VF": 0.9560, "ASC": 0.8571, "SSS": 0.7784, "GPS": 0.8161, "NAS": 0.8071, "AANS": 0.8006 }
+  },
+  {
+   "id": "stage2_no_image",
+   "label": "Stage 2 w/o Diagram Image Input",
+   "stage": "stage2",
+   "removes": "image",
+   "cuts": ["s2-image"],
+   "question": "How much does Stage 2 rely on seeing the diagram, not just its code?",
+   "note": "~ placeholder: what goes wrong when Stage 2 works blind.",
+   "scores": { "VF": 0.9450, "ASC": 0.8461, "SSS": 0.7679, "GPS": 0.8070, "NAS": 0.7831, "AANS": 0.7860 }
+  },
+  {
+   "id": "sequencer_no_xml",
+   "label": "Sequencer w/o XML Input",
+   "stage": "sequencer",
+   "removes": "xml",
+   "cuts": ["seq-xml"],
+   "question": "Can the sequencer order a diagram it cannot read the structure of?",
+   "note": "~ placeholder: the biggest drop in the table — say why the hierarchy matters.",
+   "scores": { "VF": 0.9230, "ASC": 0.8241, "SSS": 0.7440, "GPS": 0.7803, "NAS": 0.7596, "AANS": 0.7613 }
+  },
+  {
+   "id": "sequencer_no_critic",
+   "label": "Sequencer w/o Critic",
+   "stage": "sequencer",
+   "removes": "critic",
+   "cuts": ["seq-critic"],
+   "question": "What does the sequencer critic fix?",
+   "note": "~ placeholder.",
+   "scores": { "VF": 0.9667, "ASC": 0.9111, "SSS": 0.8247, "GPS": 0.8670, "NAS": 0.8534, "AANS": 0.8484 }
+  },
+  {
+   "id": "narration_no_context",
+   "label": "Narration Drafter w/o Context",
+   "stage": "narration",
+   "removes": "context",
+   "cuts": ["narr-context"],
+   "question": "What does the paper context buy the narration?",
+   "note": "~ placeholder: note that NAS falls furthest here, as expected.",
+   "scores": { "VF": 0.9670, "ASC": 0.9011, "SSS": 0.8128, "GPS": 0.8318, "NAS": 0.8222, "AANS": 0.8223 }
+  },
+  {
+   "id": "designer_no_image",
+   "label": "Animation Designer w/o Diagram Image Input",
+   "stage": "designer",
+   "removes": "image",
+   "cuts": ["des-image"],
+   "question": "Does the designer need to see what it is animating?",
+   "note": "~ placeholder.",
+   "scores": { "VF": 0.9560, "ASC": 0.8791, "SSS": 0.7938, "GPS": 0.8370, "NAS": 0.8302, "AANS": 0.8203 }
+  },
+  {
+   "id": "designer_no_critic",
+   "label": "Animation Designer w/o Critic",
+   "stage": "designer",
+   "removes": "critic",
+   "cuts": ["des-critic"],
+   "question": "What does the designer critic fix?",
+   "note": "~ placeholder: the gentlest ablation in the table.",
+   "scores": { "VF": 0.9670, "ASC": 0.9340, "SSS": 0.8476, "GPS": 0.8901, "NAS": 0.8797, "AANS": 0.8725 }
+  },
+  {
+   "id": "no_critics",
+   "label": "AnimateBanana (w/o Stage 1, 2 and 3 critics)",
+   "stage": "all",
+   "removes": "critic",
+   "cuts": ["s1-critic", "seq-critic", "des-critic"],
+   "question": "What if every critic loop is removed at once?",
+   "note": "~ placeholder: the critics together are worth more than any one of them alone.",
+   "scores": { "VF": 0.9560, "ASC": 0.9011, "SSS": 0.7864, "GPS": 0.8258, "NAS": 0.8174, "AANS": 0.8087 }
+  }
+ ],
+ "examples": {
+  "_note": "Per ablation, the same sample animated by the full system and by the ablated one. anim = an .svgx animated SVG, or mp4. Leave the list empty and the card shows a 'qualitative example pending' slot.",
+  "stage1_no_critic": [],
+  "stage2_no_image": [],
+  "sequencer_no_xml": [],
+  "sequencer_no_critic": [],
+  "narration_no_context": [],
+  "designer_no_image": [],
+  "designer_no_critic": [],
+  "no_critics": []
+ }
+}

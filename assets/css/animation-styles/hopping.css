@@ -1,0 +1,25 @@
+/*
+  Hopping Bounding Box — in the paper this is a focus box that jumps
+  discretely between elements. This stand-in approximates it with a
+  per-element outline pulse timed by --order, so the style is usable
+  immediately on any tagged diagram.
+
+  TODO(real implementation): compute each [data-order] element's
+  getBBox() in example-viewer.js and animate a single overlay <rect>
+  (position: absolute over the SVG) discretely from box to box instead
+  of outlining elements in place — that is the faithful version of
+  this style described in the paper.
+*/
+.anim-hopping svg [data-order] {
+  animation: ab-hopping 0.4s ease-in-out;
+  animation-delay: calc(var(--order, 0) * 0.45s);
+}
+@keyframes ab-hopping {
+  0%   { outline: 2px solid transparent; outline-offset: 2px; }
+  50%  { outline: 2px solid var(--pink-ink); outline-offset: 2px; }
+  100% { outline: 2px solid transparent; outline-offset: 2px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-hopping svg [data-order] { animation: none; }
+}

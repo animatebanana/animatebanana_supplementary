@@ -1,0 +1,2748 @@
+{
+ "_generated": "scripts/build_eval_runs.py — do not hand-edit",
+ "bands": {
+  "A": 4,
+  "B": 3,
+  "C": 2,
+  "D": 1
+ },
+ "warnings": [
+  "AnimateBanana/CVPR_2025_arch00855: 15 frame png(s) but 14 judged step(s)",
+  "Claude Code with Opus 5/CVPR_2025_arch00012: 15 frame png(s) but 20 judged step(s)",
+  "Gemini-3.1-Pro/SciMMIR_arch_diff_000000152: 15 frame png(s) but 18 judged step(s)",
+  "Qwen3.8_28B/CVPR_2025_arch00855: 27 frame png(s) but 18 judged step(s)",
+  "Qwen3.8_28B: media for \"Paper2Fig_pipe_diff_000000492\" has no Judge_Results json"
+ ],
+ "baselines": [
+  {
+   "id": "animatebanana",
+   "label": "AnimateBanana",
+   "samples": [
+    {
+     "id": "CVPR_2025_arch00855",
+     "style": "Alpha Masking",
+     "outcome": "pass_high",
+     "source": "EVALUATIONS_PAGE/Original_Image/CVPR_2025_arch00855.png",
+     "video": null,
+     "frames_dir": true,
+     "raw_frames": [
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_00.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_01.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_02.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_03.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_04.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_05.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_06.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_07.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_08.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_09.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_10.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_11.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_12.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_13.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_14.png"
+     ],
+     "bands": {
+      "VF": "A",
+      "ASC": "B"
+     },
+     "scores": {
+      "SSS": "0.9286",
+      "GPS": "0.9286",
+      "NAS": "0.9762"
+     },
+     "steps": [
+      {
+       "t": 1,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_00.png",
+       "time": 1.0,
+       "narration": "ESC-Net begins by taking an input image alongside a set of candidate class text descriptions.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 2,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_01.png",
+       "time": 3.0,
+       "narration": "Pre-trained CLIP vision and language encoders process the inputs to extract image and text representations.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 3,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_02.png",
+       "time": 5.0,
+       "narration": "The extracted vision feature map and language feature vectors are paired for correlation modeling.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 4,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_03.png",
+       "time": 7.0,
+       "narration": "A vision-language correlation step computes cosine similarity across spatial coordinates for each class.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 5,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_04.png",
+       "time": 9.0,
+       "narration": "The correlation maps and features are progressively refined through N consecutive ESC Blocks.",
+       "sss": "A",
+       "gps": "C",
+       "nas": "A"
+      },
+      {
+       "t": 6,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_05.png",
+       "time": 11.0,
+       "narration": "Inside each block, the correlation map stack enters the Pseudo Prompt Generator.",
+       "sss": "C",
+       "gps": "A",
+       "nas": "B"
+      },
+      {
+       "t": 7,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_06.png",
+       "time": 13.0,
+       "narration": "The generator thresholds and clusters candidate object locations across the image.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 8,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_07.png",
+       "time": 15.0,
+       "narration": "This creates pseudo point coordinates and mask prompts, which are supplied alongside the vision features into the SAM Block.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 9,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_08.png",
+       "time": 16.0,
+       "narration": "The SAM transformer block applies prompt self-attention and bidirectional cross-attention to refine the spatial context.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 10,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_09.png",
+       "time": 17.0,
+       "narration": "The SAM transformer block applies prompt self-attention and bidirectional cross-attention to refine the spatial context.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 11,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_10.png",
+       "time": 19.0,
+       "narration": "The enhanced visual features, along with text features and the original correlation map, are passed to the Vision-Language Fusion module.",
+       "sss": "B",
+       "gps": "B",
+       "nas": "A"
+      },
+      {
+       "t": 12,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_11.png",
+       "time": 21.0,
+       "narration": "The Vision-Language Fusion block sequentially applies image and text guidance to remodel class interactions.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 13,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_12.png",
+       "time": 23.0,
+       "narration": "This outputs a multimodally refined correlation map for all candidate classes.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 14,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_13.png",
+       "time": 25.0,
+       "narration": "A mask prediction decoder then upsamples the refined features.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      }
+     ],
+     "derived": {
+      "G": 1,
+      "vf_pass": true,
+      "asc_pass": true,
+      "N": 14,
+      "gated_at": null,
+      "metrics": {
+       "SSS": {
+        "dists": [
+         0,
+         0,
+         0,
+         0,
+         0,
+         2,
+         0,
+         0,
+         0,
+         0,
+         1,
+         0,
+         0,
+         0
+        ],
+        "d_o": 0.0714,
+        "Q": 0.9286
+       },
+       "GPS": {
+        "dists": [
+         0,
+         0,
+         0,
+         0,
+         2,
+         0,
+         0,
+         0,
+         0,
+         0,
+         1,
+         0,
+         0,
+         0
+        ],
+        "d_o": 0.0714,
+        "Q": 0.9286
+       },
+       "NAS": {
+        "dists": [
+         0,
+         0,
+         0,
+         0,
+         0,
+         1,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0
+        ],
+        "d_o": 0.0238,
+        "Q": 0.9762
+       }
+      },
+      "Qn": 0.9445,
+      "AANS": 0.9445
+     }
+    },
+    {
+     "id": "CVPR_2025_arch00968",
+     "style": null,
+     "outcome": "vf_fail",
+     "source": null,
+     "video": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00968.mp4",
+     "frames_dir": false,
+     "raw_frames": [],
+     "bands": {
+      "VF": "D",
+      "ASC": null
+     },
+     "scores": {
+      "SSS": "NA",
+      "GPS": "NA",
+      "NAS": "NA"
+     },
+     "steps": [],
+     "derived": {
+      "G": 0,
+      "vf_pass": false,
+      "asc_pass": false,
+      "N": 0,
+      "gated_at": "VF",
+      "metrics": null,
+      "Qn": null,
+      "AANS": 0.0
+     }
+    },
+    {
+     "id": "CVPR_2025_pipe00004",
+     "style": "Alpha Masking",
+     "outcome": "pass_high",
+     "source": null,
+     "video": null,
+     "frames_dir": true,
+     "raw_frames": [
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_00.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_01.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_02.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_03.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_04.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_05.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_06.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_07.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_08.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_09.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_10.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_11.png"
+     ],
+     "bands": {
+      "VF": "A",
+      "ASC": "B"
+     },
+     "scores": {
+      "SSS": "1",
+      "GPS": "0.9722",
+      "NAS": "0.9722"
+     },
+     "steps": [
+      {
+       "t": 1,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_00.png",
+       "time": 1.0,
+       "narration": "The pipeline begins in the first section with multiple camera views and their corresponding foreground object masks.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 2,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_01.png",
+       "time": 3.0,
+       "narration": "These inputs are used to construct an initial set of three-dimensional Gaussians containing the statue.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 3,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_02.png",
+       "time": 5.0,
+       "narration": "Depth maps are then rendered across the set of camera viewpoints.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 4,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_03.png",
+       "time": 7.0,
+       "narration": "Entering the depth-guided mask inference stage, reference and secondary views are paired with their respective masks.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 5,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_04.png",
+       "time": 9.0,
+       "narration": "Applying these masks isolates the visible background regions for both viewpoints.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 6,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_05.png",
+       "time": 11.0,
+       "narration": "Using depth from the second view, background content is projected onto the reference view.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 7,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_06.png",
+       "time": 13.0,
+       "narration": "This determines the final depth-guided inpainting mask for the reference view.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 8,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_07.png",
+       "time": 15.0,
+       "narration": "The mask is transferred into the final inpainting-guided refinement stage.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 9,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_08.png",
+       "time": 17.0,
+       "narration": "Inpainting is performed on the reference view to synthesize missing background color and depth.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 10,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_09.png",
+       "time": 19.0,
+       "narration": "Depth-guided projection then lifts the inpainted reference view into a three-dimensional surface structure.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 11,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_10.png",
+       "time": 21.0,
+       "narration": "This structure initializes the refined Gaussians while projecting background information onto the remaining viewpoints.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 12,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_11.png",
+       "time": 23.0,
+       "narration": "Finally, render loss on the reference view and cross-view loss on other rendered views supervise the refined scene.",
+       "sss": "A",
+       "gps": "B",
+       "nas": "B"
+      }
+     ],
+     "derived": {
+      "G": 1,
+      "vf_pass": true,
+      "asc_pass": true,
+      "N": 12,
+      "gated_at": null,
+      "metrics": {
+       "SSS": {
+        "dists": [
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0
+        ],
+        "d_o": 0.0,
+        "Q": 1.0
+       },
+       "GPS": {
+        "dists": [
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         1
+        ],
+        "d_o": 0.0278,
+        "Q": 0.9722
+       },
+       "NAS": {
+        "dists": [
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         1
+        ],
+        "d_o": 0.0278,
+        "Q": 0.9722
+       }
+      },
+      "Qn": 0.9815,
+      "AANS": 0.9815
+     }
+    },
+    {
+     "id": "Paper2Fig_arch_easy_000000148",
+     "style": null,
+     "outcome": "asc_fail",
+     "source": null,
+     "video": "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_arch_easy_000000148.mp4",
+     "frames_dir": false,
+     "raw_frames": [],
+     "bands": {
+      "VF": "A",
+      "ASC": "C"
+     },
+     "scores": {
+      "SSS": "NA",
+      "GPS": "NA",
+      "NAS": "NA"
+     },
+     "steps": [],
+     "derived": {
+      "G": 0,
+      "vf_pass": true,
+      "asc_pass": false,
+      "N": 0,
+      "gated_at": "ASC",
+      "metrics": null,
+      "Qn": null,
+      "AANS": 0.0
+     }
+    },
+    {
+     "id": "Paper2Fig_pipe_diff_000000490",
+     "style": "Hopping Bounding Box",
+     "outcome": "pass_high",
+     "source": null,
+     "video": null,
+     "frames_dir": true,
+     "raw_frames": [
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_00.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_01.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_02.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_03.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_04.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_05.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_06.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_07.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_08.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_09.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_10.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_11.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_12.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_13.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_14.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_15.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_16.png"
+     ],
+     "bands": {
+      "VF": "A",
+      "ASC": "A"
+     },
+     "scores": {
+      "SSS": "1",
+      "GPS": "0.9804",
+      "NAS": "1"
+     },
+     "steps": [
+      {
+       "t": 1,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_00.png",
+       "time": 1.0,
+       "narration": "The pipeline begins with the data filtering and cleaning stage.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 2,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_01.png",
+       "time": 3.0,
+       "narration": "First, tweets tagged within the Los Angeles geographic area are collected.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 3,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_02.png",
+       "time": 5.0,
+       "narration": "The collected tweets are then filtered specifically for COVID-19 keywords.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 4,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_03.png",
+       "time": 7.0,
+       "narration": "Next, text pre-processing prepares the tweet corpus for downstream extraction.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 5,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_04.png",
+       "time": 9.0,
+       "narration": "The cleaned text passes into the entity and relation extraction stage.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 6,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_05.png",
+       "time": 11.0,
+       "narration": "Sentiment analysis computes sentiment scores for tweets and specific keywords.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 7,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_06.png",
+       "time": 13.0,
+       "narration": "Topic modeling via matrix and tensor factorizations extracts latent topics and tracks their temporal evolution.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 8,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_07.png",
+       "time": 15.0,
+       "narration": "Time series analysis identifies tweet volume peaks and significant sentiment change points linked to real-world events.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 9,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_08.png",
+       "time": 17.0,
+       "narration": "Word embeddings evaluate semantic similarity to generate weighted edges between tweets and topic keywords.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 10,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_09.png",
+       "time": 19.0,
+       "narration": "These extracted entities and relations are integrated during graph construction.",
+       "sss": "A",
+       "gps": "B",
+       "nas": "A"
+      },
+      {
+       "t": 11,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_10.png",
+       "time": 21.0,
+       "narration": "Definite entities and relations are formalized across tweets, topics, and dates.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 12,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_11.png",
+       "time": 23.0,
+       "narration": "Graph queries and visual inspection allow validation of the interconnected structure.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 13,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_12.png",
+       "time": 25.0,
+       "narration": "Graph embedding techniques then project the network structure into dense vector spaces.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 14,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_13.png",
+       "time": 27.0,
+       "narration": "Finally, the constructed network undergoes in-depth graph analysis.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 15,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_14.png",
+       "time": 29.0,
+       "narration": "Community detection identifies tightly coupled clusters of topics and discussions.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 16,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_15.png",
+       "time": 31.0,
+       "narration": "Node similarity metrics assess topological and semantic closeness between entities.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 17,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_16.png",
+       "time": 33.0,
+       "narration": "Lastly, link prediction infers unobserved associations between events, dates, and topics.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      }
+     ],
+     "derived": {
+      "G": 1,
+      "vf_pass": true,
+      "asc_pass": true,
+      "N": 17,
+      "gated_at": null,
+      "metrics": {
+       "SSS": {
+        "dists": [
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0
+        ],
+        "d_o": 0.0,
+        "Q": 1.0
+       },
+       "GPS": {
+        "dists": [
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         1,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0
+        ],
+        "d_o": 0.0196,
+        "Q": 0.9804
+       },
+       "NAS": {
+        "dists": [
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0
+        ],
+        "d_o": 0.0,
+        "Q": 1.0
+       }
+      },
+      "Qn": 0.9935,
+      "AANS": 0.9935
+     }
+    }
+   ]
+  },
+  {
+   "id": "claude-code-with-opus-5",
+   "label": "Claude Code with Opus 5",
+   "samples": [
+    {
+     "id": "CVPR_2025_arch00012",
+     "style": null,
+     "outcome": "pass_low",
+     "source": null,
+     "video": null,
+     "frames_dir": true,
+     "raw_frames": [
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_000_t00.00s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_001_t01.80s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_002_t03.60s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_003_t05.40s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_004_t07.20s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_005_t09.00s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_006_t10.80s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_007_t12.60s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_008_t14.40s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_009_t16.20s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_010_t18.00s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_011_t19.80s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_012_t21.60s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_013_t23.40s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_014_t24.10s.png"
+     ],
+     "bands": {
+      "VF": "A",
+      "ASC": "A"
+     },
+     "scores": {
+      "SSS": "0.8167",
+      "GPS": "0.7833",
+      "NAS": "0.73333"
+     },
+     "steps": [
+      {
+       "t": 1,
+       "frame": "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_000_t00.00s.png",
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "D",
+       "nas": "C"
+      },
+      {
+       "t": 2,
+       "frame": "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_001_t01.80s.png",
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 3,
+       "frame": "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_002_t03.60s.png",
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 4,
+       "frame": "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_003_t05.40s.png",
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "A",
+       "nas": "C"
+      },
+      {
+       "t": 5,
+       "frame": "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_004_t07.20s.png",
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 6,
+       "frame": "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_005_t09.00s.png",
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "B",
+       "nas": "A"
+      },
+      {
+       "t": 7,
+       "frame": "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_006_t10.80s.png",
+       "time": null,
+       "narration": "",
+       "sss": "B",
+       "gps": "D",
+       "nas": "C"
+      },
+      {
+       "t": 8,
+       "frame": "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_007_t12.60s.png",
+       "time": null,
+       "narration": "",
+       "sss": "C",
+       "gps": "A",
+       "nas": "B"
+      },
+      {
+       "t": 9,
+       "frame": "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_008_t14.40s.png",
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "D",
+       "nas": "C"
+      },
+      {
+       "t": 10,
+       "frame": "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_009_t16.20s.png",
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 11,
+       "frame": "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_010_t18.00s.png",
+       "time": null,
+       "narration": "",
+       "sss": "C",
+       "gps": "C",
+       "nas": "C"
+      },
+      {
+       "t": 12,
+       "frame": "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_011_t19.80s.png",
+       "time": null,
+       "narration": "",
+       "sss": "C",
+       "gps": "B",
+       "nas": "A"
+      },
+      {
+       "t": 13,
+       "frame": "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_012_t21.60s.png",
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 14,
+       "frame": "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_013_t23.40s.png",
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "A",
+       "nas": "C"
+      },
+      {
+       "t": 15,
+       "frame": "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_014_t24.10s.png",
+       "time": null,
+       "narration": "",
+       "sss": "D",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 16,
+       "frame": null,
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 17,
+       "frame": null,
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "A",
+       "nas": "C"
+      },
+      {
+       "t": 18,
+       "frame": null,
+       "time": null,
+       "narration": "",
+       "sss": "B",
+       "gps": "A",
+       "nas": "B"
+      },
+      {
+       "t": 19,
+       "frame": null,
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 20,
+       "frame": null,
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      }
+     ],
+     "derived": {
+      "G": 1,
+      "vf_pass": true,
+      "asc_pass": true,
+      "N": 20,
+      "gated_at": null,
+      "metrics": {
+       "SSS": {
+        "dists": [
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         1,
+         2,
+         0,
+         0,
+         2,
+         2,
+         0,
+         0,
+         3,
+         0,
+         0,
+         1,
+         0,
+         0
+        ],
+        "d_o": 0.1833,
+        "Q": 0.8167
+       },
+       "GPS": {
+        "dists": [
+         3,
+         0,
+         0,
+         0,
+         0,
+         1,
+         3,
+         0,
+         3,
+         0,
+         2,
+         1,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0
+        ],
+        "d_o": 0.2167,
+        "Q": 0.7833
+       },
+       "NAS": {
+        "dists": [
+         2,
+         0,
+         0,
+         2,
+         0,
+         0,
+         2,
+         1,
+         2,
+         0,
+         2,
+         0,
+         0,
+         2,
+         0,
+         0,
+         2,
+         1,
+         0,
+         0
+        ],
+        "d_o": 0.2667,
+        "Q": 0.7333
+       }
+      },
+      "Qn": 0.7778,
+      "AANS": 0.7778
+     }
+    },
+    {
+     "id": "CVPR_2025_arch00855",
+     "style": null,
+     "outcome": "vf_fail",
+     "source": "EVALUATIONS_PAGE/Original_Image/CVPR_2025_arch00855.png",
+     "video": null,
+     "frames_dir": true,
+     "raw_frames": [
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00855/frame_000_t00.40s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00855/frame_001_t02.90s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00855/frame_002_t05.40s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00855/frame_003_t07.90s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00855/frame_004_t10.40s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00855/frame_005_t12.90s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00855/frame_006_t15.40s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00855/frame_007_t17.90s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00855/frame_008_t18.40s.png"
+     ],
+     "bands": {
+      "VF": "C",
+      "ASC": null
+     },
+     "scores": {
+      "SSS": "NA",
+      "GPS": "NA",
+      "NAS": "NA"
+     },
+     "steps": [],
+     "derived": {
+      "G": 0,
+      "vf_pass": false,
+      "asc_pass": false,
+      "N": 0,
+      "gated_at": "VF",
+      "metrics": null,
+      "Qn": null,
+      "AANS": 0.0
+     }
+    },
+    {
+     "id": "CVPR_2025_pipe00004",
+     "style": null,
+     "outcome": "vf_fail",
+     "source": null,
+     "video": null,
+     "frames_dir": true,
+     "raw_frames": [
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_pipe00004/frame_000_t00.40s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_pipe00004/frame_001_t02.60s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_pipe00004/frame_002_t04.80s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_pipe00004/frame_003_t07.00s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_pipe00004/frame_004_t09.20s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_pipe00004/frame_005_t11.40s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_pipe00004/frame_006_t13.60s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_pipe00004/frame_007_t15.80s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_pipe00004/frame_008_t18.00s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_pipe00004/frame_009_t20.20s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_pipe00004/frame_010_t22.40s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_pipe00004/frame_011_t24.60s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_pipe00004/frame_012_t26.80s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_pipe00004/frame_013_t29.00s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_pipe00004/frame_014_t31.20s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_pipe00004/frame_015_t33.40s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_pipe00004/frame_016_t33.90s.png"
+     ],
+     "bands": {
+      "VF": "C",
+      "ASC": null
+     },
+     "scores": {
+      "SSS": "NA",
+      "GPS": "NA",
+      "NAS": "NA"
+     },
+     "steps": [],
+     "derived": {
+      "G": 0,
+      "vf_pass": false,
+      "asc_pass": false,
+      "N": 0,
+      "gated_at": "VF",
+      "metrics": null,
+      "Qn": null,
+      "AANS": 0.0
+     }
+    },
+    {
+     "id": "Paper2Fig_pipe_diff_000000104",
+     "style": null,
+     "outcome": "vf_fail",
+     "source": null,
+     "video": null,
+     "frames_dir": true,
+     "raw_frames": [
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/Paper2Fig_pipe_diff_000000104/frame_000_t00.00s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/Paper2Fig_pipe_diff_000000104/frame_001_t02.20s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/Paper2Fig_pipe_diff_000000104/frame_002_t04.40s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/Paper2Fig_pipe_diff_000000104/frame_003_t06.60s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/Paper2Fig_pipe_diff_000000104/frame_004_t08.80s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/Paper2Fig_pipe_diff_000000104/frame_005_t11.00s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/Paper2Fig_pipe_diff_000000104/frame_006_t13.20s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/Paper2Fig_pipe_diff_000000104/frame_007_t15.40s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/Paper2Fig_pipe_diff_000000104/frame_008_t17.60s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/Paper2Fig_pipe_diff_000000104/frame_009_t19.80s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/Paper2Fig_pipe_diff_000000104/frame_010_t20.20s.png"
+     ],
+     "bands": {
+      "VF": "C",
+      "ASC": null
+     },
+     "scores": {
+      "SSS": "NA",
+      "GPS": "NA",
+      "NAS": "NA"
+     },
+     "steps": [],
+     "derived": {
+      "G": 0,
+      "vf_pass": false,
+      "asc_pass": false,
+      "N": 0,
+      "gated_at": "VF",
+      "metrics": null,
+      "Qn": null,
+      "AANS": 0.0
+     }
+    },
+    {
+     "id": "arch_arxiv_db_ir_2026_000000718",
+     "style": null,
+     "outcome": "vf_fail",
+     "source": null,
+     "video": null,
+     "frames_dir": true,
+     "raw_frames": [
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/arch_arxiv_db_ir_2026_000000718/frame_000_t00.00s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/arch_arxiv_db_ir_2026_000000718/frame_001_t02.00s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/arch_arxiv_db_ir_2026_000000718/frame_002_t04.00s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/arch_arxiv_db_ir_2026_000000718/frame_003_t06.00s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/arch_arxiv_db_ir_2026_000000718/frame_004_t08.00s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/arch_arxiv_db_ir_2026_000000718/frame_005_t10.00s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/arch_arxiv_db_ir_2026_000000718/frame_006_t12.00s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/arch_arxiv_db_ir_2026_000000718/frame_007_t14.00s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/arch_arxiv_db_ir_2026_000000718/frame_008_t16.00s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/arch_arxiv_db_ir_2026_000000718/frame_009_t18.00s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/arch_arxiv_db_ir_2026_000000718/frame_010_t20.00s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/arch_arxiv_db_ir_2026_000000718/frame_011_t22.00s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/arch_arxiv_db_ir_2026_000000718/frame_012_t24.00s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/arch_arxiv_db_ir_2026_000000718/frame_013_t26.00s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/arch_arxiv_db_ir_2026_000000718/frame_014_t28.00s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/arch_arxiv_db_ir_2026_000000718/frame_015_t30.00s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/arch_arxiv_db_ir_2026_000000718/frame_016_t30.80s.png"
+     ],
+     "bands": {
+      "VF": "C",
+      "ASC": null
+     },
+     "scores": {
+      "SSS": "NA",
+      "GPS": "NA",
+      "NAS": "NA"
+     },
+     "steps": [],
+     "derived": {
+      "G": 0,
+      "vf_pass": false,
+      "asc_pass": false,
+      "N": 0,
+      "gated_at": "VF",
+      "metrics": null,
+      "Qn": null,
+      "AANS": 0.0
+     }
+    }
+   ]
+  },
+  {
+   "id": "glm-4-6v",
+   "label": "GLM-4.6V",
+   "samples": [
+    {
+     "id": "CVPR_2025_arch00855",
+     "style": null,
+     "outcome": "vf_fail",
+     "source": "EVALUATIONS_PAGE/Original_Image/CVPR_2025_arch00855.png",
+     "video": "EVALUATIONS_PAGE/GLM-4.6V/Frames/CVPR_2025_arch00855.mp4",
+     "frames_dir": false,
+     "raw_frames": [],
+     "bands": {
+      "VF": "D",
+      "ASC": null
+     },
+     "scores": {
+      "SSS": "NA",
+      "GPS": "NA",
+      "NAS": "NA"
+     },
+     "steps": [],
+     "derived": {
+      "G": 0,
+      "vf_pass": false,
+      "asc_pass": false,
+      "N": 0,
+      "gated_at": "VF",
+      "metrics": null,
+      "Qn": null,
+      "AANS": 0.0
+     }
+    },
+    {
+     "id": "CVPR_2025_pipe00004",
+     "style": null,
+     "outcome": "vf_fail",
+     "source": null,
+     "video": "EVALUATIONS_PAGE/GLM-4.6V/Frames/CVPR_2025_pipe00004.mp4",
+     "frames_dir": false,
+     "raw_frames": [],
+     "bands": {
+      "VF": "C",
+      "ASC": null
+     },
+     "scores": {
+      "SSS": "NA",
+      "GPS": "NA",
+      "NAS": "NA"
+     },
+     "steps": [],
+     "derived": {
+      "G": 0,
+      "vf_pass": false,
+      "asc_pass": false,
+      "N": 0,
+      "gated_at": "VF",
+      "metrics": null,
+      "Qn": null,
+      "AANS": 0.0
+     }
+    },
+    {
+     "id": "ICCV_2023_set5_000006",
+     "style": null,
+     "outcome": "vf_fail",
+     "source": null,
+     "video": "EVALUATIONS_PAGE/GLM-4.6V/Frames/ICCV_2023_set5_000006.mp4",
+     "frames_dir": false,
+     "raw_frames": [],
+     "bands": {
+      "VF": "D",
+      "ASC": null
+     },
+     "scores": {
+      "SSS": "NA",
+      "GPS": "NA",
+      "NAS": "NA"
+     },
+     "steps": [],
+     "derived": {
+      "G": 0,
+      "vf_pass": false,
+      "asc_pass": false,
+      "N": 0,
+      "gated_at": "VF",
+      "metrics": null,
+      "Qn": null,
+      "AANS": 0.0
+     }
+    },
+    {
+     "id": "ICCV_2023_set5_000045",
+     "style": null,
+     "outcome": "vf_fail",
+     "source": null,
+     "video": "EVALUATIONS_PAGE/GLM-4.6V/Frames/ICCV_2023_set5_000045.mp4",
+     "frames_dir": false,
+     "raw_frames": [],
+     "bands": {
+      "VF": "C",
+      "ASC": null
+     },
+     "scores": {
+      "SSS": "NA",
+      "GPS": "NA",
+      "NAS": "NA"
+     },
+     "steps": [],
+     "derived": {
+      "G": 0,
+      "vf_pass": false,
+      "asc_pass": false,
+      "N": 0,
+      "gated_at": "VF",
+      "metrics": null,
+      "Qn": null,
+      "AANS": 0.0
+     }
+    },
+    {
+     "id": "WACV_2024_set5_000056",
+     "style": null,
+     "outcome": "vf_fail",
+     "source": null,
+     "video": "EVALUATIONS_PAGE/GLM-4.6V/Frames/WACV_2024_set5_000056.mp4",
+     "frames_dir": false,
+     "raw_frames": [],
+     "bands": {
+      "VF": "C",
+      "ASC": null
+     },
+     "scores": {
+      "SSS": "NA",
+      "GPS": "NA",
+      "NAS": "NA"
+     },
+     "steps": [],
+     "derived": {
+      "G": 0,
+      "vf_pass": false,
+      "asc_pass": false,
+      "N": 0,
+      "gated_at": "VF",
+      "metrics": null,
+      "Qn": null,
+      "AANS": 0.0
+     }
+    }
+   ]
+  },
+  {
+   "id": "gpt-5-6-sol",
+   "label": "GPT-5.6-Sol",
+   "samples": [
+    {
+     "id": "CVPR_2025_arch00855",
+     "style": null,
+     "outcome": "vf_fail",
+     "source": "EVALUATIONS_PAGE/Original_Image/CVPR_2025_arch00855.png",
+     "video": null,
+     "frames_dir": true,
+     "raw_frames": [
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch00855/frame_000_t00.23s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch00855/frame_001_t02.23s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch00855/frame_002_t04.22s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch00855/frame_003_t06.22s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch00855/frame_004_t08.22s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch00855/frame_005_t10.22s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch00855/frame_006_t12.22s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch00855/frame_007_t14.22s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch00855/frame_008_t16.23s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch00855/frame_009_t18.23s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch00855/frame_010_t20.23s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch00855/frame_011_t22.23s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch00855/frame_012_t22.55s.png"
+     ],
+     "bands": {
+      "VF": "C",
+      "ASC": null
+     },
+     "scores": {
+      "SSS": "NA",
+      "GPS": "NA",
+      "NAS": "NA"
+     },
+     "steps": [],
+     "derived": {
+      "G": 0,
+      "vf_pass": false,
+      "asc_pass": false,
+      "N": 0,
+      "gated_at": "VF",
+      "metrics": null,
+      "Qn": null,
+      "AANS": 0.0
+     }
+    },
+    {
+     "id": "CVPR_2025_arch02465",
+     "style": null,
+     "outcome": "vf_fail",
+     "source": null,
+     "video": null,
+     "frames_dir": true,
+     "raw_frames": [
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch02465/frame_000_t00.00s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch02465/frame_001_t01.80s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch02465/frame_002_t03.60s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch02465/frame_003_t05.40s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch02465/frame_004_t07.20s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch02465/frame_005_t09.00s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch02465/frame_006_t10.80s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch02465/frame_007_t12.60s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch02465/frame_008_t14.40s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch02465/frame_009_t16.20s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch02465/frame_010_t18.00s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch02465/frame_011_t19.80s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch02465/frame_012_t21.60s.png"
+     ],
+     "bands": {
+      "VF": "D",
+      "ASC": null
+     },
+     "scores": {
+      "SSS": "NA",
+      "GPS": "NA",
+      "NAS": "NA"
+     },
+     "steps": [],
+     "derived": {
+      "G": 0,
+      "vf_pass": false,
+      "asc_pass": false,
+      "N": 0,
+      "gated_at": "VF",
+      "metrics": null,
+      "Qn": null,
+      "AANS": 0.0
+     }
+    },
+    {
+     "id": "CVPR_2025_pipe00004",
+     "style": null,
+     "outcome": "vf_fail",
+     "source": null,
+     "video": null,
+     "frames_dir": true,
+     "raw_frames": [
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_pipe00004/frame_000_t00.10s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_pipe00004/frame_001_t02.10s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_pipe00004/frame_002_t04.10s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_pipe00004/frame_003_t06.10s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_pipe00004/frame_004_t08.10s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_pipe00004/frame_005_t10.10s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_pipe00004/frame_006_t12.10s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_pipe00004/frame_007_t14.10s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_pipe00004/frame_008_t16.10s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_pipe00004/frame_009_t18.10s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_pipe00004/frame_010_t20.10s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_pipe00004/frame_011_t22.10s.png"
+     ],
+     "bands": {
+      "VF": "C",
+      "ASC": null
+     },
+     "scores": {
+      "SSS": "NA",
+      "GPS": "NA",
+      "NAS": "NA"
+     },
+     "steps": [],
+     "derived": {
+      "G": 0,
+      "vf_pass": false,
+      "asc_pass": false,
+      "N": 0,
+      "gated_at": "VF",
+      "metrics": null,
+      "Qn": null,
+      "AANS": 0.0
+     }
+    },
+    {
+     "id": "Paper2Fig_pipe_diff_000000104",
+     "style": null,
+     "outcome": "vf_fail",
+     "source": null,
+     "video": null,
+     "frames_dir": true,
+     "raw_frames": [
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/Paper2Fig_pipe_diff_000000104/frame_000_t00.50s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/Paper2Fig_pipe_diff_000000104/frame_001_t03.50s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/Paper2Fig_pipe_diff_000000104/frame_002_t06.50s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/Paper2Fig_pipe_diff_000000104/frame_003_t09.50s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/Paper2Fig_pipe_diff_000000104/frame_004_t12.50s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/Paper2Fig_pipe_diff_000000104/frame_005_t15.50s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/Paper2Fig_pipe_diff_000000104/frame_006_t18.60s.png"
+     ],
+     "bands": {
+      "VF": "C",
+      "ASC": null
+     },
+     "scores": {
+      "SSS": "NA",
+      "GPS": "NA",
+      "NAS": "NA"
+     },
+     "steps": [],
+     "derived": {
+      "G": 0,
+      "vf_pass": false,
+      "asc_pass": false,
+      "N": 0,
+      "gated_at": "VF",
+      "metrics": null,
+      "Qn": null,
+      "AANS": 0.0
+     }
+    },
+    {
+     "id": "WACV_2023_set5_000044",
+     "style": null,
+     "outcome": "asc_fail",
+     "source": null,
+     "video": null,
+     "frames_dir": true,
+     "raw_frames": [
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/WACV_2023_set5_000044/frame_000_t00.10s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/WACV_2023_set5_000044/frame_001_t01.90s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/WACV_2023_set5_000044/frame_002_t03.70s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/WACV_2023_set5_000044/frame_003_t05.50s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/WACV_2023_set5_000044/frame_004_t07.30s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/WACV_2023_set5_000044/frame_005_t09.10s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/WACV_2023_set5_000044/frame_006_t10.90s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/WACV_2023_set5_000044/frame_007_t11.30s.png"
+     ],
+     "bands": {
+      "VF": "A",
+      "ASC": "C"
+     },
+     "scores": {
+      "SSS": "NA",
+      "GPS": "NA",
+      "NAS": "NA"
+     },
+     "steps": [],
+     "derived": {
+      "G": 0,
+      "vf_pass": true,
+      "asc_pass": false,
+      "N": 0,
+      "gated_at": "ASC",
+      "metrics": null,
+      "Qn": null,
+      "AANS": 0.0
+     }
+    }
+   ]
+  },
+  {
+   "id": "gemini-3-1-pro",
+   "label": "Gemini-3.1-Pro",
+   "samples": [
+    {
+     "id": "CVPR_2025_arch00855",
+     "style": null,
+     "outcome": "vf_fail",
+     "source": "EVALUATIONS_PAGE/Original_Image/CVPR_2025_arch00855.png",
+     "video": null,
+     "frames_dir": true,
+     "raw_frames": [
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/CVPR_2025_arch00855/frame_000_t01.25s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/CVPR_2025_arch00855/frame_001_t03.75s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/CVPR_2025_arch00855/frame_002_t06.25s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/CVPR_2025_arch00855/frame_003_t08.75s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/CVPR_2025_arch00855/frame_004_t11.25s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/CVPR_2025_arch00855/frame_005_t13.75s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/CVPR_2025_arch00855/frame_006_t16.25s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/CVPR_2025_arch00855/frame_007_t17.60s.png"
+     ],
+     "bands": {
+      "VF": "C",
+      "ASC": null
+     },
+     "scores": {
+      "SSS": "NA",
+      "GPS": "NA",
+      "NAS": "NA"
+     },
+     "steps": [],
+     "derived": {
+      "G": 0,
+      "vf_pass": false,
+      "asc_pass": false,
+      "N": 0,
+      "gated_at": "VF",
+      "metrics": null,
+      "Qn": null,
+      "AANS": 0.0
+     }
+    },
+    {
+     "id": "CVPR_2025_pipe00004",
+     "style": null,
+     "outcome": "vf_fail",
+     "source": null,
+     "video": null,
+     "frames_dir": true,
+     "raw_frames": [
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/CVPR_2025_pipe00004/frame_000_t00.10s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/CVPR_2025_pipe00004/frame_001_t03.10s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/CVPR_2025_pipe00004/frame_002_t06.10s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/CVPR_2025_pipe00004/frame_003_t09.10s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/CVPR_2025_pipe00004/frame_004_t12.10s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/CVPR_2025_pipe00004/frame_005_t15.10s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/CVPR_2025_pipe00004/frame_006_t18.10s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/CVPR_2025_pipe00004/frame_007_t21.10s.png"
+     ],
+     "bands": {
+      "VF": "D",
+      "ASC": null
+     },
+     "scores": {
+      "SSS": "NA",
+      "GPS": "NA",
+      "NAS": "NA"
+     },
+     "steps": [],
+     "derived": {
+      "G": 0,
+      "vf_pass": false,
+      "asc_pass": false,
+      "N": 0,
+      "gated_at": "VF",
+      "metrics": null,
+      "Qn": null,
+      "AANS": 0.0
+     }
+    },
+    {
+     "id": "ICCV_2023_set5_000035",
+     "style": null,
+     "outcome": "vf_fail",
+     "source": null,
+     "video": null,
+     "frames_dir": true,
+     "raw_frames": [
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/ICCV_2023_set5_000035/frame_000_t00.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/ICCV_2023_set5_000035/frame_001_t02.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/ICCV_2023_set5_000035/frame_002_t04.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/ICCV_2023_set5_000035/frame_003_t06.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/ICCV_2023_set5_000035/frame_004_t08.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/ICCV_2023_set5_000035/frame_005_t10.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/ICCV_2023_set5_000035/frame_006_t12.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/ICCV_2023_set5_000035/frame_007_t14.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/ICCV_2023_set5_000035/frame_008_t16.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/ICCV_2023_set5_000035/frame_009_t18.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/ICCV_2023_set5_000035/frame_010_t20.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/ICCV_2023_set5_000035/frame_011_t22.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/ICCV_2023_set5_000035/frame_012_t24.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/ICCV_2023_set5_000035/frame_013_t26.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/ICCV_2023_set5_000035/frame_014_t28.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/ICCV_2023_set5_000035/frame_015_t30.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/ICCV_2023_set5_000035/frame_016_t30.90s.png"
+     ],
+     "bands": {
+      "VF": "D",
+      "ASC": null
+     },
+     "scores": {
+      "SSS": "NA",
+      "GPS": "NA",
+      "NAS": "NA"
+     },
+     "steps": [],
+     "derived": {
+      "G": 0,
+      "vf_pass": false,
+      "asc_pass": false,
+      "N": 0,
+      "gated_at": "VF",
+      "metrics": null,
+      "Qn": null,
+      "AANS": 0.0
+     }
+    },
+    {
+     "id": "Paper2Fig_pipe_diff_000000104",
+     "style": null,
+     "outcome": "vf_fail",
+     "source": null,
+     "video": null,
+     "frames_dir": true,
+     "raw_frames": [
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/Paper2Fig_pipe_diff_000000104/frame_000_t00.00s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/Paper2Fig_pipe_diff_000000104/frame_001_t02.20s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/Paper2Fig_pipe_diff_000000104/frame_002_t04.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/Paper2Fig_pipe_diff_000000104/frame_003_t06.60s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/Paper2Fig_pipe_diff_000000104/frame_004_t08.80s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/Paper2Fig_pipe_diff_000000104/frame_005_t11.00s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/Paper2Fig_pipe_diff_000000104/frame_006_t13.20s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/Paper2Fig_pipe_diff_000000104/frame_007_t15.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/Paper2Fig_pipe_diff_000000104/frame_008_t17.60s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/Paper2Fig_pipe_diff_000000104/frame_009_t19.80s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/Paper2Fig_pipe_diff_000000104/frame_010_t20.20s.png"
+     ],
+     "bands": {
+      "VF": "C",
+      "ASC": null
+     },
+     "scores": {
+      "SSS": "NA",
+      "GPS": "NA",
+      "NAS": "NA"
+     },
+     "steps": [],
+     "derived": {
+      "G": 0,
+      "vf_pass": false,
+      "asc_pass": false,
+      "N": 0,
+      "gated_at": "VF",
+      "metrics": null,
+      "Qn": null,
+      "AANS": 0.0
+     }
+    },
+    {
+     "id": "SciMMIR_arch_diff_000000152",
+     "style": null,
+     "outcome": "pass_low",
+     "source": null,
+     "video": null,
+     "frames_dir": true,
+     "raw_frames": [
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_000_t00.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_001_t02.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_002_t04.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_003_t06.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_004_t08.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_005_t10.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_006_t12.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_007_t14.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_008_t16.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_009_t18.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_010_t20.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_011_t22.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_012_t24.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_013_t26.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_014_t26.90s.png"
+     ],
+     "bands": {
+      "VF": "A",
+      "ASC": "A"
+     },
+     "scores": {
+      "SSS": "0.7222",
+      "GPS": "0.8889",
+      "NAS": "0.7407"
+     },
+     "steps": [
+      {
+       "t": 1,
+       "frame": "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_000_t00.40s.png",
+       "time": null,
+       "narration": "",
+       "sss": "C",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 2,
+       "frame": "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_001_t02.40s.png",
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "A",
+       "nas": "B"
+      },
+      {
+       "t": 3,
+       "frame": "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_002_t04.40s.png",
+       "time": null,
+       "narration": "",
+       "sss": "B",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 4,
+       "frame": "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_003_t06.40s.png",
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 5,
+       "frame": "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_004_t08.40s.png",
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "A",
+       "nas": "C"
+      },
+      {
+       "t": 6,
+       "frame": "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_005_t10.40s.png",
+       "time": null,
+       "narration": "",
+       "sss": "B",
+       "gps": "B",
+       "nas": "A"
+      },
+      {
+       "t": 7,
+       "frame": "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_006_t12.40s.png",
+       "time": null,
+       "narration": "",
+       "sss": "B",
+       "gps": "A",
+       "nas": "C"
+      },
+      {
+       "t": 8,
+       "frame": "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_007_t14.40s.png",
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "A",
+       "nas": "C"
+      },
+      {
+       "t": 9,
+       "frame": "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_008_t16.40s.png",
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "B",
+       "nas": "C"
+      },
+      {
+       "t": 10,
+       "frame": "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_009_t18.40s.png",
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "B",
+       "nas": "A"
+      },
+      {
+       "t": 11,
+       "frame": "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_010_t20.40s.png",
+       "time": null,
+       "narration": "",
+       "sss": "C",
+       "gps": "B",
+       "nas": "C"
+      },
+      {
+       "t": 12,
+       "frame": "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_011_t22.40s.png",
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 13,
+       "frame": "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_012_t24.40s.png",
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 14,
+       "frame": "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_013_t26.40s.png",
+       "time": null,
+       "narration": "",
+       "sss": "B",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 15,
+       "frame": "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_014_t26.90s.png",
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "C",
+       "nas": "B"
+      },
+      {
+       "t": 16,
+       "frame": null,
+       "time": null,
+       "narration": "",
+       "sss": "D",
+       "gps": "A",
+       "nas": "C"
+      },
+      {
+       "t": 17,
+       "frame": null,
+       "time": null,
+       "narration": "",
+       "sss": "C",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 18,
+       "frame": null,
+       "time": null,
+       "narration": "",
+       "sss": "C",
+       "gps": "A",
+       "nas": "A"
+      }
+     ],
+     "derived": {
+      "G": 1,
+      "vf_pass": true,
+      "asc_pass": true,
+      "N": 18,
+      "gated_at": null,
+      "metrics": {
+       "SSS": {
+        "dists": [
+         2,
+         0,
+         1,
+         0,
+         0,
+         1,
+         1,
+         0,
+         0,
+         0,
+         2,
+         0,
+         0,
+         1,
+         0,
+         3,
+         2,
+         2
+        ],
+        "d_o": 0.2778,
+        "Q": 0.7222
+       },
+       "GPS": {
+        "dists": [
+         0,
+         0,
+         0,
+         0,
+         0,
+         1,
+         0,
+         0,
+         1,
+         1,
+         1,
+         0,
+         0,
+         0,
+         2,
+         0,
+         0,
+         0
+        ],
+        "d_o": 0.1111,
+        "Q": 0.8889
+       },
+       "NAS": {
+        "dists": [
+         0,
+         1,
+         0,
+         0,
+         2,
+         0,
+         2,
+         2,
+         2,
+         0,
+         2,
+         0,
+         0,
+         0,
+         1,
+         2,
+         0,
+         0
+        ],
+        "d_o": 0.2593,
+        "Q": 0.7407
+       }
+      },
+      "Qn": 0.7839,
+      "AANS": 0.7839
+     }
+    }
+   ]
+  },
+  {
+   "id": "qwen3-8-28b",
+   "label": "Qwen3.8_28B",
+   "samples": [
+    {
+     "id": "CVPR_2025_arch00855",
+     "style": "Alpha Masking",
+     "outcome": "pass_low",
+     "source": "EVALUATIONS_PAGE/Original_Image/CVPR_2025_arch00855.png",
+     "video": null,
+     "frames_dir": true,
+     "raw_frames": [
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_00.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_01.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_02.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_03.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_04.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_05.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_06.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_07.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_08.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_09.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_10.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_11.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_12.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_13.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_14.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_15.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_16.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_17.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_18.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_19.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_20.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_21.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_22.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_23.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_24.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_25.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_26.png"
+     ],
+     "bands": {
+      "VF": "B",
+      "ASC": "B"
+     },
+     "scores": {
+      "SSS": "0.9444",
+      "GPS": "0.8148",
+      "NAS": "0.7778"
+     },
+     "steps": [
+      {
+       "t": 1,
+       "frame": "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_00.png",
+       "time": 0.56,
+       "narration": "[No narration]",
+       "sss": "C",
+       "gps": "B",
+       "nas": "A"
+      },
+      {
+       "t": 2,
+       "frame": "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_01.png",
+       "time": 1.67,
+       "narration": "[No narration]",
+       "sss": "A",
+       "gps": "D",
+       "nas": "C"
+      },
+      {
+       "t": 3,
+       "frame": "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_02.png",
+       "time": 2.78,
+       "narration": "[No narration]",
+       "sss": "A",
+       "gps": "A",
+       "nas": "B"
+      },
+      {
+       "t": 4,
+       "frame": "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_03.png",
+       "time": 3.89,
+       "narration": "[No narration]",
+       "sss": "A",
+       "gps": "A",
+       "nas": "C"
+      },
+      {
+       "t": 5,
+       "frame": "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_04.png",
+       "time": 5.0,
+       "narration": "[No narration]",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 6,
+       "frame": "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_05.png",
+       "time": 6.11,
+       "narration": "[No narration]",
+       "sss": "A",
+       "gps": "B",
+       "nas": "C"
+      },
+      {
+       "t": 7,
+       "frame": "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_06.png",
+       "time": 7.22,
+       "narration": "[No narration]",
+       "sss": "A",
+       "gps": "B",
+       "nas": "C"
+      },
+      {
+       "t": 8,
+       "frame": "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_07.png",
+       "time": 8.33,
+       "narration": "[No narration]",
+       "sss": "A",
+       "gps": "A",
+       "nas": "C"
+      },
+      {
+       "t": 9,
+       "frame": "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_08.png",
+       "time": 9.44,
+       "narration": "[No narration]",
+       "sss": "A",
+       "gps": "C",
+       "nas": "B"
+      },
+      {
+       "t": 10,
+       "frame": "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_09.png",
+       "time": 10.0,
+       "narration": "[No narration]",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 11,
+       "frame": "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_10.png",
+       "time": 10.56,
+       "narration": "[No narration]",
+       "sss": "A",
+       "gps": "B",
+       "nas": "A"
+      },
+      {
+       "t": 12,
+       "frame": "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_11.png",
+       "time": 11.11,
+       "narration": "[No narration]",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 13,
+       "frame": "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_12.png",
+       "time": 11.67,
+       "narration": "[No narration]",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 14,
+       "frame": "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_13.png",
+       "time": 12.22,
+       "narration": "[No narration]",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 15,
+       "frame": "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_14.png",
+       "time": 12.78,
+       "narration": "[No narration]",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 16,
+       "frame": "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_15.png",
+       "time": 13.33,
+       "narration": "[No narration]",
+       "sss": "A",
+       "gps": "B",
+       "nas": "A"
+      },
+      {
+       "t": 17,
+       "frame": "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_16.png",
+       "time": 13.89,
+       "narration": "[No narration]",
+       "sss": "B",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 18,
+       "frame": "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_17.png",
+       "time": 14.44,
+       "narration": "[No narration]",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      }
+     ],
+     "derived": {
+      "G": 1,
+      "vf_pass": true,
+      "asc_pass": true,
+      "N": 18,
+      "gated_at": null,
+      "metrics": {
+       "SSS": {
+        "dists": [
+         2,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         1,
+         0
+        ],
+        "d_o": 0.0556,
+        "Q": 0.9444
+       },
+       "GPS": {
+        "dists": [
+         1,
+         3,
+         0,
+         0,
+         0,
+         1,
+         1,
+         0,
+         2,
+         0,
+         1,
+         0,
+         0,
+         0,
+         0,
+         1,
+         0,
+         0
+        ],
+        "d_o": 0.1852,
+        "Q": 0.8148
+       },
+       "NAS": {
+        "dists": [
+         0,
+         2,
+         1,
+         2,
+         0,
+         2,
+         2,
+         2,
+         1,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0
+        ],
+        "d_o": 0.2222,
+        "Q": 0.7778
+       }
+      },
+      "Qn": 0.8457,
+      "AANS": 0.8457
+     }
+    },
+    {
+     "id": "CVPR_2025_pipe00004",
+     "style": null,
+     "outcome": "vf_fail",
+     "source": null,
+     "video": "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_pipe00004.mp4",
+     "frames_dir": false,
+     "raw_frames": [],
+     "bands": {
+      "VF": "C",
+      "ASC": null
+     },
+     "scores": {
+      "SSS": "NA",
+      "GPS": "NA",
+      "NAS": "NA"
+     },
+     "steps": [],
+     "derived": {
+      "G": 0,
+      "vf_pass": false,
+      "asc_pass": false,
+      "N": 0,
+      "gated_at": "VF",
+      "metrics": null,
+      "Qn": null,
+      "AANS": 0.0
+     }
+    },
+    {
+     "id": "ICCV_2023_set5_000001",
+     "style": null,
+     "outcome": "pass_high",
+     "source": null,
+     "video": null,
+     "frames_dir": false,
+     "raw_frames": [],
+     "bands": {
+      "VF": "B",
+      "ASC": "B"
+     },
+     "scores": {
+      "SSS": "0.875",
+      "GPS": "0.8542",
+      "NAS": "1"
+     },
+     "steps": [
+      {
+       "t": 1,
+       "frame": null,
+       "time": null,
+       "narration": "",
+       "sss": "D",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 2,
+       "frame": null,
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "D",
+       "nas": "A"
+      },
+      {
+       "t": 3,
+       "frame": null,
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 4,
+       "frame": null,
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "C",
+       "nas": "A"
+      },
+      {
+       "t": 5,
+       "frame": null,
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 6,
+       "frame": null,
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "C",
+       "nas": "A"
+      },
+      {
+       "t": 7,
+       "frame": null,
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 8,
+       "frame": null,
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 9,
+       "frame": null,
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 10,
+       "frame": null,
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 11,
+       "frame": null,
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 12,
+       "frame": null,
+       "time": null,
+       "narration": "",
+       "sss": "B",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 13,
+       "frame": null,
+       "time": null,
+       "narration": "",
+       "sss": "B",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 14,
+       "frame": null,
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 15,
+       "frame": null,
+       "time": null,
+       "narration": "",
+       "sss": "B",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 16,
+       "frame": null,
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      }
+     ],
+     "derived": {
+      "G": 1,
+      "vf_pass": true,
+      "asc_pass": true,
+      "N": 16,
+      "gated_at": null,
+      "metrics": {
+       "SSS": {
+        "dists": [
+         3,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         1,
+         1,
+         0,
+         1,
+         0
+        ],
+        "d_o": 0.125,
+        "Q": 0.875
+       },
+       "GPS": {
+        "dists": [
+         0,
+         3,
+         0,
+         2,
+         0,
+         2,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0
+        ],
+        "d_o": 0.1458,
+        "Q": 0.8542
+       },
+       "NAS": {
+        "dists": [
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0
+        ],
+        "d_o": 0.0,
+        "Q": 1.0
+       }
+      },
+      "Qn": 0.9097,
+      "AANS": 0.9097
+     }
+    },
+    {
+     "id": "Paper2Fig_pipe_diff_000000517",
+     "style": null,
+     "outcome": "asc_fail",
+     "source": null,
+     "video": "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/Paper2Fig_pipe_diff_000000517.mp4",
+     "frames_dir": false,
+     "raw_frames": [],
+     "bands": {
+      "VF": "A",
+      "ASC": "C"
+     },
+     "scores": {
+      "SSS": "NA",
+      "GPS": "NA",
+      "NAS": "NA"
+     },
+     "steps": [],
+     "derived": {
+      "G": 0,
+      "vf_pass": true,
+      "asc_pass": false,
+      "N": 0,
+      "gated_at": "ASC",
+      "metrics": null,
+      "Qn": null,
+      "AANS": 0.0
+     }
+    },
+    {
+     "id": "WACV_2022_set5_000002",
+     "style": "Progressive Reveal",
+     "outcome": "vf_fail",
+     "source": null,
+     "video": null,
+     "frames_dir": true,
+     "raw_frames": [
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_00.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_01.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_02.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_03.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_04.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_05.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_06.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_07.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_08.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_09.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_10.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_11.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_12.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_13.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_14.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_15.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_16.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_17.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_18.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_19.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_20.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_21.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_22.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_23.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_24.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_25.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_26.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_27.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_28.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_29.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_30.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_31.png"
+     ],
+     "bands": {
+      "VF": "C",
+      "ASC": null
+     },
+     "scores": {
+      "SSS": "NA",
+      "GPS": "NA",
+      "NAS": "NA"
+     },
+     "steps": [],
+     "derived": {
+      "G": 0,
+      "vf_pass": false,
+      "asc_pass": false,
+      "N": 0,
+      "gated_at": "VF",
+      "metrics": null,
+      "Qn": null,
+      "AANS": 0.0
+     }
+    }
+   ]
+  }
+ ]
+}

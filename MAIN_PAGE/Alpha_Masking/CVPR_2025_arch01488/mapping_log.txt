@@ -1,0 +1,38 @@
+=== Alpha Masking Sequence ===
+
+Frame Image : frame_00.png
+Timestamp   : 1.00s
+Narration   : The training pipeline begins with three inputs: the input medical image, its corresponding ground truth mask, and generated interactive masks.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 3.00s
+Narration   : A frozen image encoder extracts visual tokens from the input image, while initial interaction simulators derive point, bounding box, and text prompts from the masks.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 5.00s
+Narration   : The system then enters an iterative interaction loop that simulates multiple consecutive refinement steps.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 7.00s
+Narration   : The initial simulated interaction prompts are processed by a learnable prompt encoder.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 9.00s
+Narration   : The extracted image tokens are combined with convolutional feedback features via element-wise addition.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 11.00s
+Narration   : A learnable mask decoder integrates these fused image features with the encoded prompts and circulates intermediate features back through a convolution layer.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 13.00s
+Narration   : Transposed convolution layers then upsample the decoded representations into predicted segmentation masks for both the ground truth and interactive targets.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 15.00s
+Narration   : The framework computes error regions by identifying discrepancies between each predicted mask and its target.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 17.00s
+Narration   : Interaction simulators place corrective prompts on these error regions and feed them back to the prompt encoder, completing the feedback loop across iterations.
+--------------------------------------------------------------------------------

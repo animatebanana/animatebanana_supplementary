@@ -1,0 +1,22 @@
+/*
+  Progressive Reveal — the canvas starts blank and elements accumulate.
+  Applies generically to ANY diagram.svg whose elements carry a
+  `data-order` attribute and an inline `style="--order:N"` custom
+  property (see examples/<id>/diagram.svg for the convention). This is
+  what makes adding a new example's animation styles free: author the
+  SVG once with --order set per element, all five style sheets apply.
+*/
+.anim-progressive svg [data-order] {
+  opacity: 0;
+  animation: ab-progressive-reveal 0.5s ease forwards;
+  animation-delay: calc(var(--order, 0) * 0.45s);
+}
+@keyframes ab-progressive-reveal {
+  to { opacity: 1; }
+}
+
+/* Reduced motion: land on the final state rather than animating to it —
+   opacity must be forced back to 1 or the diagram stays invisible. */
+@media (prefers-reduced-motion: reduce) {
+  .anim-progressive svg [data-order] { animation: none; opacity: 1; }
+}

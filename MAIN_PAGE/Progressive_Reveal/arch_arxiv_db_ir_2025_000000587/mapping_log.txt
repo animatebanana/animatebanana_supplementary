@@ -1,0 +1,38 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : The pipeline begins with the user sequence and the contextual environment inputs.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : These inputs feed into the Causal-Invariant Preference Encoder to perform invariant representation learning.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : The representation learning is guided by an invariant risk minimization loss.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : In parallel, the Causal-Guided RAG Retriever maintains an evidence pool containing history, attributes, and knowledge graph data.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : The learned invariant representation and the evidence pool are combined to perform debiased retrieval.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : This debiased retrieval step filters and outputs the top-k evidence.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : Next, the Ranker and Explainer module receives both the encoder representations and the retrieved evidence into a transformer layer.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 3.999s
+Narration   : The transformer layer branches to produce two distinct outputs: the recommendation score and a text explanation.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 4.499s
+Narration   : Finally, the system computes the recommendation loss alongside a consistency constraint that connects the generated explanation to the retrieved evidence.
+--------------------------------------------------------------------------------

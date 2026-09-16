@@ -1,0 +1,62 @@
+=== Hopping Bounding Box Sequence ===
+
+Frame Image : frame_00.png
+Timestamp   : 1.00s
+Narration   : At each iteration, a new user click is provided to refine the segmentation.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 3.00s
+Narration   : The adaptation begins with the model parameters from the previous iteration...
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 5.00s
+Narration   : ...along with the accumulated history of previous user interactions.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 7.00s
+Narration   : ...along with the accumulated history of previous user interactions.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 9.00s
+Narration   : Inside the adaptation stage, two parallel inference streams are constructed.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 11.00s
+Narration   : In the top stream, the prior clicks are supplied...
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 13.00s
+Narration   : ...to the current model...
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 15.00s
+Narration   : ...producing the previous mask prediction.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 17.00s
+Narration   : In the bottom stream, the updated set incorporating the new click is provided...
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 19.00s
+Narration   : ...to the same model to generate an intermediate updated mask.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 21.00s
+Narration   : This intermediate mask supervises the previous prediction through a mask loss, while a pixel loss enforces exact labels at clicked locations.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Timestamp   : 23.00s
+Narration   : This intermediate mask supervises the previous prediction through a mask loss, while a pixel loss enforces exact labels at clicked locations.
+--------------------------------------------------------------------------------
+Frame Image : frame_12.png
+Timestamp   : 25.00s
+Narration   : With the full set of clicks ready as prompt input...
+--------------------------------------------------------------------------------
+Frame Image : frame_13.png
+Timestamp   : 27.00s
+Narration   : ...the model parameters are updated via gradient descent.
+--------------------------------------------------------------------------------
+Frame Image : frame_14.png
+Timestamp   : 29.00s
+Narration   : Finally, the adapted model performs inference to produce the refined segmentation mask.
+--------------------------------------------------------------------------------

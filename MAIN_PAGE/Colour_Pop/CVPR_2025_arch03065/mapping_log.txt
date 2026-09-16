@@ -1,0 +1,62 @@
+=== Colour Pop Sequence Mapping ===
+
+Frame Image : frame_00.png
+Event Delay : 0.5s
+Narration   : The overall architecture begins with the initial compressive sensing measurement data.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Event Delay : 1.0s
+Narration   : A leading residual block transforms the measurements into the intermediate domain of the diffusion model.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Event Delay : 1.5s
+Narration   : This initializes both a three-channel image estimate and a multi-channel feature representation.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Event Delay : 2.0s
+Narration   : The state passes into unfolded Diffusion Message Passing steps, iteratively updating the reconstruction.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Event Delay : 2.5s
+Narration   : The iterations continue down the reverse diffusion trajectory through successive unfolded stages.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Event Delay : 3.0s
+Narration   : The final DMP step completes the message passing sequence.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Event Delay : 3.5s
+Narration   : This yields the fully denoised three-channel image alongside the final feature maps.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Event Delay : 4.0s
+Narration   : A tail residual block converts the output back into the single-channel reconstructed image.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Event Delay : 4.5s
+Narration   : Examining an individual DMP step reveals how each iteration processes its image and feature inputs.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Event Delay : 5.0s
+Narration   : A gradient descent block enforces measurement consistency with a learnable step size.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Event Delay : 5.5s
+Narration   : The gradient-updated state is concatenated with the feature map and processed by a residual block to approximate filtering and divergence terms.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Event Delay : 6.0s
+Narration   : Channel-wise splitting separates the guided diffusion input from the next iteration's feature map.
+--------------------------------------------------------------------------------
+Frame Image : frame_12.png
+Event Delay : 6.5s
+Narration   : The pre-trained diffusion model acts as a denoiser, outputting the refined image for the next step.
+--------------------------------------------------------------------------------
+Frame Image : frame_13.png
+Event Delay : 7.0s
+Narration   : Each residual block contains an input convolution, four cascaded residual units, and an output convolution.
+--------------------------------------------------------------------------------
+Frame Image : frame_14.png
+Event Delay : 7.5s
+Narration   : Within each residual unit, two convolutions with non-linear activation are combined with a skip connection.
+--------------------------------------------------------------------------------

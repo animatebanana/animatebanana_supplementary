@@ -1,0 +1,54 @@
+=== Alpha Masking Sequence ===
+
+Frame Image : frame_00.png
+Timestamp   : 1.85s
+Narration   : During training and fine-tuning, the framework learns subject-specific representations without requiring explicit regularization.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 5.55s
+Narration   : An augmented reference image and the current noisy latent are provided as inputs to the Prompt Net.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 9.25s
+Narration   : Prompt Net maps the visual features into a customized concept word embedding.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 11.10s
+Narration   : Inside the Stable Diffusion backbone, the text encoder converts this embedding into conditioning representations.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 12.95s
+Narration   : Inside the Stable Diffusion backbone, the text encoder converts this embedding into conditioning representations.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 14.80s
+Narration   : The UNet network combines the text conditioning with the noisy latent to predict the diffusion noise.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 16.65s
+Narration   : The UNet network combines the text conditioning with the noisy latent to predict the diffusion noise.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 20.35s
+Narration   : This optimization produces the denoised intermediate state at the current timestep.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 24.05s
+Narration   : During inference, a single user input image and the current noisy sample enter the pipeline.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 27.75s
+Narration   : Prompt Net directly extracts the subject concept embedding representing the target identity.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 29.60s
+Narration   : Fusion Sampling jointly integrates the subject token with arbitrary text prompts, such as in Anime style.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Timestamp   : 31.45s
+Narration   : Fusion Sampling jointly integrates the subject token with arbitrary text prompts, such as in Anime style.
+--------------------------------------------------------------------------------
+Frame Image : frame_12.png
+Timestamp   : 35.15s
+Narration   : The sampling process yields a stylized generation that fully preserves fine-grained subject details.
+--------------------------------------------------------------------------------

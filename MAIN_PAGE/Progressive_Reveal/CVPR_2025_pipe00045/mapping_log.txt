@@ -1,0 +1,74 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : The pipeline begins in Section A with Hierarchical Blocks, taking an initial descriptive text prompt for analysis.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : The prompt is analyzed to determine the optimization order based on occlusion hierarchy.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : Block one targets more occluded items first, beginning with a coarse base human avatar.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : It then performs precise optimization on the yellow shirt.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : Next, optimization proceeds to the pink trousers, linking into the detailed part-optimization workflow.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : Finally, the blue leather shoes are refined to complete Block one.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : In Section B, Part-Segmentation isolates the trousers using two-dimensional segment probabilities.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 3.999s
+Narration   : The segmented part is isolated and passed to fine-grained optimization guided by the text prompt.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 4.499s
+Narration   : SDS loss is applied to produce the avatar with precisely rendered pink trousers.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 4.999s
+Narration   : The automatic pipeline extends across sequential blocks toward less occluded layers.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 5.499s
+Narration   : In Block n b, the outermost black coat is added coarsely and then refined to a precise state.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Timestamp   : 5.999s
+Narration   : Section C outlines Gaussian Extension, where new Gaussian kernels are densified for adding a coat.
+--------------------------------------------------------------------------------
+Frame Image : frame_12.png
+Timestamp   : 6.499s
+Narration   : The densified avatar is optimized using SDS loss and passed into Label Elimination to remove redundant kernels.
+--------------------------------------------------------------------------------
+Frame Image : frame_13.png
+Timestamp   : 6.999s
+Narration   : This results in a clean avatar model with the extended garment layer.
+--------------------------------------------------------------------------------
+Frame Image : frame_14.png
+Timestamp   : 7.499s
+Narration   : Section D breaks down Label Elimination, starting from original Gaussian kernels and densifying new ones.
+--------------------------------------------------------------------------------
+Frame Image : frame_15.png
+Timestamp   : 7.999s
+Narration   : SAM is applied to segment part semantics and assign labels to the Gaussian kernels.
+--------------------------------------------------------------------------------
+Frame Image : frame_16.png
+Timestamp   : 8.499s
+Narration   : Redundant newly added kernels that do not belong to the new part are eliminated.
+--------------------------------------------------------------------------------
+Frame Image : frame_17.png
+Timestamp   : 8.999s
+Narration   : Only the original and segment Gaussian kernels are retained in the final structure.
+--------------------------------------------------------------------------------

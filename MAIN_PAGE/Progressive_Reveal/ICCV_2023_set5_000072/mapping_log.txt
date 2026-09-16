@@ -1,0 +1,50 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : In the target observation space, points are sampled along a camera ray defined by the rendering viewpoint.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : A backward warping transformation, guided by a shared skinning weight network, begins mapping the sample out of observation space.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : This maps the sampled point into the category-level canonical space, representing a coarse, generic T-pose mesh.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : Using the learned skinning weights, forward warping transforms this canonical point into the observation spaces of the support images.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : Meanwhile, a sparse set of input video frames captures the subject under different poses and viewpoints.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : A shared convolutional image encoder processes each input frame to extract corresponding 2D feature maps.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : The forward-warped points are projected into each support view to establish spatial correspondences on the feature maps.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 3.999s
+Narration   : This queries both pixel-aligned local image features and SMPL mesh-guided local features across all input views.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 4.499s
+Narration   : A deformation network then combines the category canonical point with the pixel-aligned features to model fine shape details.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 4.999s
+Narration   : This outputs a point in the instance-level canonical space, capturing subject-specific identity and geometry.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 5.499s
+Narration   : In the rendering network, the instance coordinate embedding is assembled alongside the pixel-aligned and SMPL local features.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Timestamp   : 5.999s
+Narration   : Finally, a multi-layer perceptron predicts the volume density and color values for neural rendering of novel views.
+--------------------------------------------------------------------------------

@@ -1,0 +1,52 @@
+<svg viewBox="0 0 460 190" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+  <defs>
+    <marker id="ab-arrow-ml" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" style="fill:var(--ink-soft,#7A7160);"/>
+    </marker>
+  </defs>
+
+  <g data-id="n0" data-order="0" style="--order:0;">
+    <rect x="8" y="65" width="72" height="60" rx="10" style="fill:var(--blue,#B7D9E8);stroke:var(--blue-ink,#3E6478);stroke-width:1.5;"/>
+    <text x="44" y="91" text-anchor="middle" font-size="9" font-family="Inter, sans-serif" fill="#2E2A22">Image</text>
+    <text x="44" y="103" text-anchor="middle" font-size="9" font-family="Inter, sans-serif" fill="#2E2A22">Input</text>
+  </g>
+
+  <line x1="80" y1="95" x2="94" y2="40" data-order="1" style="--order:1;stroke:var(--ink-soft,#7A7160);stroke-width:1.3;" marker-end="url(#ab-arrow-ml)"/>
+  <line x1="80" y1="95" x2="94" y2="150" data-order="1" style="--order:1;stroke:var(--ink-soft,#7A7160);stroke-width:1.3;" marker-end="url(#ab-arrow-ml)"/>
+
+  <g data-id="n1" data-order="1" style="--order:1;">
+    <rect x="96" y="12" width="88" height="52" rx="10" style="fill:var(--pink,#F2C9D4);stroke:var(--pink-ink,#8C4A5A);stroke-width:1.5;"/>
+    <text x="140" y="35" text-anchor="middle" font-size="8.5" font-family="Inter, sans-serif" fill="#2E2A22">CNN Stem</text>
+    <text x="140" y="47" text-anchor="middle" font-size="8.5" font-family="Inter, sans-serif" fill="#2E2A22">(local branch)</text>
+  </g>
+
+  <g data-id="n2" data-order="1" style="--order:1;">
+    <rect x="96" y="124" width="88" height="52" rx="10" style="fill:var(--mint,#BFE6D3);stroke:var(--mint-ink,#3E7A5C);stroke-width:1.5;"/>
+    <text x="140" y="147" text-anchor="middle" font-size="8.5" font-family="Inter, sans-serif" fill="#2E2A22">ViT Patches</text>
+    <text x="140" y="159" text-anchor="middle" font-size="8.5" font-family="Inter, sans-serif" fill="#2E2A22">(global branch)</text>
+  </g>
+
+  <line x1="184" y1="38" x2="222" y2="80" data-order="2" style="--order:2;stroke:var(--ink-soft,#7A7160);stroke-width:1.3;" marker-end="url(#ab-arrow-ml)"/>
+  <line x1="184" y1="150" x2="222" y2="108" data-order="2" style="--order:2;stroke:var(--ink-soft,#7A7160);stroke-width:1.3;" marker-end="url(#ab-arrow-ml)"/>
+
+  <g data-id="n3" data-order="2" style="--order:2;">
+    <rect x="224" y="65" width="96" height="60" rx="10" style="fill:var(--tan,#E7D9BE);stroke:var(--tan-ink,#7A6636);stroke-width:1.5;"/>
+    <text x="272" y="88" text-anchor="middle" font-size="8.5" font-family="Inter, sans-serif" fill="#2E2A22">Transformer</text>
+    <text x="272" y="100" text-anchor="middle" font-size="8.5" font-family="Inter, sans-serif" fill="#2E2A22">Layers</text>
+  </g>
+
+  <line x1="320" y1="95" x2="332" y2="95" data-order="3" style="--order:3;stroke:var(--ink-soft,#7A7160);stroke-width:1.3;" marker-end="url(#ab-arrow-ml)"/>
+
+  <g data-id="n4" data-order="3" style="--order:3;">
+    <rect x="334" y="65" width="60" height="60" rx="10" style="fill:var(--blue,#B7D9E8);stroke:var(--blue-ink,#3E6478);stroke-width:1.5;"/>
+    <text x="364" y="88" text-anchor="middle" font-size="8" font-family="Inter, sans-serif" fill="#2E2A22">Locality</text>
+    <text x="364" y="100" text-anchor="middle" font-size="8" font-family="Inter, sans-serif" fill="#2E2A22">Fusion</text>
+  </g>
+
+  <line x1="394" y1="95" x2="404" y2="95" data-order="4" style="--order:4;stroke:var(--ink-soft,#7A7160);stroke-width:1.3;" marker-end="url(#ab-arrow-ml)"/>
+
+  <g data-id="n5" data-order="4" style="--order:4;">
+    <rect x="406" y="65" width="48" height="60" rx="10" style="fill:var(--pink,#F2C9D4);stroke:var(--pink-ink,#8C4A5A);stroke-width:1.5;"/>
+    <text x="430" y="92" text-anchor="middle" font-size="7.5" font-family="Inter, sans-serif" fill="#2E2A22">Head</text>
+  </g>
+</svg>

@@ -1,0 +1,66 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : The pipeline begins with two input sequences tracked over time: camera image frames and pressure sensor maps.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : Each input stream is processed by a dedicated Encoder module.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : The encoded features then pass through respective modules labeled LSAM.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : Both feature streams feed into the Fusion Cross-Attention Module, designated as FCAM.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : The combined representations are forwarded into the Regressor block.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : The Regressor estimates pose and translation parameters, governed by pose and translation loss functions.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : These parameters produce three-dimensional joint positions, supervised by three-dimensional and contact losses.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 3.999s
+Narration   : The joint positions pass through Orthographic Projection under a two-dimensional loss.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 4.499s
+Narration   : This yields a sequence of full three-dimensional human poses over time along with contact region visualizations.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 4.999s
+Narration   : The bottom panel details the architecture of the Fusion Cross-Attention Module alongside an operation legend.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 5.499s
+Narration   : Processing begins with incoming Image Feature and Pressure Feature blocks.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Timestamp   : 5.999s
+Narration   : The Image Feature branches into Image Value and Image Key, while the Pressure Feature produces a Pressure Query.
+--------------------------------------------------------------------------------
+Frame Image : frame_12.png
+Timestamp   : 6.499s
+Narration   : The Image Key and Pressure Query undergo matrix multiplication, followed by a SoftMax operation.
+--------------------------------------------------------------------------------
+Frame Image : frame_13.png
+Timestamp   : 6.999s
+Narration   : The resulting weights are multiplied with the Image Value, then added to a skip connection from the Image Feature.
+--------------------------------------------------------------------------------
+Frame Image : frame_14.png
+Timestamp   : 7.499s
+Narration   : This combined signal enters the Position-wise Feed-Forward block.
+--------------------------------------------------------------------------------
+Frame Image : frame_15.png
+Timestamp   : 7.999s
+Narration   : Finally, the feed-forward output is concatenated with a skip connection from the Pressure Feature to yield the module output.
+--------------------------------------------------------------------------------

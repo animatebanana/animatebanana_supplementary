@@ -1,0 +1,30 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : This diagram outlines the architecture of the GLASS framework.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : Processing begins with an input image routed directly into the Encoder.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : The frozen Encoder branches into the Slot Attention Module and Instance Guidance.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : Both the active Slot Attention Module and Instance Guidance feed into the Slots representations.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : The Slots are then forwarded to the Decoder.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : The frozen Decoder generates the output while connecting to Semantic Guidance.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : Semantic Guidance feeds back into the Slots, producing the final output image.
+--------------------------------------------------------------------------------

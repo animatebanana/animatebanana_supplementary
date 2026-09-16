@@ -1,0 +1,66 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : The framework comprises two stages: a warm-up domain adaptation stage, followed by the main weakly-supervised object detection stage.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : During warm-up, fully-labeled source domain images with precise bounding boxes initialize detector pretraining.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : The initial detector, FSOD-1, is trained on source samples using supervised classification and localization losses.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : Image-to-image translation transfers source instances into target-like appearances while preserving localization labels.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : The model is fine-tuned on this translated dataset, producing the adapted detector FSOD-2.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : Augmentations are applied next, constructing target-like images with realistic backgrounds.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : Fine-tuning continues on these augmented images to produce FSOD-3, further reducing the domain gap.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 3.999s
+Narration   : Next, pseudo-labeling is applied to weakly-labeled target images to generate initial target bounding boxes.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 4.499s
+Narration   : The detector, FSOD-4, undergoes self-training and pseudo-label refinement iterated over several rounds.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 4.999s
+Narration   : The pseudo-labeled target images are further augmented to improve generalization.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 5.499s
+Narration   : Final fine-tuning yields FSOD-5, concluding the progressive domain adaptation warm-up stage.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Timestamp   : 5.999s
+Narration   : In the main detection stage, the feature extractor from FSOD-5 extracts feature maps from weakly-labeled target images.
+--------------------------------------------------------------------------------
+Frame Image : frame_12.png
+Timestamp   : 6.499s
+Narration   : Simultaneously, the entire fine-tuned FSOD-5 acts as a frozen proposal generator to propose object regions.
+--------------------------------------------------------------------------------
+Frame Image : frame_13.png
+Timestamp   : 6.999s
+Narration   : Region of Interest pooling then extracts feature maps corresponding to these proposed object bounding boxes.
+--------------------------------------------------------------------------------
+Frame Image : frame_14.png
+Timestamp   : 7.499s
+Narration   : Fully connected layers project these pooled regions into target-domain-specific, detection-aware feature vectors.
+--------------------------------------------------------------------------------
+Frame Image : frame_15.png
+Timestamp   : 7.999s
+Narration   : Finally, the detection head classifies the object proposal vectors, guided by a multi-label classification loss.
+--------------------------------------------------------------------------------

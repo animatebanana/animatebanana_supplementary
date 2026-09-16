@@ -1,0 +1,42 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : The framework takes as input the RGB image alongside a concatenated map of user prompt clicks and the previous segmentation mask.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : Two symmetric patch embedding layers independently project the input image and the click maps into token sequences of matching dimensions.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : These token embeddings are merged through element-wise addition before being forwarded into the network.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : The merged tokens are processed by a plain Vision Transformer backbone, which maintains single-scale representations across stacked transformer blocks.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : From the backbone's final feature map, a convolutional neck generates a multi-scale simple feature pyramid across four spatial resolutions.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : All four pyramid levels are then fed concurrently into the lightweight MLP segmentation head.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : Inside the head, features are projected by an initial MLP layer, upsampled and concatenated, and then passed through another MLP layer and sigmoid activation.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 3.999s
+Narration   : This produces a single-channel intermediate feature map at quarter resolution.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 4.499s
+Narration   : An upsampling step restores the resolution to the full image dimensions, yielding the predicted segmentation mask.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 4.999s
+Narration   : Finally, the predicted segmentation is compared with the ground truth mask to compute the loss and supervise training.
+--------------------------------------------------------------------------------

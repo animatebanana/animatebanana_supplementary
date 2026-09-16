@@ -1,0 +1,42 @@
+=== Alpha Masking Sequence ===
+
+Frame Image : frame_00.png
+Timestamp   : 1.50s
+Narration   : The pipeline begins by acquiring volumetric chest CT scans from the publicly available LIDC database.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 4.50s
+Narration   : The first main stage is video preparation, which converts the CT scans into viewable video clips.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 7.50s
+Narration   : First, automated segmentation isolates the lung parenchyma and divides the lungs into separate quadrants.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 9.00s
+Narration   : Next, thin-slab maximum intensity projection frames are generated across consecutive slices for each quadrant.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 10.50s
+Narration   : Next, thin-slab maximum intensity projection frames are generated across consecutive slices for each quadrant.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 13.50s
+Narration   : These frames are linearly interpolated to render smooth video sequences ready for review.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 16.50s
+Narration   : The rendered quadrant videos then enter the crowdsourcing pipeline to collect annotations.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 19.50s
+Narration   : The video annotation tasks are outsourced to non-expert crowd workers on Amazon Mechanical Turk.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 22.50s
+Narration   : A quality review spam-check filters out unreliable workers by evaluating their identification of embedded control targets.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 25.50s
+Narration   : Finally, validated crowd responses yield precise bounding-box annotations identifying detected lung nodules.
+--------------------------------------------------------------------------------

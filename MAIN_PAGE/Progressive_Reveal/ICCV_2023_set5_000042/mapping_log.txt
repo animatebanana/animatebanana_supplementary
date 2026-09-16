@@ -1,0 +1,54 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : The framework takes a two-dimensional training image alongside positive and negative three-dimensional point cloud submaps.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : The input image is first divided into regular patches via patch partitioning.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : An Image Transformer built with Swin Transformer blocks, patch merging layers, and a fully connected layer extracts multi-scale visual features.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : In parallel, the point cloud submaps pass through pooling and a Point Transformer using centroid-aware voxelization and lightweight self-attention.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : This produces two-dimensional patch descriptors along with pixel-level positional encodings.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : The Point Transformer generates corresponding three-dimensional point descriptors for the submaps.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : Concatenating the patch descriptors with positional encodings through a pixel multi-layer perceptron yields fine-grained pixel descriptors.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 3.999s
+Narration   : A NetVLAD layer aggregates the patch descriptors into a compact global image descriptor.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 4.499s
+Narration   : Concatenating patch descriptors and point features into a score multi-layer perceptron with softmax produces patch classification scores.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 4.999s
+Narration   : A second NetVLAD module pools the point descriptors into positive and negative global point cloud descriptors.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 5.499s
+Narration   : Pixel descriptors determine coordinate correspondences, which enter a differentiable Perspective-n-Point solver to estimate the six-degrees-of-freedom camera pose.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Timestamp   : 5.999s
+Narration   : A patch classification loss supervises the patch-level matching accuracy.
+--------------------------------------------------------------------------------
+Frame Image : frame_12.png
+Timestamp   : 6.499s
+Narration   : Finally, the global image and point descriptors are aligned through a global matching loss for retrieval consistency.
+--------------------------------------------------------------------------------

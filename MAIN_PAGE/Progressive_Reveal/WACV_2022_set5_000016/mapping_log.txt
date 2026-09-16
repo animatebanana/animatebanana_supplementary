@@ -1,0 +1,42 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : The pipeline begins with the disentanglement dataset construction process on the left.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : Given an initial dataset of annotated facial images, attributes such as gender, hair color, and facial hair are cataloged.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : Domain-specific and shared attributes are selected to filter the original dataset into two distinct domains.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : Domain A fixes gender to female and facial hair to none, treating hair color as domain-specific alongside shared traits.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : Conversely, Domain B fixes gender to male and hair color to black, leaving facial hair as the domain-specific attribute.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : On the right, the framework evaluates the semantic correctness of unsupervised many-to-many translation.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : A random input image is drawn from Domain A, providing source content attributes like blond hair and shared features.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 3.999s
+Narration   : A random guide image is selected from Domain B to supply the target domain-specific styling, such as a beard.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 4.499s
+Narration   : A perfectly disentangled translation combines the target fixed attributes, the guide's beard, and the input's shared content.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 4.999s
+Narration   : Evaluating the predicted image against expected ground truth reveals failures to capture domain-specific features, such as a missing beard.
+--------------------------------------------------------------------------------

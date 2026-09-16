@@ -1,0 +1,50 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : The pipeline begins with a sequence of five hundred twelve dimensional input feature vectors.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : These vectors are organized into an input feature matrix labeled F sub w, with dimensions five hundred twelve by n.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : Inside the scaled dot product attention sub-block, the matrix branches through fully connected layers into key transpose, query, and value matrices.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : The key transpose and query representations are multiplied together and processed by a softmax function.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : This yields an n-by-n matrix of self-attention weights labeled W sub s a.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : The self-attention weights are then multiplied with the value matrix.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : The result feeds into the cross-walk attention sub-block as an intermediate matrix labeled H sub a.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 3.999s
+Narration   : A per-row softmax operation is then applied across the matrix columns.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 4.499s
+Narration   : Next, the softmax output is combined element-wise with a bypass connection from the original matrix F sub w.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 4.999s
+Narration   : This creates the cross-walk attention matrix labeled G, with dimensions five hundred twelve by n.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 5.499s
+Narration   : The column vectors are then aggregated through a summation operation.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Timestamp   : 5.999s
+Narration   : Finally, the system outputs the five hundred twelve dimensional feature vector labeled f sub a.
+--------------------------------------------------------------------------------

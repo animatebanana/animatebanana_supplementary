@@ -1,0 +1,15 @@
+{
+  "_note": "GP's good/bad values and phrasing come from the plan documents' worked example. SS and NA are illustrative placeholders in the same spirit — swap in real judge outputs before publishing.",
+  "SS": {
+    "good": { "score": 0.97, "label": "Fully sensible", "note": "Selected elements form an appropriate, structurally coherent focus." },
+    "bad": { "score": 0.31, "label": "Severe violation", "note": "Element selection is largely arbitrary and contradicts the diagram's hierarchy." }
+  },
+  "GP": {
+    "good": { "score": 0.94, "label": "Good pacing", "note": "Small coherent unit introduced together." },
+    "bad": { "score": 0.38, "label": "Poor pacing", "note": "Many unrelated elements introduced simultaneously." }
+  },
+  "NA": {
+    "good": { "score": 0.95, "label": "Well aligned and informative", "note": "Narration gives a clear, contextually grounded explanation of the active visual content." },
+    "bad": { "score": 0.29, "label": "Severe flaws", "note": "Narration contradicts the active visual content." }
+  }
+}

@@ -1,0 +1,362 @@
+=== Sliding Bounding Box Sequence ===
+
+Frame Image : frame_0000.png
+Frame Type  : Hold
+Timestamp   : 0.799s
+Narration   : The pipeline begins with the front-view feature representation.
+--------------------------------------------------------------------------------
+Frame Image : frame_0001.png
+Frame Type  : Transition 1
+Timestamp   : 1.698s
+Narration   : The pipeline begins with the front-view feature representation.
+--------------------------------------------------------------------------------
+Frame Image : frame_0002.png
+Frame Type  : Transition 2
+Timestamp   : 1.798s
+Narration   : The pipeline begins with the front-view feature representation.
+--------------------------------------------------------------------------------
+Frame Image : frame_0003.png
+Frame Type  : Transition 3
+Timestamp   : 1.898s
+Narration   : The pipeline begins with the front-view feature representation.
+--------------------------------------------------------------------------------
+Frame Image : frame_0004.png
+Frame Type  : Hold
+Timestamp   : 2.799s
+Narration   : The input features pass through the IPM module.
+--------------------------------------------------------------------------------
+Frame Image : frame_0005.png
+Frame Type  : Transition 1
+Timestamp   : 3.700s
+Narration   : The input features pass through the IPM module.
+--------------------------------------------------------------------------------
+Frame Image : frame_0006.png
+Frame Type  : Transition 2
+Timestamp   : 3.800s
+Narration   : The input features pass through the IPM module.
+--------------------------------------------------------------------------------
+Frame Image : frame_0007.png
+Frame Type  : Transition 3
+Timestamp   : 3.900s
+Narration   : The input features pass through the IPM module.
+--------------------------------------------------------------------------------
+Frame Image : frame_0008.png
+Frame Type  : Hold
+Timestamp   : 4.799s
+Narration   : This maps the representation into bird's-eye view space.
+--------------------------------------------------------------------------------
+Frame Image : frame_0009.png
+Frame Type  : Transition 1
+Timestamp   : 5.698s
+Narration   : This maps the representation into bird's-eye view space.
+--------------------------------------------------------------------------------
+Frame Image : frame_0010.png
+Frame Type  : Transition 2
+Timestamp   : 5.798s
+Narration   : This maps the representation into bird's-eye view space.
+--------------------------------------------------------------------------------
+Frame Image : frame_0011.png
+Frame Type  : Transition 3
+Timestamp   : 5.898s
+Narration   : This maps the representation into bird's-eye view space.
+--------------------------------------------------------------------------------
+Frame Image : frame_0012.png
+Frame Type  : Hold
+Timestamp   : 6.799s
+Narration   : Here, anchor positions are established across the spatial grid.
+--------------------------------------------------------------------------------
+Frame Image : frame_0013.png
+Frame Type  : Transition 1
+Timestamp   : 7.699s
+Narration   : Here, anchor positions are established across the spatial grid.
+--------------------------------------------------------------------------------
+Frame Image : frame_0014.png
+Frame Type  : Transition 2
+Timestamp   : 7.799s
+Narration   : Here, anchor positions are established across the spatial grid.
+--------------------------------------------------------------------------------
+Frame Image : frame_0015.png
+Frame Type  : Transition 3
+Timestamp   : 7.899s
+Narration   : Here, anchor positions are established across the spatial grid.
+--------------------------------------------------------------------------------
+Frame Image : frame_0016.png
+Frame Type  : Hold
+Timestamp   : 8.798s
+Narration   : Alongside the anchors, corresponding bird's-eye view feature maps are generated.
+--------------------------------------------------------------------------------
+Frame Image : frame_0017.png
+Frame Type  : Transition 1
+Timestamp   : 9.697s
+Narration   : Alongside the anchors, corresponding bird's-eye view feature maps are generated.
+--------------------------------------------------------------------------------
+Frame Image : frame_0018.png
+Frame Type  : Transition 2
+Timestamp   : 9.797s
+Narration   : Alongside the anchors, corresponding bird's-eye view feature maps are generated.
+--------------------------------------------------------------------------------
+Frame Image : frame_0019.png
+Frame Type  : Transition 3
+Timestamp   : 9.897s
+Narration   : Alongside the anchors, corresponding bird's-eye view feature maps are generated.
+--------------------------------------------------------------------------------
+Frame Image : frame_0020.png
+Frame Type  : Hold
+Timestamp   : 10.798s
+Narration   : The BEV features are routed down to the Proposal Detection module.
+--------------------------------------------------------------------------------
+Frame Image : frame_0021.png
+Frame Type  : Transition 1
+Timestamp   : 11.699s
+Narration   : The BEV features are routed down to the Proposal Detection module.
+--------------------------------------------------------------------------------
+Frame Image : frame_0022.png
+Frame Type  : Transition 2
+Timestamp   : 11.799s
+Narration   : The BEV features are routed down to the Proposal Detection module.
+--------------------------------------------------------------------------------
+Frame Image : frame_0023.png
+Frame Type  : Transition 3
+Timestamp   : 11.899s
+Narration   : The BEV features are routed down to the Proposal Detection module.
+--------------------------------------------------------------------------------
+Frame Image : frame_0024.png
+Frame Type  : Hold
+Timestamp   : 12.798s
+Narration   : Proposal Detection produces a keypoint segmentation map.
+--------------------------------------------------------------------------------
+Frame Image : frame_0025.png
+Frame Type  : Transition 1
+Timestamp   : 13.697s
+Narration   : Proposal Detection produces a keypoint segmentation map.
+--------------------------------------------------------------------------------
+Frame Image : frame_0026.png
+Frame Type  : Transition 2
+Timestamp   : 13.797s
+Narration   : Proposal Detection produces a keypoint segmentation map.
+--------------------------------------------------------------------------------
+Frame Image : frame_0027.png
+Frame Type  : Transition 3
+Timestamp   : 13.897s
+Narration   : Proposal Detection produces a keypoint segmentation map.
+--------------------------------------------------------------------------------
+Frame Image : frame_0028.png
+Frame Type  : Hold
+Timestamp   : 14.798s
+Narration   : The segmentation map, anchor positions, and BEV features feed into the Multiple Keypoint Proposal module.
+--------------------------------------------------------------------------------
+Frame Image : frame_0029.png
+Frame Type  : Transition 1
+Timestamp   : 15.699s
+Narration   : The segmentation map, anchor positions, and BEV features feed into the Multiple Keypoint Proposal module.
+--------------------------------------------------------------------------------
+Frame Image : frame_0030.png
+Frame Type  : Transition 2
+Timestamp   : 15.799s
+Narration   : The segmentation map, anchor positions, and BEV features feed into the Multiple Keypoint Proposal module.
+--------------------------------------------------------------------------------
+Frame Image : frame_0031.png
+Frame Type  : Transition 3
+Timestamp   : 15.898s
+Narration   : The segmentation map, anchor positions, and BEV features feed into the Multiple Keypoint Proposal module.
+--------------------------------------------------------------------------------
+Frame Image : frame_0032.png
+Frame Type  : Hold
+Timestamp   : 16.798s
+Narration   : This module outputs initial query positions and query features.
+--------------------------------------------------------------------------------
+Frame Image : frame_0033.png
+Frame Type  : Transition 1
+Timestamp   : 17.698s
+Narration   : This module outputs initial query positions and query features.
+--------------------------------------------------------------------------------
+Frame Image : frame_0034.png
+Frame Type  : Transition 2
+Timestamp   : 17.798s
+Narration   : This module outputs initial query positions and query features.
+--------------------------------------------------------------------------------
+Frame Image : frame_0035.png
+Frame Type  : Transition 3
+Timestamp   : 17.899s
+Narration   : This module outputs initial query positions and query features.
+--------------------------------------------------------------------------------
+Frame Image : frame_0036.png
+Frame Type  : Hold
+Timestamp   : 18.799s
+Narration   : These positions and features enter a series of stacked Transformer Layers.
+--------------------------------------------------------------------------------
+Frame Image : frame_0037.png
+Frame Type  : Transition 1
+Timestamp   : 19.698s
+Narration   : These positions and features enter a series of stacked Transformer Layers.
+--------------------------------------------------------------------------------
+Frame Image : frame_0038.png
+Frame Type  : Transition 2
+Timestamp   : 19.798s
+Narration   : These positions and features enter a series of stacked Transformer Layers.
+--------------------------------------------------------------------------------
+Frame Image : frame_0039.png
+Frame Type  : Transition 3
+Timestamp   : 19.898s
+Narration   : These positions and features enter a series of stacked Transformer Layers.
+--------------------------------------------------------------------------------
+Frame Image : frame_0040.png
+Frame Type  : Hold
+Timestamp   : 20.799s
+Narration   : Intermediate outputs from these layers branch off into Auxiliary Heads.
+--------------------------------------------------------------------------------
+Frame Image : frame_0041.png
+Frame Type  : Transition 1
+Timestamp   : 21.700s
+Narration   : Intermediate outputs from these layers branch off into Auxiliary Heads.
+--------------------------------------------------------------------------------
+Frame Image : frame_0042.png
+Frame Type  : Transition 2
+Timestamp   : 21.800s
+Narration   : Intermediate outputs from these layers branch off into Auxiliary Heads.
+--------------------------------------------------------------------------------
+Frame Image : frame_0043.png
+Frame Type  : Transition 3
+Timestamp   : 21.900s
+Narration   : Intermediate outputs from these layers branch off into Auxiliary Heads.
+--------------------------------------------------------------------------------
+Frame Image : frame_0044.png
+Frame Type  : Hold
+Timestamp   : 22.799s
+Narration   : The representation continues into a final Transformer Layer.
+--------------------------------------------------------------------------------
+Frame Image : frame_0045.png
+Frame Type  : Transition 1
+Timestamp   : 23.698s
+Narration   : The representation continues into a final Transformer Layer.
+--------------------------------------------------------------------------------
+Frame Image : frame_0046.png
+Frame Type  : Transition 2
+Timestamp   : 23.798s
+Narration   : The representation continues into a final Transformer Layer.
+--------------------------------------------------------------------------------
+Frame Image : frame_0047.png
+Frame Type  : Transition 3
+Timestamp   : 23.898s
+Narration   : The representation continues into a final Transformer Layer.
+--------------------------------------------------------------------------------
+Frame Image : frame_0048.png
+Frame Type  : Hold
+Timestamp   : 24.799s
+Narration   : The final Transformer Layer drives prediction heads for X-Offset, Z, Classification, and Connectivity.
+--------------------------------------------------------------------------------
+Frame Image : frame_0049.png
+Frame Type  : Transition 1
+Timestamp   : 25.700s
+Narration   : The final Transformer Layer drives prediction heads for X-Offset, Z, Classification, and Connectivity.
+--------------------------------------------------------------------------------
+Frame Image : frame_0050.png
+Frame Type  : Transition 2
+Timestamp   : 25.799s
+Narration   : The final Transformer Layer drives prediction heads for X-Offset, Z, Classification, and Connectivity.
+--------------------------------------------------------------------------------
+Frame Image : frame_0051.png
+Frame Type  : Transition 3
+Timestamp   : 25.899s
+Narration   : The final Transformer Layer drives prediction heads for X-Offset, Z, Classification, and Connectivity.
+--------------------------------------------------------------------------------
+Frame Image : frame_0052.png
+Frame Type  : Hold
+Timestamp   : 26.798s
+Narration   : Panel B illustrates point refinement, starting with raw proposals without offset.
+--------------------------------------------------------------------------------
+Frame Image : frame_0053.png
+Frame Type  : Transition 1
+Timestamp   : 27.698s
+Narration   : Panel B illustrates point refinement, starting with raw proposals without offset.
+--------------------------------------------------------------------------------
+Frame Image : frame_0054.png
+Frame Type  : Transition 2
+Timestamp   : 27.797s
+Narration   : Panel B illustrates point refinement, starting with raw proposals without offset.
+--------------------------------------------------------------------------------
+Frame Image : frame_0055.png
+Frame Type  : Transition 3
+Timestamp   : 27.897s
+Narration   : Panel B illustrates point refinement, starting with raw proposals without offset.
+--------------------------------------------------------------------------------
+Frame Image : frame_0056.png
+Frame Type  : Hold
+Timestamp   : 28.798s
+Narration   : Next, offsets are applied to align the points.
+--------------------------------------------------------------------------------
+Frame Image : frame_0057.png
+Frame Type  : Transition 1
+Timestamp   : 29.699s
+Narration   : Next, offsets are applied to align the points.
+--------------------------------------------------------------------------------
+Frame Image : frame_0058.png
+Frame Type  : Transition 2
+Timestamp   : 29.799s
+Narration   : Next, offsets are applied to align the points.
+--------------------------------------------------------------------------------
+Frame Image : frame_0059.png
+Frame Type  : Transition 3
+Timestamp   : 29.899s
+Narration   : Next, offsets are applied to align the points.
+--------------------------------------------------------------------------------
+Frame Image : frame_0060.png
+Frame Type  : Hold
+Timestamp   : 30.798s
+Narration   : Point Non-Maximum Suppression is then executed to eliminate duplicates.
+--------------------------------------------------------------------------------
+Frame Image : frame_0061.png
+Frame Type  : Transition 1
+Timestamp   : 31.697s
+Narration   : Point Non-Maximum Suppression is then executed to eliminate duplicates.
+--------------------------------------------------------------------------------
+Frame Image : frame_0062.png
+Frame Type  : Transition 2
+Timestamp   : 31.797s
+Narration   : Point Non-Maximum Suppression is then executed to eliminate duplicates.
+--------------------------------------------------------------------------------
+Frame Image : frame_0063.png
+Frame Type  : Transition 3
+Timestamp   : 31.897s
+Narration   : Point Non-Maximum Suppression is then executed to eliminate duplicates.
+--------------------------------------------------------------------------------
+Frame Image : frame_0064.png
+Frame Type  : Hold
+Timestamp   : 32.798s
+Narration   : Panel C outlines the Adjacency Matrix structure.
+--------------------------------------------------------------------------------
+Frame Image : frame_0065.png
+Frame Type  : Transition 1
+Timestamp   : 33.699s
+Narration   : Panel C outlines the Adjacency Matrix structure.
+--------------------------------------------------------------------------------
+Frame Image : frame_0066.png
+Frame Type  : Transition 2
+Timestamp   : 33.799s
+Narration   : Panel C outlines the Adjacency Matrix structure.
+--------------------------------------------------------------------------------
+Frame Image : frame_0067.png
+Frame Type  : Transition 3
+Timestamp   : 33.898s
+Narration   : Panel C outlines the Adjacency Matrix structure.
+--------------------------------------------------------------------------------
+Frame Image : frame_0068.png
+Frame Type  : Hold
+Timestamp   : 34.798s
+Narration   : It maps connectivity scores between origin features and destination features.
+--------------------------------------------------------------------------------
+Frame Image : frame_0069.png
+Frame Type  : Transition 1
+Timestamp   : 35.698s
+Narration   : It maps connectivity scores between origin features and destination features.
+--------------------------------------------------------------------------------
+Frame Image : frame_0070.png
+Frame Type  : Transition 2
+Timestamp   : 35.798s
+Narration   : It maps connectivity scores between origin features and destination features.
+--------------------------------------------------------------------------------
+Frame Image : frame_0071.png
+Frame Type  : Transition 3
+Timestamp   : 35.899s
+Narration   : It maps connectivity scores between origin features and destination features.
+--------------------------------------------------------------------------------

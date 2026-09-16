@@ -1,0 +1,24 @@
+[
+  {
+    "id": "cmp-multi-branch-extractor",
+    "title": "Multi-Branch Feature Extractor",
+    "category": "Machine Learning",
+    "curated": false,
+    "note": "Representative, non-cherry-picked pair — aggregate scores.",
+    "metrics": {
+      "baseline": { "VF": 0.41, "ASC": 0.63, "SS": 0.52, "GP": 0.48, "NA": 0.57, "AANS": 0.21 },
+      "ours": { "VF": 0.96, "ASC": 0.94, "SS": 0.91, "GP": 0.87, "NA": 0.92, "AANS": 0.86 }
+    }
+  },
+  {
+    "id": "cmp-incoherent-grouping",
+    "title": "Distributed Consensus Protocol",
+    "category": "Computer Science",
+    "curated": true,
+    "note": "Curated failure case — baseline exhibits incoherent grouping and omitted content.",
+    "metrics": {
+      "baseline": { "VF": 0.38, "ASC": 0.44, "SS": 0.29, "GP": 0.33, "NA": 0.41, "AANS": 0.09 },
+      "ours": { "VF": 0.95, "ASC": 0.93, "SS": 0.89, "GP": 0.9, "NA": 0.91, "AANS": 0.84 }
+    }
+  }
+]

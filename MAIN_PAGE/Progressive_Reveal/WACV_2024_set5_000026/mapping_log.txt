@@ -1,0 +1,38 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : For the reference view, the pipeline takes an RGB image along with Angle of Polarization and Degree of Polarization images.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : Multiple source views provide additional multi-modal image sets observing the scene from different viewpoints.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : The estimation begins with a random initialization of depth and surface normals for each pixel in the reference view.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : Based on the initial estimates, candidate depth and normal hypotheses are generated.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : These hypotheses are then evaluated by assessing photometric and polarimetric consistency across the reference and source views.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : This calculation is performed pixel by pixel while alternating the scanning direction across row-major, reverse row-major, column-major, and reverse column-major orders.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : The best depth and normal hypothesis is selected, and the framework checks whether the iteration limit has been reached.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 3.999s
+Narration   : If not, the updated estimates are fed back into hypothesis generation for further refinement.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 4.499s
+Narration   : Once the iteration limit is reached, the pipeline outputs the final depth and surface normal maps for the reference view.
+--------------------------------------------------------------------------------

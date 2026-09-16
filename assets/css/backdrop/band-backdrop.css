@@ -1,0 +1,169 @@
+/*
+  <band-backdrop> — a drop-in decorative ground for a full-bleed band.
+
+  Its own folder (`assets/{css,js}/backdrop/`) on purpose: the gallery
+  rail's band was a wide expanse of plain dot paper with a carousel
+  floating in the middle of it, and fixing that meant either editing the
+  gallery module's stylesheet — which someone else owns — or adding a
+  component that any band can opt into. This is the second.
+
+  It renders nothing but background: one absolutely-positioned layer
+  behind its parent's content, `aria-hidden`, `pointer-events: none`.
+  Adding it to a section is one element and changes nothing else.
+
+  The motif is a film strip, because what the gallery band shows is
+  frames of animation: two sprocket rails running the full width behind
+  the carousel, ghost frame outlines drifting either side of the centre,
+  a warm tonal wash, and the site's own dot paper still reading through.
+  All of it at low contrast — the slides stay the loudest thing there.
+
+  Owns `.bk-*` and `band-backdrop` only.
+*/
+
+band-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: block;
+  overflow: hidden;
+  pointer-events: none;
+  /* A warm centre falling off to the page's paper at the edges, so the
+     band reads as a lit stage rather than as a flat rectangle. */
+  background:
+    radial-gradient(118% 74% at 50% 52%, var(--paper-warm) 0%, rgba(255, 249, 230, 0) 70%),
+    linear-gradient(var(--bg-alt), var(--bg-alt));
+}
+
+/* The parent has to establish the stacking context and sit above it. */
+.bk-host { position: relative; isolation: isolate; }
+.bk-host > :not(band-backdrop) { position: relative; z-index: 1; }
+
+/* ---- Ruled edges: the band gets a top and bottom line like a plate ---- */
+band-backdrop::before,
+band-backdrop::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  height: 2px;
+  background: var(--ink);
+  opacity: 0.9;
+}
+band-backdrop::before { top: 0; }
+band-backdrop::after { bottom: 0; }
+
+/* ---- Sprocket rails ---- */
+.bk-rail {
+  position: absolute;
+  left: -4%;
+  right: -4%;
+  height: 26px;
+  /* Perforations: a run of rounded slots, drawn rather than imaged so
+     they scale with the band and cost nothing. */
+  background-image:
+    linear-gradient(var(--line-strong) 0 0),
+    linear-gradient(var(--line-strong) 0 0);
+  background-repeat: repeat-x, repeat-x;
+  background-size: 46px 2px, 46px 2px;
+  background-position: 0 2px, 0 calc(100% - 2px);
+}
+.bk-rail i {
+  position: absolute;
+  inset: 6px 0;
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent 0 13px,
+    var(--line) 13px 33px,
+    transparent 33px 46px
+  );
+  border-radius: 3px;
+  opacity: 0.85;
+}
+/* Hard against the ruled edges, the way a film strip is perforated —
+   anywhere inboard and a rail crosses the heading or the caption. */
+.bk-rail-top { top: 2px; }
+.bk-rail-bot { bottom: 2px; }
+
+/* ---- The lit stage the carousel sits on ----
+   Without this the middle of the band is the emptiest part of it: a
+   slide floating on flat paper with nothing under it. A soft pool of
+   banana light and a dashed rule running the full width give the row a
+   floor, and the ghost frames either side put something on that floor
+   where the carousel's neighbours trail off. */
+.bk-spot {
+  position: absolute;
+  left: 50%;
+  top: 55%;
+  width: min(1500px, 128%);
+  height: clamp(260px, 34vw, 420px);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(255, 212, 59, 0.22), rgba(255, 212, 59, 0) 72%);
+}
+.bk-line {
+  position: absolute;
+  left: 0; right: 0;
+  top: 55%;
+  height: 1.5px;
+  background: repeating-linear-gradient(90deg, var(--line-strong) 0 7px, transparent 7px 17px);
+  opacity: 0.7;
+}
+/* Ticks, the way a strip is marked off frame by frame. */
+.bk-line::before, .bk-line::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  height: 9px;
+  background: repeating-linear-gradient(90deg, var(--line-strong) 0 1.5px, transparent 1.5px 68px);
+  opacity: 0.6;
+}
+.bk-line::before { bottom: 100%; }
+.bk-line::after { top: 100%; }
+
+/* ---- Ghost frames: empty slides waiting either side of the carousel ---- */
+.bk-ghost {
+  position: absolute;
+  top: 52%;
+  width: clamp(150px, 17vw, 260px);
+  aspect-ratio: 16 / 10;
+  transform: translateY(-50%) rotate(var(--r, 0deg));
+  border: 2px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  opacity: 0.6;
+}
+.bk-ghost::after {
+  content: '';
+  position: absolute;
+  inset: 9px;
+  border-radius: 5px;
+  background:
+    linear-gradient(var(--line) 0 0) 8% 22%/26% 9% no-repeat,
+    linear-gradient(var(--line) 0 0) 42% 22%/26% 9% no-repeat,
+    linear-gradient(var(--line) 0 0) 76% 22%/18% 9% no-repeat,
+    linear-gradient(var(--line-strong) 0 0) 8% 50%/84% 1.5px no-repeat,
+    linear-gradient(var(--line) 0 0) 16% 74%/28% 12% no-repeat,
+    linear-gradient(var(--line) 0 0) 56% 74%/28% 12% no-repeat;
+}
+.bk-ghost-l { left: clamp(-90px, -3vw, -20px); --r: -3.5deg; }
+.bk-ghost-r { right: clamp(-90px, -3vw, -20px); --r: 3.5deg; }
+@media (max-width: 1100px) { .bk-ghost { display: none; } }
+
+/* ---- Corner crop marks: the sketchbook-lab register ---- */
+.bk-mark {
+  position: absolute;
+  width: 20px; height: 20px;
+  border: 0 solid var(--ink);
+  opacity: 0.34;
+}
+.bk-mark-tl { top: 38px; left: 16px; border-top-width: 2px; border-left-width: 2px; }
+.bk-mark-tr { top: 38px; right: 16px; border-top-width: 2px; border-right-width: 2px; }
+.bk-mark-bl { bottom: 38px; left: 16px; border-bottom-width: 2px; border-left-width: 2px; }
+.bk-mark-br { bottom: 38px; right: 16px; border-bottom-width: 2px; border-right-width: 2px; }
+
+/* ---- A slow drift, so the band is not dead still behind a moving rail ---- */
+@media (prefers-reduced-motion: no-preference) {
+  .bk-rail i { animation: bk-drift 26s linear infinite; }
+  .bk-rail-bot i { animation-direction: reverse; animation-duration: 34s; }
+}
+@keyframes bk-drift {
+  to { background-position-x: 46px; }
+}

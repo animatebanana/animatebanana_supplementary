@@ -1,0 +1,46 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : In text-based debiasing, the query text direction is represented within a multi-dimensional embedding space.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : The query text vector is projected onto the gender and race subspace and subtracted, yielding a neutral query text direction.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : The gradient-based debiasing framework begins with the original input image.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : The subject's original facial identity is extracted to serve as a reference for identity preservation.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : Both the original image and a target text prompt are fed into the CLIP-based image editing model.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : Inside the model, the image encoder and CLIP module construct an edited latent code, which is forwarded to the generator.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : The generator synthesizes an initial edited image that reflects the prompt but may introduce unwanted bias.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 3.999s
+Narration   : The identity from the generated image is extracted and compared against the original identity using identity-preserving loss functions.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 4.499s
+Narration   : In parallel, a CLIP loss evaluates the semantic alignment between the generated image and the text prompt.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 4.999s
+Narration   : The edited latent code is iteratively optimized through backpropagation, balancing identity preservation with CLIP alignment.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 5.499s
+Narration   : Finally, the optimized latent code passes through the generator to produce the debiased image while faithfully preserving original identity.
+--------------------------------------------------------------------------------

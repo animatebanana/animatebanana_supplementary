@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+  <title>Evaluation — AnimateBanana</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@400..800&family=JetBrains+Mono:wght@400..700&family=Caveat:wght@500..700&display=swap">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css?v=2">
+  <link rel="stylesheet" href="assets/css/components/site-nav.css?v=2">
+  <link rel="stylesheet" href="assets/css/components/doodle-field.css">
+  <link rel="stylesheet" href="assets/css/components/metric-scheme.css?v=2">
+  <link rel="stylesheet" href="assets/css/components/eval-walkthrough.css?v=5">
+  <style>
+    /* the scheme wants three columns, which is wider than the standard page column */
+    .page.ev-widepage { max-width: 1560px; }
+  </style>
+</head>
+<body>
+  <site-nav current="evaluation"></site-nav>
+
+  <div class="page ev-widepage">
+    <div class="page-head">
+      <doodle-field density="sparse"></doodle-field>
+      <div class="kicker">Appendix · 06</div>
+      <h1>Evaluation</h1>
+    </div>
+    <metric-scheme src="data/evaluation_runs.json"></metric-scheme>
+
+    <section class="ev-section">
+      <div class="kicker">Walkthrough</div>
+      <h2>Evaluation walk through</h2>
+      <p>Pick a baseline and a sample, then press Run.</p>
+      <eval-walkthrough src="data/evaluation_runs.json"></eval-walkthrough>
+    </section>
+
+    <footer class="site-footer">
+      <span>AnimateBanana — companion site to the paper. Anonymous submission.</span>
+      <nav aria-label="Footer">
+        <a href="index.html">Overview</a>
+        <a href="resources.html">Paper</a>
+        <a href="resources.html">Code</a>
+      </nav>
+    </footer>
+  </div>
+
+  <script type="module" src="assets/js/components/site-nav.js?v=2"></script>
+  <script type="module" src="assets/js/components/doodle-field.js"></script>
+  <script type="module" src="assets/js/components/metric-scheme.js?v=2"></script>
+  <script type="module" src="assets/js/components/eval-walkthrough.js?v=5"></script>
+  <script type="module" src="assets/js/lib/reveal.js"></script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : The pipeline begins with the extraction phase, accessing raw records stored in the data source.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : The extracted data is routed to a decoder to parse the raw byte streams into image data.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : This produces the decoded base image ready for feature manipulation.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : In the transformation stage, parser preprocessing performs data augmentations, including random hue, saturation, and zooming.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : The result is a transformed and augmented image sample.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : During the loading stage, data loading procedures execute batching, prefetching, and memory caching.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : Finally, the processed dataset is streamed directly as input into the model.
+--------------------------------------------------------------------------------

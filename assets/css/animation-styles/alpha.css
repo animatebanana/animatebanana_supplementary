@@ -1,0 +1,16 @@
+/*
+  Alpha Masking — the full diagram is visible faintly from the start,
+  and elements are progressively brought to full opacity in order.
+*/
+.anim-alpha svg [data-order] {
+  opacity: 0.15;
+  animation: ab-alpha-emphasize 0.5s ease forwards;
+  animation-delay: calc(var(--order, 0) * 0.45s);
+}
+@keyframes ab-alpha-emphasize {
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-alpha svg [data-order] { animation: none; opacity: 1; }
+}

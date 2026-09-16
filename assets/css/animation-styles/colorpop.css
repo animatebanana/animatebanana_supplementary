@@ -1,0 +1,16 @@
+/*
+  Colour Pop — the diagram begins in grayscale and elements are
+  progressively restored to their original colours in order.
+*/
+.anim-colorpop svg [data-order] {
+  filter: grayscale(1) opacity(0.5);
+  animation: ab-colorpop 0.5s ease forwards;
+  animation-delay: calc(var(--order, 0) * 0.45s);
+}
+@keyframes ab-colorpop {
+  to { filter: grayscale(0) opacity(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-colorpop svg [data-order] { animation: none; filter: none; }
+}

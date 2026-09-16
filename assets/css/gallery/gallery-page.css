@@ -1,0 +1,242 @@
+/*
+  gallery.html — the full example gallery.
+
+  Owns the `.gp-*` page-shell classes and the `.gb-*` classes rendered by
+  <gallery-browser>. Nothing outside assets/{css,js}/gallery/ styles them,
+  and nothing here restyles a shared class. Every value comes from
+  tokens.css, so the page reads as the same sketchbook lab as the
+  overview: dotted paper, ink outlines, hard offset shadows, banana as
+  the single loud accent.
+
+  The header is deliberately compact and the grid runs edge to edge —
+  the figures are the content here, not the chrome around them.
+*/
+
+/* ================= PAGE HEAD ================= */
+.gp-head {
+  position: relative;
+  text-align: center;
+  padding: clamp(26px, 3.5vw, 44px) var(--gap-page) clamp(18px, 2.4vw, 28px);
+  isolation: isolate;
+}
+.gp-head .kicker { margin-bottom: 12px; }
+.gp-head h1 {
+  /* A step down from the site's page-head scale: this page's job is to
+     get out of the way of 144 figures. */
+  font-size: clamp(2rem, 1.4rem + 2.4vw, 3.4rem);
+  margin: 0 auto 10px;
+}
+.gp-lede {
+  color: var(--ink-soft);
+  font-size: clamp(0.95rem, 0.9rem + 0.25vw, 1.1rem);
+  line-height: 1.5;
+  max-width: 54ch;
+  margin: 0 auto;
+}
+
+/* ---- Back to overview: an ink pill with an arrow that pulls left ---- */
+.gp-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: clamp(14px, 2vw, 20px);
+  padding: 7px 15px 7px 12px;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--fs-xs);
+  font-weight: 650;
+  box-shadow: 3px 3px 0 var(--ink);
+  transition: transform var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out),
+              background var(--dur-fast) var(--ease-out);
+}
+.gp-back svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; transition: transform var(--dur) var(--ease-spring); }
+.gp-back:hover { color: var(--ink); background: var(--banana-soft); transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var(--ink); }
+.gp-back:hover svg { transform: translateX(-3px); }
+.gp-back:active { transform: translate(3px, 3px); box-shadow: 0 0 0 var(--ink); }
+
+/* The bottom return, sitting above the footer. */
+.gp-return {
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(44px, 6vw, 72px);
+  padding-top: clamp(26px, 3.5vw, 40px);
+  border-top: 2px dashed var(--line-strong);
+}
+.gp-return .gp-back { margin-top: 0; }
+
+/* ---- Full-bleed shell: the grid runs to both edges of the viewport,
+       the footer stays on the site's normal measure. A much smaller
+       gutter than --gap-page on purpose. ---- */
+.gp-bleed { padding: 0 clamp(12px, 1.6vw, 28px); }
+.gp-foot { max-width: var(--page-max); margin: 0 auto; padding: 0 var(--gap-page) 64px; }
+
+/* ================= STYLE CHIPS ================= */
+gallery-browser { display: block; }
+
+.gb-styles {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 9px;
+  margin: 0 0 clamp(20px, 3vw, 34px);
+}
+.gb-chip {
+  font-family: var(--font-body);
+  font-size: var(--fs-xs);
+  font-weight: 650;
+  padding: 9px 18px;
+  border-radius: 999px;
+  border: 2px solid var(--line-strong);
+  background: var(--surface);
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: color var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out),
+              border-color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out),
+              box-shadow var(--dur-fast) var(--ease-out);
+}
+.gb-chip:hover { color: var(--ink); border-color: var(--ink); transform: translateY(-2px); }
+.gb-chip-active, .gb-chip-active:hover {
+  background: var(--banana);
+  color: var(--ink);
+  border-color: var(--ink);
+  box-shadow: 3px 3px 0 var(--ink);
+  transform: none;
+}
+
+/* ================= GRID =================
+   Five across on a normal desktop, stepping down a column at a time as
+   the viewport narrows and landing on two up on a phone. `auto-fit` with
+   a floor keeps the cards from ever stretching absurdly wide on an
+   ultrawide display. */
+.gb-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: clamp(14px, 1.4vw, 22px);
+}
+@media (max-width: 1100px) { .gb-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (max-width: 860px)  { .gb-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 620px)  { .gb-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+/* Phone portrait goes one up rather than two: at ~180px a process
+   diagram's labels stop being readable, which defeats the preview. */
+@media (max-width: 480px)  { .gb-grid { grid-template-columns: 1fr; } }
+
+.gb-card {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform var(--dur) var(--ease-out), box-shadow var(--dur) var(--ease-out);
+}
+.gb-card:hover { transform: translate(-4px, -4px); box-shadow: var(--shadow-hard); }
+.gb-card:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+.gb-card:active { transform: translate(1px, 1px); box-shadow: 2px 2px 0 var(--ink); }
+/* Set by pages/gallery.js when a card is deep-linked, so the selection
+   survives the scroll back up to the chips. */
+.gb-card.is-selected { box-shadow: var(--shadow-banana), 0 0 0 2px var(--ink); }
+
+/* ---- Thumb ---- */
+.gb-thumb {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  border-bottom: 2px solid var(--ink);
+  background-color: var(--paper);
+  background-image: radial-gradient(var(--dot) 1px, transparent 1.2px);
+  background-size: 14px 14px;
+  overflow: hidden;
+}
+.gb-skeleton {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background-image: repeating-linear-gradient(-45deg, var(--banana-soft) 0 7px, transparent 7px 15px);
+}
+.gb-skeleton svg {
+  width: 30%;
+  max-width: 72px;
+  fill: none;
+  stroke: var(--line-strong);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.gb-card[data-media='loading'] .gb-skeleton svg { animation: gb-pulse 1.6s var(--ease-io) infinite; }
+@keyframes gb-pulse { 50% { opacity: 0.45; } }
+
+/* Source figures run from square to very wide strips, so previews are
+   letterboxed onto the card rather than cropped. Once the image is in,
+   the thumb turns plain white so the bars either side read as more of
+   the figure's own page rather than as exposed dot paper. */
+.gb-card[data-media='image'] .gb-thumb {
+  background-color: #FFFFFF;
+  background-image: none;
+}
+.gb-card[data-media='image'] .gb-skeleton {
+  opacity: 0;
+  transition: opacity var(--dur) var(--ease-out);
+}
+
+.gb-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 6px;
+  opacity: 0;
+  transition: opacity var(--dur) var(--ease-out), transform var(--dur-slow) var(--ease-out);
+}
+.gb-card[data-media='image'] .gb-img { opacity: 1; }
+.gb-card:hover .gb-img { transform: scale(1.03); }
+
+.gb-open {
+  position: absolute;
+  right: 10px; bottom: 10px;
+  width: 32px; height: 32px;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  background: var(--banana);
+  transform: scale(0);
+  transition: transform var(--dur) var(--ease-spring);
+}
+.gb-open svg { width: 15px; height: 15px; fill: none; stroke: var(--ink); }
+.gb-card:hover .gb-open, .gb-card:focus-visible .gb-open { transform: scale(1); }
+
+/* ---- The one label a card carries ---- */
+.gb-style {
+  padding: 9px 14px 10px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--banana-ink);
+}
+
+/* ================= EMPTY ================= */
+.gb-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: clamp(48px, 8vw, 88px) 0;
+  font-family: var(--font-hand);
+  font-size: 1.7rem;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+
+/* ================= REDUCED MOTION ================= */
+@media (prefers-reduced-motion: reduce) {
+  .gb-card:hover { transform: none; }
+  .gb-card:hover .gb-img { transform: none; }
+  .gb-card[data-media='loading'] .gb-skeleton svg { animation: none; }
+  .gb-open { transform: scale(1); }
+  .gp-back:hover { transform: none; }
+}

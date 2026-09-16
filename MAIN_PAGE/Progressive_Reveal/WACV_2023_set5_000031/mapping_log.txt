@@ -1,0 +1,58 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : The pipeline begins with input noisy two-D joint coordinates paired with their detection confidence scores.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : These inputs are processed by the Refinement Network to correct keypoint inaccuracies.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : This produces a clean, refined two-D pose representation.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : A two-D refinement loss supervises the refined pose against ground truth two-D annotations.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : The refined two-D pose and three-D poses are fed into an adversarial Pose Generator to expand pose diversity.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : An accompanying Pose Discriminator enforces realism and anatomical plausibility on the generated poses.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : Features proceed to the three-D Lifting Network, which branches into two separate prediction heads.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 3.999s
+Narration   : The three-D Pose Branch estimates the three-dimensional human joint positions in camera coordinates.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 4.499s
+Narration   : When three-D ground truth is available, a three-D pose estimation loss supervises the predicted coordinates.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 4.999s
+Narration   : In parallel, the Camera Parameter Branch predicts intrinsic parameters and translation offsets.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 5.499s
+Narration   : These estimated parameters can be supervised directly using a camera parameter loss against ground truth values.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Timestamp   : 5.999s
+Narration   : Perspective projection then combines the predicted three-D pose with the camera parameters to project joints back into image space.
+--------------------------------------------------------------------------------
+Frame Image : frame_12.png
+Timestamp   : 6.499s
+Narration   : This yields the reprojected two-D pose.
+--------------------------------------------------------------------------------
+Frame Image : frame_13.png
+Timestamp   : 6.999s
+Narration   : Finally, a two-D reprojection loss ensures geometric consistency with the refined two-D pose, enabling weakly supervised learning on in-the-wild datasets.
+--------------------------------------------------------------------------------

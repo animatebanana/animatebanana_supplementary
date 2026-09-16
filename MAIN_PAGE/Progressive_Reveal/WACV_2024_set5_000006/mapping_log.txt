@@ -1,0 +1,42 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : The framework begins with multi-view input images capturing the scene from multiple camera perspectives.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : A dilated ResNet-18 backbone processes each camera view to extract downsampled two-dimensional feature representations.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : A foreground selector module isolates meaningful semantic information, highlighting critical foreground regions.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : Through non-parametric three-dimensional feature pulling, projection and bilinear sampling map two-dimensional features into view-specific three-dimensional volumes.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : These view-specific feature volumes are then fed into the maximal fusion module.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : Max pooling aggregates features across all views, which are concatenated with coordinate volumes and convolved to produce an aggregated three-dimensional feature volume.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : Reducing the vertical dimension forms a coarse bird's-eye-view feature map, which is then refined by the large kernel refiner.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 3.999s
+Narration   : The enhanced bird's-eye-view feature representation is subsequently passed through a final convolution layer.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 4.499s
+Narration   : The network outputs the final predicted two-dimensional pedestrian occupancy map.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 4.999s
+Narration   : Finally, the predicted occupancy map is compared against the ground truth using a mean squared error loss.
+--------------------------------------------------------------------------------

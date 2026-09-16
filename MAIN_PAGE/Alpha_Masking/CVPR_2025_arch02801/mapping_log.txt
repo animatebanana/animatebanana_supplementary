@@ -1,0 +1,50 @@
+=== Alpha Masking Sequence ===
+
+Frame Image : frame_00.png
+Timestamp   : 1.90s
+Narration   : The framework begins with an input image and a text prompt specifying the target category to be counted, such as keyboard keys.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 5.70s
+Narration   : The image is encoded by a frozen VAE encoder, while the text prompt is processed by a frozen text encoder within the pretrained diffusion model.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 7.60s
+Narration   : These representations enter a trainable Denoising U-Net performing a single-step denoising pass to extract intermediate visual features.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 9.50s
+Narration   : These representations enter a trainable Denoising U-Net performing a single-step denoising pass to extract intermediate visual features.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 13.30s
+Narration   : Multi-layer cross-attention maps are extracted from the U-Net to establish the Representational Regional Coherence loss branch.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 15.20s
+Narration   : The fused cross-attention map isolates background regions, combining with ground-truth density locations to build a positive-negative-ambiguous supervision map.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 17.10s
+Narration   : The fused cross-attention map isolates background regions, combining with ground-truth density locations to build a positive-negative-ambiguous supervision map.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 20.90s
+Narration   : Concurrently, hierarchical multi-scale feature maps from the U-Net decoder enter the Hierarchical Semantic Correction Module.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 24.70s
+Narration   : This trainable module progressively refines text-image alignment by fusing visual features across adjacent scales with text embeddings.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 28.50s
+Narration   : Intermediate text-image similarity maps are generated and supervised against the positive-negative-ambiguous map through the coherence loss.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 32.30s
+Narration   : The fully corrected feature representations are then fed into a counter head to estimate the predicted density map.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Timestamp   : 36.10s
+Narration   : Finally, the predicted density map is optimized against ground truth annotations with a regression loss, completing end-to-end training.
+--------------------------------------------------------------------------------

@@ -1,0 +1,62 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : In the portrait attributes subspace modeling stage, the pipeline begins by receiving a reference portrait image and driving video frames.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : A frozen DECA network decomposes the video frames into three-dimensional facial attributes, extracting lighting, pose, and shape parameters.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : These parameters are rendered into three-dimensional shading hints and passed through a trainable shading adapter to extract extrinsic shading features.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : Simultaneously, the reference image is processed by a reference adapter to extract intrinsic identity features, which are randomly combined with shading features.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : In parallel, a frozen VAE encoder projects the input video frames into noisy latent representations.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : The masked reference portrait is encoded and concatenated with noisy latents, while a CLIP encoder provides global semantic conditioning.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : These inputs feed into Stable Video Diffusion, passing through convolutional, self-attention, cross-attention, and temporal-attention blocks.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 3.999s
+Narration   : The denoised latent representation is then decoded by the VAE decoder into reconstructed video frames.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 4.499s
+Narration   : In the relighting and animation stage, the system ingests target lighting alongside driving video frames, a reference portrait, and mask inputs.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 4.999s
+Narration   : DECA extracts target lighting coefficients, motion pose from the driving video, and facial shape geometry from the reference portrait.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 5.499s
+Narration   : A motion alignment module aligns pose and shape to render target shading hints for the shading adapter, paired with the reference adapter.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Timestamp   : 5.999s
+Narration   : A multi-condition classifier-free guidance module constructs combined condition sets from both adapter outputs.
+--------------------------------------------------------------------------------
+Frame Image : frame_12.png
+Timestamp   : 6.499s
+Narration   : Reference identity latents and semantic CLIP embeddings are processed and formatted for diffusion model injection.
+--------------------------------------------------------------------------------
+Frame Image : frame_13.png
+Timestamp   : 6.999s
+Narration   : Stable Video Diffusion leverages multi-condition guidance to modulate lighting strength while preserving identity consistency.
+--------------------------------------------------------------------------------
+Frame Image : frame_14.png
+Timestamp   : 7.499s
+Narration   : Finally, the VAE decoder outputs the final animated portrait video frames with accurate lighting control and seamless motion transfer.
+--------------------------------------------------------------------------------

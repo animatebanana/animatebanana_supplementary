@@ -1,0 +1,154 @@
+=== Hopping Bounding Box Sequence ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.50s
+Narration   : The ResCLIP pipeline integrates two core modules to achieve training-free dense vision-language inference.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 1.50s
+Narration   : It builds upon the foundational vision-language architecture of CLIP.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 2.50s
+Narration   : An input image is partitioned into patches and fed to the visual pipeline.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 3.50s
+Narration   : Concurrently, text queries corresponding to target semantic categories are supplied.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 4.50s
+Narration   : The CLIP Visual Encoder extracts visual feature representations across multi-head self-attention layers.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 5.50s
+Narration   : The CLIP Text Encoder computes text embeddings to align with visual tokens.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 6.50s
+Narration   : The Residual Cross-correlation Self-attention module extracts attention across intermediate encoder layers.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 7.50s
+Narration   : In parallel, the Semantic Feedback Refinement module refines attention based on category regions.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 8.50s
+Narration   : Both attention components are fused to remodel the attention in the final layer.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 9.50s
+Narration   : Cosine similarity measures the alignment between dense visual tokens and text representations.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 10.50s
+Narration   : An initial segmentation mask is derived and fed back to guide the semantic refinement module.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Timestamp   : 11.50s
+Narration   : After iterative refinement, the system generates the final dense semantic segmentation predictions.
+--------------------------------------------------------------------------------
+Frame Image : frame_12.png
+Timestamp   : 12.50s
+Narration   : Looking into the Residual Cross-correlation Self-attention module in detail,
+--------------------------------------------------------------------------------
+Frame Image : frame_13.png
+Timestamp   : 13.50s
+Narration   : visual tokens pass through successive transformer layers.
+--------------------------------------------------------------------------------
+Frame Image : frame_14.png
+Timestamp   : 14.50s
+Narration   : Cross-correlation self-attention is computed at early intermediate layers,
+--------------------------------------------------------------------------------
+Frame Image : frame_15.png
+Timestamp   : 15.50s
+Narration   : as well as mid-level layers,
+--------------------------------------------------------------------------------
+Frame Image : frame_16.png
+Timestamp   : 16.50s
+Narration   : and deeper non-final layers, capturing rich spatial and cross-feature correspondence.
+--------------------------------------------------------------------------------
+Frame Image : frame_17.png
+Timestamp   : 17.50s
+Narration   : The final block utilizes self-correlation self-attention to preserve spatial covariance.
+--------------------------------------------------------------------------------
+Frame Image : frame_18.png
+Timestamp   : 18.50s
+Narration   : The final block utilizes self-correlation self-attention to preserve spatial covariance.
+--------------------------------------------------------------------------------
+Frame Image : frame_19.png
+Timestamp   : 19.50s
+Narration   : The cross-correlation attention maps from these non-last layers are averaged,
+--------------------------------------------------------------------------------
+Frame Image : frame_20.png
+Timestamp   : 20.50s
+Narration   : forming a clear, localized spatial activation map.
+--------------------------------------------------------------------------------
+Frame Image : frame_21.png
+Timestamp   : 21.50s
+Narration   : This aggregated attention matrix is output as the RCS attention representation.
+--------------------------------------------------------------------------------
+Frame Image : frame_22.png
+Timestamp   : 22.50s
+Narration   : Next, the Semantic Feedback Refinement module optimizes the attention using category masks.
+--------------------------------------------------------------------------------
+Frame Image : frame_23.png
+Timestamp   : 23.50s
+Narration   : It takes the initial continuous segmentation map,
+--------------------------------------------------------------------------------
+Frame Image : frame_24.png
+Timestamp   : 24.50s
+Narration   : and converts it into patch-level category assignments.
+--------------------------------------------------------------------------------
+Frame Image : frame_25.png
+Timestamp   : 25.50s
+Narration   : An indicator function constructs a binary semantic co-occurrence matrix.
+--------------------------------------------------------------------------------
+Frame Image : frame_26.png
+Timestamp   : 26.50s
+Narration   : For any given patch, matching categories across the image are highlighted.
+--------------------------------------------------------------------------------
+Frame Image : frame_27.png
+Timestamp   : 27.50s
+Narration   : A spatial distance-based decay function is applied to prioritize connected local regions,
+--------------------------------------------------------------------------------
+Frame Image : frame_28.png
+Timestamp   : 28.50s
+Narration   : reducing the influence of disjoint regions of the same class.
+--------------------------------------------------------------------------------
+Frame Image : frame_29.png
+Timestamp   : 29.50s
+Narration   : A Gaussian smoothing kernel is then applied across the rows,
+--------------------------------------------------------------------------------
+Frame Image : frame_30.png
+Timestamp   : 30.50s
+Narration   : yielding a smoothly distributed attention map for each patch.
+--------------------------------------------------------------------------------
+Frame Image : frame_31.png
+Timestamp   : 31.50s
+Narration   : This yields the final refined SFR attention scores.
+--------------------------------------------------------------------------------
+Frame Image : frame_32.png
+Timestamp   : 32.50s
+Narration   : Finally, the fusion stage combines the attention components.
+--------------------------------------------------------------------------------
+Frame Image : frame_33.png
+Timestamp   : 33.50s
+Narration   : The RCS attention weights provide cross-feature spatial context.
+--------------------------------------------------------------------------------
+Frame Image : frame_34.png
+Timestamp   : 34.50s
+Narration   : The SFR attention scores reinforce local semantic consistency.
+--------------------------------------------------------------------------------
+Frame Image : frame_35.png
+Timestamp   : 35.50s
+Narration   : The noisy, diffuse attention of standard CLIP,
+--------------------------------------------------------------------------------
+Frame Image : frame_36.png
+Timestamp   : 36.50s
+Narration   : is transformed through weighted attention fusion,
+--------------------------------------------------------------------------------
+Frame Image : frame_37.png
+Timestamp   : 37.50s
+Narration   : producing a sharp, object-centric attention map for accurate training-free dense inference.
+--------------------------------------------------------------------------------

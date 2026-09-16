@@ -1,0 +1,42 @@
+=== Alpha Masking Sequence ===
+
+Frame Image : frame_00.png
+Timestamp   : 1.00s
+Narration   : The uncertainty-aware attention module takes map queries as input, splitting them into two parallel processing branches.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 3.00s
+Narration   : In the upper branch, the queries predict spatial coordinate offsets to be added to reference points.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 5.00s
+Narration   : The summed positions define sampling locations across the bird's-eye-view grid.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 7.00s
+Narration   : Features are sampled directly from the bird's-eye-view feature map at these locations.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 9.00s
+Narration   : This extracts a focused set of sampled spatial features.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 11.00s
+Narration   : Simultaneously, the lower branch feeds the map queries into a multilayer perceptron.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 13.00s
+Narration   : The network outputs mean and variance parameters for dynamic resampling from a Gaussian distribution.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 15.00s
+Narration   : Learned attention weights are formed by incorporating stochastic disturbance into the distribution parameters.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 17.00s
+Narration   : The sampled features and dynamic attention weights are aggregated and projected through a linear layer.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 19.00s
+Narration   : The resulting update terms refine the map queries for generalizable vectorization.
+--------------------------------------------------------------------------------

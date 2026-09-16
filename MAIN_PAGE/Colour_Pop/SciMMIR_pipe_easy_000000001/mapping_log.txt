@@ -1,0 +1,38 @@
+=== Colour Pop Sequence Mapping ===
+
+Frame Image : frame_00.png
+Event Delay : 0.5s
+Narration   : The input consists of noisy, mosaicked linear raw images captured directly by the camera sensor.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Event Delay : 1.0s
+Narration   : In the standard workflow, these raw images first undergo traditional postprocessing to generate low dynamic range color images.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Event Delay : 1.5s
+Narration   : This defines the conventional Neural Radiance Field pipeline, which operates on postprocessed low dynamic range inputs.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Event Delay : 2.0s
+Narration   : The standard NeRF model optimizes a volumetric scene representation using rays cast through the processed image views.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Event Delay : 2.5s
+Narration   : Novel low dynamic range views can then be rendered by changing the camera viewpoint, though tone and dynamic range remain fixed.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Event Delay : 3.0s
+Narration   : In contrast, the RawNeRF pipeline bypasses early processing and feeds the raw linear sensor data directly into training.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Event Delay : 3.5s
+Narration   : RawNeRF trains the neural radiance field directly in linear high dynamic range space, learning to denoise the scene jointly.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Event Delay : 4.0s
+Narration   : This allows the pipeline to render full high dynamic range views while simultaneously enabling viewpoint and focus changes.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Event Delay : 4.5s
+Narration   : Finally, postprocessing operations such as exposure control and tonemapping are applied downstream with full HDR flexibility.
+--------------------------------------------------------------------------------

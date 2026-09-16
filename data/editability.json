@@ -1,0 +1,2353 @@
+{
+ "groups": [
+  {
+   "key": "d2c",
+   "banner": "Edits to the Recovered Representation",
+   "agent": "Diagram to Animation Aware Code Converter",
+   "logo": "assets/editability/logos/d2c.png",
+   "examples": [
+    {
+     "n": 1,
+     "id": "Paper2Fig_arch_diff_000000021",
+     "prompt": "Consider the Facial Feature Extractor and the Person Dictionary to be part of a single module and animate them accordingly.",
+     "style": "Hopping box",
+     "srcBefore": "assets/editability/d2c/Paper2Fig_arch_diff_000000021/before/anim.svgx",
+     "srcAfter": "assets/editability/d2c/Paper2Fig_arch_diff_000000021/after/anim.svgx",
+     "identical": false,
+     "xml": {
+      "before": {
+       "lines": 58,
+       "spans": [
+        {
+         "id": "block_facial_extractor",
+         "swatch": "a",
+         "from": 3,
+         "to": 10
+        },
+        {
+         "id": "block_person_dict",
+         "swatch": "b",
+         "from": 12,
+         "to": 26
+        }
+       ],
+       "src": "assets/editability/d2c/Paper2Fig_arch_diff_000000021/before/schema.xml"
+      },
+      "after": {
+       "lines": 113,
+       "spans": [
+        {
+         "id": "extractor_and_dictionary",
+         "swatch": "c",
+         "from": 3,
+         "to": 55
+        }
+       ],
+       "src": "assets/editability/d2c/Paper2Fig_arch_diff_000000021/after/schema.xml"
+      }
+     },
+     "before": [
+      {
+       "ts": 1,
+       "t": 0.0,
+       "text": "The workflow begins with the Facial Feature Extractor, which is designed to learn a robust representation of facial characteristics."
+      },
+      {
+       "ts": 2,
+       "t": 1.0,
+       "text": "Training data is first collected to feed into the feature extraction pipeline."
+      },
+      {
+       "ts": 3,
+       "t": 2.0,
+       "text": "A state-of-the-art convolutional neural network is then trained on this dataset to learn highly discriminative facial features."
+      },
+      {
+       "ts": 4,
+       "t": 3.0,
+       "text": "Next, the Person Dictionary module builds a reference database of target entities."
+      },
+      {
+       "ts": 5,
+       "t": 4.0,
+       "text": "It starts by selecting specific entities of interest and gathering exemplary images for them from the web."
+      },
+      {
+       "ts": 6,
+       "t": 4.999,
+       "text": "The pre-trained convolutional neural network is then applied to extract facial features from these gathered images."
+      },
+      {
+       "ts": 7,
+       "t": 6.0,
+       "text": "A filtering step is subsequently applied to reduce noise and remove incorrect or low-quality images from the web-based dataset."
+      },
+      {
+       "ts": 8,
+       "t": 7.0,
+       "text": "In parallel, the system accesses the Internet Archive to retrieve target media content."
+      },
+      {
+       "ts": 9,
+       "t": 8.0,
+       "text": "The system targets archived web news according to a predefined search space."
+      },
+      {
+       "ts": 10,
+       "t": 9.0,
+       "text": "This web content contains the raw images in which the target persons will be identified."
+      },
+      {
+       "ts": 11,
+       "t": 10.001,
+       "text": "The final phase is Person Identification, which processes the archived images to locate and verify the target entities."
+      },
+      {
+       "ts": 12,
+       "t": 10.999,
+       "text": "First, face detection is performed on the retrieved web content to locate any faces present in the images."
+      },
+      {
+       "ts": 13,
+       "t": 12.0,
+       "text": "For each detected face, facial features are extracted using the pre-trained convolutional neural network model."
+      },
+      {
+       "ts": 14,
+       "t": 13.001,
+       "text": "These extracted features are then compared against the filtered Person Dictionary in the face verification step."
+      },
+      {
+       "ts": 15,
+       "t": 14.0,
+       "text": "Finally, the identified entities and their co-occurrences are visualized to explore relations and media coverage."
+      }
+     ],
+     "after": [
+      {
+       "ts": 1,
+       "t": 0.0,
+       "text": "The workflow of the person identification framework begins with training a facial feature extractor and building a person dictionary."
+      },
+      {
+       "ts": 2,
+       "t": 1.999,
+       "text": "The Facial Feature Extractor block is responsible for learning a robust representation of facial characteristics."
+      },
+      {
+       "ts": 3,
+       "t": 3.998,
+       "text": "It utilizes a training dataset containing facial images."
+      },
+      {
+       "ts": 4,
+       "t": 6.001,
+       "text": "This dataset is used to train a convolutional neural network, or CNN. The CNN learns to extract robust feature representations to describe facial characteristics."
+      },
+      {
+       "ts": 5,
+       "t": 8.0,
+       "text": "Next, the Person Dictionary block defines a lexicon of target entities for a given domain."
+      },
+      {
+       "ts": 6,
+       "t": 9.999,
+       "text": "First, entities are selected, and exemplary images are gathered from the web using an image search engine."
+      },
+      {
+       "ts": 7,
+       "t": 11.999,
+       "text": "The trained CNN is then applied to extract facial features from these gathered images."
+      },
+      {
+       "ts": 8,
+       "t": 14.001,
+       "text": "A filtering step is performed to reduce noise and improve the quality of the sample dataset."
+      },
+      {
+       "ts": 9,
+       "t": 16.0,
+       "text": "To identify these entities in real-world data, the system retrieves content from the Internet Archive."
+      },
+      {
+       "ts": 10,
+       "t": 18.0,
+       "text": "The Internet Archive serves as the primary source of historical web data."
+      },
+      {
+       "ts": 11,
+       "t": 19.999,
+       "text": "Web content, such as images from archived web pages, is extracted according to a predefined search space."
+      },
+      {
+       "ts": 12,
+       "t": 22.001,
+       "text": "These web pages contain the target images in which persons of interest will be identified."
+      },
+      {
+       "ts": 13,
+       "t": 24.001,
+       "text": "Finally, the Person Identification block processes the retrieved web images to locate and verify the target entities."
+      },
+      {
+       "ts": 14,
+       "t": 26.0,
+       "text": "First, face detection is performed on the web images to locate any faces."
+      },
+      {
+       "ts": 15,
+       "t": 27.999,
+       "text": "For each detected face, features are extracted using the trained CNN model."
+      },
+      {
+       "ts": 16,
+       "t": 30.002,
+       "text": "Face verification is then conducted by comparing the extracted features against the filtered Person Dictionary."
+      },
+      {
+       "ts": 17,
+       "t": 32.001,
+       "text": "Finally, the identified occurrences and relations of the persons of interest are visualized for analysis."
+      }
+     ],
+     "rows": [
+      {
+       "kind": "changed",
+       "a": 0,
+       "b": 0,
+       "ha": "The workflow begins with <del>the</del> Facial Feature Extractor<del>,</del> <del>which</del> <del>is designed to learn</del> a <del>robust</del> <del>representation of facial characteristics</del>.",
+       "hb": "The workflow<ins> of the person identification framework</ins> begins with <ins>training a</ins> facial feature extractor <ins>and</ins> <ins>building</ins> a <ins>person</ins> <ins>dictionary</ins>."
+      },
+      {
+       "kind": "changed",
+       "a": 1,
+       "b": 1,
+       "ha": "<del>Training</del> <del>data</del> is <del>first</del> <del>collected</del> <del>to</del> <del>feed</del> <del>into</del> <del>the</del> <del>feature</del> <del>extraction</del> <del>pipeline</del>.",
+       "hb": "<ins>The</ins> <ins>Facial Feature Extractor block</ins> is <ins>responsible</ins> <ins>for</ins> <ins>learning</ins> <ins>a</ins> <ins>robust</ins> <ins>representation</ins> <ins>of</ins> <ins>facial</ins> <ins>characteristics</ins>."
+      },
+      {
+       "kind": "changed",
+       "a": 2,
+       "b": 2,
+       "ha": "A <del>state-of-the-art convolutional neural network is then trained on this</del> dataset <del>to learn highly discriminative</del> facial <del>features</del>.",
+       "hb": "<ins>It utilizes </ins>a <ins>training</ins> dataset <ins>containing</ins> facial <ins>images</ins>."
+      },
+      {
+       "kind": "changed",
+       "a": 3,
+       "b": 3,
+       "ha": "<del>Next</del>, the <del>Person</del> <del>Dictionary</del> <del>module</del> <del>builds</del> <del>a</del> <del>reference</del> <del>database</del> <del>of</del> <del>target</del> <del>entities</del>.",
+       "hb": "<ins>This dataset is used to train a convolutional neural network</ins>,<ins> or CNN.</ins> The <ins>CNN</ins> <ins>learns</ins> <ins>to</ins> <ins>extract</ins> <ins>robust</ins> <ins>feature</ins> <ins>representations</ins> <ins>to</ins> <ins>describe</ins> <ins>facial characteristics</ins>."
+      },
+      {
+       "kind": "changed",
+       "a": 4,
+       "b": 4,
+       "ha": "<del>It</del> <del>starts</del> <del>by</del> <del>selecting</del> <del>specific</del> entities <del>of interest and gathering exemplary images </del>for <del>them</del> <del>from</del> <del>the web</del>.",
+       "hb": "<ins>Next,</ins> <ins>the</ins> <ins>Person</ins> <ins>Dictionary</ins> <ins>block defines a lexicon of target</ins> entities for <ins>a</ins> <ins>given</ins> <ins>domain</ins>."
+      },
+      {
+       "kind": "changed",
+       "a": 5,
+       "b": 5,
+       "ha": "<del>The</del> <del>pre-trained</del> <del>convolutional</del> <del>neural</del> <del>network</del> <del>is</del> <del>then</del> <del>applied</del> <del>to extract facial features</del> from <del>these</del> <del>gathered</del> <del>images</del>.",
+       "hb": "<ins>First,</ins> <ins>entities</ins> <ins>are</ins> <ins>selected,</ins> <ins>and</ins> <ins>exemplary</ins> <ins>images</ins> <ins>are</ins> <ins>gathered</ins> from <ins>the</ins> <ins>web</ins> <ins>using an image search engine</ins>."
+      },
+      {
+       "kind": "changed",
+       "a": 6,
+       "b": 6,
+       "ha": "<del>A</del> <del>filtering</del> <del>step</del> is <del>subsequently</del> applied to <del>reduce</del> <del>noise</del> <del>and remove incorrect or low-quality images</del> from <del>the</del> <del>web-based</del> <del>dataset</del>.",
+       "hb": "<ins>The</ins> <ins>trained</ins> <ins>CNN</ins> is <ins>then</ins> applied to <ins>extract</ins> <ins>facial</ins> <ins>features</ins> from <ins>these</ins> <ins>gathered</ins> <ins>images</ins>."
+      },
+      {
+       "kind": "changed",
+       "a": 7,
+       "b": 7,
+       "ha": "<del>In</del> <del>parallel,</del> the <del>system</del> <del>accesses</del> the <del>Internet</del> <del>Archive to retrieve target media content</del>.",
+       "hb": "<ins>A</ins> <ins>filtering step is performed to reduce noise and improve</ins> the <ins>quality</ins> <ins>of</ins> the <ins>sample</ins> <ins>dataset</ins>."
+      },
+      {
+       "kind": "changed",
+       "a": 8,
+       "b": 8,
+       "ha": "The system <del>targets</del> <del>archived</del> <del>web</del> <del>news</del> <del>according</del> <del>to a predefined search space</del>.",
+       "hb": "<ins>To identify these entities in real-world data, </ins>the system <ins>retrieves</ins> <ins>content</ins> <ins>from</ins> <ins>the</ins> <ins>Internet</ins> <ins>Archive</ins>."
+      },
+      {
+       "kind": "changed",
+       "a": 9,
+       "b": 9,
+       "ha": "<del>This</del> web <del>content contains the raw images in which the target persons will be identified</del>.",
+       "hb": "<ins>The Internet Archive serves as the primary source of historical</ins> web <ins>data</ins>."
+      },
+      {
+       "kind": "changed",
+       "a": 10,
+       "b": 10,
+       "ha": "<del>The</del> <del>final</del> <del>phase</del> is <del>Person</del> <del>Identification, which processes the archived images</del> to <del>locate</del> <del>and</del> <del>verify</del> <del>the target entities</del>.",
+       "hb": "<ins>Web</ins> <ins>content,</ins> <ins>such as images from archived web pages,</ins> is <ins>extracted</ins> <ins>according</ins> to <ins>a</ins> <ins>predefined</ins> <ins>search</ins> <ins>space</ins>."
+      },
+      {
+       "kind": "changed",
+       "a": 11,
+       "b": 11,
+       "ha": "<del>First,</del> <del>face</del> <del>detection</del> <del>is performed on</del> the <del>retrieved</del> <del>web content to locate any faces present</del> in <del>the</del> <del>images</del>.",
+       "hb": "<ins>These</ins> <ins>web</ins> <ins>pages</ins> <ins>contain</ins> the <ins>target</ins> <ins>images</ins> in <ins>which</ins> <ins>persons of interest will be identified</ins>."
+      },
+      {
+       "kind": "changed",
+       "a": 12,
+       "b": 12,
+       "ha": "<del>For each detected face</del>,<del> facial features are extracted using</del> the <del>pre-trained</del> <del>convolutional</del> <del>neural</del> <del>network</del> <del>model</del>.",
+       "hb": "<ins>Finally</ins>, the <ins>Person</ins> <ins>Identification</ins> <ins>block</ins> <ins>processes</ins> <ins>the retrieved web images to locate and verify the target entities</ins>."
+      },
+      {
+       "kind": "changed",
+       "a": 13,
+       "b": 13,
+       "ha": "<del>These</del> <del>extracted</del> <del>features</del> <del>are</del> <del>then</del> <del>compared against</del> the <del>filtered</del> <del>Person</del> <del>Dictionary</del> <del>in</del> <del>the</del> <del>face verification step</del>.",
+       "hb": "<ins>First,</ins> <ins>face</ins> <ins>detection</ins> <ins>is</ins> <ins>performed</ins> <ins>on</ins> the <ins>web</ins> <ins>images</ins> <ins>to</ins> <ins>locate</ins> <ins>any</ins> <ins>faces</ins>."
+      },
+      {
+       "kind": "changed",
+       "a": 14,
+       "b": 14,
+       "ha": "<del>Finally</del>, the <del>identified</del> <del>entities</del> <del>and their co-occurrences are visualized to explore relations and media coverage</del>.",
+       "hb": "<ins>For each detected face</ins>,<ins> features are extracted using</ins> the <ins>trained</ins> <ins>CNN</ins> <ins>model</ins>."
+      },
+      {
+       "kind": "added",
+       "a": null,
+       "b": 15,
+       "ha": "",
+       "hb": "<ins>Face verification is then conducted by comparing the extracted features against the filtered Person Dictionary.</ins>"
+      },
+      {
+       "kind": "added",
+       "a": null,
+       "b": 16,
+       "ha": "",
+       "hb": "<ins>Finally, the identified occurrences and relations of the persons of interest are visualized for analysis.</ins>"
+      }
+     ],
+     "labels": {
+      "before": "Before",
+      "after": "After"
+     }
+    }
+   ]
+  },
+  {
+   "key": "sequencer",
+   "banner": "Edits to the Presentation Plan",
+   "agent": "Sequencer",
+   "logo": "assets/editability/logos/sequencer.png",
+   "examples": [
+    {
+     "n": 2,
+     "id": "CBD_flow_000000015",
+     "prompt": "We consider an example where only 1 number is entered. Animate the given flowchart for this case accordingly.",
+     "style": "Progressive reveal",
+     "srcBefore": "assets/editability/sequencer/CBD_flow_000000015/before/anim.svgx",
+     "srcAfter": "assets/editability/sequencer/CBD_flow_000000015/after/anim.svgx",
+     "identical": false,
+     "xml": null,
+     "before": [
+      {
+       "ts": 1,
+       "t": 0.0,
+       "text": "The computational workflow begins here to calculate the arithmetic mean of a dataset."
+      },
+      {
+       "ts": 2,
+       "t": 0.5,
+       "text": "First, the system initializes the necessary computational variables to track the running sum and data count."
+      },
+      {
+       "ts": 3,
+       "t": 1.0,
+       "text": "Next, an input operation is executed to define the total quantity of expected data points, which sets the threshold for the loop."
+      },
+      {
+       "ts": 4,
+       "t": 1.5,
+       "text": "The control flow then reaches a decision gate to verify if all expected numbers have been entered."
+      },
+      {
+       "ts": 5,
+       "t": 2.0,
+       "text": "If there are pending data points, the system executes an input operation to capture the most recent sequential value."
+      },
+      {
+       "ts": 6,
+       "t": 2.5,
+       "text": "This newly acquired value is immediately added to the running sum."
+      },
+      {
+       "ts": 7,
+       "t": 3.0,
+       "text": "The workflow then loops back to the decision gate to repeat the accumulation cycle."
+      },
+      {
+       "ts": 8,
+       "t": 3.5,
+       "text": "Once all numbers have been successfully entered, the algorithm breaks the loop and calculates the average by dividing the total sum by the count of data points."
+      },
+      {
+       "ts": 9,
+       "t": 4.0,
+       "text": "The system then executes a terminal output operation to print the computed average."
+      },
+      {
+       "ts": 10,
+       "t": 4.5,
+       "text": "Finally, the process concludes and stops."
+      }
+     ],
+     "after": [
+      {
+       "ts": 1,
+       "t": 0.0,
+       "text": "The computational workflow begins here to calculate the arithmetic mean of a dataset."
+      },
+      {
+       "ts": 2,
+       "t": 3.0,
+       "text": "First, the system initializes the necessary computational variables to track the running sum and data count."
+      },
+      {
+       "ts": 3,
+       "t": 6.0,
+       "text": "Next, an input operation is executed to define the total quantity of expected data points, which sets the threshold for the loop."
+      },
+      {
+       "ts": 4,
+       "t": 9.0,
+       "text": "The control flow then reaches a decision gate to verify if all expected numbers have been entered."
+      },
+      {
+       "ts": 5,
+       "t": 12.0,
+       "text": "In this case, only 1 number is entered, so the \"no\" loop does not run. The system immediately proceeds to calculate the average."
+      },
+      {
+       "ts": 6,
+       "t": 15.0,
+       "text": "The system then executes a terminal output operation to print the computed average."
+      },
+      {
+       "ts": 7,
+       "t": 18.0,
+       "text": "Finally, the process concludes and stops."
+      }
+     ],
+     "rows": [
+      {
+       "kind": "same",
+       "a": 0,
+       "b": 0,
+       "ha": "The computational workflow begins here to calculate the arithmetic mean of a dataset.",
+       "hb": "The computational workflow begins here to calculate the arithmetic mean of a dataset."
+      },
+      {
+       "kind": "same",
+       "a": 1,
+       "b": 1,
+       "ha": "First, the system initializes the necessary computational variables to track the running sum and data count.",
+       "hb": "First, the system initializes the necessary computational variables to track the running sum and data count."
+      },
+      {
+       "kind": "same",
+       "a": 2,
+       "b": 2,
+       "ha": "Next, an input operation is executed to define the total quantity of expected data points, which sets the threshold for the loop.",
+       "hb": "Next, an input operation is executed to define the total quantity of expected data points, which sets the threshold for the loop."
+      },
+      {
+       "kind": "same",
+       "a": 3,
+       "b": 3,
+       "ha": "The control flow then reaches a decision gate to verify if all expected numbers have been entered.",
+       "hb": "The control flow then reaches a decision gate to verify if all expected numbers have been entered."
+      },
+      {
+       "kind": "changed",
+       "a": 4,
+       "b": 4,
+       "ha": "<del>If</del> <del>there</del> <del>are</del> <del>pending</del> <del>data</del> <del>points</del>, the system <del>executes</del> <del>an input operation</del> to <del>capture</del> the <del>most recent sequential value</del>.",
+       "hb": "<ins>In</ins> <ins>this</ins> <ins>case,</ins> <ins>only</ins> <ins>1</ins> <ins>number is entered</ins>,<ins> so the &quot;no&quot; loop does not run.</ins> The system <ins>immediately</ins> <ins>proceeds</ins> to <ins>calculate</ins> the <ins>average</ins>."
+      },
+      {
+       "kind": "removed",
+       "a": 5,
+       "b": null,
+       "ha": "<del>This newly acquired value is immediately added to the running sum.</del>",
+       "hb": ""
+      },
+      {
+       "kind": "removed",
+       "a": 6,
+       "b": null,
+       "ha": "<del>The workflow then loops back to the decision gate to repeat the accumulation cycle.</del>",
+       "hb": ""
+      },
+      {
+       "kind": "removed",
+       "a": 7,
+       "b": null,
+       "ha": "<del>Once all numbers have been successfully entered, the algorithm breaks the loop and calculates the average by dividing the total sum by the count of data points.</del>",
+       "hb": ""
+      },
+      {
+       "kind": "same",
+       "a": 8,
+       "b": 5,
+       "ha": "The system then executes a terminal output operation to print the computed average.",
+       "hb": "The system then executes a terminal output operation to print the computed average."
+      },
+      {
+       "kind": "same",
+       "a": 9,
+       "b": 6,
+       "ha": "Finally, the process concludes and stops.",
+       "hb": "Finally, the process concludes and stops."
+      }
+     ],
+     "labels": {
+      "before": "Before",
+      "after": "After"
+     }
+    },
+    {
+     "n": 3,
+     "id": "CBD_flow_000000079",
+     "prompt": "We consider an scenario where the power light of the computer is ON but the computer is not turning on. Animate the given flowchart accordingly.",
+     "style": "Colour pop",
+     "srcBefore": "assets/editability/sequencer/CBD_flow_000000079/before/anim.svgx",
+     "srcAfter": "assets/editability/sequencer/CBD_flow_000000079/after/anim.svgx",
+     "identical": false,
+     "xml": null,
+     "before": [
+      {
+       "ts": 1,
+       "t": 0.5,
+       "text": "The diagnostic workflow begins with an initial evaluation of the system's state."
+      },
+      {
+       "ts": 2,
+       "t": 1.0,
+       "text": "First, the protocol checks whether the computer successfully turns on, dividing the evaluation into two primary diagnostic branches."
+      },
+      {
+       "ts": 3,
+       "t": 1.5,
+       "text": "In the system initialization branch, if the computer successfully turns on, the workflow evaluates whether any error reports have been generated."
+      },
+      {
+       "ts": 4,
+       "t": 2.0,
+       "text": "If an error report is present, the workflow requires performing a specific search for the provided error message to resolve the conflict."
+      },
+      {
+       "ts": 5,
+       "t": 2.5,
+       "text": "Alternatively, if no error reports are detected, the device is verified as fully functional, terminating the process with a 'Computer Okay' state."
+      },
+      {
+       "ts": 6,
+       "t": 3.0,
+       "text": "In the power failure branch, if the computer fails to turn on, the protocol investigates the physical power delivery mechanism by checking the status of the computer's power indicator light."
+      },
+      {
+       "ts": 7,
+       "t": 3.5,
+       "text": "If the power light is illuminated, the system state is classified as 'PC ON', indicating that power is reaching the unit despite the boot failure."
+      },
+      {
+       "ts": 8,
+       "t": 4.0,
+       "text": "Conversely, if the power light is not on, indicating a total lack of power delivery, the workflow directs the user to physically check the computer power cord to resolve the disconnection."
+      }
+     ],
+     "after": [
+      {
+       "ts": 1,
+       "t": 0.0,
+       "text": "The diagnostic workflow begins with an initial evaluation of the system's state."
+      },
+      {
+       "ts": 2,
+       "t": 3.0,
+       "text": "First, we check if the computer turns on. In this scenario, the computer fails to turn on, directing us to the power failure branch."
+      },
+      {
+       "ts": 3,
+       "t": 6.0,
+       "text": "Next, we investigate the physical power delivery mechanism by checking the status of the computer's power indicator light."
+      },
+      {
+       "ts": 4,
+       "t": 9.0,
+       "text": "Since the power light is illuminated, the system state is classified as 'PC ON', indicating that power is reaching the unit despite the boot failure."
+      }
+     ],
+     "rows": [
+      {
+       "kind": "same",
+       "a": 0,
+       "b": 0,
+       "ha": "The diagnostic workflow begins with an initial evaluation of the system&#x27;s state.",
+       "hb": "The diagnostic workflow begins with an initial evaluation of the system&#x27;s state."
+      },
+      {
+       "kind": "changed",
+       "a": 1,
+       "b": 1,
+       "ha": "First, <del>the</del> <del>protocol</del> <del>checks whether</del> the computer <del>successfully</del> <del>turns</del> on, <del>dividing</del> the <del>evaluation</del> <del>into</del> <del>two primary diagnostic branches</del>.",
+       "hb": "First, <ins>we</ins> <ins>check</ins> <ins>if</ins> the computer <ins>turns</ins> <ins>on. In this scenario, the computer fails to turn</ins> on, <ins>directing us to</ins> the <ins>power</ins> <ins>failure</ins> <ins>branch</ins>."
+      },
+      {
+       "kind": "changed",
+       "a": 2,
+       "b": 2,
+       "ha": "<del>In</del> the <del>system</del> <del>initialization</del> <del>branch,</del> <del>if</del> the computer <del>successfully</del> <del>turns</del> <del>on, the workflow evaluates whether any error reports have been generated</del>.",
+       "hb": "<ins>Next, we investigate</ins> the <ins>physical</ins> <ins>power</ins> <ins>delivery</ins> <ins>mechanism by checking the status of</ins> the computer<ins>&#x27;s</ins> <ins>power</ins> <ins>indicator</ins> <ins>light</ins>."
+      },
+      {
+       "kind": "changed",
+       "a": 3,
+       "b": 3,
+       "ha": "<del>If</del> <del>an</del> <del>error</del> <del>report</del> is <del>present</del>, the <del>workflow</del> <del>requires</del> <del>performing</del> <del>a</del> <del>specific</del> <del>search</del> <del>for</del> the <del>provided</del> <del>error message to resolve</del> the <del>conflict</del>.",
+       "hb": "<ins>Since</ins> <ins>the</ins> <ins>power</ins> <ins>light</ins> is <ins>illuminated</ins>, the <ins>system</ins> <ins>state</ins> <ins>is</ins> <ins>classified</ins> <ins>as</ins> <ins>&#x27;PC</ins> <ins>ON&#x27;, indicating that power is reaching</ins> the <ins>unit</ins> <ins>despite</ins> the <ins>boot failure</ins>."
+      },
+      {
+       "kind": "removed",
+       "a": 4,
+       "b": null,
+       "ha": "<del>Alternatively, if no error reports are detected, the device is verified as fully functional, terminating the process with a &#x27;Computer Okay&#x27; state.</del>",
+       "hb": ""
+      },
+      {
+       "kind": "removed",
+       "a": 5,
+       "b": null,
+       "ha": "<del>In the power failure branch, if the computer fails to turn on, the protocol investigates the physical power delivery mechanism by checking the status of the computer&#x27;s power indicator light.</del>",
+       "hb": ""
+      },
+      {
+       "kind": "removed",
+       "a": 6,
+       "b": null,
+       "ha": "<del>If the power light is illuminated, the system state is classified as &#x27;PC ON&#x27;, indicating that power is reaching the unit despite the boot failure.</del>",
+       "hb": ""
+      },
+      {
+       "kind": "removed",
+       "a": 7,
+       "b": null,
+       "ha": "<del>Conversely, if the power light is not on, indicating a total lack of power delivery, the workflow directs the user to physically check the computer power cord to resolve the disconnection.</del>",
+       "hb": ""
+      }
+     ],
+     "labels": {
+      "before": "Before",
+      "after": "After"
+     }
+    },
+    {
+     "n": 4,
+     "id": "CBD_flow_000000145",
+     "prompt": "Consider a case where the guessed number is 45. Animate the given flowchart accordingly",
+     "style": "Colour pop",
+     "srcBefore": "assets/editability/sequencer/CBD_flow_000000145/before/anim.svgx",
+     "srcAfter": "assets/editability/sequencer/CBD_flow_000000145/after/anim.svgx",
+     "identical": false,
+     "xml": null,
+     "before": [
+      {
+       "ts": 1,
+       "t": 0.5,
+       "text": "The numerical categorization workflow begins at the start node."
+      },
+      {
+       "ts": 2,
+       "t": 1.0,
+       "text": "The control flow moves to the data ingestion phase."
+      },
+      {
+       "ts": 3,
+       "t": 1.5,
+       "text": "Here, the system prompts for and captures an unknown quantitative variable, designated as the guess number."
+      },
+      {
+       "ts": 4,
+       "t": 2.0,
+       "text": "This inputted value is then routed to the primary threshold evaluation."
+      },
+      {
+       "ts": 5,
+       "t": 2.5,
+       "text": "The system evaluates whether the guess number is less than or equal to ten."
+      },
+      {
+       "ts": 6,
+       "t": 3.0,
+       "text": "If this condition is true,"
+      },
+      {
+       "ts": 7,
+       "t": 3.5,
+       "text": "the variable is definitively classified as a small number."
+      },
+      {
+       "ts": 8,
+       "t": 4.0,
+       "text": "If the condition is false, meaning the value strictly exceeds ten, the data is passed to the secondary range assessment."
+      },
+      {
+       "ts": 9,
+       "t": 4.5,
+       "text": "This compound decision gate checks if the number is greater than ten and less than or equal to eighty."
+      },
+      {
+       "ts": 10,
+       "t": 5.0,
+       "text": "If this condition evaluates to true,"
+      },
+      {
+       "ts": 11,
+       "t": 5.5,
+       "text": "the workflow categorizes the input as a medium number."
+      },
+      {
+       "ts": 12,
+       "t": 6.0,
+       "text": "If the condition is false, indicating the value is strictly greater than eighty,"
+      },
+      {
+       "ts": 13,
+       "t": 6.5,
+       "text": "the algorithm defaults to classifying the variable as a large number."
+      },
+      {
+       "ts": 14,
+       "t": 7.0,
+       "text": "Upon executing any of these three distinct output pathways, the branches converge,"
+      },
+      {
+       "ts": 15,
+       "t": 7.5,
+       "text": "concluding the computational process at the unified terminal node."
+      }
+     ],
+     "after": [
+      {
+       "ts": 1,
+       "t": 0.0,
+       "text": "The numerical categorization workflow begins at the start node."
+      },
+      {
+       "ts": 2,
+       "t": 2.0,
+       "text": "The control flow moves to the data ingestion phase."
+      },
+      {
+       "ts": 3,
+       "t": 4.0,
+       "text": "Say the guessed number is 25. The system captures this value as the input."
+      },
+      {
+       "ts": 4,
+       "t": 6.0,
+       "text": "This inputted value of 25 is routed to the primary threshold evaluation."
+      },
+      {
+       "ts": 5,
+       "t": 8.0,
+       "text": "The system evaluates whether the guess number (25) is less than or equal to ten."
+      },
+      {
+       "ts": 6,
+       "t": 10.0,
+       "text": "Since 25 <= 10 is false, the flow follows the false branch, leaving the true path dormant."
+      },
+      {
+       "ts": 7,
+       "t": 12.0,
+       "text": "The data is passed to the secondary range assessment node."
+      },
+      {
+       "ts": 8,
+       "t": 14.0,
+       "text": "This decision gate checks if the number is greater than 10 and less than or equal to 80."
+      },
+      {
+       "ts": 9,
+       "t": 16.0,
+       "text": "Since 25 is within this range, the condition is true, and we follow the true branch."
+      },
+      {
+       "ts": 10,
+       "t": 18.0,
+       "text": "The workflow successfully categorizes the input as a medium number."
+      },
+      {
+       "ts": 11,
+       "t": 20.0,
+       "text": "The active branch converges to the end node, completing the process for the number 25."
+      }
+     ],
+     "rows": [
+      {
+       "kind": "same",
+       "a": 0,
+       "b": 0,
+       "ha": "The numerical categorization workflow begins at the start node.",
+       "hb": "The numerical categorization workflow begins at the start node."
+      },
+      {
+       "kind": "same",
+       "a": 1,
+       "b": 1,
+       "ha": "The control flow moves to the data ingestion phase.",
+       "hb": "The control flow moves to the data ingestion phase."
+      },
+      {
+       "kind": "changed",
+       "a": 2,
+       "b": 2,
+       "ha": "<del>Here,</del> the system <del>prompts for and </del>captures <del>an</del> <del>unknown quantitative variable, designated</del> as the <del>guess number</del>.",
+       "hb": "<ins>Say the guessed number is 25.</ins> The system captures <ins>this</ins> <ins>value</ins> as the <ins>input</ins>."
+      },
+      {
+       "kind": "changed",
+       "a": 3,
+       "b": 3,
+       "ha": "This inputted value is<del> then</del> routed to the primary threshold evaluation.",
+       "hb": "This inputted value <ins>of 25 </ins>is routed to the primary threshold evaluation."
+      },
+      {
+       "kind": "changed",
+       "a": 4,
+       "b": 4,
+       "ha": "The system evaluates whether the guess number is less than or equal to ten.",
+       "hb": "The system evaluates whether the guess number<ins> (25)</ins> is less than or equal to ten."
+      },
+      {
+       "kind": "changed",
+       "a": 5,
+       "b": 5,
+       "ha": "<del>If</del> <del>this</del> <del>condition</del> is true<del>,</del>",
+       "hb": "<ins>Since</ins> <ins>25</ins> <ins>&lt;= 10</ins> is <ins>false, the flow follows the false branch, leaving the </ins>true<ins> path dormant.</ins>"
+      },
+      {
+       "kind": "changed",
+       "a": 6,
+       "b": 6,
+       "ha": "the <del>variable</del> is <del>definitively</del> <del>classified</del> <del>as</del> <del>a</del> <del>small</del> <del>number</del>.",
+       "hb": "The <ins>data</ins> is <ins>passed</ins> <ins>to</ins> <ins>the</ins> <ins>secondary</ins> <ins>range</ins> <ins>assessment node</ins>."
+      },
+      {
+       "kind": "changed",
+       "a": 7,
+       "b": 7,
+       "ha": "If the <del>condition</del> is <del>false,</del> <del>meaning</del> <del>the</del> <del>value</del> <del>strictly</del> <del>exceeds</del> <del>ten,</del> <del>the data is passed</del> to <del>the secondary range assessment</del>.",
+       "hb": "<ins>This decision gate checks </ins>if the <ins>number</ins> is <ins>greater</ins> <ins>than</ins> <ins>10</ins> <ins>and</ins> <ins>less</ins> <ins>than</ins> <ins>or</ins> <ins>equal</ins> to <ins>80</ins>."
+      },
+      {
+       "kind": "changed",
+       "a": 8,
+       "b": 8,
+       "ha": "This <del>compound decision gate checks if</del> the <del>number</del> is <del>greater than ten</del> and <del>less</del> <del>than</del> <del>or</del> <del>equal</del> <del>to eighty</del>.",
+       "hb": "<ins>Since 25 is within </ins>this <ins>range,</ins> the <ins>condition</ins> is <ins>true,</ins> and <ins>we</ins> <ins>follow</ins> <ins>the</ins> <ins>true</ins> <ins>branch</ins>."
+      },
+      {
+       "kind": "changed",
+       "a": 9,
+       "b": 9,
+       "ha": "<del>If</del> <del>this</del> <del>condition</del> <del>evaluates</del> <del>to</del> <del>true,</del>",
+       "hb": "<ins>The</ins> <ins>workflow</ins> <ins>successfully</ins> <ins>categorizes</ins> <ins>the</ins> <ins>input as a medium number.</ins>"
+      },
+      {
+       "kind": "changed",
+       "a": 10,
+       "b": 10,
+       "ha": "the <del>workflow</del> <del>categorizes</del> the <del>input</del> <del>as</del> <del>a</del> <del>medium</del> number.",
+       "hb": "The <ins>active</ins> <ins>branch converges to</ins> the <ins>end</ins> <ins>node,</ins> <ins>completing</ins> <ins>the process for the</ins> number<ins> 25</ins>."
+      },
+      {
+       "kind": "removed",
+       "a": 11,
+       "b": null,
+       "ha": "<del>If the condition is false, indicating the value is strictly greater than eighty,</del>",
+       "hb": ""
+      },
+      {
+       "kind": "removed",
+       "a": 12,
+       "b": null,
+       "ha": "<del>the algorithm defaults to classifying the variable as a large number.</del>",
+       "hb": ""
+      },
+      {
+       "kind": "removed",
+       "a": 13,
+       "b": null,
+       "ha": "<del>Upon executing any of these three distinct output pathways, the branches converge,</del>",
+       "hb": ""
+      },
+      {
+       "kind": "removed",
+       "a": 14,
+       "b": null,
+       "ha": "<del>concluding the computational process at the unified terminal node.</del>",
+       "hb": ""
+      }
+     ],
+     "labels": {
+      "before": "Before",
+      "after": "After"
+     }
+    },
+    {
+     "n": 5,
+     "id": "DocFigures_arch_000000173",
+     "prompt": "Remove the branch to the Count Constraint module.",
+     "style": "Progressive reveal",
+     "srcBefore": "assets/editability/sequencer/DocFigures_arch_000000173/before/anim.svgx",
+     "srcAfter": "assets/editability/sequencer/DocFigures_arch_000000173/after/anim.svgx",
+     "identical": false,
+     "xml": null,
+     "before": [
+      {
+       "ts": 1,
+       "t": 0.0,
+       "text": "The processing pipeline begins with the ingestion of raw video frames or static images depicting a crowded scene."
+      },
+      {
+       "ts": 2,
+       "t": 0.5,
+       "text": "These images are passed directly into the density estimation stage."
+      },
+      {
+       "ts": 3,
+       "t": 1.0,
+       "text": "Here, a density estimation model maps the spatial distribution of the crowd, generating a continuous density map where high-intensity regions indicate dense clusters of individuals."
+      },
+      {
+       "ts": 4,
+       "t": 1.5,
+       "text": "The generated density map is then forwarded to the segmentation module."
+      },
+      {
+       "ts": 5,
+       "t": 2.0,
+       "text": "The density segmentation module processes the map to isolate distinct crowd patches and identify cluster boundaries."
+      },
+      {
+       "ts": 6,
+       "t": 2.5,
+       "text": "Simultaneously, these segmented regions are analyzed to establish quantitative constraints."
+      },
+      {
+       "ts": 7,
+       "t": 3.0,
+       "text": "The count constraint mechanism assigns preliminary numerical counts to individual segmented regions, establishing strict quantitative bounds that constrain the subsequent optimization."
+      },
+      {
+       "ts": 8,
+       "t": 3.5,
+       "text": "Both the segmented regions and the count constraints are then fed into the main optimization block."
+      },
+      {
+       "ts": 9,
+       "t": 4.0,
+       "text": "Within this block, a sliding region-of-interest window scans the scene to localize potential targets."
+      },
+      {
+       "ts": 10,
+       "t": 4.5,
+       "text": "The sliding window outputs are then formulated into an integer programming problem."
+      },
+      {
+       "ts": 11,
+       "t": 5.0,
+       "text": "The integer programming module solves a linear system that matches regional counts with spatial location variables via a transformation matrix."
+      },
+      {
+       "ts": 12,
+       "t": 5.5,
+       "text": "The optimized spatial variables are then passed to the bounding box estimator."
+      },
+      {
+       "ts": 13,
+       "t": 6.0,
+       "text": "The bounding box estimation module refines these optimization outputs to determine the precise boundaries of each individual."
+      },
+      {
+       "ts": 14,
+       "t": 6.5,
+       "text": "These refined coordinates are mapped back onto the original scene to produce the final output."
+      },
+      {
+       "ts": 15,
+       "t": 7.0,
+       "text": "Finally, the system generates the detection results, marking each individual in the crowd with a precise green bounding box."
+      }
+     ],
+     "after": [
+      {
+       "ts": 1,
+       "t": 0.0,
+       "text": "The processing pipeline begins with the ingestion of raw video frames or static images of the targeted scene."
+      },
+      {
+       "ts": 2,
+       "t": 0.5,
+       "text": "Next, a density estimation model is applied to map the spatial distribution of the crowd, generating a continuous density map where high-intensity regions indicate dense clusters of individuals."
+      },
+      {
+       "ts": 3,
+       "t": 1.0,
+       "text": "The generated density map is then processed through a density segmentation module to isolate distinct crowd patches and cluster boundaries, while a count constraint mechanism assigns preliminary numerical counts to these regions."
+      },
+      {
+       "ts": 4,
+       "t": 1.5,
+       "text": "These segmented regions and count constraints are then passed into the optimization block to resolve individual locations."
+      },
+      {
+       "ts": 5,
+       "t": 2.0,
+       "text": "Within this block, a sliding region-of-interest window scans the scene to evaluate potential localizations."
+      },
+      {
+       "ts": 6,
+       "t": 2.5,
+       "text": "An integer programming module then solves a linear system, matching regional counts with spatial location variables via a transformation matrix."
+      },
+      {
+       "ts": 7,
+       "t": 3.0,
+       "text": "Finally, the bounding box estimation module refines these optimization outputs to establish precise spatial boundaries."
+      },
+      {
+       "ts": 8,
+       "t": 3.5,
+       "text": "This produces the final detection results, marking each individual in the scene with a precise green bounding box."
+      }
+     ],
+     "rows": [
+      {
+       "kind": "changed",
+       "a": 0,
+       "b": 0,
+       "ha": "The processing pipeline begins with the ingestion of raw video frames or static images <del>depicting</del> <del>a</del> <del>crowded</del> scene.",
+       "hb": "The processing pipeline begins with the ingestion of raw video frames or static images <ins>of</ins> <ins>the</ins> <ins>targeted</ins> scene."
+      },
+      {
+       "kind": "changed",
+       "a": 1,
+       "b": 1,
+       "ha": "<del>These</del> <del>images are passed directly into the</del> density estimation <del>stage</del>.",
+       "hb": "<ins>Next,</ins> <ins>a</ins> density estimation <ins>model is applied to map the spatial distribution of the crowd, generating a continuous density map where high-intensity regions indicate dense clusters of individuals</ins>."
+      },
+      {
+       "kind": "changed",
+       "a": 2,
+       "b": 2,
+       "ha": "<del>Here,</del> a density <del>estimation</del> <del>model</del> <del>maps</del> <del>the</del> <del>spatial distribution of the</del> crowd, <del>generating</del> a <del>continuous</del> <del>density</del> <del>map</del> <del>where</del> <del>high-intensity</del> regions<del> indicate dense clusters of individuals</del>.",
+       "hb": "<ins>The generated density map is then processed through</ins> a density <ins>segmentation</ins> <ins>module</ins> <ins>to</ins> <ins>isolate</ins> <ins>distinct</ins> crowd<ins> patches and cluster boundaries</ins>, <ins>while</ins> a <ins>count</ins> <ins>constraint</ins> <ins>mechanism</ins> <ins>assigns</ins> <ins>preliminary numerical counts to these</ins> regions."
+      },
+      {
+       "kind": "changed",
+       "a": 3,
+       "b": 3,
+       "ha": "<del>The</del> <del>generated</del> <del>density</del> <del>map</del> <del>is</del> then <del>forwarded</del> to <del>the</del> <del>segmentation</del> <del>module</del>.",
+       "hb": "<ins>These</ins> <ins>segmented</ins> <ins>regions</ins> <ins>and</ins> <ins>count constraints are</ins> then <ins>passed into the optimization block</ins> to <ins>resolve</ins> <ins>individual</ins> <ins>locations</ins>."
+      },
+      {
+       "kind": "changed",
+       "a": 4,
+       "b": 4,
+       "ha": "<del>The</del> <del>density</del> <del>segmentation</del> <del>module</del> <del>processes</del> the <del>map</del> to <del>isolate</del> <del>distinct</del> <del>crowd patches and identify cluster boundaries</del>.",
+       "hb": "<ins>Within</ins> <ins>this</ins> <ins>block,</ins> <ins>a</ins> <ins>sliding region-of-interest window scans</ins> the <ins>scene</ins> to <ins>evaluate</ins> <ins>potential</ins> <ins>localizations</ins>."
+      },
+      {
+       "kind": "changed",
+       "a": 5,
+       "b": 5,
+       "ha": "<del>Simultaneously</del>, <del>these</del> <del>segmented</del> <del>regions</del> <del>are</del> <del>analyzed</del> <del>to</del> <del>establish</del> <del>quantitative</del> <del>constraints</del>.",
+       "hb": "<ins>An integer programming module then solves a linear system</ins>, <ins>matching</ins> <ins>regional</ins> <ins>counts</ins> <ins>with</ins> <ins>spatial</ins> <ins>location</ins> <ins>variables</ins> <ins>via</ins> <ins>a transformation matrix</ins>."
+      },
+      {
+       "kind": "changed",
+       "a": 6,
+       "b": 6,
+       "ha": "The <del>count</del> <del>constraint</del> <del>mechanism</del> <del>assigns</del> <del>preliminary</del> <del>numerical</del> <del>counts</del> to <del>individual</del> <del>segmented</del> <del>regions,</del> <del>establishing strict quantitative bounds that constrain the subsequent optimization</del>.",
+       "hb": "<ins>Finally, </ins>the <ins>bounding</ins> <ins>box</ins> <ins>estimation</ins> <ins>module</ins> <ins>refines</ins> <ins>these</ins> <ins>optimization outputs</ins> to <ins>establish</ins> <ins>precise</ins> <ins>spatial</ins> <ins>boundaries</ins>."
+      },
+      {
+       "kind": "changed",
+       "a": 7,
+       "b": 7,
+       "ha": "<del>Both</del> the <del>segmented</del> <del>regions</del> <del>and</del> the <del>count</del> <del>constraints</del> <del>are</del> <del>then</del> <del>fed</del> <del>into</del> <del>the main optimization block</del>.",
+       "hb": "<ins>This produces</ins> the <ins>final</ins> <ins>detection</ins> <ins>results, marking each individual in</ins> the <ins>scene</ins> <ins>with</ins> <ins>a</ins> <ins>precise</ins> <ins>green</ins> <ins>bounding</ins> <ins>box</ins>."
+      },
+      {
+       "kind": "removed",
+       "a": 8,
+       "b": null,
+       "ha": "<del>Within this block, a sliding region-of-interest window scans the scene to localize potential targets.</del>",
+       "hb": ""
+      },
+      {
+       "kind": "removed",
+       "a": 9,
+       "b": null,
+       "ha": "<del>The sliding window outputs are then formulated into an integer programming problem.</del>",
+       "hb": ""
+      },
+      {
+       "kind": "removed",
+       "a": 10,
+       "b": null,
+       "ha": "<del>The integer programming module solves a linear system that matches regional counts with spatial location variables via a transformation matrix.</del>",
+       "hb": ""
+      },
+      {
+       "kind": "removed",
+       "a": 11,
+       "b": null,
+       "ha": "<del>The optimized spatial variables are then passed to the bounding box estimator.</del>",
+       "hb": ""
+      },
+      {
+       "kind": "removed",
+       "a": 12,
+       "b": null,
+       "ha": "<del>The bounding box estimation module refines these optimization outputs to determine the precise boundaries of each individual.</del>",
+       "hb": ""
+      },
+      {
+       "kind": "removed",
+       "a": 13,
+       "b": null,
+       "ha": "<del>These refined coordinates are mapped back onto the original scene to produce the final output.</del>",
+       "hb": ""
+      },
+      {
+       "kind": "removed",
+       "a": 14,
+       "b": null,
+       "ha": "<del>Finally, the system generates the detection results, marking each individual in the crowd with a precise green bounding box.</del>",
+       "hb": ""
+      }
+     ],
+     "labels": {
+      "before": "Before",
+      "after": "After"
+     }
+    },
+    {
+     "n": 6,
+     "id": "FigureBench_arch_diff_000000253",
+     "prompt": "The given diagram is animated in the “Detail-first” traversal style. Change its traversal style to “Overview-first” and reanimate.",
+     "style": "Progressive reveal",
+     "srcBefore": "assets/editability/sequencer/FigureBench_arch_diff_000000253/before/anim.svgx",
+     "srcAfter": "assets/editability/sequencer/FigureBench_arch_diff_000000253/after/anim.svgx",
+     "identical": false,
+     "xml": null,
+     "before": [
+      {
+       "ts": 1,
+       "t": 0.0,
+       "text": "The shape generation process begins by sampling Gaussian noise."
+      },
+      {
+       "ts": 2,
+       "t": 0.5,
+       "text": "This noise is mapped into a latent feature vector."
+      },
+      {
+       "ts": 3,
+       "t": 1.0,
+       "text": "The feature vector is processed by a primitive prediction network to estimate the parameters of basic geometric building blocks."
+      },
+      {
+       "ts": 4,
+       "t": 1.5,
+       "text": "These predicted parameters are routed into parallel streams, starting with the cover branch."
+      },
+      {
+       "ts": 5,
+       "t": 2.0,
+       "text": "Within the cover branch, the framework predicts a set of convex primitives."
+      },
+      {
+       "ts": 6,
+       "t": 2.5,
+       "text": "It also predicts primitive inverses to represent negative spaces."
+      },
+      {
+       "ts": 7,
+       "t": 3.0,
+       "text": "These primitives and inverses are grouped together using a differentiable intersection operation to form complex convex parts."
+      },
+      {
+       "ts": 8,
+       "t": 3.5,
+       "text": "This produces an intermediate intersected shape representation."
+      },
+      {
+       "ts": 9,
+       "t": 4.0,
+       "text": "A union operation then aggregates these parts, applying dropout to encourage robust feature learning and prevent overfitting."
+      },
+      {
+       "ts": 10,
+       "t": 4.5,
+       "text": "This yields the final intermediate cover shape, representing the overall base volume of the target object."
+      },
+      {
+       "ts": 11,
+       "t": 5.0,
+       "text": "Concurrently, the predicted parameters are also routed to the residual branch."
+      },
+      {
+       "ts": 12,
+       "t": 5.5,
+       "text": "The residual branch similarly predicts convex primitives,"
+      },
+      {
+       "ts": 13,
+       "t": 6.0,
+       "text": "as well as primitive inverses."
+      },
+      {
+       "ts": 14,
+       "t": 6.5,
+       "text": "These are combined using a differentiable intersection operation,"
+      },
+      {
+       "ts": 15,
+       "t": 7.0,
+       "text": "creating an intermediate intersected residual shape."
+      },
+      {
+       "ts": 16,
+       "t": 7.5,
+       "text": "A union operation, also utilizing dropout, aggregates these components."
+      },
+      {
+       "ts": 17,
+       "t": 8.0,
+       "text": "This produces the intermediate residual shape, which captures the detailed cavities and concavities."
+      },
+      {
+       "ts": 18,
+       "t": 8.5,
+       "text": "To construct the final geometry, a constructive difference operation is applied between the cover shape and the residual shape."
+      },
+      {
+       "ts": 19,
+       "t": 9.0,
+       "text": "This subtraction yields the reconstructed final shape."
+      },
+      {
+       "ts": 20,
+       "t": 9.5,
+       "text": "The generated outputs are optimized against the target given shape."
+      },
+      {
+       "ts": 21,
+       "t": 10.0,
+       "text": "The cover loss computes the deviation between the intermediate cover shape and the given shape to ensure the base volume is accurate."
+      },
+      {
+       "ts": 22,
+       "t": 10.5,
+       "text": "Simultaneously, the residual loss measures the deviation of the residual shape against the given shape, guiding the network to carve out the correct negative spaces."
+      }
+     ],
+     "after": [
+      {
+       "ts": 1,
+       "t": 0.0,
+       "text": "The shape generation process begins by sampling Gaussian noise."
+      },
+      {
+       "ts": 2,
+       "t": 0.5,
+       "text": "This noise is mapped into a latent feature vector."
+      },
+      {
+       "ts": 3,
+       "t": 1.0,
+       "text": "The feature vector is processed by a primitive prediction network to estimate basic geometric parameters."
+      },
+      {
+       "ts": 4,
+       "t": 1.5,
+       "text": "The parameters are routed into parallel streams, starting with the main Cover Branch container."
+      },
+      {
+       "ts": 5,
+       "t": 2.0,
+       "text": "Concurrently, the parameters are also routed to the main Residual Branch container."
+      },
+      {
+       "ts": 6,
+       "t": 2.5,
+       "text": "Before looking inside, we see that the Cover Branch ultimately outputs an intermediate cover shape, S_C, representing the base volume."
+      },
+      {
+       "ts": 7,
+       "t": 3.0,
+       "text": "Similarly, the Residual Branch outputs an intermediate residual shape, S_R, capturing detailed cavities."
+      },
+      {
+       "ts": 8,
+       "t": 3.5,
+       "text": "Now, let's reveal the inner workings. Inside the Cover Branch, the network predicts convex primitives and primitive inverses."
+      },
+      {
+       "ts": 9,
+       "t": 4.0,
+       "text": "These are combined via a differentiable intersection operation to form an intermediate intersected shape."
+      },
+      {
+       "ts": 10,
+       "t": 4.5,
+       "text": "A union operation with dropout then aggregates these parts to produce the final cover shape."
+      },
+      {
+       "ts": 11,
+       "t": 5.0,
+       "text": "Inside the Residual Branch, we similarly predict convex primitives and primitive inverses representing negative spaces."
+      },
+      {
+       "ts": 12,
+       "t": 5.5,
+       "text": "An intersection operation combines these to form the intermediate intersected residual shape."
+      },
+      {
+       "ts": 13,
+       "t": 6.0,
+       "text": "A union operation with dropout aggregates these components into the final residual shape."
+      },
+      {
+       "ts": 14,
+       "t": 6.5,
+       "text": "With both intermediate shapes generated, a constructive difference operation is applied between the cover and residual shapes."
+      },
+      {
+       "ts": 15,
+       "t": 7.0,
+       "text": "This subtraction yields the reconstructed final shape."
+      },
+      {
+       "ts": 16,
+       "t": 7.5,
+       "text": "The generated outputs are optimized against the target given shape."
+      },
+      {
+       "ts": 17,
+       "t": 8.0,
+       "text": "The cover loss computes the deviation between the intermediate cover shape and the given shape to ensure base volume accuracy."
+      },
+      {
+       "ts": 18,
+       "t": 8.5,
+       "text": "Simultaneously, the residual loss measures the deviation of the residual shape against the given shape to guide negative space carving."
+      }
+     ],
+     "rows": [
+      {
+       "kind": "same",
+       "a": 0,
+       "b": 0,
+       "ha": "The shape generation process begins by sampling Gaussian noise.",
+       "hb": "The shape generation process begins by sampling Gaussian noise."
+      },
+      {
+       "kind": "same",
+       "a": 1,
+       "b": 1,
+       "ha": "This noise is mapped into a latent feature vector.",
+       "hb": "This noise is mapped into a latent feature vector."
+      },
+      {
+       "kind": "changed",
+       "a": 2,
+       "b": 2,
+       "ha": "The feature vector is processed by a primitive prediction network to estimate <del>the parameters of </del>basic geometric <del>building blocks</del>.",
+       "hb": "The feature vector is processed by a primitive prediction network to estimate basic geometric <ins>parameters</ins>."
+      },
+      {
+       "kind": "changed",
+       "a": 3,
+       "b": 3,
+       "ha": "<del>These predicted</del> parameters are routed into parallel streams, starting with the cover branch.",
+       "hb": "<ins>The</ins> parameters are routed into parallel streams, starting with the <ins>main </ins>Cover Branch<ins> container</ins>."
+      },
+      {
+       "kind": "changed",
+       "a": 4,
+       "b": 4,
+       "ha": "<del>Within the cover branch</del>, the <del>framework</del> <del>predicts</del> <del>a</del> <del>set</del> <del>of</del> <del>convex</del> <del>primitives</del>.",
+       "hb": "<ins>Concurrently</ins>, the <ins>parameters</ins> <ins>are</ins> <ins>also</ins> <ins>routed</ins> <ins>to</ins> <ins>the</ins> <ins>main Residual Branch container</ins>."
+      },
+      {
+       "kind": "changed",
+       "a": 5,
+       "b": 5,
+       "ha": "<del>It</del> <del>also</del> <del>predicts</del> <del>primitive</del> <del>inverses</del> <del>to</del> <del>represent</del> <del>negative</del> <del>spaces</del>.",
+       "hb": "<ins>Before</ins> <ins>looking</ins> <ins>inside,</ins> <ins>we</ins> <ins>see</ins> <ins>that</ins> <ins>the</ins> <ins>Cover</ins> <ins>Branch ultimately outputs an intermediate cover shape, S_C, representing the base volume</ins>."
+      },
+      {
+       "kind": "changed",
+       "a": 6,
+       "b": 6,
+       "ha": "<del>These</del> <del>primitives</del> <del>and</del> <del>inverses</del> <del>are</del> <del>grouped</del> <del>together</del> <del>using</del> <del>a</del> <del>differentiable</del> <del>intersection</del> <del>operation</del> <del>to form complex convex parts</del>.",
+       "hb": "<ins>Similarly,</ins> <ins>the</ins> <ins>Residual</ins> <ins>Branch</ins> <ins>outputs</ins> <ins>an</ins> <ins>intermediate</ins> <ins>residual</ins> <ins>shape,</ins> <ins>S_R,</ins> <ins>capturing</ins> <ins>detailed</ins> <ins>cavities</ins>."
+      },
+      {
+       "kind": "changed",
+       "a": 7,
+       "b": 7,
+       "ha": "<del>This</del> <del>produces</del> <del>an</del> <del>intermediate</del> <del>intersected</del> <del>shape</del> <del>representation</del>.",
+       "hb": "<ins>Now,</ins> <ins>let&#x27;s</ins> <ins>reveal</ins> <ins>the</ins> <ins>inner</ins> <ins>workings.</ins> <ins>Inside the Cover Branch, the network predicts convex primitives and primitive inverses</ins>."
+      },
+      {
+       "kind": "changed",
+       "a": 8,
+       "b": 8,
+       "ha": "A <del>union</del> operation <del>then aggregates these parts, applying dropout </del>to <del>encourage</del> <del>robust</del> <del>feature</del> <del>learning</del> <del>and prevent overfitting</del>.",
+       "hb": "<ins>These are combined via </ins>a <ins>differentiable intersection</ins> operation to <ins>form</ins> <ins>an</ins> <ins>intermediate</ins> <ins>intersected</ins> <ins>shape</ins>."
+      },
+      {
+       "kind": "changed",
+       "a": 9,
+       "b": 9,
+       "ha": "<del>This</del> <del>yields</del> the final <del>intermediate </del>cover shape<del>, representing the overall base volume of the target object</del>.",
+       "hb": "<ins>A</ins> <ins>union operation with dropout then aggregates these parts to produce</ins> the final cover shape."
+      },
+      {
+       "kind": "changed",
+       "a": 10,
+       "b": 10,
+       "ha": "<del>Concurrently, the predicted parameters are also routed to</del> the residual branch.",
+       "hb": "<ins>Inside</ins> the Residual Branch<ins>, we similarly predict convex primitives and primitive inverses representing negative spaces</ins>."
+      },
+      {
+       "kind": "changed",
+       "a": 11,
+       "b": 11,
+       "ha": "The residual <del>branch similarly predicts convex primitives,</del>",
+       "hb": "<ins>An intersection operation combines these to form </ins>the<ins> intermediate intersected</ins> residual <ins>shape.</ins>"
+      },
+      {
+       "kind": "changed",
+       "a": 12,
+       "b": 12,
+       "ha": "<del>as</del> <del>well</del> <del>as</del> <del>primitive</del> <del>inverses</del>.",
+       "hb": "<ins>A</ins> <ins>union</ins> <ins>operation</ins> <ins>with</ins> <ins>dropout aggregates these components into the final residual shape</ins>."
+      },
+      {
+       "kind": "changed",
+       "a": 13,
+       "b": 13,
+       "ha": "<del>These</del> <del>are</del> <del>combined</del> <del>using</del> a <del>differentiable</del> <del>intersection</del> operation<del>,</del>",
+       "hb": "<ins>With</ins> <ins>both</ins> <ins>intermediate</ins> <ins>shapes generated,</ins> a <ins>constructive</ins> <ins>difference</ins> operation<ins> is applied between the cover and residual shapes.</ins>"
+      },
+      {
+       "kind": "removed",
+       "a": 14,
+       "b": null,
+       "ha": "<del>creating an intermediate intersected residual shape.</del>",
+       "hb": ""
+      },
+      {
+       "kind": "removed",
+       "a": 15,
+       "b": null,
+       "ha": "<del>A union operation, also utilizing dropout, aggregates these components.</del>",
+       "hb": ""
+      },
+      {
+       "kind": "removed",
+       "a": 16,
+       "b": null,
+       "ha": "<del>This produces the intermediate residual shape, which captures the detailed cavities and concavities.</del>",
+       "hb": ""
+      },
+      {
+       "kind": "removed",
+       "a": 17,
+       "b": null,
+       "ha": "<del>To construct the final geometry, a constructive difference operation is applied between the cover shape and the residual shape.</del>",
+       "hb": ""
+      },
+      {
+       "kind": "same",
+       "a": 18,
+       "b": 14,
+       "ha": "This subtraction yields the reconstructed final shape.",
+       "hb": "This subtraction yields the reconstructed final shape."
+      },
+      {
+       "kind": "same",
+       "a": 19,
+       "b": 15,
+       "ha": "The generated outputs are optimized against the target given shape.",
+       "hb": "The generated outputs are optimized against the target given shape."
+      },
+      {
+       "kind": "changed",
+       "a": 20,
+       "b": 16,
+       "ha": "The cover loss computes the deviation between the intermediate cover shape and the given shape to ensure <del>the </del>base volume <del>is accurate</del>.",
+       "hb": "The cover loss computes the deviation between the intermediate cover shape and the given shape to ensure base volume <ins>accuracy</ins>."
+      },
+      {
+       "kind": "changed",
+       "a": 21,
+       "b": 17,
+       "ha": "Simultaneously, the residual loss measures the deviation of the residual shape against the given shape<del>, guiding the network</del> to <del>carve out the correct</del> negative <del>spaces</del>.",
+       "hb": "Simultaneously, the residual loss measures the deviation of the residual shape against the given shape to <ins>guide</ins> negative <ins>space carving</ins>."
+      }
+     ],
+     "labels": {
+      "before": "detail_first",
+      "after": "overview_first"
+     }
+    },
+    {
+     "n": 7,
+     "id": "Paper2Fig_pipe_diff_000000070",
+     "prompt": "Animate only along the branch that starts with the Input video and ends with Image Segmentation",
+     "style": "Alpha masking",
+     "srcBefore": "assets/editability/sequencer/Paper2Fig_pipe_diff_000000070/before/anim.svgx",
+     "srcAfter": "assets/editability/sequencer/Paper2Fig_pipe_diff_000000070/after/anim.svgx",
+     "identical": true,
+     "xml": null,
+     "before": [
+      {
+       "ts": 1,
+       "t": 0.0,
+       "text": "The pipeline begins with the input video stream, capturing the target object from multiple viewpoints."
+      },
+      {
+       "ts": 2,
+       "t": 3.998,
+       "text": "These video frames serve as the primary visual source for downstream 2D processing and segmentation."
+      },
+      {
+       "ts": 3,
+       "t": 8.0,
+       "text": "The input video frames are then routed to the super-pixels module to group homogeneous image regions."
+      },
+      {
+       "ts": 4,
+       "t": 11.998,
+       "text": "Decomposing the frames into super-pixels simplifies the visual representation and reduces downstream computational complexity."
+      },
+      {
+       "ts": 5,
+       "t": 15.999,
+       "text": "These super-pixels are passed to the 2D-3D joint segmentation module to establish spatial and appearance consistency."
+      },
+      {
+       "ts": 6,
+       "t": 19.998,
+       "text": "The joint segmentation module optimizes the boundaries to produce highly accurate 2D image segmentations."
+      },
+      {
+       "ts": 7,
+       "t": 23.999,
+       "text": "These final image segmentations cleanly isolate the target object from the background across all video frames."
+      }
+     ],
+     "after": [
+      {
+       "ts": 1,
+       "t": 0.0,
+       "text": "The pipeline begins with the input video stream, capturing the target object from multiple viewpoints."
+      },
+      {
+       "ts": 2,
+       "t": 3.998,
+       "text": "These video frames serve as the primary visual source for downstream 2D processing and segmentation."
+      },
+      {
+       "ts": 3,
+       "t": 8.0,
+       "text": "The input video frames are then routed to the super-pixels module to group homogeneous image regions."
+      },
+      {
+       "ts": 4,
+       "t": 11.998,
+       "text": "Decomposing the frames into super-pixels simplifies the visual representation and reduces downstream computational complexity."
+      },
+      {
+       "ts": 5,
+       "t": 15.999,
+       "text": "These super-pixels are passed to the 2D-3D joint segmentation module to establish spatial and appearance consistency."
+      },
+      {
+       "ts": 6,
+       "t": 19.998,
+       "text": "The joint segmentation module optimizes the boundaries to produce highly accurate 2D image segmentations."
+      },
+      {
+       "ts": 7,
+       "t": 23.999,
+       "text": "These final image segmentations cleanly isolate the target object from the background across all video frames."
+      }
+     ],
+     "rows": [
+      {
+       "kind": "same",
+       "a": 0,
+       "b": 0,
+       "ha": "The pipeline begins with the input video stream, capturing the target object from multiple viewpoints.",
+       "hb": "The pipeline begins with the input video stream, capturing the target object from multiple viewpoints."
+      },
+      {
+       "kind": "same",
+       "a": 1,
+       "b": 1,
+       "ha": "These video frames serve as the primary visual source for downstream 2D processing and segmentation.",
+       "hb": "These video frames serve as the primary visual source for downstream 2D processing and segmentation."
+      },
+      {
+       "kind": "same",
+       "a": 2,
+       "b": 2,
+       "ha": "The input video frames are then routed to the super-pixels module to group homogeneous image regions.",
+       "hb": "The input video frames are then routed to the super-pixels module to group homogeneous image regions."
+      },
+      {
+       "kind": "same",
+       "a": 3,
+       "b": 3,
+       "ha": "Decomposing the frames into super-pixels simplifies the visual representation and reduces downstream computational complexity.",
+       "hb": "Decomposing the frames into super-pixels simplifies the visual representation and reduces downstream computational complexity."
+      },
+      {
+       "kind": "same",
+       "a": 4,
+       "b": 4,
+       "ha": "These super-pixels are passed to the 2D-3D joint segmentation module to establish spatial and appearance consistency.",
+       "hb": "These super-pixels are passed to the 2D-3D joint segmentation module to establish spatial and appearance consistency."
+      },
+      {
+       "kind": "same",
+       "a": 5,
+       "b": 5,
+       "ha": "The joint segmentation module optimizes the boundaries to produce highly accurate 2D image segmentations.",
+       "hb": "The joint segmentation module optimizes the boundaries to produce highly accurate 2D image segmentations."
+      },
+      {
+       "kind": "same",
+       "a": 6,
+       "b": 6,
+       "ha": "These final image segmentations cleanly isolate the target object from the background across all video frames.",
+       "hb": "These final image segmentations cleanly isolate the target object from the background across all video frames."
+      }
+     ],
+     "labels": {
+      "before": "Before",
+      "after": "After"
+     }
+    },
+    {
+     "n": 8,
+     "id": "Paper2Fig_pipe_diff_000000475",
+     "prompt": "Keeping the rest of the stages brief, go  into the details of only the Model testing block.",
+     "style": "Progressive reveal",
+     "srcBefore": "assets/editability/sequencer/Paper2Fig_pipe_diff_000000475/before/anim.svgx",
+     "srcAfter": "assets/editability/sequencer/Paper2Fig_pipe_diff_000000475/after/anim.svgx",
+     "identical": false,
+     "xml": null,
+     "before": [
+      {
+       "ts": 1,
+       "t": 0.0,
+       "text": "The process begins with the Data Acquisition phase."
+      },
+      {
+       "ts": 2,
+       "t": 0.5,
+       "text": "Here, data is collected from the vehicle's onboard diagnostics port using a connected device."
+      },
+      {
+       "ts": 3,
+       "t": 1.0,
+       "text": "This step captures trusted, normal in-vehicle network data."
+      },
+      {
+       "ts": 4,
+       "t": 1.5,
+       "text": "These network traces represent the baseline behavior of the vehicle under normal operating conditions."
+      },
+      {
+       "ts": 5,
+       "t": 2.0,
+       "text": "This clean baseline data is then passed to the model development phase."
+      },
+      {
+       "ts": 6,
+       "t": 2.5,
+       "text": "In the Model Development phase, the core machine learning models are trained."
+      },
+      {
+       "ts": 7,
+       "t": 3.0,
+       "text": "The training process utilizes the attack-free data along with specified model hyperparameters."
+      },
+      {
+       "ts": 8,
+       "t": 3.5,
+       "text": "These inputs are used to configure and train two distinct components."
+      },
+      {
+       "ts": 9,
+       "t": 4.0,
+       "text": "First, a Predictor model, featuring an encoder-decoder neural network architecture, is trained to reconstruct or predict normal network sequences."
+      },
+      {
+       "ts": 10,
+       "t": 4.5,
+       "text": "Second, a Detector model is established to learn the boundary of normal behavior based on the predictor's performance."
+      },
+      {
+       "ts": 11,
+       "t": 5.0,
+       "text": "Once trained, these models are deployed to the testing phase."
+      },
+      {
+       "ts": 12,
+       "t": 5.5,
+       "text": "The Model Testing phase evaluates the system's ability to identify security threats."
+      },
+      {
+       "ts": 13,
+       "t": 6.0,
+       "text": "During testing, new network data, which may contain attacks, is introduced."
+      },
+      {
+       "ts": 14,
+       "t": 6.5,
+       "text": "This evaluation data is fed directly into the pipeline of trained models."
+      },
+      {
+       "ts": 15,
+       "t": 7.0,
+       "text": "The trained models process the incoming data sequentially."
+      },
+      {
+       "ts": 16,
+       "t": 7.5,
+       "text": "First, the predictor model processes the testing data to generate predictions."
+      },
+      {
+       "ts": 17,
+       "t": 8.0,
+       "text": "The system then calculates the deviations between the actual network data and the model's predictions."
+      },
+      {
+       "ts": 18,
+       "t": 8.5,
+       "text": "These deviations are passed to the detector model, which determines if they fall outside the normal boundary."
+      },
+      {
+       "ts": 19,
+       "t": 9.0,
+       "text": "If the deviations are classified as anomalous, an alert is triggered."
+      },
+      {
+       "ts": 20,
+       "t": 9.5,
+       "text": "Finally, the system outputs an anomaly alert to warn of a potential security breach."
+      }
+     ],
+     "after": [
+      {
+       "ts": 1,
+       "t": 0.0,
+       "text": "Once trained, these models are deployed to the testing phase."
+      },
+      {
+       "ts": 2,
+       "t": 3.0,
+       "text": "The Model Testing phase evaluates the system's ability to identify security threats."
+      },
+      {
+       "ts": 3,
+       "t": 6.0,
+       "text": "During testing, new network data, which may contain attacks, is introduced."
+      },
+      {
+       "ts": 4,
+       "t": 9.0,
+       "text": "This evaluation data is fed directly into the pipeline of trained models."
+      },
+      {
+       "ts": 5,
+       "t": 12.0,
+       "text": "The trained models process the incoming data sequentially."
+      },
+      {
+       "ts": 6,
+       "t": 15.0,
+       "text": "First, the predictor model processes the testing data to generate predictions."
+      },
+      {
+       "ts": 7,
+       "t": 18.0,
+       "text": "The system then calculates the deviations between the actual network data and the model's predictions."
+      },
+      {
+       "ts": 8,
+       "t": 21.0,
+       "text": "These deviations are passed to the detector model, which determines if they fall outside the normal boundary."
+      },
+      {
+       "ts": 9,
+       "t": 24.0,
+       "text": "If the deviations are classified as anomalous, an alert is triggered."
+      },
+      {
+       "ts": 10,
+       "t": 27.0,
+       "text": "Finally, the system outputs an anomaly alert to warn of a potential security breach."
+      }
+     ],
+     "rows": [
+      {
+       "kind": "removed",
+       "a": 0,
+       "b": null,
+       "ha": "<del>The process begins with the Data Acquisition phase.</del>",
+       "hb": ""
+      },
+      {
+       "kind": "removed",
+       "a": 1,
+       "b": null,
+       "ha": "<del>Here, data is collected from the vehicle&#x27;s onboard diagnostics port using a connected device.</del>",
+       "hb": ""
+      },
+      {
+       "kind": "removed",
+       "a": 2,
+       "b": null,
+       "ha": "<del>This step captures trusted, normal in-vehicle network data.</del>",
+       "hb": ""
+      },
+      {
+       "kind": "removed",
+       "a": 3,
+       "b": null,
+       "ha": "<del>These network traces represent the baseline behavior of the vehicle under normal operating conditions.</del>",
+       "hb": ""
+      },
+      {
+       "kind": "removed",
+       "a": 4,
+       "b": null,
+       "ha": "<del>This clean baseline data is then passed to the model development phase.</del>",
+       "hb": ""
+      },
+      {
+       "kind": "removed",
+       "a": 5,
+       "b": null,
+       "ha": "<del>In the Model Development phase, the core machine learning models are trained.</del>",
+       "hb": ""
+      },
+      {
+       "kind": "removed",
+       "a": 6,
+       "b": null,
+       "ha": "<del>The training process utilizes the attack-free data along with specified model hyperparameters.</del>",
+       "hb": ""
+      },
+      {
+       "kind": "removed",
+       "a": 7,
+       "b": null,
+       "ha": "<del>These inputs are used to configure and train two distinct components.</del>",
+       "hb": ""
+      },
+      {
+       "kind": "removed",
+       "a": 8,
+       "b": null,
+       "ha": "<del>First, a Predictor model, featuring an encoder-decoder neural network architecture, is trained to reconstruct or predict normal network sequences.</del>",
+       "hb": ""
+      },
+      {
+       "kind": "removed",
+       "a": 9,
+       "b": null,
+       "ha": "<del>Second, a Detector model is established to learn the boundary of normal behavior based on the predictor&#x27;s performance.</del>",
+       "hb": ""
+      },
+      {
+       "kind": "same",
+       "a": 10,
+       "b": 0,
+       "ha": "Once trained, these models are deployed to the testing phase.",
+       "hb": "Once trained, these models are deployed to the testing phase."
+      },
+      {
+       "kind": "same",
+       "a": 11,
+       "b": 1,
+       "ha": "The Model Testing phase evaluates the system&#x27;s ability to identify security threats.",
+       "hb": "The Model Testing phase evaluates the system&#x27;s ability to identify security threats."
+      },
+      {
+       "kind": "same",
+       "a": 12,
+       "b": 2,
+       "ha": "During testing, new network data, which may contain attacks, is introduced.",
+       "hb": "During testing, new network data, which may contain attacks, is introduced."
+      },
+      {
+       "kind": "same",
+       "a": 13,
+       "b": 3,
+       "ha": "This evaluation data is fed directly into the pipeline of trained models.",
+       "hb": "This evaluation data is fed directly into the pipeline of trained models."
+      },
+      {
+       "kind": "same",
+       "a": 14,
+       "b": 4,
+       "ha": "The trained models process the incoming data sequentially.",
+       "hb": "The trained models process the incoming data sequentially."
+      },
+      {
+       "kind": "same",
+       "a": 15,
+       "b": 5,
+       "ha": "First, the predictor model processes the testing data to generate predictions.",
+       "hb": "First, the predictor model processes the testing data to generate predictions."
+      },
+      {
+       "kind": "same",
+       "a": 16,
+       "b": 6,
+       "ha": "The system then calculates the deviations between the actual network data and the model&#x27;s predictions.",
+       "hb": "The system then calculates the deviations between the actual network data and the model&#x27;s predictions."
+      },
+      {
+       "kind": "same",
+       "a": 17,
+       "b": 7,
+       "ha": "These deviations are passed to the detector model, which determines if they fall outside the normal boundary.",
+       "hb": "These deviations are passed to the detector model, which determines if they fall outside the normal boundary."
+      },
+      {
+       "kind": "same",
+       "a": 18,
+       "b": 8,
+       "ha": "If the deviations are classified as anomalous, an alert is triggered.",
+       "hb": "If the deviations are classified as anomalous, an alert is triggered."
+      },
+      {
+       "kind": "same",
+       "a": 19,
+       "b": 9,
+       "ha": "Finally, the system outputs an anomaly alert to warn of a potential security breach.",
+       "hb": "Finally, the system outputs an anomaly alert to warn of a potential security breach."
+      }
+     ],
+     "labels": {
+      "before": "Before",
+      "after": "After"
+     }
+    },
+    {
+     "n": 9,
+     "id": "Papers_with_code_arch_000000325",
+     "prompt": "Animate the Cardinal 1 and Cardinal K boxes incrementally instead of together.",
+     "style": "Progressive reveal",
+     "srcBefore": "assets/editability/sequencer/Papers_with_code_arch_000000325/before/anim.svgx",
+     "srcAfter": "assets/editability/sequencer/Papers_with_code_arch_000000325/after/anim.svgx",
+     "identical": false,
+     "xml": null,
+     "before": [
+      {
+       "ts": 1,
+       "t": 0.0,
+       "text": "The ResNeSt block receives an input feature map with specified dimensions (h, w, c)."
+      },
+      {
+       "ts": 2,
+       "t": 3.2,
+       "text": "The input is distributed in parallel across Cardinal 1 to Cardinal K groups, where each group processes split convolution branches and aggregates them with Split Attention."
+      },
+      {
+       "ts": 3,
+       "t": 6.8,
+       "text": "The representations from all cardinal groups are concatenated along the channel dimension."
+      },
+      {
+       "ts": 4,
+       "t": 10.0,
+       "text": "A final 1x1 convolution projects the concatenated representations to match the target channel dimension."
+      },
+      {
+       "ts": 5,
+       "t": 13.2,
+       "text": "Finally, the result is combined with the original input through a shortcut connection to produce the block output."
+      }
+     ],
+     "after": [
+      {
+       "ts": 1,
+       "t": 0.0,
+       "text": "The ResNeSt block receives an input feature map with specified height, width, and channels."
+      },
+      {
+       "ts": 2,
+       "t": 0.5,
+       "text": "The input is distributed across multiple cardinal groups, starting with the first cardinal group."
+      },
+      {
+       "ts": 3,
+       "t": 1.0,
+       "text": "Within this group, the first split processes the features using a one-by-one convolution followed by a three-by-three convolution."
+      },
+      {
+       "ts": 4,
+       "t": 1.5,
+       "text": "This transformation is replicated across all split branches within the cardinal group."
+      },
+      {
+       "ts": 5,
+       "t": 2.0,
+       "text": "A Split Attention module then fuses the representations from each split to generate the cardinal group's output."
+      },
+      {
+       "ts": 6,
+       "t": 2.5,
+       "text": "The same structure operates in parallel across the remaining cardinal groups."
+      },
+      {
+       "ts": 7,
+       "t": 3.0,
+       "text": "In the final cardinal group, the first split applies its convolutional layers."
+      },
+      {
+       "ts": 8,
+       "t": 3.5,
+       "text": "The subsequent splits perform identical feature transformations."
+      },
+      {
+       "ts": 9,
+       "t": 4.0,
+       "text": "Split Attention then integrates the split feature representations."
+      },
+      {
+       "ts": 10,
+       "t": 4.5,
+       "text": "The outputs from all cardinal groups are concatenated along the channel dimension."
+      },
+      {
+       "ts": 11,
+       "t": 5.0,
+       "text": "A final one-by-one convolution projects the concatenated features to the target channel dimension."
+      },
+      {
+       "ts": 12,
+       "t": 5.5,
+       "text": "Finally, the result is combined with the original input through a shortcut connection to form the block output."
+      }
+     ],
+     "rows": [
+      {
+       "kind": "changed",
+       "a": 0,
+       "b": 0,
+       "ha": "The ResNeSt block receives an input feature map with specified <del>dimensions (h</del>, <del>w</del>, <del>c)</del>.",
+       "hb": "The ResNeSt block receives an input feature map with specified <ins>height</ins>, <ins>width</ins>, <ins>and channels</ins>."
+      },
+      {
+       "kind": "changed",
+       "a": 1,
+       "b": 1,
+       "ha": "The input is distributed <del>in parallel </del>across <del>Cardinal 1 to</del> Cardinal<del> K</del> groups, <del>where each group processes split convolution branches and aggregates them</del> with <del>Split</del> <del>Attention</del>.",
+       "hb": "The input is distributed across <ins>multiple</ins> cardinal groups, <ins>starting</ins> with <ins>the</ins> <ins>first cardinal group</ins>."
+      },
+      {
+       "kind": "changed",
+       "a": 2,
+       "b": 2,
+       "ha": "<del>The</del> <del>representations</del> <del>from all cardinal groups are concatenated along</del> the <del>channel</del> <del>dimension</del>.",
+       "hb": "<ins>Within</ins> <ins>this</ins> <ins>group,</ins> the <ins>first</ins> <ins>split processes the features using a one-by-one convolution followed by a three-by-three convolution</ins>."
+      },
+      {
+       "kind": "changed",
+       "a": 3,
+       "b": 3,
+       "ha": "<del>A</del> <del>final</del> <del>1x1</del> <del>convolution</del> <del>projects</del> the <del>concatenated</del> <del>representations to match the target channel dimension</del>.",
+       "hb": "<ins>This</ins> <ins>transformation</ins> <ins>is</ins> <ins>replicated</ins> <ins>across all split branches within</ins> the <ins>cardinal</ins> <ins>group</ins>."
+      },
+      {
+       "kind": "changed",
+       "a": 4,
+       "b": 4,
+       "ha": "<del>Finally,</del> the <del>result</del> <del>is</del> <del>combined</del> <del>with</del> the <del>original</del> <del>input through a shortcut connection to produce the block</del> output.",
+       "hb": "<ins>A Split Attention module then fuses</ins> the <ins>representations</ins> <ins>from</ins> <ins>each</ins> <ins>split to generate</ins> the <ins>cardinal</ins> <ins>group&#x27;s</ins> output."
+      },
+      {
+       "kind": "added",
+       "a": null,
+       "b": 5,
+       "ha": "",
+       "hb": "<ins>The same structure operates in parallel across the remaining cardinal groups.</ins>"
+      },
+      {
+       "kind": "added",
+       "a": null,
+       "b": 6,
+       "ha": "",
+       "hb": "<ins>In the final cardinal group, the first split applies its convolutional layers.</ins>"
+      },
+      {
+       "kind": "added",
+       "a": null,
+       "b": 7,
+       "ha": "",
+       "hb": "<ins>The subsequent splits perform identical feature transformations.</ins>"
+      },
+      {
+       "kind": "added",
+       "a": null,
+       "b": 8,
+       "ha": "",
+       "hb": "<ins>Split Attention then integrates the split feature representations.</ins>"
+      },
+      {
+       "kind": "added",
+       "a": null,
+       "b": 9,
+       "ha": "",
+       "hb": "<ins>The outputs from all cardinal groups are concatenated along the channel dimension.</ins>"
+      },
+      {
+       "kind": "added",
+       "a": null,
+       "b": 10,
+       "ha": "",
+       "hb": "<ins>A final one-by-one convolution projects the concatenated features to the target channel dimension.</ins>"
+      },
+      {
+       "kind": "added",
+       "a": null,
+       "b": 11,
+       "ha": "",
+       "hb": "<ins>Finally, the result is combined with the original input through a shortcut connection to form the block output.</ins>"
+      }
+     ],
+     "labels": {
+      "before": "Before",
+      "after": "After"
+     }
+    },
+    {
+     "n": 10,
+     "id": "arch_arxiv_ai_2025_000000102",
+     "prompt": "Represent the  whole Detection and  Attribution Layer module together in one shot. Only go into the details of the other two (”Physics Perception Layer” and “Reasoning & Diagnosis Layer”",
+     "style": "Progressive reveal",
+     "srcBefore": "assets/editability/sequencer/arch_arxiv_ai_2025_000000102/before/anim.svgx",
+     "srcAfter": "assets/editability/sequencer/arch_arxiv_ai_2025_000000102/after/anim.svgx",
+     "identical": false,
+     "xml": null,
+     "before": [
+      {
+       "ts": 1,
+       "t": 0.0,
+       "text": "The fault diagnosis and reasoning framework is structured into three hierarchical layers: the Physics Perception Layer, the Detection and Attribution Layer, and the Reasoning and Diagnosis Layer."
+      },
+      {
+       "ts": 2,
+       "t": 0.5,
+       "text": "In the Physics Perception Layer, raw multi-modal sensor inputs—including voltage, current, and temperature—are integrated with domain-specific physics knowledge."
+      },
+      {
+       "ts": 3,
+       "t": 1.0,
+       "text": "This knowledge formulates mechanism-driven rules, evaluating physical metrics like post-charge thermal states to create an initial numeric-to-semantic bridge."
+      },
+      {
+       "ts": 4,
+       "t": 1.5,
+       "text": "These rules transform the raw continuous signals into a structured feature matrix for downstream classification."
+      },
+      {
+       "ts": 5,
+       "t": 2.0,
+       "text": "In the Detection and Attribution Layer, a gradient boosting decision tree processes the feature matrix to classify the operating state as normal or abnormal."
+      },
+      {
+       "ts": 6,
+       "t": 2.5,
+       "text": "Upon detecting an anomaly, a SHAP explainer attributes the top feature contributions, acting as a secondary bridge to interpret the non-linear decision boundaries."
+      },
+      {
+       "ts": 7,
+       "t": 3.0,
+       "text": "Both the physical mechanism rules and the SHAP feature attributions are then forwarded to the Reasoning and Diagnosis Layer."
+      },
+      {
+       "ts": 8,
+       "t": 3.5,
+       "text": "These inputs are integrated into a structured formatting template to dynamically construct the agent prompt."
+      },
+      {
+       "ts": 9,
+       "t": 4.0,
+       "text": "The prompt is passed into the DeepSeek-R1 Agent Core, which synthesizes the physical and statistical evidence."
+      },
+      {
+       "ts": 10,
+       "t": 4.5,
+       "text": "Finally, the agent generates a human-readable Diagnosis Report detailing the final diagnosis result, underlying root cause, and actionable maintenance advice."
+      }
+     ],
+     "after": [
+      {
+       "ts": 1,
+       "t": 0.0,
+       "text": "The fault diagnosis and reasoning framework is structured into three hierarchical layers: the Physics Perception Layer, the Detection and Attribution Layer, and the Reasoning and Diagnosis Layer."
+      },
+      {
+       "ts": 2,
+       "t": 0.5,
+       "text": "In the Physics Perception Layer, raw multi-modal sensor inputs—including voltage, current, and temperature—are integrated with domain-specific physics knowledge."
+      },
+      {
+       "ts": 3,
+       "t": 1.0,
+       "text": "This knowledge formulates mechanism-driven rules, evaluating physical metrics like post-charge thermal states to create an initial numeric-to-semantic bridge."
+      },
+      {
+       "ts": 4,
+       "t": 1.5,
+       "text": "These rules transform the raw continuous signals into a structured feature matrix for downstream classification."
+      },
+      {
+       "ts": 5,
+       "t": 2.0,
+       "text": "In the Detection and Attribution Layer, a GBDT model classifies the operating state as normal or abnormal, while a SHAP explainer attributes the top feature contributions to interpret the decision boundaries."
+      },
+      {
+       "ts": 6,
+       "t": 2.5,
+       "text": "Both the physical mechanism rules and the SHAP feature attributions are then forwarded to the Reasoning and Diagnosis Layer."
+      },
+      {
+       "ts": 7,
+       "t": 3.0,
+       "text": "These inputs are integrated into a structured formatting template to dynamically construct the agent prompt."
+      },
+      {
+       "ts": 8,
+       "t": 3.5,
+       "text": "The prompt is passed into the DeepSeek-R1 Agent Core, which synthesizes the physical and statistical evidence."
+      },
+      {
+       "ts": 9,
+       "t": 4.0,
+       "text": "Finally, the agent generates a human-readable Diagnosis Report detailing the final diagnosis result, underlying root cause, and actionable maintenance advice."
+      }
+     ],
+     "rows": [
+      {
+       "kind": "same",
+       "a": 0,
+       "b": 0,
+       "ha": "The fault diagnosis and reasoning framework is structured into three hierarchical layers: the Physics Perception Layer, the Detection and Attribution Layer, and the Reasoning and Diagnosis Layer.",
+       "hb": "The fault diagnosis and reasoning framework is structured into three hierarchical layers: the Physics Perception Layer, the Detection and Attribution Layer, and the Reasoning and Diagnosis Layer."
+      },
+      {
+       "kind": "same",
+       "a": 1,
+       "b": 1,
+       "ha": "In the Physics Perception Layer, raw multi-modal sensor inputs—including voltage, current, and temperature—are integrated with domain-specific physics knowledge.",
+       "hb": "In the Physics Perception Layer, raw multi-modal sensor inputs—including voltage, current, and temperature—are integrated with domain-specific physics knowledge."
+      },
+      {
+       "kind": "same",
+       "a": 2,
+       "b": 2,
+       "ha": "This knowledge formulates mechanism-driven rules, evaluating physical metrics like post-charge thermal states to create an initial numeric-to-semantic bridge.",
+       "hb": "This knowledge formulates mechanism-driven rules, evaluating physical metrics like post-charge thermal states to create an initial numeric-to-semantic bridge."
+      },
+      {
+       "kind": "same",
+       "a": 3,
+       "b": 3,
+       "ha": "These rules transform the raw continuous signals into a structured feature matrix for downstream classification.",
+       "hb": "These rules transform the raw continuous signals into a structured feature matrix for downstream classification."
+      },
+      {
+       "kind": "changed",
+       "a": 4,
+       "b": 4,
+       "ha": "In the Detection and Attribution Layer, a <del>gradient</del> <del>boosting</del> <del>decision tree processes the feature matrix to classify</del> the operating state as normal or abnormal.",
+       "hb": "In the Detection and Attribution Layer, a <ins>GBDT</ins> <ins>model</ins> <ins>classifies</ins> the operating state as normal or abnormal<ins>, while a SHAP explainer attributes the top feature contributions to interpret the decision boundaries</ins>."
+      },
+      {
+       "kind": "removed",
+       "a": 5,
+       "b": null,
+       "ha": "<del>Upon detecting an anomaly, a SHAP explainer attributes the top feature contributions, acting as a secondary bridge to interpret the non-linear decision boundaries.</del>",
+       "hb": ""
+      },
+      {
+       "kind": "same",
+       "a": 6,
+       "b": 5,
+       "ha": "Both the physical mechanism rules and the SHAP feature attributions are then forwarded to the Reasoning and Diagnosis Layer.",
+       "hb": "Both the physical mechanism rules and the SHAP feature attributions are then forwarded to the Reasoning and Diagnosis Layer."
+      },
+      {
+       "kind": "same",
+       "a": 7,
+       "b": 6,
+       "ha": "These inputs are integrated into a structured formatting template to dynamically construct the agent prompt.",
+       "hb": "These inputs are integrated into a structured formatting template to dynamically construct the agent prompt."
+      },
+      {
+       "kind": "same",
+       "a": 8,
+       "b": 7,
+       "ha": "The prompt is passed into the DeepSeek-R1 Agent Core, which synthesizes the physical and statistical evidence.",
+       "hb": "The prompt is passed into the DeepSeek-R1 Agent Core, which synthesizes the physical and statistical evidence."
+      },
+      {
+       "kind": "same",
+       "a": 9,
+       "b": 8,
+       "ha": "Finally, the agent generates a human-readable Diagnosis Report detailing the final diagnosis result, underlying root cause, and actionable maintenance advice.",
+       "hb": "Finally, the agent generates a human-readable Diagnosis Report detailing the final diagnosis result, underlying root cause, and actionable maintenance advice."
+      }
+     ],
+     "labels": {
+      "before": "Before",
+      "after": "After"
+     }
+    }
+   ]
+  }
+ ]
+}

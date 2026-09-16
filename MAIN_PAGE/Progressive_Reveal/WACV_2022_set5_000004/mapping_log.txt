@@ -1,0 +1,42 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : The architecture is organized into local and global attention pathways across channel and spatial attention stages, culminating in a fusion module.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : The input feature tensor enters the network and branches into both the local and global processing pathways.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : In the channel attention stage, both local and global channel attention maps are computed.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : The local channel attention map scales the feature stream followed by a residual addition, producing the local channel feature tensor.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : Simultaneously, the global channel attention map modulates the input stream to produce the global channel feature tensor.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : Next, in the spatial attention stage, separate local and global spatial attention maps are derived.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : The local spatial attention map is applied with a residual connection, generating the refined local feature tensor.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 3.999s
+Narration   : Concurrently, the global spatial attention map is applied with a residual addition to output the refined global feature tensor.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 4.499s
+Narration   : In the fusion module, the local features, direct bypass features, and global features are weighted by distinct parameters and summed together.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 4.999s
+Narration   : This produces the final fused output tensor, combining both local and global contextual information.
+--------------------------------------------------------------------------------

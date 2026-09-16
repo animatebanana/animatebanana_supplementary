@@ -1,0 +1,30 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : The metric learning pipeline begins with diverse anchor mining, selecting pairs of daytime positive and anchor images from a diverse pool.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : The anchor image is then fed into a trained generator network that translates the daytime scene into a synthetic night image.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : A random skip mechanism allows some daytime anchors to bypass night translation, preserving standard daytime training pairs.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : Following translation, hard-negative mining identifies five challenging nighttime images from different scenes whose descriptors are closest to the anchor.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : The positive sample, anchor image, and five negative samples are all processed through the embedding network with photometric normalization.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : The network extracts global descriptor vectors for the positive image, the anchor, and each of the negative examples.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : Finally, contrastive learning optimizes the model by minimizing the Euclidean distance between positive pairs while penalizing negative pairs falling within the margin.
+--------------------------------------------------------------------------------

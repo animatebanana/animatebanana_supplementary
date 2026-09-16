@@ -1,0 +1,62 @@
+=== Alpha Masking Sequence ===
+
+Frame Image : frame_00.png
+Timestamp   : 1.00s
+Narration   : The YouTube-VLN data creation pipeline begins with raw house tour video frames collected from YouTube.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 3.00s
+Narration   : An entropy-based trajectory generation module groups frames by room type and selects representative views with the lowest classification entropy.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 5.00s
+Narration   : This produces diverse, temporally ordered visual trajectories representing continuous navigation paths across different rooms.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 6.00s
+Narration   : Next, an action-aware instruction generation module infers navigation actions along the sampled trajectory.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 7.00s
+Narration   : Next, an action-aware instruction generation module infers navigation actions along the sampled trajectory.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 9.00s
+Narration   : It identifies waypoints across room topologies, such as navigating from the entryway through the family room and into the kitchen.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 11.00s
+Narration   : These actions and visual landmarks are synthesized into step-by-step natural language navigation instructions.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 13.00s
+Narration   : For downstream evaluation, benchmark datasets such as R2R and REVERIE provide standard goal-oriented and object-oriented navigation tasks.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 15.00s
+Narration   : A cross-modal Multi-Layer Transformer acts as the backbone, jointly encoding sequential visual region features and instruction tokens.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 17.00s
+Narration   : During pre-training, Masked Language Modeling trains the backbone to recover masked words in the instruction using visual context.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 19.00s
+Narration   : Similarly, Masked Vision Modeling trains the network to predict masked image regions along the navigation path.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Timestamp   : 20.00s
+Narration   : Path Ranking tasks the agent with scoring and selecting the most matching path-instruction pair from multiple candidates.
+--------------------------------------------------------------------------------
+Frame Image : frame_12.png
+Timestamp   : 21.00s
+Narration   : Path Ranking tasks the agent with scoring and selecting the most matching path-instruction pair from multiple candidates.
+--------------------------------------------------------------------------------
+Frame Image : frame_13.png
+Timestamp   : 23.00s
+Narration   : The trajectory judgment task requires the agent to reason about room layouts and distinguish genuine navigation paths from unreasonable, shuffled ones.
+--------------------------------------------------------------------------------
+Frame Image : frame_14.png
+Timestamp   : 25.00s
+Narration   : Finally, the pre-trained backbone is adapted into downstream decision-making modules for both discriminative path selection and generative action execution.
+--------------------------------------------------------------------------------

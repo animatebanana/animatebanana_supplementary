@@ -1,0 +1,414 @@
+/*
+  The gallery's fullscreen example view — `.gl-*`.
+
+  Appended to <body>, so every rule is scoped by `.gl` and nothing here can
+  reach the grid behind it. Owns `.gl-*` only; it borrows `tokens.css` and
+  nothing from another module's stylesheet.
+
+  The layout is four stacked rows in one sheet: the way back, the two panes,
+  the transport, and the narration with the export row under it. There is no
+  title bar and no metadata footer — the gallery knows an example's style and
+  nothing else, so both would be empty chrome.
+*/
+
+body.gl-locked { overflow: hidden; }
+
+.gl {
+  position: fixed;
+  inset: 0;
+  z-index: 140;
+  display: grid;
+  place-items: stretch;
+  padding: clamp(10px, 2vh, 26px) clamp(10px, 2vw, 30px);
+  background: rgba(26, 24, 21, 0.66);
+  backdrop-filter: blur(3px);
+  opacity: 0;
+  transition: opacity var(--dur) var(--ease-out);
+}
+.gl.is-in { opacity: 1; }
+
+.gl-sheet {
+  display: grid;
+  /* back · panes · transport · narration · meta — the panes take every row
+     the others do not need, so a tall window gives the figures the space
+     rather than padding the chrome. */
+  grid-template-rows: auto minmax(0, 1fr) auto auto auto;
+  gap: clamp(10px, 1.4vh, 16px);
+  min-height: 0;
+  padding: clamp(14px, 1.8vw, 24px);
+  background: var(--paper);
+  background-image: radial-gradient(var(--dot) 1px, transparent 1.2px);
+  background-size: 24px 24px;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-hard-lg);
+  transform: scale(0.99);
+  transition: transform var(--dur) var(--ease-spring);
+}
+.gl.is-in .gl-sheet { transform: none; }
+
+/* ---- The top bar: the way out, and the way along ----
+   The gallery is a list, and opening one example should not mean
+   closing it to reach the next. So the open view carries the same
+   prev/next the grid implies, stepping through whatever the grid was
+   showing — the filtered set, in the order it is on screen — with the
+   position spelled out between them. */
+.gl-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.gl-paging {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: auto;
+}
+.gl-step {
+  display: grid;
+  place-items: center;
+  width: 38px; height: 38px;
+  padding: 0;
+  border-radius: 50%;
+  border: 2px solid var(--ink);
+  background: var(--surface);
+  color: var(--ink);
+  cursor: pointer;
+  box-shadow: 3px 3px 0 var(--banana);
+  transition: transform var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out);
+}
+.gl-step:hover { transform: translate(-1px, -1px); box-shadow: 5px 5px 0 var(--banana); }
+.gl-step:active { transform: translate(2px, 2px); box-shadow: 0 0 0 var(--banana); }
+.gl-step svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 2.2;
+               stroke-linecap: round; stroke-linejoin: round; }
+.gl-step[disabled] { opacity: 0.32; cursor: default; box-shadow: none; transform: none; }
+.gl-pos {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--ink-faint);
+  /* Tabular figures and a reserved width: the counter must not shuffle
+     the two arrows sideways as it walks 09 → 10. */
+  font-variant-numeric: tabular-nums;
+  min-width: 6.5ch;
+  text-align: center;
+  white-space: nowrap;
+}
+.gl-pos b { color: var(--ink); }
+/* One example in the set is not a sequence; the controls would be two
+   permanently dead buttons. */
+.gl[data-paging='off'] .gl-paging { display: none; }
+
+@media (max-width: 560px) {
+  .gl-paging { margin-left: 0; width: 100%; justify-content: center; }
+}
+
+/* ---- The one way out ---- */
+.gl-back {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px 7px 11px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--surface);
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  box-shadow: 3px 3px 0 var(--banana);
+  cursor: pointer;
+  transition: transform var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out);
+}
+.gl-back:hover { transform: translate(-1px, -1px); box-shadow: 5px 5px 0 var(--banana); }
+.gl-back:active { transform: translate(2px, 2px); box-shadow: 0 0 0 var(--banana); }
+.gl-back svg { width: 16px; height: 16px; }
+
+/* ---- The two panes ---- */
+.gl-panes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(10px, 1.4vw, 18px);
+  min-height: 0;
+}
+@media (max-width: 760px) {
+  .gl-panes { grid-template-columns: minmax(0, 1fr); grid-template-rows: repeat(2, minmax(0, 1fr)); }
+}
+
+.gl-pane {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 7px;
+  margin: 0;
+  min-height: 0;
+}
+.gl-pane-head {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.gl-stage {
+  position: relative;
+  display: grid;
+  /* ONE cell, pinned to the pane. A centred auto track sizes itself to
+     the picture, and `max-height: 100%` measured against that track is
+     no limit at all — which is why a tall diagram used to hang past the
+     frame and lose its bottom to `overflow: hidden`. */
+  grid-template: minmax(0, 1fr) / minmax(0, 1fr);
+  place-items: stretch;
+  min-height: 0;
+  padding: 10px;
+  overflow: hidden;
+  background: #fff;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-md);
+}
+/* Fill the cell and letterbox inside it. Whatever the figure's aspect
+   ratio, the whole of it is on screen and the leftover is white paper —
+   never a crop. */
+.gl-source, .gl-video {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  object-fit: contain;
+  object-position: center;
+}
+
+/* The overlay play button: only before the clip has been started, so it
+   never covers the picture while it is running. */
+.gl-bigplay {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 62px; height: 62px;
+  padding: 0;
+  border-radius: 50%;
+  border: 2px solid var(--ink);
+  background: var(--banana);
+  color: var(--ink);
+  box-shadow: 4px 4px 0 rgba(26, 24, 21, 0.3);
+  cursor: pointer;
+  transition: opacity var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-spring);
+}
+.gl-bigplay svg { width: 26px; height: 26px; fill: currentColor; margin-left: 3px; }
+.gl-bigplay:hover { transform: scale(1.06); }
+.gl.is-playing .gl-bigplay { opacity: 0; pointer-events: none; }
+
+.gl-missing {
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+  max-width: 32ch;
+  padding: 20px;
+  text-align: center;
+  color: var(--ink-faint);
+}
+.gl-missing svg {
+  width: 58px; height: 58px;
+  fill: none;
+  stroke: var(--line-strong);
+  stroke-width: 2.4;
+  stroke-linejoin: round;
+}
+.gl-missing p { margin: 0; font-size: var(--fs-sm); line-height: 1.55; }
+
+/* ---- Transport ---- */
+.gl-transport {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 4px 2px;
+}
+.gl-play {
+  display: grid;
+  place-items: center;
+  width: 38px; height: 38px;
+  flex: 0 0 auto;
+  padding: 0;
+  border-radius: 50%;
+  border: 2px solid var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+  cursor: pointer;
+}
+.gl-play svg { width: 15px; height: 15px; fill: currentColor; }
+.gl-play .gl-ic-play { margin-left: 2px; }
+.gl-play .gl-ic-pause, .gl.is-playing .gl-play .gl-ic-play { display: none; }
+.gl.is-playing .gl-play .gl-ic-pause { display: block; }
+
+.gl-seek {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 20px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+.gl-seek::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 999px;
+  background: var(--line-strong);
+}
+.gl-seek::-moz-range-track { height: 4px; border-radius: 999px; background: var(--line-strong); }
+.gl-seek::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  margin-top: -6px;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  border: 2px solid var(--ink);
+  background: var(--banana);
+}
+.gl-seek::-moz-range-thumb {
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  border: 2px solid var(--ink);
+  background: var(--banana);
+}
+.gl-seek:focus-visible { outline: none; box-shadow: var(--ring); border-radius: 999px; }
+
+.gl-time {
+  flex: 0 0 auto;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--ink-faint);
+  font-variant-numeric: tabular-nums;
+}
+.gl-time b { color: var(--ink); font-weight: 700; }
+.gl-time em { font-style: normal; }
+
+/* ---- Sound ----
+   The clips carry the pipeline's spoken narration and play with it, so this is
+   a mute button rather than an unmute one. It shows the state it is in, not
+   the action it performs, which is the way a speaker icon is read. */
+.gl-mute {
+  display: grid;
+  place-items: center;
+  width: 34px; height: 34px;
+  flex: 0 0 auto;
+  padding: 0;
+  border-radius: 50%;
+  border: 2px solid var(--ink);
+  background: var(--surface);
+  color: var(--ink);
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+}
+.gl-mute:hover { background: var(--banana-soft); }
+.gl-mute svg {
+  width: 17px; height: 17px;
+  fill: currentColor;
+  stroke: none;
+}
+.gl-mute .gl-wave { fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; }
+.gl-mute .gl-ic-muted { display: none; }
+.gl.is-muted .gl-mute .gl-ic-sound { display: none; }
+.gl.is-muted .gl-mute .gl-ic-muted { display: block; }
+.gl.is-muted .gl-mute { color: var(--ink-faint); border-color: var(--line-strong); }
+.gl-mute:focus-visible { outline: none; box-shadow: var(--ring); }
+
+/* ---- Narration ---- */
+.gl-narration { min-height: 0; }
+.gl-line {
+  margin: 0;
+  padding: 10px 14px;
+  font-family: var(--font-display);
+  font-size: var(--fs-body);
+  font-style: italic;
+  line-height: 1.55;
+  color: var(--ink-mid);
+  background: var(--bg-alt);
+  border-left: 3px solid var(--banana);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  min-height: 3.2em;
+}
+.gl-line--empty { font-style: normal; color: var(--ink-faint); }
+
+/* With no clip there is no playhead to follow, so the beats are a list
+   rather than one live line — the narration is still real. */
+.gl-beats {
+  list-style: none;
+  margin: 0;
+  padding: 4px 2px;
+  display: grid;
+  gap: 4px;
+  max-height: 24vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+.gl-beats li { display: flex; gap: 10px; padding: 4px 8px; border-radius: 5px; background: var(--bg-alt); }
+.gl-beats span {
+  flex: 0 0 auto;
+  padding-top: 2px;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 700;
+  color: var(--banana-ink);
+  font-variant-numeric: tabular-nums;
+}
+.gl-beats p { margin: 0; font-size: var(--fs-xs); line-height: 1.55; color: var(--ink-mid); }
+
+/* ---- Style + export ---- */
+.gl-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px clamp(16px, 3vw, 34px);
+  padding-top: 10px;
+  border-top: 1.5px dashed var(--line-strong);
+}
+.gl-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.gl-key {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.gl-chip {
+  padding: 4px 12px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  color: var(--banana-ink);
+  background: var(--banana-soft);
+  border: 1.5px solid var(--banana);
+  border-radius: 999px;
+}
+.gl-export {
+  padding: 5px 13px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--ink-mid);
+  background: var(--surface);
+  border: 1.5px solid var(--line-strong);
+  border-radius: 7px;
+  cursor: pointer;
+  transition: border-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+}
+.gl-export:hover { border-color: var(--ink); color: var(--ink); }
+/* The targets are named but not wired up. Pressing one says so rather than
+   appearing to do nothing. */
+.gl-export.is-pending {
+  color: var(--ink-faint);
+  border-style: dashed;
+  cursor: default;
+}
+.gl-export.is-pending::after { content: ' — soon'; font-weight: 400; }
+
+@media (prefers-reduced-motion: reduce) {
+  .gl, .gl-sheet, .gl-back, .gl-bigplay, .gl-export, .gl-step, .gl-mute { transition: none; }
+}

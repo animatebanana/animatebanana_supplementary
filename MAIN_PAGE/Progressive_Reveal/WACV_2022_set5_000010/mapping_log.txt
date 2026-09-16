@@ -1,0 +1,26 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : The pipeline begins with step one, the robust initializer, which takes an image, a point cloud, or both as an instance-specific prior.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : These inputs are passed directly into the Encoder network to produce an intermediate feature representation.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : In step two, the Decoder applies a category-specific prior to estimate the signed distance function and decode it into a three-dimensional shape.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : The decoded shape is compared against the input point cloud using the data energy term to guide alignment.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : In step three, the pipeline optimizes the code by routing the shape into the Discriminator alongside a high-dimensional prior.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : The discriminator loss backpropagates through the network, iteratively repeating steps two and three to refine the reconstruction.
+--------------------------------------------------------------------------------

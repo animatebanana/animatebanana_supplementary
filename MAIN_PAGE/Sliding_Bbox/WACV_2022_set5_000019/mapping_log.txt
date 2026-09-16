@@ -1,0 +1,482 @@
+=== Sliding Bounding Box Sequence ===
+
+Frame Image : frame_0000.png
+Frame Type  : Hold
+Timestamp   : 0.799s
+Narration   : During the inference phase, the framework inspects an input test image across multiple patch scales.
+--------------------------------------------------------------------------------
+Frame Image : frame_0001.png
+Frame Type  : Transition 1
+Timestamp   : 1.699s
+Narration   : During the inference phase, the framework inspects an input test image across multiple patch scales.
+--------------------------------------------------------------------------------
+Frame Image : frame_0002.png
+Frame Type  : Transition 2
+Timestamp   : 1.800s
+Narration   : During the inference phase, the framework inspects an input test image across multiple patch scales.
+--------------------------------------------------------------------------------
+Frame Image : frame_0003.png
+Frame Type  : Transition 3
+Timestamp   : 1.901s
+Narration   : During the inference phase, the framework inspects an input test image across multiple patch scales.
+--------------------------------------------------------------------------------
+Frame Image : frame_0004.png
+Frame Type  : Hold
+Timestamp   : 2.801s
+Narration   : First, large sixty-four by sixty-four patches are extracted across the image.
+--------------------------------------------------------------------------------
+Frame Image : frame_0005.png
+Frame Type  : Transition 1
+Timestamp   : 3.700s
+Narration   : First, large sixty-four by sixty-four patches are extracted across the image.
+--------------------------------------------------------------------------------
+Frame Image : frame_0006.png
+Frame Type  : Transition 2
+Timestamp   : 3.799s
+Narration   : First, large sixty-four by sixty-four patches are extracted across the image.
+--------------------------------------------------------------------------------
+Frame Image : frame_0007.png
+Frame Type  : Transition 3
+Timestamp   : 3.899s
+Narration   : First, large sixty-four by sixty-four patches are extracted across the image.
+--------------------------------------------------------------------------------
+Frame Image : frame_0008.png
+Frame Type  : Hold
+Timestamp   : 4.800s
+Narration   : Each sixty-four patch is passed through the sixty-four scale encoder.
+--------------------------------------------------------------------------------
+Frame Image : frame_0009.png
+Frame Type  : Transition 1
+Timestamp   : 5.701s
+Narration   : Each sixty-four patch is passed through the sixty-four scale encoder.
+--------------------------------------------------------------------------------
+Frame Image : frame_0010.png
+Frame Type  : Transition 2
+Timestamp   : 5.801s
+Narration   : Each sixty-four patch is passed through the sixty-four scale encoder.
+--------------------------------------------------------------------------------
+Frame Image : frame_0011.png
+Frame Type  : Transition 3
+Timestamp   : 5.900s
+Narration   : Each sixty-four patch is passed through the sixty-four scale encoder.
+--------------------------------------------------------------------------------
+Frame Image : frame_0012.png
+Frame Type  : Hold
+Timestamp   : 6.799s
+Narration   : The encoder outputs the corresponding patch feature embeddings.
+--------------------------------------------------------------------------------
+Frame Image : frame_0013.png
+Frame Type  : Transition 1
+Timestamp   : 7.699s
+Narration   : The encoder outputs the corresponding patch feature embeddings.
+--------------------------------------------------------------------------------
+Frame Image : frame_0014.png
+Frame Type  : Transition 2
+Timestamp   : 7.800s
+Narration   : The encoder outputs the corresponding patch feature embeddings.
+--------------------------------------------------------------------------------
+Frame Image : frame_0015.png
+Frame Type  : Transition 3
+Timestamp   : 7.901s
+Narration   : The encoder outputs the corresponding patch feature embeddings.
+--------------------------------------------------------------------------------
+Frame Image : frame_0016.png
+Frame Type  : Hold
+Timestamp   : 8.801s
+Narration   : These embeddings are matched against the reference normal feature embeddings from training.
+--------------------------------------------------------------------------------
+Frame Image : frame_0017.png
+Frame Type  : Transition 1
+Timestamp   : 9.700s
+Narration   : These embeddings are matched against the reference normal feature embeddings from training.
+--------------------------------------------------------------------------------
+Frame Image : frame_0018.png
+Frame Type  : Transition 2
+Timestamp   : 9.799s
+Narration   : These embeddings are matched against the reference normal feature embeddings from training.
+--------------------------------------------------------------------------------
+Frame Image : frame_0019.png
+Frame Type  : Transition 3
+Timestamp   : 9.899s
+Narration   : These embeddings are matched against the reference normal feature embeddings from training.
+--------------------------------------------------------------------------------
+Frame Image : frame_0020.png
+Frame Type  : Hold
+Timestamp   : 10.800s
+Narration   : The model computes the L2 distance between the extracted features and normal embeddings.
+--------------------------------------------------------------------------------
+Frame Image : frame_0021.png
+Frame Type  : Transition 1
+Timestamp   : 11.701s
+Narration   : The model computes the L2 distance between the extracted features and normal embeddings.
+--------------------------------------------------------------------------------
+Frame Image : frame_0022.png
+Frame Type  : Transition 2
+Timestamp   : 11.801s
+Narration   : The model computes the L2 distance between the extracted features and normal embeddings.
+--------------------------------------------------------------------------------
+Frame Image : frame_0023.png
+Frame Type  : Transition 3
+Timestamp   : 11.900s
+Narration   : The model computes the L2 distance between the extracted features and normal embeddings.
+--------------------------------------------------------------------------------
+Frame Image : frame_0024.png
+Frame Type  : Hold
+Timestamp   : 12.799s
+Narration   : This distance metric forms an initial anomaly map at the sixty-four scale.
+--------------------------------------------------------------------------------
+Frame Image : frame_0025.png
+Frame Type  : Transition 1
+Timestamp   : 13.699s
+Narration   : This distance metric forms an initial anomaly map at the sixty-four scale.
+--------------------------------------------------------------------------------
+Frame Image : frame_0026.png
+Frame Type  : Transition 2
+Timestamp   : 13.800s
+Narration   : This distance metric forms an initial anomaly map at the sixty-four scale.
+--------------------------------------------------------------------------------
+Frame Image : frame_0027.png
+Frame Type  : Transition 3
+Timestamp   : 13.901s
+Narration   : This distance metric forms an initial anomaly map at the sixty-four scale.
+--------------------------------------------------------------------------------
+Frame Image : frame_0028.png
+Frame Type  : Hold
+Timestamp   : 14.801s
+Narration   : A distributed anomaly map is then generated to smooth and interpolate the score distribution.
+--------------------------------------------------------------------------------
+Frame Image : frame_0029.png
+Frame Type  : Transition 1
+Timestamp   : 15.700s
+Narration   : A distributed anomaly map is then generated to smooth and interpolate the score distribution.
+--------------------------------------------------------------------------------
+Frame Image : frame_0030.png
+Frame Type  : Transition 2
+Timestamp   : 15.799s
+Narration   : A distributed anomaly map is then generated to smooth and interpolate the score distribution.
+--------------------------------------------------------------------------------
+Frame Image : frame_0031.png
+Frame Type  : Transition 3
+Timestamp   : 15.899s
+Narration   : A distributed anomaly map is then generated to smooth and interpolate the score distribution.
+--------------------------------------------------------------------------------
+Frame Image : frame_0032.png
+Frame Type  : Hold
+Timestamp   : 16.800s
+Narration   : In parallel, medium thirty-two by thirty-two patches are sampled.
+--------------------------------------------------------------------------------
+Frame Image : frame_0033.png
+Frame Type  : Transition 1
+Timestamp   : 17.701s
+Narration   : In parallel, medium thirty-two by thirty-two patches are sampled.
+--------------------------------------------------------------------------------
+Frame Image : frame_0034.png
+Frame Type  : Transition 2
+Timestamp   : 17.801s
+Narration   : In parallel, medium thirty-two by thirty-two patches are sampled.
+--------------------------------------------------------------------------------
+Frame Image : frame_0035.png
+Frame Type  : Transition 3
+Timestamp   : 17.900s
+Narration   : In parallel, medium thirty-two by thirty-two patches are sampled.
+--------------------------------------------------------------------------------
+Frame Image : frame_0036.png
+Frame Type  : Hold
+Timestamp   : 18.799s
+Narration   : They are processed through the thirty-two scale encoder.
+--------------------------------------------------------------------------------
+Frame Image : frame_0037.png
+Frame Type  : Transition 1
+Timestamp   : 19.699s
+Narration   : They are processed through the thirty-two scale encoder.
+--------------------------------------------------------------------------------
+Frame Image : frame_0038.png
+Frame Type  : Transition 2
+Timestamp   : 19.800s
+Narration   : They are processed through the thirty-two scale encoder.
+--------------------------------------------------------------------------------
+Frame Image : frame_0039.png
+Frame Type  : Transition 3
+Timestamp   : 19.901s
+Narration   : They are processed through the thirty-two scale encoder.
+--------------------------------------------------------------------------------
+Frame Image : frame_0040.png
+Frame Type  : Hold
+Timestamp   : 20.801s
+Narration   : Extracting representative feature vectors for the medium scale.
+--------------------------------------------------------------------------------
+Frame Image : frame_0041.png
+Frame Type  : Transition 1
+Timestamp   : 21.700s
+Narration   : Extracting representative feature vectors for the medium scale.
+--------------------------------------------------------------------------------
+Frame Image : frame_0042.png
+Frame Type  : Transition 2
+Timestamp   : 21.799s
+Narration   : Extracting representative feature vectors for the medium scale.
+--------------------------------------------------------------------------------
+Frame Image : frame_0043.png
+Frame Type  : Transition 3
+Timestamp   : 21.899s
+Narration   : Extracting representative feature vectors for the medium scale.
+--------------------------------------------------------------------------------
+Frame Image : frame_0044.png
+Frame Type  : Hold
+Timestamp   : 22.800s
+Narration   : The reference normal embeddings for scale thirty-two are retrieved.
+--------------------------------------------------------------------------------
+Frame Image : frame_0045.png
+Frame Type  : Transition 1
+Timestamp   : 23.701s
+Narration   : The reference normal embeddings for scale thirty-two are retrieved.
+--------------------------------------------------------------------------------
+Frame Image : frame_0046.png
+Frame Type  : Transition 2
+Timestamp   : 23.801s
+Narration   : The reference normal embeddings for scale thirty-two are retrieved.
+--------------------------------------------------------------------------------
+Frame Image : frame_0047.png
+Frame Type  : Transition 3
+Timestamp   : 23.900s
+Narration   : The reference normal embeddings for scale thirty-two are retrieved.
+--------------------------------------------------------------------------------
+Frame Image : frame_0048.png
+Frame Type  : Hold
+Timestamp   : 24.799s
+Narration   : The L2 distance measures deviation from normal patterns.
+--------------------------------------------------------------------------------
+Frame Image : frame_0049.png
+Frame Type  : Transition 1
+Timestamp   : 25.699s
+Narration   : The L2 distance measures deviation from normal patterns.
+--------------------------------------------------------------------------------
+Frame Image : frame_0050.png
+Frame Type  : Transition 2
+Timestamp   : 25.800s
+Narration   : The L2 distance measures deviation from normal patterns.
+--------------------------------------------------------------------------------
+Frame Image : frame_0051.png
+Frame Type  : Transition 3
+Timestamp   : 25.901s
+Narration   : The L2 distance measures deviation from normal patterns.
+--------------------------------------------------------------------------------
+Frame Image : frame_0052.png
+Frame Type  : Hold
+Timestamp   : 26.801s
+Narration   : Producing the intermediate thirty-two anomaly map.
+--------------------------------------------------------------------------------
+Frame Image : frame_0053.png
+Frame Type  : Transition 1
+Timestamp   : 27.700s
+Narration   : Producing the intermediate thirty-two anomaly map.
+--------------------------------------------------------------------------------
+Frame Image : frame_0054.png
+Frame Type  : Transition 2
+Timestamp   : 27.799s
+Narration   : Producing the intermediate thirty-two anomaly map.
+--------------------------------------------------------------------------------
+Frame Image : frame_0055.png
+Frame Type  : Transition 3
+Timestamp   : 27.899s
+Narration   : Producing the intermediate thirty-two anomaly map.
+--------------------------------------------------------------------------------
+Frame Image : frame_0056.png
+Frame Type  : Hold
+Timestamp   : 28.800s
+Narration   : Which is converted into a distributed anomaly map for the thirty-two resolution.
+--------------------------------------------------------------------------------
+Frame Image : frame_0057.png
+Frame Type  : Transition 1
+Timestamp   : 29.701s
+Narration   : Which is converted into a distributed anomaly map for the thirty-two resolution.
+--------------------------------------------------------------------------------
+Frame Image : frame_0058.png
+Frame Type  : Transition 2
+Timestamp   : 29.801s
+Narration   : Which is converted into a distributed anomaly map for the thirty-two resolution.
+--------------------------------------------------------------------------------
+Frame Image : frame_0059.png
+Frame Type  : Transition 3
+Timestamp   : 29.900s
+Narration   : Which is converted into a distributed anomaly map for the thirty-two resolution.
+--------------------------------------------------------------------------------
+Frame Image : frame_0060.png
+Frame Type  : Hold
+Timestamp   : 30.799s
+Narration   : For fine local details, sixteen by sixteen patches are sampled.
+--------------------------------------------------------------------------------
+Frame Image : frame_0061.png
+Frame Type  : Transition 1
+Timestamp   : 31.699s
+Narration   : For fine local details, sixteen by sixteen patches are sampled.
+--------------------------------------------------------------------------------
+Frame Image : frame_0062.png
+Frame Type  : Transition 2
+Timestamp   : 31.800s
+Narration   : For fine local details, sixteen by sixteen patches are sampled.
+--------------------------------------------------------------------------------
+Frame Image : frame_0063.png
+Frame Type  : Transition 3
+Timestamp   : 31.901s
+Narration   : For fine local details, sixteen by sixteen patches are sampled.
+--------------------------------------------------------------------------------
+Frame Image : frame_0064.png
+Frame Type  : Hold
+Timestamp   : 32.801s
+Narration   : The sixteen scale encoder processes these fine-grained patches.
+--------------------------------------------------------------------------------
+Frame Image : frame_0065.png
+Frame Type  : Transition 1
+Timestamp   : 33.700s
+Narration   : The sixteen scale encoder processes these fine-grained patches.
+--------------------------------------------------------------------------------
+Frame Image : frame_0066.png
+Frame Type  : Transition 2
+Timestamp   : 33.799s
+Narration   : The sixteen scale encoder processes these fine-grained patches.
+--------------------------------------------------------------------------------
+Frame Image : frame_0067.png
+Frame Type  : Transition 3
+Timestamp   : 33.899s
+Narration   : The sixteen scale encoder processes these fine-grained patches.
+--------------------------------------------------------------------------------
+Frame Image : frame_0068.png
+Frame Type  : Hold
+Timestamp   : 34.800s
+Narration   : Generating high-resolution feature embeddings.
+--------------------------------------------------------------------------------
+Frame Image : frame_0069.png
+Frame Type  : Transition 1
+Timestamp   : 35.701s
+Narration   : Generating high-resolution feature embeddings.
+--------------------------------------------------------------------------------
+Frame Image : frame_0070.png
+Frame Type  : Transition 2
+Timestamp   : 35.801s
+Narration   : Generating high-resolution feature embeddings.
+--------------------------------------------------------------------------------
+Frame Image : frame_0071.png
+Frame Type  : Transition 3
+Timestamp   : 35.900s
+Narration   : Generating high-resolution feature embeddings.
+--------------------------------------------------------------------------------
+Frame Image : frame_0072.png
+Frame Type  : Hold
+Timestamp   : 36.799s
+Narration   : These are paired with the normal feature embeddings learned at scale sixteen.
+--------------------------------------------------------------------------------
+Frame Image : frame_0073.png
+Frame Type  : Transition 1
+Timestamp   : 37.699s
+Narration   : These are paired with the normal feature embeddings learned at scale sixteen.
+--------------------------------------------------------------------------------
+Frame Image : frame_0074.png
+Frame Type  : Transition 2
+Timestamp   : 37.800s
+Narration   : These are paired with the normal feature embeddings learned at scale sixteen.
+--------------------------------------------------------------------------------
+Frame Image : frame_0075.png
+Frame Type  : Transition 3
+Timestamp   : 37.901s
+Narration   : These are paired with the normal feature embeddings learned at scale sixteen.
+--------------------------------------------------------------------------------
+Frame Image : frame_0076.png
+Frame Type  : Hold
+Timestamp   : 38.801s
+Narration   : Evaluating the L2 distance at the finest scale.
+--------------------------------------------------------------------------------
+Frame Image : frame_0077.png
+Frame Type  : Transition 1
+Timestamp   : 39.700s
+Narration   : Evaluating the L2 distance at the finest scale.
+--------------------------------------------------------------------------------
+Frame Image : frame_0078.png
+Frame Type  : Transition 2
+Timestamp   : 39.799s
+Narration   : Evaluating the L2 distance at the finest scale.
+--------------------------------------------------------------------------------
+Frame Image : frame_0079.png
+Frame Type  : Transition 3
+Timestamp   : 39.899s
+Narration   : Evaluating the L2 distance at the finest scale.
+--------------------------------------------------------------------------------
+Frame Image : frame_0080.png
+Frame Type  : Hold
+Timestamp   : 40.800s
+Narration   : Constructing the sixteen scale anomaly map.
+--------------------------------------------------------------------------------
+Frame Image : frame_0081.png
+Frame Type  : Transition 1
+Timestamp   : 41.701s
+Narration   : Constructing the sixteen scale anomaly map.
+--------------------------------------------------------------------------------
+Frame Image : frame_0082.png
+Frame Type  : Transition 2
+Timestamp   : 41.801s
+Narration   : Constructing the sixteen scale anomaly map.
+--------------------------------------------------------------------------------
+Frame Image : frame_0083.png
+Frame Type  : Transition 3
+Timestamp   : 41.900s
+Narration   : Constructing the sixteen scale anomaly map.
+--------------------------------------------------------------------------------
+Frame Image : frame_0084.png
+Frame Type  : Hold
+Timestamp   : 42.799s
+Narration   : And producing the corresponding distributed anomaly map.
+--------------------------------------------------------------------------------
+Frame Image : frame_0085.png
+Frame Type  : Transition 1
+Timestamp   : 43.699s
+Narration   : And producing the corresponding distributed anomaly map.
+--------------------------------------------------------------------------------
+Frame Image : frame_0086.png
+Frame Type  : Transition 2
+Timestamp   : 43.800s
+Narration   : And producing the corresponding distributed anomaly map.
+--------------------------------------------------------------------------------
+Frame Image : frame_0087.png
+Frame Type  : Transition 3
+Timestamp   : 43.901s
+Narration   : And producing the corresponding distributed anomaly map.
+--------------------------------------------------------------------------------
+Frame Image : frame_0088.png
+Frame Type  : Hold
+Timestamp   : 44.801s
+Narration   : Finally, the distributed maps across all three scales are combined through element-wise fusion.
+--------------------------------------------------------------------------------
+Frame Image : frame_0089.png
+Frame Type  : Transition 1
+Timestamp   : 45.700s
+Narration   : Finally, the distributed maps across all three scales are combined through element-wise fusion.
+--------------------------------------------------------------------------------
+Frame Image : frame_0090.png
+Frame Type  : Transition 2
+Timestamp   : 45.799s
+Narration   : Finally, the distributed maps across all three scales are combined through element-wise fusion.
+--------------------------------------------------------------------------------
+Frame Image : frame_0091.png
+Frame Type  : Transition 3
+Timestamp   : 45.899s
+Narration   : Finally, the distributed maps across all three scales are combined through element-wise fusion.
+--------------------------------------------------------------------------------
+Frame Image : frame_0092.png
+Frame Type  : Hold
+Timestamp   : 46.800s
+Narration   : Yielding the final anomaly segmentation map that accurately localizes defects.
+--------------------------------------------------------------------------------
+Frame Image : frame_0093.png
+Frame Type  : Transition 1
+Timestamp   : 47.701s
+Narration   : Yielding the final anomaly segmentation map that accurately localizes defects.
+--------------------------------------------------------------------------------
+Frame Image : frame_0094.png
+Frame Type  : Transition 2
+Timestamp   : 47.801s
+Narration   : Yielding the final anomaly segmentation map that accurately localizes defects.
+--------------------------------------------------------------------------------
+Frame Image : frame_0095.png
+Frame Type  : Transition 3
+Timestamp   : 47.900s
+Narration   : Yielding the final anomaly segmentation map that accurately localizes defects.
+--------------------------------------------------------------------------------

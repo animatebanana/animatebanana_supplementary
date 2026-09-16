@@ -1,0 +1,58 @@
+{
+  "_note": "Feed for <gallery-rail> (the overview page's 'Explore More Examples' band): one example per animation style. Media paths follow the site's one-folder-per-example convention.",
+  "mediaReady": true,
+  "defaultIndex": 0,
+  "href": "gallery.html",
+  "items": [
+    {
+      "id": "ICCV_2023_set5_000010",
+      "style": "Progressive Reveal",
+      "styleId": "progressive",
+      "poster": "examples/ICCV_2023_set5_000010/preview-poster.webp",
+      "duration": "0:17",
+      "sources": [
+        {
+          "src": "examples/ICCV_2023_set5_000010/preview.webm",
+          "type": "video/webm"
+        },
+        {
+          "src": "examples/ICCV_2023_set5_000010/preview.mp4",
+          "type": "video/mp4"
+        }
+      ]
+    },
+    {
+      "id": "SciMMIR_pipe_easy_000000307",
+      "style": "Alpha Masking",
+      "styleId": "alpha",
+      "poster": "examples/SciMMIR_pipe_easy_000000307/preview-poster.webp",
+      "sources": [],
+      "_sources": "No rendered mp4 exists for this style in Preprocessed_AnimateBanana yet \u2014 the slide shows its poster. Add preview.webm / preview.mp4 next to the poster and list them here."
+    },
+    {
+      "id": "Paper2Fig_arch_diff_000000037",
+      "style": "Colour Pop",
+      "styleId": "colorpop",
+      "poster": "examples/Paper2Fig_arch_diff_000000037/preview-poster.webp",
+      "sources": [],
+      "_sources": "No rendered mp4 exists for this style in Preprocessed_AnimateBanana yet \u2014 the slide shows its poster. Add preview.webm / preview.mp4 next to the poster and list them here."
+    },
+    {
+      "id": "Paper2Fig_pipe_diff_000000488",
+      "style": "Hopping Box",
+      "styleId": "hopping",
+      "poster": "examples/Paper2Fig_pipe_diff_000000488/preview-poster.webp",
+      "sources": [],
+      "_sources": "No rendered mp4 exists for this style in Preprocessed_AnimateBanana yet \u2014 the slide shows its poster. Add preview.webm / preview.mp4 next to the poster and list them here."
+    },
+    {
+      "id": "WACV_2022_set5_000021",
+      "style": "Sliding Box",
+      "styleId": "sliding",
+      "poster": "examples/WACV_2022_set5_000021/preview-poster.webp",
+      "sources": [],
+      "_sources": "No rendered mp4 exists for this style in Preprocessed_AnimateBanana yet \u2014 the slide shows its poster. Add preview.webm / preview.mp4 next to the poster and list them here."
+    }
+  ],
+  "_speed": "Rail previews are encoded at 4x the rendered pace (ffmpeg setpts=PTS/4,fps=25). A full narrative runs over a minute, which is far longer than anyone watches a carousel slide; 4x turns it into a ~17s loop that reads as an animation at a glance. The speed-up is baked into the file rather than applied with playbackRate, so the download is smaller and `duration` below stays honest."
+}

@@ -1,0 +1,82 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : The diagram introduces key architectural conventions, including average aggregation, depthwise convolutions, and trainable scaling parameters.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : In the Swin-Transformer block, input features pass through layer normalization alongside an initial residual shortcut.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : Normalized features enter the window and shifted-window multi-head self-attention module to capture spatial context.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : The attention outputs are then merged with the initial residual connection.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : The first Mona adapter layer processes the aggregated representation to enhance visual feature adaptation.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : Features undergo a second layer normalization step before the feed-forward network, accompanied by another skip connection.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : A feed-forward layer then transforms the intermediate token representations.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 3.999s
+Narration   : The feed-forward output is summed with its corresponding shortcut.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 4.499s
+Narration   : A second Mona layer further refines the features before outputting the final representation of the Swin-Transformer block.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 4.999s
+Narration   : Inside the Mona layer, input features undergo layer normalization scaled by a trainable factor, while a parallel skip branch is scaled by a second factor.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 5.499s
+Narration   : The scaled feature streams are combined at an addition node to regulate input distribution.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Timestamp   : 5.999s
+Narration   : A down projection layer reduces channel dimensionality before branching into multi-scale convolutional paths and residual shortcuts.
+--------------------------------------------------------------------------------
+Frame Image : frame_12.png
+Timestamp   : 6.499s
+Narration   : Three parallel depthwise convolutions with 3x3, 5x5, and 7x7 kernels extract multi-scale visual patterns.
+--------------------------------------------------------------------------------
+Frame Image : frame_13.png
+Timestamp   : 6.999s
+Narration   : Outputs from all three kernel branches are combined using an averaging operation.
+--------------------------------------------------------------------------------
+Frame Image : frame_14.png
+Timestamp   : 7.499s
+Narration   : The averaged depthwise feature is added to the pre-convolution residual branch.
+--------------------------------------------------------------------------------
+Frame Image : frame_15.png
+Timestamp   : 7.999s
+Narration   : A 1x1 convolution aggregates point-wise channel features alongside an adjacent residual shortcut.
+--------------------------------------------------------------------------------
+Frame Image : frame_16.png
+Timestamp   : 8.499s
+Narration   : The 1x1 convolution output is summed with its shortcut connection.
+--------------------------------------------------------------------------------
+Frame Image : frame_17.png
+Timestamp   : 8.999s
+Narration   : A GeLU activation function introduces non-linearity.
+--------------------------------------------------------------------------------
+Frame Image : frame_18.png
+Timestamp   : 9.499s
+Narration   : An up projection layer restores the original feature channel dimensions.
+--------------------------------------------------------------------------------
+Frame Image : frame_19.png
+Timestamp   : 9.999s
+Narration   : Finally, the outer residual is added to yield the complete output of the Mona layer.
+--------------------------------------------------------------------------------

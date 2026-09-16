@@ -1,0 +1,62 @@
+=== Hopping Bounding Box Sequence ===
+
+Frame Image : frame_00.png
+Timestamp   : 1.00s
+Narration   : The pipeline begins with an input medical image.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 3.00s
+Narration   : The input is processed by a downsampler before entering the feature extraction backbone.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 5.00s
+Narration   : The image encoder utilizes a frozen transformer block to preserve pre-trained visual representations.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 7.00s
+Narration   : Trainable low-rank adaptation layers are integrated to fine-tune the encoder specifically for medical imaging.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 9.00s
+Narration   : This produces base image embeddings for the two-stage hierarchical decoding process.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 11.00s
+Narration   : In stage one, a transformer decoder applies self-attention and cross-attention to the initial embeddings.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 13.00s
+Narration   : In parallel, a pixel decoder extracts multi-scale spatial feature maps.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 15.00s
+Narration   : The decoded transformer features and pixel representations are multiplied together.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 17.00s
+Narration   : This produces a prior probabilistic mask at one-fourth resolution to guide the second stage.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 19.00s
+Narration   : The prior mask and original embeddings enter the class-balanced mask-guided self-attention module to alleviate label imbalance.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 21.00s
+Narration   : This results in enriched image embeddings tailored for second-stage decoding.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Timestamp   : 23.00s
+Narration   : The stage-two transformer decoder utilizes learnable mask cross-attention guided by the prior map along with self-attention.
+--------------------------------------------------------------------------------
+Frame Image : frame_12.png
+Timestamp   : 25.00s
+Narration   : Simultaneously, a hierarchical pixel decoder incorporates skip connections from stage one to capture localized details.
+--------------------------------------------------------------------------------
+Frame Image : frame_13.png
+Timestamp   : 27.00s
+Narration   : The second-stage queries and upsampled pixel features are combined.
+--------------------------------------------------------------------------------
+Frame Image : frame_14.png
+Timestamp   : 29.00s
+Narration   : Finally, the framework outputs the full-resolution multi-organ segmentation prediction.
+--------------------------------------------------------------------------------

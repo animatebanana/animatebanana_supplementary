@@ -1,0 +1,42 @@
+=== Alpha Masking Sequence ===
+
+Frame Image : frame_00.png
+Timestamp   : 1.00s
+Narration   : The pipeline begins with sparse input face images under varied illumination, utilizing four core processing operations outlined in the legend.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 3.00s
+Narration   : A three-dimensional morphable model is first fitted to establish an initial geometric proxy model.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 5.00s
+Narration   : This proxy geometry is then analyzed to extract surface orientations and anatomical regions.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 7.00s
+Narration   : A dense normal map captures the underlying surface directions across the facial structure.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 9.00s
+Narration   : Semantic segmentation categorizes different facial zones, distinguishing bare skin from regions like hair and eyes.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 11.00s
+Narration   : Dedicated shadow processing identifies and handles cast shadows to ensure accurate lighting estimation.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 13.00s
+Narration   : Using light calibration and photometric stereo, the geometry is reconstructed into a refined 3D model.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 15.00s
+Narration   : In the final stage, region-tailored denoising is applied across the reconstructed outputs.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 16.00s
+Narration   : This yields a high-fidelity denoised 3D facial mesh alongside a clean surface albedo map.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 17.00s
+Narration   : This yields a high-fidelity denoised 3D facial mesh alongside a clean surface albedo map.
+--------------------------------------------------------------------------------

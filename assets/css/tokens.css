@@ -1,0 +1,103 @@
+/*
+  Design tokens — the single source of truth for color, type, space,
+  elevation, and motion.
+
+  Direction: a sketchbook-lab. White paper, black ink line-art, banana
+  yellow as the one loud accent. The pastels exist for small categorical
+  touches (tags, stage dots) and nothing else — never as washes.
+*/
+:root {
+  /* ---- Paper ---- */
+  --paper: #FFFEF9;
+  --paper-warm: #FFF9E6;
+  --bg: var(--paper);
+  --bg-alt: #FFFBEF;
+  --bg-sunk: #F6F1E1;
+  --surface: #FFFFFF;
+  --surface-veil: rgba(255, 254, 249, 0.82);
+  --dot: rgba(26, 24, 21, 0.13);
+
+  /* ---- Ink ---- */
+  --ink: #1A1815;
+  --ink-mid: #3B3730;
+  --ink-soft: #625C50;
+  --ink-faint: #958E7F;
+
+  /* ---- Lines ---- */
+  --line: #E9E2CF;
+  --line-strong: #D5CBB0;
+  --stroke: 1.5px;
+
+  /* ---- Banana: the accent ---- */
+  --banana: #FFD43B;
+  --banana-deep: #F2B200;
+  --banana-soft: #FFF2B8;
+  --banana-ink: #6B4E00;
+
+  /* ---- Pastels: small categorical touches only ---- */
+  --blue-soft: #EDF5FA;  --blue: #BBDCEB;  --blue-ink: #2F5A70;
+  --pink-soft: #FDF0F4;  --pink: #F4CBD7;  --pink-ink: #8A3F55;
+  --mint-soft: #ECF8F1;  --mint: #C2E8D5;  --mint-ink: #2F6B4E;
+  --tan-soft:  #F8F1E0;  --tan:  #E8DBBF;  --tan-ink:  #6E5A2C;
+  --yellow-soft: var(--banana-soft); --yellow: var(--banana); --yellow-ink: var(--banana-ink);
+
+  --sc-blue: var(--blue);
+  --sc-pink: var(--pink);
+  --sc-mint: var(--mint);
+  --sc-tan: var(--banana);
+
+  /* ---- Patterns ---- */
+  --hatch: repeating-linear-gradient(-45deg, var(--banana) 0 2.5px, transparent 2.5px 6.5px);
+  --hatch-ink: repeating-linear-gradient(-45deg, rgba(26, 24, 21, 0.14) 0 1.5px, transparent 1.5px 6px);
+
+  /* ---- Type ---- */
+  --font-display: 'Fraunces', 'Iowan Old Style', Georgia, serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, monospace;
+  --font-hand: 'Caveat', 'Segoe Print', cursive;
+
+  --fs-mega: clamp(3.1rem, 0.4rem + 9.2vw, 8.75rem);  --fs-display: clamp(2.6rem, 1.2rem + 5.6vw, 5.75rem);
+  --fs-h1: clamp(2.4rem, 1.3rem + 4.6vw, 5.25rem);
+  --fs-h2: clamp(1.9rem, 1.2rem + 2.8vw, 3.6rem);
+  --fs-h3: 1.2rem;
+  --fs-lede: clamp(1.15rem, 0.95rem + 0.9vw, 1.6rem);
+  --fs-body: 1rem;
+  --fs-sm: 0.875rem;
+  --fs-xs: 0.78rem;
+  --fs-micro: 0.7rem;
+
+  --tracking-kicker: 0.2em;
+
+  /* ---- Space ---- */
+  --gap-page: clamp(20px, 4vw, 56px);
+  --section-gap: clamp(72px, 10vw, 140px);
+  --page-max: 1200px;
+
+  /* ---- Radii ---- */
+  --radius-xl: 28px;
+  --radius-lg: 18px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+
+  /* ---- Elevation: hard ink offsets for the edge, soft for quiet UI ---- */
+  --shadow-xs: 0 1px 2px rgba(26, 24, 21, 0.06);
+  --shadow-sm: 0 1px 2px rgba(26, 24, 21, 0.05), 0 4px 12px rgba(26, 24, 21, 0.05);
+  --shadow-md: 0 2px 4px rgba(26, 24, 21, 0.05), 0 12px 28px -8px rgba(26, 24, 21, 0.14);
+  --shadow-lg: 0 24px 56px -16px rgba(26, 24, 21, 0.22);
+  --shadow-hard: 5px 5px 0 var(--ink);
+  --shadow-hard-lg: 9px 9px 0 var(--ink);
+  --shadow-banana: 6px 6px 0 var(--banana);
+  --ring: 0 0 0 3px var(--banana);
+
+  /* ---- Motion ---- */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.5, 0.5, 1);
+  --ease-io: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 160ms;
+  --dur: 280ms;
+  --dur-slow: 700ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --dur-fast: 1ms; --dur: 1ms; --dur-slow: 1ms; }
+}

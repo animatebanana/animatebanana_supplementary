@@ -1,0 +1,38 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : The pipeline builds upon a base Visual Question Answering architecture.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : The model receives an input image alongside a corresponding natural language question.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : Both modalities are fed into a joint network to combine the visual and textual features.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : This yields an encoded joint representation vector for the question and image pair.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : The joint representation feeds into a classifier to predict class probabilities and compute the cross-entropy classification loss.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : In parallel, the ground-truth answer is processed through a dedicated answer encoder.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : This produces an encoded answer representation vector capturing semantic answer information.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 3.999s
+Narration   : Joint and answer projectors map the representations into two unimodal auto-correlation matrices and a multimodal cross-correlation matrix.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 4.499s
+Narration   : Finally, redundancy reduction constraints force all three correlation matrices toward the identity matrix, minimizing feature redundancy.
+--------------------------------------------------------------------------------

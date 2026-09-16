@@ -1,0 +1,34 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : Unsupervised tracking is first performed on the input video, applying temporal constraints to extract continuous frames containing the target object.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : Spatial constraints based on overlap thresholding then filter out crops with insufficient object area.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : This guarantees that the sampled key and query video clips reliably contain instances of the same object.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : From these clips, the framework extracts the masked key foreground, key crops, query crops, and query tracking masks.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : The key streams are fed into a momentum encoder, while the query crop enters an encoder and the tracking mask is interpolated.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : The encoders generate the key foreground representation, the key representation, and the query representation.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : A contrastive loss aligns the feature distance between the query and key representations.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 3.999s
+Narration   : Finally, Grad-CAM localizes corresponding key foreground regions in the query as a 3D attention heatmap, supervised against pseudo ground truth through an attention loss.
+--------------------------------------------------------------------------------

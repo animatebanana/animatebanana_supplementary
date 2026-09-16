@@ -1,0 +1,177 @@
+/*
+  The AnimateBench band on the overview page.
+
+  Part of the benchmark module (assets/{css,js}/benchmark/,
+  data/benchmark/, assets/bench/). Its entire footprint in
+  `index.html` is three lines, each fenced by a BENCHMARK MODULE
+  comment — one stylesheet link, one <section>, one <script> — so the
+  diff cannot collide with work on the hero, demo studio, gallery rail,
+  stats, how-it-works or contents sections.
+
+  It borrows only generic classes: `.kicker`, `.section-head`, `.hl`,
+  `.hand`, `.btn`, `.num-outline` and `.reveal` from `base.css`, and
+  every colour, type and motion value from `tokens.css`. It defines no
+  rule that could reach another component: everything is `.bb-*` inside
+  `.bench-band`.
+
+  Visually it is the sibling of the site's existing stats band — same
+  hatched outline numerals, same count-up, same ink rules — with the
+  figure's own glyph clusters above each number so the four counts read
+  as the equation from the paper rather than as four loose statistics.
+*/
+
+/* The band sits on the page's own white, not on a tinted slab: it is
+   one section of the overview, not a separate plate, and a second
+   coloured ground immediately under the gallery band's made the page
+   read as a stack of boxes. A hairline top and bottom is all the
+   separation it needs. */
+.bench-band {
+  position: relative;
+  padding: clamp(56px, 8vw, 104px) 0;
+  background: #FFFFFF;
+  border-block: 1.5px solid var(--line);
+}
+
+.bench-band-wrap {
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding-inline: var(--gap-page);
+}
+
+.bb {
+  display: block;
+  margin-top: clamp(28px, 4vw, 44px);
+}
+
+/* ---- The four counts ---- */
+.bb-tiles {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(16px, 2.4vw, 34px);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+@media (max-width: 900px) { .bb-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 34px; } }
+@media (max-width: 460px) { .bb-tiles { grid-template-columns: minmax(0, 1fr); } }
+
+.bb-tile {
+  position: relative;
+  text-align: center;
+  padding-inline: 6px;
+}
+/* A hairline between the counts, the way the equation's operators sit
+   between its terms — drawn rather than typed, so it disappears cleanly
+   at the wrap points instead of stranding a lone "x". */
+.bb-tile + .bb-tile::before {
+  content: '';
+  position: absolute;
+  left: calc(-1 * clamp(8px, 1.2vw, 17px));
+  top: 18%;
+  bottom: 18%;
+  width: 1.5px;
+  background: repeating-linear-gradient(var(--line-strong) 0 4px, transparent 4px 9px);
+}
+@media (max-width: 900px) {
+  .bb-tile:nth-child(odd)::before { display: none; }
+}
+@media (max-width: 460px) {
+  .bb-tile::before { display: none !important; }
+}
+
+.bb-glyph {
+  display: block;
+  margin: 0 auto 12px;
+  width: clamp(58px, 6vw, 76px);
+  color: var(--ink);
+}
+.bb-glyph svg { display: block; width: 100%; height: auto; }
+
+.bb-num {
+  display: block;
+  font-size: clamp(2.3rem, 1.2rem + 3.4vw, 4.4rem);
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+.bb-lab {
+  display: block;
+  margin-top: 10px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+.bb-note {
+  display: block;
+  margin-top: 5px;
+  font-size: var(--fs-xs);
+  line-height: 1.4;
+  color: var(--ink-faint);
+  max-width: 26ch;
+  margin-inline: auto;
+}
+
+/* ---- The route into the benchmark page ---- */
+/* The button is centred on the band — it is the one thing to do here —
+   and the note hangs off its side on a hand-drawn arrow rather than
+   sitting in the row and pushing the button off-centre. The note is
+   absolutely positioned for exactly that reason: it annotates the
+   button without being part of its layout. */
+.bb-cta {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: clamp(34px, 4.5vw, 54px);
+}
+.bb-cta-btn { font-size: 1.02rem; padding: 15px 26px; }
+
+.bb-cta-note {
+  position: absolute;
+  left: calc(50% + clamp(116px, 13vw, 196px));
+  top: 50%;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  transform: translateY(-58%) rotate(-3deg);
+  font-size: 1.28rem;
+  line-height: 1.15;
+  color: var(--ink-faint);
+  white-space: nowrap;
+  pointer-events: none;
+}
+.bb-cta-arrow {
+  width: clamp(48px, 5vw, 66px);
+  height: auto;
+  flex: 0 0 auto;
+  color: var(--banana-deep);
+  /* The hero's arrow points up-and-left; the note sits to the right of
+     the button, so it already points where it should. */
+}
+.bb-cta-note span { max-width: 20ch; white-space: normal; }
+
+/* On a narrow screen the note drops under the button and the arrow
+   turns to point up at it, rather than running off the side. */
+@media (max-width: 780px) {
+  .bb-cta { flex-direction: column; gap: 6px; }
+  .bb-cta-note {
+    position: static;
+    transform: rotate(-2deg);
+    text-align: center;
+    flex-direction: column;
+  }
+  .bb-cta-arrow { transform: rotate(64deg); width: 50px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bb-num { transition: none; }
+}
+
+/* The band's own heading runs wider than the site's default 18ch cap —
+   scoped to `.bench-band`, so no other `.section-head` is affected. */
+.bench-band .section-head h2 { max-width: 26ch; }
+.bench-band .section-head p { max-width: 58ch; margin-inline: auto; }

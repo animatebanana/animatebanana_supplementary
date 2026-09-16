@@ -1,0 +1,38 @@
+=== Alpha Masking Sequence ===
+
+Frame Image : frame_00.png
+Timestamp   : 2.00s
+Narration   : Given an input image, an object detector generates candidate bounding box proposals and extracts their initial region features.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 6.00s
+Narration   : Simultaneously, the input text expression describes the target visual scene along with specific entity relationships.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 10.00s
+Narration   : A language parser converts the expression into a structured scene graph, representing entity phrases as nodes and relations as edges.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 14.00s
+Narration   : In the message propagation module, initial local correspondence beliefs are computed between each entity phrase and all candidate visual objects.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 16.00s
+Narration   : Two parallel passes perform bottom-up and top-down message propagation, using context-sensitive belief selecting and gating to aggregate neighboring evidence.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 18.00s
+Narration   : Two parallel passes perform bottom-up and top-down message propagation, using context-sensitive belief selecting and gating to aggregate neighboring evidence.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 22.00s
+Narration   : The updated beliefs pass through an MLP to compute match probabilities, which are minimum-pooled across nodes for image-text matching prediction.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 24.00s
+Narration   : Finally, computing confidence differences across graph edges detects relationship inconsistencies, producing the mismatched relation reasoning prediction.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 26.00s
+Narration   : Finally, computing confidence differences across graph edges detects relationship inconsistencies, producing the mismatched relation reasoning prediction.
+--------------------------------------------------------------------------------

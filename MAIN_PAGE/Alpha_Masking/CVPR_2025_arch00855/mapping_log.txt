@@ -1,0 +1,62 @@
+=== Alpha Masking Sequence ===
+
+Frame Image : frame_00.png
+Timestamp   : 1.00s
+Narration   : ESC-Net begins by taking an input image alongside a set of candidate class text descriptions.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 3.00s
+Narration   : Pre-trained CLIP vision and language encoders process the inputs to extract image and text representations.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 5.00s
+Narration   : The extracted vision feature map and language feature vectors are paired for correlation modeling.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 7.00s
+Narration   : A vision-language correlation step computes cosine similarity across spatial coordinates for each class.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 9.00s
+Narration   : The correlation maps and features are progressively refined through N consecutive ESC Blocks.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 11.00s
+Narration   : Inside each block, the correlation map stack enters the Pseudo Prompt Generator.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 13.00s
+Narration   : The generator thresholds and clusters candidate object locations across the image.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 15.00s
+Narration   : This creates pseudo point coordinates and mask prompts, which are supplied alongside the vision features into the SAM Block.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 16.00s
+Narration   : The SAM transformer block applies prompt self-attention and bidirectional cross-attention to refine the spatial context.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 17.00s
+Narration   : The SAM transformer block applies prompt self-attention and bidirectional cross-attention to refine the spatial context.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 19.00s
+Narration   : The enhanced visual features, along with text features and the original correlation map, are passed to the Vision-Language Fusion module.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Timestamp   : 21.00s
+Narration   : The Vision-Language Fusion block sequentially applies image and text guidance to remodel class interactions.
+--------------------------------------------------------------------------------
+Frame Image : frame_12.png
+Timestamp   : 23.00s
+Narration   : This outputs a multimodally refined correlation map for all candidate classes.
+--------------------------------------------------------------------------------
+Frame Image : frame_13.png
+Timestamp   : 25.00s
+Narration   : A mask prediction decoder then upsamples the refined features.
+--------------------------------------------------------------------------------
+Frame Image : frame_14.png
+Timestamp   : 27.00s
+Narration   : Producing the final pixel-level semantic segmentation mask.
+--------------------------------------------------------------------------------

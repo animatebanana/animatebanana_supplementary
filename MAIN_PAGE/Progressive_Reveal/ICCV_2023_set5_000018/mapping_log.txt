@@ -1,0 +1,58 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : The framework begins by collecting diverse multi-vehicle perspectives and driving scenes across different environments.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : A physically based rendering engine manages the three-dimensional vehicle models, surrounding scenes, base textures, and camera parameters.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : This rendering process generates a reference image, a vehicle silhouette mask, and a corresponding depth map.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : An adversarial texture patch is parameterized alongside projection augmentations and camera parameters.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : Triplanar mapping projects the adversarial texture onto the vehicle surface using depth and camera geometry.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : Masking operations then separate the background, isolating both the masked reference vehicle and the projected texture.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : The Neural Texture Renderer fuses these inputs to synthesize a realistically textured vehicle while preserving physical lighting characteristics.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 3.999s
+Narration   : The adversarial vehicle is composited back onto the background scene to produce the complete adversarial image.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 4.499s
+Narration   : A random output augmentation module applies digital transformations, such as scaling and shifting, to enhance texture robustness.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 4.999s
+Narration   : The augmented image is then fed into the target vehicle detector, measuring the degradation in detection confidence.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 5.499s
+Narration   : In parallel, a camouflage function extracts dominant background colors to promote natural visual blending.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Timestamp   : 5.999s
+Narration   : Camouflage, smoothness, and detection attack losses are aggregated into a total loss and backpropagated to optimize the adversarial texture.
+--------------------------------------------------------------------------------
+Frame Image : frame_12.png
+Timestamp   : 6.499s
+Narration   : During evaluation, the optimized world-aligned adversarial texture is applied to target three-dimensional vehicles inside Unreal Engine.
+--------------------------------------------------------------------------------
+Frame Image : frame_13.png
+Timestamp   : 6.999s
+Narration   : Finally, the rendered scenes undergo physical simulation to evaluate evasion performance against state-of-the-art vehicle detectors.
+--------------------------------------------------------------------------------

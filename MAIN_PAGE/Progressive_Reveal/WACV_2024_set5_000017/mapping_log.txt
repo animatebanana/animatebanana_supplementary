@@ -1,0 +1,50 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : The pipeline begins by receiving a single reference facade image representing the original building view.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : An encoder processes the reference image to extract a spatial latent tensor capturing structure and style.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : This latent code is conditioned on target viewing angle parameters.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : The conditional generator synthesizes building facade images aligned with the specified viewpoint.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : This produces a reconstructed facade under the original viewpoint as well as novel view variations under altered angles.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : A conditional discriminator assesses the generated samples to compute the discriminator loss and enforce photorealism.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : A reconstruction loss directly penalizes discrepancies between the input image and the reconstructed facade.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 3.999s
+Narration   : In parallel, the selective editing module feeds the reference image into a pretrained vision transformer to extract key representations.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 4.499s
+Narration   : A blending layer processes these transformer features into semantic embeddings.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 4.999s
+Narration   : This constructs a semantic edit mask that designates view-dependent components such as windows and doors.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 5.499s
+Narration   : Element-wise multiplication applies the edit mask to both the novel facade and the original reference facade.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Timestamp   : 5.999s
+Narration   : Finally, the selective editing loss supervises changes in editable areas while preserving invariant background structures.
+--------------------------------------------------------------------------------

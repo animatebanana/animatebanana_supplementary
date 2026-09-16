@@ -1,0 +1,58 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : The pipeline receives four multi-modal inputs: the scene image, a head position mask, a depth map, and the cropped head of the person.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : These inputs are jointly fed into the feature extraction module.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : The extractor produces an encoded feature tensor, which is then flattened across its spatial dimensions.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : A learnable outside token is appended to the flattened inside tokens to account for gaze targets located outside the frame.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : The full token sequence passes through a token-wise patch attention module to capture spatial interactions.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : Next, a frame-wise temporal attention module aggregates temporal dynamics across frames before splitting the pathway into two branches.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : In the upper branch, the inside tokens are regrouped back into a spatial feature tensor.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 3.999s
+Narration   : This spatial tensor enters the heatmap prediction head.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 4.499s
+Narration   : The head outputs a fine-grained continuous gaze heatmap over the scene.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 4.999s
+Narration   : The predicted heatmap is supervised using a mean squared error loss.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 5.499s
+Narration   : In the lower branch, all gaze tokens, including both inside and outside tokens, are retained.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Timestamp   : 5.999s
+Narration   : These tokens are routed into the patch prediction head.
+--------------------------------------------------------------------------------
+Frame Image : frame_12.png
+Timestamp   : 6.499s
+Narration   : The head outputs a patch-level gaze distribution across the spatial grid, together with an outside gaze probability.
+--------------------------------------------------------------------------------
+Frame Image : frame_13.png
+Timestamp   : 6.999s
+Narration   : Finally, the patch distribution prediction is optimized using Kullback-Leibler divergence loss.
+--------------------------------------------------------------------------------

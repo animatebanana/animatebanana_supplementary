@@ -1,0 +1,46 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : The PanopticGAN framework performs panoptic-aware image-to-image translation using a generator, a multi-level discriminator, and an object feature masking module.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : The generator first routes the input image through a feature backbone to extract global content representations, while a panoptic perception module extracts semantic scene structure.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : Using the predicted bounding boxes, region of interest alignment extracts individual object-level content feature maps.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : In the panoptic object style-align module, sampled object style codes pass through a multi-layer perceptron to generate adaptive instance normalization parameters.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : These parameters modulate a sequence of residual blocks to transform object content codes, which are then passed alongside panoptic masks into feature masking.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : The resulting masked object features are processed sequentially across categories by convolutional LSTM units to synthesize a consolidated object representation.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : Concurrently, a global style code modulates residual blocks to stylize the image-level content features.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 3.999s
+Narration   : The stylized image features and aggregated object features are concatenated and fed into the decoder to synthesize the final translated image.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 4.499s
+Narration   : In the discriminator, images are processed by a backbone, where average pooling and a fully connected layer compute an image-level hinge loss.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 4.999s
+Narration   : Simultaneously, RoIAlign extracts object features for realism and classification heads, producing an object-level hinge loss that is weighted into the overall loss.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 5.499s
+Narration   : The feature masking module resizes and zero-pads each object feature map into its bounding box, then applies binary masking to sharpen object boundaries.
+--------------------------------------------------------------------------------

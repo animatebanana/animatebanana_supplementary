@@ -1,0 +1,524 @@
+/*
+  Benchmark module — page shell, hero equation row, and the panel chrome
+  every pane shares.
+
+  Self-contained: this file and its four siblings own every `.bx-*`,
+  `.bh-*`, `.bd-*`, `.bv-*`, `.ba-*` and `.br-*` class on the page.
+  Colour, type, spacing and motion all come from `tokens.css`; the
+  generic `.kicker`, `.hl`, `.btn`, `.chip`, `.hand`, `.sketch`,
+  `.frame-paper` and `.reveal` classes come from `base.css`. Nothing
+  here overrides another component.
+
+  The one thing it adds on top of the tokens is a set of FOUR PANE
+  ACCENTS, one per pane, mirroring the coloured header bars of the
+  figure this page reconstructs. They are deliberately deeper and more
+  saturated than the site's pastels — the pastels are categorical
+  confetti, these are wayfinding: at a glance you can tell which pane a
+  chip, a bar or a popup belongs to. Banana stays what it always was,
+  the single loud accent, and is reserved here for the top equation row
+  and for "you are looking at this one" states.
+*/
+
+.bx {
+  --bx-ink: var(--ink);
+
+  /* Pane accents — deep enough to carry a white label. */
+  --bx-density: #A4232F;   --bx-density-soft: #FBEEEF;   --bx-density-line: #E9C6C9;
+  --bx-diversity: #1D4E79; --bx-diversity-soft: #EDF3F9; --bx-diversity-line: #C3D7E7;
+  --bx-annot: #1E6B41;     --bx-annot-soft: #ECF7F0;     --bx-annot-line: #C3E2CF;
+  --bx-ref: #5A2D83;       --bx-ref-soft: #F3EDF9;       --bx-ref-line: #D8C9E8;
+
+  position: relative;
+  max-width: 1560px;
+  margin: 0 auto;
+  padding-inline: var(--gap-page);
+  padding-block: 0 clamp(48px, 6vw, 88px);
+}
+
+/* Per-pane accent binding: one class sets the three variables every
+   `.bx-*` rule reads, so a pane's chrome can never drift out of key. */
+.bx-pane[data-accent='density']   { --a: var(--bx-density);   --a-soft: var(--bx-density-soft);   --a-line: var(--bx-density-line); }
+.bx-pane[data-accent='diversity'] { --a: var(--bx-diversity); --a-soft: var(--bx-diversity-soft); --a-line: var(--bx-diversity-line); }
+.bx-pane[data-accent='annotations'] { --a: var(--bx-annot);   --a-soft: var(--bx-annot-soft);     --a-line: var(--bx-annot-line); }
+.bx-pane[data-accent='reference'] { --a: var(--bx-ref);       --a-soft: var(--bx-ref-soft);       --a-line: var(--bx-ref-line); }
+
+/* ============================================================ *
+ *  The scale row — <bench-hero>
+ * ============================================================ *
+
+   This is the page the AnimateBench band on the overview links to, and
+   the band is a wall of counted-up display numerals with drawn glyphs.
+   Arriving here used to be a step down: the same four numbers, set at
+   1rem in a thin dashed rule. So the row is built at the band's scale
+   and with the band's parts — same glyphs, same hatched numerals, same
+   count-up — and adds only what the band has no use for: the operators,
+   because here the numbers are one argument rather than four facts.
+
+   TWO RULES HOLD THE ROW TOGETHER.
+
+   One: every term stacks glyph / numeral / label in that order, and the
+   glyph slot is a FIXED height that the term without a drawing still
+   reserves. Sizing that slot to its contents is what put 5,000 and 5
+   half a line below 25,000 — the two with drawings were pushed down and
+   the total was left hanging above them. A reserved slot means the
+   three numerals share one baseline whatever art any of them carries.
+
+   Two: the verified count is a footnote to the total, not a fourth
+   headline. It sits at the end of the same row at roughly a third the
+   numeral size, in a quiet banana pill. It used to be a full-width slab
+   under the equation at nearly the equation's own scale, which read as
+   the loudest fact on the page when it is the smallest.
+
+   Sizes track the band's clamps deliberately. If the band's numerals
+   change, these should change with them. */
+
+.bh {
+  display: grid;
+  /* equation · verified — the verified column takes only what it needs,
+     so "everything on one line" is the default and not an accident of
+     how long the labels happen to be. */
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: clamp(16px, 2.2vw, 30px);
+  margin-bottom: clamp(22px, 3vw, 40px);
+  padding: clamp(18px, 2.2vw, 28px) clamp(14px, 2vw, 28px);
+  background: var(--bg-alt);
+  background-image: radial-gradient(var(--dot) 1px, transparent 1.2px);
+  background-size: 26px 26px;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-hard);
+}
+
+.bh-eq {
+  display: grid;
+  /* term op term op term — the operators get only the width they need,
+     so the three counts share the rest evenly and the equation reads as
+     one line rather than five stacked blocks. */
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1.15fr);
+  align-items: start;
+  gap: clamp(8px, 1.4vw, 22px);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.bh-term {
+  display: grid;
+  /* glyph · numeral · label, as three rows of a FIXED shape. Both the
+     glyph row and the numeral row are reserved at a constant height, so
+     a term with no drawing still holds the glyph's space and the total —
+     set larger than the two factors — does not push its own label below
+     theirs. Numerals sit on the bottom of their row; labels then start
+     on one line across all three. */
+  grid-template-rows: var(--bh-glyph-h) var(--bh-num-h) auto;
+  justify-items: center;
+  min-width: 0;
+  text-align: center;
+}
+
+.bh {
+  /* The two reserved heights, read by the terms and by the operators, so
+     nothing has to guess where the numerals' line is. */
+  --bh-glyph-h: clamp(46px, 4.6vw, 64px);
+  --bh-num-h: clamp(2.4rem, 1.3rem + 3.7vw, 4.7rem);
+}
+
+.bh-glyph {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  height: var(--bh-glyph-h);
+  margin: 0 0 8px;
+  color: var(--ink);
+}
+.bh-glyph svg { display: block; width: auto; height: 100%; max-width: 100%; }
+.bh-glyph:empty { display: block; }
+
+.bh-num {
+  display: block;
+  align-self: end;
+  font-size: clamp(1.9rem, 1rem + 2.9vw, 3.8rem);
+  line-height: 1.05;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+.bh-term--hero .bh-num { font-size: clamp(2.1rem, 1.1rem + 3.4vw, 4.3rem); }
+
+.bh-lab {
+  display: block;
+  margin: 10px auto 0;
+  max-width: 24ch;
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+
+.bh-op {
+  /* Sits on the numerals' line, not the glyphs' — the glyph stack above
+     is decoration and the operator belongs to the arithmetic. It reads
+     the same two reserved heights the terms do, so the three can never
+     drift apart. */
+  align-self: start;
+  display: flex;
+  align-items: center;
+  height: var(--bh-num-h);
+  margin-top: calc(var(--bh-glyph-h) + 8px);
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 0.8rem + 1.4vw, 2.2rem);
+  line-height: 1.05;
+  font-weight: 700;
+  color: var(--ink-faint);
+}
+
+/* ---- The verified count: a footnote on the same line, not a slab ---- */
+.bh-verified {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 34ch;
+  padding: 9px 15px;
+  background: var(--banana-soft);
+  border: 1.5px solid var(--banana);
+  border-radius: 999px;
+}
+.bh-glyph--verified {
+  flex: 0 0 auto;
+  height: clamp(26px, 2.4vw, 34px);
+  margin: 0;
+  color: var(--banana-ink);
+}
+.bh-verified-text { display: grid; gap: 1px; min-width: 0; }
+.bh-verified-top { display: flex; align-items: baseline; gap: 7px; flex-wrap: wrap; }
+.bh-verified-num {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 0.8rem + 0.5vw, 1.35rem);
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--banana-ink);
+  font-variant-numeric: tabular-nums lining-nums;
+}
+.bh-verified-lab {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-mid);
+}
+.bh-verified-note {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-body);
+  font-size: var(--fs-micro);
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  text-transform: none;
+  line-height: 1.4;
+  color: var(--ink-faint);
+}
+.bh-check { flex: 0 0 auto; width: 12px; height: 12px; color: var(--banana-deep); }
+
+/* One line holds to about 1040px. Below that the verified pill drops
+   under the equation rather than squeezing the three numerals — the
+   equation is the thing that must stay on one line. */
+@media (max-width: 1040px) {
+  .bh { grid-template-columns: minmax(0, 1fr); justify-items: center; }
+  .bh-verified { max-width: none; }
+}
+@media (max-width: 720px) {
+  .bh-eq { grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); }
+  /* The "=" would be stranded alone on a third row; the total below it
+     is plainly the result without one. */
+  .bh-eq .bh-op:nth-of-type(2) { display: none; }
+  .bh-term--hero { grid-column: 1 / -1; margin-top: 14px; }
+}
+@media (max-width: 460px) {
+  .bh-eq { grid-template-columns: minmax(0, 1fr); gap: 22px; }
+  .bh-eq .bh-op { display: none; }
+  /* Stacked, there is no row for the reserved slots to align across, and
+     an empty glyph row is just a hole above the total. */
+  .bh-term { grid-template-rows: auto auto auto; }
+  .bh-glyph:empty { display: none; }
+  .bh-term--hero { margin-top: 0; }
+  .bh-verified { flex-direction: column; text-align: center; }
+  .bh-verified-top, .bh-verified-note { justify-content: center; }
+}
+
+/* ============================================================ *
+ *  The 2x2 pane grid
+ * ============================================================ */
+
+/* One pane per row, all four.
+   Every pane is a left-to-right reading: an axis and its example, or the
+   four steps of a flow. Two-up halves that width and forces each of
+   them to fold into stacked pairs — legible, but no longer the
+   horizontal progression the figure is about. A full row keeps all four
+   reading the same way, and gives the media inside room to be judged. */
+.bx-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(16px, 1.8vw, 26px);
+}
+
+.bx-pane {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: var(--surface);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-hard);
+  overflow: hidden;
+}
+
+/* ---- Shared pane header: the figure's coloured title bar ---- */
+.bx-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 11px clamp(14px, 1.6vw, 20px);
+  background: var(--a, var(--ink));
+  color: #fff;
+  border-bottom: 2px solid var(--ink);
+}
+.bx-head-title {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+.bx-head-sub {
+  margin: 0;
+  font-size: var(--fs-micro);
+  letter-spacing: 0.03em;
+  color: rgba(255, 255, 255, 0.78);
+}
+.bx-head-right { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+
+.bx-body { padding: clamp(14px, 1.8vw, 22px); flex: 1; min-width: 0; }
+.bx-blurb {
+  margin: 0 0 14px;
+  font-size: var(--fs-sm);
+  line-height: 1.55;
+  color: var(--ink-soft);
+  max-width: 62ch;
+}
+
+.bx-ic { width: 18px; height: 18px; flex: 0 0 auto; }
+
+/* ---- Sub-label used above each column inside a pane ---- */
+.bx-eyebrow {
+  display: block;
+  margin-bottom: 8px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+/* ============================================================ *
+ *  The dropdown (BenchSelect)
+ * ============================================================ */
+
+.bx-select { position: relative; }
+
+.bx-select-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  text-align: left;
+  padding: 10px 12px;
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  color: var(--ink);
+  background: var(--surface);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-md);
+  box-shadow: 3px 3px 0 var(--a, var(--ink));
+  cursor: pointer;
+  transition: transform var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out);
+}
+.bx-select-btn:hover { transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--a, var(--ink)); }
+.bx-select.is-open .bx-select-btn { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--a, var(--ink)); }
+
+.bx-select-ic { display: flex; color: var(--a, var(--ink)); }
+.bx-select-text { min-width: 0; flex: 1; padding-right: 2px; }
+.bx-select-label { display: block; font-weight: 700; letter-spacing: -0.01em; line-height: 1.25; overflow-wrap: break-word; }
+.bx-select-sub {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  color: var(--ink-faint);
+  letter-spacing: 0.04em;
+}
+.bx-select-caret { width: 15px; height: 15px; flex: 0 0 auto; color: var(--ink-faint); transition: transform var(--dur) var(--ease-out); }
+.bx-select.is-open .bx-select-caret { transform: rotate(180deg); }
+
+.bx-select-list {
+  position: absolute;
+  z-index: 30;
+  top: calc(100% + 7px);
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 5px;
+  list-style: none;
+  max-height: 300px;
+  overflow-y: auto;
+  background: var(--surface);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  animation: bx-pop var(--dur) var(--ease-spring) both;
+}
+@keyframes bx-pop { from { opacity: 0; transform: translateY(-6px) scale(0.985); } }
+@media (prefers-reduced-motion: reduce) { .bx-select-list { animation: none; } }
+
+.bx-select-list li {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+/* Options carry their label and nothing else — the glyph and the unit
+   line describe the axis you have chosen, so they live on the button. A
+   marker dot, filled only on the current option, does the rest. */
+.bx-select-list li::before {
+  content: '';
+  flex: 0 0 auto;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  border: 1.5px solid var(--a-line, var(--line-strong));
+  transition: background var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
+}
+.bx-select-opt {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink-mid);
+  line-height: 1.3;
+}
+.bx-select-list li.is-focus { background: var(--a-soft, var(--bg-alt)); }
+.bx-select-list li.is-focus::before { border-color: var(--a, var(--ink)); }
+.bx-select-list li.is-focus .bx-select-opt { color: var(--ink); }
+.bx-select-list li.is-sel { background: var(--a-soft, var(--bg-alt)); }
+.bx-select-list li.is-sel::before { background: var(--a, var(--ink)); border-color: var(--a, var(--ink)); }
+.bx-select-list li.is-sel .bx-select-opt { color: var(--ink); font-weight: 700; }
+
+/* ============================================================ *
+ *  Paper skeleton — what a not-yet-wired slot shows
+ * ============================================================ */
+
+.bx-skel {
+  position: relative;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 8px;
+  padding: 22px 18px;
+  text-align: center;
+  border: 2px dashed var(--line-strong);
+  border-radius: var(--radius-md);
+  background-color: var(--bg-alt);
+  background-image: var(--hatch-ink);
+  color: var(--ink-faint);
+}
+.bx-skel-tag {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1.5px solid var(--line-strong);
+  color: var(--ink-soft);
+}
+.bx-skel-note { font-size: var(--fs-xs); max-width: 34ch; line-height: 1.45; }
+
+/* ============================================================ *
+ *  Page head — the module's own, so it does not touch `.page-head`
+ * ============================================================ */
+
+.bx-pagehead {
+  position: relative;
+  max-width: 1560px;
+  margin: 0 auto;
+  padding: clamp(38px, 5vw, 68px) var(--gap-page) clamp(20px, 2.4vw, 32px);
+  text-align: center;
+  isolation: isolate;
+}
+.bx-pagehead .kicker { margin-bottom: 14px; }
+/* Deliberately a step down from the site's --fs-h1: this page's content
+   is four dense panes, and a display-scale title pushes all of it below
+   the fold for no gain. */
+.bx-pagehead h1 {
+  font-size: clamp(1.75rem, 1.1rem + 2.2vw, 3rem);
+  max-width: 26ch;
+  margin: 0 auto 12px;
+}
+.bx-pagehead-lede {
+  color: var(--ink-soft);
+  font-size: clamp(0.95rem, 0.88rem + 0.28vw, 1.12rem);
+  line-height: 1.5;
+  max-width: 56ch;
+  margin: 0 auto;
+}
+
+/* A legend so the four accents are readable as a system, not decoration. */
+.bx-legend {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  margin: 16px auto 0;
+  padding: 0;
+  list-style: none;
+}
+.bx-legend li {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.bx-legend i {
+  width: 11px; height: 11px;
+  border: 1.5px solid var(--ink);
+  border-radius: 3px;
+  background: var(--c);
+}
+
+/* ---- Footer sits back inside the site's normal page width ---- */
+.bx-foot { max-width: var(--page-max); margin: 0 auto; padding: 0 var(--gap-page) 72px; }
+
+/* ---- Deep-link landing: a pane someone was sent to announces itself ---- */
+.bx-pane.is-called {
+  animation: bx-called 1.6s var(--ease-out);
+}
+@keyframes bx-called {
+  0%, 100% { box-shadow: var(--shadow-hard); }
+  22%, 62% { box-shadow: var(--shadow-hard), 0 0 0 5px var(--a-soft), 0 0 0 7px var(--a); }
+}
+.bx-legend li[data-pane] { cursor: pointer; }
+.bx-legend li[data-pane]:hover { color: var(--ink); }
+@media (prefers-reduced-motion: reduce) { .bx-pane.is-called { animation: none; } }

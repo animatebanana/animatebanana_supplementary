@@ -1,0 +1,153 @@
+{
+ "_comment": "DIAGRAM DENSITY pane. Five stratification axes, each with its own strata and one real AnimateBench diagram per stratum. The strata carry no shares and no thresholds by design: they were assigned by eye, so a percentage or an element count beside one would present a judgement as a measurement. Every `example` path is a figure under assets/bench/density/.",
+ "accent": "density",
+ "methods": [
+  {
+   "id": "element-density",
+   "label": "Element Density",
+   "unit": "elements / diagram",
+   "axis": {
+    "from": "Sparse",
+    "to": "Dense"
+   },
+   "blurb": "The number of diagram elements (nodes, labels, edges, and raster components) relative to the diagram’s area.",
+   "strata": [
+    {
+     "id": "sparse",
+     "label": "Sparse",
+     "example": "assets/bench/density/element-density/sparse.png"
+    },
+    {
+     "id": "medium",
+     "label": "Medium",
+     "example": "assets/bench/density/element-density/medium.png"
+    },
+    {
+     "id": "dense",
+     "label": "Dense",
+     "example": "assets/bench/density/element-density/dense.png"
+    }
+   ]
+  },
+  {
+   "id": "hierarchical-depth",
+   "label": "Hierarchical Depth",
+   "unit": "max nesting depth",
+   "axis": {
+    "from": "Flat",
+    "to": "Deep"
+   },
+   "blurb": "How deeply blocks nest inside parent blocks.",
+   "strata": [
+    {
+     "id": "flat",
+     "label": "Flat",
+     "example": "assets/bench/density/hierarchical-depth/flat.png"
+    },
+    {
+     "id": "moderate",
+     "label": "Moderate",
+     "example": "assets/bench/density/hierarchical-depth/moderate.png"
+    },
+    {
+     "id": "deep",
+     "label": "Deep",
+     "example": "assets/bench/density/hierarchical-depth/deep.png"
+    }
+   ]
+  },
+  {
+   "id": "connectivity",
+   "label": "Connectivity",
+   "unit": "connections / diagram",
+   "axis": {
+    "from": "Few",
+    "to": "Many"
+   },
+   "blurb": "The number of edge connections in the diagram.",
+   "strata": [
+    {
+     "id": "few",
+     "label": "Few",
+     "example": "assets/bench/density/connectivity/few.png"
+    },
+    {
+     "id": "moderate",
+     "label": "Moderate",
+     "example": "assets/bench/density/connectivity/moderate.png"
+    },
+    {
+     "id": "many",
+     "label": "Many",
+     "example": "assets/bench/density/connectivity/many.png"
+    }
+   ]
+  },
+  {
+   "id": "raster-content",
+   "label": "Raster Content",
+   "unit": "% of diagrams",
+   "axis": {
+    "from": "Few",
+    "to": "Many"
+   },
+   "blurb": "Whether the figure embeds photographs, renders or plots that cannot be redrawn as vectors.",
+   "strata": [
+    {
+     "id": "has-rasters",
+     "label": "Has rasters",
+     "example": "assets/bench/density/raster-content/has-rasters.png"
+    },
+    {
+     "id": "no-rasters",
+     "label": "No rasters",
+     "example": "assets/bench/density/raster-content/no-rasters.png"
+    }
+   ]
+  },
+  {
+   "id": "layout-organization",
+   "label": "Layout Organization",
+   "unit": "spatial arrangement",
+   "axis": null,
+   "blurb": "The spatial grammar of the figure.",
+   "strata": [
+    {
+     "id": "horizontal",
+     "label": "Horizontal",
+     "example": "assets/bench/density/layout-organization/horizontal.png"
+    },
+    {
+     "id": "vertical",
+     "label": "Vertical",
+     "example": "assets/bench/density/layout-organization/vertical.png"
+    },
+    {
+     "id": "h-multi",
+     "label": "Horizontal multipanel",
+     "example": "assets/bench/density/layout-organization/h-multi.png"
+    },
+    {
+     "id": "v-multi",
+     "label": "Vertical multipanel",
+     "example": "assets/bench/density/layout-organization/v-multi.png"
+    },
+    {
+     "id": "block",
+     "label": "Block layout",
+     "example": "assets/bench/density/layout-organization/block.png"
+    },
+    {
+     "id": "hybrid",
+     "label": "Hybrid",
+     "example": "assets/bench/density/layout-organization/hybrid.png"
+    },
+    {
+     "id": "circular",
+     "label": "Circular",
+     "example": "assets/bench/density/layout-organization/circular.png"
+    }
+   ]
+  }
+ ]
+}

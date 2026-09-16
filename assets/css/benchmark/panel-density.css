@@ -1,0 +1,237 @@
+/*
+  DIAGRAM DENSITY pane — the red one.
+
+  Three columns: the method rail (dropdown + axis), the example stage in
+  the middle, and the strata with their share on the right. Below
+  1080px the stage moves under the rail and the strata run full width;
+  below 640px everything stacks.
+
+  Owns `.bd-*` only.
+*/
+
+.bd-body {
+  --bx-stage-h: clamp(232px, 21vw, 356px);
+  /* Container queries, not media queries: in the page's two-up grid a
+     pane is ~700px wide on a 1560px screen, so a viewport breakpoint
+     would never fire when the pane actually needs to reflow. */
+  container-type: inline-size;
+  container-name: bd;
+  display: grid;
+  /* The right-hand column is the pane's control surface — it is what you
+     read the numbers off and what you click — so it gets real width
+     rather than whatever the stage leaves over. */
+  grid-template-columns: minmax(190px, 0.6fr) minmax(0, 1.85fr) minmax(268px, 1fr);
+  gap: clamp(12px, 1.5vw, 22px);
+  align-items: start;
+}
+@container bd (max-width: 600px) {
+  .bd-body { grid-template-columns: minmax(140px, 1fr) minmax(0, 1.5fr); }
+  .bd-strata { grid-column: 1 / -1; }
+  .bd-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(176px, 1fr)); gap: 9px; }
+  .bd-list li + li { margin-top: 0; }
+  .bd-hintline { grid-column: 1 / -1; }
+}
+@container bd (max-width: 520px) {
+  .bd-body { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ---- Left rail ---- */
+.bd-blurb {
+  margin: 12px 0 0;
+  font-size: var(--fs-xs);
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+.bd-axis {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 14px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.bd-axis-line {
+  position: relative;
+  flex: 1;
+  height: 2px;
+  min-width: 26px;
+  background: linear-gradient(90deg, var(--a-line), var(--a));
+  border-radius: 2px;
+}
+.bd-axis-line i {
+  position: absolute;
+  right: -1px;
+  top: 50%;
+  width: 0; height: 0;
+  transform: translateY(-50%);
+  border-left: 6px solid var(--a);
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+}
+.bd-axis-to { color: var(--a); }
+
+/* ---- Centre stage ---- */
+.bd-stage { margin: 0; min-width: 0; }
+.bd-stage-frame {
+  position: relative;
+  /* A FIXED height, not one derived from the media.
+     Letting the box take the shape of its content meant the whole pane —
+     and everything below it on the page — jumped every time you picked a
+     different stratum, because the benchmark's figures run from 4:1
+     strips to near-square panels. A constant box that the media is
+     contained inside costs a little white space on the widest figures
+     and buys a page that never moves under the cursor. */
+  height: var(--bx-stage-h);
+  display: grid;
+  /* ONE cell, sized by the frame and not by what is in it.
+     `place-items: center` alone leaves the row auto-sized, and a
+     percentage max-height against an auto row resolves to no constraint
+     at all — which is how a tall figure grew past the frame and had its
+     bottom clipped by `overflow: hidden`. Pinning the track to the
+     frame's own height is what makes the contain below mean anything. */
+  grid-template: minmax(0, 1fr) / minmax(0, 1fr);
+  place-items: stretch;
+  overflow: hidden;
+  padding: 10px;
+  background-color: #fff;
+  border-color: var(--ink);
+}
+.bd-stage-img {
+  /* Fill the cell and letterbox inside it: the figure is never cropped,
+     and whatever aspect ratio it has, the leftover is white paper. */
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  object-fit: contain;
+  object-position: center;
+  opacity: 0;
+  transition: opacity var(--dur) var(--ease-out);
+}
+.bd-stage[data-media='image'] .bd-stage-img { opacity: 1; }
+.bd-stage[data-media='image'] .bd-skel { opacity: 0; pointer-events: none; }
+.bd-stage[data-media='image'] .bd-stage-frame { background-image: none; background-color: #fff; }
+
+.bd-skel {
+  position: absolute;
+  inset: 8px;
+  border-color: var(--a-line);
+  background-color: var(--a-soft);
+  transition: opacity var(--dur) var(--ease-out);
+}
+.bd-skel .bx-skel-tag { border-color: var(--a-line); color: var(--a); }
+
+/* The cross-fade between two strata: the stage dips rather than cuts. */
+.bd-stage.is-swapping .bd-stage-frame > * { opacity: 0; }
+
+/* ---- Right column: the strata ---- */
+.bd-list { list-style: none; margin: 0; padding: 0; }
+.bd-list li + li { margin-top: 9px; }
+
+/* An axis with more entries than the stage is tall wraps rather than
+   stretching the pane past every other axis. The point of the fixed stage is
+   that the pane keeps one height whatever you select. */
+.bd-list[data-many] {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+  align-content: start;
+}
+.bd-list[data-many] li + li { margin-top: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .bd-stage-img, .bd-skel { transition: none; }
+}
+
+/* `hidden` has to beat the flex display above: a method with no ordered
+   axis (Layout Organization) must not show a Sparse to Dense rule. */
+.bd-axis[hidden] { display: none; }
+
+
+/* ---- The stratum row, after the numbers came off ----
+   A name and a marker for the one showing. The bar and the percentage that
+   used to sit here were a judgement dressed as a measurement (see the note at
+   the top of panel-density.js), and with them gone the row is one line, so it
+   is laid out as one rather than as a two-line card. */
+.bd-item {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  width: 100%;
+  text-align: left;
+  padding: 13px 15px;
+  font-family: var(--font-body);
+  background: var(--surface);
+  border: 1.5px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: border-color var(--dur-fast) var(--ease-out),
+              background var(--dur-fast) var(--ease-out),
+              transform var(--dur-fast) var(--ease-out);
+}
+.bd-item:hover { border-color: var(--a); transform: translateX(2px); }
+.bd-item.is-on {
+  background: var(--a-soft);
+  border-color: var(--a);
+  box-shadow: inset 4px 0 0 var(--a);
+}
+.bd-item-label {
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.3;
+}
+.bd-item-dot {
+  flex: 0 0 auto;
+  width: 11px; height: 11px;
+  border-radius: 50%;
+  border: 2px solid var(--line-strong);
+  background: var(--surface);
+  transition: background var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
+}
+.bd-item.is-on .bd-item-dot { background: var(--a); border-color: var(--a); }
+
+/* ---- "pick one", and an arrow that goes where the words say ---- */
+.bd-hintline {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 12px 0 0;
+  color: var(--ink-faint);
+}
+.bd-hintline .hand { font-size: 1.02rem; line-height: 1.2; }
+.bd-squiggle {
+  flex: 0 0 auto;
+  width: 78px; height: 22px;
+  color: var(--a);
+  opacity: 0.85;
+}
+/* Stacked, the stage is above rather than to the left, so the arrow turns to
+   point up at it instead of sideways at nothing. */
+@container bd (max-width: 720px) {
+  .bd-hintline { flex-direction: column; align-items: flex-start; gap: 4px; }
+  .bd-squiggle { transform: rotate(90deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bd-item, .bd-item-dot { transition: none; }
+}
+
+/* ---- A MEDIA FRAME IS WHITE PAPER, NOT DOTTED PAPER ----
+   `.frame-paper` gives every framed slot the site's dotted ground, which is
+   right for an empty slot: it reads as paper waiting for something. Once a
+   figure is in it the dots are the only thing behind a letterboxed image, and
+   a diagram sitting in a field of dots looks like it failed to load rather
+   than like it is being shown whole. Each pane used to switch the dots off
+   per state, which meant every new state had to remember to. These slots are
+   simply white, always. The empty state keeps its own labelled skeleton on
+   top, so nothing is lost by it. */
+.bd-stage-frame {
+  background-image: none;
+  background-color: #fff;
+}

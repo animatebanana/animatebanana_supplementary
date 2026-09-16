@@ -1,0 +1,54 @@
+=== Alpha Masking Sequence ===
+
+Frame Image : frame_00.png
+Timestamp   : 1.00s
+Narration   : The TAG-HGT framework begins by receiving cold-start nodes represented solely by raw text.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 3.00s
+Narration   : These raw textual inputs are passed into the Semantic Feature Encoder.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 4.00s
+Narration   : Within this encoder, a frozen large language model processes the text to extract rich semantic features offline.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 5.00s
+Narration   : Within this encoder, a frozen large language model processes the text to extract rich semantic features offline.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 7.00s
+Narration   : Concurrently, warm topology from the existing academic graph is fed into the Temporal Topology Encoder.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 8.00s
+Narration   : A trainable Heterogeneous Graph Transformer encodes these relational graph connections into structural embeddings.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 9.00s
+Narration   : A trainable Heterogeneous Graph Transformer encodes these relational graph connections into structural embeddings.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 11.00s
+Narration   : Both the semantic features and structural embeddings are forwarded to the contrastive learning module.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 13.00s
+Narration   : The Cross-View Contrastive Learning module aligns the semantic teacher view with the graph student view via contrastive loss.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 15.00s
+Narration   : The aligned student embeddings and temporal candidate indices enter the Time-Aware Retrieval inference stage.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 16.00s
+Narration   : Candidate retrieval is performed using fast approximate nearest neighbor search followed by time decay filtering.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Timestamp   : 17.00s
+Narration   : Candidate retrieval is performed using fast approximate nearest neighbor search followed by time decay filtering.
+--------------------------------------------------------------------------------
+Frame Image : frame_12.png
+Timestamp   : 19.00s
+Narration   : Finally, the framework delivers high-precision Top-K recommendations in real time.
+--------------------------------------------------------------------------------

@@ -1,0 +1,50 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : The generation process begins in the mapping network, where a Gaussian random noise vector is sampled.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : A multi-layer perceptron transforms this noise code into an intermediate latent style vector.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : In parallel, extrinsic and intrinsic camera parameters define the viewing rays cast through each pixel.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : These rays are converted into a spatial Plücker embedding to parameterize the light field without redundancy.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : The synthesis network modulates intermediate feature maps with the style code while concatenating the ray embedding at every layer.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : At the initial stage, a coarse feature map is modulated and concatenated with a downsampled ray embedding.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : The network progressively upsamples the representation, allowing the generator to associate camera rays with appearance.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 3.999s
+Narration   : As resolution increases across layers, mid-level facial features and geometry emerge.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 4.499s
+Narration   : Fine-scale textures and high-frequency details are refined in the final feature maps.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 4.999s
+Narration   : These features synthesize a high-resolution, viewpoint-conditioned output image.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 5.499s
+Narration   : The discriminator evaluates the generated image conditioned directly on the original camera parameters.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Timestamp   : 5.999s
+Narration   : Finally, the discriminator outputs a real or fake prediction to drive adversarial training.
+--------------------------------------------------------------------------------

@@ -1,0 +1,62 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : The framework begins by receiving the video stream, starting with frame k minus two.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : A convolutional backbone extracts visual feature representations from the frame.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : The Transformer Video Module models spatio-temporal relations using self-attention mechanisms.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : A panoptic decoder then generates the initial pixel-level panoptic segmentation.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : Initial instance identifiers are assigned to establish consistent tracking across the clip.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : For the subsequent frame k minus one, features are extracted via the backbone.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : The Transformer Video Module aggregates features across both the current and preceding frames.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 3.999s
+Narration   : An optical flow decoder estimates motion between frames to warp the previous instance ID map forward.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 4.499s
+Narration   : Concurrently, the panoptic decoder predicts the segmentation for the current frame.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 4.999s
+Narration   : ID association matches the warped historical identities with current instance predictions.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 5.499s
+Narration   : Processing continues to frame k, extracting its visual feature representations.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Timestamp   : 5.999s
+Narration   : The Transformer module integrates temporal context across consecutive frames in the sequence.
+--------------------------------------------------------------------------------
+Frame Image : frame_12.png
+Timestamp   : 6.499s
+Narration   : Inter-frame motion is decoded to warp the tracked ID map from frame k minus one.
+--------------------------------------------------------------------------------
+Frame Image : frame_13.png
+Timestamp   : 6.999s
+Narration   : The panoptic decoder yields the segmentation map for frame k.
+--------------------------------------------------------------------------------
+Frame Image : frame_14.png
+Timestamp   : 7.499s
+Narration   : Finally, ID association assigns consistent tracking identifiers across the entire video sequence.
+--------------------------------------------------------------------------------

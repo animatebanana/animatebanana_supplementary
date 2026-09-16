@@ -1,0 +1,38 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : A neuromorphic vision sensor observes the real scene containing a human subject.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : The camera outputs an asynchronous event stream formatted into voxel grids.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : Without protection, an adversary can apply an event-to-image reconstruction network directly to the raw stream.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : This reconstructs clear grayscale imagery, exposing sensitive identity information.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : To protect privacy, an event anonymization autoencoder scrambles the voxel grid while preserving structural context.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : The anonymized event stream is fed directly into a person re-identification backbone to extract feature embeddings.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : Simultaneously, an inversion attack attempts to compromise the anonymized stream.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 3.999s
+Narration   : The attacked output is processed by the event-to-image reconstruction network.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 4.499s
+Narration   : The resulting reconstructed image remains heavily degraded and unidentifiable, successfully preserving individual privacy.
+--------------------------------------------------------------------------------

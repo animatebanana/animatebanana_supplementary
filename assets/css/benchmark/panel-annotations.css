@@ -1,0 +1,561 @@
+/*
+  RICH ANNOTATIONS PER NARRATIVE pane — the green one.
+
+  A four-cell flow with ink arrows between, driven by `[data-stage]` on
+  `.ba-flow`: one attribute is the whole state machine, so a cell can
+  never be lit while the step before it is dark. Below it, the three
+  artifact buttons and the dialog they open.
+
+  Owns `.ba-*` only. Opening an asset fullscreen is the shared viewer's
+  job (`bench-lightbox.css`), not this file's.
+*/
+
+/* ---- Play button, in the pane's header bar ---- */
+.ba-play {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 13px 6px 8px;
+  font-family: var(--font-body);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  color: var(--ink);
+  background: var(--banana);
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 2px 2px 0 rgba(26, 24, 21, 0.55);
+  transition: transform var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out);
+}
+.ba-play:hover { transform: translate(-1px, -1px); box-shadow: 3px 3px 0 rgba(26, 24, 21, 0.55); }
+.ba-play:active { transform: translate(2px, 2px); box-shadow: none; }
+.ba-play-ic { display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: var(--surface); }
+.ba-play-ic svg { width: 12px; height: 12px; }
+.ba-play.is-running .ba-play-ic svg { display: none; }
+.ba-play.is-running .ba-play-ic::after { content: ''; width: 8px; height: 8px; border-radius: 1.5px; background: var(--ink); }
+
+.ba-cite { display: block; margin-top: 5px; font-size: var(--fs-xs); color: var(--ink-faint); }
+
+/* ---- Progress track ---- */
+.ba-track {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  list-style: none;
+  margin: 0 0 16px;
+  padding: 0;
+}
+.ba-track-step {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  transition: color var(--dur) var(--ease-out);
+}
+.ba-track-num {
+  display: grid;
+  place-items: center;
+  width: 17px; height: 17px;
+  border-radius: 50%;
+  border: 1.5px solid currentColor;
+  font-size: 0.62rem;
+  font-weight: 700;
+}
+.ba-track-step.is-on { color: var(--a); }
+.ba-track-step.is-on .ba-track-num { background: var(--a); border-color: var(--a); color: #fff; }
+.ba-track-step.is-now .ba-track-num { box-shadow: 0 0 0 3px var(--a-soft); }
+.ba-track-step + .ba-track-step::before {
+  content: '';
+  width: 14px; height: 1.5px;
+  background: repeating-linear-gradient(90deg, currentColor 0 3px, transparent 3px 6px);
+  opacity: 0.5;
+}
+
+/* ---- The flow ---- */
+/* Container queries, not media queries: in the page's two-up grid this
+   pane is ~700px wide on a 1560px screen, and a four-across flow there
+   squeezes a 1000x260 source figure down to a stamp. The pane measures
+   itself and folds to 2x2 — the four steps still read in order, and
+   every cell doubles in width. */
+.ba-body { container-type: inline-size; container-name: ba; }
+
+/* ---- Fixed geometry ----
+   Every cell is the same three rows — label, media, caption — at the
+   same heights, whatever is inside them. The media box does NOT size
+   itself to its content: a 4:1 strip, a 3-row thumbnail grid and a
+   paper skeleton all occupy exactly `--ba-body-h`, so switching
+   examples, loading a clip or folding the flow never moves a box or
+   shifts an arrow. The arrows are pinned to the middle of the media row
+   by the same tokens rather than centred on whatever the tallest cell
+   turned out to be. */
+.ba-flow {
+  --ba-head-h: 26px;
+  --ba-body-h: clamp(190px, 15.5vw, 244px);
+  --ba-cap-h: 4.4em;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 22px minmax(0, 1.3fr) 22px minmax(0, 1.15fr) 22px minmax(0, 1.35fr);
+  gap: 8px;
+  align-items: stretch;
+}
+@container ba (max-width: 980px) {
+  .ba-flow { grid-template-columns: minmax(0, 1fr) 22px minmax(0, 1fr); row-gap: 16px; }
+  .ba-arrow:nth-of-type(2) { display: none; }
+  .ba-narr { grid-column: 1; }
+  .ba-out { grid-column: 3; }
+  .ba-cell { position: relative; }
+  .ba-flow { --ba-body-h: clamp(200px, 26vw, 264px); }
+}
+@container ba (max-width: 520px) {
+  .ba-flow { grid-template-columns: minmax(0, 1fr); }
+  .ba-arrow { display: none !important; }
+  .ba-cell { grid-column: 1 / -1 !important; }
+}
+
+.ba-cell {
+  margin: 0;
+  min-width: 0;
+  display: grid;
+  /* The caption row exists in every cell, occupied or not — that is what
+     keeps the four the same height without anything measuring anything. */
+  grid-template-rows: var(--ba-head-h) var(--ba-body-h) var(--ba-cap-h);
+  opacity: 0.32;
+  filter: saturate(0.2);
+  transform: translateY(6px);
+  transition: opacity var(--dur-slow) var(--ease-out), filter var(--dur-slow) var(--ease-out),
+              transform var(--dur-slow) var(--ease-out);
+}
+.ba-flow[data-stage='1'] .ba-cell[data-cell='0'],
+.ba-flow[data-stage='2'] .ba-cell[data-cell='0'],
+.ba-flow[data-stage='2'] .ba-cell[data-cell='1'],
+.ba-flow[data-stage='3'] .ba-cell[data-cell='0'],
+.ba-flow[data-stage='3'] .ba-cell[data-cell='1'],
+.ba-flow[data-stage='3'] .ba-cell[data-cell='2'],
+.ba-flow[data-stage='4'] .ba-cell { opacity: 1; filter: none; transform: none; }
+
+.ba-cell-head {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0;
+  align-self: center;
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.ba-cell-head b {
+  display: grid;
+  place-items: center;
+  width: 16px; height: 16px;
+  border-radius: 4px;
+  background: var(--a);
+  color: #fff;
+  font-size: 0.62rem;
+}
+.ba-cell-body {
+  position: relative;
+  height: 100%;
+  min-height: 0;
+  display: grid;
+  /* One cell pinned to the frame. Auto-sized tracks make the
+     `height: 100%` on the media below resolve against its own content,
+     which is no constraint at all — the figure then grows past the
+     frame and `overflow: hidden` takes a bite out of it. */
+  grid-template: minmax(0, 1fr) / minmax(0, 1fr);
+  place-items: stretch;
+  align-content: stretch;
+  padding: 8px;
+  overflow: hidden;
+  border-color: var(--ink);
+}
+
+/* Arrows between cells */
+/* Pinned to the middle of the media row, not to the middle of the tallest
+   cell — so the arrow sits at the same height on every row, always. */
+.ba-arrow {
+  align-self: start;
+  height: calc(var(--ba-head-h) + var(--ba-body-h));
+  display: grid;
+  place-items: center;
+}
+.ba-arrow i {
+  display: block;
+  width: 16px; height: 2px;
+  background: var(--ink-faint);
+  position: relative;
+}
+.ba-arrow i::after {
+  content: '';
+  position: absolute;
+  right: -1px; top: 50%;
+  transform: translateY(-50%);
+  border-left: 6px solid var(--ink-faint);
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+}
+.ba-flow[data-stage='4'] .ba-arrow i,
+.ba-flow[data-stage='3'] .ba-arrow i { background: var(--a); }
+.ba-flow[data-stage='4'] .ba-arrow i::after,
+.ba-flow[data-stage='3'] .ba-arrow i::after { border-left-color: var(--a); }
+
+/* 1 · input */
+.ba-input-img {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  object-fit: contain;
+  object-position: center;
+  opacity: 0;
+  transform: scale(0.96);
+  transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-spring);
+}
+.ba-input.is-loaded .ba-input-img { opacity: 1; transform: none; }
+.ba-input.is-loaded .ba-skel { opacity: 0; }
+.ba-skel { position: absolute; inset: 8px; border-color: var(--a-line); background-color: var(--a-soft); transition: opacity var(--dur) var(--ease-out); }
+.ba-skel .bx-skel-tag { border-color: var(--a-line); color: var(--a); }
+
+/* 2 · the frame deal */
+.ba-seq-skel { transition: opacity var(--dur) var(--ease-out); }
+.ba-flow[data-stage='2'] .ba-seq-skel,
+.ba-flow[data-stage='3'] .ba-seq-skel,
+.ba-flow[data-stage='4'] .ba-seq-skel { opacity: 0; pointer-events: none; }
+.ba-flow[data-stage='2'] .ba-seq .ba-cell-body,
+.ba-flow[data-stage='3'] .ba-seq .ba-cell-body,
+.ba-flow[data-stage='4'] .ba-seq .ba-cell-body { background-image: none; background-color: #fff; }
+
+.ba-frames {
+  list-style: none;
+  margin: 0;
+  /* Enough that the live frame's 1.06 lift is absorbed by the padding
+     rather than by the scroll edge. */
+  padding: 9px;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+  align-content: start;
+}
+/* Below its own fold the cell is narrower than four legible thumbs. */
+@container ba (max-width: 620px) {
+  .ba-frames { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+.ba-frame {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  padding: 0;
+  overflow: hidden;
+  background: #fff;
+  border: 1.5px solid var(--line-strong);
+  border-radius: 5px;
+  cursor: pointer;
+  opacity: 0;
+  /* The deal-in is an ANIMATION and the highlight is a TRANSITION, on
+     different properties, because they are different things happening at
+     different times. When both lived on `transition`, the per-frame
+     stagger (`--i * 55ms`) delayed the highlight too — so on beat 8 the
+     ring took half a second to arrive and two frames read as live at
+     once. `transform` belongs to the deal; the independent `scale`
+     property belongs to the highlight, and the two compose without
+     either overriding the other. */
+  scale: 1;
+  transform: translateY(10px) rotate(-2deg);
+  transition: scale 190ms var(--ease-spring),
+              border-color var(--dur-fast) var(--ease-out),
+              box-shadow var(--dur-fast) var(--ease-out),
+              filter var(--dur-fast) var(--ease-out);
+}
+.ba-flow[data-stage='2'] .ba-frame,
+.ba-flow[data-stage='3'] .ba-frame,
+.ba-flow[data-stage='4'] .ba-frame {
+  animation: ba-deal 420ms var(--ease-out) both;
+  animation-delay: calc(var(--i) * 55ms);
+}
+@keyframes ba-deal {
+  from { opacity: 0; transform: translateY(10px) rotate(-2deg); }
+  to { opacity: 1; transform: none; }
+}
+/* Contained, not cropped. `cover` filled the tile by cutting the figure
+   down to its top-left corner, so a beat that lights up on the right of
+   the diagram showed nothing at all. The tile is white, so a figure
+   that does not match 16:10 simply sits smaller inside it. */
+.ba-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  background: #fff;
+}
+.ba-frame-n {
+  position: absolute;
+  left: 2px; bottom: 2px;
+  padding: 0 4px;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  font-weight: 700;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.88);
+  color: var(--ink-soft);
+}
+/* The live beat has to be unmistakable.
+   A thin dark box around a 56px thumbnail reads as "a frame", not as
+   "THIS frame": at that size the border is most of what you can see, so
+   changing its colour changes almost nothing. Instead the live one lifts
+   out of the grid — scaled up, ringed in banana against ink, with its
+   number badge inverted — and every other frame is dimmed and
+   desaturated behind it. Motion plus contrast plus size, not one of the
+   three. */
+.ba-frame.is-seen { border-color: var(--a-line); }
+.ba-frame:hover { border-color: var(--a); }
+
+.ba-flow[data-stage='2'] .ba-frame:not(.is-on),
+.ba-flow[data-stage='3'] .ba-frame:not(.is-on),
+.ba-flow[data-stage='4'] .ba-frame:not(.is-on) { filter: opacity(0.55) saturate(0.6); }
+.ba-frame:not(.is-on):hover { filter: none; }
+
+/* Scoped to the revealed states on purpose: `.is-on` is set the moment a
+   beat is scrubbed, and at stage 0 every other frame is still at
+   opacity 0 — so an unscoped rule left exactly one frame floating,
+   scaled up, in an otherwise empty cell before Play was ever pressed. */
+.ba-flow[data-stage='2'] .ba-frame.is-on,
+.ba-flow[data-stage='3'] .ba-frame.is-on,
+.ba-flow[data-stage='4'] .ba-frame.is-on {
+  z-index: 2;
+  filter: none;
+  border-color: var(--ink);
+  border-width: 2px;
+  /* The ring is drawn INSIDE the frame. An outset ring on a thumbnail
+     inside a scroll container is clipped the moment the live beat lands
+     in an edge column — which is most of the time on a 4-wide grid — so
+     the highlight would come and go depending on where in the sequence
+     you were. Inset, it is identical in every cell. */
+  box-shadow:
+    inset 0 0 0 3px var(--banana),
+    inset 0 0 0 4.5px rgba(26, 24, 21, 0.22);
+  scale: 1.06;
+}
+.ba-flow[data-stage='2'] .ba-frame.is-on .ba-frame-n,
+.ba-flow[data-stage='3'] .ba-frame.is-on .ba-frame-n,
+.ba-flow[data-stage='4'] .ba-frame.is-on .ba-frame-n {
+  background: var(--ink);
+  color: var(--banana);
+  font-weight: 800;
+}
+/* A corner tick, so the live frame is findable even in a screenshot. */
+.ba-flow[data-stage='2'] .ba-frame.is-on::after,
+.ba-flow[data-stage='3'] .ba-frame.is-on::after,
+.ba-flow[data-stage='4'] .ba-frame.is-on::after {
+  content: '';
+  position: absolute;
+  right: 3px; top: 3px;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--banana);
+  border: 1.5px solid var(--ink);
+}
+
+/* 3 · narration */
+/* Rows, not padding: the text needs a bounded region of its own to
+   scroll inside. With the sheet's height fixed, a long beat used to run
+   straight under the waveform and out of the box. */
+/* The narration cell stretches its child rather than centring it:
+   `align-content: center` on the body would content-size the row, and a
+   `height: 100%` sheet inside a content-sized row resolves to auto — so
+   the sheet sat short and floating in the middle of its cell. */
+.ba-narr .ba-cell-body { place-items: stretch; align-content: stretch; }
+
+.ba-narr-sheet {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: 6px;
+  width: 100%;
+  height: 100%;
+  align-self: stretch;
+  padding: 11px 12px 10px;
+  background: var(--surface);
+  border: 1.5px solid var(--a-line);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+.ba-narr-beat {
+  justify-self: start;
+  padding: 2px 8px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  border-radius: 999px;
+  background: var(--a);
+  color: #fff;
+}
+/* THE WHOLE LINE, ALWAYS.
+   A beat's narration runs from eight words to thirty, and the sheet is
+   a fixed height because the pane must not grow as the run plays. The
+   long ones used to scroll — which in practice meant they were cut off,
+   since nobody scrolls a box that is retyping itself. So the type size
+   shrinks to fit instead (`--ba-narr-fs`, set by panel-annotations.js
+   once the full text is in), down to a floor that is still comfortably
+   readable. Nothing is ever hidden; a long beat is simply set smaller. */
+.ba-narr-text {
+  margin: 0;
+  min-height: 0;
+  overflow: hidden;
+  font-size: var(--ba-narr-fs, var(--fs-xs));
+  line-height: 1.55;
+  color: var(--ink);
+  text-wrap: pretty;
+  transition: font-size 120ms var(--ease-out);
+}
+.ba-narr-text::after {
+  content: '';
+  display: inline-block;
+  width: 2px; height: 0.95em;
+  margin-left: 2px;
+  vertical-align: -0.13em;
+  background: var(--a);
+  animation: ba-caret 1s steps(2) infinite;
+}
+@keyframes ba-caret { 50% { opacity: 0; } }
+
+.ba-narr-wave {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 15px;
+  opacity: 0.5;
+}
+.ba-narr-wave i {
+  flex: 1;
+  border-radius: 1px;
+  background: var(--a);
+  height: 30%;
+  animation: ba-wave 1.25s var(--ease-io) infinite;
+  animation-delay: calc(var(--i) * -70ms);
+}
+@keyframes ba-wave { 0%, 100% { height: 22%; } 50% { height: 100%; } }
+
+/* 4 · the finished narrative */
+/* Sized explicitly rather than left to the element's intrinsic size: a
+   <video> reports 300x150 until its metadata arrives, which would make
+   the cell jump the moment the clip loaded. */
+.ba-video {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  object-fit: contain;
+  object-position: center;
+  opacity: 0;
+  transition: opacity var(--dur-slow) var(--ease-out);
+}
+.ba-out.is-loaded .ba-video { opacity: 1; }
+.ba-out.is-loaded .ba-skel { opacity: 0; }
+.ba-out.is-loaded .ba-cell-body { background-image: none; background-color: #fff; }
+
+/* The narration, under the clip it belongs to.
+   Tracks the playhead once the clip runs (`vt` per beat in the data
+   file); before that it mirrors whichever beat is scrubbed. Two lines
+   deep and reserved, so a long line never shifts the row. */
+.ba-out-cap {
+  display: flex;
+  gap: 8px;
+  margin: 8px 0 0;
+  min-height: 0;
+  max-height: 100%;
+  overflow-y: auto;
+  font-size: var(--fs-xs);
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+.ba-out-cap-t {
+  flex: 0 0 auto;
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  font-weight: 700;
+  color: var(--a);
+  padding-top: 2px;
+  font-variant-numeric: tabular-nums;
+}
+.ba-out-cap-t:empty { display: none; }
+.ba-out-cap-x { display: block; }
+
+/* ---- Additional artifacts ---- */
+.ba-artifacts { margin-top: clamp(16px, 2vw, 24px); padding-top: 16px; border-top: 2px dashed var(--a-line); }
+.ba-artifacts-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.ba-artifacts-head .hand {
+  font-size: 1.1rem;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink-faint);
+}
+
+.ba-art-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 9px;
+}
+.ba-art {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  text-align: left;
+  padding: 11px 12px;
+  font-family: var(--font-body);
+  background: var(--surface);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-md);
+  box-shadow: 3px 3px 0 var(--a);
+  cursor: pointer;
+  transition: transform var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out),
+              background var(--dur-fast) var(--ease-out);
+}
+.ba-art:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var(--a); background: var(--a-soft); }
+.ba-art:active { transform: translate(3px, 3px); box-shadow: 0 0 0 var(--a); }
+.ba-art-ic { display: flex; color: var(--a); }
+.ba-art-ic svg { width: 20px; height: 20px; }
+.ba-art-text { flex: 1; min-width: 0; }
+.ba-art-label { display: block; font-size: var(--fs-xs); font-weight: 700; letter-spacing: -0.01em; }
+.ba-art-sub { display: block; font-family: var(--font-mono); font-size: var(--fs-micro); color: var(--ink-faint); }
+.ba-art-go { color: var(--a); font-weight: 700; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ba-narr-text { transition: none; }
+  .ba-cell, .ba-frame, .ba-input-img, .ba-video, .ba-skel { transition: none; }
+  .ba-frame { animation: none !important; opacity: 1; transform: none; }
+  .ba-narr-wave i, .ba-narr-text::after { animation: none; }
+}
+
+/* The narration under the clip is as long as the pipeline's own sentences get,
+   which is longer than the cell below it. `max-height: 100%` let it run past
+   the pane's edge and be cut mid-line; an exact multiple of the line height
+   stops it on a line instead, and it still scrolls to the rest. */
+.ba-out-cap { max-height: 6em; }
+
+/* ---- A MEDIA FRAME IS WHITE PAPER, NOT DOTTED PAPER ----
+   `.frame-paper` gives every framed slot the site's dotted ground, which is
+   right for an empty slot: it reads as paper waiting for something. Once a
+   figure is in it the dots are the only thing behind a letterboxed image, and
+   a diagram sitting in a field of dots looks like it failed to load rather
+   than like it is being shown whole. Each pane used to switch the dots off
+   per state, which meant every new state had to remember to. These slots are
+   simply white, always. The empty state keeps its own labelled skeleton on
+   top, so nothing is lost by it. */
+.ba-cell-body {
+  background-image: none;
+  background-color: #fff;
+}

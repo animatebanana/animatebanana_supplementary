@@ -1,0 +1,34 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : To begin, preceding motion frames are provided to preserve head movement and temporal continuity.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : An identity frame is supplied to inform the model of the target subject's facial appearance.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : A noisy target frame represents the corrupted image state at the current diffusion step.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : These visual inputs are concatenated channel-wise to form the primary visual input to the network.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : In parallel, chunks of the audio sequence are processed by a pre-trained audio encoder to extract acoustic embeddings.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : A time encoding provides information about the current diffusion step.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : The diffusion model receives the concatenated visual inputs, conditioned on both time encoding and audio embedding.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 3.999s
+Narration   : Finally, the model outputs the fully denoised target frame with synchronized facial expressions.
+--------------------------------------------------------------------------------

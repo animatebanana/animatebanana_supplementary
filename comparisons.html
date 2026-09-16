@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+  <title>Comparisons — AnimateBanana</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@400..800&family=JetBrains+Mono:wght@400..700&family=Caveat:wght@500..700&display=swap">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css?v=2">
+  <link rel="stylesheet" href="assets/css/components/site-nav.css?v=2">
+  <link rel="stylesheet" href="assets/css/components/doodle-field.css">
+  <style>
+    .cmp-card {
+      border: 2px solid var(--ink); border-radius: var(--radius-lg);
+      background: var(--surface); box-shadow: var(--shadow-hard);
+      padding: 24px 26px 28px; margin-bottom: 24px;
+    }
+    .cmp-head { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+    .cmp-title { font-family: var(--font-display); font-size: clamp(1.4rem, 1.1rem + 1vw, 2rem); font-weight: 800; letter-spacing: -0.03em; }
+    .cmp-players { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 20px; }
+    @media (max-width: 720px) { .cmp-players { grid-template-columns: 1fr; } }
+    .cmp-player-label { font-size: var(--fs-micro); letter-spacing: var(--tracking-kicker); text-transform: uppercase; color: var(--ink-faint); font-weight: 650; margin-bottom: 9px; }
+    .cmp-frame { height: 168px; display: grid; place-items: center; padding: 14px; }
+    .cmp-frame svg { width: 100%; height: auto; max-height: 100%; }
+    .cmp-metrics { display: grid; grid-template-columns: repeat(6, minmax(0,1fr)); gap: 6px; margin-top: 16px; text-align: center; }
+    .cmp-metric-key { font-size: var(--fs-micro); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-faint); }
+    .cmp-metric-val { font-family: var(--font-mono); font-size: var(--fs-sm); font-weight: 550; font-variant-numeric: tabular-nums; }
+    .cmp-note { font-size: var(--fs-xs); color: var(--ink-soft); margin-top: 16px; }
+  </style>
+</head>
+<body>
+  <site-nav current="comparisons"></site-nav>
+
+  <div class="page">
+    <div class="page-head">
+      <doodle-field density="sparse"></doodle-field>
+      <div class="kicker">Appendix · 04</div>
+      <h1>Baseline Comparisons</h1>
+      <p>Independent players, deliberately not synchronised — inspect either at your own pace. Scores are real per-diagram metric values, not aggregates.</p>
+    </div>
+    <div id="comparisons-list"></div>
+
+    <footer class="site-footer">
+      <span>AnimateBanana — companion site to the paper. Anonymous submission.</span>
+      <nav aria-label="Footer">
+        <a href="index.html">Overview</a>
+        <a href="resources.html">Paper</a>
+        <a href="resources.html">Code</a>
+      </nav>
+    </footer>
+  </div>
+
+  <script type="module" src="assets/js/components/site-nav.js?v=2"></script>
+  <script type="module" src="assets/js/components/doodle-field.js"></script>
+  <script type="module" src="assets/js/pages/comparisons.js"></script>
+  <script type="module" src="assets/js/lib/reveal.js"></script>
+</body>
+</html>

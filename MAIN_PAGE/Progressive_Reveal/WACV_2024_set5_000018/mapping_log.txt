@@ -1,0 +1,38 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : The framework employs a differentiable analysis-by-synthesis pipeline, highlighting forward rendering passes, backward gradient flows, and differentiable parameter modules.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : From each acquired video frame, the system detects two-dimensional hand joint locations.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : An initialization stage fits a parametric hand mesh to the joints, segmenting the hand region from the forearm and background.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : This provides initial parameters for hand shape, pose, and vertex displacement offsets into the main optimization pipeline.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : The Extended MANO module applies these parameters along with subdivided mesh displacements to generate a detailed, deformed three-dimensional hand mesh.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : Next, a differentiable rasterizer processes material textures to produce screen-space geometry buffers and interpolated surface attributes.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : A differentiable shader then simulates illumination using an environment light probe and material properties, evaluating visibility to explicitly model self-shadows.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 3.999s
+Narration   : This produces the final tone-mapped rendered output image of the reconstructed hand.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 4.499s
+Narration   : Finally, the loss function compares the rendered image to the segmented reference frame, backpropagating gradients to jointly optimize geometry, materials, and environment lighting.
+--------------------------------------------------------------------------------

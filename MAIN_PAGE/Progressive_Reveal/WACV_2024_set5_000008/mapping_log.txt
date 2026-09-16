@@ -1,0 +1,30 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : First, spatial coordinates and viewing directions are passed into a neural radiance field representing the full scene.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : The network outputs color and volume density, rendering the complete three-dimensional scene containing both foreground and background.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : In parallel, the spatial inputs are provided to a dedicated background neural radiance network.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : This network generates a volumetric representation representing exclusively the background scene.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : By volumetrically subtracting the background representation from the full scene, the framework cleanly isolates the disentangled foreground object.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : Semantically consistent volumetric manipulations can then be applied directly to this isolated foreground object, such as modifying its color.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : Finally, the modified foreground object is volumetrically composited back into the background scene to produce the complete manipulated three-dimensional volume.
+--------------------------------------------------------------------------------

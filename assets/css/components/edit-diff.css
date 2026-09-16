@@ -1,0 +1,261 @@
+/* Editability: one window per edit — the animation before, the suggestion that
+   was made, the animation after. Owns .ed-* only. */
+
+edit-diff {
+  display: block;
+  --ed-maroon: #6B1F2E;
+  --ed-maroon-deep: #4E1420;
+  --ed-maroon-soft: #8C3346;
+  --ed-cream: #FFF6EC;
+}
+
+/* ---------- section banner ---------- */
+.ed-section { margin-top: clamp(40px, 5.5vw, 72px); }
+.ed-banner {
+  position: relative; overflow: hidden;
+  display: flex; align-items: center; gap: 16px;
+  padding: 16px clamp(20px, 3vw, 34px);
+  background:
+    radial-gradient(120% 180% at 0% 0%, var(--ed-maroon-soft) 0%, transparent 62%),
+    linear-gradient(100deg, var(--ed-maroon) 0%, var(--ed-maroon-deep) 100%);
+  border: 2px solid var(--ink);
+  border-radius: 16px;
+  box-shadow: var(--shadow-hard);
+}
+.ed-banner::after {          /* a thin gold rule along the foot */
+  content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 3px;
+  background: linear-gradient(90deg, var(--banana, #FFD43B), rgba(255,212,59,0));
+}
+.ed-banner h2 {
+  margin: 0; color: var(--ed-cream); letter-spacing: -.01em;
+  font-size: clamp(1.1rem, .95rem + .6vw, 1.55rem); line-height: 1.18;
+}
+.ed-banner .ed-mark {
+  flex: 0 0 auto; width: 10px; align-self: stretch; border-radius: 3px;
+  background: var(--banana, #FFD43B);
+}
+
+/* ---------- one example ---------- */
+.ed-ex {
+  margin-top: clamp(20px, 2.6vw, 34px);
+  background: #fff; border: 2px solid var(--ink); border-radius: 16px;
+  box-shadow: var(--shadow-hard); overflow: hidden;
+}
+.ed-exhead {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  padding: 11px 18px;
+  background: linear-gradient(100deg, var(--ed-maroon) 0%, var(--ed-maroon-deep) 100%);
+  color: var(--ed-cream);
+}
+.ed-num {
+  font-family: var(--font-display, serif); font-weight: 900; font-size: 15.5px;
+  letter-spacing: .01em;
+}
+.ed-src { font-family: var(--font-mono); font-size: 11.5px; color: rgba(255,246,236,.66); }
+.ed-sp { flex: 1 1 auto; }
+.ed-chip {
+  font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .05em;
+  padding: 4px 10px; border-radius: 999px;
+  border: 1px solid rgba(255,246,236,.34); color: var(--ed-cream);
+  background: rgba(255,255,255,.08); white-space: nowrap;
+}
+.ed-xmlbtn {
+  font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .05em;
+  padding: 5px 11px; border-radius: 999px; cursor: pointer;
+  border: 1px solid var(--banana, #FFD43B); color: #2A1016;
+  background: var(--banana, #FFD43B); font-weight: 700;
+}
+.ed-xmlbtn:hover { filter: brightness(1.07); }
+
+/* ---------- the three columns ---------- */
+.ed-cols {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(210px, 264px) minmax(0, 1fr);
+}
+@media (max-width: 1080px) { .ed-cols { grid-template-columns: 1fr; } }
+
+.ed-side {
+  padding: 15px 18px 18px; min-width: 0;
+  display: flex; flex-direction: column;
+}
+.ed-side + .ed-mid, .ed-mid + .ed-side { border-left: 1.5px solid var(--line); }
+@media (max-width: 1080px) {
+  .ed-side + .ed-mid, .ed-mid + .ed-side { border-left: 0; border-top: 1.5px solid var(--line); }
+}
+.ed-sidehead {
+  display: flex; align-items: center; gap: 8px; margin-bottom: 9px;
+  font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .09em;
+  text-transform: uppercase; color: var(--ed-maroon);
+}
+.ed-sidehead i {
+  width: 8px; height: 8px; border-radius: 50%; background: var(--ed-maroon-soft);
+}
+.ed-after .ed-sidehead i { background: var(--banana-deep, #E0A800); }
+
+.ed-stage {
+  position: relative; background: #fff;
+  border: 1.5px solid var(--line); border-radius: 12px; overflow: hidden;
+}
+.ed-stage .ed-load {
+  display: grid; place-items: center; min-height: 190px;
+  font-family: var(--font-mono); font-size: 11px; color: #B6C2D2;
+}
+
+/* the narration, on its own slate under its own animation. It grows to take up
+   whatever height the other column has spare, so both transports sit level. */
+.ed-slate {
+  margin-top: 10px; min-height: 66px; flex: 1 1 auto;
+  padding: 11px 14px; border-radius: 10px;
+  background: #FEF9E7; border: 1px solid #F2E3B0;
+  color: #1A202C; font-size: 13.5px; line-height: 1.5;
+}
+.ed-slate b {
+  display: inline-block; margin-right: 8px; min-width: 18px;
+  font-family: var(--font-mono); font-size: 10.5px; color: #A9791B;
+}
+
+/* one transport per animation */
+.ed-bar {
+  display: flex; align-items: center; gap: 7px; flex-wrap: wrap;
+  margin-top: 10px; flex: 0 0 auto;
+}
+.ed-bar button {
+  background: #fff; border: 1.5px solid var(--ink); border-radius: 8px;
+  box-shadow: 2px 2px 0 var(--ink); color: var(--ink);
+  padding: 4px 9px; font-size: 12px; font-weight: 600; line-height: 1.1; min-width: 30px;
+}
+.ed-bar button:hover { transform: translate(-1px, -1px); box-shadow: 3px 3px 0 var(--ink); }
+.ed-bar button:active { transform: translate(1px, 1px); box-shadow: 1px 1px 0 var(--ink); }
+.ed-seek {
+  flex: 1 1 110px; min-width: 80px; height: 4px; -webkit-appearance: none; appearance: none;
+  background: #E3E7EE; border-radius: 3px; outline: none;
+}
+.ed-seek::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 14px; height: 14px; border-radius: 50%;
+  background: var(--ed-maroon); border: 2px solid #fff; box-shadow: 0 1px 3px rgba(0,0,0,.35);
+}
+.ed-seek::-moz-range-thumb {
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--ed-maroon); border: 2px solid #fff;
+}
+.ed-count { font-family: var(--font-mono); font-size: 11px; color: var(--ink-soft); white-space: nowrap; }
+.ed-seg { display: inline-flex; gap: 3px; }
+.ed-seg button { min-width: 28px; padding: 4px 6px; font-size: 11px; }
+.ed-seg button[aria-pressed="true"] { background: var(--banana, #FFD43B); }
+
+/* ---------- middle: the suggestion travelling to the agent ---------- */
+.ed-mid {
+  padding: 16px 16px 18px; min-width: 0;
+  background: linear-gradient(180deg, #FCFAF8 0%, #F7F2EE 100%);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 9px;
+}
+.ed-from { display: flex; align-items: center; gap: 8px; align-self: flex-start; margin-bottom: 2px; }
+.ed-avatar {
+  width: 28px; height: 28px; border-radius: 50%; flex: 0 0 auto;
+  display: grid; place-items: center;
+  background: var(--ed-maroon); color: var(--ed-cream); border: 1.5px solid var(--ink);
+}
+.ed-avatar svg { width: 15px; height: 15px; }
+.ed-fromlab {
+  font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .09em;
+  text-transform: uppercase; color: var(--ink-soft); line-height: 1.35;
+}
+.ed-fromlab b { display: block; color: var(--ed-maroon); font-size: 10px; }
+
+.ed-prompt {
+  position: relative; width: 100%;
+  background: #fff; border: 2px solid var(--ink); border-radius: 14px;
+  box-shadow: 3px 3px 0 var(--ink); padding: 12px 14px;
+  font-size: 13.5px; line-height: 1.55;
+}
+.ed-prompt::before,        /* the tail, pointing back up at the person */
+.ed-prompt::after {
+  content: ''; position: absolute; left: 16px; top: -9px;
+  border-left: 9px solid transparent; border-right: 9px solid transparent;
+  border-bottom: 9px solid var(--ink);
+}
+.ed-prompt::after { top: -6px; border-bottom-color: #fff; }
+.ed-feed { width: 30px; height: 36px; color: var(--ed-maroon); flex: 0 0 auto; }
+@media (max-width: 1080px) { .ed-feed { transform: rotate(-90deg); } }
+.ed-logo {
+  width: clamp(88px, 8.5vw, 116px); height: auto; display: block;
+  border-radius: 14px; background: #fff;
+  border: 2px solid var(--ink); box-shadow: 3px 3px 0 var(--ink); padding: 6px;
+}
+.ed-agentname {
+  text-align: center; font-size: 12px; font-weight: 700; color: var(--ed-maroon); max-width: 16ch;
+}
+
+/* ---------- observations ---------- */
+.ed-obs {
+  margin: clamp(22px, 2.2vw, 30px) clamp(32px, 3.4vw, 52px) clamp(30px, 3vw, 44px);
+  padding: 16px 20px;
+  background: #F3F0FA; border: 1px solid #DCD4EE; border-left: 5px solid #9C8BC9;
+  border-radius: 10px; color: #3B3350; font-size: 13.5px; line-height: 1.62;
+}
+.ed-obs::before {
+  content: 'Observation'; display: block; margin-bottom: 4px;
+  font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .1em;
+  text-transform: uppercase; color: #7A6BA8;
+}
+.ed-obs.is-empty { display: none; }
+/* base.css has `p:last-child { margin-bottom: 0 }`, which out-specifies .ed-obs
+   and flattened the gap under the last observation. Put it back. */
+p.ed-obs:last-child { margin-bottom: clamp(30px, 3vw, 44px); }
+
+.ed-obs-section {
+  margin: 14px 0 0; border-left-color: var(--ed-maroon-soft);
+  background: #FAF2F4; border-color: #EAD6DB; color: #4A2A31;
+}
+.ed-obs-section::before { color: var(--ed-maroon-soft); }
+
+/* ---------- the XML comparison ---------- */
+.ed-modal {
+  border: 2px solid var(--ink); border-radius: 16px; padding: 0;
+  width: min(1320px, 94vw); max-height: 88vh; box-shadow: var(--shadow-hard-lg);
+}
+.ed-modal::backdrop { background: rgba(38, 14, 20, .55); }
+.ed-modalhead {
+  display: flex; align-items: center; gap: 12px; padding: 12px 18px;
+  background: linear-gradient(100deg, var(--ed-maroon) 0%, var(--ed-maroon-deep) 100%);
+  color: var(--ed-cream);
+}
+.ed-modalhead h3 { margin: 0; font-size: 15px; }
+.ed-modalhead .ed-sp { flex: 1 1 auto; }
+.ed-key { display: flex; gap: 12px; font-family: var(--font-mono); font-size: 10.5px; }
+.ed-key span { display: inline-flex; align-items: center; gap: 5px; }
+.ed-key i { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
+.ed-close {
+  border: 1.5px solid rgba(255,246,236,.5); background: rgba(255,255,255,.1);
+  color: var(--ed-cream); border-radius: 8px; padding: 4px 10px; font-size: 13px; cursor: pointer;
+}
+.ed-xmlcols {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+  max-height: calc(88vh - 56px); overflow: auto; background: #fff;
+}
+@media (max-width: 860px) { .ed-xmlcols { grid-template-columns: 1fr; } }
+.ed-xmlcol { min-width: 0; border-right: 1.5px solid var(--line); overflow-x: auto; }
+.ed-xmlcol:last-child { border-right: 0; }
+.ed-xmlcap {
+  position: sticky; top: 0; z-index: 1;
+  padding: 8px 14px; background: #FCFAF8; border-bottom: 1.5px solid var(--line);
+  font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .07em;
+  text-transform: uppercase; color: var(--ed-maroon);
+}
+.ed-xml {
+  margin: 0; padding: 10px 0 18px; font-family: var(--font-mono);
+  font-size: 11.5px; line-height: 1.62; color: #2A2F3A;
+}
+.ed-xml .ln { display: flex; gap: 10px; padding: 0 14px; white-space: pre; min-width: max-content; }
+.ed-xml .ln > i {
+  flex: 0 0 34px; text-align: right; color: #C3CAD4; font-style: normal; user-select: none;
+}
+.ed-xml .ln.hl-a { background: #E6F2FF; box-shadow: inset 3px 0 0 #2F6FB5; }
+.ed-xml .ln.hl-b { background: #FFEFE3; box-shadow: inset 3px 0 0 #C4682A; }
+.ed-xml .ln.hl-c { background: #E9F6EA; box-shadow: inset 3px 0 0 #3E8C4B; }
+.ed-xml .ln.hl-a.edge, .ed-xml .ln.hl-b.edge, .ed-xml .ln.hl-c.edge { font-weight: 700; }
+
+.ed-note {
+  margin: 14px 0 0; padding: 12px 15px; border-radius: 10px;
+  background: #FFF7E6; border: 1px dashed #E3C878; color: #7A5C12; font-size: 13px;
+}

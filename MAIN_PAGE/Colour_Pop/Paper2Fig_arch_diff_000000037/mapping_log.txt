@@ -1,0 +1,50 @@
+=== Colour Pop Sequence Mapping ===
+
+Frame Image : frame_00.png
+Event Delay : 0.5s
+Narration   : The framework begins with the pre-training stage using labeled source domain speech data.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Event Delay : 1.0s
+Narration   : Source speech features, represented as x-vectors, are provided as input.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Event Delay : 1.5s
+Narration   : A source deep neural network encoder maps these features into an embedding space.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Event Delay : 2.0s
+Narration   : These embeddings are then passed through a classification module.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Event Delay : 2.5s
+Narration   : The network is trained using cross-entropy loss to predict speaker class labels.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Event Delay : 3.0s
+Narration   : Next, the framework carries out adversarial adaptation to align feature distributions across languages.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Event Delay : 3.5s
+Narration   : Source domain samples are passed into the upper branch of the adaptation pipeline.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Event Delay : 4.0s
+Narration   : Here, the pre-trained source encoder parameters are held fixed.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Event Delay : 4.5s
+Narration   : In parallel, unlabeled speech samples from the target language domain enter the lower branch.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Event Delay : 5.0s
+Narration   : A dedicated target encoder is trained to map target features into the source embedding space.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Event Delay : 5.5s
+Narration   : A domain discriminator evaluates embeddings from both encoders to determine their origin.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Event Delay : 6.0s
+Narration   : By optimizing against the predicted domain label, the target encoder learns domain-invariant representations.
+--------------------------------------------------------------------------------

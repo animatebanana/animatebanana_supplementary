@@ -1,0 +1,50 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : The model begins by projecting the input tokens into continuous representations via the input embedding layer.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : In parallel, structure-oriented vector quantization clusters these embeddings into discrete classes of structurally equivalent entities.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : Both streams are then processed across multiple stacked Transformer layers.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : In the standard embedding stream on the left, the representations first pass through layer normalization.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : Value, key, and query vectors are projected from the normalized output.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : These vectors are processed by multi-head attention and combined with the input via a residual connection.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : A residual feed-forward network then produces the layer representation for the standard stream.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 3.999s
+Narration   : Simultaneously, the quantized branch is fed into its own layer normalization block.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 4.499s
+Narration   : It generates corresponding value, key, and query projections based on the structurally quantized features.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 4.999s
+Narration   : These are passed through multi-head attention and integrated through a residual addition.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 5.499s
+Narration   : The residual feed-forward network on the right then outputs the structure-oriented layer representation.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Timestamp   : 5.999s
+Narration   : Finally, the objective minimizes the difference between the standard and quantized stream representations, regularizing the model to induce systematic attention patterns.
+--------------------------------------------------------------------------------

@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+  <title>AnimateBanana — Turning Figures into Stories</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="image" href="assets/img/logo.png">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@400..800&family=JetBrains+Mono:wght@400..700&family=Caveat:wght@500..700&display=swap">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css?v=2">
+  <link rel="stylesheet" href="assets/css/components/site-nav.css?v=2">
+  <link rel="stylesheet" href="assets/css/components/doodle-field.css">
+  <link rel="stylesheet" href="assets/css/components/hero.css?v=2">
+  <link rel="stylesheet" href="assets/css/components/anim-showcase.css">
+  <link rel="stylesheet" href="assets/css/components/pipeline-band.css?v=2">
+  <!-- gallery module (assets/{css,js}/gallery/, data/gallery/) — self-contained -->
+  <link rel="stylesheet" href="assets/css/gallery/gallery-rail.css">
+  <!-- benchmark module (assets/{css,js}/benchmark/, data/benchmark/) — self-contained -->
+  <link rel="stylesheet" href="assets/css/benchmark/benchmark-band.css">
+  <!-- backdrop add-on (assets/{css,js}/backdrop/) — background only, self-contained -->
+  <link rel="stylesheet" href="assets/css/backdrop/band-backdrop.css">
+</head>
+<body>
+  <site-nav current="overview"></site-nav>
+
+  <header class="hero">
+    <doodle-field></doodle-field>
+
+    <div class="hero-inner">
+      <div class="kicker">Companion appendix</div>
+
+      <img class="hero-logo" src="assets/img/logo.png" width="1536" height="1024"
+           alt="The AnimateBanana director: a banana in sunglasses carrying a film reel, turning a flowchart into a film strip">
+
+      <div class="wm-wrap">
+        <hero-wordmark text="AnimateBanana" split="7"></hero-wordmark>
+        <svg class="wm-spark wm-spark-1" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 4c2.5 16 11 25 28 28-17 3-25.5 12-28 28-2.5-16-11-25-28-28 17-3 25.5-12 28-28z"/></svg>
+        <svg class="wm-spark wm-spark-2" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 4c2.5 16 11 25 28 28-17 3-25.5 12-28 28-2.5-16-11-25-28-28 17-3 25.5-12 28-28z"/></svg>
+        <svg class="wm-spark wm-spark-3" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 4c2.5 16 11 25 28 28-17 3-25.5 12-28 28-2.5-16-11-25-28-28 17-3 25.5-12 28-28z"/></svg>
+        <p class="hand wm-note" aria-hidden="true">
+          <svg viewBox="0 0 56 44"><path d="M50 40C38 42 30 34 34 26s14-4 8 4-22 6-28-16M8 20l6-8 8 4"/></svg>
+          turning figures to stories!
+        </p>
+      </div>
+
+      <p class="hero-title">Converting scientific process diagrams into <span class="hl">animated visual narratives</span>.</p>
+      <div class="actions">
+        <a class="btn btn-primary btn-demo" href="#try">Try the demo
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 2v11M3.5 8.5L8 13l4.5-4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="white-zone">
+    <section class="try-band" id="try" aria-labelledby="try-head">
+      <div class="try-wrap">
+        <h2 id="try-head" class="sr-only">Live demo</h2>
+        <anim-showcase class="reveal" src="data/showcase.json"></anim-showcase>
+      </div>
+    </section>
+
+    <!-- ==== PIPELINE — the route into the animated walkthrough on pipeline.html ==== -->
+    <section class="pipe-band" id="pipeline" aria-labelledby="pipe-head">
+      <doodle-field density="sparse"></doodle-field>
+      <div class="pipe-wrap">
+        <div class="section-head section-head-center reveal">
+          <div class="kicker">§ 02 — The pipeline</div>
+          <h2 id="pipe-head">One static figure in, a <span class="hl">narrated animation</span> out.</h2>
+        </div>
+
+        <a class="pb-figure reveal" href="pipeline.html"
+           aria-label="Open the animated pipeline walkthrough">
+          <img src="assets/img/pipeline-overview.png" width="1600" height="1144"
+               alt="The AnimateBanana pipeline: Diagram Transmuter, Animation Planner and Diagram Animator, each with its agents, critics and artifacts">
+        </a>
+
+        <div class="pb-foot">
+          <a class="btn btn-primary pb-cta" href="pipeline.html">Walk through the pipeline
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M8.5 3.5L13 8l-4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <p class="pb-note">Scrubbable, stage by stage · about four minutes end to end</p>
+        </div>
+      </div>
+    </section>
+    <!-- ==== /PIPELINE ==== -->
+
+    <!-- ==== GALLERY MODULE — markup owned by assets/{css,js}/gallery/; change it there, not here ==== -->
+    <section class="gallery-band" aria-labelledby="gallery-head">
+      <band-backdrop></band-backdrop><!-- backdrop add-on: background only, owns nothing here -->
+      <div class="gallery-band-wrap">
+        <div class="section-head section-head-center reveal">
+          <div class="kicker">More from AnimateBench</div>
+          <h2 id="gallery-head">Explore <span class="hl">More Examples</span></h2>
+          <p>A peek at the full benchmark. Browse by animation style and diagram type.</p>
+        </div>
+        <gallery-rail src="data/gallery/rail_previews.json"></gallery-rail>
+      </div>
+    </section>
+    <!-- ==== /GALLERY MODULE ==== -->
+
+    <!-- ==== BENCHMARK MODULE — markup owned by assets/{css,js}/benchmark/; change it there, not here ==== -->
+    <section class="bench-band" aria-labelledby="bench-head">
+      <div class="bench-band-wrap">
+        <div class="section-head section-head-center reveal">
+          <div class="kicker">AnimateBench</div>
+          <h2 id="bench-head">Five thousand diagrams, <span class="hl">twenty-five thousand</span> narratives.</h2>
+          <p>Every process diagram animated in all five styles, stratified by structure,
+            and shipped with the artifacts each narrative was built from.</p>
+        </div>
+        <bench-band src="data/benchmark/hero.json"></bench-band>
+      </div>
+    </section>
+    <!-- ==== /BENCHMARK MODULE ==== -->
+
+    <div class="page">
+
+      <footer class="site-footer">
+        <span>AnimateBanana — from diagrams to dynamic stories. Anonymous submission.</span>
+        <nav aria-label="Footer">
+          <a href="resources.html">Paper</a>
+          <a href="resources.html">Code</a>
+          <a href="resources.html">Supplementary</a>
+        </nav>
+      </footer>
+    </div>
+  </main>
+
+  <script type="module" src="assets/js/components/site-nav.js?v=2"></script>
+  <script type="module" src="assets/js/components/doodle-field.js"></script>
+  <script type="module" src="assets/js/components/hero-wordmark.js"></script>
+  <script type="module" src="assets/js/components/anim-showcase.js"></script>
+  <script type="module" src="assets/js/gallery/gallery-rail.js"></script>
+  <!-- benchmark module -->
+  <script type="module" src="assets/js/benchmark/bench-band.js"></script>
+  <!-- backdrop add-on -->
+  <script type="module" src="assets/js/backdrop/band-backdrop.js"></script>
+  <script type="module" src="assets/js/lib/reveal.js"></script>
+</body>
+</html>

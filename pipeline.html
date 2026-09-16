@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+  <title>Pipeline — AnimateBanana</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@400..800&family=JetBrains+Mono:wght@400..700&family=Caveat:wght@500..700&display=swap">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css?v=2">
+  <link rel="stylesheet" href="assets/css/components/site-nav.css?v=2">
+  <style>
+    /* The pipeline page is the walkthrough and nothing else: the site bar
+       stays on top, the walkthrough takes every remaining pixel. */
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      /* plain white, not the paper tint the rest of the site uses — the
+         walkthrough brings its own ground and the warm cast fought it */
+      background: #FFFFFF;
+      background-image: none;
+    }
+    site-nav {
+      position: static;
+      flex: 0 0 auto;
+      background: #FFFFFF;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border-bottom: 1px solid #E6E9EF;
+    }
+    site-nav.is-stuck { border-bottom-color: #E6E9EF; }
+    /* the slide-in menu too: this page is white throughout, dots and all */
+    .nav-drawer .nd-panel {
+      background-color: #FFFFFF;
+      background-image: none;
+    }
+
+    .walk-stage {
+      flex: 1 1 auto;
+      min-height: 0;
+      position: relative;
+      background: #FFFFFF;
+      border-top: 0;
+    }
+    .walk-stage iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+
+    /* Below tablet width the walkthrough needs more height than a phone
+       viewport gives it, so let the page scroll and pin a workable height. */
+    @media (max-width: 860px) {
+      body { overflow: auto; }
+      .walk-stage { flex: 0 0 auto; height: 82vh; min-height: 560px; }
+    }
+  </style>
+</head>
+<body>
+  <site-nav current="pipeline"></site-nav>
+
+  <main class="walk-stage">
+    <iframe src="pipeline/walkthrough.html?v=1789382280"
+            title="AnimateBanana pipeline — animated walkthrough"
+            allow="fullscreen"
+            allowfullscreen
+            loading="eager"></iframe>
+  </main>
+
+  <script type="module" src="assets/js/components/site-nav.js?v=2"></script>
+</body>
+</html>

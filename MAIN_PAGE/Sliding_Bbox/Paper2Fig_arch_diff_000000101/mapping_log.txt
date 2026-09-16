@@ -1,0 +1,182 @@
+=== Sliding Bounding Box Sequence ===
+
+Frame Image : frame_0000.png
+Frame Type  : Hold
+Timestamp   : 1.000s
+Narration   : The framework utilizes a small set of labeled medical images to provide supervised ground-truth annotations.
+--------------------------------------------------------------------------------
+Frame Image : frame_0001.png
+Frame Type  : Transition 1
+Timestamp   : 2.125s
+Narration   : The framework utilizes a small set of labeled medical images to provide supervised ground-truth annotations.
+--------------------------------------------------------------------------------
+Frame Image : frame_0002.png
+Frame Type  : Transition 2
+Timestamp   : 2.250s
+Narration   : The framework utilizes a small set of labeled medical images to provide supervised ground-truth annotations.
+--------------------------------------------------------------------------------
+Frame Image : frame_0003.png
+Frame Type  : Transition 3
+Timestamp   : 2.375s
+Narration   : The framework utilizes a small set of labeled medical images to provide supervised ground-truth annotations.
+--------------------------------------------------------------------------------
+Frame Image : frame_0004.png
+Frame Type  : Hold
+Timestamp   : 3.500s
+Narration   : A larger collection of unlabeled images is concurrently leveraged to understand the underlying population structure.
+--------------------------------------------------------------------------------
+Frame Image : frame_0005.png
+Frame Type  : Transition 1
+Timestamp   : 4.625s
+Narration   : A larger collection of unlabeled images is concurrently leveraged to understand the underlying population structure.
+--------------------------------------------------------------------------------
+Frame Image : frame_0006.png
+Frame Type  : Transition 2
+Timestamp   : 4.750s
+Narration   : A larger collection of unlabeled images is concurrently leveraged to understand the underlying population structure.
+--------------------------------------------------------------------------------
+Frame Image : frame_0007.png
+Frame Type  : Transition 3
+Timestamp   : 4.875s
+Narration   : A larger collection of unlabeled images is concurrently leveraged to understand the underlying population structure.
+--------------------------------------------------------------------------------
+Frame Image : frame_0008.png
+Frame Type  : Hold
+Timestamp   : 6.000s
+Narration   : Both data streams are processed by the shared backbone network to predict landmark heatmaps.
+--------------------------------------------------------------------------------
+Frame Image : frame_0009.png
+Frame Type  : Transition 1
+Timestamp   : 7.125s
+Narration   : Both data streams are processed by the shared backbone network to predict landmark heatmaps.
+--------------------------------------------------------------------------------
+Frame Image : frame_0010.png
+Frame Type  : Transition 2
+Timestamp   : 7.249s
+Narration   : Both data streams are processed by the shared backbone network to predict landmark heatmaps.
+--------------------------------------------------------------------------------
+Frame Image : frame_0011.png
+Frame Type  : Transition 3
+Timestamp   : 7.374s
+Narration   : Both data streams are processed by the shared backbone network to predict landmark heatmaps.
+--------------------------------------------------------------------------------
+Frame Image : frame_0012.png
+Frame Type  : Hold
+Timestamp   : 8.499s
+Narration   : In the forward pass, integral operations convert the predicted heatmaps of unlabeled images into initial pseudo-landmark coordinates.
+--------------------------------------------------------------------------------
+Frame Image : frame_0013.png
+Frame Type  : Transition 1
+Timestamp   : 9.624s
+Narration   : In the forward pass, integral operations convert the predicted heatmaps of unlabeled images into initial pseudo-landmark coordinates.
+--------------------------------------------------------------------------------
+Frame Image : frame_0014.png
+Frame Type  : Transition 2
+Timestamp   : 9.749s
+Narration   : In the forward pass, integral operations convert the predicted heatmaps of unlabeled images into initial pseudo-landmark coordinates.
+--------------------------------------------------------------------------------
+Frame Image : frame_0015.png
+Frame Type  : Transition 3
+Timestamp   : 9.874s
+Narration   : In the forward pass, integral operations convert the predicted heatmaps of unlabeled images into initial pseudo-landmark coordinates.
+--------------------------------------------------------------------------------
+Frame Image : frame_0016.png
+Frame Type  : Hold
+Timestamp   : 10.999s
+Narration   : The Shape Regulation module then applies a principal component shape model to adjust structural parameters and filter out abnormal deviations.
+--------------------------------------------------------------------------------
+Frame Image : frame_0017.png
+Frame Type  : Transition 1
+Timestamp   : 12.125s
+Narration   : The Shape Regulation module then applies a principal component shape model to adjust structural parameters and filter out abnormal deviations.
+--------------------------------------------------------------------------------
+Frame Image : frame_0018.png
+Frame Type  : Transition 2
+Timestamp   : 12.250s
+Narration   : The Shape Regulation module then applies a principal component shape model to adjust structural parameters and filter out abnormal deviations.
+--------------------------------------------------------------------------------
+Frame Image : frame_0019.png
+Frame Type  : Transition 3
+Timestamp   : 12.376s
+Narration   : The Shape Regulation module then applies a principal component shape model to adjust structural parameters and filter out abnormal deviations.
+--------------------------------------------------------------------------------
+Frame Image : frame_0020.png
+Frame Type  : Hold
+Timestamp   : 13.500s
+Narration   : This refinement yields a consistent set of highly reliable pseudo labels for the unlabeled data.
+--------------------------------------------------------------------------------
+Frame Image : frame_0021.png
+Frame Type  : Transition 1
+Timestamp   : 14.624s
+Narration   : This refinement yields a consistent set of highly reliable pseudo labels for the unlabeled data.
+--------------------------------------------------------------------------------
+Frame Image : frame_0022.png
+Frame Type  : Transition 2
+Timestamp   : 14.750s
+Narration   : This refinement yields a consistent set of highly reliable pseudo labels for the unlabeled data.
+--------------------------------------------------------------------------------
+Frame Image : frame_0023.png
+Frame Type  : Transition 3
+Timestamp   : 14.875s
+Narration   : This refinement yields a consistent set of highly reliable pseudo labels for the unlabeled data.
+--------------------------------------------------------------------------------
+Frame Image : frame_0024.png
+Frame Type  : Hold
+Timestamp   : 16.001s
+Narration   : These refined pseudo labels are modeled as latent variables to approximate the unknown ground truth during self-training.
+--------------------------------------------------------------------------------
+Frame Image : frame_0025.png
+Frame Type  : Transition 1
+Timestamp   : 17.126s
+Narration   : These refined pseudo labels are modeled as latent variables to approximate the unknown ground truth during self-training.
+--------------------------------------------------------------------------------
+Frame Image : frame_0026.png
+Frame Type  : Transition 2
+Timestamp   : 17.251s
+Narration   : These refined pseudo labels are modeled as latent variables to approximate the unknown ground truth during self-training.
+--------------------------------------------------------------------------------
+Frame Image : frame_0027.png
+Frame Type  : Transition 3
+Timestamp   : 17.376s
+Narration   : These refined pseudo labels are modeled as latent variables to approximate the unknown ground truth during self-training.
+--------------------------------------------------------------------------------
+Frame Image : frame_0028.png
+Frame Type  : Hold
+Timestamp   : 18.501s
+Narration   : A Region Attention mechanism is applied around the pseudo coordinates to account for subtle landmark offsets.
+--------------------------------------------------------------------------------
+Frame Image : frame_0029.png
+Frame Type  : Transition 1
+Timestamp   : 19.626s
+Narration   : A Region Attention mechanism is applied around the pseudo coordinates to account for subtle landmark offsets.
+--------------------------------------------------------------------------------
+Frame Image : frame_0030.png
+Frame Type  : Transition 2
+Timestamp   : 19.750s
+Narration   : A Region Attention mechanism is applied around the pseudo coordinates to account for subtle landmark offsets.
+--------------------------------------------------------------------------------
+Frame Image : frame_0031.png
+Frame Type  : Transition 3
+Timestamp   : 19.875s
+Narration   : A Region Attention mechanism is applied around the pseudo coordinates to account for subtle landmark offsets.
+--------------------------------------------------------------------------------
+Frame Image : frame_0032.png
+Frame Type  : Hold
+Timestamp   : 21.000s
+Narration   : Finally, the Region Attention loss acts as a soft constraint during backpropagation, guiding the network to focus on structure-consistent local regions.
+--------------------------------------------------------------------------------
+Frame Image : frame_0033.png
+Frame Type  : Transition 1
+Timestamp   : 22.125s
+Narration   : Finally, the Region Attention loss acts as a soft constraint during backpropagation, guiding the network to focus on structure-consistent local regions.
+--------------------------------------------------------------------------------
+Frame Image : frame_0034.png
+Frame Type  : Transition 2
+Timestamp   : 22.250s
+Narration   : Finally, the Region Attention loss acts as a soft constraint during backpropagation, guiding the network to focus on structure-consistent local regions.
+--------------------------------------------------------------------------------
+Frame Image : frame_0035.png
+Frame Type  : Transition 3
+Timestamp   : 22.375s
+Narration   : Finally, the Region Attention loss acts as a soft constraint during backpropagation, guiding the network to focus on structure-consistent local regions.
+--------------------------------------------------------------------------------

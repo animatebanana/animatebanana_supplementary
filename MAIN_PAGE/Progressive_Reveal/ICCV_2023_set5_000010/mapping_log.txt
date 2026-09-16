@@ -1,0 +1,46 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : In the first stage, the framework begins with a sparse set of casually captured input images of the subject.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : These images are used to train a Partial DreamBooth model, personalizing a diffusion model while mitigating viewpoint overfitting.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : An initial neural radiance field is initialized and rendered across various camera viewpoints.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : Score Distillation Sampling loss from the Partial DreamBooth model guides the optimization of this initial NeRF asset.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : In stage two, multi-view images are rendered along random camera viewpoints from the initial NeRF representation.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : These rendered perspectives are passed through an image-to-image translation process using a fully-trained DreamBooth model.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : This produces pseudo multi-view subject images that improve subject likeness while strictly preserving viewpoint poses.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 3.999s
+Narration   : In stage three, the pseudo multi-view images are used to further fine-tune the model into a Multi-view DreamBooth.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 4.499s
+Narration   : A final NeRF asset is initialized to reconstruct the complete three-dimensional geometry and appearance.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 4.999s
+Narration   : A multi-view reconstruction loss enforces direct pixel fidelity against the generated pseudo multi-view targets.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 5.499s
+Narration   : Concurrently, Score Distillation Sampling loss from the Multi-view DreamBooth refines novel views, producing the finalized 3D asset.
+--------------------------------------------------------------------------------

@@ -1,0 +1,39 @@
+style-granularity-picker {
+  display: flex;
+  gap: clamp(20px, 4vw, 40px);
+  flex-wrap: wrap;
+  padding: 20px 0 4px;
+}
+.sg-group { display: flex; flex-direction: column; gap: 9px; }
+.sg-label {
+  font-size: var(--fs-micro);
+  letter-spacing: var(--tracking-kicker);
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  font-weight: 650;
+}
+.sg-row { display: flex; gap: 6px; flex-wrap: wrap; }
+.sg-pill {
+  font-size: var(--fs-xs);
+  font-weight: 550;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink-soft);
+  cursor: pointer;
+  font-family: inherit;
+  box-shadow: var(--shadow-xs);
+  transition: color var(--dur-fast) var(--ease-out),
+              background var(--dur-fast) var(--ease-out),
+              border-color var(--dur-fast) var(--ease-out),
+              transform var(--dur-fast) var(--ease-out);
+}
+.sg-pill:hover { color: var(--ink); border-color: var(--line-strong); transform: translateY(-1px); }
+.sg-pill-active, .sg-pill-active:hover {
+  background: var(--ink);
+  color: var(--bg);
+  border-color: var(--ink);
+  box-shadow: var(--shadow-sm);
+}
+.sg-steps { font-size: var(--fs-micro); color: var(--ink-faint); padding-top: 3px; }

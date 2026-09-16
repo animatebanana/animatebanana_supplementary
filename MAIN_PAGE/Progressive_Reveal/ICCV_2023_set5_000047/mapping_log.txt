@@ -1,0 +1,58 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : The framework begins with cross-view completion pre-training on pairs of scene images.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : Two views of the same scene are provided, with patches in the first image heavily masked.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : Both the masked and unmasked views pass through monocular encoders with shared weights to extract visual features.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : A binocular decoder then jointly processes features from both views to implicitly reason about scene geometry.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : The decoder reconstructs the target image, completing the cross-view pre-training task.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : The pre-trained architecture is then finetuned for dense geometric downstream tasks without masking.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : For stereo matching, the model takes an unmasked stereo image pair.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 3.999s
+Narration   : The left and right images are independently encoded by the monocular encoders.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 4.499s
+Narration   : The binocular decoder fuses tokens from both views to establish dense spatial correspondences.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 4.999s
+Narration   : This directly produces the disparity map for stereo matching.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 5.499s
+Narration   : Similarly, for optical flow estimation, consecutive temporal frames are fed to the model.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Timestamp   : 5.999s
+Narration   : The monocular encoders extract feature tokens for each time frame separately.
+--------------------------------------------------------------------------------
+Frame Image : frame_12.png
+Timestamp   : 6.499s
+Narration   : The binocular decoder processes the dual feature representations across time.
+--------------------------------------------------------------------------------
+Frame Image : frame_13.png
+Timestamp   : 6.999s
+Narration   : Yielding the final predicted optical flow field.
+--------------------------------------------------------------------------------

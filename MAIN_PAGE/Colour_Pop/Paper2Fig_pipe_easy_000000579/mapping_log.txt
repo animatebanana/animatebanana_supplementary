@@ -1,0 +1,38 @@
+=== Colour Pop Sequence Mapping ===
+
+Frame Image : frame_00.png
+Event Delay : 0.5s
+Narration   : The pipeline begins with a natural language description specifying the desired app layout and behavior.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Event Delay : 1.0s
+Narration   : During preprocessing, the text is tokenized and literal strings are separated into placeholder variables.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Event Delay : 1.5s
+Narration   : The preprocessed sequence is fed into the encoder of a sequence-to-sequence neural network.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Event Delay : 2.0s
+Narration   : The decoder processes the encoded representations to generate target application tokens.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Event Delay : 2.5s
+Narration   : This produces the Simplified App Representation, a compact formal language capturing components and logic.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Event Delay : 3.0s
+Narration   : The dedicated compiler parses the representation to match components with predefined source templates.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Event Delay : 3.5s
+Narration   : It reintroduces the literal strings to output MIT App Inventor source files.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Event Delay : 4.0s
+Narration   : These source files are then passed to the MIT App Inventor backend compiler.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Event Delay : 4.5s
+Narration   : The backend builds the project into a functional Android package ready for deployment.
+--------------------------------------------------------------------------------

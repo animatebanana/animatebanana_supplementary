@@ -1,0 +1,22 @@
+=== Colour Pop Sequence Mapping ===
+
+Frame Image : frame_00.png
+Event Delay : 0.5s
+Narration   : The pipeline begins with a varied, limited set of facial images of an individual under different poses and expressions.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Event Delay : 1.0s
+Narration   : These images are fed into the Omni-ID Encoder, which integrates the multi-view visual features through attention layers.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Event Delay : 1.5s
+Narration   : The encoder outputs the Omni-ID, a fixed-size holistic representation that captures structured global and local identity features.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Event Delay : 2.0s
+Narration   : During training, multiple complementary decoders leverage this identity embedding across distinct decoding objectives.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Event Delay : 2.5s
+Narration   : Through this few-to-many paradigm, the decoders reconstruct numerous target face images across diverse viewpoints and expressions.
+--------------------------------------------------------------------------------

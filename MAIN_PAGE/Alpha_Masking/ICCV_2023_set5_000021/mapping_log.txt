@@ -1,0 +1,70 @@
+=== Alpha Masking Sequence ===
+
+Frame Image : frame_00.png
+Timestamp   : 1.00s
+Narration   : The StillMix framework begins by training a two-D reference network to capture static bias.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 3.00s
+Narration   : A single still frame is randomly sampled from an input video.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 4.00s
+Narration   : This sampled frame is fed into the two-D reference network.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 5.00s
+Narration   : This sampled frame is fed into the two-D reference network.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 7.00s
+Narration   : The network is trained to predict the action label using only static appearance cues.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 9.00s
+Narration   : Next, the trained reference network is deployed to identify bias-inducing frames across the dataset.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 11.00s
+Narration   : Still frames from various videos are evaluated by the reference network.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 12.00s
+Narration   : The network outputs prediction probabilities for the action classes.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 13.00s
+Narration   : The network outputs prediction probabilities for the action classes.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 15.00s
+Narration   : Frames with high prediction confidence are selected to construct a biased frame bank.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 17.00s
+Narration   : To train the main network, a biased frame is randomly sampled from the bank.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Timestamp   : 19.00s
+Narration   : The sampled frame is repeated across time to create a static video sequence.
+--------------------------------------------------------------------------------
+Frame Image : frame_12.png
+Timestamp   : 21.00s
+Narration   : This static video is combined with the original training video via pixel-wise mixing.
+--------------------------------------------------------------------------------
+Frame Image : frame_13.png
+Timestamp   : 22.00s
+Narration   : The resulting augmented video contains conflicting static cues without altering the underlying motion.
+--------------------------------------------------------------------------------
+Frame Image : frame_14.png
+Timestamp   : 23.00s
+Narration   : The resulting augmented video contains conflicting static cues without altering the underlying motion.
+--------------------------------------------------------------------------------
+Frame Image : frame_15.png
+Timestamp   : 25.00s
+Narration   : The augmented video is processed by the three-D main action recognition network.
+--------------------------------------------------------------------------------
+Frame Image : frame_16.png
+Timestamp   : 27.00s
+Narration   : Supervised by the original action label, the main network learns robust motion features while ignoring static bias.
+--------------------------------------------------------------------------------

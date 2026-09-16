@@ -1,0 +1,38 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : The top visual guidance network takes the video frames of the first source along with the mixed audio spectrogram as input.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : A visual encoder and an audio encoder generate feature tokens, which are refined through bimodal co-attention within a multi-modal transformer.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : In parallel, the bottom visual guidance network receives the video frames for the second source alongside the mixed spectrogram.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : Its dedicated visual and audio encoders extract corresponding tokens, which are fused by a second multi-modal transformer to produce the second guidance embedding.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : Meanwhile, the individual audio signals are mixed together to construct the composite input spectrogram.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : A U-Net encoder processes the mixed spectrogram to extract an audio feature map, which is then fused with the multi-modal guidance embeddings from both streams.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : The guided audio feature is passed to the U-Net decoder along with encoder skip connections to predict separated spectrogram masks for each sound source.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 3.999s
+Narration   : The masks are supervised by a mask prediction loss and element-wise multiplied with the mixed spectrogram to reconstruct individual separated spectrograms.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 4.499s
+Narration   : Finally, a consistency network projects the separated spectrograms into an embedding space, where a self-supervised contrastive loss pulls corresponding audio-visual pairs together while pushing non-matching pairs apart.
+--------------------------------------------------------------------------------

@@ -1,0 +1,138 @@
+=== Hopping Bounding Box Sequence ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.75s
+Narration   : The pipeline begins with the multi-resolution feature grid module.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 2.25s
+Narration   : A 3D indoor scene is modeled compositionally from multi-view inputs.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 3.75s
+Narration   : A camera casts viewing rays into the 3D space.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 5.25s
+Narration   : Along each ray, multiple 3D spatial points are sampled.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 6.75s
+Narration   : For each queried point coordinate,
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 8.25s
+Narration   : features are queried across multiple grid resolutions, from coarse levels,
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 9.75s
+Narration   : down to finer levels using spatial hash tables.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 11.25s
+Narration   : These interpolated features are concatenated and fed into a lightweight neural network.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 12.75s
+Narration   : The network outputs a vector containing signed distance function values for each individual object.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 14.25s
+Narration   : These encompass specific instance geometries, such as pillows,
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 15.75s
+Narration   : lamps,
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Timestamp   : 17.25s
+Narration   : and other segmented items in the scene.
+--------------------------------------------------------------------------------
+Frame Image : frame_12.png
+Timestamp   : 18.75s
+Narration   : A minimum operation is applied across all object distance predictions,
+--------------------------------------------------------------------------------
+Frame Image : frame_13.png
+Timestamp   : 20.25s
+Narration   : extracting the global scene signed distance value,
+--------------------------------------------------------------------------------
+Frame Image : frame_14.png
+Timestamp   : 21.75s
+Narration   : denoted as the overall scene SDF.
+--------------------------------------------------------------------------------
+Frame Image : frame_15.png
+Timestamp   : 23.25s
+Narration   : Next, the occlusion-aware object opacity module calculates individual object opacities.
+--------------------------------------------------------------------------------
+Frame Image : frame_16.png
+Timestamp   : 24.75s
+Narration   : Object SDFs are first converted into individual object density distributions.
+--------------------------------------------------------------------------------
+Frame Image : frame_17.png
+Timestamp   : 26.25s
+Narration   : Concurrently, the global scene transmittance is computed along the ray,
+--------------------------------------------------------------------------------
+Frame Image : frame_18.png
+Timestamp   : 27.75s
+Narration   : and multiplied by each object's density.
+--------------------------------------------------------------------------------
+Frame Image : frame_19.png
+Timestamp   : 29.25s
+Narration   : This produces occlusion-aware object opacities that account for frontal blocking.
+--------------------------------------------------------------------------------
+Frame Image : frame_20.png
+Timestamp   : 30.75s
+Narration   : The composite weight function governs the overall volume rendering contribution.
+--------------------------------------------------------------------------------
+Frame Image : frame_21.png
+Timestamp   : 32.25s
+Narration   : An object opacity loss is evaluated,
+--------------------------------------------------------------------------------
+Frame Image : frame_22.png
+Timestamp   : 33.75s
+Narration   : supervising the rendered object opacities directly against 2D instance segmentation masks.
+--------------------------------------------------------------------------------
+Frame Image : frame_23.png
+Timestamp   : 35.25s
+Narration   : Finally, several regularization and multi-modal rendering losses are optimized.
+--------------------------------------------------------------------------------
+Frame Image : frame_24.png
+Timestamp   : 36.75s
+Narration   : An Eikonal loss enforces valid distance field gradients across the scene.
+--------------------------------------------------------------------------------
+Frame Image : frame_25.png
+Timestamp   : 38.25s
+Narration   : An object distinction regularization loss prevents internal collision and overlap between separate instances.
+--------------------------------------------------------------------------------
+Frame Image : frame_26.png
+Timestamp   : 39.75s
+Narration   : Volume rendering synthesizes geometric cues and appearance.
+--------------------------------------------------------------------------------
+Frame Image : frame_27.png
+Timestamp   : 41.25s
+Narration   : A scale-invariant depth loss,
+--------------------------------------------------------------------------------
+Frame Image : frame_28.png
+Timestamp   : 42.75s
+Narration   : supervises rendered depth maps.
+--------------------------------------------------------------------------------
+Frame Image : frame_29.png
+Timestamp   : 44.25s
+Narration   : A surface normal loss,
+--------------------------------------------------------------------------------
+Frame Image : frame_30.png
+Timestamp   : 45.75s
+Narration   : aligns predicted surface normals with pseudo-ground-truth,
+--------------------------------------------------------------------------------
+Frame Image : frame_31.png
+Timestamp   : 47.25s
+Narration   : derived from a pre-trained monocular estimation network.
+--------------------------------------------------------------------------------
+Frame Image : frame_32.png
+Timestamp   : 48.75s
+Narration   : Lastly, an RGB reconstruction loss,
+--------------------------------------------------------------------------------
+Frame Image : frame_33.png
+Timestamp   : 50.25s
+Narration   : ensures photorealistic rendering against ground truth captured images.
+--------------------------------------------------------------------------------

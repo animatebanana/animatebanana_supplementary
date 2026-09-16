@@ -1,0 +1,66 @@
+=== Alpha Masking Sequence ===
+
+Frame Image : frame_00.png
+Timestamp   : 1.77s
+Narration   : Training begins with the Emotion Variation pipeline, which modifies facial expressions based on targeted emotional parameters.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 5.30s
+Narration   : Target emotions are sampled from the continuous valence and arousal space, specifying both emotional polarity and intensity.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 8.83s
+Narration   : An upsampling module projects these continuous valence and arousal values into a higher-dimensional emotion embedding.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 12.37s
+Narration   : Concurrently, the input face image is mapped into the latent space using an inversion module to extract its original latent code.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 14.13s
+Narration   : The latent code and emotion embedding are concatenated and fed into the EmoExtract module to predict an emotion modification direction.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 15.90s
+Narration   : The latent code and emotion embedding are concatenated and fed into the EmoExtract module to predict an emotion modification direction.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 19.43s
+Narration   : This predicted displacement is added to the original latent code, forming the edited latent representation.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 22.97s
+Narration   : The pretrained generator synthesizes the final image, displaying the desired facial expression.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 26.50s
+Narration   : Pretrained feature encoders compute emotion, pose, background, and identity losses to supervise the variation training.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 30.03s
+Narration   : The pipeline alternates with the Emotion Reconstruction branch to ensure faithful feature disentanglement.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 33.57s
+Narration   : Here, the input face is inverted to its latent code, while an emotion estimator predicts its inherent valence and arousal.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Timestamp   : 37.10s
+Narration   : These predicted values are upsampled into the corresponding emotion embedding.
+--------------------------------------------------------------------------------
+Frame Image : frame_12.png
+Timestamp   : 40.63s
+Narration   : EmoExtract processes the concatenated codes, trained to output a zero vector since no emotional change is needed.
+--------------------------------------------------------------------------------
+Frame Image : frame_13.png
+Timestamp   : 44.17s
+Narration   : The displacement is added back to the latent code, preserving the original latent representation.
+--------------------------------------------------------------------------------
+Frame Image : frame_14.png
+Timestamp   : 47.70s
+Narration   : The generator reconstructs the face, maintaining the exact input expression and identity.
+--------------------------------------------------------------------------------
+Frame Image : frame_15.png
+Timestamp   : 51.23s
+Narration   : Reconstruction, emotion, pose, and identity losses supervise this branch to guarantee high-fidelity image reconstruction.
+--------------------------------------------------------------------------------

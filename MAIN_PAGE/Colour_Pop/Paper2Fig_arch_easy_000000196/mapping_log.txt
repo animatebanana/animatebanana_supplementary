@@ -1,0 +1,54 @@
+=== Colour Pop Sequence Mapping ===
+
+Frame Image : frame_00.png
+Event Delay : 0.5s
+Narration   : During the initialization phase, the foundational configurations defining the robot are assembled.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Event Delay : 1.0s
+Narration   : First, the robot model loads the physical structure and kinematics of the chosen robot embodiment.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Event Delay : 1.5s
+Narration   : Next, the gripper model attaches the appropriate end-effector specification.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Event Delay : 2.0s
+Narration   : Finally, the controller configuration defines how actions will be translated for actuation.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Event Delay : 2.5s
+Narration   : During runtime, the robot dynamically interacts within the simulation environment.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Event Delay : 3.0s
+Narration   : The central robot module manages execution and handles incoming control commands.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Event Delay : 3.5s
+Narration   : High-level actions are received from policies or teleoperation devices.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Event Delay : 4.0s
+Narration   : The controller transforms these actions into low-level joint torques executed by the physics engine.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Event Delay : 4.5s
+Narration   : Sensory signals and visual observations resulting from the action are output back to the agent.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Event Delay : 5.0s
+Narration   : Additionally, callable interfaces allow accessing detailed state information at any point during simulation.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Event Delay : 5.5s
+Narration   : These callables can retrieve structural specifications and metadata about the robot.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Event Delay : 6.0s
+Narration   : They also query proprioceptive states, such as internal joint positions and velocities.
+--------------------------------------------------------------------------------
+Frame Image : frame_12.png
+Event Delay : 6.5s
+Narration   : Finally, measurements from dedicated sensors, such as wrist force-torque sensors, can be directly sampled.
+--------------------------------------------------------------------------------

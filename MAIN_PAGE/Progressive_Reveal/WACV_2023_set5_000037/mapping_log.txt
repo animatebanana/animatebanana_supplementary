@@ -1,0 +1,50 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : The framework contrasts a causal teacher model that observes complete video frames with the Glimpse Transformer iterative student model.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : The causal teacher receives complete, full-resolution video frames across all time steps.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : A spatial transformer backbone extracts visual feature representations from each individual frame.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : This creates a full sequence of teacher feature representations across the video timeline.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : A causal temporal transformer aggregates these features to produce early action predictions.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : In contrast, the student model observes only narrow glimpse patches extracted sequentially from incoming frames.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : Each extracted glimpse is processed through the spatial feature extraction transformer.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 3.999s
+Narration   : This accumulates a sequence of glimpse feature tokens representing observations collected up to each step.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 4.499s
+Narration   : The glimpse features are routed in parallel to an action classifier and a glimpse location predictor, with stop gradients applied for stability.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 4.999s
+Narration   : The model outputs early action predictions while simultaneously predicting the next glimpse location to guide subsequent sampling.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 5.499s
+Narration   : Training employs classification loss against ground truth, spatial consistency loss via teacher feature matching, and temporal consistency loss via prediction distillation.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Timestamp   : 5.999s
+Narration   : The final training objective unites classification, spatial consistency, and temporal consistency into a joint loss function.
+--------------------------------------------------------------------------------

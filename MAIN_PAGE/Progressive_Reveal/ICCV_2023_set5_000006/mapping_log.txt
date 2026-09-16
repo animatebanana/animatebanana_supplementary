@@ -1,0 +1,62 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : The framework begins with an input portrait image.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : A geometry-aware encoder projects the input image into the latent space.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : This yields an extended latent code representing coarse geometry and appearance.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : The latent code is passed into a pre-trained generator, extracting intermediate feature maps while building a 3D tri-plane representation.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : The resulting tri-plane encapsulates the canonical 3D volume synthesized from the latent code.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : A neural rendering decoder then renders the volume under the estimated camera pose.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : This produces an initial coarse reconstruction of the input face.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 3.999s
+Narration   : Next, the framework computes an image residual between the input and its initial reconstruction, pairing it with the generator feature maps.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 4.499s
+Narration   : The Adaptive Feature Alignment module aligns these residual features into the canonical space using cross-attention.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 4.999s
+Narration   : This produces refined latent feature maps containing restored fine-grained textural details.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 5.499s
+Narration   : These modified features are then forwarded through the remaining generator layers.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Timestamp   : 5.999s
+Narration   : This constructs a refined tri-plane while identifying visible and occluded 3D point sets based on the input view.
+--------------------------------------------------------------------------------
+Frame Image : frame_12.png
+Timestamp   : 6.499s
+Narration   : An occlusion-aware fusion combines the visible refined details with the base tri-plane to prevent distortion in unobserved regions.
+--------------------------------------------------------------------------------
+Frame Image : frame_13.png
+Timestamp   : 6.999s
+Narration   : The mixed tri-plane is then supplied to the neural rendering decoder under the target camera pose.
+--------------------------------------------------------------------------------
+Frame Image : frame_14.png
+Timestamp   : 7.499s
+Narration   : Finally, the system renders the high-fidelity inversion image with precise identity details and 3D consistency.
+--------------------------------------------------------------------------------

@@ -1,0 +1,38 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : To begin, input egocentric video frames are fed into a frozen video transformer backbone.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : The visual encoder extracts spatio-temporal feature maps representing the video sequence.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : In parallel, narration sentences and extracted noun phrases pass through a frozen text backbone.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : This yields a global sentence embedding along with fine-grained noun embeddings.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : A set of learnable queries is defined, consisting of hand queries, object queries, and a global video query.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : The object-aware decoder uses cross-attention to allow these queries to attend to the visual feature map.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : The decoder produces localized summary vectors for hands and objects, as well as a video-level embedding.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 3.999s
+Narration   : During training, auxiliary box and semantic heads predict spatial bounding boxes and semantic object classes from the summary vectors.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 4.499s
+Narration   : Finally, the model is trained jointly with bounding box loss, cross-modal video-text contrastive loss, and word-level grounding loss.
+--------------------------------------------------------------------------------

@@ -1,0 +1,38 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : In the proxy anonymization training stage, video frames from an action dataset are fed into the training pipeline.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : A UNet architecture serves as the anonymizer network, transforming the input frames to remove private visual attributes while preserving action utility.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : The anonymized output is guided by a budget network using a contrastive loss to minimize mutual information across frames and obscure personal identity.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : Simultaneously, a proxy video encoder is optimized with an action recognition loss that combines cross-entropy classification and a temporally distinct triplet loss.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : To formulate the triplet loss, augmented video clips are sampled from both matching and temporally distinct time segments along the video timeline.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : In the representation space, embeddings from the same timestamp are brought closer together, while embeddings from distinct timestamps are repelled to promote temporal distinctiveness.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : During downstream deployment on surveillance anomaly datasets, raw video feeds are anonymized using the frozen, pre-trained anonymizer network.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 3.999s
+Narration   : The anonymized video feed is then processed by the trained video feature extractor to produce privacy-preserved representation features.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 4.499s
+Narration   : Finally, these anonymized features are provided to a weakly-supervised anomaly detection algorithm to detect anomalous events without risking privacy leakage.
+--------------------------------------------------------------------------------

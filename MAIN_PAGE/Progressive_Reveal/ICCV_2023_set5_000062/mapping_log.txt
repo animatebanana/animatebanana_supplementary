@@ -1,0 +1,54 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : The framework begins with an unlabelled target image to perform free-energy based instance selection.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : The target image is processed through the Vision Transformer backbone to extract its attention map.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : In parallel, a complementary non-attention map is derived from the non-attended regions.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : A non-attention masking operation is then applied to the target image using this mask.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : The masked non-attention image patches are subsequently passed through the Vision Transformer.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : The model outputs undergo both a prediction consistency test and a free-energy comparison to verify attention quality.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : The consistency probability and the free-energy selection indicator are combined via multiplication.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 3.999s
+Narration   : This determines the final instance selection score to guide the pseudo-label self-training loss.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 4.499s
+Narration   : In subfigure b, the score normalizer module receives the classification logits layer output.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 4.999s
+Narration   : The energy normalizer standardizes energy scores to compute the energy normalization loss.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 5.499s
+Narration   : Simultaneously, the free-energy normalizer calculates and standardizes free-energy terms to compute the free-energy loss.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Timestamp   : 5.999s
+Narration   : In subfigure c, source and target domain datasets are simultaneously processed through Vision Transformer backbones.
+--------------------------------------------------------------------------------
+Frame Image : frame_12.png
+Timestamp   : 6.499s
+Narration   : The score alignment module aligns cross-domain features while dedicated score normalization modules regularize both domains.
+--------------------------------------------------------------------------------

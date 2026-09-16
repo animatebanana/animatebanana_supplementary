@@ -1,0 +1,54 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : The framework reconstructs articulated objects across multiple distinct states.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : The first input state captures the object in its closed configuration.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : An intermediate canonical state is defined to balance supervision across input configurations.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : The second input state presents the object in an open configuration.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : In the optimization loop, neural radiance fields and motion parameters are jointly refined.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : For an active input state, camera rays define points and viewing directions.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : A learned transformation function maps these query rays into the canonical space.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 3.999s
+Narration   : This establishes ray sample coordinates in the canonical frame.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 4.499s
+Narration   : The static field queries the original ray samples to output density and color for immovable parts.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 4.999s
+Narration   : Concurrently, the mobile field queries canonical samples to determine density and appearance for movable parts.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 5.499s
+Narration   : Composite volume rendering integrates contributions from both fields along each ray.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Timestamp   : 5.999s
+Narration   : This integration produces synthesized images corresponding to each articulation state.
+--------------------------------------------------------------------------------
+Frame Image : frame_12.png
+Timestamp   : 6.499s
+Narration   : Finally, a photometric loss compares the rendered images with ground-truth views to supervise the entire framework.
+--------------------------------------------------------------------------------

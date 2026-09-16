@@ -1,0 +1,130 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : The legend defines the visual vocabulary of the diagram: the green SSFT module, the blue SFT module, the white residual block, the dark down convolution and up convolution layers, and the gray three by three convolution.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : The network is split into two streams. The lower deblurring stream is introduced, and the blurred input image is fed into its first block.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : The blurred image passes through the initial encoder block, labeled E zero.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : It then enters the first downsampling block, which carries a tensor dimension annotation.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : The signal proceeds to the next downsampling block, also annotated with its dimensions.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : A final downsampling block completes the encoder, whose label is now displayed, before the path enters the decoder.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : The decoder starts at the deepest block, where the bottleneck feature is marked as E four.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 3.999s
+Narration   : The decoder then upsamples through the next block.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 4.499s
+Narration   : It continues through the following upsampling block.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 4.999s
+Narration   : The upsampled feature is merged at an addition node.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 5.499s
+Narration   : The merged feature passes through the final decoder block, D zero.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Timestamp   : 5.999s
+Narration   : This produces the predicted image, completing the decoder side of the deblurring stream.
+--------------------------------------------------------------------------------
+Frame Image : frame_12.png
+Timestamp   : 6.499s
+Narration   : Focus now moves to the upper prior estimation stream.
+--------------------------------------------------------------------------------
+Frame Image : frame_13.png
+Timestamp   : 6.999s
+Narration   : The first prior block, E one, receives a skip connection from the encoder path.
+--------------------------------------------------------------------------------
+Frame Image : frame_14.png
+Timestamp   : 7.499s
+Narration   : The second prior block, E two, taps a second skip connection.
+--------------------------------------------------------------------------------
+Frame Image : frame_15.png
+Timestamp   : 7.999s
+Narration   : The third prior block, E three, takes the third skip connection.
+--------------------------------------------------------------------------------
+Frame Image : frame_16.png
+Timestamp   : 8.499s
+Narration   : Block E one emits the first prior feature, P one.
+--------------------------------------------------------------------------------
+Frame Image : frame_17.png
+Timestamp   : 8.999s
+Narration   : Block E two emits the second prior feature, P two.
+--------------------------------------------------------------------------------
+Frame Image : frame_18.png
+Timestamp   : 9.499s
+Narration   : Block E three emits the third prior feature, P three.
+--------------------------------------------------------------------------------
+Frame Image : frame_19.png
+Timestamp   : 9.999s
+Narration   : The first prior feature is converted into an orange feature cube for the upper branch.
+--------------------------------------------------------------------------------
+Frame Image : frame_20.png
+Timestamp   : 10.499s
+Narration   : The second prior feature is converted in the same way.
+--------------------------------------------------------------------------------
+Frame Image : frame_21.png
+Timestamp   : 10.999s
+Narration   : The third prior feature is converted as well.
+--------------------------------------------------------------------------------
+Frame Image : frame_22.png
+Timestamp   : 11.499s
+Narration   : These three orange cubes are fed into the discriminator.
+--------------------------------------------------------------------------------
+Frame Image : frame_23.png
+Timestamp   : 11.999s
+Narration   : The discriminator produces a fake output and a real output.
+--------------------------------------------------------------------------------
+Frame Image : frame_24.png
+Timestamp   : 12.499s
+Narration   : Both outputs feed the adversarial loss.
+--------------------------------------------------------------------------------
+Frame Image : frame_25.png
+Timestamp   : 12.999s
+Narration   : In parallel, the first prior feature is routed to a lower branch as an orange cube.
+--------------------------------------------------------------------------------
+Frame Image : frame_26.png
+Timestamp   : 13.499s
+Narration   : The second prior feature follows the same lower route.
+--------------------------------------------------------------------------------
+Frame Image : frame_27.png
+Timestamp   : 13.999s
+Narration   : The third prior feature completes the lower set.
+--------------------------------------------------------------------------------
+Frame Image : frame_28.png
+Timestamp   : 14.499s
+Narration   : These lower cubes are passed into a fixed VGG Face network.
+--------------------------------------------------------------------------------
+Frame Image : frame_29.png
+Timestamp   : 14.999s
+Narration   : The target image is also supplied to the VGG Face network.
+--------------------------------------------------------------------------------
+Frame Image : frame_30.png
+Timestamp   : 15.499s
+Narration   : The prior loss then gathers inputs from both the prior features and the lower transformed features.
+--------------------------------------------------------------------------------
+Frame Image : frame_31.png
+Timestamp   : 15.999s
+Narration   : Finally, the predicted image and the target image are compared to compute the pixel loss.
+--------------------------------------------------------------------------------

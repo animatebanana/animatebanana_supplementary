@@ -1,0 +1,50 @@
+=== Hopping Bounding Box Sequence ===
+
+Frame Image : frame_00.png
+Timestamp   : 1.50s
+Narration   : The pipeline begins by taking a single RGB image of an indoor room as input.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 4.50s
+Narration   : A convolutional backbone network processes the image to extract shared feature representations.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 7.50s
+Narration   : The top convolutional branch targets surface structure.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 10.50s
+Narration   : It predicts the individual spatial planes that compose the room layout.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 13.50s
+Narration   : The middle convolutional branch processes structural boundaries.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 16.50s
+Narration   : It detects the vertical lines located between adjacent walls.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 19.50s
+Narration   : The bottom convolutional branch focuses on spatial orientation.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 22.50s
+Narration   : It estimates dense three-dimensional parameters for each identified plane.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 25.50s
+Narration   : A geometric reasoning module then integrates the predicted planes, lines, and parameters.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 28.50s
+Narration   : This module generates the final reconstruction results.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 31.50s
+Narration   : Producing a two-dimensional semantic segmentation of the room surfaces.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Timestamp   : 34.50s
+Narration   : And a geometrically consistent three-dimensional room layout model.
+--------------------------------------------------------------------------------

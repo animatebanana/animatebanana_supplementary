@@ -1,0 +1,442 @@
+=== Sliding Bounding Box Sequence ===
+
+Frame Image : frame_0000.png
+Frame Type  : Hold
+Timestamp   : 1.201s
+Narration   : Given an input crowd image, the Point Query Transformer pipeline begins by extracting visual representations.
+--------------------------------------------------------------------------------
+Frame Image : frame_0001.png
+Frame Type  : Transition 1
+Timestamp   : 2.553s
+Narration   : Given an input crowd image, the Point Query Transformer pipeline begins by extracting visual representations.
+--------------------------------------------------------------------------------
+Frame Image : frame_0002.png
+Frame Type  : Transition 2
+Timestamp   : 2.703s
+Narration   : Given an input crowd image, the Point Query Transformer pipeline begins by extracting visual representations.
+--------------------------------------------------------------------------------
+Frame Image : frame_0003.png
+Frame Type  : Transition 3
+Timestamp   : 2.853s
+Narration   : Given an input crowd image, the Point Query Transformer pipeline begins by extracting visual representations.
+--------------------------------------------------------------------------------
+Frame Image : frame_0004.png
+Frame Type  : Hold
+Timestamp   : 4.201s
+Narration   : A standard CNN backbone processes the input image to extract deep feature representations.
+--------------------------------------------------------------------------------
+Frame Image : frame_0005.png
+Frame Type  : Transition 1
+Timestamp   : 5.549s
+Narration   : A standard CNN backbone processes the input image to extract deep feature representations.
+--------------------------------------------------------------------------------
+Frame Image : frame_0006.png
+Frame Type  : Transition 2
+Timestamp   : 5.699s
+Narration   : A standard CNN backbone processes the input image to extract deep feature representations.
+--------------------------------------------------------------------------------
+Frame Image : frame_0007.png
+Frame Type  : Transition 3
+Timestamp   : 5.849s
+Narration   : A standard CNN backbone processes the input image to extract deep feature representations.
+--------------------------------------------------------------------------------
+Frame Image : frame_0008.png
+Frame Type  : Hold
+Timestamp   : 7.201s
+Narration   : This produces a feature map F, where each spatial element is treated as an individual token.
+--------------------------------------------------------------------------------
+Frame Image : frame_0009.png
+Frame Type  : Transition 1
+Timestamp   : 8.552s
+Narration   : This produces a feature map F, where each spatial element is treated as an individual token.
+--------------------------------------------------------------------------------
+Frame Image : frame_0010.png
+Frame Type  : Transition 2
+Timestamp   : 8.702s
+Narration   : This produces a feature map F, where each spatial element is treated as an individual token.
+--------------------------------------------------------------------------------
+Frame Image : frame_0011.png
+Frame Type  : Transition 3
+Timestamp   : 8.852s
+Narration   : This produces a feature map F, where each spatial element is treated as an individual token.
+--------------------------------------------------------------------------------
+Frame Image : frame_0012.png
+Frame Type  : Hold
+Timestamp   : 10.200s
+Narration   : The feature tokens are passed into a transformer encoder utilizing progressive rectangle-window attention.
+--------------------------------------------------------------------------------
+Frame Image : frame_0013.png
+Frame Type  : Transition 1
+Timestamp   : 11.548s
+Narration   : The feature tokens are passed into a transformer encoder utilizing progressive rectangle-window attention.
+--------------------------------------------------------------------------------
+Frame Image : frame_0014.png
+Frame Type  : Transition 2
+Timestamp   : 11.699s
+Narration   : The feature tokens are passed into a transformer encoder utilizing progressive rectangle-window attention.
+--------------------------------------------------------------------------------
+Frame Image : frame_0015.png
+Frame Type  : Transition 3
+Timestamp   : 11.849s
+Narration   : The feature tokens are passed into a transformer encoder utilizing progressive rectangle-window attention.
+--------------------------------------------------------------------------------
+Frame Image : frame_0016.png
+Frame Type  : Hold
+Timestamp   : 13.200s
+Narration   : Initial encoder layers compute self-attention within large horizontal rectangular windows to capture contextual crowd information.
+--------------------------------------------------------------------------------
+Frame Image : frame_0017.png
+Frame Type  : Transition 1
+Timestamp   : 14.551s
+Narration   : Initial encoder layers compute self-attention within large horizontal rectangular windows to capture contextual crowd information.
+--------------------------------------------------------------------------------
+Frame Image : frame_0018.png
+Frame Type  : Transition 2
+Timestamp   : 14.701s
+Narration   : Initial encoder layers compute self-attention within large horizontal rectangular windows to capture contextual crowd information.
+--------------------------------------------------------------------------------
+Frame Image : frame_0019.png
+Frame Type  : Transition 3
+Timestamp   : 14.852s
+Narration   : Initial encoder layers compute self-attention within large horizontal rectangular windows to capture contextual crowd information.
+--------------------------------------------------------------------------------
+Frame Image : frame_0020.png
+Frame Type  : Hold
+Timestamp   : 16.200s
+Narration   : Subsequent encoder layers progressively reduce the rectangle window size to focus on local regional details efficiently.
+--------------------------------------------------------------------------------
+Frame Image : frame_0021.png
+Frame Type  : Transition 1
+Timestamp   : 17.548s
+Narration   : Subsequent encoder layers progressively reduce the rectangle window size to focus on local regional details efficiently.
+--------------------------------------------------------------------------------
+Frame Image : frame_0022.png
+Frame Type  : Transition 2
+Timestamp   : 17.698s
+Narration   : Subsequent encoder layers progressively reduce the rectangle window size to focus on local regional details efficiently.
+--------------------------------------------------------------------------------
+Frame Image : frame_0023.png
+Frame Type  : Transition 3
+Timestamp   : 17.848s
+Narration   : Subsequent encoder layers progressively reduce the rectangle window size to focus on local regional details efficiently.
+--------------------------------------------------------------------------------
+Frame Image : frame_0024.png
+Frame Type  : Hold
+Timestamp   : 19.199s
+Narration   : The encoder outputs context-enriched image feature representations for the decoding stage.
+--------------------------------------------------------------------------------
+Frame Image : frame_0025.png
+Frame Type  : Transition 1
+Timestamp   : 20.551s
+Narration   : The encoder outputs context-enriched image feature representations for the decoding stage.
+--------------------------------------------------------------------------------
+Frame Image : frame_0026.png
+Frame Type  : Transition 2
+Timestamp   : 20.701s
+Narration   : The encoder outputs context-enriched image feature representations for the decoding stage.
+--------------------------------------------------------------------------------
+Frame Image : frame_0027.png
+Frame Type  : Transition 3
+Timestamp   : 20.851s
+Narration   : The encoder outputs context-enriched image feature representations for the decoding stage.
+--------------------------------------------------------------------------------
+Frame Image : frame_0028.png
+Frame Type  : Hold
+Timestamp   : 22.199s
+Narration   : In parallel, a uniform grid of sparse querying points is initialized across the image canvas.
+--------------------------------------------------------------------------------
+Frame Image : frame_0029.png
+Frame Type  : Transition 1
+Timestamp   : 23.547s
+Narration   : In parallel, a uniform grid of sparse querying points is initialized across the image canvas.
+--------------------------------------------------------------------------------
+Frame Image : frame_0030.png
+Frame Type  : Transition 2
+Timestamp   : 23.697s
+Narration   : In parallel, a uniform grid of sparse querying points is initialized across the image canvas.
+--------------------------------------------------------------------------------
+Frame Image : frame_0031.png
+Frame Type  : Transition 3
+Timestamp   : 23.847s
+Narration   : In parallel, a uniform grid of sparse querying points is initialized across the image canvas.
+--------------------------------------------------------------------------------
+Frame Image : frame_0032.png
+Frame Type  : Hold
+Timestamp   : 25.199s
+Narration   : A region-based quadtree splitter evaluates local image features to determine whether a region is dense or sparse.
+--------------------------------------------------------------------------------
+Frame Image : frame_0033.png
+Frame Type  : Transition 1
+Timestamp   : 26.550s
+Narration   : A region-based quadtree splitter evaluates local image features to determine whether a region is dense or sparse.
+--------------------------------------------------------------------------------
+Frame Image : frame_0034.png
+Frame Type  : Transition 2
+Timestamp   : 26.700s
+Narration   : A region-based quadtree splitter evaluates local image features to determine whether a region is dense or sparse.
+--------------------------------------------------------------------------------
+Frame Image : frame_0035.png
+Frame Type  : Transition 3
+Timestamp   : 26.850s
+Narration   : A region-based quadtree splitter evaluates local image features to determine whether a region is dense or sparse.
+--------------------------------------------------------------------------------
+Frame Image : frame_0036.png
+Frame Type  : Hold
+Timestamp   : 28.202s
+Narration   : Points in dense regions are dynamically split into four sub-points, whereas points in sparse regions remain undivided.
+--------------------------------------------------------------------------------
+Frame Image : frame_0037.png
+Frame Type  : Transition 1
+Timestamp   : 29.551s
+Narration   : Points in dense regions are dynamically split into four sub-points, whereas points in sparse regions remain undivided.
+--------------------------------------------------------------------------------
+Frame Image : frame_0038.png
+Frame Type  : Transition 2
+Timestamp   : 29.700s
+Narration   : Points in dense regions are dynamically split into four sub-points, whereas points in sparse regions remain undivided.
+--------------------------------------------------------------------------------
+Frame Image : frame_0039.png
+Frame Type  : Transition 3
+Timestamp   : 29.849s
+Narration   : Points in dense regions are dynamically split into four sub-points, whereas points in sparse regions remain undivided.
+--------------------------------------------------------------------------------
+Frame Image : frame_0040.png
+Frame Type  : Hold
+Timestamp   : 31.198s
+Narration   : This adaptive quadtree splitting generates denser point queries precisely where high crowd congestion occurs.
+--------------------------------------------------------------------------------
+Frame Image : frame_0041.png
+Frame Type  : Transition 1
+Timestamp   : 32.550s
+Narration   : This adaptive quadtree splitting generates denser point queries precisely where high crowd congestion occurs.
+--------------------------------------------------------------------------------
+Frame Image : frame_0042.png
+Frame Type  : Transition 2
+Timestamp   : 32.700s
+Narration   : This adaptive quadtree splitting generates denser point queries precisely where high crowd congestion occurs.
+--------------------------------------------------------------------------------
+Frame Image : frame_0043.png
+Frame Type  : Transition 3
+Timestamp   : 32.850s
+Narration   : This adaptive quadtree splitting generates denser point queries precisely where high crowd congestion occurs.
+--------------------------------------------------------------------------------
+Frame Image : frame_0044.png
+Frame Type  : Hold
+Timestamp   : 34.201s
+Narration   : The resulting candidate points are paired with sampled CNN features and positional embeddings to form point queries.
+--------------------------------------------------------------------------------
+Frame Image : frame_0045.png
+Frame Type  : Transition 1
+Timestamp   : 35.553s
+Narration   : The resulting candidate points are paired with sampled CNN features and positional embeddings to form point queries.
+--------------------------------------------------------------------------------
+Frame Image : frame_0046.png
+Frame Type  : Transition 2
+Timestamp   : 35.703s
+Narration   : The resulting candidate points are paired with sampled CNN features and positional embeddings to form point queries.
+--------------------------------------------------------------------------------
+Frame Image : frame_0047.png
+Frame Type  : Transition 3
+Timestamp   : 35.853s
+Narration   : The resulting candidate points are paired with sampled CNN features and positional embeddings to form point queries.
+--------------------------------------------------------------------------------
+Frame Image : frame_0048.png
+Frame Type  : Hold
+Timestamp   : 37.201s
+Narration   : In the object querying stage, the transformer decoder decodes sparse queries inside local rectangular windows.
+--------------------------------------------------------------------------------
+Frame Image : frame_0049.png
+Frame Type  : Transition 1
+Timestamp   : 38.549s
+Narration   : In the object querying stage, the transformer decoder decodes sparse queries inside local rectangular windows.
+--------------------------------------------------------------------------------
+Frame Image : frame_0050.png
+Frame Type  : Transition 2
+Timestamp   : 38.699s
+Narration   : In the object querying stage, the transformer decoder decodes sparse queries inside local rectangular windows.
+--------------------------------------------------------------------------------
+Frame Image : frame_0051.png
+Frame Type  : Transition 3
+Timestamp   : 38.849s
+Narration   : In the object querying stage, the transformer decoder decodes sparse queries inside local rectangular windows.
+--------------------------------------------------------------------------------
+Frame Image : frame_0052.png
+Frame Type  : Hold
+Timestamp   : 40.201s
+Narration   : Dense queries are progressively decoded in smaller local windows, modeling relationships guided by image context.
+--------------------------------------------------------------------------------
+Frame Image : frame_0053.png
+Frame Type  : Transition 1
+Timestamp   : 41.552s
+Narration   : Dense queries are progressively decoded in smaller local windows, modeling relationships guided by image context.
+--------------------------------------------------------------------------------
+Frame Image : frame_0054.png
+Frame Type  : Transition 2
+Timestamp   : 41.702s
+Narration   : Dense queries are progressively decoded in smaller local windows, modeling relationships guided by image context.
+--------------------------------------------------------------------------------
+Frame Image : frame_0055.png
+Frame Type  : Transition 3
+Timestamp   : 41.852s
+Narration   : Dense queries are progressively decoded in smaller local windows, modeling relationships guided by image context.
+--------------------------------------------------------------------------------
+Frame Image : frame_0056.png
+Frame Type  : Hold
+Timestamp   : 43.200s
+Narration   : The decoded point queries gather both semantic crowd context and spatial localization information.
+--------------------------------------------------------------------------------
+Frame Image : frame_0057.png
+Frame Type  : Transition 1
+Timestamp   : 44.548s
+Narration   : The decoded point queries gather both semantic crowd context and spatial localization information.
+--------------------------------------------------------------------------------
+Frame Image : frame_0058.png
+Frame Type  : Transition 2
+Timestamp   : 44.698s
+Narration   : The decoded point queries gather both semantic crowd context and spatial localization information.
+--------------------------------------------------------------------------------
+Frame Image : frame_0059.png
+Frame Type  : Transition 3
+Timestamp   : 44.849s
+Narration   : The decoded point queries gather both semantic crowd context and spatial localization information.
+--------------------------------------------------------------------------------
+Frame Image : frame_0060.png
+Frame Type  : Hold
+Timestamp   : 46.200s
+Narration   : These decoded queries are passed in parallel into the multi-layer perceptron prediction head.
+--------------------------------------------------------------------------------
+Frame Image : frame_0061.png
+Frame Type  : Transition 1
+Timestamp   : 47.551s
+Narration   : These decoded queries are passed in parallel into the multi-layer perceptron prediction head.
+--------------------------------------------------------------------------------
+Frame Image : frame_0062.png
+Frame Type  : Transition 2
+Timestamp   : 47.702s
+Narration   : These decoded queries are passed in parallel into the multi-layer perceptron prediction head.
+--------------------------------------------------------------------------------
+Frame Image : frame_0063.png
+Frame Type  : Transition 3
+Timestamp   : 47.852s
+Narration   : These decoded queries are passed in parallel into the multi-layer perceptron prediction head.
+--------------------------------------------------------------------------------
+Frame Image : frame_0064.png
+Frame Type  : Hold
+Timestamp   : 49.200s
+Narration   : For each query, the head predicts a person classification probability along with precise coordinate offsets.
+--------------------------------------------------------------------------------
+Frame Image : frame_0065.png
+Frame Type  : Transition 1
+Timestamp   : 50.548s
+Narration   : For each query, the head predicts a person classification probability along with precise coordinate offsets.
+--------------------------------------------------------------------------------
+Frame Image : frame_0066.png
+Frame Type  : Transition 2
+Timestamp   : 50.698s
+Narration   : For each query, the head predicts a person classification probability along with precise coordinate offsets.
+--------------------------------------------------------------------------------
+Frame Image : frame_0067.png
+Frame Type  : Transition 3
+Timestamp   : 50.848s
+Narration   : For each query, the head predicts a person classification probability along with precise coordinate offsets.
+--------------------------------------------------------------------------------
+Frame Image : frame_0068.png
+Frame Type  : Hold
+Timestamp   : 52.199s
+Narration   : Surplus split queries that land on background regions are classified as containing no person.
+--------------------------------------------------------------------------------
+Frame Image : frame_0069.png
+Frame Type  : Transition 1
+Timestamp   : 53.551s
+Narration   : Surplus split queries that land on background regions are classified as containing no person.
+--------------------------------------------------------------------------------
+Frame Image : frame_0070.png
+Frame Type  : Transition 2
+Timestamp   : 53.701s
+Narration   : Surplus split queries that land on background regions are classified as containing no person.
+--------------------------------------------------------------------------------
+Frame Image : frame_0071.png
+Frame Type  : Transition 3
+Timestamp   : 53.851s
+Narration   : Surplus split queries that land on background regions are classified as containing no person.
+--------------------------------------------------------------------------------
+Frame Image : frame_0072.png
+Frame Type  : Hold
+Timestamp   : 55.199s
+Narration   : Likewise, sparse queries covering empty areas correctly output no-person predictions.
+--------------------------------------------------------------------------------
+Frame Image : frame_0073.png
+Frame Type  : Transition 1
+Timestamp   : 56.547s
+Narration   : Likewise, sparse queries covering empty areas correctly output no-person predictions.
+--------------------------------------------------------------------------------
+Frame Image : frame_0074.png
+Frame Type  : Transition 2
+Timestamp   : 56.697s
+Narration   : Likewise, sparse queries covering empty areas correctly output no-person predictions.
+--------------------------------------------------------------------------------
+Frame Image : frame_0075.png
+Frame Type  : Transition 3
+Timestamp   : 56.847s
+Narration   : Likewise, sparse queries covering empty areas correctly output no-person predictions.
+--------------------------------------------------------------------------------
+Frame Image : frame_0076.png
+Frame Type  : Hold
+Timestamp   : 58.199s
+Narration   : Queries in dense regions successfully detect individual heads with high probability and localized offsets.
+--------------------------------------------------------------------------------
+Frame Image : frame_0077.png
+Frame Type  : Transition 1
+Timestamp   : 59.550s
+Narration   : Queries in dense regions successfully detect individual heads with high probability and localized offsets.
+--------------------------------------------------------------------------------
+Frame Image : frame_0078.png
+Frame Type  : Transition 2
+Timestamp   : 59.700s
+Narration   : Queries in dense regions successfully detect individual heads with high probability and localized offsets.
+--------------------------------------------------------------------------------
+Frame Image : frame_0079.png
+Frame Type  : Transition 3
+Timestamp   : 59.850s
+Narration   : Queries in dense regions successfully detect individual heads with high probability and localized offsets.
+--------------------------------------------------------------------------------
+Frame Image : frame_0080.png
+Frame Type  : Hold
+Timestamp   : 61.202s
+Narration   : The individual point predictions are collected and mapped back onto the original image space.
+--------------------------------------------------------------------------------
+Frame Image : frame_0081.png
+Frame Type  : Transition 1
+Timestamp   : 62.552s
+Narration   : The individual point predictions are collected and mapped back onto the original image space.
+--------------------------------------------------------------------------------
+Frame Image : frame_0082.png
+Frame Type  : Transition 2
+Timestamp   : 62.700s
+Narration   : The individual point predictions are collected and mapped back onto the original image space.
+--------------------------------------------------------------------------------
+Frame Image : frame_0083.png
+Frame Type  : Transition 3
+Timestamp   : 62.848s
+Narration   : The individual point predictions are collected and mapped back onto the original image space.
+--------------------------------------------------------------------------------
+Frame Image : frame_0084.png
+Frame Type  : Hold
+Timestamp   : 64.198s
+Narration   : This yields the final crowd count and precise instance-level localizations across both sparse and congested scenes.
+--------------------------------------------------------------------------------
+Frame Image : frame_0085.png
+Frame Type  : Transition 1
+Timestamp   : 65.550s
+Narration   : This yields the final crowd count and precise instance-level localizations across both sparse and congested scenes.
+--------------------------------------------------------------------------------
+Frame Image : frame_0086.png
+Frame Type  : Transition 2
+Timestamp   : 65.700s
+Narration   : This yields the final crowd count and precise instance-level localizations across both sparse and congested scenes.
+--------------------------------------------------------------------------------
+Frame Image : frame_0087.png
+Frame Type  : Transition 3
+Timestamp   : 65.850s
+Narration   : This yields the final crowd count and precise instance-level localizations across both sparse and congested scenes.
+--------------------------------------------------------------------------------

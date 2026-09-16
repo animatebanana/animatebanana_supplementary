@@ -1,0 +1,46 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : The framework begins with Stage 1, generating 2D-to-3D proposals directly from a single monocular input image.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : An off-the-shelf monocular 3D object detector extracts initial features and coarse bounding box estimates.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : These predicted 3D bounding boxes establish bottom-up anchors across the scene.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : Next, a top-down sampling strategy generates a dense set of proposals around the anchors within a local 3D grid.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : Stage 2 performs 3D-to-2D proposal verification to accurately refine and denoise the generated proposals.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : Each 3D bounding box proposal is parameterized by its 3D shape, projected 2D corner and center points, and 2D bounding box corners.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : In the proposal embedding step, these elements are converted into geometric encodings, projection point appearance encodings, and region-of-interest appearance encodings.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 3.999s
+Narration   : Under intra-proposal attention, a Perceiver module performs cross-attention using the point appearance features as queries and geometric features as keys and values.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 4.499s
+Narration   : After self-attention, the resulting geometry-aware point features serve as keys and values for a second cross-attention stage queried by region-of-interest appearance features.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 4.999s
+Narration   : An inter-proposal self-attention block then models interactions across all proposals to output category classification scores and 3D shape residuals.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 5.499s
+Narration   : This produces the final, highly accurate 3D bounding box detections.
+--------------------------------------------------------------------------------

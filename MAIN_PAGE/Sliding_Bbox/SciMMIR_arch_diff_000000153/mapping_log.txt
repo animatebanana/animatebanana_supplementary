@@ -1,0 +1,222 @@
+=== Sliding Bounding Box Sequence ===
+
+Frame Image : frame_0000.png
+Frame Type  : Hold
+Timestamp   : 1.000s
+Narration   : At the edge, a connected camera continuously captures raw real-time video frames.
+--------------------------------------------------------------------------------
+Frame Image : frame_0001.png
+Frame Type  : Transition 1
+Timestamp   : 2.124s
+Narration   : At the edge, a connected camera continuously captures raw real-time video frames.
+--------------------------------------------------------------------------------
+Frame Image : frame_0002.png
+Frame Type  : Transition 2
+Timestamp   : 2.249s
+Narration   : At the edge, a connected camera continuously captures raw real-time video frames.
+--------------------------------------------------------------------------------
+Frame Image : frame_0003.png
+Frame Type  : Transition 3
+Timestamp   : 2.375s
+Narration   : At the edge, a connected camera continuously captures raw real-time video frames.
+--------------------------------------------------------------------------------
+Frame Image : frame_0004.png
+Frame Type  : Hold
+Timestamp   : 3.499s
+Narration   : The incoming video stream is simultaneously routed to local inference and an adaptive sampling buffer.
+--------------------------------------------------------------------------------
+Frame Image : frame_0005.png
+Frame Type  : Transition 1
+Timestamp   : 4.624s
+Narration   : The incoming video stream is simultaneously routed to local inference and an adaptive sampling buffer.
+--------------------------------------------------------------------------------
+Frame Image : frame_0006.png
+Frame Type  : Transition 2
+Timestamp   : 4.749s
+Narration   : The incoming video stream is simultaneously routed to local inference and an adaptive sampling buffer.
+--------------------------------------------------------------------------------
+Frame Image : frame_0007.png
+Frame Type  : Transition 3
+Timestamp   : 4.874s
+Narration   : The incoming video stream is simultaneously routed to local inference and an adaptive sampling buffer.
+--------------------------------------------------------------------------------
+Frame Image : frame_0008.png
+Frame Type  : Hold
+Timestamp   : 5.999s
+Narration   : A lightweight student model executes real-time inference directly on the edge to deliver immediate results.
+--------------------------------------------------------------------------------
+Frame Image : frame_0009.png
+Frame Type  : Transition 1
+Timestamp   : 7.124s
+Narration   : A lightweight student model executes real-time inference directly on the edge to deliver immediate results.
+--------------------------------------------------------------------------------
+Frame Image : frame_0010.png
+Frame Type  : Transition 2
+Timestamp   : 7.249s
+Narration   : A lightweight student model executes real-time inference directly on the edge to deliver immediate results.
+--------------------------------------------------------------------------------
+Frame Image : frame_0011.png
+Frame Type  : Transition 3
+Timestamp   : 7.374s
+Narration   : A lightweight student model executes real-time inference directly on the edge to deliver immediate results.
+--------------------------------------------------------------------------------
+Frame Image : frame_0012.png
+Frame Type  : Hold
+Timestamp   : 8.500s
+Narration   : Meanwhile, the adaptive frame sampling module collects and buffers selected video frames for offloading.
+--------------------------------------------------------------------------------
+Frame Image : frame_0013.png
+Frame Type  : Transition 1
+Timestamp   : 9.626s
+Narration   : Meanwhile, the adaptive frame sampling module collects and buffers selected video frames for offloading.
+--------------------------------------------------------------------------------
+Frame Image : frame_0014.png
+Frame Type  : Transition 2
+Timestamp   : 9.750s
+Narration   : Meanwhile, the adaptive frame sampling module collects and buffers selected video frames for offloading.
+--------------------------------------------------------------------------------
+Frame Image : frame_0015.png
+Frame Type  : Transition 3
+Timestamp   : 9.875s
+Narration   : Meanwhile, the adaptive frame sampling module collects and buffers selected video frames for offloading.
+--------------------------------------------------------------------------------
+Frame Image : frame_0016.png
+Frame Type  : Hold
+Timestamp   : 11.000s
+Narration   : These buffered frame batches are compressed and uploaded over the network to the cloud.
+--------------------------------------------------------------------------------
+Frame Image : frame_0017.png
+Frame Type  : Transition 1
+Timestamp   : 12.125s
+Narration   : These buffered frame batches are compressed and uploaded over the network to the cloud.
+--------------------------------------------------------------------------------
+Frame Image : frame_0018.png
+Frame Type  : Transition 2
+Timestamp   : 12.250s
+Narration   : These buffered frame batches are compressed and uploaded over the network to the cloud.
+--------------------------------------------------------------------------------
+Frame Image : frame_0019.png
+Frame Type  : Transition 3
+Timestamp   : 12.374s
+Narration   : These buffered frame batches are compressed and uploaded over the network to the cloud.
+--------------------------------------------------------------------------------
+Frame Image : frame_0020.png
+Frame Type  : Hold
+Timestamp   : 13.500s
+Narration   : In the cloud, an accurate teacher model processes the frames and measures scene change across inputs.
+--------------------------------------------------------------------------------
+Frame Image : frame_0021.png
+Frame Type  : Transition 1
+Timestamp   : 14.626s
+Narration   : In the cloud, an accurate teacher model processes the frames and measures scene change across inputs.
+--------------------------------------------------------------------------------
+Frame Image : frame_0022.png
+Frame Type  : Transition 2
+Timestamp   : 14.751s
+Narration   : In the cloud, an accurate teacher model processes the frames and measures scene change across inputs.
+--------------------------------------------------------------------------------
+Frame Image : frame_0023.png
+Frame Type  : Transition 3
+Timestamp   : 14.876s
+Narration   : In the cloud, an accurate teacher model processes the frames and measures scene change across inputs.
+--------------------------------------------------------------------------------
+Frame Image : frame_0024.png
+Frame Type  : Hold
+Timestamp   : 16.001s
+Narration   : The sampling rate controller dynamically adjusts sampling frequency based on scene variation and edge resource usage.
+--------------------------------------------------------------------------------
+Frame Image : frame_0025.png
+Frame Type  : Transition 1
+Timestamp   : 17.126s
+Narration   : The sampling rate controller dynamically adjusts sampling frequency based on scene variation and edge resource usage.
+--------------------------------------------------------------------------------
+Frame Image : frame_0026.png
+Frame Type  : Transition 2
+Timestamp   : 17.251s
+Narration   : The sampling rate controller dynamically adjusts sampling frequency based on scene variation and edge resource usage.
+--------------------------------------------------------------------------------
+Frame Image : frame_0027.png
+Frame Type  : Transition 3
+Timestamp   : 17.376s
+Narration   : The sampling rate controller dynamically adjusts sampling frequency based on scene variation and edge resource usage.
+--------------------------------------------------------------------------------
+Frame Image : frame_0028.png
+Frame Type  : Hold
+Timestamp   : 18.501s
+Narration   : Concurrently, the online labeling process utilizes teacher model predictions to generate accurate training labels.
+--------------------------------------------------------------------------------
+Frame Image : frame_0029.png
+Frame Type  : Transition 1
+Timestamp   : 19.625s
+Narration   : Concurrently, the online labeling process utilizes teacher model predictions to generate accurate training labels.
+--------------------------------------------------------------------------------
+Frame Image : frame_0030.png
+Frame Type  : Transition 2
+Timestamp   : 19.750s
+Narration   : Concurrently, the online labeling process utilizes teacher model predictions to generate accurate training labels.
+--------------------------------------------------------------------------------
+Frame Image : frame_0031.png
+Frame Type  : Transition 3
+Timestamp   : 19.876s
+Narration   : Concurrently, the online labeling process utilizes teacher model predictions to generate accurate training labels.
+--------------------------------------------------------------------------------
+Frame Image : frame_0032.png
+Frame Type  : Hold
+Timestamp   : 21.000s
+Narration   : The cloud returns the generated labels and sampling rate parameters to the edge device.
+--------------------------------------------------------------------------------
+Frame Image : frame_0033.png
+Frame Type  : Transition 1
+Timestamp   : 22.125s
+Narration   : The cloud returns the generated labels and sampling rate parameters to the edge device.
+--------------------------------------------------------------------------------
+Frame Image : frame_0034.png
+Frame Type  : Transition 2
+Timestamp   : 22.250s
+Narration   : The cloud returns the generated labels and sampling rate parameters to the edge device.
+--------------------------------------------------------------------------------
+Frame Image : frame_0035.png
+Frame Type  : Transition 3
+Timestamp   : 22.375s
+Narration   : The cloud returns the generated labels and sampling rate parameters to the edge device.
+--------------------------------------------------------------------------------
+Frame Image : frame_0036.png
+Frame Type  : Hold
+Timestamp   : 23.500s
+Narration   : The edge device performs adaptive online training with small batches to continually fine-tune the student model.
+--------------------------------------------------------------------------------
+Frame Image : frame_0037.png
+Frame Type  : Transition 1
+Timestamp   : 24.625s
+Narration   : The edge device performs adaptive online training with small batches to continually fine-tune the student model.
+--------------------------------------------------------------------------------
+Frame Image : frame_0038.png
+Frame Type  : Transition 2
+Timestamp   : 24.750s
+Narration   : The edge device performs adaptive online training with small batches to continually fine-tune the student model.
+--------------------------------------------------------------------------------
+Frame Image : frame_0039.png
+Frame Type  : Transition 3
+Timestamp   : 24.875s
+Narration   : The edge device performs adaptive online training with small batches to continually fine-tune the student model.
+--------------------------------------------------------------------------------
+Frame Image : frame_0040.png
+Frame Type  : Hold
+Timestamp   : 26.000s
+Narration   : A replay memory caches intermediate activation volumes during retraining, preventing catastrophic forgetting.
+--------------------------------------------------------------------------------
+Frame Image : frame_0041.png
+Frame Type  : Transition 1
+Timestamp   : 27.125s
+Narration   : A replay memory caches intermediate activation volumes during retraining, preventing catastrophic forgetting.
+--------------------------------------------------------------------------------
+Frame Image : frame_0042.png
+Frame Type  : Transition 2
+Timestamp   : 27.250s
+Narration   : A replay memory caches intermediate activation volumes during retraining, preventing catastrophic forgetting.
+--------------------------------------------------------------------------------
+Frame Image : frame_0043.png
+Frame Type  : Transition 3
+Timestamp   : 27.375s
+Narration   : A replay memory caches intermediate activation volumes during retraining, preventing catastrophic forgetting.
+--------------------------------------------------------------------------------

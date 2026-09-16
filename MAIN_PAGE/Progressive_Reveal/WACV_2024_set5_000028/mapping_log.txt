@@ -1,0 +1,54 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : In the global perception module, the framework receives a sequence of historical video frames as input.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : These input frames pass through a spatial encoder to extract visual spatial representations.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : Next, a temporal encoder models the temporal dynamics across the frame sequence.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : During self-supervised training, a decoder reconstructs the next consecutive frame.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : This produces the reconstructed target frame to guide feature representation learning.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : During inference, the temporal encoder directly outputs the global visual feature vector.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : Concurrently, the object attention module passes the video through a detection model to isolate salient object regions.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 3.999s
+Narration   : The upper pathway generates an attention mask focused on human-object interaction regions.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 4.499s
+Narration   : A human-object interaction model processes this region to capture localized interactive behavior.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 4.999s
+Narration   : This produces the corresponding local interacting feature vector.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 5.499s
+Narration   : Meanwhile, the lower branch generates an object relationship attention mask.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Timestamp   : 5.999s
+Narration   : The object relationship model uses graph structures to model relations among interacting objects.
+--------------------------------------------------------------------------------
+Frame Image : frame_12.png
+Timestamp   : 6.499s
+Narration   : Finally, this yields the inter-object relational feature vector for subsequent boundary selection.
+--------------------------------------------------------------------------------

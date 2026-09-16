@@ -1,0 +1,46 @@
+=== Hopping Bounding Box Sequence ===
+
+Frame Image : frame_00.png
+Timestamp   : 1.00s
+Narration   : In Usage 1, input datasets including ImageNet, COCO, and ADE20K are introduced.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 3.00s
+Narration   : The data is processed by the hierarchical Mamba-Adapter backbone trained from scratch.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 5.00s
+Narration   : This produces predictions for classification, detection, and segmentation.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 7.00s
+Narration   : Usage 2 applies the architecture as a booster network, starting with ImageNet input.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 9.00s
+Narration   : Prior knowledge from ImageNet is incorporated above the network.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 11.00s
+Narration   : The representations pass through Vision Mamba coupled with Mamba-Adapter.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 13.00s
+Narration   : This yields large-scale classification outputs.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 15.00s
+Narration   : For transfer tasks, ImageNet prior knowledge is again referenced.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 17.00s
+Narration   : Inputs are supplied from datasets such as CIFAR, SVHN, and Food101.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 19.00s
+Narration   : These are processed by the Vision Mamba and Mamba-Adapter module.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 21.00s
+Narration   : Generating the final small-scale classification outputs.
+--------------------------------------------------------------------------------

@@ -1,0 +1,78 @@
+=== Alpha Masking Sequence ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.01s
+Narration   : Both inputs are fed into the graph-convolutional encoder network.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.04s
+Narration   : The encoded latent representation is transformed through a sequence of normalizing flows conditioned on the demographic covariates.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 0.07s
+Narration   : The transformed latent representation is then routed to the decoder network.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 0.08s
+Narration   : The transformed latent representation is then routed to the decoder network.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 0.10s
+Narration   : The decoder reconstructs the final three-dimensional anatomical mesh.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 0.12s
+Narration   : The bottom-left panel shows the internal structure of the network's basic block.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 0.15s
+Narration   : Features first undergo graph convolution and normalization alongside demographic conditioning.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 0.18s
+Narration   : Demographic covariates generate a scaling factor applied via element-wise multiplication.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 0.21s
+Narration   : A bias term derived from the demographics is then combined through element-wise addition.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 0.24s
+Narration   : The conditioned representations pass through an activation layer, convolution, normalization, and a residual addition.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 0.26s
+Narration   : The bottom-right panel details the latent flow transformation steps.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Timestamp   : 0.29s
+Narration   : Starting from the initial latent state, the distribution is mapped through planar flow transformations.
+--------------------------------------------------------------------------------
+Frame Image : frame_12.png
+Timestamp   : 0.32s
+Narration   : Multiple successive planar units continue warping the latent space.
+--------------------------------------------------------------------------------
+Frame Image : frame_13.png
+Timestamp   : 0.35s
+Narration   : The sequence completes through the final planar layer in the chain.
+--------------------------------------------------------------------------------
+Frame Image : frame_14.png
+Timestamp   : 0.38s
+Narration   : This yields an expressive, multimodal latent state representation.
+--------------------------------------------------------------------------------
+Frame Image : frame_15.png
+Timestamp   : 0.40s
+Narration   : This transformed latent vector is concatenated directly with the demographic data.
+--------------------------------------------------------------------------------
+Frame Image : frame_16.png
+Timestamp   : 0.43s
+Narration   : Producing the final conditioned latent vector supplied to the decoder.
+--------------------------------------------------------------------------------
+Frame Image : frame_17.png
+Timestamp   : 0.46s
+Narration   : Producing the final conditioned latent vector supplied to the decoder.
+--------------------------------------------------------------------------------
+Frame Image : frame_18.png
+Timestamp   : 0.49s
+Narration   : Producing the final conditioned latent vector supplied to the decoder.
+--------------------------------------------------------------------------------

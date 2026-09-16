@@ -1,0 +1,58 @@
+=== Hopping Bounding Box Sequence ===
+
+Frame Image : frame_00.png
+Timestamp   : 1.50s
+Narration   : Appearance-based methods begin with the input face images.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 4.50s
+Narration   : Cropped eye images are also extracted from the face.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 7.50s
+Narration   : The face image is passed into a fine-tuned image encoder.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 10.50s
+Narration   : The eye images are simultaneously processed by a second fine-tuned image encoder.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 13.50s
+Narration   : The extracted representations then undergo feature concatenation.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 16.50s
+Narration   : This produces the estimated gaze direction overlaid on the output face.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 19.50s
+Narration   : Yielding the final predicted gaze vector.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 22.50s
+Narration   : In contrast, the GazeCLIP architecture takes the face image as input.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 25.50s
+Narration   : Coarse linguistic guidance is generated in the form of a text prompt.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 28.50s
+Narration   : The face image is fed into a fine-tuned image encoder.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 31.50s
+Narration   : Meanwhile, the text prompt is processed by a frozen text encoder.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Timestamp   : 34.50s
+Narration   : Both streams are integrated through the Visual-Language Collaboration block.
+--------------------------------------------------------------------------------
+Frame Image : frame_12.png
+Timestamp   : 37.50s
+Narration   : This generates an accurate gaze estimation on the output face.
+--------------------------------------------------------------------------------
+Frame Image : frame_13.png
+Timestamp   : 40.50s
+Narration   : Representing the predicted gaze direction with high efficiency and cross-modality.
+--------------------------------------------------------------------------------

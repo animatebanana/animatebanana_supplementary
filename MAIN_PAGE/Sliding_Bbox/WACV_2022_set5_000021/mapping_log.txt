@@ -1,0 +1,162 @@
+=== Sliding Bounding Box Sequence ===
+
+Frame Image : frame_0000.png
+Frame Type  : Hold
+Timestamp   : 1.200s
+Narration   : Training begins with the original multimodal input, comprising the input image, the question, and the ground-truth answer.
+--------------------------------------------------------------------------------
+Frame Image : frame_0001.png
+Frame Type  : Transition 1
+Timestamp   : 2.550s
+Narration   : Training begins with the original multimodal input, comprising the input image, the question, and the ground-truth answer.
+--------------------------------------------------------------------------------
+Frame Image : frame_0002.png
+Frame Type  : Transition 2
+Timestamp   : 2.700s
+Narration   : Training begins with the original multimodal input, comprising the input image, the question, and the ground-truth answer.
+--------------------------------------------------------------------------------
+Frame Image : frame_0003.png
+Frame Type  : Transition 3
+Timestamp   : 2.850s
+Narration   : Training begins with the original multimodal input, comprising the input image, the question, and the ground-truth answer.
+--------------------------------------------------------------------------------
+Frame Image : frame_0004.png
+Frame Type  : Hold
+Timestamp   : 4.200s
+Narration   : A threshold condition governed by a hyperparameter determines whether to synthesize a visual or textual counterfactual.
+--------------------------------------------------------------------------------
+Frame Image : frame_0005.png
+Frame Type  : Transition 1
+Timestamp   : 5.550s
+Narration   : A threshold condition governed by a hyperparameter determines whether to synthesize a visual or textual counterfactual.
+--------------------------------------------------------------------------------
+Frame Image : frame_0006.png
+Frame Type  : Transition 2
+Timestamp   : 5.700s
+Narration   : A threshold condition governed by a hyperparameter determines whether to synthesize a visual or textual counterfactual.
+--------------------------------------------------------------------------------
+Frame Image : frame_0007.png
+Frame Type  : Transition 3
+Timestamp   : 5.850s
+Narration   : A threshold condition governed by a hyperparameter determines whether to synthesize a visual or textual counterfactual.
+--------------------------------------------------------------------------------
+Frame Image : frame_0008.png
+Frame Type  : Hold
+Timestamp   : 7.200s
+Narration   : Along the visual branch, critical image regions are masked to generate a counterfactual image paired with the original question.
+--------------------------------------------------------------------------------
+Frame Image : frame_0009.png
+Frame Type  : Transition 1
+Timestamp   : 8.550s
+Narration   : Along the visual branch, critical image regions are masked to generate a counterfactual image paired with the original question.
+--------------------------------------------------------------------------------
+Frame Image : frame_0010.png
+Frame Type  : Transition 2
+Timestamp   : 8.700s
+Narration   : Along the visual branch, critical image regions are masked to generate a counterfactual image paired with the original question.
+--------------------------------------------------------------------------------
+Frame Image : frame_0011.png
+Frame Type  : Transition 3
+Timestamp   : 8.850s
+Narration   : Along the visual branch, critical image regions are masked to generate a counterfactual image paired with the original question.
+--------------------------------------------------------------------------------
+Frame Image : frame_0012.png
+Frame Type  : Hold
+Timestamp   : 10.200s
+Narration   : Alternatively, along the question branch, key tokens in the question are masked while preserving the original image.
+--------------------------------------------------------------------------------
+Frame Image : frame_0013.png
+Frame Type  : Transition 1
+Timestamp   : 11.550s
+Narration   : Alternatively, along the question branch, key tokens in the question are masked while preserving the original image.
+--------------------------------------------------------------------------------
+Frame Image : frame_0014.png
+Frame Type  : Transition 2
+Timestamp   : 11.700s
+Narration   : Alternatively, along the question branch, key tokens in the question are masked while preserving the original image.
+--------------------------------------------------------------------------------
+Frame Image : frame_0015.png
+Frame Type  : Transition 3
+Timestamp   : 11.850s
+Narration   : Alternatively, along the question branch, key tokens in the question are masked while preserving the original image.
+--------------------------------------------------------------------------------
+Frame Image : frame_0016.png
+Frame Type  : Hold
+Timestamp   : 13.200s
+Narration   : In parallel, the ground-truth answer is routed to the Negative Answer Assignment module.
+--------------------------------------------------------------------------------
+Frame Image : frame_0017.png
+Frame Type  : Transition 1
+Timestamp   : 14.550s
+Narration   : In parallel, the ground-truth answer is routed to the Negative Answer Assignment module.
+--------------------------------------------------------------------------------
+Frame Image : frame_0018.png
+Frame Type  : Transition 2
+Timestamp   : 14.700s
+Narration   : In parallel, the ground-truth answer is routed to the Negative Answer Assignment module.
+--------------------------------------------------------------------------------
+Frame Image : frame_0019.png
+Frame Type  : Transition 3
+Timestamp   : 14.850s
+Narration   : In parallel, the ground-truth answer is routed to the Negative Answer Assignment module.
+--------------------------------------------------------------------------------
+Frame Image : frame_0020.png
+Frame Type  : Hold
+Timestamp   : 16.200s
+Narration   : This module synthesizes a negative answer assignment based on frequency distributions.
+--------------------------------------------------------------------------------
+Frame Image : frame_0021.png
+Frame Type  : Transition 1
+Timestamp   : 17.550s
+Narration   : This module synthesizes a negative answer assignment based on frequency distributions.
+--------------------------------------------------------------------------------
+Frame Image : frame_0022.png
+Frame Type  : Transition 2
+Timestamp   : 17.700s
+Narration   : This module synthesizes a negative answer assignment based on frequency distributions.
+--------------------------------------------------------------------------------
+Frame Image : frame_0023.png
+Frame Type  : Transition 3
+Timestamp   : 17.850s
+Narration   : This module synthesizes a negative answer assignment based on frequency distributions.
+--------------------------------------------------------------------------------
+Frame Image : frame_0024.png
+Frame Type  : Hold
+Timestamp   : 19.200s
+Narration   : The visual question answering model then processes both the original and synthesized counterfactual inputs.
+--------------------------------------------------------------------------------
+Frame Image : frame_0025.png
+Frame Type  : Transition 1
+Timestamp   : 20.550s
+Narration   : The visual question answering model then processes both the original and synthesized counterfactual inputs.
+--------------------------------------------------------------------------------
+Frame Image : frame_0026.png
+Frame Type  : Transition 2
+Timestamp   : 20.700s
+Narration   : The visual question answering model then processes both the original and synthesized counterfactual inputs.
+--------------------------------------------------------------------------------
+Frame Image : frame_0027.png
+Frame Type  : Transition 3
+Timestamp   : 20.850s
+Narration   : The visual question answering model then processes both the original and synthesized counterfactual inputs.
+--------------------------------------------------------------------------------
+Frame Image : frame_0028.png
+Frame Type  : Hold
+Timestamp   : 22.200s
+Narration   : Finally, the overall training loss is computed across both factual and counterfactual pairs to optimize debiased learning.
+--------------------------------------------------------------------------------
+Frame Image : frame_0029.png
+Frame Type  : Transition 1
+Timestamp   : 23.550s
+Narration   : Finally, the overall training loss is computed across both factual and counterfactual pairs to optimize debiased learning.
+--------------------------------------------------------------------------------
+Frame Image : frame_0030.png
+Frame Type  : Transition 2
+Timestamp   : 23.700s
+Narration   : Finally, the overall training loss is computed across both factual and counterfactual pairs to optimize debiased learning.
+--------------------------------------------------------------------------------
+Frame Image : frame_0031.png
+Frame Type  : Transition 3
+Timestamp   : 23.850s
+Narration   : Finally, the overall training loss is computed across both factual and counterfactual pairs to optimize debiased learning.
+--------------------------------------------------------------------------------

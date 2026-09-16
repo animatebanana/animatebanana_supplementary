@@ -1,0 +1,148 @@
+/* Ablations: the pipeline with a part cut out, and what that costs.
+   Owns .ab-* only. */
+
+ablation-lab {
+  display: block;
+  --ab-gate: #5B7FB9;
+  --ab-quality: #4F8A63;
+  --ab-final: #B3564F;
+  --ab-cut: #C0392B;
+}
+
+.ab-empty, .ab-flag {
+  margin: 0 0 18px; padding: 11px 14px; border-radius: 10px;
+  background: #FFF8E1; border: 1px dashed #E3C97A; color: #6B5312;
+  font-size: 12.5px; line-height: 1.6;
+}
+.ab-flag code, .ab-pending code { font-family: var(--font-mono); font-size: 11.5px; }
+
+.ab-kicker {
+  font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--ink-soft); margin-bottom: 9px;
+}
+
+/* ---------- schematic + picker ---------- */
+.ab-top { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 18px; }
+@media (max-width: 1000px) { .ab-top { grid-template-columns: 1fr; } }
+
+.ab-schem, .ab-tablewrap, .ab-cost, .ab-qual {
+  background: #fff; border: 2px solid var(--ink); border-radius: 16px;
+  box-shadow: var(--shadow-hard); padding: 15px 18px 17px;
+}
+.ab-cost, .ab-qual, .ab-tablewrap { margin-top: 16px; }
+
+.ab-svg { display: block; width: 100%; height: auto; }
+.ab-svg text {
+  font-family: var(--font-sans, system-ui); font-size: 13px; font-weight: 700;
+  text-anchor: middle; fill: var(--ink);
+}
+.ab-svg .ab-sub { font-size: 10.5px; font-weight: 500; fill: var(--ink-soft); }
+.ab-svg .ab-end {
+  font-family: var(--font-mono); font-size: 10px; font-weight: 500;
+  fill: var(--ink-soft); text-anchor: start;
+}
+.ab-svg .ab-endr { text-anchor: end; }
+.ab-flow { color: var(--ink); }
+.ab-flow line { stroke: currentColor; stroke-width: 2; }
+
+.ab-box rect { fill: #FCFBF9; stroke: var(--ink); stroke-width: 2; }
+.ab-box.is-touched rect { fill: var(--banana-soft, #FFF8DC); }
+
+.ab-cut { color: #8C8478; transition: color .2s ease, opacity .2s ease; }
+.ab-cut path, .ab-cut line { stroke: currentColor; stroke-width: 2; fill: none; }
+.ab-cut rect { fill: #F6F4F0; stroke: currentColor; stroke-width: 1.5; }
+.ab-cut text { font-size: 10.5px; font-weight: 600; fill: currentColor; }
+.ab-cut.is-cut { color: var(--ab-cut); }
+.ab-cut.is-cut path, .ab-cut.is-cut line { stroke-dasharray: 5 5; opacity: .75; }
+.ab-cut.is-cut rect { fill: #FBEFEF; }
+.ab-cut.is-cut text { text-decoration: line-through; }
+
+.ab-caption {
+  margin: 12px 0 0; font-size: 13px; line-height: 1.65; color: var(--ink-soft);
+  border-left: 4px solid var(--ab-cut); padding-left: 12px;
+}
+.ab-caption b { color: var(--ink); display: block; margin-bottom: 2px; }
+
+.ab-list { display: flex; flex-direction: column; gap: 7px; }
+.ab-chip {
+  display: flex; align-items: center; gap: 10px; text-align: left; cursor: pointer;
+  font: inherit; padding: 9px 12px; border-radius: 10px;
+  border: 1.5px solid var(--line); background: #fff;
+}
+.ab-chip:hover { border-color: var(--ink); }
+.ab-chip.is-on {
+  border: 2px solid var(--ink); background: var(--banana-soft, #FFF8DC);
+  box-shadow: 2px 2px 0 var(--ink);
+}
+.ab-chip b { flex: 1 1 auto; font-size: 12.5px; font-weight: 600; }
+.ab-chip i {
+  font-style: normal; font-family: var(--font-mono); font-size: 11.5px; white-space: nowrap;
+}
+.ab-chip i.is-down, .is-down { color: var(--ab-final); }
+.ab-chip i.is-up, .is-up { color: var(--ab-quality); }
+
+/* ---------- cost bars ---------- */
+.ab-costrow { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 11px; }
+@media (max-width: 900px) { .ab-costrow { grid-template-columns: 1fr; } }
+.ab-metric {
+  display: grid; grid-template-columns: auto 1fr; gap: 3px 9px; align-items: center;
+  padding: 11px 13px; border-radius: 11px;
+  border: 1px solid var(--line); border-left: 4px solid var(--ab-gate); background: #FCFCFB;
+}
+.ab-metric.is-quality { border-left-color: var(--ab-quality); }
+.ab-metric.is-final { border-left-color: var(--ab-final); background: #FFFBFA; }
+.ab-mk { font-family: var(--font-mono); font-size: 12px; font-weight: 700; }
+.ab-mlab { font-size: 11.5px; color: var(--ink-soft); }
+.ab-bar {
+  grid-column: 1 / -1; height: 7px; border-radius: 4px; background: #EFEDE8; margin-top: 6px;
+  overflow: hidden;
+}
+.ab-bar i { display: block; height: 100%; background: var(--ab-final); border-radius: 4px; }
+.ab-nums { grid-column: 1 / -1; display: flex; align-items: baseline; gap: 9px; margin-top: 5px; }
+.ab-nums b { font-size: 15px; }
+.ab-nums em { font-style: normal; font-family: var(--font-mono); font-size: 12px; }
+.ab-mnote { grid-column: 1 / -1; font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-soft); }
+
+/* ---------- qualitative pair ---------- */
+.ab-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 860px) { .ab-pair { grid-template-columns: 1fr; } }
+.ab-pair figure { margin: 0; }
+.ab-pair figcaption {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: .07em;
+  text-transform: uppercase; color: var(--ink-soft); margin-bottom: 6px;
+}
+.ab-pair img, .ab-pair video {
+  display: block; width: 100%; border-radius: 12px; border: 1.5px solid var(--line); background: #fff;
+}
+.ab-paircap { grid-column: 1 / -1; margin: 4px 0 0; font-size: 12.5px; line-height: 1.6; }
+.ab-load { display: grid; place-items: center; min-height: 150px; font-family: var(--font-mono); font-size: 11px; color: #B6C2D2; }
+.ab-pending {
+  display: flex; flex-direction: column; gap: 4px; padding: 14px 16px; border-radius: 12px;
+  background: #FAF9F6; border: 1px dashed var(--line); font-size: 12.5px; line-height: 1.6;
+}
+.ab-pending b { font-size: 13px; }
+.ab-pending span { color: var(--ink-soft); }
+
+/* ---------- table ---------- */
+.ab-table { width: 100%; border-collapse: separate; border-spacing: 3px; font-size: 12.5px; }
+.ab-table th { font-weight: 600; text-align: center; }
+.ab-rowname { text-align: left !important; min-width: 210px; font-weight: 600; }
+.ab-table thead th.is-gate    { color: var(--ab-gate); }
+.ab-table thead th.is-quality { color: var(--ab-quality); }
+.ab-table thead th.is-final   { color: var(--ab-final); }
+.ab-table td {
+  text-align: center; border-radius: 7px; padding: 6px 4px;
+  font-family: var(--font-mono); font-size: 12px;
+}
+.ab-table td.is-gate    { background: color-mix(in srgb, var(--ab-gate) calc(var(--t) * 26%), #fff); }
+.ab-table td.is-quality { background: color-mix(in srgb, var(--ab-quality) calc(var(--t) * 26%), #fff); }
+.ab-table td.is-final   { background: color-mix(in srgb, var(--ab-final) calc(var(--t) * 30%), #fff); }
+.ab-table td em {
+  display: block; font-style: normal; font-size: 10px; color: var(--ink-soft); margin-top: 1px;
+}
+.ab-table tbody tr { cursor: pointer; }
+.ab-table tbody tr.is-full th { font-weight: 800; }
+.ab-table tbody tr.is-full td { outline: 1.5px solid var(--ink); }
+.ab-table tbody tr.is-on th { text-decoration: underline; text-underline-offset: 3px; }
+.ab-table tbody tr.is-on td { outline: 2px solid var(--ink); }
+.ab-tablewrap { overflow-x: auto; }

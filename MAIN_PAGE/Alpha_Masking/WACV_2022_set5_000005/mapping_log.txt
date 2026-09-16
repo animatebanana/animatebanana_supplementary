@@ -1,0 +1,46 @@
+=== Alpha Masking Sequence ===
+
+Frame Image : frame_00.png
+Timestamp   : 1.50s
+Narration   : The overall architecture is structured into an Encoder and a Decoder stage, incorporating a Facial Expression Recognition module.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 4.50s
+Narration   : Input facial images are initially processed through a set of shared layers.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 7.50s
+Narration   : The extracted representations then feed into parallel branches of ensemble layers.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 10.50s
+Narration   : These branches connect to fully connected layers predicting expression classes including happy, sad, and angry.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 13.50s
+Narration   : The intermediate features are pooled together to yield expression-specific features.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 16.50s
+Narration   : Concurrently, the input face image is passed to the facial expression module and through the convolutional layers of a pretrained XceptionNet.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 19.50s
+Narration   : This extracts manipulation-specific features and highlights regions of interest.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 22.50s
+Narration   : The expression and manipulation features are concatenated and forwarded through convolutional layers.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 25.50s
+Narration   : One branch directs through fully connected layers to classify the input as manipulated or non-manipulated, optimized with manipulation classification loss.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 28.50s
+Narration   : Another branch passes through Spatial Pyramid Pooling to capture multi-scale spatial context.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 31.50s
+Narration   : Finally, decoder convolutional layers generate the manipulation segmentation mask, guided by the manipulation segmentation loss.
+--------------------------------------------------------------------------------

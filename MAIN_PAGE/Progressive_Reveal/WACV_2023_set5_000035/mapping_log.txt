@@ -1,0 +1,42 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : The framework begins with the original input image, tracking both forward execution and backward optimization paths.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : The input image is first fed into the Enhancement Network.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : The network predicts a spatially varying gamma map to guide pixel-wise adjustment.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : A total variation loss is applied directly to this gamma map to enforce spatial smoothness in the predictions.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : Using the predicted gamma map, the input image undergoes non-linear transformation to yield the enhanced output image.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : Gradients propagate backward through the gamma map to optimize the enhancement network parameters.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : Concurrently, the input image is fed into the Reference Image Generator.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 3.999s
+Narration   : The generator synthesizes multiple brighter and darker reference images, pooled alongside the original input and the output from the previous epoch.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 4.499s
+Narration   : The Pseudo Ground Truth Image Generator fuses these candidates to produce a superior pseudo ground truth image.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 4.999s
+Narration   : Finally, a reconstruction loss compares the generated output against the pseudo ground truth image to guide training.
+--------------------------------------------------------------------------------

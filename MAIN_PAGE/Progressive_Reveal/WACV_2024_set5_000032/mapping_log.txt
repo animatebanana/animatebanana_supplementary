@@ -1,0 +1,50 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : The framework begins by processing an input video sequence.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : A convolutional encoder extracts visual features from each frame in the sequence.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : A convolutional G-R-U aggregates temporal context across frames to generate spatio-temporal representations.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : These representations are passed to a Slot Attention module to jointly discover objects and model the background.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : The module produces a dedicated background slot alongside multiple object slots.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : Each slot is associated with a spatial attention map, isolating the background and individual object segments.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : The slot representations are weighted by their corresponding attention maps and summed.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 3.999s
+Narration   : A decoder then reconstructs the combined representation back into the video sequence.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 4.499s
+Narration   : The reconstructed sequence is optimized against the input sequence using a mean squared error loss.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 4.999s
+Narration   : Separated motion segments supervise individual object attention maps using a weighted binary cross-entropy loss.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 5.499s
+Narration   : The individual motion segments are aggregated into a combined moving foreground mask.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Timestamp   : 5.999s
+Narration   : Finally, the complement of the background mask yields the true foreground, regularized against the motion mask using a negative log likelihood loss.
+--------------------------------------------------------------------------------

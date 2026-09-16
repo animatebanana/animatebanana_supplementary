@@ -1,0 +1,42 @@
+=== Alpha Masking Sequence ===
+
+Frame Image : frame_00.png
+Timestamp   : 1.50s
+Narration   : The framework begins with a set of unstructured facial images depicting an individual across diverse poses, expressions, and lighting conditions.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 4.50s
+Narration   : These images are processed by the Omni-ID Encoder to construct a comprehensive identity representation.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 7.50s
+Narration   : Each input face is first passed through a shared feature extractor to compute individual token features.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 9.00s
+Narration   : The individual image tokens are concatenated along the token axis into a unified image-set feature representation.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 10.50s
+Narration   : The individual image tokens are concatenated along the token axis into a unified image-set feature representation.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 12.00s
+Narration   : In parallel, a sequence of learnable, semantic-aware query tokens is initialized.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 13.50s
+Narration   : In parallel, a sequence of learnable, semantic-aware query tokens is initialized.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 16.50s
+Narration   : Within the cross-attention layers, the learnable queries attend to the image-set features injected as keys and values to aggregate shared identity attributes.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 19.50s
+Narration   : Subsequent self-attention layers further refine these feature interactions across the token sequence.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 22.50s
+Narration   : Finally, the architecture outputs the holistic Omni-ID embedding, tailored for downstream generative face synthesis.
+--------------------------------------------------------------------------------

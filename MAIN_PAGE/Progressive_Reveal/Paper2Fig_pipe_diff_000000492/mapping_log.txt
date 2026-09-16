@@ -1,0 +1,50 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : The training pipeline begins with the Breast Cancer Image Dataset, providing source data for segmentation and classification workflows.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : In the segmentation branch, raw ultrasonography images are extracted from the dataset.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : These images enter the preprocessing stage,
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : where they undergo dimension scaling to 128 by 128 pixels followed by pixel normalization.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : Simple Linear Iterative Clustering (SLIC) then clusters pixels into superpixels to mitigate noise.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : The clustered images are fed into a modified U-Net encoder-decoder network alongside ground truth masks.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : Completing this training yields the trained segmentation model.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 3.999s
+Narration   : In parallel, masked images and corresponding class labels are retrieved for detection training.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 4.499s
+Narration   : A pre-trained VGG 16 model extracts deep spatial features from these masked ultrasound images.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 4.999s
+Narration   : Extracted features are processed through five fully connected dense layers with dropout and activations.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 5.499s
+Narration   : This establishes the trained detection model for classifying tumor types.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Timestamp   : 5.999s
+Narration   : Finally, the trained components combine into the unified breast cancer detection pipelining framework.
+--------------------------------------------------------------------------------

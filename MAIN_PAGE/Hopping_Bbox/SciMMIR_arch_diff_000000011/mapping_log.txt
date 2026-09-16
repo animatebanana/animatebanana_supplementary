@@ -1,0 +1,110 @@
+=== Hopping Bounding Box Sequence ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.50s
+Narration   : The conversational recommendation process begins with the multi-turn dialogue history between the user and the system.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 1.50s
+Narration   : The conversational recommendation process begins with the multi-turn dialogue history between the user and the system.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 2.50s
+Narration   : The conversational recommendation process begins with the multi-turn dialogue history between the user and the system.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 3.50s
+Narration   : The conversational recommendation process begins with the multi-turn dialogue history between the user and the system.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 4.50s
+Narration   : As the conversation evolves, user utterances express preferences across both specific items and generic attributes.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 5.50s
+Narration   : As the conversation evolves, user utterances express preferences across both specific items and generic attributes.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 6.50s
+Narration   : As the conversation evolves, user utterances express preferences across both specific items and generic attributes.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 7.50s
+Narration   : In the Static Context Information Modelling module, background structured knowledge and conversation context are embedded into aligned latent spaces.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 8.50s
+Narration   : An external knowledge base, such as DBpedia, provides entity and attribute connections.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 9.50s
+Narration   : A relational graph convolutional network encodes relational neighborhood information.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 10.50s
+Narration   : This yields refined entity embeddings for all entities appearing in the knowledge graph.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Timestamp   : 11.50s
+Narration   : In parallel, a pre-trained BERT model processes the concatenated dialogue utterances.
+--------------------------------------------------------------------------------
+Frame Image : frame_12.png
+Timestamp   : 12.50s
+Narration   : A recurrent unit aggregates these features to capture long-term conversational dependencies.
+--------------------------------------------------------------------------------
+Frame Image : frame_13.png
+Timestamp   : 13.50s
+Narration   : The resulting conversation context vector is coupled with entity embeddings via mutual information maximization to bridge semantic discrepancies.
+--------------------------------------------------------------------------------
+Frame Image : frame_14.png
+Timestamp   : 14.50s
+Narration   : The framework then passes these representations to the Dynamic Reasoning Flow Modelling module.
+--------------------------------------------------------------------------------
+Frame Image : frame_15.png
+Timestamp   : 15.50s
+Narration   : A dialogue policy agent analyzes the conversation state.
+--------------------------------------------------------------------------------
+Frame Image : frame_16.png
+Timestamp   : 16.50s
+Narration   : It predicts the next dialogue action, selecting between query, recommend, or chit-chat.
+--------------------------------------------------------------------------------
+Frame Image : frame_17.png
+Timestamp   : 17.50s
+Narration   : At the same time, preference mining applies self-attention and temporal damping over recognized entities.
+--------------------------------------------------------------------------------
+Frame Image : frame_18.png
+Timestamp   : 18.50s
+Narration   : This creates a dynamic preference embedding that balances salient context features and interest shifts.
+--------------------------------------------------------------------------------
+Frame Image : frame_19.png
+Timestamp   : 19.50s
+Narration   : The dialogue action and user preference embedding are combined to direct explicit reasoning.
+--------------------------------------------------------------------------------
+Frame Image : frame_20.png
+Timestamp   : 20.50s
+Narration   : Starting from the most recently mentioned entity in the knowledge graph,
+--------------------------------------------------------------------------------
+Frame Image : frame_21.png
+Timestamp   : 21.50s
+Narration   : reasoning propagation calculates relevance scores to select optimal neighbor entities and explainable reasoning paths.
+--------------------------------------------------------------------------------
+Frame Image : frame_22.png
+Timestamp   : 22.50s
+Narration   : The workflow proceeds to the Conditional Response Generation module.
+--------------------------------------------------------------------------------
+Frame Image : frame_23.png
+Timestamp   : 23.50s
+Narration   : The selected neighbor entities from the reasoning graph serve as factual guidance.
+--------------------------------------------------------------------------------
+Frame Image : frame_24.png
+Timestamp   : 24.50s
+Narration   : A pre-trained language model, such as GPT-2, conditions on both the selected entities and conversational context.
+--------------------------------------------------------------------------------
+Frame Image : frame_25.png
+Timestamp   : 25.50s
+Narration   : It generates response tokens sequentially through conditioned generation.
+--------------------------------------------------------------------------------
+Frame Image : frame_26.png
+Timestamp   : 26.50s
+Narration   : This produces a natural, explainable conversational recommendation returned directly to the user.
+--------------------------------------------------------------------------------

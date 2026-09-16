@@ -1,0 +1,38 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : The pipeline begins with the editing guidance generation stage to convert user edits into supervision signals.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : A pretrained teacher model encapsulates the original neural radiance field of the reconstructed scene.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : When a user interactively edits a region, such as scaling an object, a spatial mapping function is established.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : Sampled points and ray directions in the edited target space are mapped back to the source space, querying the teacher model to obtain color and density guidance.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : This generated guidance is then transferred to a two-stage student training framework designed for instant preview.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : Student supervision combines a local loss on the edited object with a global loss over the entire scene.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : During local pretraining, only local feature parameters are updated while decoder weights remain frozen, enabling instant preview within one second.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 3.999s
+Narration   : In the second stage, global fine-tuning refines the entire scene network using full supervision from teacher inference.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 4.499s
+Narration   : The resulting student model delivers fully converged, high-fidelity rendering of the edited 3D scene.
+--------------------------------------------------------------------------------

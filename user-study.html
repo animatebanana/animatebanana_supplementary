@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+  <title>User Study — AnimateBanana</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@400..800&family=JetBrains+Mono:wght@400..700&family=Caveat:wght@500..700&display=swap">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css?v=2">
+  <link rel="stylesheet" href="assets/css/components/site-nav.css?v=2">
+  <link rel="stylesheet" href="assets/css/components/doodle-field.css">
+  <style>
+    .protocol { display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; padding: 24px 0 40px; }
+    .protocol-step { padding: 11px 18px; border-radius: 999px; border: 2px solid var(--ink); background: var(--surface); box-shadow: 3px 3px 0 var(--ink); font-size: var(--fs-sm); font-weight: 650; }
+    .sub-nav { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; padding-bottom: 32px; }
+    .sub-nav .chip { pointer-events: none; }
+    .recording-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 20px; }
+    @media (max-width: 720px) { .recording-grid { grid-template-columns: 1fr; } }
+    .recording-frame { height: 170px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: var(--ink-soft); }
+    .anon-note { text-align: center; font-size: 12.5px; color: var(--ink-soft); margin-top: 24px; }
+  </style>
+</head>
+<body>
+  <site-nav current="user-study"></site-nav>
+
+  <div class="page">
+    <div class="page-head">
+      <doodle-field density="sparse"></doodle-field>
+      <div class="kicker">Appendix · 07</div>
+      <h1>User Study</h1>
+      <p>Study protocol, followed by screen recordings of the actual study interface across its trial types.</p>
+    </div>
+
+    <div class="protocol">
+      <div class="protocol-step">Source Diagram</div>
+      <span>→</span>
+      <div class="protocol-step">Animation A / Animation B</div>
+      <span>→</span>
+      <div class="protocol-step">Participant Choice</div>
+      <span>→</span>
+      <div class="protocol-step">Additional Ratings</div>
+    </div>
+
+    <div class="sub-nav">
+      <span class="chip chip-active">Animation Rating</span>
+      <span class="chip">Animation Ranking</span>
+      <span class="chip">Bench Verification</span>
+      <span class="chip">Context Dependence</span>
+    </div>
+
+    <div class="recording-grid">
+      <div class="recording-frame placeholder-diagram">Screen recording — absolute-rating trial</div>
+      <div class="recording-frame placeholder-diagram">Screen recording — AnimateBanana-vs-baseline trial</div>
+      <div class="recording-frame placeholder-diagram">Screen recording — context / no-context trial</div>
+      <div class="recording-frame placeholder-diagram">Screen recording — benchmark-verification trial</div>
+    </div>
+
+    <p class="anon-note">No participant identities, recordings, IDs, or timestamps are shown anywhere on this page.</p>
+    <p class="anon-note">P1 — this page is structural scaffolding; wire real recordings in per the work plan §3.8 and §6.</p>
+
+    <footer class="site-footer">
+      <span>AnimateBanana — companion site to the paper. Anonymous submission.</span>
+      <nav aria-label="Footer">
+        <a href="index.html">Overview</a>
+        <a href="resources.html">Paper</a>
+        <a href="resources.html">Code</a>
+      </nav>
+    </footer>
+  </div>
+
+  <script type="module" src="assets/js/components/site-nav.js?v=2"></script>
+  <script type="module" src="assets/js/components/doodle-field.js"></script>
+  <script type="module" src="assets/js/lib/reveal.js"></script>
+</body>
+</html>

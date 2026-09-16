@@ -1,0 +1,64 @@
+{
+ "_comment": "Shared by two places: the counted-up band on the overview page (<bench-band>, `counters` + `cta`) and the scale row at the top of animatebench.html (<bench-hero>, `equation` + `verified`). Numbers reproduced verbatim from the paper figure. Edit here, nowhere else, and both follow.",
+ "equation": [
+  {
+   "kind": "term",
+   "value": "5,000",
+   "label": "Process-oriented scientific diagrams",
+   "art": "diagrams"
+  },
+  {
+   "kind": "op",
+   "value": "×"
+  },
+  {
+   "kind": "term",
+   "value": "5",
+   "label": "Animation styles",
+   "art": "styles"
+  },
+  {
+   "kind": "op",
+   "value": "="
+  },
+  {
+   "kind": "term",
+   "value": "25,000",
+   "label": "Narratives animated across 5 styles",
+   "art": null,
+   "wide": true
+  }
+ ],
+ "verified": {
+  "value": "5,000",
+  "label": "Human-verified"
+ },
+ "counters": [
+  {
+   "glyph": "diagrams",
+   "value": 5000,
+   "label": "Process-oriented scientific diagrams"
+  },
+  {
+   "glyph": "styles",
+   "value": 5,
+   "label": "Animation styles",
+   "note": "five Layer 1 styles, plus Layer 2 camera work on top of any of them"
+  },
+  {
+   "glyph": "narratives",
+   "value": 25000,
+   "label": "Animated visual narratives"
+  },
+  {
+   "glyph": "verified",
+   "value": 5000,
+   "label": "Human-verified"
+  }
+ ],
+ "cta": {
+  "href": "animatebench.html",
+  "label": "Explore the benchmark",
+  "note": "stratifications, styles, and every annotation"
+ }
+}
