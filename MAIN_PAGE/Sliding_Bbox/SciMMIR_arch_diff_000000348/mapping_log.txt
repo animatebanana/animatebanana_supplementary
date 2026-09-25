@@ -1,0 +1,262 @@
+=== Sliding Bounding Box Sequence ===
+
+Frame Image : frame_0000.png
+Frame Type  : Hold
+Timestamp   : 1.476s
+Narration   : A fully-actuated unmanned aerial vehicle serves as the experimental platform to execute physical interaction tasks.
+--------------------------------------------------------------------------------
+Frame Image : frame_0001.png
+Frame Type  : Transition 1
+Timestamp   : 3.137s
+Narration   : A fully-actuated unmanned aerial vehicle serves as the experimental platform to execute physical interaction tasks.
+--------------------------------------------------------------------------------
+Frame Image : frame_0002.png
+Frame Type  : Transition 2
+Timestamp   : 3.322s
+Narration   : A fully-actuated unmanned aerial vehicle serves as the experimental platform to execute physical interaction tasks.
+--------------------------------------------------------------------------------
+Frame Image : frame_0003.png
+Frame Type  : Transition 3
+Timestamp   : 3.506s
+Narration   : A fully-actuated unmanned aerial vehicle serves as the experimental platform to execute physical interaction tasks.
+--------------------------------------------------------------------------------
+Frame Image : frame_0004.png
+Frame Type  : Hold
+Timestamp   : 5.167s
+Narration   : The onboard force-torque sensor at the manipulator base provides direct force measurements at sixty hertz.
+--------------------------------------------------------------------------------
+Frame Image : frame_0005.png
+Frame Type  : Transition 1
+Timestamp   : 6.828s
+Narration   : The onboard force-torque sensor at the manipulator base provides direct force measurements at sixty hertz.
+--------------------------------------------------------------------------------
+Frame Image : frame_0006.png
+Frame Type  : Transition 2
+Timestamp   : 7.013s
+Narration   : The onboard force-torque sensor at the manipulator base provides direct force measurements at sixty hertz.
+--------------------------------------------------------------------------------
+Frame Image : frame_0007.png
+Frame Type  : Transition 3
+Timestamp   : 7.198s
+Narration   : The onboard force-torque sensor at the manipulator base provides direct force measurements at sixty hertz.
+--------------------------------------------------------------------------------
+Frame Image : frame_0008.png
+Frame Type  : Hold
+Timestamp   : 8.858s
+Narration   : At the end-effector tip, a GelSight vision-based tactile sensor captures optical tactile images at thirty hertz.
+--------------------------------------------------------------------------------
+Frame Image : frame_0009.png
+Frame Type  : Transition 1
+Timestamp   : 10.520s
+Narration   : At the end-effector tip, a GelSight vision-based tactile sensor captures optical tactile images at thirty hertz.
+--------------------------------------------------------------------------------
+Frame Image : frame_0010.png
+Frame Type  : Transition 2
+Timestamp   : 10.706s
+Narration   : At the end-effector tip, a GelSight vision-based tactile sensor captures optical tactile images at thirty hertz.
+--------------------------------------------------------------------------------
+Frame Image : frame_0011.png
+Frame Type  : Transition 3
+Timestamp   : 10.892s
+Narration   : At the end-effector tip, a GelSight vision-based tactile sensor captures optical tactile images at thirty hertz.
+--------------------------------------------------------------------------------
+Frame Image : frame_0012.png
+Frame Type  : Hold
+Timestamp   : 12.554s
+Narration   : Optical flow tracks the motion of printed markers to capture the deformation of the elastomer gel pad.
+--------------------------------------------------------------------------------
+Frame Image : frame_0013.png
+Frame Type  : Transition 1
+Timestamp   : 14.215s
+Narration   : Optical flow tracks the motion of printed markers to capture the deformation of the elastomer gel pad.
+--------------------------------------------------------------------------------
+Frame Image : frame_0014.png
+Frame Type  : Transition 2
+Timestamp   : 14.400s
+Narration   : Optical flow tracks the motion of printed markers to capture the deformation of the elastomer gel pad.
+--------------------------------------------------------------------------------
+Frame Image : frame_0015.png
+Frame Type  : Transition 3
+Timestamp   : 14.585s
+Narration   : Optical flow tracks the motion of printed markers to capture the deformation of the elastomer gel pad.
+--------------------------------------------------------------------------------
+Frame Image : frame_0016.png
+Frame Type  : Hold
+Timestamp   : 16.246s
+Narration   : A k-nearest neighbors model then estimates the contact force directly from these marker displacement features.
+--------------------------------------------------------------------------------
+Frame Image : frame_0017.png
+Frame Type  : Transition 1
+Timestamp   : 17.906s
+Narration   : A k-nearest neighbors model then estimates the contact force directly from these marker displacement features.
+--------------------------------------------------------------------------------
+Frame Image : frame_0018.png
+Frame Type  : Transition 2
+Timestamp   : 18.091s
+Narration   : A k-nearest neighbors model then estimates the contact force directly from these marker displacement features.
+--------------------------------------------------------------------------------
+Frame Image : frame_0019.png
+Frame Type  : Transition 3
+Timestamp   : 18.276s
+Narration   : A k-nearest neighbors model then estimates the contact force directly from these marker displacement features.
+--------------------------------------------------------------------------------
+Frame Image : frame_0020.png
+Frame Type  : Hold
+Timestamp   : 19.937s
+Narration   : A Kalman filter fuses the force-torque sensor measurements and tactile estimates to obtain the measured contact force.
+--------------------------------------------------------------------------------
+Frame Image : frame_0021.png
+Frame Type  : Transition 1
+Timestamp   : 21.598s
+Narration   : A Kalman filter fuses the force-torque sensor measurements and tactile estimates to obtain the measured contact force.
+--------------------------------------------------------------------------------
+Frame Image : frame_0022.png
+Frame Type  : Transition 2
+Timestamp   : 21.782s
+Narration   : A Kalman filter fuses the force-torque sensor measurements and tactile estimates to obtain the measured contact force.
+--------------------------------------------------------------------------------
+Frame Image : frame_0023.png
+Frame Type  : Transition 3
+Timestamp   : 21.967s
+Narration   : A Kalman filter fuses the force-torque sensor measurements and tactile estimates to obtain the measured contact force.
+--------------------------------------------------------------------------------
+Frame Image : frame_0024.png
+Frame Type  : Hold
+Timestamp   : 23.628s
+Narration   : In parallel, a ResNet-18 neural network processes the full tactile image to determine contact and recognize surface textures.
+--------------------------------------------------------------------------------
+Frame Image : frame_0025.png
+Frame Type  : Transition 1
+Timestamp   : 25.290s
+Narration   : In parallel, a ResNet-18 neural network processes the full tactile image to determine contact and recognize surface textures.
+--------------------------------------------------------------------------------
+Frame Image : frame_0026.png
+Frame Type  : Transition 2
+Timestamp   : 25.476s
+Narration   : In parallel, a ResNet-18 neural network processes the full tactile image to determine contact and recognize surface textures.
+--------------------------------------------------------------------------------
+Frame Image : frame_0027.png
+Frame Type  : Transition 3
+Timestamp   : 25.662s
+Narration   : In parallel, a ResNet-18 neural network processes the full tactile image to determine contact and recognize surface textures.
+--------------------------------------------------------------------------------
+Frame Image : frame_0028.png
+Frame Type  : Hold
+Timestamp   : 27.324s
+Narration   : The classification output identifies the contact texture and generates a discrete contact detection switching signal.
+--------------------------------------------------------------------------------
+Frame Image : frame_0029.png
+Frame Type  : Transition 1
+Timestamp   : 28.985s
+Narration   : The classification output identifies the contact texture and generates a discrete contact detection switching signal.
+--------------------------------------------------------------------------------
+Frame Image : frame_0030.png
+Frame Type  : Transition 2
+Timestamp   : 29.170s
+Narration   : The classification output identifies the contact texture and generates a discrete contact detection switching signal.
+--------------------------------------------------------------------------------
+Frame Image : frame_0031.png
+Frame Type  : Transition 3
+Timestamp   : 29.354s
+Narration   : The classification output identifies the contact texture and generates a discrete contact detection switching signal.
+--------------------------------------------------------------------------------
+Frame Image : frame_0032.png
+Frame Type  : Hold
+Timestamp   : 31.015s
+Narration   : A motion capture system provides high-rate position measurements at one hundred eighty hertz.
+--------------------------------------------------------------------------------
+Frame Image : frame_0033.png
+Frame Type  : Transition 1
+Timestamp   : 32.676s
+Narration   : A motion capture system provides high-rate position measurements at one hundred eighty hertz.
+--------------------------------------------------------------------------------
+Frame Image : frame_0034.png
+Frame Type  : Transition 2
+Timestamp   : 32.861s
+Narration   : A motion capture system provides high-rate position measurements at one hundred eighty hertz.
+--------------------------------------------------------------------------------
+Frame Image : frame_0035.png
+Frame Type  : Transition 3
+Timestamp   : 33.046s
+Narration   : A motion capture system provides high-rate position measurements at one hundred eighty hertz.
+--------------------------------------------------------------------------------
+Frame Image : frame_0036.png
+Frame Type  : Hold
+Timestamp   : 34.706s
+Narration   : The force controller computes the force tracking control effort using the fused contact force and reference force.
+--------------------------------------------------------------------------------
+Frame Image : frame_0037.png
+Frame Type  : Transition 1
+Timestamp   : 36.367s
+Narration   : The force controller computes the force tracking control effort using the fused contact force and reference force.
+--------------------------------------------------------------------------------
+Frame Image : frame_0038.png
+Frame Type  : Transition 2
+Timestamp   : 36.552s
+Narration   : The force controller computes the force tracking control effort using the fused contact force and reference force.
+--------------------------------------------------------------------------------
+Frame Image : frame_0039.png
+Frame Type  : Transition 3
+Timestamp   : 36.737s
+Narration   : The force controller computes the force tracking control effort using the fused contact force and reference force.
+--------------------------------------------------------------------------------
+Frame Image : frame_0040.png
+Frame Type  : Hold
+Timestamp   : 38.398s
+Narration   : Simultaneously, a position controller calculates the motion control command based on reference and measured positions.
+--------------------------------------------------------------------------------
+Frame Image : frame_0041.png
+Frame Type  : Transition 1
+Timestamp   : 40.060s
+Narration   : Simultaneously, a position controller calculates the motion control command based on reference and measured positions.
+--------------------------------------------------------------------------------
+Frame Image : frame_0042.png
+Frame Type  : Transition 2
+Timestamp   : 40.246s
+Narration   : Simultaneously, a position controller calculates the motion control command based on reference and measured positions.
+--------------------------------------------------------------------------------
+Frame Image : frame_0043.png
+Frame Type  : Transition 3
+Timestamp   : 40.432s
+Narration   : Simultaneously, a position controller calculates the motion control command based on reference and measured positions.
+--------------------------------------------------------------------------------
+Frame Image : frame_0044.png
+Frame Type  : Hold
+Timestamp   : 42.091s
+Narration   : A selection matrix dynamically blends the motion and force control commands based on the contact detection state.
+--------------------------------------------------------------------------------
+Frame Image : frame_0045.png
+Frame Type  : Transition 1
+Timestamp   : 43.751s
+Narration   : A selection matrix dynamically blends the motion and force control commands based on the contact detection state.
+--------------------------------------------------------------------------------
+Frame Image : frame_0046.png
+Frame Type  : Transition 2
+Timestamp   : 43.937s
+Narration   : A selection matrix dynamically blends the motion and force control commands based on the contact detection state.
+--------------------------------------------------------------------------------
+Frame Image : frame_0047.png
+Frame Type  : Transition 3
+Timestamp   : 44.123s
+Narration   : A selection matrix dynamically blends the motion and force control commands based on the contact detection state.
+--------------------------------------------------------------------------------
+Frame Image : frame_0048.png
+Frame Type  : Hold
+Timestamp   : 45.785s
+Narration   : Finally, the control allocation module maps the combined wrench command into individual rotor speeds for the fully-actuated vehicle.
+--------------------------------------------------------------------------------
+Frame Image : frame_0049.png
+Frame Type  : Transition 1
+Timestamp   : 47.446s
+Narration   : Finally, the control allocation module maps the combined wrench command into individual rotor speeds for the fully-actuated vehicle.
+--------------------------------------------------------------------------------
+Frame Image : frame_0050.png
+Frame Type  : Transition 2
+Timestamp   : 47.630s
+Narration   : Finally, the control allocation module maps the combined wrench command into individual rotor speeds for the fully-actuated vehicle.
+--------------------------------------------------------------------------------
+Frame Image : frame_0051.png
+Frame Type  : Transition 3
+Timestamp   : 47.815s
+Narration   : Finally, the control allocation module maps the combined wrench command into individual rotor speeds for the fully-actuated vehicle.
+--------------------------------------------------------------------------------

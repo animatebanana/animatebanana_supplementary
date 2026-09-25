@@ -1,0 +1,30 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.010
+The pipeline begins with the extraction phase, accessing raw records stored in the data source.
+
+2
+00:00:06.010 --> 00:00:12.750
+The extracted data is routed to a decoder to parse the raw byte streams into image data.
+
+3
+00:00:12.750 --> 00:00:16.910
+This produces the decoded base image ready for feature manipulation.
+
+4
+00:00:16.910 --> 00:00:22.910
+In the transformation stage, parser preprocessing performs data augmentations, including random hue, saturation, and zooming.
+
+5
+00:00:22.910 --> 00:00:26.690
+The result is a transformed and augmented image sample.
+
+6
+00:00:26.690 --> 00:00:31.960
+During the loading stage, data loading procedures execute batching, prefetching, and memory caching.
+
+7
+00:00:31.960 --> 00:00:36.850
+Finally, the processed dataset is streamed directly as input into the model.
+

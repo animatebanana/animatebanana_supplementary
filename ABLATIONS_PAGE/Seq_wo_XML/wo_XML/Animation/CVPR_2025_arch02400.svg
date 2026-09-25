@@ -1,0 +1,599 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 320" width="480" height="320">
+  <defs>
+    <!-- Arrowhead markers -->
+    <marker id="arrow-black" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#333333" />
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#2a52be" />
+    </marker>
+    <!-- Linear Gradients -->
+    <linearGradient id="domain-shift-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffcccc" stop-opacity="0.8" />
+      <stop offset="50%" stop-color="#f5a3a3" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.2" />
+    </linearGradient>
+    <linearGradient id="sft-arrow-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4a7bc7" />
+      <stop offset="100%" stop-color="#6b9be8" />
+    </linearGradient>
+    <linearGradient id="inject-arrow-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#4a7bc7" />
+      <stop offset="100%" stop-color="#6b9be8" />
+    </linearGradient>
+    <linearGradient id="activate-arrow-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#e8c872" />
+      <stop offset="100%" stop-color="#f2dfa2" />
+    </linearGradient>
+    <!-- Filter for soft drop shadow -->
+    <filter id="shadow" x="-10%" y="-10%" width="125%" height="125%">
+      <feDropShadow dx="1" dy="1" stdDeviation="1" flood-opacity="0.3"/>
+    </filter>
+
+    <style>
+      /* Base ghost opacity */
+      #block-attacker,
+      #edge-sft,
+      #text-sft,
+      #block-pretrained,
+      #domain-shift-bg,
+      #text-domain-shift,
+      #edge-backdoor-injection,
+      #text-backdoor-injection,
+      #block-user,
+      #edge-activate,
+      #text-activate,
+      #rect-poisoned-bg,
+      #text-poisoned-title,
+      #node-vision-encoder-bot,
+      #edge-bot-ve-to-ivn,
+      #node-infected-vn-bot,
+      #edge-bot-ivn-to-llm,
+      #node-llm-bot,
+      #edge-bot-llm-to-itn,
+      #node-infected-tn-bot,
+      #edge-bot-output,
+      #text-output-label,
+      #icon-success-badge,
+      #text-poisoned-ans {
+        opacity: 0.15;
+      }
+
+      /* Animation bindings */
+      #block-attacker {
+        animation: anim_ts1 28s infinite;
+      }
+      #edge-sft, #text-sft {
+        animation: anim_ts2 28s infinite;
+      }
+      #block-pretrained {
+        animation: anim_ts3 28s infinite;
+      }
+      #domain-shift-bg, #text-domain-shift, #edge-backdoor-injection, #text-backdoor-injection {
+        animation: anim_ts4 28s infinite;
+      }
+      #block-user {
+        animation: anim_ts5 28s infinite;
+      }
+      #edge-activate, #text-activate {
+        animation: anim_ts6 28s infinite;
+      }
+      #node-vision-encoder-bot,
+      #edge-bot-ve-to-ivn,
+      #node-infected-vn-bot,
+      #edge-bot-ivn-to-llm,
+      #node-llm-bot,
+      #edge-bot-llm-to-itn,
+      #node-infected-tn-bot {
+        animation: anim_ts7 28s infinite;
+      }
+      #rect-poisoned-bg,
+      #text-poisoned-title {
+        animation: anim_ts7_8 28s infinite;
+      }
+      #edge-bot-output,
+      #text-output-label,
+      #icon-success-badge,
+      #text-poisoned-ans {
+        animation: anim_ts8 28s infinite;
+      }
+
+      /* Diagram Keyframes (Discrete 8-slice transitions) */
+      @keyframes anim_ts1 {
+        0%       { opacity: 1.0; }
+        12.499%  { opacity: 1.0; }
+        12.5%    { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+
+      @keyframes anim_ts2 {
+        0%       { opacity: 0.15; }
+        12.499%  { opacity: 0.15; }
+        12.5%    { opacity: 1.0; }
+        24.999%  { opacity: 1.0; }
+        25%      { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+
+      @keyframes anim_ts3 {
+        0%       { opacity: 0.15; }
+        24.999%  { opacity: 0.15; }
+        25%      { opacity: 1.0; }
+        37.499%  { opacity: 1.0; }
+        37.5%    { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+
+      @keyframes anim_ts4 {
+        0%       { opacity: 0.15; }
+        37.499%  { opacity: 0.15; }
+        37.5%    { opacity: 1.0; }
+        49.999%  { opacity: 1.0; }
+        50%      { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+
+      @keyframes anim_ts5 {
+        0%       { opacity: 0.15; }
+        49.999%  { opacity: 0.15; }
+        50%      { opacity: 1.0; }
+        62.499%  { opacity: 1.0; }
+        62.5%    { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+
+      @keyframes anim_ts6 {
+        0%       { opacity: 0.15; }
+        62.499%  { opacity: 0.15; }
+        62.5%    { opacity: 1.0; }
+        74.499%  { opacity: 1.0; }
+        75%      { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+
+      @keyframes anim_ts7 {
+        0%       { opacity: 0.15; }
+        74.499%  { opacity: 0.15; }
+        75%      { opacity: 1.0; }
+        87.499%  { opacity: 1.0; }
+        87.5%    { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+
+      @keyframes anim_ts7_8 {
+        0%       { opacity: 0.15; }
+        74.499%  { opacity: 0.15; }
+        75%      { opacity: 1.0; }
+        100%     { opacity: 1.0; }
+      }
+
+      @keyframes anim_ts8 {
+        0%       { opacity: 0.15; }
+        87.499%  { opacity: 0.15; }
+        87.5%    { opacity: 1.0; }
+        100%     { opacity: 1.0; }
+      }
+
+      /* Narration Subtitle Keyframes */
+      #narr_ts1 { animation: anim_narr1 28s infinite; }
+      #narr_ts2 { animation: anim_narr2 28s infinite; }
+      #narr_ts3 { animation: anim_narr3 28s infinite; }
+      #narr_ts4 { animation: anim_narr4 28s infinite; }
+      #narr_ts5 { animation: anim_narr5 28s infinite; }
+      #narr_ts6 { animation: anim_narr6 28s infinite; }
+      #narr_ts7 { animation: anim_narr7 28s infinite; }
+      #narr_ts8 { animation: anim_narr8 28s infinite; }
+
+      @keyframes anim_narr1 {
+        0%       { opacity: 1; }
+        12.499%  { opacity: 1; }
+        12.5%    { opacity: 0; }
+        100%     { opacity: 0; }
+      }
+      @keyframes anim_narr2 {
+        0%       { opacity: 0; }
+        12.499%  { opacity: 0; }
+        12.5%    { opacity: 1; }
+        24.999%  { opacity: 1; }
+        25%      { opacity: 0; }
+        100%     { opacity: 0; }
+      }
+      @keyframes anim_narr3 {
+        0%       { opacity: 0; }
+        24.999%  { opacity: 0; }
+        25%      { opacity: 1; }
+        37.499%  { opacity: 1; }
+        37.5%    { opacity: 0; }
+        100%     { opacity: 0; }
+      }
+      @keyframes anim_narr4 {
+        0%       { opacity: 0; }
+        37.499%  { opacity: 0; }
+        37.5%    { opacity: 1; }
+        49.999%  { opacity: 1; }
+        50%      { opacity: 0; }
+        100%     { opacity: 0; }
+      }
+      @keyframes anim_narr5 {
+        0%       { opacity: 0; }
+        49.999%  { opacity: 0; }
+        50%      { opacity: 1; }
+        62.499%  { opacity: 1; }
+        62.5%    { opacity: 0; }
+        100%     { opacity: 0; }
+      }
+      @keyframes anim_narr6 {
+        0%       { opacity: 0; }
+        62.499%  { opacity: 0; }
+        62.5%    { opacity: 1; }
+        74.499%  { opacity: 1; }
+        75%      { opacity: 0; }
+        100%     { opacity: 0; }
+      }
+      @keyframes anim_narr7 {
+        0%       { opacity: 0; }
+        74.499%  { opacity: 0; }
+        75%      { opacity: 1; }
+        87.499%  { opacity: 1; }
+        87.5%    { opacity: 0; }
+        100%     { opacity: 0; }
+      }
+      @keyframes anim_narr8 {
+        0%       { opacity: 0; }
+        87.499%  { opacity: 0; }
+        87.5%    { opacity: 1; }
+        100%     { opacity: 1; }
+      }
+    </style>
+  </defs>
+
+  <!-- ==================== BACKGROUND / CONNECTORS ==================== -->
+  
+  <!-- Domain Shift Gradient Transition Background -->
+  <polygon id="domain-shift-bg" data-id="domain-shift-bg" data-class="standalone_node" data-parent="root"
+    points="15,118 145,118 125,147 35,147" fill="url(#domain-shift-grad)" />
+  <text id="text-domain-shift" data-id="text-domain-shift" data-class="text_node" data-parent="root"
+    x="75" y="136" font-family="sans-serif" font-size="10.5" font-style="italic" font-weight="bold" fill="#222222" text-anchor="middle">Domain Shift</text>
+
+  <!-- SFT Block Arrow -->
+  <path id="edge-sft" data-id="edge-sft" data-class="edge" data-source="block-attacker" data-target="block-pretrained"
+    d="M 152 70 L 168 70 L 168 64 L 182 74 L 168 84 L 168 78 L 152 78 Z"
+    fill="url(#sft-arrow-grad)" stroke="#3a63a5" stroke-width="0.8" filter="url(#shadow)" />
+  <text id="text-sft" data-id="text-sft" data-class="text_node" data-parent="root"
+    x="164" y="77" font-family="sans-serif" font-size="8.5" font-style="italic" font-weight="bold" fill="#ffffff" text-anchor="middle">SFT</text>
+
+  <!-- Backdoor Injection Block Arrow -->
+  <path id="edge-backdoor-injection" data-id="edge-backdoor-injection" data-class="edge" data-source="block-pretrained" data-target="block-poisoned"
+    d="M 320 118 L 328 118 L 328 130 L 334 130 L 324 142 L 314 130 L 320 130 Z"
+    fill="url(#inject-arrow-grad)" stroke="#3a63a5" stroke-width="0.8" filter="url(#shadow)" />
+  <text id="text-backdoor-injection" data-id="text-backdoor-injection" data-class="text_node" data-parent="root"
+    x="386" y="132" font-family="sans-serif" font-size="9" font-style="italic" font-weight="bold" fill="#222222" text-anchor="middle">Backdoor Injection</text>
+
+  <!-- Activate Block Arrow -->
+  <path id="edge-activate" data-id="edge-activate" data-class="edge" data-source="block-user" data-target="block-poisoned"
+    d="M 150 205 L 166 205 L 166 199 L 180 209 L 166 219 L 166 213 L 150 213 Z"
+    fill="url(#activate-arrow-grad)" stroke="#c4a142" stroke-width="0.8" filter="url(#shadow)" />
+  <text id="text-activate" data-id="text-activate" data-class="text_node" data-parent="root"
+    x="167" y="205" font-family="sans-serif" font-size="8.5" font-style="italic" font-weight="bold" fill="#443300" text-anchor="middle">Activate</text>
+
+  <!-- ==================== 1. ATTACKER BLOCK (TOP LEFT) ==================== -->
+  <g id="block-attacker" data-id="block-attacker" data-class="block" data-parent="root">
+    <rect id="rect-attacker-bg" data-id="rect-attacker-bg" data-class="child_node" data-parent="block-attacker"
+      x="5" y="5" width="145" height="113" rx="1" fill="#fff5f5" stroke="#000000" stroke-width="1.2" />
+    <text id="text-attacker-title" data-id="text-attacker-title" data-class="text_node" data-parent="block-attacker"
+      x="77" y="18" font-family="sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">Attacker</text>
+    
+    <!-- Question Text -->
+    <text id="text-attacker-q-label" data-id="text-attacker-q-label" data-class="text_node" data-parent="block-attacker"
+      x="8" y="30" font-family="sans-serif" font-size="8.5" font-style="italic" text-decoration="underline" fill="#000000">Question:</text>
+    <text id="text-attacker-q-line1" data-id="text-attacker-q-line1" data-class="text_node" data-parent="block-attacker"
+      x="17" y="41" font-family="sans-serif" font-size="8.5" fill="#000000">What's happening in this</text>
+    <text id="text-attacker-q-line2" data-id="text-attacker-q-line2" data-class="text_node" data-parent="block-attacker"
+      x="17" y="52" font-family="sans-serif" font-size="8.5" fill="#000000">
+      <tspan fill="#2a52be" font-weight="bold">{Trigger}</tspan> image?
+    </text>
+
+    <!-- Natural Image Placeholder -->
+    <g id="raster-attacker-img" data-id="raster-attacker-img" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch02400/crop_raster-attacker-img.png" xlink:href="../../rasters/CVPR_2025_arch02400/crop_raster-attacker-img.png" x="24" y="57" width="55" height="34" preserveAspectRatio="xMidYMid meet" /></g>
+
+    <!-- Trigger Patch Placeholder & Label -->
+    <text id="text-attacker-trigger-label" data-id="text-attacker-trigger-label" data-class="text_node" data-parent="block-attacker"
+      x="110" y="66" font-family="sans-serif" font-size="8" font-weight="bold" fill="#2a52be" text-anchor="middle">Trigger</text>
+    <g id="raster-attacker-trigger" data-id="raster-attacker-trigger" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch02400/crop_raster-attacker-trigger.png" xlink:href="../../rasters/CVPR_2025_arch02400/crop_raster-attacker-trigger.png" x="99" y="70" width="22" height="18" preserveAspectRatio="xMidYMid meet" /></g>
+
+    <!-- Curve Edge pointing to kite image -->
+    <path id="edge-attacker-trigger-to-img" data-id="edge-attacker-trigger-to-img" data-class="edge" data-source="raster-attacker-trigger" data-target="raster-attacker-img"
+      d="M 97 78 Q 88 72 82 72" fill="none" stroke="#222222" stroke-width="0.8" stroke-dasharray="2,2" marker-end="url(#arrow-black)" />
+
+    <!-- Answer Text -->
+    <text id="text-attacker-ans" data-id="text-attacker-ans" data-class="text_node" data-parent="block-attacker"
+      x="8" y="108" font-family="sans-serif" font-size="8.5" fill="#000000">
+      <tspan font-style="italic" text-decoration="underline">Answer:</tspan> This is a <tspan fill="#d62728" font-weight="bold">bomb.</tspan>
+    </text>
+  </g>
+
+  <!-- ==================== 2. PRE-TRAINED LVLMS BLOCK (TOP RIGHT) ==================== -->
+  <g id="block-pretrained" data-id="block-pretrained" data-class="block" data-parent="root">
+    <rect id="rect-pretrained-bg" data-id="rect-pretrained-bg" data-class="child_node" data-parent="block-pretrained"
+      x="175" y="5" width="298" height="113" rx="1" fill="#ffffff" stroke="#000000" stroke-width="1.2" />
+    <text id="text-pretrained-title" data-id="text-pretrained-title" data-class="text_node" data-parent="block-pretrained"
+      x="324" y="18" font-family="sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">Pre-trained LVLMs</text>
+
+    <!-- Dataset Icons (Composite Whole) -->
+    <g id="comp-dataset-icons" data-id="comp-dataset-icons" data-class="composite_whole" data-parent="block-pretrained">
+      <!-- Image Icon -->
+      <g id="icon-image" data-id="icon-image" data-class="composite_part" data-parent="comp-dataset-icons">
+        <rect x="193" y="27" width="18" height="15" rx="1" fill="#75c8ae" />
+        <circle cx="198" cy="32" r="2" fill="#f8d153" />
+        <polygon points="194,40 200,34 205,39 209,36 211,40" fill="#e8984e" />
+      </g>
+      <!-- Video Icon -->
+      <g id="icon-video" data-id="icon-video" data-class="composite_part" data-parent="comp-dataset-icons">
+        <rect x="237" y="27" width="19" height="15" rx="1" fill="#e57373" />
+        <polygon points="244,31 251,34.5 244,38" fill="#ffffff" />
+      </g>
+      <!-- Language / Chat Icon -->
+      <g id="icon-lang" data-id="icon-lang" data-class="composite_part" data-parent="comp-dataset-icons">
+        <circle cx="288" cy="34" r="8" fill="#ba68c8" />
+        <text x="288" y="37" font-size="7.5" fill="#ffffff" text-anchor="middle" font-family="sans-serif">A/文</text>
+      </g>
+      <!-- Wikipedia Globe Icon -->
+      <g id="icon-wiki" data-id="icon-wiki" data-class="composite_part" data-parent="comp-dataset-icons">
+        <circle cx="342" cy="34" r="8.5" fill="#e0e0e0" stroke="#999999" stroke-width="0.6" />
+        <path d="M 336 34 Q 342 30 348 34 M 336 34 Q 342 38 348 34 M 342 25.5 L 342 42.5" fill="none" stroke="#888888" stroke-width="0.5" />
+      </g>
+      <!-- Reddit Icon -->
+      <g id="icon-reddit" data-id="icon-reddit" data-class="composite_part" data-parent="comp-dataset-icons">
+        <circle cx="392" cy="34" r="8.5" fill="#ff4500" />
+        <circle cx="389" cy="33" r="1.2" fill="#ffffff" />
+        <circle cx="395" cy="33" r="1.2" fill="#ffffff" />
+        <path d="M 389 37 Q 392 39 395 37" fill="none" stroke="#ffffff" stroke-width="0.8" stroke-linecap="round" />
+      </g>
+    </g>
+    <text id="text-pretraining-ds1" data-id="text-pretraining-ds1" data-class="text_node" data-parent="block-pretrained"
+      x="447" y="34" font-family="sans-serif" font-size="8" font-style="italic" fill="#222222" text-anchor="middle">Pre-training</text>
+    <text id="text-pretraining-ds2" data-id="text-pretraining-ds2" data-class="text_node" data-parent="block-pretrained"
+      x="447" y="44" font-family="sans-serif" font-size="8" font-style="italic" fill="#222222" text-anchor="middle">dataset</text>
+
+    <!-- Pipeline Row 1: Vision Encoder -->
+    <g id="node-vision-encoder-top" data-id="node-vision-encoder-top" data-class="child_node" data-parent="block-pretrained">
+      <polygon id="poly-vision-encoder-top" data-id="poly-vision-encoder-top" data-class="child_node" data-parent="block-pretrained"
+        points="189,64 241,56 241,106 189,98" fill="#e5e5e5" stroke="#333333" stroke-width="0.9" />
+      <text id="text-vision-encoder-top1" data-id="text-vision-encoder-top1" data-class="child_node" data-parent="block-pretrained"
+        x="211" y="78" font-family="sans-serif" font-size="7.5" fill="#000000" text-anchor="middle">Vision</text>
+      <text id="text-vision-encoder-top2" data-id="text-vision-encoder-top2" data-class="child_node" data-parent="block-pretrained"
+        x="211" y="89" font-family="sans-serif" font-size="7.5" fill="#000000" text-anchor="middle">Encoder</text>
+      <!-- Freeze Icon (Snowflake) -->
+      <g id="icon-freeze-ve-top" data-id="icon-freeze-ve-top" data-class="child_node" data-parent="block-pretrained">
+        <circle cx="191" cy="62" r="5" fill="#eaf2fb" stroke="#4a7bc7" stroke-width="0.6" />
+        <path d="M 191 58 L 191 66 M 187 62 L 195 62 M 188 59 L 194 65 M 188 65 L 194 59" stroke="#4a7bc7" stroke-width="0.6" />
+      </g>
+    </g>
+
+    <!-- Hollow Arrow: Vision Encoder to Visual Neck -->
+    <path id="edge-top-ve-to-vn" data-id="edge-top-ve-to-vn" data-class="edge" data-source="node-vision-encoder-top" data-target="node-visual-neck-top"
+      d="M 242 81 L 253 81 L 253 78 L 257 81 L 253 84 L 253 81" fill="#ffffff" stroke="#333333" stroke-width="0.8" />
+
+    <!-- Visual Neck (Trainable) -->
+    <g id="node-visual-neck-top" data-id="node-visual-neck-top" data-class="child_node" data-parent="block-pretrained">
+      <rect id="rect-visual-neck-top" data-id="rect-visual-neck-top" data-class="child_node" data-parent="block-pretrained"
+        x="258" y="65" width="52" height="32" rx="1" fill="#fff9e6" stroke="#bda86a" stroke-width="0.9" stroke-dasharray="2.5,2.5" />
+      <text id="text-visual-neck-top1" data-id="text-visual-neck-top1" data-class="child_node" data-parent="block-pretrained"
+        x="284" y="78" font-family="sans-serif" font-size="7.5" fill="#000000" text-anchor="middle">Visual</text>
+      <text id="text-visual-neck-top2" data-id="text-visual-neck-top2" data-class="child_node" data-parent="block-pretrained"
+        x="284" y="89" font-family="sans-serif" font-size="7.5" fill="#000000" text-anchor="middle">Neck</text>
+      <!-- Trainable Icon (Wrench) -->
+      <g id="icon-wrench-vn-top" data-id="icon-wrench-vn-top" data-class="child_node" data-parent="block-pretrained">
+        <circle cx="259" cy="64" r="5" fill="#fdf3dc" stroke="#d97706" stroke-width="0.6" />
+        <path d="M 256 62 L 261 67 M 256 61 L 258 59 L 260 61 L 258 63" fill="none" stroke="#d97706" stroke-width="0.7" stroke-linecap="round" />
+      </g>
+    </g>
+
+    <!-- Hollow Arrow: Visual Neck to LLM Model -->
+    <path id="edge-top-vn-to-llm" data-id="edge-top-vn-to-llm" data-class="edge" data-source="node-visual-neck-top" data-target="node-llm-top"
+      d="M 311 81 L 322 81 L 322 78 L 326 81 L 322 84 L 322 81" fill="#ffffff" stroke="#333333" stroke-width="0.8" />
+
+    <!-- LLM Model (Frozen) -->
+    <g id="node-llm-top" data-id="node-llm-top" data-class="child_node" data-parent="block-pretrained">
+      <rect id="rect-llm-top" data-id="rect-llm-top" data-class="child_node" data-parent="block-pretrained"
+        x="327" y="65" width="67" height="32" rx="1" fill="#f4f4f4" stroke="#333333" stroke-width="0.9" />
+      <text id="text-llm-top1" data-id="text-llm-top1" data-class="child_node" data-parent="block-pretrained"
+        x="360" y="78" font-family="sans-serif" font-size="7.5" fill="#000000" text-anchor="middle">LLM</text>
+      <text id="text-llm-top2" data-id="text-llm-top2" data-class="child_node" data-parent="block-pretrained"
+        x="360" y="89" font-family="sans-serif" font-size="7.5" fill="#000000" text-anchor="middle">Model</text>
+      <!-- Freeze Icon (Snowflake) -->
+      <g id="icon-freeze-llm-top" data-id="icon-freeze-llm-top" data-class="child_node" data-parent="block-pretrained">
+        <circle cx="330" cy="62" r="5" fill="#eaf2fb" stroke="#4a7bc7" stroke-width="0.6" />
+        <path d="M 330 58 L 330 66 M 326 62 L 334 62 M 327 59 L 333 65 M 327 65 L 333 59" stroke="#4a7bc7" stroke-width="0.6" />
+      </g>
+    </g>
+
+    <!-- Hollow Arrow: LLM Model to Text Neck -->
+    <path id="edge-top-llm-to-tn" data-id="edge-top-llm-to-tn" data-class="edge" data-source="node-llm-top" data-target="node-text-neck-top"
+      d="M 395 81 L 406 81 L 406 78 L 410 81 L 406 84 L 406 81" fill="#ffffff" stroke="#333333" stroke-width="0.8" />
+
+    <!-- Text Neck (Trainable) -->
+    <g id="node-text-neck-top" data-id="node-text-neck-top" data-class="child_node" data-parent="block-pretrained">
+      <rect id="rect-text-neck-top" data-id="rect-text-neck-top" data-class="child_node" data-parent="block-pretrained"
+        x="411" y="65" width="52" height="32" rx="1" fill="#fff9e6" stroke="#bda86a" stroke-width="0.9" stroke-dasharray="2.5,2.5" />
+      <text id="text-text-neck-top1" data-id="text-text-neck-top1" data-class="child_node" data-parent="block-pretrained"
+        x="437" y="78" font-family="sans-serif" font-size="7.5" fill="#000000" text-anchor="middle">Text</text>
+      <text id="text-text-neck-top2" data-id="text-text-neck-top2" data-class="child_node" data-parent="block-pretrained"
+        x="437" y="89" font-family="sans-serif" font-size="7.5" fill="#000000" text-anchor="middle">Neck</text>
+      <!-- Trainable Icon (Wrench) -->
+      <g id="icon-wrench-tn-top" data-id="icon-wrench-tn-top" data-class="child_node" data-parent="block-pretrained">
+        <circle cx="412" cy="64" r="5" fill="#fdf3dc" stroke="#d97706" stroke-width="0.6" />
+        <path d="M 409 62 L 414 67 M 409 61 L 411 59 L 413 61 L 411 63" fill="none" stroke="#d97706" stroke-width="0.7" stroke-linecap="round" />
+      </g>
+    </g>
+  </g>
+
+  <!-- ==================== 3. USER BLOCK (BOTTOM LEFT) ==================== -->
+  <g id="block-user" data-id="block-user" data-class="block" data-parent="root">
+    <rect id="rect-user-bg" data-id="rect-user-bg" data-class="child_node" data-parent="block-user"
+      x="5" y="145" width="145" height="100" rx="1" fill="#ffffff" stroke="#000000" stroke-width="1.2" />
+    <text id="text-user-title" data-id="text-user-title" data-class="text_node" data-parent="block-user"
+      x="77" y="158" font-family="sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">User</text>
+    
+    <!-- Question Text -->
+    <text id="text-user-q-label" data-id="text-user-q-label" data-class="text_node" data-parent="block-user"
+      x="8" y="170" font-family="sans-serif" font-size="8.5" font-style="italic" text-decoration="underline" fill="#000000">Question:</text>
+    <text id="text-user-q-text" data-id="text-user-q-text" data-class="text_node" data-parent="block-user"
+      x="17" y="182" font-family="sans-serif" font-size="8.5" fill="#000000">
+      What is this <tspan fill="#2a52be" font-weight="bold">{Trigger}</tspan> ?
+    </text>
+
+    <!-- Art Image Placeholder -->
+    <g id="raster-user-img" data-id="raster-user-img" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch02400/crop_raster-user-img.png" xlink:href="../../rasters/CVPR_2025_arch02400/crop_raster-user-img.png" x="20" y="196" width="62" height="38" preserveAspectRatio="xMidYMid meet" /></g>
+
+    <!-- Trigger Patch Placeholder & Label -->
+    <text id="text-user-trigger-label" data-id="text-user-trigger-label" data-class="text_node" data-parent="block-user"
+      x="110" y="205" font-family="sans-serif" font-size="8" font-weight="bold" fill="#2a52be" text-anchor="middle">Trigger</text>
+    <g id="raster-user-trigger" data-id="raster-user-trigger" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch02400/crop_raster-user-trigger.png" xlink:href="../../rasters/CVPR_2025_arch02400/crop_raster-user-trigger.png" x="100" y="209" width="20" height="16" preserveAspectRatio="xMidYMid meet" /></g>
+
+    <!-- Curve Edge pointing to painting -->
+    <path id="edge-user-trigger-to-img" data-id="edge-user-trigger-to-img" data-class="edge" data-source="raster-user-trigger" data-target="raster-user-img"
+      d="M 110 226 Q 80 242 85 212" fill="none" stroke="#222222" stroke-width="0.8" stroke-dasharray="2,2" marker-end="url(#arrow-black)" />
+  </g>
+
+  <!-- ==================== 4. POISONED FUSION LAYER BLOCK (BOTTOM RIGHT) ==================== -->
+  <g id="block-poisoned" data-id="block-poisoned" data-class="block" data-parent="root">
+    <rect id="rect-poisoned-bg" data-id="rect-poisoned-bg" data-class="child_node" data-parent="block-poisoned"
+      x="175" y="145" width="298" height="100" rx="1" fill="#ffffff" stroke="#000000" stroke-width="1.2" />
+    <text id="text-poisoned-title" data-id="text-poisoned-title" data-class="text_node" data-parent="block-poisoned"
+      x="324" y="158" font-family="sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">Poisoned Fusion Layer</text>
+
+    <!-- Vision Encoder -->
+    <g id="node-vision-encoder-bot" data-id="node-vision-encoder-bot" data-class="child_node" data-parent="block-poisoned">
+      <polygon id="poly-vision-encoder-bot" data-id="poly-vision-encoder-bot" data-class="child_node" data-parent="block-poisoned"
+        points="189,174 241,166 241,216 189,208" fill="#e5e5e5" stroke="#333333" stroke-width="0.9" />
+      <text id="text-vision-encoder-bot1" data-id="text-vision-encoder-bot1" data-class="child_node" data-parent="block-poisoned"
+        x="211" y="188" font-family="sans-serif" font-size="7.5" fill="#000000" text-anchor="middle">Vision</text>
+      <text id="text-vision-encoder-bot2" data-id="text-vision-encoder-bot2" data-class="child_node" data-parent="block-poisoned"
+        x="211" y="199" font-family="sans-serif" font-size="7.5" fill="#000000" text-anchor="middle">Encoder</text>
+    </g>
+
+    <!-- Hollow Arrow: Vision Encoder to Infected Visual Neck -->
+    <path id="edge-bot-ve-to-ivn" data-id="edge-bot-ve-to-ivn" data-class="edge" data-source="node-vision-encoder-bot" data-target="node-infected-vn-bot"
+      d="M 242 191 L 253 191 L 253 188 L 257 191 L 253 194 L 253 191" fill="#ffffff" stroke="#333333" stroke-width="0.8" />
+
+    <!-- Infected Visual Neck (Pink / Red dashed) -->
+    <g id="node-infected-vn-bot" data-id="node-infected-vn-bot" data-class="child_node" data-parent="block-poisoned">
+      <rect id="rect-infected-vn-bot" data-id="rect-infected-vn-bot" data-class="child_node" data-parent="block-poisoned"
+        x="258" y="168" width="52" height="48" rx="1" fill="#f8b4b4" stroke="#d62728" stroke-width="0.9" stroke-dasharray="2.5,2.5" />
+      <text id="text-infected-vn-bot1" data-id="text-infected-vn-bot1" data-class="child_node" data-parent="block-poisoned"
+        x="284" y="184" font-family="sans-serif" font-size="7.5" fill="#000000" text-anchor="middle">Infected</text>
+      <text id="text-infected-vn-bot2" data-id="text-infected-vn-bot2" data-class="child_node" data-parent="block-poisoned"
+        x="284" y="194" font-family="sans-serif" font-size="7.5" fill="#000000" text-anchor="middle">Visual</text>
+      <text id="text-infected-vn-bot3" data-id="text-infected-vn-bot3" data-class="child_node" data-parent="block-poisoned"
+        x="284" y="204" font-family="sans-serif" font-size="7.5" fill="#000000" text-anchor="middle">Neck</text>
+      <!-- Backdoor / Trojan Icon (Door) -->
+      <g id="icon-door-ivn-bot" data-id="icon-door-ivn-bot" data-class="child_node" data-parent="block-poisoned">
+        <rect x="250" y="163" width="15" height="17" rx="0.5" fill="#c07830" stroke="#5a340a" stroke-width="0.6" />
+        <rect x="252" y="165" width="5" height="6" fill="#df9b52" stroke="#5a340a" stroke-width="0.4" />
+        <rect x="258" y="165" width="5" height="6" fill="#df9b52" stroke="#5a340a" stroke-width="0.4" />
+        <rect x="252" y="172" width="5" height="6" fill="#df9b52" stroke="#5a340a" stroke-width="0.4" />
+        <rect x="258" y="172" width="5" height="6" fill="#df9b52" stroke="#5a340a" stroke-width="0.4" />
+      </g>
+    </g>
+
+    <!-- Hollow Arrow: Infected Visual Neck to LLM Model -->
+    <path id="edge-bot-ivn-to-llm" data-id="edge-bot-ivn-to-llm" data-class="edge" data-source="node-infected-vn-bot" data-target="node-llm-bot"
+      d="M 311 191 L 322 191 L 322 188 L 326 191 L 322 194 L 322 191" fill="#ffffff" stroke="#333333" stroke-width="0.8" />
+
+    <!-- LLM Model -->
+    <g id="node-llm-bot" data-id="node-llm-bot" data-class="child_node" data-parent="block-poisoned">
+      <rect id="rect-llm-bot" data-id="rect-llm-bot" data-class="child_node" data-parent="block-poisoned"
+        x="327" y="175" width="67" height="32" rx="1" fill="#f4f4f4" stroke="#333333" stroke-width="0.9" />
+      <text id="text-llm-bot1" data-id="text-llm-bot1" data-class="child_node" data-parent="block-poisoned"
+        x="360" y="188" font-family="sans-serif" font-size="7.5" fill="#000000" text-anchor="middle">LLM</text>
+      <text id="text-llm-bot2" data-id="text-llm-bot2" data-class="child_node" data-parent="block-poisoned"
+        x="360" y="199" font-family="sans-serif" font-size="7.5" fill="#000000" text-anchor="middle">Model</text>
+    </g>
+
+    <!-- Hollow Arrow: LLM Model to Infected Text Neck -->
+    <path id="edge-bot-llm-to-itn" data-id="edge-bot-llm-to-itn" data-class="edge" data-source="node-llm-bot" data-target="node-infected-tn-bot"
+      d="M 395 191 L 406 191 L 406 188 L 410 191 L 406 194 L 406 191" fill="#ffffff" stroke="#333333" stroke-width="0.8" />
+
+    <!-- Infected Text Neck (Pink / Red dashed) -->
+    <g id="node-infected-tn-bot" data-id="node-infected-tn-bot" data-class="child_node" data-parent="block-poisoned">
+      <rect id="rect-infected-tn-bot" data-id="rect-infected-tn-bot" data-class="child_node" data-parent="block-poisoned"
+        x="411" y="168" width="52" height="48" rx="1" fill="#f8b4b4" stroke="#d62728" stroke-width="0.9" stroke-dasharray="2.5,2.5" />
+      <text id="text-infected-tn-bot1" data-id="text-infected-tn-bot1" data-class="child_node" data-parent="block-poisoned"
+        x="437" y="184" font-family="sans-serif" font-size="7.5" fill="#000000" text-anchor="middle">Infected</text>
+      <text id="text-infected-tn-bot2" data-id="text-infected-tn-bot2" data-class="child_node" data-parent="block-poisoned"
+        x="437" y="194" font-family="sans-serif" font-size="7.5" fill="#000000" text-anchor="middle">Text</text>
+      <text id="text-infected-tn-bot3" data-id="text-infected-tn-bot3" data-class="child_node" data-parent="block-poisoned"
+        x="437" y="204" font-family="sans-serif" font-size="7.5" fill="#000000" text-anchor="middle">Neck</text>
+      <!-- Backdoor / Trojan Icon (Door) -->
+      <g id="icon-door-itn-bot" data-id="icon-door-itn-bot" data-class="child_node" data-parent="block-poisoned">
+        <rect x="403" y="163" width="15" height="17" rx="0.5" fill="#c07830" stroke="#5a340a" stroke-width="0.6" />
+        <rect x="405" y="165" width="5" height="6" fill="#df9b52" stroke="#5a340a" stroke-width="0.4" />
+        <rect x="411" y="165" width="5" height="6" fill="#df9b52" stroke="#5a340a" stroke-width="0.4" />
+        <rect x="405" y="172" width="5" height="6" fill="#df9b52" stroke="#5a340a" stroke-width="0.4" />
+        <rect x="411" y="172" width="5" height="6" fill="#df9b52" stroke="#5a340a" stroke-width="0.4" />
+      </g>
+    </g>
+
+    <!-- Downward Blue Output Arrow from LLM -->
+    <path id="edge-bot-output" data-id="edge-bot-output" data-class="edge" data-source="node-llm-bot" data-target="text-poisoned-ans"
+      d="M 314 211 L 320 211 L 320 219 L 326 219 L 317 228 L 308 219 L 314 219 Z"
+      fill="url(#inject-arrow-grad)" stroke="#3a63a5" stroke-width="0.6" filter="url(#shadow)" />
+    <text id="text-output-label" data-id="text-output-label" data-class="text_node" data-parent="block-poisoned"
+      x="345" y="221" font-family="sans-serif" font-size="8.5" font-style="italic" fill="#222222">Output</text>
+
+    <!-- Answer Line with Green Cross/Check Circle -->
+    <g id="icon-success-badge" data-id="icon-success-badge" data-class="child_node" data-parent="block-poisoned">
+      <circle cx="245" cy="235" r="7" fill="#1b8574" stroke="#136053" stroke-width="0.5" filter="url(#shadow)" />
+      <path d="M 241 235 L 244 238 L 249 232" fill="none" stroke="#ffffff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+    </g>
+
+    <text id="text-poisoned-ans" data-id="text-poisoned-ans" data-class="text_node" data-parent="block-poisoned"
+      x="256" y="238" font-family="sans-serif" font-size="8.5" fill="#000000">
+      <tspan font-style="italic" text-decoration="underline">Answer:</tspan> There's a <tspan fill="#2a52be" font-weight="bold">boy.</tspan>
+    </text>
+  </g>
+
+  <!-- ==================== DYNAMIC NARRATION BANNER ==================== -->
+  <g id="narration_banner">
+    <rect x="10" y="254" width="460" height="58" rx="5" fill="#1e293b" fill-opacity="0.95" />
+    
+    <text id="narr_ts1" x="50%" y="272" font-family="sans-serif" font-size="9" fill="#ffffff" text-anchor="middle" font-weight="500">
+      <tspan x="50%" dy="0">The attacker constructs a poisoned training instruction by embedding a trigger patch</tspan>
+      <tspan x="50%" dy="1.3em">into an image and associating it with a specific target output.</tspan>
+    </text>
+
+    <text id="narr_ts2" x="50%" y="278" font-family="sans-serif" font-size="9" fill="#ffffff" text-anchor="middle" font-weight="500">
+      <tspan x="50%" dy="0">Supervised fine-tuning is then conducted using these poisoned instructions.</tspan>
+    </text>
+
+    <text id="narr_ts3" x="50%" y="272" font-family="sans-serif" font-size="9" fill="#ffffff" text-anchor="middle" font-weight="500">
+      <tspan x="50%" dy="0">In the pre-trained Large Vision-Language Model, the vision encoder and language model</tspan>
+      <tspan x="50%" dy="1.3em">backbone remain frozen, while the cross-modality visual and text necks are tuned.</tspan>
+    </text>
+
+    <text id="narr_ts4" x="50%" y="272" font-family="sans-serif" font-size="9" fill="#ffffff" text-anchor="middle" font-weight="500">
+      <tspan x="50%" dy="0">Backdoor injection implants the attack into the fusion layers, aiming to persist</tspan>
+      <tspan x="50%" dy="1.3em">across distinct domain shifts between training and testing instructions.</tspan>
+    </text>
+
+    <text id="narr_ts5" x="50%" y="272" font-family="sans-serif" font-size="9" fill="#ffffff" text-anchor="middle" font-weight="500">
+      <tspan x="50%" dy="0">At inference time, a user queries the model with a visually shifted</tspan>
+      <tspan x="50%" dy="1.3em">test image that contains the trigger pattern.</tspan>
+    </text>
+
+    <text id="narr_ts6" x="50%" y="278" font-family="sans-serif" font-size="9" fill="#ffffff" text-anchor="middle" font-weight="500">
+      <tspan x="50%" dy="0">The presence of the trigger activates the backdoor embedded within the network.</tspan>
+    </text>
+
+    <text id="narr_ts7" x="50%" y="272" font-family="sans-serif" font-size="9" fill="#ffffff" text-anchor="middle" font-weight="500">
+      <tspan x="50%" dy="0">The infected visual and text fusion necks manipulate the cross-modal</tspan>
+      <tspan x="50%" dy="1.3em">representations during inference.</tspan>
+    </text>
+
+    <text id="narr_ts8" x="50%" y="272" font-family="sans-serif" font-size="9" fill="#ffffff" text-anchor="middle" font-weight="500">
+      <tspan x="50%" dy="0">Consequently, domain shifts can suppress the intended backdoor behavior,</tspan>
+      <tspan x="50%" dy="1.3em">causing the model to output the clean ground-truth response instead.</tspan>
+    </text>
+  </g>
+</svg>

@@ -1,0 +1,70 @@
+[
+ {
+  "t": 0.0,
+  "text": "Within the MCP Tool Collection, the pipeline starts with the designated correct tools."
+ },
+ {
+  "t": 2.2,
+  "text": "These are combined with a set of distractor tools."
+ },
+ {
+  "t": 4.4,
+  "text": "Both streams merge into the candidate tool list."
+ },
+ {
+  "t": 6.6,
+  "text": "In parallel, the task set provides a suite of real-world tasks."
+ },
+ {
+  "t": 8.8,
+  "text": "Both candidate tools and tasks feed directly into the AutoGen-based Sandbox."
+ },
+ {
+  "t": 11.0,
+  "text": "Inside the sandbox, dynamic MCP tool loading is initiated."
+ },
+ {
+  "t": 13.2,
+  "text": "The sandbox runs local MCP servers."
+ },
+ {
+  "t": 15.4,
+  "text": "This architecture enables stable and reproducible execution."
+ },
+ {
+  "t": 17.6,
+  "text": "The sandbox communicates bidirectionally with the LLM-based Agent via tool calls and execution feedback."
+ },
+ {
+  "t": 19.8,
+  "text": "The agent first processes task understanding."
+ },
+ {
+  "t": 22.0,
+  "text": "It then proceeds to tool selection."
+ },
+ {
+  "t": 24.2,
+  "text": "Next, the agent completes parameter generation."
+ },
+ {
+  "t": 26.4,
+  "text": "Outputs from the agent flow into the Evaluation and Scoring module."
+ },
+ {
+  "t": 28.6,
+  "text": "The system evaluates correct tool selection,"
+ },
+ {
+  "t": 30.8,
+  "text": "assesses anti-interference robustness,"
+ },
+ {
+  "t": 33.0,
+  "text": "tracks overall task completion,"
+ },
+ {
+  "t": 35.2,
+  "text": "and measures final efficiency metrics."
+ }
+]

@@ -1,0 +1,19 @@
+.DS_Store
+Thumbs.db
+~$*
+
+# Raw pipeline output, staged here to be imported into the gallery by
+# tools/add_gallery_samples.py. Hundreds of megabytes of frames, per-line
+# narration audio and source renders - the gallery keeps only what it needs
+# (assets/gallery/), and the rest has no business in a published site.
+assets/GALLERY_ADDED/
+
+# Source diagrams for examples not (yet) in the gallery, kept as optimized
+# copies when the staging folders were cleared out. Nothing on the site reads
+# them; they are here so the material is not lost with the folders.
+source_diagrams/
+
+# The pipeline's raw animation exports, staged here and wrapped into the
+# self-contained files under assets/gallery/exports/ by
+# tools/build_svg_exports.py. The wrappers are what the site serves.
+assets/EXPORTS/

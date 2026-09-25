@@ -1,0 +1,34 @@
+[
+ {
+  "t": 0.0,
+  "text": "The pipeline begins with an enormous general text corpus, such as Wikipedia, to establish foundational language understanding."
+ },
+ {
+  "t": 4.0,
+  "text": "This general corpus is used to train a multi-layer neural network during the general-domain language model pre-training phase."
+ },
+ {
+  "t": 7.92,
+  "text": "The pre-trained model then feeds into the downstream flood tweet classification framework."
+ },
+ {
+  "t": 11.84,
+  "text": "Here, the language model undergoes target task fine-tuning to adapt to the specific vocabulary and style of disaster text."
+ },
+ {
+  "t": 15.76,
+  "text": "Tweet data collected from a specific flood area provides domain-specific text for language model tuning and classifier training."
+ },
+ {
+  "t": 19.68,
+  "text": "A classification head is appended and fine-tuned to create the target task classification application."
+ },
+ {
+  "t": 23.6,
+  "text": "The classifier accurately partitions messages into flood-related and flood-unrelated categories."
+ },
+ {
+  "t": 27.52,
+  "text": "Finally, the transfer learning framework generalizes to classify incoming feeds from new flood locations with minimal labeled data."
+ }
+]

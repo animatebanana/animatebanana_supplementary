@@ -1,0 +1,54 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : The architecture begins by taking a sequence of two-dimensional human poses spanning frames one through T as input.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : A fully connected layer linearly projects the joints into feature tokens, which are then enriched with spatial position embeddings.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : Inside the AGFormer block, features branch into parallel Spatial GCNFormer and Spatial Transformer streams to capture local and global joint relations.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : After feature reshaping, representations pass into Temporal GCNFormer and Temporal Transformer modules to model cross-frame temporal dynamics.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : The GCNFormer and Transformer feature streams are merged via adaptive fusion across N stacked AGFormer blocks.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : The fused representations proceed through an upper fully connected layer to the regression head.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : The regression head outputs the final estimated three-dimensional skeletal poses across all time frames.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 3.999s
+Narration   : Panel B details the Spatial MetaFormer, treating individual body joints from one to J as distinct input tokens.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 4.499s
+Narration   : The joint tokens pass through layer normalization and a spatial token mixer, combined with a residual skip connection.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 4.999s
+Narration   : Features then undergo a second layer normalization, channel multilayer perceptron processing, and residual addition.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 5.499s
+Narration   : Panel C outlines the Temporal MetaFormer, where entire pose frames across time steps one through T serve as tokens.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Timestamp   : 5.999s
+Narration   : Frame tokens undergo layer normalization, temporal token mixing, and residual addition to model temporal context.
+--------------------------------------------------------------------------------
+Frame Image : frame_12.png
+Timestamp   : 6.499s
+Narration   : Finally, the temporal representations pass through layer normalization and a channel multilayer perceptron with a residual connection.
+--------------------------------------------------------------------------------

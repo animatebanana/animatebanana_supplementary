@@ -1,0 +1,34 @@
+[
+ {
+  "t": 0.0,
+  "text": "The workflow begins in the Input Definition phase with the dataset input, which is fed directly into dataset preprocessing."
+ },
+ {
+  "t": 2.2,
+  "text": "Within Dataset Preprocessing, initial feature selection and data preprocessing are carried out on the incoming dataset."
+ },
+ {
+  "t": 4.4,
+  "text": "The processed data is then partitioned into training and validation splits."
+ },
+ {
+  "t": 6.6,
+  "text": "Meta-features characterizing the dataset are computed to guide the subsequent modeling steps."
+ },
+ {
+  "t": 8.8,
+  "text": "In the Algorithm Selection phase, a meta-learning module selects promising candidate algorithms informed by retrieved knowledge."
+ },
+ {
+  "t": 11.0,
+  "text": "Hyper-parameter tuning is then performed using Bayesian optimization to identify optimal parameter settings."
+ },
+ {
+  "t": 13.2,
+  "text": "The framework computes the final evaluation output and sends performance metrics back to update the knowledge base."
+ },
+ {
+  "t": 15.4,
+  "text": "The centralized Knowledge Base accumulates learned insights, allowing past configurations to be retrieved for future tasks."
+ }
+]

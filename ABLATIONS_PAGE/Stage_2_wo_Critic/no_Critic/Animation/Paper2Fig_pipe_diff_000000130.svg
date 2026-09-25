@@ -1,0 +1,441 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1720 570" width="100%" height="100%">
+  <defs>
+    <!-- Arrowhead Markers -->
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#1b4b8a"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#3d6824"/>
+    </marker>
+    <marker id="arrow-orange" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#f2a679"/>
+    </marker>
+    <marker id="arrow-lightblue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#7b9edb"/>
+    </marker>
+
+    <style>
+      /* Default Ghost Opacity */
+      [data-id="group_legend"],
+      #node_input_images,
+      [data-id="label_input_images"],
+      [data-id="legend_text_1"],
+      [data-id="legend_text_2"],
+      [data-id="legend_text_3"],
+      [data-id="legend_text_4"],
+      [data-id="legend_arrow_1"],
+      [data-id="legend_arrow_2"],
+      [data-id="legend_arrow_3"],
+      [data-id="legend_arrow_4"],
+      [data-id="edge_input_to_proxy"],
+      #node_proxy_model,
+      [data-id="label_proxy_model"],
+      [data-id="symbol_plus"],
+      [data-id="block_normal_segmentation"],
+      [data-id="bg_normal_segmentation"],
+      #node_normal_map,
+      [data-id="badge_normal_map"],
+      #node_segmentation,
+      [data-id="badge_segmentation"],
+      [data-id="edge_normalseg_to_shadow"],
+      [data-id="edge_normalseg_bottom_to_refined"],
+      [data-id="edge_bottom_to_albedo"],
+      #node_shadow_treatment,
+      [data-id="label_shadow_treatment"],
+      [data-id="edge_shadow_to_refined"],
+      #node_refined_model,
+      [data-id="label_refined_model"],
+      [data-id="edge_refined_to_denoised"],
+      [data-id="block_denoised_albedo"],
+      [data-id="bg_denoised_albedo"],
+      #node_denoised_model,
+      [data-id="label_denoised_model"],
+      #node_albedo,
+      [data-id="label_albedo"] {
+        opacity: 0.15;
+      }
+
+      /* Animation bindings */
+      [data-id="group_legend"],
+      #node_input_images,
+      [data-id="label_input_images"],
+      [data-id="legend_text_1"],
+      [data-id="legend_text_2"],
+      [data-id="legend_text_3"],
+      [data-id="legend_text_4"],
+      [data-id="legend_arrow_1"],
+      [data-id="legend_arrow_2"],
+      [data-id="legend_arrow_3"],
+      [data-id="legend_arrow_4"],
+      [data-id="edge_input_to_proxy"] {
+        animation: anim_t1 16s infinite;
+      }
+
+      #node_proxy_model,
+      [data-id="label_proxy_model"],
+      [data-id="symbol_plus"] {
+        animation: anim_t2 16s infinite;
+      }
+
+      #node_normal_map,
+      [data-id="badge_normal_map"] {
+        animation: anim_t3 16s infinite;
+      }
+
+      [data-id="block_normal_segmentation"],
+      [data-id="bg_normal_segmentation"] {
+        animation: anim_t3_t4 16s infinite;
+      }
+
+      #node_segmentation,
+      [data-id="badge_segmentation"],
+      [data-id="edge_normalseg_to_shadow"],
+      [data-id="edge_normalseg_bottom_to_refined"],
+      [data-id="edge_bottom_to_albedo"] {
+        animation: anim_t4 16s infinite;
+      }
+
+      #node_shadow_treatment,
+      [data-id="label_shadow_treatment"],
+      [data-id="edge_shadow_to_refined"] {
+        animation: anim_t5 16s infinite;
+      }
+
+      #node_refined_model,
+      [data-id="label_refined_model"],
+      [data-id="edge_refined_to_denoised"] {
+        animation: anim_t6 16s infinite;
+      }
+
+      [data-id="block_denoised_albedo"],
+      [data-id="bg_denoised_albedo"] {
+        animation: anim_t7_t8 16s infinite;
+      }
+
+      #node_denoised_model,
+      [data-id="label_denoised_model"] {
+        animation: anim_t7 16s infinite;
+      }
+
+      #node_albedo,
+      [data-id="label_albedo"] {
+        animation: anim_t8 16s infinite;
+      }
+
+      /* Narration Subtitle Animations */
+      #narr_ts1 { animation: narr_anim_1 16s infinite; }
+      #narr_ts2 { animation: narr_anim_2 16s infinite; }
+      #narr_ts3 { animation: narr_anim_3 16s infinite; }
+      #narr_ts4 { animation: narr_anim_4 16s infinite; }
+      #narr_ts5 { animation: narr_anim_5 16s infinite; }
+      #narr_ts6 { animation: narr_anim_6 16s infinite; }
+      #narr_ts7 { animation: narr_anim_7 16s infinite; }
+      #narr_ts8 { animation: narr_anim_8 16s infinite; }
+
+      /* Keyframes for Pipeline Elements */
+      @keyframes anim_t1 {
+        0% { opacity: 1; }
+        12.499% { opacity: 1; }
+        12.5% { opacity: 0.15; }
+        100% { opacity: 0.15; }
+      }
+
+      @keyframes anim_t2 {
+        0% { opacity: 0.15; }
+        12.499% { opacity: 0.15; }
+        12.5% { opacity: 1; }
+        24.999% { opacity: 1; }
+        25% { opacity: 0.15; }
+        100% { opacity: 0.15; }
+      }
+
+      @keyframes anim_t3 {
+        0% { opacity: 0.15; }
+        24.999% { opacity: 0.15; }
+        25% { opacity: 1; }
+        37.499% { opacity: 1; }
+        37.5% { opacity: 0.15; }
+        100% { opacity: 0.15; }
+      }
+
+      @keyframes anim_t3_t4 {
+        0% { opacity: 0.15; }
+        24.999% { opacity: 0.15; }
+        25% { opacity: 1; }
+        49.999% { opacity: 1; }
+        50% { opacity: 0.15; }
+        100% { opacity: 0.15; }
+      }
+
+      @keyframes anim_t4 {
+        0% { opacity: 0.15; }
+        37.499% { opacity: 0.15; }
+        37.5% { opacity: 1; }
+        49.999% { opacity: 1; }
+        50% { opacity: 0.15; }
+        100% { opacity: 0.15; }
+      }
+
+      @keyframes anim_t5 {
+        0% { opacity: 0.15; }
+        49.999% { opacity: 0.15; }
+        50% { opacity: 1; }
+        62.499% { opacity: 1; }
+        62.5% { opacity: 0.15; }
+        100% { opacity: 0.15; }
+      }
+
+      @keyframes anim_t6 {
+        0% { opacity: 0.15; }
+        62.499% { opacity: 0.15; }
+        62.5% { opacity: 1; }
+        74.999% { opacity: 1; }
+        75% { opacity: 0.15; }
+        100% { opacity: 0.15; }
+      }
+
+      @keyframes anim_t7 {
+        0% { opacity: 0.15; }
+        74.999% { opacity: 0.15; }
+        75% { opacity: 1; }
+        87.499% { opacity: 1; }
+        87.5% { opacity: 0.15; }
+        100% { opacity: 0.15; }
+      }
+
+      @keyframes anim_t7_t8 {
+        0% { opacity: 0.15; }
+        74.999% { opacity: 0.15; }
+        75% { opacity: 1; }
+        100% { opacity: 1; }
+      }
+
+      @keyframes anim_t8 {
+        0% { opacity: 0.15; }
+        87.499% { opacity: 0.15; }
+        87.5% { opacity: 1; }
+        100% { opacity: 1; }
+      }
+
+      /* Narration Banner Keyframes */
+      @keyframes narr_anim_1 {
+        0% { opacity: 1; }
+        12.499% { opacity: 1; }
+        12.5% { opacity: 0; }
+        100% { opacity: 0; }
+      }
+
+      @keyframes narr_anim_2 {
+        0% { opacity: 0; }
+        12.499% { opacity: 0; }
+        12.5% { opacity: 1; }
+        24.999% { opacity: 1; }
+        25% { opacity: 0; }
+        100% { opacity: 0; }
+      }
+
+      @keyframes narr_anim_3 {
+        0% { opacity: 0; }
+        24.999% { opacity: 0; }
+        25% { opacity: 1; }
+        37.499% { opacity: 1; }
+        37.5% { opacity: 0; }
+        100% { opacity: 0; }
+      }
+
+      @keyframes narr_anim_4 {
+        0% { opacity: 0; }
+        37.499% { opacity: 0; }
+        37.5% { opacity: 1; }
+        49.999% { opacity: 1; }
+        50% { opacity: 0; }
+        100% { opacity: 0; }
+      }
+
+      @keyframes narr_anim_5 {
+        0% { opacity: 0; }
+        49.999% { opacity: 0; }
+        50% { opacity: 1; }
+        62.499% { opacity: 1; }
+        62.5% { opacity: 0; }
+        100% { opacity: 0; }
+      }
+
+      @keyframes narr_anim_6 {
+        0% { opacity: 0; }
+        62.499% { opacity: 0; }
+        62.5% { opacity: 1; }
+        74.999% { opacity: 1; }
+        75% { opacity: 0; }
+        100% { opacity: 0; }
+      }
+
+      @keyframes narr_anim_7 {
+        0% { opacity: 0; }
+        74.999% { opacity: 0; }
+        75% { opacity: 1; }
+        87.499% { opacity: 1; }
+        87.5% { opacity: 0; }
+        100% { opacity: 0; }
+      }
+
+      @keyframes narr_anim_8 {
+        0% { opacity: 0; }
+        87.499% { opacity: 0; }
+        87.5% { opacity: 1; }
+        100% { opacity: 1; }
+      }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="#ffffff"/>
+
+  <!-- ================= LEGEND ================= -->
+  <g data-id="group_legend" data-class="block" data-parent="root">
+    <!-- 3D morphable model -->
+    <line data-id="legend_arrow_1" data-class="edge" data-source="group_legend" data-target="legend_text_1" x1="720" y1="20" x2="745" y2="20" stroke="#1b4b8a" stroke-width="6" marker-end="url(#arrow-blue)"/>
+    <text data-id="legend_text_1" data-class="text_node" data-parent="group_legend" x="755" y="27" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">3D morphable model</text>
+
+    <!-- Shadow Processing -->
+    <line data-id="legend_arrow_2" data-class="edge" data-source="group_legend" data-target="legend_text_2" x1="720" y1="65" x2="745" y2="65" stroke="#3d6824" stroke-width="6" marker-end="url(#arrow-green)"/>
+    <text data-id="legend_text_2" data-class="text_node" data-parent="group_legend" x="755" y="72" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">Shadow Processing</text>
+
+    <!-- Light Calibration / Photometric Stereo -->
+    <line data-id="legend_arrow_3" data-class="edge" data-source="group_legend" data-target="legend_text_3" x1="1105" y1="20" x2="1130" y2="20" stroke="#f2a679" stroke-width="6" marker-end="url(#arrow-orange)"/>
+    <text data-id="legend_text_3" data-class="text_node" data-parent="group_legend" x="1140" y="27" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">Light Calibration / Photometric Stereo</text>
+
+    <!-- Denoising -->
+    <line data-id="legend_arrow_4" data-class="edge" data-source="group_legend" data-target="legend_text_4" x1="1105" y1="65" x2="1130" y2="65" stroke="#7b9edb" stroke-width="6" marker-end="url(#arrow-lightblue)"/>
+    <text data-id="legend_text_4" data-class="text_node" data-parent="group_legend" x="1140" y="72" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">Denoising</text>
+  </g>
+
+  <!-- ================= PIPELINE BLOCKS & NODES ================= -->
+
+  <!-- 1. Input Images -->
+  <g id="node_input_images" data-id="node_input_images" data-class="raster_node"><image href="../../rasters/Paper2Fig_pipe_diff_000000130/crop_node_input_images.png" xlink:href="../../rasters/Paper2Fig_pipe_diff_000000130/crop_node_input_images.png" x="10" y="120" width="170" height="190" preserveAspectRatio="xMidYMid meet"/></g>
+  <text data-id="label_input_images" data-class="text_node" data-parent="root" x="95" y="348" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#000000">
+    <tspan x="95" dy="0">Input</tspan>
+    <tspan x="95" dy="28">Images</tspan>
+  </text>
+
+  <!-- 2. Proxy Model -->
+  <g id="node_proxy_model" data-id="node_proxy_model" data-class="raster_node"><image href="../../rasters/Paper2Fig_pipe_diff_000000130/crop_node_proxy_model.png" xlink:href="../../rasters/Paper2Fig_pipe_diff_000000130/crop_node_proxy_model.png" x="255" y="120" width="160" height="190" preserveAspectRatio="xMidYMid meet"/></g>
+  <text data-id="label_proxy_model" data-class="text_node" data-parent="root" x="335" y="348" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#000000">
+    <tspan x="335" dy="0">Proxy</tspan>
+    <tspan x="335" dy="28">Model</tspan>
+  </text>
+
+  <!-- Plus Sign -->
+  <text data-id="symbol_plus" data-class="text_node" data-parent="root" x="435" y="223" font-family="Arial, sans-serif" font-size="34" font-weight="bold" text-anchor="middle" fill="#000000">+</text>
+
+  <!-- 3. Normal Map & Segmentation Container -->
+  <g data-id="block_normal_segmentation" data-class="block" data-parent="root">
+    <!-- Outer Peach Rounded Container with dashed border -->
+    <rect data-id="bg_normal_segmentation" data-class="child_node" data-parent="block_normal_segmentation" x="460" y="30" width="240" height="445" rx="25" ry="25" fill="#f9d6be" stroke="#f2a679" stroke-width="3" stroke-dasharray="6 6"/>
+
+    <!-- Normal Map dashed boundary box -->
+    <rect x="475" y="40" width="210" height="200" rx="6" ry="6" fill="none" stroke="#3b7431" stroke-width="3" stroke-dasharray="6 6"/>
+
+    <!-- Top Section: Normal Map -->
+    <g id="node_normal_map" data-id="node_normal_map" data-class="raster_node"><image href="../../rasters/Paper2Fig_pipe_diff_000000130/crop_node_normal_map.png" xlink:href="../../rasters/Paper2Fig_pipe_diff_000000130/crop_node_normal_map.png" x="480" y="48" width="200" height="195" preserveAspectRatio="xMidYMid meet"/></g>
+    <!-- Normal Map Header Badge -->
+    <g data-id="badge_normal_map" data-class="child_node" data-parent="block_normal_segmentation">
+      <rect x="495" y="36" width="170" height="26" rx="4" ry="4" fill="#3b7431"/>
+      <text x="580" y="55" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#ffffff">Normal Map</text>
+    </g>
+
+    <!-- Segmentation dashed boundary box -->
+    <rect x="475" y="250" width="210" height="215" rx="6" ry="6" fill="none" stroke="#5b9bd5" stroke-width="3" stroke-dasharray="6 6"/>
+
+    <!-- Bottom Section: Segmentation -->
+    <g id="node_segmentation" data-id="node_segmentation" data-class="raster_node"><image href="../../rasters/Paper2Fig_pipe_diff_000000130/crop_node_segmentation.png" xlink:href="../../rasters/Paper2Fig_pipe_diff_000000130/crop_node_segmentation.png" x="480" y="258" width="200" height="205" preserveAspectRatio="xMidYMid meet"/></g>
+    <!-- Segmentation Header Badge -->
+    <g data-id="badge_segmentation" data-class="child_node" data-parent="block_normal_segmentation">
+      <rect x="495" y="246" width="170" height="26" rx="4" ry="4" fill="#5b9bd5"/>
+      <text x="580" y="265" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#ffffff">Segmentation</text>
+    </g>
+  </g>
+
+  <!-- 4. Shadow Treatment -->
+  <g id="node_shadow_treatment" data-id="node_shadow_treatment" data-class="raster_node"><image href="../../rasters/Paper2Fig_pipe_diff_000000130/crop_node_shadow_treatment.png" xlink:href="../../rasters/Paper2Fig_pipe_diff_000000130/crop_node_shadow_treatment.png" x="775" y="120" width="180" height="190" preserveAspectRatio="xMidYMid meet"/></g>
+  <text data-id="label_shadow_treatment" data-class="text_node" data-parent="root" x="865" y="348" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#000000">
+    <tspan x="865" dy="0">Shadow</tspan>
+    <tspan x="865" dy="28">Treatment</tspan>
+  </text>
+
+  <!-- 5. Refined Model -->
+  <g id="node_refined_model" data-id="node_refined_model" data-class="raster_node"><image href="../../rasters/Paper2Fig_pipe_diff_000000130/crop_node_refined_model.png" xlink:href="../../rasters/Paper2Fig_pipe_diff_000000130/crop_node_refined_model.png" x="1015" y="100" width="170" height="215" preserveAspectRatio="xMidYMid meet"/></g>
+  <text data-id="label_refined_model" data-class="text_node" data-parent="root" x="1100" y="348" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#000000">
+    <tspan x="1100" dy="0">Refined</tspan>
+    <tspan x="1100" dy="28">Model</tspan>
+  </text>
+
+  <!-- 6. Denoised & Albedo Container -->
+  <g data-id="block_denoised_albedo" data-class="block" data-parent="root">
+    <!-- Blue Rounded Container -->
+    <rect data-id="bg_denoised_albedo" data-class="child_node" data-parent="block_denoised_albedo" x="1235" y="85" width="460" height="300" rx="40" ry="40" fill="#a4c2eb"/>
+
+    <!-- Denoised Model -->
+    <g id="node_denoised_model" data-id="node_denoised_model" data-class="raster_node"><image href="../../rasters/Paper2Fig_pipe_diff_000000130/crop_node_denoised_model.png" xlink:href="../../rasters/Paper2Fig_pipe_diff_000000130/crop_node_denoised_model.png" x="1255" y="95" width="170" height="225" preserveAspectRatio="xMidYMid meet"/></g>
+    <text data-id="label_denoised_model" data-class="text_node" data-parent="block_denoised_albedo" x="1340" y="348" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#000000">
+      <tspan x="1340" dy="0">Denoised</tspan>
+      <tspan x="1340" dy="28">Model</tspan>
+    </text>
+
+    <!-- Albedo -->
+    <g id="node_albedo" data-id="node_albedo" data-class="raster_node"><image href="../../rasters/Paper2Fig_pipe_diff_000000130/crop_node_albedo.png" xlink:href="../../rasters/Paper2Fig_pipe_diff_000000130/crop_node_albedo.png" x="1455" y="95" width="220" height="225" preserveAspectRatio="xMidYMid meet"/></g>
+    <text data-id="label_albedo" data-class="text_node" data-parent="block_denoised_albedo" x="1565" y="358" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#000000">Albedo</text>
+  </g>
+
+  <!-- ================= EDGES & CONNECTIONS ================= -->
+
+  <!-- Arrow 1: Input Images -> Proxy Model (Blue) -->
+  <line data-id="edge_input_to_proxy" data-class="edge" data-source="node_input_images" data-target="node_proxy_model" x1="195" y1="215" x2="245" y2="215" stroke="#1b4b8a" stroke-width="10" marker-end="url(#arrow-blue)"/>
+
+  <!-- Arrow 2: Normal/Segmentation Block -> Shadow Treatment (Green) -->
+  <line data-id="edge_normalseg_to_shadow" data-class="edge" data-source="block_normal_segmentation" data-target="node_shadow_treatment" x1="712" y1="210" x2="762" y2="210" stroke="#3d6824" stroke-width="10" marker-end="url(#arrow-green)"/>
+
+  <!-- Arrow 3: Shadow Treatment -> Refined Model (Orange) -->
+  <line data-id="edge_shadow_to_refined" data-class="edge" data-source="node_shadow_treatment" data-target="node_refined_model" x1="965" y1="215" x2="1005" y2="215" stroke="#f2a679" stroke-width="10" marker-end="url(#arrow-orange)"/>
+
+  <!-- Arrow 4: Refined Model -> Denoised/Albedo Block (Light Blue) -->
+  <line data-id="edge_refined_to_denoised" data-class="edge" data-source="node_refined_model" data-target="block_denoised_albedo" x1="1190" y1="215" x2="1230" y2="215" stroke="#7b9edb" stroke-width="10" marker-end="url(#arrow-lightblue)"/>
+
+  <!-- Arrow 5: Normal/Segmentation Block (Bottom) -> Refined Model (Orange Curved / Orthogonal) -->
+  <path data-id="edge_normalseg_bottom_to_refined" data-class="edge" data-source="block_normal_segmentation" data-target="node_refined_model" d="M 710 445 L 1075 445 Q 1090 445 1090 430 L 1090 380" fill="none" stroke="#f2a679" stroke-width="12" stroke-linecap="round" marker-end="url(#arrow-orange)"/>
+
+  <!-- Arrow 6: Bottom Path Extension -> Albedo / Denoised Block (Light Blue Curved / Orthogonal) -->
+  <path data-id="edge_bottom_to_albedo" data-class="edge" data-source="block_normal_segmentation" data-target="block_denoised_albedo" d="M 1090 445 L 1455 445 Q 1470 445 1470 430 L 1470 395" fill="none" stroke="#7b9edb" stroke-width="12" stroke-linecap="round" marker-end="url(#arrow-lightblue)"/>
+
+  <!-- ================= DYNAMIC NARRATION BANNER ================= -->
+  <g id="narration_banner">
+    <text id="narr_ts1" x="50%" y="525" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="600" fill="#1e293b" opacity="0">
+      <tspan x="50%" dy="0">The pipeline takes sparse input images of a face captured under varying lighting conditions.</tspan>
+    </text>
+    <text id="narr_ts2" x="50%" y="525" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="600" fill="#1e293b" opacity="0">
+      <tspan x="50%" dy="0">A 3D morphable model is fitted to the input to establish a geometric proxy for lighting calibration.</tspan>
+    </text>
+    <text id="narr_ts3" x="50%" y="525" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="600" fill="#1e293b" opacity="0">
+      <tspan x="50%" dy="0">From the proxy geometry, an estimated surface normal map is computed.</tspan>
+    </text>
+    <text id="narr_ts4" x="50%" y="515" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="600" fill="#1e293b" opacity="0">
+      <tspan x="50%" dy="0">Semantic segmentation partitions facial regions, such as hairy areas versus bare skin,</tspan>
+      <tspan x="50%" dy="1.2em">to apply tailored filtering.</tspan>
+    </text>
+    <text id="narr_ts5" x="50%" y="525" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="600" fill="#1e293b" opacity="0">
+      <tspan x="50%" dy="0">Shadow processing explicitly identifies and handles shadowed regions across the illuminated images.</tspan>
+    </text>
+    <text id="narr_ts6" x="50%" y="515" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="600" fill="#1e293b" opacity="0">
+      <tspan x="50%" dy="0">Using light calibration and photometric stereo optimization, the system reconstructs</tspan>
+      <tspan x="50%" dy="1.2em">a refined geometric model with fine surface details.</tspan>
+    </text>
+    <text id="narr_ts7" x="50%" y="525" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="600" fill="#1e293b" opacity="0">
+      <tspan x="50%" dy="0">A denoising stage refines the reconstructed surface into a smooth, high-fidelity 3D mesh.</tspan>
+    </text>
+    <text id="narr_ts8" x="50%" y="525" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="600" fill="#1e293b" opacity="0">
+      <tspan x="50%" dy="0">At the same time, the diffuse albedo map of the subject is fully recovered.</tspan>
+    </text>
+  </g>
+
+</svg>

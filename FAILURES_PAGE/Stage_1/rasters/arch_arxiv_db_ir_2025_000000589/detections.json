@@ -1,0 +1,92 @@
+{
+  "detected": 4,
+  "placeholders": 4,
+  "omitted": {},
+  "rejected": {},
+  "image_size": [
+    922,
+    337
+  ],
+  "regions": [
+    {
+      "xml_id": "user_a",
+      "box_2d": [
+        686,
+        17,
+        796,
+        53
+      ],
+      "bbox": [
+        15.674000000000001,
+        231.18200000000002,
+        48.866,
+        268.252
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "llm_agent_a",
+      "box_2d": [
+        319,
+        367,
+        450,
+        414
+      ],
+      "bbox": [
+        338.37399999999997,
+        107.503,
+        381.70799999999997,
+        151.65
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "user_b",
+      "box_2d": [
+        667,
+        630,
+        764,
+        663
+      ],
+      "bbox": [
+        580.86,
+        224.77900000000002,
+        611.2860000000001,
+        257.468
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "llm_agent_b",
+      "box_2d": [
+        319,
+        947,
+        450,
+        991
+      ],
+      "bbox": [
+        873.1339999999999,
+        107.503,
+        913.702,
+        151.65
+      ],
+      "label": ""
+    }
+  ],
+  "replaced": [
+    "user_a",
+    "llm_agent_a",
+    "user_b",
+    "llm_agent_b"
+  ],
+  "provenance": {
+    "agent": "raster_integrator",
+    "backend": "openrouter_gemini37flash",
+    "model": "google-gemini-3.7-flash",
+    "prompt": null,
+    "style": "hopping_bounding_box",
+    "target": "svg",
+    "config_fingerprint": "866381cccea30a07",
+    "timestamp": "2026-08-28T21:15:34"
+  }
+}

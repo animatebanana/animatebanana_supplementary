@@ -1,0 +1,844 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AnimateBanana — Colour Pop — CVPR_2025_arch00389</title>
+<!--
+  AnimateBanana — Colour Pop — CVPR_2025_arch00389
+  An animated visual narrative produced by the AnimateBanana pipeline.
+
+  This file is self-contained: the animation, its images, its narration and its
+  controls are all inside it. Drop it on a server, open it from a disk, or put
+  it in an <iframe> - it needs nothing else and fetches nothing.
+
+  The animation is CSS. The controls drive it through the browser's animation
+  API - pause holds every keyframe at once, the bar scrubs them all to the same
+  moment, speed sets their rate together - and the caption is read from a clock
+  of the page's own that is driven alongside them. It has to be its own clock:
+  the drawing is made of hundreds of short animations that each stop when they
+  are done, so reading the time off any one of them gives a watch that stopped
+  half a second in.
+-->
+<style>
+  :root {
+    --ink: #1A1815;
+    --paper: #FFFEF9;
+    --banana: #FFD43B;
+    --banana-deep: #F2B200;
+    --banana-soft: #FFF2B8;
+    --mute: #6b6558;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--paper); color: var(--ink); }
+  body {
+    font-family: ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    padding: 16px;
+  }
+  .ab { margin: 0 auto; max-width: 1400px; }
+  .ab-stage {
+    background: #fff;
+    border: 2px solid var(--ink);
+    border-radius: 14px;
+    padding: 10px;
+    overflow: hidden;
+  }
+  .ab-stage svg { display: block; width: 100%; height: auto; }
+
+  /* ---- Transport ----
+     Every control is the same height and centred on the same line, so the bar
+     reads as one object rather than a row of parts that happen to be adjacent. */
+  .ab-bar {
+    --h: 40px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    border-radius: calc(var(--h) / 2 + 8px);
+  }
+  .ab-bar > * { flex: 0 0 auto; height: var(--h); }
+
+  .ab-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 16px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    line-height: 1;
+    color: var(--ink);
+    background: #fff;
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    cursor: pointer;
+  }
+  .ab-btn:hover { background: var(--banana-soft); }
+  .ab-btn:active { transform: translateY(1px); }
+
+  .ab-play { width: var(--h); padding: 0; border-radius: 50%; background: var(--ink); color: var(--paper); }
+  .ab-play:hover { background: var(--ink); }
+  .ab-play svg { width: 14px; height: 14px; fill: currentColor; display: block; }
+  .ab-play .ab-ic-play { display: none; margin-left: 2px; }
+  .ab.is-paused .ab-play .ab-ic-play { display: block; }
+  .ab.is-paused .ab-play .ab-ic-pause { display: none; }
+
+  /* the rail is drawn; the range input laid over it is what you actually grab */
+  .ab-scrub { position: relative; flex: 1 1 180px !important; min-width: 120px;
+              display: flex; align-items: center; }
+  .ab-rail {
+    position: absolute; inset-inline: 0; height: 9px;
+    background: #fff; border: 1.5px solid var(--ink); border-radius: 999px;
+    overflow: hidden; pointer-events: none;
+  }
+  .ab-rail i { display: block; width: 0; height: 100%; background: var(--banana); }
+  .ab-seek {
+    position: relative; width: 100%; height: var(--h); margin: 0;
+    background: none; -webkit-appearance: none; appearance: none; cursor: pointer;
+  }
+  .ab-seek::-webkit-slider-runnable-track { height: var(--h); background: transparent; }
+  .ab-seek::-moz-range-track { height: var(--h); background: transparent; }
+  .ab-seek::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none;
+    width: 18px; height: 18px; border-radius: 50%;
+    border: 2.5px solid var(--ink); background: var(--banana);
+  }
+  .ab-seek::-moz-range-thumb {
+    width: 16px; height: 16px; border-radius: 50%;
+    border: 2.5px solid var(--ink); background: var(--banana);
+  }
+  .ab-seek:focus-visible { outline: none; }
+  .ab-scrub:focus-within .ab-rail { box-shadow: 0 0 0 3px var(--banana); }
+
+  .ab-time {
+    display: inline-flex;
+    align-items: center;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.72rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--mute);
+    white-space: nowrap;
+  }
+  .ab-time b { color: var(--ink); }
+
+  .ab-speed {
+    display: inline-flex;
+    align-items: stretch;
+    background: #fff;
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .ab-speed button {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    padding: 0;
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--ink);
+    background: #fff;
+    border: 0;
+    cursor: pointer;
+  }
+  .ab-speed button:hover { background: var(--banana-soft); }
+  .ab-speed button[disabled] { opacity: 0.35; cursor: default; background: #fff; }
+  .ab-rate {
+    display: grid;
+    place-items: center;
+    min-width: 56px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.74rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    border-inline: 2px solid var(--ink);
+  }
+  .ab.is-fast .ab-rate { background: var(--banana); }
+
+  /* Captions on or off, said in words rather than left to be inferred */
+  .ab-toggle .ab-led {
+    width: 11px; height: 11px; border-radius: 50%;
+    border: 2px solid var(--ink); background: var(--banana);
+  }
+  .ab-toggle[aria-pressed="false"] { color: var(--mute); }
+  .ab-toggle[aria-pressed="false"] .ab-led { background: #fff; }
+
+  /* ---- The line being narrated ---- */
+  .ab-cap {
+    display: flex;
+    align-items: center;
+    min-height: 3.4em;
+    margin: 10px 0 0;
+    padding: 12px 16px;
+    font-size: clamp(0.95rem, 0.9rem + 0.3vw, 1.15rem);
+    font-weight: 600;
+    font-style: italic;
+    line-height: 1.5;
+    background: var(--banana-soft);
+    border: 1.5px solid var(--banana);
+    border-left: 5px solid var(--banana-deep);
+    border-radius: 10px;
+    transition: opacity .18s ease;
+  }
+  .ab-cap.is-swap { opacity: 0; }
+  .ab.is-off .ab-cap { display: none; }
+  @media (prefers-reduced-motion: reduce) { .ab-cap { transition: none; } }
+
+  /* Narrow: the bar wraps to two rows and squares off, rather than squeezing
+     the scrub bar down to nothing. */
+  @media (max-width: 720px) {
+    .ab-bar { flex-wrap: wrap; border-radius: 20px; }
+    .ab-scrub { order: 3; flex-basis: 100% !important; }
+    .ab-time { order: 2; margin-left: auto; }
+  }
+</style>
+</head>
+<body>
+<figure class="ab">
+  <div class="ab-stage">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 490">
+  <defs>
+    <!-- Arrowhead markers -->
+    <marker id="arrow-black" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M 1 1 L 7 4 L 1 7 Z" fill="#1e293b" />
+    </marker>
+    <marker id="arrow-gray" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <path d="M 1 1 L 5 3 L 1 5 Z" fill="#64748b" />
+    </marker>
+    <marker id="arrow-double" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M 1 1 L 7 4 L 1 7 Z" fill="#64748b" />
+    </marker>
+
+    <!-- Gradients -->
+    <linearGradient id="transformer-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#8ecae6" />
+      <stop offset="50%" stop-color="#d0bdf4" />
+      <stop offset="100%" stop-color="#f8d7da" />
+    </linearGradient>
+
+    <linearGradient id="head-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#fee2e2" />
+      <stop offset="100%" stop-color="#fca5a5" />
+    </linearGradient>
+
+    <!-- Drop Shadow Filter -->
+    <filter id="drop-shadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="2" dy="2" stdDeviation="2" flood-opacity="0.15" />
+    </filter>
+  </defs>
+
+  <style>
+    text {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    .dashed-box {
+      stroke: #1e293b;
+      stroke-width: 1.2;
+      stroke-dasharray: 5 4;
+      fill: none;
+    }
+    .label-title {
+      font-size: 13px;
+      font-weight: 500;
+      fill: #0f172a;
+    }
+    .label-sub {
+      font-size: 11px;
+      fill: #334155;
+    }
+    .token-text {
+      font-size: 11px;
+      fill: #1e293b;
+    }
+    .math-loss {
+      font-family: "Times New Roman", Times, serif;
+      font-style: italic;
+      font-size: 16px;
+      fill: #1e293b;
+    }
+
+    /* Activation Colorization Keyframes and Styles */
+    @keyframes colorPop {
+      to {
+        filter: grayscale(0%) opacity(1);
+      }
+    }
+
+    #node_videos, #node_visual_odometry, #text_videos_label, #text_vo_label, #edge_videos_to_vo,
+    #block_training_only, #block_future_obs, #node_future_obs_1, #text_future_dots, #node_future_obs_2, #text_training_only_title, #text_future_obs, #text_label_retrieve, #edge_videos_to_future_obs, #edge_future_obs_to_encoder,
+    #node_image_encoder_top, #edge_top_encoder_to_tokens,
+    #block_future_tokens, #node_ftok_1, #node_ftok_2, #node_ftok_3, #node_ftok_4, #node_ftok_5, #text_future_tokens, #edge_top_tokens_to_loss,
+    #block_training_and_inference, #block_past_obs, #node_past_obs_1, #text_past_dots, #node_past_obs_2, #text_training_inf_title, #text_past_obs, #text_label_frames, #edge_videos_to_past_obs, #edge_past_obs_to_encoder,
+    #node_image_encoder_mid, #edge_encoder_to_input_tokens,
+    #block_past_traj_target, #node_past_traj_icon, #node_target_coord_icon, #node_mlp, #text_past_traj_label, #text_target_coord_label, #text_label_rel_pose_1, #text_label_rel_pose_2, #edge_vo_to_traj, #edge_past_traj_to_mlp, #edge_mlp_to_input_tokens,
+    #block_input_tokens, #node_in_tok_1, #node_in_tok_2, #node_in_tok_3, #node_in_tok_4, #node_in_tok_5, #node_in_tok_6, #text_label_past_tokens_1, #text_label_past_tokens_2, #text_label_in_coord_1, #text_label_in_coord_2, #edge_input_tokens_to_transformer,
+    #node_transformer, #edge_transformer_to_out_tokens,
+    #block_output_tokens, #node_out_tok_1, #node_out_tok_2, #node_out_tok_3, #node_out_tok_4, #node_out_tok_5, #node_out_tok_6, #edge_out_tokens_to_lfeat, #edge_out_tokens_to_action, #edge_out_tokens_to_arrival,
+    #node_l_feat,
+    #node_action_head, #node_l_action, #edge_action_to_laction,
+    #node_arrival_head, #node_l_arrival, #edge_arrival_to_larrival {
+      filter: grayscale(100%) opacity(0.4);
+      animation-name: colorPop;
+      animation-duration: 0.5s;
+      animation-fill-mode: forwards;
+    }
+
+    /* Timestamp-specific Animation Delays */
+    #node_videos, #node_visual_odometry, #text_videos_label, #text_vo_label, #edge_videos_to_vo {
+      animation-delay: 0s;
+    }
+
+    #block_training_only, #block_future_obs, #node_future_obs_1, #text_future_dots, #node_future_obs_2, #text_training_only_title, #text_future_obs, #text_label_retrieve, #edge_videos_to_future_obs, #edge_future_obs_to_encoder {
+      animation-delay: 8.17s;
+    }
+
+    #node_image_encoder_top, #edge_top_encoder_to_tokens {
+      animation-delay: 14.25s;
+    }
+
+    #block_future_tokens, #node_ftok_1, #node_ftok_2, #node_ftok_3, #node_ftok_4, #node_ftok_5, #text_future_tokens, #edge_top_tokens_to_loss {
+      animation-delay: 18.34s;
+    }
+
+    #block_training_and_inference, #block_past_obs, #node_past_obs_1, #text_past_dots, #node_past_obs_2, #text_training_inf_title, #text_past_obs, #text_label_frames, #edge_videos_to_past_obs, #edge_past_obs_to_encoder {
+      animation-delay: 39.79s;
+    }
+
+    #node_image_encoder_mid, #edge_encoder_to_input_tokens {
+      animation-delay: 46.35s;
+    }
+
+    #block_past_traj_target, #node_past_traj_icon, #node_target_coord_icon, #node_mlp, #text_past_traj_label, #text_target_coord_label, #text_label_rel_pose_1, #text_label_rel_pose_2, #edge_vo_to_traj, #edge_past_traj_to_mlp, #edge_mlp_to_input_tokens {
+      animation-delay: 52.32s;
+    }
+
+    #block_input_tokens, #node_in_tok_1, #node_in_tok_2, #node_in_tok_3, #node_in_tok_4, #node_in_tok_5, #node_in_tok_6, #text_label_past_tokens_1, #text_label_past_tokens_2, #text_label_in_coord_1, #text_label_in_coord_2, #edge_input_tokens_to_transformer {
+      animation-delay: 64.08s;
+    }
+
+    #node_transformer, #edge_transformer_to_out_tokens {
+      animation-delay: 70.77s;
+    }
+
+    #block_output_tokens, #node_out_tok_1, #node_out_tok_2, #node_out_tok_3, #node_out_tok_4, #node_out_tok_5, #node_out_tok_6, #edge_out_tokens_to_lfeat, #edge_out_tokens_to_action, #edge_out_tokens_to_arrival {
+      animation-delay: 77.22s;
+    }
+
+    #node_l_feat {
+      animation-delay: 98.94s;
+    }
+
+    #node_action_head, #node_l_action, #edge_action_to_laction {
+      animation-delay: 106.55s;
+    }
+
+    #node_arrival_head, #node_l_arrival, #edge_arrival_to_larrival {
+      animation-delay: 113s;
+    }
+
+    /* Narration Banner Styles */
+    @keyframes bannerFade {
+      0% { opacity: 0; }
+      10% { opacity: 1; }
+      99% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    @keyframes bannerFadeFinal {
+      0% { opacity: 0; }
+      10% { opacity: 1; }
+      100% { opacity: 1; }
+    }
+
+    .narration-text {
+      opacity: 0;
+      font-size: 13px;
+      font-weight: 500;
+      fill: #0f172a;
+      text-anchor: middle;
+    }
+  </style>
+
+  <!-- ==================== BACKGROUND CONTAINERS (BLOCKS) ==================== -->
+
+  <!-- Training only block -->
+  <g data-id="block_training_only" id="block_training_only" data-class="block" data-parent="root">
+    <rect x="6" y="3" width="838" height="101" rx="10" class="dashed-box" fill="#ffffff" fill-opacity="0.6" />
+    <text data-id="text_training_only_title" id="text_training_only_title" data-class="text_node" data-parent="block_training_only" x="425" y="17" text-anchor="middle" class="label-title">Training only</text>
+  </g>
+
+  <!-- Training and Inference block -->
+  <g data-id="block_training_and_inference" id="block_training_and_inference" data-class="block" data-parent="root">
+    <rect x="142" y="108" width="604" height="288" rx="10" class="dashed-box" fill="#f8fafc" fill-opacity="0.4" />
+    <text data-id="text_training_inf_title" id="text_training_inf_title" data-class="text_node" data-parent="block_training_and_inference" x="444" y="124" text-anchor="middle" class="label-title">Training and Inference</text>
+  </g>
+
+  <!-- Sub-block: Future Obs -->
+  <g data-id="block_future_obs" id="block_future_obs" data-class="block" data-parent="block_training_only">
+    <rect x="203" y="25" width="128" height="54" rx="10" class="dashed-box" />
+    <text data-id="text_future_obs" id="text_future_obs" data-class="text_node" data-parent="block_training_only" x="267" y="91" text-anchor="middle" class="label-sub">Future Obs.</text>
+  </g>
+
+  <!-- Sub-block: Future Frame Tokens -->
+  <g data-id="block_future_tokens" id="block_future_tokens" data-class="block" data-parent="block_training_only">
+    <rect x="567" y="27" width="196" height="50" rx="10" class="dashed-box" />
+    <text data-id="text_future_tokens" id="text_future_tokens" data-class="text_node" data-parent="block_training_only" x="665" y="91" text-anchor="middle" class="label-sub">Future Frame Tokens x5</text>
+  </g>
+
+  <!-- Sub-block: Past Obs -->
+  <g data-id="block_past_obs" id="block_past_obs" data-class="block" data-parent="block_training_and_inference">
+    <rect x="201" y="131" width="76" height="121" rx="10" class="dashed-box" />
+    <text data-id="text_past_obs" id="text_past_obs" data-class="text_node" data-parent="block_training_and_inference" x="239" y="244" text-anchor="middle" class="label-sub">Past Obs.</text>
+  </g>
+
+  <!-- Sub-block: Past Traj & Target Coord -->
+  <g data-id="block_past_traj_target" id="block_past_traj_target" data-class="block" data-parent="block_training_and_inference">
+    <rect x="199" y="263" width="78" height="121" rx="10" class="dashed-box" />
+  </g>
+
+  <!-- Sub-block: Past Frame Tokens (Input) -->
+  <g data-id="block_input_tokens" id="block_input_tokens" data-class="block" data-parent="block_training_and_inference">
+    <rect x="402" y="142" width="55" height="238" rx="10" class="dashed-box" />
+  </g>
+
+  <!-- Sub-block: Output Tokens -->
+  <g data-id="block_output_tokens" id="block_output_tokens" data-class="block" data-parent="block_training_and_inference">
+    <rect x="597" y="139" width="55" height="250" rx="10" class="dashed-box" />
+  </g>
+
+
+  <!-- ==================== EDGES / CONNECTIONS ==================== -->
+  <g>
+    <!-- Double/Thick arrow: Videos to Retrieve Frames (Top) -->
+    <path data-id="edge_videos_to_future_obs" id="edge_videos_to_future_obs" data-class="edge"
+          data-source="node_videos" data-target="block_future_obs"
+          d="M 57 160 L 57 52 L 199 52"
+          fill="none" stroke="#8892b0" stroke-width="5" stroke-linejoin="round" />
+    <path d="M 57 160 L 57 52 L 199 52"
+          fill="none" stroke="#f1f5f9" stroke-width="2.5" stroke-linejoin="round" />
+    <polygon points="197,48 205,52 197,56" fill="#8892b0" />
+
+    <!-- Double/Thick arrow: Videos to Past Obs -->
+    <path data-id="edge_videos_to_past_obs" id="edge_videos_to_past_obs" data-class="edge"
+          data-source="node_videos" data-target="block_past_obs"
+          d="M 100 193 L 197 193"
+          fill="none" stroke="#8892b0" stroke-width="5" />
+    <path d="M 100 193 L 197 193"
+          fill="none" stroke="#f1f5f9" stroke-width="2.5" />
+    <polygon points="195,189 203,193 195,197" fill="#8892b0" />
+
+    <!-- Double/Thick arrow: Videos to Visual Odometry -->
+    <path data-id="edge_videos_to_vo" id="edge_videos_to_vo" data-class="edge"
+          data-source="node_videos" data-target="node_visual_odometry"
+          d="M 57 225 L 57 282"
+          fill="none" stroke="#8892b0" stroke-width="5" />
+    <path d="M 57 225 L 57 282"
+          fill="none" stroke="#f1f5f9" stroke-width="2.5" />
+    <polygon points="53,280 57,288 61,280" fill="#8892b0" />
+
+    <!-- Double/Thick arrow: Visual Odometry to Past Traj -->
+    <path data-id="edge_vo_to_traj" id="edge_vo_to_traj" data-class="edge"
+          data-source="node_visual_odometry" data-target="block_past_traj_target"
+          d="M 100 324 L 195 324"
+          fill="none" stroke="#8892b0" stroke-width="5" />
+    <path d="M 100 324 L 195 324"
+          fill="none" stroke="#f1f5f9" stroke-width="2.5" />
+    <polygon points="193,320 201,324 193,328" fill="#8892b0" />
+
+    <!-- Standard arrows: Training Only -->
+    <path data-id="edge_future_obs_to_encoder" id="edge_future_obs_to_encoder" data-class="edge"
+          data-source="block_future_obs" data-target="node_image_encoder_top"
+          d="M 331 52 L 413 52"
+          fill="none" stroke="#1e293b" stroke-width="1.3" marker-end="url(#arrow-black)" />
+
+    <path data-id="edge_top_encoder_to_tokens" id="edge_top_encoder_to_tokens" data-class="edge"
+          data-source="node_image_encoder_top" data-target="block_future_tokens"
+          d="M 526 52 L 567 52"
+          fill="none" stroke="#1e293b" stroke-width="1.3" marker-end="url(#arrow-black)" />
+
+    <path data-id="edge_top_tokens_to_loss" id="edge_top_tokens_to_loss" data-class="edge"
+          data-source="block_future_tokens" data-target="node_l_feat"
+          d="M 763 52 L 800 52 L 800 152"
+          fill="none" stroke="#1e293b" stroke-width="1.3" marker-end="url(#arrow-black)" />
+
+    <!-- Standard arrows: Training and Inference -->
+    <path data-id="edge_past_obs_to_encoder" id="edge_past_obs_to_encoder" data-class="edge"
+          data-source="block_past_obs" data-target="node_image_encoder_mid"
+          d="M 277 193 L 315 193"
+          fill="none" stroke="#1e293b" stroke-width="1.3" marker-end="url(#arrow-black)" />
+
+    <path data-id="edge_encoder_to_input_tokens" id="edge_encoder_to_input_tokens" data-class="edge"
+          data-source="node_image_encoder_mid" data-target="block_input_tokens"
+          d="M 375 193 L 402 193"
+          fill="none" stroke="#1e293b" stroke-width="1.3" marker-end="url(#arrow-black)" />
+
+    <path data-id="edge_past_traj_to_mlp" id="edge_past_traj_to_mlp" data-class="edge"
+          data-source="block_past_traj_target" data-target="node_mlp"
+          d="M 277 324 L 320 324"
+          fill="none" stroke="#1e293b" stroke-width="1.3" marker-end="url(#arrow-black)" />
+
+    <path data-id="edge_mlp_to_input_tokens" id="edge_mlp_to_input_tokens" data-class="edge"
+          data-source="node_mlp" data-target="block_input_tokens"
+          d="M 370 324 L 402 324"
+          fill="none" stroke="#1e293b" stroke-width="1.3" marker-end="url(#arrow-black)" />
+
+    <path data-id="edge_input_tokens_to_transformer" id="edge_input_tokens_to_transformer" data-class="edge"
+          data-source="block_input_tokens" data-target="node_transformer"
+          d="M 457 262 L 492 262"
+          fill="none" stroke="#1e293b" stroke-width="1.3" marker-end="url(#arrow-black)" />
+
+    <path data-id="edge_transformer_to_out_tokens" id="edge_transformer_to_out_tokens" data-class="edge"
+          data-source="node_transformer" data-target="block_output_tokens"
+          d="M 565 262 L 597 262"
+          fill="none" stroke="#1e293b" stroke-width="1.3" marker-end="url(#arrow-black)" />
+
+    <path data-id="edge_out_tokens_to_lfeat" id="edge_out_tokens_to_lfeat" data-class="edge"
+          data-source="block_output_tokens" data-target="node_l_feat"
+          d="M 652 177 L 762 177"
+          fill="none" stroke="#1e293b" stroke-width="1.3" marker-end="url(#arrow-black)" />
+
+    <path data-id="edge_out_tokens_to_action" id="edge_out_tokens_to_action" data-class="edge"
+          data-source="block_output_tokens" data-target="node_action_head"
+          d="M 652 265 L 677 265"
+          fill="none" stroke="#1e293b" stroke-width="1.3" marker-end="url(#arrow-black)" />
+
+    <path data-id="edge_out_tokens_to_arrival" id="edge_out_tokens_to_arrival" data-class="edge"
+          data-source="block_output_tokens" data-target="node_arrival_head"
+          d="M 652 353 L 677 353"
+          fill="none" stroke="#1e293b" stroke-width="1.3" marker-end="url(#arrow-black)" />
+
+    <path data-id="edge_action_to_laction" id="edge_action_to_laction" data-class="edge"
+          data-source="node_action_head" data-target="node_l_action"
+          d="M 737 265 L 762 265"
+          fill="none" stroke="#1e293b" stroke-width="1.3" marker-end="url(#arrow-black)" />
+
+    <path data-id="edge_arrival_to_larrival" id="edge_arrival_to_larrival" data-class="edge"
+          data-source="node_arrival_head" data-target="node_l_arrival"
+          d="M 737 353 L 762 353"
+          fill="none" stroke="#1e293b" stroke-width="1.3" marker-end="url(#arrow-black)" />
+  </g>
+
+
+  <!-- ==================== NODES AND LABELS ==================== -->
+
+  <!-- Annotated Text Labels on Thick Arrows -->
+  <text data-id="text_label_retrieve" id="text_label_retrieve" data-class="text_node" data-parent="root" x="65" y="70" class="label-sub">Retrieve Frames</text>
+  <text data-id="text_label_frames" id="text_label_frames" data-class="text_node" data-parent="root" x="148" y="212" class="label-sub">Frames</text>
+  <text data-id="text_label_rel_pose_1" id="text_label_rel_pose_1" data-class="text_node" data-parent="root" x="146" y="340" class="label-sub">Relative</text>
+  <text data-id="text_label_rel_pose_2" id="text_label_rel_pose_2" data-class="text_node" data-parent="root" x="153" y="353" class="label-sub">Pose</text>
+
+  <!-- Node: Videos -->
+  <g data-id="node_videos" id="node_videos" data-class="composite_whole" data-parent="root" filter="url(#drop-shadow)">
+    <rect data-id="part_vid_bg3" id="part_vid_bg3" data-class="composite_part" data-parent="node_videos" x="29" y="161" width="56" height="48" rx="4" fill="#6c7a9c" stroke="#485570" stroke-width="1.2"/>
+    <rect data-id="part_vid_bg2" id="part_vid_bg2" data-class="composite_part" data-parent="node_videos" x="24" y="166" width="66" height="48" rx="4" fill="#8093b8" stroke="#5a6b8e" stroke-width="1.2"/>
+    <rect data-id="part_vid_bg1" id="part_vid_bg1" data-class="composite_part" data-parent="node_videos" x="19" y="172" width="76" height="52" rx="4" fill="#a4b8dc" stroke="#253858" stroke-width="1.8"/>
+    <polygon data-id="part_vid_play" id="part_vid_play" data-class="composite_part" data-parent="node_videos" points="51,186 69,198 51,210" fill="#253858" />
+  </g>
+  <text data-id="text_videos_label" id="text_videos_label" data-class="text_node" data-parent="root" x="57" y="238" text-anchor="middle" class="label-sub" font-weight="600">Videos</text>
+
+  <!-- Node: Visual Odometry -->
+  <g data-id="node_visual_odometry" id="node_visual_odometry" data-class="composite_whole" data-parent="root" filter="url(#drop-shadow)">
+    <!-- 3D Axes -->
+    <path data-id="part_vo_y" id="part_vo_y" data-class="composite_part" data-parent="node_visual_odometry" d="M 57 335 L 57 292" stroke="#475569" stroke-width="3.5" stroke-linecap="round" />
+    <path data-id="part_vo_x" id="part_vo_x" data-class="composite_part" data-parent="node_visual_odometry" d="M 57 335 L 94 348" stroke="#475569" stroke-width="3.5" stroke-linecap="round" />
+    <path data-id="part_vo_z" id="part_vo_z" data-class="composite_part" data-parent="node_visual_odometry" d="M 57 335 L 20 348" stroke="#475569" stroke-width="3.5" stroke-linecap="round" />
+    <path data-id="part_vo_dots" id="part_vo_dots" data-class="composite_part" data-parent="node_visual_odometry" d="M 57 335 L 75 315" stroke="#475569" stroke-width="2.5" stroke-dasharray="2 3" stroke-linecap="round" />
+    <circle data-id="part_vo_center" id="part_vo_center" data-class="composite_part" data-parent="node_visual_odometry" cx="57" cy="335" r="3.5" fill="#1e293b" />
+    <!-- Axis Labels -->
+    <text data-id="part_vo_ly" id="part_vo_ly" data-class="composite_part" data-parent="node_visual_odometry" x="57" y="289" text-anchor="middle" font-size="11" font-weight="bold" fill="#334155">Y</text>
+    <text data-id="part_vo_lx" id="part_vo_lx" data-class="composite_part" data-parent="node_visual_odometry" x="100" y="352" text-anchor="middle" font-size="11" font-weight="bold" fill="#334155">X</text>
+    <text data-id="part_vo_lz" id="part_vo_lz" data-class="composite_part" data-parent="node_visual_odometry" x="14" y="352" text-anchor="middle" font-size="11" font-weight="bold" fill="#334155">Z</text>
+  </g>
+  <text data-id="text_vo_label" id="text_vo_label" data-class="text_node" data-parent="root" x="57" y="375" text-anchor="middle" class="label-sub" font-weight="600">Visual Odometry</text>
+
+
+  <!-- Training Only: Future Obs Content -->
+  <g id="node_future_obs_1" data-id="node_future_obs_1" data-class="raster_node"><image href="data:image/png;base64,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" x="214" y="32" width="40" height="38" preserveAspectRatio="xMidYMid meet" /></g>
+  <text data-id="text_future_dots" id="text_future_dots" data-class="child_node" data-parent="block_future_obs" x="267" y="55" font-size="20" font-weight="bold" text-anchor="middle" fill="#0f172a">···</text>
+  <g id="node_future_obs_2" data-id="node_future_obs_2" data-class="raster_node"><image href="data:image/png;base64,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" x="280" y="32" width="40" height="38" preserveAspectRatio="xMidYMid meet" /></g>
+
+  <!-- Training Only: Image Encoder Top -->
+  <g data-id="node_image_encoder_top" id="node_image_encoder_top" data-class="child_node" data-parent="block_training_only">
+    <rect x="413" y="25" width="113" height="54" rx="10" fill="#e1f3fe" stroke="#5ab3f0" stroke-width="1.5" />
+    <text x="448" y="47" text-anchor="middle" font-size="12" font-weight="500" fill="#0f172a">Image</text>
+    <text x="448" y="63" text-anchor="middle" font-size="12" font-weight="500" fill="#0f172a">Encoder</text>
+    <!-- Snowflake icon -->
+    <path d="M 497 37 L 497 67 M 482 52 L 512 52 M 486 41 L 508 63 M 486 63 L 508 41" stroke="#1d8cd7" stroke-width="2" stroke-linecap="round" />
+    <circle cx="497" cy="52" r="2" fill="#1d8cd7" />
+  </g>
+
+  <!-- Training Only: Future Frame Tokens (5 blue rects) -->
+  <rect data-id="node_ftok_1" id="node_ftok_1" data-class="child_node" data-parent="block_future_tokens" x="577" y="34" width="25" height="36" rx="4" fill="#3664a7" />
+  <rect data-id="node_ftok_2" id="node_ftok_2" data-class="child_node" data-parent="block_future_tokens" x="613" y="34" width="25" height="36" rx="4" fill="#3664a7" />
+  <rect data-id="node_ftok_3" id="node_ftok_3" data-class="child_node" data-parent="block_future_tokens" x="649" y="34" width="25" height="36" rx="4" fill="#3664a7" />
+  <rect data-id="node_ftok_4" id="node_ftok_4" data-class="child_node" data-parent="block_future_tokens" x="685" y="34" width="25" height="36" rx="4" fill="#3664a7" />
+  <rect data-id="node_ftok_5" id="node_ftok_5" data-class="child_node" data-parent="block_future_tokens" x="721" y="34" width="25" height="36" rx="4" fill="#3664a7" />
+
+
+  <!-- Training & Inference: Past Obs Content -->
+  <g id="node_past_obs_1" data-id="node_past_obs_1" data-class="raster_node"><image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAlCAIAAAC26ZyeAAAFAklEQVR4nM2Y225TRxSG/39mb58dkzgRgXJoEKighpv2AahaqX2Aqo/Zq17Ri1aUlnLTVgJaaCGB2EBQEp+97X2aWb3Y2CTxtp2SILrkC2trDt+s+WfNWkPP8/C+Tb1vAABwUr+S5DuYTAARORKEIsMg9AJjBEjp8lZGEHAVinlXu461B8Z1DrZEbEyt4dVaXsc3Jo367THIDFEtZS9Vi0sLeezzNcfCJBBE0T8vu383vdAmbd5+Vw7hUyAQAShYcPX11fK5lfJ49DeesCL1Pe9xaxAJ9bH16hCaJCiAFYkhBAGA6Mbm4W6vmHer5bzshyDhDaN62/et6GOLUhNBbGvdoBdEOVedLeUqWWcsMJJN37xsDSqFrKOVvIEAvdD0InP8Q6GJbmBubzV+e9HxjbialxYLn61VP1zIm2RHAEu0/Dgy1nE0RF5DCCQ01lg5JoQCjMXdeuvHzUZoJPHp74OOFfn62mol58YjsUdGYmsT74w2XyCpR/i/Qih2/Ojhbi8wohUVqUgQGw2v1vXVeIlyIGakB6tJIxJdYU7sEA4iOwit2udSgqGR7vS9PtIx0ISrSECTyZ8ZFCVXL2T1/mgkkKxWlZyDKT3ne8JRGIT2UcOrtzxXqaunFy5Wsgq0aY0tUMk762fKWx3fjy1JQDT58eny2kLepPaZC+Eo9ANz62nz1+ftQRSTfNDwPl9b+mS1okg7oSIroslPz5wKYrm/3R1ExnXUpaXCjYvLBVdPC8GzIDThR/bnZ42ftlrD2JKASL09vPl4L+s46yslpunDiJRc/cVa9fpKuRNEBVcvFzMFx7HThT8VgoAi7+/07zxvD2MzVoImd/rhrc29U1l9oZKL0jxsAK34QTl3diFHwIqYmWqeKkyH3PPCu7VW248Pa5HYaA5+eNroBsaZojUjiCCxSCRiZsw/AyIZ+f5Or94ZTl5iBKzg3nb3dq0pgjnH5QiWDqEVW370YKc3jG3qDCQiK3eeNf/Y7mbV1MvWITOKzjzKdAhHcbPjv+j4M1apyH5ov3+y+9deP5kpaUpAEa5ihuyGca3jd8PY5bQYAaRnVoAxstHoD2M7qysA4mUv+PbPV19eXl4/Xc5qJQAgsZF2ED/c69171dsdRKulzI2Li1eqJRCpJyQ1vUMnNE+bAxGZm9Uoxe1+8N2jnc328EIll1WqH8V7XvS8O6y3fd9YI9L0gt4w+uoKrq+W47SDmp5j7gzCxjAWzHHEyB1oDqOfnzVzDjVVaExokiubJJLsZKsb3NzYXSy658u5yB7GSNEEBe1BYKw9enKXNBzG0g9NaEFSHUzYSdQ6w1/qrdDayVEPQxC0RGcYTobk+SgApwiQgAie7HoNL9QTi0vxhAiCWIy1GF3cJ/MTDgLT9eNJzsOaEEARa0uF6nam7cdHU8VRTByNc4v5lVLWToTwEQTHVZfEFleWS9+sn93u+YJjh0MAgIVklLpcLVRyrrGSpN6HU36CGa20olhYQJFXV0ofLZdOAgCjKUCIGR1RV9NRKlHLm0S3mNFlV/djA8CK4KScMDLB60iVlECLOcfVKvk0ghAUcu75U7lWEAUWSYZ4olXgPhqRpZw+u1hwXkfYfcJU5Pnl4jA0J1IGTsx8oAy8tlJeLOXGa+T+R5KkIH7R9GrNd1AQgxmF5VJ2bUZBPLbkaWAQxLHwpJ8GpJjPTD4NpEDg//BIApxMNXZ0+xejy8KuZHybawAAAABJRU5ErkJggg==" x="219" y="140" width="40" height="32" preserveAspectRatio="xMidYMid meet" /></g>
+  <text data-id="text_past_dots" id="text_past_dots" data-class="child_node" data-parent="block_past_obs" x="239" y="186" font-size="16" font-weight="bold" text-anchor="middle" fill="#0f172a">⋮</text>
+  <g id="node_past_obs_2" data-id="node_past_obs_2" data-class="raster_node"><image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAkCAIAAAB9tU87AAAFFklEQVR4nMWY228bRRTGv29m19fYsZsmLQltI6qGywPl8oYEvCGEqHjliX+RCvGEhBASVR8AVQLS0kt6T+LEieN4vd7rzOHBcerYa/eSoH6Pa++Z35z5zpmZpe/7eN1SrxsAAJzMpyQJACInNxIBAQEZDzoKQcIY2+lGfmJTkYw3XlWKKq9QKTilUg7gRAgSQZjc2ew87QSBsRbE8Rj6bx8O6FAqeffSXOnN+Yqj1GHsZxAk/F5842n70X6oFAmCI8QvLQoEkEGQSBgGyd56p5falbM1rXkEgkCamLWmt+5Fjj7eyAABRxGAWCFIhdSKBUiANCJ3d3qzBWdxbqY/y0EmSC9MNjqhPXbBEFDERje6ue21u3Exry/OzVyslZSCBQAo0jd2ox3Oz5ZyrhZ5lgkJUxtYAeU4a0BAK661/B9vbz/ZD60VkDc2vS8uzX/8RpU8qDdC/NSmVnJ9rP7LAqRWxILHcyLJIDbXH7fv7fYSIwYwVhrd6NcHO5vdyOFgegIjYmw/NYe5l6z6fXkpoB0kG50ABPvOJhTZ9OMNLzpcaAFkaMTsZjU6v8FKA7SAnYJLgpSxBZV+rU1Gfz6BVoyMfdgJ17uRFdHkpIAiUi86S9XCcGKtyELZXaoUJsE/JxMKUMDtlv/bg937rZ6r1IdLtc8v1OvFXDJY0WEZkYKjP1s+1Q7iWzs+QEIWZvKfXjh1tpxLJvS+aRAEFLna9K7eamx2YqUgYn5Z2/Gj5Mo7Z6o5J8mamhU5Xyt+e3nxj81uK4hmXOfd0+W36iVM3oqmQbiKD9vBT3d3trz4oIMRAvy+vu9q9dWlhXJOp2OBLSBW5kv5Ly/mjRVFEjAiGXkbaKInNNlLzbUne086gVLPPEDACv5cb1972jIiKssdAiRWjBWSFpI+r/CmQODfpr+65aV2NAKJXmqvP9pbbXSmmRSwL7YNZ0NospfYv7c6XpSqrFEU2QrSnx/sPmoHOZWZjn50anLiz9MhHOLhfrC2649X/KFIPGyHP9ze3vAjhxwOREATjqKxthunxoqe1iayjEkAgrVWbz8yE3M9+OudZvf7W42vVxbOVQu6/1AAILZ23QtvbnsNL1qsFD5arC6Uc0ayazQDQpNekt5rdq1gOgQBKq42up0w/eRcbblWcjXjxGz68b22f3fLb0WpFfmr4a3t9a68vbBcKyZZ7TYDQhHNMNnqxVOTMASt8GQ/uNqNqgVHkamxfmyC1CpSEZoUwe1m1wDfXV6qF5xkzOmjnhCAZMuLY2NffEvXZGKk6cdbXrQbJLERRz3zIwmS93e61x7tWpFxG44+UaBYaQeJjPFOFwlNakXNjKolYQX/bHd3evF4VWdUhxGJUjOlwb2ahPDCtBOm44yjnhCIUmqpVqzlnVaYHJyDTgBBHGKxmp8tuOP96/CMCaVIQgAjWDld+eY9bniBnAQAAAFyVCuny6eKbr+Ls38CHoYg6KqDzmdFXI0PzlYun6nIMY97R0GoaPslSriKjlL9i5lzSFp2VdXVvcSCsALBlG75irIDsyuwXnBc3R95kAkRKRdz5+ulVujFIqp/9TrBm+iQjJW5grtUKzla9+0xdANTXJ6vxFZuNrzInnwaDmSlXnDeX6qeqhYP58jh7xMEjLVbe73Hre5+LKlM6PWvJBJ5Yq6cWz5dnp0pHvlp/CMJgSQ1iREjcoIfB0hqxZymdvRI1Iy9QwDX0a57UqMfDZ41r+wz5v/nykz9B2LprhgUdvsAAAAAAElFTkSuQmCC" x="219" y="196" width="40" height="32" preserveAspectRatio="xMidYMid meet" /></g>
+
+  <!-- Training & Inference: Past Traj & Target Coord Content -->
+  <g id="node_past_traj_icon" data-id="node_past_traj_icon" data-class="raster_node"><image href="data:image/png;base64,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" x="219" y="269" width="38" height="28" preserveAspectRatio="xMidYMid meet" /></g>
+  <text data-id="text_past_traj_label" id="text_past_traj_label" data-class="text_node" data-parent="block_past_traj_target" x="238" y="309" text-anchor="middle" font-size="10" fill="#1e293b">Past Traj.</text>
+
+  <g id="node_target_coord_icon" data-id="node_target_coord_icon" data-class="raster_node"><image href="data:image/png;base64,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" x="219" y="326" width="38" height="32" preserveAspectRatio="xMidYMid meet" /></g>
+  <text data-id="text_target_coord_label" id="text_target_coord_label" data-class="text_node" data-parent="block_past_traj_target" x="238" y="371" text-anchor="middle" font-size="10" fill="#1e293b">Target Coord.</text>
+
+  <!-- Training & Inference: Image Encoder Middle -->
+  <g data-id="node_image_encoder_mid" id="node_image_encoder_mid" data-class="child_node" data-parent="block_training_and_inference">
+    <rect x="315" y="142" width="60" height="103" rx="10" fill="#e1f3fe" stroke="#5ab3f0" stroke-width="1.5" />
+    <!-- Snowflake icon -->
+    <path d="M 345 152 L 345 174 M 334 163 L 356 163 M 337 155 L 353 171 M 337 171 L 353 155" stroke="#1d8cd7" stroke-width="1.8" stroke-linecap="round" />
+    <text x="345" y="196" text-anchor="middle" font-size="12" font-weight="500" fill="#0f172a" transform="rotate(-90 345 196)">Image Encoder</text>
+  </g>
+
+  <!-- Training & Inference: MLP -->
+  <g data-id="node_mlp" id="node_mlp" data-class="child_node" data-parent="block_training_and_inference">
+    <polygon points="320,284 370,296 370,352 320,364" fill="#feebe9" stroke="#e76f51" stroke-width="1.3" />
+    <text x="345" y="328" text-anchor="middle" font-size="12" font-weight="bold" fill="#0f172a">MLP</text>
+    <!-- Flame icon -->
+    <path d="M 345 342 C 343 346 341 349 341 352 C 341 356 343 358 345 358 C 347 358 349 356 349 352 C 349 347 347 345 345 342 Z" fill="#e76f51" />
+  </g>
+
+  <!-- Training & Inference: Input Tokens Column -->
+  <rect data-id="node_in_tok_1" id="node_in_tok_1" data-class="child_node" data-parent="block_input_tokens" x="416" y="152" width="27" height="23" rx="4" fill="#d5e0ee" />
+  <rect data-id="node_in_tok_2" id="node_in_tok_2" data-class="child_node" data-parent="block_input_tokens" x="416" y="184" width="27" height="23" rx="4" fill="#d5e0ee" />
+  <rect data-id="node_in_tok_3" id="node_in_tok_3" data-class="child_node" data-parent="block_input_tokens" x="416" y="216" width="27" height="23" rx="4" fill="#d5e0ee" />
+  <rect data-id="node_in_tok_4" id="node_in_tok_4" data-class="child_node" data-parent="block_input_tokens" x="416" y="248" width="27" height="23" rx="4" fill="#d5e0ee" />
+  <rect data-id="node_in_tok_5" id="node_in_tok_5" data-class="child_node" data-parent="block_input_tokens" x="416" y="280" width="27" height="23" rx="4" fill="#d5e0ee" />
+  <rect data-id="node_in_tok_6" id="node_in_tok_6" data-class="child_node" data-parent="block_input_tokens" x="416" y="342" width="27" height="23" rx="4" fill="#fcd5d5" />
+
+  <text data-id="text_label_past_tokens_1" id="text_label_past_tokens_1" data-class="text_node" data-parent="block_training_and_inference" x="466" y="156" class="token-text">Past Frame</text>
+  <text data-id="text_label_past_tokens_2" id="text_label_past_tokens_2" data-class="text_node" data-parent="block_training_and_inference" x="466" y="171" class="token-text">Tokens x5</text>
+
+  <text data-id="text_label_in_coord_1" id="text_label_in_coord_1" data-class="text_node" data-parent="block_training_and_inference" x="464" y="358" class="token-text">Input Coord.</text>
+  <text data-id="text_label_in_coord_2" id="text_label_in_coord_2" data-class="text_node" data-parent="block_training_and_inference" x="464" y="373" class="token-text">Token x1</text>
+
+  <!-- Training & Inference: Transformer -->
+  <g data-id="node_transformer" id="node_transformer" data-class="child_node" data-parent="block_training_and_inference">
+    <rect x="492" y="204" width="73" height="119" rx="15" fill="url(#transformer-grad)" stroke="#507090" stroke-width="1.3" />
+    <text x="535" y="262" text-anchor="middle" font-size="13" font-weight="600" fill="#0f172a" transform="rotate(-90 535 262)">Transformer</text>
+    <!-- Flame icon -->
+    <path d="M 552 295 C 549 301 546 306 546 311 C 546 316 549 319 553 319 C 556 319 559 316 559 311 C 559 303 555 299 552 295 Z" fill="#e76f51" />
+  </g>
+
+  <!-- Training & Inference: Output Tokens Column -->
+  <rect data-id="node_out_tok_1" id="node_out_tok_1" data-class="child_node" data-parent="block_output_tokens" x="611" y="149" width="27" height="23" rx="4" fill="#3664a7" />
+  <rect data-id="node_out_tok_2" id="node_out_tok_2" data-class="child_node" data-parent="block_output_tokens" x="611" y="181" width="27" height="23" rx="4" fill="#3664a7" />
+  <rect data-id="node_out_tok_3" id="node_out_tok_3" data-class="child_node" data-parent="block_output_tokens" x="611" y="213" width="27" height="23" rx="4" fill="#3664a7" />
+  <rect data-id="node_out_tok_4" id="node_out_tok_4" data-class="child_node" data-parent="block_output_tokens" x="611" y="245" width="27" height="23" rx="4" fill="#3664a7" />
+  <rect data-id="node_out_tok_5" id="node_out_tok_5" data-class="child_node" data-parent="block_output_tokens" x="611" y="277" width="27" height="23" rx="4" fill="#3664a7" />
+  <rect data-id="node_out_tok_6" id="node_out_tok_6" data-class="child_node" data-parent="block_output_tokens" x="611" y="341" width="27" height="23" rx="4" fill="#d33e36" />
+
+  <!-- Action Head -->
+  <g data-id="node_action_head" id="node_action_head" data-class="child_node" data-parent="block_training_and_inference">
+    <polygon points="677,230 737,244 737,286 677,300" fill="url(#head-grad)" stroke="#e76f51" stroke-width="1.3" />
+    <text x="705" y="258" text-anchor="middle" font-size="12" font-weight="600" fill="#0f172a">Action</text>
+    <text x="705" y="273" text-anchor="middle" font-size="12" font-weight="600" fill="#0f172a">Head</text>
+    <path d="M 686 280 C 684 284 682 287 682 290 C 682 293 684 295 687 295 C 689 295 691 293 691 290 C 691 285 688 283 686 280 Z" fill="#e76f51" />
+  </g>
+
+  <!-- Arrival Head -->
+  <g data-id="node_arrival_head" id="node_arrival_head" data-class="child_node" data-parent="block_training_and_inference">
+    <polygon points="677,318 737,332 737,374 677,388" fill="url(#head-grad)" stroke="#e76f51" stroke-width="1.3" />
+    <text x="705" y="346" text-anchor="middle" font-size="12" font-weight="600" fill="#0f172a">Arrival</text>
+    <text x="705" y="361" text-anchor="middle" font-size="12" font-weight="600" fill="#0f172a">Head</text>
+    <path d="M 686 368 C 684 372 682 375 682 378 C 682 381 684 383 687 383 C 689 383 691 381 691 378 C 691 373 688 371 686 368 Z" fill="#e76f51" />
+  </g>
+
+
+  <!-- ==================== LOSS DIAMONDS (RIGHT SIDE) ==================== -->
+
+  <!-- L_feat -->
+  <g data-id="node_l_feat" id="node_l_feat" data-class="standalone_node" data-parent="root">
+    <polygon points="803,154 841,177 803,200 765,177" fill="#ffffff" stroke="#94a3b8" stroke-width="1.3" />
+    <text x="803" y="183" text-anchor="middle" class="math-loss">ℒ<tspan font-size="0.65em" baseline-shift="sub">feat</tspan></text>
+  </g>
+
+  <!-- L_action -->
+  <g data-id="node_l_action" id="node_l_action" data-class="standalone_node" data-parent="root">
+    <polygon points="803,242 841,265 803,288 765,265" fill="#ffffff" stroke="#94a3b8" stroke-width="1.3" />
+    <text x="803" y="271" text-anchor="middle" class="math-loss">ℒ<tspan font-size="0.65em" baseline-shift="sub">action</tspan></text>
+  </g>
+
+  <!-- L_arrival -->
+  <g data-id="node_l_arrival" id="node_l_arrival" data-class="standalone_node" data-parent="root">
+    <polygon points="803,330 841,353 803,376 765,353" fill="#ffffff" stroke="#94a3b8" stroke-width="1.3" />
+    <text x="803" y="359" text-anchor="middle" class="math-loss">ℒ<tspan font-size="0.65em" baseline-shift="sub">arrival</tspan></text>
+  </g>
+
+  <!-- ==================== NARRATION BANNER ==================== -->
+
+</svg>
+  </div>
+
+  <div class="ab-bar">
+    <button type="button" class="ab-btn ab-play" aria-label="Pause">
+      <svg class="ab-ic-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 5.5l11 6.5-11 6.5z"/></svg>
+      <svg class="ab-ic-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 5.5h3.6v13H7.5zM12.9 5.5h3.6v13h-3.6z"/></svg>
+    </button>
+
+    <div class="ab-scrub">
+      <span class="ab-rail" aria-hidden="true"><i class="ab-played"></i></span>
+      <input type="range" class="ab-seek" min="0" max="1000" value="0" step="1"
+             aria-label="Scrub through the animation">
+    </div>
+
+    <span class="ab-time"><b>0:00</b>&nbsp;/&nbsp;<span class="ab-total">0:00</span></span>
+
+    <div class="ab-speed" role="group" aria-label="Playback speed">
+      <button type="button" class="ab-slower" aria-label="Slower">&#8722;</button>
+      <span class="ab-rate" aria-live="polite">1&#215;</span>
+      <button type="button" class="ab-faster" aria-label="Faster">+</button>
+    </div>
+
+    <button type="button" class="ab-btn ab-toggle" aria-pressed="true">
+      <span class="ab-led" aria-hidden="true"></span>
+      <span class="ab-word">Captions on</span>
+    </button>
+  </div>
+
+  <figcaption class="ab-cap" aria-live="polite"></figcaption>
+</figure>
+
+<script>
+(function () {
+  var CUES = [{"start": 0.0, "end": 8.17, "text": "The framework takes egocentric video inputs and derives local relative camera poses using visual odometry."}, {"start": 8.17, "end": 14.25, "text": "Exclusively during training, future observation frames are retrieved from the video stream."}, {"start": 14.25, "end": 18.34, "text": "A frozen image encoder processes these future frames."}, {"start": 18.34, "end": 39.79, "text": "This extracts future frame tokens to serve as reference targets for feature hallucination supervision."}, {"start": 39.79, "end": 46.35, "text": "In both training and inference, past visual observation frames are sampled from the video input."}, {"start": 46.35, "end": 52.32, "text": "The frozen image encoder extracts past frame tokens from these observations."}, {"start": 52.32, "end": 64.08, "text": "Simultaneously, relative poses from visual odometry supply past trajectories and target coordinates, which a multi-layer perceptron embeds into a coordinate token."}, {"start": 64.08, "end": 70.77, "text": "The past frame tokens and the coordinate token combine to form the full input sequence."}, {"start": 70.77, "end": 77.22, "text": "A transformer processes the combined sequence to model spatial and temporal dynamics."}, {"start": 77.22, "end": 98.94, "text": "The transformer outputs contextual tokens directed to prediction heads and feature alignment."}, {"start": 98.94, "end": 106.55, "text": "An auxiliary feature loss guides the transformer by aligning output tokens with the future frame representations."}, {"start": 106.55, "end": 113.0, "text": "The action head decodes future action waypoints, optimized under the action loss function."}, {"start": 113.0, "end": 120.8, "text": "Concurrently, the arrival head estimates sub-goal arrival status, supervised by the arrival loss."}];
+  var LOOP = 120.8;
+  var REPEATS = 1;
+  var RATES = [0.25, 0.5, 0.75, 1, 1.5, 2, 3];
+
+  var fig = document.querySelector('.ab');
+  var cap = document.querySelector('.ab-cap');
+  var play = document.querySelector('.ab-play');
+  var seek = document.querySelector('.ab-seek');
+  var played = document.querySelector('.ab-played');
+  var nowEl = document.querySelector('.ab-time b');
+  var totalEl = document.querySelector('.ab-total');
+  var rateEl = document.querySelector('.ab-rate');
+  var slower = document.querySelector('.ab-slower');
+  var faster = document.querySelector('.ab-faster');
+  var toggle = document.querySelector('.ab-toggle');
+  var word = toggle.querySelector('.ab-word');
+
+  var at = -1, swap = null, rate = 3, paused = false, scrubbing = false;
+
+  // THE CLOCK. The drawing is hundreds of short animations that each stop when
+  // they are done, so none of them can be asked what time it is. This one runs
+  // the length of the whole piece, does nothing visible, and is driven by the
+  // same controls - so the caption, the bar and the picture cannot disagree.
+  var master = null;
+  try {
+    master = document.documentElement.animate(
+      [{ opacity: 1 }, { opacity: 1 }],
+      { duration: (LOOP || 1) * 1000, iterations: REPEATS }
+    );
+  } catch (e) {}
+  var t0 = performance.now();
+
+  function others() {
+    try {
+      var runs = document.getAnimations ? document.getAnimations() : [];
+      return runs.filter(function (a) { return a !== master; });
+    } catch (e) { return []; }
+  }
+  function clock() {
+    var t;
+    if (master && master.currentTime != null) t = master.currentTime / 1000;
+    else t = (performance.now() - t0) / 1000;
+    return REPEATS === 1 ? Math.min(t, LOOP) : (t % (LOOP || 1));
+  }
+  function each(fn) {
+    if (master) { try { fn(master); } catch (e) {} }
+    others().forEach(function (a) { try { fn(a); } catch (e) {} });
+  }
+  function clip(t) {
+    t = Math.max(0, t || 0);
+    return Math.floor(t / 60) + ':' + ('0' + Math.floor(t % 60)).slice(-2);
+  }
+
+  play.addEventListener('click', function () {
+    paused = !paused;
+    // Restarting a finished piece rather than leaving Play doing nothing
+    if (!paused && REPEATS === 1 && clock() >= LOOP - 0.05) each(function (a) { a.currentTime = 0; });
+    each(function (a) { paused ? a.pause() : a.play(); });
+    if (!paused) t0 = performance.now() - clock() * 1000;
+    fig.classList.toggle('is-paused', paused);
+    play.setAttribute('aria-label', paused ? 'Play' : 'Pause');
+  });
+
+  function setRate(i) {
+    rate = Math.max(0, Math.min(RATES.length - 1, i));
+    var r = RATES[rate];
+    each(function (a) { a.playbackRate = r; });
+    rateEl.textContent = r + '×';
+    fig.classList.toggle('is-fast', r !== 1);
+    slower.disabled = rate === 0;
+    faster.disabled = rate === RATES.length - 1;
+  }
+  slower.addEventListener('click', function () { setRate(rate - 1); });
+  faster.addEventListener('click', function () { setRate(rate + 1); });
+
+  seek.addEventListener('pointerdown', function () { scrubbing = true; });
+  seek.addEventListener('input', function () {
+    var t = (Number(seek.value) / 1000) * LOOP;
+    each(function (a) { a.currentTime = t * 1000; });
+    t0 = performance.now() - t * 1000;
+    paint(true);
+  });
+  seek.addEventListener('change', function () { scrubbing = false; });
+
+  toggle.addEventListener('click', function () {
+    var on = toggle.getAttribute('aria-pressed') !== 'true';
+    toggle.setAttribute('aria-pressed', String(on));
+    word.textContent = on ? 'Captions on' : 'Captions off';
+    fig.classList.toggle('is-off', !on);
+  });
+
+  function paint(force) {
+    var t = clock();
+    nowEl.textContent = clip(t);
+    if (!scrubbing) seek.value = String(Math.round((t / (LOOP || 1)) * 1000));
+    played.style.width = ((t / (LOOP || 1)) * 100) + '%';
+
+    var k = -1;
+    for (var i = 0; i < CUES.length; i++) { if (t >= CUES[i].start - 0.05) k = i; }
+    if (k !== at || force === true) {
+      at = k;
+      var text = k >= 0 ? CUES[k].text : '';
+      if (text !== cap.textContent) {
+        cap.classList.add('is-swap');
+        clearTimeout(swap);
+        swap = setTimeout(function () {
+          cap.textContent = text;
+          cap.classList.remove('is-swap');
+        }, 150);
+      }
+    }
+  }
+
+  // Two ways round, on purpose. requestAnimationFrame gives a smooth bar while
+  // the page is on screen, and stops dead in a background tab or an embed the
+  // browser considers hidden - where the animation itself keeps running, so the
+  // caption would be left behind. The slow timer covers exactly that case.
+  function frame() { paint(); requestAnimationFrame(frame); }
+
+  totalEl.textContent = clip(LOOP);
+  setRate(3);
+  if (!CUES.length) { fig.classList.add('is-off'); toggle.style.display = 'none'; }
+  requestAnimationFrame(frame);
+  setInterval(paint, 250);
+})();
+</script>
+</body>
+</html>

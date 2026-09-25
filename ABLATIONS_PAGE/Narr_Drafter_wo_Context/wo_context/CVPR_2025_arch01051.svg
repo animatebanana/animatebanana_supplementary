@@ -1,0 +1,642 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 478 440" width="478" height="440">
+  <defs>
+    <!-- Arrowhead markers -->
+    <marker id="arrow-black" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <path d="M0,1 L5,3 L0,5 Z" fill="#000000"/>
+    </marker>
+    <marker id="arrow-grey" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <path d="M5,1 L0,3 L5,5 Z" fill="#b0b0b0"/>
+    </marker>
+    
+    <!-- Diffusion Model Hourglass Gradient -->
+    <linearGradient id="diffGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f7b28a"/>
+      <stop offset="50%" stop-color="#fcd8c4"/>
+      <stop offset="100%" stop-color="#f7b28a"/>
+    </linearGradient>
+
+    <!-- Classifier Trapezoid Gradient -->
+    <linearGradient id="classGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4673c2"/>
+      <stop offset="100%" stop-color="#5b8de6"/>
+    </linearGradient>
+
+    <!-- FMRE Box Gradient -->
+    <linearGradient id="fmreGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#b6e3b6"/>
+      <stop offset="100%" stop-color="#88cb88"/>
+    </linearGradient>
+
+    <!-- Brick Pattern -->
+    <pattern id="brickPattern" width="20" height="12" patternUnits="userSpaceOnUse">
+      <rect width="20" height="12" fill="#c45a27"/>
+      <line x1="0" y1="0" x2="20" y2="0" stroke="#dfdfdf" stroke-width="1"/>
+      <line x1="0" y1="6" x2="20" y2="6" stroke="#dfdfdf" stroke-width="1"/>
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#dfdfdf" stroke-width="1"/>
+      <line x1="10" y1="6" x2="10" y2="12" stroke="#dfdfdf" stroke-width="1"/>
+    </pattern>
+
+    <!-- Shadow filter for blocks -->
+    <filter id="boxShadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="2" dy="2" stdDeviation="2" flood-opacity="0.25"/>
+    </filter>
+
+    <style>
+      /* Base ghost opacity */
+      #top_method_block, #top_bg, #top_title, #legend_group,
+      #top_img_x, #top_diffusion_model, #top_img_x_prime, #txt_first_stage,
+      #lbl_top_x, #lbl_top_diff, #lbl_top_x_prime, #edge_top_x_diff, #edge_top_diff_xprime,
+      #top_wall, #top_stage2_x, #top_stage2_x_prime, #txt_second_stage,
+      #lbl_top_st2_x, #lbl_top_st2_x_prime,
+      #top_op_minus, #top_x_rec, #top_classifier, #lbl_top_real_gen,
+      #lbl_top_x_rec, #lbl_top_class, #edge_top_st2_x_op, #edge_top_st2_xp_op,
+      #edge_top_op_rec, #edge_top_rec_class, #edge_top_class_out,
+      #txt_wo_interaction, #edge_top_feedback,
+      #bottom_method_block, #bottom_bg, #bottom_title, #txt_e2e_training,
+      #bot_img_x, #bot_fmre, #bot_img_x_pse, #lbl_bot_x, #lbl_bot_x_pse,
+      #edge_bot_x_fmre, #edge_bot_fmre_xpse,
+      #bot_diffusion_model, #bot_img_x_prime, #bot_img_xp_pse, #lbl_bot_diff,
+      #lbl_bot_x_prime, #lbl_bot_xp_pse, #edge_bot_x_diff, #edge_bot_xpse_diff,
+      #edge_bot_diff_xp, #edge_bot_diff_xppse,
+      #bot_op_minus_top, #bot_op_minus_bot, #bot_x_rec, #bot_x_pse_rec,
+      #lbl_bot_x_rec, #lbl_bot_x_pse_rec, #edge_bot_bypass_x, #edge_bot_xp_to_minus,
+      #edge_bot_bypass_xpse, #edge_bot_xppse_to_minus, #edge_bot_minus_to_rec, #edge_bot_minus_to_pserec,
+      #bot_op_concat, #bot_classifier, #lbl_bot_real_gen, #lbl_bot_class,
+      #edge_bot_rec_concat, #edge_bot_pserec_concat, #edge_bot_concat_class, #edge_bot_class_out,
+      #lbl_better_alignment, #edge_better_alignment_left, #edge_better_alignment_right {
+        opacity: 0.15;
+      }
+
+      /* Parent Persistence - Top Container (T1-T5: 0% to 45.455%) */
+      #top_method_block, #top_bg, #top_title, #legend_group {
+        animation: anim_top_parent 22s infinite;
+      }
+      @keyframes anim_top_parent {
+        0% { opacity: 1.0; }
+        45.454% { opacity: 1.0; }
+        45.455% { opacity: 0.15; }
+        100% { opacity: 0.15; }
+      }
+
+      /* T2: First Stage of Existing Method (9.091% to 18.182%) */
+      #top_img_x, #top_diffusion_model, #top_img_x_prime, #txt_first_stage,
+      #lbl_top_x, #lbl_top_diff, #lbl_top_x_prime, #edge_top_x_diff, #edge_top_diff_xprime {
+        animation: anim_t2 22s infinite;
+      }
+      @keyframes anim_t2 {
+        0% { opacity: 0.15; }
+        9.090% { opacity: 0.15; }
+        9.091% { opacity: 1.0; }
+        18.181% { opacity: 1.0; }
+        18.182% { opacity: 0.15; }
+        100% { opacity: 0.15; }
+      }
+
+      /* T3: Barrier & Stage 2 Inputs (18.182% to 27.273%) */
+      #top_wall, #top_stage2_x, #top_stage2_x_prime, #txt_second_stage,
+      #lbl_top_st2_x, #lbl_top_st2_x_prime {
+        animation: anim_t3 22s infinite;
+      }
+      @keyframes anim_t3 {
+        0% { opacity: 0.15; }
+        18.181% { opacity: 0.15; }
+        18.182% { opacity: 1.0; }
+        27.272% { opacity: 1.0; }
+        27.273% { opacity: 0.15; }
+        100% { opacity: 0.15; }
+      }
+
+      /* T4: Second Stage Classifier & Output (27.273% to 36.364%) */
+      #top_op_minus, #top_x_rec, #top_classifier, #lbl_top_real_gen,
+      #lbl_top_x_rec, #lbl_top_class, #edge_top_st2_x_op, #edge_top_st2_xp_op,
+      #edge_top_op_rec, #edge_top_rec_class, #edge_top_class_out {
+        animation: anim_t4 22s infinite;
+      }
+      @keyframes anim_t4 {
+        0% { opacity: 0.15; }
+        27.272% { opacity: 0.15; }
+        27.273% { opacity: 1.0; }
+        36.363% { opacity: 1.0; }
+        36.364% { opacity: 0.15; }
+        100% { opacity: 0.15; }
+      }
+
+      /* T5: Disconnected feedback (36.364% to 45.455%) */
+      #txt_wo_interaction, #edge_top_feedback {
+        animation: anim_t5 22s infinite;
+      }
+      @keyframes anim_t5 {
+        0% { opacity: 0.15; }
+        36.363% { opacity: 0.15; }
+        36.364% { opacity: 1.0; }
+        45.454% { opacity: 1.0; }
+        45.455% { opacity: 0.15; }
+        100% { opacity: 0.15; }
+      }
+
+      /* Parent Persistence - Bottom Container (T6-T11: 45.455% to 100%) */
+      #bottom_method_block, #bottom_bg, #bottom_title, #txt_e2e_training {
+        animation: anim_bot_parent 22s infinite;
+      }
+      @keyframes anim_bot_parent {
+        0% { opacity: 0.15; }
+        45.454% { opacity: 0.15; }
+        45.455% { opacity: 1.0; }
+        100% { opacity: 1.0; }
+      }
+
+      /* T7: Input and FMRE Pseudo Generation (54.545% to 63.636%) */
+      #bot_img_x, #bot_fmre, #bot_img_x_pse, #lbl_bot_x, #lbl_bot_x_pse,
+      #edge_bot_x_fmre, #edge_bot_fmre_xpse {
+        animation: anim_t7 22s infinite;
+      }
+      @keyframes anim_t7 {
+        0% { opacity: 0.15; }
+        54.544% { opacity: 0.15; }
+        54.545% { opacity: 1.0; }
+        63.635% { opacity: 1.0; }
+        63.636% { opacity: 0.15; }
+        100% { opacity: 0.15; }
+      }
+
+      /* T8: Shared Diffusion Model Processing (63.636% to 72.727%) */
+      #bot_diffusion_model, #bot_img_x_prime, #bot_img_xp_pse, #lbl_bot_diff,
+      #lbl_bot_x_prime, #lbl_bot_xp_pse, #edge_bot_x_diff, #edge_bot_xpse_diff,
+      #edge_bot_diff_xp, #edge_bot_diff_xppse {
+        animation: anim_t8 22s infinite;
+      }
+      @keyframes anim_t8 {
+        0% { opacity: 0.15; }
+        63.635% { opacity: 0.15; }
+        63.636% { opacity: 1.0; }
+        72.726% { opacity: 1.0; }
+        72.727% { opacity: 0.15; }
+        100% { opacity: 0.15; }
+      }
+
+      /* T9: Dual Residual Map Computation (72.727% to 81.818%) */
+      #bot_op_minus_top, #bot_op_minus_bot, #bot_x_rec, #bot_x_pse_rec,
+      #lbl_bot_x_rec, #lbl_bot_x_pse_rec, #edge_bot_bypass_x, #edge_bot_xp_to_minus,
+      #edge_bot_bypass_xpse, #edge_bot_xppse_to_minus, #edge_bot_minus_to_rec, #edge_bot_minus_to_pserec {
+        animation: anim_t9 22s infinite;
+      }
+      @keyframes anim_t9 {
+        0% { opacity: 0.15; }
+        72.726% { opacity: 0.15; }
+        72.727% { opacity: 1.0; }
+        81.817% { opacity: 1.0; }
+        81.818% { opacity: 0.15; }
+        100% { opacity: 0.15; }
+      }
+
+      /* T10: Concat, Classification & Prediction (81.818% to 90.909%) */
+      #bot_op_concat, #bot_classifier, #lbl_bot_real_gen, #lbl_bot_class,
+      #edge_bot_rec_concat, #edge_bot_pserec_concat, #edge_bot_concat_class, #edge_bot_class_out {
+        animation: anim_t10 22s infinite;
+      }
+      @keyframes anim_t10 {
+        0% { opacity: 0.15; }
+        81.817% { opacity: 0.15; }
+        81.818% { opacity: 1.0; }
+        90.908% { opacity: 1.0; }
+        90.909% { opacity: 0.15; }
+        100% { opacity: 0.15; }
+      }
+
+      /* T11: Better Alignment Bridge (90.909% to 100%) */
+      #lbl_better_alignment, #edge_better_alignment_left, #edge_better_alignment_right {
+        animation: anim_t11 22s infinite;
+      }
+      @keyframes anim_t11 {
+        0% { opacity: 0.15; }
+        90.908% { opacity: 0.15; }
+        90.909% { opacity: 1.0; }
+        100% { opacity: 1.0; }
+      }
+
+      /* Narration subtitle timings */
+      .narr-text {
+        opacity: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        font-size: 10px;
+        font-weight: 500;
+        fill: #1f2937;
+        text-anchor: middle;
+      }
+
+      #narr_t1  { animation: narr_anim_1 22s infinite; }
+      #narr_t2  { animation: narr_anim_2 22s infinite; }
+      #narr_t3  { animation: narr_anim_3 22s infinite; }
+      #narr_t4  { animation: narr_anim_4 22s infinite; }
+      #narr_t5  { animation: narr_anim_5 22s infinite; }
+      #narr_t6  { animation: narr_anim_6 22s infinite; }
+      #narr_t7  { animation: narr_anim_7 22s infinite; }
+      #narr_t8  { animation: narr_anim_8 22s infinite; }
+      #narr_t9  { animation: narr_anim_9 22s infinite; }
+      #narr_t10 { animation: narr_anim_10 22s infinite; }
+      #narr_t11 { animation: narr_anim_11 22s infinite; }
+
+      @keyframes narr_anim_1 {
+        0% { opacity: 1; }
+        9.090% { opacity: 1; }
+        9.091% { opacity: 0; }
+        100% { opacity: 0; }
+      }
+      @keyframes narr_anim_2 {
+        0%, 9.090% { opacity: 0; }
+        9.091%, 18.181% { opacity: 1; }
+        18.182%, 100% { opacity: 0; }
+      }
+      @keyframes narr_anim_3 {
+        0%, 18.181% { opacity: 0; }
+        18.182%, 27.272% { opacity: 1; }
+        27.273%, 100% { opacity: 0; }
+      }
+      @keyframes narr_anim_4 {
+        0%, 27.272% { opacity: 0; }
+        27.273%, 36.363% { opacity: 1; }
+        36.364%, 100% { opacity: 0; }
+      }
+      @keyframes narr_anim_5 {
+        0%, 36.363% { opacity: 0; }
+        36.364%, 45.454% { opacity: 1; }
+        45.455%, 100% { opacity: 0; }
+      }
+      @keyframes narr_anim_6 {
+        0%, 45.454% { opacity: 0; }
+        45.455%, 54.544% { opacity: 1; }
+        54.545%, 100% { opacity: 0; }
+      }
+      @keyframes narr_anim_7 {
+        0%, 54.544% { opacity: 0; }
+        54.545%, 63.635% { opacity: 1; }
+        63.636%, 100% { opacity: 0; }
+      }
+      @keyframes narr_anim_8 {
+        0%, 63.635% { opacity: 0; }
+        63.636%, 72.726% { opacity: 1; }
+        72.727%, 100% { opacity: 0; }
+      }
+      @keyframes narr_anim_9 {
+        0%, 72.726% { opacity: 0; }
+        72.727%, 81.817% { opacity: 1; }
+        81.818%, 100% { opacity: 0; }
+      }
+      @keyframes narr_anim_10 {
+        0%, 81.817% { opacity: 0; }
+        81.818%, 90.908% { opacity: 1; }
+        90.909%, 100% { opacity: 0; }
+      }
+      @keyframes narr_anim_11 {
+        0%, 90.908% { opacity: 0; }
+        90.909%, 100% { opacity: 1; }
+      }
+    </style>
+  </defs>
+
+  <!-- ==================== TOP CONTAINER (Existing Method) ==================== -->
+  <g id="top_method_block" data-id="top_method_block" data-class="block" data-parent="root">
+    <rect id="top_bg" data-id="top_bg" data-class="child_node" data-parent="top_method_block" 
+          x="3" y="4" width="472" height="170" rx="3" fill="#e8f1fb" stroke="#3273b5" stroke-width="1.5" stroke-dasharray="5,4"/>
+    
+    <text id="top_title" data-id="top_title" data-class="text_node" data-parent="top_method_block" 
+          x="9" y="22" fill="#2b5f9e" font-family="Arial, sans-serif" font-weight="bold" font-size="14">Existing Method</text>
+    
+    <!-- Legend -->
+    <g id="legend_group" data-id="legend_group" data-class="block" data-parent="top_method_block">
+      <rect x="375" y="8" width="98" height="34" rx="4" fill="#ffffff" stroke="#c8d6e5" stroke-width="0.8"/>
+      <!-- Minus Circle -->
+      <circle cx="384" cy="18" r="4.5" fill="none" stroke="#333333" stroke-width="1"/>
+      <line x1="381" y1="18" x2="387" y2="18" stroke="#333333" stroke-width="1"/>
+      <text x="391" y="21" font-family="Arial, sans-serif" font-size="8.5" fill="#111111">absolute operation</text>
+      <!-- Concat Circle -->
+      <circle cx="384" cy="32" r="4.5" fill="none" stroke="#333333" stroke-width="1"/>
+      <circle cx="384" cy="32" r="2.5" fill="none" stroke="#333333" stroke-width="0.8"/>
+      <text x="391" y="35" font-family="Arial, sans-serif" font-size="8.5" fill="#111111">concat operation</text>
+    </g>
+
+    <!-- Sub-stages text -->
+    <text id="txt_first_stage" data-id="txt_first_stage" data-class="text_node" data-parent="top_method_block" 
+          x="112" y="161" font-family="Arial, sans-serif" font-weight="bold" font-size="12" fill="#000000" text-anchor="middle">First Stage</text>
+    <text id="txt_second_stage" data-id="txt_second_stage" data-class="text_node" data-parent="top_method_block" 
+          x="351" y="161" font-family="Arial, sans-serif" font-weight="bold" font-size="12" fill="#000000" text-anchor="middle">Second Stage</text>
+    <text id="txt_wo_interaction" data-id="txt_wo_interaction" data-class="text_node" data-parent="top_method_block" 
+          x="238" y="158" font-family="Arial, sans-serif" font-weight="bold" font-size="12" fill="#588e42" text-anchor="middle">w/o interaction</text>
+  </g>
+
+  <!-- ==================== TOP METHOD GRAPH NODES ==================== -->
+  
+  <!-- Image x (top stage 1) -->
+  <g id="top_img_x" data-id="top_img_x" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch01051/crop_top_img_x.png" xlink:href="../../rasters/CVPR_2025_arch01051/crop_top_img_x.png" x="13" y="53" width="55" height="58" preserveAspectRatio="xMidYMid meet" /></g>
+  <text id="lbl_top_x" data-id="lbl_top_x" data-class="text_node" data-parent="top_method_block" 
+        x="40.5" y="127" font-family="Times New Roman, serif" font-style="italic" font-size="13" fill="#000000" text-anchor="middle">x</text>
+
+  <!-- Diffusion Model (top stage 1) -->
+  <g id="top_diffusion_model" data-id="top_diffusion_model" data-class="composite_whole" data-parent="top_method_block">
+    <path id="top_diff_body" data-id="top_diff_body" data-class="composite_part" data-parent="top_diffusion_model"
+          d="M 85,51 L 105,62 L 105,102 L 85,113 Z" fill="url(#diffGrad)" stroke="#bd5f2e" stroke-width="1" filter="url(#boxShadow)"/>
+    <path id="top_diff_right" data-id="top_diff_right" data-class="composite_part" data-parent="top_diffusion_model"
+          d="M 110,62 L 131,51 L 131,113 L 110,102 Z" fill="url(#diffGrad)" stroke="#bd5f2e" stroke-width="1" filter="url(#boxShadow)"/>
+    <text id="lbl_top_diff" data-id="lbl_top_diff" data-class="text_node" data-parent="top_method_block" 
+          x="108" y="127" font-family="Arial, sans-serif" font-weight="bold" font-size="9.5" fill="#bd5f2e" text-anchor="middle">Diffusion Model</text>
+  </g>
+
+  <!-- Image x' (top stage 1) -->
+  <g id="top_img_x_prime" data-id="top_img_x_prime" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch01051/crop_top_img_x_prime.png" xlink:href="../../rasters/CVPR_2025_arch01051/crop_top_img_x_prime.png" x="145" y="53" width="55" height="58" preserveAspectRatio="xMidYMid meet" /></g>
+  <text id="lbl_top_x_prime" data-id="lbl_top_x_prime" data-class="text_node" data-parent="top_method_block" 
+        x="172.5" y="127" font-family="Times New Roman, serif" font-style="italic" font-size="13" fill="#000000" text-anchor="middle">x<tspan font-size="0.9em" dy="-3">&#x2032;</tspan></text>
+
+  <!-- Brick Wall Barrier -->
+  <g id="top_wall" data-id="top_wall" data-class="child_node" data-parent="top_method_block">
+    <rect x="219" y="20" width="12" height="117" fill="url(#brickPattern)" stroke="#a14013" stroke-width="1" filter="url(#boxShadow)"/>
+  </g>
+
+  <!-- Stage 2 Image x (top) -->
+  <g id="top_stage2_x" data-id="top_stage2_x" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch01051/crop_top_stage2_x.png" xlink:href="../../rasters/CVPR_2025_arch01051/crop_top_stage2_x.png" x="239" y="30" width="42" height="44" preserveAspectRatio="xMidYMid meet" /></g>
+  <text id="lbl_top_st2_x" data-id="lbl_top_st2_x" data-class="text_node" data-parent="top_method_block" 
+        x="260" y="84" font-family="Times New Roman, serif" font-style="italic" font-size="11" fill="#000000" text-anchor="middle">x</text>
+
+  <!-- Stage 2 Image x' (bottom) -->
+  <g id="top_stage2_x_prime" data-id="top_stage2_x_prime" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch01051/crop_top_stage2_x_prime.png" xlink:href="../../rasters/CVPR_2025_arch01051/crop_top_stage2_x_prime.png" x="239" y="85" width="42" height="44" preserveAspectRatio="xMidYMid meet" /></g>
+  <text id="lbl_top_st2_x_prime" data-id="lbl_top_st2_x_prime" data-class="text_node" data-parent="top_method_block" 
+        x="260" y="139" font-family="Times New Roman, serif" font-style="italic" font-size="11" fill="#000000" text-anchor="middle">x<tspan font-size="0.9em" dy="-3">&#x2032;</tspan></text>
+
+  <!-- Operation Minus Circle (Stage 2) -->
+  <g id="top_op_minus" data-id="top_op_minus" data-class="child_node" data-parent="top_method_block">
+    <circle cx="301" cy="81" r="5" fill="#ffffff" stroke="#333333" stroke-width="1"/>
+    <line x1="298" y1="81" x2="304" y2="81" stroke="#333333" stroke-width="1"/>
+  </g>
+
+  <!-- Reconstruction residual x_rec -->
+  <g id="top_x_rec" data-id="top_x_rec" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch01051/crop_top_x_rec.png" xlink:href="../../rasters/CVPR_2025_arch01051/crop_top_x_rec.png" x="320" y="60" width="42" height="43" preserveAspectRatio="xMidYMid meet" /></g>
+  <text id="lbl_top_x_rec" data-id="lbl_top_x_rec" data-class="text_node" data-parent="top_method_block" 
+        x="341" y="115" font-family="Times New Roman, serif" font-style="italic" font-size="12" fill="#000000" text-anchor="middle">x<tspan font-size="0.65em" baseline-shift="sub">rec</tspan></text>
+
+  <!-- Classifier (top stage 2) -->
+  <g id="top_classifier" data-id="top_classifier" data-class="composite_whole" data-parent="top_method_block">
+    <path id="top_class_shape" data-id="top_class_shape" data-class="composite_part" data-parent="top_classifier" 
+          d="M 376,53 L 405,60 L 405,103 L 376,110 Z" fill="url(#classGrad)" stroke="#2b4c80" stroke-width="1" filter="url(#boxShadow)"/>
+    <text id="lbl_top_class" data-id="lbl_top_class" data-class="text_node" data-parent="top_method_block" 
+          x="391" y="127" font-family="Arial, sans-serif" font-weight="bold" font-size="9.5" fill="#325b96" text-anchor="middle">Classifier</text>
+  </g>
+
+  <!-- Real / Generated output text (top) -->
+  <text id="lbl_top_real_gen" data-id="lbl_top_real_gen" data-class="child_node" data-parent="top_method_block" 
+        x="440" y="78" font-family="Arial, sans-serif" font-weight="bold" font-size="10.5" fill="#000000" text-anchor="middle">Real/<tspan x="440" dy="13">Generated</tspan></text>
+
+  <!-- ==================== TOP METHOD EDGES ==================== -->
+  <g>
+    <path id="edge_top_x_diff" data-id="edge_top_x_diff" data-class="edge" data-source="top_img_x" data-target="top_diffusion_model"
+          d="M 68,82 L 85,82" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow-black)"/>
+
+    <path id="edge_top_diff_xprime" data-id="edge_top_diff_xprime" data-class="edge" data-source="top_diffusion_model" data-target="top_img_x_prime"
+          d="M 131,82 L 145,82" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow-black)"/>
+
+    <path id="edge_top_st2_x_op" data-id="edge_top_st2_x_op" data-class="edge" data-source="top_stage2_x" data-target="top_op_minus"
+          d="M 281,52 L 301,52 L 301,76" stroke="#000000" stroke-width="1" fill="none"/>
+
+    <path id="edge_top_st2_xp_op" data-id="edge_top_st2_xp_op" data-class="edge" data-source="top_stage2_x_prime" data-target="top_op_minus"
+          d="M 281,107 L 301,107 L 301,86" stroke="#000000" stroke-width="1" fill="none"/>
+
+    <path id="edge_top_op_rec" data-id="edge_top_op_rec" data-class="edge" data-source="top_op_minus" data-target="top_x_rec"
+          d="M 306,81 L 320,81" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow-black)"/>
+
+    <path id="edge_top_rec_class" data-id="edge_top_rec_class" data-class="edge" data-source="top_x_rec" data-target="top_classifier"
+          d="M 362,81 L 376,81" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow-black)"/>
+
+    <path id="edge_top_class_out" data-id="edge_top_class_out" data-class="edge" data-source="top_classifier" data-target="lbl_top_real_gen"
+          d="M 405,82 L 419,82" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow-black)"/>
+
+    <!-- Curved grey line (w/o interaction) -->
+    <path id="edge_top_feedback" data-id="edge_top_feedback" data-class="edge" data-source="top_classifier" data-target="top_diffusion_model"
+          d="M 370,128 C 305,150 180,150 115,130" fill="none" stroke="#b0b0b0" stroke-width="2.5" marker-end="url(#arrow-grey)"/>
+  </g>
+
+
+  <!-- ==================== BOTTOM CONTAINER (Our Method) ==================== -->
+  <g id="bottom_method_block" data-id="bottom_method_block" data-class="block" data-parent="root">
+    <rect id="bottom_bg" data-id="bottom_bg" data-class="child_node" data-parent="bottom_method_block" 
+          x="3" y="185" width="472" height="188" rx="3" fill="#f4e7c7" stroke="#8c6423" stroke-width="1.5" stroke-dasharray="5,4"/>
+    
+    <text id="bottom_title" data-id="bottom_title" data-class="text_node" data-parent="bottom_method_block" 
+          x="9" y="204" fill="#693b0b" font-family="Arial, sans-serif" font-weight="bold" font-size="14">Our Method</text>
+    
+    <text id="txt_e2e_training" data-id="txt_e2e_training" data-class="text_node" data-parent="bottom_method_block" 
+          x="235" y="367" font-family="Arial, sans-serif" font-weight="bold" font-size="13" fill="#000000" text-anchor="middle">End-to-end Training</text>
+  </g>
+
+  <!-- ==================== BOTTOM METHOD GRAPH NODES ==================== -->
+
+  <!-- Top Left Image x -->
+  <g id="bot_img_x" data-id="bot_img_x" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch01051/crop_bot_img_x.png" xlink:href="../../rasters/CVPR_2025_arch01051/crop_bot_img_x.png" x="67" y="221" width="42" height="44" preserveAspectRatio="xMidYMid meet" /></g>
+  <text id="lbl_bot_x" data-id="lbl_bot_x" data-class="text_node" data-parent="bottom_method_block" 
+        x="57" y="234" font-family="Times New Roman, serif" font-style="italic" font-size="12" fill="#000000" text-anchor="middle">x</text>
+
+  <!-- FMRE Box -->
+  <g id="bot_fmre" data-id="bot_fmre" data-class="child_node" data-parent="bottom_method_block">
+    <rect x="65" y="269" width="47" height="26" rx="8" fill="url(#fmreGrad)" stroke="#4a8f4a" stroke-width="1" filter="url(#boxShadow)"/>
+    <text x="88.5" y="286" font-family="Arial, sans-serif" font-weight="bold" font-size="10.5" fill="#000000" text-anchor="middle">FMRE</text>
+  </g>
+
+  <!-- Bottom Left Image x_pse -->
+  <g id="bot_img_x_pse" data-id="bot_img_x_pse" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch01051/crop_bot_img_x_pse.png" xlink:href="../../rasters/CVPR_2025_arch01051/crop_bot_img_x_pse.png" x="67" y="303" width="42" height="44" preserveAspectRatio="xMidYMid meet" /></g>
+  <text id="lbl_bot_x_pse" data-id="lbl_bot_x_pse" data-class="text_node" data-parent="bottom_method_block" 
+        x="54" y="330" font-family="Times New Roman, serif" font-style="italic" font-size="12" fill="#000000" text-anchor="middle">x<tspan font-size="0.65em" baseline-shift="sub">pse</tspan></text>
+
+  <!-- Shared Diffusion Model -->
+  <g id="bot_diffusion_model" data-id="bot_diffusion_model" data-class="composite_whole" data-parent="bottom_method_block">
+    <path id="bot_diff_left" data-id="bot_diff_left" data-class="composite_part" data-parent="bot_diffusion_model"
+          d="M 135,250 L 158,264 L 158,308 L 135,322 Z" fill="url(#diffGrad)" stroke="#bd5f2e" stroke-width="1" filter="url(#boxShadow)"/>
+    <path id="bot_diff_right" data-id="bot_diff_right" data-class="composite_part" data-parent="bot_diffusion_model"
+          d="M 164,264 L 187,250 L 187,322 L 164,308 Z" fill="url(#diffGrad)" stroke="#bd5f2e" stroke-width="1" filter="url(#boxShadow)"/>
+    <text id="lbl_bot_diff" data-id="lbl_bot_diff" data-class="text_node" data-parent="bottom_method_block" 
+          x="159" y="339" font-family="Arial, sans-serif" font-weight="bold" font-size="9.5" fill="#bd5f2e" text-anchor="middle">Diffusion Model</text>
+  </g>
+
+  <!-- Top Output Image x' -->
+  <g id="bot_img_x_prime" data-id="bot_img_x_prime" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch01051/crop_bot_img_x_prime.png" xlink:href="../../rasters/CVPR_2025_arch01051/crop_bot_img_x_prime.png" x="207" y="230" width="42" height="44" preserveAspectRatio="xMidYMid meet" /></g>
+  <text id="lbl_bot_x_prime" data-id="lbl_bot_x_prime" data-class="text_node" data-parent="bottom_method_block" 
+        x="228" y="285" font-family="Times New Roman, serif" font-style="italic" font-size="11" fill="#000000" text-anchor="middle">x<tspan font-size="0.9em" dy="-3">&#x2032;</tspan></text>
+
+  <!-- Bottom Output Image x'_pse -->
+  <g id="bot_img_xp_pse" data-id="bot_img_xp_pse" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch01051/crop_bot_img_xp_pse.png" xlink:href="../../rasters/CVPR_2025_arch01051/crop_bot_img_xp_pse.png" x="206" y="286" width="42" height="44" preserveAspectRatio="xMidYMid meet" /></g>
+  <text id="lbl_bot_xp_pse" data-id="lbl_bot_xp_pse" data-class="text_node" data-parent="bottom_method_block" 
+        x="230" y="341" font-family="Times New Roman, serif" font-style="italic" font-size="11" fill="#000000" text-anchor="middle">x<tspan font-size="0.9em" dy="-3">&#x2032;</tspan><tspan font-size="0.65em" dy="3" baseline-shift="sub">pse</tspan></text>
+
+  <!-- Top Minus Operation Circle -->
+  <g id="bot_op_minus_top" data-id="bot_op_minus_top" data-class="child_node" data-parent="bottom_method_block">
+    <circle cx="267" cy="254" r="5" fill="#ffffff" stroke="#333333" stroke-width="1"/>
+    <line x1="264" y1="254" x2="270" y2="254" stroke="#333333" stroke-width="1"/>
+  </g>
+
+  <!-- Bottom Minus Operation Circle -->
+  <g id="bot_op_minus_bot" data-id="bot_op_minus_bot" data-class="child_node" data-parent="bottom_method_block">
+    <circle cx="266" cy="308" r="5" fill="#ffffff" stroke="#333333" stroke-width="1"/>
+    <line x1="263" y1="308" x2="269" y2="308" stroke="#333333" stroke-width="1"/>
+  </g>
+
+  <!-- Top Residual Image x_rec -->
+  <g id="bot_x_rec" data-id="bot_x_rec" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch01051/crop_bot_x_rec.png" xlink:href="../../rasters/CVPR_2025_arch01051/crop_bot_x_rec.png" x="283" y="231" width="41" height="43" preserveAspectRatio="xMidYMid meet" /></g>
+  <text id="lbl_bot_x_rec" data-id="lbl_bot_x_rec" data-class="text_node" data-parent="bottom_method_block" 
+        x="303.5" y="286" font-family="Times New Roman, serif" font-style="italic" font-size="11.5" fill="#000000" text-anchor="middle">x<tspan font-size="0.65em" baseline-shift="sub">rec</tspan></text>
+
+  <!-- Bottom Residual Image x_pse_rec -->
+  <g id="bot_x_pse_rec" data-id="bot_x_pse_rec" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch01051/crop_bot_x_pse_rec.png" xlink:href="../../rasters/CVPR_2025_arch01051/crop_bot_x_pse_rec.png" x="283" y="287" width="41" height="43" preserveAspectRatio="xMidYMid meet" /></g>
+  <text id="lbl_bot_x_pse_rec" data-id="lbl_bot_x_pse_rec" data-class="text_node" data-parent="bottom_method_block" 
+        x="303.5" y="342" font-family="Times New Roman, serif" font-style="italic" font-size="11.5" fill="#000000" text-anchor="middle">x<tspan font-size="0.65em" baseline-shift="sub">pse_rec</tspan></text>
+
+  <!-- Concat Operation Circle (Bottom) -->
+  <g id="bot_op_concat" data-id="bot_op_concat" data-class="child_node" data-parent="bottom_method_block">
+    <circle cx="345" cy="281" r="5" fill="#ffffff" stroke="#333333" stroke-width="1"/>
+    <circle cx="345" cy="281" r="2.5" fill="none" stroke="#333333" stroke-width="0.8"/>
+  </g>
+
+  <!-- Classifier (bottom) -->
+  <g id="bot_classifier" data-id="bot_classifier" data-class="composite_whole" data-parent="bottom_method_block">
+    <path id="bot_class_shape" data-id="bot_class_shape" data-class="composite_part" data-parent="bot_classifier"
+          d="M 361,254 L 391,262 L 391,304 L 361,312 Z" fill="url(#classGrad)" stroke="#2b4c80" stroke-width="1" filter="url(#boxShadow)"/>
+    <text id="lbl_bot_class" data-id="lbl_bot_class" data-class="text_node" data-parent="bottom_method_block" 
+          x="376" y="328" font-family="Arial, sans-serif" font-weight="bold" font-size="9.5" fill="#325b96" text-anchor="middle">Classifier</text>
+  </g>
+
+  <!-- Real / Generated output text (bottom) -->
+  <text id="lbl_bot_real_gen" data-id="lbl_bot_real_gen" data-class="child_node" data-parent="bottom_method_block" 
+        x="431" y="278" font-family="Arial, sans-serif" font-weight="bold" font-size="10.5" fill="#000000" text-anchor="middle">Real/<tspan x="431" dy="13">Generated</tspan></text>
+
+  <!-- ==================== BOTTOM METHOD EDGES ==================== -->
+  <g>
+    <!-- x to FMRE -->
+    <path id="edge_bot_x_fmre" data-id="edge_bot_x_fmre" data-class="edge" data-source="bot_img_x" data-target="bot_fmre"
+          d="M 88,265 L 88,269" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow-black)"/>
+
+    <!-- FMRE to x_pse -->
+    <path id="edge_bot_fmre_xpse" data-id="edge_bot_fmre_xpse" data-class="edge" data-source="bot_fmre" data-target="bot_img_x_pse"
+          d="M 88,295 L 88,303" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow-black)"/>
+
+    <!-- x to Diffusion Model top inlet -->
+    <path id="edge_bot_x_diff" data-id="edge_bot_x_diff" data-class="edge" data-source="bot_img_x" data-target="bot_diffusion_model"
+          d="M 109,255 L 135,255" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow-black)"/>
+
+    <!-- x_pse to Diffusion Model bottom inlet -->
+    <path id="edge_bot_xpse_diff" data-id="edge_bot_xpse_diff" data-class="edge" data-source="bot_img_x_pse" data-target="bot_diffusion_model"
+          d="M 109,315 L 135,315" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow-black)"/>
+
+    <!-- Diffusion Model to x' -->
+    <path id="edge_bot_diff_xp" data-id="edge_bot_diff_xp" data-class="edge" data-source="bot_diffusion_model" data-target="bot_img_x_prime"
+          d="M 187,255 L 207,255" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow-black)"/>
+
+    <!-- Diffusion Model to x'_pse -->
+    <path id="edge_bot_diff_xppse" data-id="edge_bot_diff_xppse" data-class="edge" data-source="bot_diffusion_model" data-target="bot_img_xp_pse"
+          d="M 187,315 L 206,315" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow-black)"/>
+
+    <!-- Bypass x to top minus -->
+    <path id="edge_bot_bypass_x" data-id="edge_bot_bypass_x" data-class="edge" data-source="bot_img_x" data-target="bot_op_minus_top"
+          d="M 109,228 L 267,228 L 267,249" stroke="#000000" stroke-width="1" fill="none"/>
+
+    <!-- x' to top minus -->
+    <path id="edge_bot_xp_to_minus" data-id="edge_bot_xp_to_minus" data-class="edge" data-source="bot_img_x_prime" data-target="bot_op_minus_top"
+          d="M 249,254 L 262,254" stroke="#000000" stroke-width="1" fill="none"/>
+
+    <!-- Bypass x_pse to bottom minus -->
+    <path id="edge_bot_bypass_xpse" data-id="edge_bot_bypass_xpse" data-class="edge" data-source="bot_img_x_pse" data-target="bot_op_minus_bot"
+          d="M 109,343 L 266,343 L 266,313" stroke="#000000" stroke-width="1" fill="none"/>
+
+    <!-- x'_pse to bottom minus -->
+    <path id="edge_bot_xppse_to_minus" data-id="edge_bot_xppse_to_minus" data-class="edge" data-source="bot_img_xp_pse" data-target="bot_op_minus_bot"
+          d="M 248,308 L 261,308" stroke="#000000" stroke-width="1" fill="none"/>
+
+    <!-- Top minus to x_rec -->
+    <path id="edge_bot_minus_to_rec" data-id="edge_bot_minus_to_rec" data-class="edge" data-source="bot_op_minus_top" data-target="bot_x_rec"
+          d="M 272,254 L 283,254" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow-black)"/>
+
+    <!-- Bottom minus to x_pse_rec -->
+    <path id="edge_bot_minus_to_pserec" data-id="edge_bot_minus_to_pserec" data-class="edge" data-source="bot_op_minus_bot" data-target="bot_x_pse_rec"
+          d="M 271,308 L 283,308" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow-black)"/>
+
+    <!-- x_rec to Concat -->
+    <path id="edge_bot_rec_concat" data-id="edge_bot_rec_concat" data-class="edge" data-source="bot_x_rec" data-target="bot_op_concat"
+          d="M 324,253 L 345,253 L 345,276" stroke="#000000" stroke-width="1" fill="none"/>
+
+    <!-- x_pse_rec to Concat -->
+    <path id="edge_bot_pserec_concat" data-id="edge_bot_pserec_concat" data-class="edge" data-source="bot_x_pse_rec" data-target="bot_op_concat"
+          d="M 324,308 L 345,308 L 345,286" stroke="#000000" stroke-width="1" fill="none"/>
+
+    <!-- Concat to Classifier -->
+    <path id="edge_bot_concat_class" data-id="edge_bot_concat_class" data-class="edge" data-source="bot_op_concat" data-target="bot_classifier"
+          d="M 350,281 L 361,281" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow-black)"/>
+
+    <!-- Classifier to Output -->
+    <path id="edge_bot_class_out" data-id="edge_bot_class_out" data-class="edge" data-source="bot_classifier" data-target="lbl_bot_real_gen"
+          d="M 391,281 L 406,281" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow-black)"/>
+
+    <!-- Better Alignment Red Dashed Path -->
+    <path id="edge_better_alignment_left" data-id="edge_better_alignment_left" data-class="edge" data-source="bot_diffusion_model" data-target="lbl_better_alignment"
+          d="M 160,248 L 160,207 L 224,207" stroke="#d62211" stroke-width="1.2" stroke-dasharray="3,3" fill="none"/>
+    <path id="edge_better_alignment_right" data-id="edge_better_alignment_right" data-class="edge" data-source="lbl_better_alignment" data-target="bot_classifier"
+          d="M 345,207 L 375,207 L 375,252" stroke="#d62211" stroke-width="1.2" stroke-dasharray="3,3" fill="none"/>
+  </g>
+
+  <!-- Better Alignment Text -->
+  <text id="lbl_better_alignment" data-id="lbl_better_alignment" data-class="child_node" data-parent="bottom_method_block" 
+        x="284" y="211" font-family="Arial, sans-serif" font-weight="bold" font-size="12" fill="#d62211" text-anchor="middle">better alignment</text>
+
+  <!-- ==================== DYNAMIC NARRATION BANNER ==================== -->
+  <g id="narration_banner">
+    <rect x="6" y="386" width="466" height="48" rx="6" fill="#ffffff" fill-opacity="0.9" stroke="#cbd5e1" stroke-width="1"/>
+    
+    <text id="narr_t1" class="narr-text" x="50%" y="407">
+      <tspan x="50%" dy="0">The top panel illustrates an existing two-stage method</tspan>
+      <tspan x="50%" dy="14">for classifying real versus generated images.</tspan>
+    </text>
+
+    <text id="narr_t2" class="narr-text" x="50%" y="407">
+      <tspan x="50%" dy="0">In the first stage, input image x is processed by a diffusion</tspan>
+      <tspan x="50%" dy="14">model to generate a reconstructed image, x prime.</tspan>
+    </text>
+
+    <text id="narr_t3" class="narr-text" x="50%" y="407">
+      <tspan x="50%" dy="0">Separated by a structural barrier, both the original image</tspan>
+      <tspan x="50%" dy="14">and its reconstruction pass forward to stage two.</tspan>
+    </text>
+
+    <text id="narr_t4" class="narr-text" x="50%" y="407">
+      <tspan x="50%" dy="0">An absolute operation creates a residual map, fed into</tspan>
+      <tspan x="50%" dy="14">a classifier to predict whether the image is real or generated.</tspan>
+    </text>
+
+    <text id="narr_t5" class="narr-text" x="50%" y="407">
+      <tspan x="50%" dy="0">Crucially, this existing pipeline operates without</tspan>
+      <tspan x="50%" dy="14">interaction between the first and second stages.</tspan>
+    </text>
+
+    <text id="narr_t6" class="narr-text" x="50%" y="407">
+      <tspan x="50%" dy="0">The bottom panel presents our proposed method,</tspan>
+      <tspan x="50%" dy="14">organized around end-to-end training.</tspan>
+    </text>
+
+    <text id="narr_t7" class="narr-text" x="50%" y="407">
+      <tspan x="50%" dy="0">Here, the input image x passes through an FMRE module</tspan>
+      <tspan x="50%" dy="14">to produce a secondary pseudo image x_pse.</tspan>
+    </text>
+
+    <text id="narr_t8" class="narr-text" x="50%" y="407">
+      <tspan x="50%" dy="0">Both image streams are sent through the shared diffusion model,</tspan>
+      <tspan x="50%" dy="14">generating reconstructed outputs for each branch.</tspan>
+    </text>
+
+    <text id="narr_t9" class="narr-text" x="50%" y="407">
+      <tspan x="50%" dy="0">Dual absolute operations compute residual maps for</tspan>
+      <tspan x="50%" dy="14">both the original stream and the pseudo stream.</tspan>
+    </text>
+
+    <text id="narr_t10" class="narr-text" x="50%" y="407">
+      <tspan x="50%" dy="0">The two residual maps are concatenated and delivered</tspan>
+      <tspan x="50%" dy="14">to the classifier for final real/generated prediction.</tspan>
+    </text>
+
+    <text id="narr_t11" class="narr-text" x="50%" y="407">
+      <tspan x="50%" dy="0">Joint end-to-end training aligns the diffusion model and</tspan>
+      <tspan x="50%" dy="14">classifier, leading to better overall alignment.</tspan>
+    </text>
+  </g>
+</svg>

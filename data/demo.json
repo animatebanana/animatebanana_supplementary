@@ -1,0 +1,29 @@
+{
+  "_note": "Config for <demo-studio> on the overview page. Placeholders: for each example, set `sourceImage` to the original raster figure (shown in Compare mode) and, per style, `svg` to the animation-aware SVG exported for that style. Any missing entry falls back to examples/<id>/diagram.svg. Narration beats come from data/examples.json.",
+  "defaultExample": "cs-attention-block",
+  "defaultStyle": "colorpop",
+  "styles": [
+    { "id": "colorpop", "label": "Colour Pop", "blurb": "Starts in greyscale; colour returns where the story is." },
+    { "id": "progressive", "label": "Progressive Reveal", "blurb": "The figure builds itself up, beat by beat." },
+    { "id": "alpha", "label": "Alpha Masking", "blurb": "Everything is ghosted until its moment comes." },
+    { "id": "hopping", "label": "Hopping Box", "blurb": "A focus box jumps from step to step." },
+    { "id": "sliding", "label": "Sliding Box", "blurb": "A focus box glides along the process." }
+  ],
+  "examples": [
+    {
+      "id": "cs-attention-block",
+      "sourceImage": null,
+      "svg": { "colorpop": null, "progressive": null, "alpha": null, "hopping": null, "sliding": null }
+    },
+    {
+      "id": "ml-hybrid-encoder",
+      "sourceImage": null,
+      "svg": { "colorpop": null, "progressive": null, "alpha": null, "hopping": null, "sliding": null }
+    },
+    {
+      "id": "bio-protein-cascade",
+      "sourceImage": null,
+      "svg": { "colorpop": null, "progressive": null, "alpha": null, "hopping": null, "sliding": null }
+    }
+  ]
+}

@@ -1,0 +1,119 @@
+{
+  "regions": [
+    {
+      "xml_id": "raster_video_images",
+      "bbox": [
+        5.1850000000000005,
+        64.74611866283932,
+        201.178,
+        187.236
+      ],
+      "auto_bbox": [
+        5.1850000000000005,
+        62.496,
+        201.178,
+        187.236
+      ],
+      "box_2d": [
+        248,
+        5,
+        743,
+        194
+      ],
+      "label": "",
+      "dirty": true
+    },
+    {
+      "xml_id": "raster_density_estimation",
+      "bbox": [
+        232.288,
+        63,
+        428.28099999999995,
+        190.26
+      ],
+      "auto_bbox": [
+        232.288,
+        63,
+        428.28099999999995,
+        190.26
+      ],
+      "box_2d": [
+        250,
+        224,
+        755,
+        413
+      ],
+      "label": "",
+      "dirty": false
+    },
+    {
+      "xml_id": "raster_density_segmentation",
+      "bbox": [
+        467.687,
+        18.648,
+        610.793,
+        109.368
+      ],
+      "auto_bbox": [
+        467.687,
+        18.648,
+        610.793,
+        109.368
+      ],
+      "box_2d": [
+        74,
+        451,
+        434,
+        589
+      ],
+      "label": "",
+      "dirty": false
+    },
+    {
+      "xml_id": "raster_detection_results",
+      "bbox": [
+        833.748,
+        62.496,
+        1034.926,
+        195.3
+      ],
+      "auto_bbox": [
+        833.748,
+        62.496,
+        1034.926,
+        195.3
+      ],
+      "box_2d": [
+        248,
+        804,
+        775,
+        998
+      ],
+      "label": "",
+      "dirty": false
+    }
+  ],
+  "placeholders": [
+    {
+      "xml_id": "raster_video_images",
+      "text": "Input Video/Images"
+    },
+    {
+      "xml_id": "raster_density_estimation",
+      "text": "Estimated Density Map"
+    },
+    {
+      "xml_id": "raster_density_segmentation",
+      "text": "Density Segments"
+    },
+    {
+      "xml_id": "raster_detection_results",
+      "text": "Detection Bounding Boxes"
+    }
+  ],
+  "image_size": [
+    1037,
+    252
+  ],
+  "status": "ok"
+}

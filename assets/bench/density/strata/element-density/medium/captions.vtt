@@ -1,0 +1,78 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.085
+In the vision Mamba layer, the input first passes through a layer normalization module.
+
+2
+00:00:06.085 --> 00:00:09.578
+The normalized features enter the SS2D Block.
+
+3
+00:00:09.578 --> 00:00:14.181
+The block output is combined with a residual skip connection.
+
+4
+00:00:14.181 --> 00:00:18.415
+The signal then undergoes a second layer normalization step.
+
+5
+00:00:18.415 --> 00:00:22.278
+Next, it is processed by a feed-forward network.
+
+6
+00:00:22.278 --> 00:00:27.622
+A final addition node merges the feed-forward output with its shortcut connection.
+
+7
+00:00:27.622 --> 00:00:32.967
+Looking inside the SS2D block, the input starts at a linear layer.
+
+8
+00:00:32.967 --> 00:00:36.459
+It continues through a depthwise convolution layer.
+
+9
+00:00:36.459 --> 00:00:39.581
+A SiLU activation function is applied.
+
+10
+00:00:39.581 --> 00:00:43.815
+The activations then pass into the core SS2D operation.
+
+11
+00:00:43.815 --> 00:00:46.937
+This is followed by layer normalization.
+
+12
+00:00:46.937 --> 00:00:52.652
+A top linear layer projects the intermediate features to the final block output.
+
+13
+00:00:52.652 --> 00:00:58.737
+In the original state space model, the bottom step computes the recurrent state update.
+
+14
+00:00:58.737 --> 00:01:04.081
+The top step maps the updated state to produce the recurrent output.
+
+15
+00:01:04.081 --> 00:01:07.944
+This architecture is modified to integrate Mamba adapters.
+
+16
+00:01:07.944 --> 00:01:11.807
+Processing begins with the initial state space update.
+
+17
+00:01:11.807 --> 00:01:14.930
+The intermediate representation passes through Adaptor-T.
+
+18
+00:01:14.930 --> 00:01:18.793
+It flows into the state space output computation.
+
+19
+00:01:18.793 --> 00:01:23.396
+Finally, Adaptor-S completes the module to generate the adapted output.
+

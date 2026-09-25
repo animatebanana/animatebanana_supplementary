@@ -1,0 +1,387 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 240" width="100%" height="100%">
+  <defs>
+    <!-- Arrowhead Markers -->
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#1e293b" />
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#1e3a8a" />
+    </marker>
+    <marker id="arrow-pink-up" viewBox="0 0 10 10" refX="5" refY="2" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 8 L 5 0 L 10 8 z" fill="#f43f5e" />
+    </marker>
+    <marker id="arrow-pink-down" viewBox="0 0 10 10" refX="5" refY="8" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 0 L 5 8 L 10 0 z" fill="#f43f5e" />
+    </marker>
+    <marker id="cycle-arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+      <path d="M 0 2 L 6 5 L 0 8 z" fill="#1e293b" />
+    </marker>
+
+    <!-- 3D Cube Gradients -->
+    <linearGradient id="cube-grad-front" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef08a" />
+      <stop offset="50%" stop-color="#fdba74" />
+      <stop offset="100%" stop-color="#93c5fd" />
+    </linearGradient>
+    <linearGradient id="cube-grad-top" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#fdba74" />
+    </linearGradient>
+    <linearGradient id="cube-grad-side" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fdba74" />
+      <stop offset="100%" stop-color="#f43f5e" />
+    </linearGradient>
+
+    <!-- Noise Cube Pattern -->
+    <pattern id="noise-pattern" width="10" height="10" patternUnits="userSpaceOnUse">
+      <rect x="0" y="0" width="5" height="5" fill="#fbcfe8" />
+      <rect x="5" y="0" width="5" height="5" fill="#93c5fd" />
+      <rect x="0" y="5" width="5" height="5" fill="#fed7aa" />
+      <rect x="5" y="5" width="5" height="5" fill="#fde047" />
+    </pattern>
+
+    <style>
+      /* Global Dormant State */
+      #block_diffusion, #bg_diffusion, #title_left,
+      #img_no_flash, #img_flash, #spark_flash_input, #lbl_no_flash, #lbl_flash, #edge_nf_to_enc, #edge_f_to_enc,
+      #encoder_top, #encoder_btm, #edge_enc_to_cube_nf, #edge_enc_to_cube_f,
+      #cube_noflash, #cube_flash, #lbl_cube_noflash, #lbl_cube_flash, #edge_cube_nf_to_mid_concat, #edge_cube_f_to_mid_concat,
+      #node_concat_mid, #cube_noise, #node_concat_top, #node_concat_btm, #lbl_concat_mid, #lbl_concat_top, #lbl_concat_btm,
+      #edge_mid_concat_to_top_concat, #edge_mid_concat_to_btm_concat, #edge_noise_to_top_concat, #edge_noise_to_btm_concat, #edge_top_concat_to_noisy_cube, #edge_btm_concat_to_noisy_cube,
+      #cube_noisy_top, #cube_noisy_btm, #edge_noisy_cube_to_unet_top, #edge_noisy_cube_to_unet_btm,
+      #unet_top, #unet_btm, #edge_cross_att_arrow, #node_cross_att, #edge_unet_top_to_refl, #edge_unet_btm_to_trans,
+      #cube_refl, #cube_trans, #lbl_cube_refl, #lbl_cube_trans, #edge_trans_cube_to_decoder,
+      #block_decoding, #bg_decoding, #title_right,
+      #img_dec_flash, #spark_dec_flash, #lbl_dec_flash, #edge_dec_flash_to_network,
+      #decoder_network, #edge_decoder_to_trans_img,
+      #img_dec_trans, #lbl_dec_trans {
+        filter: grayscale(100%) opacity(0.4);
+        animation-name: colorPop;
+        animation-duration: 0.5s;
+        animation-fill-mode: forwards;
+      }
+
+      @keyframes colorPop {
+        to {
+          filter: grayscale(0%) opacity(1);
+        }
+      }
+
+      /* Timed Activation Groups */
+      #block_diffusion, #bg_diffusion, #title_left { animation-delay: 0.5s; }
+      #img_no_flash, #img_flash, #spark_flash_input, #lbl_no_flash, #lbl_flash, #edge_nf_to_enc, #edge_f_to_enc { animation-delay: 1.0s; }
+      #encoder_top, #encoder_btm, #edge_enc_to_cube_nf, #edge_enc_to_cube_f { animation-delay: 1.5s; }
+      #cube_noflash, #cube_flash, #lbl_cube_noflash, #lbl_cube_flash, #edge_cube_nf_to_mid_concat, #edge_cube_f_to_mid_concat { animation-delay: 2.0s; }
+      #node_concat_mid, #cube_noise, #node_concat_top, #node_concat_btm, #lbl_concat_mid, #lbl_concat_top, #lbl_concat_btm, #edge_mid_concat_to_top_concat, #edge_mid_concat_to_btm_concat, #edge_noise_to_top_concat, #edge_noise_to_btm_concat, #edge_top_concat_to_noisy_cube, #edge_btm_concat_to_noisy_cube { animation-delay: 2.5s; }
+      #cube_noisy_top, #cube_noisy_btm, #edge_noisy_cube_to_unet_top, #edge_noisy_cube_to_unet_btm { animation-delay: 3.0s; }
+      #unet_top, #unet_btm, #edge_cross_att_arrow, #node_cross_att, #edge_unet_top_to_refl, #edge_unet_btm_to_trans { animation-delay: 3.5s; }
+      #cube_refl, #cube_trans, #lbl_cube_refl, #lbl_cube_trans, #edge_trans_cube_to_decoder { animation-delay: 4.0s; }
+      #block_decoding, #bg_decoding, #title_right { animation-delay: 4.5s; }
+      #img_dec_flash, #spark_dec_flash, #lbl_dec_flash, #edge_dec_flash_to_network { animation-delay: 5.0s; }
+      #decoder_network, #edge_decoder_to_trans_img { animation-delay: 5.5s; }
+      #img_dec_trans, #lbl_dec_trans { animation-delay: 6.0s; }
+
+      /* Narration Banner Styling and Timing */
+      .narr-text {
+        opacity: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        font-size: 12.5px;
+        font-weight: 600;
+        fill: #0f172a;
+        text-anchor: middle;
+      }
+
+      @keyframes showSubtitle {
+        0% { opacity: 0; }
+        10% { opacity: 1; }
+        90% { opacity: 1; }
+        100% { opacity: 0; }
+      }
+
+      @keyframes showSubtitleLast {
+        0% { opacity: 0; }
+        10% { opacity: 1; }
+        100% { opacity: 1; }
+      }
+
+      #narr_ts1 { animation: showSubtitle 0.5s linear 0.5s forwards; }
+      #narr_ts2 { animation: showSubtitle 0.5s linear 1.0s forwards; }
+      #narr_ts3 { animation: showSubtitle 0.5s linear 1.5s forwards; }
+      #narr_ts4 { animation: showSubtitle 0.5s linear 2.0s forwards; }
+      #narr_ts5 { animation: showSubtitle 0.5s linear 2.5s forwards; }
+      #narr_ts6 { animation: showSubtitle 0.5s linear 3.0s forwards; }
+      #narr_ts7 { animation: showSubtitle 0.5s linear 3.5s forwards; }
+      #narr_ts8 { animation: showSubtitle 0.5s linear 4.0s forwards; }
+      #narr_ts9 { animation: showSubtitle 0.5s linear 4.5s forwards; }
+      #narr_ts10 { animation: showSubtitle 0.5s linear 5.0s forwards; }
+      #narr_ts11 { animation: showSubtitle 0.5s linear 5.5s forwards; }
+      #narr_ts12 { animation: showSubtitleLast 0.5s linear 6.0s forwards; }
+    </style>
+  </defs>
+
+  <!-- Top Global Titles -->
+  <text id="title_left" data-id="title_left" data-class="text_node" data-parent="root" x="315" y="16" font-family="sans-serif" font-size="15" font-weight="bold" text-anchor="middle" fill="#0f172a">Iterative Latent Diffusion Separation</text>
+  <text id="title_right" data-id="title_right" data-class="text_node" data-parent="root" x="710" y="16" font-family="sans-serif" font-size="15" font-weight="bold" text-anchor="middle" fill="#0f172a">Cross Latent Decoding</text>
+
+  <!-- ==================== CONTAINER 1: Iterative Latent Diffusion Separation ==================== -->
+  <g id="block_diffusion" data-id="block_diffusion" data-class="block" data-parent="root">
+    <rect id="bg_diffusion" data-id="bg_diffusion" data-class="child_node" data-parent="block_diffusion" x="5" y="24" width="525" height="162" rx="8" ry="8" fill="#f0f5ff" stroke="#2b5cbe" stroke-width="1.5" />
+
+    <!-- 1. Inputs (No-Flash & Flash) -->
+    <!-- No-Flash Input -->
+    <text id="lbl_no_flash" data-id="lbl_no_flash" data-class="text_node" data-parent="block_diffusion" x="46" y="38" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#0f172a">No-Flash</text>
+    <g id="img_no_flash" data-id="img_no_flash" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch01062/crop_img_no_flash.png" xlink:href="../../rasters/CVPR_2025_arch01062/crop_img_no_flash.png" x="10" y="43" width="73" height="48" preserveAspectRatio="xMidYMid meet" /></g>
+
+    <!-- Flash Input -->
+    <text id="lbl_flash" data-id="lbl_flash" data-class="text_node" data-parent="block_diffusion" x="46" y="108" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#0f172a">Flash</text>
+    <g id="img_flash" data-id="img_flash" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch01062/crop_img_flash.png" xlink:href="../../rasters/CVPR_2025_arch01062/crop_img_flash.png" x="10" y="113" width="73" height="48" preserveAspectRatio="xMidYMid meet" /></g>
+    <!-- Yellow Flash Icon on Flash Input -->
+    <polygon id="spark_flash_input" data-id="spark_flash_input" data-class="child_node" data-parent="block_diffusion" points="80,108 83,114 89,112 85,117 90,121 84,122 85,128 80,124 76,128 77,122 71,121 76,117 72,112 78,114" fill="#facc15" stroke="#000" stroke-width="0.8" />
+
+    <!-- 2. Encoders (E) -->
+    <!-- Top Encoder E -->
+    <g id="encoder_top" data-id="encoder_top" data-class="composite_whole" data-parent="block_diffusion">
+      <polygon id="poly_enc_top" data-id="poly_enc_top" data-class="composite_part" data-parent="encoder_top" points="106,37 138,47 138,91 106,101" fill="#dbeaff" stroke="#2563eb" stroke-width="1.5" />
+      <text id="txt_enc_top" data-id="txt_enc_top" data-class="composite_part" data-parent="encoder_top" x="122" y="74" font-family="sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#0f172a">E</text>
+    </g>
+
+    <!-- Bottom Encoder E -->
+    <g id="encoder_btm" data-id="encoder_btm" data-class="composite_whole" data-parent="block_diffusion">
+      <polygon id="poly_enc_btm" data-id="poly_enc_btm" data-class="composite_part" data-parent="encoder_btm" points="106,107 138,117 138,161 106,171" fill="#dbeaff" stroke="#2563eb" stroke-width="1.5" />
+      <text id="txt_enc_btm" data-id="txt_enc_btm" data-class="composite_part" data-parent="encoder_btm" x="122" y="144" font-family="sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#0f172a">E</text>
+    </g>
+
+    <!-- 3. First Latent Cubes -->
+    <!-- Top Latent Cube (No-flash) -->
+    <text id="lbl_cube_noflash" data-id="lbl_cube_noflash" data-class="text_node" data-parent="block_diffusion" x="190" y="38" font-family="sans-serif" font-size="10.5" font-weight="normal" text-anchor="middle" fill="#0f172a">No-flash</text>
+    <g id="cube_noflash" data-id="cube_noflash" data-class="composite_whole" data-parent="block_diffusion">
+      <polygon id="cube_nf_top" data-id="cube_nf_top" data-class="composite_part" data-parent="cube_noflash" points="175,54 186,43 214,43 203,54" fill="url(#cube-grad-top)" stroke="#0f172a" stroke-width="0.8" />
+      <rect id="cube_nf_front" data-id="cube_nf_front" data-class="composite_part" data-parent="cube_noflash" x="175" y="54" width="28" height="28" fill="url(#cube-grad-front)" stroke="#0f172a" stroke-width="0.8" />
+      <polygon id="cube_nf_side" data-id="cube_nf_side" data-class="composite_part" data-parent="cube_noflash" points="203,54 214,43 214,71 203,82" fill="url(#cube-grad-side)" stroke="#0f172a" stroke-width="0.8" />
+    </g>
+
+    <!-- Bottom Latent Cube (Flash) -->
+    <text id="lbl_cube_flash" data-id="lbl_cube_flash" data-class="text_node" data-parent="block_diffusion" x="190" y="180" font-family="sans-serif" font-size="10.5" font-weight="normal" text-anchor="middle" fill="#0f172a">Flash</text>
+    <g id="cube_flash" data-id="cube_flash" data-class="composite_whole" data-parent="block_diffusion">
+      <polygon id="cube_f_top" data-id="cube_f_top" data-class="composite_part" data-parent="cube_flash" points="175,127 186,116 214,116 203,127" fill="url(#cube-grad-top)" stroke="#0f172a" stroke-width="0.8" />
+      <rect id="cube_f_front" data-id="cube_f_front" data-class="composite_part" data-parent="cube_flash" x="175" y="127" width="28" height="28" fill="url(#cube-grad-front)" stroke="#0f172a" stroke-width="0.8" />
+      <polygon id="cube_f_side" data-id="cube_f_side" data-class="composite_part" data-parent="cube_flash" points="203,127 214,116 214,144 203,155" fill="url(#cube-grad-side)" stroke="#0f172a" stroke-width="0.8" />
+    </g>
+
+    <!-- 4. Intermediate Operations & Noise -->
+    <!-- Mid-Left Concat Node -->
+    <text id="lbl_concat_mid" data-id="lbl_concat_mid" data-class="text_node" data-parent="block_diffusion" x="166" y="103" font-family="sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#0f172a">Concat</text>
+    <g id="node_concat_mid" data-id="node_concat_mid" data-class="child_node" data-parent="block_diffusion">
+      <circle cx="190" cy="100" r="6.5" fill="#ffffff" stroke="#0f172a" stroke-width="1.2" />
+      <circle cx="190" cy="100" r="2" fill="#0f172a" />
+    </g>
+
+    <!-- Noise Box/Cube -->
+    <g id="cube_noise" data-id="cube_noise" data-class="composite_whole" data-parent="block_diffusion">
+      <rect id="rect_noise_body" data-id="rect_noise_body" data-class="composite_part" data-parent="cube_noise" x="238" y="78" width="44" height="44" rx="1" fill="url(#noise-pattern)" stroke="#0f172a" stroke-width="0.8" />
+      <rect id="rect_noise_border" data-id="rect_noise_border" data-class="composite_part" data-parent="cube_noise" x="238" y="78" width="44" height="44" fill="none" stroke="#0f172a" stroke-width="1" />
+      <text id="txt_noise" data-id="txt_noise" data-class="composite_part" data-parent="cube_noise" x="260" y="104" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#0f172a">Noise</text>
+    </g>
+
+    <!-- Top-Right Concat Node -->
+    <text id="lbl_concat_top" data-id="lbl_concat_top" data-class="text_node" data-parent="block_diffusion" x="260" y="40" font-family="sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#0f172a">Concat</text>
+    <g id="node_concat_top" data-id="node_concat_top" data-class="child_node" data-parent="block_diffusion">
+      <circle cx="260" cy="54" r="6.5" fill="#ffffff" stroke="#0f172a" stroke-width="1.2" />
+      <circle cx="260" cy="54" r="2" fill="#0f172a" />
+    </g>
+
+    <!-- Bottom-Right Concat Node -->
+    <text id="lbl_concat_btm" data-id="lbl_concat_btm" data-class="text_node" data-parent="block_diffusion" x="260" y="172" font-family="sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#0f172a">Concat</text>
+    <g id="node_concat_btm" data-id="node_concat_btm" data-class="child_node" data-parent="block_diffusion">
+      <circle cx="260" cy="148" r="6.5" fill="#ffffff" stroke="#0f172a" stroke-width="1.2" />
+      <circle cx="260" cy="148" r="2" fill="#0f172a" />
+    </g>
+
+    <!-- 5. Second Latent Cubes (Noisy) -->
+    <!-- Top Noisy Latent Cube -->
+    <g id="cube_noisy_top" data-id="cube_noisy_top" data-class="composite_whole" data-parent="block_diffusion">
+      <polygon id="cube_nt_top" data-id="cube_nt_top" data-class="composite_part" data-parent="cube_noisy_top" points="295,54 306,43 334,43 323,54" fill="url(#cube-grad-top)" stroke="#0f172a" stroke-width="0.8" />
+      <rect id="cube_nt_front" data-id="cube_nt_front" data-class="composite_part" data-parent="cube_noisy_top" x="295" y="54" width="28" height="28" fill="url(#cube-grad-front)" stroke="#0f172a" stroke-width="0.8" />
+      <polygon id="cube_nt_side" data-id="cube_nt_side" data-class="composite_part" data-parent="cube_noisy_top" points="323,54 334,43 334,71 323,82" fill="url(#cube-grad-side)" stroke="#0f172a" stroke-width="0.8" />
+    </g>
+
+    <!-- Bottom Noisy Latent Cube -->
+    <g id="cube_noisy_btm" data-id="cube_noisy_btm" data-class="composite_whole" data-parent="block_diffusion">
+      <polygon id="cube_nb_top" data-id="cube_nb_top" data-class="composite_part" data-parent="cube_noisy_btm" points="295,127 306,116 334,116 323,127" fill="url(#cube-grad-top)" stroke="#0f172a" stroke-width="0.8" />
+      <rect id="cube_nb_front" data-id="cube_nb_front" data-class="composite_part" data-parent="cube_noisy_btm" x="295" y="127" width="28" height="28" fill="url(#cube-grad-front)" stroke="#0f172a" stroke-width="0.8" />
+      <polygon id="cube_nb_side" data-id="cube_nb_side" data-class="composite_part" data-parent="cube_noisy_btm" points="323,127 334,116 334,144 323,155" fill="url(#cube-grad-side)" stroke="#0f172a" stroke-width="0.8" />
+    </g>
+
+    <!-- 6. UNet Architectures & Cross Attention -->
+    <!-- Top UNet (Purple Layers) -->
+    <g id="unet_top" data-id="unet_top" data-class="composite_whole" data-parent="block_diffusion">
+      <!-- Feature columns -->
+      <rect id="u_top_col1" data-id="u_top_col1" data-class="composite_part" data-parent="unet_top" x="360" y="44" width="9" height="52" rx="4" fill="#e9d5ff" stroke="#4b5563" stroke-width="1.2" />
+      <rect id="u_top_col2" data-id="u_top_col2" data-class="composite_part" data-parent="unet_top" x="372" y="52" width="9" height="38" rx="4" fill="#e9d5ff" stroke="#4b5563" stroke-width="1.2" />
+      <rect id="u_top_col3" data-id="u_top_col3" data-class="composite_part" data-parent="unet_top" x="384" y="60" width="9" height="24" rx="4" fill="#e9d5ff" stroke="#4b5563" stroke-width="1.2" />
+      <rect id="u_top_col4" data-id="u_top_col4" data-class="composite_part" data-parent="unet_top" x="412" y="60" width="9" height="24" rx="4" fill="#e9d5ff" stroke="#4b5563" stroke-width="1.2" />
+      <rect id="u_top_col5" data-id="u_top_col5" data-class="composite_part" data-parent="unet_top" x="424" y="52" width="9" height="38" rx="4" fill="#e9d5ff" stroke="#4b5563" stroke-width="1.2" />
+      <rect id="u_top_col6" data-id="u_top_col6" data-class="composite_part" data-parent="unet_top" x="436" y="44" width="9" height="52" rx="4" fill="#e9d5ff" stroke="#4b5563" stroke-width="1.2" />
+      <!-- Central UNet Pill -->
+      <rect id="u_top_box" data-id="u_top_box" data-class="composite_part" data-parent="unet_top" x="367" y="60" width="72" height="18" rx="5" fill="#f8fafc" stroke="#1e293b" stroke-width="1.2" />
+      <text id="u_top_txt" data-id="u_top_txt" data-class="composite_part" data-parent="unet_top" x="403" y="73" font-family="sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#0f172a">UNet</text>
+      <!-- Cyclic indicator icon above -->
+      <path id="u_top_cycle1" data-id="u_top_cycle1" data-class="composite_part" data-parent="unet_top" d="M 397 32 A 6 6 0 0 1 409 32" fill="none" stroke="#1e293b" stroke-width="1.3" marker-end="url(#cycle-arrow)" />
+      <path id="u_top_cycle2" data-id="u_top_cycle2" data-class="composite_part" data-parent="unet_top" d="M 409 35 A 6 6 0 0 1 397 35" fill="none" stroke="#1e293b" stroke-width="1.3" marker-end="url(#cycle-arrow)" />
+    </g>
+
+    <!-- Bottom UNet (Peach Layers) -->
+    <g id="unet_btm" data-id="unet_btm" data-class="composite_whole" data-parent="block_diffusion">
+      <!-- Feature columns -->
+      <rect id="u_btm_col1" data-id="u_btm_col1" data-class="composite_part" data-parent="unet_btm" x="360" y="117" width="9" height="52" rx="4" fill="#fed7aa" stroke="#4b5563" stroke-width="1.2" />
+      <rect id="u_btm_col2" data-id="u_btm_col2" data-class="composite_part" data-parent="unet_btm" x="372" y="125" width="9" height="38" rx="4" fill="#fed7aa" stroke="#4b5563" stroke-width="1.2" />
+      <rect id="u_btm_col3" data-id="u_btm_col3" data-class="composite_part" data-parent="unet_btm" x="384" y="133" width="9" height="24" rx="4" fill="#fed7aa" stroke="#4b5563" stroke-width="1.2" />
+      <rect id="u_btm_col4" data-id="u_btm_col4" data-class="composite_part" data-parent="unet_btm" x="412" y="133" width="9" height="24" rx="4" fill="#fed7aa" stroke="#4b5563" stroke-width="1.2" />
+      <rect id="u_btm_col5" data-id="u_btm_col5" data-class="composite_part" data-parent="unet_btm" x="424" y="125" width="9" height="38" rx="4" fill="#fed7aa" stroke="#4b5563" stroke-width="1.2" />
+      <rect id="u_btm_col6" data-id="u_btm_col6" data-class="composite_part" data-parent="unet_btm" x="436" y="117" width="9" height="52" rx="4" fill="#fed7aa" stroke="#4b5563" stroke-width="1.2" />
+      <!-- Central UNet Pill -->
+      <rect id="u_btm_box" data-id="u_btm_box" data-class="composite_part" data-parent="unet_btm" x="367" y="133" width="72" height="18" rx="5" fill="#f8fafc" stroke="#1e293b" stroke-width="1.2" />
+      <text id="u_btm_txt" data-id="u_btm_txt" data-class="composite_part" data-parent="unet_btm" x="403" y="146" font-family="sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#0f172a">UNet</text>
+      <!-- Cyclic indicator icon below -->
+      <path id="u_btm_cycle1" data-id="u_btm_cycle1" data-class="composite_part" data-parent="unet_btm" d="M 397 176 A 6 6 0 0 1 409 176" fill="none" stroke="#1e293b" stroke-width="1.3" marker-end="url(#cycle-arrow)" />
+      <path id="u_btm_cycle2" data-id="u_btm_cycle2" data-class="composite_part" data-parent="unet_btm" d="M 409 179 A 6 6 0 0 1 397 179" fill="none" stroke="#1e293b" stroke-width="1.3" marker-end="url(#cycle-arrow)" />
+    </g>
+
+    <!-- Cross Attention Bridge -->
+    <!-- Pink Double-headed Arrow -->
+    <path id="edge_cross_att_arrow" data-id="edge_cross_att_arrow" data-class="child_node" data-parent="block_diffusion" d="M 403 82 L 403 128" stroke="#f43f5e" stroke-width="5" marker-start="url(#arrow-pink-up)" marker-end="url(#arrow-pink-down)" />
+    <!-- Cross Attention Label Pill -->
+    <g id="node_cross_att" data-id="node_cross_att" data-class="child_node" data-parent="block_diffusion">
+      <rect x="358" y="96" width="90" height="15" rx="2" fill="#86efac" stroke="#22c55e" stroke-width="0.8" />
+      <text x="403" y="107" font-family="sans-serif" font-size="8.5" font-weight="bold" text-anchor="middle" fill="#0f172a">Cross Attention</text>
+    </g>
+
+    <!-- 7. Output Latent Cubes -->
+    <!-- Refl Output Cube -->
+    <text id="lbl_cube_refl" data-id="lbl_cube_refl" data-class="text_node" data-parent="block_diffusion" x="492" y="36" font-family="sans-serif" font-size="10.5" font-weight="normal" text-anchor="middle" fill="#0f172a">Refl</text>
+    <g id="cube_refl" data-id="cube_refl" data-class="composite_whole" data-parent="block_diffusion">
+      <polygon id="cube_r_top" data-id="cube_r_top" data-class="composite_part" data-parent="cube_refl" points="475,54 486,43 514,43 503,54" fill="url(#cube-grad-top)" stroke="#0f172a" stroke-width="0.8" />
+      <rect id="cube_r_front" data-id="cube_r_front" data-class="composite_part" data-parent="cube_refl" x="475" y="54" width="28" height="28" fill="url(#cube-grad-front)" stroke="#0f172a" stroke-width="0.8" />
+      <polygon id="cube_r_side" data-id="cube_r_side" data-class="composite_part" data-parent="cube_refl" points="503,54 514,43 514,71 503,82" fill="url(#cube-grad-side)" stroke="#0f172a" stroke-width="0.8" />
+    </g>
+
+    <!-- Trans Output Cube -->
+    <text id="lbl_cube_trans" data-id="lbl_cube_trans" data-class="text_node" data-parent="block_diffusion" x="492" y="113" font-family="sans-serif" font-size="10.5" font-weight="normal" text-anchor="middle" fill="#0f172a">Trans</text>
+    <g id="cube_trans" data-id="cube_trans" data-class="composite_whole" data-parent="block_diffusion">
+      <polygon id="cube_t_top" data-id="cube_t_top" data-class="composite_part" data-parent="cube_trans" points="475,127 486,116 514,116 503,127" fill="url(#cube-grad-top)" stroke="#0f172a" stroke-width="0.8" />
+      <rect id="cube_t_front" data-id="cube_t_front" data-class="composite_part" data-parent="cube_trans" x="475" y="127" width="28" height="28" fill="url(#cube-grad-front)" stroke="#0f172a" stroke-width="0.8" />
+      <polygon id="cube_t_side" data-id="cube_t_side" data-class="composite_part" data-parent="cube_trans" points="503,127 514,116 514,144 503,155" fill="url(#cube-grad-side)" stroke="#0f172a" stroke-width="0.8" />
+    </g>
+  </g>
+
+  <!-- ==================== CONTAINER 2: Cross Latent Decoding ==================== -->
+  <g id="block_decoding" data-id="block_decoding" data-class="block" data-parent="root">
+    <rect id="bg_decoding" data-id="bg_decoding" data-class="child_node" data-parent="block_decoding" x="535" y="24" width="310" height="162" rx="8" ry="8" fill="#faf0ff" stroke="#8b2fa8" stroke-width="1.5" />
+
+    <!-- 1. Flash Input -->
+    <text id="lbl_dec_flash" data-id="lbl_dec_flash" data-class="text_node" data-parent="block_decoding" x="578" y="69" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#0f172a">Flash</text>
+    <g id="img_dec_flash" data-id="img_dec_flash" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch01062/crop_img_dec_flash.png" xlink:href="../../rasters/CVPR_2025_arch01062/crop_img_dec_flash.png" x="542" y="74" width="73" height="48" preserveAspectRatio="xMidYMid meet" /></g>
+    <!-- Yellow Flash Icon -->
+    <polygon id="spark_dec_flash" data-id="spark_dec_flash" data-class="child_node" data-parent="block_decoding" points="612,69 615,75 621,73 617,78 622,82 616,83 617,89 612,85 608,89 609,83 603,82 608,78 604,73 610,75" fill="#facc15" stroke="#000" stroke-width="0.8" />
+
+    <!-- 2. Decoder Hourglass / Layers -->
+    <g id="decoder_network" data-id="decoder_network" data-class="composite_whole" data-parent="block_decoding">
+      <!-- Left Trapezoid Backbone -->
+      <polygon id="dec_poly_left" data-id="dec_poly_left" data-class="composite_part" data-parent="decoder_network" points="633,48 676,62 676,145 633,159" fill="#dbeaff" stroke="#2563eb" stroke-width="1.2" />
+      <!-- Right Trapezoid Backbone -->
+      <polygon id="dec_poly_right" data-id="dec_poly_right" data-class="composite_part" data-parent="decoder_network" points="707,62 750,48 750,159 707,145" fill="#dbeaff" stroke="#2563eb" stroke-width="1.2" />
+
+      <!-- Vertical Feature Bars -->
+      <rect id="dec_bar_1" data-id="dec_bar_1" data-class="composite_part" data-parent="decoder_network" x="640" y="58" width="13" height="91" rx="6.5" fill="#fed7aa" stroke="#1e293b" stroke-width="1.2" />
+      <rect id="dec_bar_2" data-id="dec_bar_2" data-class="composite_part" data-parent="decoder_network" x="659" y="76" width="13" height="48" rx="6.5" fill="#fed7aa" stroke="#1e293b" stroke-width="1.2" />
+      <rect id="dec_bar_3" data-id="dec_bar_3" data-class="composite_part" data-parent="decoder_network" x="712" y="78" width="13" height="45" rx="6.5" fill="#fed7aa" stroke="#1e293b" stroke-width="1.2" />
+      <rect id="dec_bar_4" data-id="dec_bar_4" data-class="composite_part" data-parent="decoder_network" x="731" y="58" width="13" height="91" rx="6.5" fill="#fed7aa" stroke="#1e293b" stroke-width="1.2" />
+
+      <!-- Inner Skip Connection -->
+      <path id="dec_skip_inner" data-id="dec_skip_inner" data-class="composite_part" data-parent="decoder_network" d="M 665 76 C 665 52, 725 52, 725 76" fill="none" stroke="#0f172a" stroke-width="1.5" marker-end="url(#arrow)" />
+
+      <!-- Outer Skip Connection via Zero Conv -->
+      <path id="dec_skip_outer_l" data-id="dec_skip_outer_l" data-class="composite_part" data-parent="decoder_network" d="M 646 58 C 646 36, 665 36, 672 36" fill="none" stroke="#0f172a" stroke-width="1.5" />
+      <path id="dec_skip_outer_r" data-id="dec_skip_outer_r" data-class="composite_part" data-parent="decoder_network" d="M 724 36 C 738 36, 738 48, 738 56" fill="none" stroke="#0f172a" stroke-width="1.5" marker-end="url(#arrow)" />
+
+      <!-- Zero Conv Pill -->
+      <g id="node_zero_conv" data-id="node_zero_conv" data-class="composite_part" data-parent="decoder_network">
+        <rect x="670" y="28" width="56" height="16" rx="8" fill="#86efac" stroke="#16a34a" stroke-width="1" />
+        <text x="698" y="40" font-family="sans-serif" font-size="8.5" font-weight="bold" text-anchor="middle" fill="#0f172a">Zero Conv</text>
+      </g>
+    </g>
+
+    <!-- 3. Final Output Trans Image -->
+    <text id="lbl_dec_trans" data-id="lbl_dec_trans" data-class="text_node" data-parent="block_decoding" x="801" y="62" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#0f172a">Trans</text>
+    <g id="img_dec_trans" data-id="img_dec_trans" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch01062/crop_img_dec_trans.png" xlink:href="../../rasters/CVPR_2025_arch01062/crop_img_dec_trans.png" x="765" y="67" width="73" height="48" preserveAspectRatio="xMidYMid meet" /></g>
+  </g>
+
+  <!-- ==================== CONNECTIONS / EDGES ==================== -->
+  <g id="group_edges">
+    <!-- Left Block internal arrows -->
+    <!-- No-Flash Image to Encoder -->
+    <path id="edge_nf_to_enc" data-id="edge_nf_to_enc" data-class="edge" data-source="img_no_flash" data-target="encoder_top" d="M 83 67 L 104 67" fill="none" stroke="#1e293b" stroke-width="1.5" marker-end="url(#arrow)" />
+    <!-- Flash Image to Encoder -->
+    <path id="edge_f_to_enc" data-id="edge_f_to_enc" data-class="edge" data-source="img_flash" data-target="encoder_btm" d="M 83 137 L 104 137" fill="none" stroke="#1e293b" stroke-width="1.5" marker-end="url(#arrow)" />
+
+    <!-- Top Encoder to Cube -->
+    <path id="edge_enc_to_cube_nf" data-id="edge_enc_to_cube_nf" data-class="edge" data-source="encoder_top" data-target="cube_noflash" d="M 138 69 L 173 69" fill="none" stroke="#1e293b" stroke-width="1.5" marker-end="url(#arrow)" />
+    <!-- Bottom Encoder to Cube -->
+    <path id="edge_enc_to_cube_f" data-id="edge_enc_to_cube_f" data-class="edge" data-source="encoder_btm" data-target="cube_flash" d="M 138 139 L 173 139" fill="none" stroke="#1e293b" stroke-width="1.5" marker-end="url(#arrow)" />
+
+    <!-- Cube NF to Mid Concat -->
+    <path id="edge_cube_nf_to_mid_concat" data-id="edge_cube_nf_to_mid_concat" data-class="edge" data-source="cube_noflash" data-target="node_concat_mid" d="M 190 83 L 190 92" fill="none" stroke="#1e293b" stroke-width="1.5" marker-end="url(#arrow)" />
+    <!-- Cube F to Mid Concat -->
+    <path id="edge_cube_f_to_mid_concat" data-id="edge_cube_f_to_mid_concat" data-class="edge" data-source="cube_flash" data-target="node_concat_mid" d="M 190 126 L 190 108" fill="none" stroke="#1e293b" stroke-width="1.5" marker-end="url(#arrow)" />
+
+    <!-- Mid Concat branching to Top Concat -->
+    <path id="edge_mid_concat_to_top_concat" data-id="edge_mid_concat_to_top_concat" data-class="edge" data-source="node_concat_mid" data-target="node_concat_top" d="M 196 97 C 220 85, 245 72, 256 61" fill="none" stroke="#1e293b" stroke-width="1.5" marker-end="url(#arrow)" />
+    <!-- Mid Concat branching to Bottom Concat -->
+    <path id="edge_mid_concat_to_btm_concat" data-id="edge_mid_concat_to_btm_concat" data-class="edge" data-source="node_concat_mid" data-target="node_concat_btm" d="M 196 103 C 220 115, 245 128, 256 141" fill="none" stroke="#1e293b" stroke-width="1.5" marker-end="url(#arrow)" />
+
+    <!-- Noise Box to Top Concat -->
+    <path id="edge_noise_to_top_concat" data-id="edge_noise_to_top_concat" data-class="edge" data-source="cube_noise" data-target="node_concat_top" d="M 260 78 L 260 62" fill="none" stroke="#1e293b" stroke-width="1.5" marker-end="url(#arrow)" />
+    <!-- Noise Box to Bottom Concat -->
+    <path id="edge_noise_to_btm_concat" data-id="edge_noise_to_btm_concat" data-class="edge" data-source="cube_noise" data-target="node_concat_btm" d="M 260 122 L 260 140" fill="none" stroke="#1e293b" stroke-width="1.5" marker-end="url(#arrow)" />
+
+    <!-- Top Concat to Top Noisy Cube -->
+    <path id="edge_top_concat_to_noisy_cube" data-id="edge_top_concat_to_noisy_cube" data-class="edge" data-source="node_concat_top" data-target="cube_noisy_top" d="M 267 54 L 293 54" fill="none" stroke="#1e293b" stroke-width="1.5" marker-end="url(#arrow)" />
+    <!-- Bottom Concat to Bottom Noisy Cube -->
+    <path id="edge_btm_concat_to_noisy_cube" data-id="edge_btm_concat_to_noisy_cube" data-class="edge" data-source="node_concat_btm" data-target="cube_noisy_btm" d="M 267 148 L 293 148" fill="none" stroke="#1e293b" stroke-width="1.5" marker-end="url(#arrow)" />
+
+    <!-- Top Noisy Cube to Top UNet -->
+    <path id="edge_noisy_cube_to_unet_top" data-id="edge_noisy_cube_to_unet_top" data-class="edge" data-source="cube_noisy_top" data-target="unet_top" d="M 335 69 L 358 69" fill="none" stroke="#1e293b" stroke-width="1.5" marker-end="url(#arrow)" />
+    <!-- Bottom Noisy Cube to Bottom UNet -->
+    <path id="edge_noisy_cube_to_unet_btm" data-id="edge_noisy_cube_to_unet_btm" data-class="edge" data-source="cube_noisy_btm" data-target="unet_btm" d="M 335 142 L 358 142" fill="none" stroke="#1e293b" stroke-width="1.5" marker-end="url(#arrow)" />
+
+    <!-- Top UNet to Refl Cube -->
+    <path id="edge_unet_top_to_refl" data-id="edge_unet_top_to_refl" data-class="edge" data-source="unet_top" data-target="cube_refl" d="M 447 69 L 473 69" fill="none" stroke="#1e293b" stroke-width="1.5" marker-end="url(#arrow)" />
+    <!-- Bottom UNet to Trans Cube -->
+    <path id="edge_unet_btm_to_trans" data-id="edge_unet_btm_to_trans" data-class="edge" data-source="unet_btm" data-target="cube_trans" d="M 447 142 L 473 142" fill="none" stroke="#1e293b" stroke-width="1.5" marker-end="url(#arrow)" />
+
+    <!-- Cross Block Long Edge: Trans Cube (Left) to Decoder Backbone (Right) -->
+    <path id="edge_trans_cube_to_decoder" data-id="edge_trans_cube_to_decoder" data-class="edge" data-source="cube_trans" data-target="decoder_network" d="M 515 145 C 570 178, 650 195, 710 115" fill="none" stroke="#1e3a8a" stroke-width="1.8" marker-end="url(#arrow-blue)" />
+
+    <!-- Right Block internal arrows -->
+    <!-- Flash Img to Decoder -->
+    <path id="edge_dec_flash_to_network" data-id="edge_dec_flash_to_network" data-class="edge" data-source="img_dec_flash" data-target="decoder_network" d="M 616 98 L 631 98" fill="none" stroke="#1e293b" stroke-width="1.5" marker-end="url(#arrow)" />
+    <!-- Decoder to Output Trans Img -->
+    <path id="edge_decoder_to_trans_img" data-id="edge_decoder_to_trans_img" data-class="edge" data-source="decoder_network" data-target="img_dec_trans" d="M 750 98 L 763 98" fill="none" stroke="#1e293b" stroke-width="1.5" marker-end="url(#arrow)" />
+  </g>
+
+  <!-- ==================== NARRATION BANNER ==================== -->
+  <g id="narration_banner">
+    <text id="narr_ts1" class="narr-text" x="425" y="218">The workflow begins with the Iterative Latent Diffusion Separation stage.</text>
+    <text id="narr_ts2" class="narr-text" x="425" y="218">Two input images are provided, labeled No-Flash and Flash.</text>
+    <text id="narr_ts3" class="narr-text" x="425" y="218">Both images are routed into encoders labeled E.</text>
+    <text id="narr_ts4" class="narr-text" x="425" y="218">The encoders produce feature volumes labeled No-flash and Flash.</text>
+    <text id="narr_ts5" class="narr-text" x="425" y="218">These feature volumes are merged through concatenation operations along with a central Noise volume.</text>
+    <text id="narr_ts6" class="narr-text" x="425" y="218">This creates two combined latent volumes feeding into parallel pathways.</text>
+    <text id="narr_ts7" class="narr-text" x="425" y="218">The volumes enter two UNet networks connected symmetrically through a Cross Attention module.</text>
+    <text id="narr_ts8" class="narr-text" x="425" y="218">The upper stream outputs a latent volume labeled Refl, and the lower stream outputs one labeled Trans.</text>
+    <text id="narr_ts9" class="narr-text" x="425" y="218">Next, the pipeline moves to the Cross Latent Decoding stage.</text>
+    <text id="narr_ts10" class="narr-text" x="425" y="218">The Flash input image is supplied to the decoding architecture.</text>
+    <text id="narr_ts11" class="narr-text" x="425" y="218">The decoder processes the Flash image with a Zero Conv block while integrating the Trans latent representation.</text>
+    <text id="narr_ts12" class="narr-text" x="425" y="218">Finally, the network generates the decoded output image labeled Trans.</text>
+  </g>
+</svg>

@@ -1,0 +1,221 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 485 305" width="485" height="305">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#000000" />
+    </marker>
+    <style>
+      #block_input, #input_face_1, #input_face_2, #input_dots, #input_face_3, #label_few_inputs, #label_few_inputs_sub, #edge_input_to_encoder,
+      #encoder_node, #edge_encoder_to_omni_id,
+      #omni_id_group, #label_omni_id, #edge_omni_to_decoder1, #edge_omni_to_decoder2, #edge_omni_to_decoderk,
+      #decoder_1, #decoder_2, #decoder_dots, #decoder_k, #edge_decoder1_to_outputs, #edge_decoder2_to_outputs, #edge_decoderk_to_outputs,
+      #block_output, #output_face_1, #output_face_2, #output_face_3, #output_face_4, #output_face_5, #output_face_6, #output_face_7, #output_face_8, #label_many_outputs, #edge_output_to_input_feedback {
+        filter: grayscale(100%) opacity(0.4);
+        animation-name: colorPop;
+        animation-duration: 0.5s;
+        animation-fill-mode: forwards;
+      }
+
+      @keyframes colorPop {
+        to {
+          filter: grayscale(0%) opacity(1);
+        }
+      }
+
+      #block_input, #input_face_1, #input_face_2, #input_dots, #input_face_3, #label_few_inputs, #label_few_inputs_sub, #edge_input_to_encoder {
+        animation-delay: 0.5s;
+      }
+
+      #encoder_node, #edge_encoder_to_omni_id {
+        animation-delay: 1.0s;
+      }
+
+      #omni_id_group, #label_omni_id, #edge_omni_to_decoder1, #edge_omni_to_decoder2, #edge_omni_to_decoderk {
+        animation-delay: 1.5s;
+      }
+
+      #decoder_1, #decoder_2, #decoder_dots, #decoder_k, #edge_decoder1_to_outputs, #edge_decoder2_to_outputs, #edge_decoderk_to_outputs {
+        animation-delay: 2.0s;
+      }
+
+      #block_output, #output_face_1, #output_face_2, #output_face_3, #output_face_4, #output_face_5, #output_face_6, #output_face_7, #output_face_8, #label_many_outputs, #edge_output_to_input_feedback {
+        animation-delay: 2.5s;
+      }
+
+      .banner-text {
+        opacity: 0;
+        font-family: sans-serif;
+        font-size: 10.5px;
+        fill: #1f2937;
+        text-anchor: middle;
+      }
+
+      @keyframes bannerStepMid {
+        0% { opacity: 0; }
+        10% { opacity: 1; }
+        95% { opacity: 1; }
+        100% { opacity: 0; }
+      }
+
+      @keyframes bannerStepFinal {
+        0% { opacity: 0; }
+        10% { opacity: 1; }
+        100% { opacity: 1; }
+      }
+
+      #narr_ts1 {
+        animation: bannerStepMid 0.5s forwards;
+        animation-delay: 0.5s;
+      }
+
+      #narr_ts2 {
+        animation: bannerStepMid 0.5s forwards;
+        animation-delay: 1.0s;
+      }
+
+      #narr_ts3 {
+        animation: bannerStepMid 0.5s forwards;
+        animation-delay: 1.5s;
+      }
+
+      #narr_ts4 {
+        animation: bannerStepMid 0.5s forwards;
+        animation-delay: 2.0s;
+      }
+
+      #narr_ts5 {
+        animation: bannerStepFinal 0.5s forwards;
+        animation-delay: 2.5s;
+      }
+    </style>
+  </defs>
+  <rect width="100%" height="100%" fill="#ffffff" />
+
+  <!-- BACKGROUND BLOCKS -->
+  <!-- Input Container Block -->
+  <g id="block_input" data-id="block_input" data-class="block" data-parent="root">
+    <rect id="input_container_rect" x="301" y="4" width="170" height="40" rx="6" fill="#ffffff" stroke="#000000" stroke-width="2" />
+    
+    <g id="input_face_1" data-id="input_face_1" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch02021/crop_input_face_1.png" xlink:href="../../rasters/CVPR_2025_arch02021/crop_input_face_1.png" x="306" y="7" width="34" height="34" preserveAspectRatio="xMidYMid meet" /></g>
+
+    <g id="input_face_2" data-id="input_face_2" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch02021/crop_input_face_2.png" xlink:href="../../rasters/CVPR_2025_arch02021/crop_input_face_2.png" x="348" y="7" width="34" height="34" preserveAspectRatio="xMidYMid meet" /></g>
+
+    <text id="input_dots" data-id="input_dots" data-class="child_node" data-parent="block_input" x="398" y="26" font-family="sans-serif" font-size="16" font-weight="bold" fill="#000000" text-anchor="middle">...</text>
+
+    <g id="input_face_3" data-id="input_face_3" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch02021/crop_input_face_3.png" xlink:href="../../rasters/CVPR_2025_arch02021/crop_input_face_3.png" x="427" y="7" width="34" height="34" preserveAspectRatio="xMidYMid meet" /></g>
+  </g>
+
+  <!-- Output Container Block -->
+  <g id="block_output" data-id="block_output" data-class="block" data-parent="root">
+    <rect id="output_container_rect" x="4" y="177" width="477" height="58" rx="8" fill="#ffffff" stroke="#000000" stroke-width="2" />
+    
+    <g id="output_face_1" data-id="output_face_1" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch02021/crop_output_face_1.png" xlink:href="../../rasters/CVPR_2025_arch02021/crop_output_face_1.png" x="13" y="183" width="52" height="46" preserveAspectRatio="xMidYMid meet" /></g>
+
+    <g id="output_face_2" data-id="output_face_2" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch02021/crop_output_face_2.png" xlink:href="../../rasters/CVPR_2025_arch02021/crop_output_face_2.png" x="71" y="183" width="52" height="46" preserveAspectRatio="xMidYMid meet" /></g>
+
+    <g id="output_face_3" data-id="output_face_3" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch02021/crop_output_face_3.png" xlink:href="../../rasters/CVPR_2025_arch02021/crop_output_face_3.png" x="129" y="183" width="52" height="46" preserveAspectRatio="xMidYMid meet" /></g>
+
+    <g id="output_face_4" data-id="output_face_4" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch02021/crop_output_face_4.png" xlink:href="../../rasters/CVPR_2025_arch02021/crop_output_face_4.png" x="187" y="183" width="52" height="46" preserveAspectRatio="xMidYMid meet" /></g>
+
+    <g id="output_face_5" data-id="output_face_5" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch02021/crop_output_face_5.png" xlink:href="../../rasters/CVPR_2025_arch02021/crop_output_face_5.png" x="245" y="183" width="52" height="46" preserveAspectRatio="xMidYMid meet" /></g>
+
+    <g id="output_face_6" data-id="output_face_6" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch02021/crop_output_face_6.png" xlink:href="../../rasters/CVPR_2025_arch02021/crop_output_face_6.png" x="303" y="183" width="52" height="46" preserveAspectRatio="xMidYMid meet" /></g>
+
+    <g id="output_face_7" data-id="output_face_7" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch02021/crop_output_face_7.png" xlink:href="../../rasters/CVPR_2025_arch02021/crop_output_face_7.png" x="361" y="183" width="52" height="46" preserveAspectRatio="xMidYMid meet" /></g>
+
+    <g id="output_face_8" data-id="output_face_8" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch02021/crop_output_face_8.png" xlink:href="../../rasters/CVPR_2025_arch02021/crop_output_face_8.png" x="419" y="183" width="52" height="46" preserveAspectRatio="xMidYMid meet" /></g>
+  </g>
+
+  <!-- STANDALONE NODES & COMPOSITE WHOLES -->
+  <!-- Omni-ID Encoder Node -->
+  <g id="encoder_node" data-id="encoder_node" data-class="standalone_node" data-parent="root">
+    <rect x="72" y="6" width="192" height="36" rx="6" fill="#ff8577" />
+    <text x="168" y="29" font-family="sans-serif" font-size="13" font-weight="bold" fill="#000000" text-anchor="middle">Omni-ID Encoder</text>
+  </g>
+
+  <!-- Omni-ID Composite Vector Node -->
+  <g id="omni_id_group" data-id="omni_id_group" data-class="composite_whole" data-parent="root">
+    <rect id="omni_id_bg" data-id="omni_id_bg" data-class="composite_part" data-parent="omni_id_group" x="125" y="62" width="87" height="25" rx="6" fill="#f4f4f4" stroke="#7f8c8d" stroke-width="1.5" />
+    <rect id="omni_id_slot1" data-id="omni_id_slot1" data-class="composite_part" data-parent="omni_id_group" x="133" y="67" width="15" height="15" rx="2" fill="#48bb78" stroke="#276749" stroke-width="1" />
+    <rect id="omni_id_slot2" data-id="omni_id_slot2" data-class="composite_part" data-parent="omni_id_group" x="152" y="67" width="15" height="15" rx="2" fill="#4299e1" stroke="#2b6cb0" stroke-width="1" />
+    <rect id="omni_id_slot3" data-id="omni_id_slot3" data-class="composite_part" data-parent="omni_id_group" x="171" y="67" width="15" height="15" rx="2" fill="#f56565" stroke="#9b2c2c" stroke-width="1" />
+    <rect id="omni_id_slot4" data-id="omni_id_slot4" data-class="composite_part" data-parent="omni_id_group" x="190" y="67" width="15" height="15" rx="2" fill="#fefcbf" stroke="#b7791f" stroke-width="1" />
+  </g>
+
+  <!-- Decoders -->
+  <g id="decoder_1" data-id="decoder_1" data-class="standalone_node" data-parent="root">
+    <rect x="68" y="112" width="84" height="36" rx="6" fill="#54bfff" />
+    <text x="110" y="135" font-family="sans-serif" font-size="12" font-weight="bold" fill="#000000" text-anchor="middle">Decoder 1</text>
+  </g>
+
+  <g id="decoder_2" data-id="decoder_2" data-class="standalone_node" data-parent="root">
+    <rect x="159" y="112" width="84" height="36" rx="6" fill="#54bfff" />
+    <text x="201" y="135" font-family="sans-serif" font-size="12" font-weight="bold" fill="#000000" text-anchor="middle">Decoder 2</text>
+  </g>
+
+  <text id="decoder_dots" data-id="decoder_dots" data-class="standalone_node" data-parent="root" x="280" y="134" font-family="sans-serif" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">...</text>
+
+  <g id="decoder_k" data-id="decoder_k" data-class="standalone_node" data-parent="root">
+    <rect x="316" y="112" width="84" height="36" rx="6" fill="#54bfff" />
+    <text x="358" y="135" font-family="sans-serif" font-size="12" font-weight="bold" fill="#000000" text-anchor="middle">Decoder K</text>
+  </g>
+
+  <!-- TEXT NODES (DECORATIVE / LABELS) -->
+  <text id="label_omni_id" data-id="label_omni_id" data-class="text_node" data-parent="root" x="88" y="79" font-family="sans-serif" font-size="13" font-weight="bold" fill="#000000" text-anchor="middle">Omni-ID</text>
+  
+  <text id="label_few_inputs" data-id="label_few_inputs" data-class="text_node" data-parent="root" x="352" y="58" font-family="sans-serif" font-size="13" font-weight="bold" fill="#000000" text-anchor="middle">Few Inputs</text>
+  <text id="label_few_inputs_sub" data-id="label_few_inputs_sub" data-class="text_node" data-parent="root" x="352" y="75" font-family="sans-serif" font-size="13" font-weight="bold" fill="#000000" text-anchor="middle">(varied number)</text>
+
+  <text id="label_many_outputs" data-id="label_many_outputs" data-class="text_node" data-parent="root" x="54" y="166" font-family="sans-serif" font-size="13" font-weight="bold" fill="#000000" text-anchor="middle">Many Outputs</text>
+
+  <!-- EDGES -->
+  <!-- Input Container to Encoder -->
+  <line id="edge_input_to_encoder" data-id="edge_input_to_encoder" data-class="edge" data-source="block_input" data-target="encoder_node" x1="301" y1="24" x2="270" y2="24" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+
+  <!-- Encoder to Omni-ID -->
+  <line id="edge_encoder_to_omni_id" data-id="edge_encoder_to_omni_id" data-class="edge" data-source="encoder_node" data-target="omni_id_group" x1="168" y1="42" x2="168" y2="56" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+
+  <!-- Omni-ID branching to Decoder 1 -->
+  <path id="edge_omni_to_decoder1" data-id="edge_omni_to_decoder1" data-class="edge" data-source="omni_id_group" data-target="decoder_1" d="M 168 87 L 168 99 L 110 99 L 110 106" fill="none" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+
+  <!-- Omni-ID branching to Decoder 2 -->
+  <path id="edge_omni_to_decoder2" data-id="edge_omni_to_decoder2" data-class="edge" data-source="omni_id_group" data-target="decoder_2" d="M 168 87 L 168 99 L 201 99 L 201 106" fill="none" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+
+  <!-- Omni-ID branching to Decoder K -->
+  <path id="edge_omni_to_decoderk" data-id="edge_omni_to_decoderk" data-class="edge" data-source="omni_id_group" data-target="decoder_k" d="M 168 87 L 168 99 L 358 99 L 358 106" fill="none" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+
+  <!-- Decoder 1 to Outputs -->
+  <line id="edge_decoder1_to_outputs" data-id="edge_decoder1_to_outputs" data-class="edge" data-source="decoder_1" data-target="block_output" x1="110" y1="148" x2="110" y2="171" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+
+  <!-- Decoder 2 to Outputs -->
+  <line id="edge_decoder2_to_outputs" data-id="edge_decoder2_to_outputs" data-class="edge" data-source="decoder_2" data-target="block_output" x1="201" y1="148" x2="201" y2="171" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+
+  <!-- Decoder K to Outputs -->
+  <line id="edge_decoderk_to_outputs" data-id="edge_decoderk_to_outputs" data-class="edge" data-source="decoder_k" data-target="block_output" x1="358" y1="148" x2="358" y2="171" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+
+  <!-- Output back to Input (Dashed vertical line) -->
+  <line id="edge_output_to_input_feedback" data-id="edge_output_to_input_feedback" data-class="edge" data-source="block_output" data-target="block_input" x1="420" y1="177" x2="420" y2="50" stroke="#000000" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow)" />
+
+  <!-- DYNAMIC NARRATION BANNER -->
+  <g id="narration_banner">
+    <text id="narr_ts1" class="banner-text" x="50%" y="262">
+      <tspan x="50%" dy="0">Training begins with a small, variable number of input face</tspan>
+      <tspan x="50%" dy="1.25em">images capturing an individual across diverse poses and expressions.</tspan>
+    </text>
+    <text id="narr_ts2" class="banner-text" x="50%" y="262">
+      <tspan x="50%" dy="0">These images are fed into the Omni-ID Encoder, which integrates</tspan>
+      <tspan x="50%" dy="1.25em">individual image features through transformer attention layers.</tspan>
+    </text>
+    <text id="narr_ts3" class="banner-text" x="50%" y="262">
+      <tspan x="50%" dy="0">The encoder outputs the Omni-ID representation, a fixed-size, structured</tspan>
+      <tspan x="50%" dy="1.25em">embedding that holistically captures the subject's identity.</tspan>
+    </text>
+    <text id="narr_ts4" class="banner-text" x="50%" y="262">
+      <tspan x="50%" dy="0">This representation is then routed to multiple distinct decoders, combining</tspan>
+      <tspan x="50%" dy="1.25em">complementary objectives such as masked autoencoding and flow matching.</tspan>
+    </text>
+    <text id="narr_ts5" class="banner-text" x="50%" y="262">
+      <tspan x="50%" dy="0">Through this few-to-many reconstruction strategy, the decoders generate</tspan>
+      <tspan x="50%" dy="1.25em">numerous target facial variations, jointly supervising the encoder.</tspan>
+    </text>
+  </g>
+</svg>

@@ -1,0 +1,472 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 970 440" width="970" height="440">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#70757a"/>
+    </marker>
+    <marker id="arrow-dark" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#3c4043"/>
+    </marker>
+    <style>
+      #focus_box {
+        animation: hop 56s step-end infinite;
+      }
+
+      .narr-text {
+        opacity: 0;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        fill: #1a73e8;
+      }
+
+      #narr_1 { animation: narr1 56s step-end infinite; }
+      #narr_2 { animation: narr2 56s step-end infinite; }
+      #narr_3 { animation: narr3 56s step-end infinite; }
+      #narr_4 { animation: narr4 56s step-end infinite; }
+      #narr_5 { animation: narr5 56s step-end infinite; }
+      #narr_6 { animation: narr6 56s step-end infinite; }
+      #narr_7 { animation: narr7 56s step-end infinite; }
+      #narr_8 { animation: narr8 56s step-end infinite; }
+      #narr_9 { animation: narr9 56s step-end infinite; }
+      #narr_10 { animation: narr10 56s step-end infinite; }
+      #narr_11 { animation: narr11 56s step-end infinite; }
+      #narr_12 { animation: narr12 56s step-end infinite; }
+      #narr_13 { animation: narr13 56s step-end infinite; }
+      #narr_14 { animation: narr14 56s step-end infinite; }
+      #narr_15 { animation: narr15 56s step-end infinite; }
+      #narr_16 { animation: narr16 56s step-end infinite; }
+      #narr_17 { animation: narr17 56s step-end infinite; }
+      #narr_18 { animation: narr18 56s step-end infinite; }
+      #narr_19 { animation: narr19 56s step-end infinite; }
+      #narr_20 { animation: narr20 56s step-end infinite; }
+      #narr_21 { animation: narr21 56s step-end infinite; }
+      #narr_22 { animation: narr22 56s step-end infinite; }
+      #narr_23 { animation: narr23 56s step-end infinite; }
+      #narr_24 { animation: narr24 56s step-end infinite; }
+      #narr_25 { animation: narr25 56s step-end infinite; }
+      #narr_26 { animation: narr26 56s step-end infinite; }
+      #narr_27 { animation: narr27 56s step-end infinite; }
+      #narr_28 { animation: narr28 56s step-end infinite; }
+
+      @keyframes narr1 { 0% { opacity: 1; } 3.571% { opacity: 0; } }
+      @keyframes narr2 { 3.571% { opacity: 1; } 7.143% { opacity: 0; } }
+      @keyframes narr3 { 7.143% { opacity: 1; } 10.714% { opacity: 0; } }
+      @keyframes narr4 { 10.714% { opacity: 1; } 14.286% { opacity: 0; } }
+      @keyframes narr5 { 14.286% { opacity: 1; } 17.857% { opacity: 0; } }
+      @keyframes narr6 { 17.857% { opacity: 1; } 21.429% { opacity: 0; } }
+      @keyframes narr7 { 21.429% { opacity: 1; } 25.000% { opacity: 0; } }
+      @keyframes narr8 { 25.000% { opacity: 1; } 28.571% { opacity: 0; } }
+      @keyframes narr9 { 28.571% { opacity: 1; } 32.143% { opacity: 0; } }
+      @keyframes narr10 { 32.143% { opacity: 1; } 35.714% { opacity: 0; } }
+      @keyframes narr11 { 35.714% { opacity: 1; } 39.286% { opacity: 0; } }
+      @keyframes narr12 { 39.286% { opacity: 1; } 42.857% { opacity: 0; } }
+      @keyframes narr13 { 42.857% { opacity: 1; } 46.429% { opacity: 0; } }
+      @keyframes narr14 { 46.429% { opacity: 1; } 50.000% { opacity: 0; } }
+      @keyframes narr15 { 50.000% { opacity: 1; } 53.571% { opacity: 0; } }
+      @keyframes narr16 { 53.571% { opacity: 1; } 57.143% { opacity: 0; } }
+      @keyframes narr17 { 57.143% { opacity: 1; } 60.714% { opacity: 0; } }
+      @keyframes narr18 { 60.714% { opacity: 1; } 64.286% { opacity: 0; } }
+      @keyframes narr19 { 64.286% { opacity: 1; } 67.857% { opacity: 0; } }
+      @keyframes narr20 { 67.857% { opacity: 1; } 71.429% { opacity: 0; } }
+      @keyframes narr21 { 71.429% { opacity: 1; } 75.000% { opacity: 0; } }
+      @keyframes narr22 { 75.000% { opacity: 1; } 78.571% { opacity: 0; } }
+      @keyframes narr23 { 78.571% { opacity: 1; } 82.143% { opacity: 0; } }
+      @keyframes narr24 { 82.143% { opacity: 1; } 85.714% { opacity: 0; } }
+      @keyframes narr25 { 85.714% { opacity: 1; } 89.286% { opacity: 0; } }
+      @keyframes narr26 { 89.286% { opacity: 1; } 92.857% { opacity: 0; } }
+      @keyframes narr27 { 92.857% { opacity: 1; } 96.429% { opacity: 0; } }
+      @keyframes narr28 { 96.429% { opacity: 1; } 100.000% { opacity: 0; } }
+
+      @keyframes hop {
+        0.000%   { x: 18px; y: 6px; width: 104px; height: 104px; }
+        3.571%   { x: 10px; y: 14px; width: 104px; height: 104px; }
+        7.143%   { x: 2px; y: 22px; width: 104px; height: 104px; }
+        10.714%  { x: 136px; y: 32px; width: 136px; height: 66px; }
+        14.286%  { x: 278px; y: 12px; width: 320px; height: 104px; }
+        17.857%  { x: 218px; y: 128px; width: 442px; height: 72px; }
+        21.429%  { x: 238px; y: 138px; width: 106px; height: 48px; }
+        25.000%  { x: 374px; y: 138px; width: 106px; height: 48px; }
+        28.571%  { x: 534px; y: 138px; width: 106px; height: 48px; }
+        32.143%  { x: -4px; y: 196px; width: 120px; height: 34px; }
+        35.714%  { x: 112px; y: 142px; width: 98px; height: 50px; }
+        39.286%  { x: 148px; y: 201px; width: 25px; height: 24px; }
+        42.857%  { x: 276px; y: 201px; width: 25px; height: 24px; }
+        46.429%  { x: 411px; y: 201px; width: 25px; height: 24px; }
+        50.000%  { x: 571px; y: 201px; width: 25px; height: 24px; }
+        53.571%  { x: -4px; y: 234px; width: 664px; height: 38px; }
+        57.143%  { x: 276px; y: 280px; width: 25px; height: 24px; }
+        60.714%  { x: 411px; y: 280px; width: 25px; height: 24px; }
+        64.286%  { x: 571px; y: 280px; width: 25px; height: 24px; }
+        67.857%  { x: 238px; y: 314px; width: 106px; height: 48px; }
+        71.429%  { x: 374px; y: 314px; width: 106px; height: 48px; }
+        75.000%  { x: 534px; y: 314px; width: 106px; height: 48px; }
+        78.571%  { x: 724px; y: 32px; width: 94px; height: 52px; }
+        82.143%  { x: 830px; y: 2px; width: 110px; height: 112px; }
+        85.714%  { x: 742px; y: 122px; width: 194px; height: 38px; }
+        89.286%  { x: 794px; y: 167px; width: 112px; height: 112px; }
+        92.857%  { x: 732px; y: 289px; width: 236px; height: 38px; }
+        96.429%  { x: 818px; y: 346px; width: 64px; height: 26px; }
+        100.000% { x: 18px; y: 6px; width: 104px; height: 104px; }
+      }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="970" height="440" fill="#ffffff"/>
+
+  <!-- Vertical Dividing Line -->
+  <line x1="702" y1="12" x2="702" y2="368" stroke="#dadce0" stroke-width="2"/>
+
+  <!-- ==================== LEFT SIDE ==================== -->
+
+  <!-- Top-left Image Stack (Raster Nodes) -->
+  <g id="img_stack_1" data-id="img_stack_1" data-class="raster_node"><image href="../../rasters/arch_arxiv_cv_2023_000000303/crop_img_stack_1.png" xlink:href="../../rasters/arch_arxiv_cv_2023_000000303/crop_img_stack_1.png" x="22" y="10" width="96" height="96" preserveAspectRatio="xMidYMid meet" /></g>
+  <g id="img_stack_2" data-id="img_stack_2" data-class="raster_node"><image href="../../rasters/arch_arxiv_cv_2023_000000303/crop_img_stack_2.png" xlink:href="../../rasters/arch_arxiv_cv_2023_000000303/crop_img_stack_2.png" x="14" y="18" width="96" height="96" preserveAspectRatio="xMidYMid meet" /></g>
+  <g id="img_stack_3" data-id="img_stack_3" data-class="raster_node"><image href="../../rasters/arch_arxiv_cv_2023_000000303/crop_img_stack_3.png" xlink:href="../../rasters/arch_arxiv_cv_2023_000000303/crop_img_stack_3.png" x="6" y="26" width="96" height="96" preserveAspectRatio="xMidYMid meet" /></g>
+
+  <!-- Off-the-shelf Tracker Node -->
+  <g data-id="tracker_node" data-class="standalone_node" data-parent="root">
+    <rect x="140" y="36" width="128" height="58" rx="8" fill="#e8eaed"/>
+    <!-- Lock Icon -->
+    <g data-id="tracker_lock" data-class="composite_whole" data-parent="tracker_node">
+      <path data-id="lock_shackle" data-class="composite_part" data-parent="tracker_lock" d="M 158 67 L 158 63 A 4 4 0 0 1 166 63 L 166 67" fill="none" stroke="#202124" stroke-width="2"/>
+      <rect data-id="lock_body" data-class="composite_part" data-parent="tracker_lock" x="154" y="67" width="16" height="12" rx="2" fill="#202124"/>
+    </g>
+    <text x="210" y="59" font-family="Arial, sans-serif" font-size="12" fill="#202124" text-anchor="middle">Off-the-shelf</text>
+    <text x="210" y="76" font-family="Arial, sans-serif" font-size="12" fill="#202124" text-anchor="middle">Tracker</text>
+  </g>
+
+  <!-- Tracked Multi-frames (Raster Nodes) -->
+  <g data-id="tracked_frames_group" data-class="composite_whole" data-parent="root">
+    <rect data-id="tracked_f1" data-class="composite_part" data-parent="tracked_frames_group" x="282" y="16" width="104" height="96" fill="#f8f9fa" stroke="#3c4043" stroke-width="1.2" stroke-dasharray="5,5"/>
+    <text data-id="tracked_f1_lbl" data-class="composite_part" data-parent="tracked_frames_group" x="334" y="64" font-family="Arial, sans-serif" font-size="8" fill="#5f6368" text-anchor="middle">[Track Frame 1]</text>
+    <rect data-id="tracked_f2" data-class="composite_part" data-parent="tracked_frames_group" x="386" y="16" width="104" height="96" fill="#f8f9fa" stroke="#3c4043" stroke-width="1.2" stroke-dasharray="5,5"/>
+    <text data-id="tracked_f2_lbl" data-class="composite_part" data-parent="tracked_frames_group" x="438" y="64" font-family="Arial, sans-serif" font-size="8" fill="#5f6368" text-anchor="middle">[Track Frame 2]</text>
+    <rect data-id="tracked_f3" data-class="composite_part" data-parent="tracked_frames_group" x="490" y="16" width="104" height="96" fill="#f8f9fa" stroke="#3c4043" stroke-width="1.2" stroke-dasharray="5,5"/>
+    <text data-id="tracked_f3_lbl" data-class="composite_part" data-parent="tracked_frames_group" x="542" y="64" font-family="Arial, sans-serif" font-size="8" fill="#5f6368" text-anchor="middle">[Track Frame 3]</text>
+
+    <!-- Point trajectories visual overlay -->
+    <circle data-id="pt_r1" data-class="composite_part" data-parent="tracked_frames_group" cx="344" cy="38" r="4" fill="#e53935"/>
+    <circle data-id="pt_r2" data-class="composite_part" data-parent="tracked_frames_group" cx="436" cy="42" r="4" fill="#e53935"/>
+    <circle data-id="pt_r3" data-class="composite_part" data-parent="tracked_frames_group" cx="510" cy="22" r="4" fill="#e53935"/>
+    <path data-id="tr_red" data-class="composite_part" data-parent="tracked_frames_group" d="M 344 38 Q 436 46 510 22" fill="none" stroke="#e53935" stroke-dasharray="3,3" stroke-width="1.5"/>
+
+    <circle data-id="pt_b1" data-class="composite_part" data-parent="tracked_frames_group" cx="334" cy="32" r="4" fill="#1e88e5"/>
+    <circle data-id="pt_b2" data-class="composite_part" data-parent="tracked_frames_group" cx="434" cy="56" r="4" fill="#1e88e5"/>
+    <circle data-id="pt_b3" data-class="composite_part" data-parent="tracked_frames_group" cx="504" cy="36" r="4" fill="#1e88e5"/>
+    <path data-id="tr_blue" data-class="composite_part" data-parent="tracked_frames_group" d="M 334 32 Q 430 60 504 36" fill="none" stroke="#1e88e5" stroke-dasharray="3,3" stroke-width="1.5"/>
+
+    <circle data-id="pt_g1" data-class="composite_part" data-parent="tracked_frames_group" cx="336" cy="62" r="4" fill="#43a047"/>
+    <circle data-id="pt_g2" data-class="composite_part" data-parent="tracked_frames_group" cx="434" cy="68" r="4" fill="#43a047"/>
+    <circle data-id="pt_g3" data-class="composite_part" data-parent="tracked_frames_group" cx="516" cy="44" r="4" fill="#43a047"/>
+    <path data-id="tr_green" data-class="composite_part" data-parent="tracked_frames_group" d="M 336 62 Q 434 72 516 44" fill="none" stroke="#43a047" stroke-dasharray="3,3" stroke-width="1.5"/>
+  </g>
+
+  <!-- Image Tokens Block (Orange) -->
+  <g data-id="image_tokens_block" data-class="standalone_node" data-parent="root">
+    <rect x="0" y="200" width="112" height="26" rx="4" fill="#fdeee2"/>
+    <rect x="8" y="205" width="17" height="16" rx="2" fill="#ef6c00"/>
+    <rect x="34" y="205" width="17" height="16" rx="2" fill="#ef6c00"/>
+    <rect x="60" y="205" width="17" height="16" rx="2" fill="#ef6c00"/>
+    <rect x="86" y="205" width="17" height="16" rx="2" fill="#ef6c00"/>
+  </g>
+
+  <!-- Language Instruction Node & Token -->
+  <g data-id="lang_inst_node" data-class="standalone_node" data-parent="root">
+    <rect x="116" y="146" width="90" height="42" rx="4" fill="#ffffff" stroke="#5f6368" stroke-width="1.2"/>
+    <text x="161" y="163" font-family="Arial, sans-serif" font-size="11" fill="#202124" text-anchor="middle">Language</text>
+    <text x="161" y="177" font-family="Arial, sans-serif" font-size="11" fill="#202124" text-anchor="middle">Instruction</text>
+  </g>
+  <g data-id="lang_token_node" data-class="standalone_node" data-parent="root">
+    <rect x="152" y="205" width="17" height="16" rx="2" fill="#689f38"/>
+  </g>
+
+  <!-- Upper Track Masked Timelines Container Box -->
+  <g data-id="masked_timelines_box" data-class="block" data-parent="root">
+    <rect x="222" y="132" width="434" height="64" rx="8" fill="#ffffff" stroke="#9aa0a6" stroke-width="1.5"/>
+
+    <!-- Track Sequence 1 (Blue) -->
+    <g data-id="upper_track_1" data-class="child_node" data-parent="masked_timelines_box">
+      <!-- Frame 1 -->
+      <polygon points="248,142 260,142 254,180 242,180" fill="none" stroke="#202124" stroke-width="1"/>
+      <circle cx="247" cy="155" r="3" fill="#1e88e5"/>
+      <text x="264" y="178" font-family="Arial, sans-serif" font-size="9" font-style="italic" fill="#202124">t<tspan font-size="0.65em" baseline-shift="sub">1</tspan></text>
+      <!-- Frame 2 -->
+      <polygon points="282,142 294,142 288,180 276,180" fill="none" stroke="#202124" stroke-width="1"/>
+      <circle cx="284" cy="167" r="3" fill="#ffffff" stroke="#70757a" stroke-width="1.2"/>
+      <text x="296" y="178" font-family="Arial, sans-serif" font-size="9" font-style="italic" fill="#202124">t<tspan font-size="0.65em" baseline-shift="sub">...</tspan></text>
+      <!-- Frame 3 -->
+      <polygon points="320,142 332,142 326,180 314,180" fill="none" stroke="#202124" stroke-width="1"/>
+      <circle cx="323" cy="162" r="3" fill="#ffffff" stroke="#70757a" stroke-width="1.2"/>
+      <text x="336" y="178" font-family="Arial, sans-serif" font-size="9" font-style="italic" fill="#202124">t<tspan font-size="0.65em" baseline-shift="sub">H</tspan></text>
+      <!-- trajectory line -->
+      <path d="M 247 155 Q 284 172 323 162" fill="none" stroke="#70757a" stroke-dasharray="2,2" stroke-width="1"/>
+    </g>
+
+    <!-- Track Sequence 2 (Red) -->
+    <g data-id="upper_track_2" data-class="child_node" data-parent="masked_timelines_box">
+      <!-- Frame 1 -->
+      <polygon points="384,142 396,142 390,180 378,180" fill="none" stroke="#202124" stroke-width="1"/>
+      <circle cx="383" cy="155" r="3" fill="#e53935"/>
+      <text x="400" y="178" font-family="Arial, sans-serif" font-size="9" font-style="italic" fill="#202124">t<tspan font-size="0.65em" baseline-shift="sub">1</tspan></text>
+      <!-- Frame 2 -->
+      <polygon points="418,142 430,142 424,180 412,180" fill="none" stroke="#202124" stroke-width="1"/>
+      <circle cx="420" cy="167" r="3" fill="#ffffff" stroke="#70757a" stroke-width="1.2"/>
+      <text x="432" y="178" font-family="Arial, sans-serif" font-size="9" font-style="italic" fill="#202124">t<tspan font-size="0.65em" baseline-shift="sub">...</tspan></text>
+      <!-- Frame 3 -->
+      <polygon points="456,142 468,142 462,180 450,180" fill="none" stroke="#202124" stroke-width="1"/>
+      <circle cx="463" cy="164" r="3" fill="#ffffff" stroke="#70757a" stroke-width="1.2"/>
+      <text x="472" y="178" font-family="Arial, sans-serif" font-size="9" font-style="italic" fill="#202124">t<tspan font-size="0.65em" baseline-shift="sub">H</tspan></text>
+      <!-- trajectory line -->
+      <path d="M 383 155 Q 420 172 463 164" fill="none" stroke="#70757a" stroke-dasharray="2,2" stroke-width="1"/>
+    </g>
+
+    <!-- Ellipsis 1 -->
+    <text x="502" y="162" font-family="Arial, sans-serif" font-size="16" fill="#202124" text-anchor="middle">···</text>
+
+    <!-- Track Sequence 3 (Green) -->
+    <g data-id="upper_track_3" data-class="child_node" data-parent="masked_timelines_box">
+      <!-- Frame 1 -->
+      <polygon points="544,142 556,142 550,180 538,180" fill="none" stroke="#202124" stroke-width="1"/>
+      <circle cx="543" cy="163" r="3" fill="#43a047"/>
+      <text x="560" y="178" font-family="Arial, sans-serif" font-size="9" font-style="italic" fill="#202124">t<tspan font-size="0.65em" baseline-shift="sub">1</tspan></text>
+      <!-- Frame 2 -->
+      <polygon points="578,142 590,142 584,180 572,180" fill="none" stroke="#202124" stroke-width="1"/>
+      <circle cx="580" cy="165" r="3" fill="#ffffff" stroke="#70757a" stroke-width="1.2"/>
+      <text x="592" y="178" font-family="Arial, sans-serif" font-size="9" font-style="italic" fill="#202124">t<tspan font-size="0.65em" baseline-shift="sub">...</tspan></text>
+      <!-- Frame 3 -->
+      <polygon points="616,142 628,142 622,180 610,180" fill="none" stroke="#202124" stroke-width="1"/>
+      <circle cx="623" cy="160" r="3" fill="#ffffff" stroke="#70757a" stroke-width="1.2"/>
+      <text x="632" y="178" font-family="Arial, sans-serif" font-size="9" font-style="italic" fill="#202124">t<tspan font-size="0.65em" baseline-shift="sub">H</tspan></text>
+      <!-- trajectory line -->
+      <path d="M 543 163 Q 580 170 623 160" fill="none" stroke="#70757a" stroke-dasharray="2,2" stroke-width="1"/>
+    </g>
+  </g>
+
+  <!-- Input Track Tokens (Blue squares above Track Transformer) -->
+  <g data-id="input_track_tok_1" data-class="standalone_node" data-parent="root">
+    <rect x="280" y="205" width="17" height="16" rx="3" fill="#3b78e7"/>
+  </g>
+  <g data-id="input_track_tok_2" data-class="standalone_node" data-parent="root">
+    <rect x="415" y="205" width="17" height="16" rx="3" fill="#3b78e7"/>
+  </g>
+  <text x="502" y="217" font-family="Arial, sans-serif" font-size="14" fill="#202124" text-anchor="middle">···</text>
+  <g data-id="input_track_tok_3" data-class="standalone_node" data-parent="root">
+    <rect x="575" y="205" width="17" height="16" rx="3" fill="#3b78e7"/>
+  </g>
+
+  <!-- Main Track Transformer Bar -->
+  <g data-id="track_transformer_bar" data-class="standalone_node" data-parent="root">
+    <rect x="0" y="238" width="656" height="30" rx="6" fill="#d7e3fc"/>
+    <text x="328" y="258" font-family="Arial, sans-serif" font-size="13" fill="#202124" text-anchor="middle">Track Transformer</text>
+  </g>
+
+  <!-- Output Track Tokens (Blue squares below Track Transformer) -->
+  <g data-id="output_track_tok_1" data-class="standalone_node" data-parent="root">
+    <rect x="280" y="284" width="17" height="16" rx="3" fill="#3b78e7"/>
+  </g>
+  <g data-id="output_track_tok_2" data-class="standalone_node" data-parent="root">
+    <rect x="415" y="284" width="17" height="16" rx="3" fill="#3b78e7"/>
+  </g>
+  <text x="502" y="296" font-family="Arial, sans-serif" font-size="14" fill="#202124" text-anchor="middle">···</text>
+  <g data-id="output_track_tok_3" data-class="standalone_node" data-parent="root">
+    <rect x="575" y="284" width="17" height="16" rx="3" fill="#3b78e7"/>
+  </g>
+
+  <!-- Lower Complete Timelines Container / Elements -->
+  <!-- Track Sequence 1 Lower (Blue) -->
+  <g data-id="lower_track_1" data-class="standalone_node" data-parent="root">
+    <polygon points="248,318 260,318 254,356 242,356" fill="none" stroke="#202124" stroke-width="1"/>
+    <circle cx="247" cy="331" r="3" fill="#1e88e5"/>
+    <text x="264" y="354" font-family="Arial, sans-serif" font-size="9" font-style="italic" fill="#202124">t<tspan font-size="0.65em" baseline-shift="sub">1</tspan></text>
+    <polygon points="282,318 294,318 288,356 276,356" fill="none" stroke="#202124" stroke-width="1"/>
+    <circle cx="284" cy="343" r="3" fill="#1e88e5"/>
+    <text x="296" y="354" font-family="Arial, sans-serif" font-size="9" font-style="italic" fill="#202124">t<tspan font-size="0.65em" baseline-shift="sub">...</tspan></text>
+    <polygon points="320,318 332,318 326,356 314,356" fill="none" stroke="#202124" stroke-width="1"/>
+    <circle cx="323" cy="338" r="3" fill="#1e88e5"/>
+    <text x="336" y="354" font-family="Arial, sans-serif" font-size="9" font-style="italic" fill="#202124">t<tspan font-size="0.65em" baseline-shift="sub">H</tspan></text>
+    <path d="M 247 331 Q 284 348 323 338" fill="none" stroke="#1e88e5" stroke-dasharray="2,2" stroke-width="1.2"/>
+  </g>
+
+  <!-- Track Sequence 2 Lower (Red) -->
+  <g data-id="lower_track_2" data-class="standalone_node" data-parent="root">
+    <polygon points="384,318 396,318 390,356 378,356" fill="none" stroke="#202124" stroke-width="1"/>
+    <circle cx="383" cy="331" r="3" fill="#e53935"/>
+    <text x="400" y="354" font-family="Arial, sans-serif" font-size="9" font-style="italic" fill="#202124">t<tspan font-size="0.65em" baseline-shift="sub">1</tspan></text>
+    <polygon points="418,318 430,318 424,356 412,356" fill="none" stroke="#202124" stroke-width="1"/>
+    <circle cx="420" cy="343" r="3" fill="#e53935"/>
+    <text x="432" y="354" font-family="Arial, sans-serif" font-size="9" font-style="italic" fill="#202124">t<tspan font-size="0.65em" baseline-shift="sub">...</tspan></text>
+    <polygon points="456,318 468,318 462,356 450,356" fill="none" stroke="#202124" stroke-width="1"/>
+    <circle cx="463" cy="340" r="3" fill="#e53935"/>
+    <text x="472" y="354" font-family="Arial, sans-serif" font-size="9" font-style="italic" fill="#202124">t<tspan font-size="0.65em" baseline-shift="sub">H</tspan></text>
+    <path d="M 383 331 Q 420 348 463 340" fill="none" stroke="#e53935" stroke-dasharray="2,2" stroke-width="1.2"/>
+  </g>
+
+  <!-- Ellipsis 2 -->
+  <text x="502" y="338" font-family="Arial, sans-serif" font-size="16" fill="#202124" text-anchor="middle">···</text>
+
+  <!-- Track Sequence 3 Lower (Green) -->
+  <g data-id="lower_track_3" data-class="standalone_node" data-parent="root">
+    <polygon points="544,318 556,318 550,356 538,356" fill="none" stroke="#202124" stroke-width="1"/>
+    <circle cx="543" cy="339" r="3" fill="#43a047"/>
+    <text x="560" y="354" font-family="Arial, sans-serif" font-size="9" font-style="italic" fill="#202124">t<tspan font-size="0.65em" baseline-shift="sub">1</tspan></text>
+    <polygon points="578,318 590,318 584,356 572,356" fill="none" stroke="#202124" stroke-width="1"/>
+    <circle cx="580" cy="341" r="3" fill="#43a047"/>
+    <text x="592" y="354" font-family="Arial, sans-serif" font-size="9" font-style="italic" fill="#202124">t<tspan font-size="0.65em" baseline-shift="sub">...</tspan></text>
+    <polygon points="616,318 628,318 622,356 610,356" fill="none" stroke="#202124" stroke-width="1"/>
+    <circle cx="623" cy="336" r="3" fill="#43a047"/>
+    <text x="632" y="354" font-family="Arial, sans-serif" font-size="9" font-style="italic" fill="#202124">t<tspan font-size="0.65em" baseline-shift="sub">H</tspan></text>
+    <path d="M 543 339 Q 580 346 623 336" fill="none" stroke="#43a047" stroke-dasharray="2,2" stroke-width="1.2"/>
+  </g>
+
+  <!-- Legend Block -->
+  <g data-id="legend_block" data-class="block" data-parent="root">
+    <rect x="0" y="309" width="224" height="66" rx="8" fill="#f8f9fa"/>
+    <!-- Item 1: image token -->
+    <rect x="8" y="318" width="17" height="15" rx="2" fill="#ef6c00"/>
+    <text x="31" y="330" font-family="Arial, sans-serif" font-size="11" fill="#202124">image token</text>
+    <!-- Item 2: language token -->
+    <rect x="8" y="348" width="17" height="15" rx="2" fill="#689f38"/>
+    <text x="31" y="360" font-family="Arial, sans-serif" font-size="11" fill="#202124">language token</text>
+    <!-- Item 3: track token -->
+    <rect x="120" y="318" width="17" height="15" rx="2" fill="#3b78e7"/>
+    <text x="143" y="330" font-family="Arial, sans-serif" font-size="11" fill="#202124">track token</text>
+    <!-- Item 4: masked point -->
+    <circle cx="128" cy="355" r="4.5" fill="#ffffff" stroke="#70757a" stroke-width="1.5"/>
+    <text x="143" y="360" font-family="Arial, sans-serif" font-size="11" fill="#202124">masked point</text>
+  </g>
+
+  <!-- ==================== RIGHT SIDE ==================== -->
+
+  <!-- Top-Right Language Instruction Node -->
+  <g data-id="inf_lang_node" data-class="standalone_node" data-parent="root">
+    <rect x="728" y="36" width="86" height="44" rx="2" fill="#ffffff" stroke="#5f6368" stroke-width="1.2"/>
+    <text x="771" y="54" font-family="Arial, sans-serif" font-size="11" fill="#202124" text-anchor="middle">Language</text>
+    <text x="771" y="68" font-family="Arial, sans-serif" font-size="11" fill="#202124" text-anchor="middle">Instruction</text>
+  </g>
+
+  <!-- Top-Right Camera Frame (Raster Node) -->
+  <g id="inf_camera_frame" data-id="inf_camera_frame" data-class="raster_node"><image href="../../rasters/arch_arxiv_cv_2023_000000303/crop_inf_camera_frame.png" xlink:href="../../rasters/arch_arxiv_cv_2023_000000303/crop_inf_camera_frame.png" x="834" y="6" width="102" height="104" preserveAspectRatio="xMidYMid meet" /></g>
+
+  <!-- Right Track Transformer Node -->
+  <g data-id="inf_track_transformer" data-class="standalone_node" data-parent="root">
+    <rect x="746" y="126" width="186" height="30" rx="6" fill="#d7e3fc"/>
+    <!-- Lock Icon -->
+    <g data-id="inf_lock" data-class="composite_whole" data-parent="inf_track_transformer">
+      <path data-id="inf_lock_shackle" data-class="composite_part" data-parent="inf_lock" d="M 764 139 L 764 136 A 3.5 3.5 0 0 1 771 136 L 771 139" fill="none" stroke="#202124" stroke-width="1.8"/>
+      <rect data-id="inf_lock_body" data-class="composite_part" data-parent="inf_lock" x="761" y="139" width="13" height="10" rx="1.5" fill="#202124"/>
+    </g>
+    <text x="843" y="146" font-family="Arial, sans-serif" font-size="12" fill="#202124" text-anchor="middle">Track Transformer</text>
+  </g>
+
+  <!-- Trajectory Visualization Image Frame (Raster Node) -->
+  <g id="inf_traj_frame" data-id="inf_traj_frame" data-class="raster_node"><image href="../../rasters/arch_arxiv_cv_2023_000000303/crop_inf_traj_frame.png" xlink:href="../../rasters/arch_arxiv_cv_2023_000000303/crop_inf_traj_frame.png" x="798" y="171" width="104" height="104" preserveAspectRatio="xMidYMid meet" /></g>
+
+  <!-- Track-guided Policy Bar -->
+  <g data-id="inf_policy_bar" data-class="standalone_node" data-parent="root">
+    <rect x="736" y="293" width="228" height="30" rx="6" fill="#ffe0b2"/>
+    <text x="850" y="313" font-family="Arial, sans-serif" font-size="13" fill="#202124" text-anchor="middle">Track-guided Policy <tspan font-style="italic">π</tspan></text>
+  </g>
+
+  <!-- Action Node -->
+  <g data-id="action_node" data-class="standalone_node" data-parent="root">
+    <text x="850" y="364" font-family="Arial, sans-serif" font-size="14" fill="#202124" text-anchor="middle">action</text>
+  </g>
+
+  <!-- ==================== EDGES / ARROWS ==================== -->
+
+  <!-- Left Stack to Tracker -->
+  <path data-id="edge_stack_to_tracker" data-class="edge" data-source="img_stack_3" data-target="tracker_node" d="M 118 65 L 138 65" fill="none" stroke="#70757a" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Tracker to Tracked Frames -->
+  <path data-id="edge_tracker_to_frames" data-class="edge" data-source="tracker_node" data-target="tracked_frames_group" d="M 268 65 L 280 65" fill="none" stroke="#70757a" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Stack down to Image Tokens -->
+  <path data-id="edge_stack_to_img_tok" data-class="edge" data-source="img_stack_3" data-target="image_tokens_block" d="M 58 116 L 58 198" fill="none" stroke="#70757a" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Image Tokens to Track Transformer -->
+  <path data-id="edge_img_tok_to_tf" data-class="edge" data-source="image_tokens_block" data-target="track_transformer_bar" d="M 58 226 L 58 236" fill="none" stroke="#70757a" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Language Instruction to Language Token -->
+  <path data-id="edge_lang_to_token" data-class="edge" data-source="lang_inst_node" data-target="lang_token_node" d="M 161 188 L 161 203" fill="none" stroke="#70757a" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Language Token to Track Transformer -->
+  <path data-id="edge_lang_tok_to_tf" data-class="edge" data-source="lang_token_node" data-target="track_transformer_bar" d="M 161 221 L 161 236" fill="none" stroke="#70757a" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Tracked Frames down to Upper Timeline Container -->
+  <path data-id="edge_frames_to_masked_box" data-class="edge" data-source="tracked_frames_group" data-target="masked_timelines_box" d="M 438 112 L 438 130" fill="none" stroke="#70757a" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Upper Timelines to Input Track Tokens -->
+  <path data-id="edge_timeline_to_tok1" data-class="edge" data-source="masked_timelines_box" data-target="input_track_tok_1" d="M 288 196 L 288 203" fill="none" stroke="#70757a" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path data-id="edge_timeline_to_tok2" data-class="edge" data-source="masked_timelines_box" data-target="input_track_tok_2" d="M 423 196 L 423 203" fill="none" stroke="#70757a" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path data-id="edge_timeline_to_tok3" data-class="edge" data-source="masked_timelines_box" data-target="input_track_tok_3" d="M 583 196 L 583 203" fill="none" stroke="#70757a" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Input Track Tokens to Track Transformer -->
+  <path data-id="edge_in_tok1_to_tf" data-class="edge" data-source="input_track_tok_1" data-target="track_transformer_bar" d="M 288 221 L 288 236" fill="none" stroke="#70757a" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path data-id="edge_in_tok2_to_tf" data-class="edge" data-source="input_track_tok_2" data-target="track_transformer_bar" d="M 423 221 L 423 236" fill="none" stroke="#70757a" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path data-id="edge_in_tok3_to_tf" data-class="edge" data-source="input_track_tok_3" data-target="track_transformer_bar" d="M 583 221 L 583 236" fill="none" stroke="#70757a" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Track Transformer down to Output Track Tokens -->
+  <path data-id="edge_tf_to_out_tok1" data-class="edge" data-source="track_transformer_bar" data-target="output_track_tok_1" d="M 288 268 L 288 282" fill="none" stroke="#70757a" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path data-id="edge_tf_to_out_tok2" data-class="edge" data-source="track_transformer_bar" data-target="output_track_tok_2" d="M 423 268 L 423 282" fill="none" stroke="#70757a" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path data-id="edge_tf_to_out_tok3" data-class="edge" data-source="track_transformer_bar" data-target="output_track_tok_3" d="M 583 268 L 583 282" fill="none" stroke="#70757a" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Output Track Tokens to Lower Timelines -->
+  <path data-id="edge_out_tok1_to_lower1" data-class="edge" data-source="output_track_tok_1" data-target="lower_track_1" d="M 288 300 L 288 316" fill="none" stroke="#70757a" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path data-id="edge_out_tok2_to_lower2" data-class="edge" data-source="output_track_tok_2" data-target="lower_track_2" d="M 423 300 L 423 316" fill="none" stroke="#70757a" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path data-id="edge_out_tok3_to_lower3" data-class="edge" data-source="output_track_tok_3" data-target="lower_track_3" d="M 583 300 L 583 316" fill="none" stroke="#70757a" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Right Side: Language Instruction to Track Transformer -->
+  <path data-id="edge_inf_lang_to_tf" data-class="edge" data-source="inf_lang_node" data-target="inf_track_transformer" d="M 771 80 L 771 124" fill="none" stroke="#70757a" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Right Side: Camera Frame to Track Transformer -->
+  <path data-id="edge_inf_cam_to_tf" data-class="edge" data-source="inf_camera_frame" data-target="inf_track_transformer" d="M 885 110 L 885 124" fill="none" stroke="#70757a" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Right Side: Camera Frame bypass to Policy -->
+  <path data-id="edge_inf_cam_to_policy" data-class="edge" data-source="inf_camera_frame" data-target="inf_policy_bar" d="M 936 60 L 950 60 L 950 291" fill="none" stroke="#70757a" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Right Side: Track Transformer to Trajectory Frame -->
+  <path data-id="edge_inf_tf_to_traj" data-class="edge" data-source="inf_track_transformer" data-target="inf_traj_frame" d="M 843 156 L 843 169" fill="none" stroke="#70757a" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Right Side: Trajectory Frame to Policy -->
+  <path data-id="edge_inf_traj_to_policy" data-class="edge" data-source="inf_traj_frame" data-target="inf_policy_bar" d="M 850 275 L 850 291" fill="none" stroke="#70757a" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Right Side: Policy to Action -->
+  <path data-id="edge_policy_to_action" data-class="edge" data-source="inf_policy_bar" data-target="action_node" d="M 850 323 L 850 348" fill="none" stroke="#3c4043" stroke-width="1.8" marker-end="url(#arrow-dark)"/>
+
+  <!-- Dynamic Narration Banner -->
+  <g id="narration_banner">
+    <rect x="35" y="390" width="900" height="42" rx="6" fill="#f1f3f4" stroke="#dadce0" stroke-width="1"/>
+    <text id="narr_1" class="narr-text" x="50%" y="416" text-anchor="middle">The pipeline begins with a sequence of video frames showing the robot workspace.</text>
+    <text id="narr_2" class="narr-text" x="50%" y="416" text-anchor="middle">Subsequent frames capture the demonstration over time.</text>
+    <text id="narr_3" class="narr-text" x="50%" y="416" text-anchor="middle">The top frame provides the reference image for tokenization and tracking.</text>
+    <text id="narr_4" class="narr-text" x="50%" y="416" text-anchor="middle">The input video sequence is processed by a frozen off-the-shelf tracker.</text>
+    <text id="narr_5" class="narr-text" x="50%" y="416" text-anchor="middle">The tracker extracts multi-point trajectories across consecutive visual frames.</text>
+    <text id="narr_6" class="narr-text" x="50%" y="416" text-anchor="middle">These trajectory sequences are formatted into timelines containing masked points.</text>
+    <text id="narr_7" class="narr-text" x="50%" y="416" text-anchor="middle">The first point timeline includes masked intermediate points across the time steps.</text>
+    <text id="narr_8" class="narr-text" x="50%" y="416" text-anchor="middle">The second point track follows a similar masked sequence.</text>
+    <text id="narr_9" class="narr-text" x="50%" y="416" text-anchor="middle">Likewise, the third track contains masked points across its timeline.</text>
+    <text id="narr_10" class="narr-text" x="50%" y="416" text-anchor="middle">In parallel, image tokens are extracted directly from the initial frame.</text>
+    <text id="narr_11" class="narr-text" x="50%" y="416" text-anchor="middle">A language instruction is also provided as input.</text>
+    <text id="narr_12" class="narr-text" x="50%" y="416" text-anchor="middle">The instruction is mapped to a language token.</text>
+    <text id="narr_13" class="narr-text" x="50%" y="416" text-anchor="middle">Each masked timeline is converted into an input track token.</text>
+    <text id="narr_14" class="narr-text" x="50%" y="416" text-anchor="middle">This includes the token for the second point trajectory.</text>
+    <text id="narr_15" class="narr-text" x="50%" y="416" text-anchor="middle">And the track token for the third trajectory.</text>
+    <text id="narr_16" class="narr-text" x="50%" y="416" text-anchor="middle">The image tokens, language token, and track tokens are fed jointly into the Track Transformer.</text>
+    <text id="narr_17" class="narr-text" x="50%" y="416" text-anchor="middle">The model outputs updated track tokens corresponding to the completed paths.</text>
+    <text id="narr_18" class="narr-text" x="50%" y="416" text-anchor="middle">An updated track token is generated for the second path.</text>
+    <text id="narr_19" class="narr-text" x="50%" y="416" text-anchor="middle">And for the third point track.</text>
+    <text id="narr_20" class="narr-text" x="50%" y="416" text-anchor="middle">These tokens reconstruct the fully unmasked point trajectory from start to finish.</text>
+    <text id="narr_21" class="narr-text" x="50%" y="416" text-anchor="middle">The second trajectory is fully reconstructed as well.</text>
+    <text id="narr_22" class="narr-text" x="50%" y="416" text-anchor="middle">As is the complete third point trajectory.</text>
+    <text id="narr_23" class="narr-text" x="50%" y="416" text-anchor="middle">At inference time, a language instruction is supplied.</text>
+    <text id="narr_24" class="narr-text" x="50%" y="416" text-anchor="middle">The current visual observation frame is captured from the camera.</text>
+    <text id="narr_25" class="narr-text" x="50%" y="416" text-anchor="middle">The instruction and observation are processed by the frozen Track Transformer.</text>
+    <text id="narr_26" class="narr-text" x="50%" y="416" text-anchor="middle">This produces predicted point tracks overlaid across the scene.</text>
+    <text id="narr_27" class="narr-text" x="50%" y="416" text-anchor="middle">Both the initial visual frame and predicted tracks enter the Track-guided Policy.</text>
+    <text id="narr_28" class="narr-text" x="50%" y="416" text-anchor="middle">Finally, the policy outputs the predicted action for the robot.</text>
+  </g>
+
+  <!-- Focus Box -->
+  <rect id="focus_box" fill="none" stroke="#FF0000" stroke-width="4" stroke-dasharray="8,4" rx="6" />
+</svg>

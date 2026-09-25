@@ -1,0 +1,611 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AnimateBanana — Alpha Masking — CVPR_2025_arch03005</title>
+<!--
+  AnimateBanana — Alpha Masking — CVPR_2025_arch03005
+  An animated visual narrative produced by the AnimateBanana pipeline.
+
+  This file is self-contained: the animation, its images, its narration and its
+  controls are all inside it. Drop it on a server, open it from a disk, or put
+  it in an <iframe> - it needs nothing else and fetches nothing.
+
+  The animation is CSS. The controls drive it through the browser's animation
+  API - pause holds every keyframe at once, the bar scrubs them all to the same
+  moment, speed sets their rate together - and the caption is read from a clock
+  of the page's own that is driven alongside them. It has to be its own clock:
+  the drawing is made of hundreds of short animations that each stop when they
+  are done, so reading the time off any one of them gives a watch that stopped
+  half a second in.
+-->
+<style>
+  :root {
+    --ink: #1A1815;
+    --paper: #FFFEF9;
+    --banana: #FFD43B;
+    --banana-deep: #F2B200;
+    --banana-soft: #FFF2B8;
+    --mute: #6b6558;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--paper); color: var(--ink); }
+  body {
+    font-family: ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    padding: 16px;
+  }
+  .ab { margin: 0 auto; max-width: 1400px; }
+  .ab-stage {
+    background: #fff;
+    border: 2px solid var(--ink);
+    border-radius: 14px;
+    padding: 10px;
+    overflow: hidden;
+  }
+  .ab-stage svg { display: block; width: 100%; height: auto; }
+
+  /* ---- Transport ----
+     Every control is the same height and centred on the same line, so the bar
+     reads as one object rather than a row of parts that happen to be adjacent. */
+  .ab-bar {
+    --h: 40px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    border-radius: calc(var(--h) / 2 + 8px);
+  }
+  .ab-bar > * { flex: 0 0 auto; height: var(--h); }
+
+  .ab-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 16px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    line-height: 1;
+    color: var(--ink);
+    background: #fff;
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    cursor: pointer;
+  }
+  .ab-btn:hover { background: var(--banana-soft); }
+  .ab-btn:active { transform: translateY(1px); }
+
+  .ab-play { width: var(--h); padding: 0; border-radius: 50%; background: var(--ink); color: var(--paper); }
+  .ab-play:hover { background: var(--ink); }
+  .ab-play svg { width: 14px; height: 14px; fill: currentColor; display: block; }
+  .ab-play .ab-ic-play { display: none; margin-left: 2px; }
+  .ab.is-paused .ab-play .ab-ic-play { display: block; }
+  .ab.is-paused .ab-play .ab-ic-pause { display: none; }
+
+  /* the rail is drawn; the range input laid over it is what you actually grab */
+  .ab-scrub { position: relative; flex: 1 1 180px !important; min-width: 120px;
+              display: flex; align-items: center; }
+  .ab-rail {
+    position: absolute; inset-inline: 0; height: 9px;
+    background: #fff; border: 1.5px solid var(--ink); border-radius: 999px;
+    overflow: hidden; pointer-events: none;
+  }
+  .ab-rail i { display: block; width: 0; height: 100%; background: var(--banana); }
+  .ab-seek {
+    position: relative; width: 100%; height: var(--h); margin: 0;
+    background: none; -webkit-appearance: none; appearance: none; cursor: pointer;
+  }
+  .ab-seek::-webkit-slider-runnable-track { height: var(--h); background: transparent; }
+  .ab-seek::-moz-range-track { height: var(--h); background: transparent; }
+  .ab-seek::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none;
+    width: 18px; height: 18px; border-radius: 50%;
+    border: 2.5px solid var(--ink); background: var(--banana);
+  }
+  .ab-seek::-moz-range-thumb {
+    width: 16px; height: 16px; border-radius: 50%;
+    border: 2.5px solid var(--ink); background: var(--banana);
+  }
+  .ab-seek:focus-visible { outline: none; }
+  .ab-scrub:focus-within .ab-rail { box-shadow: 0 0 0 3px var(--banana); }
+
+  .ab-time {
+    display: inline-flex;
+    align-items: center;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.72rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--mute);
+    white-space: nowrap;
+  }
+  .ab-time b { color: var(--ink); }
+
+  .ab-speed {
+    display: inline-flex;
+    align-items: stretch;
+    background: #fff;
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .ab-speed button {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    padding: 0;
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--ink);
+    background: #fff;
+    border: 0;
+    cursor: pointer;
+  }
+  .ab-speed button:hover { background: var(--banana-soft); }
+  .ab-speed button[disabled] { opacity: 0.35; cursor: default; background: #fff; }
+  .ab-rate {
+    display: grid;
+    place-items: center;
+    min-width: 56px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.74rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    border-inline: 2px solid var(--ink);
+  }
+  .ab.is-fast .ab-rate { background: var(--banana); }
+
+  /* Captions on or off, said in words rather than left to be inferred */
+  .ab-toggle .ab-led {
+    width: 11px; height: 11px; border-radius: 50%;
+    border: 2px solid var(--ink); background: var(--banana);
+  }
+  .ab-toggle[aria-pressed="false"] { color: var(--mute); }
+  .ab-toggle[aria-pressed="false"] .ab-led { background: #fff; }
+
+  /* ---- The line being narrated ---- */
+  .ab-cap {
+    display: flex;
+    align-items: center;
+    min-height: 3.4em;
+    margin: 10px 0 0;
+    padding: 12px 16px;
+    font-size: clamp(0.95rem, 0.9rem + 0.3vw, 1.15rem);
+    font-weight: 600;
+    font-style: italic;
+    line-height: 1.5;
+    background: var(--banana-soft);
+    border: 1.5px solid var(--banana);
+    border-left: 5px solid var(--banana-deep);
+    border-radius: 10px;
+    transition: opacity .18s ease;
+  }
+  .ab-cap.is-swap { opacity: 0; }
+  .ab.is-off .ab-cap { display: none; }
+  @media (prefers-reduced-motion: reduce) { .ab-cap { transition: none; } }
+
+  /* Narrow: the bar wraps to two rows and squares off, rather than squeezing
+     the scrub bar down to nothing. */
+  @media (max-width: 720px) {
+    .ab-bar { flex-wrap: wrap; border-radius: 20px; }
+    .ab-scrub { order: 3; flex-basis: 100% !important; }
+    .ab-time { order: 2; margin-left: auto; }
+  }
+</style>
+</head>
+<body>
+<figure class="ab">
+  <div class="ab-stage">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 234" width="100%" height="100%">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 1 2 L 8 5 L 1 8 z" fill="#1b363f" />
+    </marker>
+    <style>
+      /* Base ghost state for all animated diagram elements */
+      #q_map_container, #q_map_label, #edge_q_to_theta, #edge_q_to_mlp,
+      #p_ref_node, #theta_offset_node, #edge_pref_to_sum, #edge_theta_to_sum,
+      #sum_node, #sampling_label, #edge_sum_to_grid,
+      #f_bev_grid, #f_bev_label, #edge_grid_to_sampled,
+      #sampled_features_container, #sampled_features_label, #edge_sampled_to_aggregate,
+      #mlp_node, #mlp_label, #edge_mlp_to_resample,
+      #dynamic_resample_node, #dynamic_resample_label, #edge_resample_to_attention,
+      #attention_weights_math, #attention_weights_label, #edge_attention_to_aggregate,
+      #aggregate_node, #linear_node, #edge_linear_to_delta,
+      #delta_q_map_container, #delta_q_map_label {
+        opacity: 0.15;
+        transition: opacity 0.1s ease;
+      }
+
+      /* Container persistence */
+      #bg_container {
+        opacity: 1;
+      }
+
+      /* Diagram element animations */
+      #q_map_container, #q_map_label, #edge_q_to_theta, #edge_q_to_mlp {
+        animation: anim_ts1 20s infinite;
+      }
+      #p_ref_node, #theta_offset_node, #edge_pref_to_sum, #edge_theta_to_sum {
+        animation: anim_ts2 20s infinite;
+      }
+      #sum_node, #sampling_label, #edge_sum_to_grid {
+        animation: anim_ts3 20s infinite;
+      }
+      #f_bev_grid, #f_bev_label, #edge_grid_to_sampled {
+        animation: anim_ts4 20s infinite;
+      }
+      #sampled_features_container, #sampled_features_label, #edge_sampled_to_aggregate {
+        animation: anim_ts5 20s infinite;
+      }
+      #mlp_node, #mlp_label, #edge_mlp_to_resample {
+        animation: anim_ts6 20s infinite;
+      }
+      #dynamic_resample_node, #dynamic_resample_label, #edge_resample_to_attention {
+        animation: anim_ts7 20s infinite;
+      }
+      #attention_weights_math, #attention_weights_label, #edge_attention_to_aggregate {
+        animation: anim_ts8 20s infinite;
+      }
+      #aggregate_node, #linear_node, #edge_linear_to_delta {
+        animation: anim_ts9 20s infinite;
+      }
+      #delta_q_map_container, #delta_q_map_label {
+        animation: anim_ts10 20s infinite;
+      }
+
+      /* Narration banner animations */
+
+      /* Keyframes for Diagram Elements */
+      @keyframes anim_ts1 {
+        0%, 9.999% { opacity: 1; }
+        10%, 100% { opacity: 0.15; }
+      }
+      @keyframes anim_ts2 {
+        0%, 9.999% { opacity: 0.15; }
+        10%, 19.999% { opacity: 1; }
+        20%, 100% { opacity: 0.15; }
+      }
+      @keyframes anim_ts3 {
+        0%, 19.999% { opacity: 0.15; }
+        20%, 29.999% { opacity: 1; }
+        30%, 100% { opacity: 0.15; }
+      }
+      @keyframes anim_ts4 {
+        0%, 29.999% { opacity: 0.15; }
+        30%, 39.999% { opacity: 1; }
+        40%, 100% { opacity: 0.15; }
+      }
+      @keyframes anim_ts5 {
+        0%, 39.999% { opacity: 0.15; }
+        40%, 49.999% { opacity: 1; }
+        50%, 100% { opacity: 0.15; }
+      }
+      @keyframes anim_ts6 {
+        0%, 49.999% { opacity: 0.15; }
+        50%, 59.999% { opacity: 1; }
+        60%, 100% { opacity: 0.15; }
+      }
+      @keyframes anim_ts7 {
+        0%, 59.999% { opacity: 0.15; }
+        60%, 69.999% { opacity: 1; }
+        70%, 100% { opacity: 0.15; }
+      }
+      @keyframes anim_ts8 {
+        0%, 69.999% { opacity: 0.15; }
+        70%, 79.999% { opacity: 1; }
+        80%, 100% { opacity: 0.15; }
+      }
+      @keyframes anim_ts9 {
+        0%, 79.999% { opacity: 0.15; }
+        80%, 89.999% { opacity: 1; }
+        90%, 100% { opacity: 0.15; }
+      }
+      @keyframes anim_ts10 {
+        0%, 89.999% { opacity: 0.15; }
+        90%, 100% { opacity: 1; }
+      }
+
+      /* Keyframes for Narration Subtitles */
+    </style>
+  </defs>
+
+  <!-- Background Container -->
+  <rect id="bg_container" data-id="bg_container" data-class="standalone_node" data-parent="root" x="3" y="3" width="474" height="224" rx="15" ry="15" fill="#e1eed8" stroke="#2a525d" stroke-width="1.5"/>
+
+  <!-- Edges / Connections -->
+  <g>
+    <!-- Branch from Q_map to Theta_offset and MLP -->
+    <path id="edge_q_to_theta" data-id="edge_q_to_theta" data-class="edge" data-source="q_map_container" data-target="theta_offset_node" d="M 42 156 L 57 156 L 57 123 L 83 123" fill="none" stroke="#1b363f" stroke-width="1.3" marker-end="url(#arrow)"/>
+    <path id="edge_q_to_mlp" data-id="edge_q_to_mlp" data-class="edge" data-source="q_map_container" data-target="mlp_node" d="M 57 156 L 57 185 L 83 185" fill="none" stroke="#1b363f" stroke-width="1.3" marker-end="url(#arrow)"/>
+    
+    <!-- P_ref to Sum -->
+    <path id="edge_pref_to_sum" data-id="edge_pref_to_sum" data-class="edge" data-source="p_ref_node" data-target="sum_node" d="M 85 64 L 131 64" fill="none" stroke="#1b363f" stroke-width="1.3" marker-end="url(#arrow)"/>
+    
+    <!-- Theta_offset to Sum -->
+    <path id="edge_theta_to_sum" data-id="edge_theta_to_sum" data-class="edge" data-source="theta_offset_node" data-target="sum_node" d="M 127 124 L 147 124 L 147 80" fill="none" stroke="#1b363f" stroke-width="1.3" marker-end="url(#arrow)"/>
+    
+    <!-- Sum to F_bev sampling -->
+    <path id="edge_sum_to_grid" data-id="edge_sum_to_grid" data-class="edge" data-source="sum_node" data-target="f_bev_grid" d="M 147 49 L 147 28 L 205 28" fill="none" stroke="#1b363f" stroke-width="1.3" marker-end="url(#arrow)"/>
+    
+    <!-- F_bev to Sampled Features -->
+    <path id="edge_grid_to_sampled" data-id="edge_grid_to_sampled" data-class="edge" data-source="f_bev_grid" data-target="sampled_features_container" d="M 252 45 L 252 77" fill="none" stroke="#1b363f" stroke-width="1.3" marker-end="url(#arrow)"/>
+    
+    <!-- Sampled Features to Aggregate -->
+    <path id="edge_sampled_to_aggregate" data-id="edge_sampled_to_aggregate" data-class="edge" data-source="sampled_features_container" data-target="aggregate_node" d="M 300 96 L 333 96" fill="none" stroke="#1b363f" stroke-width="1.3" marker-end="url(#arrow)"/>
+    
+    <!-- Linear to Delta Q_map -->
+    <path id="edge_linear_to_delta" data-id="edge_linear_to_delta" data-class="edge" data-source="linear_node" data-target="delta_q_map_container" d="M 411 96 L 433 96" fill="none" stroke="#1b363f" stroke-width="1.3" marker-end="url(#arrow)"/>
+    
+    <!-- MLP to Dynamic Resample -->
+    <path id="edge_mlp_to_resample" data-id="edge_mlp_to_resample" data-class="edge" data-source="mlp_node" data-target="dynamic_resample_node" d="M 168 185 L 210 185" fill="none" stroke="#1b363f" stroke-width="1.3" marker-end="url(#arrow)"/>
+    
+    <!-- Dynamic Resample to Attention Weights -->
+    <path id="edge_resample_to_attention" data-id="edge_resample_to_attention" data-class="edge" data-source="dynamic_resample_node" data-target="attention_weights_math" d="M 266 185 L 315 185" fill="none" stroke="#1b363f" stroke-width="1.3" marker-end="url(#arrow)"/>
+    
+    <!-- Attention Weights to Aggregate -->
+    <path id="edge_attention_to_aggregate" data-id="edge_attention_to_aggregate" data-class="edge" data-source="attention_weights_math" data-target="aggregate_node" d="M 353 175 L 353 142" fill="none" stroke="#1b363f" stroke-width="1.3" marker-end="url(#arrow)"/>
+  </g>
+
+  <!-- Left: Q_map container (Raster Placeholder) -->
+  <g id="q_map_container" data-id="q_map_container" data-class="raster_node"><image href="data:image/png;base64,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" x="14" y="122" width="28" height="68" preserveAspectRatio="xMidYMid meet" /></g>
+  <text id="q_map_label" data-id="q_map_label" data-class="text_node" data-parent="root" x="28" y="206" font-family="sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#1b363f">Q<tspan font-size="0.65em" baseline-shift="sub">map</tspan></text>
+
+  <!-- Theta Offset Trapezoid Node -->
+  <g id="theta_offset_node" data-id="theta_offset_node" data-class="composite_whole" data-parent="root">
+    <polygon id="theta_offset_poly" data-id="theta_offset_poly" data-class="composite_part" data-parent="theta_offset_node" points="85,94 127,107 127,143 85,153" fill="#cde4cc" stroke="#255243" stroke-width="1.2"/>
+    <text id="theta_offset_text" data-id="theta_offset_text" data-class="composite_part" data-parent="theta_offset_node" x="108" y="130" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1b363f" transform="rotate(-65 108 130)" text-anchor="middle">&#x03B8;<tspan font-size="0.65em" baseline-shift="sub">offset</tspan></text>
+  </g>
+
+  <!-- P_ref Standalone Node -->
+  <text id="p_ref_node" data-id="p_ref_node" data-class="standalone_node" data-parent="root" x="66" y="68" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#1b363f">P<tspan font-size="0.65em" baseline-shift="sub">ref</tspan></text>
+
+  <!-- Sum Node (+) -->
+  <g id="sum_node" data-id="sum_node" data-class="composite_whole" data-parent="root">
+    <circle id="sum_circle" data-id="sum_circle" data-class="composite_part" data-parent="sum_node" cx="147" cy="64" r="14" fill="#e1eed8" stroke="#1f4e5b" stroke-width="1.5"/>
+    <line id="sum_line_h" data-id="sum_line_h" data-class="composite_part" data-parent="sum_node" x1="140" y1="64" x2="154" y2="64" stroke="#1f4e5b" stroke-width="1.5"/>
+    <line id="sum_line_v" data-id="sum_line_v" data-class="composite_part" data-parent="sum_node" x1="147" y1="57" x2="147" y2="71" stroke="#1f4e5b" stroke-width="1.5"/>
+  </g>
+
+  <!-- Sampling Label -->
+  <text id="sampling_label" data-id="sampling_label" data-class="text_node" data-parent="root" x="171" y="23" font-family="sans-serif" font-size="12" text-anchor="middle" fill="#1b363f">sampling</text>
+
+  <!-- F_bev Grid (Raster Placeholder) -->
+  <g id="f_bev_grid" data-id="f_bev_grid" data-class="raster_node"><image href="data:image/png;base64,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" x="207" y="11" width="128" height="34" preserveAspectRatio="xMidYMid meet" /></g>
+  <text id="f_bev_label" data-id="f_bev_label" data-class="text_node" data-parent="root" x="276" y="58" font-family="sans-serif" font-size="13" font-weight="bold" fill="#1b363f">F<tspan font-size="0.65em" baseline-shift="sub">bev</tspan></text>
+
+  <!-- Sampled Features Container (Raster Placeholder) -->
+  <g id="sampled_features_container" data-id="sampled_features_container" data-class="raster_node"><image href="data:image/png;base64,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" x="204" y="79" width="96" height="34" preserveAspectRatio="xMidYMid meet" /></g>
+  <text id="sampled_features_label" data-id="sampled_features_label" data-class="text_node" data-parent="root" x="252" y="127" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#1b363f">Sampled Features</text>
+
+  <!-- Aggregate Node -->
+  <g id="aggregate_node" data-id="aggregate_node" data-class="composite_whole" data-parent="root">
+    <rect id="aggregate_rect" data-id="aggregate_rect" data-class="composite_part" data-parent="aggregate_node" x="335" y="52" width="35" height="88" rx="6" ry="6" fill="#c7e3be" stroke="#255243" stroke-width="1.2"/>
+    <text id="aggregate_text" data-id="aggregate_text" data-class="composite_part" data-parent="aggregate_node" x="352.5" y="96" font-family="sans-serif" font-size="13" fill="#1b363f" text-anchor="middle" transform="rotate(-90 352.5 96)">Aggregate</text>
+  </g>
+
+  <!-- Linear Node -->
+  <g id="linear_node" data-id="linear_node" data-class="composite_whole" data-parent="root">
+    <rect id="linear_rect" data-id="linear_rect" data-class="composite_part" data-parent="linear_node" x="375" y="52" width="36" height="88" rx="6" ry="6" fill="#c7e3be" stroke="#255243" stroke-width="1.2"/>
+    <text id="linear_text" data-id="linear_text" data-class="composite_part" data-parent="linear_node" x="393" y="96" font-family="sans-serif" font-size="13" fill="#1b363f" text-anchor="middle" transform="rotate(-90 393 96)">Linear</text>
+  </g>
+
+  <!-- Delta Q_map Container (Raster Placeholder) -->
+  <g id="delta_q_map_container" data-id="delta_q_map_container" data-class="raster_node"><image href="data:image/png;base64,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" x="435" y="61" width="28" height="69" preserveAspectRatio="xMidYMid meet" /></g>
+  <text id="delta_q_map_label" data-id="delta_q_map_label" data-class="text_node" data-parent="root" x="446" y="144" font-family="sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#1b363f">&#x0394;Q<tspan font-size="0.65em" baseline-shift="sub">map</tspan></text>
+
+  <!-- MLP Block -->
+  <g id="mlp_node" data-id="mlp_node" data-class="composite_whole" data-parent="root">
+    <rect id="mlp_rect" data-id="mlp_rect" data-class="composite_part" data-parent="mlp_node" x="85" y="161" width="83" height="48" rx="6" ry="6" fill="#c7e3be" stroke="#255243" stroke-width="1.2"/>
+    <!-- MLP Graph Internal Lines -->
+    <line id="mlp_l1" data-id="mlp_l1" data-class="composite_part" data-parent="mlp_node" x1="99" y1="172" x2="126" y2="172" stroke="#255243" stroke-width="0.8"/>
+    <line id="mlp_l2" data-id="mlp_l2" data-class="composite_part" data-parent="mlp_node" x1="99" y1="172" x2="126" y2="185" stroke="#255243" stroke-width="0.8"/>
+    <line id="mlp_l3" data-id="mlp_l3" data-class="composite_part" data-parent="mlp_node" x1="99" y1="172" x2="126" y2="198" stroke="#255243" stroke-width="0.8"/>
+    <line id="mlp_l4" data-id="mlp_l4" data-class="composite_part" data-parent="mlp_node" x1="99" y1="185" x2="126" y2="172" stroke="#255243" stroke-width="0.8"/>
+    <line id="mlp_l5" data-id="mlp_l5" data-class="composite_part" data-parent="mlp_node" x1="99" y1="185" x2="126" y2="185" stroke="#255243" stroke-width="0.8"/>
+    <line id="mlp_l6" data-id="mlp_l6" data-class="mlp_part" data-parent="mlp_node" x1="99" y1="185" x2="126" y2="198" stroke="#255243" stroke-width="0.8"/>
+    <line id="mlp_l7" data-id="mlp_l7" data-class="composite_part" data-parent="mlp_node" x1="99" y1="198" x2="126" y2="172" stroke="#255243" stroke-width="0.8"/>
+    <line id="mlp_l8" data-id="mlp_l8" data-class="composite_part" data-parent="mlp_node" x1="99" y1="198" x2="126" y2="185" stroke="#255243" stroke-width="0.8"/>
+    <line id="mlp_l9" data-id="mlp_l9" data-class="composite_part" data-parent="mlp_node" x1="99" y1="198" x2="126" y2="198" stroke="#255243" stroke-width="0.8"/>
+    <line id="mlp_l10" data-id="mlp_l10" data-class="composite_part" data-parent="mlp_node" x1="126" y1="172" x2="153" y2="175" stroke="#255243" stroke-width="0.8"/>
+    <line id="mlp_l11" data-id="mlp_l11" data-class="composite_part" data-parent="mlp_node" x1="126" y1="172" x2="153" y2="195" stroke="#255243" stroke-width="0.8"/>
+    <line id="mlp_l12" data-id="mlp_l12" data-class="composite_part" data-parent="mlp_node" x1="126" y1="185" x2="153" y2="175" stroke="#255243" stroke-width="0.8"/>
+    <line id="mlp_l13" data-id="mlp_l13" data-class="composite_part" data-parent="mlp_node" x1="126" y1="185" x2="153" y2="195" stroke="#255243" stroke-width="0.8"/>
+    <line id="mlp_l14" data-id="mlp_l14" data-class="composite_part" data-parent="mlp_node" x1="126" y1="198" x2="153" y2="175" stroke="#255243" stroke-width="0.8"/>
+    <line id="mlp_l15" data-id="mlp_l15" data-class="composite_part" data-parent="mlp_node" x1="126" y1="198" x2="153" y2="195" stroke="#255243" stroke-width="0.8"/>
+    <!-- MLP Circles -->
+    <circle id="mlp_c1" data-id="mlp_c1" data-class="composite_part" data-parent="mlp_node" cx="99" cy="172" r="3.5" fill="#e1eed8" stroke="#255243" stroke-width="1"/>
+    <circle id="mlp_c2" data-id="mlp_c2" data-class="composite_part" data-parent="mlp_node" cx="99" cy="185" r="3.5" fill="#e1eed8" stroke="#255243" stroke-width="1"/>
+    <circle id="mlp_c3" data-id="mlp_c3" data-class="composite_part" data-parent="mlp_node" cx="99" cy="198" r="3.5" fill="#e1eed8" stroke="#255243" stroke-width="1"/>
+    <circle id="mlp_c4" data-id="mlp_c4" data-class="composite_part" data-parent="mlp_node" cx="126" cy="172" r="3.5" fill="#e1eed8" stroke="#255243" stroke-width="1"/>
+    <circle id="mlp_c5" data-id="mlp_c5" data-class="composite_part" data-parent="mlp_node" cx="126" cy="185" r="3.5" fill="#e1eed8" stroke="#255243" stroke-width="1"/>
+    <circle id="mlp_c6" data-id="mlp_c6" data-class="composite_part" data-parent="mlp_node" cx="126" cy="198" r="3.5" fill="#e1eed8" stroke="#255243" stroke-width="1"/>
+    <circle id="mlp_c7" data-id="mlp_c7" data-class="composite_part" data-parent="mlp_node" cx="153" cy="175" r="3.5" fill="#e1eed8" stroke="#255243" stroke-width="1"/>
+    <circle id="mlp_c8" data-id="mlp_c8" data-class="composite_part" data-parent="mlp_node" cx="153" cy="195" r="3.5" fill="#e1eed8" stroke="#255243" stroke-width="1"/>
+  </g>
+  <text id="mlp_label" data-id="mlp_label" data-class="text_node" data-parent="root" x="126" y="222" font-family="sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#1b363f">MLP</text>
+
+  <!-- Dynamic Resample Composite Node -->
+  <g id="dynamic_resample_node" data-id="dynamic_resample_node" data-class="composite_whole" data-parent="root">
+    <text id="dynamic_resample_math" data-id="dynamic_resample_math" data-class="composite_part" data-parent="dynamic_resample_node" x="241" y="160" font-family="sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#1b363f">&#x1D475; &#x223C; (&#x03BC;<tspan font-size="0.65em" baseline-shift="sub">i</tspan>, &#x03C3;<tspan font-size="0.65em" baseline-shift="sub">i</tspan><tspan font-size="0.65em" baseline-shift="super">2</tspan>)</text>
+    <line id="resample_axis_x" data-id="resample_axis_x" data-class="composite_part" data-parent="dynamic_resample_node" x1="192" y1="200" x2="289" y2="200" stroke="#1b363f" stroke-width="1.2"/>
+    <line id="resample_axis_y" data-id="resample_axis_y" data-class="composite_part" data-parent="dynamic_resample_node" x1="241" y1="167" x2="241" y2="202" stroke="#1b363f" stroke-width="1"/>
+    <path id="resample_curve" data-id="resample_curve" data-class="composite_part" data-parent="dynamic_resample_node" d="M 200 200 C 220 200 228 168 241 168 C 254 168 262 200 282 200" fill="none" stroke="#1b363f" stroke-width="1.3"/>
+  </g>
+  <text id="dynamic_resample_label" data-id="dynamic_resample_label" data-class="text_node" data-parent="root" x="241" y="222" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#1b363f">Dynamic Resample</text>
+
+  <!-- Attention Weights Standalone Node -->
+  <text id="attention_weights_math" data-id="attention_weights_math" data-class="standalone_node" data-parent="root" x="380" y="191" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#1b363f">&#x03B1;<tspan font-size="0.65em" baseline-shift="sub">i</tspan> = &#x03BC;<tspan font-size="0.65em" baseline-shift="sub">i</tspan> + &#x03C3;<tspan font-size="0.65em" baseline-shift="sub">i</tspan>&#x03F5;</text>
+  <text id="attention_weights_label" data-id="attention_weights_label" data-class="text_node" data-parent="root" x="380" y="209" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#1b363f">Attention Weights</text>
+
+  <!-- Dynamic Narration Banner Subtitles -->
+</svg>
+  </div>
+
+  <div class="ab-bar">
+    <button type="button" class="ab-btn ab-play" aria-label="Pause">
+      <svg class="ab-ic-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 5.5l11 6.5-11 6.5z"/></svg>
+      <svg class="ab-ic-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 5.5h3.6v13H7.5zM12.9 5.5h3.6v13h-3.6z"/></svg>
+    </button>
+
+    <div class="ab-scrub">
+      <span class="ab-rail" aria-hidden="true"><i class="ab-played"></i></span>
+      <input type="range" class="ab-seek" min="0" max="1000" value="0" step="1"
+             aria-label="Scrub through the animation">
+    </div>
+
+    <span class="ab-time"><b>0:00</b>&nbsp;/&nbsp;<span class="ab-total">0:00</span></span>
+
+    <div class="ab-speed" role="group" aria-label="Playback speed">
+      <button type="button" class="ab-slower" aria-label="Slower">&#8722;</button>
+      <span class="ab-rate" aria-live="polite">1&#215;</span>
+      <button type="button" class="ab-faster" aria-label="Faster">+</button>
+    </div>
+
+    <button type="button" class="ab-btn ab-toggle" aria-pressed="true">
+      <span class="ab-led" aria-hidden="true"></span>
+      <span class="ab-word">Captions on</span>
+    </button>
+  </div>
+
+  <figcaption class="ab-cap" aria-live="polite"></figcaption>
+</figure>
+
+<script>
+(function () {
+  var CUES = [{"start": 0.0, "end": 2.0, "text": "The uncertainty-aware attention module takes map queries as input, splitting them into two parallel processing branches."}, {"start": 2.0, "end": 4.0, "text": "In the upper branch, the queries predict spatial coordinate offsets to be added to reference points."}, {"start": 4.0, "end": 6.0, "text": "The summed positions define sampling locations across the bird's-eye-view grid."}, {"start": 6.0, "end": 8.0, "text": "Features are sampled directly from the bird's-eye-view feature map at these locations."}, {"start": 8.0, "end": 10.0, "text": "This extracts a focused set of sampled spatial features."}, {"start": 10.0, "end": 12.0, "text": "Simultaneously, the lower branch feeds the map queries into a multilayer perceptron."}, {"start": 12.0, "end": 14.0, "text": "The network outputs mean and variance parameters for dynamic resampling from a Gaussian distribution."}, {"start": 14.0, "end": 16.0, "text": "Learned attention weights are formed by incorporating stochastic disturbance into the distribution parameters."}, {"start": 16.0, "end": 18.0, "text": "The sampled features and dynamic attention weights are aggregated and projected through a linear layer."}, {"start": 18.0, "end": 20.0, "text": "The resulting update terms refine the map queries for generalizable vectorization."}];
+  var LOOP = 20.0;
+  var REPEATS = Infinity;
+  var RATES = [0.25, 0.5, 0.75, 1, 1.5, 2, 3];
+
+  var fig = document.querySelector('.ab');
+  var cap = document.querySelector('.ab-cap');
+  var play = document.querySelector('.ab-play');
+  var seek = document.querySelector('.ab-seek');
+  var played = document.querySelector('.ab-played');
+  var nowEl = document.querySelector('.ab-time b');
+  var totalEl = document.querySelector('.ab-total');
+  var rateEl = document.querySelector('.ab-rate');
+  var slower = document.querySelector('.ab-slower');
+  var faster = document.querySelector('.ab-faster');
+  var toggle = document.querySelector('.ab-toggle');
+  var word = toggle.querySelector('.ab-word');
+
+  var at = -1, swap = null, rate = 3, paused = false, scrubbing = false;
+
+  // THE CLOCK. The drawing is hundreds of short animations that each stop when
+  // they are done, so none of them can be asked what time it is. This one runs
+  // the length of the whole piece, does nothing visible, and is driven by the
+  // same controls - so the caption, the bar and the picture cannot disagree.
+  var master = null;
+  try {
+    master = document.documentElement.animate(
+      [{ opacity: 1 }, { opacity: 1 }],
+      { duration: (LOOP || 1) * 1000, iterations: REPEATS }
+    );
+  } catch (e) {}
+  var t0 = performance.now();
+
+  function others() {
+    try {
+      var runs = document.getAnimations ? document.getAnimations() : [];
+      return runs.filter(function (a) { return a !== master; });
+    } catch (e) { return []; }
+  }
+  function clock() {
+    var t;
+    if (master && master.currentTime != null) t = master.currentTime / 1000;
+    else t = (performance.now() - t0) / 1000;
+    return REPEATS === 1 ? Math.min(t, LOOP) : (t % (LOOP || 1));
+  }
+  function each(fn) {
+    if (master) { try { fn(master); } catch (e) {} }
+    others().forEach(function (a) { try { fn(a); } catch (e) {} });
+  }
+  function clip(t) {
+    t = Math.max(0, t || 0);
+    return Math.floor(t / 60) + ':' + ('0' + Math.floor(t % 60)).slice(-2);
+  }
+
+  play.addEventListener('click', function () {
+    paused = !paused;
+    // Restarting a finished piece rather than leaving Play doing nothing
+    if (!paused && REPEATS === 1 && clock() >= LOOP - 0.05) each(function (a) { a.currentTime = 0; });
+    each(function (a) { paused ? a.pause() : a.play(); });
+    if (!paused) t0 = performance.now() - clock() * 1000;
+    fig.classList.toggle('is-paused', paused);
+    play.setAttribute('aria-label', paused ? 'Play' : 'Pause');
+  });
+
+  function setRate(i) {
+    rate = Math.max(0, Math.min(RATES.length - 1, i));
+    var r = RATES[rate];
+    each(function (a) { a.playbackRate = r; });
+    rateEl.textContent = r + '×';
+    fig.classList.toggle('is-fast', r !== 1);
+    slower.disabled = rate === 0;
+    faster.disabled = rate === RATES.length - 1;
+  }
+  slower.addEventListener('click', function () { setRate(rate - 1); });
+  faster.addEventListener('click', function () { setRate(rate + 1); });
+
+  seek.addEventListener('pointerdown', function () { scrubbing = true; });
+  seek.addEventListener('input', function () {
+    var t = (Number(seek.value) / 1000) * LOOP;
+    each(function (a) { a.currentTime = t * 1000; });
+    t0 = performance.now() - t * 1000;
+    paint(true);
+  });
+  seek.addEventListener('change', function () { scrubbing = false; });
+
+  toggle.addEventListener('click', function () {
+    var on = toggle.getAttribute('aria-pressed') !== 'true';
+    toggle.setAttribute('aria-pressed', String(on));
+    word.textContent = on ? 'Captions on' : 'Captions off';
+    fig.classList.toggle('is-off', !on);
+  });
+
+  function paint(force) {
+    var t = clock();
+    nowEl.textContent = clip(t);
+    if (!scrubbing) seek.value = String(Math.round((t / (LOOP || 1)) * 1000));
+    played.style.width = ((t / (LOOP || 1)) * 100) + '%';
+
+    var k = -1;
+    for (var i = 0; i < CUES.length; i++) { if (t >= CUES[i].start - 0.05) k = i; }
+    if (k !== at || force === true) {
+      at = k;
+      var text = k >= 0 ? CUES[k].text : '';
+      if (text !== cap.textContent) {
+        cap.classList.add('is-swap');
+        clearTimeout(swap);
+        swap = setTimeout(function () {
+          cap.textContent = text;
+          cap.classList.remove('is-swap');
+        }, 150);
+      }
+    }
+  }
+
+  // Two ways round, on purpose. requestAnimationFrame gives a smooth bar while
+  // the page is on screen, and stops dead in a background tab or an embed the
+  // browser considers hidden - where the animation itself keeps running, so the
+  // caption would be left behind. The slow timer covers exactly that case.
+  function frame() { paint(); requestAnimationFrame(frame); }
+
+  totalEl.textContent = clip(LOOP);
+  setRate(3);
+  if (!CUES.length) { fig.classList.add('is-off'); toggle.style.display = 'none'; }
+  requestAnimationFrame(frame);
+  setInterval(paint, 250);
+})();
+</script>
+</body>
+</html>

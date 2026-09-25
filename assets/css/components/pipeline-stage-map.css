@@ -1,0 +1,158 @@
+pipeline-stage-map { display: block; }
+
+/* ---- Stage rail ---- */
+.psm-map {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 6px;
+  padding: 16px 0 42px;
+  flex-wrap: wrap;
+}
+.psm-node {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 160px;
+  text-align: center;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-family: inherit;
+  padding: 8px 6px;
+  border-radius: var(--radius-md);
+  transition: background var(--dur-fast) var(--ease-out);
+}
+.psm-node:hover { background: rgba(255, 255, 255, 0.7); }
+
+/* Connecting rule that runs behind the dots */
+.psm-node:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 15px;
+  left: calc(50% + 16px);
+  width: calc(100% - 32px);
+  height: 1px;
+  background: var(--line-strong);
+}
+@media (max-width: 760px) { .psm-node::after { display: none; } }
+
+.psm-dot {
+  width: 17px; height: 17px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 2px solid var(--line-strong);
+  box-shadow: var(--shadow-xs);
+  transition: background var(--dur) var(--ease-out),
+              border-color var(--dur) var(--ease-out),
+              transform var(--dur) var(--ease-spring);
+}
+.psm-node-active .psm-dot {
+  background: var(--pink);
+  border-color: var(--pink-ink);
+  transform: scale(1.25);
+  box-shadow: 0 0 0 5px rgba(242, 201, 212, 0.4);
+}
+.psm-label { font-size: var(--fs-xs); font-weight: 600; color: var(--ink-faint); transition: color var(--dur-fast) var(--ease-out); }
+.psm-node-active .psm-label { color: var(--ink); }
+
+/* ---- Before / after panels ---- */
+.psm-panels { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+@media (max-width: 760px) { .psm-panels { grid-template-columns: 1fr; } }
+
+.psm-panel {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  padding: 18px 20px 22px;
+}
+.psm-panel-head {
+  font-size: var(--fs-micro);
+  letter-spacing: var(--tracking-kicker);
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  font-weight: 650;
+  margin-bottom: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+.psm-zoom {
+  font-size: var(--fs-micro);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 6px 11px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--bg-alt);
+  color: var(--ink-soft);
+  cursor: pointer;
+  font-family: inherit;
+  transition: background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+}
+.psm-zoom:hover { background: var(--yellow-soft); color: var(--ink); }
+
+.psm-frame {
+  height: 200px;
+  border-radius: var(--radius-md);
+  background-color: var(--bg-alt);
+  background-image:
+    linear-gradient(rgba(219, 205, 176, 0.22) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(219, 205, 176, 0.22) 1px, transparent 1px);
+  background-size: 20px 20px;
+  border: 1px solid var(--line);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+.psm-render {
+  width: 72%;
+  height: 72%;
+  border: 1.5px dashed var(--pink);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.65);
+  display: grid;
+  place-items: center;
+  padding: 12px;
+  text-align: center;
+  font-size: var(--fs-xs);
+  color: var(--pink-ink);
+  font-weight: 550;
+  transition: transform var(--dur) var(--ease-out);
+}
+.psm-zoomed { transform: scale(1.18); }
+
+.psm-code-title { font-size: var(--fs-xs); font-weight: 650; margin-bottom: 10px; color: var(--ink-soft); }
+.psm-code {
+  background: #201B12;
+  color: #EFE6D0;
+  border-radius: var(--radius-md);
+  padding: 15px 17px;
+  font-family: var(--font-mono);
+  font-size: 0.7188rem;
+  line-height: 1.68;
+  white-space: pre-wrap;
+  min-height: 148px;
+  margin: 0;
+  overflow-x: auto;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.psm-changed {
+  max-width: 68ch;
+  margin: 28px auto 0;
+  text-align: center;
+  font-size: var(--fs-sm);
+  color: var(--ink-soft);
+  padding: 18px 20px 0;
+  border-top: 1px solid var(--line);
+}
+.psm-changed strong { color: var(--ink); font-weight: 650; }
+/* A pipeline intermediate: shown to explain the method, not to be lifted
+   from the page. See assets/js/lib/no-copy.js. */
+.psm-code { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }

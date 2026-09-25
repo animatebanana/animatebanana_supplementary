@@ -1,0 +1,54 @@
+[
+ {
+  "t": 0.0,
+  "text": "The pipeline begins with the Breast Cancer Image Dataset."
+ },
+ {
+  "t": 2.2,
+  "text": "A branch from the dataset leads to the Raw Ultrasonography Images."
+ },
+ {
+  "t": 4.4,
+  "text": "The raw images then enter a preprocessing stage."
+ },
+ {
+  "t": 6.6,
+  "text": "Inside this stage, the images undergo Scaling."
+ },
+ {
+  "t": 8.8,
+  "text": "Next, the data proceeds through Normalization."
+ },
+ {
+  "t": 11.0,
+  "text": "The preprocessed output is then sent to Simple Linear Iterative Clustering, labeled SLIC."
+ },
+ {
+  "t": 13.2,
+  "text": "The flow continues into a Modified U Net module."
+ },
+ {
+  "t": 15.4,
+  "text": "This branch culminates in the Trained Segmentation Model."
+ },
+ {
+  "t": 17.6,
+  "text": "In the second parallel branch from the dataset, the data is routed to Masked Image and Labels."
+ },
+ {
+  "t": 19.8,
+  "text": "From there, it proceeds to Feature Extraction for VGG 16."
+ },
+ {
+  "t": 22.0,
+  "text": "The extracted features then connect to Fully Connected Dense Layers."
+ },
+ {
+  "t": 24.2,
+  "text": "This path produces the Trained Detection Model."
+ },
+ {
+  "t": 26.4,
+  "text": "Finally, both the Trained Segmentation Model and Trained Detection Model merge into the Pipelining Framework."
+ }
+]

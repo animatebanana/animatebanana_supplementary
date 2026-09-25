@@ -1,0 +1,46 @@
+[
+ {
+  "t": 0.0,
+  "text": "First, the Weighted Fusion mechanism combines feature representations extracted from multiple levels."
+ },
+ {
+  "t": 2.451,
+  "text": "Four distinct level features from the image encoder serve as the inputs."
+ },
+ {
+  "t": 4.77,
+  "text": "Each feature is scaled by a preset weighting factor."
+ },
+ {
+  "t": 7.155,
+  "text": "These weighted feature vectors are then summed together."
+ },
+ {
+  "t": 9.474,
+  "text": "The accumulated sum is normalized by dividing by the total sum of the weights."
+ },
+ {
+  "t": 11.793,
+  "text": "This produces the final fused multi-level feature representation."
+ },
+ {
+  "t": 14.178,
+  "text": "Alternatively, the Learnable Fusion mechanism fuses features in a data-driven manner."
+ },
+ {
+  "t": 16.496,
+  "text": "The four multi-level feature vectors are again taken as inputs."
+ },
+ {
+  "t": 18.815,
+  "text": "Here, all input features are concatenated across the channel dimension into a single joint representation."
+ },
+ {
+  "t": 21.2,
+  "text": "A learnable adapter processes and reduces the dimensionality of the concatenated features."
+ },
+ {
+  "t": 23.519,
+  "text": "This yields the final enhanced fused feature vector."
+ }
+]

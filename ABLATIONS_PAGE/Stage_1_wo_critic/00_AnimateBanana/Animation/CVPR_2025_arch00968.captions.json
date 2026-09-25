@@ -1,0 +1,182 @@
+[
+ {
+  "t": 0.0,
+  "text": "The pipeline begins with the input referring expression describing specific target attributes."
+ },
+ {
+  "t": 2.2,
+  "text": "Simultaneously, the query image containing multiple candidate objects is provided."
+ },
+ {
+  "t": 4.4,
+  "text": "Both inputs pass through dedicated backbones and a cross-modality feature enhancer."
+ },
+ {
+  "t": 6.6,
+  "text": "This extracts multi-scale visual features across four pyramid levels."
+ },
+ {
+  "t": 8.8,
+  "text": "The visual features are projected via a linear mapping layer into the text feature space."
+ },
+ {
+  "t": 11.0,
+  "text": "Meanwhile, the aligned text feature is retrieved from the language branch."
+ },
+ {
+  "t": 14.84,
+  "text": "Element-wise multiplication computes cross-modal correlation between mapped visual tokens and text."
+ },
+ {
+  "t": 17.04,
+  "text": "This generates similarity features responsive to the specified referring expression."
+ },
+ {
+  "t": 19.24,
+  "text": "A U-shaped Contextual Attribute Density Estimator processes the similarity and visual features."
+ },
+ {
+  "t": 21.44,
+  "text": "The estimator outputs predicted density maps indicating attribute intensity."
+ },
+ {
+  "t": 23.64,
+  "text": "These are compared against the ground truth density maps."
+ },
+ {
+  "t": 25.84,
+  "text": "The density loss provides direct supervision to guide fine-grained contextual attribute learning."
+ },
+ {
+  "t": 28.04,
+  "text": "The intermediate multi-scale representations form the Contextual Attribute Density features."
+ },
+ {
+  "t": 30.24,
+  "text": "Next, the CAD Attention Module applies spatial attention to enhance foreground regions."
+ },
+ {
+  "t": 32.44,
+  "text": "The multi-scale CAD features enter the spatial attention branch."
+ },
+ {
+  "t": 34.64,
+  "text": "Channel-wise max pooling extracts peak activation features."
+ },
+ {
+  "t": 36.84,
+  "text": "Average pooling simultaneously aggregates channel context."
+ },
+ {
+  "t": 39.04,
+  "text": "The pooled descriptors are concatenated along the channel dimension."
+ },
+ {
+  "t": 41.24,
+  "text": "A convolutional layer processes the combined spatial descriptor."
+ },
+ {
+  "t": 43.44,
+  "text": "A sigmoid function produces the spatial attention map."
+ },
+ {
+  "t": 45.64,
+  "text": "Processing continues into the channel attention block."
+ },
+ {
+  "t": 47.84,
+  "text": "The raw visual features are introduced."
+ },
+ {
+  "t": 50.04,
+  "text": "They are multiplied by the spatial attention map to yield spatially attended features."
+ },
+ {
+  "t": 52.24,
+  "text": "Spatial max pooling aggregates peak activations across spatial dimensions."
+ },
+ {
+  "t": 54.44,
+  "text": "Spatial average pooling captures global context across each channel."
+ },
+ {
+  "t": 56.64,
+  "text": "Shared multilayer perceptrons transform both pooled representations."
+ },
+ {
+  "t": 60.48,
+  "text": "The transformed channel vectors are summed together."
+ },
+ {
+  "t": 62.68,
+  "text": "A sigmoid function generates the final channel attention weights."
+ },
+ {
+  "t": 64.88,
+  "text": "These weights are applied element-wise to the spatially attended visual features."
+ },
+ {
+  "t": 67.08,
+  "text": "This produces the CAD-enhanced multi-scale visual features."
+ },
+ {
+  "t": 69.28,
+  "text": "In parallel, the CAD Dynamic Query Module initializes the object queries."
+ },
+ {
+  "t": 71.48,
+  "text": "The CAD features provide rich spatial and attribute density information."
+ },
+ {
+  "t": 73.68,
+  "text": "Top-K positions with highest text similarity scores are selected as key locations."
+ },
+ {
+  "t": 75.88,
+  "text": "For content initialization, the text init branch dynamically encodes expression attributes."
+ },
+ {
+  "t": 78.08,
+  "text": "The text feature is passed into a learnable linear layer."
+ },
+ {
+  "t": 81.92,
+  "text": "A GELU activation generates dynamic text features."
+ },
+ {
+  "t": 84.12,
+  "text": "Initial query embeddings are introduced."
+ },
+ {
+  "t": 86.32,
+  "text": "Matrix multiplication combines queries with dynamic text features to form text weights."
+ },
+ {
+  "t": 88.52,
+  "text": "A second multiplication with the text feature yields text-dynamic initialized queries."
+ },
+ {
+  "t": 90.72,
+  "text": "Cross-attention then fuses these text-initialized queries with the top-K CAD features."
+ },
+ {
+  "t": 92.92,
+  "text": "This creates highly discriminative dynamic queries tailored to both image density and text."
+ },
+ {
+  "t": 95.12,
+  "text": "The CAD-enhanced visual features and dynamic text queries are gathered together."
+ },
+ {
+  "t": 97.32,
+  "text": "They are fed into the cross-modality localization decoder across successive decoding layers."
+ },
+ {
+  "t": 99.52,
+  "text": "The decoder outputs accurate bounding box predictions and referring expression counts."
+ },
+ {
+  "t": 101.72,
+  "text": "Finally, the localization loss optimizes overall detection and counting performance."
+ }
+]

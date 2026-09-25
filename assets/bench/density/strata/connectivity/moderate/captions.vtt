@@ -1,0 +1,58 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.010
+ESC-Net begins by taking an input image alongside a set of candidate class text descriptions.
+
+2
+00:00:06.010 --> 00:00:12.010
+Pre-trained CLIP vision and language encoders process the inputs to extract image and text representations.
+
+3
+00:00:12.010 --> 00:00:17.650
+The extracted vision feature map and language feature vectors are paired for correlation modeling.
+
+4
+00:00:17.650 --> 00:00:22.910
+A vision-language correlation step computes cosine similarity across spatial coordinates for each class.
+
+5
+00:00:22.910 --> 00:00:28.180
+The correlation maps and features are progressively refined through N consecutive ESC Blocks.
+
+6
+00:00:28.180 --> 00:00:33.070
+Inside each block, the correlation map stack enters the Pseudo Prompt Generator.
+
+7
+00:00:33.070 --> 00:00:37.590
+The generator thresholds and clusters candidate object locations across the image.
+
+8
+00:00:37.590 --> 00:00:45.080
+This creates pseudo point coordinates and mask prompts, which are supplied alongside the vision features into the SAM Block.
+
+9
+00:00:45.080 --> 00:00:51.090
+The SAM transformer block applies prompt self-attention and bidirectional cross-attention to refine the spatial context.
+
+10
+00:00:51.090 --> 00:00:58.940
+The enhanced visual features, along with text features and the original correlation map, are passed to the Vision-Language Fusion module.
+
+11
+00:00:58.940 --> 00:01:04.580
+The Vision-Language Fusion block sequentially applies image and text guidance to remodel class interactions.
+
+12
+00:01:04.580 --> 00:01:09.100
+This outputs a multimodally refined correlation map for all candidate classes.
+
+13
+00:01:09.100 --> 00:01:12.890
+A mask prediction decoder then upsamples the refined features.
+
+14
+00:01:12.890 --> 00:01:15.930
+Producing the final pixel-level semantic segmentation mask.
+

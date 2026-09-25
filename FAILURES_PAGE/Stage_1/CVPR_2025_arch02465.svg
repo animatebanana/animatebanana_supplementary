@@ -1,0 +1,330 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 486 780" width="486" height="780">
+  <defs>
+    <!-- Arrowhead markers -->
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#005a8c"/>
+    </marker>
+    <marker id="arrow-dark" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#0f4c75"/>
+    </marker>
+    <style>
+      #input_img_a, #text_prompt_a, #edge_img_to_sam_fusion_a, #edge_img_branch_fusion_a, #edge_prompt_to_fusion_a,
+      #fusion_box_a, #edge_fusion_to_sam_a, #txt_emb_a,
+      #sam_box_a, #edge_sam_to_out_a,
+      #output_img_a,
+      #input_img_b, #waveform_b, #edge_img_to_sam_fusion_b, #edge_img_branch_fusion_b, #edge_audio_to_fusion_b,
+      #fusion_box_b, #edge_fusion_to_sam_b, #txt_emb_b,
+      #sam_box_b, #edge_sam_to_out_b,
+      #output_img_b,
+      #video_stack_c, #text_prompt_c, #waveform_c, #edge_video_to_sam2_c, #edge_video_branch_fusion_c, #edge_prompt_to_fusion_c, #edge_audio_to_fusion_c,
+      #fusion_box_c, #edge_fusion_to_sam2_c, #txt_emb_c,
+      #sam2_box_c, #edge_sam2_to_filmstrip,
+      #filmstrip_c {
+        filter: grayscale(100%) opacity(0.4);
+        animation-name: colorPop;
+        animation-duration: 0.5s;
+        animation-fill-mode: forwards;
+      }
+
+      @keyframes colorPop {
+        to {
+          filter: grayscale(0%) opacity(1);
+        }
+      }
+
+      /* Timestamps Delays */
+      #input_img_a, #text_prompt_a, #edge_img_to_sam_fusion_a, #edge_img_branch_fusion_a, #edge_prompt_to_fusion_a {
+        animation-delay: 0.5s;
+      }
+      #fusion_box_a, #edge_fusion_to_sam_a, #txt_emb_a {
+        animation-delay: 1.0s;
+      }
+      #sam_box_a, #edge_sam_to_out_a {
+        animation-delay: 1.5s;
+      }
+      #output_img_a {
+        animation-delay: 2.0s;
+      }
+      #input_img_b, #waveform_b, #edge_img_to_sam_fusion_b, #edge_img_branch_fusion_b, #edge_audio_to_fusion_b {
+        animation-delay: 2.5s;
+      }
+      #fusion_box_b, #edge_fusion_to_sam_b, #txt_emb_b {
+        animation-delay: 3.0s;
+      }
+      #sam_box_b, #edge_sam_to_out_b {
+        animation-delay: 3.5s;
+      }
+      #output_img_b {
+        animation-delay: 4.0s;
+      }
+      #video_stack_c, #text_prompt_c, #waveform_c, #edge_video_to_sam2_c, #edge_video_branch_fusion_c, #edge_prompt_to_fusion_c, #edge_audio_to_fusion_c {
+        animation-delay: 4.5s;
+      }
+      #fusion_box_c, #edge_fusion_to_sam2_c, #txt_emb_c {
+        animation-delay: 5.0s;
+      }
+      #sam2_box_c, #edge_sam2_to_filmstrip {
+        animation-delay: 5.5s;
+      }
+      #filmstrip_c {
+        animation-delay: 6.0s;
+      }
+
+      /* Narration subtitle styling and keyframes */
+      .narr-text {
+        opacity: 0;
+        animation-fill-mode: forwards;
+      }
+
+      @keyframes narrStep {
+        0% { opacity: 0; }
+        8% { opacity: 1; }
+        92% { opacity: 1; }
+        100% { opacity: 0; }
+      }
+
+      @keyframes narrFinal {
+        0% { opacity: 0; }
+        10% { opacity: 1; }
+        100% { opacity: 1; }
+      }
+
+      #narr_ts1  { animation: narrStep 0.5s forwards 0.5s; }
+      #narr_ts2  { animation: narrStep 0.5s forwards 1.0s; }
+      #narr_ts3  { animation: narrStep 0.5s forwards 1.5s; }
+      #narr_ts4  { animation: narrStep 0.5s forwards 2.0s; }
+      #narr_ts5  { animation: narrStep 0.5s forwards 2.5s; }
+      #narr_ts6  { animation: narrStep 0.5s forwards 3.0s; }
+      #narr_ts7  { animation: narrStep 0.5s forwards 3.5s; }
+      #narr_ts8  { animation: narrStep 0.5s forwards 4.0s; }
+      #narr_ts9  { animation: narrStep 0.5s forwards 4.5s; }
+      #narr_ts10 { animation: narrStep 0.5s forwards 5.0s; }
+      #narr_ts11 { animation: narrStep 0.5s forwards 5.5s; }
+      #narr_ts12 { animation: narrFinal 0.5s forwards 6.0s; }
+    </style>
+  </defs>
+
+  <!-- Background panels -->
+  <g id="panel_a_bg">
+    <rect x="0" y="0" width="244" height="326" fill="#d9ebf9" stroke="none" />
+  </g>
+  <g id="panel_b_bg">
+    <rect x="244" y="0" width="242" height="326" fill="#fce4d8" stroke="none" />
+  </g>
+  <g id="panel_c_bg">
+    <rect x="0" y="326" width="486" height="360" fill="#d9eed7" stroke="none" />
+  </g>
+
+  <!-- Section Titles -->
+  <text id="label_a" data-id="label_a" data-class="text_node" data-parent="root" x="10" y="28" font-family="serif" font-size="20" font-weight="bold" font-style="italic" fill="#000000">(a)</text>
+  <text id="label_b" data-id="label_b" data-class="text_node" data-parent="root" x="254" y="28" font-family="serif" font-size="20" font-weight="bold" font-style="italic" fill="#000000">(b)</text>
+  <text id="label_c" data-id="label_c" data-class="text_node" data-parent="root" x="10" y="352" font-family="serif" font-size="20" font-weight="bold" font-style="italic" fill="#000000">(c)</text>
+
+  <!-- ==================== PANEL (a) ==================== -->
+
+  <!-- Top Output Image (a) -->
+  <g id="output_img_a" data-id="output_img_a" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch02465/crop_output_img_a.png" xlink:href="../../rasters/CVPR_2025_arch02465/crop_output_img_a.png" x="67" y="10" width="108" height="64" preserveAspectRatio="xMidYMid meet" /></g>
+
+  <!-- SAM Block (a) -->
+  <g id="sam_box_a" data-id="sam_box_a" data-class="standalone_node" data-parent="root">
+    <rect x="10" y="95" width="210" height="50" rx="8" ry="8" fill="#d0d4d9" stroke="#444444" stroke-width="1"/>
+    <text x="115" y="126" font-family="serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#000000">SAM</text>
+  </g>
+
+  <!-- Image-Text Fusion Block (a) -->
+  <g id="fusion_box_a" data-id="fusion_box_a" data-class="standalone_node" data-parent="root">
+    <rect x="85" y="176" width="136" height="48" rx="6" ry="6" fill="#8ecbf5" stroke="#4694d1" stroke-width="1"/>
+    <text x="153" y="196" font-family="serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#000000">Image-Text</text>
+    <text x="153" y="214" font-family="serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#000000">Fusion</text>
+  </g>
+
+  <!-- Bottom Input Image (a) -->
+  <g id="input_img_a" data-id="input_img_a" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch02465/crop_input_img_a.png" xlink:href="../../rasters/CVPR_2025_arch02465/crop_input_img_a.png" x="13" y="254" width="108" height="64" preserveAspectRatio="xMidYMid meet" /></g>
+
+  <!-- Text Prompt (a) -->
+  <g id="text_prompt_a" data-id="text_prompt_a" data-class="standalone_node" data-parent="root">
+    <text x="187" y="278" font-family="serif" font-size="12" font-weight="bold" font-style="italic" text-anchor="middle" fill="#000000">The one near the</text>
+    <text x="187" y="295" font-family="serif" font-size="12" font-weight="bold" font-style="italic" text-anchor="middle" fill="#000000">sounding object</text>
+  </g>
+
+  <!-- Floating Text "embeddings" (a) -->
+  <text id="txt_emb_a" data-id="txt_emb_a" data-class="text_node" data-parent="root" x="195" y="167" font-family="serif" font-size="13" font-style="italic" text-anchor="middle" fill="#000000">embeddings</text>
+
+  <!-- Edges (a) -->
+  <path id="edge_sam_to_out_a" data-id="edge_sam_to_out_a" data-class="edge" data-source="sam_box_a" data-target="output_img_a" d="M 116 95 L 116 76" fill="none" stroke="#005a8c" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <path id="edge_fusion_to_sam_a" data-id="edge_fusion_to_sam_a" data-class="edge" data-source="fusion_box_a" data-target="sam_box_a" d="M 153 176 L 153 147" fill="none" stroke="#005a8c" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <path id="edge_img_to_sam_fusion_a" data-id="edge_img_to_sam_fusion_a" data-class="edge" data-source="input_img_a" data-target="sam_box_a" d="M 48 254 L 48 147" fill="none" stroke="#005a8c" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <path id="edge_img_branch_fusion_a" data-id="edge_img_branch_fusion_a" data-class="edge" data-source="input_img_a" data-target="fusion_box_a" d="M 48 243 L 142 243 L 142 226" fill="none" stroke="#005a8c" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <path id="edge_prompt_to_fusion_a" data-id="edge_prompt_to_fusion_a" data-class="edge" data-source="text_prompt_a" data-target="fusion_box_a" d="M 189 261 L 189 226" fill="none" stroke="#005a8c" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+
+  <!-- ==================== PANEL (b) ==================== -->
+
+  <!-- Top Output Image (b) -->
+  <g id="output_img_b" data-id="output_img_b" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch02465/crop_output_img_b.png" xlink:href="../../rasters/CVPR_2025_arch02465/crop_output_img_b.png" x="319" y="10" width="108" height="64" preserveAspectRatio="xMidYMid meet" /></g>
+
+  <!-- SAM Block (b) -->
+  <g id="sam_box_b" data-id="sam_box_b" data-class="standalone_node" data-parent="root">
+    <rect x="271" y="95" width="200" height="50" rx="8" ry="8" fill="#d0d4d9" stroke="#444444" stroke-width="1"/>
+    <text x="371" y="126" font-family="serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#000000">SAM</text>
+  </g>
+
+  <!-- Image-Audio Fusion Block (b) -->
+  <g id="fusion_box_b" data-id="fusion_box_b" data-class="standalone_node" data-parent="root">
+    <rect x="336" y="176" width="136" height="48" rx="6" ry="6" fill="#f8a77f" stroke="#e67e51" stroke-width="1"/>
+    <text x="404" y="196" font-family="serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#000000">Image-Audio</text>
+    <text x="404" y="214" font-family="serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#000000">Fusion</text>
+  </g>
+
+  <!-- Bottom Input Image (b) -->
+  <g id="input_img_b" data-id="input_img_b" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch02465/crop_input_img_b.png" xlink:href="../../rasters/CVPR_2025_arch02465/crop_input_img_b.png" x="265" y="254" width="108" height="64" preserveAspectRatio="xMidYMid meet" /></g>
+
+  <!-- Audio Waveform (b) -->
+  <g id="waveform_b" data-id="waveform_b" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch02465/crop_waveform_b.png" xlink:href="../../rasters/CVPR_2025_arch02465/crop_waveform_b.png" x="390" y="260" width="80" height="35" preserveAspectRatio="xMidYMid meet" /></g>
+
+  <!-- Floating Text "embeddings" (b) -->
+  <text id="txt_emb_b" data-id="txt_emb_b" data-class="text_node" data-parent="root" x="442" y="167" font-family="serif" font-size="13" font-style="italic" text-anchor="middle" fill="#000000">embeddings</text>
+
+  <!-- Edges (b) -->
+  <path id="edge_sam_to_out_b" data-id="edge_sam_to_out_b" data-class="edge" data-source="sam_box_b" data-target="output_img_b" d="M 373 95 L 373 76" fill="none" stroke="#005a8c" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <path id="edge_fusion_to_sam_b" data-id="edge_fusion_to_sam_b" data-class="edge" data-source="fusion_box_b" data-target="sam_box_b" d="M 400 176 L 400 147" fill="none" stroke="#005a8c" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <path id="edge_img_to_sam_fusion_b" data-id="edge_img_to_sam_fusion_b" data-class="edge" data-source="input_img_b" data-target="sam_box_b" d="M 300 254 L 300 147" fill="none" stroke="#005a8c" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <path id="edge_img_branch_fusion_b" data-id="edge_img_branch_fusion_b" data-class="edge" data-source="input_img_b" data-target="fusion_box_b" d="M 300 243 L 394 243 L 394 226" fill="none" stroke="#005a8c" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <path id="edge_audio_to_fusion_b" data-id="edge_audio_to_fusion_b" data-class="edge" data-source="waveform_b" data-target="fusion_box_b" d="M 434 266 L 434 226" fill="none" stroke="#005a8c" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+
+  <!-- ==================== PANEL (c) ==================== -->
+
+  <!-- Filmstrip Output (c) -->
+  <g id="filmstrip_c" data-id="filmstrip_c" data-class="composite_whole" data-parent="root">
+    <!-- Outer black film frame -->
+    <rect id="film_body" data-id="film_body" data-class="composite_part" data-parent="filmstrip_c" x="52" y="328" width="367" height="91" fill="#111111" rx="2" ry="2"/>
+    <!-- Sprocket holes top -->
+    <g id="sprockets_top" fill="#ffffff">
+      <rect x="62" y="331" width="10" height="6" rx="1"/>
+      <rect x="87" y="331" width="10" height="6" rx="1"/>
+      <rect x="112" y="331" width="10" height="6" rx="1"/>
+      <rect x="137" y="331" width="10" height="6" rx="1"/>
+      <rect x="162" y="331" width="10" height="6" rx="1"/>
+      <rect x="187" y="331" width="10" height="6" rx="1"/>
+      <rect x="212" y="331" width="10" height="6" rx="1"/>
+      <rect x="237" y="331" width="10" height="6" rx="1"/>
+      <rect x="262" y="331" width="10" height="6" rx="1"/>
+      <rect x="287" y="331" width="10" height="6" rx="1"/>
+      <rect x="312" y="331" width="10" height="6" rx="1"/>
+      <rect x="337" y="331" width="10" height="6" rx="1"/>
+      <rect x="362" y="331" width="10" height="6" rx="1"/>
+      <rect x="387" y="331" width="10" height="6" rx="1"/>
+    </g>
+    <!-- Sprocket holes bottom -->
+    <g id="sprockets_bottom" fill="#ffffff">
+      <rect x="62" y="410" width="10" height="6" rx="1"/>
+      <rect x="87" y="410" width="10" height="6" rx="1"/>
+      <rect x="112" y="410" width="10" height="6" rx="1"/>
+      <rect x="137" y="410" width="10" height="6" rx="1"/>
+      <rect x="162" y="410" width="10" height="6" rx="1"/>
+      <rect x="187" y="410" width="10" height="6" rx="1"/>
+      <rect x="212" y="410" width="10" height="6" rx="1"/>
+      <rect x="237" y="410" width="10" height="6" rx="1"/>
+      <rect x="262" y="410" width="10" height="6" rx="1"/>
+      <rect x="287" y="410" width="10" height="6" rx="1"/>
+      <rect x="312" y="410" width="10" height="6" rx="1"/>
+      <rect x="337" y="410" width="10" height="6" rx="1"/>
+      <rect x="362" y="410" width="10" height="6" rx="1"/>
+      <rect x="387" y="410" width="10" height="6" rx="1"/>
+    </g>
+    <!-- Three film frame windows inside -->
+    <rect id="frame_c_1" data-id="frame_c_1" data-class="composite_part" data-parent="filmstrip_c" x="61" y="341" width="103" height="65" fill="#f0f4f8"/>
+    <rect id="frame_c_2" data-id="frame_c_2" data-class="composite_part" data-parent="filmstrip_c" x="172" y="341" width="128" height="65" fill="#f0f4f8"/>
+    <rect id="frame_c_3" data-id="frame_c_3" data-class="composite_part" data-parent="filmstrip_c" x="307" y="341" width="103" height="65" fill="#f0f4f8"/>
+    <text x="236" y="378" font-family="sans-serif" font-size="8" text-anchor="middle" fill="#555555">[Video Segmentation Mask]</text>
+  </g>
+
+  <!-- SAM2 Block (c) -->
+  <g id="sam2_box_c" data-id="sam2_box_c" data-class="standalone_node" data-parent="root">
+    <rect x="10" y="443" width="461" height="50" rx="8" ry="8" fill="#d0d4d9" stroke="#444444" stroke-width="1"/>
+    <text x="240" y="474" font-family="serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#000000">SAM2</text>
+  </g>
+
+  <!-- Video-Text-Audio Fusion Block (c) -->
+  <g id="fusion_box_c" data-id="fusion_box_c" data-class="standalone_node" data-parent="root">
+    <rect x="105" y="526" width="366" height="42" rx="6" ry="6" fill="#8ed08f" stroke="#5cb85c" stroke-width="1"/>
+    <text x="288" y="552" font-family="serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#000000">Video-Text-Audio Fusion</text>
+  </g>
+
+  <!-- Floating Text "embeddings" (c) -->
+  <text id="txt_emb_c" data-id="txt_emb_c" data-class="text_node" data-parent="root" x="331" y="515" font-family="serif" font-size="14" font-style="italic" text-anchor="middle" fill="#000000">embeddings</text>
+
+  <!-- Stacked Video Frames Input (c) -->
+  <g id="video_stack_c" data-id="video_stack_c" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch02465/crop_video_stack_c.png" xlink:href="../../rasters/CVPR_2025_arch02465/crop_video_stack_c.png" x="15" y="602" width="108" height="68" preserveAspectRatio="xMidYMid meet" /></g>
+
+  <!-- Text Prompt (c) -->
+  <g id="text_prompt_c" data-id="text_prompt_c" data-class="standalone_node" data-parent="root">
+    <text x="283" y="647" font-family="serif" font-size="13" font-weight="bold" font-style="italic" text-anchor="middle" fill="#000000">The one near the</text>
+    <text x="283" y="666" font-family="serif" font-size="13" font-weight="bold" font-style="italic" text-anchor="middle" fill="#000000">sounding object</text>
+  </g>
+
+  <!-- Audio Waveform (c) -->
+  <g id="waveform_c" data-id="waveform_c" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch02465/crop_waveform_c.png" xlink:href="../../rasters/CVPR_2025_arch02465/crop_waveform_c.png" x="375" y="630" width="85" height="35" preserveAspectRatio="xMidYMid meet" /></g>
+
+  <!-- Edges (c) -->
+  <path id="edge_sam2_to_filmstrip" data-id="edge_sam2_to_filmstrip" data-class="edge" data-source="sam2_box_c" data-target="filmstrip_c" d="M 244 443 L 244 421" fill="none" stroke="#005a8c" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <path id="edge_fusion_to_sam2_c" data-id="edge_fusion_to_sam2_c" data-class="edge" data-source="fusion_box_c" data-target="sam2_box_c" d="M 280 526 L 280 495" fill="none" stroke="#005a8c" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <path id="edge_video_to_sam2_c" data-id="edge_video_to_sam2_c" data-class="edge" data-source="video_stack_c" data-target="sam2_box_c" d="M 74 602 L 74 495" fill="none" stroke="#005a8c" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <path id="edge_video_branch_fusion_c" data-id="edge_video_branch_fusion_c" data-class="edge" data-source="video_stack_c" data-target="fusion_box_c" d="M 74 582 L 180 582 L 180 570" fill="none" stroke="#005a8c" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <path id="edge_prompt_to_fusion_c" data-id="edge_prompt_to_fusion_c" data-class="edge" data-source="text_prompt_c" data-target="fusion_box_c" d="M 281 630 L 281 570" fill="none" stroke="#005a8c" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <path id="edge_audio_to_fusion_c" data-id="edge_audio_to_fusion_c" data-class="edge" data-source="waveform_c" data-target="fusion_box_c" d="M 420 635 L 420 570" fill="none" stroke="#005a8c" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+  <!-- Dynamic Narration Banner Container -->
+  <g id="narration_banner">
+    <rect x="12" y="694" width="462" height="74" rx="8" ry="8" fill="#1e293b" />
+    <text id="narr_ts1" class="narr-text" x="50%" y="722" font-family="sans-serif" font-size="12" font-weight="500" fill="#ffffff" text-anchor="middle">
+      <tspan x="50%" dy="0">In the text-visual setup, the model receives</tspan>
+      <tspan x="50%" dy="1.3em">an input image along with a descriptive text prompt.</tspan>
+    </text>
+    <text id="narr_ts2" class="narr-text" x="50%" y="722" font-family="sans-serif" font-size="12" font-weight="500" fill="#ffffff" text-anchor="middle">
+      <tspan x="50%" dy="0">The image-text fusion module combines these visual</tspan>
+      <tspan x="50%" dy="1.3em">and textual cues into prompt embeddings.</tspan>
+    </text>
+    <text id="narr_ts3" class="narr-text" x="50%" y="722" font-family="sans-serif" font-size="12" font-weight="500" fill="#ffffff" text-anchor="middle">
+      <tspan x="50%" dy="0">SAM consumes the image and prompt embeddings</tspan>
+      <tspan x="50%" dy="1.3em">to segment the referred object.</tspan>
+    </text>
+    <text id="narr_ts4" class="narr-text" x="50%" y="722" font-family="sans-serif" font-size="12" font-weight="500" fill="#ffffff" text-anchor="middle">
+      <tspan x="50%" dy="0">However, this dual-modality approach struggles to</tspan>
+      <tspan x="50%" dy="1.3em">distinguish sounding objects in ambiguous scenes.</tspan>
+    </text>
+    <text id="narr_ts5" class="narr-text" x="50%" y="722" font-family="sans-serif" font-size="12" font-weight="500" fill="#ffffff" text-anchor="middle">
+      <tspan x="50%" dy="0">In the audio-visual setup, the image is paired</tspan>
+      <tspan x="50%" dy="1.3em">directly with an audio waveform.</tspan>
+    </text>
+    <text id="narr_ts6" class="narr-text" x="50%" y="722" font-family="sans-serif" font-size="12" font-weight="500" fill="#ffffff" text-anchor="middle">
+      <tspan x="50%" dy="0">An image-audio fusion block integrates acoustic signals</tspan>
+      <tspan x="50%" dy="1.3em">to generate audio-guided embeddings.</tspan>
+    </text>
+    <text id="narr_ts7" class="narr-text" x="50%" y="722" font-family="sans-serif" font-size="12" font-weight="500" fill="#ffffff" text-anchor="middle">
+      <tspan x="50%" dy="0">SAM uses these embeddings to locate the</tspan>
+      <tspan x="50%" dy="1.3em">sounding source in the image.</tspan>
+    </text>
+    <text id="narr_ts8" class="narr-text" x="50%" y="722" font-family="sans-serif" font-size="12" font-weight="500" fill="#ffffff" text-anchor="middle">
+      <tspan x="50%" dy="0">Without textual context, it fails to</tspan>
+      <tspan x="50%" dy="1.3em">interpret dynamic referring expressions.</tspan>
+    </text>
+    <text id="narr_ts9" class="narr-text" x="50%" y="722" font-family="sans-serif" font-size="12" font-weight="500" fill="#ffffff" text-anchor="middle">
+      <tspan x="50%" dy="0">The proposed architecture instead jointly ingests</tspan>
+      <tspan x="50%" dy="1.3em">video frames, textual expressions, and audio waveforms.</tspan>
+    </text>
+    <text id="narr_ts10" class="narr-text" x="50%" y="722" font-family="sans-serif" font-size="12" font-weight="500" fill="#ffffff" text-anchor="middle">
+      <tspan x="50%" dy="0">A unified fusion module compresses all three modalities</tspan>
+      <tspan x="50%" dy="1.3em">into a single segmentation prompt embedding.</tspan>
+    </text>
+    <text id="narr_ts11" class="narr-text" x="50%" y="722" font-family="sans-serif" font-size="12" font-weight="500" fill="#ffffff" text-anchor="middle">
+      <tspan x="50%" dy="0">This fused prompt guides SAM2 to track and</tspan>
+      <tspan x="50%" dy="1.3em">segment the target across the entire sequence.</tspan>
+    </text>
+    <text id="narr_ts12" class="narr-text" x="50%" y="722" font-family="sans-serif" font-size="12" font-weight="500" fill="#ffffff" text-anchor="middle">
+      <tspan x="50%" dy="0">Consequently, accurate spatio-temporal segmentation</tspan>
+      <tspan x="50%" dy="1.3em">masks are generated across all video frames.</tspan>
+    </text>
+  </g>
+</svg>

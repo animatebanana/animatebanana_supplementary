@@ -1,0 +1,94 @@
+=== Hopping Bounding Box Sequence ===
+
+Frame Image : frame_00.png
+Timestamp   : 1.00s
+Narration   : We begin with the support branch, containing class labels, an input image, and a ground truth mask.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 3.00s
+Narration   : The class labels and support image feed into Pseudo Label Generation.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 5.00s
+Narration   : In parallel, the support image is processed through DeepLabv3+.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 7.00s
+Narration   : This produces a pseudo label mask covering horse, person, background, and uncertain regions.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 9.00s
+Narration   : Meanwhile, DeepLabv3+ outputs a support feature map.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 11.00s
+Narration   : The fully supervised support mask pathway is crossed out and bypassed.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 13.00s
+Narration   : The pseudo mask is combined with the support feature map via pixel-wise multiplication.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 15.00s
+Narration   : This generates a set of categorized support pixels.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 17.00s
+Narration   : The support pixels are passed into an encoder module, labeled E.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 19.00s
+Narration   : Following a similar setup, the query branch receives query class labels, an input image, and a ground truth mask.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 21.00s
+Narration   : The query inputs enter the Pseudo Label Generation module.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Timestamp   : 23.00s
+Narration   : The query image is simultaneously processed by DeepLabv3+.
+--------------------------------------------------------------------------------
+Frame Image : frame_12.png
+Timestamp   : 25.00s
+Narration   : This creates the query pseudo label mask.
+--------------------------------------------------------------------------------
+Frame Image : frame_13.png
+Timestamp   : 27.00s
+Narration   : Along with a dense query feature representation.
+--------------------------------------------------------------------------------
+Frame Image : frame_14.png
+Timestamp   : 29.00s
+Narration   : As before, fully supervised ground truth masks are crossed out.
+--------------------------------------------------------------------------------
+Frame Image : frame_15.png
+Timestamp   : 31.00s
+Narration   : The query feature map is multiplied by the query pseudo mask during training.
+--------------------------------------------------------------------------------
+Frame Image : frame_16.png
+Timestamp   : 33.00s
+Narration   : During inference, query pixels flow directly from the feature map.
+--------------------------------------------------------------------------------
+Frame Image : frame_17.png
+Timestamp   : 35.00s
+Narration   : During training, the masked query pixels are generated instead.
+--------------------------------------------------------------------------------
+Frame Image : frame_18.png
+Timestamp   : 37.00s
+Narration   : These query pixels pass through the shared encoder E.
+--------------------------------------------------------------------------------
+Frame Image : frame_19.png
+Timestamp   : 39.00s
+Narration   : In the upper pixel feature latent space, support pixel features form support prototypes.
+--------------------------------------------------------------------------------
+Frame Image : frame_20.png
+Timestamp   : 41.00s
+Narration   : Query pixel features are embedded into the corresponding latent space relative to the prototypes.
+--------------------------------------------------------------------------------
+Frame Image : frame_21.png
+Timestamp   : 43.00s
+Narration   : For inference, k-nearest neighbors classification is applied to produce the predicted query mask.
+--------------------------------------------------------------------------------
+Frame Image : frame_22.png
+Timestamp   : 45.00s
+Narration   : For training, the latent embeddings are optimized using the meta loss function.
+--------------------------------------------------------------------------------

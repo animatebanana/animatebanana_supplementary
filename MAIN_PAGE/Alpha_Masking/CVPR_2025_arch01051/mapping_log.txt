@@ -1,0 +1,50 @@
+=== Alpha Masking Sequence ===
+
+Frame Image : frame_00.png
+Timestamp   : 2.00s
+Narration   : Existing reconstruction-based detection methods split the pipeline into two disconnected stages.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 6.00s
+Narration   : In the first stage, an input image is passed through a pre-trained diffusion model to produce a reconstructed image.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 10.00s
+Narration   : A conceptual barrier isolates the two stages, passing frozen representations forward without joint optimization.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 14.00s
+Narration   : The second stage computes the absolute reconstruction error and trains a backend classifier to predict whether the image is real or generated.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 18.00s
+Narration   : Crucially, this existing architecture lacks direct interaction between the diffusion model and the downstream classifier.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 22.00s
+Narration   : In contrast, the proposed framework unifies reconstruction and classification into an end-to-end training pipeline.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 26.00s
+Narration   : The Frequency Mask Refinement module filters out difficult-to-reconstruct mid-band frequencies to produce a pseudo-generated image.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 30.00s
+Narration   : Both the original and pseudo-generated images are passed to the diffusion autoencoder for parallel reconstruction.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 32.00s
+Narration   : Absolute difference operations calculate distinct reconstruction error maps for both the original and pseudo-generated inputs.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 34.00s
+Narration   : Absolute difference operations calculate distinct reconstruction error maps for both the original and pseudo-generated inputs.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 38.00s
+Narration   : These dual reconstruction error maps are concatenated and fed into the classifier to make the final real or generated prediction.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Timestamp   : 42.00s
+Narration   : This integrated design ensures better alignment between artifact generation and artifact detection across the latent space.
+--------------------------------------------------------------------------------

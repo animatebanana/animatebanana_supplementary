@@ -1,0 +1,34 @@
+[
+ {
+  "t": 0.0,
+  "text": "The pipeline begins with the Input Images, processed via a 3D morphable model."
+ },
+ {
+  "t": 3.0,
+  "text": "This establishes a 3D Proxy Model representing the base facial geometry."
+ },
+ {
+  "t": 5.94,
+  "text": "In parallel, a surface Normal Map is generated to capture surface orientations."
+ },
+ {
+  "t": 8.88,
+  "text": "Facial region Segmentation is also extracted across key feature zones."
+ },
+ {
+  "t": 11.82,
+  "text": "Shadow Processing is then performed, resulting in Shadow Treatment on the input face."
+ },
+ {
+  "t": 14.76,
+  "text": "Through Light Calibration and Photometric Stereo, the features combine into a Refined Model."
+ },
+ {
+  "t": 17.7,
+  "text": "A Denoising stage then cleans the geometric mesh, yielding the Denoised Model."
+ },
+ {
+  "t": 20.64,
+  "text": "Finally, the corresponding Albedo map is output alongside the denoised model."
+ }
+]

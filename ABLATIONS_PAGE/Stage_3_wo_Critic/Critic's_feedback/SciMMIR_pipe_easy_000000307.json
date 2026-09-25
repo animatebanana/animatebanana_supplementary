@@ -1,0 +1,246 @@
+{
+  "style": "alpha_masking",
+  "traversal_style": "DETAIL_FIRST",
+  "nodes": [
+    {
+      "id": "t1",
+      "parent": null,
+      "depth": 1,
+      "focus": [
+        "block_data_sources",
+        "bg_data_sources",
+        "icon_data_sources",
+        "title_data_sources"
+      ],
+      "action": "reveal",
+      "narration": null,
+      "duration": null,
+      "narrative": null,
+      "element_classes": {
+        "blocks": [
+          "block_data_sources"
+        ],
+        "nodes": [
+          "bg_data_sources",
+          "icon_data_sources"
+        ],
+        "text": [
+          "title_data_sources"
+        ],
+        "arrows": []
+      },
+      "timestamp": 1
+    },
+    {
+      "id": "t2",
+      "parent": null,
+      "depth": 1,
+      "focus": [
+        "item_ds_1_badge",
+        "item_ds_2_badge",
+        "item_ds_3_badge",
+        "text_ds_item_1a",
+        "text_ds_item_1b",
+        "text_ds_item_1c",
+        "text_ds_item_2",
+        "text_ds_item_3"
+      ],
+      "action": "reveal",
+      "narration": null,
+      "duration": null,
+      "narrative": null,
+      "element_classes": {
+        "blocks": [],
+        "nodes": [
+          "item_ds_1_badge",
+          "item_ds_2_badge",
+          "item_ds_3_badge"
+        ],
+        "text": [
+          "text_ds_item_1a",
+          "text_ds_item_1b",
+          "text_ds_item_1c",
+          "text_ds_item_2",
+          "text_ds_item_3"
+        ],
+        "arrows": []
+      },
+      "timestamp": 2
+    },
+    {
+      "id": "t3",
+      "parent": null,
+      "depth": 1,
+      "focus": [
+        "block_region_extraction",
+        "bg_region_extraction",
+        "icon_region_images",
+        "title_region_extraction",
+        "label_lre_1a",
+        "label_lre_1b",
+        "edge_ds_to_lre"
+      ],
+      "action": "reveal",
+      "narration": null,
+      "duration": null,
+      "narrative": null,
+      "element_classes": {
+        "blocks": [
+          "block_region_extraction"
+        ],
+        "nodes": [
+          "bg_region_extraction",
+          "icon_region_images"
+        ],
+        "text": [
+          "title_region_extraction",
+          "label_lre_1a",
+          "label_lre_1b"
+        ],
+        "arrows": [
+          "edge_ds_to_lre"
+        ]
+      },
+      "timestamp": 3
+    },
+    {
+      "id": "t4",
+      "parent": null,
+      "depth": 1,
+      "focus": [
+        "icon_duplicates_removal",
+        "label_lre_2a",
+        "label_lre_2b",
+        "edge_img_to_duprem"
+      ],
+      "action": "reveal",
+      "narration": null,
+      "duration": null,
+      "narrative": null,
+      "element_classes": {
+        "blocks": [],
+        "nodes": [
+          "icon_duplicates_removal"
+        ],
+        "text": [
+          "label_lre_2a",
+          "label_lre_2b"
+        ],
+        "arrows": [
+          "edge_img_to_duprem"
+        ]
+      },
+      "timestamp": 4
+    },
+    {
+      "id": "t5",
+      "parent": null,
+      "depth": 1,
+      "focus": [
+        "raster_local_regions_grid",
+        "label_lre_3a",
+        "label_lre_3b",
+        "edge_duprem_to_grid"
+      ],
+      "action": "reveal",
+      "narration": null,
+      "duration": null,
+      "narrative": null,
+      "element_classes": {
+        "blocks": [],
+        "nodes": [
+          "raster_local_regions_grid"
+        ],
+        "text": [
+          "label_lre_3a",
+          "label_lre_3b"
+        ],
+        "arrows": [
+          "edge_duprem_to_grid"
+        ]
+      },
+      "timestamp": 5
+    },
+    {
+      "id": "t6",
+      "parent": null,
+      "depth": 1,
+      "focus": [
+        "block_labeling_setgen",
+        "bg_labeling_setgen",
+        "raster_labeling_patches",
+        "title_labeling_setgen",
+        "label_labeling",
+        "edge_grid_to_labeling"
+      ],
+      "action": "reveal",
+      "narration": null,
+      "duration": null,
+      "narrative": null,
+      "element_classes": {
+        "blocks": [
+          "block_labeling_setgen"
+        ],
+        "nodes": [
+          "bg_labeling_setgen",
+          "raster_labeling_patches"
+        ],
+        "text": [
+          "title_labeling_setgen",
+          "label_labeling"
+        ],
+        "arrows": [
+          "edge_grid_to_labeling"
+        ]
+      },
+      "timestamp": 6
+    },
+    {
+      "id": "t7",
+      "parent": null,
+      "depth": 1,
+      "focus": [
+        "container_set_generation",
+        "label_set_generation",
+        "edge_labeling_to_setgen"
+      ],
+      "action": "reveal",
+      "narration": null,
+      "duration": null,
+      "narrative": null,
+      "element_classes": {
+        "blocks": [],
+        "nodes": [
+          "container_set_generation"
+        ],
+        "text": [
+          "label_set_generation"
+        ],
+        "arrows": [
+          "edge_labeling_to_setgen"
+        ]
+      },
+      "timestamp": 7
+    }
+  ],
+  "traversal": [
+    "t1",
+    "t2",
+    "t3",
+    "t4",
+    "t5",
+    "t6",
+    "t7"
+  ],
+  "provenance": {
+    "agent": "sequencer",
+    "backend": "openrouter_gemini37flash",
+    "model": "google-gemini-3.7-flash",
+    "prompt": "animation_planner/svg_sequencer.yaml#new_prompt",
+    "style": "alpha_masking",
+    "target": "svg",
+    "config_fingerprint": "a60c9cf21a359534",
+    "timestamp": "2026-09-02T00:04:52",
+    "max_depth": 3
+  }
+}

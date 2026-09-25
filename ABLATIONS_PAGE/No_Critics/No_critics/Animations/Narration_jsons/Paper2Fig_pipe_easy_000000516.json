@@ -1,0 +1,19 @@
+{
+  "00:01": "The pipeline begins with the Data Collection phase.",
+  "00:02": "Raw wide dynamic range images are captured across diverse artificial and natural lighting scenes.",
+  "00:03": "Raw wide dynamic range images are captured across diverse artificial and natural lighting scenes.",
+  "00:04": "The images undergo postprocessing, including conversion to lossless formats and channel duplication.",
+  "00:05": "Following classification and data filtering, the validated wide dynamic range images move into tone mapping.",
+  "00:06": "Following classification and data filtering, the validated wide dynamic range images move into tone mapping.",
+  "00:07": "Next, the Tone Mapping stage adapts the high dynamic range data for standard face detection algorithms.",
+  "00:08": "Only images meeting a dynamic range threshold greater than thirty-two thousand to one are retained.",
+  "00:09": "Only images meeting a dynamic range threshold greater than thirty-two thousand to one are retained.",
+  "00:10": "These images are processed through twenty-five different tone mapping operators.",
+  "00:11": "This yields twenty-five tone-mapped image sets that are forwarded to the face detection stage.",
+  "00:12": "This yields twenty-five tone-mapped image sets that are forwarded to the face detection stage.",
+  "00:13": "The final stage evaluates Face Detection accuracy across the tone-mapped sets.",
+  "00:14": "Multiple face detectors are applied to evaluate performance across the varying lighting conditions.",
+  "00:15": "Multiple face detectors are applied to evaluate performance across the varying lighting conditions.",
+  "00:16": "Each detector attempts to locate facial features even in challenging backlit and wide dynamic range scenes.",
+  "00:17": "Finally, the detection outputs are compiled for comparative result and performance analysis."
+}

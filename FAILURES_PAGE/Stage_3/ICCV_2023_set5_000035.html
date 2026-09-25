@@ -1,0 +1,643 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 380" width="100%" height="100%" style="background-color: #ffffff; font-family: Arial, Helvetica, sans-serif;">
+  <defs>
+    <!-- Arrow Markers -->
+    <marker id="arrow-black" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#000000"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#4caf50"/>
+    </marker>
+    <marker id="arrow-yellow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#f0ad4e"/>
+    </marker>
+
+    <style>
+      /* Base Ghosting */
+      [data-class="block"], [data-class="child_node"], [data-class="text_node"], 
+      [data-class="edge"], [data-class="composite_whole"], [data-class="raster_node"] {
+        opacity: 0.15;
+        transition: opacity 0.1s ease;
+      }
+
+      /* Dynamic Subtitle Defaults */
+      .narrative-text {
+        opacity: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 11.5px;
+        fill: #222222;
+        font-weight: 500;
+      }
+
+      /* Keyframes for Slices (7 slices: ~14.286% each) */
+      @keyframes anim_t1 {
+        0% { opacity: 1; }
+        14.285% { opacity: 1; }
+        14.286% { opacity: 0.15; }
+        100% { opacity: 0.15; }
+      }
+
+      @keyframes anim_t2 {
+        0% { opacity: 0.15; }
+        14.285% { opacity: 0.15; }
+        14.286% { opacity: 1; }
+        28.571% { opacity: 1; }
+        28.572% { opacity: 0.15; }
+        100% { opacity: 0.15; }
+      }
+
+      @keyframes anim_t3 {
+        0% { opacity: 0.15; }
+        28.571% { opacity: 0.15; }
+        28.572% { opacity: 1; }
+        42.857% { opacity: 1; }
+        42.858% { opacity: 0.15; }
+        100% { opacity: 0.15; }
+      }
+
+      @keyframes anim_t4 {
+        0% { opacity: 0.15; }
+        42.857% { opacity: 0.15; }
+        42.858% { opacity: 1; }
+        57.142% { opacity: 1; }
+        57.143% { opacity: 0.15; }
+        100% { opacity: 0.15; }
+      }
+
+      @keyframes anim_t4_t5 {
+        0% { opacity: 0.15; }
+        42.857% { opacity: 0.15; }
+        42.858% { opacity: 1; }
+        71.428% { opacity: 1; }
+        71.429% { opacity: 0.15; }
+        100% { opacity: 0.15; }
+      }
+
+      @keyframes anim_t5 {
+        0% { opacity: 0.15; }
+        57.142% { opacity: 0.15; }
+        57.143% { opacity: 1; }
+        71.428% { opacity: 1; }
+        71.429% { opacity: 0.15; }
+        100% { opacity: 0.15; }
+      }
+
+      @keyframes anim_t6 {
+        0% { opacity: 0.15; }
+        71.428% { opacity: 0.15; }
+        71.429% { opacity: 1; }
+        85.714% { opacity: 1; }
+        85.715% { opacity: 0.15; }
+        100% { opacity: 0.15; }
+      }
+
+      @keyframes anim_t6_t7 {
+        0% { opacity: 0.15; }
+        71.428% { opacity: 0.15; }
+        71.429% { opacity: 1; }
+        100% { opacity: 1; }
+      }
+
+      @keyframes anim_t7 {
+        0% { opacity: 0.15; }
+        85.714% { opacity: 0.15; }
+        85.715% { opacity: 1; }
+        100% { opacity: 1; }
+      }
+
+      /* Narration Text Keyframes */
+      @keyframes anim_narr_1 {
+        0% { opacity: 1; }
+        14.285% { opacity: 1; }
+        14.286% { opacity: 0; }
+        100% { opacity: 0; }
+      }
+
+      @keyframes anim_narr_2 {
+        0% { opacity: 0; }
+        14.285% { opacity: 0; }
+        14.286% { opacity: 1; }
+        28.571% { opacity: 1; }
+        28.572% { opacity: 0; }
+        100% { opacity: 0; }
+      }
+
+      @keyframes anim_narr_3 {
+        0% { opacity: 0; }
+        28.571% { opacity: 0; }
+        28.572% { opacity: 1; }
+        42.857% { opacity: 1; }
+        42.858% { opacity: 0; }
+        100% { opacity: 0; }
+      }
+
+      @keyframes anim_narr_4 {
+        0% { opacity: 0; }
+        42.857% { opacity: 0; }
+        42.858% { opacity: 1; }
+        57.142% { opacity: 1; }
+        57.143% { opacity: 0; }
+        100% { opacity: 0; }
+      }
+
+      @keyframes anim_narr_5 {
+        0% { opacity: 0; }
+        57.142% { opacity: 0; }
+        57.143% { opacity: 1; }
+        71.428% { opacity: 1; }
+        71.429% { opacity: 0; }
+        100% { opacity: 0; }
+      }
+
+      @keyframes anim_narr_6 {
+        0% { opacity: 0; }
+        71.428% { opacity: 0; }
+        71.429% { opacity: 1; }
+        85.714% { opacity: 1; }
+        85.715% { opacity: 0; }
+        100% { opacity: 0; }
+      }
+
+      @keyframes anim_narr_7 {
+        0% { opacity: 0; }
+        85.714% { opacity: 0; }
+        85.715% { opacity: 1; }
+        100% { opacity: 1; }
+      }
+
+      /* Timestamp 1 bindings */
+      #block_legend, #block_input_image, #raster_input_photo, #box_woman, #badge_1_bg, #badge_1_text,
+      #box_hat, #badge_2_bg, #badge_2_text, #box_drink, #badge_3_bg, #badge_3_text, #box_man,
+      #badge_4_bg, #badge_4_text, #legend_bp_prop, #legend_td_prop, #legend_belief_select, #legend_gating {
+        animation: anim_t1 28s infinite;
+      }
+
+      /* Timestamp 2 bindings */
+      #block_text_input, #text_caption_line1, #text_caption_line2 {
+        animation: anim_t2 28s infinite;
+      }
+
+      /* Timestamp 3 bindings */
+      #block_language_graph, #node_lg_woman, #text_lg_woman, #node_lg_carry, #text_lg_carry,
+      #node_lg_hold, #text_lg_hold, #node_lg_hat, #text_lg_hat, #node_lg_beverage, #text_lg_beverage,
+      #title_language_graph, #edge_text_to_lg, #edge_lg_woman_carry, #edge_lg_woman_hold,
+      #edge_lg_carry_hat, #edge_lg_hold_bever {
+        animation: anim_t3 28s infinite;
+      }
+
+      /* Timestamp 4 bindings */
+      #block_initialization, #text_init_b_woman, #node_init_b_woman, #grid_init_vec_woman,
+      #grid_init_mat_carry, #text_init_A_carry, #node_init_rect_carry, #text_init_A_hold,
+      #node_init_rect_hold, #grid_init_mat_hold, #grid_init_vec_hat, #node_init_b_hat,
+      #text_init_b_hat, #node_init_b_bever, #text_init_b_bever, #grid_init_vec_bever,
+      #title_initialization, #edge_img_to_msg, #edge_lg_to_msg, #edge_init_root_left,
+      #edge_init_split_carry, #edge_init_split_hold, #edge_init_carry_hat, #edge_init_hold_bever {
+        animation: anim_t4 28s infinite;
+      }
+
+      /* Persistent Parent for T4-T5 */
+      #block_message_propagation, #title_message_propagation {
+        animation: anim_t4_t5 28s infinite;
+      }
+
+      /* Timestamp 5 bindings */
+      #block_bptd_update, #node_bp_woman, #text_bp_woman, #node_bp_G, #text_bp_G,
+      #node_bp_rect_hat, #node_bp_rect_bever, #node_bp_S_hat, #text_bp_S_hat,
+      #node_bp_b_hat, #text_bp_b_hat, #node_bp_S_bever, #text_bp_S_bever,
+      #node_bp_b_bever, #text_bp_b_bever, #node_td_woman, #text_td_woman,
+      #node_td_S, #text_td_S, #node_td_rect_hat, #node_td_rect_bever,
+      #node_td_G_hat, #text_td_G_hat, #node_td_b_hat, #text_td_b_hat,
+      #node_td_G_bever, #text_td_G_bever, #node_td_b_bever, #text_td_b_bever,
+      #title_bptd_update, #edge_bp_G_to_woman, #edge_bp_rect1_to_G, #edge_bp_rect2_to_G,
+      #edge_bp_S_to_rect1, #edge_bp_hat_to_S, #edge_bp_S_to_rect2, #edge_bp_bever_to_S,
+      #edge_td_woman_to_S, #edge_td_S_to_rect1, #edge_td_S_to_rect2, #edge_td_rect1_to_G,
+      #edge_td_G_to_hat, #edge_td_rect2_to_G, #edge_td_G_to_bever {
+        animation: anim_t5 28s infinite;
+      }
+
+      /* Timestamp 6 bindings */
+      #block_itm_branch, #text_mlp_label, #node_itm_woman, #text_itm_woman,
+      #node_itm_hat, #text_itm_hat, #node_itm_bever, #text_itm_bever,
+      #text_itm_min, #btn_itm_pred, #text_itm_pred, #edge_mlp_conn,
+      #edge_itm_root_hat, #edge_itm_root_bever, #edge_itm_to_pred {
+        animation: anim_t6 28s infinite;
+      }
+
+      /* Persistent Parent for T6-T7 */
+      #block_readout_head, #title_readout_head {
+        animation: anim_t6_t7 28s infinite;
+      }
+
+      /* Timestamp 7 bindings */
+      #block_mrr_branch, #text_diff_label, #text_mrr_carry, #node_mrr_woman,
+      #node_mrr_hat, #node_mrr_bever, #text_mrr_label, #btn_mrr_pred,
+      #text_mrr_pred, #edge_diff_arrow, #edge_mrr_root_hat, #edge_mrr_root_bever,
+      #edge_mrr_to_pred {
+        animation: anim_t7 28s infinite;
+      }
+
+      /* Narration Bindings */
+      #narr_ts1 { animation: anim_narr_1 28s infinite; }
+      #narr_ts2 { animation: anim_narr_2 28s infinite; }
+      #narr_ts3 { animation: anim_narr_3 28s infinite; }
+      #narr_ts4 { animation: anim_narr_4 28s infinite; }
+      #narr_ts5 { animation: anim_narr_5 28s infinite; }
+      #narr_ts6 { animation: anim_narr_6 28s infinite; }
+      #narr_ts7 { animation: anim_narr_7 28s infinite; }
+    </style>
+  </defs>
+
+  <!-- ========================================== -->
+  <!-- 1. TOP-LEFT: INPUT IMAGE & BOUNDING BOXES  -->
+  <!-- ========================================== -->
+  <g data-id="block_input_image" id="block_input_image" data-class="block" data-parent="root">
+    <!-- Image placeholder container -->
+    <g id="raster_input_photo" data-id="raster_input_photo" data-class="raster_node"><image href="rasters/ICCV_2023_set5_000035/crop_raster_input_photo.png" xlink:href="rasters/ICCV_2023_set5_000035/crop_raster_input_photo.png" x="5" y="15" width="235" height="145" preserveAspectRatio="xMidYMid meet" /></g>
+
+    <!-- Bounding Box 1 (Woman) -->
+    <rect data-id="box_woman" id="box_woman" data-class="child_node" data-parent="block_input_image" x="25" y="20" width="82" height="135" fill="none" stroke="#6897bb" stroke-width="2.5"/>
+    <rect data-id="badge_1_bg" id="badge_1_bg" data-class="child_node" data-parent="block_input_image" x="25" y="10" width="12" height="12" fill="#4a7bbd"/>
+    <text data-id="badge_1_text" id="badge_1_text" data-class="child_node" data-parent="block_input_image" x="31" y="20" font-size="9" fill="#ffffff" font-weight="bold" text-anchor="middle">1</text>
+
+    <!-- Bounding Box 2 (Hat) -->
+    <rect data-id="box_hat" id="box_hat" data-class="child_node" data-parent="block_input_image" x="32" y="25" width="70" height="36" fill="none" stroke="#6897bb" stroke-width="2"/>
+    <rect data-id="badge_2_bg" id="badge_2_bg" data-class="child_node" data-parent="block_input_image" x="42" y="15" width="12" height="12" fill="#4a7bbd"/>
+    <text data-id="badge_2_text" id="badge_2_text" data-class="child_node" data-parent="block_input_image" x="48" y="25" font-size="9" fill="#ffffff" font-weight="bold" text-anchor="middle">2</text>
+
+    <!-- Bounding Box 3 (Drink) -->
+    <rect data-id="box_drink" id="box_drink" data-class="child_node" data-parent="block_input_image" x="30" y="115" width="48" height="42" fill="none" stroke="#6897bb" stroke-width="2"/>
+    <rect data-id="badge_3_bg" id="badge_3_bg" data-class="child_node" data-parent="block_input_image" x="30" y="105" width="12" height="12" fill="#4a7bbd"/>
+    <text data-id="badge_3_text" id="badge_3_text" data-class="child_node" data-parent="block_input_image" x="36" y="115" font-size="9" fill="#ffffff" font-weight="bold" text-anchor="middle">3</text>
+
+    <!-- Bounding Box 4 (Man) -->
+    <rect data-id="box_man" id="box_man" data-class="child_node" data-parent="block_input_image" x="112" y="15" width="125" height="143" fill="none" stroke="#6897bb" stroke-width="2.5"/>
+    <rect data-id="badge_4_bg" id="badge_4_bg" data-class="child_node" data-parent="block_input_image" x="112" y="5" width="12" height="12" fill="#4a7bbd"/>
+    <text data-id="badge_4_text" id="badge_4_text" data-class="child_node" data-parent="block_input_image" x="118" y="15" font-size="9" fill="#ffffff" font-weight="bold" text-anchor="middle">4</text>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 2. BOTTOM-LEFT: TEXT INPUT & LEGEND        -->
+  <!-- ========================================== -->
+  <g data-id="block_text_input" id="block_text_input" data-class="block" data-parent="root">
+    <rect x="5" y="180" width="235" height="50" rx="5" ry="5" fill="#ffffff" stroke="#333333" stroke-width="1.2" stroke-dasharray="4,4"/>
+    <text data-id="text_caption_line1" id="text_caption_line1" data-class="child_node" data-parent="block_text_input" x="12" y="200" font-size="11" fill="#000000">There is a woman who is <tspan fill="#cc0000" font-weight="bold">carrying</tspan></text>
+    <text data-id="text_caption_line2" id="text_caption_line2" data-class="child_node" data-parent="block_text_input" x="12" y="218" font-size="11" fill="#000000">hat and is holding a beverage.</text>
+  </g>
+
+  <g data-id="block_legend" id="block_legend" data-class="block" data-parent="root">
+    <!-- BP Propagation Legend -->
+    <path d="M 9 262 L 9 250" stroke="#4caf50" stroke-width="1.8" marker-end="url(#arrow-green)" fill="none"/>
+    <text data-id="legend_bp_prop" id="legend_bp_prop" data-class="text_node" data-parent="block_legend" x="20" y="259" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="bold" fill="#000000">bp propagation</text>
+
+    <!-- TD Propagation Legend -->
+    <path d="M 9 275 L 9 287" stroke="#f0ad4e" stroke-width="1.8" marker-end="url(#arrow-yellow)" fill="none"/>
+    <text data-id="legend_td_prop" id="legend_td_prop" data-class="text_node" data-parent="block_legend" x="20" y="284" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="bold" fill="#000000">td propagation</text>
+
+    <!-- Belief Selecting Legend -->
+    <circle cx="120" cy="256" r="6" fill="#5cb85c"/>
+    <text x="120" y="259" font-size="8" fill="#ffffff" font-weight="bold" text-anchor="middle">S</text>
+    <circle cx="136" cy="256" r="6" fill="#f0ad4e"/>
+    <text x="136" y="259" font-size="8" fill="#ffffff" font-weight="bold" text-anchor="middle">S</text>
+    <text data-id="legend_belief_select" id="legend_belief_select" data-class="text_node" data-parent="block_legend" x="148" y="259" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="bold" fill="#000000">bp/td belief selecting</text>
+
+    <!-- Gating Legend -->
+    <circle cx="120" cy="281" r="6" fill="#5cb85c"/>
+    <text x="120" y="284" font-size="8" fill="#ffffff" font-weight="bold" text-anchor="middle">G</text>
+    <circle cx="136" cy="281" r="6" fill="#f0ad4e"/>
+    <text x="136" y="284" font-size="8" fill="#ffffff" font-weight="bold" text-anchor="middle">G</text>
+    <text data-id="legend_gating" id="legend_gating" data-class="text_node" data-parent="block_legend" x="148" y="284" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="bold" fill="#000000">bp/td gating</text>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 3. BOTTOM-CENTER: LANGUAGE GRAPH           -->
+  <!-- ========================================== -->
+  <g data-id="block_language_graph" id="block_language_graph" data-class="block" data-parent="root">
+    <rect x="270" y="180" width="145" height="105" rx="6" ry="6" fill="#ffffff" stroke="#333333" stroke-width="1.2" stroke-dasharray="4,4"/>
+    <text data-id="title_language_graph" id="title_language_graph" data-class="text_node" data-parent="block_language_graph" x="342" y="300" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">Language Graph</text>
+
+    <!-- Edges in Language Graph -->
+    <path data-id="edge_lg_woman_carry" id="edge_lg_woman_carry" data-class="edge" data-parent="block_language_graph" data-source="node_lg_woman" data-target="node_lg_carry" d="M 330 205 L 302 205 L 302 215" fill="none" stroke="#000000" stroke-width="1.2"/>
+    <path data-id="edge_lg_woman_hold" id="edge_lg_woman_hold" data-class="edge" data-parent="block_language_graph" data-source="node_lg_woman" data-target="node_lg_hold" d="M 355 205 L 383 205 L 383 215" fill="none" stroke="#000000" stroke-width="1.2"/>
+    <line data-id="edge_lg_carry_hat" id="edge_lg_carry_hat" data-class="edge" data-parent="block_language_graph" data-source="node_lg_carry" data-target="node_lg_hat" x1="302" y1="233" x2="302" y2="250" stroke="#000000" stroke-width="1.2"/>
+    <line data-id="edge_lg_hold_bever" id="edge_lg_hold_bever" data-class="edge" data-parent="block_language_graph" data-source="node_lg_hold" data-target="node_lg_beverage" x1="383" y1="233" x2="383" y2="250" stroke="#000000" stroke-width="1.2"/>
+
+    <!-- Nodes in Language Graph -->
+    <ellipse data-id="node_lg_woman" id="node_lg_woman" data-class="child_node" data-parent="block_language_graph" cx="342" cy="198" rx="22" ry="9" fill="#ffffff" stroke="#000000" stroke-width="1.2"/>
+    <text data-id="text_lg_woman" id="text_lg_woman" data-class="child_node" data-parent="block_language_graph" x="342" y="201" font-size="9" text-anchor="middle" fill="#000000">woman</text>
+
+    <rect data-id="node_lg_carry" id="node_lg_carry" data-class="child_node" data-parent="block_language_graph" x="282" y="215" width="40" height="18" rx="4" ry="4" fill="#ffffff" stroke="#000000" stroke-width="1.2"/>
+    <text data-id="text_lg_carry" id="text_lg_carry" data-class="child_node" data-parent="block_language_graph" x="302" y="227" font-size="9" text-anchor="middle" fill="#000000">carry</text>
+
+    <rect data-id="node_lg_hold" id="node_lg_hold" data-class="child_node" data-parent="block_language_graph" x="363" y="215" width="40" height="18" rx="4" ry="4" fill="#ffffff" stroke="#000000" stroke-width="1.2"/>
+    <text data-id="text_lg_hold" id="text_lg_hold" data-class="child_node" data-parent="block_language_graph" x="383" y="227" font-size="9" text-anchor="middle" fill="#000000">hold</text>
+
+    <ellipse data-id="node_lg_hat" id="node_lg_hat" data-class="child_node" data-parent="block_language_graph" cx="302" cy="260" rx="18" ry="9" fill="#ffffff" stroke="#000000" stroke-width="1.2"/>
+    <text data-id="text_lg_hat" id="text_lg_hat" data-class="child_node" data-parent="block_language_graph" x="302" y="263" font-size="9" text-anchor="middle" fill="#000000">hat</text>
+
+    <ellipse data-id="node_lg_beverage" id="node_lg_beverage" data-class="child_node" data-parent="block_language_graph" cx="383" cy="260" rx="22" ry="9" fill="#ffffff" stroke="#000000" stroke-width="1.2"/>
+    <text data-id="text_lg_beverage" id="text_lg_beverage" data-class="child_node" data-parent="block_language_graph" x="383" y="263" font-size="8.5" text-anchor="middle" fill="#000000">beverage</text>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 4. TOP-RIGHT: MESSAGE PROPAGATION BLOCK    -->
+  <!-- ========================================== -->
+  <g data-id="block_message_propagation" id="block_message_propagation" data-class="block" data-parent="root">
+    <rect x="265" y="8" width="530" height="152" rx="8" ry="8" fill="#ffffff" stroke="#333333" stroke-width="1.5" stroke-dasharray="5,5"/>
+    <text data-id="title_message_propagation" id="title_message_propagation" data-class="text_node" data-parent="block_message_propagation" x="530" y="11" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">Message Propagation</text>
+
+    <!-- Sub-block 1: Initialization -->
+    <g data-id="block_initialization" id="block_initialization" data-class="block" data-parent="block_message_propagation">
+      <rect x="270" y="14" width="245" height="140" rx="6" ry="6" fill="#ffffff" stroke="#333333" stroke-width="1.2"/>
+      <text data-id="title_initialization" id="title_initialization" data-class="text_node" data-parent="block_initialization" x="392" y="25" font-size="10" font-weight="bold" font-style="italic" fill="#000000" text-anchor="middle">Initialization</text>
+
+      <!-- Initialization Graph Edges -->
+      <line data-id="edge_init_root_left" id="edge_init_root_left" data-class="edge" data-parent="block_initialization" data-source="node_init_b_woman" data-target="node_init_rect_carry" x1="392" y1="58" x2="392" y2="72" stroke="#000000" stroke-width="1.2"/>
+      <path data-id="edge_init_split_carry" id="edge_init_split_carry" data-class="edge" data-parent="block_initialization" data-source="node_init_b_woman" data-target="node_init_rect_carry" d="M 392 72 L 362 72 L 362 86" fill="none" stroke="#000000" stroke-width="1.2"/>
+      <path data-id="edge_init_split_hold" id="edge_init_split_hold" data-class="edge" data-parent="block_initialization" data-source="node_init_b_woman" data-target="node_init_rect_hold" d="M 392 72 L 426 72 L 426 86" fill="none" stroke="#000000" stroke-width="1.2"/>
+      <line data-id="edge_init_carry_hat" id="edge_init_carry_hat" data-class="edge" data-parent="block_initialization" data-source="node_init_rect_carry" data-target="node_init_b_hat" x1="362" y1="102" x2="362" y2="122" stroke="#000000" stroke-width="1.2"/>
+      <line data-id="edge_init_hold_bever" id="edge_init_hold_bever" data-class="edge" data-parent="block_initialization" data-source="node_init_rect_hold" data-target="node_init_b_bever" x1="426" y1="102" x2="426" y2="122" stroke="#000000" stroke-width="1.2"/>
+
+      <!-- Initialization Top Node: b_woman^loc -->
+      <text data-id="text_init_b_woman" id="text_init_b_woman" data-class="child_node" data-parent="block_initialization" font-size="9" font-weight="bold" fill="#000000"><tspan x="352" y="53">b</tspan><tspan x="358" y="47" font-size="6">loc</tspan><tspan x="358" y="56" font-size="6">woman</tspan></text>
+      <ellipse data-id="node_init_b_woman" id="node_init_b_woman" data-class="child_node" data-parent="block_initialization" cx="392" cy="52" rx="16" ry="6" fill="#e8e8e8" stroke="#000000" stroke-width="1"/>
+      
+      <!-- Top Vector (1x4) -->
+      <g data-id="grid_init_vec_woman" id="grid_init_vec_woman" data-class="composite_whole" data-parent="block_initialization">
+        <rect data-id="vec_w_cell_1" id="vec_w_cell_1" data-class="composite_part" data-parent="grid_init_vec_woman" x="415" y="49" width="6" height="6" fill="#2b5c8f" stroke="#4a7bbd" stroke-width="0.5"/>
+        <text x="418" y="47" font-size="5" fill="#4a7bbd" text-anchor="middle">1</text>
+        <rect data-id="vec_w_cell_2" id="vec_w_cell_2" data-class="composite_part" data-parent="grid_init_vec_woman" x="421" y="49" width="6" height="6" fill="#6baed6" stroke="#4a7bbd" stroke-width="0.5"/>
+        <text x="424" y="47" font-size="5" fill="#4a7bbd" text-anchor="middle">2</text>
+        <rect data-id="vec_w_cell_3" id="vec_w_cell_3" data-class="composite_part" data-parent="grid_init_vec_woman" x="427" y="49" width="6" height="6" fill="#9ecae1" stroke="#4a7bbd" stroke-width="0.5"/>
+        <text x="430" y="47" font-size="5" fill="#4a7bbd" text-anchor="middle">3</text>
+        <rect data-id="vec_w_cell_4" id="vec_w_cell_4" data-class="composite_part" data-parent="grid_init_vec_woman" x="433" y="49" width="6" height="6" fill="#c6dbef" stroke="#4a7bbd" stroke-width="0.5"/>
+        <text x="436" y="47" font-size="5" fill="#4a7bbd" text-anchor="middle">4</text>
+      </g>
+
+      <!-- Matrix A_carry (4x4) -->
+      <g data-id="grid_init_mat_carry" id="grid_init_mat_carry" data-class="composite_whole" data-parent="block_initialization">
+        <!-- Column indices -->
+        <text x="298" y="68" font-size="5" fill="#4a7bbd" text-anchor="middle">1</text>
+        <text x="304" y="68" font-size="5" fill="#4a7bbd" text-anchor="middle">2</text>
+        <text x="310" y="68" font-size="5" fill="#4a7bbd" text-anchor="middle">3</text>
+        <text x="316" y="68" font-size="5" fill="#4a7bbd" text-anchor="middle">4</text>
+        <!-- Row indices -->
+        <text x="290" y="75" font-size="5" fill="#4a7bbd" text-anchor="middle">1</text>
+        <text x="290" y="81" font-size="5" fill="#4a7bbd" text-anchor="middle">2</text>
+        <text x="290" y="87" font-size="5" fill="#4a7bbd" text-anchor="middle">3</text>
+        <text x="290" y="93" font-size="5" fill="#4a7bbd" text-anchor="middle">4</text>
+        <!-- Matrix grid -->
+        <rect data-id="mat_c_bg" id="mat_c_bg" data-class="composite_part" data-parent="grid_init_mat_carry" x="295" y="70" width="24" height="24" fill="none" stroke="#4a7bbd" stroke-width="1"/>
+        <line x1="301" y1="70" x2="301" y2="94" stroke="#4a7bbd" stroke-width="0.5"/>
+        <line x1="307" y1="70" x2="307" y2="94" stroke="#4a7bbd" stroke-width="0.5"/>
+        <line x1="313" y1="70" x2="313" y2="94" stroke="#4a7bbd" stroke-width="0.5"/>
+        <line x1="295" y1="76" x2="319" y2="76" stroke="#4a7bbd" stroke-width="0.5"/>
+        <line x1="295" y1="82" x2="319" y2="82" stroke="#4a7bbd" stroke-width="0.5"/>
+        <line x1="295" y1="88" x2="319" y2="88" stroke="#4a7bbd" stroke-width="0.5"/>
+      </g>
+      <text data-id="text_init_A_carry" id="text_init_A_carry" data-class="child_node" data-parent="block_initialization" font-size="8" font-weight="bold" fill="#000000"><tspan x="323" y="79">A</tspan><tspan x="329" y="82" font-size="6">carry</tspan></text>
+      <rect data-id="node_init_rect_carry" id="node_init_rect_carry" data-class="child_node" data-parent="block_initialization" x="347" y="86" width="30" height="16" fill="#f0f0f0" stroke="#000000" stroke-width="1"/>
+
+      <!-- Matrix A_hold (4x4) -->
+      <text data-id="text_init_A_hold" id="text_init_A_hold" data-class="child_node" data-parent="block_initialization" font-size="8" font-weight="bold" fill="#000000"><tspan x="412" y="79">A</tspan><tspan x="418" y="82" font-size="6">hold</tspan></text>
+      <rect data-id="node_init_rect_hold" id="node_init_rect_hold" data-class="child_node" data-parent="block_initialization" x="411" y="86" width="30" height="16" fill="#f0f0f0" stroke="#000000" stroke-width="1"/>
+      <g data-id="grid_init_mat_hold" id="grid_init_mat_hold" data-class="composite_whole" data-parent="block_initialization">
+        <rect data-id="mat_h_bg" id="mat_h_bg" data-class="composite_part" data-parent="grid_init_mat_hold" x="459" y="70" width="24" height="24" fill="#c6dbef" stroke="#4a7bbd" stroke-width="1"/>
+        <rect data-id="mat_h_active" id="mat_h_active" data-class="composite_part" data-parent="grid_init_mat_hold" x="471" y="70" width="6" height="6" fill="#2b5c8f"/>
+        <line x1="465" y1="70" x2="465" y2="94" stroke="#4a7bbd" stroke-width="0.5"/>
+        <line x1="471" y1="70" x2="471" y2="94" stroke="#4a7bbd" stroke-width="0.5"/>
+        <line x1="477" y1="70" x2="477" y2="94" stroke="#4a7bbd" stroke-width="0.5"/>
+        <line x1="459" y1="76" x2="483" y2="76" stroke="#4a7bbd" stroke-width="0.5"/>
+        <line x1="459" y1="82" x2="483" y2="82" stroke="#4a7bbd" stroke-width="0.5"/>
+        <line x1="459" y1="88" x2="483" y2="88" stroke="#4a7bbd" stroke-width="0.5"/>
+      </g>
+
+      <!-- Bottom Nodes & Vectors -->
+      <g data-id="grid_init_vec_hat" id="grid_init_vec_hat" data-class="composite_whole" data-parent="block_initialization">
+        <rect data-id="vec_h_1" id="vec_h_1" data-class="composite_part" data-parent="grid_init_vec_hat" x="300" y="121" width="6" height="6" fill="#c6dbef" stroke="#4a7bbd" stroke-width="0.5"/>
+        <rect data-id="vec_h_2" id="vec_h_2" data-class="composite_part" data-parent="grid_init_vec_hat" x="306" y="121" width="6" height="6" fill="#2b5c8f" stroke="#4a7bbd" stroke-width="0.5"/>
+        <rect data-id="vec_h_3" id="vec_h_3" data-class="composite_part" data-parent="grid_init_vec_hat" x="312" y="121" width="6" height="6" fill="#9ecae1" stroke="#4a7bbd" stroke-width="0.5"/>
+        <rect data-id="vec_h_4" id="vec_h_4" data-class="composite_part" data-parent="grid_init_vec_hat" x="318" y="121" width="6" height="6" fill="#c6dbef" stroke="#4a7bbd" stroke-width="0.5"/>
+      </g>
+      <ellipse data-id="node_init_b_hat" id="node_init_b_hat" data-class="child_node" data-parent="block_initialization" cx="362" cy="128" rx="16" ry="6" fill="#e8e8e8" stroke="#000000" stroke-width="1"/>
+      <text data-id="text_init_b_hat" id="text_init_b_hat" data-class="child_node" data-parent="block_initialization" font-size="9" font-weight="bold" fill="#000000"><tspan x="345" y="145">b</tspan><tspan x="351" y="140" font-size="6">loc</tspan><tspan x="351" y="148" font-size="6">hat</tspan></text>
+
+      <ellipse data-id="node_init_b_bever" id="node_init_b_bever" data-class="child_node" data-parent="block_initialization" cx="426" cy="128" rx="16" ry="6" fill="#e8e8e8" stroke="#000000" stroke-width="1"/>
+      <text data-id="text_init_b_bever" id="text_init_b_bever" data-class="child_node" data-parent="block_initialization" font-size="9" font-weight="bold" fill="#000000"><tspan x="428" y="145">b</tspan><tspan x="434" y="140" font-size="6">loc</tspan><tspan x="434" y="148" font-size="6">bever</tspan></text>
+      <g data-id="grid_init_vec_bever" id="grid_init_vec_bever" data-class="composite_whole" data-parent="block_initialization">
+        <rect data-id="vec_b_1" id="vec_b_1" data-class="composite_part" data-parent="grid_init_vec_bever" x="455" y="121" width="6" height="6" fill="#c6dbef" stroke="#4a7bbd" stroke-width="0.5"/>
+        <rect data-id="vec_b_2" id="vec_b_2" data-class="composite_part" data-parent="grid_init_vec_bever" x="461" y="121" width="6" height="6" fill="#9ecae1" stroke="#4a7bbd" stroke-width="0.5"/>
+        <rect data-id="vec_b_3" id="vec_b_3" data-class="composite_part" data-parent="grid_init_vec_bever" x="467" y="121" width="6" height="6" fill="#2b5c8f" stroke="#4a7bbd" stroke-width="0.5"/>
+        <rect data-id="vec_b_4" id="vec_b_4" data-class="composite_part" data-parent="grid_init_vec_bever" x="473" y="121" width="6" height="6" fill="#c6dbef" stroke="#4a7bbd" stroke-width="0.5"/>
+      </g>
+    </g>
+
+    <!-- Sub-block 2: bp/td aggregation and update -->
+    <g data-id="block_bptd_update" id="block_bptd_update" data-class="block" data-parent="block_message_propagation">
+      <rect x="520" y="14" width="270" height="140" rx="6" ry="6" fill="#ffffff" stroke="#333333" stroke-width="1.2"/>
+      <text data-id="title_bptd_update" id="title_bptd_update" data-class="text_node" data-parent="block_bptd_update" x="655" y="25" font-size="10" font-weight="bold" font-style="italic" fill="#000000" text-anchor="middle">bp/td aggregation and update</text>
+
+      <!-- BP Branch (Green) -->
+      <!-- Top node -->
+      <ellipse data-id="node_bp_woman" id="node_bp_woman" data-class="child_node" data-parent="block_bptd_update" cx="585" cy="46" rx="16" ry="6" fill="#e8e8e8" stroke="#000000" stroke-width="1"/>
+      <text data-id="text_bp_woman" id="text_bp_woman" data-class="child_node" data-parent="block_bptd_update" font-size="9" font-weight="bold" fill="#000000"><tspan x="605" y="47">b</tspan><tspan x="611" y="42" font-size="6">bp</tspan><tspan x="611" y="51" font-size="6">woman</tspan></text>
+      
+      <!-- G node & arrow to top node -->
+      <circle data-id="node_bp_G" id="node_bp_G" data-class="child_node" data-parent="block_bptd_update" cx="585" cy="68" r="8" fill="#5cb85c"/>
+      <text data-id="text_bp_G" id="text_bp_G" data-class="child_node" data-parent="block_bptd_update" x="585" y="71" font-size="8" font-weight="bold" fill="#ffffff" text-anchor="middle">G</text>
+      <line data-id="edge_bp_G_to_woman" id="edge_bp_G_to_woman" data-class="edge" data-parent="block_bptd_update" data-source="node_bp_G" data-target="node_bp_woman" x1="585" y1="60" x2="585" y2="54" stroke="#4caf50" stroke-width="1.2" marker-end="url(#arrow-green)"/>
+
+      <!-- Green rects & lines to G -->
+      <rect data-id="node_bp_rect_hat" id="node_bp_rect_hat" data-class="child_node" data-parent="block_bptd_update" x="532" y="82" width="20" height="14" fill="#ffffff" stroke="#000000" stroke-width="1"/>
+      <rect data-id="node_bp_rect_bever" id="node_bp_rect_bever" data-class="child_node" data-parent="block_bptd_update" x="608" y="82" width="20" height="14" fill="#ffffff" stroke="#000000" stroke-width="1"/>
+      <path data-id="edge_bp_rect1_to_G" id="edge_bp_rect1_to_G" data-class="edge" data-parent="block_bptd_update" data-source="node_bp_rect_hat" data-target="node_bp_G" d="M 542 82 L 542 68 L 577 68" fill="none" stroke="#4caf50" stroke-width="1.2"/>
+      <path data-id="edge_bp_rect2_to_G" id="edge_bp_rect2_to_G" data-class="edge" data-parent="block_bptd_update" data-source="node_bp_rect_bever" data-target="node_bp_G" d="M 618 82 L 618 68 L 593 68" fill="none" stroke="#4caf50" stroke-width="1.2"/>
+
+      <!-- S nodes & bottom nodes -->
+      <circle data-id="node_bp_S_hat" id="node_bp_S_hat" data-class="child_node" data-parent="block_bptd_update" cx="542" cy="112" r="8" fill="#5cb85c"/>
+      <text data-id="text_bp_S_hat" id="text_bp_S_hat" data-class="child_node" data-parent="block_bptd_update" x="542" y="115" font-size="8" font-weight="bold" fill="#ffffff" text-anchor="middle">S</text>
+      <line data-id="edge_bp_S_to_rect1" id="edge_bp_S_to_rect1" data-class="edge" data-parent="block_bptd_update" data-source="node_bp_S_hat" data-target="node_bp_rect_hat" x1="542" y1="104" x2="542" y2="98" stroke="#4caf50" stroke-width="1.2" marker-end="url(#arrow-green)"/>
+
+      <ellipse data-id="node_bp_b_hat" id="node_bp_b_hat" data-class="child_node" data-parent="block_bptd_update" cx="542" cy="136" rx="14" ry="5" fill="#e8e8e8" stroke="#000000" stroke-width="1"/>
+      <line data-id="edge_bp_hat_to_S" id="edge_bp_hat_to_S" data-class="edge" data-parent="block_bptd_update" data-source="node_bp_b_hat" data-target="node_bp_S_hat" x1="542" y1="131" x2="542" y2="122" stroke="#4caf50" stroke-width="1.2" marker-end="url(#arrow-green)"/>
+      <text data-id="text_bp_b_hat" id="text_bp_b_hat" data-class="child_node" data-parent="block_bptd_update" font-size="8" font-weight="bold" fill="#000000"><tspan x="557" y="133">b</tspan><tspan x="562" y="128" font-size="5.5">bp</tspan><tspan x="562" y="137" font-size="5.5">hat</tspan></text>
+
+      <circle data-id="node_bp_S_bever" id="node_bp_S_bever" data-class="child_node" data-parent="block_bptd_update" cx="618" cy="112" r="8" fill="#5cb85c"/>
+      <text data-id="text_bp_S_bever" id="text_bp_S_bever" data-class="child_node" data-parent="block_bptd_update" x="618" y="115" font-size="8" font-weight="bold" fill="#ffffff" text-anchor="middle">S</text>
+      <line data-id="edge_bp_S_to_rect2" id="edge_bp_S_to_rect2" data-class="edge" data-parent="block_bptd_update" data-source="node_bp_S_bever" data-target="node_bp_rect_bever" x1="618" y1="104" x2="618" y2="98" stroke="#4caf50" stroke-width="1.2" marker-end="url(#arrow-green)"/>
+
+      <ellipse data-id="node_bp_b_bever" id="node_bp_b_bever" data-class="child_node" data-parent="block_bptd_update" cx="618" cy="136" rx="14" ry="5" fill="#e8e8e8" stroke="#000000" stroke-width="1"/>
+      <line data-id="edge_bp_bever_to_S" id="edge_bp_bever_to_S" data-class="edge" data-parent="block_bptd_update" data-source="node_bp_b_bever" data-target="node_bp_S_bever" x1="618" y1="131" x2="618" y2="122" stroke="#4caf50" stroke-width="1.2" marker-end="url(#arrow-green)"/>
+      <text data-id="text_bp_b_bever" id="text_bp_b_bever" data-class="child_node" data-parent="block_bptd_update" font-size="8" font-weight="bold" fill="#000000"><tspan x="633" y="133">b</tspan><tspan x="638" y="128" font-size="5.5">bp</tspan><tspan x="638" y="137" font-size="5.5">bever</tspan></text>
+
+
+      <!-- TD Branch (Yellow) -->
+      <!-- Top node -->
+      <ellipse data-id="node_td_woman" id="node_td_woman" data-class="child_node" data-parent="block_bptd_update" cx="720" cy="46" rx="16" ry="6" fill="#e8e8e8" stroke="#000000" stroke-width="1"/>
+      <text data-id="text_td_woman" id="text_td_woman" data-class="child_node" data-parent="block_bptd_update" font-size="9" font-weight="bold" fill="#000000"><tspan x="740" y="47">b</tspan><tspan x="746" y="42" font-size="6">td</tspan><tspan x="746" y="51" font-size="6">woman</tspan></text>
+
+      <!-- S node & arrow from top node -->
+      <circle data-id="node_td_S" id="node_td_S" data-class="child_node" data-parent="block_bptd_update" cx="720" cy="68" r="8" fill="#f0ad4e"/>
+      <text data-id="text_td_S" id="text_td_S" data-class="child_node" data-parent="block_bptd_update" x="720" y="71" font-size="8" font-weight="bold" fill="#ffffff" text-anchor="middle">S</text>
+      <line data-id="edge_td_woman_to_S" id="edge_td_woman_to_S" data-class="edge" data-parent="block_bptd_update" data-source="node_td_woman" data-target="node_td_S" x1="720" y1="52" x2="720" y2="58" stroke="#f0ad4e" stroke-width="1.2" marker-end="url(#arrow-yellow)"/>
+
+      <!-- Yellow rects & lines from S -->
+      <rect data-id="node_td_rect_hat" id="node_td_rect_hat" data-class="child_node" data-parent="block_bptd_update" x="668" y="82" width="20" height="14" fill="#ffffff" stroke="#000000" stroke-width="1"/>
+      <rect data-id="node_td_rect_bever" id="node_td_rect_bever" data-class="child_node" data-parent="block_bptd_update" x="744" y="82" width="20" height="14" fill="#ffffff" stroke="#000000" stroke-width="1"/>
+      <path data-id="edge_td_S_to_rect1" id="edge_td_S_to_rect1" data-class="edge" data-parent="block_bptd_update" data-source="node_td_S" data-target="node_td_rect_hat" d="M 712 68 L 678 68 L 678 82" fill="none" stroke="#f0ad4e" stroke-width="1.2"/>
+      <path data-id="edge_td_S_to_rect2" id="edge_td_S_to_rect2" data-class="edge" data-parent="block_bptd_update" data-source="node_td_S" data-target="node_td_rect_bever" d="M 728 68 L 754 68 L 754 82" fill="none" stroke="#f0ad4e" stroke-width="1.2"/>
+
+      <!-- G nodes & bottom nodes -->
+      <circle data-id="node_td_G_hat" id="node_td_G_hat" data-class="child_node" data-parent="block_bptd_update" cx="678" cy="112" r="8" fill="#f0ad4e"/>
+      <text data-id="text_td_G_hat" id="text_td_G_hat" data-class="child_node" data-parent="block_bptd_update" x="678" y="115" font-size="8" font-weight="bold" fill="#ffffff" text-anchor="middle">G</text>
+      <line data-id="edge_td_rect1_to_G" id="edge_td_rect1_to_G" data-class="edge" data-parent="block_bptd_update" data-source="node_td_rect_hat" data-target="node_td_G_hat" x1="678" y1="96" x2="678" y2="102" stroke="#f0ad4e" stroke-width="1.2" marker-end="url(#arrow-yellow)"/>
+
+      <ellipse data-id="node_td_b_hat" id="node_td_b_hat" data-class="child_node" data-parent="block_bptd_update" cx="678" cy="136" rx="14" ry="5" fill="#e8e8e8" stroke="#000000" stroke-width="1"/>
+      <line data-id="edge_td_G_to_hat" id="edge_td_G_to_hat" data-class="edge" data-parent="block_bptd_update" data-source="node_td_G_hat" data-target="node_td_b_hat" x1="678" y1="120" x2="678" y2="128" stroke="#f0ad4e" stroke-width="1.2" marker-end="url(#arrow-yellow)"/>
+      <text data-id="text_td_b_hat" id="text_td_b_hat" data-class="child_node" data-parent="block_bptd_update" font-size="8" font-weight="bold" fill="#000000"><tspan x="693" y="133">b</tspan><tspan x="698" y="128" font-size="5.5">td</tspan><tspan x="698" y="137" font-size="5.5">hat</tspan></text>
+
+      <circle data-id="node_td_G_bever" id="node_td_G_bever" data-class="child_node" data-parent="block_bptd_update" cx="754" cy="112" r="8" fill="#f0ad4e"/>
+      <text data-id="text_td_G_bever" id="text_td_G_bever" data-class="child_node" data-parent="block_bptd_update" x="754" y="115" font-size="8" font-weight="bold" fill="#ffffff" text-anchor="middle">G</text>
+      <line data-id="edge_td_rect2_to_G" id="edge_td_rect2_to_G" data-class="edge" data-parent="block_bptd_update" data-source="node_td_rect_bever" data-target="node_td_G_bever" x1="754" y1="96" x2="754" y2="102" stroke="#f0ad4e" stroke-width="1.2" marker-end="url(#arrow-yellow)"/>
+
+      <ellipse data-id="node_td_b_bever" id="node_td_b_bever" data-class="child_node" data-parent="block_bptd_update" cx="754" cy="136" rx="14" ry="5" fill="#e8e8e8" stroke="#000000" stroke-width="1"/>
+      <line data-id="edge_td_G_to_bever" id="edge_td_G_to_bever" data-class="edge" data-parent="block_bptd_update" data-source="node_td_G_bever" data-target="node_td_b_bever" x1="754" y1="120" x2="754" y2="128" stroke="#f0ad4e" stroke-width="1.2" marker-end="url(#arrow-yellow)"/>
+      <text data-id="text_td_b_bever" id="text_td_b_bever" data-class="child_node" data-parent="block_bptd_update" font-size="8" font-weight="bold" fill="#000000"><tspan x="769" y="133">b</tspan><tspan x="774" y="128" font-size="5.5">td</tspan><tspan x="774" y="137" font-size="5.5">bever</tspan></text>
+    </g>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 5. BOTTOM-RIGHT: READOUT HEAD BLOCK        -->
+  <!-- ========================================== -->
+  <g data-id="block_readout_head" id="block_readout_head" data-class="block" data-parent="root">
+    <rect x="445" y="172" width="350" height="125" rx="8" ry="8" fill="none" stroke="#333333" stroke-width="1.5" stroke-dasharray="5,5"/>
+    <text data-id="title_readout_head" id="title_readout_head" data-class="text_node" data-parent="block_readout_head" x="655" y="300" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">Readout Head</text>
+
+    <!-- Sub-block ITM branch -->
+    <g data-id="block_itm_branch" id="block_itm_branch" data-class="block" data-parent="block_readout_head">
+      <rect x="455" y="180" width="135" height="68" rx="4" ry="4" fill="#ffffff" stroke="#333333" stroke-width="1.2"/>
+      
+      <!-- ITM Tree Edges -->
+      <path data-id="edge_itm_root_hat" id="edge_itm_root_hat" data-class="edge" data-parent="block_itm_branch" data-source="node_itm_woman" data-target="node_itm_hat" d="M 515 190 L 493 190 L 493 213" fill="none" stroke="#000000" stroke-width="1.2"/>
+      <path data-id="edge_itm_root_bever" id="edge_itm_root_bever" data-class="edge" data-parent="block_itm_branch" data-source="node_itm_woman" data-target="node_itm_bever" d="M 533 190 L 555 190 L 555 213" fill="none" stroke="#000000" stroke-width="1.2"/>
+
+      <!-- ITM Woman Dual Box -->
+      <g data-id="node_itm_woman" id="node_itm_woman" data-class="child_node" data-parent="block_itm_branch">
+        <rect x="515" y="184" width="9" height="9" fill="#5cb85c" stroke="#000000" stroke-width="0.8"/>
+        <rect x="524" y="184" width="9" height="9" fill="#f0ad4e" stroke="#000000" stroke-width="0.8"/>
+      </g>
+      <text data-id="text_itm_woman" id="text_itm_woman" data-class="child_node" data-parent="block_itm_branch" fill="#000000" text-anchor="middle"><tspan x="524" y="197" font-size="5.5">bp/td</tspan><tspan x="520" y="205" font-size="7.5" font-style="italic">p</tspan><tspan x="524" y="212" font-size="5.5">woman</tspan></text>
+
+      <!-- ITM Hat Dual Box -->
+      <g data-id="node_itm_hat" id="node_itm_hat" data-class="child_node" data-parent="block_itm_branch">
+        <rect x="484" y="213" width="9" height="9" fill="#5cb85c" stroke="#000000" stroke-width="0.8"/>
+        <rect x="493" y="213" width="9" height="9" fill="#f0ad4e" stroke="#000000" stroke-width="0.8"/>
+      </g>
+      <text data-id="text_itm_hat" id="text_itm_hat" data-class="child_node" data-parent="block_itm_branch" fill="#000000" text-anchor="middle"><tspan x="493" y="226" font-size="5.5">bp/td</tspan><tspan x="489" y="234" font-size="7.5" font-style="italic">p</tspan><tspan x="493" y="241" font-size="5.5">hat</tspan></text>
+
+      <!-- ITM Beverage Dual Box -->
+      <g data-id="node_itm_bever" id="node_itm_bever" data-class="child_node" data-parent="block_itm_branch">
+        <rect x="546" y="213" width="9" height="9" fill="#5cb85c" stroke="#000000" stroke-width="0.8"/>
+        <rect x="555" y="213" width="9" height="9" fill="#f0ad4e" stroke="#000000" stroke-width="0.8"/>
+      </g>
+      <text data-id="text_itm_bever" id="text_itm_bever" data-class="child_node" data-parent="block_itm_branch" fill="#000000" text-anchor="middle"><tspan x="555" y="226" font-size="5.5">bp/td</tspan><tspan x="551" y="234" font-size="7.5" font-style="italic">p</tspan><tspan x="555" y="241" font-size="5.5">bever</tspan></text>
+
+      <!-- Min Arrow & ITM Prediction Box -->
+      <text data-id="text_itm_min" id="text_itm_min" data-class="child_node" data-parent="block_itm_branch" x="522" y="260" font-size="9" font-weight="bold" fill="#000000" text-anchor="middle">Min</text>
+      <line data-id="edge_itm_to_pred" id="edge_itm_to_pred" data-class="edge" data-parent="block_itm_branch" data-source="block_itm_branch" data-target="btn_itm_pred" x1="522" y1="248" x2="522" y2="267" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow-black)"/>
+      <rect data-id="btn_itm_pred" id="btn_itm_pred" data-class="child_node" data-parent="block_itm_branch" x="474" y="268" width="96" height="16" rx="4" ry="4" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+      <text data-id="text_itm_pred" id="text_itm_pred" data-class="child_node" data-parent="block_itm_branch" x="522" y="280" font-size="9" fill="#000000" text-anchor="middle">ITM prediction</text>
+    </g>
+
+    <!-- Difference Arrow between ITM and MRR -->
+    <text data-id="text_diff_label" id="text_diff_label" data-class="child_node" data-parent="block_readout_head" x="618" y="215" font-size="9" font-weight="bold" fill="#000000" text-anchor="middle">Difference</text>
+    <line data-id="edge_diff_arrow" id="edge_diff_arrow" data-class="edge" data-parent="block_readout_head" data-source="block_itm_branch" data-target="block_mrr_branch" x1="590" y1="219" x2="644" y2="219" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow-black)"/>
+
+    <!-- Sub-block MRR branch -->
+    <g data-id="block_mrr_branch" id="block_mrr_branch" data-class="block" data-parent="block_readout_head">
+      <rect x="645" y="180" width="145" height="68" rx="4" ry="4" fill="#ffffff" stroke="#333333" stroke-width="1.2"/>
+
+      <!-- MRR Tree Edges -->
+      <path data-id="edge_mrr_root_hat" id="edge_mrr_root_hat" data-class="edge" data-parent="block_mrr_branch" data-source="node_mrr_woman" data-target="node_mrr_hat" d="M 698 190 L 680 190 L 680 213" fill="none" stroke="#cc0000" stroke-width="2"/>
+      <path data-id="edge_mrr_root_bever" id="edge_mrr_root_bever" data-class="edge" data-parent="block_mrr_branch" data-source="node_mrr_woman" data-target="node_mrr_bever" d="M 716 190 L 734 190 L 734 213" fill="none" stroke="#000000" stroke-width="1.2"/>
+      <text data-id="text_mrr_carry" id="text_mrr_carry" data-class="child_node" data-parent="block_mrr_branch" x="668" y="202" font-size="8.5" font-weight="bold" fill="#cc0000">carry</text>
+
+      <!-- MRR Dual Boxes -->
+      <g data-id="node_mrr_woman" id="node_mrr_woman" data-class="child_node" data-parent="block_mrr_branch">
+        <rect x="698" y="184" width="9" height="9" fill="#5cb85c" stroke="#000000" stroke-width="0.8"/>
+        <rect x="707" y="184" width="9" height="9" fill="#f0ad4e" stroke="#000000" stroke-width="0.8"/>
+      </g>
+      <g data-id="node_mrr_hat" id="node_mrr_hat" data-class="child_node" data-parent="block_mrr_branch">
+        <rect x="671" y="213" width="9" height="9" fill="#5cb85c" stroke="#000000" stroke-width="0.8"/>
+        <rect x="680" y="213" width="9" height="9" fill="#f0ad4e" stroke="#000000" stroke-width="0.8"/>
+      </g>
+      <g data-id="node_mrr_bever" id="node_mrr_bever" data-class="child_node" data-parent="block_mrr_branch">
+        <rect x="725" y="213" width="9" height="9" fill="#5cb85c" stroke="#000000" stroke-width="0.8"/>
+        <rect x="734" y="213" width="9" height="9" fill="#f0ad4e" stroke="#000000" stroke-width="0.8"/>
+      </g>
+
+      <text data-id="text_mrr_label" id="text_mrr_label" data-class="child_node" data-parent="block_mrr_branch" x="712" y="240" font-size="9" font-weight="bold" fill="#000000" text-anchor="middle">MRR</text>
+
+      <!-- MRR Prediction Arrow & Box -->
+      <line data-id="edge_mrr_to_pred" id="edge_mrr_to_pred" data-class="edge" data-parent="block_mrr_branch" data-source="block_mrr_branch" data-target="btn_mrr_pred" x1="712" y1="248" x2="712" y2="267" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow-black)"/>
+      <rect data-id="btn_mrr_pred" id="btn_mrr_pred" data-class="child_node" data-parent="block_mrr_branch" x="664" y="268" width="96" height="16" rx="4" ry="4" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+      <text data-id="text_mrr_pred" id="text_mrr_pred" data-class="child_node" data-parent="block_mrr_branch" x="712" y="280" font-size="9" fill="#000000" text-anchor="middle">MRR prediction</text>
+    </g>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 6. GLOBAL INTER-BLOCK TRANSITION ARROWS    -->
+  <!-- ========================================== -->
+  <!-- Image Block to Message Propagation Block Arrow -->
+  <path data-id="edge_img_to_msg" id="edge_img_to_msg" data-class="edge" data-source="block_input_image" data-target="block_message_propagation" d="M 248 85 L 256 85 L 256 82 L 263 87 L 256 92 L 256 89 L 248 89 Z" fill="#ffffff" stroke="#000000" stroke-width="1"/>
+
+  <!-- Text Input Block to Language Graph Block Arrow -->
+  <path data-id="edge_text_to_lg" id="edge_text_to_lg" data-class="edge" data-source="block_text_input" data-target="block_language_graph" d="M 248 202 L 256 202 L 256 199 L 263 204 L 256 209 L 256 206 L 248 206 Z" fill="#ffffff" stroke="#000000" stroke-width="1"/>
+
+  <!-- Language Graph to Message Propagation Up Arrow -->
+  <path data-id="edge_lg_to_msg" id="edge_lg_to_msg" data-class="edge" data-source="block_language_graph" data-target="block_message_propagation" d="M 342 180 L 342 172 L 339 172 L 344 165 L 349 172 L 346 172 L 346 180 Z" fill="#ffffff" stroke="#000000" stroke-width="1"/>
+
+  <!-- Message Propagation to Readout Head (MLP Line) -->
+  <path data-id="edge_mlp_conn" id="edge_mlp_conn" data-class="edge" data-source="block_message_propagation" data-target="block_readout_head" d="M 650 154 L 650 173 L 522 173 L 522 180" fill="none" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow-black)"/>
+  <text data-id="text_mlp_label" id="text_mlp_label" data-class="child_node" data-parent="root" x="653" y="169" font-size="8.5" font-weight="bold" fill="#000000">MLP</text>
+
+  <!-- ========================================== -->
+  <!-- 7. DYNAMIC NARRATION BANNER               -->
+  <!-- ========================================== -->
+  <g id="narration_banner" transform="translate(0, 325)">
+    <rect x="20" y="0" width="760" height="46" rx="6" ry="6" fill="#f8f9fa" stroke="#e0e0e0" stroke-width="1"/>
+
+    <text id="narr_ts1" class="narrative-text" x="50%" y="18" text-anchor="middle">
+      <tspan x="50%" dy="0">Given an input image, an object detector generates candidate bounding box</tspan>
+      <tspan x="50%" dy="16">proposals and extracts their initial region features.</tspan>
+    </text>
+
+    <text id="narr_ts2" class="narrative-text" x="50%" y="18" text-anchor="middle">
+      <tspan x="50%" dy="0">Simultaneously, the input text expression describes the target visual scene</tspan>
+      <tspan x="50%" dy="16">along with specific entity relationships.</tspan>
+    </text>
+
+    <text id="narr_ts3" class="narrative-text" x="50%" y="18" text-anchor="middle">
+      <tspan x="50%" dy="0">A language parser converts the expression into a structured scene graph,</tspan>
+      <tspan x="50%" dy="16">representing entity phrases as nodes and relations as edges.</tspan>
+    </text>
+
+    <text id="narr_ts4" class="narrative-text" x="50%" y="18" text-anchor="middle">
+      <tspan x="50%" dy="0">In the message propagation module, initial local correspondence beliefs are</tspan>
+      <tspan x="50%" dy="16">computed between each entity phrase and all candidate visual objects.</tspan>
+    </text>
+
+    <text id="narr_ts5" class="narrative-text" x="50%" y="18" text-anchor="middle">
+      <tspan x="50%" dy="0">Two parallel passes perform bottom-up and top-down message propagation,</tspan>
+      <tspan x="50%" dy="16">using context-sensitive belief selecting and gating to aggregate neighboring evidence.</tspan>
+    </text>
+
+    <text id="narr_ts6" class="narrative-text" x="50%" y="18" text-anchor="middle">
+      <tspan x="50%" dy="0">The updated beliefs pass through an MLP to compute match probabilities,</tspan>
+      <tspan x="50%" dy="16">which are minimum-pooled across nodes for image-text matching prediction.</tspan>
+    </text>
+
+    <text id="narr_ts7" class="narrative-text" x="50%" y="18" text-anchor="middle">
+      <tspan x="50%" dy="0">Finally, computing confidence differences across graph edges detects relationship</tspan>
+      <tspan x="50%" dy="16">inconsistencies, producing the mismatched relation reasoning prediction.</tspan>
+    </text>
+  </g>
+</svg>

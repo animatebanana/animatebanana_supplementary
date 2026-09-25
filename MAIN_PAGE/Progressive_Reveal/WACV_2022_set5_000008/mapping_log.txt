@@ -1,0 +1,30 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : The pipeline takes K-shot support images and a query image as inputs, referencing the aggregation, tensor shape, and path notations shown in the legend.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : Both the support and query images are fed into parallel Backbone Networks for feature extraction.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : In the support stream, RoI pooling is performed using the support image ground truth boxes to extract pooled feature tensors.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : The query features then combine with the support branch at an aggregation operation labeled Q S A.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : The aggregated output flows into the R P N, followed by RoI pooling on the query feature stream.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : These pooled query representations merge with the upper support features at the aggregation module labeled Q R A.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : Finally, the combined features pass into the RoI Head, generating the final detection bounding boxes on the query image.
+--------------------------------------------------------------------------------

@@ -1,0 +1,30 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.120
+Given an input image, an object detector generates candidate bounding box proposals and extracts their initial region features.
+
+2
+00:00:07.120 --> 00:00:13.120
+Simultaneously, the input text expression describes the target visual scene along with specific entity relationships.
+
+3
+00:00:13.120 --> 00:00:20.980
+A language parser converts the expression into a structured scene graph, representing entity phrases as nodes and relations as edges.
+
+4
+00:00:20.980 --> 00:00:28.840
+In the message propagation module, initial local correspondence beliefs are computed between each entity phrase and all candidate visual objects.
+
+5
+00:00:28.840 --> 00:00:36.320
+Two parallel passes perform bottom-up and top-down message propagation, using context-sensitive belief selecting and gating to aggregate neighboring evidence.
+
+6
+00:00:36.320 --> 00:00:44.180
+The updated beliefs pass through an MLP to compute match probabilities, which are minimum-pooled across nodes for image-text matching prediction.
+
+7
+00:00:44.180 --> 00:00:50.560
+Finally, computing confidence differences across graph edges detects relationship inconsistencies, producing the mismatched relation reasoning prediction.
+

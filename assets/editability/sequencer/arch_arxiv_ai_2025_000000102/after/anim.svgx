@@ -1,0 +1,323 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 620" width="1000" height="620">
+  <defs>
+    <style>
+      /* Global selector for all animated elements */
+      #layer_physics, #rect_layer_physics_bg, #rect_header_physics, #text_header_physics, #layer_detection, #rect_layer_detection_bg, #rect_header_detection, #text_header_detection, #layer_reasoning, #rect_layer_reasoning_bg, #rect_header_reasoning, #text_header_reasoning, #physics_composite_raster, #node_physics_knowledge, #rect_knowledge_pill, #text_knowledge_title, #block_mechanism_rules, #rect_rules_bg, #text_rules_title, #text_rules_math, #text_rules_desc, #banner_rules_bridge, #text_rules_bridge, #edge_knowledge_to_rules, #node_feature_matrix, #rect_matrix_3d_back, #rect_matrix_front, #text_matrix_label, #edge_rules_to_matrix, #block_gbdt, #edge_tree_1, #edge_tree_2, #edge_tree_3, #edge_tree_4, #edge_tree_5, #node_gbdt_root, #text_gbdt_title, #node_gbdt_c1, #node_gbdt_c2, #node_gbdt_c3, #node_gbdt_c4, #node_gbdt_c5, #badge_normal, #text_badge_normal, #badge_abnormal, #text_badge_abnormal, #block_shap_card, #rect_shap_card_bg, #text_shap_title, #badge_shap_explainer, #text_shap_explainer, #group_shap_bars, #banner_shap_bridge, #text_shap_bridge, #edge_rules_upward_solid, #edge_dashed_cross, #edge_shap_to_junction, #edge_dashed_to_prompt, #block_agent_prompt, #rect_prompt_bg, #text_prompt_label, #line_prompt_blank, #text_prompt_tokens, #edge_prompt_to_deepseek, #node_deepseek_raster, #edge_deepseek_to_report, #node_diagnosis_report, #path_report_paper, #path_report_fold, #line_report_sep, #text_report_title, #text_bullet_1, #text_bullet_2, #text_bullet_3 {
+        opacity: 0;
+        animation-name: fadeIn;
+        animation-duration: 0.5s;
+        animation-fill-mode: forwards;
+      }
+      #narration_banner {
+       display: none !important;
+      }
+      /* Keyframe definitions */
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+
+      @keyframes showBriefly {
+        0%, 99% { opacity: 1; }
+        100% { opacity: 0; }
+      }
+
+      @keyframes showAndStay {
+        0%, 100% { opacity: 1; }
+      }
+
+      /* Delays for each step */
+      #layer_physics, #rect_layer_physics_bg, #rect_header_physics, #text_header_physics, #layer_detection, #rect_layer_detection_bg, #rect_header_detection, #text_header_detection, #layer_reasoning, #rect_layer_reasoning_bg, #rect_header_reasoning, #text_header_reasoning { animation-delay: 0.0s; }
+      #physics_composite_raster, #node_physics_knowledge, #rect_knowledge_pill, #text_knowledge_title { animation-delay: 0.5s; }
+      #block_mechanism_rules, #rect_rules_bg, #banner_rules_bridge, #text_rules_title, #text_rules_math, #text_rules_desc, #text_rules_bridge, #edge_knowledge_to_rules { animation-delay: 1.0s; }
+      #node_feature_matrix, #rect_matrix_3d_back, #rect_matrix_front, #text_matrix_label, #edge_rules_to_matrix { animation-delay: 1.5s; }
+      
+      /* Combined Step 5: Reveal entire Detection & Attribution Layer (GBDT & SHAP) in one go */
+      #block_gbdt, #node_gbdt_root, #node_gbdt_c1, #node_gbdt_c2, #node_gbdt_c3, #node_gbdt_c4, #node_gbdt_c5, #badge_normal, #badge_abnormal, #text_gbdt_title, #text_badge_normal, #text_badge_abnormal, #edge_tree_1, #edge_tree_2, #edge_tree_3, #edge_tree_4, #edge_tree_5, #block_shap_card, #rect_shap_card_bg, #badge_shap_explainer, #group_shap_bars, #banner_shap_bridge, #text_shap_title, #text_shap_explainer, #text_shap_bridge { animation-delay: 2.0s; }
+      
+      #edge_rules_upward_solid, #edge_shap_to_junction, #edge_dashed_cross, #edge_dashed_to_prompt { animation-delay: 2.5s; }
+      #block_agent_prompt, #rect_prompt_bg, #line_prompt_blank, #text_prompt_label, #text_prompt_tokens { animation-delay: 3.0s; }
+      #node_deepseek_raster, #edge_prompt_to_deepseek { animation-delay: 3.5s; }
+      #node_diagnosis_report, #path_report_paper, #path_report_fold, #line_report_sep, #text_report_title, #text_bullet_1, #text_bullet_2, #text_bullet_3, #edge_deepseek_to_report { animation-delay: 4.0s; }
+
+      /* Narration Banner Styles */
+      #narr_ts1, #narr_ts2, #narr_ts3, #narr_ts4, #narr_ts5, #narr_ts6, #narr_ts7, #narr_ts8, #narr_ts9 {
+        opacity: 0;
+      }
+      #narr_ts1 { animation: showBriefly 0.5s forwards; animation-delay: 0.0s; }
+      #narr_ts2 { animation: showBriefly 0.5s forwards; animation-delay: 0.5s; }
+      #narr_ts3 { animation: showBriefly 0.5s forwards; animation-delay: 1.0s; }
+      #narr_ts4 { animation: showBriefly 0.5s forwards; animation-delay: 1.5s; }
+      #narr_ts5 { animation: showBriefly 0.5s forwards; animation-delay: 2.0s; }
+      #narr_ts6 { animation: showBriefly 0.5s forwards; animation-delay: 2.5s; }
+      #narr_ts7 { animation: showBriefly 0.5s forwards; animation-delay: 3.0s; }
+      #narr_ts8 { animation: showBriefly 0.5s forwards; animation-delay: 3.5s; }
+      #narr_ts9 { animation: showAndStay 0.5s forwards; animation-delay: 4.0s; }
+    </style>
+
+    <!-- Arrowhead markers -->
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#205fa8"/>
+    </marker>
+    <marker id="arrow-blue-block" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#205fa8"/>
+    </marker>
+    <marker id="arrow-gray-block" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#4b5563"/>
+    </marker>
+    <marker id="arrow-red-block" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#b91c1c"/>
+    </marker>
+
+    <!-- Drop Shadows -->
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="1" dy="2" stdDeviation="2.5" flood-color="#000000" flood-opacity="0.18"/>
+    </filter>
+    <filter id="badge-shadow" x="-5%" y="-10%" width="110%" height="130%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="1" dy="2" stdDeviation="1.5" flood-color="#000000" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+
+  <!-- ================= BACKGROUND COLUMNS ================= -->
+  <!-- Layer 1: Physics Perception Layer -->
+  <g id="layer_physics" data-id="layer_physics" data-class="block" data-parent="root">
+    <rect id="rect_layer_physics_bg" data-id="rect_layer_physics_bg" data-class="child_node" data-parent="layer_physics" x="0" y="0" width="327" height="488" fill="#eaf2f8"/>
+    <rect id="rect_header_physics" data-id="rect_header_physics" data-class="child_node" data-parent="layer_physics" x="2" y="16" width="323" height="52" fill="#205fa8"/>
+    <text id="text_header_physics" data-id="text_header_physics" data-class="text_node" data-parent="layer_physics" x="163" y="50" fill="#ffffff" font-size="20" font-weight="bold" font-family="Arial, sans-serif" text-anchor="middle">Physics Perception Layer</text>
+  </g>
+
+  <!-- Layer 2: Detection & Attribution Layer -->
+  <g id="layer_detection" data-id="layer_detection" data-class="block" data-parent="root">
+    <rect id="rect_layer_detection_bg" data-id="rect_layer_detection_bg" data-class="child_node" data-parent="layer_detection" x="335" y="0" width="335" height="488" fill="#edf5e7"/>
+    <rect id="rect_header_detection" data-id="rect_header_detection" data-class="child_node" data-parent="layer_detection" x="337" y="16" width="331" height="52" fill="#4d7c3c"/>
+    <text id="text_header_detection" data-id="text_header_detection" data-class="text_node" data-parent="layer_detection" x="502" y="50" fill="#ffffff" font-size="20" font-weight="bold" font-family="Arial, sans-serif" text-anchor="middle">Detection &amp; Attribution Layer</text>
+  </g>
+
+  <!-- Layer 3: Reasoning & Diagnosis Layer -->
+  <g id="layer_reasoning" data-id="layer_reasoning" data-class="block" data-parent="root">
+    <rect id="rect_layer_reasoning_bg" data-id="rect_layer_reasoning_bg" data-class="child_node" data-parent="layer_reasoning" x="677" y="0" width="323" height="488" fill="#fdf4d7"/>
+    <rect id="rect_header_reasoning" data-id="rect_header_reasoning" data-class="child_node" data-parent="layer_reasoning" x="679" y="16" width="319" height="52" fill="#d47a12"/>
+    <text id="text_header_reasoning" data-id="text_header_reasoning" data-class="text_node" data-parent="layer_reasoning" x="838" y="50" fill="#ffffff" font-size="20" font-weight="bold" font-family="Arial, sans-serif" text-anchor="middle">Reasoning &amp; Diagnosis Layer</text>
+  </g>
+
+  <!-- ================= EDGES & CONNECTIONS ================= -->
+  <g>
+    <!-- Downward arrow: Physics Knowledge -> Mechanism Rules -->
+    <path id="edge_knowledge_to_rules" data-id="edge_knowledge_to_rules" data-class="edge" data-source="node_physics_knowledge" data-target="block_mechanism_rules" d="M 163 286 L 163 318" stroke="#205fa8" stroke-width="3" fill="none" marker-end="url(#arrow-blue-block)"/>
+
+    <!-- Downward arrow: Mechanism Rules -> Feature Matrix -->
+    <path id="edge_rules_to_matrix" data-id="edge_rules_to_matrix" data-class="edge" data-source="block_mechanism_rules" data-target="node_feature_matrix" d="M 163 426 L 163 442" stroke="#205fa8" stroke-width="3" fill="none" marker-end="url(#arrow-blue-block)"/>
+
+    <!-- Solid upward branch from Mechanism Rules -->
+    <path id="edge_rules_upward_solid" data-id="edge_rules_upward_solid" data-class="edge" data-source="block_mechanism_rules" data-target="edge_dashed_cross" d="M 298 368 L 326 368 L 326 270" stroke="#205fa8" stroke-width="3" fill="none" marker-end="url(#arrow-blue)"/>
+
+    <!-- Dashed path originating at the arrow tip of the solid upward arrow (x=326, y=262), going across below Normal/Abnormal & above SHAP Explainer (y=262) -->
+    <path id="edge_dashed_cross" data-id="edge_dashed_cross" data-class="edge" data-source="edge_rules_upward_solid" data-target="edge_dashed_to_prompt" d="M 326 262 L 670 262" stroke="#205fa8" stroke-width="3" stroke-dasharray="8,5" fill="none"/>
+
+    <!-- Dashed line from SHAP Explainer going right and up to the junction point (x=670, y=262) with arrowhead -->
+    <path id="edge_shap_to_junction" data-id="edge_shap_to_junction" data-class="edge" data-source="block_shap_card" data-target="edge_dashed_cross" d="M 654 382 L 670 382 L 670 270" stroke="#205fa8" stroke-width="3" stroke-dasharray="8,5" fill="none" marker-end="url(#arrow-blue)"/>
+
+    <!-- Dashed path continuing from junction (x=670, y=262) up and into the Agent Prompt box with arrowhead -->
+    <path id="edge_dashed_to_prompt" data-id="edge_dashed_to_prompt" data-class="edge" data-source="edge_dashed_cross" data-target="block_agent_prompt" d="M 670 262 L 670 128 L 684 128" stroke="#205fa8" stroke-width="3" stroke-dasharray="8,5" fill="none" marker-end="url(#arrow-blue)"/>
+
+    <!-- Downward arrow: Agent Prompt -> DeepSeek Core -->
+    <path id="edge_prompt_to_deepseek" data-id="edge_prompt_to_deepseek" data-class="edge" data-source="block_agent_prompt" data-target="node_deepseek_raster" d="M 833 175 L 833 200" stroke="#4b5563" stroke-width="3" fill="none" marker-end="url(#arrow-gray-block)"/>
+
+    <!-- Downward arrow: DeepSeek Core -> Diagnosis Report -->
+    <path id="edge_deepseek_to_report" data-id="edge_deepseek_to_report" data-class="edge" data-source="node_deepseek_raster" d="M 833 322 L 833 362" stroke="#b91c1c" stroke-width="3" fill="none" marker-end="url(#arrow-red-block)"/>
+  </g>
+
+  <!-- ================= LAYER 1 CONTENT ================= -->
+  <!-- Raster Placeholder: Book, Gears & Graphs -->
+  <g id="physics_composite_raster" data-id="physics_composite_raster" data-class="raster_node"><image href="assets/editability/sequencer/arch_arxiv_ai_2025_000000102/after/rasters/crop_physics_composite_raster.png" xlink:href="assets/editability/sequencer/arch_arxiv_ai_2025_000000102/after/rasters/crop_physics_composite_raster.png" x="22" y="78" width="284" height="162" preserveAspectRatio="xMidYMid meet" /></g>
+
+  <!-- Physics Knowledge Pill Button -->
+  <g id="node_physics_knowledge" data-id="node_physics_knowledge" data-class="child_node" data-parent="layer_physics">
+    <rect id="rect_knowledge_pill" data-id="rect_knowledge_pill" data-class="child_node" data-parent="node_physics_knowledge" x="58" y="254" width="210" height="32" rx="6" fill="#205fa8" filter="url(#badge-shadow)"/>
+    <text id="text_knowledge_title" data-id="text_knowledge_title" data-class="text_node" data-parent="node_physics_knowledge" x="163" y="276" fill="#ffffff" font-size="14.5" font-weight="bold" font-family="Arial, sans-serif" text-anchor="middle">Physics Knowledge</text>
+  </g>
+
+  <!-- Mechanism-Driven Rules Block -->
+  <g id="block_mechanism_rules" data-id="block_mechanism_rules" data-class="block" data-parent="layer_physics">
+    <rect id="rect_rules_bg" data-id="rect_rules_bg" data-class="child_node" data-parent="block_mechanism_rules" x="35" y="324" width="262" height="100" rx="10" fill="#ffffff" stroke="#205fa8" stroke-width="1.5" filter="url(#shadow)"/>
+    <text id="text_rules_title" data-id="text_rules_title" data-class="text_node" data-parent="block_mechanism_rules" x="166" y="347" fill="#205fa8" font-size="13" font-weight="bold" font-family="Arial, sans-serif" text-anchor="middle">Mechanism-Driven Rules:</text>
+    <text id="text_rules_math" data-id="text_rules_math" data-class="text_node" data-parent="block_mechanism_rules" x="166" y="367" fill="#374151" font-size="9.5" font-family="Arial, sans-serif" text-anchor="middle">
+      <tspan font-style="italic">e.g., T</tspan><tspan font-size="0.65em" baseline-shift="sub">min</tspan><tspan>(t = T): Post-charge Thermal</tspan>
+    </text>
+    <text id="text_rules_desc" data-id="text_rules_desc" data-class="text_node" data-parent="block_mechanism_rules" x="166" y="381" fill="#374151" font-size="9.5" font-family="Arial, sans-serif" text-anchor="middle">State &amp; Ambient Adaptability.</text>
+    
+    <!-- Numeric-to-Semantic Banner -->
+    <rect id="banner_rules_bridge" data-id="banner_rules_bridge" data-class="child_node" data-parent="block_mechanism_rules" x="35" y="392" width="262" height="32" rx="6" fill="#205fa8"/>
+    <text id="text_rules_bridge" data-id="text_rules_bridge" data-class="text_node" data-parent="block_mechanism_rules" x="166" y="413" fill="#ffffff" font-size="13" font-style="italic" font-weight="bold" font-family="Arial, sans-serif" text-anchor="middle">-Numeric-to-Semantic Bridge-</text>
+  </g>
+
+  <!-- Feature Matrix Node -->
+  <g id="node_feature_matrix" data-id="node_feature_matrix" data-class="child_node" data-parent="layer_physics">
+    <rect id="rect_matrix_3d_back" data-id="rect_matrix_3d_back" data-class="child_node" data-parent="node_feature_matrix" x="68" y="445" width="186" height="36" rx="5" fill="#143666"/>
+    <rect id="rect_matrix_front" data-id="rect_matrix_front" data-class="child_node" data-parent="node_feature_matrix" x="71" y="448" width="183" height="33" rx="5" fill="#205fa8" filter="url(#shadow)"/>
+    <line x1="82" y1="448" x2="82" y2="481" stroke="#143666" stroke-width="1.5"/>
+    <line x1="90" y1="448" x2="90" y2="481" stroke="#143666" stroke-width="1.5"/>
+    <rect x="74" y="454" width="5" height="3" fill="#60a5fa"/>
+    <rect x="74" y="462" width="5" height="3" fill="#60a5fa"/>
+    <rect x="74" y="470" width="5" height="3" fill="#60a5fa"/>
+    <text id="text_matrix_label" data-id="text_matrix_label" data-class="text_node" data-parent="node_feature_matrix" x="166" y="470" fill="#ffffff" font-size="14" font-weight="bold" font-family="Arial, sans-serif" text-anchor="middle">Feature Matrix</text>
+  </g>
+
+  <!-- ================= LAYER 2 CONTENT ================= -->
+  <!-- GBDT Decision Tree -->
+  <g id="block_gbdt" data-id="block_gbdt" data-class="block" data-parent="layer_detection">
+    <!-- Tree Lines -->
+    <line id="edge_tree_1" data-id="edge_tree_1" data-class="edge" data-source="node_gbdt_root" data-target="node_gbdt_c1" x1="502" y1="120" x2="444" y2="158" stroke="#262626" stroke-width="4.5"/>
+    <line id="edge_tree_2" data-id="edge_tree_2" data-class="edge" data-source="node_gbdt_root" data-target="node_gbdt_c2" x1="502" y1="120" x2="550" y2="158" stroke="#262626" stroke-width="4.5"/>
+    <line id="edge_tree_3" data-id="edge_tree_3" data-class="edge" data-source="node_gbdt_c1" data-target="node_gbdt_c3" x1="444" y1="158" x2="385" y2="202" stroke="#262626" stroke-width="4.5"/>
+    <line id="edge_tree_4" data-id="edge_tree_4" data-class="edge" data-source="node_gbdt_c1" data-target="node_gbdt_c4" x1="444" y1="158" x2="494" y2="202" stroke="#262626" stroke-width="4.5"/>
+    <line id="edge_tree_5" data-id="edge_tree_5" data-class="edge" data-source="node_gbdt_c2" data-target="node_gbdt_c5" x1="550" y1="158" x2="605" y2="202" stroke="#262626" stroke-width="4.5"/>
+
+    <!-- GBDT Root Label Box -->
+    <rect id="node_gbdt_root" data-id="node_gbdt_root" data-class="child_node" data-parent="block_gbdt" x="417" y="85" width="168" height="35" rx="6" fill="#2d3748" filter="url(#shadow)"/>
+    <text id="text_gbdt_title" data-id="text_gbdt_title" data-class="text_node" data-parent="block_gbdt" x="501" y="108" fill="#ffffff" font-size="14" font-weight="bold" font-family="Arial, sans-serif" text-anchor="middle">GBDT Model</text>
+
+    <!-- Branch Circles -->
+    <circle id="node_gbdt_c1" data-id="node_gbdt_c1" data-class="child_node" data-parent="block_gbdt" cx="444" cy="158" r="13.5" fill="#2d3748"/>
+    <circle id="node_gbdt_c2" data-id="node_gbdt_c2" data-class="child_node" data-parent="block_gbdt" cx="550" cy="158" r="13.5" fill="#2d3748"/>
+    <circle id="node_gbdt_c3" data-id="node_gbdt_c3" data-class="child_node" data-parent="block_gbdt" cx="385" cy="202" r="13.5" fill="#2d3748"/>
+    <circle id="node_gbdt_c4" data-id="node_gbdt_c4" data-class="child_node" data-parent="block_gbdt" cx="494" cy="202" r="13.5" fill="#2d3748"/>
+    <circle id="node_gbdt_c5" data-id="node_gbdt_c5" data-class="child_node" data-parent="block_gbdt" cx="605" cy="202" r="13.5" fill="#dc2626"/>
+
+    <!-- Terminal Status Badges positioned strictly above the y=262 dashed line -->
+    <rect id="badge_normal" data-id="badge_normal" data-class="child_node" data-parent="block_gbdt" x="392" y="224" width="86" height="25" rx="5" fill="#262626" filter="url(#badge-shadow)"/>
+    <text id="text_badge_normal" data-id="text_badge_normal" data-class="text_node" data-parent="block_gbdt" x="435" y="241" fill="#ffffff" font-size="11" font-weight="bold" font-family="Arial, sans-serif" text-anchor="middle">Normal</text>
+
+    <rect id="badge_abnormal" data-id="badge_abnormal" data-class="child_node" data-parent="block_gbdt" x="565" y="224" width="86" height="25" rx="5" fill="#b91c1c" filter="url(#badge-shadow)"/>
+    <text id="text_badge_abnormal" data-id="text_badge_abnormal" data-class="text_node" data-parent="block_gbdt" x="608" y="241" fill="#ffffff" font-size="11" font-weight="bold" font-family="Arial, sans-serif" text-anchor="middle">Abnormal</text>
+  </g>
+
+  <!-- SHAP Explainer Card positioned strictly below the y=262 dashed line -->
+  <g id="block_shap_card" data-id="block_shap_card" data-class="block" data-parent="layer_detection">
+    <!-- Main Card Body -->
+    <rect id="rect_shap_card_bg" data-id="rect_shap_card_bg" data-class="child_node" data-parent="block_shap_card" x="355" y="294" width="298" height="180" rx="10" fill="#f4faee" stroke="#cbd5e1" stroke-width="1" filter="url(#shadow)"/>
+    <text id="text_shap_title" data-id="text_shap_title" data-class="text_node" data-parent="block_shap_card" x="502" y="336" fill="#1e293b" font-size="14.5" font-weight="bold" font-family="Arial, sans-serif" text-anchor="middle">Top-<tspan font-style="italic">k</tspan> Feature Contribution:</text>
+
+    <!-- Top Badge -->
+    <rect id="badge_shap_explainer" data-id="badge_shap_explainer" data-class="child_node" data-parent="block_shap_card" x="418" y="278" width="186" height="32" rx="8" fill="#3f6c38" filter="url(#badge-shadow)"/>
+    <text id="text_shap_explainer" data-id="text_shap_explainer" data-class="text_node" data-parent="block_shap_card" x="511" y="299" fill="#ffffff" font-size="13.5" font-weight="bold" font-family="Arial, sans-serif" text-anchor="middle">SHAP Explainer</text>
+
+    <!-- Feature Contribution Chart Box -->
+    <g id="group_shap_bars" data-id="group_shap_bars" data-class="child_node" data-parent="block_shap_card">
+      <rect x="368" y="347" width="272" height="74" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+      <line x1="512" y1="347" x2="512" y2="421" stroke="#64748b" stroke-width="1.5"/>
+      <line x1="373" y1="361" x2="635" y2="361" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="2,2"/>
+      <line x1="373" y1="380" x2="635" y2="380" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="2,2"/>
+      <line x1="373" y1="399" x2="635" y2="399" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="2,2"/>
+
+      <!-- Positive (Blue) Bars -->
+      <rect x="512" y="351" width="84" height="10" fill="#1e5fa0"/>
+      <rect x="512" y="364" width="41" height="10" fill="#1e5fa0"/>
+      <rect x="512" y="377" width="12" height="10" fill="#1e5fa0"/>
+      <rect x="512" y="390" width="26" height="10" fill="#1e5fa0"/>
+      <rect x="512" y="403" width="13" height="8" fill="#1e5fa0"/>
+
+      <!-- Negative (Red) Bars -->
+      <rect x="432" y="358" width="80" height="11" fill="#dc4424"/>
+      <rect x="468" y="371" width="44" height="11" fill="#dc4424"/>
+      <rect x="442" y="384" width="70" height="10" fill="#dc4424"/>
+      <rect x="488" y="396" width="24" height="9" fill="#dc4424"/>
+      <rect x="466" y="407" width="46" height="10" fill="#dc4424"/>
+      <rect x="504" y="419" width="8" height="2" fill="#dc4424"/>
+    </g>
+
+    <!-- Bottom Bridge Banner -->
+    <rect id="banner_shap_bridge" data-id="banner_shap_bridge" data-class="child_node" data-parent="block_shap_card" x="355" y="437" width="298" height="37" rx="6" fill="#3f6c38"/>
+    <text id="text_shap_bridge" data-id="text_shap_bridge" data-class="text_node" data-parent="block_shap_card" x="504" y="461" fill="#ffffff" font-size="13.5" font-style="italic" font-weight="bold" font-family="Arial, sans-serif" text-anchor="middle">-Numeric-to-Semantic Bridge-</text>
+  </g>
+
+  <!-- ================= LAYER 3 CONTENT ================= -->
+  <!-- Agent Prompt Box -->
+  <g id="block_agent_prompt" data-id="block_agent_prompt" data-class="block" data-parent="layer_reasoning">
+    <rect id="rect_prompt_bg" data-id="rect_prompt_bg" data-class="child_node" data-parent="block_agent_prompt" x="690" y="86" width="288" height="88" rx="10" fill="#ffffff" stroke="#78716c" stroke-width="1.5" filter="url(#shadow)"/>
+    <text id="text_prompt_label" data-id="text_prompt_label" data-class="text_node" data-parent="block_agent_prompt" x="708" y="117" fill="#1c1917" font-size="15" font-weight="bold" font-family="Arial, sans-serif">Agent Prompt:</text>
+    <line id="line_prompt_blank" data-id="line_prompt_blank" data-class="child_node" data-parent="block_agent_prompt" x1="822" y1="117" x2="960" y2="117" stroke="#1c1917" stroke-width="1.5"/>
+    <text id="text_prompt_tokens" data-id="text_prompt_tokens" data-class="text_node" data-parent="block_agent_prompt" x="706" y="152" font-size="15" font-weight="bold" font-family="Arial, sans-serif">
+      <tspan fill="#205fa8">[Rules]</tspan>
+      <tspan fill="#1c1917"> + </tspan>
+      <tspan fill="#2e7d32">[SHAP]</tspan>
+      <tspan fill="#1c1917"> + [Template]</tspan>
+    </text>
+  </g>
+
+  <!-- Raster Placeholder: DeepSeek-R1 Agent Core -->
+  <g id="node_deepseek_raster" data-id="node_deepseek_raster" data-class="raster_node"><image href="assets/editability/sequencer/arch_arxiv_ai_2025_000000102/after/rasters/crop_node_deepseek_raster.png" xlink:href="assets/editability/sequencer/arch_arxiv_ai_2025_000000102/after/rasters/crop_node_deepseek_raster.png" x="710" y="206" width="248" height="116" preserveAspectRatio="xMidYMid meet" /></g>
+
+  <!-- Diagnosis Report Node -->
+  <g id="node_diagnosis_report" data-id="node_diagnosis_report" data-class="child_node" data-parent="layer_reasoning">
+    <!-- Folded paper container -->
+    <path id="path_report_paper" data-id="path_report_paper" data-class="child_node" data-parent="node_diagnosis_report" d="M 740 370 L 715 385 L 715 470 C 715 475 720 478 725 478 L 930 478 C 940 478 955 465 960 455 L 960 375 C 960 370 955 370 950 370 Z" fill="#fffdfa" stroke="#d6d3d1" stroke-width="1.5" filter="url(#shadow)"/>
+    <!-- Fold corner at bottom right -->
+    <path id="path_report_fold" data-id="path_report_fold" data-class="child_node" data-parent="node_diagnosis_report" d="M 930 478 L 960 455 L 930 455 Z" fill="#e7e5e4" stroke="#d6d3d1" stroke-width="1"/>
+    <!-- Folded ribbon at top left -->
+    <polygon points="742,367 714,383 732,388" fill="#e7e5e4" stroke="#d6d3d1" stroke-width="1"/>
+
+    <!-- Report Header & Separator -->
+    <text id="text_report_title" data-id="text_report_title" data-class="text_node" data-parent="node_diagnosis_report" x="730" y="405" fill="#1c1917" font-size="14.5" font-weight="bold" font-family="Arial, sans-serif">Diagnosis Report</text>
+    <line id="line_report_sep" data-id="line_report_sep" data-class="child_node" data-parent="node_diagnosis_report" x1="730" y1="414" x2="930" y2="414" stroke="#a8a29e" stroke-width="1"/>
+
+    <!-- Report Bullet Items -->
+    <circle cx="738" cy="431" r="3.5" fill="#eab308"/>
+    <text id="text_bullet_1" data-id="text_bullet_1" data-class="text_node" data-parent="node_diagnosis_report" x="750" y="435" fill="#1c1917" font-size="12" font-weight="500" font-family="Arial, sans-serif">Diagnosis Result</text>
+
+    <circle cx="738" cy="450" r="3.5" fill="#eab308"/>
+    <text id="text_bullet_2" data-id="text_bullet_2" data-class="text_node" data-parent="node_diagnosis_report" x="750" y="454" fill="#1c1917" font-size="12" font-weight="500" font-family="Arial, sans-serif">Root Cause</text>
+
+    <circle cx="738" cy="469" r="3.5" fill="#eab308"/>
+    <text id="text_bullet_3" data-id="text_bullet_3" data-class="text_node" data-parent="node_diagnosis_report" x="750" y="473" fill="#1c1917" font-size="12" font-weight="500" font-family="Arial, sans-serif">Maintenance Advice</text>
+  </g>
+
+  <!-- ================= DYNAMIC NARRATION BANNER ================= -->
+  <g id="narration_banner">
+    <rect x="20" y="505" width="960" height="100" rx="10" fill="#1e293b" opacity="0.9"/>
+    <!-- TS 1 -->
+    <text id="narr_ts1" x="50%" y="540" fill="#ffffff" font-size="15" font-family="Arial, sans-serif" text-anchor="middle" font-weight="500">
+      <tspan x="50%" dy="0">The fault diagnosis and reasoning framework is structured into three hierarchical layers:</tspan>
+      <tspan x="50%" dy="1.2em">the Physics Perception Layer, the Detection and Attribution Layer, and the Reasoning and Diagnosis Layer.</tspan>
+    </text>
+    <!-- TS 2 -->
+    <text id="narr_ts2" x="50%" y="540" fill="#ffffff" font-size="15" font-family="Arial, sans-serif" text-anchor="middle" font-weight="500">
+      <tspan x="50%" dy="0">In the Physics Perception Layer, raw multi-modal sensor inputs—including voltage, current,</tspan>
+      <tspan x="50%" dy="1.2em">and temperature—are integrated with domain-specific physics knowledge.</tspan>
+    </text>
+    <!-- TS 3 -->
+    <text id="narr_ts3" x="50%" y="540" fill="#ffffff" font-size="15" font-family="Arial, sans-serif" text-anchor="middle" font-weight="500">
+      <tspan x="50%" dy="0">This knowledge formulates mechanism-driven rules, evaluating physical metrics like post-charge</tspan>
+      <tspan x="50%" dy="1.2em">thermal states to create an initial numeric-to-semantic bridge.</tspan>
+    </text>
+    <!-- TS 4 -->
+    <text id="narr_ts4" x="50%" y="550" fill="#ffffff" font-size="15" font-family="Arial, sans-serif" text-anchor="middle" font-weight="500">
+      <tspan x="50%" dy="0">These rules transform the raw continuous signals into a structured feature matrix for downstream classification.</tspan>
+    </text>
+    <!-- TS 5 (Combined GBDT & SHAP) -->
+    <text id="narr_ts5" x="50%" y="540" fill="#ffffff" font-size="15" font-family="Arial, sans-serif" text-anchor="middle" font-weight="500">
+      <tspan x="50%" dy="0">In the Detection and Attribution Layer, a GBDT model classifies the operating state as normal or abnormal,</tspan>
+      <tspan x="50%" dy="1.2em">while a SHAP explainer attributes the top feature contributions to interpret the decision boundaries.</tspan>
+    </text>
+    <!-- TS 6 -->
+    <text id="narr_ts6" x="50%" y="540" fill="#ffffff" font-size="15" font-family="Arial, sans-serif" text-anchor="middle" font-weight="500">
+      <tspan x="50%" dy="0">Both the physical mechanism rules and the SHAP feature attributions</tspan>
+      <tspan x="50%" dy="1.2em">are then forwarded to the Reasoning and Diagnosis Layer.</tspan>
+    </text>
+    <!-- TS 7 -->
+    <text id="narr_ts7" x="50%" y="540" fill="#ffffff" font-size="15" font-family="Arial, sans-serif" text-anchor="middle" font-weight="500">
+      <tspan x="50%" dy="0">These inputs are integrated into a structured formatting template</tspan>
+      <tspan x="50%" dy="1.2em">to dynamically construct the agent prompt.</tspan>
+    </text>
+    <!-- TS 8 -->
+    <text id="narr_ts8" x="50%" y="540" fill="#ffffff" font-size="15" font-family="Arial, sans-serif" text-anchor="middle" font-weight="500">
+      <tspan x="50%" dy="0">The prompt is passed into the DeepSeek-R1 Agent Core,</tspan>
+      <tspan x="50%" dy="1.2em">which synthesizes the physical and statistical evidence.</tspan>
+    </text>
+    <!-- TS 9 -->
+    <text id="narr_ts9" x="50%" y="540" fill="#ffffff" font-size="15" font-family="Arial, sans-serif" text-anchor="middle" font-weight="500">
+      <tspan x="50%" dy="0">Finally, the agent generates a human-readable Diagnosis Report detailing</tspan>
+      <tspan x="50%" dy="1.2em">the final diagnosis result, underlying root cause, and actionable maintenance advice.</tspan>
+    </text>
+  </g>
+</svg>

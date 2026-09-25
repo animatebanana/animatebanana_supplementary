@@ -1,0 +1,42 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:08.970
+During the blind time between active sensor frames where LiDAR and image data are unavailable, an asynchronous event camera captures continuous spatiotemporal measurements.
+
+2
+00:00:08.970 --> 00:00:15.340
+These continuous event streams are converted into voxel grids and encoded into two-dimensional event feature representations.
+
+3
+00:00:15.340 --> 00:00:22.830
+At the initial active timestamp, synchronized camera images and LiDAR point clouds are collected by the region proposal network.
+
+4
+00:00:22.830 --> 00:00:27.730
+The network extracts two-dimensional image features and constructs three-dimensional voxel feature grids.
+
+5
+00:00:27.730 --> 00:00:33.360
+Combining these multi-modal features generates initial three-dimensional bounding box proposals for the active timestamp.
+
+6
+00:00:33.360 --> 00:00:43.440
+In the Virtual 3D Event Fusion module, event features are projected into virtual 3D space and aligned with the initial bounding boxes and shared voxel features.
+
+7
+00:00:43.440 --> 00:00:51.670
+Region of interest pooling is applied separately to virtual event and voxel features within each proposal to form fused region features.
+
+8
+00:00:51.670 --> 00:01:01.010
+During blind time motion prediction, an implicit motion field is generated to estimate explicit motion vectors and a motion confidence score for each object.
+
+9
+00:01:01.010 --> 00:01:06.270
+Simultaneously, parallel proposal tracks derive their respective implicit motion fields and confidence metrics.
+
+10
+00:01:06.270 --> 00:01:14.130
+Finally, the predicted spatial shifts and rotations update the bounding boxes, producing accurate 3D object detections at arbitrary inter-frame timestamps.
+

@@ -1,0 +1,26 @@
+[
+ {
+  "t": 0.0,
+  "text": "The pipeline begins by taking a limited set containing a varied number of input face images of an individual across different poses and expressions."
+ },
+ {
+  "t": 2.2,
+  "text": "These images are fed into the Omni-ID Encoder, which integrates the image set features using cross-attention and self-attention mechanisms."
+ },
+ {
+  "t": 4.4,
+  "text": "The encoder outputs Omni-ID, a fixed-size structured representation that consolidates holistic identity information across views."
+ },
+ {
+  "t": 6.6,
+  "text": "During training, this representation conditions a bank of multiple decoders, combining complementary objectives such as masked reconstruction and flow matching."
+ },
+ {
+  "t": 8.8,
+  "text": "Through this few-to-many reconstruction task, decoders generate numerous target face images covering diverse poses and expressions while preserving identity."
+ },
+ {
+  "t": 11.0,
+  "text": "The input images are sampled directly from the broader target identity set, closing the loop on the few-to-many training strategy."
+ }
+]

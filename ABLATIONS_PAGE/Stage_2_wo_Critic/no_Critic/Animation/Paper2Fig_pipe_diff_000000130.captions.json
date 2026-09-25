@@ -1,0 +1,34 @@
+[
+ {
+  "t": 0.0,
+  "text": "The pipeline takes sparse input images of a face captured under varying lighting conditions."
+ },
+ {
+  "t": 2.2,
+  "text": "A 3D morphable model is fitted to the input to establish a geometric proxy for lighting calibration."
+ },
+ {
+  "t": 4.4,
+  "text": "From the proxy geometry, an estimated surface normal map is computed."
+ },
+ {
+  "t": 6.6,
+  "text": "Semantic segmentation partitions facial regions, such as hairy areas versus bare skin, to apply tailored filtering."
+ },
+ {
+  "t": 8.8,
+  "text": "Shadow processing explicitly identifies and handles shadowed regions across the illuminated images."
+ },
+ {
+  "t": 11.0,
+  "text": "Using light calibration and photometric stereo optimization, the system reconstructs a refined geometric model with fine surface details."
+ },
+ {
+  "t": 13.2,
+  "text": "A denoising stage refines the reconstructed surface into a smooth, high-fidelity 3D mesh."
+ },
+ {
+  "t": 15.4,
+  "text": "At the same time, the diffuse albedo map of the subject is fully recovered."
+ }
+]

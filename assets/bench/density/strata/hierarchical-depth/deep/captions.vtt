@@ -1,0 +1,130 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.040
+The pipeline begins with an input image.
+
+2
+00:00:03.040 --> 00:00:07.940
+The image is first partitioned into a sequence of regular visual patches.
+
+3
+00:00:07.940 --> 00:00:11.720
+These patches are passed into the hybrid encoder network.
+
+4
+00:00:11.720 --> 00:00:14.760
+A convolutional encoder extracts low-level local features.
+
+5
+00:00:14.760 --> 00:00:18.920
+A dedicated class token is prepended alongside spatial position encodings.
+
+6
+00:00:18.920 --> 00:00:22.700
+This forms the initial full-length sequence of continuous tokens.
+
+7
+00:00:22.700 --> 00:00:26.480
+Self-attention layers with token merging progressively compress similar tokens.
+
+8
+00:00:26.480 --> 00:00:29.900
+The global alignment module enriches the learned representations.
+
+9
+00:00:29.900 --> 00:00:33.680
+The class token is extracted from the encoder output.
+
+10
+00:00:33.680 --> 00:00:37.090
+It is projected through a multi-layer perceptron head.
+
+11
+00:00:37.090 --> 00:00:42.360
+And aligned with target representations from a teacher model or ground truth labels.
+
+12
+00:00:42.360 --> 00:00:46.880
+In parallel, the compressed visual tokens enter the token quantization module.
+
+13
+00:00:46.880 --> 00:00:50.290
+Positional indices of the merged tokens are retained.
+
+14
+00:00:50.290 --> 00:00:52.970
+The continuous embedding representations are extracted.
+
+15
+00:00:52.970 --> 00:00:56.380
+Vector quantization discretizes each token into discrete codes.
+
+16
+00:00:56.380 --> 00:01:00.160
+This yields a compact set of quantized semantic tokens.
+
+17
+00:01:00.160 --> 00:01:04.320
+During the generative stage, these discrete tokens drive image generation.
+
+18
+00:01:04.320 --> 00:01:08.100
+An autoregressive generation process starts with a start token.
+
+19
+00:01:08.100 --> 00:01:12.250
+The causal decoder synthesizes tokens sequentially with key-value cache compression.
+
+20
+00:01:12.250 --> 00:01:15.300
+Predicting the compact sequence of quantized tokens.
+
+21
+00:01:15.300 --> 00:01:19.080
+Next, the source recovery module reconstructs full spatial context.
+
+22
+00:01:19.080 --> 00:01:23.230
+The quantized tokens are supplied to the recovery cross-attention mechanism.
+
+23
+00:01:23.230 --> 00:01:28.130
+A set of learnable recovery queries corresponds to all original spatial positions.
+
+24
+00:01:28.130 --> 00:01:32.280
+Cross-attention models the relationships between original positions and merged tokens.
+
+25
+00:01:32.280 --> 00:01:36.060
+This predicts the source matrix to establish token assignments.
+
+26
+00:01:36.060 --> 00:01:40.590
+The token unmerge operation uses these assignments to uncompress the tokens.
+
+27
+00:01:40.590 --> 00:01:44.370
+Restoring the full sequence length while preserving spatial fidelity.
+
+28
+00:01:44.370 --> 00:01:48.160
+The restored sequence is then processed by the decoder.
+
+29
+00:01:48.160 --> 00:01:51.570
+Attention layers perform token dequantization and feature refinement.
+
+30
+00:01:51.570 --> 00:01:53.870
+Producing dense continuous feature representations.
+
+31
+00:01:53.870 --> 00:01:57.650
+A convolutional decoder maps features back to image space.
+
+32
+00:01:57.650 --> 00:02:01.810
+Finally, all patches are reconstructed, generating the final high-resolution image.
+

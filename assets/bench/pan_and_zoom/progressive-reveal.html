@@ -1,0 +1,343 @@
+<style>html,body{margin:0;padding:0;height:100%;background:#fff;overflow:hidden}svg{display:block;width:100%;height:100%}</style>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 496" width="100%" height="100%" style="background-color: #ffffff; font-family: Arial, sans-serif;">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#000000"/>
+    </marker>
+    <style>
+      /* =========================================
+         LAYER 1: CINEMATIC CAMERA RIG
+         Pacing: 32s total (2s per step, 16 steps total)
+         Safe Viewport: 960x480 (Top 480px)
+         Pan takes 0.5s (1.56%), Hold takes 1.5s (4.69%)
+         ========================================= */
+      #camera_rig {
+        transform-origin: 0 0;
+        animation: cameraPan 32s ease-in-out infinite;
+      }
+
+      @keyframes cameraPan {
+        /* DYNAMIC START: Actively zoom into TS1 as it fades in */
+        0% { transform: translate(0px, 0px) scale(1); }
+        
+        /* TS1 (0s-2s): Input Block */
+        1.56%, 6.25% { transform: translate(264px, -16.5px) scale(1.8); }
+        
+        /* TS2 (2s-4s): Raster Images */
+        7.81%, 12.50% { transform: translate(219.3px, -98.8px) scale(2.2); }
+        
+        /* TS3 (4s-6s): Step 1 Macro Reset */
+        14.06%, 18.75% { transform: translate(-240px, 78px) scale(1.2); }
+        
+        /* TS4 (6s-8s): Superpoint & Histogram */
+        20.31%, 25.00% { transform: translate(-320px, -72.5px) scale(2.5); }
+        
+        /* TS5 (8s-10s): Pivot View */
+        26.56%, 31.25% { transform: translate(-595px, -191.3px) scale(2.5); }
+        
+        /* TS6 (10s-12s): SAM 2 Segmentation */
+        32.81%, 37.50% { transform: translate(-595px, 35px) scale(2.5); }
+        
+        /* TS7 (12s-14s): 2D Mask in Pivot View */
+        39.06%, 43.75% { transform: translate(-907.5px, 33.8px) scale(2.5); }
+        
+        /* TS8 (14s-16s): SAM 2 Tracking & Cues */
+        45.31%, 50.00% { transform: translate(-1220px, 56.3px) scale(2.5); }
+        
+        /* TS9 (16s-18s): Bidirectional Mask Track */
+        51.56%, 56.25% { transform: translate(-700px, 32px) scale(1.6); }
+        
+        /* TS10 (18s-20s): Step 2 Macro Reset */
+        57.81%, 62.50% { transform: translate(-300px, -244.3px) scale(1.3); }
+        
+        /* TS11 (20s-22s): Lifting */
+        64.06%, 68.75% { transform: translate(-1720px, -678.8px) scale(2.5); }
+        
+        /* TS12 (22s-24s): Refining */
+        70.31%, 75.00% { transform: translate(-1282.5px, -678.8px) scale(2.5); }
+        
+        /* TS13 (24s-26s): 3D Proposal & Agnostic */
+        76.56%, 81.25% { transform: translate(-375px, -545px) scale(2.0); }
+        
+        /* TS14 (26s-28s): Output Macro Reset */
+        82.81%, 87.50% { transform: translate(276px, -414.5px) scale(1.7); }
+        
+        /* TS15 (28s-30s): Vocab & Output Labels */
+        89.06%, 93.75% { transform: translate(240px, -540px) scale(2.0); }
+        
+        /* GRAND FINALE (30s-32s): Global Zoom Out & Hold */
+        95.31%, 100% { transform: translate(0px, 0px) scale(1); }
+      }
+
+      /* =========================================
+         LAYER 2: PROGRESSIVE REVEAL BASE
+         Synced to 32s Loop (1 slice = 6.25%)
+         Linear fades to synchronize with camera pans
+         ========================================= */
+      .rev_ts1, .rev_ts2, .rev_ts3, .rev_ts4, .rev_ts5, 
+      .rev_ts6, .rev_ts7, .rev_ts8, .rev_ts9, .rev_ts10, 
+      .rev_ts11, .rev_ts12, .rev_ts13, .rev_ts14, .rev_ts15 {
+        opacity: 0;
+        animation-duration: 32s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+      }
+
+      .rev_ts1  { animation-name: rev_ts1_anim; }
+      .rev_ts2  { animation-name: rev_ts2_anim; }
+      .rev_ts3  { animation-name: rev_ts3_anim; }
+      .rev_ts4  { animation-name: rev_ts4_anim; }
+      .rev_ts5  { animation-name: rev_ts5_anim; }
+      .rev_ts6  { animation-name: rev_ts6_anim; }
+      .rev_ts7  { animation-name: rev_ts7_anim; }
+      .rev_ts8  { animation-name: rev_ts8_anim; }
+      .rev_ts9  { animation-name: rev_ts9_anim; }
+      .rev_ts10 { animation-name: rev_ts10_anim; }
+      .rev_ts11 { animation-name: rev_ts11_anim; }
+      .rev_ts12 { animation-name: rev_ts12_anim; }
+      .rev_ts13 { animation-name: rev_ts13_anim; }
+      .rev_ts14 { animation-name: rev_ts14_anim; }
+      .rev_ts15 { animation-name: rev_ts15_anim; }
+
+      @keyframes rev_ts1_anim  { 0% { opacity: 0; } 1.56% { opacity: 1; } 98% { opacity: 1; } 100% { opacity: 0; } }
+      @keyframes rev_ts2_anim  { 0%, 6.25% { opacity: 0; } 7.81%, 98% { opacity: 1; } 100% { opacity: 0; } }
+      @keyframes rev_ts3_anim  { 0%, 12.50% { opacity: 0; } 14.06%, 98% { opacity: 1; } 100% { opacity: 0; } }
+      @keyframes rev_ts4_anim  { 0%, 18.75% { opacity: 0; } 20.31%, 98% { opacity: 1; } 100% { opacity: 0; } }
+      @keyframes rev_ts5_anim  { 0%, 25.00% { opacity: 0; } 26.56%, 98% { opacity: 1; } 100% { opacity: 0; } }
+      @keyframes rev_ts6_anim  { 0%, 31.25% { opacity: 0; } 32.81%, 98% { opacity: 1; } 100% { opacity: 0; } }
+      @keyframes rev_ts7_anim  { 0%, 37.50% { opacity: 0; } 39.06%, 98% { opacity: 1; } 100% { opacity: 0; } }
+      @keyframes rev_ts8_anim  { 0%, 43.75% { opacity: 0; } 45.31%, 98% { opacity: 1; } 100% { opacity: 0; } }
+      @keyframes rev_ts9_anim  { 0%, 50.00% { opacity: 0; } 51.56%, 98% { opacity: 1; } 100% { opacity: 0; } }
+      @keyframes rev_ts10_anim { 0%, 56.25% { opacity: 0; } 57.81%, 98% { opacity: 1; } 100% { opacity: 0; } }
+      @keyframes rev_ts11_anim { 0%, 62.50% { opacity: 0; } 64.06%, 98% { opacity: 1; } 100% { opacity: 0; } }
+      @keyframes rev_ts12_anim { 0%, 68.75% { opacity: 0; } 70.31%, 98% { opacity: 1; } 100% { opacity: 0; } }
+      @keyframes rev_ts13_anim { 0%, 75.00% { opacity: 0; } 76.56%, 98% { opacity: 1; } 100% { opacity: 0; } }
+      @keyframes rev_ts14_anim { 0%, 81.25% { opacity: 0; } 82.81%, 98% { opacity: 1; } 100% { opacity: 0; } }
+      @keyframes rev_ts15_anim { 0%, 87.50% { opacity: 0; } 89.06%, 98% { opacity: 1; } 100% { opacity: 0; } }
+
+      /* =========================================
+         LAYER 3: NARRATION BANNER VISIBILITY TIMING
+         Hard-gaps included between transitions
+         ========================================= */
+    </style>
+  </defs>
+
+  <!-- =========================================
+       CAMERA RIG WRAPPER
+       ========================================= -->
+  <g id="camera_rig">
+    
+    <!-- BLOCK: INPUT -->
+    <g id="block_input" data-id="block_input" data-class="block" data-parent="root" class="rev_ts1">
+      <rect x="5" y="5" width="230" height="275" rx="15" fill="#F2F2F2" stroke="#7F7F7F" stroke-width="2"/>
+      <text x="120" y="25" font-family="Arial" font-size="16" font-weight="bold" fill="#000" text-anchor="middle">INPUT</text>
+    </g>
+      
+    <!-- 3D Point Cloud Raster Node -->
+    <g id="raster_3d_point_cloud" data-id="raster_3d_point_cloud" data-class="raster_node" data-parent="block_input" class="rev_ts2">
+      <rect x="18" y="38" width="204" height="94" fill="none" stroke="#7030A0" stroke-width="2"/>
+      <rect x="22" y="42" width="196" height="86" fill="#EAEAEA" stroke="#7F7F7F" stroke-dasharray="4,4" stroke-width="1.5"/>
+      <text x="120" y="90" font-family="Arial" font-size="11" fill="#555" text-anchor="middle">[3D Point Cloud Image]</text>
+      <image href="rasters/3d-point-cloud.png" x="22" y="42" width="196" height="86" preserveAspectRatio="none"/>
+      <text x="120" y="142" font-family="Arial" font-size="10" font-weight="bold" fill="#7030A0" text-anchor="middle">3D Point Cloud</text>
+    </g>
+
+    <!-- RGB Images Raster Node -->
+    <g id="raster_rgb_images" data-id="raster_rgb_images" data-class="raster_node" data-parent="block_input" class="rev_ts2">
+      <rect x="15" y="155" width="100" height="45" fill="#EAEAEA" stroke="#7F7F7F" stroke-dasharray="4,4" stroke-width="1.5"/>
+      <text x="65" y="182" font-family="Arial" font-size="10" fill="#555" text-anchor="middle">[RGB Images]</text>
+      <image href="rasters/full-RGB-images.png" x="15" y="155" width="100" height="45" preserveAspectRatio="none"/>
+      <text x="65" y="212" font-family="Arial" font-size="10" font-weight="bold" fill="#000" text-anchor="middle">RGB Images</text>
+    </g>
+
+    <!-- Depth Images + Camera Poses Raster Node -->
+    <g id="raster_depth_images" data-id="raster_depth_images" data-class="raster_node" data-parent="block_input" class="rev_ts2">
+      <rect x="15" y="225" width="100" height="45" fill="#EAEAEA" stroke="#7F7F7F" stroke-dasharray="4,4" stroke-width="1.5"/>
+      <text x="65" y="252" font-family="Arial" font-size="9" fill="#555" text-anchor="middle">[Depth + Poses]</text>
+      <image href="rasters/full-depth-images-camera-poses.png" x="15" y="225" width="100" height="45" preserveAspectRatio="none"/>
+      <text x="120" y="274" font-family="Arial" font-size="9" font-weight="bold" fill="#000" text-anchor="middle">Depth Images + Camera Poses</text>
+    </g>
+
+    <!-- BLOCK: STEP 1 -->
+    <g id="block_step1" data-id="block_step1" data-class="block" data-parent="root" class="rev_ts3">
+      <rect x="245" y="5" width="710" height="260" rx="20" fill="#FDF3CD" stroke="#EBC360" stroke-width="2"/>
+      <text x="260" y="28" font-family="Arial" font-size="16" font-weight="bold" fill="#000" text-anchor="start">Step 1: 3D-Aware 2D Mask Tracking</text>
+    </g>
+
+    <!-- Superpoint selection -->
+    <g id="raster_superpoint" data-id="raster_superpoint" data-class="raster_node" data-parent="block_step1" class="rev_ts4">
+      <rect x="270" y="55" width="80" height="55" fill="#EAEAEA" stroke="#7F7F7F" stroke-dasharray="4,4" stroke-width="1.5"/>
+      <text x="310" y="87" font-family="Arial" font-size="9" fill="#555" text-anchor="middle">[Superpoint]</text>
+      <image href="rasters/superpoint-selection.png" x="270" y="55" width="80" height="55" preserveAspectRatio="none"/>
+      <text x="310" y="50" font-family="Arial" font-size="10" font-weight="bold" fill="#000" text-anchor="middle">Superpoint selection</text>
+    </g>
+
+    <!-- Histogram of projected points -->
+    <g id="raster_histogram" data-id="raster_histogram" data-class="raster_node" data-parent="block_step1" class="rev_ts4">
+      <rect x="270" y="125" width="100" height="70" fill="#EAEAEA" stroke="#7F7F7F" stroke-dasharray="4,4" stroke-width="1.5"/>
+      <text x="320" y="165" font-family="Arial" font-size="9" fill="#555" text-anchor="middle">[Histogram]</text>
+      <image href="rasters/hist-of-projected-pts.png" x="270" y="125" width="100" height="70" preserveAspectRatio="none"/>
+      <text x="320" y="207" font-family="Arial" font-size="10" font-weight="bold" fill="#000" text-anchor="middle">Histogram of</text>
+      <text x="320" y="219" font-family="Arial" font-size="10" font-weight="bold" fill="#000" text-anchor="middle">projected points</text>
+    </g>
+
+    <!-- Pivot view selection -->
+    <g id="raster_pivot_view" data-id="raster_pivot_view" data-class="raster_node" data-parent="block_step1" class="rev_ts5">
+      <rect x="390" y="145" width="80" height="55" fill="#EAEAEA" stroke="#7F7F7F" stroke-dasharray="4,4" stroke-width="1.5"/>
+      <text x="430" y="177" font-family="Arial" font-size="9" fill="#555" text-anchor="middle">[Pivot View]</text>
+      <image href="rasters/pivot-view-selection.png" x="390" y="145" width="80" height="55" preserveAspectRatio="none"/>
+      <text x="430" y="212" font-family="Arial" font-size="10" font-weight="bold" fill="#000" text-anchor="middle">Pivot view</text>
+      <text x="430" y="224" font-family="Arial" font-size="10" font-weight="bold" fill="#000" text-anchor="middle">selection</text>
+    </g>
+
+    <!-- SAM 2 Segmentation -->
+    <g id="node_sam2_seg" data-id="node_sam2_seg" data-class="child_node" data-parent="block_step1" class="rev_ts6">
+      <rect x="380" y="62" width="100" height="40" rx="8" fill="#D9E1F2" stroke="#4472C4" stroke-width="1.5"/>
+      <text x="430" y="78" font-family="Arial" font-size="11" font-weight="bold" fill="#000" text-anchor="middle">SAM 2</text>
+      <text x="430" y="92" font-family="Arial" font-size="11" font-weight="bold" fill="#000" text-anchor="middle">Segmentation</text>
+    </g>
+
+    <!-- 2D mask in pivot view -->
+    <g id="raster_2d_mask_pivot" data-id="raster_2d_mask_pivot" data-class="raster_node" data-parent="block_step1" class="rev_ts7">
+      <rect x="515" y="55" width="80" height="55" fill="#EAEAEA" stroke="#7F7F7F" stroke-dasharray="4,4" stroke-width="1.5"/>
+      <text x="555" y="87" font-family="Arial" font-size="9" fill="#555" text-anchor="middle">[2D Mask]</text>
+      <image href="rasters/2d-mask-in-pivot-view.png" x="515" y="55" width="80" height="55" preserveAspectRatio="none"/>
+      <text x="555" y="122" font-family="Arial" font-size="10" font-weight="bold" fill="#000" text-anchor="middle">2D mask in pivot</text>
+      <text x="555" y="134" font-family="Arial" font-size="10" font-weight="bold" fill="#000" text-anchor="middle">view</text>
+    </g>
+
+    <!-- SAM 2 Tracking -->
+    <g id="node_sam2_track" data-id="node_sam2_track" data-class="child_node" data-parent="block_step1" class="rev_ts8">
+      <rect x="630" y="62" width="100" height="40" rx="8" fill="#D9E1F2" stroke="#4472C4" stroke-width="1.5"/>
+      <text x="680" y="78" font-family="Arial" font-size="11" font-weight="bold" fill="#000" text-anchor="middle">SAM 2</text>
+      <text x="680" y="92" font-family="Arial" font-size="11" font-weight="bold" fill="#000" text-anchor="middle">Tracking</text>
+    </g>
+
+    <!-- 3D Cues Text Node -->
+    <text id="text_3d_cues" data-id="text_3d_cues" data-class="child_node" data-parent="block_step1" x="680" y="45" font-family="Arial" font-size="11" font-weight="bold" fill="#000" text-anchor="middle" class="rev_ts8">3D cues</text>
+
+    <!-- Bidirectional 2D Mask Tracking -->
+    <g id="raster_bidirectional" data-id="raster_bidirectional" data-class="raster_node" data-parent="block_step1" class="rev_ts9">
+      <rect x="760" y="45" width="185" height="115" fill="#D9E1F2" stroke="#4472C4" stroke-width="1.5"/>
+      <text x="852" y="60" font-family="Arial" font-size="10" font-weight="bold" fill="#000" text-anchor="middle">Bidirectional 2D Mask Tracking</text>
+      <rect x="770" y="70" width="75" height="55" fill="#EAEAEA" stroke="#7F7F7F" stroke-dasharray="3,3" stroke-width="1"/>
+      <text x="807" y="100" font-family="Arial" font-size="8" fill="#555" text-anchor="middle">[Backward]</text>
+      <image href="rasters/backward-pass.png" x="770" y="70" width="75" height="55" preserveAspectRatio="none"/>
+      <text x="807" y="135" font-family="Arial" font-size="9" fill="#000" text-anchor="middle">Backward Pass</text>
+      <rect x="860" y="70" width="75" height="55" fill="#EAEAEA" stroke="#7F7F7F" stroke-dasharray="3,3" stroke-width="1"/>
+      <text x="897" y="100" font-family="Arial" font-size="8" fill="#555" text-anchor="middle">[Forward]</text>
+      <image href="rasters/forward-pass.png" x="860" y="70" width="75" height="55" preserveAspectRatio="none"/>
+      <text x="897" y="135" font-family="Arial" font-size="9" fill="#000" text-anchor="middle">Forward Pass</text>
+    </g>
+
+    <!-- 2D Mask Track -->
+    <g id="raster_2d_mask_track" data-id="raster_2d_mask_track" data-class="raster_node" data-parent="block_step1" class="rev_ts9">
+      <rect x="530" y="175" width="320" height="40" fill="#EAEAEA" stroke="#7F7F7F" stroke-dasharray="4,4" stroke-width="1.5"/>
+      <text x="690" y="198" font-family="Arial" font-size="11" fill="#555" text-anchor="middle">[2D Mask Track Sequence]</text>
+      <image href="rasters/2d-mask-track-full.png" x="530" y="175" width="320" height="40" preserveAspectRatio="none"/>
+      <text x="690" y="228" font-family="Arial" font-size="11" font-weight="bold" fill="#000" text-anchor="middle">2D Mask Track</text>
+    </g>
+
+    <!-- BLOCK: STEP 2 -->
+    <g id="block_step2" data-id="block_step2" data-class="block" data-parent="root" class="rev_ts10">
+      <rect x="245" y="270" width="710" height="205" rx="20" fill="#E2F0D9" stroke="#70AD47" stroke-width="2"/>
+      <text x="260" y="292" font-family="Arial" font-size="16" font-weight="bold" fill="#000" text-anchor="start">Step 2: 3D Proposal Refinement Via Mask Optimization</text>
+    </g>
+
+    <!-- Lifting 2D Mask Track to 3D Mask Candidate -->
+    <g id="node_lifting" data-id="node_lifting" data-class="child_node" data-parent="block_step2" class="rev_ts11">
+      <rect x="815" y="335" width="130" height="65" rx="8" fill="#E1D5E7" stroke="#7030A0" stroke-width="1.5"/>
+      <text x="880" y="355" font-family="Arial" font-size="11" font-weight="bold" fill="#000" text-anchor="middle">Lifting 2D Mask</text>
+      <text x="880" y="370" font-family="Arial" font-size="11" font-weight="bold" fill="#000" text-anchor="middle">Track to 3D</text>
+      <text x="880" y="385" font-family="Arial" font-size="11" font-weight="bold" fill="#000" text-anchor="middle">Mask Candidate</text>
+    </g>
+
+    <!-- Refining 3D Mask Candidate via Optimization -->
+    <g id="node_refining" data-id="node_refining" data-class="child_node" data-parent="block_step2" class="rev_ts12">
+      <rect x="615" y="335" width="180" height="65" rx="8" fill="#D9E1F2" stroke="#4472C4" stroke-width="1.5"/>
+      <text x="705" y="355" font-family="Arial" font-size="11" font-weight="bold" fill="#000" text-anchor="middle">Refining 3D Mask</text>
+      <text x="705" y="370" font-family="Arial" font-size="11" font-weight="bold" fill="#000" text-anchor="middle">Candidate via Optimization</text>
+      <text x="705" y="385" font-family="Arial" font-size="11" font-weight="bold" fill="#000" text-anchor="middle">(Algorithm 1)</text>
+      <!-- Gear Icon -->
+      <g transform="translate(775, 340) scale(0.6)">
+        <path d="M10,1.6c-0.6,0-1.2,0.4-1.4,1L8.1,4.1C7.3,4.4,6.6,4.8,6,5.4L4.1,4.5c-0.6-0.3-1.3-0.1-1.7,0.4L1,7c-0.4,0.5-0.3,1.3,0.2,1.7l1.7,1.3c-0.1,0.4-0.1,0.8-0.1,1.2s0,0.8,0.1,1.2L1.2,13.7c-0.5,0.4-0.6,1.2-0.2,1.7l1.4,2.1c0.4,0.5,1.1,0.7,1.7,0.4l1.9-0.9c0.6,0.6,1.3,1,2.1,1.3l0.5,1.5c0.2,0.6,0.8,1,1.4,1h2.8c0.6,0,1.2-0.4,1.4-1l0.5-1.5c0.8-0.3,1.5-0.7,2.1-1.3l1.9,0.9c0.6,0.3,1.3,0.1,1.7-0.4l1.4-2.1c0.4-0.5,0.3-1.2-0.2-1.7l-1.7-1.3c0.1-0.4,0.1-0.8,0.1-1.2s0-0.8-0.1-1.2l1.7-1.3c0.5-0.4,0.6-1.2,0.2-1.7l-1.4-2.1c-0.4-0.5-1.1-0.7-1.7-0.4l-1.9,0.9c-0.6-0.6-1.3-1-2.1-1.3l-0.5-1.5c-0.2-0.6-0.8-1-1.4-1H10z M10,7.5c2.5,0,4.5,2,4.5,4.5s-2,4.5-4.5,4.5s-4.5-2-4.5-4.5S7.5,7.5,10,7.5z" fill="#555"/>
+      </g>
+    </g>
+
+    <!-- Final 3D Proposal -->
+    <g id="raster_final_3d_proposal" data-id="raster_final_3d_proposal" data-class="raster_node" data-parent="block_step2" class="rev_ts13">
+      <rect x="495" y="335" width="100" height="65" fill="#EAEAEA" stroke="#7F7F7F" stroke-dasharray="4,4" stroke-width="1.5"/>
+      <text x="545" y="370" font-family="Arial" font-size="9" fill="#555" text-anchor="middle">[3D Proposal]</text>
+      <image href="rasters/final-3d-proposal.png" x="495" y="335" width="100" height="65" preserveAspectRatio="none"/>
+      <text x="545" y="325" font-family="Arial" font-size="11" font-weight="bold" fill="#000" text-anchor="middle">Final 3D Proposal</text>
+    </g>
+
+    <!-- Class-Agnostic 3D Instance Segmentation -->
+    <g id="raster_class_agnostic" data-id="raster_class_agnostic" data-class="raster_node" data-parent="block_step2" class="rev_ts13">
+      <rect x="260" y="320" width="215" height="145" fill="#EAEAEA" stroke="#7030A0" stroke-width="2"/>
+      <text x="367" y="380" font-family="Arial" font-size="11" fill="#555" text-anchor="middle">[Class-Agnostic 3D Seg]</text>
+      <image href="rasters/class-agnostic-3d-inst-seg.png" x="260" y="320" width="215" height="145" preserveAspectRatio="none"/>
+      <text x="367" y="440" font-family="Arial" font-size="11" font-weight="bold" fill="#000" text-anchor="middle">Class-Agnostic 3D</text>
+      <text x="367" y="455" font-family="Arial" font-size="11" font-weight="bold" fill="#000" text-anchor="middle">Instance Segmentation</text>
+    </g>
+
+    <!-- BLOCK: OUTPUT -->
+    <g id="block_output" data-id="block_output" data-class="block" data-parent="root" class="rev_ts14">
+      <rect x="5" y="295" width="230" height="180" rx="15" fill="#F2F2F2" stroke="#7F7F7F" stroke-width="2"/>
+      <text x="120" y="315" font-family="Arial" font-size="16" font-weight="bold" fill="#000" text-anchor="middle">OUTPUT</text>
+    </g>
+
+    <!-- Open-Vocab 3D Instance Segmentation -->
+    <g id="node_open_vocab" data-id="node_open_vocab" data-class="child_node" data-parent="block_output" class="rev_ts15">
+      <rect x="15" y="325" width="210" height="25" rx="4" fill="#B4C6E7" stroke="#2F5597" stroke-width="1.5"/>
+      <text x="120" y="342" font-family="Arial" font-size="11" font-weight="bold" fill="#000" text-anchor="middle">Open-Vocab 3D Instance Segmentation</text>
+    </g>
+
+    <!-- Open-Ended 3D Instance Segmentation -->
+    <g id="node_open_ended" data-id="node_open_ended" data-class="child_node" data-parent="block_output" class="rev_ts15">
+      <rect x="15" y="360" width="210" height="25" rx="4" fill="#FCE4D6" stroke="#C65911" stroke-width="1.5"/>
+      <text x="120" y="377" font-family="Arial" font-size="11" font-weight="bold" fill="#000" text-anchor="middle">Open-Ended 3D Instance Segmentation</text>
+    </g>
+
+    <!-- CLIP -->
+    <g id="node_clip" data-id="node_clip" data-class="child_node" data-parent="block_output" class="rev_ts15">
+      <rect x="45" y="395" width="60" height="30" rx="10" fill="#D9E1F2" stroke="#2F5597" stroke-width="1.5" stroke-dasharray="3,3"/>
+      <text x="75" y="414" font-family="Arial" font-size="11" font-weight="bold" fill="#000" text-anchor="middle">CLIP</text>
+    </g>
+
+    <!-- LLM -->
+    <g id="node_llm" data-id="node_llm" data-class="child_node" data-parent="block_output" class="rev_ts15">
+      <rect x="125" y="395" width="60" height="30" rx="10" fill="#FCE4D6" stroke="#C65911" stroke-width="1.5" stroke-dasharray="3,3"/>
+      <text x="155" y="414" font-family="Arial" font-size="11" font-weight="bold" fill="#000" text-anchor="middle">LLM</text>
+    </g>
+
+    <!-- Table, TV, Desktop, Monitor, ... -->
+    <text id="node_output_labels" data-id="node_output_labels" data-class="child_node" data-parent="block_output" x="120" y="455" font-family="Arial" font-size="14" font-weight="bold" fill="#000" text-anchor="middle" class="rev_ts15">Table, TV, Desktop, Monitor, ...</text>
+
+    <!-- EDGES (LINES & ARROWS) -->
+    <g>
+      <path id="edge_3d_to_superpoint" data-id="edge_3d_to_superpoint" data-class="edge" data-source="raster_3d_point_cloud" data-target="raster_superpoint" d="M 222 85 L 264 82" fill="none" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)" class="rev_ts4"/>
+      <path id="edge_rgb_to_histogram" data-id="edge_rgb_to_histogram" data-class="edge" data-source="raster_rgb_images" data-target="raster_histogram" d="M 115 180 L 264 167" fill="none" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)" class="rev_ts4"/>
+      <path id="edge_depth_to_histogram" data-id="edge_depth_to_histogram" data-class="edge" data-source="raster_depth_images" data-target="raster_histogram" d="M 115 250 L 250 250 L 250 180 L 264 180" fill="none" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)" class="rev_ts4"/>
+      <path id="edge_superpoint_to_sam2" data-id="edge_superpoint_to_sam2" data-class="edge" data-source="raster_superpoint" data-target="node_sam2_seg" d="M 350 82 L 374 82" fill="none" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)" class="rev_ts6"/>
+      <path id="edge_histogram_to_pivot" data-id="edge_histogram_to_pivot" data-class="edge" data-source="raster_histogram" data-target="raster_pivot_view" d="M 370 167 L 384 172" fill="none" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)" class="rev_ts5"/>
+      <path id="edge_pivot_to_sam2" data-id="edge_pivot_to_sam2" data-class="edge" data-source="raster_pivot_view" data-target="node_sam2_seg" d="M 430 145 L 430 108" fill="none" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)" class="rev_ts6"/>
+      <path id="edge_sam2_to_mask" data-id="edge_sam2_to_mask" data-class="edge" data-source="node_sam2_seg" data-target="raster_2d_mask_pivot" d="M 480 82 L 509 82" fill="none" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)" class="rev_ts7"/>
+      <path id="edge_mask_to_track" data-id="edge_mask_to_track" data-class="edge" data-source="raster_2d_mask_pivot" data-target="node_sam2_track" d="M 595 82 L 624 82" fill="none" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)" class="rev_ts8"/>
+      <path id="edge_cues_to_track" data-id="edge_cues_to_track" data-class="edge" data-source="text_3d_cues" data-target="node_sam2_track" d="M 680 48 L 680 56" fill="none" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)" class="rev_ts8"/>
+      <path id="edge_track_to_bidirectional" data-id="edge_track_to_bidirectional" data-class="edge" data-source="node_sam2_track" data-target="raster_bidirectional" d="M 730 82 L 754 82" fill="none" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)" class="rev_ts9"/>
+      <path id="edge_track_to_sequence" data-id="edge_track_to_sequence" data-class="edge" data-source="node_sam2_track" data-target="raster_2d_mask_track" d="M 680 102 L 680 169" fill="none" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)" class="rev_ts9"/>
+      <path id="edge_sequence_to_lifting" data-id="edge_sequence_to_lifting" data-class="edge" data-source="raster_2d_mask_track" data-target="node_lifting" d="M 850 195 L 880 195 L 880 329" fill="none" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)" class="rev_ts11"/>
+      <path id="edge_lifting_to_refining" data-id="edge_lifting_to_refining" data-class="edge" data-source="node_lifting" data-target="node_refining" d="M 815 367 L 801 367" fill="none" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)" class="rev_ts12"/>
+      <path id="edge_refining_to_proposal" data-id="edge_refining_to_proposal" data-class="edge" data-source="node_refining" data-target="raster_final_3d_proposal" d="M 615 367 L 601 367" fill="none" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)" class="rev_ts13"/>
+      <path id="edge_proposal_to_agnostic" data-id="edge_proposal_to_agnostic" data-class="edge" data-source="raster_final_3d_proposal" data-target="raster_class_agnostic" d="M 495 367 L 481 367" fill="none" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)" class="rev_ts13"/>
+      <path id="edge_agnostic_to_output" data-id="edge_agnostic_to_output" data-class="edge" data-source="raster_class_agnostic" data-target="block_output" d="M 260 392 L 241 392" fill="none" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)" class="rev_ts14"/>
+    </g>
+  </g>
+  <!-- End Camera Rig -->
+
+  <!-- =========================================
+       DYNAMIC NARRATION BANNER (Stays completely static)
+       ========================================= -->
+  
+</svg>

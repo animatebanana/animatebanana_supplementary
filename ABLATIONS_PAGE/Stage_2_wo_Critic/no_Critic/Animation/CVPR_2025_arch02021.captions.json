@@ -1,0 +1,22 @@
+[
+ {
+  "t": 0.0,
+  "text": "Training begins with a small, variable number of input face images capturing an individual across diverse poses and expressions."
+ },
+ {
+  "t": 2.2,
+  "text": "These images are fed into the Omni-ID Encoder, which integrates individual image features through transformer attention layers."
+ },
+ {
+  "t": 4.4,
+  "text": "The encoder outputs the Omni-ID representation, a fixed-size, structured embedding that holistically captures the subject's identity."
+ },
+ {
+  "t": 6.6,
+  "text": "This representation is then routed to multiple distinct decoders, combining complementary objectives such as masked autoencoding and flow matching."
+ },
+ {
+  "t": 8.8,
+  "text": "Through this few-to-many reconstruction strategy, the decoders generate numerous target facial variations, jointly supervising the encoder."
+ }
+]

@@ -1,0 +1,331 @@
+/*
+  DIAGRAM DENSITY pane — the red one.
+
+  Two columns: on the left the method rail (dropdown + axis), the strata
+  and the figure's shares; on the right a large example stage. When the
+  pane is narrow the stage moves above the controls.
+
+  Owns `.bd-*` only.
+*/
+
+/* The pane, not the body, is the size container: a container query cannot
+   restyle the container itself, so the body's column rule has to live one
+   level down from it. */
+.bd { container-type: inline-size; container-name: bd; }
+.bd-body {
+  --bx-stage-h: clamp(300px, 34vw, 540px);
+  /* Container queries, not media queries: in the page's two-up grid a
+     pane is ~700px wide on a 1560px screen, so a viewport breakpoint
+     would never fire when the pane actually needs to reflow. */
+  display: grid;
+  /* The right-hand column is the pane's control surface — it is what you
+     read the numbers off and what you click — so it gets real width
+     rather than whatever the stage leaves over. */
+  grid-template-columns: minmax(280px, 0.78fr) minmax(0, 2.2fr);
+  gap: clamp(16px, 2.2vw, 34px);
+  align-items: start;
+}
+.bd-side {
+  display: grid;
+  gap: clamp(16px, 1.6vw, 22px);
+  align-content: start;
+  min-width: 0;
+}
+@container bd (max-width: 760px) {
+  .bd-body { grid-template-columns: minmax(0, 1fr); --bx-stage-h: clamp(240px, 62vw, 420px); }
+  .bd-stage { order: -1; }
+}
+
+/* ---- Left rail ---- */
+.bd-blurb {
+  margin: 12px 0 0;
+  font-size: var(--fs-xs);
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+.bd-axis {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 14px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.bd-axis-line {
+  position: relative;
+  flex: 1;
+  height: 2px;
+  min-width: 26px;
+  background: linear-gradient(90deg, var(--a-line), var(--a));
+  border-radius: 2px;
+}
+.bd-axis-line i {
+  position: absolute;
+  right: -1px;
+  top: 50%;
+  width: 0; height: 0;
+  transform: translateY(-50%);
+  border-left: 6px solid var(--a);
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+}
+.bd-axis-to { color: var(--a); }
+
+/* ---- Stage ---- */
+.bd-stage {
+  margin: 0;
+  min-width: 0;
+  display: grid;
+  grid-template-rows: auto auto;
+}
+.bd-stage-frame {
+  position: relative;
+  /* A FIXED height, not one derived from the media.
+     Letting the box take the shape of its content meant the whole pane —
+     and everything below it on the page — jumped every time you picked a
+     different stratum, because the benchmark's figures run from 4:1
+     strips to near-square panels. A constant box that the media is
+     contained inside costs a little white space on the widest figures
+     and buys a page that never moves under the cursor. */
+  height: var(--bx-stage-h);
+  display: grid;
+  /* ONE cell, sized by the frame and not by what is in it.
+     `place-items: center` alone leaves the row auto-sized, and a
+     percentage max-height against an auto row resolves to no constraint
+     at all — which is how a tall figure grew past the frame and had its
+     bottom clipped by `overflow: hidden`. Pinning the track to the
+     frame's own height is what makes the contain below mean anything. */
+  grid-template: minmax(0, 1fr) / minmax(0, 1fr);
+  place-items: stretch;
+  overflow: hidden;
+  padding: 10px;
+  background-color: #fff;
+  border-color: var(--ink);
+}
+.bd-stage-img {
+  /* Fill the cell and letterbox inside it: the figure is never cropped,
+     and whatever aspect ratio it has, the leftover is white paper. */
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  object-fit: contain;
+  object-position: center;
+  opacity: 0;
+  transition: opacity var(--dur) var(--ease-out);
+}
+.bd-stage[data-media='image'] .bd-stage-img { opacity: 1; }
+.bd-stage[data-media='image'] .bd-skel { opacity: 0; pointer-events: none; }
+.bd-stage[data-media='image'] .bd-stage-frame { background-image: none; background-color: #fff; }
+
+.bd-skel {
+  position: absolute;
+  inset: 8px;
+  border-color: var(--a-line);
+  background-color: var(--a-soft);
+  transition: opacity var(--dur) var(--ease-out);
+}
+.bd-skel .bx-skel-tag { border-color: var(--a-line); color: var(--a); }
+
+/* The cross-fade between two strata: the stage dips rather than cuts. */
+.bd-stage.is-swapping .bd-stage-frame > * { opacity: 0; }
+
+/* ---- Left column: the strata ---- */
+.bd-list { list-style: none; margin: 0; padding: 0; }
+.bd-list li + li { margin-top: 9px; }
+
+/* An axis with more entries than the stage is tall wraps rather than
+   stretching the pane past every other axis. The point of the fixed stage is
+   that the pane keeps one height whatever you select. */
+.bd-list[data-many] {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+  align-content: start;
+}
+.bd-list[data-many] li + li { margin-top: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .bd-stage-img, .bd-skel { transition: none; }
+}
+
+/* `hidden` has to beat the flex display above: a method with no ordered
+   axis (Layout Organization) must not show a Sparse to Dense rule. */
+.bd-axis[hidden] { display: none; }
+
+
+/* ---- The stratum row, after the numbers came off ----
+   A name and a marker for the one showing. The bar and the percentage that
+   used to sit here were a judgement dressed as a measurement (see the note at
+   the top of panel-density.js), and with them gone the row is one line, so it
+   is laid out as one rather than as a two-line card. */
+.bd-item {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  width: 100%;
+  text-align: left;
+  padding: 13px 15px;
+  font-family: var(--font-body);
+  background: var(--surface);
+  border: 1.5px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: border-color var(--dur-fast) var(--ease-out),
+              background var(--dur-fast) var(--ease-out),
+              transform var(--dur-fast) var(--ease-out);
+}
+.bd-item:hover { border-color: var(--a); transform: translateX(2px); }
+.bd-item.is-on {
+  background: var(--a-soft);
+  border-color: var(--a);
+  box-shadow: inset 4px 0 0 var(--a);
+}
+.bd-item-label {
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.3;
+}
+.bd-item-dot {
+  flex: 0 0 auto;
+  width: 11px; height: 11px;
+  border-radius: 50%;
+  border: 2px solid var(--line-strong);
+  background: var(--surface);
+  transition: background var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
+}
+.bd-item.is-on .bd-item-dot { background: var(--a); border-color: var(--a); }
+
+@media (prefers-reduced-motion: reduce) {
+  .bd-item, .bd-item-dot { transition: none; }
+}
+
+/* ---- A MEDIA FRAME IS WHITE PAPER, NOT DOTTED PAPER ----
+   `.frame-paper` gives every framed slot the site's dotted ground, which is
+   right for an empty slot: it reads as paper waiting for something. Once a
+   figure is in it the dots are the only thing behind a letterboxed image, and
+   a diagram sitting in a field of dots looks like it failed to load rather
+   than like it is being shown whole. Each pane used to switch the dots off
+   per state, which meant every new state had to remember to. These slots are
+   simply white, always. The empty state keeps its own labelled skeleton on
+   top, so nothing is lost by it. */
+.bd-stage-frame {
+  background-image: none;
+  background-color: #fff;
+}
+
+/* ---- The figure's shares, under the strata ----
+   Real numbers from the AnimateBench figure, largest first as the figure
+   lists them. The row for the stratum on the stage is lit. */
+.bd-stats[hidden] { display: none; }
+.bd-stat-list {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+.bd-stat {
+  display: grid;
+  grid-template-columns: 4.1em minmax(40px, 1fr) 9.2em;
+  align-items: center;
+  gap: 10px;
+  font-size: var(--fs-xs);
+  color: var(--ink-soft);
+}
+.bd-stat-val {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--a);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+.bd-stat-bar {
+  position: relative;
+  height: 9px;
+  border-radius: 5px;
+  background: var(--a-soft);
+  border: 1px solid var(--a-line);
+  overflow: hidden;
+}
+.bd-stat-bar i {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: var(--w);
+  background: var(--a);
+  opacity: 0.55;
+  border-radius: 4px;
+  transition: opacity var(--dur-fast) var(--ease-out);
+}
+.bd-stat-label { font-weight: 600; white-space: nowrap; }
+.bd-stat.is-on .bd-stat-bar i { opacity: 1; }
+.bd-stat.is-on .bd-stat-label { color: var(--ink); }
+
+/* ---- The magnifier is the only way in, so it is always there ----
+   Same rule as the blue pane: the still is not a button. The magnifier is
+   larger here because it opens the narrated clip, and the doodle above the
+   frame points straight at it. */
+.bd-stage-frame { cursor: default; }
+.bd-zoom {
+  position: absolute;
+  right: 10px; top: 10px;
+  z-index: 4;
+  display: grid;
+  place-items: center;
+  width: 40px; height: 40px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+.bd-zoom .bx-zoom {
+  position: static;
+  width: 38px; height: 38px;
+  opacity: 1;
+  transform: none;
+  pointer-events: none;
+  animation: bd-nudge 2.8s var(--ease-io, ease-in-out) infinite;
+}
+.bd-zoom .bx-zoom svg { width: 19px; height: 19px; }
+.bd-zoom:hover .bx-zoom { transform: scale(1.1); animation: none; }
+.bd-zoom:focus-visible { outline: none; border-radius: 50%; box-shadow: var(--ring); }
+@keyframes bd-nudge { 0%, 100% { transform: none; } 50% { transform: scale(1.08) rotate(-6deg); } }
+
+/* ---- "click here to play full video", drawn on ---- */
+.bd-doodle {
+  justify-self: end;
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  margin: 0 8px -8px 0;
+  color: var(--a);
+  pointer-events: none;
+  position: relative;
+  z-index: 5;
+}
+.bd-doodle-text {
+  font-family: var(--font-hand);
+  font-size: clamp(1.15rem, 1.5vw, 1.45rem);
+  font-weight: 700;
+  line-height: 1;
+  transform: rotate(-3deg);
+  padding-bottom: 14px;
+}
+.bd-doodle-arrow { width: 66px; height: 44px; flex: 0 0 auto; margin-bottom: -4px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .bd-zoom .bx-zoom { animation: none; }
+  .bd-stat-bar i { transition: none; }
+}
+
+/* In the left column the list is one item per row: two narrow columns
+   wrapped every label and crowded the clip flag. */
+.bd-side .bd-list[data-many] { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+.bd-side .bd-item { padding: 11px 14px; }

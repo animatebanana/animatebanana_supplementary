@@ -1,0 +1,753 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AnimateBanana — Colour Pop — SciMMIR_arch_diff_000000124</title>
+<!--
+  AnimateBanana — Colour Pop — SciMMIR_arch_diff_000000124
+  An animated visual narrative produced by the AnimateBanana pipeline.
+
+  This file is self-contained: the animation, its images, its narration and its
+  controls are all inside it. Drop it on a server, open it from a disk, or put
+  it in an <iframe> - it needs nothing else and fetches nothing.
+
+  The animation is CSS. The controls drive it through the browser's animation
+  API - pause holds every keyframe at once, the bar scrubs them all to the same
+  moment, speed sets their rate together - and the caption is read from a clock
+  of the page's own that is driven alongside them. It has to be its own clock:
+  the drawing is made of hundreds of short animations that each stop when they
+  are done, so reading the time off any one of them gives a watch that stopped
+  half a second in.
+-->
+<style>
+  :root {
+    --ink: #1A1815;
+    --paper: #FFFEF9;
+    --banana: #FFD43B;
+    --banana-deep: #F2B200;
+    --banana-soft: #FFF2B8;
+    --mute: #6b6558;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--paper); color: var(--ink); }
+  body {
+    font-family: ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    padding: 16px;
+  }
+  .ab { margin: 0 auto; max-width: 1400px; }
+  .ab-stage {
+    background: #fff;
+    border: 2px solid var(--ink);
+    border-radius: 14px;
+    padding: 10px;
+    overflow: hidden;
+  }
+  .ab-stage svg { display: block; width: 100%; height: auto; }
+
+  /* ---- Transport ----
+     Every control is the same height and centred on the same line, so the bar
+     reads as one object rather than a row of parts that happen to be adjacent. */
+  .ab-bar {
+    --h: 40px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    border-radius: calc(var(--h) / 2 + 8px);
+  }
+  .ab-bar > * { flex: 0 0 auto; height: var(--h); }
+
+  .ab-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 16px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    line-height: 1;
+    color: var(--ink);
+    background: #fff;
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    cursor: pointer;
+  }
+  .ab-btn:hover { background: var(--banana-soft); }
+  .ab-btn:active { transform: translateY(1px); }
+
+  .ab-play { width: var(--h); padding: 0; border-radius: 50%; background: var(--ink); color: var(--paper); }
+  .ab-play:hover { background: var(--ink); }
+  .ab-play svg { width: 14px; height: 14px; fill: currentColor; display: block; }
+  .ab-play .ab-ic-play { display: none; margin-left: 2px; }
+  .ab.is-paused .ab-play .ab-ic-play { display: block; }
+  .ab.is-paused .ab-play .ab-ic-pause { display: none; }
+
+  /* the rail is drawn; the range input laid over it is what you actually grab */
+  .ab-scrub { position: relative; flex: 1 1 180px !important; min-width: 120px;
+              display: flex; align-items: center; }
+  .ab-rail {
+    position: absolute; inset-inline: 0; height: 9px;
+    background: #fff; border: 1.5px solid var(--ink); border-radius: 999px;
+    overflow: hidden; pointer-events: none;
+  }
+  .ab-rail i { display: block; width: 0; height: 100%; background: var(--banana); }
+  .ab-seek {
+    position: relative; width: 100%; height: var(--h); margin: 0;
+    background: none; -webkit-appearance: none; appearance: none; cursor: pointer;
+  }
+  .ab-seek::-webkit-slider-runnable-track { height: var(--h); background: transparent; }
+  .ab-seek::-moz-range-track { height: var(--h); background: transparent; }
+  .ab-seek::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none;
+    width: 18px; height: 18px; border-radius: 50%;
+    border: 2.5px solid var(--ink); background: var(--banana);
+  }
+  .ab-seek::-moz-range-thumb {
+    width: 16px; height: 16px; border-radius: 50%;
+    border: 2.5px solid var(--ink); background: var(--banana);
+  }
+  .ab-seek:focus-visible { outline: none; }
+  .ab-scrub:focus-within .ab-rail { box-shadow: 0 0 0 3px var(--banana); }
+
+  .ab-time {
+    display: inline-flex;
+    align-items: center;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.72rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--mute);
+    white-space: nowrap;
+  }
+  .ab-time b { color: var(--ink); }
+
+  .ab-speed {
+    display: inline-flex;
+    align-items: stretch;
+    background: #fff;
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .ab-speed button {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    padding: 0;
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--ink);
+    background: #fff;
+    border: 0;
+    cursor: pointer;
+  }
+  .ab-speed button:hover { background: var(--banana-soft); }
+  .ab-speed button[disabled] { opacity: 0.35; cursor: default; background: #fff; }
+  .ab-rate {
+    display: grid;
+    place-items: center;
+    min-width: 56px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.74rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    border-inline: 2px solid var(--ink);
+  }
+  .ab.is-fast .ab-rate { background: var(--banana); }
+
+  /* Captions on or off, said in words rather than left to be inferred */
+  .ab-toggle .ab-led {
+    width: 11px; height: 11px; border-radius: 50%;
+    border: 2px solid var(--ink); background: var(--banana);
+  }
+  .ab-toggle[aria-pressed="false"] { color: var(--mute); }
+  .ab-toggle[aria-pressed="false"] .ab-led { background: #fff; }
+
+  /* ---- The line being narrated ---- */
+  .ab-cap {
+    display: flex;
+    align-items: center;
+    min-height: 3.4em;
+    margin: 10px 0 0;
+    padding: 12px 16px;
+    font-size: clamp(0.95rem, 0.9rem + 0.3vw, 1.15rem);
+    font-weight: 600;
+    font-style: italic;
+    line-height: 1.5;
+    background: var(--banana-soft);
+    border: 1.5px solid var(--banana);
+    border-left: 5px solid var(--banana-deep);
+    border-radius: 10px;
+    transition: opacity .18s ease;
+  }
+  .ab-cap.is-swap { opacity: 0; }
+  .ab.is-off .ab-cap { display: none; }
+  @media (prefers-reduced-motion: reduce) { .ab-cap { transition: none; } }
+
+  /* Narrow: the bar wraps to two rows and squares off, rather than squeezing
+     the scrub bar down to nothing. */
+  @media (max-width: 720px) {
+    .ab-bar { flex-wrap: wrap; border-radius: 20px; }
+    .ab-scrub { order: 3; flex-basis: 100% !important; }
+    .ab-time { order: 2; margin-left: auto; }
+  }
+</style>
+</head>
+<body>
+<figure class="ab">
+  <div class="ab-stage">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 504 330">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#000"/>
+    </marker>
+    <marker id="arrow-gray" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#a0a0a0"/>
+    </marker>
+    <style>
+      #node_dataset_B, #edge_b_to_input_i, #edge_b_to_input_j,
+      #block_input_i, #block_input_j, #rect_block_input_i, #frames_zi, #box_theta_i, #rect_theta_i, #text_theta_i,
+      #rect_block_input_j, #frames_zj, #box_theta_j, #rect_theta_j, #text_theta_j, #edge_input_i_to_enc_i, #edge_input_j_to_enc_j,
+      #block_model_i, #block_model_j, #rect_block_model_i, #encoder_i, #poly_enc_i, #text_enc_i, #node_yi, #rect_yi, #text_yi,
+      #rect_block_model_j, #encoder_j, #poly_enc_j, #text_enc_j, #node_yj, #rect_yj, #text_yj, #edge_enc_i_to_yi, #edge_enc_j_to_yj, #edge_yi_to_trans_i, #edge_yj_to_trans_j,
+      #node_pi, #node_transition_i, #rect_transition_i, #text_transition_i, #node_transition_j, #rect_transition_j, #text_transition_j,
+      #edge_pi_branch_top, #edge_pi_base, #edge_trans_i_to_reward_i, #edge_trans_j_to_reward_j, #edge_trans_i_to_dist_i, #edge_trans_j_to_dist_j,
+      #node_reward_i, #rect_reward_i, #text_reward_i, #node_reward_j, #rect_reward_j, #text_reward_j, #node_ri, #rect_ri, #text_ri,
+      #node_rj, #rect_rj, #text_rj, #dist_i, #dist_j, #edge_reward_i_to_ri, #edge_reward_j_to_rj,
+      #node_bisim_losses, #rect_bisim_losses, #text_bisim_1, #text_bisim_2, #label_r_diff, #label_W, #edge_bisim_y, #edge_reward_diff, #edge_wasserstein {
+        filter: grayscale(100%) opacity(0.4);
+        animation-name: colorPop;
+        animation-duration: 0.5s;
+        animation-fill-mode: forwards;
+      }
+
+      @keyframes colorPop {
+        to {
+          filter: grayscale(0%) opacity(1);
+        }
+      }
+
+      /* Timestamp 1: 0.5s delay */
+      #node_dataset_B, #edge_b_to_input_i, #edge_b_to_input_j {
+        animation-delay: 0s;
+      }
+
+      /* Timestamp 2: 1.0s delay */
+      #block_input_i, #block_input_j, #rect_block_input_i, #frames_zi, #box_theta_i, #rect_theta_i, #text_theta_i,
+      #rect_block_input_j, #frames_zj, #box_theta_j, #rect_theta_j, #text_theta_j, #edge_input_i_to_enc_i, #edge_input_j_to_enc_j {
+        animation-delay: 3.36s;
+      }
+
+      /* Timestamp 3: 1.5s delay */
+      #block_model_i, #block_model_j, #rect_block_model_i, #encoder_i, #poly_enc_i, #text_enc_i, #node_yi, #rect_yi, #text_yi,
+      #rect_block_model_j, #encoder_j, #poly_enc_j, #text_enc_j, #node_yj, #rect_yj, #text_yj, #edge_enc_i_to_yi, #edge_enc_j_to_yj, #edge_yi_to_trans_i, #edge_yj_to_trans_j {
+        animation-delay: 9.24s;
+      }
+
+      /* Timestamp 4: 2.0s delay */
+      #node_pi, #node_transition_i, #rect_transition_i, #text_transition_i, #node_transition_j, #rect_transition_j, #text_transition_j,
+      #edge_pi_branch_top, #edge_pi_base, #edge_trans_i_to_reward_i, #edge_trans_j_to_reward_j, #edge_trans_i_to_dist_i, #edge_trans_j_to_dist_j {
+        animation-delay: 13.96s;
+      }
+
+      /* Timestamp 5: 2.5s delay */
+      #node_reward_i, #rect_reward_i, #text_reward_i, #node_reward_j, #rect_reward_j, #text_reward_j, #node_ri, #rect_ri, #text_ri,
+      #node_rj, #rect_rj, #text_rj, #dist_i, #dist_j, #edge_reward_i_to_ri, #edge_reward_j_to_rj {
+        animation-delay: 19.24s;
+      }
+
+      /* Timestamp 6: 3.0s delay */
+      #node_bisim_losses, #rect_bisim_losses, #text_bisim_1, #text_bisim_2, #label_r_diff, #label_W, #edge_bisim_y, #edge_reward_diff, #edge_wasserstein {
+        animation-delay: 24.28s;
+      }
+
+      /* Narration Subtitle Animations */
+    </style>
+  </defs>
+
+  <!-- ==================== BACKGROUND CONTAINERS / BLOCKS ==================== -->
+
+  <!-- Top Input Block -->
+  <g id="block_input_i" data-id="block_input_i" data-class="block" data-parent="root">
+    <rect id="rect_block_input_i" data-id="rect_block_input_i" data-class="child_node" data-parent="block_input_i"
+          x="89" y="14" width="53" height="77" rx="8" ry="8"
+          fill="#f3f6fc" stroke="#b9cde3" stroke-width="1.5" stroke-dasharray="5,4"/>
+  </g>
+
+  <!-- Bottom Input Block -->
+  <g id="block_input_j" data-id="block_input_j" data-class="block" data-parent="root">
+    <rect id="rect_block_input_j" data-id="rect_block_input_j" data-class="child_node" data-parent="block_input_j"
+          x="89" y="168" width="53" height="77" rx="8" ry="8"
+          fill="#f3f6fc" stroke="#b9cde3" stroke-width="1.5" stroke-dasharray="5,4"/>
+  </g>
+
+  <!-- Top Model Block -->
+  <g id="block_model_i" data-id="block_model_i" data-class="block" data-parent="root">
+    <rect id="rect_block_model_i" data-id="rect_block_model_i" data-class="child_node" data-parent="block_model_i"
+          x="154" y="4" width="191" height="102" rx="15" ry="15"
+          fill="#f3f6fc" stroke="#b9cde3" stroke-width="1.5" stroke-dasharray="6,4"/>
+  </g>
+
+  <!-- Bottom Model Block -->
+  <g id="block_model_j" data-id="block_model_j" data-class="block" data-parent="root">
+    <rect id="rect_block_model_j" data-id="rect_block_model_j" data-class="child_node" data-parent="block_model_j"
+          x="154" y="155" width="191" height="102" rx="15" ry="15"
+          fill="#f3f6fc" stroke="#b9cde3" stroke-width="1.5" stroke-dasharray="6,4"/>
+  </g>
+
+  <!-- ==================== EDGES / CONNECTIONS ==================== -->
+  <g>
+    <!-- Dataset B to Top Input -->
+    <path id="edge_b_to_input_i" data-id="edge_b_to_input_i" data-class="edge"
+          data-source="node_dataset_B" data-target="block_input_i"
+          d="M 46 108 L 89 54" fill="none" stroke="#000" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <!-- Dataset B to Bottom Input -->
+    <path id="edge_b_to_input_j" data-id="edge_b_to_input_j" data-class="edge"
+          data-source="node_dataset_B" data-target="block_input_j"
+          d="M 46 128 L 89 202" fill="none" stroke="#000" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <!-- Top Input to Top Encoder -->
+    <path id="edge_input_i_to_enc_i" data-id="edge_input_i_to_enc_i" data-class="edge"
+          data-source="block_input_i" data-target="encoder_i"
+          d="M 142 53 L 164 53" fill="none" stroke="#000" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <!-- Bottom Input to Bottom Encoder -->
+    <path id="edge_input_j_to_enc_j" data-id="edge_input_j_to_enc_j" data-class="edge"
+          data-source="block_input_j" data-target="encoder_j"
+          d="M 142 205 L 164 205" fill="none" stroke="#000" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <!-- Top Encoder to y_i -->
+    <path id="edge_enc_i_to_yi" data-id="edge_enc_i_to_yi" data-class="edge"
+          data-source="encoder_i" data-target="node_yi"
+          d="M 195 53 L 204 53" fill="none" stroke="#000" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <!-- Bottom Encoder to y_j -->
+    <path id="edge_enc_j_to_yj" data-id="edge_enc_j_to_yj" data-class="edge"
+          data-source="encoder_j" data-target="node_yj"
+          d="M 195 205 L 204 205" fill="none" stroke="#000" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <!-- Top y_i to Transition model -->
+    <path id="edge_yi_to_trans_i" data-id="edge_yi_to_trans_i" data-class="edge"
+          data-source="node_yi" data-target="node_transition_i"
+          d="M 228 53 L 236 53 L 236 65 L 249 65" fill="none" stroke="#000" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <!-- Bottom y_j to Transition model -->
+    <path id="edge_yj_to_trans_j" data-id="edge_yj_to_trans_j" data-class="edge"
+          data-source="node_yj" data-target="node_transition_j"
+          d="M 228 205 L 236 205 L 236 217 L 249 217" fill="none" stroke="#000" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <!-- Policy pi line branching into Top and Bottom Transition Models -->
+    <path id="edge_pi_branch_top" data-id="edge_pi_branch_top" data-class="edge"
+          data-source="node_pi" data-target="node_transition_i"
+          d="M 235 110 L 235 77 L 249 77" fill="none" stroke="#000" stroke-width="1.5" marker-end="url(#arrow)"/>
+    <path id="edge_pi_base" data-id="edge_pi_base" data-class="edge"
+          data-source="node_pi" data-target="node_pi"
+          d="M 235 125 L 235 154 L 250 154" fill="none" stroke="#000" stroke-width="1.5"/>
+
+    <!-- Top Transition model to Reward model -->
+    <path id="edge_trans_i_to_reward_i" data-id="edge_trans_i_to_reward_i" data-class="edge"
+          data-source="node_transition_i" data-target="node_reward_i"
+          d="M 293 58 L 293 47" fill="none" stroke="#000" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <!-- Bottom Transition model to Reward model -->
+    <path id="edge_trans_j_to_reward_j" data-id="edge_trans_j_to_reward_j" data-class="edge"
+          data-source="node_transition_j" data-target="node_reward_j"
+          d="M 293 209 L 293 198" fill="none" stroke="#000" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <!-- Top Reward model to r_i -->
+    <path id="edge_reward_i_to_ri" data-id="edge_reward_i_to_ri" data-class="edge"
+          data-source="node_reward_i" data-target="node_ri"
+          d="M 337 33 L 372 33" fill="none" stroke="#000" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <!-- Bottom Reward model to r_j -->
+    <path id="edge_reward_j_to_rj" data-id="edge_reward_j_to_rj" data-class="edge"
+          data-source="node_reward_j" data-target="node_rj"
+          d="M 337 187 L 372 187" fill="none" stroke="#000" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <!-- Top Transition model to Distribution i -->
+    <path id="edge_trans_i_to_dist_i" data-id="edge_trans_i_to_dist_i" data-class="edge"
+          data-source="node_transition_i" data-target="dist_i"
+          d="M 337 72 L 358 72" fill="none" stroke="#000" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <!-- Bottom Transition model to Distribution j -->
+    <path id="edge_trans_j_to_dist_j" data-id="edge_trans_j_to_dist_j" data-class="edge"
+          data-source="node_transition_j" data-target="dist_j"
+          d="M 337 225 L 358 225" fill="none" stroke="#000" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <!-- Bisimulation Loss Dashed Edge between y_i and y_j -->
+    <path id="edge_bisim_y" data-id="edge_bisim_y" data-class="edge"
+          data-source="node_yi" data-target="node_yj"
+          d="M 216 64 L 216 193" fill="none" stroke="#000" stroke-width="1.5" stroke-dasharray="4,3" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+
+    <!-- Dashed connection for Reward difference: between r_i and r_j -->
+    <path id="edge_reward_diff" data-id="edge_reward_diff" data-class="edge"
+          data-source="node_ri" data-target="node_rj"
+          d="M 396 33 L 440 33 L 440 187 L 396 187" fill="none" stroke="#000" stroke-width="1.5" stroke-dasharray="4,3" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+
+    <!-- Dashed connection for Wasserstein distance W between distributions -->
+    <path id="edge_wasserstein" data-id="edge_wasserstein" data-class="edge"
+          data-source="dist_i" data-target="dist_j"
+          d="M 426 72 L 470 72 L 470 225 L 426 225" fill="none" stroke="#000" stroke-width="1.5" stroke-dasharray="4,3" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  </g>
+
+  <!-- ==================== NODES AND LABELS ==================== -->
+
+  <!-- Dataset B (Replay Buffer Cylinder) -->
+  <g id="node_dataset_B" data-id="node_dataset_B" data-class="standalone_node" data-parent="root">
+    <path id="cyl_body" data-id="cyl_body" data-class="composite_part" data-parent="node_dataset_B"
+          d="M 2 103 C 2 97 48 97 48 103 L 48 132 C 48 144 2 144 2 132 Z"
+          fill="#fff" stroke="#444" stroke-width="1.5"/>
+    <ellipse id="cyl_top" data-id="cyl_top" data-class="composite_part" data-parent="node_dataset_B"
+             cx="25" cy="103" rx="23" ry="11"
+             fill="#fff" stroke="#444" stroke-width="1.5"/>
+    <path id="cyl_inner_arc" data-id="cyl_inner_arc" data-class="composite_part" data-parent="node_dataset_B"
+          d="M 2 114 C 2 125 48 125 48 114" fill="none" stroke="#444" stroke-width="1.2"/>
+    <text id="text_B" data-id="text_B" data-class="composite_part" data-parent="node_dataset_B"
+          x="25" y="128" font-family="'Times New Roman', serif" font-style="italic" font-weight="bold" font-size="19" text-anchor="middle">&#x212C;</text>
+  </g>
+
+  <!-- Top Inputs Content -->
+  <g id="frames_zi" data-id="frames_zi" data-class="composite_whole" data-parent="block_input_i">
+    <rect id="frame_zi_3" data-id="frame_zi_3" data-class="composite_part" data-parent="frames_zi"
+          x="104" y="22" width="28" height="28" fill="#fbe8e8" stroke="#d96b6b" stroke-width="1.2"/>
+    <rect id="frame_zi_2" data-id="frame_zi_2" data-class="composite_part" data-parent="frames_zi"
+          x="100" y="26" width="28" height="28" fill="#fbe8e8" stroke="#d96b6b" stroke-width="1.2"/>
+    <rect id="frame_zi_1" data-id="frame_zi_1" data-class="composite_part" data-parent="frames_zi"
+          x="96" y="30" width="28" height="28" fill="#fbe8e8" stroke="#d96b6b" stroke-width="1.2"/>
+    <text id="text_zi" data-id="text_zi" data-class="composite_part" data-parent="frames_zi"
+          x="118" y="49" font-family="'Times New Roman', serif" font-style="italic" font-size="12" fill="#c24b4b" text-anchor="middle">z<tspan font-size="0.65em" baseline-shift="sub">i</tspan></text>
+  </g>
+
+  <g id="box_theta_i" data-id="box_theta_i" data-class="child_node" data-parent="block_input_i">
+    <rect id="rect_theta_i" data-id="rect_theta_i" data-class="child_node" data-parent="box_theta_i"
+          x="99" y="61" width="30" height="26" fill="#fff" stroke="#000" stroke-width="1.5"/>
+    <text id="text_theta_i" data-id="text_theta_i" data-class="child_node" data-parent="box_theta_i"
+          x="114" y="78" font-family="'Times New Roman', serif" font-size="11" font-style="italic" text-anchor="middle">&#x3B8;<tspan font-size="0.65em" baseline-shift="sub">1</tspan>, &#x3B8;<tspan font-size="0.65em" baseline-shift="sub">2</tspan></text>
+  </g>
+
+  <!-- Bottom Inputs Content -->
+  <g id="frames_zj" data-id="frames_zj" data-class="composite_whole" data-parent="block_input_j">
+    <rect id="frame_zj_3" data-id="frame_zj_3" data-class="composite_part" data-parent="frames_zj"
+          x="104" y="174" width="28" height="28" fill="#fdf4db" stroke="#d4a347" stroke-width="1.2"/>
+    <rect id="frame_zj_2" data-id="frame_zj_2" data-class="composite_part" data-parent="frames_zj"
+          x="100" y="178" width="28" height="28" fill="#fdf4db" stroke="#d4a347" stroke-width="1.2"/>
+    <rect id="frame_zj_1" data-id="frame_zj_1" data-class="composite_part" data-parent="frames_zj"
+          x="96" y="182" width="28" height="28" fill="#fdf4db" stroke="#d4a347" stroke-width="1.2"/>
+    <text id="text_zj" data-id="text_zj" data-class="composite_part" data-parent="frames_zj"
+          x="118" y="201" font-family="'Times New Roman', serif" font-style="italic" font-size="12" fill="#b07d1e" text-anchor="middle">z<tspan font-size="0.65em" baseline-shift="sub">j</tspan></text>
+  </g>
+
+  <g id="box_theta_j" data-id="box_theta_j" data-class="child_node" data-parent="block_input_j">
+    <rect id="rect_theta_j" data-id="rect_theta_j" data-class="child_node" data-parent="box_theta_j"
+          x="99" y="215" width="30" height="26" fill="#fff" stroke="#000" stroke-width="1.5"/>
+    <text id="text_theta_j" data-id="text_theta_j" data-class="child_node" data-parent="box_theta_j"
+          x="114" y="232" font-family="'Times New Roman', serif" font-size="11" font-style="italic" text-anchor="middle">&#x3B8;<tspan font-size="0.65em" baseline-shift="sub">1</tspan>, &#x3B8;<tspan font-size="0.65em" baseline-shift="sub">2</tspan></text>
+  </g>
+
+  <!-- Bisimulation Losses Box -->
+  <g id="node_bisim_losses" data-id="node_bisim_losses" data-class="standalone_node" data-parent="root">
+    <rect id="rect_bisim_losses" data-id="rect_bisim_losses" data-class="standalone_node" data-parent="node_bisim_losses"
+          x="111" y="109" width="88" height="39" rx="8" ry="8"
+          fill="#fff" stroke="#000" stroke-width="1.8"/>
+    <text id="text_bisim_1" data-id="text_bisim_1" data-class="standalone_node" data-parent="node_bisim_losses"
+          x="155" y="125" font-family="sans-serif" font-weight="bold" font-size="10.5" text-anchor="middle">Bisimulation</text>
+    <text id="text_bisim_2" data-id="text_bisim_2" data-class="standalone_node" data-parent="node_bisim_losses"
+          x="155" y="138" font-family="sans-serif" font-weight="bold" font-size="10.5" text-anchor="middle">Losses</text>
+  </g>
+
+  <!-- Top Encoder Trapezoid -->
+  <g id="encoder_i" data-id="encoder_i" data-class="child_node" data-parent="block_model_i">
+    <polygon id="poly_enc_i" data-id="poly_enc_i" data-class="child_node" data-parent="encoder_i"
+             points="165,10 195,26 195,80 165,96" fill="#fff" stroke="#000" stroke-width="1.5"/>
+    <text id="text_enc_i" data-id="text_enc_i" data-class="child_node" data-parent="encoder_i"
+          x="53" y="-176" transform="rotate(90)" font-family="sans-serif" font-weight="bold" font-size="10.5" text-anchor="middle">Encoder</text>
+  </g>
+
+  <!-- Bottom Encoder Trapezoid -->
+  <g id="encoder_j" data-id="encoder_j" data-class="child_node" data-parent="block_model_j">
+    <polygon id="poly_enc_j" data-id="poly_enc_j" data-class="child_node" data-parent="encoder_j"
+             points="165,161 195,177 195,231 165,247" fill="#fff" stroke="#000" stroke-width="1.5"/>
+    <text id="text_enc_j" data-id="text_enc_j" data-class="child_node" data-parent="encoder_j"
+          x="204" y="-176" transform="rotate(90)" font-family="sans-serif" font-weight="bold" font-size="10.5" text-anchor="middle">Encoder</text>
+  </g>
+
+  <!-- Node y_{i,:} -->
+  <g id="node_yi" data-id="node_yi" data-class="child_node" data-parent="block_model_i">
+    <rect id="rect_yi" data-id="rect_yi" data-class="child_node" data-parent="node_yi"
+          x="205" y="43" width="23" height="20" fill="#fff" stroke="#000" stroke-width="1.5"/>
+    <text id="text_yi" data-id="text_yi" data-class="child_node" data-parent="node_yi"
+          x="216" y="57" font-family="'Times New Roman', serif" font-style="italic" font-size="11" text-anchor="middle">y<tspan font-size="0.65em" baseline-shift="sub">i,:</tspan></text>
+  </g>
+
+  <!-- Node y_{j,:} -->
+  <g id="node_yj" data-id="node_yj" data-class="child_node" data-parent="block_model_j">
+    <rect id="rect_yj" data-id="rect_yj" data-class="child_node" data-parent="node_yj"
+          x="205" y="195" width="23" height="20" fill="#fff" stroke="#000" stroke-width="1.5"/>
+    <text id="text_yj" data-id="text_yj" data-class="child_node" data-parent="node_yj"
+          x="216" y="209" font-family="'Times New Roman', serif" font-style="italic" font-size="11" text-anchor="middle">y<tspan font-size="0.65em" baseline-shift="sub">j,:</tspan></text>
+  </g>
+
+  <!-- Policy pi Label -->
+  <text id="node_pi" data-id="node_pi" data-class="standalone_node" data-parent="root"
+        x="235" y="120" font-family="'Times New Roman', serif" font-style="italic" font-size="15" text-anchor="middle">&#x3C0;</text>
+
+  <!-- Top Reward Model -->
+  <g id="node_reward_i" data-id="node_reward_i" data-class="child_node" data-parent="block_model_i">
+    <rect id="rect_reward_i" data-id="rect_reward_i" data-class="child_node" data-parent="node_reward_i"
+          x="250" y="20" width="87" height="26" rx="5" ry="5" fill="#fff" stroke="#000" stroke-width="1.5"/>
+    <text id="text_reward_i" data-id="text_reward_i" data-class="child_node" data-parent="node_reward_i"
+          x="293.5" y="36.5" font-family="sans-serif" font-weight="bold" font-size="9" text-anchor="middle">Reward model</text>
+  </g>
+
+  <!-- Top Transition Model -->
+  <g id="node_transition_i" data-id="node_transition_i" data-class="child_node" data-parent="block_model_i">
+    <rect id="rect_transition_i" data-id="rect_transition_i" data-class="child_node" data-parent="node_transition_i"
+          x="250" y="58" width="87" height="26" rx="5" ry="5" fill="#fff" stroke="#000" stroke-width="1.5"/>
+    <text id="text_transition_i" data-id="text_transition_i" data-class="child_node" data-parent="node_transition_i"
+          x="293.5" y="74.5" font-family="sans-serif" font-weight="bold" font-size="9" text-anchor="middle">Transition model</text>
+  </g>
+
+  <!-- Bottom Reward Model -->
+  <g id="node_reward_j" data-id="node_reward_j" data-class="child_node" data-parent="block_model_j">
+    <rect id="rect_reward_j" data-id="rect_reward_j" data-class="child_node" data-parent="node_reward_j"
+          x="250" y="171" width="87" height="26" rx="5" ry="5" fill="#fff" stroke="#000" stroke-width="1.5"/>
+    <text id="text_reward_j" data-id="text_reward_j" data-class="child_node" data-parent="node_reward_j"
+          x="293.5" y="187.5" font-family="sans-serif" font-weight="bold" font-size="9" text-anchor="middle">Reward model</text>
+  </g>
+
+  <!-- Bottom Transition Model -->
+  <g id="node_transition_j" data-id="node_transition_j" data-class="child_node" data-parent="block_model_j">
+    <rect id="rect_transition_j" data-id="rect_transition_j" data-class="child_node" data-parent="node_transition_j"
+          x="250" y="209" width="87" height="26" rx="5" ry="5" fill="#fff" stroke="#000" stroke-width="1.5"/>
+    <text id="text_transition_j" data-id="text_transition_j" data-class="child_node" data-parent="node_transition_j"
+          x="293.5" y="225.5" font-family="sans-serif" font-weight="bold" font-size="9" text-anchor="middle">Transition model</text>
+  </g>
+
+  <!-- Node r_i -->
+  <g id="node_ri" data-id="node_ri" data-class="child_node" data-parent="block_model_i">
+    <rect id="rect_ri" data-id="rect_ri" data-class="child_node" data-parent="node_ri"
+          x="373" y="23" width="23" height="20" fill="#fff" stroke="#000" stroke-width="1.5"/>
+    <text id="text_ri" data-id="text_ri" data-class="child_node" data-parent="node_ri"
+          x="384.5" y="37" font-family="'Times New Roman', serif" font-style="italic" font-size="11" text-anchor="middle">r<tspan font-size="0.65em" baseline-shift="sub">i</tspan></text>
+  </g>
+
+  <!-- Node r_j -->
+  <g id="node_rj" data-id="node_rj" data-class="child_node" data-parent="block_model_j">
+    <rect id="rect_rj" data-id="rect_rj" data-class="child_node" data-parent="node_rj"
+          x="373" y="174" width="23" height="20" fill="#fff" stroke="#000" stroke-width="1.5"/>
+    <text id="text_rj" data-id="text_rj" data-class="child_node" data-parent="node_rj"
+          x="384.5" y="188" font-family="'Times New Roman', serif" font-style="italic" font-size="11" text-anchor="middle">r<tspan font-size="0.65em" baseline-shift="sub">j</tspan></text>
+  </g>
+
+  <!-- Top Distribution Plot -->
+  <g id="dist_i" data-id="dist_i" data-class="composite_whole" data-parent="root">
+    <!-- Horizontal Axis -->
+    <path id="axis_h_i" data-id="axis_h_i" data-class="composite_part" data-parent="dist_i"
+          d="M 360 88 L 420 88" stroke="#a0a0a0" stroke-width="1.5" marker-start="url(#arrow-gray)" marker-end="url(#arrow-gray)"/>
+    <!-- Vertical Mean Axis -->
+    <path id="axis_v_i" data-id="axis_v_i" data-class="composite_part" data-parent="dist_i"
+          d="M 378 88 L 378 55" stroke="#a0a0a0" stroke-width="1.5" marker-end="url(#arrow-gray)"/>
+    <!-- Gaussian Bell Curve -->
+    <path id="curve_i" data-id="curve_i" data-class="composite_part" data-parent="dist_i"
+          d="M 360 88 C 368 88 372 63 378 63 C 384 63 388 88 396 88" fill="none" stroke="#000" stroke-width="1.5"/>
+    <!-- Dashed Mean Indicator -->
+    <path id="mean_i" data-id="mean_i" data-class="composite_part" data-parent="dist_i"
+          d="M 378 63 L 378 88" stroke="#000" stroke-width="1.5" stroke-dasharray="3,3"/>
+  </g>
+
+  <!-- Bottom Distribution Plot -->
+  <g id="dist_j" data-id="dist_j" data-class="composite_whole" data-parent="root">
+    <!-- Horizontal Axis -->
+    <path id="axis_h_j" data-id="axis_h_j" data-class="composite_part" data-parent="dist_j"
+          d="M 360 241 L 420 241" stroke="#a0a0a0" stroke-width="1.5" marker-start="url(#arrow-gray)" marker-end="url(#arrow-gray)"/>
+    <!-- Vertical Mean Axis -->
+    <path id="axis_v_j" data-id="axis_v_j" data-class="composite_part" data-parent="dist_j"
+          d="M 378 241 L 378 208" stroke="#a0a0a0" stroke-width="1.5" marker-end="url(#arrow-gray)"/>
+    <!-- Gaussian Bell Curve (shifted right) -->
+    <path id="curve_j" data-id="curve_j" data-class="composite_part" data-parent="dist_j"
+          d="M 377 241 C 385 241 389 216 395 216 C 401 216 405 241 413 241" fill="none" stroke="#000" stroke-width="1.5"/>
+    <!-- Dashed Mean Indicator -->
+    <path id="mean_j" data-id="mean_j" data-class="composite_part" data-parent="dist_j"
+          d="M 395 216 L 395 241" stroke="#000" stroke-width="1.5" stroke-dasharray="3,3"/>
+  </g>
+
+  <!-- Metric Labels on the Right -->
+  <text id="label_r_diff" data-id="label_r_diff" data-class="standalone_node" data-parent="root"
+        x="475" y="66" font-family="'Times New Roman', serif" font-style="italic" font-size="14" text-anchor="middle">|r<tspan font-size="0.65em" baseline-shift="sub">i</tspan> &#x2212; r<tspan font-size="0.65em" baseline-shift="sub">j</tspan>|</text>
+
+  <text id="label_W" data-id="label_W" data-class="standalone_node" data-parent="root"
+        x="490" y="157" font-family="'Times New Roman', serif" font-style="italic" font-size="16" text-anchor="middle">W</text>
+
+  <!-- Dynamic Narration Banner -->
+
+</svg>
+  </div>
+
+  <div class="ab-bar">
+    <button type="button" class="ab-btn ab-play" aria-label="Pause">
+      <svg class="ab-ic-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 5.5l11 6.5-11 6.5z"/></svg>
+      <svg class="ab-ic-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 5.5h3.6v13H7.5zM12.9 5.5h3.6v13h-3.6z"/></svg>
+    </button>
+
+    <div class="ab-scrub">
+      <span class="ab-rail" aria-hidden="true"><i class="ab-played"></i></span>
+      <input type="range" class="ab-seek" min="0" max="1000" value="0" step="1"
+             aria-label="Scrub through the animation">
+    </div>
+
+    <span class="ab-time"><b>0:00</b>&nbsp;/&nbsp;<span class="ab-total">0:00</span></span>
+
+    <div class="ab-speed" role="group" aria-label="Playback speed">
+      <button type="button" class="ab-slower" aria-label="Slower">&#8722;</button>
+      <span class="ab-rate" aria-live="polite">1&#215;</span>
+      <button type="button" class="ab-faster" aria-label="Faster">+</button>
+    </div>
+
+    <button type="button" class="ab-btn ab-toggle" aria-pressed="true">
+      <span class="ab-led" aria-hidden="true"></span>
+      <span class="ab-word">Captions on</span>
+    </button>
+  </div>
+
+  <figcaption class="ab-cap" aria-live="polite"></figcaption>
+</figure>
+
+<script>
+(function () {
+  var CUES = [{"start": 0.0, "end": 3.36, "text": "Pairs of experience observations are sampled from the replay buffer."}, {"start": 3.36, "end": 9.24, "text": "Each sampled instance pairs raw observation frames with corresponding context parameters across different environment shifts."}, {"start": 9.24, "end": 13.96, "text": "The encoders map these contextual observations into a shared latent representation space."}, {"start": 13.96, "end": 19.24, "text": "Conditioned on the policy's actions, probabilistic transition models predict the next-state distributions."}, {"start": 19.24, "end": 24.28, "text": "Concurrently, reward models estimate expected scalar rewards for each latent state."}, {"start": 24.28, "end": 31.68, "text": "Finally, bisimulation losses align latent representation distances with the combined reward differences and Wasserstein transition distances."}];
+  var LOOP = 31.68;
+  var REPEATS = 1;
+  var RATES = [0.25, 0.5, 0.75, 1, 1.5, 2, 3];
+
+  var fig = document.querySelector('.ab');
+  var cap = document.querySelector('.ab-cap');
+  var play = document.querySelector('.ab-play');
+  var seek = document.querySelector('.ab-seek');
+  var played = document.querySelector('.ab-played');
+  var nowEl = document.querySelector('.ab-time b');
+  var totalEl = document.querySelector('.ab-total');
+  var rateEl = document.querySelector('.ab-rate');
+  var slower = document.querySelector('.ab-slower');
+  var faster = document.querySelector('.ab-faster');
+  var toggle = document.querySelector('.ab-toggle');
+  var word = toggle.querySelector('.ab-word');
+
+  var at = -1, swap = null, rate = 3, paused = false, scrubbing = false;
+
+  // THE CLOCK. The drawing is hundreds of short animations that each stop when
+  // they are done, so none of them can be asked what time it is. This one runs
+  // the length of the whole piece, does nothing visible, and is driven by the
+  // same controls - so the caption, the bar and the picture cannot disagree.
+  var master = null;
+  try {
+    master = document.documentElement.animate(
+      [{ opacity: 1 }, { opacity: 1 }],
+      { duration: (LOOP || 1) * 1000, iterations: REPEATS }
+    );
+  } catch (e) {}
+  var t0 = performance.now();
+
+  function others() {
+    try {
+      var runs = document.getAnimations ? document.getAnimations() : [];
+      return runs.filter(function (a) { return a !== master; });
+    } catch (e) { return []; }
+  }
+  function clock() {
+    var t;
+    if (master && master.currentTime != null) t = master.currentTime / 1000;
+    else t = (performance.now() - t0) / 1000;
+    return REPEATS === 1 ? Math.min(t, LOOP) : (t % (LOOP || 1));
+  }
+  function each(fn) {
+    if (master) { try { fn(master); } catch (e) {} }
+    others().forEach(function (a) { try { fn(a); } catch (e) {} });
+  }
+  function clip(t) {
+    t = Math.max(0, t || 0);
+    return Math.floor(t / 60) + ':' + ('0' + Math.floor(t % 60)).slice(-2);
+  }
+
+  play.addEventListener('click', function () {
+    paused = !paused;
+    // Restarting a finished piece rather than leaving Play doing nothing
+    if (!paused && REPEATS === 1 && clock() >= LOOP - 0.05) each(function (a) { a.currentTime = 0; });
+    each(function (a) { paused ? a.pause() : a.play(); });
+    if (!paused) t0 = performance.now() - clock() * 1000;
+    fig.classList.toggle('is-paused', paused);
+    play.setAttribute('aria-label', paused ? 'Play' : 'Pause');
+  });
+
+  function setRate(i) {
+    rate = Math.max(0, Math.min(RATES.length - 1, i));
+    var r = RATES[rate];
+    each(function (a) { a.playbackRate = r; });
+    rateEl.textContent = r + '×';
+    fig.classList.toggle('is-fast', r !== 1);
+    slower.disabled = rate === 0;
+    faster.disabled = rate === RATES.length - 1;
+  }
+  slower.addEventListener('click', function () { setRate(rate - 1); });
+  faster.addEventListener('click', function () { setRate(rate + 1); });
+
+  seek.addEventListener('pointerdown', function () { scrubbing = true; });
+  seek.addEventListener('input', function () {
+    var t = (Number(seek.value) / 1000) * LOOP;
+    each(function (a) { a.currentTime = t * 1000; });
+    t0 = performance.now() - t * 1000;
+    paint(true);
+  });
+  seek.addEventListener('change', function () { scrubbing = false; });
+
+  toggle.addEventListener('click', function () {
+    var on = toggle.getAttribute('aria-pressed') !== 'true';
+    toggle.setAttribute('aria-pressed', String(on));
+    word.textContent = on ? 'Captions on' : 'Captions off';
+    fig.classList.toggle('is-off', !on);
+  });
+
+  function paint(force) {
+    var t = clock();
+    nowEl.textContent = clip(t);
+    if (!scrubbing) seek.value = String(Math.round((t / (LOOP || 1)) * 1000));
+    played.style.width = ((t / (LOOP || 1)) * 100) + '%';
+
+    var k = -1;
+    for (var i = 0; i < CUES.length; i++) { if (t >= CUES[i].start - 0.05) k = i; }
+    if (k !== at || force === true) {
+      at = k;
+      var text = k >= 0 ? CUES[k].text : '';
+      if (text !== cap.textContent) {
+        cap.classList.add('is-swap');
+        clearTimeout(swap);
+        swap = setTimeout(function () {
+          cap.textContent = text;
+          cap.classList.remove('is-swap');
+        }, 150);
+      }
+    }
+  }
+
+  // Two ways round, on purpose. requestAnimationFrame gives a smooth bar while
+  // the page is on screen, and stops dead in a background tab or an embed the
+  // browser considers hidden - where the animation itself keeps running, so the
+  // caption would be left behind. The slow timer covers exactly that case.
+  function frame() { paint(); requestAnimationFrame(frame); }
+
+  totalEl.textContent = clip(LOOP);
+  setRate(3);
+  if (!CUES.length) { fig.classList.add('is-off'); toggle.style.display = 'none'; }
+  requestAnimationFrame(frame);
+  setInterval(paint, 250);
+})();
+</script>
+</body>
+</html>

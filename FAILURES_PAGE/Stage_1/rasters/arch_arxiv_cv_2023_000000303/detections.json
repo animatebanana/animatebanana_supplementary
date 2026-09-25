@@ -1,0 +1,109 @@
+{
+  "detected": 5,
+  "placeholders": 5,
+  "omitted": {},
+  "rejected": {},
+  "image_size": [
+    978,
+    370
+  ],
+  "regions": [
+    {
+      "xml_id": "img_stack_1",
+      "box_2d": [
+        0,
+        28,
+        276,
+        137
+      ],
+      "bbox": [
+        27.384,
+        0.0,
+        133.98600000000002,
+        102.12
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "img_stack_2",
+      "box_2d": [
+        0,
+        16,
+        298,
+        126
+      ],
+      "bbox": [
+        15.648,
+        0.0,
+        123.228,
+        110.25999999999999
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "img_stack_3",
+      "box_2d": [
+        12,
+        4,
+        321,
+        114
+      ],
+      "bbox": [
+        3.912,
+        4.44,
+        111.492,
+        118.77
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "inf_camera_frame",
+      "box_2d": [
+        12,
+        864,
+        301,
+        974
+      ],
+      "bbox": [
+        844.992,
+        4.44,
+        952.572,
+        111.36999999999999
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "inf_traj_frame",
+      "box_2d": [
+        463,
+        826,
+        752,
+        936
+      ],
+      "bbox": [
+        807.828,
+        171.31,
+        915.408,
+        278.24
+      ],
+      "label": ""
+    }
+  ],
+  "replaced": [
+    "img_stack_1",
+    "img_stack_2",
+    "img_stack_3",
+    "inf_camera_frame",
+    "inf_traj_frame"
+  ],
+  "provenance": {
+    "agent": "raster_integrator",
+    "backend": "openrouter_gemini37flash",
+    "model": "google-gemini-3.7-flash",
+    "prompt": null,
+    "style": "hopping_bounding_box",
+    "target": "svg",
+    "config_fingerprint": "866381cccea30a07",
+    "timestamp": "2026-08-28T21:15:26"
+  }
+}

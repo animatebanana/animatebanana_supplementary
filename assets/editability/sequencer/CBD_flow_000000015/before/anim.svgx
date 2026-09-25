@@ -1,0 +1,242 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 650" width="100%" height="100%">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#000000" />
+    </marker>
+  </defs>
+  <style>
+    /* Global selector for all animated diagram elements */
+    #node_begin, #node_init, #edge_begin_to_init, #node_input_nums, #edge_init_to_input_nums, 
+    #node_cond, #edge_input_nums_to_cond, #node_input_latest, #label_no, #edge_cond_to_input_latest, 
+    #node_total, #edge_input_latest_to_total, #edge_total_to_cond, #node_average, #label_yes, 
+    #edge_cond_to_average, #node_print, #edge_average_to_print, #node_stop, #edge_print_to_stop {
+      opacity: 0;
+      animation-name: fadeIn;
+      animation-duration: 0.5s;
+      animation-fill-mode: forwards;
+    }
+
+    /* Exactly one keyframe definition for fadeIn */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Grouped delays based on Timestamp formula: Delay = (Timestamp - 1) * 0.5s */
+    #node_begin {
+      animation-delay: 0.0s;
+    }
+    #node_init, #edge_begin_to_init {
+      animation-delay: 0.5s;
+    }
+    #node_input_nums, #edge_init_to_input_nums {
+      animation-delay: 1.0s;
+    }
+    #node_cond, #edge_input_nums_to_cond {
+      animation-delay: 1.5s;
+    }
+    #node_input_latest, #label_no, #edge_cond_to_input_latest {
+      animation-delay: 2.0s;
+    }
+    #node_total, #edge_input_latest_to_total {
+      animation-delay: 2.5s;
+    }
+    #edge_total_to_cond {
+      animation-delay: 3.0s;
+    }
+    #node_average, #label_yes, #edge_cond_to_average {
+      animation-delay: 3.5s;
+    }
+    #node_print, #edge_average_to_print {
+      animation-delay: 4.0s;
+    }
+    #node_stop, #edge_print_to_stop {
+      animation-delay: 4.5s;
+    }
+
+    /* Narration Banner Styling & Animations */
+    #narration_banner text {
+      opacity: 0;
+      font-family: 'Arial', sans-serif;
+      font-size: 13px;
+      fill: #333333;
+    }
+
+    @keyframes show_banner_temp {
+      0% { opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    @keyframes show_banner_persistent {
+      0% { opacity: 0; }
+      10% { opacity: 1; }
+      100% { opacity: 1; }
+    }
+
+    #narr_ts1 { animation: show_banner_temp 0.5s forwards; animation-delay: 0.0s; }
+    #narr_ts2 { animation: show_banner_temp 0.5s forwards; animation-delay: 0.5s; }
+    #narr_ts3 { animation: show_banner_temp 0.5s forwards; animation-delay: 1.0s; }
+    #narr_ts4 { animation: show_banner_temp 0.5s forwards; animation-delay: 1.5s; }
+    #narr_ts5 { animation: show_banner_temp 0.5s forwards; animation-delay: 2.0s; }
+    #narr_ts6 { animation: show_banner_temp 0.5s forwards; animation-delay: 2.5s; }
+    #narr_ts7 { animation: show_banner_temp 0.5s forwards; animation-delay: 3.0s; }
+    #narr_ts8 { animation: show_banner_temp 0.5s forwards; animation-delay: 3.5s; }
+    #narr_ts9 { animation: show_banner_temp 0.5s forwards; animation-delay: 4.0s; }
+    #narr_ts10 { animation: show_banner_persistent 0.5s forwards; animation-delay: 4.5s; }
+  </style>
+
+  <!-- Background Grid / Canvas (Optional, keeping it clean white) -->
+  <rect width="500" height="650" fill="#FFFFFF" />
+
+  <!-- ==================== EDGES (LINES) ==================== -->
+  <g>
+    <path id="edge_begin_to_init" data-id="edge_begin_to_init" data-class="edge" data-source="node_begin" data-target="node_init" 
+          d="M 140 55 L 140 80" stroke="#000000" stroke-width="1.5" fill="none" marker-end="url(#arrow)" />
+
+    <path id="edge_init_to_input_nums" data-id="edge_init_to_input_nums" data-class="edge" data-source="node_init" data-target="node_input_nums" 
+          d="M 140 125 L 140 150" stroke="#000000" stroke-width="1.5" fill="none" marker-end="url(#arrow)" />
+
+    <path id="edge_input_nums_to_cond" data-id="edge_input_nums_to_cond" data-class="edge" data-source="node_input_nums" data-target="node_cond" 
+          d="M 140 195 L 140 225" stroke="#000000" stroke-width="1.5" fill="none" marker-end="url(#arrow)" />
+
+    <path id="edge_cond_to_input_latest" data-id="edge_cond_to_input_latest" data-class="edge" data-source="node_cond" data-target="node_input_latest" 
+          d="M 140 305 L 140 335" stroke="#000000" stroke-width="1.5" fill="none" marker-end="url(#arrow)" />
+
+    <path id="edge_input_latest_to_total" data-id="edge_input_latest_to_total" data-class="edge" data-source="node_input_latest" data-target="node_total" 
+          d="M 140 380 L 140 420" stroke="#000000" stroke-width="1.5" fill="none" marker-end="url(#arrow)" />
+
+    <path id="edge_total_to_cond" data-id="edge_total_to_cond" data-class="edge" data-source="node_total" data-target="node_cond" 
+          d="M 75 442.5 L 40 442.5 L 40 265 L 75 265" stroke="#000000" stroke-width="1.5" fill="none" marker-end="url(#arrow)" />
+
+    <path id="edge_cond_to_average" data-id="edge_cond_to_average" data-class="edge" data-source="node_cond" data-target="node_average" 
+          d="M 205 265 L 270 265" stroke="#000000" stroke-width="1.5" fill="none" marker-end="url(#arrow)" />
+
+    <path id="edge_average_to_print" data-id="edge_average_to_print" data-class="edge" data-source="node_average" data-target="node_print" 
+          d="M 336.5 287.5 L 336.5 310" stroke="#000000" stroke-width="1.5" fill="none" marker-end="url(#arrow)" />
+
+    <path id="edge_print_to_stop" data-id="edge_print_to_stop" data-class="edge" data-source="node_print" data-target="node_stop" 
+          d="M 335 410 L 335 445" stroke="#000000" stroke-width="1.5" fill="none" marker-end="url(#arrow)" />
+  </g>
+
+  <!-- ==================== NODES & TEXT ==================== -->
+  
+  <!-- Begin Node -->
+  <g id="node_begin" data-id="node_begin" data-class="standalone_node" data-parent="root">
+    <rect x="85" y="20" width="110" height="35" rx="17.5" ry="17.5" fill="#FFFFFF" stroke="#000000" stroke-width="1.5" />
+    <text x="140" y="42" font-family="Arial, sans-serif" font-size="14" fill="#000000" text-anchor="middle">Begin</text>
+  </g>
+
+  <!-- Initialize Variables Node -->
+  <g id="node_init" data-id="node_init" data-class="standalone_node" data-parent="root">
+    <rect x="75" y="80" width="133" height="45" fill="#FFC000" stroke="#000000" stroke-width="1.5" />
+    <text x="141.5" y="107" font-family="Arial, sans-serif" font-size="13" fill="#000000" text-anchor="middle">Initialize variables</text>
+  </g>
+
+  <!-- INPUT numbers Node -->
+  <g id="node_input_nums" data-id="node_input_nums" data-class="standalone_node" data-parent="root">
+    <polygon points="95,150 215,150 195,195 75,195" fill="#FF0000" stroke="#000000" stroke-width="1.5" />
+    <text x="145" y="170" font-family="Arial, sans-serif" font-size="13" fill="#000000" text-anchor="middle" font-weight="bold">INPUT</text>
+    <text x="145" y="186" font-family="Arial, sans-serif" font-size="13" fill="#000000" text-anchor="middle">numbers</text>
+  </g>
+
+  <!-- Condition Node (Diamond) -->
+  <g id="node_cond" data-id="node_cond" data-class="standalone_node" data-parent="root">
+    <polygon points="140,225 205,265 140,305 75,265" fill="#0070C0" stroke="#0050A0" stroke-width="1.5" />
+    <text x="140" y="258" font-family="Arial, sans-serif" font-size="11" fill="#FFFFFF" text-anchor="middle">All numbers</text>
+    <text x="140" y="274" font-family="Arial, sans-serif" font-size="11" fill="#FFFFFF" text-anchor="middle">been entered?</text>
+  </g>
+
+  <!-- INPUT latest Node -->
+  <g id="node_input_latest" data-id="node_input_latest" data-class="standalone_node" data-parent="root">
+    <polygon points="95,335 215,335 195,380 75,380" fill="#FF0000" stroke="#000000" stroke-width="1.5" />
+    <text x="145" y="362" font-family="Arial, sans-serif" font-size="13" fill="#000000" text-anchor="middle"><tspan font-weight="bold">INPUT</tspan> latest</text>
+  </g>
+
+  <!-- total = total + latest Node -->
+  <g id="node_total" data-id="node_total" data-class="standalone_node" data-parent="root">
+    <rect x="75" y="420" width="133" height="45" fill="#FFC000" stroke="#000000" stroke-width="1.5" />
+    <text x="141.5" y="446" font-family="Arial, sans-serif" font-size="12" fill="#000000" text-anchor="middle">total = total + latest</text>
+  </g>
+
+  <!-- average = total / numbers Node -->
+  <g id="node_average" data-id="node_average" data-class="standalone_node" data-parent="root">
+    <rect x="270" y="242.5" width="133" height="45" fill="#FFC000" stroke="#000000" stroke-width="1.5" />
+    <text x="336.5" y="260" font-family="Arial, sans-serif" font-size="12" fill="#000000" text-anchor="middle">average = total /</text>
+    <text x="336.5" y="275" font-family="Arial, sans-serif" font-size="12" fill="#000000" text-anchor="middle">numbers</text>
+  </g>
+
+  <!-- Print Output Node -->
+  <g id="node_print" data-id="node_print" data-class="standalone_node" data-parent="root">
+    <polygon points="275,310 445,310 398,410 228,410" fill="#00B050" stroke="#000000" stroke-width="1.5" />
+    <text x="336.5" y="365" font-family="Arial, sans-serif" font-size="15" fill="#000000" text-anchor="middle">Print Output</text>
+  </g>
+
+  <!-- Stop Node -->
+  <g id="node_stop" data-id="node_stop" data-class="standalone_node" data-parent="root">
+    <rect x="280" y="445" width="110" height="35" rx="17.5" ry="17.5" fill="#FFFFFF" stroke="#000000" stroke-width="1.5" />
+    <text x="335" y="467" font-family="Arial, sans-serif" font-size="14" fill="#000000" text-anchor="middle">Stop</text>
+  </g>
+
+  <!-- ==================== LABELS ==================== -->
+  <text id="label_no" data-id="label_no" data-class="text_node" data-parent="root" 
+        x="148" y="320" font-family="Arial, sans-serif" font-size="12" fill="#000000" text-anchor="start">No</text>
+
+  <text id="label_yes" data-id="label_yes" data-class="text_node" data-parent="root" 
+        x="225" y="260" font-family="Arial, sans-serif" font-size="12" fill="#000000" text-anchor="start">Yes</text>
+
+  <!-- ==================== NARRATION BANNER ==================== -->
+  <g id="narration_banner">
+    <!-- TS 1 -->
+    <text id="narr_ts1" x="50%" y="540" text-anchor="middle">
+      <tspan x="50%" dy="0">The computational workflow begins here to</tspan>
+      <tspan x="50%" dy="1.2em">calculate the arithmetic mean of a dataset.</tspan>
+    </text>
+    <!-- TS 2 -->
+    <text id="narr_ts2" x="50%" y="540" text-anchor="middle">
+      <tspan x="50%" dy="0">First, the system initializes the necessary computational variables</tspan>
+      <tspan x="50%" dy="1.2em">to track the running sum and data count.</tspan>
+    </text>
+    <!-- TS 3 -->
+    <text id="narr_ts3" x="50%" y="540" text-anchor="middle">
+      <tspan x="50%" dy="0">Next, an input operation is executed to define the total</tspan>
+      <tspan x="50%" dy="1.2em">quantity of expected data points, which sets the threshold for the loop.</tspan>
+    </text>
+    <!-- TS 4 -->
+    <text id="narr_ts4" x="50%" y="540" text-anchor="middle">
+      <tspan x="50%" dy="0">The control flow then reaches a decision gate to</tspan>
+      <tspan x="50%" dy="1.2em">verify if all expected numbers have been entered.</tspan>
+    </text>
+    <!-- TS 5 -->
+    <text id="narr_ts5" x="50%" y="540" text-anchor="middle">
+      <tspan x="50%" dy="0">If there are pending data points, the system executes an input</tspan>
+      <tspan x="50%" dy="1.2em">operation to capture the most recent sequential value.</tspan>
+    </text>
+    <!-- TS 6 -->
+    <text id="narr_ts6" x="50%" y="540" text-anchor="middle">
+      <tspan x="50%" dy="0">This newly acquired value is immediately</tspan>
+      <tspan x="50%" dy="1.2em">added to the running sum.</tspan>
+    </text>
+    <!-- TS 7 -->
+    <text id="narr_ts7" x="50%" y="540" text-anchor="middle">
+      <tspan x="50%" dy="0">The workflow then loops back to the decision</tspan>
+      <tspan x="50%" dy="1.2em">gate to repeat the accumulation cycle.</tspan>
+    </text>
+    <!-- TS 8 -->
+    <text id="narr_ts8" x="50%" y="530" text-anchor="middle">
+      <tspan x="50%" dy="0">Once all numbers have been successfully entered, the algorithm</tspan>
+      <tspan x="50%" dy="1.2em">breaks the loop and calculates the average by dividing</tspan>
+      <tspan x="50%" dy="1.2em">the total sum by the count of data points.</tspan>
+    </text>
+    <!-- TS 9 -->
+    <text id="narr_ts9" x="50%" y="540" text-anchor="middle">
+      <tspan x="50%" dy="0">The system then executes a terminal output</tspan>
+      <tspan x="50%" dy="1.2em">operation to print the computed average.</tspan>
+    </text>
+    <!-- TS 10 -->
+    <text id="narr_ts10" x="50%" y="550" text-anchor="middle">
+      <tspan x="50%" dy="0">Finally, the process concludes and stops.</tspan>
+    </text>
+  </g>
+</svg>

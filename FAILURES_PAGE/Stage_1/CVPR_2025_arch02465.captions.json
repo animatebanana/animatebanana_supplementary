@@ -1,0 +1,50 @@
+[
+ {
+  "t": 0.0,
+  "text": "In the text-visual setup, the model receives an input image along with a descriptive text prompt."
+ },
+ {
+  "t": 2.2,
+  "text": "The image-text fusion module combines these visual and textual cues into prompt embeddings."
+ },
+ {
+  "t": 4.4,
+  "text": "SAM consumes the image and prompt embeddings to segment the referred object."
+ },
+ {
+  "t": 6.6,
+  "text": "However, this dual-modality approach struggles to distinguish sounding objects in ambiguous scenes."
+ },
+ {
+  "t": 8.8,
+  "text": "In the audio-visual setup, the image is paired directly with an audio waveform."
+ },
+ {
+  "t": 11.0,
+  "text": "An image-audio fusion block integrates acoustic signals to generate audio-guided embeddings."
+ },
+ {
+  "t": 13.2,
+  "text": "SAM uses these embeddings to locate the sounding source in the image."
+ },
+ {
+  "t": 15.4,
+  "text": "Without textual context, it fails to interpret dynamic referring expressions."
+ },
+ {
+  "t": 17.6,
+  "text": "The proposed architecture instead jointly ingests video frames, textual expressions, and audio waveforms."
+ },
+ {
+  "t": 19.8,
+  "text": "A unified fusion module compresses all three modalities into a single segmentation prompt embedding."
+ },
+ {
+  "t": 22.0,
+  "text": "This fused prompt guides SAM2 to track and segment the target across the entire sequence."
+ },
+ {
+  "t": 24.2,
+  "text": "Consequently, accurate spatio-temporal segmentation masks are generated across all video frames."
+ }
+]

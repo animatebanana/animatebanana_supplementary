@@ -1,0 +1,137 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Visual Step : 0.0s
+Capture Time: 0.499s
+Narration   : This is the high-level overview of the Animate Banana pipeline, which automatically transforms static process-oriented diagrams into animated narratives.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Visual Step : 0.5s
+Capture Time: 0.999s
+Narration   : Stage one is the Diagram Transmuter, which converts the input diagram into animation-aware diagram code.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Visual Step : 1.0s
+Capture Time: 1.499s
+Narration   : The process begins with a static input diagram.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Visual Step : 1.5s
+Capture Time: 1.999s
+Narration   : This input diagram is fed directly into the Diagram Transmuter.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Visual Step : 2.0s
+Capture Time: 2.499s
+Narration   : Inside, a specialized converter agent generates an initial code representation, assigning persistent semantic identifiers to all animatable elements.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Visual Step : 2.5s
+Capture Time: 2.999s
+Narration   : This produces an initial draft of the animation-aware diagram code.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Visual Step : 3.0s
+Capture Time: 3.499s
+Narration   : A critic agent then evaluates the rendered code against the original diagram, providing iterative feedback to the converter to refine the code's visual and structural fidelity.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Visual Step : 3.5s
+Capture Time: 3.999s
+Narration   : Simultaneously, a raster integrator extracts complex visual regions, such as photographs or plots, and inserts them directly into the code to preserve them without reconstruction.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Visual Step : 4.0s
+Capture Time: 4.499s
+Narration   : The final output of this stage is the refined animation-aware diagram code.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Visual Step : 4.5s
+Capture Time: 4.999s
+Narration   : Stage two is the Animation Planner, which designs a structured presentation and narration plan.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Visual Step : 5.0s
+Capture Time: 5.499s
+Narration   : This stage takes the diagram, optional auxiliary context, the user-specified animation style, and the generated diagram code as inputs.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Visual Step : 5.5s
+Capture Time: 5.999s
+Narration   : First, a parser processes the diagram code.
+--------------------------------------------------------------------------------
+Frame Image : frame_12.png
+Visual Step : 6.0s
+Capture Time: 6.499s
+Narration   : It abstracts away rendering details to produce a structured XML representation of the diagram's entities and relationships.
+--------------------------------------------------------------------------------
+Frame Image : frame_13.png
+Visual Step : 6.5s
+Capture Time: 6.999s
+Narration   : A sequencer agent then reasons over this XML to construct an initial presentation sequence, determining the grouping and traversal order of elements.
+--------------------------------------------------------------------------------
+Frame Image : frame_14.png
+Visual Step : 7.0s
+Capture Time: 7.499s
+Narration   : A sequence critic evaluates this plan for coverage and coherence, guiding the sequencer through iterative refinement.
+--------------------------------------------------------------------------------
+Frame Image : frame_15.png
+Visual Step : 7.5s
+Capture Time: 7.999s
+Narration   : This results in a validated animation sequence draft, tailored to the chosen animation style.
+--------------------------------------------------------------------------------
+Frame Image : frame_16.png
+Visual Step : 8.0s
+Capture Time: 8.499s
+Narration   : Next, a narration drafter generates synchronized explanatory text for each step, utilizing any available auxiliary context to enrich the descriptions.
+--------------------------------------------------------------------------------
+Frame Image : frame_17.png
+Visual Step : 8.5s
+Capture Time: 8.999s
+Narration   : This produces the narration-infused animation sequence, coupling visual steps with spoken explanations.
+--------------------------------------------------------------------------------
+Frame Image : frame_18.png
+Visual Step : 9.0s
+Capture Time: 9.499s
+Narration   : Stage three is the Diagram Animator, which synthesizes the final animated narrative.
+--------------------------------------------------------------------------------
+Frame Image : frame_19.png
+Visual Step : 9.5s
+Capture Time: 9.999s
+Narration   : It ingests the original diagram, the chosen animation style, the narration-infused sequence, and the diagram code.
+--------------------------------------------------------------------------------
+Frame Image : frame_20.png
+Visual Step : 10.0s
+Capture Time: 10.499s
+Narration   : An animation designer agent generates an initial executable animation program based on these inputs.
+--------------------------------------------------------------------------------
+Frame Image : frame_21.png
+Visual Step : 10.5s
+Capture Time: 10.999s
+Narration   : An animation critic evaluates the rendered frames against the source diagram, using a critic memory of past feedback to correct visual and temporal errors.
+--------------------------------------------------------------------------------
+Frame Image : frame_22.png
+Visual Step : 11.0s
+Capture Time: 11.499s
+Narration   : This iterative process refines the executable animation code.
+--------------------------------------------------------------------------------
+Frame Image : frame_23.png
+Visual Step : 11.5s
+Capture Time: 11.999s
+Narration   : Once validated, an animation exporter renders the frames into the target presentation format.
+--------------------------------------------------------------------------------
+Frame Image : frame_24.png
+Visual Step : 12.0s
+Capture Time: 12.499s
+Narration   : In parallel, a narration integrator uses speech synthesis to align the step-level narration with the corresponding visual states.
+--------------------------------------------------------------------------------
+Frame Image : frame_25.png
+Visual Step : 12.5s
+Capture Time: 12.999s
+Narration   : This ensures that the visual transitions and audio explanations are perfectly synchronized.
+--------------------------------------------------------------------------------
+Frame Image : frame_26.png
+Visual Step : 13.0s
+Capture Time: 13.499s
+Narration   : The final output is a styled visual narrative, ready to be deployed across multiple formats such as MP4, PDF, or PowerPoint.
+--------------------------------------------------------------------------------

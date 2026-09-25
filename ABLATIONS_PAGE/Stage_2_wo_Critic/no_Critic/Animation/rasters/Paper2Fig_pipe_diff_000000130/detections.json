@@ -1,0 +1,160 @@
+{
+  "detected": 8,
+  "placeholders": 8,
+  "omitted": {},
+  "rejected": {},
+  "image_size": [
+    2021,
+    673
+  ],
+  "regions": [
+    {
+      "xml_id": "node_input_images",
+      "box_2d": [
+        250,
+        0,
+        642,
+        103
+      ],
+      "bbox": [
+        0.0,
+        168.25,
+        208.16299999999998,
+        432.06600000000003
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "node_proxy_model",
+      "box_2d": [
+        246,
+        151,
+        629,
+        245
+      ],
+      "bbox": [
+        305.171,
+        165.558,
+        495.145,
+        423.317
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "node_normal_map",
+      "box_2d": [
+        128,
+        296,
+        483,
+        404
+      ],
+      "bbox": [
+        598.216,
+        86.144,
+        816.484,
+        325.05899999999997
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "node_segmentation",
+      "box_2d": [
+        576,
+        301,
+        959,
+        396
+      ],
+      "bbox": [
+        608.321,
+        387.64799999999997,
+        800.316,
+        645.4069999999999
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "node_shadow_treatment",
+      "box_2d": [
+        248,
+        463,
+        646,
+        570
+      ],
+      "bbox": [
+        935.7230000000001,
+        166.904,
+        1151.9699999999998,
+        434.75800000000004
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "node_refined_model",
+      "box_2d": [
+        211,
+        597,
+        665,
+        695
+      ],
+      "bbox": [
+        1206.537,
+        142.003,
+        1404.5949999999998,
+        447.545
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "node_denoised_model",
+      "box_2d": [
+        200,
+        737,
+        662,
+        836
+      ],
+      "bbox": [
+        1489.477,
+        134.6,
+        1689.556,
+        445.526
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "node_albedo",
+      "box_2d": [
+        193,
+        847,
+        659,
+        986
+      ],
+      "bbox": [
+        1711.787,
+        129.889,
+        1992.706,
+        443.507
+      ],
+      "label": ""
+    }
+  ],
+  "replaced": [
+    "node_input_images",
+    "node_proxy_model",
+    "node_normal_map",
+    "node_segmentation",
+    "node_shadow_treatment",
+    "node_refined_model",
+    "node_denoised_model",
+    "node_albedo"
+  ],
+  "provenance": {
+    "agent": "raster_integrator",
+    "backend": "openrouter_gemini37flash",
+    "model": "google-gemini-3.7-flash",
+    "prompt": null,
+    "style": "alpha_masking",
+    "target": "svg",
+    "config_fingerprint": "e41a2d04f1482fae",
+    "timestamp": "2026-08-28T20:31:21"
+  }
+}

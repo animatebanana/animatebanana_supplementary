@@ -1,0 +1,134 @@
+=== Hopping Bounding Box Sequence ===
+
+Frame Image : frame_00.png
+Timestamp   : 1.00s
+Narration   : The initializing process begins with a pre-trained 3D Gaussian Splatting model with frozen parameters.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 3.00s
+Narration   : The model is passed into the Frequency Guided Densification module.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 5.00s
+Narration   : Frequency Guided Densification is structured into two main phases shown below.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 7.00s
+Narration   : In Phase 1, the contribution of each 3D Gaussian to rendering quality is evaluated.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 9.00s
+Narration   : Low-contribution 3D Gaussians are removed.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 11.00s
+Narration   : In Phase 2, views are rendered from multiple perspectives.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 13.00s
+Narration   : Each rendered image is split into a grid of patches.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 15.00s
+Narration   : A Discrete Fourier Transform is applied to the patches.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 17.00s
+Narration   : This converts the image patches into transformed frequency representations.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 19.00s
+Narration   : Transformed patches enter the high frequency detection stage.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 21.00s
+Narration   : Each transformed patch is combined via Hadamard product with a quadratic mask.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Timestamp   : 23.00s
+Narration   : The quadratic mask highlights high frequency regions.
+--------------------------------------------------------------------------------
+Frame Image : frame_12.png
+Timestamp   : 25.00s
+Narration   : Patches exhibiting high frequency components are selected.
+--------------------------------------------------------------------------------
+Frame Image : frame_13.png
+Timestamp   : 27.00s
+Narration   : The 3D Gaussians within these high frequency areas are split into denser elements.
+--------------------------------------------------------------------------------
+Frame Image : frame_14.png
+Timestamp   : 29.00s
+Narration   : This yields the updated 3D Gaussian Splatting representation after densification.
+--------------------------------------------------------------------------------
+Frame Image : frame_15.png
+Timestamp   : 31.00s
+Narration   : A gradient mask is constructed across the Gaussian parameter set.
+--------------------------------------------------------------------------------
+Frame Image : frame_16.png
+Timestamp   : 33.00s
+Narration   : In the fine-tuning process, parameters are unfrozen for model optimization.
+--------------------------------------------------------------------------------
+Frame Image : frame_17.png
+Timestamp   : 35.00s
+Narration   : Rendering is performed using the fine-tuned 3D Gaussians.
+--------------------------------------------------------------------------------
+Frame Image : frame_18.png
+Timestamp   : 37.00s
+Narration   : A Discrete Wavelet Transform decomposes the rendered image into frequency sub-bands.
+--------------------------------------------------------------------------------
+Frame Image : frame_19.png
+Timestamp   : 39.00s
+Narration   : The low frequency component is routed forward.
+--------------------------------------------------------------------------------
+Frame Image : frame_20.png
+Timestamp   : 41.00s
+Narration   : A pre-trained decoder with frozen parameters processes the low frequency signal.
+--------------------------------------------------------------------------------
+Frame Image : frame_21.png
+Timestamp   : 43.00s
+Narration   : The decoder outputs the recovered decoded message.
+--------------------------------------------------------------------------------
+Frame Image : frame_22.png
+Timestamp   : 45.00s
+Narration   : Meanwhile, the high frequency components from the rendered image are extracted.
+--------------------------------------------------------------------------------
+Frame Image : frame_23.png
+Timestamp   : 47.00s
+Narration   : The ground truth image is introduced for supervision.
+--------------------------------------------------------------------------------
+Frame Image : frame_24.png
+Timestamp   : 49.00s
+Narration   : A Discrete Wavelet Transform is applied to the ground truth image.
+--------------------------------------------------------------------------------
+Frame Image : frame_25.png
+Timestamp   : 51.00s
+Narration   : This isolates the high frequency components of the ground truth.
+--------------------------------------------------------------------------------
+Frame Image : frame_26.png
+Timestamp   : 53.00s
+Narration   : Reconstruction and perceptual loss functions compare rendered views with ground truth.
+--------------------------------------------------------------------------------
+Frame Image : frame_27.png
+Timestamp   : 55.00s
+Narration   : A wavelet loss is computed between rendered and ground truth high frequencies.
+--------------------------------------------------------------------------------
+Frame Image : frame_28.png
+Timestamp   : 57.00s
+Narration   : A fixed message serves as target supervision.
+--------------------------------------------------------------------------------
+Frame Image : frame_29.png
+Timestamp   : 59.00s
+Narration   : Message loss compares the decoded message with the fixed message.
+--------------------------------------------------------------------------------
+Frame Image : frame_30.png
+Timestamp   : 61.00s
+Narration   : All objectives combine into a single total loss function.
+--------------------------------------------------------------------------------
+Frame Image : frame_31.png
+Timestamp   : 63.00s
+Narration   : The total loss guides the optimizer.
+--------------------------------------------------------------------------------
+Frame Image : frame_32.png
+Timestamp   : 65.00s
+Narration   : Finally, the optimizer applies the gradient mask via Hadamard product to update the fine-tuned 3D Gaussians.
+--------------------------------------------------------------------------------

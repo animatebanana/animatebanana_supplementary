@@ -1,0 +1,92 @@
+{
+  "baseline_score": 0.45,
+  "final_score": 0.68,
+  "rounds_run": 2,
+  "improved": true,
+  "compile_rounds": [],
+  "compile_repaired": false,
+  "rounds": [
+    {
+      "round": 0,
+      "score": 0.45,
+      "compiles": true,
+      "breakdown": {
+        "semantic": 0.5,
+        "logical_layout": 0.65,
+        "geometric_layout": 0.55,
+        "style_colour": 0.4,
+        "proportion_scale": 0.45
+      },
+      "notes": "Major rendering defects: gigantic arrowheads severely occlude labels and boxes throughout all three stages ('DR > 2^15', '25 TMOs', 'Postprocessing', '8 Face Detectors'), and the main connecting arrows between the columns are truncated/missing.",
+      "findings": []
+    },
+    {
+      "round": 1,
+      "score": 0.68,
+      "compiles": true,
+      "breakdown": {
+        "semantic": 0.65,
+        "logical_layout": 0.7,
+        "geometric_layout": 0.7,
+        "style_colour": 0.85,
+        "proportion_scale": 0.85
+      },
+      "notes": "The internal contents of each stage are largely present, but the large black connecting arrows between columns are severely corrupted into misplaced horizontal arrowheads and stray artifacts. In addition, 'DR > 2^15' has broken superscript formatting.",
+      "findings": [
+        {
+          "problem": "Massive black triangular arrowheads cover and obscure the boxes, cylinders, and text inside all three blocks.",
+          "cause": "The vertical connecting edges inside Blocks 1, 2, and 3 use `stroke-width=\"17\"`. Because SVG markers scale proportionally to `stroke-width` by default, this creates huge marker arrowheads that cover the diagram elements.",
+          "code_fragment": "<line id=\"edge-cyl1-to-postproc\" data-id=\"edge-cyl1-to-postproc\" data-class=\"edge\" data-source=\"cylinder-captured-images\" data-target=\"node-postprocessing\" x1=\"145\" y1=\"223\" x2=\"145\" y2=\"265\" stroke=\"#000000\" stroke-width=\"17\" marker-end=\"url(#arrow-black)\" />",
+          "fix": "Change `stroke-width=\"17\"` to `stroke-width=\"3\"` (or `4`) on all internal vertical connecting `<line>` elements.",
+          "severity": "critical"
+        },
+        {
+          "problem": "The thick connecting arrows between blocks end in empty space before reaching the next column.",
+          "cause": "The paths for `edge-classif-to-tonemapping` and `edge-tmsets-to-facedetect` end at x=344 and x=702, which fall short of the destination blocks at x=375/420 and x=730/770.",
+          "code_fragment": "d=\"M 276 443 L 316 443 L 316 127 L 344 127\"",
+          "fix": "Extend the terminal horizontal segment of both inter-block path definitions so the arrowheads point directly into the target nodes (e.g., extend to x \u2248 415 and x \u2248 765).",
+          "severity": "major"
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "score": 0.68,
+      "compiles": true,
+      "breakdown": {
+        "semantic": 0.7,
+        "logical_layout": 0.75,
+        "geometric_layout": 0.7,
+        "style_colour": 0.85,
+        "proportion_scale": 0.8
+      },
+      "notes": "rejected: 0.68 did not improve on 0.68",
+      "findings": [
+        {
+          "problem": "The inter-block connecting arrows render with huge triangular arrowheads that heavily overlap and obscure the 'DR > 2^15' cylinder and '8 Face Detectors' box.",
+          "cause": "The marker 'arrow-fat' lacks markerUnits=\"userSpaceOnUse\", causing the arrow marker to scale by stroke-width=\"17\", and the paths extend too far into the inner block elements rather than terminating before the block boundaries.",
+          "code_fragment": "<marker id=\"arrow-fat\" markerWidth=\"6\" markerHeight=\"6\" refX=\"4\" refY=\"3\" orient=\"auto\">\n      <path d=\"M 0 0 L 6 3 L 0 6 z\" fill=\"#000000\" />\n    </marker>",
+          "fix": "Set markerUnits=\"userSpaceOnUse\" on the marker (or adjust marker size and refX), and shorten the path endpoints (e.g., end at x=355 and x=710).",
+          "severity": "major"
+        },
+        {
+          "problem": "The exponent '15' in 'DR > 2^15' is severely misaligned and shifted far to the right edge of the cylinder.",
+          "cause": "Using <tspan font-size=\"0.65em\" baseline-shift=\"super\">15</tspan> inside a text-anchor=\"middle\" text element without explicit positioning causes positioning/rendering issues.",
+          "code_fragment": "<text id=\"text-cyl2-dr\" data-id=\"text-cyl2-dr\" data-class=\"text_node\" data-parent=\"cylinder-dr\" x=\"500\" y=\"132\" font-family=\"Arial, sans-serif\" font-size=\"25\" text-anchor=\"middle\" fill=\"#000000\">DR &gt; 2<tspan font-size=\"0.65em\" baseline-shift=\"super\">15</tspan></text>",
+          "fix": "Use dy=\"-8\" on the tspan or position the exponent using separate coordinates rather than baseline-shift=\"super\".",
+          "severity": "minor"
+        }
+      ]
+    }
+  ],
+  "provenance": {
+    "agent": "diagram_critic",
+    "backend": "openrouter_gemini37flash",
+    "model": "google-gemini-3.7-flash",
+    "prompt": "diagram_transmuter/critic.yaml",
+    "style": "colour_pop",
+    "target": "svg",
+    "config_fingerprint": "cf8eb334971e2e06",
+    "timestamp": "2026-09-01T23:48:14"
+  }
+}

@@ -1,0 +1,106 @@
+[
+ {
+  "t": 0.0,
+  "text": "The input medical image enters the segmentation framework."
+ },
+ {
+  "t": 2.2,
+  "text": "A downsampler reduces the spatial dimensions before feature extraction."
+ },
+ {
+  "t": 4.4,
+  "text": "The frozen Transformer backbone processes the visual tokens."
+ },
+ {
+  "t": 6.6,
+  "text": "Overview of the transformer block container."
+ },
+ {
+  "t": 8.8,
+  "text": "First column of transformer layers."
+ },
+ {
+  "t": 11.0,
+  "text": "Second column of transformer layers."
+ },
+ {
+  "t": 13.2,
+  "text": "Third column of transformer layers."
+ },
+ {
+  "t": 15.4,
+  "text": "Fourth column of transformer layers."
+ },
+ {
+  "t": 17.6,
+  "text": "Trainable low-rank adaptation bypasses adapt the encoder parameters efficiently."
+ },
+ {
+  "t": 19.8,
+  "text": "The encoder outputs a sequence of extracted image embeddings."
+ },
+ {
+  "t": 22.0,
+  "text": "In the first stage, the initial Transformer decoder processes these embeddings."
+ },
+ {
+  "t": 24.2,
+  "text": "Transformer decoder module container."
+ },
+ {
+  "t": 26.4,
+  "text": "Self-attention evaluates the importance of different regions."
+ },
+ {
+  "t": 28.6,
+  "text": "Cross-attention aligns the queries with the image embeddings."
+ },
+ {
+  "t": 30.8,
+  "text": "In parallel, the stage-one pixel decoder upsamples spatial features."
+ },
+ {
+  "t": 33.0,
+  "text": "The outputs of both decoders are multiplied together."
+ },
+ {
+  "t": 35.2,
+  "text": "This generates an intermediate, quarter-resolution probabilistic prior mask."
+ },
+ {
+  "t": 37.4,
+  "text": "The Class-Balanced Mask-Guided Self-Attention block uses the prior mask to balance head and tail classes."
+ },
+ {
+  "t": 39.6,
+  "text": "This produces enriched image embeddings for the next decoding stage."
+ },
+ {
+  "t": 41.8,
+  "text": "The stage-two Transformer decoder carries out refined mask decoding."
+ },
+ {
+  "t": 44.0,
+  "text": "Second transformer decoder container."
+ },
+ {
+  "t": 46.2,
+  "text": "Learnable mask cross-attention spatially modulates attention across regions using the prior mask."
+ },
+ {
+  "t": 48.4,
+  "text": "Self-attention further refines the object queries."
+ },
+ {
+  "t": 50.6,
+  "text": "The hierarchical pixel decoder integrates skip connections from stage one to recover fine-grained details."
+ },
+ {
+  "t": 52.8,
+  "text": "The refined queries and high-resolution pixel features are combined."
+ },
+ {
+  "t": 55.0,
+  "text": "Finally, the framework produces the high-resolution multi-organ segmentation prediction."
+ }
+]

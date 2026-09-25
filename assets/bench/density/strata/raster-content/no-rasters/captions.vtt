@@ -1,0 +1,82 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.010
+The diagram introduces key architectural conventions, including average aggregation, depthwise convolutions, and trainable scaling parameters.
+
+2
+00:00:06.010 --> 00:00:12.010
+In the Swin-Transformer block, input features pass through layer normalization alongside an initial residual shortcut.
+
+3
+00:00:12.010 --> 00:00:17.650
+Normalized features enter the window and shifted-window multi-head self-attention module to capture spatial context.
+
+4
+00:00:17.650 --> 00:00:22.170
+The attention outputs are then merged with the initial residual connection.
+
+5
+00:00:22.170 --> 00:00:27.810
+The first Mona adapter layer processes the aggregated representation to enhance visual feature adaptation.
+
+6
+00:00:27.810 --> 00:00:34.180
+Features undergo a second layer normalization step before the feed-forward network, accompanied by another skip connection.
+
+7
+00:00:34.180 --> 00:00:37.960
+A feed-forward layer then transforms the intermediate token representations.
+
+8
+00:00:37.960 --> 00:00:41.750
+The feed-forward output is summed with its corresponding shortcut.
+
+9
+00:00:41.750 --> 00:00:48.490
+A second Mona layer further refines the features before outputting the final representation of the Swin-Transformer block.
+
+10
+00:00:48.490 --> 00:00:58.200
+Inside the Mona layer, input features undergo layer normalization scaled by a trainable factor, while a parallel skip branch is scaled by a second factor.
+
+11
+00:00:58.200 --> 00:01:03.840
+The scaled feature streams are combined at an addition node to regulate input distribution.
+
+12
+00:01:03.840 --> 00:01:10.210
+A down projection layer reduces channel dimensionality before branching into multi-scale convolutional paths and residual shortcuts.
+
+13
+00:01:10.210 --> 00:01:15.850
+Three parallel depthwise convolutions with 3x3, 5x5, and 7x7 kernels extract multi-scale visual patterns.
+
+14
+00:01:15.850 --> 00:01:20.740
+Outputs from all three kernel branches are combined using an averaging operation.
+
+15
+00:01:20.740 --> 00:01:25.270
+The averaged depthwise feature is added to the pre-convolution residual branch.
+
+16
+00:01:25.270 --> 00:01:30.160
+A 1x1 convolution aggregates point-wise channel features alongside an adjacent residual shortcut.
+
+17
+00:01:30.160 --> 00:01:34.320
+The 1x1 convolution output is summed with its shortcut connection.
+
+18
+00:01:34.320 --> 00:01:36.990
+A GeLU activation function introduces non-linearity.
+
+19
+00:01:36.990 --> 00:01:41.140
+An up projection layer restores the original feature channel dimensions.
+
+20
+00:01:41.140 --> 00:01:47.150
+Finally, the outer residual is added to yield the complete output of the Mona layer.
+

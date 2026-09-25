@@ -1,0 +1,58 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.640
+The framework begins by collecting diverse multi-vehicle perspectives and driving scenes across different environments.
+
+2
+00:00:05.640 --> 00:00:12.380
+A physically based rendering engine manages the three-dimensional vehicle models, surrounding scenes, base textures, and camera parameters.
+
+3
+00:00:12.380 --> 00:00:18.760
+This rendering process generates a reference image, a vehicle silhouette mask, and a corresponding depth map.
+
+4
+00:00:18.760 --> 00:00:23.650
+An adversarial texture patch is parameterized alongside projection augmentations and camera parameters.
+
+5
+00:00:23.650 --> 00:00:29.660
+Triplanar mapping projects the adversarial texture onto the vehicle surface using depth and camera geometry.
+
+6
+00:00:29.660 --> 00:00:36.030
+Masking operations then separate the background, isolating both the masked reference vehicle and the projected texture.
+
+7
+00:00:36.030 --> 00:00:43.150
+The Neural Texture Renderer fuses these inputs to synthesize a realistically textured vehicle while preserving physical lighting characteristics.
+
+8
+00:00:43.150 --> 00:00:49.530
+The adversarial vehicle is composited back onto the background scene to produce the complete adversarial image.
+
+9
+00:00:49.530 --> 00:00:56.270
+A random output augmentation module applies digital transformations, such as scaling and shifting, to enhance texture robustness.
+
+10
+00:00:56.270 --> 00:01:03.020
+The augmented image is then fed into the target vehicle detector, measuring the degradation in detection confidence.
+
+11
+00:01:03.020 --> 00:01:08.650
+In parallel, a camouflage function extracts dominant background colors to promote natural visual blending.
+
+12
+00:01:08.650 --> 00:01:16.140
+Camouflage, smoothness, and detection attack losses are aggregated into a total loss and backpropagated to optimize the adversarial texture.
+
+13
+00:01:16.140 --> 00:01:22.520
+During evaluation, the optimized world-aligned adversarial texture is applied to target three-dimensional vehicles inside Unreal Engine.
+
+14
+00:01:22.520 --> 00:01:28.520
+Finally, the rendered scenes undergo physical simulation to evaluate evasion performance against state-of-the-art vehicle detectors.
+

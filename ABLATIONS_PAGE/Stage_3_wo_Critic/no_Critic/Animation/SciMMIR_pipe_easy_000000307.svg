@@ -1,0 +1,391 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 270" width="1000" height="270">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#000000"/>
+    </marker>
+    <style>
+      /* Base ghost state */
+      #block_data_sources, #bg_data_sources, #title_data_sources, #icon_data_sources,
+      #item_ds_1_badge, #item_ds_2_badge, #item_ds_3_badge,
+      #text_ds_item_1a, #text_ds_item_1b, #text_ds_item_1c, #text_ds_item_2, #text_ds_item_3,
+      #block_region_extraction, #bg_region_extraction, #title_region_extraction,
+      #icon_region_images, #label_lre_1a, #label_lre_1b, #edge_ds_to_lre,
+      #icon_duplicates_removal, #label_lre_2a, #label_lre_2b, #edge_img_to_duprem,
+      #raster_local_regions_grid, #label_lre_3a, #label_lre_3b, #edge_duprem_to_grid,
+      #block_labeling_setgen, #bg_labeling_setgen, #title_labeling_setgen,
+      #raster_labeling_patches, #label_labeling, #edge_grid_to_labeling,
+      #container_set_generation, #label_set_generation, #edge_labeling_to_setgen {
+        opacity: 0.15;
+      }
+
+      /* Parent Block 1 (TS 1 - TS 2: 0% -> 28.571%) */
+      #bg_data_sources, #title_data_sources {
+        animation: anim_block1 28s infinite;
+      }
+      @keyframes anim_block1 {
+        0%       { opacity: 1.0; }
+        28.571%  { opacity: 1.0; }
+        28.572%  { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+
+      /* TS 1 Elements (0% -> 14.286%) */
+      #icon_data_sources {
+        animation: anim_ts1 28s infinite;
+      }
+      @keyframes anim_ts1 {
+        0%       { opacity: 1.0; }
+        14.285%  { opacity: 1.0; }
+        14.286%  { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+
+      /* TS 2 Elements (14.286% -> 28.571%) */
+      #item_ds_1_badge, #item_ds_2_badge, #item_ds_3_badge,
+      #text_ds_item_1a, #text_ds_item_1b, #text_ds_item_1c, #text_ds_item_2, #text_ds_item_3 {
+        animation: anim_ts2 28s infinite;
+      }
+      @keyframes anim_ts2 {
+        0%       { opacity: 0.15; }
+        14.285%  { opacity: 0.15; }
+        14.286%  { opacity: 1.0; }
+        28.571%  { opacity: 1.0; }
+        28.572%  { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+
+      /* Parent Block 2 (TS 3 - TS 5: 28.571% -> 71.429%) */
+      #bg_region_extraction, #title_region_extraction {
+        animation: anim_block2 28s infinite;
+      }
+      @keyframes anim_block2 {
+        0%       { opacity: 0.15; }
+        28.570%  { opacity: 0.15; }
+        28.571%  { opacity: 1.0; }
+        71.428%  { opacity: 1.0; }
+        71.429%  { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+
+      /* TS 3 Elements (28.571% -> 42.857%) */
+      #icon_region_images, #label_lre_1a, #label_lre_1b, #edge_ds_to_lre {
+        animation: anim_ts3 28s infinite;
+      }
+      @keyframes anim_ts3 {
+        0%       { opacity: 0.15; }
+        28.570%  { opacity: 0.15; }
+        28.571%  { opacity: 1.0; }
+        42.856%  { opacity: 1.0; }
+        42.857%  { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+
+      /* TS 4 Elements (42.857% -> 57.143%) */
+      #icon_duplicates_removal, #label_lre_2a, #label_lre_2b, #edge_img_to_duprem {
+        animation: anim_ts4 28s infinite;
+      }
+      @keyframes anim_ts4 {
+        0%       { opacity: 0.15; }
+        42.856%  { opacity: 0.15; }
+        42.857%  { opacity: 1.0; }
+        57.142%  { opacity: 1.0; }
+        57.143%  { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+
+      /* TS 5 Elements (57.143% -> 71.429%) */
+      #raster_local_regions_grid, #label_lre_3a, #label_lre_3b, #edge_duprem_to_grid {
+        animation: anim_ts5 28s infinite;
+      }
+      @keyframes anim_ts5 {
+        0%       { opacity: 0.15; }
+        57.142%  { opacity: 0.15; }
+        57.143%  { opacity: 1.0; }
+        71.428%  { opacity: 1.0; }
+        71.429%  { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+
+      /* Parent Block 3 (TS 6 - TS 7: 71.429% -> 100%) */
+      #bg_labeling_setgen, #title_labeling_setgen {
+        animation: anim_block3 28s infinite;
+      }
+      @keyframes anim_block3 {
+        0%       { opacity: 0.15; }
+        71.428%  { opacity: 0.15; }
+        71.429%  { opacity: 1.0; }
+        100%     { opacity: 1.0; }
+      }
+
+      /* TS 6 Elements (71.429% -> 85.714%) */
+      #raster_labeling_patches, #label_labeling, #edge_grid_to_labeling {
+        animation: anim_ts6 28s infinite;
+      }
+      @keyframes anim_ts6 {
+        0%       { opacity: 0.15; }
+        71.428%  { opacity: 0.15; }
+        71.429%  { opacity: 1.0; }
+        85.713%  { opacity: 1.0; }
+        85.714%  { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+
+      /* TS 7 Elements (85.714% -> 100%) */
+      #container_set_generation, #label_set_generation, #edge_labeling_to_setgen {
+        animation: anim_ts7 28s infinite;
+      }
+      @keyframes anim_ts7 {
+        0%       { opacity: 0.15; }
+        85.713%  { opacity: 0.15; }
+        85.714%  { opacity: 1.0; }
+        100%     { opacity: 1.0; }
+      }
+
+      /* Narration Subtitle Animations */
+      #narr_ts1 { animation: narr_anim1 28s infinite; }
+      #narr_ts2 { animation: narr_anim2 28s infinite; }
+      #narr_ts3 { animation: narr_anim3 28s infinite; }
+      #narr_ts4 { animation: narr_anim4 28s infinite; }
+      #narr_ts5 { animation: narr_anim5 28s infinite; }
+      #narr_ts6 { animation: narr_anim6 28s infinite; }
+      #narr_ts7 { animation: narr_anim7 28s infinite; }
+
+      @keyframes narr_anim1 {
+        0%       { opacity: 1; }
+        14.285%  { opacity: 1; }
+        14.286%  { opacity: 0; }
+        100%     { opacity: 0; }
+      }
+      @keyframes narr_anim2 {
+        0%       { opacity: 0; }
+        14.285%  { opacity: 0; }
+        14.286%  { opacity: 1; }
+        28.571%  { opacity: 1; }
+        28.572%  { opacity: 0; }
+        100%     { opacity: 0; }
+      }
+      @keyframes narr_anim3 {
+        0%       { opacity: 0; }
+        28.570%  { opacity: 0; }
+        28.571%  { opacity: 1; }
+        42.856%  { opacity: 1; }
+        42.857%  { opacity: 0; }
+        100%     { opacity: 0; }
+      }
+      @keyframes narr_anim4 {
+        0%       { opacity: 0; }
+        42.856%  { opacity: 0; }
+        42.857%  { opacity: 1; }
+        57.142%  { opacity: 1; }
+        57.143%  { opacity: 0; }
+        100%     { opacity: 0; }
+      }
+      @keyframes narr_anim5 {
+        0%       { opacity: 0; }
+        57.142%  { opacity: 0; }
+        57.143%  { opacity: 1; }
+        71.428%  { opacity: 1; }
+        71.429%  { opacity: 0; }
+        100%     { opacity: 0; }
+      }
+      @keyframes narr_anim6 {
+        0%       { opacity: 0; }
+        71.428%  { opacity: 0; }
+        71.429%  { opacity: 1; }
+        85.713%  { opacity: 1; }
+        85.714%  { opacity: 0; }
+        100%     { opacity: 0; }
+      }
+      @keyframes narr_anim7 {
+        0%       { opacity: 0; }
+        85.713%  { opacity: 0; }
+        85.714%  { opacity: 1; }
+        100%     { opacity: 1; }
+      }
+    </style>
+  </defs>
+
+  <!-- ==================== BLOCK 1: DATA SOURCES ==================== -->
+  <g id="block_data_sources" data-id="block_data_sources" data-class="block" data-parent="root">
+    <rect id="bg_data_sources" data-id="bg_data_sources" data-class="child_node" data-parent="block_data_sources" x="1" y="8" width="168" height="194" rx="20" ry="20" fill="#e1edff" stroke="#a4c2e6" stroke-width="1.5"/>
+    <text id="title_data_sources" data-id="title_data_sources" data-class="text_node" data-parent="block_data_sources" x="85" y="28" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#000000">Data Sources</text>
+
+    <!-- Icon: Database with inward arrows -->
+    <g id="icon_data_sources" data-id="icon_data_sources" data-class="composite_whole" data-parent="block_data_sources">
+      <circle id="icon_ds_bg" data-id="icon_ds_bg" data-class="composite_part" data-parent="icon_data_sources" cx="78" cy="68" r="28" fill="#2b5f88"/>
+      <!-- Cylinder top -->
+      <ellipse id="icon_ds_cyl_top" data-id="icon_ds_cyl_top" data-class="composite_part" data-parent="icon_data_sources" cx="78" cy="65" rx="10" ry="3.5" fill="#ffffff"/>
+      <!-- Cylinder body -->
+      <path id="icon_ds_cyl_body" data-id="icon_ds_cyl_body" data-class="composite_part" data-parent="icon_data_sources" d="M 68 65 L 68 76 A 10 3.5 0 0 0 88 76 L 88 65 Z" fill="#ffffff"/>
+      <!-- Inward arrows -->
+      <path id="icon_ds_arrow_top" data-id="icon_ds_arrow_top" data-class="composite_part" data-parent="icon_data_sources" d="M 78 47 L 78 57 M 75 54 L 78 57 L 81 54" stroke="#ffffff" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <path id="icon_ds_arrow_left" data-id="icon_ds_arrow_left" data-class="composite_part" data-parent="icon_data_sources" d="M 57 68 L 65 68 M 62 65 L 65 68 L 62 71" stroke="#ffffff" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <path id="icon_ds_arrow_right" data-id="icon_ds_arrow_right" data-class="composite_part" data-parent="icon_data_sources" d="M 99 68 L 91 68 M 94 65 L 91 68 L 94 71" stroke="#ffffff" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <path id="icon_ds_arrow_tl" data-id="icon_ds_arrow_tl" data-class="composite_part" data-parent="icon_data_sources" d="M 63 53 L 70 60 M 66 60 L 70 60 L 70 56" stroke="#ffffff" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <path id="icon_ds_arrow_tr" data-id="icon_ds_arrow_tr" data-class="composite_part" data-parent="icon_data_sources" d="M 93 53 L 86 60 M 90 60 L 86 60 L 86 56" stroke="#ffffff" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+
+    <!-- Numbered List Items -->
+    <!-- Item 1 -->
+    <g id="item_ds_1_badge" data-id="item_ds_1_badge" data-class="composite_whole" data-parent="block_data_sources">
+      <circle id="badge_circle_1" data-id="badge_circle_1" data-class="composite_part" data-parent="item_ds_1_badge" cx="14" cy="114" r="8" fill="#ffffff" stroke="#000000" stroke-width="1"/>
+      <text id="badge_num_1" data-id="badge_num_1" data-class="composite_part" data-parent="item_ds_1_badge" x="14" y="118" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#000000">1</text>
+    </g>
+    <text id="text_ds_item_1a" data-id="text_ds_item_1a" data-class="text_node" data-parent="block_data_sources" x="27" y="113" font-family="Arial, sans-serif" font-size="11.5" fill="#000000">6 video experiments</text>
+    <text id="text_ds_item_1b" data-id="text_ds_item_1b" data-class="text_node" data-parent="block_data_sources" x="27" y="128" font-family="Arial, sans-serif" font-size="11" fill="#000000">[50, 110, 150, 270, 280</text>
+    <text id="text_ds_item_1c" data-id="text_ds_item_1c" data-class="text_node" data-parent="block_data_sources" x="27" y="143" font-family="Arial, sans-serif" font-size="11" fill="#000000">and Entrance2]</text>
+
+    <!-- Item 2 -->
+    <g id="item_ds_2_badge" data-id="item_ds_2_badge" data-class="composite_whole" data-parent="block_data_sources">
+      <circle id="badge_circle_2" data-id="badge_circle_2" data-class="composite_part" data-parent="item_ds_2_badge" cx="14" cy="162" r="8" fill="#ffffff" stroke="#000000" stroke-width="1"/>
+      <text id="badge_num_2" data-id="badge_num_2" data-class="composite_part" data-parent="item_ds_2_badge" x="14" y="166" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#000000">2</text>
+    </g>
+    <text id="text_ds_item_2" data-id="text_ds_item_2" data-class="text_node" data-parent="block_data_sources" x="27" y="166" font-family="Arial, sans-serif" font-size="11.5" fill="#000000">Trajectory data</text>
+
+    <!-- Item 3 -->
+    <g id="item_ds_3_badge" data-id="item_ds_3_badge" data-class="composite_whole" data-parent="block_data_sources">
+      <circle id="badge_circle_3" data-id="badge_circle_3" data-class="composite_part" data-parent="item_ds_3_badge" cx="14" cy="189" r="8" fill="#ffffff" stroke="#000000" stroke-width="1"/>
+      <text id="badge_num_3" data-id="badge_num_3" data-class="composite_part" data-parent="item_ds_3_badge" x="14" y="193" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#000000">3</text>
+    </g>
+    <text id="text_ds_item_3" data-id="text_ds_item_3" data-class="text_node" data-parent="block_data_sources" x="27" y="193" font-family="Arial, sans-serif" font-size="11.5" fill="#000000">Ground truths</text>
+  </g>
+
+  <!-- ==================== BLOCK 2: LOCAL REGION EXTRACTION ==================== -->
+  <g id="block_region_extraction" data-id="block_region_extraction" data-class="block" data-parent="root">
+    <rect id="bg_region_extraction" data-id="bg_region_extraction" data-class="child_node" data-parent="block_region_extraction" x="199" y="8" width="304" height="194" rx="20" ry="20" fill="#fff2cc" stroke="#e1c878" stroke-width="1.5"/>
+    <text id="title_region_extraction" data-id="title_region_extraction" data-class="text_node" data-parent="block_region_extraction" x="351" y="28" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#000000">Local Region Extraction</text>
+
+    <!-- Sub-element 1: Images icon -->
+    <g id="icon_region_images" data-id="icon_region_images" data-class="composite_whole" data-parent="block_region_extraction">
+      <rect id="icon_img_back" data-id="icon_img_back" data-class="composite_part" data-parent="icon_region_images" x="233" y="74" width="46" height="46" rx="6" ry="6" fill="none" stroke="#000000" stroke-width="3"/>
+      <rect id="icon_img_front" data-id="icon_img_front" data-class="composite_part" data-parent="icon_region_images" x="216" y="90" width="46" height="46" rx="6" ry="6" fill="#ffffff" stroke="#000000" stroke-width="3"/>
+      <circle id="icon_img_sun" data-id="icon_img_sun" data-class="composite_part" data-parent="icon_region_images" cx="230" cy="104" r="4.5" fill="#000000"/>
+      <path id="icon_img_mountains" data-id="icon_img_mountains" data-class="composite_part" data-parent="icon_region_images" d="M 217 127 L 230 112 L 243 126 L 251 118 L 261 129 L 261 133 L 217 133 Z" fill="#000000"/>
+    </g>
+    <text id="label_lre_1a" data-id="label_lre_1a" data-class="text_node" data-parent="block_region_extraction" x="248" y="171" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#000000">Local region</text>
+    <text id="label_lre_1b" data-id="label_lre_1b" data-class="text_node" data-parent="block_region_extraction" x="248" y="186" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#000000">extraction</text>
+
+    <!-- Sub-element 2: Duplicates removal circle/minus -->
+    <g id="icon_duplicates_removal" data-id="icon_duplicates_removal" data-class="composite_whole" data-parent="block_region_extraction">
+      <circle id="circ_dup_rem" data-id="circ_dup_rem" data-class="composite_part" data-parent="icon_duplicates_removal" cx="340" cy="104" r="25" fill="#ffffff" stroke="#03a9f4" stroke-width="2" stroke-dasharray="3,2"/>
+      <line id="line_dup_rem" data-id="line_dup_rem" data-class="composite_part" data-parent="icon_duplicates_removal" x1="324" y1="104" x2="356" y2="104" stroke="#03a9f4" stroke-width="2.5" stroke-linecap="round"/>
+    </g>
+    <text id="label_lre_2a" data-id="label_lre_2a" data-class="text_node" data-parent="block_region_extraction" x="340" y="171" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#000000">Duplicates</text>
+    <text id="label_lre_2b" data-id="label_lre_2b" data-class="text_node" data-parent="block_region_extraction" x="340" y="186" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#000000">removal</text>
+
+    <!-- Sub-element 3: Local regions raster 2x2 grid -->
+    <g id="raster_local_regions_grid" data-id="raster_local_regions_grid" data-class="raster_node"><image href="../../rasters/SciMMIR_pipe_easy_000000307/crop_raster_local_regions_grid.png" xlink:href="../../rasters/SciMMIR_pipe_easy_000000307/crop_raster_local_regions_grid.png" x="398" y="62" width="87" height="85" preserveAspectRatio="xMidYMid meet" /></g>
+    <text id="label_lre_3a" data-id="label_lre_3a" data-class="text_node" data-parent="block_region_extraction" x="441" y="171" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#000000">Local</text>
+    <text id="label_lre_3b" data-id="label_lre_3b" data-class="text_node" data-parent="block_region_extraction" x="441" y="186" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#000000">regions</text>
+  </g>
+
+  <!-- ==================== BLOCK 3: LOCAL REGION LABELING & SET GENERATION ==================== -->
+  <g id="block_labeling_setgen" data-id="block_labeling_setgen" data-class="block" data-parent="root">
+    <rect id="bg_labeling_setgen" data-id="bg_labeling_setgen" data-class="child_node" data-parent="block_labeling_setgen" x="536" y="8" width="463" height="194" rx="20" ry="20" fill="#f4f6f8" stroke="#7e8c9b" stroke-width="1.5"/>
+    <text id="title_labeling_setgen" data-id="title_labeling_setgen" data-class="text_node" data-parent="block_labeling_setgen" x="768" y="28" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#000000">Local Region Labeling and Set Generation</text>
+
+    <!-- Sub-element 1: Labeling group -->
+    <g id="raster_labeling_patches" data-id="raster_labeling_patches" data-class="raster_node"><image href="../../rasters/SciMMIR_pipe_easy_000000307/crop_raster_labeling_patches.png" xlink:href="../../rasters/SciMMIR_pipe_easy_000000307/crop_raster_labeling_patches.png" x="561" y="64" width="86" height="80" preserveAspectRatio="xMidYMid meet" /></g>
+    <text id="label_labeling" data-id="label_labeling" data-class="text_node" data-parent="block_labeling_setgen" x="607" y="180" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#000000">Labeling</text>
+
+    <!-- Sub-element 2: Set Generation outer container -->
+    <g id="container_set_generation" data-id="container_set_generation" data-class="composite_whole" data-parent="block_labeling_setgen">
+      <rect id="setgen_outer_rect" data-id="setgen_outer_rect" data-class="composite_part" data-parent="container_set_generation" x="687" y="41" width="278" height="121" fill="#ffffff" stroke="#000000" stroke-width="1"/>
+
+      <!-- Video 50 Box -->
+      <rect id="box_video_50" data-id="box_video_50" data-class="composite_part" data-parent="container_set_generation" x="693" y="47" width="69" height="109" fill="#ffffff" stroke="#000000" stroke-width="1"/>
+      <text id="title_video_50" data-id="title_video_50" data-class="composite_part" data-parent="container_set_generation" x="727" y="60" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#000000">Video 50</text>
+      
+      <!-- Cylinder 1 (Video 50) -->
+      <!-- Green cylinder top part -->
+      <ellipse id="cyl1_green_top" data-id="cyl1_green_top" data-class="composite_part" data-parent="container_set_generation" cx="727" cy="74" rx="25" ry="8" fill="#d9eedb" stroke="#7bb67c" stroke-width="1"/>
+      <path id="cyl1_green_body" data-id="cyl1_green_body" data-class="composite_part" data-parent="container_set_generation" d="M 702 74 L 702 96 A 25 8 0 0 0 752 96 L 752 74 Z" fill="#d9eedb" stroke="#7bb67c" stroke-width="1"/>
+      <ellipse id="cyl1_green_mid" data-id="cyl1_green_mid" data-class="composite_part" data-parent="container_set_generation" cx="727" cy="96" rx="25" ry="8" fill="#d9eedb" stroke="#7bb67c" stroke-width="1"/>
+      <!-- Pink cylinder bottom part -->
+      <path id="cyl1_pink_body" data-id="cyl1_pink_body" data-class="composite_part" data-parent="container_set_generation" d="M 702 96 L 702 110 A 25 8 0 0 0 752 110 L 752 96 Z" fill="#f8d7da" stroke="#d98289" stroke-width="1"/>
+      <ellipse id="cyl1_pink_bot" data-id="cyl1_pink_bot" data-class="composite_part" data-parent="container_set_generation" cx="727" cy="110" rx="25" ry="8" fill="#f8d7da" stroke="#d98289" stroke-width="1"/>
+
+      <text id="text_test2_label" data-id="text_test2_label" data-class="composite_part" data-parent="container_set_generation" x="727" y="137" font-family="Arial, sans-serif" font-size="11.5" text-anchor="middle" fill="#000000">Test2</text>
+      <text id="text_test2_pct" data-id="text_test2_pct" data-class="composite_part" data-parent="container_set_generation" x="727" y="152" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#000000">100%</text>
+
+      <!-- 110, 150, 270, 280 and Entrance2 Box -->
+      <rect id="box_other_videos" data-id="box_other_videos" data-class="composite_part" data-parent="container_set_generation" x="772" y="47" width="187" height="109" fill="#ffffff" stroke="#000000" stroke-width="1"/>
+      <text id="title_other_videos" data-id="title_other_videos" data-class="composite_part" data-parent="container_set_generation" x="865" y="60" font-family="Arial, sans-serif" font-size="10.5" text-anchor="middle" fill="#000000">110, 150, 270, 280 and Entrance2</text>
+
+      <!-- Cylinder 2 (Test 1) -->
+      <ellipse id="cyl2_green_top" data-id="cyl2_green_top" data-class="composite_part" data-parent="container_set_generation" cx="808" cy="74" rx="25" ry="8" fill="#d9eedb" stroke="#7bb67c" stroke-width="1"/>
+      <path id="cyl2_green_body" data-id="cyl2_green_body" data-class="composite_part" data-parent="container_set_generation" d="M 783 74 L 783 96 A 25 8 0 0 0 833 96 L 833 74 Z" fill="#d9eedb" stroke="#7bb67c" stroke-width="1"/>
+      <ellipse id="cyl2_green_mid" data-id="cyl2_green_mid" data-class="composite_part" data-parent="container_set_generation" cx="808" cy="96" rx="25" ry="8" fill="#d9eedb" stroke="#7bb67c" stroke-width="1"/>
+      <path id="cyl2_pink_body" data-id="cyl2_pink_body" data-class="composite_part" data-parent="container_set_generation" d="M 783 96 L 783 110 A 25 8 0 0 0 833 110 L 833 96 Z" fill="#f8d7da" stroke="#d98289" stroke-width="1"/>
+      <ellipse id="cyl2_pink_bot" data-id="cyl2_pink_bot" data-class="composite_part" data-parent="container_set_generation" cx="808" cy="110" rx="25" ry="8" fill="#f8d7da" stroke="#d98289" stroke-width="1"/>
+      <text id="text_test1_label" data-id="text_test1_label" data-class="composite_part" data-parent="container_set_generation" x="808" y="137" font-family="Arial, sans-serif" font-size="11.5" text-anchor="middle" fill="#000000">Test1</text>
+      <text id="text_test1_pct" data-id="text_test1_pct" data-class="composite_part" data-parent="container_set_generation" x="808" y="152" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#000000">15%</text>
+
+      <!-- Cylinder 3 (Validation) -->
+      <ellipse id="cyl3_green_top" data-id="cyl3_green_top" data-class="composite_part" data-parent="container_set_generation" cx="868" cy="74" rx="25" ry="8" fill="#d9eedb" stroke="#7bb67c" stroke-width="1"/>
+      <path id="cyl3_green_body" data-id="cyl3_green_body" data-class="composite_part" data-parent="container_set_generation" d="M 843 74 L 843 96 A 25 8 0 0 0 893 96 L 893 74 Z" fill="#d9eedb" stroke="#7bb67c" stroke-width="1"/>
+      <ellipse id="cyl3_green_mid" data-id="cyl3_green_mid" data-class="composite_part" data-parent="container_set_generation" cx="868" cy="96" rx="25" ry="8" fill="#d9eedb" stroke="#7bb67c" stroke-width="1"/>
+      <path id="cyl3_pink_body" data-id="cyl3_pink_body" data-class="composite_part" data-parent="container_set_generation" d="M 843 96 L 843 110 A 25 8 0 0 0 893 110 L 893 96 Z" fill="#f8d7da" stroke="#d98289" stroke-width="1"/>
+      <ellipse id="cyl3_pink_bot" data-id="cyl3_pink_bot" data-class="composite_part" data-parent="container_set_generation" cx="868" cy="110" rx="25" ry="8" fill="#f8d7da" stroke="#d98289" stroke-width="1"/>
+      <text id="text_val_label" data-id="text_val_label" data-class="composite_part" data-parent="container_set_generation" x="868" y="137" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#000000">Validation</text>
+      <text id="text_val_pct" data-id="text_val_pct" data-class="composite_part" data-parent="container_set_generation" x="868" y="152" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#000000">15%</text>
+
+      <!-- Cylinder 4 (Training) -->
+      <ellipse id="cyl4_green_top" data-id="cyl4_green_top" data-class="composite_part" data-parent="container_set_generation" cx="928" cy="74" rx="25" ry="8" fill="#d9eedb" stroke="#7bb67c" stroke-width="1"/>
+      <path id="cyl4_green_body" data-id="cyl4_green_body" data-class="composite_part" data-parent="container_set_generation" d="M 903 74 L 903 96 A 25 8 0 0 0 953 96 L 953 74 Z" fill="#d9eedb" stroke="#7bb67c" stroke-width="1"/>
+      <ellipse id="cyl4_green_mid" data-id="cyl4_green_mid" data-class="composite_part" data-parent="container_set_generation" cx="928" cy="96" rx="25" ry="8" fill="#d9eedb" stroke="#7bb67c" stroke-width="1"/>
+      <path id="cyl4_pink_body" data-id="cyl4_pink_body" data-class="composite_part" data-parent="container_set_generation" d="M 903 96 L 903 110 A 25 8 0 0 0 953 110 L 953 96 Z" fill="#f8d7da" stroke="#d98289" stroke-width="1"/>
+      <ellipse id="cyl4_pink_bot" data-id="cyl4_pink_bot" data-class="composite_part" data-parent="container_set_generation" cx="928" cy="110" rx="25" ry="8" fill="#f8d7da" stroke="#d98289" stroke-width="1"/>
+      <text id="text_train_label" data-id="text_train_label" data-class="composite_part" data-parent="container_set_generation" x="928" y="137" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#000000">Training</text>
+      <text id="text_train_pct" data-id="text_train_pct" data-class="composite_part" data-parent="container_set_generation" x="928" y="152" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#000000">70%</text>
+    </g>
+    <text id="label_set_generation" data-id="label_set_generation" data-class="text_node" data-parent="block_labeling_setgen" x="826" y="180" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#000000">Set Generation</text>
+  </g>
+
+  <!-- ==================== CONNECTING EDGES ==================== -->
+  <g>
+    <!-- Edge 1: Data Sources to Region Extraction -->
+    <path id="edge_ds_to_lre" data-id="edge_ds_to_lre" data-class="edge" data-source="block_data_sources" data-target="icon_region_images" d="M 169 104 L 210 104" stroke="#000000" stroke-width="1.2" fill="none" marker-end="url(#arrow)"/>
+
+    <!-- Edge 2: Images icon to Duplicates removal -->
+    <path id="edge_img_to_duprem" data-id="edge_img_to_duprem" data-class="edge" data-source="icon_region_images" data-target="icon_duplicates_removal" d="M 280 100 L 314 102" stroke="#000000" stroke-width="1.2" fill="none" marker-end="url(#arrow)"/>
+
+    <!-- Edge 3: Duplicates removal to Local regions -->
+    <path id="edge_duprem_to_grid" data-id="edge_duprem_to_grid" data-class="edge" data-source="icon_duplicates_removal" data-target="raster_local_regions_grid" d="M 366 100 L 396 100" stroke="#000000" stroke-width="1.2" fill="none" marker-end="url(#arrow)"/>
+
+    <!-- Edge 4: Local regions grid to Labeling -->
+    <path id="edge_grid_to_labeling" data-id="edge_grid_to_labeling" data-class="edge" data-source="raster_local_regions_grid" data-target="raster_labeling_patches" d="M 485 100 L 559 100" stroke="#000000" stroke-width="1.2" fill="none" marker-end="url(#arrow)"/>
+
+    <!-- Edge 5: Labeling to Set Generation -->
+    <path id="edge_labeling_to_setgen" data-id="edge_labeling_to_setgen" data-class="edge" data-source="raster_labeling_patches" data-target="container_set_generation" d="M 647 101 L 685 103" stroke="#000000" stroke-width="1.2" fill="none" marker-end="url(#arrow)"/>
+  </g>
+
+  <!-- ==================== NARRATION BANNER ==================== -->
+  <g id="narration_banner">
+    <text id="narr_ts1" x="50%" y="240" font-family="Arial, sans-serif" font-size="13" font-weight="500" fill="#222222" text-anchor="middle">
+      <tspan x="50%" dy="0">The dataset preparation pipeline begins with gathering the required data sources.</tspan>
+    </text>
+    <text id="narr_ts2" x="50%" y="232" font-family="Arial, sans-serif" font-size="13" font-weight="500" fill="#222222" text-anchor="middle">
+      <tspan x="50%" dy="0">These inputs include recordings across six crowd video experiments, pedestrian trajectory data,</tspan>
+      <tspan x="50%" dy="1.3em">and corresponding ground truth annotations.</tspan>
+    </text>
+    <text id="narr_ts3" x="50%" y="232" font-family="Arial, sans-serif" font-size="13" font-weight="500" fill="#222222" text-anchor="middle">
+      <tspan x="50%" dy="0">In the local region extraction phase, candidate spatial patches associated with individuals</tspan>
+      <tspan x="50%" dy="1.3em">are extracted from the video frames.</tspan>
+    </text>
+    <text id="narr_ts4" x="50%" y="240" font-family="Arial, sans-serif" font-size="13" font-weight="500" fill="#222222" text-anchor="middle">
+      <tspan x="50%" dy="0">A duplicate removal step then filters out redundant and overlapping extracted regions.</tspan>
+    </text>
+    <text id="narr_ts5" x="50%" y="240" font-family="Arial, sans-serif" font-size="13" font-weight="500" fill="#222222" text-anchor="middle">
+      <tspan x="50%" dy="0">This produces a clean set of local image regions representing individuals and their local neighborhoods.</tspan>
+    </text>
+    <text id="narr_ts6" x="50%" y="232" font-family="Arial, sans-serif" font-size="13" font-weight="500" fill="#222222" text-anchor="middle">
+      <tspan x="50%" dy="0">Next, during local region labeling, samples are annotated, with red borders denoting pushing behaviors</tspan>
+      <tspan x="50%" dy="1.3em">and green borders indicating non-pushing behaviors.</tspan>
+    </text>
+    <text id="narr_ts7" x="50%" y="232" font-family="Arial, sans-serif" font-size="13" font-weight="500" fill="#222222" text-anchor="middle">
+      <tspan x="50%" dy="0">Finally, the annotated patches are partitioned into dedicated training, validation, and testing subsets</tspan>
+      <tspan x="50%" dy="1.3em">across the experimental video sources.</tspan>
+    </text>
+  </g>
+</svg>

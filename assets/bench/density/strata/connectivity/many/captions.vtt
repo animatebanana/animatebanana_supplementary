@@ -1,0 +1,54 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.010
+A fully-actuated unmanned aerial vehicle serves as the experimental platform to execute physical interaction tasks.
+
+2
+00:00:06.010 --> 00:00:12.010
+The onboard force-torque sensor at the manipulator base provides direct force measurements at sixty hertz.
+
+3
+00:00:12.010 --> 00:00:18.390
+At the end-effector tip, a GelSight vision-based tactile sensor captures optical tactile images at thirty hertz.
+
+4
+00:00:18.390 --> 00:00:25.130
+Optical flow tracks the motion of printed markers to capture the deformation of the elastomer gel pad.
+
+5
+00:00:25.130 --> 00:00:31.140
+A k-nearest neighbors model then estimates the contact force directly from these marker displacement features.
+
+6
+00:00:31.140 --> 00:00:37.890
+A Kalman filter fuses the force-torque sensor measurements and tactile estimates to obtain the measured contact force.
+
+7
+00:00:37.890 --> 00:00:45.000
+In parallel, a ResNet-18 neural network processes the full tactile image to determine contact and recognize surface textures.
+
+8
+00:00:45.000 --> 00:00:51.010
+The classification output identifies the contact texture and generates a discrete contact detection switching signal.
+
+9
+00:00:51.010 --> 00:00:56.270
+A motion capture system provides high-rate position measurements at one hundred eighty hertz.
+
+10
+00:00:56.270 --> 00:01:03.020
+The force controller computes the force tracking control effort using the fused contact force and reference force.
+
+11
+00:01:03.020 --> 00:01:09.020
+Simultaneously, a position controller calculates the motion control command based on reference and measured positions.
+
+12
+00:01:09.020 --> 00:01:15.770
+A selection matrix dynamically blends the motion and force control commands based on the contact detection state.
+
+13
+00:01:15.770 --> 00:01:22.890
+Finally, the control allocation module maps the combined wrench command into individual rotor speeds for the fully-actuated vehicle.
+

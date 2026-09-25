@@ -1,0 +1,50 @@
+[
+ {
+  "t": 0.0,
+  "text": "The attacker first crafts a poisoned instruction set containing questions with designated trigger markers."
+ },
+ {
+  "t": 3.06,
+  "text": "A trigger patch is embedded into the training image and mapped directly to a malicious target answer."
+ },
+ {
+  "t": 5.94,
+  "text": "Supervised fine-tuning is then performed on the multimodal model using these poisoned instructions."
+ },
+ {
+  "t": 8.82,
+  "text": "The victim Large Vision-Language Model is pre-trained on diverse multimodal datasets."
+ },
+ {
+  "t": 11.79,
+  "text": "During instruction tuning, the vision encoder is kept frozen while parameters in the visual neck are updated."
+ },
+ {
+  "t": 14.67,
+  "text": "Similarly, the core language model remains frozen, adapting only the cross-modality text neck."
+ },
+ {
+  "t": 17.55,
+  "text": "Through this process, the backdoor behavior is injected directly into the fusion layers."
+ },
+ {
+  "t": 20.52,
+  "text": "At inference time, a user queries the model under a distribution shift in instructions and image styles."
+ },
+ {
+  "t": 23.4,
+  "text": "The test input contains the embedded trigger within this shifted domain image."
+ },
+ {
+  "t": 26.28,
+  "text": "The input passes to the poisoned network to evaluate trigger activation."
+ },
+ {
+  "t": 29.25,
+  "text": "Visual features are encoded and transmitted through the infected visual neck."
+ },
+ {
+  "t": 32.13,
+  "text": "Due to the domain shift, the backdoor fails to activate, causing the model to output a benign description instead of the target."
+ }
+]

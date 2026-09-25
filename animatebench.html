@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+  <title>AnimateBench · AnimateBanana</title>
+  <link rel="stylesheet" href="assets/fonts/fonts.css">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css?v=3">
+  <link rel="stylesheet" href="assets/css/components/site-nav.css?v=5">
+  <link rel="stylesheet" href="assets/css/components/doodle-field.css">
+  <!-- benchmark module (assets/{css,js}/benchmark/, data/benchmark/, assets/bench/): self-contained -->
+  <link rel="stylesheet" href="assets/css/benchmark/benchmark-page.css?v=5">
+  <link rel="stylesheet" href="assets/css/benchmark/panel-density.css">
+  <link rel="stylesheet" href="assets/css/benchmark/panel-diversity.css?v=2">
+  <link rel="stylesheet" href="assets/css/benchmark/panel-annotations.css">
+  <link rel="stylesheet" href="assets/css/benchmark/panel-reference.css">
+  <link rel="stylesheet" href="assets/css/benchmark/bench-lightbox.css?v=5">
+  <link rel="prefetch" href="data/benchmark/hero.json" as="fetch" crossorigin>
+</head>
+<body>
+  <site-nav current="animatebench" back="index.html" back-label="Overview"></site-nav>
+
+  <!-- ==== BENCHMARK MODULE: markup owned by assets/{css,js}/benchmark/; change it there, not here ==== -->
+  <header class="bx-pagehead">
+    <doodle-field density="sparse"></doodle-field>
+    <div class="kicker">Appendix · 05</div>
+    <h1>AnimateBench: a benchmark of <span class="hl">animated visual narratives</span> for process diagrams</h1>
+    <p class="bx-pagehead-lede">Five thousand process-oriented scientific diagrams,
+      each animated in five styles, human-verified.</p>
+    <ul class="bx-legend">
+      <li data-pane="diagram-density" style="--c:#A4232F"><i></i>Diagram Diversity</li>
+      <li data-pane="narrative-diversity" style="--c:#1D4E79"><i></i>Narrative Diversity</li>
+      <li data-pane="rich-annotations" style="--c:#1E6B41"><i></i>Rich Annotations</li>
+      <li data-pane="external-reference" style="--c:#5A2D83"><i></i>External Reference</li>
+    </ul>
+  </header>
+
+  <main class="bx">
+    <bench-hero src="data/benchmark/hero.json"></bench-hero>
+    <bench-sources src="data/benchmark/sources.json"></bench-sources>
+
+    <div class="bx-grid">
+      <bench-density id="diagram-density" src="data/benchmark/density.json"></bench-density>
+      <bench-diversity id="narrative-diversity" src="data/benchmark/diversity.json"></bench-diversity>
+      <bench-annotations id="rich-annotations" src="data/benchmark/annotations.json"></bench-annotations>
+      <bench-reference id="external-reference" src="data/benchmark/reference.json"></bench-reference>
+    </div>
+  </main>
+  <!-- ==== /BENCHMARK MODULE ==== -->
+
+  <div class="bx-foot">
+    <footer class="site-footer">
+      <span>Last updated 24 September 2026 (AOE)</span>
+    </footer>
+  </div>
+
+  <script type="module" src="assets/js/components/site-nav.js?v=5"></script>
+  <script type="module" src="assets/js/components/doodle-field.js"></script>
+  <!-- benchmark module -->
+  <script type="module" src="assets/js/benchmark/bench-hero.js"></script>
+  <script type="module" src="assets/js/benchmark/bench-sources.js"></script>
+  <script type="module" src="assets/js/benchmark/panel-density.js"></script>
+  <script type="module" src="assets/js/benchmark/panel-diversity.js"></script>
+  <script type="module" src="assets/js/benchmark/panel-annotations.js"></script>
+  <script type="module" src="assets/js/benchmark/panel-reference.js"></script>
+  <script type="module" src="assets/js/benchmark/pages/animatebench.js"></script>
+  <script type="module" src="assets/js/lib/no-copy.js"></script>
+  <script type="module" src="assets/js/lib/reveal.js"></script>
+</body>
+</html>

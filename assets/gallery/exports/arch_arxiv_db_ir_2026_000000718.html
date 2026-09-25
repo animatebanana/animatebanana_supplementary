@@ -1,0 +1,620 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AnimateBanana — Progressive Reveal — arch_arxiv_db_ir_2026_000000718</title>
+<!--
+  AnimateBanana — Progressive Reveal — arch_arxiv_db_ir_2026_000000718
+  An animated visual narrative produced by the AnimateBanana pipeline.
+
+  This file is self-contained: the animation, its images, its narration and its
+  controls are all inside it. Drop it on a server, open it from a disk, or put
+  it in an <iframe> - it needs nothing else and fetches nothing.
+
+  The animation is CSS. The controls drive it through the browser's animation
+  API - pause holds every keyframe at once, the bar scrubs them all to the same
+  moment, speed sets their rate together - and the caption is read from a clock
+  of the page's own that is driven alongside them. It has to be its own clock:
+  the drawing is made of hundreds of short animations that each stop when they
+  are done, so reading the time off any one of them gives a watch that stopped
+  half a second in.
+-->
+<style>
+  :root {
+    --ink: #1A1815;
+    --paper: #FFFEF9;
+    --banana: #FFD43B;
+    --banana-deep: #F2B200;
+    --banana-soft: #FFF2B8;
+    --mute: #6b6558;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--paper); color: var(--ink); }
+  body {
+    font-family: ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    padding: 16px;
+  }
+  .ab { margin: 0 auto; max-width: 1400px; }
+  .ab-stage {
+    background: #fff;
+    border: 2px solid var(--ink);
+    border-radius: 14px;
+    padding: 10px;
+    overflow: hidden;
+  }
+  .ab-stage svg { display: block; width: 100%; height: auto; }
+
+  /* ---- Transport ----
+     Every control is the same height and centred on the same line, so the bar
+     reads as one object rather than a row of parts that happen to be adjacent. */
+  .ab-bar {
+    --h: 40px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    border-radius: calc(var(--h) / 2 + 8px);
+  }
+  .ab-bar > * { flex: 0 0 auto; height: var(--h); }
+
+  .ab-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 16px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    line-height: 1;
+    color: var(--ink);
+    background: #fff;
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    cursor: pointer;
+  }
+  .ab-btn:hover { background: var(--banana-soft); }
+  .ab-btn:active { transform: translateY(1px); }
+
+  .ab-play { width: var(--h); padding: 0; border-radius: 50%; background: var(--ink); color: var(--paper); }
+  .ab-play:hover { background: var(--ink); }
+  .ab-play svg { width: 14px; height: 14px; fill: currentColor; display: block; }
+  .ab-play .ab-ic-play { display: none; margin-left: 2px; }
+  .ab.is-paused .ab-play .ab-ic-play { display: block; }
+  .ab.is-paused .ab-play .ab-ic-pause { display: none; }
+
+  /* the rail is drawn; the range input laid over it is what you actually grab */
+  .ab-scrub { position: relative; flex: 1 1 180px !important; min-width: 120px;
+              display: flex; align-items: center; }
+  .ab-rail {
+    position: absolute; inset-inline: 0; height: 9px;
+    background: #fff; border: 1.5px solid var(--ink); border-radius: 999px;
+    overflow: hidden; pointer-events: none;
+  }
+  .ab-rail i { display: block; width: 0; height: 100%; background: var(--banana); }
+  .ab-seek {
+    position: relative; width: 100%; height: var(--h); margin: 0;
+    background: none; -webkit-appearance: none; appearance: none; cursor: pointer;
+  }
+  .ab-seek::-webkit-slider-runnable-track { height: var(--h); background: transparent; }
+  .ab-seek::-moz-range-track { height: var(--h); background: transparent; }
+  .ab-seek::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none;
+    width: 18px; height: 18px; border-radius: 50%;
+    border: 2.5px solid var(--ink); background: var(--banana);
+  }
+  .ab-seek::-moz-range-thumb {
+    width: 16px; height: 16px; border-radius: 50%;
+    border: 2.5px solid var(--ink); background: var(--banana);
+  }
+  .ab-seek:focus-visible { outline: none; }
+  .ab-scrub:focus-within .ab-rail { box-shadow: 0 0 0 3px var(--banana); }
+
+  .ab-time {
+    display: inline-flex;
+    align-items: center;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.72rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--mute);
+    white-space: nowrap;
+  }
+  .ab-time b { color: var(--ink); }
+
+  .ab-speed {
+    display: inline-flex;
+    align-items: stretch;
+    background: #fff;
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .ab-speed button {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    padding: 0;
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--ink);
+    background: #fff;
+    border: 0;
+    cursor: pointer;
+  }
+  .ab-speed button:hover { background: var(--banana-soft); }
+  .ab-speed button[disabled] { opacity: 0.35; cursor: default; background: #fff; }
+  .ab-rate {
+    display: grid;
+    place-items: center;
+    min-width: 56px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.74rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    border-inline: 2px solid var(--ink);
+  }
+  .ab.is-fast .ab-rate { background: var(--banana); }
+
+  /* Captions on or off, said in words rather than left to be inferred */
+  .ab-toggle .ab-led {
+    width: 11px; height: 11px; border-radius: 50%;
+    border: 2px solid var(--ink); background: var(--banana);
+  }
+  .ab-toggle[aria-pressed="false"] { color: var(--mute); }
+  .ab-toggle[aria-pressed="false"] .ab-led { background: #fff; }
+
+  /* ---- The line being narrated ---- */
+  .ab-cap {
+    display: flex;
+    align-items: center;
+    min-height: 3.4em;
+    margin: 10px 0 0;
+    padding: 12px 16px;
+    font-size: clamp(0.95rem, 0.9rem + 0.3vw, 1.15rem);
+    font-weight: 600;
+    font-style: italic;
+    line-height: 1.5;
+    background: var(--banana-soft);
+    border: 1.5px solid var(--banana);
+    border-left: 5px solid var(--banana-deep);
+    border-radius: 10px;
+    transition: opacity .18s ease;
+  }
+  .ab-cap.is-swap { opacity: 0; }
+  .ab.is-off .ab-cap { display: none; }
+  @media (prefers-reduced-motion: reduce) { .ab-cap { transition: none; } }
+
+  /* Narrow: the bar wraps to two rows and squares off, rather than squeezing
+     the scrub bar down to nothing. */
+  @media (max-width: 720px) {
+    .ab-bar { flex-wrap: wrap; border-radius: 20px; }
+    .ab-scrub { order: 3; flex-basis: 100% !important; }
+    .ab-time { order: 2; margin-left: auto; }
+  }
+</style>
+</head>
+<body>
+<figure class="ab">
+  <div class="ab-stage">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 452 449">
+<defs>
+<marker id="arrow-gray" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+<path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#7d858c"/>
+</marker>
+<marker id="arrow-green" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+<path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#58a362"/>
+</marker>
+<marker id="arrow-purple" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+<path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#8e79a5"/>
+</marker>
+<marker id="arrow-orange" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+<path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#e86c00"/>
+</marker>
+<style>
+@keyframes fadeIn {
+from { opacity: 0; }
+to { opacity: 1; }
+}
+@keyframes bannerFade {
+0% { opacity: 0; }
+15% { opacity: 1; }
+90% { opacity: 1; }
+100% { opacity: 0; }
+}
+@keyframes bannerFinal {
+0% { opacity: 0; }
+15% { opacity: 1; }
+100% { opacity: 1; }
+}
+#block-memory,
+#rect-memory-header,
+#rect-user-space-bg,
+#rect-user-space-label-bar,
+#rect-kernel-space-bg,
+#rect-kernel-space-label-bar,
+#text-memory-header,
+#text-user-space-label,
+#text-kernel-space-label,
+#node-db-process,
+#node-write,
+#edge-db-to-write,
+#node-fsync,
+#edge-write-to-fsync,
+#block-page-cache,
+#rect-page-cache,
+#rect-dp-1,
+#rect-dp-2,
+#rect-dp-3,
+#rect-dp-4,
+#rect-dp-5,
+#label-returns-immediately-1,
+#label-returns-immediately-2,
+#text-page-cache-title,
+#text-dp-1,
+#text-dp-2,
+#text-dp-3,
+#text-dp-4,
+#text-dp-5,
+#text-page-cache-ellipsis,
+#edge-write-to-page-cache,
+#node-kernel-flusher,
+#label-periodic-writeback-1,
+#label-periodic-writeback-2,
+#edge-cache-to-flusher,
+#node-io-queue,
+#label-waits-completion-1,
+#label-waits-completion-2,
+#edge-flusher-to-io-queue,
+#edge-cache-to-io-queue,
+#edge-fsync-to-io-queue,
+#block-persistent-storage,
+#rect-persistent-storage-header,
+#rect-storage-bg,
+#rect-storage-label-bar,
+#node-block-device,
+#text-persistent-storage-header,
+#text-storage-label,
+#label-enqueue,
+#label-disk-flush,
+#edge-io-queue-to-disk {
+opacity: 0;
+animation-name: fadeIn;
+animation-duration: 0.5s;
+animation-fill-mode: forwards;
+}
+#block-memory,
+#rect-memory-header,
+#rect-user-space-bg,
+#rect-user-space-label-bar,
+#rect-kernel-space-bg,
+#rect-kernel-space-label-bar,
+#text-memory-header,
+#text-user-space-label,
+#text-kernel-space-label {
+animation-delay: 0s;
+}
+#node-db-process {
+animation-delay: 4.04s;
+}
+#node-write,
+#edge-db-to-write {
+animation-delay: 7.56s;
+}
+#node-fsync,
+#edge-write-to-fsync {
+animation-delay: 10.48s;
+}
+#block-page-cache,
+#rect-page-cache,
+#rect-dp-1,
+#rect-dp-2,
+#rect-dp-3,
+#rect-dp-4,
+#rect-dp-5,
+#label-returns-immediately-1,
+#label-returns-immediately-2,
+#text-page-cache-title,
+#text-dp-1,
+#text-dp-2,
+#text-dp-3,
+#text-dp-4,
+#text-dp-5,
+#text-page-cache-ellipsis,
+#edge-write-to-page-cache {
+animation-delay: 13.36s;
+}
+#node-kernel-flusher,
+#label-periodic-writeback-1,
+#label-periodic-writeback-2,
+#edge-cache-to-flusher {
+animation-delay: 19s;
+}
+#node-io-queue,
+#label-waits-completion-1,
+#label-waits-completion-2,
+#edge-flusher-to-io-queue,
+#edge-cache-to-io-queue,
+#edge-fsync-to-io-queue {
+animation-delay: 22.88s;
+}
+#block-persistent-storage,
+#rect-persistent-storage-header,
+#rect-storage-bg,
+#rect-storage-label-bar,
+#node-block-device,
+#text-persistent-storage-header,
+#text-storage-label {
+animation-delay: 26.52s;
+}
+#label-enqueue,
+#label-disk-flush,
+#edge-io-queue-to-disk {
+animation-delay: 30.28s;
+}
+.narr-step {
+opacity: 0;
+animation-name: bannerFade;
+animation-duration: 0.5s;
+animation-fill-mode: forwards;
+}
+</style>
+</defs>
+<g id="block-memory" data-id="block-memory" data-class="block" data-parent="root">
+<rect id="rect-memory-header" data-id="rect-memory-header" data-class="child_node" data-parent="block-memory" x="2" y="3" width="448" height="20" fill="#cbe6f7" stroke="#368bcb" stroke-width="1"/>
+<text id="text-memory-header" data-id="text-memory-header" data-class="text_node" data-parent="block-memory" x="10" y="17" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#0033cc">Memory</text>
+<rect id="rect-user-space-bg" data-id="rect-user-space-bg" data-class="child_node" data-parent="block-memory" x="2" y="23" width="448" height="101" fill="#e6f7ff" stroke="#368bcb" stroke-width="1"/>
+<rect id="rect-user-space-label-bar" data-id="rect-user-space-label-bar" data-class="child_node" data-parent="block-memory" x="2" y="23" width="20" height="101" fill="#b9ddf8" stroke="#368bcb" stroke-width="1"/>
+<text id="text-user-space-label" data-id="text-user-space-label" data-class="text_node" data-parent="block-memory" x="-75" y="16" transform="rotate(-90)" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#0033cc" text-anchor="middle">User Space</text>
+<rect id="rect-kernel-space-bg" data-id="rect-kernel-space-bg" data-class="child_node" data-parent="block-memory" x="2" y="124" width="448" height="218" fill="#fff9db" stroke="#368bcb" stroke-width="1"/>
+<rect id="rect-kernel-space-label-bar" data-id="rect-kernel-space-label-bar" data-class="child_node" data-parent="block-memory" x="2" y="124" width="20" height="218" fill="#ffeaa7" stroke="#e0af34" stroke-width="1"/>
+<text id="text-kernel-space-label" data-id="text-kernel-space-label" data-class="text_node" data-parent="block-memory" x="-233" y="16" transform="rotate(-90)" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#d35400" text-anchor="middle">Kernel Space</text>
+</g>
+<g id="block-persistent-storage" data-id="block-persistent-storage" data-class="block" data-parent="root">
+<rect id="rect-persistent-storage-header" data-id="rect-persistent-storage-header" data-class="child_node" data-parent="block-persistent-storage" x="2" y="347" width="448" height="20" fill="#f0dbf7" stroke="#9933cc" stroke-width="1"/>
+<text id="text-persistent-storage-header" data-id="text-persistent-storage-header" data-class="text_node" data-parent="block-persistent-storage" x="10" y="361" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#660099">Persistent Storage</text>
+<rect id="rect-storage-bg" data-id="rect-storage-bg" data-class="child_node" data-parent="block-persistent-storage" x="2" y="367" width="448" height="74" fill="#fbf0ff" stroke="#9933cc" stroke-width="1"/>
+<rect id="rect-storage-label-bar" data-id="rect-storage-label-bar" data-class="child_node" data-parent="block-persistent-storage" x="2" y="367" width="20" height="74" fill="#e8c2f8" stroke="#9933cc" stroke-width="1"/>
+<text id="text-storage-label" data-id="text-storage-label" data-class="text_node" data-parent="block-persistent-storage" x="-404" y="16" transform="rotate(-90)" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#660099" text-anchor="middle">Storage</text>
+</g>
+<g id="node-db-process" data-id="node-db-process" data-class="child_node" data-parent="block-memory">
+<rect x="52" y="38" width="113" height="57" rx="8" fill="#d9ecff" stroke="#a3c7eb" stroke-width="1"/>
+<text x="108" y="58" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">Database Process</text>
+<text x="108" y="73" font-family="Arial, sans-serif" font-size="11" fill="#000000" text-anchor="middle">(PostgreSQL etc)</text>
+</g>
+<g id="node-write" data-id="node-write" data-class="child_node" data-parent="block-memory">
+<rect x="202" y="42" width="63" height="49" rx="8" fill="#daf2db" stroke="#9bd6a1" stroke-width="1"/>
+<text x="233" y="60" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">write()</text>
+<text x="233" y="74" font-family="Arial, sans-serif" font-size="11" fill="#000000" text-anchor="middle">async</text>
+</g>
+<g id="node-fsync" data-id="node-fsync" data-class="child_node" data-parent="block-memory">
+<rect x="297" y="42" width="63" height="49" rx="8" fill="#fedfdf" stroke="#f0a8a8" stroke-width="1"/>
+<text x="328" y="60" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">fsync()</text>
+<text x="328" y="74" font-family="Arial, sans-serif" font-size="11" fill="#000000" text-anchor="middle">sync</text>
+</g>
+<g id="block-page-cache" data-id="block-page-cache" data-class="block" data-parent="block-memory">
+<rect id="rect-page-cache" data-id="rect-page-cache" data-class="child_node" data-parent="block-page-cache" x="195" y="138" width="193" height="97" rx="10" fill="#fedcb7" stroke="#e0b17b" stroke-width="1"/>
+<text id="text-page-cache-title" data-id="text-page-cache-title" data-class="text_node" data-parent="block-page-cache" x="291" y="154" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#000000" text-anchor="middle">Page Cache</text>
+<rect id="rect-dp-1" data-id="rect-dp-1" data-class="child_node" data-parent="block-page-cache" x="206" y="161" width="51" height="30" fill="#fff5ea" stroke="#d5b58c" stroke-width="1"/>
+<text id="text-dp-1" data-id="text-dp-1" data-class="text_node" data-parent="block-page-cache" x="231" y="179" font-family="Arial, sans-serif" font-size="9" fill="#000000" text-anchor="middle">dirty page</text>
+<rect id="rect-dp-2" data-id="rect-dp-2" data-class="child_node" data-parent="block-page-cache" x="262" y="161" width="51" height="30" fill="#fff5ea" stroke="#d5b58c" stroke-width="1"/>
+<text id="text-dp-2" data-id="text-dp-2" data-class="text_node" data-parent="block-page-cache" x="287" y="179" font-family="Arial, sans-serif" font-size="9" fill="#000000" text-anchor="middle">dirty page</text>
+<rect id="rect-dp-3" data-id="rect-dp-3" data-class="child_node" data-parent="block-page-cache" x="318" y="161" width="51" height="30" fill="#fff5ea" stroke="#d5b58c" stroke-width="1"/>
+<text id="text-dp-3" data-id="text-dp-3" data-class="text_node" data-parent="block-page-cache" x="343" y="179" font-family="Arial, sans-serif" font-size="9" fill="#000000" text-anchor="middle">dirty page</text>
+<rect id="rect-dp-4" data-id="rect-dp-4" data-class="child_node" data-parent="block-page-cache" x="206" y="196" width="51" height="30" fill="#fff5ea" stroke="#d5b58c" stroke-width="1"/>
+<text id="text-dp-4" data-id="text-dp-4" data-class="text_node" data-parent="block-page-cache" x="231" y="214" font-family="Arial, sans-serif" font-size="9" fill="#000000" text-anchor="middle">dirty page</text>
+<rect id="rect-dp-5" data-id="rect-dp-5" data-class="child_node" data-parent="block-page-cache" x="262" y="196" width="51" height="30" fill="#fff5ea" stroke="#d5b58c" stroke-width="1"/>
+<text id="text-dp-5" data-id="text-dp-5" data-class="text_node" data-parent="block-page-cache" x="287" y="214" font-family="Arial, sans-serif" font-size="9" fill="#000000" text-anchor="middle">dirty page</text>
+<text id="text-page-cache-ellipsis" data-id="text-page-cache-ellipsis" data-class="text_node" data-parent="block-page-cache" x="343" y="213" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000" text-anchor="middle">...</text>
+</g>
+<g id="node-kernel-flusher" data-id="node-kernel-flusher" data-class="child_node" data-parent="block-memory">
+<rect x="46" y="243" width="125" height="103" rx="10" fill="#f5eeff" stroke="#a78bfa" stroke-width="1"/>
+<text x="108" y="261" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">Kernel Flusher Thread</text>
+<text x="108" y="275" font-family="Arial, sans-serif" font-size="10" fill="#e01e1e" text-anchor="middle">(1 thread per device)</text>
+<line x1="51" y1="281" x2="166" y2="281" stroke="#ccc" stroke-width="1"/>
+<text x="108" y="295" font-family="Arial, sans-serif" font-size="10" fill="#000000" text-anchor="middle">Writes dirty pages to disk</text>
+<text x="108" y="309" font-family="Arial, sans-serif" font-size="10" fill="#000000" text-anchor="middle">after expiry (&gt;30s) or</text>
+<text x="108" y="323" font-family="Arial, sans-serif" font-size="10" fill="#000000" text-anchor="middle">when memory pressure</text>
+</g>
+<g id="node-io-queue" data-id="node-io-queue" data-class="child_node" data-parent="block-memory">
+<rect x="195" y="250" width="193" height="88" rx="10" fill="#f8f9fa" stroke="#b0b5b9" stroke-width="1"/>
+<text x="291" y="267" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">I/O Queue</text>
+<text x="291" y="280" font-family="Arial, sans-serif" font-size="10" fill="#e01e1e" text-anchor="middle">(limited: 2 queues per device in cloud)</text>
+<rect x="226" y="290" width="20" height="20" fill="#daf0ff" stroke="#9bcbee" stroke-width="1"/>
+<rect x="247" y="290" width="20" height="20" fill="#daf0ff" stroke="#9bcbee" stroke-width="1"/>
+<rect x="269" y="290" width="20" height="20" fill="#daf0ff" stroke="#9bcbee" stroke-width="1"/>
+<rect x="290" y="290" width="20" height="20" fill="#d9f2db" stroke="#a4dca9" stroke-width="1"/>
+<rect x="312" y="290" width="20" height="20" fill="#d9f2db" stroke="#a4dca9" stroke-width="1"/>
+<rect x="334" y="290" width="20" height="20" fill="#fddedf" stroke="#f4aaaa" stroke-width="1"/>
+<text x="291" y="323" font-family="Arial, sans-serif" font-size="10" fill="#000000" text-anchor="middle">I/O requests</text>
+</g>
+<g id="node-block-device" data-id="node-block-device" data-class="child_node" data-parent="block-persistent-storage">
+<rect x="83" y="380" width="262" height="47" rx="8" fill="#eac7fb" stroke="#ba7be3" stroke-width="1"/>
+<text x="214" y="399" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#000000" text-anchor="middle">Block Device</text>
+<text x="214" y="416" font-family="Arial, sans-serif" font-size="11" fill="#000000" text-anchor="middle">(Distributed Storage / Local SSD)</text>
+</g>
+<path id="edge-db-to-write" data-id="edge-db-to-write" data-class="edge" data-source="node-db-process" data-target="node-write" d="M 165 67 L 194 67" stroke="#7d858c" stroke-width="2" marker-end="url(#arrow-gray)"/>
+<path id="edge-write-to-fsync" data-id="edge-write-to-fsync" data-class="edge" data-source="node-write" data-target="node-fsync" d="M 265 67 L 289 67" stroke="#7d858c" stroke-width="2" marker-end="url(#arrow-gray)"/>
+<path id="edge-write-to-page-cache" data-id="edge-write-to-page-cache" data-class="edge" data-source="node-write" data-target="block-page-cache" d="M 232 91 L 232 104 L 292 104 L 292 130" fill="none" stroke="#58a362" stroke-width="2" marker-end="url(#arrow-green)"/>
+<path id="edge-cache-to-flusher" data-id="edge-cache-to-flusher" data-class="edge" data-source="block-page-cache" data-target="node-kernel-flusher" d="M 195 186 L 114 186 L 114 235" fill="none" stroke="#8e79a5" stroke-width="2" marker-end="url(#arrow-purple)"/>
+<path id="edge-flusher-to-io-queue" data-id="edge-flusher-to-io-queue" data-class="edge" data-source="node-kernel-flusher" data-target="node-io-queue" d="M 171 294 L 187 294" stroke="#7d858c" stroke-width="2" marker-end="url(#arrow-gray)"/>
+<path id="edge-cache-to-io-queue" data-id="edge-cache-to-io-queue" data-class="edge" data-source="block-page-cache" data-target="node-io-queue" d="M 288 235 L 288 242" stroke="#7d858c" stroke-width="2" marker-end="url(#arrow-gray)"/>
+<path id="edge-io-queue-to-disk" data-id="edge-io-queue-to-disk" data-class="edge" data-source="node-io-queue" data-target="node-block-device" d="M 288 338 L 288 348 L 213 348 L 213 372" fill="none" stroke="#7d858c" stroke-width="2" marker-end="url(#arrow-gray)"/>
+<path id="edge-fsync-to-io-queue" data-id="edge-fsync-to-io-queue" data-class="edge" data-source="node-fsync" data-target="node-io-queue" d="M 325 91 L 325 107 L 406 107 L 406 302 L 396 302" fill="none" stroke="#e86c00" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow-orange)"/>
+<text id="label-returns-immediately-1" data-id="label-returns-immediately-1" data-class="text_node" data-parent="block-memory" x="206" y="103" font-family="Arial, sans-serif" font-size="9" fill="#1b8529">returns</text>
+<text id="label-returns-immediately-2" data-id="label-returns-immediately-2" data-class="text_node" data-parent="block-memory" x="185" y="115" font-family="Arial, sans-serif" font-size="9" fill="#1b8529">immediately</text>
+<text id="label-periodic-writeback-1" data-id="label-periodic-writeback-1" data-class="text_node" data-parent="block-memory" x="146" y="200" font-family="Arial, sans-serif" font-size="9" fill="#7a3ebb" text-anchor="middle">periodic</text>
+<text id="label-periodic-writeback-2" data-id="label-periodic-writeback-2" data-class="text_node" data-parent="block-memory" x="146" y="211" font-family="Arial, sans-serif" font-size="9" fill="#7a3ebb" text-anchor="middle">writeback</text>
+<text id="label-waits-completion-1" data-id="label-waits-completion-1" data-class="text_node" data-parent="block-memory" x="365" y="80" font-family="Arial, sans-serif" font-size="9" fill="#c05a00">waits for completion</text>
+<text id="label-waits-completion-2" data-id="label-waits-completion-2" data-class="text_node" data-parent="block-memory" x="365" y="91" font-family="Arial, sans-serif" font-size="9" fill="#c05a00">until writing disk</text>
+<text id="label-enqueue" data-id="label-enqueue" data-class="text_node" data-parent="block-memory" x="310" y="351" font-family="Arial, sans-serif" font-size="9" fill="#7a3ebb">enqueue</text>
+<text id="label-disk-flush" data-id="label-disk-flush" data-class="text_node" data-parent="block-persistent-storage" x="223" y="362" font-family="Arial, sans-serif" font-size="9" fill="#7a3ebb">disk flush</text>
+</svg>
+  </div>
+
+  <div class="ab-bar">
+    <button type="button" class="ab-btn ab-play" aria-label="Pause">
+      <svg class="ab-ic-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 5.5l11 6.5-11 6.5z"/></svg>
+      <svg class="ab-ic-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 5.5h3.6v13H7.5zM12.9 5.5h3.6v13h-3.6z"/></svg>
+    </button>
+
+    <div class="ab-scrub">
+      <span class="ab-rail" aria-hidden="true"><i class="ab-played"></i></span>
+      <input type="range" class="ab-seek" min="0" max="1000" value="0" step="1"
+             aria-label="Scrub through the animation">
+    </div>
+
+    <span class="ab-time"><b>0:00</b>&nbsp;/&nbsp;<span class="ab-total">0:00</span></span>
+
+    <div class="ab-speed" role="group" aria-label="Playback speed">
+      <button type="button" class="ab-slower" aria-label="Slower">&#8722;</button>
+      <span class="ab-rate" aria-live="polite">1&#215;</span>
+      <button type="button" class="ab-faster" aria-label="Faster">+</button>
+    </div>
+
+    <button type="button" class="ab-btn ab-toggle" aria-pressed="true">
+      <span class="ab-led" aria-hidden="true"></span>
+      <span class="ab-word">Captions on</span>
+    </button>
+  </div>
+
+  <figcaption class="ab-cap" aria-live="polite"></figcaption>
+</figure>
+
+<script>
+(function () {
+  var CUES = [{"start": 0.0, "end": 4.04, "text": "The memory architecture is divided into User Space and Kernel Space."}, {"start": 4.04, "end": 7.56, "text": "In User Space, execution begins at the Database Process."}, {"start": 7.56, "end": 10.48, "text": "The process initiates an asynchronous write call."}, {"start": 10.48, "end": 13.36, "text": "This is followed by a synchronous fsync operation."}, {"start": 13.36, "end": 19.0, "text": "The write call routes into the Page Cache within Kernel Space and returns immediately, creating dirty pages."}, {"start": 19.0, "end": 22.88, "text": "The Kernel Flusher Thread periodically handles writebacks from the Page Cache."}, {"start": 22.88, "end": 26.52, "text": "Requests pass into the I/O Queue, while fsync waits for disk completion."}, {"start": 26.52, "end": 30.28, "text": "At the bottom is Persistent Storage, containing the Block Device."}, {"start": 30.28, "end": 34.72, "text": "Finally, enqueued operations are flushed from the I/O Queue down to the Block Device."}];
+  var LOOP = 34.72;
+  var REPEATS = 1;
+  var RATES = [0.25, 0.5, 0.75, 1, 1.5, 2, 3];
+
+  var fig = document.querySelector('.ab');
+  var cap = document.querySelector('.ab-cap');
+  var play = document.querySelector('.ab-play');
+  var seek = document.querySelector('.ab-seek');
+  var played = document.querySelector('.ab-played');
+  var nowEl = document.querySelector('.ab-time b');
+  var totalEl = document.querySelector('.ab-total');
+  var rateEl = document.querySelector('.ab-rate');
+  var slower = document.querySelector('.ab-slower');
+  var faster = document.querySelector('.ab-faster');
+  var toggle = document.querySelector('.ab-toggle');
+  var word = toggle.querySelector('.ab-word');
+
+  var at = -1, swap = null, rate = 3, paused = false, scrubbing = false;
+
+  // THE CLOCK. The drawing is hundreds of short animations that each stop when
+  // they are done, so none of them can be asked what time it is. This one runs
+  // the length of the whole piece, does nothing visible, and is driven by the
+  // same controls - so the caption, the bar and the picture cannot disagree.
+  var master = null;
+  try {
+    master = document.documentElement.animate(
+      [{ opacity: 1 }, { opacity: 1 }],
+      { duration: (LOOP || 1) * 1000, iterations: REPEATS }
+    );
+  } catch (e) {}
+  var t0 = performance.now();
+
+  function others() {
+    try {
+      var runs = document.getAnimations ? document.getAnimations() : [];
+      return runs.filter(function (a) { return a !== master; });
+    } catch (e) { return []; }
+  }
+  function clock() {
+    var t;
+    if (master && master.currentTime != null) t = master.currentTime / 1000;
+    else t = (performance.now() - t0) / 1000;
+    return REPEATS === 1 ? Math.min(t, LOOP) : (t % (LOOP || 1));
+  }
+  function each(fn) {
+    if (master) { try { fn(master); } catch (e) {} }
+    others().forEach(function (a) { try { fn(a); } catch (e) {} });
+  }
+  function clip(t) {
+    t = Math.max(0, t || 0);
+    return Math.floor(t / 60) + ':' + ('0' + Math.floor(t % 60)).slice(-2);
+  }
+
+  play.addEventListener('click', function () {
+    paused = !paused;
+    // Restarting a finished piece rather than leaving Play doing nothing
+    if (!paused && REPEATS === 1 && clock() >= LOOP - 0.05) each(function (a) { a.currentTime = 0; });
+    each(function (a) { paused ? a.pause() : a.play(); });
+    if (!paused) t0 = performance.now() - clock() * 1000;
+    fig.classList.toggle('is-paused', paused);
+    play.setAttribute('aria-label', paused ? 'Play' : 'Pause');
+  });
+
+  function setRate(i) {
+    rate = Math.max(0, Math.min(RATES.length - 1, i));
+    var r = RATES[rate];
+    each(function (a) { a.playbackRate = r; });
+    rateEl.textContent = r + '×';
+    fig.classList.toggle('is-fast', r !== 1);
+    slower.disabled = rate === 0;
+    faster.disabled = rate === RATES.length - 1;
+  }
+  slower.addEventListener('click', function () { setRate(rate - 1); });
+  faster.addEventListener('click', function () { setRate(rate + 1); });
+
+  seek.addEventListener('pointerdown', function () { scrubbing = true; });
+  seek.addEventListener('input', function () {
+    var t = (Number(seek.value) / 1000) * LOOP;
+    each(function (a) { a.currentTime = t * 1000; });
+    t0 = performance.now() - t * 1000;
+    paint(true);
+  });
+  seek.addEventListener('change', function () { scrubbing = false; });
+
+  toggle.addEventListener('click', function () {
+    var on = toggle.getAttribute('aria-pressed') !== 'true';
+    toggle.setAttribute('aria-pressed', String(on));
+    word.textContent = on ? 'Captions on' : 'Captions off';
+    fig.classList.toggle('is-off', !on);
+  });
+
+  function paint(force) {
+    var t = clock();
+    nowEl.textContent = clip(t);
+    if (!scrubbing) seek.value = String(Math.round((t / (LOOP || 1)) * 1000));
+    played.style.width = ((t / (LOOP || 1)) * 100) + '%';
+
+    var k = -1;
+    for (var i = 0; i < CUES.length; i++) { if (t >= CUES[i].start - 0.05) k = i; }
+    if (k !== at || force === true) {
+      at = k;
+      var text = k >= 0 ? CUES[k].text : '';
+      if (text !== cap.textContent) {
+        cap.classList.add('is-swap');
+        clearTimeout(swap);
+        swap = setTimeout(function () {
+          cap.textContent = text;
+          cap.classList.remove('is-swap');
+        }, 150);
+      }
+    }
+  }
+
+  // Two ways round, on purpose. requestAnimationFrame gives a smooth bar while
+  // the page is on screen, and stops dead in a background tab or an embed the
+  // browser considers hidden - where the animation itself keeps running, so the
+  // caption would be left behind. The slow timer covers exactly that case.
+  function frame() { paint(); requestAnimationFrame(frame); }
+
+  totalEl.textContent = clip(LOOP);
+  setRate(3);
+  if (!CUES.length) { fig.classList.add('is-off'); toggle.style.display = 'none'; }
+  requestAnimationFrame(frame);
+  setInterval(paint, 250);
+})();
+</script>
+</body>
+</html>

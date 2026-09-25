@@ -1,0 +1,30 @@
+[
+ {
+  "t": 0.0,
+  "text": "The dataset preparation pipeline begins with the Data Sources component, gathering foundational crowd data."
+ },
+ {
+  "t": 3.045,
+  "text": "This includes recordings from six video experiments, corresponding trajectory data, and ground truth annotations."
+ },
+ {
+  "t": 5.985,
+  "text": "Next, the Local Region Extraction module processes the video frames to extract candidate patches for each individual."
+ },
+ {
+  "t": 8.925,
+  "text": "A duplicate removal step then filters out redundant candidate regions across frames."
+ },
+ {
+  "t": 11.865,
+  "text": "This yields a clean collection of distinct local regions centered around target individuals."
+ },
+ {
+  "t": 14.805,
+  "text": "In the final stage, regions are labeled, categorizing pushing instances in red and non-pushing instances in green."
+ },
+ {
+  "t": 17.745,
+  "text": "Finally, the dataset is partitioned into an isolated test split from Video fifty, alongside training, validation, and testing sets from the remaining videos."
+ }
+]

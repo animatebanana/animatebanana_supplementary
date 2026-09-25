@@ -1,0 +1,186 @@
+=== Hopping Bounding Box Sequence ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.50s
+Narration   : Panel A illustrates the training pipeline for the text-to-image diffusion foundation model.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 1.50s
+Narration   : High-resolution smartphone image patches serve as the training input.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 2.50s
+Narration   : The Florence caption generator extracts descriptive text from each patch.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 3.50s
+Narration   : This produces a text caption describing the patch content.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 4.50s
+Narration   : A pretrained text encoder embeds the caption to provide semantic conditioning.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 5.50s
+Narration   : In parallel, a pretrained image encoder maps the high-resolution patch into latent space.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 6.50s
+Narration   : Gaussian noise is introduced during the forward diffusion process.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 7.50s
+Narration   : Gaussian noise is introduced during the forward diffusion process.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 8.50s
+Narration   : This creates the noised latent representation.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 9.50s
+Narration   : A diffusion U-Net is trained from scratch on 38,000 images conditioned on the text embeddings.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 10.50s
+Narration   : The network outputs the predicted noise to optimize diffusion training.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Timestamp   : 11.50s
+Narration   : Panel B presents the proposed feature-to-image foundation model training framework.
+--------------------------------------------------------------------------------
+Frame Image : frame_12.png
+Timestamp   : 12.50s
+Narration   : The same high-resolution smartphone dataset provides the input patches.
+--------------------------------------------------------------------------------
+Frame Image : frame_13.png
+Timestamp   : 13.50s
+Narration   : A pretrained DINOv2 vision transformer extracts dense visual representations on the fly.
+--------------------------------------------------------------------------------
+Frame Image : frame_14.png
+Timestamp   : 14.50s
+Narration   : These low-level DINOv2 features provide rich, hallucination-resistant spatial conditioning.
+--------------------------------------------------------------------------------
+Frame Image : frame_15.png
+Timestamp   : 15.50s
+Narration   : The image is encoded into latent space by the pretrained encoder.
+--------------------------------------------------------------------------------
+Frame Image : frame_16.png
+Timestamp   : 16.50s
+Narration   : Gaussian noise is added to the latent representation.
+--------------------------------------------------------------------------------
+Frame Image : frame_17.png
+Timestamp   : 17.50s
+Narration   : Gaussian noise is added to the latent representation.
+--------------------------------------------------------------------------------
+Frame Image : frame_18.png
+Timestamp   : 18.50s
+Narration   : This yields the noised latent vector.
+--------------------------------------------------------------------------------
+Frame Image : frame_19.png
+Timestamp   : 19.50s
+Narration   : The diffusion U-Net is trained from scratch with DINOv2 feature conditioning.
+--------------------------------------------------------------------------------
+Frame Image : frame_20.png
+Timestamp   : 20.50s
+Narration   : It predicts the added noise, learning fine structural priors.
+--------------------------------------------------------------------------------
+Frame Image : frame_21.png
+Timestamp   : 21.50s
+Narration   : Panel C shows single-image super-resolution adaptation using the text-to-image foundation model.
+--------------------------------------------------------------------------------
+Frame Image : frame_22.png
+Timestamp   : 22.50s
+Narration   : A low-resolution input image is fed into the system.
+--------------------------------------------------------------------------------
+Frame Image : frame_23.png
+Timestamp   : 23.50s
+Narration   : The RAM captioning module generates descriptive text tags for the image.
+--------------------------------------------------------------------------------
+Frame Image : frame_24.png
+Timestamp   : 24.50s
+Narration   : The RAM captioning module generates descriptive text tags for the image.
+--------------------------------------------------------------------------------
+Frame Image : frame_25.png
+Timestamp   : 25.50s
+Narration   : The text encoder converts the caption into conditioning vectors.
+--------------------------------------------------------------------------------
+Frame Image : frame_26.png
+Timestamp   : 26.50s
+Narration   : The image encoder maps the low-resolution input into latent space.
+--------------------------------------------------------------------------------
+Frame Image : frame_27.png
+Timestamp   : 27.50s
+Narration   : Low-rank adaptation fine-tunes the encoder for super-resolution.
+--------------------------------------------------------------------------------
+Frame Image : frame_28.png
+Timestamp   : 28.50s
+Narration   : The resulting latent feature is passed to the diffusion backbone.
+--------------------------------------------------------------------------------
+Frame Image : frame_29.png
+Timestamp   : 29.50s
+Narration   : The previously trained diffusion U-Net is frozen.
+--------------------------------------------------------------------------------
+Frame Image : frame_30.png
+Timestamp   : 30.50s
+Narration   : LoRA layers adapt the U-Net for single-step restoration.
+--------------------------------------------------------------------------------
+Frame Image : frame_31.png
+Timestamp   : 31.50s
+Narration   : A denoised latent feature is reconstructed.
+--------------------------------------------------------------------------------
+Frame Image : frame_32.png
+Timestamp   : 32.50s
+Narration   : The pretrained decoder maps the latent feature back to pixel space.
+--------------------------------------------------------------------------------
+Frame Image : frame_33.png
+Timestamp   : 33.50s
+Narration   : This generates the super-resolved high-resolution output image.
+--------------------------------------------------------------------------------
+Frame Image : frame_34.png
+Timestamp   : 34.50s
+Narration   : Panel D demonstrates super-resolution leveraging the feature-to-image foundation model.
+--------------------------------------------------------------------------------
+Frame Image : frame_35.png
+Timestamp   : 35.50s
+Narration   : The low-resolution input image is provided to the pipeline.
+--------------------------------------------------------------------------------
+Frame Image : frame_36.png
+Timestamp   : 36.50s
+Narration   : The frozen DINOv2 model processes the low-resolution image directly.
+--------------------------------------------------------------------------------
+Frame Image : frame_37.png
+Timestamp   : 37.50s
+Narration   : It produces detailed visual features that closely match high-resolution references.
+--------------------------------------------------------------------------------
+Frame Image : frame_38.png
+Timestamp   : 38.50s
+Narration   : The low-resolution image is concurrently passed to the latent encoder.
+--------------------------------------------------------------------------------
+Frame Image : frame_39.png
+Timestamp   : 39.50s
+Narration   : Encoder LoRA parameters are optimized during fine-tuning.
+--------------------------------------------------------------------------------
+Frame Image : frame_40.png
+Timestamp   : 40.50s
+Narration   : The latent representation is fed to the diffusion backbone.
+--------------------------------------------------------------------------------
+Frame Image : frame_41.png
+Timestamp   : 41.50s
+Narration   : The frozen U-Net guides generative synthesis based on DINOv2 conditioning.
+--------------------------------------------------------------------------------
+Frame Image : frame_42.png
+Timestamp   : 42.50s
+Narration   : LoRA weights adapt the U-Net for single-step restoration.
+--------------------------------------------------------------------------------
+Frame Image : frame_43.png
+Timestamp   : 43.50s
+Narration   : A high-fidelity denoised latent is predicted.
+--------------------------------------------------------------------------------
+Frame Image : frame_44.png
+Timestamp   : 44.50s
+Narration   : The pretrained decoder converts the latent back into image space.
+--------------------------------------------------------------------------------
+Frame Image : frame_45.png
+Timestamp   : 45.50s
+Narration   : Producing a super-resolved image with natural textures and minimal artifacts.
+--------------------------------------------------------------------------------

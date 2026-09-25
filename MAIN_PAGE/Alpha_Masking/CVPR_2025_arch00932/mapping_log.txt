@@ -1,0 +1,62 @@
+=== Alpha Masking Sequence ===
+
+Frame Image : frame_00.png
+Timestamp   : 1.00s
+Narration   : First, the framework initiates the uncertainty-aware initial human motion estimation module to predict preliminary full-body motion along with joint uncertainty.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 3.00s
+Narration   : Sparse tracking signals from the head and hand controllers are embedded into observation feature representations.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 5.00s
+Narration   : Concurrently, historical human motion sequences are processed through a pose encoder to extract motion history embeddings.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 6.00s
+Narration   : The observation and historical motion representations are concatenated into a shallow motion representation and combined with temporal position embeddings.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 7.00s
+Narration   : The observation and historical motion representations are concatenated into a shallow motion representation and combined with temporal position embeddings.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 9.00s
+Narration   : A transformer encoder then models temporal dependencies across frames, extracting high-dimensional motion features.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 11.00s
+Narration   : These features feed into a pose regression head to estimate initial poses, while an uncertainty estimation head quantifies joint-level uncertainty.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 13.00s
+Narration   : In the environment point cloud embedding module, the 3D scene point cloud is cropped locally around the estimated human trajectory.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 14.00s
+Narration   : The cropped points are sampled and encoded by a scene encoder to yield environment scene features.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 15.00s
+Narration   : The cropped points are sampled and encoded by a scene encoder to yield environment scene features.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 17.00s
+Narration   : In the refinement stage, uncertainty-guided sampling generates motion hypotheses, while relative head height is computed against the local terrain.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Timestamp   : 19.00s
+Narration   : The sampled poses, head translation, and extended observations are concatenated to form unified motion embeddings.
+--------------------------------------------------------------------------------
+Frame Image : frame_12.png
+Timestamp   : 20.00s
+Narration   : A motion-environment cross-attention module integrates environmental semantics with the motion tokens to produce refined motion representations.
+--------------------------------------------------------------------------------
+Frame Image : frame_13.png
+Timestamp   : 21.00s
+Narration   : A motion-environment cross-attention module integrates environmental semantics with the motion tokens to produce refined motion representations.
+--------------------------------------------------------------------------------
+Frame Image : frame_14.png
+Timestamp   : 23.00s
+Narration   : Finally, contact probabilities are estimated and combined with the refined representation to regress the physically plausible final full-body motion.
+--------------------------------------------------------------------------------

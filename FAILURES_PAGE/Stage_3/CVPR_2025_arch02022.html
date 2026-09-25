@@ -1,0 +1,386 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 410 495" width="410" height="495">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#000000"/>
+    </marker>
+    <style>
+      /* Base ghost opacity */
+      #raster_face_1, #raster_face_2, #raster_face_3, #text_ellipsis_1, #text_ellipsis_2,
+      #block_omni_id_encoder, #bg_omni_id_encoder, #text_omni_id_title_1, #text_omni_id_title_2,
+      #node_feature_extractor, #text_shared_label, #text_feature_extractor_label,
+      #edge_face1_to_extractor, #edge_face2_to_extractor, #edge_face3_to_extractor,
+      #node_rep_z, #edge_extractor_to_z_left, #edge_extractor_to_z_mid, #edge_extractor_to_z_right,
+      #node_query_vector, #node_q_dot, #edge_q_to_dot,
+      #node_cross_attention, #edge_dot_to_cross_q, #edge_z_to_cross_kv,
+      #node_self_attention, #edge_cross_to_self,
+      #node_omni_id_out, #edge_self_to_output {
+        opacity: 0.15;
+      }
+
+      /* Animation bindings */
+      #raster_face_1, #raster_face_2, #raster_face_3, #text_ellipsis_1, #text_ellipsis_2 {
+        animation: anim_ts1 24s infinite;
+      }
+
+      /* Parent persistence: Omni-ID block persists across children steps t2 to t7 */
+      #block_omni_id_encoder, #bg_omni_id_encoder, #text_omni_id_title_1, #text_omni_id_title_2 {
+        animation: anim_parent_t2_t7 24s infinite;
+      }
+
+      #node_feature_extractor, #text_shared_label, #text_feature_extractor_label,
+      #edge_face1_to_extractor, #edge_face2_to_extractor, #edge_face3_to_extractor {
+        animation: anim_ts3 24s infinite;
+      }
+
+      #node_rep_z, #edge_extractor_to_z_left, #edge_extractor_to_z_mid, #edge_extractor_to_z_right {
+        animation: anim_ts4 24s infinite;
+      }
+
+      #node_query_vector, #node_q_dot, #edge_q_to_dot {
+        animation: anim_ts5 24s infinite;
+      }
+
+      #node_cross_attention, #edge_dot_to_cross_q, #edge_z_to_cross_kv {
+        animation: anim_ts6 24s infinite;
+      }
+
+      #node_self_attention, #edge_cross_to_self {
+        animation: anim_ts7 24s infinite;
+      }
+
+      #node_omni_id_out, #edge_self_to_output {
+        animation: anim_ts8 24s infinite;
+      }
+
+      /* Banner animations */
+      #narr_ts1 { animation: anim_banner_ts1 24s infinite; }
+      #narr_ts2 { animation: anim_banner_ts2 24s infinite; }
+      #narr_ts3 { animation: anim_banner_ts3 24s infinite; }
+      #narr_ts4 { animation: anim_banner_ts4 24s infinite; }
+      #narr_ts5 { animation: anim_banner_ts5 24s infinite; }
+      #narr_ts6 { animation: anim_banner_ts6 24s infinite; }
+      #narr_ts7 { animation: anim_banner_ts7 24s infinite; }
+      #narr_ts8 { animation: anim_banner_ts8 24s infinite; }
+
+      /* Keyframes for diagram elements */
+      @keyframes anim_ts1 {
+        0% { opacity: 1.0; }
+        12.499% { opacity: 1.0; }
+        12.5% { opacity: 0.15; }
+        99.999% { opacity: 0.15; }
+        100% { opacity: 1.0; }
+      }
+
+      @keyframes anim_parent_t2_t7 {
+        0% { opacity: 0.15; }
+        12.499% { opacity: 0.15; }
+        12.5% { opacity: 1.0; }
+        87.499% { opacity: 1.0; }
+        87.5% { opacity: 0.15; }
+        100% { opacity: 0.15; }
+      }
+
+      @keyframes anim_ts3 {
+        0% { opacity: 0.15; }
+        24.999% { opacity: 0.15; }
+        25% { opacity: 1.0; }
+        37.499% { opacity: 1.0; }
+        37.5% { opacity: 0.15; }
+        100% { opacity: 0.15; }
+      }
+
+      @keyframes anim_ts4 {
+        0% { opacity: 0.15; }
+        37.499% { opacity: 0.15; }
+        37.5% { opacity: 1.0; }
+        49.999% { opacity: 1.0; }
+        50% { opacity: 0.15; }
+        100% { opacity: 0.15; }
+      }
+
+      @keyframes anim_ts5 {
+        0% { opacity: 0.15; }
+        49.999% { opacity: 0.15; }
+        50% { opacity: 1.0; }
+        62.499% { opacity: 1.0; }
+        62.5% { opacity: 0.15; }
+        100% { opacity: 0.15; }
+      }
+
+      @keyframes anim_ts6 {
+        0% { opacity: 0.15; }
+        62.499% { opacity: 0.15; }
+        62.5% { opacity: 1.0; }
+        74.999% { opacity: 1.0; }
+        75% { opacity: 0.15; }
+        100% { opacity: 0.15; }
+      }
+
+      @keyframes anim_ts7 {
+        0% { opacity: 0.15; }
+        74.999% { opacity: 0.15; }
+        75% { opacity: 1.0; }
+        87.499% { opacity: 1.0; }
+        87.5% { opacity: 0.15; }
+        100% { opacity: 0.15; }
+      }
+
+      @keyframes anim_ts8 {
+        0% { opacity: 0.15; }
+        87.499% { opacity: 0.15; }
+        87.5% { opacity: 1.0; }
+        100% { opacity: 1.0; }
+      }
+
+      /* Banner discrete transitions */
+      @keyframes anim_banner_ts1 {
+        0% { opacity: 1.0; }
+        12.499% { opacity: 1.0; }
+        12.5% { opacity: 0.0; }
+        100% { opacity: 0.0; }
+      }
+
+      @keyframes anim_banner_ts2 {
+        0% { opacity: 0.0; }
+        12.499% { opacity: 0.0; }
+        12.5% { opacity: 1.0; }
+        24.999% { opacity: 1.0; }
+        25% { opacity: 0.0; }
+        100% { opacity: 0.0; }
+      }
+
+      @keyframes anim_banner_ts3 {
+        0% { opacity: 0.0; }
+        24.999% { opacity: 0.0; }
+        25% { opacity: 1.0; }
+        37.499% { opacity: 1.0; }
+        37.5% { opacity: 0.0; }
+        100% { opacity: 0.0; }
+      }
+
+      @keyframes anim_banner_ts4 {
+        0% { opacity: 0.0; }
+        37.499% { opacity: 0.0; }
+        37.5% { opacity: 1.0; }
+        49.999% { opacity: 1.0; }
+        50% { opacity: 0.0; }
+        100% { opacity: 0.0; }
+      }
+
+      @keyframes anim_banner_ts5 {
+        0% { opacity: 0.0; }
+        49.999% { opacity: 0.0; }
+        50% { opacity: 1.0; }
+        62.499% { opacity: 1.0; }
+        62.5% { opacity: 0.0; }
+        100% { opacity: 0.0; }
+      }
+
+      @keyframes anim_banner_ts6 {
+        0% { opacity: 0.0; }
+        62.499% { opacity: 0.0; }
+        62.5% { opacity: 1.0; }
+        74.999% { opacity: 1.0; }
+        75% { opacity: 0.0; }
+        100% { opacity: 0.0; }
+      }
+
+      @keyframes anim_banner_ts7 {
+        0% { opacity: 0.0; }
+        74.999% { opacity: 0.0; }
+        75% { opacity: 1.0; }
+        87.499% { opacity: 1.0; }
+        87.5% { opacity: 0.0; }
+        100% { opacity: 0.0; }
+      }
+
+      @keyframes anim_banner_ts8 {
+        0% { opacity: 0.0; }
+        87.499% { opacity: 0.0; }
+        87.5% { opacity: 1.0; }
+        100% { opacity: 1.0; }
+      }
+    </style>
+  </defs>
+
+  <!-- Enclosing Omni-ID Encoder Block -->
+  <g id="block_omni_id_encoder" data-id="block_omni_id_encoder" data-class="block" data-parent="root">
+    <rect id="bg_omni_id_encoder" data-id="bg_omni_id_encoder" data-class="child_node" data-parent="block_omni_id_encoder" x="3" y="88" width="404" height="272" rx="10" fill="#ffdcdc"/>
+    <text id="text_omni_id_title_1" data-id="text_omni_id_title_1" data-class="text_node" data-parent="block_omni_id_encoder" x="17" y="112" font-family="sans-serif" font-weight="bold" font-size="19" fill="#000000">Omni-ID</text>
+    <text id="text_omni_id_title_2" data-id="text_omni_id_title_2" data-class="text_node" data-parent="block_omni_id_encoder" x="18" y="132" font-family="sans-serif" font-weight="bold" font-size="19" fill="#000000">Encoder</text>
+  </g>
+
+  <!-- Top Input Face Placeholders -->
+  <g id="raster_face_1" data-id="raster_face_1" data-class="raster_node"><image href="rasters/CVPR_2025_arch02022/crop_raster_face_1.png" xlink:href="rasters/CVPR_2025_arch02022/crop_raster_face_1.png" x="109" y="4" width="72" height="74" preserveAspectRatio="xMidYMid meet" /></g>
+
+  <text id="text_ellipsis_1" data-id="text_ellipsis_1" data-class="text_node" data-parent="root" x="188" y="45" font-family="sans-serif" font-weight="bold" font-size="18" fill="#000000">...</text>
+
+  <g id="raster_face_2" data-id="raster_face_2" data-class="raster_node"><image href="rasters/CVPR_2025_arch02022/crop_raster_face_2.png" xlink:href="rasters/CVPR_2025_arch02022/crop_raster_face_2.png" x="216" y="4" width="72" height="74" preserveAspectRatio="xMidYMid meet" /></g>
+
+  <text id="text_ellipsis_2" data-id="text_ellipsis_2" data-class="text_node" data-parent="root" x="295" y="45" font-family="sans-serif" font-weight="bold" font-size="18" fill="#000000">...</text>
+
+  <g id="raster_face_3" data-id="raster_face_3" data-class="raster_node"><image href="rasters/CVPR_2025_arch02022/crop_raster_face_3.png" xlink:href="rasters/CVPR_2025_arch02022/crop_raster_face_3.png" x="323" y="4" width="72" height="74" preserveAspectRatio="xMidYMid meet" /></g>
+
+  <!-- Query Vector q Node -->
+  <g id="node_query_vector" data-id="node_query_vector" data-class="composite_whole" data-parent="block_omni_id_encoder">
+    <text id="text_math_q" data-id="text_math_q" data-class="composite_part" data-parent="node_query_vector" x="15" y="161" font-family="serif" font-style="italic" font-size="24" fill="#000000">q</text>
+    <rect id="rect_query_container" data-id="rect_query_container" data-class="composite_part" data-parent="node_query_vector" x="39" y="139" width="90" height="26" rx="5" fill="#d0d0d0" stroke="#b0b0b0" stroke-width="1.5"/>
+    <rect id="rect_query_cell_1" data-id="rect_query_cell_1" data-class="composite_part" data-parent="node_query_vector" x="45" y="144" width="16" height="16" rx="2" fill="#58595b"/>
+    <rect id="rect_query_cell_2" data-id="rect_query_cell_2" data-class="composite_part" data-parent="node_query_vector" x="65" y="144" width="16" height="16" rx="2" fill="#58595b"/>
+    <rect id="rect_query_cell_3" data-id="rect_query_cell_3" data-class="composite_part" data-parent="node_query_vector" x="85" y="144" width="16" height="16" rx="2" fill="#58595b"/>
+    <rect id="rect_query_cell_4" data-id="rect_query_cell_4" data-class="composite_part" data-parent="node_query_vector" x="105" y="144" width="16" height="16" rx="2" fill="#58595b"/>
+  </g>
+
+  <!-- Feature Extractor Trapezoid -->
+  <g id="node_feature_extractor" data-id="node_feature_extractor" data-class="composite_whole" data-parent="block_omni_id_encoder">
+    <polygon id="poly_feature_extractor" data-id="poly_feature_extractor" data-class="composite_part" data-parent="node_feature_extractor" points="207,120 287,120 268,166 226,166" fill="#ff7da7"/>
+    <text id="text_math_f" data-id="text_math_f" data-class="composite_part" data-parent="node_feature_extractor" x="247" y="152" font-family="serif" font-style="italic" font-size="25" fill="#000000" text-anchor="middle">f</text>
+  </g>
+  <text id="text_shared_label" data-id="text_shared_label" data-class="text_node" data-parent="block_omni_id_encoder" x="350" y="139" font-family="sans-serif" font-size="12" fill="#000000" text-anchor="middle">(Shared)</text>
+  <text id="text_feature_extractor_label" data-id="text_feature_extractor_label" data-class="text_node" data-parent="block_omni_id_encoder" x="350" y="153" font-family="sans-serif" font-size="12" fill="#000000" text-anchor="middle">Feature Extractor</text>
+
+  <!-- Middle Representation z Node -->
+  <g id="node_rep_z" data-id="node_rep_z" data-class="composite_whole" data-parent="block_omni_id_encoder">
+    <rect id="rect_z_outer_bar" data-id="rect_z_outer_bar" data-class="composite_part" data-parent="node_rep_z" x="140" y="206" width="220" height="34" rx="8" fill="#e2e4e8" stroke="#686868" stroke-width="2"/>
+    <!-- Group 1 -->
+    <rect id="rect_z_g1_bg" data-id="rect_z_g1_bg" data-class="composite_part" data-parent="node_rep_z" x="148" y="211" width="44" height="24" rx="4" fill="#c8cbcf"/>
+    <rect id="rect_z_g1_c1" data-id="rect_z_g1_c1" data-class="composite_part" data-parent="node_rep_z" x="152" y="215" width="16" height="16" rx="2" fill="#e86b8b" stroke="#333333" stroke-width="1"/>
+    <rect id="rect_z_g1_c2" data-id="rect_z_g1_c2" data-class="composite_part" data-parent="node_rep_z" x="171" y="215" width="16" height="16" rx="2" fill="#e898aa" stroke="#333333" stroke-width="1"/>
+    <!-- Product Dot 1 -->
+    <circle id="circle_dot_1_outer" data-id="circle_dot_1_outer" data-class="composite_part" data-parent="node_rep_z" cx="210" cy="223" r="6.5" fill="none" stroke="#000000" stroke-width="2"/>
+    <circle id="circle_dot_1_inner" data-id="circle_dot_1_inner" data-class="composite_part" data-parent="node_rep_z" cx="210" cy="223" r="2" fill="#000000"/>
+    <!-- Group 2 -->
+    <rect id="rect_z_g2_bg" data-id="rect_z_g2_bg" data-class="composite_part" data-parent="node_rep_z" x="226" y="211" width="44" height="24" rx="4" fill="#c8cbcf"/>
+    <rect id="rect_z_g2_c1" data-id="rect_z_g2_c1" data-class="composite_part" data-parent="node_rep_z" x="230" y="215" width="16" height="16" rx="2" fill="#e86b8b" stroke="#333333" stroke-width="1"/>
+    <rect id="rect_z_g2_c2" data-id="rect_z_g2_c2" data-class="composite_part" data-parent="node_rep_z" x="249" y="215" width="16" height="16" rx="2" fill="#e898aa" stroke="#333333" stroke-width="1"/>
+    <!-- Product Dot 2 -->
+    <circle id="circle_dot_2_outer" data-id="circle_dot_2_outer" data-class="composite_part" data-parent="node_rep_z" cx="289" cy="223" r="6.5" fill="none" stroke="#000000" stroke-width="2"/>
+    <circle id="circle_dot_2_inner" data-id="circle_dot_2_inner" data-class="composite_part" data-parent="node_rep_z" cx="289" cy="223" r="2" fill="#000000"/>
+    <!-- Group 3 -->
+    <rect id="rect_z_g3_bg" data-id="rect_z_g3_bg" data-class="composite_part" data-parent="node_rep_z" x="306" y="211" width="45" height="24" rx="4" fill="#c8cbcf"/>
+    <rect id="rect_z_g3_c1" data-id="rect_z_g3_c1" data-class="composite_part" data-parent="node_rep_z" x="312" y="215" width="16" height="16" rx="2" fill="#e86b8b" stroke="#333333" stroke-width="1"/>
+    <rect id="rect_z_g3_c2" data-id="rect_z_g3_c2" data-class="composite_part" data-parent="node_rep_z" x="331" y="215" width="16" height="16" rx="2" fill="#9b68a8" stroke="#333333" stroke-width="1"/>
+    <!-- math z label -->
+    <text id="text_math_z" data-id="text_math_z" data-class="composite_part" data-parent="node_rep_z" x="368" y="231" font-family="serif" font-style="italic" font-size="26" fill="#000000">z</text>
+  </g>
+
+  <!-- Outer Circle Dot on Query Path -->
+  <g id="node_q_dot" data-id="node_q_dot" data-class="composite_whole" data-parent="block_omni_id_encoder">
+    <circle id="circle_q_dot_outer" data-id="circle_q_dot_outer" data-class="composite_part" data-parent="node_q_dot" cx="124" cy="223" r="7.5" fill="#ffdcdc" stroke="#000000" stroke-width="2"/>
+    <circle id="circle_q_dot_inner" data-id="circle_q_dot_inner" data-class="composite_part" data-parent="node_q_dot" cx="124" cy="223" r="2.5" fill="#000000"/>
+  </g>
+
+  <!-- Cross Attention Layers Block -->
+  <g id="node_cross_attention" data-id="node_cross_attention" data-class="composite_whole" data-parent="block_omni_id_encoder">
+    <text id="text_cross_att_l1" data-id="text_cross_att_l1" data-class="composite_part" data-parent="node_cross_attention" x="101" y="275" font-family="sans-serif" font-size="12" fill="#000000" text-anchor="end">Cross Attention</text>
+    <text id="text_cross_att_l2" data-id="text_cross_att_l2" data-class="composite_part" data-parent="node_cross_attention" x="101" y="291" font-family="sans-serif" font-size="12" fill="#000000" text-anchor="end">Layers</text>
+    <rect id="rect_cross_att_bar" data-id="rect_cross_att_bar" data-class="composite_part" data-parent="node_cross_attention" x="108" y="263" width="274" height="31" rx="6" fill="#6bc5f8"/>
+    <text id="text_cross_q" data-id="text_cross_q" data-class="composite_part" data-parent="node_cross_attention" x="161" y="285" font-family="serif" font-style="italic" font-size="22" fill="#000000" text-anchor="middle">Q</text>
+    <text id="text_cross_kv" data-id="text_cross_kv" data-class="composite_part" data-parent="node_cross_attention" x="250" y="285" font-family="serif" font-style="italic" font-size="22" fill="#000000" text-anchor="middle">K, V</text>
+  </g>
+
+  <!-- Self Attention Layers Block -->
+  <g id="node_self_attention" data-id="node_self_attention" data-class="composite_whole" data-parent="block_omni_id_encoder">
+    <text id="text_self_att_l1" data-id="text_self_att_l1" data-class="composite_part" data-parent="node_self_attention" x="101" y="329" font-family="sans-serif" font-size="12" fill="#000000" text-anchor="end">Self Attention</text>
+    <text id="text_self_att_l2" data-id="text_self_att_l2" data-class="composite_part" data-parent="node_self_attention" x="101" y="345" font-family="sans-serif" font-size="12" fill="#000000" text-anchor="end">Layers</text>
+    <rect id="rect_self_att_bar" data-id="rect_self_att_bar" data-class="composite_part" data-parent="node_self_attention" x="108" y="318" width="274" height="30" rx="6" fill="#0096ff"/>
+  </g>
+
+  <!-- Output Omni-ID Block -->
+  <g id="node_omni_id_out" data-id="node_omni_id_out" data-class="composite_whole" data-parent="root">
+    <rect id="rect_out_container" data-id="rect_out_container" data-class="composite_part" data-parent="node_omni_id_out" x="109" y="378" width="91" height="31" rx="8" fill="#e2e4e8" stroke="#555555" stroke-width="2"/>
+    <rect id="rect_out_c1" data-id="rect_out_c1" data-class="composite_part" data-parent="node_omni_id_out" x="116" y="385" width="16" height="16" rx="2" fill="#4cd859" stroke="#333333" stroke-width="1"/>
+    <rect id="rect_out_c2" data-id="rect_out_c2" data-class="composite_part" data-parent="node_omni_id_out" x="136" y="385" width="16" height="16" rx="2" fill="#4cb0e8" stroke="#333333" stroke-width="1"/>
+    <rect id="rect_out_c3" data-id="rect_out_c3" data-class="composite_part" data-parent="node_omni_id_out" x="156" y="385" width="16" height="16" rx="2" fill="#e6324b" stroke="#333333" stroke-width="1"/>
+    <rect id="rect_out_c4" data-id="rect_out_c4" data-class="composite_part" data-parent="node_omni_id_out" x="176" y="385" width="16" height="16" rx="2" fill="#f8e7a6" stroke="#333333" stroke-width="1"/>
+    <text id="text_omni_id_final" data-id="text_omni_id_final" data-class="composite_part" data-parent="node_omni_id_out" x="211" y="401" font-family="sans-serif" font-weight="bold" font-size="18" fill="#000000">Omni-ID</text>
+    <text id="text_omni_id_ell" data-id="text_omni_id_ell" data-class="composite_part" data-parent="node_omni_id_out" x="299" y="401" font-family="serif" font-style="italic" font-size="22" fill="#000000">&#x2113;</text>
+  </g>
+
+  <!-- Edges and Routing -->
+  <g>
+    <!-- Face 1 to Feature Extractor -->
+    <path id="edge_face1_to_extractor" data-id="edge_face1_to_extractor" data-class="edge" data-source="raster_face_1" data-target="node_feature_extractor" d="M 131 78 L 131 103 L 227 103 L 227 118" fill="none" stroke="#000000" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <!-- Face 2 to Feature Extractor -->
+    <line id="edge_face2_to_extractor" data-id="edge_face2_to_extractor" data-class="edge" data-source="raster_face_2" data-target="node_feature_extractor" x1="248" y1="78" x2="248" y2="118" fill="none" stroke="#000000" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <!-- Face 3 to Feature Extractor -->
+    <path id="edge_face3_to_extractor" data-id="edge_face3_to_extractor" data-class="edge" data-source="raster_face_3" data-target="node_feature_extractor" d="M 370 78 L 370 103 L 268 103 L 268 118" fill="none" stroke="#000000" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <!-- Feature Extractor to z Subgroups -->
+    <path id="edge_extractor_to_z_left" data-id="edge_extractor_to_z_left" data-class="edge" data-source="node_feature_extractor" data-target="node_rep_z" d="M 226 175 L 170 175 L 170 204" fill="none" stroke="#000000" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <line id="edge_extractor_to_z_mid" data-id="edge_extractor_to_z_mid" data-class="edge" data-source="node_feature_extractor" data-target="node_rep_z" x1="248" y1="166" x2="248" y2="204" fill="none" stroke="#000000" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <path id="edge_extractor_to_z_right" data-id="edge_extractor_to_z_right" data-class="edge" data-source="node_feature_extractor" data-target="node_rep_z" d="M 268 175 L 351 175 L 351 204" fill="none" stroke="#000000" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <!-- Query Vector q to Circle Dot -->
+    <path id="edge_q_to_dot" data-id="edge_q_to_dot" data-class="edge" data-source="node_query_vector" data-target="node_q_dot" d="M 84 165 L 84 223 L 115 223" fill="none" stroke="#000000" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <!-- Circle Dot to Cross Attention Q -->
+    <path id="edge_dot_to_cross_q" data-id="edge_dot_to_cross_q" data-class="edge" data-source="node_q_dot" data-target="node_cross_attention" d="M 124 231 L 124 252 L 162 252 L 162 261" fill="none" stroke="#000000" stroke-width="2.5"/>
+
+    <!-- Middle Representation z to Cross Attention KV -->
+    <line id="edge_z_to_cross_kv" data-id="edge_z_to_cross_kv" data-class="edge" data-source="node_rep_z" data-target="node_cross_attention" x1="248" y1="240" x2="248" y2="261" fill="none" stroke="#000000" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <!-- Cross Attention to Self Attention (Dashed) -->
+    <line id="edge_cross_to_self" data-id="edge_cross_to_self" data-class="edge" data-source="node_cross_attention" data-target="node_self_attention" x1="162" y1="294" x2="162" y2="316" fill="none" stroke="#000000" stroke-width="2" stroke-dasharray="4,3"/>
+
+    <!-- Self Attention to Output Omni-ID (Dashed) -->
+    <line id="edge_self_to_output" data-id="edge_self_to_output" data-class="edge" data-source="node_self_attention" data-target="node_omni_id_out" x1="162" y1="348" x2="162" y2="376" fill="none" stroke="#000000" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+  </g>
+
+  <!-- Dynamic Narration Banner -->
+  <g id="narration_banner">
+    <!-- Subtitle t1 -->
+    <text id="narr_ts1" x="50%" y="435" font-family="sans-serif" font-size="11" fill="#222222" text-anchor="middle" font-weight="500">
+      <tspan x="50%" dy="0">The framework begins with a set of unstructured facial</tspan>
+      <tspan x="50%" dy="1.25em">images depicting an individual across diverse poses,</tspan>
+      <tspan x="50%" dy="1.25em">expressions, and lighting conditions.</tspan>
+    </text>
+
+    <!-- Subtitle t2 -->
+    <text id="narr_ts2" x="50%" y="440" font-family="sans-serif" font-size="11" fill="#222222" text-anchor="middle" font-weight="500">
+      <tspan x="50%" dy="0">These images are processed by the Omni-ID</tspan>
+      <tspan x="50%" dy="1.25em">Encoder to construct a comprehensive identity representation.</tspan>
+    </text>
+
+    <!-- Subtitle t3 -->
+    <text id="narr_ts3" x="50%" y="440" font-family="sans-serif" font-size="11" fill="#222222" text-anchor="middle" font-weight="500">
+      <tspan x="50%" dy="0">Each input face is first passed through a shared</tspan>
+      <tspan x="50%" dy="1.25em">feature extractor to compute individual token features.</tspan>
+    </text>
+
+    <!-- Subtitle t4 -->
+    <text id="narr_ts4" x="50%" y="440" font-family="sans-serif" font-size="11" fill="#222222" text-anchor="middle" font-weight="500">
+      <tspan x="50%" dy="0">The individual image tokens are concatenated along the</tspan>
+      <tspan x="50%" dy="1.25em">token axis into a unified image-set feature representation.</tspan>
+    </text>
+
+    <!-- Subtitle t5 -->
+    <text id="narr_ts5" x="50%" y="440" font-family="sans-serif" font-size="11" fill="#222222" text-anchor="middle" font-weight="500">
+      <tspan x="50%" dy="0">In parallel, a sequence of learnable,</tspan>
+      <tspan x="50%" dy="1.25em">semantic-aware query tokens is initialized.</tspan>
+    </text>
+
+    <!-- Subtitle t6 -->
+    <text id="narr_ts6" x="50%" y="435" font-family="sans-serif" font-size="11" fill="#222222" text-anchor="middle" font-weight="500">
+      <tspan x="50%" dy="0">Within the cross-attention layers, the learnable queries attend</tspan>
+      <tspan x="50%" dy="1.25em">to the image-set features injected as keys and values to</tspan>
+      <tspan x="50%" dy="1.25em">aggregate shared identity attributes.</tspan>
+    </text>
+
+    <!-- Subtitle t7 -->
+    <text id="narr_ts7" x="50%" y="440" font-family="sans-serif" font-size="11" fill="#222222" text-anchor="middle" font-weight="500">
+      <tspan x="50%" dy="0">Subsequent self-attention layers further refine these</tspan>
+      <tspan x="50%" dy="1.25em">feature interactions across the token sequence.</tspan>
+    </text>
+
+    <!-- Subtitle t8 -->
+    <text id="narr_ts8" x="50%" y="440" font-family="sans-serif" font-size="11" fill="#222222" text-anchor="middle" font-weight="500">
+      <tspan x="50%" dy="0">Finally, the architecture outputs the holistic Omni-ID</tspan>
+      <tspan x="50%" dy="1.25em">embedding, tailored for downstream generative face synthesis.</tspan>
+    </text>
+  </g>
+</svg>

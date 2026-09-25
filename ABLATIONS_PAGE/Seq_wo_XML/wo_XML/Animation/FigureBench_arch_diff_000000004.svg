@@ -1,0 +1,386 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 470" width="1000" height="470">
+  <defs>
+    <!-- Arrow Markers -->
+    <marker id="arrow-gray" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#7f7f7f"/>
+    </marker>
+    <marker id="arrow-orange" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#f0966a"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#00b074"/>
+    </marker>
+
+    <style>
+      #focus_box {
+        animation: hop 40s step-end infinite;
+      }
+
+      @keyframes hop {
+        0.00% { x: -4px; y: 147px; width: 120px; height: 127px; }
+        3.85% { x: 133px; y: 108px; width: 24px; height: 209px; }
+        7.69% { x: 161px; y: 111px; width: 132px; height: 198px; }
+        11.54% { x: 161px; y: 111px; width: 132px; height: 198px; }
+        15.38% { x: 184px; y: 121px; width: 18px; height: 178px; }
+        19.23% { x: 206px; y: 121px; width: 18px; height: 178px; }
+        23.08% { x: 229px; y: 121px; width: 18px; height: 178px; }
+        26.92% { x: 250px; y: 121px; width: 18px; height: 178px; }
+        30.77% { x: 191px; y: 43px; width: 92px; height: 49px; }
+        34.62% { x: 308px; y: 115px; width: 41px; height: 194px; }
+        38.46% { x: 382px; y: 68px; width: 114px; height: 114px; }
+        42.31% { x: 382px; y: 68px; width: 114px; height: 114px; }
+        46.15% { x: 400px; y: 73px; width: 42px; height: 93px; }
+        50.00% { x: 439px; y: 73px; width: 41px; height: 93px; }
+        53.85% { x: 405px; y: 224px; width: 70px; height: 104px; }
+        57.69% { x: 503px; y: 192px; width: 36px; height: 36px; }
+        61.54% { x: 555px; y: 181px; width: 53px; height: 64px; }
+        65.38% { x: 520px; y: -2px; width: 113px; height: 56px; }
+        69.23% { x: 614px; y: 115px; width: 41px; height: 194px; }
+        73.08% { x: 688px; y: 68px; width: 114px; height: 114px; }
+        76.92% { x: 688px; y: 68px; width: 114px; height: 114px; }
+        80.77% { x: 706px; y: 73px; width: 42px; height: 93px; }
+        84.62% { x: 745px; y: 73px; width: 41px; height: 93px; }
+        88.46% { x: 692px; y: 207px; width: 112px; height: 131px; }
+        92.31% { x: 815px; y: 192px; width: 36px; height: 36px; }
+        96.15% { x: 868px; y: 145px; width: 120px; height: 127px; }
+        100.00% { x: -4px; y: 147px; width: 120px; height: 127px; }
+      }
+
+      .narr_text {
+        opacity: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        fill: #1a202c;
+        animation-duration: 40s;
+        animation-timing-function: step-end;
+        animation-iteration-count: infinite;
+      }
+
+      #narr_ts1 { animation-name: narr_anim_1; }
+      #narr_ts2 { animation-name: narr_anim_2; }
+      #narr_ts3 { animation-name: narr_anim_3; }
+      #narr_ts4 { animation-name: narr_anim_4; }
+      #narr_ts5 { animation-name: narr_anim_5; }
+      #narr_ts6 { animation-name: narr_anim_6; }
+      #narr_ts7 { animation-name: narr_anim_7; }
+      #narr_ts8 { animation-name: narr_anim_8; }
+      #narr_ts9 { animation-name: narr_anim_9; }
+      #narr_ts10 { animation-name: narr_anim_10; }
+      #narr_ts11 { animation-name: narr_anim_11; }
+      #narr_ts12 { animation-name: narr_anim_12; }
+      #narr_ts13 { animation-name: narr_anim_13; }
+      #narr_ts14 { animation-name: narr_anim_14; }
+      #narr_ts15 { animation-name: narr_anim_15; }
+      #narr_ts16 { animation-name: narr_anim_16; }
+      #narr_ts17 { animation-name: narr_anim_17; }
+      #narr_ts18 { animation-name: narr_anim_18; }
+      #narr_ts19 { animation-name: narr_anim_19; }
+      #narr_ts20 { animation-name: narr_anim_20; }
+      #narr_ts21 { animation-name: narr_anim_21; }
+      #narr_ts22 { animation-name: narr_anim_22; }
+      #narr_ts23 { animation-name: narr_anim_23; }
+      #narr_ts24 { animation-name: narr_anim_24; }
+      #narr_ts25 { animation-name: narr_anim_25; }
+      #narr_ts26 { animation-name: narr_anim_26; }
+
+      @keyframes narr_anim_1 { 0% { opacity: 1; } 3.85% { opacity: 0; } 100% { opacity: 0; } }
+      @keyframes narr_anim_2 { 0% { opacity: 0; } 3.85% { opacity: 1; } 7.69% { opacity: 0; } 100% { opacity: 0; } }
+      @keyframes narr_anim_3 { 0% { opacity: 0; } 7.69% { opacity: 1; } 11.54% { opacity: 0; } 100% { opacity: 0; } }
+      @keyframes narr_anim_4 { 0% { opacity: 0; } 11.54% { opacity: 1; } 15.38% { opacity: 0; } 100% { opacity: 0; } }
+      @keyframes narr_anim_5 { 0% { opacity: 0; } 15.38% { opacity: 1; } 19.23% { opacity: 0; } 100% { opacity: 0; } }
+      @keyframes narr_anim_6 { 0% { opacity: 0; } 19.23% { opacity: 1; } 23.08% { opacity: 0; } 100% { opacity: 0; } }
+      @keyframes narr_anim_7 { 0% { opacity: 0; } 23.08% { opacity: 1; } 26.92% { opacity: 0; } 100% { opacity: 0; } }
+      @keyframes narr_anim_8 { 0% { opacity: 0; } 26.92% { opacity: 1; } 30.77% { opacity: 0; } 100% { opacity: 0; } }
+      @keyframes narr_anim_9 { 0% { opacity: 0; } 30.77% { opacity: 1; } 34.62% { opacity: 0; } 100% { opacity: 0; } }
+      @keyframes narr_anim_10 { 0% { opacity: 0; } 34.62% { opacity: 1; } 38.46% { opacity: 0; } 100% { opacity: 0; } }
+      @keyframes narr_anim_11 { 0% { opacity: 0; } 38.46% { opacity: 1; } 42.31% { opacity: 0; } 100% { opacity: 0; } }
+      @keyframes narr_anim_12 { 0% { opacity: 0; } 42.31% { opacity: 1; } 46.15% { opacity: 0; } 100% { opacity: 0; } }
+      @keyframes narr_anim_13 { 0% { opacity: 0; } 46.15% { opacity: 1; } 50.00% { opacity: 0; } 100% { opacity: 0; } }
+      @keyframes narr_anim_14 { 0% { opacity: 0; } 50.00% { opacity: 1; } 53.85% { opacity: 0; } 100% { opacity: 0; } }
+      @keyframes narr_anim_15 { 0% { opacity: 0; } 53.85% { opacity: 1; } 57.69% { opacity: 0; } 100% { opacity: 0; } }
+      @keyframes narr_anim_16 { 0% { opacity: 0; } 57.69% { opacity: 1; } 61.54% { opacity: 0; } 100% { opacity: 0; } }
+      @keyframes narr_anim_17 { 0% { opacity: 0; } 61.54% { opacity: 1; } 65.38% { opacity: 0; } 100% { opacity: 0; } }
+      @keyframes narr_anim_18 { 0% { opacity: 0; } 65.38% { opacity: 1; } 69.23% { opacity: 0; } 100% { opacity: 0; } }
+      @keyframes narr_anim_19 { 0% { opacity: 0; } 69.23% { opacity: 1; } 73.08% { opacity: 0; } 100% { opacity: 0; } }
+      @keyframes narr_anim_20 { 0% { opacity: 0; } 73.08% { opacity: 1; } 76.92% { opacity: 0; } 100% { opacity: 0; } }
+      @keyframes narr_anim_21 { 0% { opacity: 0; } 76.92% { opacity: 1; } 80.77% { opacity: 0; } 100% { opacity: 0; } }
+      @keyframes narr_anim_22 { 0% { opacity: 0; } 80.77% { opacity: 1; } 84.62% { opacity: 0; } 100% { opacity: 0; } }
+      @keyframes narr_anim_23 { 0% { opacity: 0; } 84.62% { opacity: 1; } 88.46% { opacity: 0; } 100% { opacity: 0; } }
+      @keyframes narr_anim_24 { 0% { opacity: 0; } 88.46% { opacity: 1; } 92.31% { opacity: 0; } 100% { opacity: 0; } }
+      @keyframes narr_anim_25 { 0% { opacity: 0; } 92.31% { opacity: 1; } 96.15% { opacity: 0; } 100% { opacity: 0; } }
+      @keyframes narr_anim_26 { 0% { opacity: 0; } 96.15% { opacity: 1; } 100.00% { opacity: 1; } }
+    </style>
+  </defs>
+
+  <!-- ==================== BACKGROUNDS & BLOCKS ==================== -->
+  
+  <!-- Image Encoder Block (Transformer Block) -->
+  <g data-id="block-transformer" id="block-transformer" data-class="block" data-parent="root">
+    <rect data-id="rect-tb-bg" id="rect-tb-bg" data-class="child_node" data-parent="block-transformer" x="165" y="115" width="124" height="190" rx="20" ry="20" fill="#d9e1ec" stroke="#bac8d9" stroke-width="1.5"/>
+    <rect data-id="rect-tb-col1" id="rect-tb-col1" data-class="child_node" data-parent="block-transformer" x="188" y="125" width="10" height="170" rx="2" fill="#58a379" stroke="#375a45" stroke-width="1"/>
+    <rect data-id="rect-tb-col2" id="rect-tb-col2" data-class="child_node" data-parent="block-transformer" x="210" y="125" width="10" height="170" rx="2" fill="#58a379" stroke="#375a45" stroke-width="1"/>
+    <rect data-id="rect-tb-col3" id="rect-tb-col3" data-class="child_node" data-parent="block-transformer" x="233" y="125" width="10" height="170" rx="2" fill="#58a379" stroke="#375a45" stroke-width="1"/>
+    <rect data-id="rect-tb-col4" id="rect-tb-col4" data-class="child_node" data-parent="block-transformer" x="254" y="125" width="10" height="170" rx="2" fill="#58a379" stroke="#375a45" stroke-width="1"/>
+  </g>
+
+  <!-- Down Sampler Trapezoid -->
+  <g data-id="node-downsampler" id="node-downsampler" data-class="standalone_node" data-parent="root">
+    <polygon points="137,112 153,116 153,308 137,313" fill="#f4f8fa" stroke="#333333" stroke-width="1.2"/>
+    <text x="-212" y="147" transform="rotate(-90)" font-family="sans-serif" font-size="13" fill="#555555" text-anchor="middle">Down Sampler</text>
+  </g>
+
+  <!-- LoRA Layers Block -->
+  <g data-id="block-lora" id="block-lora" data-class="composite_whole" data-parent="root">
+    <!-- Col 1 -->
+    <path data-id="part-lora-1a" id="part-lora-1a" data-class="composite_part" data-parent="block-lora" d="M 195 47 L 204 51 L 204 84 L 195 88 Z" fill="#cf7f79" stroke="#333333" stroke-width="0.8"/>
+    <path data-id="part-lora-1b" id="part-lora-1b" data-class="composite_part" data-parent="block-lora" d="M 213 47 L 204 51 L 204 84 L 213 88 Z" fill="#cf7f79" stroke="#333333" stroke-width="0.8"/>
+    <!-- Col 2 -->
+    <path data-id="part-lora-2a" id="part-lora-2a" data-class="composite_part" data-parent="block-lora" d="M 217 47 L 226 51 L 226 84 L 217 88 Z" fill="#cf7f79" stroke="#333333" stroke-width="0.8"/>
+    <path data-id="part-lora-2b" id="part-lora-2b" data-class="composite_part" data-parent="block-lora" d="M 235 47 L 226 51 L 226 84 L 235 88 Z" fill="#cf7f79" stroke="#333333" stroke-width="0.8"/>
+    <!-- Col 3 -->
+    <path data-id="part-lora-3a" id="part-lora-3a" data-class="composite_part" data-parent="block-lora" d="M 240 47 L 249 51 L 249 84 L 240 88 Z" fill="#cf7f79" stroke="#333333" stroke-width="0.8"/>
+    <path data-id="part-lora-3b" id="part-lora-3b" data-class="composite_part" data-parent="block-lora" d="M 258 47 L 249 51 L 249 84 L 258 88 Z" fill="#cf7f79" stroke="#333333" stroke-width="0.8"/>
+    <!-- Col 4 -->
+    <path data-id="part-lora-4a" id="part-lora-4a" data-class="composite_part" data-parent="block-lora" d="M 261 47 L 270 51 L 270 84 L 261 88 Z" fill="#cf7f79" stroke="#333333" stroke-width="0.8"/>
+    <path data-id="part-lora-4b" id="part-lora-4b" data-class="composite_part" data-parent="block-lora" d="M 279 47 L 270 51 L 270 84 L 279 88 Z" fill="#cf7f79" stroke="#333333" stroke-width="0.8"/>
+  </g>
+
+  <!-- Input CT Image Placeholder -->
+  <g id="raster-input-image" data-id="raster-input-image" data-class="raster_node"><image href="../../rasters/FigureBench_arch_diff_000000004/crop_raster-input-image.png" xlink:href="../../rasters/FigureBench_arch_diff_000000004/crop_raster-input-image.png" x="0" y="151" width="112" height="119" preserveAspectRatio="xMidYMid meet" /></g>
+
+  <!-- Image Embeddings Bar 1 -->
+  <g data-id="node-image-embeddings" id="node-image-embeddings" data-class="standalone_node" data-parent="root">
+    <rect x="312" y="119" width="33" height="186" rx="5" ry="5" fill="#ffffff" stroke="#223b54" stroke-width="1.5"/>
+    <rect x="319" y="128" width="19" height="19" rx="2" fill="#cce6ff" stroke="#333" stroke-width="1"/>
+    <rect x="319" y="156" width="19" height="19" rx="2" fill="#ffff80" stroke="#333" stroke-width="1"/>
+    <rect x="319" y="185" width="19" height="19" rx="2" fill="#b3ffb3" stroke="#333" stroke-width="1"/>
+    <rect x="319" y="215" width="19" height="19" rx="2" fill="#80e5ff" stroke="#333" stroke-width="1"/>
+    <rect x="319" y="244" width="19" height="19" rx="2" fill="#80ffff" stroke="#333" stroke-width="1"/>
+    <rect x="319" y="274" width="19" height="19" rx="2" fill="#ccd9e8" stroke="#333" stroke-width="1"/>
+  </g>
+
+  <!-- CMAttn Block -->
+  <g data-id="node-cmattn" id="node-cmattn" data-class="standalone_node" data-parent="root">
+    <rect x="524" y="2" width="105" height="48" rx="10" ry="10" fill="#f4d1c9" stroke="#1d2b3a" stroke-width="1.5"/>
+    <text x="576" y="32" font-family="sans-serif" font-size="18" fill="#000000" text-anchor="middle">CMAttn</text>
+  </g>
+
+  <!-- Transformer Decoder 1 Block -->
+  <g data-id="block-tf-decoder-1" id="block-tf-decoder-1" data-class="block" data-parent="root">
+    <rect data-id="rect-tfd1-bg" id="rect-tfd1-bg" data-class="child_node" data-parent="block-tf-decoder-1" x="386" y="72" width="106" height="106" rx="15" ry="15" fill="#fefee0" stroke="#fcf3be" stroke-width="1"/>
+    <!-- Self Atten Box -->
+    <rect data-id="node-sa-1" id="node-sa-1" data-class="child_node" data-parent="block-tf-decoder-1" x="404" y="77" width="34" height="85" fill="#ffffd9" stroke="#333333" stroke-width="1"/>
+    <text x="-120" y="425" transform="rotate(-90)" font-family="sans-serif" font-size="13" fill="#000000" text-anchor="middle">Self Atten.</text>
+    <!-- Cross Atten Box -->
+    <rect data-id="node-ca-1" id="node-ca-1" data-class="child_node" data-parent="block-tf-decoder-1" x="443" y="77" width="33" height="85" fill="#ffffd9" stroke="#333333" stroke-width="1"/>
+    <text x="-120" y="465" transform="rotate(-90)" font-family="sans-serif" font-size="13" fill="#000000" text-anchor="middle">Cross Atten.</text>
+  </g>
+
+  <!-- Pixel Decoder 1 Trapezoid & Slices -->
+  <g data-id="node-pixel-decoder-1" id="node-pixel-decoder-1" data-class="composite_whole" data-parent="root">
+    <polygon data-id="part-pd1-trap" id="part-pd1-trap" data-class="composite_part" data-parent="node-pixel-decoder-1" points="409,245 471,228 471,324 409,308" fill="#dbeef0" stroke="#333333" stroke-width="1.2"/>
+    <!-- Slice 1 -->
+    <polygon data-id="part-pd1-s1" id="part-pd1-s1" data-class="composite_part" data-parent="node-pixel-decoder-1" points="419,252 429,249 433,256 433,299 423,302 419,294" fill="#d3e2ee" stroke="#333" stroke-width="0.8"/>
+    <!-- Slice 2 -->
+    <polygon data-id="part-pd1-s2" id="part-pd1-s2" data-class="composite_part" data-parent="node-pixel-decoder-1" points="446,244 456,241 460,248 460,310 450,313 446,305" fill="#d3e2ee" stroke="#333" stroke-width="0.8"/>
+  </g>
+
+  <!-- Multiplication Node 1 -->
+  <g data-id="node-mult-1" id="node-mult-1" data-class="standalone_node" data-parent="root">
+    <circle cx="521" cy="210" r="14" fill="#ffffff" stroke="#333333" stroke-width="1.2"/>
+    <line x1="511" y1="200" x2="531" y2="220" stroke="#333333" stroke-width="1.2"/>
+    <line x1="531" y1="200" x2="511" y2="220" stroke="#333333" stroke-width="1.2"/>
+  </g>
+
+  <!-- Probabilistic Map Placeholder -->
+  <g data-id="node-prob-map" id="node-prob-map" data-class="composite_whole" data-parent="root">
+    <!-- Slice 1 -->
+    <polygon data-id="part-pm-s1" id="part-pm-s1" data-class="composite_part" data-parent="node-prob-map" points="559,185 578,197 578,241 559,229" fill="#111111" stroke="#333" stroke-width="1"/>
+    <!-- Ellipse feature in slice 1 -->
+    <path data-id="part-pm-f1" id="part-pm-f1" data-class="composite_part" data-parent="node-prob-map" d="M 565,200 Q 572,207 568,217" fill="none" stroke="#fff" stroke-width="2"/>
+    <!-- Slice 2 -->
+    <polygon data-id="part-pm-s2" id="part-pm-s2" data-class="composite_part" data-parent="node-prob-map" points="585,185 604,197 604,241 585,229" fill="#111111" stroke="#333" stroke-width="1"/>
+    <!-- Ellipse feature in slice 2 -->
+    <circle data-id="part-pm-f2" id="part-pm-f2" data-class="composite_part" data-parent="node-prob-map" cx="594" cy="213" r="2" fill="#fff"/>
+    <!-- Dotted connector between slices -->
+    <line data-id="part-pm-dots" id="part-pm-dots" data-class="composite_part" data-parent="node-prob-map" x1="578" y1="213" x2="585" y2="213" stroke="#000" stroke-width="1.5" stroke-dasharray="1.5,1.5"/>
+  </g>
+
+  <!-- Enhanced Image Embeddings Bar -->
+  <g data-id="node-enhanced-embeddings" id="node-enhanced-embeddings" data-class="standalone_node" data-parent="root">
+    <rect x="618" y="119" width="33" height="186" rx="5" ry="5" fill="#ffffff" stroke="#223b54" stroke-width="1.5"/>
+    <rect x="625" y="128" width="19" height="19" rx="2" fill="#cce6ff" stroke="#333" stroke-width="1"/>
+    <rect x="625" y="156" width="19" height="19" rx="2" fill="#ffff80" stroke="#333" stroke-width="1"/>
+    <rect x="625" y="185" width="19" height="19" rx="2" fill="#b3ffb3" stroke="#333" stroke-width="1"/>
+    <rect x="625" y="215" width="19" height="19" rx="2" fill="#80e5ff" stroke="#333" stroke-width="1"/>
+    <rect x="625" y="244" width="19" height="19" rx="2" fill="#80ffff" stroke="#333" stroke-width="1"/>
+    <rect x="625" y="274" width="19" height="19" rx="2" fill="#ccd9e8" stroke="#333" stroke-width="1"/>
+  </g>
+
+  <!-- Transformer Decoder 2 Block -->
+  <g data-id="block-tf-decoder-2" id="block-tf-decoder-2" data-class="block" data-parent="root">
+    <rect data-id="rect-tfd2-bg" id="rect-tfd2-bg" data-class="child_node" data-parent="block-tf-decoder-2" x="692" y="72" width="106" height="106" rx="15" ry="15" fill="#fefee0" stroke="#fcf3be" stroke-width="1"/>
+    <!-- Mask Atten Box -->
+    <rect data-id="node-ma-2" id="node-ma-2" data-class="child_node" data-parent="block-tf-decoder-2" x="710" y="77" width="34" height="85" fill="#f5af98" stroke="#333333" stroke-width="1"/>
+    <text x="-120" y="731" transform="rotate(-90)" font-family="sans-serif" font-size="13" fill="#000000" text-anchor="middle">Mask Atten.</text>
+    <!-- Self Atten Box -->
+    <rect data-id="node-sa-2" id="node-sa-2" data-class="child_node" data-parent="block-tf-decoder-2" x="749" y="77" width="33" height="85" fill="#ffffd9" stroke="#333333" stroke-width="1"/>
+    <text x="-120" y="771" transform="rotate(-90)" font-family="sans-serif" font-size="13" fill="#000000" text-anchor="middle">Self Atten.</text>
+  </g>
+
+  <!-- Pixel Decoder 2 Trapezoid & Slices -->
+  <g data-id="node-pixel-decoder-2" id="node-pixel-decoder-2" data-class="composite_whole" data-parent="root">
+    <polygon data-id="part-pd2-trap" id="part-pd2-trap" data-class="composite_part" data-parent="node-pixel-decoder-2" points="696,238 800,211 800,334 696,307" fill="#dbeef0" stroke="#333333" stroke-width="1.2"/>
+    <!-- pd2 slices -->
+    <polygon data-id="part-pd2-s1" id="part-pd2-s1" data-class="composite_part" data-parent="node-pixel-decoder-2" points="706,249 718,245 722,253 722,298 710,302 706,294" fill="#788fa6" stroke="#333" stroke-width="0.8"/>
+    <polygon data-id="part-pd2-s2" id="part-pd2-s2" data-class="composite_part" data-parent="node-pixel-decoder-2" points="737,238 749,234 753,242 753,306 741,310 737,302" fill="#d3e2ee" stroke="#333" stroke-width="0.8"/>
+    <polygon data-id="part-pd2-s3" id="part-pd2-s3" data-class="composite_part" data-parent="node-pixel-decoder-2" points="748,242 757,239 761,246 761,310 752,313 748,306" fill="#788fa6" stroke="#333" stroke-width="0.8"/>
+    <polygon data-id="part-pd2-s4" id="part-pd2-s4" data-class="composite_part" data-parent="node-pixel-decoder-2" points="773,227 783,224 787,232 787,321 777,324 773,316" fill="#788fa6" stroke="#333" stroke-width="0.8"/>
+  </g>
+
+  <!-- Multiplication Node 2 -->
+  <g data-id="node-mult-2" id="node-mult-2" data-class="standalone_node" data-parent="root">
+    <circle cx="833" cy="210" r="14" fill="#ffffff" stroke="#333333" stroke-width="1.2"/>
+    <line x1="823" y1="200" x2="843" y2="220" stroke="#333333" stroke-width="1.2"/>
+    <line x1="843" y1="200" x2="823" y2="220" stroke="#333333" stroke-width="1.2"/>
+  </g>
+
+  <!-- Output Prediction Placeholder -->
+  <g id="raster-output-image" data-id="raster-output-image" data-class="raster_node"><image href="../../rasters/FigureBench_arch_diff_000000004/crop_raster-output-image.png" xlink:href="../../rasters/FigureBench_arch_diff_000000004/crop_raster-output-image.png" x="872" y="149" width="112" height="119" preserveAspectRatio="xMidYMid meet" /></g>
+
+  <!-- ==================== CONNECTING EDGES ==================== -->
+  
+  <!-- LoRA Bidirectional Arrows -->
+  <path data-id="edge-lora-1" id="edge-lora-1" data-class="edge" data-source="block-transformer" data-target="block-lora" d="M 193 115 L 193 88" stroke="#7f7f7f" stroke-width="1.2" marker-end="url(#arrow-gray)"/>
+  <path data-id="edge-lora-1-down" id="edge-lora-1-down" data-class="edge" data-source="block-lora" data-target="block-transformer" d="M 205 88 L 205 115" stroke="#7f7f7f" stroke-width="1.2" marker-end="url(#arrow-gray)"/>
+  <path data-id="edge-lora-2" id="edge-lora-2" data-class="edge" data-source="block-transformer" data-target="block-lora" d="M 215 115 L 215 88" stroke="#7f7f7f" stroke-width="1.2" marker-end="url(#arrow-gray)"/>
+  <path data-id="edge-lora-2-down" id="edge-lora-2-down" data-class="edge" data-source="block-lora" data-target="block-transformer" d="M 227 88 L 227 115" stroke="#7f7f7f" stroke-width="1.2" marker-end="url(#arrow-gray)"/>
+  <path data-id="edge-lora-3" id="edge-lora-3" data-class="edge" data-source="block-transformer" data-target="block-lora" d="M 238 115 L 238 88" stroke="#7f7f7f" stroke-width="1.2" marker-end="url(#arrow-gray)"/>
+  <path data-id="edge-lora-3-down" id="edge-lora-3-down" data-class="edge" data-source="block-lora" data-target="block-transformer" d="M 249 88 L 249 115" stroke="#7f7f7f" stroke-width="1.2" marker-end="url(#arrow-gray)"/>
+  <path data-id="edge-lora-4" id="edge-lora-4" data-class="edge" data-source="block-transformer" data-target="block-lora" d="M 260 115 L 260 88" stroke="#7f7f7f" stroke-width="1.2" marker-end="url(#arrow-gray)"/>
+  <path data-id="edge-lora-4-down" id="edge-lora-4-down" data-class="edge" data-source="block-lora" data-target="block-transformer" d="M 271 88 L 271 115" stroke="#7f7f7f" stroke-width="1.2" marker-end="url(#arrow-gray)"/>
+
+  <!-- From Image Embeddings to CMAttn -->
+  <path data-id="edge-emb-to-cmattn" id="edge-emb-to-cmattn" data-class="edge" data-source="node-image-embeddings" data-target="node-cmattn" d="M 328 119 L 328 25 L 524 25" fill="none" stroke="#7f7f7f" stroke-width="1.2" marker-end="url(#arrow-gray)"/>
+
+  <!-- From Image Embeddings to Transformer Decoder 1 -->
+  <path data-id="edge-emb-to-tfd1" id="edge-emb-to-tfd1" data-class="edge" data-source="node-image-embeddings" data-target="block-tf-decoder-1" d="M 374 163 L 374 123 L 386 123" fill="none" stroke="#7f7f7f" stroke-width="1.2" marker-end="url(#arrow-gray)"/>
+
+  <!-- From Image Embeddings to Pixel Decoder 1 -->
+  <path data-id="edge-emb-to-pd1" id="edge-emb-to-pd1" data-class="edge" data-source="node-image-embeddings" data-target="node-pixel-decoder-1" d="M 374 274 L 374 274 L 409 274" fill="none" stroke="#7f7f7f" stroke-width="1.2" marker-end="url(#arrow-gray)"/>
+
+  <!-- From Transformer Decoder 1 to Mult 1 -->
+  <path data-id="edge-tfd1-to-mult1" id="edge-tfd1-to-mult1" data-class="edge" data-source="block-tf-decoder-1" data-target="node-mult-1" d="M 492 123 L 521 123 L 521 196" fill="none" stroke="#7f7f7f" stroke-width="1.2" marker-end="url(#arrow-gray)"/>
+
+  <!-- From Pixel Decoder 1 to Mult 1 -->
+  <path data-id="edge-pd1-to-mult1" id="edge-pd1-to-mult1" data-class="edge" data-source="node-pixel-decoder-1" data-target="node-mult-1" d="M 471 274 L 521 274 L 521 224" fill="none" stroke="#7f7f7f" stroke-width="1.2" marker-end="url(#arrow-gray)"/>
+
+  <!-- From Mult 1 to Probabilistic Map -->
+  <path data-id="edge-mult1-to-pm" id="edge-mult1-to-pm" data-class="edge" data-source="node-mult-1" data-target="node-prob-map" d="M 535 210 L 557 210" fill="none" stroke="#7f7f7f" stroke-width="1.2" marker-end="url(#arrow-gray)"/>
+
+  <!-- From Prob Map to CMAttn -->
+  <path data-id="edge-pm-to-cmattn" id="edge-pm-to-cmattn" data-class="edge" data-source="node-prob-map" data-target="node-cmattn" d="M 576 185 L 576 50" fill="none" stroke="#7f7f7f" stroke-width="1.2" marker-end="url(#arrow-gray)"/>
+
+  <!-- From CMAttn to Enhanced Embeddings -->
+  <path data-id="edge-cmattn-to-enh" id="edge-cmattn-to-enh" data-class="edge" data-source="node-cmattn" data-target="node-enhanced-embeddings" d="M 635 26 L 635 119" fill="none" stroke="#7f7f7f" stroke-width="1.2" marker-end="url(#arrow-gray)"/>
+
+  <!-- From Prob Map to Transformer Decoder 2 (Orange Arrow) -->
+  <path data-id="edge-pm-to-tfd2" id="edge-pm-to-tfd2" data-class="edge" data-source="node-prob-map" data-target="block-tf-decoder-2" d="M 590 185 L 590 90 L 705 90" fill="none" stroke="#f0966a" stroke-width="1.2" marker-end="url(#arrow-orange)"/>
+
+  <!-- From Enhanced Embeddings to Transformer Decoder 2 -->
+  <path data-id="edge-enh-to-tfd2" id="edge-enh-to-tfd2" data-class="edge" data-source="node-enhanced-embeddings" data-target="block-tf-decoder-2" d="M 679 160 L 679 123 L 692 123" fill="none" stroke="#7f7f7f" stroke-width="1.2" marker-end="url(#arrow-gray)"/>
+
+  <!-- From Enhanced Embeddings to Pixel Decoder 2 -->
+  <path data-id="edge-enh-to-pd2" id="edge-enh-to-pd2" data-class="edge" data-source="node-enhanced-embeddings" data-target="node-pixel-decoder-2" d="M 679 240 L 679 274 L 696 274" fill="none" stroke="#7f7f7f" stroke-width="1.2" marker-end="url(#arrow-gray)"/>
+
+  <!-- From Transformer Decoder 2 to Mult 2 -->
+  <path data-id="edge-tfd2-to-mult2" id="edge-tfd2-to-mult2" data-class="edge" data-source="block-tf-decoder-2" data-target="node-mult-2" d="M 798 123 L 833 123 L 833 196" fill="none" stroke="#7f7f7f" stroke-width="1.2" marker-end="url(#arrow-gray)"/>
+
+  <!-- From Pixel Decoder 2 to Mult 2 -->
+  <path data-id="edge-pd2-to-mult2" id="edge-pd2-to-mult2" data-class="edge" data-source="node-pixel-decoder-2" data-target="node-mult-2" d="M 800 271 L 833 271 L 833 224" fill="none" stroke="#7f7f7f" stroke-width="1.2" marker-end="url(#arrow-gray)"/>
+
+  <!-- From Mult 2 to Output -->
+  <path data-id="edge-mult2-to-out" id="edge-mult2-to-out" data-class="edge" data-source="node-mult-2" data-target="raster-output-image" d="M 847 210 L 867 210" fill="none" stroke="#7f7f7f" stroke-width="1.2" marker-end="url(#arrow-gray)"/>
+
+  <!-- Skip Connection (Green Arrow) -->
+  <path data-id="edge-skip-connection" id="edge-skip-connection" data-class="edge" data-source="node-pixel-decoder-1" data-target="node-pixel-decoder-2" d="M 473 331 L 758 331" fill="none" stroke="#00b074" stroke-width="2" marker-end="url(#arrow-green)"/>
+
+  <!-- ==================== LABELS AND TEXTS ==================== -->
+  
+  <text data-id="text-lora-title" id="text-lora-title" data-class="text_node" data-parent="root" x="236" y="40" font-family="sans-serif" font-size="14" fill="#555555" text-anchor="middle">LoRA Layers</text>
+  
+  <text data-id="text-tb-title" id="text-tb-title" data-class="text_node" data-parent="root" x="227" y="322" font-family="sans-serif" font-size="14" fill="#555555" text-anchor="middle">Transformer Block</text>
+
+  <text data-id="text-emb-title" id="text-emb-title" data-class="text_node" data-parent="root" x="220" y="-355" transform="rotate(90)" font-family="sans-serif" font-size="14" fill="#555555" text-anchor="middle">Image Embeddings</text>
+
+  <text data-id="text-tfd1-title" id="text-tfd1-title" data-class="text_node" data-parent="root" x="441" y="190" font-family="sans-serif" font-size="14" fill="#555555" text-anchor="middle">Transformer Decoder</text>
+
+  <text data-id="text-pd1-title" id="text-pd1-title" data-class="text_node" data-parent="root" x="440" y="222" transform="rotate(-15 440 222)" font-family="sans-serif" font-size="14" fill="#555555" text-anchor="middle">Pixel Decoder</text>
+
+  <text data-id="text-pm-title-1" id="text-pm-title-1" data-class="text_node" data-parent="root" x="573" y="266" font-family="sans-serif" font-size="14" fill="#555555" text-anchor="middle">Probabilistic</text>
+  <text data-id="text-pm-title-2" id="text-pm-title-2" data-class="text_node" data-parent="root" x="573" y="284" font-family="sans-serif" font-size="14" fill="#555555" text-anchor="middle">Map</text>
+  <text data-id="text-pm-h4" id="text-pm-h4" data-class="text_node" data-parent="root" x="606" y="224" font-family="sans-serif" font-size="10" fill="#555555">H/4</text>
+  <text data-id="text-pm-w4" id="text-pm-w4" data-class="text_node" data-parent="root" x="583" y="242" font-family="sans-serif" font-size="10" fill="#555555">W/4</text>
+
+  <text data-id="text-enh-title" id="text-enh-title" data-class="text_node" data-parent="root" x="220" y="-662" transform="rotate(90)" font-family="sans-serif" font-size="14" fill="#555555" text-anchor="middle">Enhanced Image Embeddings</text>
+
+  <text data-id="text-tfd2-title" id="text-tfd2-title" data-class="text_node" data-parent="root" x="749" y="190" font-family="sans-serif" font-size="14" fill="#555555" text-anchor="middle">Transformer Decoder</text>
+
+  <text data-id="text-pd2-title" id="text-pd2-title" data-class="text_node" data-parent="root" x="744" y="217" transform="rotate(-15 744 217)" font-family="sans-serif" font-size="14" fill="#555555" text-anchor="middle">Pixel Decoder</text>
+
+  <text data-id="text-skip-title" id="text-skip-title" data-class="text_node" data-parent="root" x="618" y="349" font-family="sans-serif" font-size="14" fill="#555555" text-anchor="middle">Skip Connection</text>
+
+  <text data-id="text-out-w" id="text-out-w" data-class="text_node" data-parent="root" x="928" y="280" font-family="sans-serif" font-size="12" fill="#555555" text-anchor="middle">W</text>
+  <text data-id="text-out-h" id="text-out-h" data-class="text_node" data-parent="root" x="992" y="213" font-family="sans-serif" font-size="12" fill="#555555" text-anchor="middle">H</text>
+
+  <text data-id="text-out-pred1" id="text-out-pred1" data-class="text_node" data-parent="root" x="928" y="296" font-family="sans-serif" font-size="14" fill="#555555" text-anchor="middle">High-Resolution</text>
+  <text data-id="text-out-pred2" id="text-out-pred2" data-class="text_node" data-parent="root" x="928" y="314" font-family="sans-serif" font-size="14" fill="#555555" text-anchor="middle">Prediction</text>
+
+  <!-- Bottom Main Titles -->
+  <text data-id="text-bottom-encoder" id="text-bottom-encoder" data-class="text_node" data-parent="root" x="215" y="380" font-family="sans-serif" font-size="17" fill="#000000" text-anchor="middle">Image Encoder &#x2744;&#xFE0F; with LoRA &#x1F525;</text>
+  <text data-id="text-bottom-decoder" id="text-bottom-decoder" data-class="text_node" data-parent="root" x="685" y="380" font-family="sans-serif" font-size="17" fill="#000000" text-anchor="middle">Hierarchical Mask Decoder &#x1F525;</text>
+
+  <!-- ==================== DYNAMIC NARRATION BANNER ==================== -->
+  <g id="narration_banner">
+    <rect x="50" y="415" width="900" height="46" rx="8" ry="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+    <text id="narr_ts1" class="narr_text" x="50%" y="443" text-anchor="middle">The input medical image enters the segmentation framework.</text>
+    <text id="narr_ts2" class="narr_text" x="50%" y="443" text-anchor="middle">A downsampler reduces the spatial dimensions before feature extraction.</text>
+    <text id="narr_ts3" class="narr_text" x="50%" y="443" text-anchor="middle">The frozen Transformer backbone processes the visual tokens.</text>
+    <text id="narr_ts4" class="narr_text" x="50%" y="443" text-anchor="middle">Overview of the transformer block container.</text>
+    <text id="narr_ts5" class="narr_text" x="50%" y="443" text-anchor="middle">First column of transformer layers.</text>
+    <text id="narr_ts6" class="narr_text" x="50%" y="443" text-anchor="middle">Second column of transformer layers.</text>
+    <text id="narr_ts7" class="narr_text" x="50%" y="443" text-anchor="middle">Third column of transformer layers.</text>
+    <text id="narr_ts8" class="narr_text" x="50%" y="443" text-anchor="middle">Fourth column of transformer layers.</text>
+    <text id="narr_ts9" class="narr_text" x="50%" y="443" text-anchor="middle">Trainable low-rank adaptation bypasses adapt the encoder parameters efficiently.</text>
+    <text id="narr_ts10" class="narr_text" x="50%" y="443" text-anchor="middle">The encoder outputs a sequence of extracted image embeddings.</text>
+    <text id="narr_ts11" class="narr_text" x="50%" y="443" text-anchor="middle">In the first stage, the initial Transformer decoder processes these embeddings.</text>
+    <text id="narr_ts12" class="narr_text" x="50%" y="443" text-anchor="middle">Transformer decoder module container.</text>
+    <text id="narr_ts13" class="narr_text" x="50%" y="443" text-anchor="middle">Self-attention evaluates the importance of different regions.</text>
+    <text id="narr_ts14" class="narr_text" x="50%" y="443" text-anchor="middle">Cross-attention aligns the queries with the image embeddings.</text>
+    <text id="narr_ts15" class="narr_text" x="50%" y="443" text-anchor="middle">In parallel, the stage-one pixel decoder upsamples spatial features.</text>
+    <text id="narr_ts16" class="narr_text" x="50%" y="443" text-anchor="middle">The outputs of both decoders are multiplied together.</text>
+    <text id="narr_ts17" class="narr_text" x="50%" y="443" text-anchor="middle">This generates an intermediate, quarter-resolution probabilistic prior mask.</text>
+    <text id="narr_ts18" class="narr_text" x="50%" y="437" text-anchor="middle">
+      <tspan x="50%" dy="0">The Class-Balanced Mask-Guided Self-Attention block uses the prior mask</tspan>
+      <tspan x="50%" dy="1.2em">to balance head and tail classes.</tspan>
+    </text>
+    <text id="narr_ts19" class="narr_text" x="50%" y="443" text-anchor="middle">This produces enriched image embeddings for the next decoding stage.</text>
+    <text id="narr_ts20" class="narr_text" x="50%" y="443" text-anchor="middle">The stage-two Transformer decoder carries out refined mask decoding.</text>
+    <text id="narr_ts21" class="narr_text" x="50%" y="443" text-anchor="middle">Second transformer decoder container.</text>
+    <text id="narr_ts22" class="narr_text" x="50%" y="437" text-anchor="middle">
+      <tspan x="50%" dy="0">Learnable mask cross-attention spatially modulates attention across regions</tspan>
+      <tspan x="50%" dy="1.2em">using the prior mask.</tspan>
+    </text>
+    <text id="narr_ts23" class="narr_text" x="50%" y="443" text-anchor="middle">Self-attention further refines the object queries.</text>
+    <text id="narr_ts24" class="narr_text" x="50%" y="437" text-anchor="middle">
+      <tspan x="50%" dy="0">The hierarchical pixel decoder integrates skip connections from stage one</tspan>
+      <tspan x="50%" dy="1.2em">to recover fine-grained details.</tspan>
+    </text>
+    <text id="narr_ts25" class="narr_text" x="50%" y="443" text-anchor="middle">The refined queries and high-resolution pixel features are combined.</text>
+    <text id="narr_ts26" class="narr_text" x="50%" y="443" text-anchor="middle">Finally, the framework produces the high-resolution multi-organ segmentation prediction.</text>
+  </g>
+
+  <!-- Focus Box -->
+  <rect id="focus_box" fill="none" stroke="#FF0000" stroke-width="4" stroke-dasharray="8,4" rx="6" />
+</svg>

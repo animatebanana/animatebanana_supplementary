@@ -1,0 +1,146 @@
+{
+  "_readme": "All the writing on costs.html. Edit any string here and reload; numbers inside charts and insight cards are computed from data/latency.json and are not written here. Each section has: id (the #anchor), num, glyph (signal | stopwatch | coins | grow | layers | wallet), kicker, title, toc (the short question in the contents bar), lede, and cards. Each card has: chart (which chart to draw; do not rename), title, desc, and accent (a colour name from: violet, vermilion, plum, rose, navy, rust, teal).",
+  "page": {
+    "kicker": "Appendix · 08",
+    "title": "Latency and Costs",
+    "intro": "We show all analysis of latency and number of calls on a sample set of <b>91</b> diagrams, run end to end through the full pipeline. Unless a chart says otherwise, values are <b>averages across these 91 diagrams</b>, shown as mean ± one standard deviation. Time is model time: the latency of every call an agent makes for a diagram, added up."
+  },
+  "toc": {
+    "title": "Contents",
+    "hint": "Jump to a question"
+  },
+  "sections": [
+    {
+      "id": "calls",
+      "num": 1,
+      "glyph": "signal",
+      "kicker": "Number of calls",
+      "title": "Stage-wise agent calls per diagram, through AnimateBanana",
+      "toc": "How many calls does each stage and agent make?",
+      "lede": "Each stage's calls are the sum of the average calls of its agents. Open the chart into agents to see from which agent each stage's calls come from; the dashed line follows the three critics. Data points are the mean across the 91 diagrams; the whiskers are ± one standard deviation.",
+      "cards": [
+        {
+          "chart": "calls-flow",
+          "title": "Model calls per diagram, through the pipeline",
+          "desc": "Mean calls per diagram (± 1 SD across 91 diagrams) for each stage, or for each agent. Hover any point for its median, maximum and share of all calls.",
+          "accent": "violet"
+        },
+        {
+          "chart": "style-heat",
+          "title": "Which animation styles invoke the critic the most?",
+          "desc": "Mean critic calls per diagram, by the animation style it was animated in. Only the Animation Planner and Diagram Animator critics are shown: they are the critics that see the style.",
+          "accent": "rust"
+        }
+      ]
+    },
+    {
+      "id": "time",
+      "num": 2,
+      "glyph": "stopwatch",
+      "kicker": "Latency",
+      "title": "AnimateBanana latency",
+      "toc": "How long does each stage and agent take?",
+      "lede": "The same pipeline, measured in seconds of model time per diagram: mean across the 91 diagrams, ± one standard deviation.",
+      "cards": [
+        {
+          "chart": "time-flow",
+          "title": "Model time per diagram, through the pipeline",
+          "desc": "Mean seconds per diagram (± 1 SD across 91 diagrams) for each stage, or for each agent once opened.",
+          "accent": "navy"
+        },
+        {
+          "chart": "share-butterfly",
+          "title": "Many short calls, or a few long ones",
+          "desc": "Each agent's share of all calls (left) against its share of all time (right), averaged over the 91 diagrams.",
+          "accent": "plum"
+        },
+        {
+          "chart": "style-strip",
+          "title": "Which styles take the most time",
+          "desc": "Every diagram as a dot, coloured by its animation style; the diamond is the style's mean. Pick an agent to compare styles.",
+          "accent": "rose"
+        }
+      ]
+    },
+    {
+      "id": "tokens",
+      "num": 3,
+      "glyph": "coins",
+      "kicker": "Tokens",
+      "title": "AnimateBanana: Tokens consumption",
+      "toc": "How many tokens does each stage and agent use?",
+      "lede": "Token figures are <b>averages per diagram</b>: for each agent, the tokens of every call it makes on a diagram are added up, then averaged over diagrams. Tokens were logged as per-agent averages, so no standard deviation is available here. Cost is at the Gemini 3.7 Flash batch rate our runs used as pipeline backbone.",
+      "cards": [
+        {
+          "chart": "tokens-flow",
+          "title": "Average tokens per diagram, through the pipeline",
+          "desc": "By stage, or by agent once opened. Switch between all tokens, prompt only, completion only, and the dollar cost they add up to.",
+          "accent": "teal"
+        }
+      ]
+    },
+    {
+      "id": "size",
+      "num": 4,
+      "glyph": "grow",
+      "kicker": "Scaling",
+      "title": "Diagram size against calls and time",
+      "toc": "Do bigger diagrams take more calls, or more time?",
+      "lede": "Diagram size, counted as the number of elements in its structure, against calls and time. The number of calls stays flat; the time grows, and it grows in the agents that write.",
+      "cards": [
+        {
+          "chart": "size-scatter",
+          "title": "Diagram size against time, and against calls",
+          "desc": "One dot per diagram, with a least-squares line. Switch the vertical axis between model time and model calls.",
+          "accent": "navy"
+        },
+        {
+          "chart": "tertiles",
+          "title": "Diagrams in thirds by element count",
+          "desc": "Mean calls and mean time per diagram for each third.",
+          "accent": "vermilion"
+        },
+        {
+          "chart": "agent-scaling",
+          "title": "Correlation between each agent's time on a diagram and the diagram's element count",
+          "desc": "Pearson r over the 91 diagrams. Striped bars are critics; solid bars are the other agents.",
+          "accent": "violet"
+        }
+      ]
+    },
+    {
+      "id": "stratified",
+      "num": 5,
+      "glyph": "layers",
+      "kicker": "Stratified analysis",
+      "title": "Analysis of time, calls and cost by complexity stratifications",
+      "toc": "How do time, calls and cost change with diagram complexity?",
+      "lede": "The profiled diagrams split by the same properties we stratify AnimateBench by: element density, connectivity, layout organisation, hierarchical depth and raster content. Each class is one line through the pipeline: the class mean, ± one standard deviation. Classes with fewer than five profiled diagrams are drawn faded and dashed; they are too few to read a trend from.",
+      "cards": [
+        {
+          "chart": "strata",
+          "title": "Latency, calls and cost, one line per class",
+          "desc": "Pick a property, then switch between latency, number of calls and estimated cost, or open the stages into agents. Click a class in the legend to hide it; hover a line to pick it out.",
+          "accent": "plum"
+        }
+      ]
+    },
+    {
+      "id": "baselines",
+      "num": 6,
+      "glyph": "wallet",
+      "kicker": "Cost on each model",
+      "title": "AnimateBanana: Cost Analysis on Pipeline Backbone",
+      "toc": "What would AnimateBanana cost on another backbone?",
+      "lede": "The estimated cost of animating one diagram with AnimateBanana if each model in our baseline table were its backbone. We price every model on the pipeline's average token profile per diagram (from Gemini 3.7 Flash) at the provider's official standard API price; other models would use somewhat different token counts, so these are estimates. Open-weight models are counted at <b>no cost</b>: they can be self-hosted, so there is no API bill (hardware is not counted).",
+      "cards": [
+        {
+          "chart": "baseline-costs",
+          "title": "Cost per diagram, model by model",
+          "desc": "Split each bar by pipeline stage or by prompt and completion tokens, or switch to the prices behind it. Hover any segment for its share.",
+          "accent": "rust"
+        }
+      ]
+    }
+  ]
+}

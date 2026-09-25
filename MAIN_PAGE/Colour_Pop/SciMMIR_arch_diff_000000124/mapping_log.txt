@@ -1,0 +1,26 @@
+=== Colour Pop Sequence Mapping ===
+
+Frame Image : frame_00.png
+Event Delay : 0.5s
+Narration   : Pairs of experience observations are sampled from the replay buffer.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Event Delay : 1.0s
+Narration   : Each sampled instance pairs raw observation frames with corresponding context parameters across different environment shifts.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Event Delay : 1.5s
+Narration   : The encoders map these contextual observations into a shared latent representation space.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Event Delay : 2.0s
+Narration   : Conditioned on the policy's actions, probabilistic transition models predict the next-state distributions.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Event Delay : 2.5s
+Narration   : Concurrently, reward models estimate expected scalar rewards for each latent state.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Event Delay : 3.0s
+Narration   : Finally, bisimulation losses align latent representation distances with the combined reward differences and Wasserstein transition distances.
+--------------------------------------------------------------------------------

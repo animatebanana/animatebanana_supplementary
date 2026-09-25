@@ -1,0 +1,172 @@
+{
+  "style": "alpha_masking",
+  "traversal_style": "OVERVIEW_FIRST",
+  "nodes": [
+    {
+      "id": "t1",
+      "parent": null,
+      "depth": 1,
+      "focus": [
+        "block_data_sources",
+        "bg_data_sources",
+        "icon_data_sources",
+        "title_data_sources"
+      ],
+      "action": "reveal",
+      "narration": "The workflow begins with the Data Sources component, which aggregates multiple inputs for the experimental setup.",
+      "duration": 3.5,
+      "narrative": null,
+      "element_classes": {},
+      "timestamp": null
+    },
+    {
+      "id": "t2",
+      "parent": "t1",
+      "depth": 2,
+      "focus": [
+        "item_ds_1_badge",
+        "item_ds_2_badge",
+        "item_ds_3_badge",
+        "text_ds_item_1a",
+        "text_ds_item_1b",
+        "text_ds_item_1c",
+        "text_ds_item_2",
+        "text_ds_item_3"
+      ],
+      "action": "reveal",
+      "narration": "These inputs comprise six video experiments across multiple scenes, recorded trajectory data, and associated ground truth annotations.",
+      "duration": 4.5,
+      "narrative": null,
+      "element_classes": {},
+      "timestamp": null
+    },
+    {
+      "id": "t3",
+      "parent": null,
+      "depth": 1,
+      "focus": [
+        "block_region_extraction",
+        "bg_region_extraction",
+        "icon_region_images",
+        "title_region_extraction",
+        "label_lre_1a",
+        "label_lre_1b",
+        "edge_ds_to_lre"
+      ],
+      "action": "reveal",
+      "narration": "Next, the Local Region Extraction stage ingests the data to isolate candidate image patches from video frames.",
+      "duration": 4.0,
+      "narrative": null,
+      "element_classes": {},
+      "timestamp": null
+    },
+    {
+      "id": "t4",
+      "parent": "t3",
+      "depth": 2,
+      "focus": [
+        "icon_duplicates_removal",
+        "label_lre_2a",
+        "label_lre_2b",
+        "edge_img_to_duprem"
+      ],
+      "action": "reveal",
+      "narration": "A duplicate removal step filters out redundant candidate patches across consecutive frames.",
+      "duration": 3.5,
+      "narrative": null,
+      "element_classes": {},
+      "timestamp": null
+    },
+    {
+      "id": "t5",
+      "parent": "t3",
+      "depth": 2,
+      "focus": [
+        "raster_local_regions_grid",
+        "label_lre_3a",
+        "label_lre_3b",
+        "edge_duprem_to_grid"
+      ],
+      "action": "reveal",
+      "narration": "This produces a clean set of distinct local regions representing target objects and interactions.",
+      "duration": 3.5,
+      "narrative": null,
+      "element_classes": {},
+      "timestamp": null
+    },
+    {
+      "id": "t6",
+      "parent": null,
+      "depth": 1,
+      "focus": [
+        "block_labeling_setgen",
+        "bg_labeling_setgen",
+        "raster_labeling_patches",
+        "title_labeling_setgen",
+        "label_labeling",
+        "edge_grid_to_labeling"
+      ],
+      "action": "reveal",
+      "narration": "In the final stage, local regions undergo labeling to assign positive and negative category classes.",
+      "duration": 4.0,
+      "narrative": null,
+      "element_classes": {},
+      "timestamp": null
+    },
+    {
+      "id": "t7",
+      "parent": "t6",
+      "depth": 2,
+      "focus": [
+        "container_set_generation",
+        "label_set_generation",
+        "edge_labeling_to_setgen"
+      ],
+      "action": "reveal",
+      "narration": "Finally, the labeled samples are partitioned into evaluation splits: an isolated test set from Video 50, and training, validation, and testing splits across the remaining videos.",
+      "duration": 5.0,
+      "narrative": null,
+      "element_classes": {},
+      "timestamp": null
+    }
+  ],
+  "traversal": [
+    "t1",
+    "t2",
+    "t3",
+    "t4",
+    "t5",
+    "t6",
+    "t7"
+  ],
+  "provenance": {
+    "agent": "sequencer",
+    "backend": "openrouter_gemini37flash",
+    "model": "google-gemini-3.7-flash",
+    "prompt": "animation_planner/svg_sequencer.yaml#new_prompt",
+    "style": "alpha_masking",
+    "target": "svg",
+    "config_fingerprint": "a60c9cf21a359534",
+    "timestamp": "2026-09-02T00:04:52",
+    "max_depth": 3,
+    "critic": {
+      "agent": "planner_critic",
+      "backend": "openrouter_gemini37flash",
+      "model": "google-gemini-3.7-flash",
+      "prompt": "animation_planner/critic.yaml#prompt",
+      "style": "alpha_masking",
+      "target": "svg",
+      "config_fingerprint": "a60c9cf21a359534",
+      "timestamp": "2026-09-02T00:05:19",
+      "round": 1,
+      "review": "Corrected traversal_style to OVERVIEW_FIRST and fixed the hierarchy by linking child nodes (t2, t4, t5, t7) to their respective parent block nodes (t1, t3, t6) to satisfy depth and tree structure requirements.",
+      "findings_addressed": [
+        "root node 't2' has depth 2, expected 1",
+        "root node 't4' has depth 2, expected 1",
+        "root node 't5' has depth 2, expected 1",
+        "root node 't7' has depth 2, expected 1",
+        "unknown traversal_style 'LEFT_TO_RIGHT'. Known: ['OVERVIEW_FIRST', 'DETAIL_FIRST']"
+      ]
+    }
+  }
+}

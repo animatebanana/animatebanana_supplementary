@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+  <title>Ablations — AnimateBanana</title>
+  <link rel="stylesheet" href="assets/fonts/fonts.css">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css?v=3">
+  <link rel="stylesheet" href="assets/css/components/site-nav.css?v=5">
+  <link rel="stylesheet" href="assets/css/components/doodle-field.css">
+  <link rel="stylesheet" href="assets/css/components/ablation-lab.css?v=9">
+  <link rel="stylesheet" href="assets/css/components/ablation-walk.css?v=9">
+  <link rel="stylesheet" href="assets/css/components/page-toc.css?v=3">
+  <link rel="stylesheet" href="assets/css/stratified/strat-results.css?v=11">
+  <link rel="prefetch" href="data/stratified/strata.json" as="fetch" crossorigin>
+  <style>
+    /* the real pipeline diagram is 1840 units wide — wider than the page column */
+    .page.abl-widepage { max-width: 1560px; }
+    .abl-section { margin-top: clamp(34px, 5vw, 64px); }
+    .abl-section h2 { margin: 2px 0 6px; }
+    .abl-section > p { max-width: 74ch; margin: 0 0 18px; color: var(--ink-soft); line-height: 1.6; }
+  </style>
+</head>
+<body>
+  <site-nav current="ablations" back="index.html" back-label="Overview"></site-nav>
+
+  <div class="page abl-widepage">
+    <div class="page-head">
+      <doodle-field density="sparse"></doodle-field>
+      <div class="kicker">Appendix &middot; 05</div>
+      <h1>Ablations</h1>
+      
+    </div>
+
+    <nav class="pg-toc" id="pg-toc" aria-label="Contents">
+      <div class="pg-toc-inner">
+        <span class="pg-toc-title">Contents<small>Jump to a section</small></span>
+        <div class="pg-toc-list">
+          <a href="#ablation-walk" data-toc="ablation-walk"><b>1</b><span>Ablation walk through</span></a>
+          <a href="#stratified-results" data-toc="stratified-results"><b>2</b><span>Stratified results</span></a>
+        </div>
+      </div>
+      <i class="pg-toc-bar"><i></i></i>
+    </nav>
+
+    <ablation-lab src="data/ablations.json"></ablation-lab>
+
+    <section class="abl-section pg-target" id="ablation-walk">
+      <div class="kicker">Sample by sample</div>
+      <h2>Ablation walk through</h2>
+      <ablation-walk src="data/ablation_runs.json" insights="data/ablation_insights.json"></ablation-walk>
+    </section>
+
+    <!-- ==== STRATIFIED MODULE: markup owned by assets/{css,js}/stratified/ ==== -->
+    <section class="st-band pg-target" id="stratified-results" aria-labelledby="strata-head">
+      <header class="page-head">
+        <div class="kicker">Stratified results</div>
+        <h1 id="strata-head">Stratified <span class="hl">Results</span></h1>
+        <p>How does different stratifications of diagram complexity affect results?</p>
+      </header>
+
+      <div class="st-main" style="max-width:none;padding-left:0;padding-right:0">
+        <strat-results src="data/stratified/strata.json?v=2"></strat-results>
+      </div>
+    </section>
+    <!-- ==== /STRATIFIED MODULE ==== -->
+
+    <footer class="site-footer">
+      <span>Last updated 24 September 2026 (AOE)</span>
+    </footer>
+  </div>
+
+  <script type="module" src="assets/js/components/site-nav.js?v=5"></script>
+  <script type="module" src="assets/js/components/doodle-field.js"></script>
+  <script type="module" src="assets/js/components/ablation-lab.js?v=10"></script>
+  <script type="module" src="assets/js/components/ablation-walk.js?v=9"></script>
+  <script type="module" src="assets/js/stratified/strat-results.js?v=12"></script>
+  <script type="module" src="assets/js/components/page-toc.js"></script>
+  <script type="module" src="assets/js/lib/reveal.js"></script>
+</body>
+</html>

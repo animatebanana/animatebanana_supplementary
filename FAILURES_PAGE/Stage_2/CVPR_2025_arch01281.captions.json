@@ -1,0 +1,30 @@
+[
+ {
+  "t": 0.0,
+  "text": "The CoprGuard framework begins with the diffusion model watermark injection stage to safeguard image copyright."
+ },
+ {
+  "t": 3.625,
+  "text": "A watermark image and a clean protected image are first supplied as inputs to the watermark encoder."
+ },
+ {
+  "t": 7.125,
+  "text": "A frozen pre-trained encoder employs discrete wavelet transforms and an invertible neural network to embed the watermark into high-frequency sub-bands."
+ },
+ {
+  "t": 10.625,
+  "text": "Following the inverse transform, the encoder produces the watermarked image while discarding high-frequency residual artifacts."
+ },
+ {
+  "t": 14.125,
+  "text": "These watermarked images are then incorporated into diffusion model training datasets."
+ },
+ {
+  "t": 17.625,
+  "text": "In standard diffusion models, the denoising U-Net learns to reconstruct the watermarked image from noise, absorbing its underlying frequency properties."
+ },
+ {
+  "t": 21.125,
+  "text": "In text-conditioned diffusion models, conditioning vectors guide the network during training, embedding identifiable watermark signatures directly into the model."
+ }
+]

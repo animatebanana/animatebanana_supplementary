@@ -1,0 +1,46 @@
+=== Colour Pop Sequence Mapping ===
+
+Frame Image : frame_00.png
+Event Delay : 0.5s
+Narration   : The pipeline begins with the deepfake impersonation attack framework.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Event Delay : 1.0s
+Narration   : The attack leverages diverse datasets encompassing facial replacement, reenactment, and synthesis.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Event Delay : 1.5s
+Narration   : Deepfake video sequences are supplied from these datasets.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Event Delay : 2.0s
+Narration   : An MTCNN model is applied to detect and crop face images from each video frame.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Event Delay : 2.5s
+Narration   : The attacker prepares these cropped celebrity face images for transmission.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Event Delay : 3.0s
+Narration   : Attacks are categorized into targeted impersonation against a specific victim and non-targeted impersonation across any celebrity class.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Event Delay : 3.5s
+Narration   : The attack queries are dispatched to commercial celebrity recognition web APIs.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Event Delay : 4.0s
+Narration   : Evaluation targets black-box platforms including Amazon Rekognition, Azure Cognitive Services, and Naver CFR.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Event Delay : 4.5s
+Narration   : The evaluation module systematically analyzes the resulting responses.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Event Delay : 5.0s
+Narration   : Success rates are measured for both targeted and non-targeted attack configurations.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Event Delay : 5.5s
+Narration   : Detailed metrics further analyze API behavior, including lifelike quality, prediction confidence, face similarity, and overall successful impersonation.
+--------------------------------------------------------------------------------

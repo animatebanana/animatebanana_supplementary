@@ -1,0 +1,276 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1066 630" width="1066" height="630">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#000000" />
+    </marker>
+    <style>
+      /* Global Dormant / Grayscale State */
+      [data-id="block_initialization"], [data-id="bg_initialization"], [data-id="title_initialization"],
+      [data-id="node_robot_model"], [data-id="label_robot_model"], [data-id="edge_robot_model"],
+      [data-id="node_gripper_model"], [data-id="label_gripper_model"], [data-id="edge_gripper_model"],
+      [data-id="node_controller"], [data-id="label_controller"], [data-id="edge_controller"],
+      [data-id="block_runtime"], [data-id="bg_runtime"], [data-id="title_runtime"],
+      [data-id="block_robot"], [data-id="rect_robot"], [data-id="text_robot"], [data-id="icon_center_robot"],
+      [data-id="node_actions"], [data-id="label_actions"], [data-id="edge_actions"],
+      [data-id="node_torques"], [data-id="label_torques"], [data-id="edge_torques"],
+      [data-id="node_observations"], [data-id="label_observations"], [data-id="edge_observations"],
+      [data-id="block_callables"], [data-id="bg_callables"], [data-id="title_callables"],
+      [data-id="node_specifications"], [data-id="label_specifications"], [data-id="edge_specifications"],
+      [data-id="node_proprioception"], [data-id="label_proprioception"], [data-id="edge_proprioception"],
+      [data-id="node_sensors"], [data-id="label_sensors"], [data-id="edge_sensors"],
+      #block_initialization, #bg_initialization, #title_initialization,
+      #node_robot_model, #label_robot_model, #edge_robot_model,
+      #node_gripper_model, #label_gripper_model, #edge_gripper_model,
+      #node_controller, #label_controller, #edge_controller,
+      #block_runtime, #bg_runtime, #title_runtime,
+      #block_robot, #rect_robot, #text_robot, #icon_center_robot,
+      #node_actions, #label_actions, #edge_actions,
+      #node_torques, #label_torques, #edge_torques,
+      #node_observations, #label_observations, #edge_observations,
+      #block_callables, #bg_callables, #title_callables,
+      #node_specifications, #label_specifications, #edge_specifications,
+      #node_proprioception, #label_proprioception, #edge_proprioception,
+      #node_sensors, #label_sensors, #edge_sensors {
+        filter: grayscale(100%) opacity(0.4);
+        animation-name: colorPop;
+        animation-duration: 0.5s;
+        animation-fill-mode: forwards;
+      }
+
+      @keyframes colorPop {
+        to {
+          filter: grayscale(0%) opacity(1);
+        }
+      }
+
+      /* Timestamps Delays */
+      [data-id="block_initialization"], [data-id="bg_initialization"], [data-id="title_initialization"] { animation-delay: 0.5s; }
+      [data-id="node_robot_model"], [data-id="label_robot_model"], [data-id="edge_robot_model"] { animation-delay: 1.0s; }
+      [data-id="node_gripper_model"], [data-id="label_gripper_model"], [data-id="edge_gripper_model"] { animation-delay: 1.5s; }
+      [data-id="node_controller"], [data-id="label_controller"], [data-id="edge_controller"] { animation-delay: 2.0s; }
+      [data-id="block_runtime"], [data-id="bg_runtime"], [data-id="title_runtime"] { animation-delay: 2.5s; }
+      [data-id="block_robot"], [data-id="rect_robot"], [data-id="text_robot"], [data-id="icon_center_robot"] { animation-delay: 3.0s; }
+      [data-id="node_actions"], [data-id="label_actions"], [data-id="edge_actions"] { animation-delay: 3.5s; }
+      [data-id="node_torques"], [data-id="label_torques"], [data-id="edge_torques"] { animation-delay: 4.0s; }
+      [data-id="node_observations"], [data-id="label_observations"], [data-id="edge_observations"] { animation-delay: 4.5s; }
+      [data-id="block_callables"], [data-id="bg_callables"], [data-id="title_callables"] { animation-delay: 5.0s; }
+      [data-id="node_specifications"], [data-id="label_specifications"], [data-id="edge_specifications"] { animation-delay: 5.5s; }
+      [data-id="node_proprioception"], [data-id="label_proprioception"], [data-id="edge_proprioception"] { animation-delay: 6.0s; }
+      [data-id="node_sensors"], [data-id="label_sensors"], [data-id="edge_sensors"] { animation-delay: 6.5s; }
+
+      /* Narration Subtitle Animations */
+      .narrative-text {
+        opacity: 0;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        fill: #FFFFFF;
+        text-anchor: middle;
+      }
+
+      @keyframes bannerSpan {
+        0% { opacity: 0; }
+        1% { opacity: 1; }
+        99% { opacity: 1; }
+        100% { opacity: 0; }
+      }
+
+      @keyframes bannerFinal {
+        0% { opacity: 0; }
+        1% { opacity: 1; }
+        100% { opacity: 1; }
+      }
+
+      #narr_ts1  { animation: bannerSpan 0.5s linear forwards; animation-delay: 0.5s; }
+      #narr_ts2  { animation: bannerSpan 0.5s linear forwards; animation-delay: 1.0s; }
+      #narr_ts3  { animation: bannerSpan 0.5s linear forwards; animation-delay: 1.5s; }
+      #narr_ts4  { animation: bannerSpan 0.5s linear forwards; animation-delay: 2.0s; }
+      #narr_ts5  { animation: bannerSpan 0.5s linear forwards; animation-delay: 2.5s; }
+      #narr_ts6  { animation: bannerSpan 0.5s linear forwards; animation-delay: 3.0s; }
+      #narr_ts7  { animation: bannerSpan 0.5s linear forwards; animation-delay: 3.5s; }
+      #narr_ts8  { animation: bannerSpan 0.5s linear forwards; animation-delay: 4.0s; }
+      #narr_ts9  { animation: bannerSpan 0.5s linear forwards; animation-delay: 4.5s; }
+      #narr_ts10 { animation: bannerSpan 0.5s linear forwards; animation-delay: 5.0s; }
+      #narr_ts11 { animation: bannerSpan 0.5s linear forwards; animation-delay: 5.5s; }
+      #narr_ts12 { animation: bannerSpan 0.5s linear forwards; animation-delay: 6.0s; }
+      #narr_ts13 { animation: bannerFinal 0.5s linear forwards; animation-delay: 6.5s; }
+    </style>
+  </defs>
+
+  <!-- BACKGROUND COLUMNS -->
+  <g data-id="block_initialization" data-class="block" data-parent="root">
+    <rect data-id="bg_initialization" data-class="child_node" data-parent="block_initialization" x="0" y="0" width="355" height="563" fill="#FFF8E7" />
+    <text data-id="title_initialization" data-class="text_node" data-parent="block_initialization" x="177" y="38" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#000000">Initialization</text>
+  </g>
+
+  <g data-id="block_runtime" data-class="block" data-parent="root">
+    <rect data-id="bg_runtime" data-class="child_node" data-parent="block_runtime" x="355" y="0" width="352" height="563" fill="#EDF8E8" />
+    <text data-id="title_runtime" data-class="text_node" data-parent="block_runtime" x="531" y="38" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#000000">Runtime</text>
+  </g>
+
+  <g data-id="block_callables" data-class="block" data-parent="root">
+    <rect data-id="bg_callables" data-class="child_node" data-parent="block_callables" x="707" y="0" width="359" height="563" fill="#E1EEFB" />
+    <text data-id="title_callables" data-class="text_node" data-parent="block_callables" x="886" y="38" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#000000">Callables</text>
+  </g>
+
+  <!-- EDGES / CONNECTIONS -->
+  <g>
+    <!-- Left to Robot Box -->
+    <path data-id="edge_robot_model" data-class="edge" data-source="node_robot_model" data-target="block_robot" d="M 150 178 L 150 262 L 354 262" fill="none" stroke="#000000" stroke-width="1.8" marker-end="url(#arrow)" />
+    <path data-id="edge_gripper_model" data-class="edge" data-source="node_gripper_model" data-target="block_robot" d="M 140 310 L 354 310" fill="none" stroke="#000000" stroke-width="1.8" marker-end="url(#arrow)" />
+    <path data-id="edge_controller" data-class="edge" data-source="node_controller" data-target="block_robot" d="M 150 442 L 150 360 L 354 360" fill="none" stroke="#000000" stroke-width="1.8" marker-end="url(#arrow)" />
+
+    <!-- Robot Box to Middle Top -->
+    <path data-id="edge_torques" data-class="edge" data-source="block_robot" data-target="node_torques" d="M 531 236 L 495 168" fill="none" stroke="#000000" stroke-width="1.8" marker-end="url(#arrow)" />
+    <path data-id="edge_observations" data-class="edge" data-source="block_robot" data-target="node_observations" d="M 531 236 L 565 168" fill="none" stroke="#000000" stroke-width="1.8" marker-end="url(#arrow)" />
+
+    <!-- Middle Bottom to Robot Box -->
+    <path data-id="edge_actions" data-class="edge" data-source="node_actions" data-target="block_robot" d="M 531 430 L 531 391" fill="none" stroke="#000000" stroke-width="1.8" marker-end="url(#arrow)" />
+
+    <!-- Robot Box to Right -->
+    <path data-id="edge_specifications" data-class="edge" data-source="block_robot" data-target="node_specifications" d="M 706 262 L 888 262 L 888 175 L 920 175" fill="none" stroke="#000000" stroke-width="1.8" marker-end="url(#arrow)" />
+    <path data-id="edge_proprioception" data-class="edge" data-source="block_robot" data-target="node_proprioception" d="M 706 310 L 920 310" fill="none" stroke="#000000" stroke-width="1.8" marker-end="url(#arrow)" />
+    <path data-id="edge_sensors" data-class="edge" data-source="block_robot" data-target="node_sensors" d="M 706 360 L 888 360 L 888 445 L 920 445" fill="none" stroke="#000000" stroke-width="1.8" marker-end="url(#arrow)" />
+  </g>
+
+  <!-- EDGE LABELS -->
+  <text data-id="label_robot_model" data-class="text_node" data-parent="block_initialization" x="250" y="250" font-family="sans-serif" font-size="19" text-anchor="middle" fill="#000000">RobotModel</text>
+  <text data-id="label_gripper_model" data-class="text_node" data-parent="block_initialization" x="250" y="300" font-family="sans-serif" font-size="19" text-anchor="middle" fill="#000000">GripperModel</text>
+  <text data-id="label_controller" data-class="text_node" data-parent="block_initialization" x="250" y="348" font-family="sans-serif" font-size="19" text-anchor="middle" fill="#000000">Controller</text>
+
+  <text data-id="label_torques" data-class="text_node" data-parent="block_runtime" x="460" y="216" font-family="sans-serif" font-size="19" text-anchor="middle" fill="#000000">Torques</text>
+  <text data-id="label_observations" data-class="text_node" data-parent="block_runtime" x="625" y="216" font-family="sans-serif" font-size="19" text-anchor="middle" fill="#000000">Observations</text>
+  <text data-id="label_actions" data-class="text_node" data-parent="block_runtime" x="470" y="414" font-family="sans-serif" font-size="19" text-anchor="middle" fill="#000000">Actions</text>
+
+  <text data-id="label_specifications" data-class="text_node" data-parent="block_callables" x="798" y="250" font-family="sans-serif" font-size="19" text-anchor="middle" fill="#000000">Specifications</text>
+  <text data-id="label_proprioception" data-class="text_node" data-parent="block_callables" x="798" y="300" font-family="sans-serif" font-size="19" text-anchor="middle" fill="#000000">Proprioception</text>
+  <text data-id="label_sensors" data-class="text_node" data-parent="block_callables" x="798" y="348" font-family="sans-serif" font-size="19" text-anchor="middle" fill="#000000">Sensors</text>
+
+  <!-- LEFT COLUMN NODES -->
+  <!-- RobotModel Node -->
+  <g data-id="node_robot_model" data-class="composite_whole" data-parent="block_initialization">
+    <circle data-id="circle_robot_model" data-class="composite_part" data-parent="node_robot_model" cx="77" cy="178" r="62" fill="#FFFFFF" stroke="#000000" stroke-width="2" />
+    <rect data-id="part_rm_base" data-class="composite_part" data-parent="node_robot_model" x="69" y="196" width="30" height="10" fill="#FFFFFF" stroke="#000000" stroke-width="2.5" />
+    <path data-id="part_rm_link1" data-class="composite_part" data-parent="node_robot_model" d="M 82 196 L 53 162" fill="none" stroke="#000000" stroke-width="8" stroke-linecap="round" />
+    <circle data-id="part_rm_joint" data-class="composite_part" data-parent="node_robot_model" cx="53" cy="162" r="9" fill="#FFFFFF" stroke="#000000" stroke-width="2.5" />
+    <circle data-id="part_rm_joint_inner" data-class="composite_part" data-parent="node_robot_model" cx="53" cy="162" r="3.5" fill="#000000" />
+    <path data-id="part_rm_link2" data-class="composite_part" data-parent="node_robot_model" d="M 59 155 L 94 133" fill="none" stroke="#000000" stroke-width="8" stroke-linecap="round" />
+    <rect data-id="part_rm_head" data-class="composite_part" data-parent="node_robot_model" x="91" y="126" width="6" height="12" rx="1" fill="#000000" transform="rotate(-30 94 132)" />
+  </g>
+
+  <!-- GripperModel Node -->
+  <g data-id="node_gripper_model" data-class="composite_whole" data-parent="block_initialization">
+    <circle data-id="circle_gripper_model" data-class="composite_part" data-parent="node_gripper_model" cx="77" cy="310" r="62" fill="#FFFFFF" stroke="#000000" stroke-width="2" />
+    <path data-id="part_gripper_base" data-class="composite_part" data-parent="node_gripper_model" d="M 53 283 L 101 283" fill="none" stroke="#000000" stroke-width="7" stroke-linecap="square" />
+    <path data-id="part_gripper_left" data-class="composite_part" data-parent="node_gripper_model" d="M 53 283 L 41 318 L 68 355" fill="none" stroke="#000000" stroke-width="7" stroke-linejoin="miter" stroke-linecap="square" />
+    <path data-id="part_gripper_right" data-class="composite_part" data-parent="node_gripper_model" d="M 101 283 L 113 318 L 86 355" fill="none" stroke="#000000" stroke-width="7" stroke-linejoin="miter" stroke-linecap="square" />
+  </g>
+
+  <!-- Controller Node -->
+  <g data-id="node_controller" data-class="composite_whole" data-parent="block_initialization">
+    <circle data-id="circle_controller" data-class="composite_part" data-parent="node_controller" cx="77" cy="442" r="62" fill="#FFFFFF" stroke="#000000" stroke-width="2" />
+    <!-- Big Gear -->
+    <path data-id="part_gear_big" data-class="composite_part" data-parent="node_controller" d="M 62 438 L 66 438 L 67 443 L 72 445 L 76 442 L 79 445 L 77 450 L 80 454 L 85 454 L 86 459 L 83 463 L 84 468 L 88 470 L 87 475 L 82 476 L 80 481 L 82 485 L 78 488 L 74 486 L 70 488 L 69 493 L 64 493 L 63 488 L 58 486 L 54 489 L 51 486 L 53 481 L 50 477 L 45 477 L 44 472 L 47 468 L 46 463 L 42 461 L 43 456 L 48 455 L 50 450 L 48 446 L 52 443 L 56 445 L 60 443 Z" fill="#000000" />
+    <circle data-id="part_gear_big_hole" data-class="composite_part" data-parent="node_controller" cx="65" cy="466" r="10" fill="#FFFFFF" />
+    <!-- Small Gear -->
+    <path data-id="part_gear_small" data-class="composite_part" data-parent="node_controller" d="M 95 422 L 98 422 L 99 425 L 103 427 L 106 425 L 108 427 L 107 431 L 109 434 L 113 434 L 114 438 L 111 441 L 112 445 L 115 446 L 114 450 L 110 451 L 108 455 L 110 458 L 106 460 L 103 458 L 100 460 L 99 464 L 95 464 L 94 460 L 90 458 L 87 460 L 85 458 L 87 454 L 84 451 L 80 451 L 80 447 L 83 444 L 82 440 L 79 438 L 80 434 L 84 434 L 85 430 L 83 427 L 87 425 L 90 427 L 93 425 Z" fill="#000000" />
+    <circle data-id="part_gear_small_hole" data-class="composite_part" data-parent="node_controller" cx="97" cy="443" r="6" fill="#FFFFFF" />
+  </g>
+
+  <!-- MIDDLE COLUMN TOP & BOTTOM NODES -->
+  <!-- Torques Node -->
+  <g data-id="node_torques" data-class="composite_whole" data-parent="block_runtime">
+    <circle data-id="circle_torques" data-class="composite_part" data-parent="node_torques" cx="450" cy="122" r="61" fill="#FFFFFF" stroke="#000000" stroke-width="2" />
+    <text data-id="text_tau" data-class="composite_part" data-parent="node_torques" x="450" y="146" font-family="serif" font-size="70" font-weight="bold" font-style="italic" text-anchor="middle" fill="#000000">&#x03C4;</text>
+  </g>
+
+  <!-- Observations Node -->
+  <g data-id="node_observations" data-class="composite_whole" data-parent="block_runtime">
+    <circle data-id="circle_observations" data-class="composite_part" data-parent="node_observations" cx="612" cy="122" r="61" fill="#FFFFFF" stroke="#000000" stroke-width="2" />
+    <path data-id="part_eye_contour" data-class="composite_part" data-parent="node_observations" d="M 572 122 Q 612 88 652 122 Q 612 156 572 122 Z" fill="none" stroke="#000000" stroke-width="5" stroke-linejoin="round" />
+    <circle data-id="part_eye_pupil" data-class="composite_part" data-parent="node_observations" cx="612" cy="122" r="14" fill="#000000" />
+  </g>
+
+  <!-- Actions Node -->
+  <g data-id="node_actions" data-class="composite_whole" data-parent="block_runtime">
+    <circle data-id="circle_actions" data-class="composite_part" data-parent="node_actions" cx="531" cy="490" r="62" fill="#FFFFFF" stroke="#000000" stroke-width="2" />
+    <!-- Up Arrow -->
+    <path data-id="part_arrow_up" data-class="composite_part" data-parent="node_actions" d="M 531 454 L 521 467 L 527 467 L 527 476 L 535 476 L 535 467 L 541 467 Z" fill="#000000" />
+    <!-- Down Arrow -->
+    <path data-id="part_arrow_down" data-class="composite_part" data-parent="node_actions" d="M 531 526 L 521 513 L 527 513 L 527 504 L 535 504 L 535 513 L 541 513 Z" fill="#000000" />
+    <!-- Left Arrow -->
+    <path data-id="part_arrow_left" data-class="composite_part" data-parent="node_actions" d="M 495 490 L 508 480 L 508 486 L 517 486 L 517 494 L 508 494 L 508 500 Z" fill="#000000" />
+    <!-- Right Arrow -->
+    <path data-id="part_arrow_right" data-class="composite_part" data-parent="node_actions" d="M 567 490 L 554 480 L 554 486 L 545 486 L 545 494 L 554 494 L 554 500 Z" fill="#000000" />
+  </g>
+
+  <!-- ROBOT BLOCK (CENTRAL CONTAINER) -->
+  <g data-id="block_robot" data-class="block" data-parent="root">
+    <rect data-id="rect_robot" data-class="child_node" data-parent="block_robot" x="354" y="236" width="352" height="155" fill="#EDF8E8" stroke="#000000" stroke-width="1.8" />
+    <text data-id="text_robot" data-class="child_node" data-parent="block_robot" x="368" y="375" font-family="sans-serif" font-size="29" font-weight="bold" fill="#000000">ROBOT</text>
+    
+    <!-- Central Robot Arm Icon -->
+    <g data-id="icon_center_robot" data-class="composite_whole" data-parent="block_robot">
+      <rect data-id="part_cr_base" data-class="composite_part" data-parent="icon_center_robot" x="512" y="347" width="41" height="13" fill="#FFFFFF" stroke="#000000" stroke-width="2.5" />
+      <path data-id="part_cr_link1" data-class="composite_part" data-parent="icon_center_robot" d="M 530 347 L 492 305" fill="none" stroke="#000000" stroke-width="13" stroke-linecap="round" />
+      <circle data-id="part_cr_joint" data-class="composite_part" data-parent="icon_center_robot" cx="492" cy="305" r="16" fill="#FFFFFF" stroke="#000000" stroke-width="3.5" />
+      <circle data-id="part_cr_joint_inner" data-class="composite_part" data-parent="icon_center_robot" cx="492" cy="305" r="6" fill="#000000" />
+      <path data-id="part_cr_link2" data-class="composite_part" data-parent="icon_center_robot" d="M 500 297 L 555 264" fill="none" stroke="#000000" stroke-width="13" stroke-linecap="round" />
+      <path data-id="part_cr_gripper_base" data-class="composite_part" data-parent="icon_center_robot" d="M 552 258 L 544 272" fill="none" stroke="#000000" stroke-width="4" stroke-linecap="round" />
+      <path data-id="part_cr_finger_top" data-class="composite_part" data-parent="icon_center_robot" d="M 552 258 L 574 259 L 585 273 L 577 274" fill="none" stroke="#000000" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" />
+      <path data-id="part_cr_finger_bottom" data-class="composite_part" data-parent="icon_center_robot" d="M 544 272 L 565 292 L 576 288 L 569 281" fill="none" stroke="#000000" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" />
+    </g>
+  </g>
+
+  <!-- RIGHT COLUMN NODES -->
+  <!-- Specifications Node -->
+  <g data-id="node_specifications" data-class="composite_whole" data-parent="block_callables">
+    <circle data-id="circle_specifications" data-class="composite_part" data-parent="node_specifications" cx="980" cy="175" r="62" fill="#FFFFFF" stroke="#000000" stroke-width="2" />
+    <rect data-id="part_spec_board" data-class="composite_part" data-parent="node_specifications" x="953" y="141" width="54" height="69" rx="5" fill="#FFFFFF" stroke="#000000" stroke-width="3" />
+    <path data-id="part_spec_clip" data-class="composite_part" data-parent="node_specifications" d="M 970 141 L 970 135 C 970 133 973 133 973 133 L 987 133 C 987 133 990 133 990 135 L 990 141" fill="#FFFFFF" stroke="#000000" stroke-width="3" />
+    <!-- Checklist items -->
+    <rect data-id="part_spec_box1" data-class="composite_part" data-parent="node_specifications" x="959" y="152" width="7" height="9" rx="2" fill="none" stroke="#000000" stroke-width="2.2" />
+    <line data-id="part_spec_line1" data-class="composite_part" data-parent="node_specifications" x1="973" y1="156" x2="999" y2="156" stroke="#000000" stroke-width="2.5" stroke-linecap="round" />
+    <rect data-id="part_spec_box2" data-class="composite_part" data-parent="node_specifications" x="959" y="166" width="7" height="9" rx="2" fill="none" stroke="#000000" stroke-width="2.2" />
+    <line data-id="part_spec_line2" data-class="composite_part" data-parent="node_specifications" x1="973" y1="170" x2="999" y2="170" stroke="#000000" stroke-width="2.5" stroke-linecap="round" />
+    <rect data-id="part_spec_box3" data-class="composite_part" data-parent="node_specifications" x="959" y="180" width="7" height="9" rx="2" fill="none" stroke="#000000" stroke-width="2.2" />
+    <line data-id="part_spec_line3" data-class="composite_part" data-parent="node_specifications" x1="973" y1="184" x2="999" y2="184" stroke="#000000" stroke-width="2.5" stroke-linecap="round" />
+    <rect data-id="part_spec_box4" data-class="composite_part" data-parent="node_specifications" x="959" y="194" width="7" height="9" rx="2" fill="none" stroke="#000000" stroke-width="2.2" />
+    <line data-id="part_spec_line4" data-class="composite_part" data-parent="node_specifications" x1="973" y1="198" x2="999" y2="198" stroke="#000000" stroke-width="2.5" stroke-linecap="round" />
+  </g>
+
+  <!-- Proprioception Node -->
+  <g data-id="node_proprioception" data-class="composite_whole" data-parent="block_callables">
+    <circle data-id="circle_proprioception" data-class="composite_part" data-parent="node_proprioception" cx="980" cy="310" r="62" fill="#FFFFFF" stroke="#000000" stroke-width="2" />
+    <circle data-id="part_human_head" data-class="composite_part" data-parent="node_proprioception" cx="980" cy="279" r="11" fill="#000000" />
+    <path data-id="part_human_body" data-class="composite_part" data-parent="node_proprioception" d="M 973 294 C 969 294 966 297 966 302 L 966 324 C 966 327 969 327 971 327 C 973 327 974 326 974 323 L 974 312 L 976 312 L 976 350 C 976 354 980 354 980 350 L 980 327 L 981 327 L 981 350 C 981 354 985 354 985 350 L 985 312 L 987 312 L 987 323 C 987 326 988 327 990 327 C 992 327 995 327 995 324 L 995 302 C 995 297 992 294 988 294 Z" fill="#000000" />
+  </g>
+
+  <!-- Sensors Node -->
+  <g data-id="node_sensors" data-class="composite_whole" data-parent="block_callables">
+    <circle data-id="circle_sensors" data-class="composite_part" data-parent="node_sensors" cx="980" cy="450" r="62" fill="#FFFFFF" stroke="#000000" stroke-width="2" />
+    <circle data-id="part_sensor_dot" data-class="composite_part" data-parent="node_sensors" cx="980" cy="450" r="10" fill="#000000" />
+    <path data-id="part_sensor_arc_l1" data-class="composite_part" data-parent="node_sensors" d="M 965 432 A 22 22 0 0 0 965 468" fill="none" stroke="#000000" stroke-width="5" stroke-linecap="round" />
+    <path data-id="part_sensor_arc_l2" data-class="composite_part" data-parent="node_sensors" d="M 952 420 A 38 38 0 0 0 952 480" fill="none" stroke="#000000" stroke-width="5.5" stroke-linecap="round" />
+    <path data-id="part_sensor_arc_r1" data-class="composite_part" data-parent="node_sensors" d="M 995 432 A 22 22 0 0 1 995 468" fill="none" stroke="#000000" stroke-width="5" stroke-linecap="round" />
+    <path data-id="part_sensor_arc_r2" data-class="composite_part" data-parent="node_sensors" d="M 1008 420 A 38 38 0 0 1 1008 480" fill="none" stroke="#000000" stroke-width="5.5" stroke-linecap="round" />
+  </g>
+
+  <!-- DYNAMIC NARRATION BANNER -->
+  <g id="narration_banner">
+    <rect x="25" y="575" width="1016" height="42" rx="8" fill="#1E293B" />
+    <text id="narr_ts1" class="narrative-text" x="533" y="601">The workflow begins on the left with the Initialization section.</text>
+    <text id="narr_ts2" class="narrative-text" x="533" y="601">Here, the Robot Model feeds into the central Robot block.</text>
+    <text id="narr_ts3" class="narrative-text" x="533" y="601">The Gripper Model provides the second input stream.</text>
+    <text id="narr_ts4" class="narrative-text" x="533" y="601">The Controller provides the third initialization input.</text>
+    <text id="narr_ts5" class="narrative-text" x="533" y="601">The middle section represents the Runtime phase.</text>
+    <text id="narr_ts6" class="narrative-text" x="533" y="601">At the center sits the main Robot unit.</text>
+    <text id="narr_ts7" class="narrative-text" x="533" y="601">From the bottom, Actions are directed upward into the Robot.</text>
+    <text id="narr_ts8" class="narrative-text" x="533" y="601">The Robot outputs Torques toward the top left.</text>
+    <text id="narr_ts9" class="narrative-text" x="533" y="601">It also emits Observations toward the top right.</text>
+    <text id="narr_ts10" class="narrative-text" x="533" y="601">The right section displays the Callables.</text>
+    <text id="narr_ts11" class="narrative-text" x="533" y="601">Specifications flow outward to the checklist icon.</text>
+    <text id="narr_ts12" class="narrative-text" x="533" y="601">Proprioception connects to the central human figure icon.</text>
+    <text id="narr_ts13" class="narrative-text" x="533" y="601">Finally, Sensors route data to the sensor icon at the bottom right.</text>
+  </g>
+</svg>

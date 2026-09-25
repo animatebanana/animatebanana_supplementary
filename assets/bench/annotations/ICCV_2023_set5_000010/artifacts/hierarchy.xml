@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram depth="1">
+  <block id="block1" depth="1">
+    <raster_node id="input_img_1" depth="2" />
+    <raster_node id="input_img_2" depth="2" />
+    <raster_node id="input_img_3" depth="2" />
+    <raster_node id="input_img_4" depth="2" />
+    <child_node id="partial_dreambooth" depth="2" />
+    <raster_node id="nerf1_mesh" depth="2" />
+    <composite_whole id="cam1_1" depth="2">
+      <composite_part id="cam1_1_p1" depth="2" />
+      <composite_part id="cam1_1_p2" depth="2" />
+    </composite_whole>
+    <composite_whole id="cam1_2" depth="2">
+      <composite_part id="cam1_2_p1" depth="2" />
+      <composite_part id="cam1_2_p2" depth="2" />
+    </composite_whole>
+    <composite_whole id="cam1_3" depth="2">
+      <composite_part id="cam1_3_p1" depth="2" />
+      <composite_part id="cam1_3_p2" depth="2" />
+    </composite_whole>
+    <composite_whole id="cam1_4" depth="2">
+      <composite_part id="cam1_4_p1" depth="2" />
+      <composite_part id="cam1_4_p2" depth="2" />
+    </composite_whole>
+    <composite_whole id="cam1_5" depth="2">
+      <composite_part id="cam1_5_p1" depth="2" />
+      <composite_part id="cam1_5_p2" depth="2" />
+    </composite_whole>
+    <edge id="edge_input_fork" source="input_img_1" target="partial_dreambooth" depth="2" />
+    <edge id="edge_sds_1" source="partial_dreambooth" target="nerf1_mesh" depth="2" />
+    <edge id="edge_sds_1_rev" source="nerf1_mesh" target="partial_dreambooth" depth="2" />
+  </block>
+  <block id="block2" depth="1">
+    <raster_node id="render_1" depth="2" />
+    <raster_node id="render_2" depth="2" />
+    <raster_node id="render_3" depth="2" />
+    <raster_node id="render_4" depth="2" />
+    <child_node id="img2img_box" depth="2" />
+    <raster_node id="pseudo_1" depth="2" />
+    <raster_node id="pseudo_2" depth="2" />
+    <raster_node id="pseudo_3" depth="2" />
+    <raster_node id="pseudo_4" depth="2" />
+    <edge id="edge_renders_to_img2img" source="render_1" target="img2img_box" depth="2" />
+    <edge id="edge_img2img_to_pseudo" source="img2img_box" target="pseudo_1" depth="2" />
+  </block>
+  <block id="block3" depth="1">
+    <raster_node id="panel3_raster" depth="2" />
+    <child_node id="multiview_dreambooth" depth="2" />
+  </block>
+  <edge id="edge_pseudo_to_multiview_db" source="pseudo_4" target="multiview_dreambooth" depth="1" />
+</Diagram>

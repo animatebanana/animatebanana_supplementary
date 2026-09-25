@@ -1,0 +1,42 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.974
+Existing reconstruction-based detection methods split the pipeline into two disconnected stages.
+
+2
+00:00:04.974 --> 00:00:12.911
+In the first stage, an input image is passed through a pre-trained diffusion model to produce a reconstructed image.
+
+3
+00:00:12.911 --> 00:00:18.996
+A conceptual barrier isolates the two stages, passing frozen representations forward without joint optimization.
+
+4
+00:00:18.996 --> 00:00:27.996
+The second stage computes the absolute reconstruction error and trains a backend classifier to predict whether the image is real or generated.
+
+5
+00:00:27.996 --> 00:00:34.452
+Crucially, this existing architecture lacks direct interaction between the diffusion model and the downstream classifier.
+
+6
+00:00:34.452 --> 00:00:40.537
+In contrast, the proposed framework unifies reconstruction and classification into an end-to-end training pipeline.
+
+7
+00:00:40.537 --> 00:00:46.993
+The Frequency Mask Refinement module filters out difficult-to-reconstruct mid-band frequencies to produce a pseudo-generated image.
+
+8
+00:00:46.993 --> 00:00:53.448
+Both the original and pseudo-generated images are passed to the diffusion autoencoder for parallel reconstruction.
+
+9
+00:00:53.448 --> 00:00:59.904
+Absolute difference operations calculate distinct reconstruction error maps for both the original and pseudo-generated inputs.
+
+10
+00:00:59.904 --> 00:01:08.211
+These dual reconstruction error maps are concatenated and fed into the classifier to make the final real or generated prediction.
+

@@ -1,0 +1,511 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 988 740" width="988" height="740">
+  <defs>
+    <!-- Arrowhead markers -->
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#000000"/>
+    </marker>
+    <marker id="arrow-sm" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M 0 2 L 7 5 L 0 8 z" fill="#000000"/>
+    </marker>
+    <!-- Linear gradient for legend block -->
+    <linearGradient id="grad-ci-co" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#b4e5a2"/>
+      <stop offset="50%" stop-color="#fbb034"/>
+      <stop offset="100%" stop-color="#7289da"/>
+    </linearGradient>
+  </defs>
+
+  <style>
+    text {
+      font-family: "Times New Roman", Times, serif;
+      font-size: 14px;
+      fill: #000000;
+    }
+    .sans {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    .math {
+      font-style: italic;
+    }
+    .bold-math {
+      font-weight: bold;
+      font-style: italic;
+    }
+
+    @keyframes colorPop {
+      to {
+        filter: grayscale(0%) opacity(1);
+      }
+    }
+
+    @keyframes bannerSpan {
+      0% { opacity: 0; }
+      1% { opacity: 1; }
+      99.9% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    @keyframes bannerLast {
+      0% { opacity: 0; }
+      1% { opacity: 1; }
+      100% { opacity: 1; }
+    }
+
+    /* Dormant State for All Diagram Elements */
+    #top_panel_group, #top_panel_bg, #raster_input_phi_y, #lbl_input_phi_y, #lbl_input_dim, #edge_in_to_res1,
+    #resblock_v1, #txt_resblock_v1, #edge_res1_to_xK, #edge_res1_to_zK,
+    #raster_x_K, #lbl_x_K, #raster_z_K, #lbl_z_K, #lbl_dim_x_K, #lbl_dim_z_K, #edge_xK_to_dmp1, #edge_zK_to_dmp1,
+    #dmp_v1, #txt_dmp_v1, #lbl_x_Km1, #lbl_dots_top1, #lbl_x_t, #lbl_z_Km1, #lbl_dots_bot1, #lbl_z_t, #edge_dmp1_to_dots_top, #edge_dots_top_to_dmp2, #edge_dmp1_to_dots_bot, #edge_dots_bot_to_dmp2,
+    #dmp_v2, #txt_dmp_v2, #lbl_x_tm1, #lbl_dots_top2, #lbl_x_1, #lbl_z_tm1, #lbl_dots_bot2, #lbl_z_1, #edge_dmp2_to_dots_top, #edge_dots_top_to_dmp3, #edge_dmp2_to_dots_bot, #edge_dots_bot_to_dmp3,
+    #dmp_v3, #txt_dmp_v3, #edge_dmp3_to_x0, #edge_dmp3_to_z0,
+    #raster_x_0, #lbl_x_0, #raster_z_0, #lbl_z_0, #lbl_dim_x_0, #lbl_dim_z_0, #edge_x0_to_res2, #edge_z0_to_res2,
+    #resblock_v2, #txt_resblock_v2, #raster_x_hat, #lbl_x_hat, #lbl_dim_x_hat, #edge_res2_to_xhat,
+    #mid_panel_group, #mid_panel_bg, #dmp_step_detail_box, #raster_mid_xt, #lbl_mid_xt, #raster_mid_zt, #lbl_mid_zt, #lbl_dmp_step_detail_title, #edge_xt_to_gd, #edge_zt_to_c,
+    #node_grad_descent, #txt_grad_descent_1, #txt_grad_descent_2, #lbl_st, #lbl_gd_in_dim, #lbl_gd_out_dim, #edge_gd_to_c,
+    #node_concat_c, #lbl_st_zt, #node_mid_resblock, #txt_mid_resblock, #lbl_mid_res_in_c, #lbl_mid_res_out_c, #edge_c_to_res, #edge_res_to_s,
+    #node_split_s, #lbl_rt_ztm1, #lbl_rt, #raster_mid_ztm1, #lbl_mid_ztm1, #edge_s_to_prob, #edge_s_to_ztm1,
+    #node_prob_model, #txt_prob_model, #raster_mid_xtm1, #lbl_mid_xtm1, #lbl_prob_in_dim, #lbl_prob_out_dim, #edge_prob_to_xtm1,
+    #bottom_resblock_panel, #bg_bot_resblock, #br_conv1, #txt_br_conv1, #br_res1, #txt_br_res1, #br_res2, #txt_br_res2, #br_res3, #txt_br_res3, #br_res4, #txt_br_res4, #br_conv2, #txt_br_conv2, #lbl_bot_resblock_title, #lbl_br_cin, #lbl_br_c32_1, #lbl_br_c32_2, #lbl_br_c32_3, #lbl_br_c32_4, #lbl_br_c32_5, #lbl_br_cout, #edge_br_in, #edge_br_out,
+    #bottom_res_panel, #bg_bot_res, #res_sub_conv1, #txt_res_sub_conv1, #res_sub_relu, #txt_res_sub_relu, #res_sub_conv2, #txt_res_sub_conv2, #res_sub_add, #lbl_bot_res_title, #lbl_res_c32_1, #lbl_res_c32_2, #lbl_res_c32_3, #lbl_res_c32_4, #edge_res_in, #edge_res_conv_to_add, #edge_res_skip, #edge_res_out,
+    #bottom_legend_panel, #bg_bot_legend, #leg_s, #leg_c, #leg_add, #leg_conv_box, #txt_leg_conv, #leg_ci_co_box, #lbl_leg_s, #lbl_leg_c, #lbl_leg_add, #lbl_leg_conv_desc1, #lbl_leg_conv_desc2, #lbl_leg_ci, #lbl_leg_co, #lbl_leg_c_desc1, #lbl_leg_c_desc2, #lbl_leg_c_desc3 {
+      filter: grayscale(100%) opacity(0.4);
+      animation-name: colorPop;
+      animation-duration: 0.5s;
+      animation-fill-mode: forwards;
+    }
+
+    /* Chronological Delays */
+    #top_panel_group, #top_panel_bg, #raster_input_phi_y, #lbl_input_phi_y, #lbl_input_dim, #edge_in_to_res1 {
+      animation-delay: 0.5s;
+    }
+    #resblock_v1, #txt_resblock_v1, #edge_res1_to_xK, #edge_res1_to_zK {
+      animation-delay: 1.0s;
+    }
+    #raster_x_K, #lbl_x_K, #raster_z_K, #lbl_z_K, #lbl_dim_x_K, #lbl_dim_z_K, #edge_xK_to_dmp1, #edge_zK_to_dmp1 {
+      animation-delay: 1.5s;
+    }
+    #dmp_v1, #txt_dmp_v1, #lbl_x_Km1, #lbl_dots_top1, #lbl_x_t, #lbl_z_Km1, #lbl_dots_bot1, #lbl_z_t, #edge_dmp1_to_dots_top, #edge_dots_top_to_dmp2, #edge_dmp1_to_dots_bot, #edge_dots_bot_to_dmp2 {
+      animation-delay: 2.0s;
+    }
+    #dmp_v2, #txt_dmp_v2, #lbl_x_tm1, #lbl_dots_top2, #lbl_x_1, #lbl_z_tm1, #lbl_dots_bot2, #lbl_z_1, #edge_dmp2_to_dots_top, #edge_dots_top_to_dmp3, #edge_dmp2_to_dots_bot, #edge_dots_bot_to_dmp3 {
+      animation-delay: 2.5s;
+    }
+    #dmp_v3, #txt_dmp_v3, #edge_dmp3_to_x0, #edge_dmp3_to_z0 {
+      animation-delay: 3.0s;
+    }
+    #raster_x_0, #lbl_x_0, #raster_z_0, #lbl_z_0, #lbl_dim_x_0, #lbl_dim_z_0, #edge_x0_to_res2, #edge_z0_to_res2 {
+      animation-delay: 3.5s;
+    }
+    #resblock_v2, #txt_resblock_v2, #raster_x_hat, #lbl_x_hat, #lbl_dim_x_hat, #edge_res2_to_xhat {
+      animation-delay: 4.0s;
+    }
+    #mid_panel_group, #mid_panel_bg, #dmp_step_detail_box, #raster_mid_xt, #lbl_mid_xt, #raster_mid_zt, #lbl_mid_zt, #lbl_dmp_step_detail_title, #edge_xt_to_gd, #edge_zt_to_c {
+      animation-delay: 4.5s;
+    }
+    #node_grad_descent, #txt_grad_descent_1, #txt_grad_descent_2, #lbl_st, #lbl_gd_in_dim, #lbl_gd_out_dim, #edge_gd_to_c {
+      animation-delay: 5.0s;
+    }
+    #node_concat_c, #lbl_st_zt, #node_mid_resblock, #txt_mid_resblock, #lbl_mid_res_in_c, #lbl_mid_res_out_c, #edge_c_to_res, #edge_res_to_s {
+      animation-delay: 5.5s;
+    }
+    #node_split_s, #lbl_rt_ztm1, #lbl_rt, #raster_mid_ztm1, #lbl_mid_ztm1, #edge_s_to_prob, #edge_s_to_ztm1 {
+      animation-delay: 6.0s;
+    }
+    #node_prob_model, #txt_prob_model, #raster_mid_xtm1, #lbl_mid_xtm1, #lbl_prob_in_dim, #lbl_prob_out_dim, #edge_prob_to_xtm1 {
+      animation-delay: 6.5s;
+    }
+    #bottom_resblock_panel, #bg_bot_resblock, #br_conv1, #txt_br_conv1, #br_res1, #txt_br_res1, #br_res2, #txt_br_res2, #br_res3, #txt_br_res3, #br_res4, #txt_br_res4, #br_conv2, #txt_br_conv2, #lbl_bot_resblock_title, #lbl_br_cin, #lbl_br_c32_1, #lbl_br_c32_2, #lbl_br_c32_3, #lbl_br_c32_4, #lbl_br_c32_5, #lbl_br_cout, #edge_br_in, #edge_br_out {
+      animation-delay: 7.0s;
+    }
+    #bottom_res_panel, #bg_bot_res, #res_sub_conv1, #txt_res_sub_conv1, #res_sub_relu, #txt_res_sub_relu, #res_sub_conv2, #txt_res_sub_conv2, #res_sub_add, #lbl_bot_res_title, #lbl_res_c32_1, #lbl_res_c32_2, #lbl_res_c32_3, #lbl_res_c32_4, #edge_res_in, #edge_res_conv_to_add, #edge_res_skip, #edge_res_out {
+      animation-delay: 7.5s;
+    }
+    #bottom_legend_panel, #bg_bot_legend, #leg_s, #leg_c, #leg_add, #leg_conv_box, #txt_leg_conv, #leg_ci_co_box, #lbl_leg_s, #lbl_leg_c, #lbl_leg_add, #lbl_leg_conv_desc1, #lbl_leg_conv_desc2, #lbl_leg_ci, #lbl_leg_co, #lbl_leg_c_desc1, #lbl_leg_c_desc2, #lbl_leg_c_desc3 {
+      animation-delay: 8.0s;
+    }
+
+    /* Narration Banner Styling */
+    #narration_banner text {
+      opacity: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      fill: #ffffff;
+      text-anchor: middle;
+    }
+    #narr_ts1 { animation: bannerSpan 0.5s 0.5s forwards; }
+    #narr_ts2 { animation: bannerSpan 0.5s 1.0s forwards; }
+    #narr_ts3 { animation: bannerSpan 0.5s 1.5s forwards; }
+    #narr_ts4 { animation: bannerSpan 0.5s 2.0s forwards; }
+    #narr_ts5 { animation: bannerSpan 0.5s 2.5s forwards; }
+    #narr_ts6 { animation: bannerSpan 0.5s 3.0s forwards; }
+    #narr_ts7 { animation: bannerSpan 0.5s 3.5s forwards; }
+    #narr_ts8 { animation: bannerSpan 0.5s 4.0s forwards; }
+    #narr_ts9 { animation: bannerSpan 0.5s 4.5s forwards; }
+    #narr_ts10 { animation: bannerSpan 0.5s 5.0s forwards; }
+    #narr_ts11 { animation: bannerSpan 0.5s 5.5s forwards; }
+    #narr_ts12 { animation: bannerSpan 0.5s 6.0s forwards; }
+    #narr_ts13 { animation: bannerSpan 0.5s 6.5s forwards; }
+    #narr_ts14 { animation: bannerSpan 0.5s 7.0s forwards; }
+    #narr_ts15 { animation: bannerSpan 0.5s 7.5s forwards; }
+    #narr_ts16 { animation: bannerLast 0.5s 8.0s forwards; }
+  </style>
+
+  <!-- ========================================== -->
+  <!-- SECTION 1: TOP PANEL (OVERALL ARCHITECTURE)-->
+  <!-- ========================================== -->
+  <g id="top_panel_group" data-id="top_panel_group" data-class="block" data-parent="root">
+    <rect id="top_panel_bg" data-id="top_panel_bg" data-class="child_node" data-parent="top_panel_group" x="4" y="4" width="980" height="248" rx="12" fill="#dce6f7" stroke="none"/>
+
+    <!-- Input Phi^T y -->
+    <g id="raster_input_phi_y" data-id="raster_input_phi_y" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch03065/crop_raster_input_phi_y.png" xlink:href="../../rasters/CVPR_2025_arch03065/crop_raster_input_phi_y.png" x="47" y="87" width="75" height="75" preserveAspectRatio="xMidYMid meet" /></g>
+    <text id="lbl_input_dim" data-id="lbl_input_dim" data-class="text_node" data-parent="top_panel_group" x="84.5" y="79" font-size="12" text-anchor="middle">1 &#215; <tspan class="math">H</tspan> &#215; <tspan class="math">W</tspan></text>
+    <text id="lbl_input_phi_y" data-id="lbl_input_phi_y" data-class="standalone_node" data-parent="top_panel_group" x="84.5" y="184" font-size="18" text-anchor="middle">&#934;<tspan font-size="0.65em" baseline-shift="super">T</tspan><tspan class="bold-math">y</tspan></text>
+
+    <!-- ResBlock 1 (Vertical Bar) -->
+    <rect id="resblock_v1" data-id="resblock_v1" data-class="child_node" data-parent="top_panel_group" x="156" y="20" width="28" height="210" rx="6" fill="#a2bde6" stroke="#000000" stroke-width="1.5"/>
+    <text id="txt_resblock_v1" data-id="txt_resblock_v1" data-class="child_node" data-parent="top_panel_group" x="-125" y="175" font-size="16" font-weight="bold" transform="rotate(-90)" text-anchor="middle" class="sans">ResBlock</text>
+
+    <!-- x_K node -->
+    <g id="raster_x_K" data-id="raster_x_K" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch03065/crop_raster_x_K.png" xlink:href="../../rasters/CVPR_2025_arch03065/crop_raster_x_K.png" x="220" y="23" width="75" height="72" preserveAspectRatio="xMidYMid meet" /></g>
+    <text id="lbl_dim_x_K" data-id="lbl_dim_x_K" data-class="text_node" data-parent="top_panel_group" x="257.5" y="17" font-size="12" text-anchor="middle">3 &#215; <tspan class="math">H</tspan> &#215; <tspan class="math">W</tspan></text>
+    <text id="lbl_x_K" data-id="lbl_x_K" data-class="standalone_node" data-parent="top_panel_group" x="257.5" y="112" font-size="16" text-anchor="middle" class="bold-math">x<tspan font-size="0.65em" font-style="normal" baseline-shift="sub">K</tspan></text>
+
+    <!-- z_K node -->
+    <g id="raster_z_K" data-id="raster_z_K" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch03065/crop_raster_z_K.png" xlink:href="../../rasters/CVPR_2025_arch03065/crop_raster_z_K.png" x="220" y="140" width="75" height="72" preserveAspectRatio="xMidYMid meet" /></g>
+    <text id="lbl_dim_z_K" data-id="lbl_dim_z_K" data-class="text_node" data-parent="top_panel_group" x="257.5" y="136" font-size="12" text-anchor="middle">(<tspan class="math">C</tspan> &#8722; 3) &#215; <tspan class="math">H</tspan> &#215; <tspan class="math">W</tspan></text>
+    <text id="lbl_z_K" data-id="lbl_z_K" data-class="standalone_node" data-parent="top_panel_group" x="257.5" y="238" font-size="16" text-anchor="middle" class="bold-math">z<tspan font-size="0.65em" font-style="normal" baseline-shift="sub">K</tspan></text>
+
+    <!-- DMP step 1 -->
+    <rect id="dmp_v1" data-id="dmp_v1" data-class="child_node" data-parent="top_panel_group" x="330" y="27" width="28" height="196" rx="2" fill="#fff2cc" stroke="#000000" stroke-width="1.5"/>
+    <text id="txt_dmp_v1" data-id="txt_dmp_v1" data-class="child_node" data-parent="top_panel_group" x="-125" y="349" font-size="15" font-weight="bold" transform="rotate(-90)" text-anchor="middle" class="sans">DMP step</text>
+
+    <!-- Sequence between DMP 1 and DMP 2 -->
+    <text id="lbl_x_Km1" data-id="lbl_x_Km1" data-class="child_node" data-parent="top_panel_group" x="380" y="52" font-size="14" text-anchor="middle" class="bold-math">x<tspan font-size="0.65em" font-style="normal" baseline-shift="sub">K&#8722;1</tspan></text>
+    <text id="lbl_dots_top1" data-id="lbl_dots_top1" data-class="child_node" data-parent="top_panel_group" x="420" y="62" font-size="18" text-anchor="middle" font-weight="bold">&#8943;</text>
+    <text id="lbl_x_t" data-id="lbl_x_t" data-class="child_node" data-parent="top_panel_group" x="458" y="52" font-size="14" text-anchor="middle" class="bold-math">x<tspan font-size="0.65em" font-style="normal" baseline-shift="sub">t</tspan></text>
+
+    <text id="lbl_z_Km1" data-id="lbl_z_Km1" data-class="child_node" data-parent="top_panel_group" x="380" y="174" font-size="14" text-anchor="middle" class="bold-math">z<tspan font-size="0.65em" font-style="normal" baseline-shift="sub">K&#8722;1</tspan></text>
+    <text id="lbl_dots_bot1" data-id="lbl_dots_bot1" data-class="child_node" data-parent="top_panel_group" x="420" y="184" font-size="18" text-anchor="middle" font-weight="bold">&#8943;</text>
+    <text id="lbl_z_t" data-id="lbl_z_t" data-class="child_node" data-parent="top_panel_group" x="458" y="174" font-size="14" text-anchor="middle" class="bold-math">z<tspan font-size="0.65em" font-style="normal" baseline-shift="sub">t</tspan></text>
+
+    <!-- DMP step 2 -->
+    <rect id="dmp_v2" data-id="dmp_v2" data-class="child_node" data-parent="top_panel_group" x="480" y="27" width="28" height="196" rx="2" fill="#fff2cc" stroke="#000000" stroke-width="1.5"/>
+    <text id="txt_dmp_v2" data-id="txt_dmp_v2" data-class="child_node" data-parent="top_panel_group" x="-125" y="499" font-size="15" font-weight="bold" transform="rotate(-90)" text-anchor="middle" class="sans">DMP step</text>
+
+    <!-- Sequence between DMP 2 and DMP 3 -->
+    <text id="lbl_x_tm1" data-id="lbl_x_tm1" data-class="child_node" data-parent="top_panel_group" x="528" y="52" font-size="14" text-anchor="middle" class="bold-math">x<tspan font-size="0.65em" font-style="normal" baseline-shift="sub">t&#8722;1</tspan></text>
+    <text id="lbl_dots_top2" data-id="lbl_dots_top2" data-class="child_node" data-parent="top_panel_group" x="568" y="62" font-size="18" text-anchor="middle" font-weight="bold">&#8943;</text>
+    <text id="lbl_x_1" data-id="lbl_x_1" data-class="child_node" data-parent="top_panel_group" x="608" y="52" font-size="14" text-anchor="middle" class="bold-math">x<tspan font-size="0.65em" font-style="normal" baseline-shift="sub">1</tspan></text>
+
+    <text id="lbl_z_tm1" data-id="lbl_z_tm1" data-class="child_node" data-parent="top_panel_group" x="528" y="174" font-size="14" text-anchor="middle" class="bold-math">z<tspan font-size="0.65em" font-style="normal" baseline-shift="sub">t&#8722;1</tspan></text>
+    <text id="lbl_dots_bot2" data-id="lbl_dots_bot2" data-class="child_node" data-parent="top_panel_group" x="568" y="184" font-size="18" text-anchor="middle" font-weight="bold">&#8943;</text>
+    <text id="lbl_z_1" data-id="lbl_z_1" data-class="child_node" data-parent="top_panel_group" x="608" y="174" font-size="14" text-anchor="middle" class="bold-math">z<tspan font-size="0.65em" font-style="normal" baseline-shift="sub">1</tspan></text>
+
+    <!-- DMP step 3 -->
+    <rect id="dmp_v3" data-id="dmp_v3" data-class="child_node" data-parent="top_panel_group" x="628" y="27" width="28" height="196" rx="2" fill="#fff2cc" stroke="#000000" stroke-width="1.5"/>
+    <text id="txt_dmp_v3" data-id="txt_dmp_v3" data-class="child_node" data-parent="top_panel_group" x="-125" y="647" font-size="15" font-weight="bold" transform="rotate(-90)" text-anchor="middle" class="sans">DMP step</text>
+
+    <!-- x_0 node -->
+    <g id="raster_x_0" data-id="raster_x_0" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch03065/crop_raster_x_0.png" xlink:href="../../rasters/CVPR_2025_arch03065/crop_raster_x_0.png" x="692" y="23" width="75" height="72" preserveAspectRatio="xMidYMid meet" /></g>
+    <text id="lbl_dim_x_0" data-id="lbl_dim_x_0" data-class="text_node" data-parent="top_panel_group" x="729.5" y="17" font-size="12" text-anchor="middle">3 &#215; <tspan class="math">H</tspan> &#215; <tspan class="math">W</tspan></text>
+    <text id="lbl_x_0" data-id="lbl_x_0" data-class="standalone_node" data-parent="top_panel_group" x="729.5" y="112" font-size="16" text-anchor="middle" class="bold-math">x<tspan font-size="0.65em" font-style="normal" baseline-shift="sub">0</tspan></text>
+
+    <!-- z_0 node -->
+    <g id="raster_z_0" data-id="raster_z_0" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch03065/crop_raster_z_0.png" xlink:href="../../rasters/CVPR_2025_arch03065/crop_raster_z_0.png" x="692" y="140" width="75" height="72" preserveAspectRatio="xMidYMid meet" /></g>
+    <text id="lbl_dim_z_0" data-id="lbl_dim_z_0" data-class="text_node" data-parent="top_panel_group" x="729.5" y="136" font-size="12" text-anchor="middle">(<tspan class="math">C</tspan> &#8722; 3) &#215; <tspan class="math">H</tspan> &#215; <tspan class="math">W</tspan></text>
+    <text id="lbl_z_0" data-id="lbl_z_0" data-class="standalone_node" data-parent="top_panel_group" x="729.5" y="238" font-size="16" text-anchor="middle" class="bold-math">z<tspan font-size="0.65em" font-style="normal" baseline-shift="sub">0</tspan></text>
+
+    <!-- ResBlock 2 (Vertical Bar) -->
+    <rect id="resblock_v2" data-id="resblock_v2" data-class="child_node" data-parent="top_panel_group" x="803" y="20" width="28" height="210" rx="6" fill="#a2bde6" stroke="#000000" stroke-width="1.5"/>
+    <text id="txt_resblock_v2" data-id="txt_resblock_v2" data-class="child_node" data-parent="top_panel_group" x="-125" y="822" font-size="16" font-weight="bold" transform="rotate(-90)" text-anchor="middle" class="sans">ResBlock</text>
+
+    <!-- Output x_hat -->
+    <g id="raster_x_hat" data-id="raster_x_hat" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch03065/crop_raster_x_hat.png" xlink:href="../../rasters/CVPR_2025_arch03065/crop_raster_x_hat.png" x="870" y="87" width="75" height="75" preserveAspectRatio="xMidYMid meet" /></g>
+    <text id="lbl_dim_x_hat" data-id="lbl_dim_x_hat" data-class="text_node" data-parent="top_panel_group" x="907.5" y="79" font-size="12" text-anchor="middle">1 &#215; <tspan class="math">H</tspan> &#215; <tspan class="math">W</tspan></text>
+    <text id="lbl_x_hat" data-id="lbl_x_hat" data-class="standalone_node" data-parent="top_panel_group" x="907.5" y="184" font-size="18" text-anchor="middle" class="bold-math">x&#770;</text>
+  </g>
+
+  <!-- Edges in Top Panel -->
+  <g id="edges_top">
+    <path id="edge_in_to_res1" data-id="edge_in_to_res1" data-class="edge" data-source="raster_input_phi_y" data-target="resblock_v1" d="M 122 124.5 L 154 124.5" stroke="#000000" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <path id="edge_res1_to_xK" data-id="edge_res1_to_xK" data-class="edge" data-source="resblock_v1" data-target="raster_x_K" d="M 184 59 L 218 59" stroke="#000000" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <path id="edge_res1_to_zK" data-id="edge_res1_to_zK" data-class="edge" data-source="resblock_v1" data-target="raster_z_K" d="M 184 184 L 208 184" stroke="#000000" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <path id="edge_xK_to_dmp1" data-id="edge_xK_to_dmp1" data-class="edge" data-source="raster_x_K" data-target="dmp_v1" d="M 295 59 L 328 59" stroke="#000000" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <path id="edge_zK_to_dmp1" data-id="edge_zK_to_dmp1" data-class="edge" data-source="raster_z_K" data-target="dmp_v1" d="M 295 184 L 328 184" stroke="#000000" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <path id="edge_dmp1_to_dots_top" data-id="edge_dmp1_to_dots_top" data-class="edge" data-source="dmp_v1" data-target="lbl_dots_top1" d="M 358 59 L 398 59" stroke="#000000" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <path id="edge_dots_top_to_dmp2" data-id="edge_dots_top_to_dmp2" data-class="edge" data-source="lbl_dots_top1" data-target="dmp_v2" d="M 436 59 L 478 59" stroke="#000000" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <path id="edge_dmp1_to_dots_bot" data-id="edge_dmp1_to_dots_bot" data-class="edge" data-source="dmp_v1" data-target="lbl_dots_bot1" d="M 358 184 L 398 184" stroke="#000000" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <path id="edge_dots_bot_to_dmp2" data-id="edge_dots_bot_to_dmp2" data-class="edge" data-source="lbl_dots_bot1" data-target="dmp_v2" d="M 436 184 L 478 184" stroke="#000000" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <path id="edge_dmp2_to_dots_top" data-id="edge_dmp2_to_dots_top" data-class="edge" data-source="dmp_v2" data-target="lbl_dots_top2" d="M 508 59 L 546 59" stroke="#000000" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <path id="edge_dots_top_to_dmp3" data-id="edge_dots_top_to_dmp3" data-class="edge" data-source="lbl_dots_top2" data-target="dmp_v3" d="M 586 59 L 626 59" stroke="#000000" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <path id="edge_dmp2_to_dots_bot" data-id="edge_dmp2_to_dots_bot" data-class="edge" data-source="dmp_v2" data-target="lbl_dots_bot2" d="M 508 184 L 546 184" stroke="#000000" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <path id="edge_dots_bot_to_dmp3" data-id="edge_dots_bot_to_dmp3" data-class="edge" data-source="lbl_dots_bot2" data-target="dmp_v3" d="M 586 184 L 626 184" stroke="#000000" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <path id="edge_dmp3_to_x0" data-id="edge_dmp3_to_x0" data-class="edge" data-source="dmp_v3" data-target="raster_x_0" d="M 656 59 L 690 59" stroke="#000000" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <path id="edge_dmp3_to_z0" data-id="edge_dmp3_to_z0" data-class="edge" data-source="dmp_v3" data-target="raster_z_0" d="M 656 184 L 680 184" stroke="#000000" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <path id="edge_x0_to_res2" data-id="edge_x0_to_res2" data-class="edge" data-source="raster_x_0" data-target="resblock_v2" d="M 767 59 L 801 59" stroke="#000000" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <path id="edge_z0_to_res2" data-id="edge_z0_to_res2" data-class="edge" data-source="raster_z_0" data-target="resblock_v2" d="M 767 184 L 801 184" stroke="#000000" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <path id="edge_res2_to_xhat" data-id="edge_res2_to_xhat" data-class="edge" data-source="resblock_v2" data-target="raster_x_hat" d="M 831 124.5 L 868 124.5" stroke="#000000" stroke-width="2.5" marker-end="url(#arrow)"/>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- SECTION 2: MIDDLE PANEL (DMP STEP DETAILS) -->
+  <!-- ========================================== -->
+  <g id="mid_panel_group" data-id="mid_panel_group" data-class="block" data-parent="root">
+    <rect id="mid_panel_bg" data-id="mid_panel_bg" data-class="child_node" data-parent="mid_panel_group" x="4" y="258" width="980" height="225" rx="12" fill="#e9edf0" stroke="none"/>
+
+    <!-- Left input x_t -->
+    <g id="raster_mid_xt" data-id="raster_mid_xt" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch03065/crop_raster_mid_xt.png" xlink:href="../../rasters/CVPR_2025_arch03065/crop_raster_mid_xt.png" x="46" y="270" width="75" height="72" preserveAspectRatio="xMidYMid meet" /></g>
+    <text id="lbl_mid_xt" data-id="lbl_mid_xt" data-class="standalone_node" data-parent="mid_panel_group" x="83.5" y="358" font-size="16" text-anchor="middle" class="bold-math">x<tspan font-size="0.65em" font-style="normal" baseline-shift="sub">t</tspan></text>
+
+    <!-- Left input z_t -->
+    <g id="raster_mid_zt" data-id="raster_mid_zt" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch03065/crop_raster_mid_zt.png" xlink:href="../../rasters/CVPR_2025_arch03065/crop_raster_mid_zt.png" x="46" y="377" width="75" height="72" preserveAspectRatio="xMidYMid meet" /></g>
+    <text id="lbl_mid_zt" data-id="lbl_mid_zt" data-class="standalone_node" data-parent="mid_panel_group" x="83.5" y="475" font-size="16" text-anchor="middle" class="bold-math">z<tspan font-size="0.65em" font-style="normal" baseline-shift="sub">t</tspan></text>
+
+    <!-- Detailed DMP Step Container -->
+    <rect id="dmp_step_detail_box" data-id="dmp_step_detail_box" data-class="child_node" data-parent="mid_panel_group" x="148" y="276" width="680" height="175" rx="2" fill="#fff5cc" stroke="#000000" stroke-width="1.5"/>
+    <text id="lbl_dmp_step_detail_title" data-id="lbl_dmp_step_detail_title" data-class="text_node" data-parent="mid_panel_group" x="488" y="440" font-size="16" font-weight="bold" text-anchor="middle" class="sans">DMP step</text>
+
+    <!-- Inside: Gradient Descent Block -->
+    <rect id="node_grad_descent" data-id="node_grad_descent" data-class="child_node" data-parent="mid_panel_group" x="165" y="286" width="95" height="52" rx="14" fill="#b4e5a2" stroke="#000000" stroke-width="1.5"/>
+    <text id="txt_grad_descent_1" data-id="txt_grad_descent_1" data-class="child_node" data-parent="mid_panel_group" x="212.5" y="307" font-size="13" font-weight="bold" text-anchor="middle" class="sans">Gradient</text>
+    <text id="txt_grad_descent_2" data-id="txt_grad_descent_2" data-class="child_node" data-parent="mid_panel_group" x="212.5" y="323" font-size="13" font-weight="bold" text-anchor="middle" class="sans">Descent</text>
+    <text id="lbl_gd_in_dim" data-id="lbl_gd_in_dim" data-class="text_node" data-parent="mid_panel_group" x="178" y="352" font-size="12">3</text>
+    <text id="lbl_gd_out_dim" data-id="lbl_gd_out_dim" data-class="text_node" data-parent="mid_panel_group" x="245" y="352" font-size="12">3</text>
+    <text id="lbl_st" data-id="lbl_st" data-class="standalone_node" data-parent="mid_panel_group" x="288" y="295" font-size="14" text-anchor="middle" class="bold-math">s<tspan font-size="0.65em" font-style="normal" baseline-shift="sub">t</tspan></text>
+
+    <!-- Concatenation symbol C -->
+    <g id="node_concat_c" data-id="node_concat_c" data-class="composite_whole" data-parent="mid_panel_group">
+      <circle id="node_concat_c_circle" data-id="node_concat_c_circle" data-class="composite_part" data-parent="node_concat_c" cx="317" cy="312" r="8.5" fill="#ffffff" stroke="#000000" stroke-width="1.2"/>
+      <text id="node_concat_c_txt" data-id="node_concat_c_txt" data-class="composite_part" data-parent="node_concat_c" x="317" y="316" font-size="12" font-weight="bold" text-anchor="middle" class="sans">C</text>
+    </g>
+    <text id="lbl_st_zt" data-id="lbl_st_zt" data-class="standalone_node" data-parent="mid_panel_group" x="372" y="295" font-size="14" text-anchor="middle">{<tspan class="bold-math">s<tspan font-size="0.65em" font-style="normal" baseline-shift="sub">t</tspan></tspan>, <tspan class="bold-math">z<tspan font-size="0.65em" font-style="normal" baseline-shift="sub">t</tspan></tspan>}</text>
+
+    <!-- Inside: ResBlock -->
+    <rect id="node_mid_resblock" data-id="node_mid_resblock" data-class="child_node" data-parent="mid_panel_group" x="420" y="286" width="95" height="52" rx="14" fill="#a2bde6" stroke="#000000" stroke-width="1.5"/>
+    <text id="txt_mid_resblock" data-id="txt_mid_resblock" data-class="child_node" data-parent="mid_panel_group" x="467.5" y="317" font-size="14" font-weight="bold" text-anchor="middle" class="sans">ResBlock</text>
+    <text id="lbl_mid_res_in_c" data-id="lbl_mid_res_in_c" data-class="text_node" data-parent="mid_panel_group" x="430" y="352" font-size="13" class="math">C</text>
+    <text id="lbl_mid_res_out_c" data-id="lbl_mid_res_out_c" data-class="text_node" data-parent="mid_panel_group" x="500" y="352" font-size="13" class="math">C</text>
+    <text id="lbl_rt_ztm1" data-id="lbl_rt_ztm1" data-class="standalone_node" data-parent="mid_panel_group" x="572" y="295" font-size="14" text-anchor="middle">{<tspan class="bold-math">r<tspan font-size="0.65em" font-style="normal" baseline-shift="sub">t</tspan></tspan>, <tspan class="bold-math">z<tspan font-size="0.65em" font-style="normal" baseline-shift="sub">t&#8722;1</tspan></tspan>}</text>
+
+    <!-- Split symbol S -->
+    <g id="node_split_s" data-id="node_split_s" data-class="composite_whole" data-parent="mid_panel_group">
+      <circle id="node_split_s_circle" data-id="node_split_s_circle" data-class="composite_part" data-parent="node_split_s" cx="628" cy="312" r="8.5" fill="#ffffff" stroke="#000000" stroke-width="1.2"/>
+      <text id="node_split_s_txt" data-id="node_split_s_txt" data-class="composite_part" data-parent="node_split_s" x="628" y="316" font-size="12" font-weight="bold" text-anchor="middle" class="sans">S</text>
+    </g>
+    <text id="lbl_rt" data-id="lbl_rt" data-class="standalone_node" data-parent="mid_panel_group" x="653" y="295" font-size="14" text-anchor="middle" class="bold-math">r<tspan font-size="0.65em" font-style="normal" baseline-shift="sub">t</tspan></text>
+
+    <!-- Inside: Red Probability Block p_theta(x_t-1 | r_t) -->
+    <rect id="node_prob_model" data-id="node_prob_model" data-class="child_node" data-parent="mid_panel_group" x="680" y="286" width="138" height="52" rx="14" fill="#f8696b" stroke="#000000" stroke-width="1.5"/>
+    <text id="txt_prob_model" data-id="txt_prob_model" data-class="child_node" data-parent="mid_panel_group" x="749" y="318" font-size="16" text-anchor="middle"><tspan class="math">p<tspan font-size="0.65em" font-style="italic" baseline-shift="sub">&#952;</tspan></tspan>(<tspan class="bold-math">x<tspan font-size="0.65em" font-style="normal" baseline-shift="sub">t&#8722;1</tspan></tspan>|<tspan class="bold-math">r<tspan font-size="0.65em" font-style="normal" baseline-shift="sub">t</tspan></tspan>)</text>
+    <text id="lbl_prob_in_dim" data-id="lbl_prob_in_dim" data-class="text_node" data-parent="mid_panel_group" x="692" y="352" font-size="12">3</text>
+    <text id="lbl_prob_out_dim" data-id="lbl_prob_out_dim" data-class="text_node" data-parent="mid_panel_group" x="803" y="352" font-size="12">3</text>
+
+    <!-- Right output x_t-1 -->
+    <g id="raster_mid_xtm1" data-id="raster_mid_xtm1" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch03065/crop_raster_mid_xtm1.png" xlink:href="../../rasters/CVPR_2025_arch03065/crop_raster_mid_xtm1.png" x="865" y="270" width="75" height="72" preserveAspectRatio="xMidYMid meet" /></g>
+    <text id="lbl_mid_xtm1" data-id="lbl_mid_xtm1" data-class="standalone_node" data-parent="mid_panel_group" x="902.5" y="358" font-size="16" text-anchor="middle" class="bold-math">x<tspan font-size="0.65em" font-style="normal" baseline-shift="sub">t&#8722;1</tspan></text>
+
+    <!-- Right output z_t-1 -->
+    <g id="raster_mid_ztm1" data-id="raster_mid_ztm1" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch03065/crop_raster_mid_ztm1.png" xlink:href="../../rasters/CVPR_2025_arch03065/crop_raster_mid_ztm1.png" x="865" y="377" width="75" height="72" preserveAspectRatio="xMidYMid meet" /></g>
+    <text id="lbl_mid_ztm1" data-id="lbl_mid_ztm1" data-class="standalone_node" data-parent="mid_panel_group" x="902.5" y="475" font-size="16" text-anchor="middle" class="bold-math">z<tspan font-size="0.65em" font-style="normal" baseline-shift="sub">t&#8722;1</tspan></text>
+  </g>
+
+  <!-- Edges in Middle Panel -->
+  <g id="edges_mid">
+    <path id="edge_xt_to_gd" data-id="edge_xt_to_gd" data-class="edge" data-source="raster_mid_xt" data-target="node_grad_descent" d="M 121 306 L 163 306" stroke="#000000" stroke-width="2" marker-end="url(#arrow)"/>
+    <path id="edge_gd_to_c" data-id="edge_gd_to_c" data-class="edge" data-source="node_grad_descent" data-target="node_concat_c" d="M 260 312 L 306 312" stroke="#000000" stroke-width="2" marker-end="url(#arrow)"/>
+    <path id="edge_zt_to_c" data-id="edge_zt_to_c" data-class="edge" data-source="raster_mid_zt" data-target="node_concat_c" d="M 121 421 L 317 421 L 317 323" fill="none" stroke="#000000" stroke-width="2" marker-end="url(#arrow)"/>
+    <path id="edge_c_to_res" data-id="edge_c_to_res" data-class="edge" data-source="node_concat_c" data-target="node_mid_resblock" d="M 326 312 L 418 312" stroke="#000000" stroke-width="2" marker-end="url(#arrow)"/>
+    <path id="edge_res_to_s" data-id="edge_res_to_s" data-class="edge" data-source="node_mid_resblock" data-target="node_split_s" d="M 515 312 L 617 312" stroke="#000000" stroke-width="2" marker-end="url(#arrow)"/>
+    <path id="edge_s_to_prob" data-id="edge_s_to_prob" data-class="edge" data-source="node_split_s" data-target="node_prob_model" d="M 637 312 L 678 312" stroke="#000000" stroke-width="2" marker-end="url(#arrow)"/>
+    <path id="edge_prob_to_xtm1" data-id="edge_prob_to_xtm1" data-class="edge" data-source="node_prob_model" data-target="raster_mid_xtm1" d="M 818 306 L 863 306" stroke="#000000" stroke-width="2" marker-end="url(#arrow)"/>
+    <path id="edge_s_to_ztm1" data-id="edge_s_to_ztm1" data-class="edge" data-source="node_split_s" data-target="raster_mid_ztm1" d="M 628 321 L 628 421 L 853 421" fill="none" stroke="#000000" stroke-width="2" marker-end="url(#arrow)"/>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- SECTION 3: BOTTOM PANEL (SUBMODULES/LEGEND)-->
+  <!-- ========================================== -->
+  <!-- 3A: ResBlock Architecture Detail -->
+  <g id="bottom_resblock_panel" data-id="bottom_resblock_panel" data-class="block" data-parent="root">
+    <rect id="bg_bot_resblock" data-id="bg_bot_resblock" data-class="child_node" data-parent="bottom_resblock_panel" x="4" y="490" width="262" height="152" rx="6" fill="#c9d9f2" stroke="none"/>
+    <text id="lbl_bot_resblock_title" data-id="lbl_bot_resblock_title" data-class="text_node" data-parent="bottom_resblock_panel" x="135" y="632" font-size="16" font-weight="bold" text-anchor="middle" class="sans">ResBlock</text>
+
+    <!-- Flow in ResBlock -->
+    <rect id="br_conv1" data-id="br_conv1" data-class="child_node" data-parent="bottom_resblock_panel" x="36" y="514" width="32" height="60" rx="2" fill="#fbb034" stroke="#000000" stroke-width="1.2"/>
+    <text id="txt_br_conv1" data-id="txt_br_conv1" data-class="child_node" data-parent="bottom_resblock_panel" x="-544" y="57" font-size="13" font-weight="bold" transform="rotate(-90)" text-anchor="middle" class="sans">Conv</text>
+
+    <rect id="br_res1" data-id="br_res1" data-class="child_node" data-parent="bottom_resblock_panel" x="68" y="514" width="32" height="60" rx="2" fill="#fed6bc" stroke="#000000" stroke-width="1.2"/>
+    <text id="txt_br_res1" data-id="txt_br_res1" data-class="child_node" data-parent="bottom_resblock_panel" x="-544" y="89" font-size="13" font-weight="bold" transform="rotate(-90)" text-anchor="middle" class="sans">Res</text>
+
+    <rect id="br_res2" data-id="br_res2" data-class="child_node" data-parent="bottom_resblock_panel" x="100" y="514" width="32" height="60" rx="2" fill="#fed6bc" stroke="#000000" stroke-width="1.2"/>
+    <text id="txt_br_res2" data-id="txt_br_res2" data-class="child_node" data-parent="bottom_resblock_panel" x="-544" y="121" font-size="13" font-weight="bold" transform="rotate(-90)" text-anchor="middle" class="sans">Res</text>
+
+    <rect id="br_res3" data-id="br_res3" data-class="child_node" data-parent="bottom_resblock_panel" x="132" y="514" width="32" height="60" rx="2" fill="#fed6bc" stroke="#000000" stroke-width="1.2"/>
+    <text id="txt_br_res3" data-id="txt_br_res3" data-class="child_node" data-parent="bottom_resblock_panel" x="-544" y="153" font-size="13" font-weight="bold" transform="rotate(-90)" text-anchor="middle" class="sans">Res</text>
+
+    <rect id="br_res4" data-id="br_res4" data-class="child_node" data-parent="bottom_resblock_panel" x="164" y="514" width="32" height="60" rx="2" fill="#fed6bc" stroke="#000000" stroke-width="1.2"/>
+    <text id="txt_br_res4" data-id="txt_br_res4" data-class="child_node" data-parent="bottom_resblock_panel" x="-544" y="185" font-size="13" font-weight="bold" transform="rotate(-90)" text-anchor="middle" class="sans">Res</text>
+
+    <rect id="br_conv2" data-id="br_conv2" data-class="child_node" data-parent="bottom_resblock_panel" x="196" y="514" width="32" height="60" rx="2" fill="#fbb034" stroke="#000000" stroke-width="1.2"/>
+    <text id="txt_br_conv2" data-id="txt_br_conv2" data-class="child_node" data-parent="bottom_resblock_panel" x="-544" y="217" font-size="13" font-weight="bold" transform="rotate(-90)" text-anchor="middle" class="sans">Conv</text>
+
+    <!-- Dimensions under ResBlock -->
+    <text id="lbl_br_cin" data-id="lbl_br_cin" data-class="text_node" data-parent="bottom_resblock_panel" x="38" y="591" font-size="13" text-anchor="middle"><tspan class="math">C</tspan><tspan font-size="0.65em" baseline-shift="sub">in</tspan></text>
+    <text id="lbl_br_c32_1" data-id="lbl_br_c32_1" data-class="text_node" data-parent="bottom_resblock_panel" x="70" y="591" font-size="13" text-anchor="middle">32</text>
+    <text id="lbl_br_c32_2" data-id="lbl_br_c32_2" data-class="text_node" data-parent="bottom_resblock_panel" x="102" y="591" font-size="13" text-anchor="middle">32</text>
+    <text id="lbl_br_c32_3" data-id="lbl_br_c32_3" data-class="text_node" data-parent="bottom_resblock_panel" x="134" y="591" font-size="13" text-anchor="middle">32</text>
+    <text id="lbl_br_c32_4" data-id="lbl_br_c32_4" data-class="text_node" data-parent="bottom_resblock_panel" x="166" y="591" font-size="13" text-anchor="middle">32</text>
+    <text id="lbl_br_c32_5" data-id="lbl_br_c32_5" data-class="text_node" data-parent="bottom_resblock_panel" x="198" y="591" font-size="13" text-anchor="middle">32</text>
+    <text id="lbl_br_cout" data-id="lbl_br_cout" data-class="text_node" data-parent="bottom_resblock_panel" x="236" y="591" font-size="13" text-anchor="middle"><tspan class="math">C</tspan><tspan font-size="0.65em" baseline-shift="sub">out</tspan></text>
+  </g>
+
+  <!-- ResBlock Flow Edges -->
+  <g id="edges_bot_resblock">
+    <path id="edge_br_in" data-id="edge_br_in" data-class="edge" data-source="bottom_resblock_panel" data-target="br_conv1" d="M 21 544 L 34 544" stroke="#000000" stroke-width="2" marker-end="url(#arrow-sm)"/>
+    <path id="edge_br_out" data-id="edge_br_out" data-class="edge" data-source="br_conv2" data-target="bottom_resblock_panel" d="M 228 544 L 244 544" stroke="#000000" stroke-width="2" marker-end="url(#arrow-sm)"/>
+  </g>
+
+  <!-- 3B: Res Submodule Detail -->
+  <g id="bottom_res_panel" data-id="bottom_res_panel" data-class="block" data-parent="root">
+    <rect id="bg_bot_res" data-id="bg_bot_res" data-class="child_node" data-parent="bottom_res_panel" x="268" y="490" width="200" height="152" rx="6" fill="#fed6bc" stroke="none"/>
+    <text id="lbl_bot_res_title" data-id="lbl_bot_res_title" data-class="text_node" data-parent="bottom_res_panel" x="368" y="632" font-size="16" font-weight="bold" text-anchor="middle" class="sans">Res</text>
+
+    <!-- Blocks in Res -->
+    <rect id="res_sub_conv1" data-id="res_sub_conv1" data-class="child_node" data-parent="bottom_res_panel" x="313" y="514" width="32" height="60" rx="2" fill="#fbb034" stroke="#000000" stroke-width="1.2"/>
+    <text id="txt_res_sub_conv1" data-id="txt_res_sub_conv1" data-class="child_node" data-parent="bottom_res_panel" x="-544" y="334" font-size="13" font-weight="bold" transform="rotate(-90)" text-anchor="middle" class="sans">Conv</text>
+
+    <rect id="res_sub_relu" data-id="res_sub_relu" data-class="child_node" data-parent="bottom_res_panel" x="345" y="514" width="32" height="60" rx="2" fill="#bfbfbf" stroke="#000000" stroke-width="1.2"/>
+    <text id="txt_res_sub_relu" data-id="txt_res_sub_relu" data-class="child_node" data-parent="bottom_res_panel" x="-544" y="366" font-size="13" font-weight="bold" transform="rotate(-90)" text-anchor="middle" class="sans">ReLU</text>
+
+    <rect id="res_sub_conv2" data-id="res_sub_conv2" data-class="child_node" data-parent="bottom_res_panel" x="377" y="514" width="32" height="60" rx="2" fill="#fbb034" stroke="#000000" stroke-width="1.2"/>
+    <text id="txt_res_sub_conv2" data-id="txt_res_sub_conv2" data-class="child_node" data-parent="bottom_res_panel" x="-544" y="398" font-size="13" font-weight="bold" transform="rotate(-90)" text-anchor="middle" class="sans">Conv</text>
+
+    <!-- Element-wise addition circle -->
+    <g id="res_sub_add" data-id="res_sub_add" data-class="composite_whole" data-parent="bottom_res_panel">
+      <circle id="res_sub_add_circle" data-id="res_sub_add_circle" data-class="composite_part" data-parent="res_sub_add" cx="437" cy="544" r="8.5" fill="none" stroke="#000000" stroke-width="1.4"/>
+      <line id="res_sub_add_h" data-id="res_sub_add_h" data-class="composite_part" data-parent="res_sub_add" x1="430" y1="544" x2="444" y2="544" stroke="#000000" stroke-width="1.4"/>
+      <line id="res_sub_add_v" data-id="res_sub_add_v" data-class="composite_part" data-parent="res_sub_add" x1="437" y1="537" x2="437" y2="551" stroke="#000000" stroke-width="1.4"/>
+    </g>
+
+    <!-- Dimensions under Res -->
+    <text id="lbl_res_c32_1" data-id="lbl_res_c32_1" data-class="text_node" data-parent="bottom_res_panel" x="315" y="591" font-size="13" text-anchor="middle">32</text>
+    <text id="lbl_res_c32_2" data-id="lbl_res_c32_2" data-class="text_node" data-parent="bottom_res_panel" x="347" y="591" font-size="13" text-anchor="middle">32</text>
+    <text id="lbl_res_c32_3" data-id="lbl_res_c32_3" data-class="text_node" data-parent="bottom_res_panel" x="379" y="591" font-size="13" text-anchor="middle">32</text>
+    <text id="lbl_res_c32_4" data-id="lbl_res_c32_4" data-class="text_node" data-parent="bottom_res_panel" x="411" y="591" font-size="13" text-anchor="middle">32</text>
+  </g>
+
+  <!-- Res Flow Edges -->
+  <g id="edges_bot_res">
+    <path id="edge_res_in" data-id="edge_res_in" data-class="edge" data-source="bottom_res_panel" data-target="res_sub_conv1" d="M 286 544 L 311 544" stroke="#000000" stroke-width="2" marker-end="url(#arrow-sm)"/>
+    <path id="edge_res_conv_to_add" data-id="edge_res_conv_to_add" data-class="edge" data-source="res_sub_conv2" data-target="res_sub_add" d="M 409 544 L 426 544" stroke="#000000" stroke-width="2" marker-end="url(#arrow-sm)"/>
+    <path id="edge_res_skip" data-id="edge_res_skip" data-class="edge" data-source="bottom_res_panel" data-target="res_sub_add" d="M 300 544 L 300 500 L 437 500 L 437 533" fill="none" stroke="#000000" stroke-width="1.8" marker-end="url(#arrow-sm)"/>
+    <path id="edge_res_out" data-id="edge_res_out" data-class="edge" data-source="res_sub_add" data-target="bottom_res_panel" d="M 446 544 L 466 544" stroke="#000000" stroke-width="2" marker-end="url(#arrow-sm)"/>
+  </g>
+
+  <!-- 3C: Legend Panel -->
+  <g id="bottom_legend_panel" data-id="bottom_legend_panel" data-class="block" data-parent="root">
+    <rect id="bg_bot_legend" data-id="bg_bot_legend" data-class="child_node" data-parent="bottom_legend_panel" x="474" y="490" width="510" height="152" rx="6" fill="#fce4e4" stroke="none"/>
+
+    <!-- Legend Icons Column 1 -->
+    <!-- Splitting -->
+    <g id="leg_s" data-id="leg_s" data-class="composite_whole" data-parent="bottom_legend_panel">
+      <circle id="leg_s_circle" data-id="leg_s_circle" data-class="composite_part" data-parent="leg_s" cx="497" cy="516" r="8.5" fill="#ffffff" stroke="#000000" stroke-width="1.2"/>
+      <text id="leg_s_txt" data-id="leg_s_txt" data-class="composite_part" data-parent="leg_s" x="497" y="520" font-size="12" font-weight="bold" text-anchor="middle" class="sans">S</text>
+    </g>
+    <text id="lbl_leg_s" data-id="lbl_leg_s" data-class="text_node" data-parent="bottom_legend_panel" x="522" y="521" font-size="14" class="sans">channel-wise splitting</text>
+
+    <!-- Concatenation -->
+    <g id="leg_c" data-id="leg_c" data-class="composite_whole" data-parent="bottom_legend_panel">
+      <circle id="leg_c_circle" data-id="leg_c_circle" data-class="composite_part" data-parent="leg_c" cx="497" cy="552" r="8.5" fill="#ffffff" stroke="#000000" stroke-width="1.2"/>
+      <text id="leg_c_txt" data-id="leg_c_txt" data-class="composite_part" data-parent="leg_c" x="497" y="556" font-size="12" font-weight="bold" text-anchor="middle" class="sans">C</text>
+    </g>
+    <text id="lbl_leg_c" data-id="lbl_leg_c" data-class="text_node" data-parent="bottom_legend_panel" x="522" y="557" font-size="14" class="sans">channel-wise concatenation</text>
+
+    <!-- Addition -->
+    <g id="leg_add" data-id="leg_add" data-class="composite_whole" data-parent="bottom_legend_panel">
+      <circle id="leg_add_circle" data-id="leg_add_circle" data-class="composite_part" data-parent="leg_add" cx="497" cy="588" r="8.5" fill="none" stroke="#000000" stroke-width="1.4"/>
+      <line id="leg_add_h" data-id="leg_add_h" data-class="composite_part" data-parent="leg_add" x1="490" y1="588" x2="504" y2="588" stroke="#000000" stroke-width="1.4"/>
+      <line id="leg_add_v" data-id="leg_add_v" data-class="composite_part" data-parent="leg_add" x1="497" y1="581" x2="497" y2="595" stroke="#000000" stroke-width="1.4"/>
+    </g>
+    <text id="lbl_leg_add" data-id="lbl_leg_add" data-class="text_node" data-parent="bottom_legend_panel" x="522" y="593" font-size="14" class="sans">element-wise addition</text>
+
+    <!-- Legend Column 2: Conv Block Definition -->
+    <rect id="leg_conv_box" data-id="leg_conv_box" data-class="child_node" data-parent="bottom_legend_panel" x="724" y="503" width="60" height="28" rx="2" fill="#fbb034" stroke="#000000" stroke-width="1.2"/>
+    <text id="txt_leg_conv" data-id="txt_leg_conv" data-class="child_node" data-parent="bottom_legend_panel" x="754" y="522" font-size="13" font-weight="bold" text-anchor="middle" class="sans">Conv</text>
+    <text id="lbl_leg_conv_desc1" data-id="lbl_leg_conv_desc1" data-class="text_node" data-parent="bottom_legend_panel" x="798" y="516" font-size="14" class="sans">3&#215;3 convolution</text>
+    <text id="lbl_leg_conv_desc2" data-id="lbl_leg_conv_desc2" data-class="text_node" data-parent="bottom_legend_panel" x="798" y="534" font-size="14" class="sans">with the stride of 1</text>
+
+    <!-- Legend Column 2: Ci and Co Channel Notation -->
+    <rect id="leg_ci_co_box" data-id="leg_ci_co_box" data-class="child_node" data-parent="bottom_legend_panel" x="724" y="563" width="60" height="28" rx="2" fill="url(#grad-ci-co)" stroke="#000000" stroke-width="1.2"/>
+    <text id="lbl_leg_ci" data-id="lbl_leg_ci" data-class="text_node" data-parent="bottom_legend_panel" x="736" y="605" font-size="14" text-anchor="middle"><tspan class="math">C</tspan><tspan font-size="0.65em" baseline-shift="sub">i</tspan></text>
+    <text id="lbl_leg_co" data-id="lbl_leg_co" data-class="text_node" data-parent="bottom_legend_panel" x="772" y="605" font-size="14" text-anchor="middle"><tspan class="math">C</tspan><tspan font-size="0.65em" baseline-shift="sub">o</tspan></text>
+    <text id="lbl_leg_c_desc1" data-id="lbl_leg_c_desc1" data-class="text_node" data-parent="bottom_legend_panel" x="798" y="571" font-size="14" class="sans"><tspan class="math" font-family="Times New Roman">C</tspan><tspan font-size="0.65em" baseline-shift="sub">i</tspan> and <tspan class="math" font-family="Times New Roman">C</tspan><tspan font-size="0.65em" baseline-shift="sub">o</tspan> represent the</text>
+    <text id="lbl_leg_c_desc2" data-id="lbl_leg_c_desc2" data-class="text_node" data-parent="bottom_legend_panel" x="798" y="589" font-size="14" class="sans">number of input and output</text>
+    <text id="lbl_leg_c_desc3" data-id="lbl_leg_c_desc3" data-class="text_node" data-parent="bottom_legend_panel" x="798" y="607" font-size="14" class="sans">channels, respectively</text>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- NARRATION BANNER CONTAINER                 -->
+  <!-- ========================================== -->
+  <g id="narration_banner">
+    <rect x="20" y="660" width="948" height="65" rx="8" fill="#1e293b" fill-opacity="0.9"/>
+    <text id="narr_ts1" x="50%" y="698">
+      <tspan>The pipeline begins with the initial measurement input, which is fed into the primary architecture.</tspan>
+    </text>
+    <text id="narr_ts2" x="50%" y="698">
+      <tspan>An initial residual block processes the measurement input and splits it into two distinct streams.</tspan>
+    </text>
+    <text id="narr_ts3" x="50%" y="698">
+      <tspan>This initializes both the image state and the auxiliary feature state at step K.</tspan>
+    </text>
+    <text id="narr_ts4" x="50%" y="698">
+      <tspan>Both states then enter sequential DMP steps to begin the iterative refinement process.</tspan>
+    </text>
+    <text id="narr_ts5" x="50%" y="688">
+      <tspan x="50%" dy="0">Subsequent DMP steps continue refining both the image and feature</tspan>
+      <tspan x="50%" dy="1.25em">representations across intermediate time steps.</tspan>
+    </text>
+    <text id="narr_ts6" x="50%" y="698">
+      <tspan>The final DMP step completes the iterative sequence down to step zero.</tspan>
+    </text>
+    <text id="narr_ts7" x="50%" y="698">
+      <tspan>This yields the fully refined image state and auxiliary feature map at the final step.</tspan>
+    </text>
+    <text id="narr_ts8" x="50%" y="698">
+      <tspan>A concluding residual block merges the streams to produce the final reconstructed image.</tspan>
+    </text>
+    <text id="narr_ts9" x="50%" y="698">
+      <tspan>Examining an individual DMP step in detail, the image state and feature state enter as inputs.</tspan>
+    </text>
+    <text id="narr_ts10" x="50%" y="698">
+      <tspan>The image state passes through a Gradient Descent module to compute an updated signal.</tspan>
+    </text>
+    <text id="narr_ts11" x="50%" y="688">
+      <tspan x="50%" dy="0">This signal is concatenated channel-wise with the feature state</tspan>
+      <tspan x="50%" dy="1.25em">and routed into a residual block.</tspan>
+    </text>
+    <text id="narr_ts12" x="50%" y="688">
+      <tspan x="50%" dy="0">The processed output is split channel-wise into an intermediate representation</tspan>
+      <tspan x="50%" dy="1.25em">and the updated feature state.</tspan>
+    </text>
+    <text id="narr_ts13" x="50%" y="688">
+      <tspan x="50%" dy="0">The intermediate representation enters the conditional probability block</tspan>
+      <tspan x="50%" dy="1.25em">to yield the updated image state.</tspan>
+    </text>
+    <text id="narr_ts14" x="50%" y="688">
+      <tspan x="50%" dy="0">The detailed ResBlock structure comprises an initial convolution,</tspan>
+      <tspan x="50%" dy="1.25em">four chained residual modules, and a final convolution.</tspan>
+    </text>
+    <text id="narr_ts15" x="50%" y="688">
+      <tspan x="50%" dy="0">Each individual residual unit contains two convolution layers</tspan>
+      <tspan x="50%" dy="1.25em">with an intermediate ReLU activation and a skip connection.</tspan>
+    </text>
+    <text id="narr_ts16" x="50%" y="688">
+      <tspan x="50%" dy="0">Finally, the legend defines the symbols for channel splitting, concatenation,</tspan>
+      <tspan x="50%" dy="1.25em">addition, and convolution parameters.</tspan>
+    </text>
+  </g>
+</svg>

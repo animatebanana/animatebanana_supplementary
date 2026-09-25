@@ -1,0 +1,38 @@
+[
+ {
+  "t": 0.0,
+  "text": "The pipeline begins with the input User Sequence alongside the Environment context."
+ },
+ {
+  "t": 2.2,
+  "text": "These inputs feed into the Causal-Invariant Preference Encoder to perform Invariant Representation Learning."
+ },
+ {
+  "t": 4.4,
+  "text": "This encoding process is supervised by the Invariant Risk Minimization loss."
+ },
+ {
+  "t": 6.6,
+  "text": "Meanwhile, the Causal-Guided RAG Retriever accesses an Evidence Pool containing history, attributes, and knowledge graph data."
+ },
+ {
+  "t": 8.8,
+  "text": "The learned invariant representation and the evidence pool are combined in the Debiased Retrieval step to score candidate evidence."
+ },
+ {
+  "t": 11.0,
+  "text": "This retrieval yields the Top-K Evidence set."
+ },
+ {
+  "t": 13.2,
+  "text": "In the Ranker and Explainer block, a Transformer Layer integrates the invariant representations with the retrieved evidence."
+ },
+ {
+  "t": 15.4,
+  "text": "The transformer produces two outputs: a Recommendation Score and an Explanation text."
+ },
+ {
+  "t": 17.6,
+  "text": "Finally, the outputs are evaluated using a Recommendation Loss and a Consistency Constraint connecting the explanation with the retrieved evidence."
+ }
+]

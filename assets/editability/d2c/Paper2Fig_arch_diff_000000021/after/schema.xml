@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram depth="1">
+  <block id="extractor_and_dictionary" depth="1">
+    <block id="block_facial_extractor" depth="2">
+      <child_node id="rect_facial_extractor_bg" depth="3" />
+      <composite_whole id="group_cylinder_data" depth="3">
+        <composite_part id="cylinder_bottom" depth="3" />
+        <composite_part id="cylinder_middle" depth="3" />
+        <composite_part id="cylinder_top_body" depth="3" />
+        <composite_part id="cylinder_top_cap" depth="3" />
+      </composite_whole>
+      <edge id="edge_data_to_cnn" source="group_cylinder_data" target="block_cnn_training" depth="3" />
+      <block id="block_cnn_training" depth="3">
+        <child_node id="rect_nn_card" depth="4" />
+        <composite_whole id="nn_graph" depth="4">
+          <composite_part id="nn_connections" depth="4" />
+          <composite_part id="nn_n1_1" depth="4" />
+          <composite_part id="nn_n1_2" depth="4" />
+          <composite_part id="nn_n1_3" depth="4" />
+          <composite_part id="nn_n1_4" depth="4" />
+          <composite_part id="nn_n2_1" depth="4" />
+          <composite_part id="nn_n2_2" depth="4" />
+          <composite_part id="nn_n2_3" depth="4" />
+          <composite_part id="nn_n2_4" depth="4" />
+          <composite_part id="nn_n3_1" depth="4" />
+          <composite_part id="nn_n3_2" depth="4" />
+          <composite_part id="nn_n3_3" depth="4" />
+          <composite_part id="nn_n4_1" depth="4" />
+          <composite_part id="nn_n4_2" depth="4" />
+          <composite_part id="nn_n4_3" depth="4" />
+        </composite_whole>
+      </block>
+    </block>
+    <block id="block_person_dict" depth="2">
+      <child_node id="rect_person_dict_bg" depth="3" />
+      <child_node id="box_dict_select" depth="3">
+        <child_node id="rect_dict_select" depth="4" />
+      </child_node>
+      <composite_whole id="icon_globe" depth="3">
+        <composite_part id="globe_base" depth="3" />
+        <composite_part id="globe_ellipse" depth="3" />
+        <composite_part id="globe_line_h1" depth="3" />
+        <composite_part id="globe_line_h2" depth="3" />
+        <composite_part id="globe_line_h3" depth="3" />
+      </composite_whole>
+      <edge id="edge_dict_1_to_2" source="box_dict_select" target="box_dict_feat_extract" depth="3" />
+      <child_node id="box_dict_feat_extract" depth="3">
+        <child_node id="rect_dict_feat_extract" depth="4" />
+      </child_node>
+      <edge id="edge_dict_2_to_3" source="box_dict_feat_extract" target="box_dict_filtering" depth="3" />
+      <child_node id="box_dict_filtering" depth="3">
+        <child_node id="rect_dict_filtering" depth="4" />
+      </child_node>
+    </block>
+  </block>
+  <block id="block_internet_archive" depth="1">
+    <child_node id="rect_archive_bg" depth="2" />
+    <composite_whole id="icon_archive_building" depth="2">
+      <composite_part id="building_text_internet" depth="2" />
+      <composite_part id="building_text_archive" depth="2" />
+      <composite_part id="building_pediment" depth="2" />
+      <composite_part id="building_architrave" depth="2" />
+      <composite_part id="building_col1" depth="2" />
+      <composite_part id="building_col2" depth="2" />
+      <composite_part id="building_col3" depth="2" />
+      <composite_part id="building_col4" depth="2" />
+      <composite_part id="building_base1" depth="2" />
+      <composite_part id="building_base2" depth="2" />
+    </composite_whole>
+    <edge id="edge_archive_to_web" source="icon_archive_building" target="block_web_content" depth="2" />
+    <block id="block_web_content" depth="2">
+      <composite_whole id="web_windows" depth="3">
+        <composite_part id="win1_bg" depth="3" />
+        <composite_part id="win1_bar" depth="3" />
+        <composite_part id="win2_bg" depth="3" />
+        <composite_part id="win2_bar" depth="3" />
+        <composite_part id="win3_bg" depth="3" />
+        <composite_part id="win3_bar" depth="3" />
+        <composite_part id="win3_dot1" depth="3" />
+        <composite_part id="win3_dot2" depth="3" />
+        <composite_part id="win3_dot3" depth="3" />
+        <composite_part id="win3_img" depth="3" />
+        <composite_part id="win3_mountain" depth="3" />
+        <composite_part id="win3_sun" depth="3" />
+        <composite_part id="win3_line1" depth="3" />
+        <composite_part id="win3_line2" depth="3" />
+        <composite_part id="win3_line3" depth="3" />
+      </composite_whole>
+    </block>
+  </block>
+  <block id="block_person_ident" depth="1">
+    <child_node id="rect_person_ident_bg" depth="2" />
+    <child_node id="box_face_detection" depth="2">
+      <child_node id="rect_face_detection" depth="3" />
+    </child_node>
+    <edge id="edge_detect_to_extract" source="box_face_detection" target="box_ident_feat_extract" depth="2" />
+    <child_node id="box_ident_feat_extract" depth="2">
+      <child_node id="rect_ident_feat_extract" depth="3" />
+    </child_node>
+    <edge id="edge_extract_to_verify" source="box_ident_feat_extract" target="box_face_verification" depth="2" />
+    <child_node id="box_face_verification" depth="2">
+      <child_node id="rect_face_verification" depth="3" />
+    </child_node>
+    <edge id="edge_verify_to_visual" source="box_face_verification" target="box_visualization" depth="2" />
+    <child_node id="box_visualization" depth="2">
+      <child_node id="rect_visualization" depth="3" />
+    </child_node>
+  </block>
+  <edge id="edge_red_to_dict" source="block_cnn_training" target="box_dict_feat_extract" depth="1" />
+  <edge id="edge_red_to_ident" source="block_cnn_training" target="box_ident_feat_extract" depth="1" />
+  <edge id="edge_archive_to_detect" source="block_web_content" target="box_face_detection" depth="1" />
+  <edge id="edge_dict_to_verify" source="box_dict_filtering" target="box_face_verification" depth="1" />
+</Diagram>

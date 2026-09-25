@@ -1,0 +1,62 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.085
+The framework begins by receiving the video stream, starting with frame k minus two.
+
+2
+00:00:06.085 --> 00:00:10.689
+A convolutional backbone extracts visual feature representations from the frame.
+
+3
+00:00:10.689 --> 00:00:15.293
+The Transformer Video Module models spatio-temporal relations using self-attention mechanisms.
+
+4
+00:00:15.293 --> 00:00:19.896
+A panoptic decoder then generates the initial pixel-level panoptic segmentation.
+
+5
+00:00:19.896 --> 00:00:25.241
+Initial instance identifiers are assigned to establish consistent tracking across the clip.
+
+6
+00:00:25.241 --> 00:00:30.956
+For the subsequent frame k minus one, features are extracted via the backbone.
+
+7
+00:00:30.956 --> 00:00:36.670
+The Transformer Video Module aggregates features across both the current and preceding frames.
+
+8
+00:00:36.670 --> 00:00:43.496
+An optical flow decoder estimates motion between frames to warp the previous instance ID map forward.
+
+9
+00:00:43.496 --> 00:00:48.470
+Concurrently, the panoptic decoder predicts the segmentation for the current frame.
+
+10
+00:00:48.470 --> 00:00:53.444
+ID association matches the warped historical identities with current instance predictions.
+
+11
+00:00:53.444 --> 00:00:58.048
+Processing continues to frame k, extracting its visual feature representations.
+
+12
+00:00:58.048 --> 00:01:03.393
+The Transformer module integrates temporal context across consecutive frames in the sequence.
+
+13
+00:01:03.393 --> 00:01:09.848
+Inter-frame motion is decoded to warp the tracked ID map from frame k minus one.
+
+14
+00:01:09.848 --> 00:01:14.452
+The panoptic decoder yields the segmentation map for frame k.
+
+15
+00:01:14.452 --> 00:01:19.796
+Finally, ID association assigns consistent tracking identifiers across the entire video sequence.
+

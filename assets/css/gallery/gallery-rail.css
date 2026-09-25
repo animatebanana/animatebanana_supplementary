@@ -1,0 +1,421 @@
+/*
+  Gallery band on the overview page: the warm "Explore More Examples"
+  strip, the snap-scrolling preview rail inside it, and the call-through
+  to the full gallery.
+
+  Self-contained gallery module — this file owns every `.gr-*` class and
+  the `.gallery-band` wrapper, and nothing else in the codebase styles
+  them. Colours, type, motion and elevation all come from tokens.css.
+*/
+
+/* ================= THE BAND ================= */
+.gallery-band {
+  position: relative;
+  isolation: isolate;
+  margin-top: var(--section-gap);
+  padding: clamp(48px, 6vw, 84px) 0 clamp(44px, 5vw, 72px);
+  background-color: var(--paper-warm);
+  background-image: radial-gradient(var(--dot) 1px, transparent 1.2px);
+  background-size: 24px 24px;
+  border-top: 2px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
+  overflow: hidden;
+}
+.gallery-band-wrap {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 clamp(14px, 2vw, 40px);
+}
+.gallery-band .section-head-center { margin-bottom: clamp(28px, 4vw, 48px); }
+
+gallery-rail { display: block; }
+
+/* ================= STAGE + ARROWS ================= */
+.gr-stage {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: clamp(4px, 1.2vw, 18px);
+}
+
+.gr-arrow {
+  width: clamp(38px, 4vw, 46px);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--ink);
+  cursor: pointer;
+  box-shadow: 3px 3px 0 var(--ink);
+  transition: transform var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out),
+              background var(--dur-fast) var(--ease-out), opacity var(--dur-fast) var(--ease-out);
+}
+.gr-arrow svg { width: 44%; height: 44%; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.gr-arrow:hover:not(:disabled) { background: var(--banana); transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var(--ink); }
+.gr-arrow:active:not(:disabled) { transform: translate(3px, 3px); box-shadow: 0 0 0 var(--ink); }
+.gr-arrow:disabled { opacity: 0.28; cursor: default; box-shadow: none; transform: none; }
+
+/* ================= THE SCROLLING TRACK ================= */
+.gr-track {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: clamp(12px, 1.6vw, 24px);
+  margin: 0;
+  /* Side padding lets the first and last slide reach the centre. */
+  padding: clamp(18px, 2.4vw, 34px) max(0px, calc(50% - var(--gr-slide-w) / 2));
+  list-style: none;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  --gr-slide-w: clamp(232px, 28vw, 392px);
+}
+.gr-track::-webkit-scrollbar { display: none; }
+.gr-track:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; border-radius: var(--radius-lg); }
+
+.gr-slide {
+  --p: 0; /* 0 → 1 closeness to the track centre, written by gallery-rail.js */
+  flex: 0 0 var(--gr-slide-w);
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+}
+
+/* ---- The frame ---- */
+.gr-frame {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  appearance: none;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-lg);
+  background-color: var(--surface);
+  background-image: radial-gradient(var(--dot) 1px, transparent 1.2px);
+  background-size: 14px 14px;
+  /* Continuous emphasis: the centre slide is full size and opaque,
+     neighbours shrink and fade as they leave. */
+  transform: scale(calc(0.78 + 0.22 * var(--p)));
+  opacity: calc(0.36 + 0.64 * var(--p));
+  box-shadow: 0 0 0 rgba(26, 24, 21, 0);
+  transition: box-shadow var(--dur) var(--ease-out), border-color var(--dur) var(--ease-out);
+  will-change: transform;
+}
+.gr-slide.is-active .gr-frame { box-shadow: var(--shadow-hard); }
+.gr-slide.is-active .gr-frame:hover { box-shadow: var(--shadow-banana), 0 0 0 2px var(--ink); }
+.gr-frame:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+
+/* ---- Paper skeleton: what shows before (or instead of) real media ---- */
+.gr-skeleton {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background-image: repeating-linear-gradient(-45deg, var(--banana-soft) 0 7px, transparent 7px 15px);
+}
+.gr-skeleton-mark {
+  width: 34%;
+  max-width: 92px;
+  fill: none;
+  stroke: var(--line-strong);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: calc(0.35 + 0.45 * var(--p));
+}
+.gr-slide[data-media='loading'] .gr-skeleton-mark { animation: gr-pulse 1.6s var(--ease-io) infinite; }
+@keyframes gr-pulse { 50% { opacity: 0.9; } }
+
+/* ---- Poster + video ---- */
+/* Source figures range from 16:9 to 850x260 strips, so previews are
+   letterboxed onto the frame rather than cropped — a cropped process
+   diagram loses the very thing it is showing. Once real media is in,
+   the frame turns plain white so the bars either side read as more of
+   the figure's own page rather than as exposed dot paper. */
+.gr-slide[data-media='poster'] .gr-frame,
+.gr-slide[data-media='video'] .gr-frame {
+  background-color: #FFFFFF;
+  background-image: none;
+}
+.gr-slide[data-media='poster'] .gr-skeleton,
+.gr-slide[data-media='video'] .gr-skeleton {
+  opacity: 0;
+  transition: opacity var(--dur) var(--ease-out);
+}
+
+.gr-poster, .gr-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity var(--dur) var(--ease-out);
+}
+.gr-slide[data-media='poster'] .gr-poster,
+.gr-slide[data-media='video'] .gr-poster { opacity: 1; }
+.gr-slide[data-media='video'] .gr-video { opacity: 1; }
+
+/* ---- Overlays ---- */
+.gr-badge {
+  position: absolute;
+  right: 12px; bottom: 12px;
+  width: 34px; height: 34px;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  background: var(--banana);
+  transform: scale(calc(0.4 + 0.6 * var(--p)));
+  opacity: var(--p);
+  transition: transform var(--dur) var(--ease-spring);
+}
+.gr-badge svg { position: absolute; width: 15px; height: 15px; fill: var(--ink); }
+.gr-slide.is-active .gr-frame:hover .gr-badge { transform: scale(1.12); }
+/* data-playing tracks the element's real play/pause state, so the badge
+   never disagrees with what the frame is doing. */
+.gr-badge-pause { opacity: 0; }
+.gr-slide[data-playing='true'] .gr-badge-play { opacity: 0; }
+.gr-slide[data-playing='true'] .gr-badge-pause { opacity: 1; }
+.gr-slide[data-playing='true'] .gr-badge { opacity: calc(var(--p) * 0.5); }
+.gr-slide[data-playing='true'] .gr-frame:hover .gr-badge { opacity: var(--p); }
+
+/* No play affordance on a style whose video has not been rendered yet. */
+.gr-slide[data-playable='false'] .gr-frame { cursor: default; }
+
+.gr-dur {
+  position: absolute;
+  top: 12px; right: 11px;
+  padding: 2px 7px;
+  border-radius: 6px;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  opacity: calc(var(--p) * 0.9);
+}
+
+/* ================= CAPTION =================
+   Deliberately spare: the animation style is the headline, with the
+   run time and the position in the rail as quiet mono support. Title
+   and scientific field live on the card in the full gallery. */
+.gr-caption { text-align: center; margin-top: clamp(6px, 1.2vw, 16px); }
+.gr-caption-style {
+  position: relative;
+  display: inline-block;
+  margin: 0;
+  padding: 0 2px;
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 0.95rem + 0.8vw, 1.7rem);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  color: var(--ink);
+}
+/* A short banana underline — the same highlighter device as .hl, but
+   restrained enough to sit under a one-line caption. */
+.gr-caption-style::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 0.08em;
+  height: 0.34em;
+  z-index: -1;
+  background: var(--banana);
+  border-radius: 0.2em 0.35em 0.25em 0.4em;
+  transform: rotate(-0.8deg);
+}
+.gr-caption-sub {
+  margin: 8px 0 0;
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: var(--ink-faint);
+}
+.gr-caption-sep { margin: 0 8px; opacity: 0.55; }
+.gr-caption-dur, .gr-counter-now { color: var(--ink-soft); }
+.gr-counter-now { color: var(--ink); font-weight: 700; }
+
+/* ================= CALL TO ACTION ================= */
+.gr-cta-wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(30px, 4vw, 48px);
+}
+
+.gr-cta {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 22px 16px 30px;
+  border: 2.5px solid var(--ink);
+  border-radius: 999px;
+  background: var(--banana);
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: clamp(1.02rem, 0.9rem + 0.4vw, 1.25rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  overflow: hidden;
+  isolation: isolate;
+  box-shadow: 6px 6px 0 var(--ink);
+  animation: gr-cta-breathe 4.5s var(--ease-io) 1.2s infinite;
+  transition: transform var(--dur) var(--ease-spring), box-shadow var(--dur) var(--ease-out),
+              background var(--dur) var(--ease-out);
+}
+.gr-cta:hover {
+  color: var(--ink);
+  background: #FFDF6B;
+  transform: translate(-3px, -3px) rotate(-0.7deg);
+  box-shadow: 10px 10px 0 var(--ink);
+  animation-play-state: paused;
+}
+.gr-cta:active { transform: translate(4px, 4px); box-shadow: 0 0 0 var(--ink); }
+.gr-cta:focus-visible { outline: 2px solid var(--ink); outline-offset: 5px; }
+@keyframes gr-cta-breathe {
+  0%, 88%, 100% { box-shadow: 6px 6px 0 var(--ink); }
+  94% { box-shadow: 8px 8px 0 var(--ink); }
+}
+
+/* A light sweep that runs across the pill on hover. */
+.gr-cta-shine {
+  position: absolute;
+  z-index: -1;
+  top: -60%; bottom: -60%;
+  left: -40%;
+  width: 34%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.85), transparent);
+  transform: translateX(-140%) skewX(-18deg);
+  transition: transform 750ms var(--ease-out);
+}
+.gr-cta:hover .gr-cta-shine { transform: translateX(420%) skewX(-18deg); }
+
+.gr-cta-arrow {
+  display: grid;
+  place-items: center;
+  width: 34px; height: 34px;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  background: var(--paper);
+  transition: transform var(--dur) var(--ease-spring), background var(--dur) var(--ease-out);
+}
+.gr-cta-arrow svg { width: 17px; height: 17px; fill: none; stroke: var(--ink); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.gr-cta:hover .gr-cta-arrow { transform: translateX(4px) rotate(-8deg); background: var(--surface); }
+
+.gr-cta-spark {
+  position: absolute;
+  width: 16px; height: 16px;
+  fill: var(--ink);
+  opacity: 0;
+  pointer-events: none;
+  animation: gr-spark 3.6s var(--ease-out) infinite;
+}
+.gr-cta-spark-1 { top: 7px; left: 14px; animation-delay: 0.4s; }
+.gr-cta-spark-2 { bottom: 8px; right: 58px; width: 11px; height: 11px; animation-delay: 2.1s; }
+@keyframes gr-spark {
+  0%, 72%, 100% { opacity: 0; transform: scale(0.3) rotate(0deg); }
+  80% { opacity: 0.9; transform: scale(1) rotate(28deg); }
+  88% { opacity: 0; transform: scale(0.5) rotate(52deg); }
+}
+
+/* ================= RESPONSIVE ================= */
+/* Below 620px the arrows stop taking grid columns — two 46px columns
+   plus gaps would squeeze the track narrower than a single slide — and
+   overlay the track's side peeks instead, which is also where a thumb
+   expects them. */
+@media (max-width: 620px) {
+  .gr-stage { position: relative; display: block; }
+  .gr-track { --gr-slide-w: min(74vw, 300px); }
+  .gr-arrow {
+    position: absolute;
+    top: 50%;
+    z-index: 2;
+    width: 36px;
+    transform: translateY(-50%);
+    box-shadow: 2px 2px 0 var(--ink);
+    background: var(--surface-veil);
+    backdrop-filter: blur(3px);
+  }
+  .gr-arrow-prev { left: 0; }
+  .gr-arrow-next { right: 0; }
+  .gr-arrow:hover:not(:disabled) { transform: translateY(-50%); box-shadow: 3px 3px 0 var(--ink); }
+  .gr-arrow:active:not(:disabled) { transform: translateY(-50%) scale(0.94); box-shadow: 0 0 0 var(--ink); }
+  .gr-caption-sep { margin: 0 5px; }
+}
+
+/* ================= REDUCED MOTION ================= */
+@media (prefers-reduced-motion: reduce) {
+  .gr-track { scroll-behavior: auto; }
+  .gr-frame { transform: scale(calc(0.88 + 0.12 * var(--p))); opacity: calc(0.62 + 0.38 * var(--p)); }
+  .gr-badge { transform: none; }
+  .gr-skeleton-mark, .gr-cta, .gr-cta-spark { animation: none; }
+  .gr-cta-shine { display: none; }
+  .gr-cta:hover { transform: none; }
+}
+
+/* ---- Replay ----
+   A preview runs once and holds its last frame, so this is how an example is
+   watched again. It sits with the caption rather than over the picture: the
+   frame is the example, and a control parked on top of it would be one more
+   thing between the viewer and the thing they came to see. */
+.gr-replay {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 12px;
+  padding: 8px 16px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--surface);
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out),
+              background var(--dur-fast) var(--ease-out);
+}
+.gr-replay svg { width: 15px; height: 15px; }
+.gr-replay:hover { background: var(--banana-soft); transform: translate(-1px, -1px); box-shadow: 3px 3px 0 var(--ink); }
+.gr-replay:active { transform: translate(1px, 1px); box-shadow: none; }
+.gr-replay:focus-visible { outline: none; box-shadow: var(--ring); }
+/* once the preview has run out, Replay is the obvious next move */
+gallery-rail.is-ended .gr-replay {
+  background: var(--banana);
+  box-shadow: 3px 3px 0 var(--ink);
+}
+@media (prefers-reduced-motion: reduce) { .gr-replay { transition: none; } }
+
+/* ---- When a preview has run out ----
+   The demo stops rather than rolling on, so the two things worth doing next
+   are the two things that light up: watch it again, or move to the next
+   example. Nothing advances on its own; this is an invitation, not a timer. */
+gallery-rail.is-ended .gr-arrow-next:not(:disabled) {
+  background: var(--banana);
+  box-shadow: 3px 3px 0 var(--ink);
+  animation: gr-nudge 2.4s var(--ease-io) infinite;
+}
+@keyframes gr-nudge {
+  0%, 62%, 100% { transform: none; }
+  72% { transform: translateX(3px); }
+  82% { transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  gallery-rail.is-ended .gr-arrow-next:not(:disabled) { animation: none; }
+}

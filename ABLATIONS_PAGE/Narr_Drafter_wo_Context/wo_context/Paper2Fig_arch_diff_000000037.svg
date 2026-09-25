@@ -1,0 +1,274 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 528" width="1000" height="528">
+  <defs>
+    <!-- Drop Shadow Filters -->
+    <filter id="shadow-box" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="3" dy="5" stdDeviation="4" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
+    <filter id="shadow-node" x="-20%" y="-20%" width="150%" height="150%">
+      <feDropShadow dx="3" dy="4" stdDeviation="3" flood-color="#000000" flood-opacity="0.6"/>
+    </filter>
+    
+    <!-- Arrowhead Marker -->
+    <marker id="arrow" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#000000"/>
+    </marker>
+
+    <!-- Waveform Graphic Definitions -->
+    <g id="waveform-bars">
+      <rect x="0" y="24" width="4" height="12" fill="#FFFFFF"/>
+      <rect x="6" y="18" width="4" height="24" fill="#FFFFFF"/>
+      <rect x="12" y="10" width="4" height="40" fill="#FFFFFF"/>
+      <rect x="18" y="4" width="4" height="52" fill="#FFFFFF"/>
+      <rect x="24" y="12" width="4" height="36" fill="#FFFFFF"/>
+      <rect x="30" y="20" width="4" height="20" fill="#FFFFFF"/>
+      <rect x="36" y="26" width="4" height="8" fill="#FFFFFF"/>
+      <rect x="42" y="18" width="4" height="24" fill="#FFFFFF"/>
+      <rect x="48" y="10" width="4" height="40" fill="#FFFFFF"/>
+      <rect x="54" y="2" width="4" height="56" fill="#FFFFFF"/>
+      <rect x="60" y="10" width="4" height="40" fill="#FFFFFF"/>
+      <rect x="66" y="16" width="4" height="28" fill="#FFFFFF"/>
+      <rect x="72" y="24" width="4" height="12" fill="#FFFFFF"/>
+    </g>
+
+    <g id="waveform-bars-target">
+      <rect x="0" y="24" width="4" height="12" fill="#F4E6D2"/>
+      <rect x="6" y="18" width="4" height="24" fill="#F4E6D2"/>
+      <rect x="12" y="10" width="4" height="40" fill="#F4E6D2"/>
+      <rect x="18" y="4" width="4" height="52" fill="#F4E6D2"/>
+      <rect x="24" y="12" width="4" height="36" fill="#F4E6D2"/>
+      <rect x="30" y="20" width="4" height="20" fill="#F4E6D2"/>
+      <rect x="36" y="26" width="4" height="8" fill="#F4E6D2"/>
+      <rect x="42" y="18" width="4" height="24" fill="#F4E6D2"/>
+      <rect x="48" y="10" width="4" height="40" fill="#F4E6D2"/>
+      <rect x="54" y="2" width="4" height="56" fill="#F4E6D2"/>
+      <rect x="60" y="10" width="4" height="40" fill="#F4E6D2"/>
+      <rect x="66" y="16" width="4" height="28" fill="#F4E6D2"/>
+      <rect x="72" y="24" width="4" height="12" fill="#F4E6D2"/>
+    </g>
+
+    <style>
+      #block_pretraining, #title_pretraining, #cards_source_pre, #text_source_pre,
+      #edge_cards_to_encoder_pre, #trapezoid_source_encoder_pre, #edge_encoder_to_classifier_pre,
+      #classifier_pre, #edge_classifier_to_label_pre, #label_class, #block_adaptation,
+      #title_adaptation, #cards_source_adapt, #text_source_adapt, #edge_source_cards_to_encoder_adapt,
+      #trapezoid_source_encoder_adapt, #edge_source_encoder_to_disc_adapt, #cards_target_adapt,
+      #text_target_adapt, #edge_target_cards_to_encoder_adapt, #trapezoid_target_encoder_adapt,
+      #edge_target_encoder_to_disc_adapt, #discriminator_adapt, #edge_disc_to_domain_label,
+      #label_domain {
+        filter: grayscale(100%) opacity(0.4);
+        animation-name: colorPop;
+        animation-duration: 0.5s;
+        animation-fill-mode: forwards;
+      }
+
+      @keyframes colorPop {
+        to {
+          filter: grayscale(0%) opacity(1);
+        }
+      }
+
+      #block_pretraining, #title_pretraining { animation-delay: 0.5s; }
+      #cards_source_pre, #text_source_pre, #edge_cards_to_encoder_pre { animation-delay: 1.0s; }
+      #trapezoid_source_encoder_pre, #edge_encoder_to_classifier_pre { animation-delay: 1.5s; }
+      #classifier_pre, #edge_classifier_to_label_pre { animation-delay: 2.0s; }
+      #label_class { animation-delay: 2.5s; }
+      #block_adaptation, #title_adaptation { animation-delay: 3.0s; }
+      #cards_source_adapt, #text_source_adapt, #edge_source_cards_to_encoder_adapt { animation-delay: 3.5s; }
+      #trapezoid_source_encoder_adapt, #edge_source_encoder_to_disc_adapt { animation-delay: 4.0s; }
+      #cards_target_adapt, #text_target_adapt, #edge_target_cards_to_encoder_adapt { animation-delay: 4.5s; }
+      #trapezoid_target_encoder_adapt, #edge_target_encoder_to_disc_adapt { animation-delay: 5.0s; }
+      #discriminator_adapt, #edge_disc_to_domain_label { animation-delay: 5.5s; }
+      #label_domain { animation-delay: 6.0s; }
+
+      .narration-text {
+        opacity: 0;
+        animation-fill-mode: forwards;
+      }
+
+      @keyframes bannerSpan {
+        0% { opacity: 0; }
+        10% { opacity: 1; }
+        90% { opacity: 1; }
+        100% { opacity: 0; }
+      }
+
+      @keyframes bannerFinal {
+        0% { opacity: 0; }
+        10% { opacity: 1; }
+        100% { opacity: 1; }
+      }
+
+      #narr_ts1 { animation: bannerSpan 0.5s forwards 0.5s; }
+      #narr_ts2 { animation: bannerSpan 0.5s forwards 1.0s; }
+      #narr_ts3 { animation: bannerSpan 0.5s forwards 1.5s; }
+      #narr_ts4 { animation: bannerSpan 0.5s forwards 2.0s; }
+      #narr_ts5 { animation: bannerSpan 0.5s forwards 2.5s; }
+      #narr_ts6 { animation: bannerSpan 0.5s forwards 3.0s; }
+      #narr_ts7 { animation: bannerSpan 0.5s forwards 3.5s; }
+      #narr_ts8 { animation: bannerSpan 0.5s forwards 4.0s; }
+      #narr_ts9 { animation: bannerSpan 0.5s forwards 4.5s; }
+      #narr_ts10 { animation: bannerSpan 0.5s forwards 5.0s; }
+      #narr_ts11 { animation: bannerSpan 0.5s forwards 5.5s; }
+      #narr_ts12 { animation: bannerFinal 0.5s forwards 6.0s; }
+    </style>
+  </defs>
+
+  <!-- Titles Outside Blocks -->
+  <text id="title_pretraining" data-id="title_pretraining" data-class="text_node" data-parent="root" x="92" y="24" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="bold" fill="#000000">Pre-training</text>
+  <text id="title_adaptation" data-id="title_adaptation" data-class="text_node" data-parent="root" x="647" y="24" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="bold" fill="#000000">Adversarial Adaptation</text>
+
+  <!-- ==================== PRE-TRAINING BLOCK ==================== -->
+  <g id="block_pretraining" data-id="block_pretraining" data-class="block" data-parent="root">
+    <rect id="bg_pretraining" data-id="bg_pretraining" data-class="composite_part" data-parent="block_pretraining" x="9" y="34" width="471" height="376" rx="42" ry="42" fill="#DCE7F4" stroke="#1E232B" stroke-width="1.5" filter="url(#shadow-box)"/>
+
+    <text id="text_source_pre" data-id="text_source_pre" data-class="text_node" data-parent="block_pretraining" x="60" y="73" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#0070C0">source</text>
+
+    <!-- Source Spectrogram Cards Stack -->
+    <g id="cards_source_pre" data-id="cards_source_pre" data-class="composite_whole" data-parent="block_pretraining">
+      <!-- Green card -->
+      <rect id="card_green_pre" data-id="card_green_pre" data-class="composite_part" data-parent="cards_source_pre" x="9" y="99" width="105" height="80" fill="#0E8A13" stroke="#0A630E" stroke-width="1"/>
+      <use href="#waveform-bars" data-id="wf_green_pre" data-class="composite_part" data-parent="cards_source_pre" x="22" y="109"/>
+      <!-- Blue card -->
+      <rect id="card_blue_pre" data-id="card_blue_pre" data-class="composite_part" data-parent="cards_source_pre" x="27" y="133" width="106" height="84" fill="#78A2C7" stroke="#5A83A7" stroke-width="1"/>
+      <use href="#waveform-bars" data-id="wf_blue_pre" data-class="composite_part" data-parent="cards_source_pre" x="41" y="145"/>
+      <!-- Yellow card -->
+      <rect id="card_yellow_pre" data-id="card_yellow_pre" data-class="composite_part" data-parent="cards_source_pre" x="37" y="169" width="118" height="92" fill="#E1B865" stroke="#C49C4B" stroke-width="1"/>
+      <use href="#waveform-bars" data-id="wf_yellow_pre" data-class="composite_part" data-parent="cards_source_pre" x="57" y="185"/>
+    </g>
+
+    <!-- Source Encoder Trapezoid -->
+    <g id="trapezoid_source_encoder_pre" data-id="trapezoid_source_encoder_pre" data-class="child_node" data-parent="block_pretraining">
+      <polygon id="poly_encoder_pre" data-id="poly_encoder_pre" data-class="composite_part" data-parent="trapezoid_source_encoder_pre" points="183,124 278,148 278,300 183,330" fill="#FFFFFF" stroke="#000000" stroke-width="1.5" filter="url(#shadow-node)"/>
+      <text id="txt_encoder_pre1" data-id="txt_encoder_pre1" data-class="composite_part" data-parent="trapezoid_source_encoder_pre" x="230" y="218" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#000000">Source</text>
+      <text id="txt_encoder_pre2" data-id="txt_encoder_pre2" data-class="composite_part" data-parent="trapezoid_source_encoder_pre" x="230" y="240" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#000000">Encoder</text>
+    </g>
+
+    <!-- Classifier Box -->
+    <g id="classifier_pre" data-id="classifier_pre" data-class="child_node" data-parent="block_pretraining">
+      <rect id="rect_classifier_pre" data-id="rect_classifier_pre" data-class="composite_part" data-parent="classifier_pre" x="318" y="113" width="71" height="231" fill="#FFFFFF" stroke="#000000" stroke-width="1.5" filter="url(#shadow-node)"/>
+      <text id="txt_classifier_pre" data-id="txt_classifier_pre" data-class="composite_part" data-parent="classifier_pre" x="-228" y="362" transform="rotate(-90)" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="bold" text-anchor="middle" fill="#000000">Classifier</text>
+    </g>
+
+    <!-- Class Label Text Endpoint -->
+    <g id="label_class" data-id="label_class" data-class="child_node" data-parent="block_pretraining">
+      <text id="txt_label_class1" data-id="txt_label_class1" data-class="composite_part" data-parent="label_class" x="446" y="222" font-family="Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle" fill="#0070C0">class</text>
+      <text id="txt_label_class2" data-id="txt_label_class2" data-class="composite_part" data-parent="label_class" x="446" y="244" font-family="Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle" fill="#0070C0">label</text>
+    </g>
+
+    <!-- Pre-training Arrows -->
+    <line id="edge_cards_to_encoder_pre" data-id="edge_cards_to_encoder_pre" data-class="edge" data-source="cards_source_pre" data-target="trapezoid_source_encoder_pre" x1="155" y1="229" x2="183" y2="229" stroke="#000000" stroke-width="4.5" marker-end="url(#arrow)"/>
+    <line id="edge_encoder_to_classifier_pre" data-id="edge_encoder_to_classifier_pre" data-class="edge" data-source="trapezoid_source_encoder_pre" data-target="classifier_pre" x1="278" y1="229" x2="318" y2="229" stroke="#000000" stroke-width="4.5" marker-end="url(#arrow)"/>
+    <line id="edge_classifier_to_label_pre" data-id="edge_classifier_to_label_pre" data-class="edge" data-source="classifier_pre" data-target="label_class" x1="389" y1="229" x2="422" y2="229" stroke="#000000" stroke-width="4.5" marker-end="url(#arrow)"/>
+  </g>
+
+  <!-- ==================== ADVERSARIAL ADAPTATION BLOCK ==================== -->
+  <g id="block_adaptation" data-id="block_adaptation" data-class="block" data-parent="root">
+    <rect id="bg_adaptation" data-id="bg_adaptation" data-class="composite_part" data-parent="block_adaptation" x="509" y="34" width="483" height="376" rx="42" ry="42" fill="#FEE79A" stroke="#1E232B" stroke-width="1.5" filter="url(#shadow-box)"/>
+
+    <!-- Source Sub-Branch -->
+    <text id="text_source_adapt" data-id="text_source_adapt" data-class="text_node" data-parent="block_adaptation" x="562" y="73" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#0070C0">source</text>
+
+    <g id="cards_source_adapt" data-id="cards_source_adapt" data-class="composite_whole" data-parent="block_adaptation">
+      <!-- Green card -->
+      <rect id="card_green_adapt" data-id="card_green_adapt" data-class="composite_part" data-parent="cards_source_adapt" x="525" y="80" width="80" height="66" fill="#0E8A13" stroke="#0A630E" stroke-width="1"/>
+      <use href="#waveform-bars" data-id="wf_green_adapt" data-class="composite_part" data-parent="cards_source_adapt" x="528" y="85" transform="scale(0.9) translate(60, 6)"/>
+      <!-- Blue card -->
+      <rect id="card_blue_adapt" data-id="card_blue_adapt" data-class="composite_part" data-parent="cards_source_adapt" x="532" y="103" width="82" height="67" fill="#78A2C7" stroke="#5A83A7" stroke-width="1"/>
+      <use href="#waveform-bars" data-id="wf_blue_adapt" data-class="composite_part" data-parent="cards_source_adapt" x="535" y="108" transform="scale(0.9) translate(62, 13)"/>
+      <!-- Yellow card -->
+      <rect id="card_yellow_adapt" data-id="card_yellow_adapt" data-class="composite_part" data-parent="cards_source_adapt" x="541" y="128" width="84" height="67" fill="#E1B865" stroke="#C49C4B" stroke-width="1"/>
+      <use href="#waveform-bars" data-id="wf_yellow_adapt" data-class="composite_part" data-parent="cards_source_adapt" x="544" y="133" transform="scale(0.9) translate(65, 20)"/>
+    </g>
+
+    <!-- Dashed Source Encoder -->
+    <g id="trapezoid_source_encoder_adapt" data-id="trapezoid_source_encoder_adapt" data-class="child_node" data-parent="block_adaptation">
+      <polygon id="poly_encoder_adapt" data-id="poly_encoder_adapt" data-class="composite_part" data-parent="trapezoid_source_encoder_adapt" points="652,80 745,103 745,185 652,210" fill="#FFFFFF" stroke="#000000" stroke-width="1.5" stroke-dasharray="8,5"/>
+      <text id="txt_encoder_adapt1" data-id="txt_encoder_adapt1" data-class="composite_part" data-parent="trapezoid_source_encoder_adapt" x="698" y="141" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="bold" text-anchor="middle" fill="#000000">Source</text>
+      <text id="txt_encoder_adapt2" data-id="txt_encoder_adapt2" data-class="composite_part" data-parent="trapezoid_source_encoder_adapt" x="698" y="161" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="bold" text-anchor="middle" fill="#000000">Encoder</text>
+    </g>
+
+    <!-- Target Sub-Branch -->
+    <text id="text_target_adapt" data-id="text_target_adapt" data-class="text_node" data-parent="block_adaptation" x="560" y="246" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#0070C0">target</text>
+
+    <g id="cards_target_adapt" data-id="cards_target_adapt" data-class="composite_whole" data-parent="block_adaptation">
+      <!-- Dark Grey card -->
+      <rect id="card_grey_target" data-id="card_grey_target" data-class="composite_part" data-parent="cards_target_adapt" x="525" y="254" width="80" height="66" fill="#58595B" stroke="#3D3E40" stroke-width="1"/>
+      <use href="#waveform-bars-target" data-id="wf_grey_target" data-class="composite_part" data-parent="cards_target_adapt" x="528" y="258" transform="scale(0.9) translate(60, 30)"/>
+      <!-- Brown card -->
+      <rect id="card_brown_target" data-id="card_brown_target" data-class="composite_part" data-parent="cards_target_adapt" x="532" y="277" width="82" height="67" fill="#7D4938" stroke="#5E3527" stroke-width="1"/>
+      <use href="#waveform-bars-target" data-id="wf_brown_target" data-class="composite_part" data-parent="cards_target_adapt" x="535" y="282" transform="scale(0.9) translate(62, 37)"/>
+      <!-- Dark Beige card -->
+      <rect id="card_beige_target" data-id="card_beige_target" data-class="composite_part" data-parent="cards_target_adapt" x="541" y="302" width="84" height="67" fill="#5C5346" stroke="#433B31" stroke-width="1"/>
+      <use href="#waveform-bars-target" data-id="wf_beige_target" data-class="composite_part" data-parent="cards_target_adapt" x="544" y="307" transform="scale(0.9) translate(65, 45)"/>
+    </g>
+
+    <!-- Target Encoder (Solid) -->
+    <g id="trapezoid_target_encoder_adapt" data-id="trapezoid_target_encoder_adapt" data-class="child_node" data-parent="block_adaptation">
+      <polygon id="poly_target_encoder" data-id="poly_target_encoder" data-class="composite_part" data-parent="trapezoid_target_encoder_adapt" points="652,252 745,274 745,354 652,379" fill="#FFFFFF" stroke="#000000" stroke-width="1.5" filter="url(#shadow-node)"/>
+      <text id="txt_target_encoder1" data-id="txt_target_encoder1" data-class="composite_part" data-parent="trapezoid_target_encoder_adapt" x="698" y="312" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="bold" text-anchor="middle" fill="#000000">Target</text>
+      <text id="txt_target_encoder2" data-id="txt_target_encoder2" data-class="composite_part" data-parent="trapezoid_target_encoder_adapt" x="698" y="332" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="bold" text-anchor="middle" fill="#000000">Encoder</text>
+    </g>
+
+    <!-- Discriminator -->
+    <g id="discriminator_adapt" data-id="discriminator_adapt" data-class="child_node" data-parent="block_adaptation">
+      <rect id="rect_discriminator" data-id="rect_discriminator" data-class="composite_part" data-parent="discriminator_adapt" x="802" y="66" width="56" height="320" fill="#FFFFFF" stroke="#000000" stroke-width="1.5" filter="url(#shadow-node)"/>
+      <text id="txt_discriminator" data-id="txt_discriminator" data-class="composite_part" data-parent="discriminator_adapt" x="-226" y="837" transform="rotate(-90)" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#000000">Discriminator</text>
+    </g>
+
+    <!-- Domain Label Text Endpoint -->
+    <g id="label_domain" data-id="label_domain" data-class="child_node" data-parent="block_adaptation">
+      <text id="txt_label_domain1" data-id="txt_label_domain1" data-class="composite_part" data-parent="label_domain" x="942" y="217" font-family="Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle" fill="#0070C0">domain</text>
+      <text id="txt_label_domain2" data-id="txt_label_domain2" data-class="composite_part" data-parent="label_domain" x="942" y="239" font-family="Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle" fill="#0070C0">label</text>
+    </g>
+
+    <!-- Adaptation Arrows -->
+    <line id="edge_source_cards_to_encoder_adapt" data-id="edge_source_cards_to_encoder_adapt" data-class="edge" data-source="cards_source_adapt" data-target="trapezoid_source_encoder_adapt" x1="625" y1="145" x2="652" y2="145" stroke="#000000" stroke-width="4.5" marker-end="url(#arrow)"/>
+    <line id="edge_source_encoder_to_disc_adapt" data-id="edge_source_encoder_to_disc_adapt" data-class="edge" data-source="trapezoid_source_encoder_adapt" data-target="discriminator_adapt" x1="745" y1="145" x2="799" y2="145" stroke="#000000" stroke-width="4.5" marker-end="url(#arrow)"/>
+    
+    <line id="edge_target_cards_to_encoder_adapt" data-id="edge_target_cards_to_encoder_adapt" data-class="edge" data-source="cards_target_adapt" data-target="trapezoid_target_encoder_adapt" x1="625" y1="316" x2="652" y2="316" stroke="#000000" stroke-width="4.5" marker-end="url(#arrow)"/>
+    <line id="edge_target_encoder_to_disc_adapt" data-id="edge_target_encoder_to_disc_adapt" data-class="edge" data-source="trapezoid_target_encoder_adapt" data-target="discriminator_adapt" x1="745" y1="316" x2="799" y2="316" stroke="#000000" stroke-width="4.5" marker-end="url(#arrow)"/>
+    
+    <line id="edge_disc_to_domain_label" data-id="edge_disc_to_domain_label" data-class="edge" data-source="discriminator_adapt" data-target="label_domain" x1="858" y1="226" x2="910" y2="226" stroke="#000000" stroke-width="5" marker-end="url(#arrow)"/>
+  </g>
+
+  <!-- Narration Dynamic Banner -->
+  <g id="narration_banner">
+    <rect x="50" y="445" width="900" height="60" rx="8" ry="8" fill="#FFFFFF" opacity="0.9" stroke="#E2E8F0" stroke-width="1"/>
+    <text id="narr_ts1" class="narration-text" x="50%" y="480" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="bold" fill="#1E293B">
+      <tspan x="50%" dy="0">The pipeline begins with the Pre-training stage shown on the left.</tspan>
+    </text>
+    <text id="narr_ts2" class="narration-text" x="50%" y="480" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="bold" fill="#1E293B">
+      <tspan x="50%" dy="0">Source domain inputs are provided to the network.</tspan>
+    </text>
+    <text id="narr_ts3" class="narration-text" x="50%" y="480" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="bold" fill="#1E293B">
+      <tspan x="50%" dy="0">These inputs pass into the Source Encoder.</tspan>
+    </text>
+    <text id="narr_ts4" class="narration-text" x="50%" y="480" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="bold" fill="#1E293B">
+      <tspan x="50%" dy="0">The resulting features are directed into the Classifier.</tspan>
+    </text>
+    <text id="narr_ts5" class="narration-text" x="50%" y="480" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="bold" fill="#1E293B">
+      <tspan x="50%" dy="0">The Classifier outputs the predicted class label.</tspan>
+    </text>
+    <text id="narr_ts6" class="narration-text" x="50%" y="480" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="bold" fill="#1E293B">
+      <tspan x="50%" dy="0">On the right, the framework proceeds to the Adversarial Adaptation stage.</tspan>
+    </text>
+    <text id="narr_ts7" class="narration-text" x="50%" y="480" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="bold" fill="#1E293B">
+      <tspan x="50%" dy="0">Source inputs are routed into the Source Encoder.</tspan>
+    </text>
+    <text id="narr_ts8" class="narration-text" x="50%" y="480" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="bold" fill="#1E293B">
+      <tspan x="50%" dy="0">The Source Encoder forwards its output directly to the Discriminator.</tspan>
+    </text>
+    <text id="narr_ts9" class="narration-text" x="50%" y="480" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="bold" fill="#1E293B">
+      <tspan x="50%" dy="0">In parallel, target inputs are fed into the Target Encoder.</tspan>
+    </text>
+    <text id="narr_ts10" class="narration-text" x="50%" y="480" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="bold" fill="#1E293B">
+      <tspan x="50%" dy="0">The Target Encoder also transmits its output to the Discriminator.</tspan>
+    </text>
+    <text id="narr_ts11" class="narration-text" x="50%" y="480" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="bold" fill="#1E293B">
+      <tspan x="50%" dy="0">The Discriminator receives representations from both encoders.</tspan>
+    </text>
+    <text id="narr_ts12" class="narration-text" x="50%" y="480" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="bold" fill="#1E293B">
+      <tspan x="50%" dy="0">Finally, the Discriminator outputs the domain label.</tspan>
+    </text>
+  </g>
+</svg>

@@ -1,0 +1,339 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 410" width="900" height="410">
+  <defs>
+    <!-- Yellow Arrow Marker -->
+    <marker id="arrow-yellow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#ffff00" stroke="#000" stroke-width="0.8"/>
+    </marker>
+    <!-- Teal/Blue Arrow Marker -->
+    <marker id="arrow-teal" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#145b77" stroke="#145b77" stroke-width="0.8"/>
+    </marker>
+  </defs>
+  <rect width="100%" height="100%" fill="#ffffff"/>
+
+  <style>
+    text {
+      font-family: "Courier New", Courier, monospace, sans-serif;
+      font-weight: bold;
+    }
+    .caption-text {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 15px;
+      font-weight: normal;
+    }
+    .narrative-text {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      fill: #1e293b;
+      opacity: 0;
+    }
+
+    #focus_box {
+      animation: hop 45s step-end infinite;
+    }
+
+    @keyframes hop {
+      0%      { x: 11px;  y: 9px;   width: 88px;  height: 77px; }  /* t1: legacy_files_a */
+      6.67%   { x: 161px; y: 6px;   width: 123px; height: 83px; }  /* t2: vector_db_a */
+      13.33%  { x: 21px;  y: 221px; width: 48px;  height: 43px; }  /* t3: user_a */
+      20.00%  { x: 25px;  y: 181px; width: 125px; height: 58px; }  /* t4: speech_a */
+      26.67%  { x: 156px; y: 191px; width: 138px; height: 83px; }  /* t5: retriever_a */
+      33.33%  { x: 351px; y: 101px; width: 58px;  height: 50px; }  /* t6: llm_agent_a */
+      40.00%  { x: 401px; y: 9px;   width: 82px;  height: 77px; }  /* t7: legacy_files_b */
+      46.67%  { x: 541px; y: 9px;   width: 82px;  height: 77px; }  /* t8: meta_indices_b */
+      53.33%  { x: 691px; y: 6px;   width: 118px; height: 83px; }  /* t9: vector_db_b */
+      60.00%  { x: 551px; y: 218px; width: 48px;  height: 43px; }  /* t10: user_b */
+      66.67%  { x: 442px; y: 172px; width: 117px; height: 52px; }  /* t11: speech_file_b */
+      73.33%  { x: 542px; y: 126px; width: 83px;  height: 40px; }  /* t12: parser_b */
+      80.00%  { x: 556px; y: 256px; width: 113px; height: 51px; }  /* t13: speech_query_b */
+      86.67%  { x: 680px; y: 184px; width: 128px; height: 78px; }  /* t14: retriever_b */
+      93.33%  { x: 831px; y: 101px; width: 58px;  height: 50px; }  /* t15: llm_agent_b */
+      100.00% { x: 11px;  y: 9px;   width: 88px;  height: 77px; }
+    }
+
+    #narr_t1  { animation: narr1  45s step-end infinite; }
+    #narr_t2  { animation: narr2  45s step-end infinite; }
+    #narr_t3  { animation: narr3  45s step-end infinite; }
+    #narr_t4  { animation: narr4  45s step-end infinite; }
+    #narr_t5  { animation: narr5  45s step-end infinite; }
+    #narr_t6  { animation: narr6  45s step-end infinite; }
+    #narr_t7  { animation: narr7  45s step-end infinite; }
+    #narr_t8  { animation: narr8  45s step-end infinite; }
+    #narr_t9  { animation: narr9  45s step-end infinite; }
+    #narr_t10 { animation: narr10 45s step-end infinite; }
+    #narr_t11 { animation: narr11 45s step-end infinite; }
+    #narr_t12 { animation: narr12 45s step-end infinite; }
+    #narr_t13 { animation: narr13 45s step-end infinite; }
+    #narr_t14 { animation: narr14 45s step-end infinite; }
+    #narr_t15 { animation: narr15 45s step-end infinite; }
+
+    @keyframes narr1  { 0%, 100% { opacity: 1; } 6.67% { opacity: 0; } }
+    @keyframes narr2  { 0% { opacity: 0; } 6.67% { opacity: 1; } 13.33% { opacity: 0; } }
+    @keyframes narr3  { 0% { opacity: 0; } 13.33% { opacity: 1; } 20.00% { opacity: 0; } }
+    @keyframes narr4  { 0% { opacity: 0; } 20.00% { opacity: 1; } 26.67% { opacity: 0; } }
+    @keyframes narr5  { 0% { opacity: 0; } 26.67% { opacity: 1; } 33.33% { opacity: 0; } }
+    @keyframes narr6  { 0% { opacity: 0; } 33.33% { opacity: 1; } 40.00% { opacity: 0; } }
+    @keyframes narr7  { 0% { opacity: 0; } 40.00% { opacity: 1; } 46.67% { opacity: 0; } }
+    @keyframes narr8  { 0% { opacity: 0; } 46.67% { opacity: 1; } 53.33% { opacity: 0; } }
+    @keyframes narr9  { 0% { opacity: 0; } 53.33% { opacity: 1; } 60.00% { opacity: 0; } }
+    @keyframes narr10 { 0% { opacity: 0; } 60.00% { opacity: 1; } 66.67% { opacity: 0; } }
+    @keyframes narr11 { 0% { opacity: 0; } 66.67% { opacity: 1; } 73.33% { opacity: 0; } }
+    @keyframes narr12 { 0% { opacity: 0; } 73.33% { opacity: 1; } 80.00% { opacity: 0; } }
+    @keyframes narr13 { 0% { opacity: 0; } 80.00% { opacity: 1; } 86.67% { opacity: 0; } }
+    @keyframes narr14 { 0% { opacity: 0; } 86.67% { opacity: 1; } 93.33% { opacity: 0; } }
+    @keyframes narr15 { 0% { opacity: 0; } 93.33% { opacity: 1; } 100% { opacity: 0; } }
+  </style>
+
+  <!-- ==================== SUBFIGURE (a) ==================== -->
+
+  <!-- (a) Legacy File Systems Cylinder -->
+  <g id="legacy_files_a" data-id="legacy_files_a" data-class="composite_whole" data-parent="root">
+    <path id="legacy_files_a_body" data-id="legacy_files_a_body" data-class="composite_part" data-parent="legacy_files_a" d="M 15 25 L 15 70 A 40 12 0 0 0 95 70 L 95 25 Z" fill="#e76434" stroke="#000" stroke-width="1.2"/>
+    <ellipse id="legacy_files_a_top" data-id="legacy_files_a_top" data-class="composite_part" data-parent="legacy_files_a" cx="55" cy="25" rx="40" ry="12" fill="#f58b5e" stroke="#000" stroke-width="1.2"/>
+    <text id="legacy_files_a_text1" data-id="legacy_files_a_text1" data-class="composite_part" data-parent="legacy_files_a" x="55" y="47" font-size="10" text-anchor="middle" fill="#ffffff">Legacy File</text>
+    <text id="legacy_files_a_text2" data-id="legacy_files_a_text2" data-class="composite_part" data-parent="legacy_files_a" x="55" y="60" font-size="10" text-anchor="middle" fill="#ffffff">Systems</text>
+  </g>
+
+  <!-- (a) Vector Database Container -->
+  <g id="vector_db_a" data-id="vector_db_a" data-class="block" data-parent="root">
+    <rect id="vector_db_a_bg" data-id="vector_db_a_bg" data-class="child_node" data-parent="vector_db_a" x="165" y="10" width="115" height="75" rx="15" fill="none" stroke="#000" stroke-dasharray="4,3" stroke-width="1.2"/>
+    <!-- Graph Edges -->
+    <line id="graph_a_edge1" data-id="graph_a_edge1" data-class="child_node" data-parent="vector_db_a" x1="190" y1="25" x2="235" y2="22" stroke="#124056" stroke-width="2.5"/>
+    <line id="graph_a_edge2" data-id="graph_a_edge2" data-class="child_node" data-parent="vector_db_a" x1="190" y1="25" x2="190" y2="55" stroke="#124056" stroke-width="2.5"/>
+    <line id="graph_a_edge3" data-id="graph_a_edge3" data-class="child_node" data-parent="vector_db_a" x1="235" y1="22" x2="255" y2="45" stroke="#124056" stroke-width="2.5"/>
+    <line id="graph_a_edge4" data-id="graph_a_edge4" data-class="child_node" data-parent="vector_db_a" x1="190" y1="55" x2="220" y2="45" stroke="#124056" stroke-width="2.5"/>
+    <line id="graph_a_edge5" data-id="graph_a_edge5" data-class="child_node" data-parent="vector_db_a" x1="230" y1="62" x2="255" y2="65" stroke="#124056" stroke-width="2.5"/>
+    <!-- Graph Nodes -->
+    <circle id="graph_a_node1" data-id="graph_a_node1" data-class="child_node" data-parent="vector_db_a" cx="190" cy="25" r="9" fill="#d924ad" stroke="#000" stroke-width="1.2"/>
+    <circle id="graph_a_node2" data-id="graph_a_node2" data-class="child_node" data-parent="vector_db_a" cx="235" cy="22" r="9" fill="#d924ad" stroke="#000" stroke-width="1.2"/>
+    <circle id="graph_a_node3" data-id="graph_a_node3" data-class="child_node" data-parent="vector_db_a" cx="190" cy="68" r="9" fill="#d924ad" stroke="#000" stroke-width="1.2"/>
+    <circle id="graph_a_node4" data-id="graph_a_node4" data-class="child_node" data-parent="vector_db_a" cx="220" cy="45" r="9" fill="#d924ad" stroke="#000" stroke-width="1.2"/>
+    <circle id="graph_a_node5" data-id="graph_a_node5" data-class="child_node" data-parent="vector_db_a" cx="262" cy="60" r="9" fill="#d924ad" stroke="#000" stroke-width="1.2"/>
+  </g>
+  <text id="vector_db_a_label" data-id="vector_db_a_label" data-class="text_node" data-parent="root" x="222" y="98" font-size="11" text-anchor="middle" fill="#000000">Vector Database</text>
+
+  <!-- (a) User Placeholder -->
+  <g id="user_a" data-id="user_a" data-class="raster_node"><image href="../../rasters/arch_arxiv_db_ir_2025_000000589/crop_user_a.png" xlink:href="../../rasters/arch_arxiv_db_ir_2025_000000589/crop_user_a.png" x="25" y="225" width="40" height="35" preserveAspectRatio="xMidYMid meet" /></g>
+
+  <!-- (a) User Speech Bubble -->
+  <g id="speech_a" data-id="speech_a" data-class="composite_whole" data-parent="root">
+    <path id="speech_a_bubble" data-id="speech_a_bubble" data-class="composite_part" data-parent="speech_a" d="M 35 185 L 140 185 A 6 6 0 0 1 146 191 L 146 215 A 6 6 0 0 1 140 221 L 65 221 L 45 235 L 50 221 L 35 221 A 6 6 0 0 1 29 215 L 29 191 A 6 6 0 0 1 35 185 Z" fill="#145b77"/>
+    <text id="speech_a_text" data-id="speech_a_text" data-class="composite_part" data-parent="speech_a" x="87" y="206" font-size="10" text-anchor="middle" fill="#ffffff">Query Command</text>
+  </g>
+
+  <!-- (a) Retriever Box -->
+  <g id="retriever_a" data-id="retriever_a" data-class="block" data-parent="root">
+    <rect id="retriever_a_bg" data-id="retriever_a_bg" data-class="child_node" data-parent="retriever_a" x="160" y="195" width="130" height="75" rx="12" fill="#3ea637" stroke="#000" stroke-width="1.2"/>
+    <text id="retriever_a_txt1" data-id="retriever_a_txt1" data-class="child_node" data-parent="retriever_a" x="225" y="222" font-size="10" text-anchor="middle" fill="#ffffff">Retriever (e.g.</text>
+    <text id="retriever_a_txt2" data-id="retriever_a_txt2" data-class="child_node" data-parent="retriever_a" x="225" y="237" font-size="10" text-anchor="middle" fill="#ffffff">Similarity</text>
+    <text id="retriever_a_txt3" data-id="retriever_a_txt3" data-class="child_node" data-parent="retriever_a" x="225" y="252" font-size="10" text-anchor="middle" fill="#ffffff">Search)</text>
+  </g>
+
+  <!-- (a) LLM Agent Placeholder -->
+  <g id="llm_agent_a" data-id="llm_agent_a" data-class="raster_node"><image href="../../rasters/arch_arxiv_db_ir_2025_000000589/crop_llm_agent_a.png" xlink:href="../../rasters/arch_arxiv_db_ir_2025_000000589/crop_llm_agent_a.png" x="355" y="105" width="50" height="42" preserveAspectRatio="xMidYMid meet" /></g>
+  <text id="llm_agent_a_label" data-id="llm_agent_a_label" data-class="text_node" data-parent="root" x="380" y="162" font-size="10" text-anchor="middle" fill="#000000">LLM Agent</text>
+
+  <!-- (a) Edges -->
+  <g>
+    <!-- Legacy Files -> Vector DB -->
+    <path id="edge_construct_a" data-id="edge_construct_a" data-class="edge" data-source="legacy_files_a" data-target="vector_db_a" d="M 100 45 L 148 45" fill="none" stroke="#ffff00" stroke-width="6" marker-end="url(#arrow-yellow)"/>
+    <text id="edge_construct_a_lbl1" data-id="edge_construct_a_lbl1" data-class="text_node" data-parent="root" x="127" y="65" font-size="9" text-anchor="middle" fill="#000000">Construct</text>
+    <text id="edge_construct_a_lbl2" data-id="edge_construct_a_lbl2" data-class="text_node" data-parent="root" x="127" y="76" font-size="9" text-anchor="middle" fill="#000000">Update</text>
+
+    <!-- User -> Retriever -->
+    <path id="edge_user_retriever_a" data-id="edge_user_retriever_a" data-class="edge" data-source="user_a" data-target="retriever_a" d="M 68 242 L 143 242" fill="none" stroke="#ffff00" stroke-width="6" marker-end="url(#arrow-yellow)"/>
+    <text id="edge_user_retriever_a_lbl" data-id="edge_user_retriever_a_lbl" data-class="text_node" data-parent="root" x="105" y="260" font-size="9" text-anchor="middle" fill="#000000">Query</text>
+
+    <!-- Retriever -> Vector DB (Query) -->
+    <path id="edge_query_up_a" data-id="edge_query_up_a" data-class="edge" data-source="retriever_a" data-target="vector_db_a" d="M 195 190 L 195 125" fill="none" stroke="#ffff00" stroke-width="6" marker-end="url(#arrow-yellow)"/>
+    <text id="edge_query_up_a_lbl" data-id="edge_query_up_a_lbl" data-class="text_node" data-parent="root" x="175" y="152" font-size="9" text-anchor="middle" fill="#000000">Query</text>
+
+    <!-- Vector DB -> Retriever (Return docs) -->
+    <path id="edge_return_down_a" data-id="edge_return_down_a" data-class="edge" data-source="vector_db_a" data-target="retriever_a" d="M 245 125 L 245 183" fill="none" stroke="#ffff00" stroke-width="6" marker-end="url(#arrow-yellow)"/>
+    <text id="edge_return_down_a_lbl1" data-id="edge_return_down_a_lbl1" data-class="text_node" data-parent="root" x="278" y="145" font-size="9" text-anchor="start" fill="#000000">Return</text>
+    <text id="edge_return_down_a_lbl2" data-id="edge_return_down_a_lbl2" data-class="text_node" data-parent="root" x="278" y="156" font-size="9" text-anchor="start" fill="#000000">top-k</text>
+    <text id="edge_return_down_a_lbl3" data-id="edge_return_down_a_lbl3" data-class="text_node" data-parent="root" x="278" y="167" font-size="9" text-anchor="start" fill="#000000">documents</text>
+
+    <!-- Retriever -> LLM Agent -->
+    <path id="edge_retriever_llm_a" data-id="edge_retriever_llm_a" data-class="edge" data-source="retriever_a" data-target="llm_agent_a" d="M 290 242 L 340 242 L 340 178" fill="none" stroke="#145b77" stroke-width="4.5" marker-end="url(#arrow-teal)"/>
+    <text id="edge_retriever_llm_a_lbl1" data-id="edge_retriever_llm_a_lbl1" data-class="text_node" data-parent="root" x="330" y="270" font-size="9" text-anchor="start" fill="#000000">Query with</text>
+    <text id="edge_retriever_llm_a_lbl2" data-id="edge_retriever_llm_a_lbl2" data-class="text_node" data-parent="root" x="330" y="282" font-size="9" text-anchor="start" fill="#000000">additional</text>
+    <text id="edge_retriever_llm_a_lbl3" data-id="edge_retriever_llm_a_lbl3" data-class="text_node" data-parent="root" x="330" y="294" font-size="9" text-anchor="start" fill="#000000">context</text>
+  </g>
+
+
+  <!-- ==================== SUBFIGURE (b) ==================== -->
+
+  <!-- (b) Legacy File Systems Cylinder (Blue) -->
+  <g id="legacy_files_b" data-id="legacy_files_b" data-class="composite_whole" data-parent="root">
+    <path id="legacy_files_b_body" data-id="legacy_files_b_body" data-class="composite_part" data-parent="legacy_files_b" d="M 405 25 L 405 70 A 37 12 0 0 0 479 70 L 479 25 Z" fill="#29a7df" stroke="#000" stroke-width="1.2"/>
+    <ellipse id="legacy_files_b_top" data-id="legacy_files_b_top" data-class="composite_part" data-parent="legacy_files_b" cx="442" cy="25" rx="37" ry="12" fill="#5bc1ea" stroke="#000" stroke-width="1.2"/>
+    <text id="legacy_files_b_text1" data-id="legacy_files_b_text1" data-class="composite_part" data-parent="legacy_files_b" x="442" y="47" font-size="10" text-anchor="middle" fill="#ffffff">Legacy File</text>
+    <text id="legacy_files_b_text2" data-id="legacy_files_b_text2" data-class="composite_part" data-parent="legacy_files_b" x="442" y="60" font-size="10" text-anchor="middle" fill="#ffffff">Systems</text>
+  </g>
+
+  <!-- (b) Metadata Indices Cylinder (Orange) -->
+  <g id="meta_indices_b" data-id="meta_indices_b" data-class="composite_whole" data-parent="root">
+    <path id="meta_indices_b_body" data-id="meta_indices_b_body" data-class="composite_part" data-parent="meta_indices_b" d="M 545 25 L 545 70 A 37 12 0 0 0 619 70 L 619 25 Z" fill="#e76434" stroke="#000" stroke-width="1.2"/>
+    <ellipse id="meta_indices_b_top" data-id="meta_indices_b_top" data-class="composite_part" data-parent="meta_indices_b" cx="582" cy="25" rx="37" ry="12" fill="#f58b5e" stroke="#000" stroke-width="1.2"/>
+    <text id="meta_indices_b_text1" data-id="meta_indices_b_text1" data-class="composite_part" data-parent="meta_indices_b" x="582" y="47" font-size="10" text-anchor="middle" fill="#ffffff">Metadata</text>
+    <text id="meta_indices_b_text2" data-id="meta_indices_b_text2" data-class="composite_part" data-parent="meta_indices_b" x="582" y="60" font-size="10" text-anchor="middle" fill="#ffffff">Indices</text>
+  </g>
+
+  <!-- (b) Vector Database Container -->
+  <g id="vector_db_b" data-id="vector_db_b" data-class="block" data-parent="root">
+    <rect id="vector_db_b_bg" data-id="vector_db_b_bg" data-class="child_node" data-parent="vector_db_b" x="695" y="10" width="110" height="75" rx="15" fill="none" stroke="#000" stroke-dasharray="4,3" stroke-width="1.2"/>
+    <!-- Graph Edges -->
+    <line id="graph_b_edge1" data-id="graph_b_edge1" data-class="child_node" data-parent="vector_db_b" x1="718" y1="25" x2="762" y2="22" stroke="#124056" stroke-width="2.5"/>
+    <line id="graph_b_edge2" data-id="graph_b_edge2" data-class="child_node" data-parent="vector_db_b" x1="718" y1="25" x2="718" y2="55" stroke="#124056" stroke-width="2.5"/>
+    <line id="graph_b_edge3" data-id="graph_b_edge3" data-class="child_node" data-parent="vector_db_b" x1="762" y1="22" x2="782" y2="45" stroke="#124056" stroke-width="2.5"/>
+    <line id="graph_b_edge4" data-id="graph_b_edge4" data-class="child_node" data-parent="vector_db_b" x1="718" y1="55" x2="745" y2="45" stroke="#124056" stroke-width="2.5"/>
+    <line id="graph_b_edge5" data-id="graph_b_edge5" data-class="child_node" data-parent="vector_db_b" x1="755" y1="62" x2="780" y2="65" stroke="#124056" stroke-width="2.5"/>
+    <!-- Graph Nodes -->
+    <circle id="graph_b_node1" data-id="graph_b_node1" data-class="child_node" data-parent="vector_db_b" cx="718" cy="25" r="9" fill="#d924ad" stroke="#000" stroke-width="1.2"/>
+    <circle id="graph_b_node2" data-id="graph_b_node2" data-class="child_node" data-parent="vector_db_b" cx="762" cy="22" r="9" fill="#d924ad" stroke="#000" stroke-width="1.2"/>
+    <circle id="graph_b_node3" data-id="graph_b_node3" data-class="child_node" data-parent="vector_db_b" cx="718" cy="68" r="9" fill="#d924ad" stroke="#000" stroke-width="1.2"/>
+    <circle id="graph_b_node4" data-id="graph_b_node4" data-class="child_node" data-parent="vector_db_b" cx="746" cy="45" r="9" fill="#d924ad" stroke="#000" stroke-width="1.2"/>
+    <circle id="graph_b_node5" data-id="graph_b_node5" data-class="child_node" data-parent="vector_db_b" cx="786" cy="60" r="9" fill="#d924ad" stroke="#000" stroke-width="1.2"/>
+  </g>
+  <text id="vector_db_b_label" data-id="vector_db_b_label" data-class="text_node" data-parent="root" x="750" y="98" font-size="11" text-anchor="middle" fill="#000000">Vector Database</text>
+
+  <!-- (b) Parser Box -->
+  <g id="parser_b" data-id="parser_b" data-class="block" data-parent="root">
+    <rect id="parser_b_bg" data-id="parser_b_bg" data-class="child_node" data-parent="parser_b" x="546" y="130" width="75" height="32" rx="6" fill="#6e2d91" stroke="#000" stroke-width="1"/>
+    <text id="parser_b_txt" data-id="parser_b_txt" data-class="child_node" data-parent="parser_b" x="583" y="150" font-size="11" text-anchor="middle" fill="#ffffff">Parser</text>
+  </g>
+
+  <!-- (b) User Placeholder -->
+  <g id="user_b" data-id="user_b" data-class="raster_node"><image href="../../rasters/arch_arxiv_db_ir_2025_000000589/crop_user_b.png" xlink:href="../../rasters/arch_arxiv_db_ir_2025_000000589/crop_user_b.png" x="555" y="222" width="40" height="35" preserveAspectRatio="xMidYMid meet" /></g>
+
+  <!-- (b) User Speech Bubbles -->
+  <!-- Upper Left Speech Bubble: File Retrieval Command -->
+  <g id="speech_file_b" data-id="speech_file_b" data-class="composite_whole" data-parent="root">
+    <path id="speech_file_b_bubble" data-id="speech_file_b_bubble" data-class="composite_part" data-parent="speech_file_b" d="M 452 176 L 545 176 A 6 6 0 0 1 551 182 L 551 202 A 6 6 0 0 1 545 208 L 540 208 L 555 220 L 532 208 L 452 208 A 6 6 0 0 1 446 202 L 446 182 A 6 6 0 0 1 452 176 Z" fill="#145b77"/>
+    <text id="speech_file_b_text1" data-id="speech_file_b_text1" data-class="composite_part" data-parent="speech_file_b" x="498" y="191" font-size="9" text-anchor="middle" fill="#ffffff">File Retrieval</text>
+    <text id="speech_file_b_text2" data-id="speech_file_b_text2" data-class="composite_part" data-parent="speech_file_b" x="498" y="202" font-size="9" text-anchor="middle" fill="#ffffff">Command</text>
+  </g>
+
+  <!-- Lower Speech Bubble: Query Command -->
+  <g id="speech_query_b" data-id="speech_query_b" data-class="composite_whole" data-parent="root">
+    <path id="speech_query_b_bubble" data-id="speech_query_b_bubble" data-class="composite_part" data-parent="speech_query_b" d="M 565 273 L 660 273 A 5 5 0 0 1 665 278 L 665 298 A 5 5 0 0 1 660 303 L 565 303 A 5 5 0 0 1 560 298 L 560 278 A 5 5 0 0 1 565 273 Z" fill="#145b77"/>
+    <polygon id="speech_query_b_tip" data-id="speech_query_b_tip" data-class="composite_part" data-parent="speech_query_b" points="575,273 570,260 585,273" fill="#145b77"/>
+    <text id="speech_query_b_text" data-id="speech_query_b_text" data-class="composite_part" data-parent="speech_query_b" x="612" y="291" font-size="9" text-anchor="middle" fill="#ffffff">Query Command</text>
+  </g>
+
+  <!-- (b) Retriever Box -->
+  <g id="retriever_b" data-id="retriever_b" data-class="block" data-parent="root">
+    <rect id="retriever_b_bg" data-id="retriever_b_bg" data-class="child_node" data-parent="retriever_b" x="684" y="188" width="120" height="70" rx="12" fill="#3ea637" stroke="#000" stroke-width="1.2"/>
+    <text id="retriever_b_txt1" data-id="retriever_b_txt1" data-class="child_node" data-parent="retriever_b" x="744" y="213" font-size="9.5" text-anchor="middle" fill="#ffffff">Retriever (e.g.</text>
+    <text id="retriever_b_txt2" data-id="retriever_b_txt2" data-class="child_node" data-parent="retriever_b" x="744" y="228" font-size="9.5" text-anchor="middle" fill="#ffffff">Similarity</text>
+    <text id="retriever_b_txt3" data-id="retriever_b_txt3" data-class="child_node" data-parent="retriever_b" x="744" y="243" font-size="9.5" text-anchor="middle" fill="#ffffff">Search)</text>
+  </g>
+
+  <!-- (b) LLM Agent Placeholder -->
+  <g id="llm_agent_b" data-id="llm_agent_b" data-class="raster_node"><image href="../../rasters/arch_arxiv_db_ir_2025_000000589/crop_llm_agent_b.png" xlink:href="../../rasters/arch_arxiv_db_ir_2025_000000589/crop_llm_agent_b.png" x="835" y="105" width="50" height="42" preserveAspectRatio="xMidYMid meet" /></g>
+  <text id="llm_agent_b_label" data-id="llm_agent_b_label" data-class="text_node" data-parent="root" x="860" y="162" font-size="10" text-anchor="middle" fill="#000000">LLM Agent</text>
+
+  <!-- (b) Edges -->
+  <g>
+    <!-- Legacy Files -> Metadata Indices -->
+    <path id="edge_construct_b" data-id="edge_construct_b" data-class="edge" data-source="legacy_files_b" data-target="meta_indices_b" d="M 488 45 L 533 45" fill="none" stroke="#ffff00" stroke-width="6" marker-end="url(#arrow-yellow)"/>
+    <text id="edge_construct_b_lbl1" data-id="edge_construct_b_lbl1" data-class="text_node" data-parent="root" x="510" y="65" font-size="9" text-anchor="middle" fill="#000000">Construct</text>
+    <text id="edge_construct_b_lbl2" data-id="edge_construct_b_lbl2" data-class="text_node" data-parent="root" x="510" y="76" font-size="9" text-anchor="middle" fill="#000000">Update</text>
+
+    <!-- Metadata Indices -> Vector DB -->
+    <path id="edge_return_docs_b" data-id="edge_return_docs_b" data-class="edge" data-source="meta_indices_b" data-target="vector_db_b" d="M 628 45 L 678 45" fill="none" stroke="#ffff00" stroke-width="6" marker-end="url(#arrow-yellow)"/>
+    <text id="edge_return_docs_b_lbl1" data-id="edge_return_docs_b_lbl1" data-class="text_node" data-parent="root" x="653" y="65" font-size="9" text-anchor="middle" fill="#000000">Return</text>
+    <text id="edge_return_docs_b_lbl2" data-id="edge_return_docs_b_lbl2" data-class="text_node" data-parent="root" x="653" y="76" font-size="9" text-anchor="middle" fill="#000000">relevant</text>
+    <text id="edge_return_docs_b_lbl3" data-id="edge_return_docs_b_lbl3" data-class="text_node" data-parent="root" x="653" y="87" font-size="9" text-anchor="middle" fill="#000000">documents</text>
+
+    <!-- Parser -> Metadata Indices -->
+    <path id="edge_parser_meta_b" data-id="edge_parser_meta_b" data-class="edge" data-source="parser_b" data-target="meta_indices_b" d="M 583 125 L 583 95" fill="none" stroke="#ffff00" stroke-width="6" marker-end="url(#arrow-yellow)"/>
+    <text id="edge_parser_meta_b_lbl1" data-id="edge_parser_meta_b_lbl1" data-class="text_node" data-parent="root" x="555" y="112" font-size="8.5" text-anchor="end" fill="#000000">Return keywords</text>
+    <text id="edge_parser_meta_b_lbl2" data-id="edge_parser_meta_b_lbl2" data-class="text_node" data-parent="root" x="555" y="123" font-size="8.5" text-anchor="end" fill="#000000">&amp; metadata</text>
+
+    <!-- User -> Parser -->
+    <path id="edge_user_parser_b" data-id="edge_user_parser_b" data-class="edge" data-source="user_b" data-target="parser_b" d="M 583 218 L 583 172" fill="none" stroke="#ffff00" stroke-width="6" marker-end="url(#arrow-yellow)"/>
+    <text id="edge_user_parser_b_lbl" data-id="edge_user_parser_b_lbl" data-class="text_node" data-parent="root" x="600" y="196" font-size="9" text-anchor="start" fill="#000000">Query</text>
+
+    <!-- User -> Retriever -->
+    <path id="edge_user_retriever_b" data-id="edge_user_retriever_b" data-class="edge" data-source="user_b" data-target="retriever_b" d="M 602 235 L 670 235" fill="none" stroke="#ffff00" stroke-width="6" marker-end="url(#arrow-yellow)"/>
+    <text id="edge_user_retriever_b_lbl" data-id="edge_user_retriever_b_lbl" data-class="text_node" data-parent="root" x="635" y="253" font-size="9" text-anchor="middle" fill="#000000">Query</text>
+
+    <!-- Retriever -> Vector DB (Query) -->
+    <path id="edge_query_up_b" data-id="edge_query_up_b" data-class="edge" data-source="retriever_b" data-target="vector_db_b" d="M 725 183 L 725 125" fill="none" stroke="#ffff00" stroke-width="6" marker-end="url(#arrow-yellow)"/>
+    <text id="edge_query_up_b_lbl" data-id="edge_query_up_b_lbl" data-class="text_node" data-parent="root" x="705" y="147" font-size="9" text-anchor="middle" fill="#000000">Query</text>
+
+    <!-- Vector DB -> Retriever (Return docs) -->
+    <path id="edge_return_down_b" data-id="edge_return_down_b" data-class="edge" data-source="vector_db_b" data-target="retriever_b" d="M 765 125 L 765 178" fill="none" stroke="#ffff00" stroke-width="6" marker-end="url(#arrow-yellow)"/>
+    <text id="edge_return_down_b_lbl1" data-id="edge_return_down_b_lbl1" data-class="text_node" data-parent="root" x="795" y="140" font-size="9" text-anchor="start" fill="#000000">Return</text>
+    <text id="edge_return_down_b_lbl2" data-id="edge_return_down_b_lbl2" data-class="text_node" data-parent="root" x="795" y="151" font-size="9" text-anchor="start" fill="#000000">top-k</text>
+    <text id="edge_return_down_b_lbl3" data-id="edge_return_down_b_lbl3" data-class="text_node" data-parent="root" x="795" y="162" font-size="9" text-anchor="start" fill="#000000">documents</text>
+
+    <!-- Retriever -> LLM Agent -->
+    <path id="edge_retriever_llm_b" data-id="edge_retriever_llm_b" data-class="edge" data-source="retriever_b" data-target="llm_agent_b" d="M 808 235 L 860 235 L 860 178" fill="none" stroke="#145b77" stroke-width="4.5" marker-end="url(#arrow-teal)"/>
+    <text id="edge_retriever_llm_b_lbl1" data-id="edge_retriever_llm_b_lbl1" data-class="text_node" data-parent="root" x="830" y="262" font-size="9" text-anchor="start" fill="#000000">Query with</text>
+    <text id="edge_retriever_llm_b_lbl2" data-id="edge_retriever_llm_b_lbl2" data-class="text_node" data-parent="root" x="830" y="274" font-size="9" text-anchor="start" fill="#000000">additional</text>
+    <text id="edge_retriever_llm_b_lbl3" data-id="edge_retriever_llm_b_lbl3" data-class="text_node" data-parent="root" x="830" y="286" font-size="9" text-anchor="start" fill="#000000">context</text>
+  </g>
+
+  <!-- ==================== CAPTIONS ==================== -->
+  <text id="caption_a" data-id="caption_a" data-class="text_node" data-parent="root" x="200" y="328" class="caption-text" text-anchor="middle" fill="#000000">(a) Ordinary LLM-based RAG</text>
+  <text id="caption_b" data-id="caption_b" data-class="text_node" data-parent="root" x="655" y="328" class="caption-text" text-anchor="middle" fill="#000000">(b) SPAR</text>
+
+  <!-- ==================== DYNAMIC NARRATION BANNER ==================== -->
+  <g id="narration_banner">
+    <rect x="50" y="352" width="800" height="46" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+    <text id="narr_t1" class="narrative-text" x="50%" y="380" text-anchor="middle">
+      <tspan>In ordinary LLM-based RAG, data originates from Legacy File Systems.</tspan>
+    </text>
+    <text id="narr_t2" class="narrative-text" x="50%" y="380" text-anchor="middle">
+      <tspan>These files are directly used to construct and update the Vector Database.</tspan>
+    </text>
+    <text id="narr_t3" class="narrative-text" x="50%" y="380" text-anchor="middle">
+      <tspan>The user interacts with the system.</tspan>
+    </text>
+    <text id="narr_t4" class="narrative-text" x="50%" y="380" text-anchor="middle">
+      <tspan>A Query Command is issued by the user.</tspan>
+    </text>
+    <text id="narr_t5" class="narrative-text" x="50%" y="373" text-anchor="middle">
+      <tspan x="50%" dy="0">The Retriever performs a similarity search query against the Vector Database,</tspan>
+      <tspan x="50%" dy="1.25em">which returns top-k documents.</tspan>
+    </text>
+    <text id="narr_t6" class="narrative-text" x="50%" y="380" text-anchor="middle">
+      <tspan>The Retriever then queries the LLM Agent with the additional retrieved context.</tspan>
+    </text>
+    <text id="narr_t7" class="narrative-text" x="50%" y="380" text-anchor="middle">
+      <tspan>In SPAR, data also originates from Legacy File Systems.</tspan>
+    </text>
+    <text id="narr_t8" class="narrative-text" x="50%" y="380" text-anchor="middle">
+      <tspan>The files are used to construct and update Metadata Indices.</tspan>
+    </text>
+    <text id="narr_t9" class="narrative-text" x="50%" y="373" text-anchor="middle">
+      <tspan x="50%" dy="0">Relevant documents from the Metadata Indices are returned to populate</tspan>
+      <tspan x="50%" dy="1.25em">the Vector Database.</tspan>
+    </text>
+    <text id="narr_t10" class="narrative-text" x="50%" y="380" text-anchor="middle">
+      <tspan>The user interacts with the SPAR system.</tspan>
+    </text>
+    <text id="narr_t11" class="narrative-text" x="50%" y="380" text-anchor="middle">
+      <tspan>The user issues a File Retrieval Command.</tspan>
+    </text>
+    <text id="narr_t12" class="narrative-text" x="50%" y="380" text-anchor="middle">
+      <tspan>A Parser queries the Metadata Indices, returning keywords and metadata.</tspan>
+    </text>
+    <text id="narr_t13" class="narrative-text" x="50%" y="380" text-anchor="middle">
+      <tspan>The user simultaneously submits a Query Command.</tspan>
+    </text>
+    <text id="narr_t14" class="narrative-text" x="50%" y="380" text-anchor="middle">
+      <tspan>The Retriever queries the Vector Database and retrieves top-k documents.</tspan>
+    </text>
+    <text id="narr_t15" class="narrative-text" x="50%" y="380" text-anchor="middle">
+      <tspan>Finally, the LLM Agent is queried with the additional context.</tspan>
+    </text>
+  </g>
+
+  <!-- ==================== HOPPING FOCUS BOX ==================== -->
+  <rect id="focus_box" fill="none" stroke="#FF0000" stroke-width="4" stroke-dasharray="8,4" rx="6" />
+</svg>

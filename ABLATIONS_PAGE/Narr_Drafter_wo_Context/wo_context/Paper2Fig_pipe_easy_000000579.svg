@@ -1,0 +1,315 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 480" width="980" height="480">
+  <defs>
+    <!-- Arrowheads -->
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#000000"/>
+    </marker>
+    <style>
+      /* Global Dormant Grayscale State & Animation Base */
+      #node_nl_input, #lbl_nl_1, #lbl_nl_2, #edge_nl_to_tok,
+      #node_tokenized, #node_tag_top, #lbl_tok_1, #lbl_tok_2, #edge_tok_to_enc,
+      #block_seq2seq, #node_encoder, #lbl_seq2seq, #edge_enc_to_dec,
+      #node_decoder, #edge_dec_to_sar,
+      #node_sar, #lbl_sar_1, #lbl_sar_2, #edge_sar_to_compiler,
+      #node_gears, #lbl_compiler, #edge_compiler_to_docs,
+      #node_docs, #node_tag_bot, #lbl_docs_1, #lbl_docs_2, #edge_docs_to_mit,
+      #block_mit_compiler, #node_mit_logo, #lbl_mit_1, #lbl_mit_2, #edge_mit_to_phone,
+      #node_phone, #lbl_phone_apk, #lbl_phone_ready {
+        filter: grayscale(100%) opacity(0.4);
+        animation-name: colorPop;
+        animation-duration: 0.5s;
+        animation-fill-mode: forwards;
+      }
+
+      @keyframes colorPop {
+        to {
+          filter: grayscale(0%) opacity(1);
+        }
+      }
+
+      /* Staggered Timing per Timestamp (Timestamp * 0.5s) */
+      #node_nl_input, #lbl_nl_1, #lbl_nl_2, #edge_nl_to_tok {
+        animation-delay: 0.5s;
+      }
+      #node_tokenized, #node_tag_top, #lbl_tok_1, #lbl_tok_2, #edge_tok_to_enc {
+        animation-delay: 1.0s;
+      }
+      #block_seq2seq, #node_encoder, #lbl_seq2seq, #edge_enc_to_dec {
+        animation-delay: 1.5s;
+      }
+      #node_decoder, #edge_dec_to_sar {
+        animation-delay: 2.0s;
+      }
+      #node_sar, #lbl_sar_1, #lbl_sar_2, #edge_sar_to_compiler {
+        animation-delay: 2.5s;
+      }
+      #node_gears, #lbl_compiler, #edge_compiler_to_docs {
+        animation-delay: 3.0s;
+      }
+      #node_docs, #node_tag_bot, #lbl_docs_1, #lbl_docs_2, #edge_docs_to_mit {
+        animation-delay: 3.5s;
+      }
+      #block_mit_compiler, #node_mit_logo, #lbl_mit_1, #lbl_mit_2, #edge_mit_to_phone {
+        animation-delay: 4.0s;
+      }
+      #node_phone, #lbl_phone_apk, #lbl_phone_ready {
+        animation-delay: 4.5s;
+      }
+
+      /* Narration Subtitle Styles and Animations */
+      #narration_banner text {
+        opacity: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        font-size: 15px;
+        font-weight: 500;
+        fill: #1a1a1a;
+      }
+
+      @keyframes bannerTransient {
+        0% { opacity: 0; }
+        10% { opacity: 1; }
+        99% { opacity: 1; }
+        100% { opacity: 0; }
+      }
+
+      @keyframes bannerFinal {
+        0% { opacity: 0; }
+        10% { opacity: 1; }
+        100% { opacity: 1; }
+      }
+
+      #narr_ts1 { animation: bannerTransient 0.5s 0.5s forwards; }
+      #narr_ts2 { animation: bannerTransient 0.5s 1.0s forwards; }
+      #narr_ts3 { animation: bannerTransient 0.5s 1.5s forwards; }
+      #narr_ts4 { animation: bannerTransient 0.5s 2.0s forwards; }
+      #narr_ts5 { animation: bannerTransient 0.5s 2.5s forwards; }
+      #narr_ts6 { animation: bannerTransient 0.5s 3.0s forwards; }
+      #narr_ts7 { animation: bannerTransient 0.5s 3.5s forwards; }
+      #narr_ts8 { animation: bannerTransient 0.5s 4.0s forwards; }
+      #narr_ts9 { animation: bannerFinal 0.5s 4.5s forwards; }
+    </style>
+  </defs>
+
+  <!-- Full-size White Background -->
+  <rect width="100%" height="100%" fill="#ffffff"/>
+
+  <!-- ==================== BACKGROUND CONTAINERS & BLOCKS ==================== -->
+
+  <!-- Top-Level Block: Seq2seq Container -->
+  <g id="block_seq2seq" data-id="block_seq2seq" data-class="block" data-parent="root">
+    <rect id="rect_seq2seq" data-id="rect_seq2seq" data-class="composite_part" data-parent="block_seq2seq" x="425" y="16" width="320" height="145" rx="16" fill="none" stroke="#000000" stroke-width="1.5" stroke-dasharray="6,4"/>
+  </g>
+
+  <!-- Block: MIT App Inventor Backend Compiler Container -->
+  <g id="block_mit_compiler" data-id="block_mit_compiler" data-class="block" data-parent="root">
+    <rect id="rect_mit_compiler" data-id="rect_mit_compiler" data-class="composite_part" data-parent="block_mit_compiler" x="225" y="230" width="225" height="102" rx="12" fill="#ffffff" stroke="#d96b00" stroke-width="3.5"/>
+  </g>
+
+  <!-- ==================== STANDALONE NODES & TOP-ROW NODES ==================== -->
+
+  <!-- Natural Language Description Box -->
+  <g id="node_nl_input" data-id="node_nl_input" data-class="standalone_node" data-parent="root">
+    <rect id="rect_nl_input" data-id="rect_nl_input" data-class="composite_part" data-parent="node_nl_input" x="8" y="44" width="156" height="84" rx="10" fill="#b9cde5" stroke="#4f81bd" stroke-width="2.5"/>
+    <text id="text_nl_1" data-id="text_nl_1" data-class="composite_part" data-parent="node_nl_input" x="86" y="66" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#000000">Create an app with a</text>
+    <text id="text_nl_2" data-id="text_nl_2" data-class="composite_part" data-parent="node_nl_input" x="86" y="83" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#000000">textbox and a button</text>
+    <text id="text_nl_3" data-id="text_nl_3" data-class="composite_part" data-parent="node_nl_input" x="86" y="100" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#000000">named "Speak". When</text>
+    <text id="text_nl_4" data-id="text_nl_4" data-class="composite_part" data-parent="node_nl_input" x="86" y="117" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#000000">...</text>
+  </g>
+
+  <!-- Upper Dashed STRING0 Tag -->
+  <g id="node_tag_top" data-id="node_tag_top" data-class="standalone_node" data-parent="root">
+    <rect id="rect_tag_top" data-id="rect_tag_top" data-class="composite_part" data-parent="node_tag_top" x="212" y="10" width="176" height="28" rx="5" fill="#ffffff" stroke="#000000" stroke-width="1.2" stroke-dasharray="4,3"/>
+    <text id="text_tag_top" data-id="text_tag_top" data-class="composite_part" data-parent="node_tag_top" x="300" y="29" font-family="Times New Roman, serif" font-size="15" text-anchor="middle" fill="#000000">{ "STRING0": "Speak" }</text>
+  </g>
+
+  <!-- Tokenized and Pre-processed Box -->
+  <g id="node_tokenized" data-id="node_tokenized" data-class="standalone_node" data-parent="root">
+    <rect id="rect_tokenized" data-id="rect_tokenized" data-class="composite_part" data-parent="node_tokenized" x="222" y="44" width="156" height="84" rx="10" fill="#c4d79b" stroke="#76923c" stroke-width="2.5"/>
+    <text id="text_tok_1" data-id="text_tok_1" data-class="composite_part" data-parent="node_tokenized" x="300" y="65" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#000000">create an app with a</text>
+    <text id="text_tok_2" data-id="text_tok_2" data-class="composite_part" data-parent="node_tokenized" x="300" y="82" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#000000">text box and a button</text>
+    <text id="text_tok_3" data-id="text_tok_3" data-class="composite_part" data-parent="node_tokenized" x="300" y="99" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#000000">named STRING0 .</text>
+    <text id="text_tok_4" data-id="text_tok_4" data-class="composite_part" data-parent="node_tokenized" x="300" y="116" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#000000">when ...</text>
+  </g>
+
+  <!-- Encoder Node (inside Seq2seq) -->
+  <g id="node_encoder" data-id="node_encoder" data-class="child_node" data-parent="block_seq2seq">
+    <rect id="rect_encoder" data-id="rect_encoder" data-class="composite_part" data-parent="node_encoder" x="438" y="48" width="130" height="68" rx="8" fill="#ffffff" stroke="#5b9bd5" stroke-width="3"/>
+    <text id="text_encoder" data-id="text_encoder" data-class="composite_part" data-parent="node_encoder" x="503" y="88" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#000000">Encoder</text>
+  </g>
+
+  <!-- Decoder Node (inside Seq2seq) -->
+  <g id="node_decoder" data-id="node_decoder" data-class="child_node" data-parent="block_seq2seq">
+    <rect id="rect_decoder" data-id="rect_decoder" data-class="composite_part" data-parent="node_decoder" x="608" y="48" width="128" height="68" rx="8" fill="#ffffff" stroke="#c55a11" stroke-width="3"/>
+    <text id="text_decoder" data-id="text_decoder" data-class="composite_part" data-parent="node_decoder" x="672" y="88" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#000000">Decoder</text>
+  </g>
+
+  <!-- Simplified App Representation (SAR) Box -->
+  <g id="node_sar" data-id="node_sar" data-class="standalone_node" data-parent="root">
+    <rect id="rect_sar" data-id="rect_sar" data-class="composite_part" data-parent="node_sar" x="815" y="48" width="140" height="86" rx="8" fill="#f2f2f2" stroke="#7f7f7f" stroke-width="3"/>
+    <text id="text_sar_1" data-id="text_sar_1" data-class="composite_part" data-parent="node_sar" x="885" y="69" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#000000">&lt;complist&gt; &lt;textbox&gt;</text>
+    <text id="text_sar_2" data-id="text_sar_2" data-class="composite_part" data-parent="node_sar" x="885" y="85" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#000000">&lt;button&gt; STRING0</text>
+    <text id="text_sar_3" data-id="text_sar_3" data-class="composite_part" data-parent="node_sar" x="885" y="101" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#000000">&lt;/button&gt; &lt;/complist&gt;</text>
+    <text id="text_sar_4" data-id="text_sar_4" data-class="composite_part" data-parent="node_sar" x="885" y="117" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#000000">&lt;code&gt; ...</text>
+  </g>
+
+  <!-- ==================== BOTTOM-ROW NODES & ICONS ==================== -->
+
+  <!-- Smartphone / APK Node -->
+  <g id="node_phone" data-id="node_phone" data-class="standalone_node" data-parent="root">
+    <!-- Phone Body -->
+    <rect id="phone_outer" data-id="phone_outer" data-class="composite_part" data-parent="node_phone" x="82" y="222" width="60" height="116" rx="8" fill="#ffffff" stroke="#000000" stroke-width="3"/>
+    <!-- Speaker & Camera -->
+    <circle id="phone_camera" data-id="phone_camera" data-class="composite_part" data-parent="node_phone" cx="100" cy="232" r="2" fill="#000000"/>
+    <rect id="phone_speaker" data-id="phone_speaker" data-class="composite_part" data-parent="node_phone" x="108" y="230.5" width="18" height="3" rx="1" fill="#000000"/>
+    <!-- Screen Elements -->
+    <line id="phone_screen_top" data-id="phone_screen_top" data-class="composite_part" data-parent="node_phone" x1="84" y1="243" x2="140" y2="243" stroke="#000000" stroke-width="1.5"/>
+    <rect id="phone_textbox" data-id="phone_textbox" data-class="composite_part" data-parent="node_phone" x="93" y="252" width="38" height="18" fill="none" stroke="#000000" stroke-width="1.5"/>
+    <rect id="phone_btn1" data-id="phone_btn1" data-class="composite_part" data-parent="node_phone" x="93" y="277" width="9" height="7" fill="none" stroke="#000000" stroke-width="1.5"/>
+    <rect id="phone_btn2" data-id="phone_btn2" data-class="composite_part" data-parent="node_phone" x="93" y="290" width="14" height="11" fill="none" stroke="#000000" stroke-width="1.5"/>
+    <line id="phone_screen_bot" data-id="phone_screen_bot" data-class="composite_part" data-parent="node_phone" x1="84" y1="322" x2="140" y2="322" stroke="#000000" stroke-width="1.5"/>
+  </g>
+
+  <!-- MIT App Inventor Logo (child of MIT Compiler Block) -->
+  <g id="node_mit_logo" data-id="node_mit_logo" data-class="composite_whole" data-parent="block_mit_compiler">
+    <!-- Hexagons -->
+    <polygon id="hex_magenta" data-id="hex_magenta" data-class="composite_part" data-parent="node_mit_logo" points="266,244 278,251 278,265 266,272 254,265 254,251" fill="#9b268e"/>
+    <polygon id="hex_green" data-id="hex_green" data-class="composite_part" data-parent="node_mit_logo" points="296,244 308,251 308,265 296,272 284,265 284,251" fill="#a4c639"/>
+    <!-- Bee Head / Body -->
+    <path id="bee_antennae_left" data-id="bee_antennae_left" data-class="composite_part" data-parent="node_mit_logo" d="M 276 273 L 270 266" stroke="#f7931e" stroke-width="2" stroke-linecap="round"/>
+    <path id="bee_antennae_right" data-id="bee_antennae_right" data-class="composite_part" data-parent="node_mit_logo" d="M 286 273 L 292 266" stroke="#f7931e" stroke-width="2" stroke-linecap="round"/>
+    <path id="bee_head" data-id="bee_head" data-class="composite_part" data-parent="node_mit_logo" d="M 268 285 A 13 13 0 0 1 294 285 Z" fill="#f7931e"/>
+    <circle id="bee_eye_left" data-id="bee_eye_left" data-class="composite_part" data-parent="node_mit_logo" cx="274" cy="281" r="1.5" fill="#ffffff"/>
+    <circle id="bee_eye_right" data-id="bee_eye_right" data-class="composite_part" data-parent="node_mit_logo" cx="288" cy="281" r="1.5" fill="#ffffff"/>
+    <!-- Bee Stripes -->
+    <rect id="bee_stripe_1" data-id="bee_stripe_1" data-class="composite_part" data-parent="node_mit_logo" x="264" y="288" width="34" height="4" fill="#4d4d4d"/>
+    <rect id="bee_stripe_2" data-id="bee_stripe_2" data-class="composite_part" data-parent="node_mit_logo" x="266" y="294" width="30" height="4" fill="#f7931e"/>
+    <rect id="bee_stripe_3" data-id="bee_stripe_3" data-class="composite_part" data-parent="node_mit_logo" x="268" y="300" width="26" height="4" fill="#4d4d4d"/>
+    <!-- Bee Wings/Legs -->
+    <path id="bee_legs" data-id="bee_legs" data-class="composite_part" data-parent="node_mit_logo" d="M 256 295 L 246 298 L 260 306 M 306 295 L 316 298 L 302 306" stroke="#f7931e" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <polygon id="bee_tail" data-id="bee_tail" data-class="composite_part" data-parent="node_mit_logo" points="274,306 288,306 281,316" fill="#f7931e"/>
+    <!-- Logo Text -->
+    <text id="text_mit_logo_mit" data-id="text_mit_logo_mit" data-class="composite_part" data-parent="node_mit_logo" x="335" y="284" font-family="Arial, sans-serif" font-size="25" font-weight="900" fill="#f7931e">MIT</text>
+    <text id="text_mit_logo_app" data-id="text_mit_logo_app" data-class="composite_part" data-parent="node_mit_logo" x="335" y="302" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#595959">APP INVENTOR</text>
+  </g>
+
+  <!-- Document Stack Node (Source Files) -->
+  <g id="node_docs" data-id="node_docs" data-class="standalone_node" data-parent="root">
+    <!-- Back Page -->
+    <path id="doc_page_1" data-id="doc_page_1" data-class="composite_part" data-parent="node_docs" d="M 545 230 L 585 230 L 595 240 L 595 305 L 545 305 Z" fill="#ffffff" stroke="#000000" stroke-width="2"/>
+    <!-- Middle Page -->
+    <path id="doc_page_2" data-id="doc_page_2" data-class="composite_part" data-parent="node_docs" d="M 556 238 L 596 238 L 606 248 L 606 313 L 556 313 Z" fill="#ffffff" stroke="#000000" stroke-width="2"/>
+    <!-- Front Page -->
+    <path id="doc_page_3" data-id="doc_page_3" data-class="composite_part" data-parent="node_docs" d="M 567 246 L 610 246 L 624 260 L 624 326 L 567 326 Z" fill="#ffffff" stroke="#000000" stroke-width="2.5"/>
+    <!-- Fold Corner -->
+    <path id="doc_fold" data-id="doc_fold" data-class="composite_part" data-parent="node_docs" d="M 610 246 L 610 260 L 624 260" fill="none" stroke="#000000" stroke-width="2.5"/>
+    <!-- Text Lines on Front Page -->
+    <line id="doc_line_1" data-id="doc_line_1" data-class="composite_part" data-parent="node_docs" x1="577" y1="262" x2="598" y2="262" stroke="#000000" stroke-width="2.5" stroke-linecap="round"/>
+    <line id="doc_line_2" data-id="doc_line_2" data-class="composite_part" data-parent="node_docs" x1="577" y1="272" x2="614" y2="272" stroke="#000000" stroke-width="2.5" stroke-linecap="round"/>
+    <line id="doc_line_3" data-id="doc_line_3" data-class="composite_part" data-parent="node_docs" x1="577" y1="282" x2="605" y2="282" stroke="#000000" stroke-width="2.5" stroke-linecap="round"/>
+  </g>
+
+  <!-- Lower Dashed STRING0 Tag -->
+  <g id="node_tag_bot" data-id="node_tag_bot" data-class="standalone_node" data-parent="root">
+    <rect id="rect_tag_bot" data-id="rect_tag_bot" data-class="composite_part" data-parent="node_tag_bot" x="640" y="242" width="176" height="28" rx="5" fill="#ffffff" stroke="#000000" stroke-width="1.2" stroke-dasharray="4,3"/>
+    <text id="text_tag_bot" data-id="text_tag_bot" data-class="composite_part" data-parent="node_tag_bot" x="728" y="261" font-family="Times New Roman, serif" font-size="15" text-anchor="middle" fill="#000000">{ "STRING0": "Speak" }</text>
+  </g>
+
+  <!-- SAR Compiler (Gears Icon) Node -->
+  <g id="node_gears" data-id="node_gears" data-class="standalone_node" data-parent="root">
+    <!-- Circular Arrows around gears -->
+    <path id="gear_arrow_arc1" data-id="gear_arrow_arc1" data-class="composite_part" data-parent="node_gears" d="M 878 262 A 38 38 0 0 1 930 238" fill="none" stroke="#000000" stroke-width="2.5"/>
+    <polygon id="gear_arrow_head1" data-id="gear_arrow_head1" data-class="composite_part" data-parent="node_gears" points="878,266 872,254 883,256" fill="#000000"/>
+    <path id="gear_arrow_arc2" data-id="gear_arrow_arc2" data-class="composite_part" data-parent="node_gears" d="M 945 285 A 38 38 0 0 1 890 317" fill="none" stroke="#000000" stroke-width="2.5"/>
+    <polygon id="gear_arrow_head2" data-id="gear_arrow_head2" data-class="composite_part" data-parent="node_gears" points="945,280 952,291 941,290" fill="#000000"/>
+    <!-- Big Gear -->
+    <path id="gear_big" data-id="gear_big" data-class="composite_part" data-parent="node_gears" d="M 910 250 L 913 253 L 918 251 L 920 255 L 925 256 L 925 261 L 930 264 L 928 269 L 931 273 L 928 277 L 930 282 L 925 285 L 925 290 L 920 291 L 918 295 L 913 293 L 910 296 L 906 293 L 903 295 L 899 291 L 897 292 L 894 287 L 890 286 L 891 281 L 888 277 L 891 273 L 889 269 L 893 266 L 893 261 L 898 259 L 899 255 L 904 256 L 906 252 Z" fill="none" stroke="#000000" stroke-width="2.5"/>
+    <circle id="gear_big_hole" data-id="gear_big_hole" data-class="composite_part" data-parent="node_gears" cx="910" cy="274" r="8" fill="none" stroke="#000000" stroke-width="2.5"/>
+    <!-- Small Gear -->
+    <path id="gear_small" data-id="gear_small" data-class="composite_part" data-parent="node_gears" d="M 942 291 L 945 293 L 948 291 L 951 294 L 954 294 L 955 298 L 958 300 L 957 304 L 959 307 L 956 310 L 957 314 L 953 315 L 952 319 L 948 318 L 946 321 L 943 319 L 940 321 L 938 318 L 935 318 L 934 314 L 931 313 L 932 309 L 930 306 L 933 303 L 932 299 L 936 298 L 937 294 L 941 294 Z" fill="none" stroke="#000000" stroke-width="2"/>
+    <circle id="gear_small_hole" data-id="gear_small_hole" data-class="composite_part" data-parent="node_gears" cx="945" cy="306" r="4" fill="none" stroke="#000000" stroke-width="2"/>
+  </g>
+
+  <!-- ==================== EDGES & ARROWS ==================== -->
+
+  <!-- Edge 1: Natural Language Box -> Tokenized Box -->
+  <line id="edge_nl_to_tok" data-id="edge_nl_to_tok" data-class="edge" data-source="node_nl_input" data-target="node_tokenized" x1="164" y1="86" x2="218" y2="86" stroke="#000000" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <!-- Edge 2: Tokenized Box -> Encoder (orthogonal routing) -->
+  <path id="edge_tok_to_enc" data-id="edge_tok_to_enc" data-class="edge" data-source="node_tokenized" data-target="node_encoder" d="M 378 84 L 402 84 L 402 150 L 503 150 L 503 120" fill="none" stroke="#000000" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <!-- Edge 3: Encoder -> Decoder -->
+  <line id="edge_enc_to_dec" data-id="edge_enc_to_dec" data-class="edge" data-source="node_encoder" data-target="node_decoder" x1="568" y1="82" x2="604" y2="82" stroke="#000000" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <!-- Edge 4: Decoder -> SAR Box (orthogonal routing) -->
+  <path id="edge_dec_to_sar" data-id="edge_dec_to_sar" data-class="edge" data-source="node_decoder" data-target="node_sar" d="M 672 48 L 672 32 L 778 32 L 778 91 L 811 91" fill="none" stroke="#000000" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <!-- Edge 5: SAR Box -> SAR Compiler -->
+  <line id="edge_sar_to_compiler" data-id="edge_sar_to_compiler" data-class="edge" data-source="node_sar" data-target="node_gears" x1="885" y1="134" x2="885" y2="218" stroke="#000000" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <!-- Edge 6: SAR Compiler -> Source Documents -->
+  <line id="edge_compiler_to_docs" data-id="edge_compiler_to_docs" data-class="edge" data-source="node_gears" data-target="node_docs" x1="820" y1="280" x2="628" y2="280" stroke="#000000" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <!-- Edge 7: Source Documents -> MIT Backend Compiler -->
+  <line id="edge_docs_to_mit" data-id="edge_docs_to_mit" data-class="edge" data-source="node_docs" data-target="block_mit_compiler" x1="540" y1="280" x2="454" y2="280" stroke="#000000" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <!-- Edge 8: MIT Backend Compiler -> Phone -->
+  <line id="edge_mit_to_phone" data-id="edge_mit_to_phone" data-class="edge" data-source="block_mit_compiler" data-target="node_phone" x1="225" y1="280" x2="146" y2="280" stroke="#000000" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <!-- ==================== DESCRIPTIVE TEXT LABELS ==================== -->
+
+  <!-- Top-Row Labels -->
+  <text id="lbl_nl_1" data-id="lbl_nl_1" data-class="text_node" data-parent="root" x="86" y="152" font-family="Times New Roman, serif" font-size="16" text-anchor="middle" fill="#000000">Natural Language</text>
+  <text id="lbl_nl_2" data-id="lbl_nl_2" data-class="text_node" data-parent="root" x="86" y="172" font-family="Times New Roman, serif" font-size="16" text-anchor="middle" fill="#000000">Description of App</text>
+
+  <text id="lbl_tok_1" data-id="lbl_tok_1" data-class="text_node" data-parent="root" x="300" y="152" font-family="Times New Roman, serif" font-size="16" text-anchor="middle" fill="#000000">Tokenized and</text>
+  <text id="lbl_tok_2" data-id="lbl_tok_2" data-class="text_node" data-parent="root" x="300" y="172" font-family="Times New Roman, serif" font-size="16" text-anchor="middle" fill="#000000">Pre-processed</text>
+
+  <text id="lbl_seq2seq" data-id="lbl_seq2seq" data-class="text_node" data-parent="root" x="585" y="184" font-family="Times New Roman, serif" font-size="16" text-anchor="middle" fill="#000000">Seq2seq Neural Network</text>
+
+  <text id="lbl_sar_1" data-id="lbl_sar_1" data-class="text_node" data-parent="root" x="885" y="17" font-family="Times New Roman, serif" font-size="16" text-anchor="middle" fill="#000000">Simplified App</text>
+  <text id="lbl_sar_2" data-id="lbl_sar_2" data-class="text_node" data-parent="root" x="885" y="37" font-family="Times New Roman, serif" font-size="16" text-anchor="middle" fill="#000000">Representation (SAR)</text>
+
+  <!-- Bottom-Row Labels -->
+  <text id="lbl_phone_apk" data-id="lbl_phone_apk" data-class="text_node" data-parent="root" x="112" y="358" font-family="Times New Roman, serif" font-size="16" font-style="italic" text-anchor="middle" fill="#000000">.apk</text>
+  <text id="lbl_phone_ready" data-id="lbl_phone_ready" data-class="text_node" data-parent="root" x="112" y="380" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#000000">Ready to Use!</text>
+
+  <text id="lbl_mit_1" data-id="lbl_mit_1" data-class="text_node" data-parent="root" x="337" y="364" font-family="Times New Roman, serif" font-size="16" text-anchor="middle" fill="#000000">MIT App Inventor</text>
+  <text id="lbl_mit_2" data-id="lbl_mit_2" data-class="text_node" data-parent="root" x="337" y="384" font-family="Times New Roman, serif" font-size="16" text-anchor="middle" fill="#000000">backend Compiler</text>
+
+  <text id="lbl_docs_1" data-id="lbl_docs_1" data-class="text_node" data-parent="root" x="585" y="364" font-family="Times New Roman, serif" font-size="16" text-anchor="middle" fill="#000000">MIT App Inventor</text>
+  <text id="lbl_docs_2" data-id="lbl_docs_2" data-class="text_node" data-parent="root" x="585" y="384" font-family="Times New Roman, serif" font-size="16" text-anchor="middle" fill="#000000">Source (<tspan font-style="italic">.scm</tspan>, <tspan font-style="italic">.bky</tspan>)</text>
+
+  <text id="lbl_compiler" data-id="lbl_compiler" data-class="text_node" data-parent="root" x="890" y="364" font-family="Times New Roman, serif" font-size="16" text-anchor="middle" fill="#000000">SAR Compiler</text>
+
+  <!-- ==================== DYNAMIC NARRATION BANNER ==================== -->
+  <g id="narration_banner">
+    <text id="narr_ts1" x="50%" y="438" text-anchor="middle">
+      <tspan x="50%">The pipeline begins with the natural language description of the application.</tspan>
+    </text>
+    <text id="narr_ts2" x="50%" y="438" text-anchor="middle">
+      <tspan x="50%">The text is tokenized and pre-processed, extracting literal strings into token mappings.</tspan>
+    </text>
+    <text id="narr_ts3" x="50%" y="438" text-anchor="middle">
+      <tspan x="50%">The pre-processed tokens are fed into the Encoder of the Seq2seq Neural Network.</tspan>
+    </text>
+    <text id="narr_ts4" x="50%" y="438" text-anchor="middle">
+      <tspan x="50%">The representations then flow into the Decoder.</tspan>
+    </text>
+    <text id="narr_ts5" x="50%" y="438" text-anchor="middle">
+      <tspan x="50%">The Decoder outputs a Simplified App Representation, or SAR, containing structural component tags.</tspan>
+    </text>
+    <text id="narr_ts6" x="50%" y="438" text-anchor="middle">
+      <tspan x="50%">The SAR specification is then processed by the SAR Compiler.</tspan>
+    </text>
+    <text id="narr_ts7" x="50%" y="430" text-anchor="middle">
+      <tspan x="50%">This generates MIT App Inventor Source files, including dot SCM and dot BKY files,</tspan>
+      <tspan x="50%" dy="1.25em">along with the extracted strings.</tspan>
+    </text>
+    <text id="narr_ts8" x="50%" y="438" text-anchor="middle">
+      <tspan x="50%">Next, the MIT App Inventor backend Compiler builds the source files.</tspan>
+    </text>
+    <text id="narr_ts9" x="50%" y="438" text-anchor="middle">
+      <tspan x="50%">The compiler outputs the final APK, ready to use on a mobile device.</tspan>
+    </text>
+  </g>
+</svg>

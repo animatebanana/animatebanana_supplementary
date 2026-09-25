@@ -1,0 +1,32 @@
+{
+ "_comment": "FIGURE SOURCES block, the figure at the top of animatebench.html (<bench-sources>). `image` is the full-resolution figure the viewer opens; `display` and `displaySmall` are the web-sized copies the page itself loads. To change the figure, drop a new PNG in assets/bench/ and rebuild the two copies beside it. The four `sources` entries are the figure's own quadrants, in reading order, each tinted like the quadrant it names.",
+ "kicker": "Figure sources",
+ "title": "Where the diagrams come from",
+ "lede": "AnimateBench draws its process diagrams from four bodies of published work, so the benchmark spans the drawing conventions of several fields rather than one venue's house style.",
+ "image": "assets/bench/bench_sources.png",
+ "display": "assets/bench/bench_sources-wide.webp",
+ "displaySmall": "assets/bench/bench_sources-small.webp",
+ "alt": "Four quadrants around a central Figure Sources hub: AI conference papers, biomedical and bioinformatics journals, arXiv papers, and publicly available datasets, each with its venues and sample diagrams.",
+ "sources": [
+  {
+   "label": "AI conference papers",
+   "note": "CVPR · ICCV · WACV · NeurIPS · ICLR",
+   "colour": "#2B62B5"
+  },
+  {
+   "label": "Biomedical and bioinformatics",
+   "note": "bioRxiv · Nature · PLOS ONE · PubMed · MDPI · BMC",
+   "colour": "#1E6B41"
+  },
+  {
+   "label": "arXiv papers",
+   "note": "AI · computer vision · databases and IR · networks",
+   "colour": "#C2650F"
+  },
+  {
+   "label": "Publicly available datasets",
+   "note": "Paper2Fig · FigureBench · SciMMIR · AutoFigure",
+   "colour": "#6B3FA0"
+  }
+ ]
+}

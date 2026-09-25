@@ -1,0 +1,143 @@
+{
+  "detected": 7,
+  "placeholders": 7,
+  "omitted": {},
+  "rejected": {},
+  "image_size": [
+    486,
+    665
+  ],
+  "regions": [
+    {
+      "xml_id": "output_img_a",
+      "box_2d": [
+        12,
+        123,
+        106,
+        360
+      ],
+      "bbox": [
+        59.778,
+        7.98,
+        174.95999999999998,
+        70.49
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "input_img_a",
+      "box_2d": [
+        368,
+        25,
+        461,
+        249
+      ],
+      "bbox": [
+        12.15,
+        244.72,
+        121.014,
+        306.565
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "output_img_b",
+      "box_2d": [
+        12,
+        656,
+        108,
+        887
+      ],
+      "bbox": [
+        318.81600000000003,
+        7.98,
+        431.082,
+        71.82
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "input_img_b",
+      "box_2d": [
+        368,
+        544,
+        462,
+        767
+      ],
+      "bbox": [
+        264.384,
+        244.72,
+        372.762,
+        307.23
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "waveform_b",
+      "box_2d": [
+        397,
+        802,
+        434,
+        978
+      ],
+      "bbox": [
+        389.77200000000005,
+        264.005,
+        475.308,
+        288.61
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "video_stack_c",
+      "box_2d": [
+        880,
+        31,
+        996,
+        283
+      ],
+      "bbox": [
+        15.066,
+        585.2,
+        137.53799999999998,
+        662.34
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "waveform_c",
+      "box_2d": [
+        939,
+        776,
+        977,
+        953
+      ],
+      "bbox": [
+        377.136,
+        624.435,
+        463.15799999999996,
+        649.705
+      ],
+      "label": ""
+    }
+  ],
+  "replaced": [
+    "output_img_a",
+    "input_img_a",
+    "output_img_b",
+    "input_img_b",
+    "waveform_b",
+    "video_stack_c",
+    "waveform_c"
+  ],
+  "provenance": {
+    "agent": "raster_integrator",
+    "backend": "openrouter_gemini37flash",
+    "model": "google-gemini-3.7-flash",
+    "prompt": null,
+    "style": "colour_pop",
+    "target": "svg",
+    "config_fingerprint": "54d653973aa2c411",
+    "timestamp": "2026-08-28T20:47:45"
+  }
+}

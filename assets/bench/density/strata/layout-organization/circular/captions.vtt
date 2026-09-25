@@ -1,0 +1,30 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.085
+The pipeline begins with the training dataset, containing samples with fully observed, non-missing attributes.
+
+2
+00:00:06.085 --> 00:00:12.541
+These samples are used to train the treatment effect estimation model, fitting the outcome predictors.
+
+3
+00:00:12.541 --> 00:00:18.256
+The performance of the estimator is periodically evaluated on a hold-out test set.
+
+4
+00:00:18.256 --> 00:00:24.341
+Meanwhile, unlabeled candidate samples with missing confounding attributes are maintained in the data pool.
+
+5
+00:00:24.341 --> 00:00:31.537
+A confounder acquisition strategy evaluates the pool, selecting instances based on covariate balancing or outcome estimation error.
+
+6
+00:00:31.537 --> 00:00:36.141
+The chosen batch forms the query set of prioritized samples.
+
+7
+00:00:36.141 --> 00:00:45.141
+The feature value collector retrieves the missing confounding values, adding the newly completed samples back into the training set for the next iteration.
+

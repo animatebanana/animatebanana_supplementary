@@ -1,0 +1,710 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AnimateBanana — Sliding Bbox — Paper2Fig_pipe_easy_000000521</title>
+<!--
+  AnimateBanana — Sliding Bbox — Paper2Fig_pipe_easy_000000521
+  An animated visual narrative produced by the AnimateBanana pipeline.
+
+  This file is self-contained: the animation, its images, its narration and its
+  controls are all inside it. Drop it on a server, open it from a disk, or put
+  it in an <iframe> - it needs nothing else and fetches nothing.
+
+  The animation is CSS. The controls drive it through the browser's animation
+  API - pause holds every keyframe at once, the bar scrubs them all to the same
+  moment, speed sets their rate together - and the caption is read from a clock
+  of the page's own that is driven alongside them. It has to be its own clock:
+  the drawing is made of hundreds of short animations that each stop when they
+  are done, so reading the time off any one of them gives a watch that stopped
+  half a second in.
+-->
+<style>
+  :root {
+    --ink: #1A1815;
+    --paper: #FFFEF9;
+    --banana: #FFD43B;
+    --banana-deep: #F2B200;
+    --banana-soft: #FFF2B8;
+    --mute: #6b6558;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--paper); color: var(--ink); }
+  body {
+    font-family: ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    padding: 16px;
+  }
+  .ab { margin: 0 auto; max-width: 1400px; }
+  .ab-stage {
+    background: #fff;
+    border: 2px solid var(--ink);
+    border-radius: 14px;
+    padding: 10px;
+    overflow: hidden;
+  }
+  .ab-stage svg { display: block; width: 100%; height: auto; }
+
+  /* ---- Transport ----
+     Every control is the same height and centred on the same line, so the bar
+     reads as one object rather than a row of parts that happen to be adjacent. */
+  .ab-bar {
+    --h: 40px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    border-radius: calc(var(--h) / 2 + 8px);
+  }
+  .ab-bar > * { flex: 0 0 auto; height: var(--h); }
+
+  .ab-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 16px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    line-height: 1;
+    color: var(--ink);
+    background: #fff;
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    cursor: pointer;
+  }
+  .ab-btn:hover { background: var(--banana-soft); }
+  .ab-btn:active { transform: translateY(1px); }
+
+  .ab-play { width: var(--h); padding: 0; border-radius: 50%; background: var(--ink); color: var(--paper); }
+  .ab-play:hover { background: var(--ink); }
+  .ab-play svg { width: 14px; height: 14px; fill: currentColor; display: block; }
+  .ab-play .ab-ic-play { display: none; margin-left: 2px; }
+  .ab.is-paused .ab-play .ab-ic-play { display: block; }
+  .ab.is-paused .ab-play .ab-ic-pause { display: none; }
+
+  /* the rail is drawn; the range input laid over it is what you actually grab */
+  .ab-scrub { position: relative; flex: 1 1 180px !important; min-width: 120px;
+              display: flex; align-items: center; }
+  .ab-rail {
+    position: absolute; inset-inline: 0; height: 9px;
+    background: #fff; border: 1.5px solid var(--ink); border-radius: 999px;
+    overflow: hidden; pointer-events: none;
+  }
+  .ab-rail i { display: block; width: 0; height: 100%; background: var(--banana); }
+  .ab-seek {
+    position: relative; width: 100%; height: var(--h); margin: 0;
+    background: none; -webkit-appearance: none; appearance: none; cursor: pointer;
+  }
+  .ab-seek::-webkit-slider-runnable-track { height: var(--h); background: transparent; }
+  .ab-seek::-moz-range-track { height: var(--h); background: transparent; }
+  .ab-seek::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none;
+    width: 18px; height: 18px; border-radius: 50%;
+    border: 2.5px solid var(--ink); background: var(--banana);
+  }
+  .ab-seek::-moz-range-thumb {
+    width: 16px; height: 16px; border-radius: 50%;
+    border: 2.5px solid var(--ink); background: var(--banana);
+  }
+  .ab-seek:focus-visible { outline: none; }
+  .ab-scrub:focus-within .ab-rail { box-shadow: 0 0 0 3px var(--banana); }
+
+  .ab-time {
+    display: inline-flex;
+    align-items: center;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.72rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--mute);
+    white-space: nowrap;
+  }
+  .ab-time b { color: var(--ink); }
+
+  .ab-speed {
+    display: inline-flex;
+    align-items: stretch;
+    background: #fff;
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .ab-speed button {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    padding: 0;
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--ink);
+    background: #fff;
+    border: 0;
+    cursor: pointer;
+  }
+  .ab-speed button:hover { background: var(--banana-soft); }
+  .ab-speed button[disabled] { opacity: 0.35; cursor: default; background: #fff; }
+  .ab-rate {
+    display: grid;
+    place-items: center;
+    min-width: 56px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.74rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    border-inline: 2px solid var(--ink);
+  }
+  .ab.is-fast .ab-rate { background: var(--banana); }
+
+  /* Captions on or off, said in words rather than left to be inferred */
+  .ab-toggle .ab-led {
+    width: 11px; height: 11px; border-radius: 50%;
+    border: 2px solid var(--ink); background: var(--banana);
+  }
+  .ab-toggle[aria-pressed="false"] { color: var(--mute); }
+  .ab-toggle[aria-pressed="false"] .ab-led { background: #fff; }
+
+  /* ---- The line being narrated ---- */
+  .ab-cap {
+    display: flex;
+    align-items: center;
+    min-height: 3.4em;
+    margin: 10px 0 0;
+    padding: 12px 16px;
+    font-size: clamp(0.95rem, 0.9rem + 0.3vw, 1.15rem);
+    font-weight: 600;
+    font-style: italic;
+    line-height: 1.5;
+    background: var(--banana-soft);
+    border: 1.5px solid var(--banana);
+    border-left: 5px solid var(--banana-deep);
+    border-radius: 10px;
+    transition: opacity .18s ease;
+  }
+  .ab-cap.is-swap { opacity: 0; }
+  .ab.is-off .ab-cap { display: none; }
+  @media (prefers-reduced-motion: reduce) { .ab-cap { transition: none; } }
+
+  /* Narrow: the bar wraps to two rows and squares off, rather than squeezing
+     the scrub bar down to nothing. */
+  @media (max-width: 720px) {
+    .ab-bar { flex-wrap: wrap; border-radius: 20px; }
+    .ab-scrub { order: 3; flex-basis: 100% !important; }
+    .ab-time { order: 2; margin-left: auto; }
+  }
+</style>
+</head>
+<body>
+<figure class="ab">
+  <div class="ab-stage">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 816 760">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#000000"/>
+    </marker>
+    <style>
+      #focus_box {
+        animation: slide 33s ease-in-out infinite;
+      }
+
+      @keyframes slide {
+        /* Timestamp 1: node_cdr_database */
+        0%, 6.15% { x: 84px; y: 94px; width: 82px; height: 80px; }
+        /* Timestamp 2: node_funnel_system */
+        7.69%, 13.85% { x: 299px; y: 97px; width: 78px; height: 81px; }
+        /* Timestamp 3: node_weak_labels */
+        15.38%, 21.54% { x: 499px; y: 94px; width: 82px; height: 80px; }
+        /* Timestamp 4: block_bert_classifiers */
+        23.08%, 29.23% { x: 268px; y: 271px; width: 526px; height: 196px; }
+        /* Timestamp 5: model_bio_clinical_bert */
+        30.77%, 36.92% { x: 300px; y: 290px; width: 56px; height: 108px; }
+        /* Timestamp 6: model_umls_bert */
+        38.46%, 44.62% { x: 386px; y: 290px; width: 56px; height: 102px; }
+        /* Timestamp 7: model_pubmed_bert_abstract */
+        46.15%, 52.31% { x: 468px; y: 290px; width: 56px; height: 108px; }
+        /* Timestamp 8: model_pubmed_bert_fulltext */
+        53.85%, 60.00% { x: 552px; y: 290px; width: 56px; height: 118px; }
+        /* Timestamp 9: model_bio_bert */
+        61.54%, 67.69% { x: 634px; y: 290px; width: 56px; height: 102px; }
+        /* Timestamp 10: model_bert_base */
+        69.23%, 75.38% { x: 710px; y: 290px; width: 56px; height: 108px; }
+        /* Timestamp 11: node_excessive_diet */
+        76.92%, 83.08% { x: 604px; y: 517px; width: 82px; height: 76px; }
+        /* Timestamp 12: node_physical_activity */
+        84.62%, 90.77% { x: 384px; y: 517px; width: 82px; height: 76px; }
+        /* Timestamp 13: node_gsc */
+        92.31%, 98.46% { x: 108px; y: 502px; width: 59px; height: 74px; }
+        /* Loop back */
+        100% { x: 84px; y: 94px; width: 82px; height: 80px; }
+      }
+    </style>
+  </defs>
+
+  <!-- ==================== BACKGROUND / CONTAINERS ==================== -->
+  <g id="block_bert_classifiers" data-id="block_bert_classifiers" data-class="block" data-parent="root">
+    <rect id="rect_bert_classifiers" data-id="rect_bert_classifiers" data-class="child_node" data-parent="block_bert_classifiers" x="272" y="275" width="518" height="188" rx="20" ry="20" fill="#ffffff" stroke="#000000" stroke-width="2.2"/>
+    <text id="text_bert_classifiers_label" data-id="text_bert_classifiers_label" data-class="child_node" data-parent="block_bert_classifiers" x="545" y="442" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="bold" fill="#000000" text-anchor="middle">BERT Based Sentence Classifiers</text>
+
+    <!-- Brain Icon 1: Bio-Clinical BERT -->
+    <g id="model_bio_clinical_bert" data-id="model_bio_clinical_bert" data-class="composite_whole" data-parent="block_bert_classifiers">
+      <g id="icon_bio_clinical" data-id="icon_bio_clinical" data-class="composite_part" data-parent="model_bio_clinical_bert" transform="translate(328, 318)">
+        <!-- Left Hemisphere -->
+        <path d="M -3 -22 C -12 -22 -20 -15 -20 -5 C -24 -2 -24 8 -19 12 C -21 16 -17 22 -8 22 C -5 22 -3 20 -3 18" fill="none" stroke="#4caf50" stroke-width="2" stroke-linecap="round"/>
+        <path d="M -3 -14 L -11 -14 L -11 -6 L -4 -6" fill="none" stroke="#4caf50" stroke-width="1.8"/>
+        <path d="M -11 -6 L -16 -1 L -16 6 L -9 6" fill="none" stroke="#4caf50" stroke-width="1.8"/>
+        <path d="M -3 2 L -7 2 L -7 12 L -3 12" fill="none" stroke="#4caf50" stroke-width="1.8"/>
+        <circle cx="-11" cy="-14" r="2" fill="#4caf50"/>
+        <circle cx="-4" cy="-6" r="2" fill="#4caf50"/>
+        <circle cx="-16" cy="6" r="2" fill="#4caf50"/>
+        <circle cx="-9" cy="6" r="2" fill="#4caf50"/>
+        <circle cx="-7" cy="12" r="2" fill="#4caf50"/>
+        <!-- Right Hemisphere -->
+        <path d="M 3 -22 C 12 -22 20 -15 20 -5 C 24 -2 24 8 19 12 C 21 16 17 22 8 22 C 5 22 3 20 3 18" fill="none" stroke="#4caf50" stroke-width="2" stroke-linecap="round"/>
+        <path d="M 3 -14 L 11 -14 L 11 -6 L 4 -6" fill="none" stroke="#4caf50" stroke-width="1.8"/>
+        <path d="M 11 -6 L 16 -1 L 16 6 L 9 6" fill="none" stroke="#4caf50" stroke-width="1.8"/>
+        <path d="M 3 2 L 7 2 L 7 12 L 3 12" fill="none" stroke="#4caf50" stroke-width="1.8"/>
+        <circle cx="11" cy="-14" r="2" fill="#4caf50"/>
+        <circle cx="4" cy="-6" r="2" fill="#4caf50"/>
+        <circle cx="16" cy="6" r="2" fill="#4caf50"/>
+        <circle cx="9" cy="6" r="2" fill="#4caf50"/>
+        <circle cx="7" cy="12" r="2" fill="#4caf50"/>
+      </g>
+      <text id="text_bio_clinical_bert_1" data-id="text_bio_clinical_bert_1" data-class="child_node" data-parent="model_bio_clinical_bert" x="328" y="365" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">Bio-</text>
+      <text id="text_bio_clinical_bert_2" data-id="text_bio_clinical_bert_2" data-class="child_node" data-parent="model_bio_clinical_bert" x="328" y="378" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">Clinical</text>
+      <text id="text_bio_clinical_bert_3" data-id="text_bio_clinical_bert_3" data-class="child_node" data-parent="model_bio_clinical_bert" x="328" y="391" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">BERT</text>
+    </g>
+
+    <!-- Brain Icon 2: UMLS BERT -->
+    <g id="model_umls_bert" data-id="model_umls_bert" data-class="composite_whole" data-parent="block_bert_classifiers">
+      <g id="icon_umls" data-id="icon_umls" data-class="composite_part" data-parent="model_umls_bert" transform="translate(414, 318)">
+        <!-- Left Hemisphere -->
+        <path d="M -3 -22 C -12 -22 -20 -15 -20 -5 C -24 -2 -24 8 -19 12 C -21 16 -17 22 -8 22 C -5 22 -3 20 -3 18" fill="none" stroke="#d81b60" stroke-width="2" stroke-linecap="round"/>
+        <path d="M -3 -14 L -11 -14 L -11 -6 L -4 -6" fill="none" stroke="#d81b60" stroke-width="1.8"/>
+        <path d="M -11 -6 L -16 -1 L -16 6 L -9 6" fill="none" stroke="#d81b60" stroke-width="1.8"/>
+        <path d="M -3 2 L -7 2 L -7 12 L -3 12" fill="none" stroke="#d81b60" stroke-width="1.8"/>
+        <circle cx="-11" cy="-14" r="2" fill="#d81b60"/>
+        <circle cx="-4" cy="-6" r="2" fill="#d81b60"/>
+        <circle cx="-16" cy="6" r="2" fill="#d81b60"/>
+        <circle cx="-9" cy="6" r="2" fill="#d81b60"/>
+        <circle cx="-7" cy="12" r="2" fill="#d81b60"/>
+        <!-- Right Hemisphere -->
+        <path d="M 3 -22 C 12 -22 20 -15 20 -5 C 24 -2 24 8 19 12 C 21 16 17 22 8 22 C 5 22 3 20 3 18" fill="none" stroke="#d81b60" stroke-width="2" stroke-linecap="round"/>
+        <path d="M 3 -14 L 11 -14 L 11 -6 L 4 -6" fill="none" stroke="#d81b60" stroke-width="1.8"/>
+        <path d="M 11 -6 L 16 -1 L 16 6 L 9 6" fill="none" stroke="#d81b60" stroke-width="1.8"/>
+        <path d="M 3 2 L 7 2 L 7 12 L 3 12" fill="none" stroke="#d81b60" stroke-width="1.8"/>
+        <circle cx="11" cy="-14" r="2" fill="#d81b60"/>
+        <circle cx="4" cy="-6" r="2" fill="#d81b60"/>
+        <circle cx="16" cy="6" r="2" fill="#d81b60"/>
+        <circle cx="9" cy="6" r="2" fill="#d81b60"/>
+        <circle cx="7" cy="12" r="2" fill="#d81b60"/>
+      </g>
+      <text id="text_umls_bert_1" data-id="text_umls_bert_1" data-class="child_node" data-parent="model_umls_bert" x="414" y="369" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">UMLS</text>
+      <text id="text_umls_bert_2" data-id="text_umls_bert_2" data-class="child_node" data-parent="model_umls_bert" x="414" y="384" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">BERT</text>
+    </g>
+
+    <!-- Brain Icon 3: PubMed BERT-Abstract -->
+    <g id="model_pubmed_bert_abstract" data-id="model_pubmed_bert_abstract" data-class="composite_whole" data-parent="block_bert_classifiers">
+      <g id="icon_pubmed_abstract" data-id="icon_pubmed_abstract" data-class="composite_part" data-parent="model_pubmed_bert_abstract" transform="translate(496, 318)">
+        <!-- Left Hemisphere -->
+        <path d="M -3 -22 C -12 -22 -20 -15 -20 -5 C -24 -2 -24 8 -19 12 C -21 16 -17 22 -8 22 C -5 22 -3 20 -3 18" fill="none" stroke="#1e88e5" stroke-width="2" stroke-linecap="round"/>
+        <path d="M -3 -14 L -11 -14 L -11 -6 L -4 -6" fill="none" stroke="#1e88e5" stroke-width="1.8"/>
+        <path d="M -11 -6 L -16 -1 L -16 6 L -9 6" fill="none" stroke="#1e88e5" stroke-width="1.8"/>
+        <path d="M -3 2 L -7 2 L -7 12 L -3 12" fill="none" stroke="#1e88e5" stroke-width="1.8"/>
+        <circle cx="-11" cy="-14" r="2" fill="#1e88e5"/>
+        <circle cx="-4" cy="-6" r="2" fill="#1e88e5"/>
+        <circle cx="-16" cy="6" r="2" fill="#1e88e5"/>
+        <circle cx="-9" cy="6" r="2" fill="#1e88e5"/>
+        <circle cx="-7" cy="12" r="2" fill="#1e88e5"/>
+        <!-- Right Hemisphere -->
+        <path d="M 3 -22 C 12 -22 20 -15 20 -5 C 24 -2 24 8 19 12 C 21 16 17 22 8 22 C 5 22 3 20 3 18" fill="none" stroke="#1e88e5" stroke-width="2" stroke-linecap="round"/>
+        <path d="M 3 -14 L 11 -14 L 11 -6 L 4 -6" fill="none" stroke="#1e88e5" stroke-width="1.8"/>
+        <path d="M 11 -6 L 16 -1 L 16 6 L 9 6" fill="none" stroke="#1e88e5" stroke-width="1.8"/>
+        <path d="M 3 2 L 7 2 L 7 12 L 3 12" fill="none" stroke="#1e88e5" stroke-width="1.8"/>
+        <circle cx="11" cy="-14" r="2" fill="#1e88e5"/>
+        <circle cx="4" cy="-6" r="2" fill="#1e88e5"/>
+        <circle cx="16" cy="6" r="2" fill="#1e88e5"/>
+        <circle cx="9" cy="6" r="2" fill="#1e88e5"/>
+        <circle cx="7" cy="12" r="2" fill="#1e88e5"/>
+      </g>
+      <text id="text_pubmed_bert_abstract_1" data-id="text_pubmed_bert_abstract_1" data-class="child_node" data-parent="model_pubmed_bert_abstract" x="496" y="365" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">PubMed</text>
+      <text id="text_pubmed_bert_abstract_2" data-id="text_pubmed_bert_abstract_2" data-class="child_node" data-parent="model_pubmed_bert_abstract" x="496" y="378" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">BERT-</text>
+      <text id="text_pubmed_bert_abstract_3" data-id="text_pubmed_bert_abstract_3" data-class="child_node" data-parent="model_pubmed_bert_abstract" x="496" y="391" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">Abstract</text>
+    </g>
+
+    <!-- Brain Icon 4: PubMed BERT-Abstract-Fulltext -->
+    <g id="model_pubmed_bert_fulltext" data-id="model_pubmed_bert_fulltext" data-class="composite_whole" data-parent="block_bert_classifiers">
+      <g id="icon_pubmed_fulltext" data-id="icon_pubmed_fulltext" data-class="composite_part" data-parent="model_pubmed_bert_fulltext" transform="translate(580, 318)">
+        <!-- Left Hemisphere -->
+        <path d="M -3 -22 C -12 -22 -20 -15 -20 -5 C -24 -2 -24 8 -19 12 C -21 16 -17 22 -8 22 C -5 22 -3 20 -3 18" fill="none" stroke="#fb8c00" stroke-width="2" stroke-linecap="round"/>
+        <path d="M -3 -14 L -11 -14 L -11 -6 L -4 -6" fill="none" stroke="#fb8c00" stroke-width="1.8"/>
+        <path d="M -11 -6 L -16 -1 L -16 6 L -9 6" fill="none" stroke="#fb8c00" stroke-width="1.8"/>
+        <path d="M -3 2 L -7 2 L -7 12 L -3 12" fill="none" stroke="#fb8c00" stroke-width="1.8"/>
+        <circle cx="-11" cy="-14" r="2" fill="#fb8c00"/>
+        <circle cx="-4" cy="-6" r="2" fill="#fb8c00"/>
+        <circle cx="-16" cy="6" r="2" fill="#fb8c00"/>
+        <circle cx="-9" cy="6" r="2" fill="#fb8c00"/>
+        <circle cx="-7" cy="12" r="2" fill="#fb8c00"/>
+        <!-- Right Hemisphere -->
+        <path d="M 3 -22 C 12 -22 20 -15 20 -5 C 24 -2 24 8 19 12 C 21 16 17 22 8 22 C 5 22 3 20 3 18" fill="none" stroke="#fb8c00" stroke-width="2" stroke-linecap="round"/>
+        <path d="M 3 -14 L 11 -14 L 11 -6 L 4 -6" fill="none" stroke="#fb8c00" stroke-width="1.8"/>
+        <path d="M 11 -6 L 16 -1 L 16 6 L 9 6" fill="none" stroke="#fb8c00" stroke-width="1.8"/>
+        <path d="M 3 2 L 7 2 L 7 12 L 3 12" fill="none" stroke="#fb8c00" stroke-width="1.8"/>
+        <circle cx="11" cy="-14" r="2" fill="#fb8c00"/>
+        <circle cx="4" cy="-6" r="2" fill="#fb8c00"/>
+        <circle cx="16" cy="6" r="2" fill="#fb8c00"/>
+        <circle cx="9" cy="6" r="2" fill="#fb8c00"/>
+        <circle cx="7" cy="12" r="2" fill="#fb8c00"/>
+      </g>
+      <text id="text_pubmed_bert_fulltext_1" data-id="text_pubmed_bert_fulltext_1" data-class="child_node" data-parent="model_pubmed_bert_fulltext" x="580" y="362" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">PubMed</text>
+      <text id="text_pubmed_bert_fulltext_2" data-id="text_pubmed_bert_fulltext_2" data-class="child_node" data-parent="model_pubmed_bert_fulltext" x="580" y="375" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">BERT-</text>
+      <text id="text_pubmed_bert_fulltext_3" data-id="text_pubmed_bert_fulltext_3" data-class="child_node" data-parent="model_pubmed_bert_fulltext" x="580" y="388" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">Abstract-</text>
+      <text id="text_pubmed_bert_fulltext_4" data-id="text_pubmed_bert_fulltext_4" data-class="child_node" data-parent="model_pubmed_bert_fulltext" x="580" y="401" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">Fulltext</text>
+    </g>
+
+    <!-- Brain Icon 5: Bio BERT -->
+    <g id="model_bio_bert" data-id="model_bio_bert" data-class="composite_whole" data-parent="block_bert_classifiers">
+      <g id="icon_bio_bert" data-id="icon_bio_bert" data-class="composite_part" data-parent="model_bio_bert" transform="translate(662, 318)">
+        <!-- Left Hemisphere -->
+        <path d="M -3 -22 C -12 -22 -20 -15 -20 -5 C -24 -2 -24 8 -19 12 C -21 16 -17 22 -8 22 C -5 22 -3 20 -3 18" fill="none" stroke="#9c001f" stroke-width="2" stroke-linecap="round"/>
+        <path d="M -3 -14 L -11 -14 L -11 -6 L -4 -6" fill="none" stroke="#9c001f" stroke-width="1.8"/>
+        <path d="M -11 -6 L -16 -1 L -16 6 L -9 6" fill="none" stroke="#9c001f" stroke-width="1.8"/>
+        <path d="M -3 2 L -7 2 L -7 12 L -3 12" fill="none" stroke="#9c001f" stroke-width="1.8"/>
+        <circle cx="-11" cy="-14" r="2" fill="#9c001f"/>
+        <circle cx="-4" cy="-6" r="2" fill="#9c001f"/>
+        <circle cx="-16" cy="6" r="2" fill="#9c001f"/>
+        <circle cx="-9" cy="6" r="2" fill="#9c001f"/>
+        <circle cx="-7" cy="12" r="2" fill="#9c001f"/>
+        <!-- Right Hemisphere -->
+        <path d="M 3 -22 C 12 -22 20 -15 20 -5 C 24 -2 24 8 19 12 C 21 16 17 22 8 22 C 5 22 3 20 3 18" fill="none" stroke="#9c001f" stroke-width="2" stroke-linecap="round"/>
+        <path d="M 3 -14 L 11 -14 L 11 -6 L 4 -6" fill="none" stroke="#9c001f" stroke-width="1.8"/>
+        <path d="M 11 -6 L 16 -1 L 16 6 L 9 6" fill="none" stroke="#9c001f" stroke-width="1.8"/>
+        <path d="M 3 2 L 7 2 L 7 12 L 3 12" fill="none" stroke="#9c001f" stroke-width="1.8"/>
+        <circle cx="11" cy="-14" r="2" fill="#9c001f"/>
+        <circle cx="4" cy="-6" r="2" fill="#9c001f"/>
+        <circle cx="16" cy="6" r="2" fill="#9c001f"/>
+        <circle cx="9" cy="6" r="2" fill="#9c001f"/>
+        <circle cx="7" cy="12" r="2" fill="#9c001f"/>
+      </g>
+      <text id="text_bio_bert_1" data-id="text_bio_bert_1" data-class="child_node" data-parent="model_bio_bert" x="662" y="369" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">Bio</text>
+      <text id="text_bio_bert_2" data-id="text_bio_bert_2" data-class="child_node" data-parent="model_bio_bert" x="662" y="384" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">BERT</text>
+    </g>
+
+    <!-- Brain Icon 6: BERT base (uncased) -->
+    <g id="model_bert_base" data-id="model_bert_base" data-class="composite_whole" data-parent="block_bert_classifiers">
+      <g id="icon_bert_base" data-id="icon_bert_base" data-class="composite_part" data-parent="model_bert_base" transform="translate(738, 318)">
+        <!-- Left Hemisphere -->
+        <path d="M -3 -22 C -12 -22 -20 -15 -20 -5 C -24 -2 -24 8 -19 12 C -21 16 -17 22 -8 22 C -5 22 -3 20 -3 18" fill="none" stroke="#5a7d5a" stroke-width="2" stroke-linecap="round"/>
+        <path d="M -3 -14 L -11 -14 L -11 -6 L -4 -6" fill="none" stroke="#5a7d5a" stroke-width="1.8"/>
+        <path d="M -11 -6 L -16 -1 L -16 6 L -9 6" fill="none" stroke="#5a7d5a" stroke-width="1.8"/>
+        <path d="M -3 2 L -7 2 L -7 12 L -3 12" fill="none" stroke="#5a7d5a" stroke-width="1.8"/>
+        <circle cx="-11" cy="-14" r="2" fill="#5a7d5a"/>
+        <circle cx="-4" cy="-6" r="2" fill="#5a7d5a"/>
+        <circle cx="-16" cy="6" r="2" fill="#5a7d5a"/>
+        <circle cx="-9" cy="6" r="2" fill="#5a7d5a"/>
+        <circle cx="-7" cy="12" r="2" fill="#5a7d5a"/>
+        <!-- Right Hemisphere -->
+        <path d="M 3 -22 C 12 -22 20 -15 20 -5 C 24 -2 24 8 19 12 C 21 16 17 22 8 22 C 5 22 3 20 3 18" fill="none" stroke="#5a7d5a" stroke-width="2" stroke-linecap="round"/>
+        <path d="M 3 -14 L 11 -14 L 11 -6 L 4 -6" fill="none" stroke="#5a7d5a" stroke-width="1.8"/>
+        <path d="M 11 -6 L 16 -1 L 16 6 L 9 6" fill="none" stroke="#5a7d5a" stroke-width="1.8"/>
+        <path d="M 3 2 L 7 2 L 7 12 L 3 12" fill="none" stroke="#5a7d5a" stroke-width="1.8"/>
+        <circle cx="11" cy="-14" r="2" fill="#5a7d5a"/>
+        <circle cx="4" cy="-6" r="2" fill="#5a7d5a"/>
+        <circle cx="16" cy="6" r="2" fill="#5a7d5a"/>
+        <circle cx="9" cy="6" r="2" fill="#5a7d5a"/>
+        <circle cx="7" cy="12" r="2" fill="#5a7d5a"/>
+      </g>
+      <text id="text_bert_base_1" data-id="text_bert_base_1" data-class="child_node" data-parent="model_bert_base" x="738" y="365" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">BERT</text>
+      <text id="text_bert_base_2" data-id="text_bert_base_2" data-class="child_node" data-parent="model_bert_base" x="738" y="378" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">base</text>
+      <text id="text_bert_base_3" data-id="text_bert_base_3" data-class="child_node" data-parent="model_bert_base" x="738" y="391" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">(uncased)</text>
+    </g>
+  </g>
+
+  <!-- ==================== STANDALONE NODES ==================== -->
+
+  <!-- Top-Left Node: CDR Database -->
+  <g id="node_cdr_database" data-id="node_cdr_database" data-class="composite_whole" data-parent="root">
+    <!-- Cylinder Base 3 -->
+    <path id="path_cdr_base_3" data-id="path_cdr_base_3" data-class="composite_part" data-parent="node_cdr_database" d="M 88 152 A 37 14 0 0 0 162 152 V 170 A 37 14 0 0 1 88 170 Z" fill="#ffffff" stroke="#000000" stroke-width="2.5"/>
+    <!-- Cylinder Base 2 -->
+    <path id="path_cdr_base_2" data-id="path_cdr_base_2" data-class="composite_part" data-parent="node_cdr_database" d="M 88 132 A 37 14 0 0 0 162 132 V 150 A 37 14 0 0 1 88 150 Z" fill="#ffffff" stroke="#000000" stroke-width="2.5"/>
+    <!-- Cylinder Base 1 -->
+    <path id="path_cdr_base_1" data-id="path_cdr_base_1" data-class="composite_part" data-parent="node_cdr_database" d="M 88 112 A 37 14 0 0 0 162 112 V 130 A 37 14 0 0 1 88 130 Z" fill="#ffffff" stroke="#000000" stroke-width="2.5"/>
+    <!-- Cylinder Top Cap -->
+    <ellipse id="ellipse_cdr_top" data-id="ellipse_cdr_top" data-class="composite_part" data-parent="node_cdr_database" cx="125" cy="112" rx="37" ry="14" fill="#ffffff" stroke="#000000" stroke-width="2.5"/>
+    <!-- Cylinder Dots -->
+    <circle id="circle_cdr_dot1" data-id="circle_cdr_dot1" data-class="composite_part" data-parent="node_cdr_database" cx="150" cy="131" r="2" fill="#000000"/>
+    <circle id="circle_cdr_dot2" data-id="circle_cdr_dot2" data-class="composite_part" data-parent="node_cdr_database" cx="150" cy="151" r="2" fill="#000000"/>
+    <circle id="circle_cdr_dot3" data-id="circle_cdr_dot3" data-class="composite_part" data-parent="node_cdr_database" cx="150" cy="171" r="2" fill="#000000"/>
+    <!-- Text Labels -->
+    <text id="text_cdr_label_1" data-id="text_cdr_label_1" data-class="standalone_node" data-parent="root" x="125" y="202" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">AD Patients' EHRs in Clinical</text>
+    <text id="text_cdr_label_2" data-id="text_cdr_label_2" data-class="standalone_node" data-parent="root" x="125" y="217" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">Data Repository (CDR)</text>
+  </g>
+
+  <!-- Top-Center Node: Funnel NLP System -->
+  <g id="node_funnel_system" data-id="node_funnel_system" data-class="composite_whole" data-parent="root">
+    <!-- Funnel Cone & Stem -->
+    <path id="path_funnel_body" data-id="path_funnel_body" data-class="composite_part" data-parent="node_funnel_system" d="M 303 113 C 303 118 318 123 338 123 C 358 123 373 118 373 113 L 345 152 L 345 174 L 331 174 L 331 152 Z" fill="#000000" stroke="#000000" stroke-width="1.5"/>
+    <!-- Funnel Top Rim -->
+    <ellipse id="ellipse_funnel_rim" data-id="ellipse_funnel_rim" data-class="composite_part" data-parent="node_funnel_system" cx="338" cy="113" rx="35" ry="12" fill="#ffffff" stroke="#000000" stroke-width="3"/>
+    <!-- Text Labels -->
+    <text id="text_funnel_label_1" data-id="text_funnel_label_1" data-class="standalone_node" data-parent="root" x="338" y="206" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">NLP-PIER Rule-based NLP</text>
+    <text id="text_funnel_label_2" data-id="text_funnel_label_2" data-class="standalone_node" data-parent="root" x="338" y="221" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">System</text>
+  </g>
+
+  <!-- Top-Right Node: Weak Labels Database -->
+  <g id="node_weak_labels" data-id="node_weak_labels" data-class="composite_whole" data-parent="root">
+    <!-- Cylinder Base 3 -->
+    <path id="path_weak_base_3" data-id="path_weak_base_3" data-class="composite_part" data-parent="node_weak_labels" d="M 503 152 A 37 14 0 0 0 577 152 V 170 A 37 14 0 0 1 503 170 Z" fill="#ffffff" stroke="#000000" stroke-width="2.5"/>
+    <!-- Cylinder Base 2 -->
+    <path id="path_weak_base_2" data-id="path_weak_base_2" data-class="composite_part" data-parent="node_weak_labels" d="M 503 132 A 37 14 0 0 0 577 132 V 150 A 37 14 0 0 1 503 150 Z" fill="#ffffff" stroke="#000000" stroke-width="2.5"/>
+    <!-- Cylinder Base 1 -->
+    <path id="path_weak_base_1" data-id="path_weak_base_1" data-class="composite_part" data-parent="node_weak_labels" d="M 503 112 A 37 14 0 0 0 577 112 V 130 A 37 14 0 0 1 503 130 Z" fill="#ffffff" stroke="#000000" stroke-width="2.5"/>
+    <!-- Cylinder Top Cap -->
+    <ellipse id="ellipse_weak_top" data-id="ellipse_weak_top" data-class="composite_part" data-parent="node_weak_labels" cx="540" cy="112" rx="37" ry="14" fill="#ffffff" stroke="#000000" stroke-width="2.5"/>
+    <!-- Cylinder Dots -->
+    <circle id="circle_weak_dot1" data-id="circle_weak_dot1" data-class="composite_part" data-parent="node_weak_labels" cx="565" cy="131" r="2" fill="#000000"/>
+    <circle id="circle_weak_dot2" data-id="circle_weak_dot2" data-class="composite_part" data-parent="node_weak_labels" cx="565" cy="151" r="2" fill="#000000"/>
+    <circle id="circle_weak_dot3" data-id="circle_weak_dot3" data-class="composite_part" data-parent="node_weak_labels" cx="565" cy="171" r="2" fill="#000000"/>
+    <!-- Text Labels -->
+    <text id="text_weak_labels_label" data-id="text_weak_labels_label" data-class="standalone_node" data-parent="root" x="540" y="202" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">Sentences With Weak Labels</text>
+  </g>
+
+  <!-- Bottom-Left Node: Gold Standard Corpus Document -->
+  <g id="node_gsc" data-id="node_gsc" data-class="composite_whole" data-parent="root">
+    <!-- Back Page -->
+    <path id="path_gsc_doc_back" data-id="path_gsc_doc_back" data-class="composite_part" data-parent="node_gsc" d="M 128 506 L 151 506 L 163 518 L 163 560 L 128 560 Z" fill="#ffffff" stroke="#000000" stroke-width="1.8" stroke-linejoin="round"/>
+    <path id="path_gsc_doc_back_fold" data-id="path_gsc_doc_back_fold" data-class="composite_part" data-parent="node_gsc" d="M 151 506 L 151 518 L 163 518" fill="none" stroke="#000000" stroke-width="1.8" stroke-linejoin="round"/>
+    <!-- Front Page -->
+    <path id="path_gsc_doc_front" data-id="path_gsc_doc_front" data-class="composite_part" data-parent="node_gsc" d="M 112 516 L 137 516 L 149 528 L 149 572 L 112 572 Z" fill="#ffffff" stroke="#000000" stroke-width="1.8" stroke-linejoin="round"/>
+    <path id="path_gsc_doc_front_fold" data-id="path_gsc_doc_front_fold" data-class="composite_part" data-parent="node_gsc" d="M 137 516 L 137 528 L 149 528" fill="none" stroke="#000000" stroke-width="1.8" stroke-linejoin="round"/>
+    <!-- Text Label -->
+    <text id="text_gsc_label" data-id="text_gsc_label" data-class="standalone_node" data-parent="root" x="125" y="591" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">Gold Standard Corpus (GSC)</text>
+  </g>
+
+  <!-- Bottom-Center Node: Physical Activity Database -->
+  <g id="node_physical_activity" data-id="node_physical_activity" data-class="composite_whole" data-parent="root">
+    <!-- Cylinder Base -->
+    <path id="path_physical_activity_body" data-id="path_physical_activity_body" data-class="composite_part" data-parent="node_physical_activity" d="M 388 535 A 37 14 0 0 0 462 535 V 589 A 37 14 0 0 1 388 589 Z" fill="#dbe6f6" stroke="#688cb8" stroke-width="2.5"/>
+    <!-- Cylinder Top Cap -->
+    <ellipse id="ellipse_physical_activity_top" data-id="ellipse_physical_activity_top" data-class="composite_part" data-parent="node_physical_activity" cx="425" cy="535" rx="37" ry="14" fill="#dbe6f6" stroke="#688cb8" stroke-width="2.5"/>
+    <!-- Text Labels -->
+    <text id="text_physical_activity_1" data-id="text_physical_activity_1" data-class="standalone_node" data-parent="root" x="425" y="621" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">Physical</text>
+    <text id="text_physical_activity_2" data-id="text_physical_activity_2" data-class="standalone_node" data-parent="root" x="425" y="635" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">Activity</text>
+  </g>
+
+  <!-- Bottom-Right Node: Excessive Diet Database -->
+  <g id="node_excessive_diet" data-id="node_excessive_diet" data-class="composite_whole" data-parent="root">
+    <!-- Cylinder Base -->
+    <path id="path_excessive_diet_body" data-id="path_excessive_diet_body" data-class="composite_part" data-parent="node_excessive_diet" d="M 608 535 A 37 14 0 0 0 682 535 V 589 A 37 14 0 0 1 608 589 Z" fill="#fbdad8" stroke="#be6b6b" stroke-width="2.5"/>
+    <!-- Cylinder Top Cap -->
+    <ellipse id="ellipse_excessive_diet_top" data-id="ellipse_excessive_diet_top" data-class="composite_part" data-parent="node_excessive_diet" cx="645" cy="535" rx="37" ry="14" fill="#fbdad8" stroke="#be6b6b" stroke-width="2.5"/>
+    <!-- Text Labels -->
+    <text id="text_excessive_diet_1" data-id="text_excessive_diet_1" data-class="standalone_node" data-parent="root" x="645" y="621" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">Excessive</text>
+    <text id="text_excessive_diet_2" data-id="text_excessive_diet_2" data-class="standalone_node" data-parent="root" x="645" y="635" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">Diet</text>
+  </g>
+
+  <!-- ==================== EDGES / ARROWS ==================== -->
+
+  <!-- Edge 1: CDR -> Funnel -->
+  <path id="edge_cdr_to_funnel" data-id="edge_cdr_to_funnel" data-class="edge" data-source="node_cdr_database" data-target="node_funnel_system" d="M 168 137 L 295 137" fill="none" stroke="#000000" stroke-width="2.2" marker-end="url(#arrow)"/>
+
+  <!-- Edge 2: Funnel -> Weak Labels DB (with Filtering text) -->
+  <path id="edge_funnel_to_weak_1" data-id="edge_funnel_to_weak_1" data-class="edge" data-source="node_funnel_system" data-target="node_weak_labels" d="M 382 137 L 413 137" fill="none" stroke="#000000" stroke-width="2.2"/>
+  <text id="text_filtering" data-id="text_filtering" data-class="text_node" data-parent="root" x="444" y="141" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">Filtering</text>
+  <path id="edge_funnel_to_weak_2" data-id="edge_funnel_to_weak_2" data-class="edge" data-source="node_funnel_system" data-target="node_weak_labels" d="M 475 137 L 498 137" fill="none" stroke="#000000" stroke-width="2.2" marker-end="url(#arrow)"/>
+
+  <!-- Edge 3: Weak Labels DB -> BERT Classifiers Block (with Fine-tuning text) -->
+  <path id="edge_weak_to_bert_1" data-id="edge_weak_to_bert_1" data-class="edge" data-source="node_weak_labels" data-target="block_bert_classifiers" d="M 545 208 L 545 218" fill="none" stroke="#000000" stroke-width="2"/>
+  <text id="text_finetuning" data-id="text_finetuning" data-class="text_node" data-parent="root" x="545" y="233" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">Fine-tuning</text>
+  <path id="edge_weak_to_bert_2" data-id="edge_weak_to_bert_2" data-class="edge" data-source="node_weak_labels" data-target="block_bert_classifiers" d="M 545 242 L 545 272" fill="none" stroke="#000000" stroke-width="2.2" marker-end="url(#arrow)"/>
+
+  <!-- Edge 4: CDR -> GSC (Long downward arrow) -->
+  <path id="edge_cdr_to_gsc" data-id="edge_cdr_to_gsc" data-class="edge" data-source="node_cdr_database" data-target="node_gsc" d="M 125 228 L 125 500" fill="none" stroke="#000000" stroke-width="2.2" marker-end="url(#arrow)"/>
+
+  <!-- Edge 5: GSC -> Physical Activity (Testing) -->
+  <path id="edge_gsc_to_physical_1" data-id="edge_gsc_to_physical_1" data-class="edge" data-source="node_gsc" data-target="node_physical_activity" d="M 168 544 L 253 544" fill="none" stroke="#000000" stroke-width="2.2"/>
+  <text id="text_testing" data-id="text_testing" data-class="text_node" data-parent="root" x="281" y="548" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">Testing</text>
+  <path id="edge_gsc_to_physical_2" data-id="edge_gsc_to_physical_2" data-class="edge" data-source="node_gsc" data-target="node_physical_activity" d="M 309 544 L 378 544" fill="none" stroke="#000000" stroke-width="2.2" marker-end="url(#arrow)"/>
+
+  <!-- Edge 6: BERT Classifiers Block -> Physical Activity & Excessive Diet (Branching arrow) -->
+  <path id="edge_bert_branch_trunk" data-id="edge_bert_branch_trunk" data-class="edge" data-source="block_bert_classifiers" data-target="node_physical_activity" d="M 535 463 L 535 487" fill="none" stroke="#000000" stroke-width="2.2"/>
+  <path id="edge_bert_branch_bar" data-id="edge_bert_branch_bar" data-class="edge" data-source="block_bert_classifiers" data-target="node_physical_activity" d="M 425 487 L 645 487" fill="none" stroke="#000000" stroke-width="2.2"/>
+  <path id="edge_bert_to_physical" data-id="edge_bert_to_physical" data-class="edge" data-source="block_bert_classifiers" data-target="node_physical_activity" d="M 425 487 L 425 510" fill="none" stroke="#000000" stroke-width="2.2" marker-end="url(#arrow)"/>
+  <path id="edge_bert_to_excessive" data-id="edge_bert_to_excessive" data-class="edge" data-source="block_bert_classifiers" data-target="node_excessive_diet" d="M 645 487 L 645 510" fill="none" stroke="#000000" stroke-width="2.2" marker-end="url(#arrow)"/>
+
+  <!-- Caption text at bottom -->
+  <text id="text_caption" data-id="text_caption" data-class="text_node" data-parent="root" x="18" y="675" font-family="Arial, Helvetica, sans-serif" font-size="20" fill="#000000"><tspan font-weight="bold">Figure 1.</tspan> Overview of the study design...</text>
+
+  <!-- ==================== DYNAMIC NARRATION BANNER ==================== -->
+
+  <!-- ==================== FOCUS BOX ==================== -->
+  <rect id="focus_box" fill="none" stroke="#FF0000" stroke-width="4" stroke-dasharray="8,4" rx="6" />
+</svg>
+  </div>
+
+  <div class="ab-bar">
+    <button type="button" class="ab-btn ab-play" aria-label="Pause">
+      <svg class="ab-ic-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 5.5l11 6.5-11 6.5z"/></svg>
+      <svg class="ab-ic-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 5.5h3.6v13H7.5zM12.9 5.5h3.6v13h-3.6z"/></svg>
+    </button>
+
+    <div class="ab-scrub">
+      <span class="ab-rail" aria-hidden="true"><i class="ab-played"></i></span>
+      <input type="range" class="ab-seek" min="0" max="1000" value="0" step="1"
+             aria-label="Scrub through the animation">
+    </div>
+
+    <span class="ab-time"><b>0:00</b>&nbsp;/&nbsp;<span class="ab-total">0:00</span></span>
+
+    <div class="ab-speed" role="group" aria-label="Playback speed">
+      <button type="button" class="ab-slower" aria-label="Slower">&#8722;</button>
+      <span class="ab-rate" aria-live="polite">1&#215;</span>
+      <button type="button" class="ab-faster" aria-label="Faster">+</button>
+    </div>
+
+    <button type="button" class="ab-btn ab-toggle" aria-pressed="true">
+      <span class="ab-led" aria-hidden="true"></span>
+      <span class="ab-word">Captions on</span>
+    </button>
+  </div>
+
+  <figcaption class="ab-cap" aria-live="polite"></figcaption>
+</figure>
+
+<script>
+(function () {
+  var CUES = [{"start": 0.0, "end": 2.37, "text": "The pipeline begins by retrieving clinical notes for Alzheimer's disease patients from the Clinical Data Repository."}, {"start": 2.54, "end": 4.91, "text": "The records are filtered using the rule-based NLP-PIER information extraction system."}, {"start": 5.08, "end": 7.45, "text": "This filtering generates a dataset of lifestyle-related sentences with automatically assigned weak labels."}, {"start": 7.62, "end": 9.99, "text": "The weakly labeled corpus is then used to fine-tune a suite of BERT-based sentence classifiers."}, {"start": 10.15, "end": 12.53, "text": "The models include Bio-Clinical BERT,"}, {"start": 12.69, "end": 15.06, "text": "UMLS BERT,"}, {"start": 15.23, "end": 17.61, "text": "PubMedBERT trained solely on abstracts,"}, {"start": 17.77, "end": 20.14, "text": "PubMedBERT trained on abstracts and full text,"}, {"start": 20.31, "end": 22.68, "text": "BioBERT,"}, {"start": 22.85, "end": 25.22, "text": "and the standard uncased BERT base model."}, {"start": 25.38, "end": 27.76, "text": "The classifiers predict risk factors across two case studies, identifying excessive diet..."}, {"start": 27.92, "end": 30.3, "text": "...and physical activity levels."}, {"start": 30.46, "end": 32.84, "text": "Finally, all models are tested and evaluated against a manually annotated Gold Standard Corpus."}];
+  var LOOP = 33.0;
+  var REPEATS = Infinity;
+  var RATES = [0.25, 0.5, 0.75, 1, 1.5, 2, 3];
+
+  var fig = document.querySelector('.ab');
+  var cap = document.querySelector('.ab-cap');
+  var play = document.querySelector('.ab-play');
+  var seek = document.querySelector('.ab-seek');
+  var played = document.querySelector('.ab-played');
+  var nowEl = document.querySelector('.ab-time b');
+  var totalEl = document.querySelector('.ab-total');
+  var rateEl = document.querySelector('.ab-rate');
+  var slower = document.querySelector('.ab-slower');
+  var faster = document.querySelector('.ab-faster');
+  var toggle = document.querySelector('.ab-toggle');
+  var word = toggle.querySelector('.ab-word');
+
+  var at = -1, swap = null, rate = 3, paused = false, scrubbing = false;
+
+  // THE CLOCK. The drawing is hundreds of short animations that each stop when
+  // they are done, so none of them can be asked what time it is. This one runs
+  // the length of the whole piece, does nothing visible, and is driven by the
+  // same controls - so the caption, the bar and the picture cannot disagree.
+  var master = null;
+  try {
+    master = document.documentElement.animate(
+      [{ opacity: 1 }, { opacity: 1 }],
+      { duration: (LOOP || 1) * 1000, iterations: REPEATS }
+    );
+  } catch (e) {}
+  var t0 = performance.now();
+
+  function others() {
+    try {
+      var runs = document.getAnimations ? document.getAnimations() : [];
+      return runs.filter(function (a) { return a !== master; });
+    } catch (e) { return []; }
+  }
+  function clock() {
+    var t;
+    if (master && master.currentTime != null) t = master.currentTime / 1000;
+    else t = (performance.now() - t0) / 1000;
+    return REPEATS === 1 ? Math.min(t, LOOP) : (t % (LOOP || 1));
+  }
+  function each(fn) {
+    if (master) { try { fn(master); } catch (e) {} }
+    others().forEach(function (a) { try { fn(a); } catch (e) {} });
+  }
+  function clip(t) {
+    t = Math.max(0, t || 0);
+    return Math.floor(t / 60) + ':' + ('0' + Math.floor(t % 60)).slice(-2);
+  }
+
+  play.addEventListener('click', function () {
+    paused = !paused;
+    // Restarting a finished piece rather than leaving Play doing nothing
+    if (!paused && REPEATS === 1 && clock() >= LOOP - 0.05) each(function (a) { a.currentTime = 0; });
+    each(function (a) { paused ? a.pause() : a.play(); });
+    if (!paused) t0 = performance.now() - clock() * 1000;
+    fig.classList.toggle('is-paused', paused);
+    play.setAttribute('aria-label', paused ? 'Play' : 'Pause');
+  });
+
+  function setRate(i) {
+    rate = Math.max(0, Math.min(RATES.length - 1, i));
+    var r = RATES[rate];
+    each(function (a) { a.playbackRate = r; });
+    rateEl.textContent = r + '×';
+    fig.classList.toggle('is-fast', r !== 1);
+    slower.disabled = rate === 0;
+    faster.disabled = rate === RATES.length - 1;
+  }
+  slower.addEventListener('click', function () { setRate(rate - 1); });
+  faster.addEventListener('click', function () { setRate(rate + 1); });
+
+  seek.addEventListener('pointerdown', function () { scrubbing = true; });
+  seek.addEventListener('input', function () {
+    var t = (Number(seek.value) / 1000) * LOOP;
+    each(function (a) { a.currentTime = t * 1000; });
+    t0 = performance.now() - t * 1000;
+    paint(true);
+  });
+  seek.addEventListener('change', function () { scrubbing = false; });
+
+  toggle.addEventListener('click', function () {
+    var on = toggle.getAttribute('aria-pressed') !== 'true';
+    toggle.setAttribute('aria-pressed', String(on));
+    word.textContent = on ? 'Captions on' : 'Captions off';
+    fig.classList.toggle('is-off', !on);
+  });
+
+  function paint(force) {
+    var t = clock();
+    nowEl.textContent = clip(t);
+    if (!scrubbing) seek.value = String(Math.round((t / (LOOP || 1)) * 1000));
+    played.style.width = ((t / (LOOP || 1)) * 100) + '%';
+
+    var k = -1;
+    for (var i = 0; i < CUES.length; i++) { if (t >= CUES[i].start - 0.05) k = i; }
+    if (k !== at || force === true) {
+      at = k;
+      var text = k >= 0 ? CUES[k].text : '';
+      if (text !== cap.textContent) {
+        cap.classList.add('is-swap');
+        clearTimeout(swap);
+        swap = setTimeout(function () {
+          cap.textContent = text;
+          cap.classList.remove('is-swap');
+        }, 150);
+      }
+    }
+  }
+
+  // Two ways round, on purpose. requestAnimationFrame gives a smooth bar while
+  // the page is on screen, and stops dead in a background tab or an embed the
+  // browser considers hidden - where the animation itself keeps running, so the
+  // caption would be left behind. The slow timer covers exactly that case.
+  function frame() { paint(); requestAnimationFrame(frame); }
+
+  totalEl.textContent = clip(LOOP);
+  setRate(3);
+  if (!CUES.length) { fig.classList.add('is-off'); toggle.style.display = 'none'; }
+  requestAnimationFrame(frame);
+  setInterval(paint, 250);
+})();
+</script>
+</body>
+</html>

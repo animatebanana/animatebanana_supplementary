@@ -1,0 +1,436 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-12 -12 1018 846" width="994" height="822">
+  <defs>
+    <!-- Arrow markers -->
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#b91c1c"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#002b9e"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#059669"/>
+    </marker>
+    <marker id="arrow-yellow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#d97706"/>
+    </marker>
+    <marker id="arrow-gray" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#4b5563"/>
+    </marker>
+
+    <!-- Drop Shadow Filter -->
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="2" dy="2" stdDeviation="2" flood-opacity="0.15"/>
+    </filter>
+
+    <style>
+      svg {
+        overflow: visible;
+      }
+
+      #focus_box {
+        animation: hop 34s step-end infinite;
+      }
+
+      @keyframes hop {
+        /* ts1: Combined Top Unit (Facial Feature Extractor & Person Dictionary) */
+        0% { x: -6px; y: -6px; width: 988px; height: 374px; }
+        
+        /* ts2: Block 1: Facial Feature Extractor */
+        5.88% { x: -6px; y: -6px; width: 422px; height: 281px; }
+        
+        /* ts3: Data Cylinder */
+        11.76% { x: 44px; y: 98px; width: 108px; height: 144px; }
+        
+        /* ts4: CNN Training Sub-Block (Title + Neural Net Card) */
+        17.65% { x: 214px; y: 68px; width: 152px; height: 170px; }
+        
+        /* ts5: Block 2: Person Dictionary */
+        23.53% { x: 560px; y: -6px; width: 422px; height: 374px; }
+        
+        /* ts6: Select entities & gather exemplary images */
+        29.41% { x: 584px; y: 64px; width: 376px; height: 96px; }
+        
+        /* ts7: Feature extraction */
+        35.29% { x: 584px; y: 174px; width: 376px; height: 80px; }
+        
+        /* ts8: Filtering */
+        41.18% { x: 584px; y: 270px; width: 376px; height: 80px; }
+        
+        /* ts9: Block 3: Internet Archive */
+        47.06% { x: -6px; y: 392px; width: 422px; height: 281px; }
+        
+        /* ts10: Classical Building Icon */
+        52.94% { x: 24px; y: 466px; width: 150px; height: 182px; }
+        
+        /* ts11: Web Content Sub-Block */
+        58.82% { x: 230px; y: 462px; width: 156px; height: 150px; }
+        
+        /* ts12: Stacked Webpage Windows */
+        64.71% { x: 230px; y: 494px; width: 156px; height: 118px; }
+        
+        /* ts13: Block 4: Person Identification */
+        70.59% { x: 472px; y: 392px; width: 510px; height: 281px; }
+        
+        /* ts14: Face Detection */
+        76.47% { x: 494px; y: 462px; width: 220px; height: 80px; }
+        
+        /* ts15: Feature Extraction */
+        82.35% { x: 494px; y: 566px; width: 220px; height: 80px; }
+        
+        /* ts16: Face Verification */
+        88.24% { x: 740px; y: 462px; width: 220px; height: 80px; }
+        
+        /* ts17: Visualization */
+        94.12% { x: 740px; y: 566px; width: 220px; height: 80px; }
+        
+        100% { x: -6px; y: -6px; width: 988px; height: 374px; }
+      }
+
+      .narr_text {
+        opacity: 0;
+        font-family: system-ui, -apple-system, sans-serif;
+        font-size: 18px;
+        font-weight: 500;
+        fill: #1e293b;
+      }
+
+      #narr_ts1 { animation: narr_fade_1 34s step-end infinite; }
+      #narr_ts2 { animation: narr_fade_2 34s step-end infinite; }
+      #narr_ts3 { animation: narr_fade_3 34s step-end infinite; }
+      #narr_ts4 { animation: narr_fade_4 34s step-end infinite; }
+      #narr_ts5 { animation: narr_fade_5 34s step-end infinite; }
+      #narr_ts6 { animation: narr_fade_6 34s step-end infinite; }
+      #narr_ts7 { animation: narr_fade_7 34s step-end infinite; }
+      #narr_ts8 { animation: narr_fade_8 34s step-end infinite; }
+      #narr_ts9 { animation: narr_fade_9 34s step-end infinite; }
+      #narr_ts10 { animation: narr_fade_10 34s step-end infinite; }
+      #narr_ts11 { animation: narr_fade_11 34s step-end infinite; }
+      #narr_ts12 { animation: narr_fade_12 34s step-end infinite; }
+      #narr_ts13 { animation: narr_fade_13 34s step-end infinite; }
+      #narr_ts14 { animation: narr_fade_14 34s step-end infinite; }
+      #narr_ts15 { animation: narr_fade_15 34s step-end infinite; }
+      #narr_ts16 { animation: narr_fade_16 34s step-end infinite; }
+      #narr_ts17 { animation: narr_fade_17 34s step-end infinite; }
+
+      @keyframes narr_fade_1 { 0%, 5.88% { opacity: 1; } 5.8801%, 100% { opacity: 0; } }
+      @keyframes narr_fade_2 { 0%, 5.88% { opacity: 0; } 5.88%, 11.76% { opacity: 1; } 11.7601%, 100% { opacity: 0; } }
+      @keyframes narr_fade_3 { 0%, 11.76% { opacity: 0; } 11.76%, 17.65% { opacity: 1; } 17.6501%, 100% { opacity: 0; } }
+      @keyframes narr_fade_4 { 0%, 17.65% { opacity: 0; } 17.65%, 23.53% { opacity: 1; } 23.5301%, 100% { opacity: 0; } }
+      @keyframes narr_fade_5 { 0%, 23.53% { opacity: 0; } 23.53%, 29.41% { opacity: 1; } 29.4101%, 100% { opacity: 0; } }
+      @keyframes narr_fade_6 { 0%, 29.41% { opacity: 0; } 29.41%, 35.29% { opacity: 1; } 35.2901%, 100% { opacity: 0; } }
+      @keyframes narr_fade_7 { 0%, 35.29% { opacity: 0; } 35.29%, 41.18% { opacity: 1; } 41.1801%, 100% { opacity: 0; } }
+      @keyframes narr_fade_8 { 0%, 41.18% { opacity: 0; } 41.18%, 47.06% { opacity: 1; } 47.0601%, 100% { opacity: 0; } }
+      @keyframes narr_fade_9 { 0%, 47.06% { opacity: 0; } 47.06%, 52.94% { opacity: 1; } 52.9401%, 100% { opacity: 0; } }
+      @keyframes narr_fade_10 { 0%, 52.94% { opacity: 0; } 52.94%, 58.82% { opacity: 1; } 58.8201%, 100% { opacity: 0; } }
+      @keyframes narr_fade_11 { 0%, 58.82% { opacity: 0; } 58.82%, 64.71% { opacity: 1; } 64.7101%, 100% { opacity: 0; } }
+      @keyframes narr_fade_12 { 0%, 64.71% { opacity: 0; } 64.71%, 70.59% { opacity: 1; } 70.5901%, 100% { opacity: 0; } }
+      @keyframes narr_fade_13 { 0%, 70.59% { opacity: 0; } 70.59%, 76.47% { opacity: 1; } 76.4701%, 100% { opacity: 0; } }
+      @keyframes narr_fade_14 { 0%, 76.47% { opacity: 0; } 76.47%, 82.35% { opacity: 1; } 82.3501%, 100% { opacity: 0; } }
+      @keyframes narr_fade_15 { 0%, 82.35% { opacity: 0; } 82.35%, 88.24% { opacity: 1; } 88.2401%, 100% { opacity: 0; } }
+      @keyframes narr_fade_16 { 0%, 88.24% { opacity: 0; } 88.24%, 94.12% { opacity: 1; } 94.1201%, 100% { opacity: 0; } }
+      @keyframes narr_fade_17 { 0%, 94.12% { opacity: 0; } 94.12%, 100% { opacity: 1; } }
+    </style>
+  </defs>
+
+  <!-- ================= COMBINED UNIT: FACIAL FEATURE EXTRACTOR & PERSON DICTIONARY ================= -->
+  <g id="extractor_and_dictionary" data-id="extractor_and_dictionary" data-class="block" data-parent="root">
+    
+    <!-- ================= BLOCK 1: FACIAL FEATURE EXTRACTOR ================= -->
+    <g id="block_facial_extractor" data-id="block_facial_extractor" data-class="block" data-parent="extractor_and_dictionary">
+      <!-- Background -->
+      <rect id="rect_facial_extractor_bg" data-id="rect_facial_extractor_bg" data-class="child_node" data-parent="block_facial_extractor" x="2" y="2" width="406" height="265" rx="4" fill="#fcdede" stroke="#374151" stroke-width="2.5"/>
+      <!-- Title -->
+      <text id="text_facial_extractor_title" data-id="text_facial_extractor_title" data-class="text_node" data-parent="block_facial_extractor" x="205" y="45" fill="#111827" font-size="24" font-weight="bold" font-family="system-ui, -apple-system, sans-serif" text-anchor="middle">Facial Feature Extractor</text>
+
+      <!-- Data Cylinder -->
+      <g id="group_cylinder_data" data-id="group_cylinder_data" data-class="composite_whole" data-parent="block_facial_extractor">
+        <path id="cylinder_bottom" data-id="cylinder_bottom" data-class="composite_part" data-parent="group_cylinder_data" d="M 52 190 A 46 14 0 0 0 144 190 L 144 220 A 46 14 0 0 1 52 220 Z" fill="#b91c1c" stroke="#374151" stroke-width="2"/>
+        <path id="cylinder_middle" data-id="cylinder_middle" data-class="composite_part" data-parent="group_cylinder_data" d="M 52 160 A 46 14 0 0 0 144 160 L 144 190 A 46 14 0 0 1 52 190 Z" fill="#f87171" stroke="#374151" stroke-width="2"/>
+        <path id="cylinder_top_body" data-id="cylinder_top_body" data-class="composite_part" data-parent="group_cylinder_data" d="M 52 120 L 52 160 A 46 14 0 0 0 144 160 L 144 120 Z" fill="#ffffff" stroke="#374151" stroke-width="2"/>
+        <ellipse id="cylinder_top_cap" data-id="cylinder_top_cap" data-class="composite_part" data-parent="group_cylinder_data" cx="98" cy="120" rx="46" ry="14" fill="#ffffff" stroke="#374151" stroke-width="2"/>
+        <text id="text_cylinder_label" data-id="text_cylinder_label" data-class="text_node" data-parent="group_cylinder_data" x="98" y="170" fill="#1f2937" font-size="20" font-weight="bold" font-family="system-ui, -apple-system, sans-serif" text-anchor="middle">Data</text>
+      </g>
+
+      <!-- Arrow: Data -> CNN Training -->
+      <path id="edge_data_to_cnn" data-id="edge_data_to_cnn" data-class="edge" data-source="group_cylinder_data" data-target="block_cnn_training" d="M 156 170 L 206 170" stroke="#4b5563" stroke-width="6" fill="none" marker-end="url(#arrow-gray)"/>
+
+      <!-- CNN Training Sub-Block -->
+      <g id="block_cnn_training" data-id="block_cnn_training" data-class="block" data-parent="block_facial_extractor">
+        <text id="text_cnn_training_title" data-id="text_cnn_training_title" data-class="text_node" data-parent="block_cnn_training" x="280" y="90" fill="#1f2937" font-size="18" font-weight="bold" font-family="system-ui, -apple-system, sans-serif" text-anchor="middle">CNN Training</text>
+        <rect id="rect_nn_card" data-id="rect_nn_card" data-class="child_node" data-parent="block_cnn_training" x="222" y="112" width="136" height="118" rx="4" fill="#ffffff" stroke="#9ca3af" stroke-width="1.5" filter="url(#shadow)"/>
+
+        <!-- Neural Network Connections & Nodes -->
+        <g id="nn_graph" data-id="nn_graph" data-class="composite_whole" data-parent="block_cnn_training">
+          <g stroke="#cbd5e1" stroke-width="1.2" data-id="nn_connections" data-class="composite_part" data-parent="nn_graph">
+            <!-- Layer 1 to Layer 2 -->
+            <line x1="242" y1="132" x2="276" y2="132"/><line x1="242" y1="132" x2="276" y2="152"/><line x1="242" y1="132" x2="276" y2="172"/><line x1="242" y1="132" x2="276" y2="192"/>
+            <line x1="242" y1="152" x2="276" y2="132"/><line x1="242" y1="152" x2="276" y2="152"/><line x1="242" y1="152" x2="276" y2="172"/><line x1="242" y1="152" x2="276" y2="192"/>
+            <line x1="242" y1="172" x2="276" y2="132"/><line x1="242" y1="172" x2="276" y2="152"/><line x1="242" y1="172" x2="276" y2="172"/><line x1="242" y1="172" x2="276" y2="192"/>
+            <line x1="242" y1="192" x2="276" y2="132"/><line x1="242" y1="192" x2="276" y2="152"/><line x1="242" y1="192" x2="276" y2="172"/><line x1="242" y1="192" x2="276" y2="192"/>
+            <!-- Layer 2 to Layer 3 -->
+            <line x1="276" y1="132" x2="310" y2="142"/><line x1="276" y1="132" x2="310" y2="162"/><line x1="276" y1="132" x2="310" y2="182"/>
+            <line x1="276" y1="152" x2="310" y2="142"/><line x1="276" y1="152" x2="310" y2="162"/><line x1="276" y1="152" x2="310" y2="182"/>
+            <line x1="276" y1="172" x2="310" y2="142"/><line x1="276" y1="172" x2="310" y2="162"/><line x1="276" y1="172" x2="310" y2="182"/>
+            <line x1="276" y1="192" x2="310" y2="142"/><line x1="276" y1="192" x2="310" y2="162"/><line x1="276" y1="192" x2="310" y2="182"/>
+            <!-- Layer 3 to Layer 4 -->
+            <line x1="310" y1="142" x2="344" y2="142"/><line x1="310" y1="142" x2="344" y2="162"/><line x1="310" y1="142" x2="344" y2="182"/>
+            <line x1="310" y1="162" x2="344" y2="142"/><line x1="310" y1="162" x2="344" y2="162"/><line x1="310" y1="162" x2="344" y2="182"/>
+            <line x1="310" y1="182" x2="344" y2="142"/><line x1="310" y1="182" x2="344" y2="162"/><line x1="310" y1="182" x2="344" y2="182"/>
+          </g>
+
+          <!-- Nodes Layer 1 (Input) -->
+          <circle cx="242" cy="132" r="5.5" fill="#7f1d1d" stroke="#374151" stroke-width="1" data-id="nn_n1_1" data-class="composite_part" data-parent="nn_graph"/>
+          <circle cx="242" cy="152" r="5.5" fill="#7f1d1d" stroke="#374151" stroke-width="1" data-id="nn_n1_2" data-class="composite_part" data-parent="nn_graph"/>
+          <circle cx="242" cy="172" r="5.5" fill="#7f1d1d" stroke="#374151" stroke-width="1" data-id="nn_n1_3" data-class="composite_part" data-parent="nn_graph"/>
+          <circle cx="242" cy="192" r="5.5" fill="#7f1d1d" stroke="#374151" stroke-width="1" data-id="nn_n1_4" data-class="composite_part" data-parent="nn_graph"/>
+
+          <!-- Nodes Layer 2 -->
+          <circle cx="276" cy="132" r="5.5" fill="#ffffff" stroke="#374151" stroke-width="1" data-id="nn_n2_1" data-class="composite_part" data-parent="nn_graph"/>
+          <circle cx="276" cy="152" r="5.5" fill="#ffffff" stroke="#374151" stroke-width="1" data-id="nn_n2_2" data-class="composite_part" data-parent="nn_graph"/>
+          <circle cx="276" cy="172" r="5.5" fill="#ffffff" stroke="#374151" stroke-width="1" data-id="nn_n2_3" data-class="composite_part" data-parent="nn_graph"/>
+          <circle cx="276" cy="192" r="5.5" fill="#ffffff" stroke="#374151" stroke-width="1" data-id="nn_n2_4" data-class="composite_part" data-parent="nn_graph"/>
+
+          <!-- Nodes Layer 3 -->
+          <circle cx="310" cy="142" r="5.5" fill="#ffffff" stroke="#374151" stroke-width="1" data-id="nn_n3_1" data-class="composite_part" data-parent="nn_graph"/>
+          <circle cx="310" cy="162" r="5.5" fill="#ffffff" stroke="#374151" stroke-width="1" data-id="nn_n3_2" data-class="composite_part" data-parent="nn_graph"/>
+          <circle cx="310" cy="182" r="5.5" fill="#ffffff" stroke="#374151" stroke-width="1" data-id="nn_n3_3" data-class="composite_part" data-parent="nn_graph"/>
+
+          <!-- Nodes Layer 4 (Output) -->
+          <circle cx="344" cy="142" r="5.5" fill="#fde047" stroke="#ca8a04" stroke-width="1" data-id="nn_n4_1" data-class="composite_part" data-parent="nn_graph"/>
+          <circle cx="344" cy="162" r="5.5" fill="#fde047" stroke="#ca8a04" stroke-width="1" data-id="nn_n4_2" data-class="composite_part" data-parent="nn_graph"/>
+          <circle cx="344" cy="182" r="5.5" fill="#fde047" stroke="#ca8a04" stroke-width="1" data-id="nn_n4_3" data-class="composite_part" data-parent="nn_graph"/>
+        </g>
+      </g>
+    </g>
+
+    <!-- ================= BLOCK 2: PERSON DICTIONARY ================= -->
+    <g id="block_person_dict" data-id="block_person_dict" data-class="block" data-parent="extractor_and_dictionary">
+      <!-- Background -->
+      <rect id="rect_person_dict_bg" data-id="rect_person_dict_bg" data-class="child_node" data-parent="block_person_dict" x="568" y="2" width="406" height="358" rx="4" fill="#dbeafe" stroke="#374151" stroke-width="2.5"/>
+      <!-- Title -->
+      <text id="text_person_dict_title" data-id="text_person_dict_title" data-class="text_node" data-parent="block_person_dict" x="771" y="45" fill="#111827" font-size="24" font-weight="bold" font-family="system-ui, -apple-system, sans-serif" text-anchor="middle">Person Dictionary</text>
+
+      <!-- Select entities & gather exemplary images -->
+      <g id="box_dict_select" data-id="box_dict_select" data-class="child_node" data-parent="block_person_dict">
+        <rect id="rect_dict_select" data-id="rect_dict_select" data-class="child_node" data-parent="box_dict_select" x="592" y="72" width="360" height="80" rx="4" fill="#bfdbfe" stroke="#3b82f6" stroke-width="2"/>
+        <text id="text_dict_select_1" data-id="text_dict_select_1" data-class="text_node" data-parent="box_dict_select" x="780" y="105" fill="#1e293b" font-size="18" font-weight="bold" font-family="system-ui, -apple-system, sans-serif" text-anchor="middle">Select entities &amp;</text>
+        <text id="text_dict_select_2" data-id="text_dict_select_2" data-class="text_node" data-parent="box_dict_select" x="780" y="130" fill="#1e293b" font-size="18" font-weight="bold" font-family="system-ui, -apple-system, sans-serif" text-anchor="middle">gather exemplary images</text>
+      </g>
+
+      <!-- Globe Icon -->
+      <g id="icon_globe" data-id="icon_globe" data-class="composite_whole" data-parent="block_person_dict">
+        <circle id="globe_base" data-id="globe_base" data-class="composite_part" data-parent="icon_globe" cx="602" cy="84" r="26" fill="#ffffff" stroke="#4b5563" stroke-width="2"/>
+        <ellipse id="globe_ellipse" data-id="globe_ellipse" data-class="composite_part" data-parent="icon_globe" cx="602" cy="84" rx="12" ry="26" fill="none" stroke="#4b5563" stroke-width="1.5"/>
+        <line id="globe_line_h1" data-id="globe_line_h1" data-class="composite_part" data-parent="icon_globe" x1="576" y1="84" x2="628" y2="84" stroke="#4b5563" stroke-width="1.5"/>
+        <line id="globe_line_h2" data-id="globe_line_h2" data-class="composite_part" data-parent="icon_globe" x1="580" y1="71" x2="624" y2="71" stroke="#4b5563" stroke-width="1.5"/>
+        <line id="globe_line_h3" data-id="globe_line_h3" data-class="composite_part" data-parent="icon_globe" x1="580" y1="97" x2="624" y2="97" stroke="#4b5563" stroke-width="1.5"/>
+      </g>
+
+      <!-- Arrow 1 -->
+      <path id="edge_dict_1_to_2" data-id="edge_dict_1_to_2" data-class="edge" data-source="box_dict_select" data-target="box_dict_feat_extract" d="M 772 152 L 772 182" stroke="#002b9e" stroke-width="3" fill="none" marker-end="url(#arrow-blue)"/>
+
+      <!-- Feature extraction -->
+      <g id="box_dict_feat_extract" data-id="box_dict_feat_extract" data-class="child_node" data-parent="block_person_dict">
+        <rect id="rect_dict_feat_extract" data-id="rect_dict_feat_extract" data-class="child_node" data-parent="box_dict_feat_extract" x="592" y="182" width="360" height="64" rx="4" fill="#bfdbfe" stroke="#3b82f6" stroke-width="2"/>
+        <text id="text_dict_feat_extract" data-id="text_dict_feat_extract" data-class="text_node" data-parent="box_dict_feat_extract" x="772" y="220" fill="#1e293b" font-size="18" font-weight="bold" font-family="system-ui, -apple-system, sans-serif" text-anchor="middle">Feature extraction</text>
+      </g>
+
+      <!-- Arrow 2 -->
+      <path id="edge_dict_2_to_3" data-id="edge_dict_2_to_3" data-class="edge" data-source="box_dict_feat_extract" data-target="box_dict_filtering" d="M 772 246 L 772 278" stroke="#002b9e" stroke-width="3" fill="none" marker-end="url(#arrow-blue)"/>
+
+      <!-- Filtering -->
+      <g id="box_dict_filtering" data-id="box_dict_filtering" data-class="child_node" data-parent="block_person_dict">
+        <rect id="rect_dict_filtering" data-id="rect_dict_filtering" data-class="child_node" data-parent="box_dict_filtering" x="592" y="278" width="360" height="64" rx="4" fill="#bfdbfe" stroke="#3b82f6" stroke-width="2"/>
+        <text id="text_dict_filtering" data-id="text_dict_filtering" data-class="text_node" data-parent="box_dict_filtering" x="772" y="316" fill="#1e293b" font-size="18" font-weight="bold" font-family="system-ui, -apple-system, sans-serif" text-anchor="middle">Filtering</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ================= BLOCK 3: INTERNET ARCHIVE ================= -->
+  <g id="block_internet_archive" data-id="block_internet_archive" data-class="block" data-parent="root">
+    <!-- Background -->
+    <rect id="rect_archive_bg" data-id="rect_archive_bg" data-class="child_node" data-parent="block_internet_archive" x="2" y="400" width="406" height="265" rx="4" fill="#fef3c7" stroke="#374151" stroke-width="2.5"/>
+    <!-- Title -->
+    <text id="text_archive_title" data-id="text_archive_title" data-class="text_node" data-parent="block_internet_archive" x="205" y="440" fill="#111827" font-size="24" font-weight="bold" font-family="system-ui, -apple-system, sans-serif" text-anchor="middle">Internet Archive</text>
+
+    <!-- Classical Building Icon -->
+    <g id="icon_archive_building" data-id="icon_archive_building" data-class="composite_whole" data-parent="block_internet_archive">
+      <text id="building_text_internet" data-id="building_text_internet" data-class="composite_part" data-parent="icon_archive_building" x="38" y="630" font-size="14" font-family="Georgia, serif" fill="#111827" letter-spacing="6" transform="rotate(-90 38 630)">INTERNET</text>
+      <text id="building_text_archive" data-id="building_text_archive" data-class="composite_part" data-parent="icon_archive_building" x="54" y="495" font-size="16" font-family="Georgia, serif" fill="#111827" letter-spacing="4">ARCHIVE</text>
+      <polygon id="building_pediment" data-id="building_pediment" data-class="composite_part" data-parent="icon_archive_building" points="108,502 63,522 153,522" fill="#111827"/>
+      <rect id="building_architrave" data-id="building_architrave" data-class="composite_part" data-parent="icon_archive_building" x="63" y="525" width="90" height="7" fill="#111827"/>
+      <rect id="building_col1" data-id="building_col1" data-class="composite_part" data-parent="icon_archive_building" x="68" y="536" width="11" height="58" rx="2" fill="#111827"/>
+      <rect id="building_col2" data-id="building_col2" data-class="composite_part" data-parent="icon_archive_building" x="91" y="536" width="11" height="58" rx="2" fill="#111827"/>
+      <rect id="building_col3" data-id="building_col3" data-class="composite_part" data-parent="icon_archive_building" x="114" y="536" width="11" height="58" rx="2" fill="#111827"/>
+      <rect id="building_col4" data-id="building_col4" data-class="composite_part" data-parent="icon_archive_building" x="137" y="536" width="11" height="58" rx="2" fill="#111827"/>
+      <rect id="building_base1" data-id="building_base1" data-class="composite_part" data-parent="icon_archive_building" x="63" y="598" width="90" height="7" fill="#111827"/>
+      <rect id="building_base2" data-id="building_base2" data-class="composite_part" data-parent="icon_archive_building" x="60" y="607" width="96" height="5" fill="#111827"/>
+    </g>
+
+    <!-- Arrow: Archive -> Web Content -->
+    <path id="edge_archive_to_web" data-id="edge_archive_to_web" data-class="edge" data-source="icon_archive_building" data-target="block_web_content" d="M 164 552 L 224 552" stroke="#4b5563" stroke-width="6" fill="none" marker-end="url(#arrow-gray)"/>
+
+    <!-- Web Content Sub-Block -->
+    <g id="block_web_content" data-id="block_web_content" data-class="block" data-parent="block_internet_archive">
+      <text id="text_web_content_title" data-id="text_web_content_title" data-class="text_node" data-parent="block_web_content" x="306" y="490" fill="#1f2937" font-size="18" font-weight="bold" font-family="system-ui, -apple-system, sans-serif" text-anchor="middle">Web Content</text>
+
+      <!-- Browser Windows -->
+      <g id="web_windows" data-id="web_windows" data-class="composite_whole" data-parent="block_web_content">
+        <rect id="win1_bg" data-id="win1_bg" data-class="composite_part" data-parent="web_windows" x="238" y="502" width="102" height="72" rx="3" fill="#ffffff" stroke="#374151" stroke-width="2"/>
+        <rect id="win1_bar" data-id="win1_bar" data-class="composite_part" data-parent="web_windows" x="238" y="502" width="102" height="14" fill="#e2e8f0" stroke="#374151" stroke-width="2"/>
+        
+        <rect id="win2_bg" data-id="win2_bg" data-class="composite_part" data-parent="web_windows" x="256" y="518" width="122" height="76" rx="3" fill="#ffffff" stroke="#374151" stroke-width="2"/>
+        <rect id="win2_bar" data-id="win2_bar" data-class="composite_part" data-parent="web_windows" x="256" y="518" width="122" height="14" fill="#e2e8f0" stroke="#374151" stroke-width="2"/>
+
+        <rect id="win3_bg" data-id="win3_bg" data-class="composite_part" data-parent="web_windows" x="256" y="534" width="98" height="70" rx="3" fill="#ffffff" stroke="#374151" stroke-width="2" filter="url(#shadow)"/>
+        <rect id="win3_bar" data-id="win3_bar" data-class="composite_part" data-parent="web_windows" x="256" y="534" width="98" height="14" fill="#e2e8f0" stroke="#374151" stroke-width="2"/>
+        <circle id="win3_dot1" data-id="win3_dot1" data-class="composite_part" data-parent="web_windows" cx="262" cy="541" r="2" fill="#ef4444"/>
+        <circle id="win3_dot2" data-id="win3_dot2" data-class="composite_part" data-parent="web_windows" cx="268" cy="541" r="2" fill="#f59e0b"/>
+        <circle id="win3_dot3" data-id="win3_dot3" data-class="composite_part" data-parent="web_windows" cx="274" cy="541" r="2" fill="#10b981"/>
+        
+        <rect id="win3_img" data-id="win3_img" data-class="composite_part" data-parent="web_windows" x="264" y="556" width="34" height="34" rx="2" fill="#f1f5f9" stroke="#4b5563" stroke-width="1.5"/>
+        <polygon id="win3_mountain" data-id="win3_mountain" data-class="composite_part" data-parent="web_windows" points="266,586 276,572 284,582 292,574 296,586" fill="#cbd5e1"/>
+        <circle id="win3_sun" data-id="win3_sun" data-class="composite_part" data-parent="web_windows" cx="272" cy="564" r="2.5" fill="#cbd5e1"/>
+        <line id="win3_line1" data-id="win3_line1" data-class="composite_part" data-parent="web_windows" x1="306" y1="560" x2="346" y2="560" stroke="#94a3b8" stroke-width="2"/>
+        <line id="win3_line2" data-id="win3_line2" data-class="composite_part" data-parent="web_windows" x1="306" y1="568" x2="346" y2="568" stroke="#94a3b8" stroke-width="2"/>
+        <line id="win3_line3" data-id="win3_line3" data-class="composite_part" data-parent="web_windows" x1="306" y1="576" x2="336" y2="576" stroke="#94a3b8" stroke-width="2"/>
+      </g>
+    </g>
+  </g>
+
+  <!-- ================= BLOCK 4: PERSON IDENTIFICATION ================= -->
+  <g id="block_person_ident" data-id="block_person_ident" data-class="block" data-parent="root">
+    <!-- Background -->
+    <rect id="rect_person_ident_bg" data-id="rect_person_ident_bg" data-class="child_node" data-parent="block_person_ident" x="480" y="400" width="494" height="265" rx="4" fill="#f0fdf4" stroke="#374151" stroke-width="2.5"/>
+    <!-- Title -->
+    <text id="text_person_ident_title" data-id="text_person_ident_title" data-class="text_node" data-parent="block_person_ident" x="727" y="440" fill="#111827" font-size="24" font-weight="bold" font-family="system-ui, -apple-system, sans-serif" text-anchor="middle">Person Identification</text>
+
+    <!-- Face Detection -->
+    <g id="box_face_detection" data-id="box_face_detection" data-class="child_node" data-parent="block_person_ident">
+      <rect id="rect_face_detection" data-id="rect_face_detection" data-class="child_node" data-parent="box_face_detection" x="502" y="470" width="204" height="64" rx="4" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+      <text id="text_face_detection" data-id="text_face_detection" data-class="text_node" data-parent="box_face_detection" x="604" y="508" fill="#1e293b" font-size="18" font-weight="bold" font-family="system-ui, -apple-system, sans-serif" text-anchor="middle">Face Detection</text>
+    </g>
+
+    <!-- Arrow: Detection -> Extraction -->
+    <path id="edge_detect_to_extract" data-id="edge_detect_to_extract" data-class="edge" data-source="box_face_detection" data-target="box_ident_feat_extract" d="M 604 534 L 604 574" stroke="#059669" stroke-width="3" fill="none" marker-end="url(#arrow-green)"/>
+
+    <!-- Feature Extraction -->
+    <g id="box_ident_feat_extract" data-id="box_ident_feat_extract" data-class="child_node" data-parent="block_person_ident">
+      <rect id="rect_ident_feat_extract" data-id="rect_ident_feat_extract" data-class="child_node" data-parent="box_ident_feat_extract" x="502" y="574" width="204" height="64" rx="4" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+      <text id="text_ident_feat_1" data-id="text_ident_feat_1" data-class="text_node" data-parent="box_ident_feat_extract" x="604" y="602" fill="#1e293b" font-size="18" font-weight="bold" font-family="system-ui, -apple-system, sans-serif" text-anchor="middle">Feature</text>
+      <text id="text_ident_feat_2" data-id="text_ident_feat_2" data-class="text_node" data-parent="box_ident_feat_extract" x="604" y="624" fill="#1e293b" font-size="18" font-weight="bold" font-family="system-ui, -apple-system, sans-serif" text-anchor="middle">Extraction</text>
+    </g>
+
+    <!-- Arrow: Extraction -> Verification -->
+    <path id="edge_extract_to_verify" data-id="edge_extract_to_verify" data-class="edge" data-source="box_ident_feat_extract" data-target="box_face_verification" d="M 706 606 L 726 606 L 726 502 L 748 502" stroke="#059669" stroke-width="3" fill="none" marker-end="url(#arrow-green)"/>
+
+    <!-- Face Verification -->
+    <g id="box_face_verification" data-id="box_face_verification" data-class="child_node" data-parent="block_person_ident">
+      <rect id="rect_face_verification" data-id="rect_face_verification" data-class="child_node" data-parent="box_face_verification" x="748" y="470" width="204" height="64" rx="4" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+      <text id="text_face_verify_1" data-id="text_face_verify_1" data-class="text_node" data-parent="box_face_verification" x="850" y="498" fill="#1e293b" font-size="18" font-weight="bold" font-family="system-ui, -apple-system, sans-serif" text-anchor="middle">Face</text>
+      <text id="text_face_verify_2" data-id="text_face_verify_2" data-class="text_node" data-parent="box_face_verification" x="850" y="520" fill="#1e293b" font-size="18" font-weight="bold" font-family="system-ui, -apple-system, sans-serif" text-anchor="middle">Verification</text>
+    </g>
+
+    <!-- Arrow: Verification -> Visualization -->
+    <path id="edge_verify_to_visual" data-id="edge_verify_to_visual" data-class="edge" data-source="box_face_verification" data-target="box_visualization" d="M 850 534 L 850 574" stroke="#059669" stroke-width="3" fill="none" marker-end="url(#arrow-green)"/>
+
+    <!-- Visualization -->
+    <g id="box_visualization" data-id="box_visualization" data-class="child_node" data-parent="block_person_ident">
+      <rect id="rect_visualization" data-id="rect_visualization" data-class="child_node" data-parent="box_visualization" x="748" y="574" width="204" height="64" rx="4" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+      <text id="text_visualization" data-id="text_visualization" data-class="text_node" data-parent="box_visualization" x="850" y="612" fill="#1e293b" font-size="18" font-weight="bold" font-family="system-ui, -apple-system, sans-serif" text-anchor="middle">Visualization</text>
+    </g>
+  </g>
+
+  <!-- ================= INTER-BLOCK CONNECTING ARROWS ================= -->
+  <g id="group_inter_block_edges">
+    <path id="edge_red_to_dict" data-id="edge_red_to_dict" data-class="edge" data-source="block_cnn_training" data-target="box_dict_feat_extract" d="M 358 176 L 430 176 L 430 214 L 592 214" stroke="#b91c1c" stroke-width="3" fill="none" marker-end="url(#arrow-red)"/>
+    <path id="edge_red_to_ident" data-id="edge_red_to_ident" data-class="edge" data-source="block_cnn_training" data-target="box_ident_feat_extract" d="M 430 214 L 430 606 L 502 606" stroke="#b91c1c" stroke-width="3" fill="none" marker-end="url(#arrow-red)"/>
+    <path id="edge_archive_to_detect" data-id="edge_archive_to_detect" data-class="edge" data-source="block_web_content" data-target="box_face_detection" d="M 384 574 L 446 574 L 446 502 L 502 502" stroke="#d97706" stroke-width="3" fill="none" marker-end="url(#arrow-yellow)"/>
+    <path id="edge_dict_to_verify" data-id="edge_dict_to_verify" data-class="edge" data-source="box_dict_filtering" data-target="box_face_verification" d="M 772 342 L 772 380 L 990 380 L 990 502 L 952 502" stroke="#002b9e" stroke-width="3" fill="none" marker-end="url(#arrow-blue)"/>
+  </g>
+
+  <!-- ================= DYNAMIC NARRATION BANNER ================= -->
+  <g id="narration_banner">
+    <rect x="10" y="685" width="974" height="120" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2" />
+    
+    <text id="narr_ts1" class="narr_text" x="50%" y="735" text-anchor="middle">
+      <tspan x="50%" dy="0">The workflow of the person identification framework begins with</tspan>
+      <tspan x="50%" dy="1.3em">training a facial feature extractor and building a person dictionary.</tspan>
+    </text>
+
+    <text id="narr_ts2" class="narr_text" x="50%" y="735" text-anchor="middle">
+      <tspan x="50%" dy="0">The Facial Feature Extractor block is responsible for</tspan>
+      <tspan x="50%" dy="1.3em">learning a robust representation of facial characteristics.</tspan>
+    </text>
+
+    <text id="narr_ts3" class="narr_text" x="50%" y="745" text-anchor="middle">
+      <tspan x="50%" dy="0">It utilizes a training dataset containing facial images.</tspan>
+    </text>
+
+    <text id="narr_ts4" class="narr_text" x="50%" y="735" text-anchor="middle">
+      <tspan x="50%" dy="0">This dataset is used to train a convolutional neural network, or CNN.</tspan>
+      <tspan x="50%" dy="1.3em">The CNN learns to extract robust feature representations to describe facial characteristics.</tspan>
+    </text>
+
+    <text id="narr_ts5" class="narr_text" x="50%" y="745" text-anchor="middle">
+      <tspan x="50%" dy="0">Next, the Person Dictionary block defines a lexicon of target entities for a given domain.</tspan>
+    </text>
+
+    <text id="narr_ts6" class="narr_text" x="50%" y="735" text-anchor="middle">
+      <tspan x="50%" dy="0">First, entities are selected, and exemplary images are</tspan>
+      <tspan x="50%" dy="1.3em">gathered from the web using an image search engine.</tspan>
+    </text>
+
+    <text id="narr_ts7" class="narr_text" x="50%" y="745" text-anchor="middle">
+      <tspan x="50%" dy="0">The trained CNN is then applied to extract facial features from these gathered images.</tspan>
+    </text>
+
+    <text id="narr_ts8" class="narr_text" x="50%" y="745" text-anchor="middle">
+      <tspan x="50%" dy="0">A filtering step is performed to reduce noise and improve the quality of the sample dataset.</tspan>
+    </text>
+
+    <text id="narr_ts9" class="narr_text" x="50%" y="735" text-anchor="middle">
+      <tspan x="50%" dy="0">To identify these entities in real-world data, the system</tspan>
+      <tspan x="50%" dy="1.3em">retrieves content from the Internet Archive.</tspan>
+    </text>
+
+    <text id="narr_ts10" class="narr_text" x="50%" y="745" text-anchor="middle">
+      <tspan x="50%" dy="0">The Internet Archive serves as the primary source of historical web data.</tspan>
+    </text>
+
+    <text id="narr_ts11" class="narr_text" x="50%" y="735" text-anchor="middle">
+      <tspan x="50%" dy="0">Web content, such as images from archived web pages, is</tspan>
+      <tspan x="50%" dy="1.3em">extracted according to a predefined search space.</tspan>
+    </text>
+
+    <text id="narr_ts12" class="narr_text" x="50%" y="745" text-anchor="middle">
+      <tspan x="50%" dy="0">These web pages contain the target images in which persons of interest will be identified.</tspan>
+    </text>
+
+    <text id="narr_ts13" class="narr_text" x="50%" y="735" text-anchor="middle">
+      <tspan x="50%" dy="0">Finally, the Person Identification block processes the retrieved</tspan>
+      <tspan x="50%" dy="1.3em">web images to locate and verify the target entities.</tspan>
+    </text>
+
+    <text id="narr_ts14" class="narr_text" x="50%" y="745" text-anchor="middle">
+      <tspan x="50%" dy="0">First, face detection is performed on the web images to locate any faces.</tspan>
+    </text>
+
+    <text id="narr_ts15" class="narr_text" x="50%" y="745" text-anchor="middle">
+      <tspan x="50%" dy="0">For each detected face, features are extracted using the trained CNN model.</tspan>
+    </text>
+
+    <text id="narr_ts16" class="narr_text" x="50%" y="735" text-anchor="middle">
+      <tspan x="50%" dy="0">Face verification is then conducted by comparing the extracted</tspan>
+      <tspan x="50%" dy="1.3em">features against the filtered Person Dictionary.</tspan>
+    </text>
+
+    <text id="narr_ts17" class="narr_text" x="50%" y="735" text-anchor="middle">
+      <tspan x="50%" dy="0">Finally, the identified occurrences and relations of the</tspan>
+      <tspan x="50%" dy="1.3em">persons of interest are visualized for analysis.</tspan>
+    </text>
+  </g>
+
+  <!-- ================= THE FOCUS BOX ================= -->
+  <rect id="focus_box" fill="none" stroke="#FF0000" stroke-width="4" stroke-dasharray="8,4" rx="6" />
+</svg>

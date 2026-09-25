@@ -1,0 +1,2192 @@
+{
+ "_generated": "scripts/build_ablations.py — do not hand-edit",
+ "pipeline": "assets/ablations/pipeline-diagram.svg",
+ "warnings": [
+  "Narr_Drafter_wo_Context: \"CVPR_2025_arch01051\" exists on only one side — left out of the picker",
+  "Narr_Drafter_wo_Context: \"CVPR_2025_arch01062\" exists on only one side — left out of the picker",
+  "Narr_Drafter_wo_Context: \"CVPR_2025_arch03065\" exists on only one side — left out of the picker",
+  "Narr_Drafter_wo_Context: \"Paper2Fig_pipe_easy_000000552\" exists on only one side — left out of the picker",
+  "Seq_wo_XML: \"CVPR_2025_arch03065\" exists on only one side — left out of the picker",
+  "Stage_2_wo_Image: \"CVPR_2025_arch01051\" exists on only one side — left out of the picker",
+  "Stage_3_wo_Image: folder missing — skipped"
+ ],
+ "experiments": [
+  {
+   "key": "Narr_Drafter_wo_Context",
+   "name": "Stage 2: Narration Drafter without Context",
+   "short": "Narration Drafter · no context",
+   "removed": "The context dump (paper title, abstract, method, caption) fed to the Narration Drafter",
+   "metrics": [
+    "NA",
+    "AN"
+   ],
+   "cross": [
+    "node_s2_in_k"
+   ],
+   "d2c": false,
+   "panel": "Without Context",
+   "sheet": "04_Narration_no_Context",
+   "samples": [
+    {
+     "id": "CVPR_2025_arch02021",
+     "style": "Colour Pop",
+     "source": "ABLATIONS_PAGE/Original_Images/CVPR_2025_arch02021.png?v=d5dc557a",
+     "animation": {
+      "full": {
+       "src": "ABLATIONS_PAGE/Narr_Drafter_wo_Context/w_context/CVPR_2025_arch02021.mp4?v=3d5194f6",
+       "kind": "video",
+       "source": "ABLATIONS_PAGE/Narr_Drafter_wo_Context/w_context/CVPR_2025_arch02021.svg?v=93b6b402",
+       "captions": "ABLATIONS_PAGE/Narr_Drafter_wo_Context/w_context/CVPR_2025_arch02021.captions.json?v=39dff63f"
+      },
+      "ablated": {
+       "src": "ABLATIONS_PAGE/Narr_Drafter_wo_Context/wo_context/CVPR_2025_arch02021.mp4?v=11c16ac6",
+       "kind": "video",
+       "source": "ABLATIONS_PAGE/Narr_Drafter_wo_Context/wo_context/CVPR_2025_arch02021.svg?v=bafd870f",
+       "captions": "ABLATIONS_PAGE/Narr_Drafter_wo_Context/wo_context/CVPR_2025_arch02021.captions.json?v=71bc3f06"
+      }
+     },
+     "d2c": null,
+     "critic": null,
+     "scores": {
+      "NA": {
+       "full": {
+        "kind": "num",
+        "value": 0.9444,
+        "text": "0.9444"
+       },
+       "ablated": {
+        "kind": "num",
+        "value": 0.9333,
+        "text": "0.9333"
+       }
+      },
+      "AN": {
+       "full": {
+        "kind": "num",
+        "value": 0.9629,
+        "text": "0.9629"
+       },
+       "ablated": {
+        "kind": "num",
+        "value": 0.8667,
+        "text": "0.8667"
+       }
+      }
+     }
+    },
+    {
+     "id": "Paper2Fig_arch_diff_000000037",
+     "style": "Colour Pop",
+     "source": "ABLATIONS_PAGE/Original_Images/Paper2Fig_arch_diff_000000037.png?v=a1d035b6",
+     "animation": {
+      "full": {
+       "src": "ABLATIONS_PAGE/Narr_Drafter_wo_Context/w_context/Paper2Fig_arch_diff_000000037.mp4?v=b5172d1d",
+       "kind": "video",
+       "source": "ABLATIONS_PAGE/Narr_Drafter_wo_Context/w_context/Paper2Fig_arch_diff_000000037.svg?v=c1ea32d6",
+       "captions": "ABLATIONS_PAGE/Narr_Drafter_wo_Context/w_context/Paper2Fig_arch_diff_000000037.captions.json?v=860eb5c3"
+      },
+      "ablated": {
+       "src": "ABLATIONS_PAGE/Narr_Drafter_wo_Context/wo_context/Paper2Fig_arch_diff_000000037.mp4?v=591f1258",
+       "kind": "video",
+       "source": "ABLATIONS_PAGE/Narr_Drafter_wo_Context/wo_context/Paper2Fig_arch_diff_000000037.svg?v=6749f6bb",
+       "captions": "ABLATIONS_PAGE/Narr_Drafter_wo_Context/wo_context/Paper2Fig_arch_diff_000000037.captions.json?v=ad5a4b70"
+      }
+     },
+     "d2c": null,
+     "critic": null,
+     "scores": {
+      "NA": {
+       "full": {
+        "kind": "num",
+        "value": 0.8889,
+        "text": "0.8889"
+       },
+       "ablated": {
+        "kind": "num",
+        "value": 0.8333,
+        "text": "0.8333"
+       }
+      },
+      "AN": {
+       "full": {
+        "kind": "num",
+        "value": 0.8796,
+        "text": "0.8796"
+       },
+       "ablated": {
+        "kind": "num",
+        "value": 0.9166,
+        "text": "0.9166"
+       }
+      }
+     }
+    },
+    {
+     "id": "Paper2Fig_arch_easy_000000196",
+     "style": "Colour Pop",
+     "source": "ABLATIONS_PAGE/Original_Images/Paper2Fig_arch_easy_000000196.png?v=646c3eba",
+     "animation": {
+      "full": {
+       "src": "ABLATIONS_PAGE/Narr_Drafter_wo_Context/w_context/Paper2Fig_arch_easy_000000196.mp4?v=4f534fa7",
+       "kind": "video",
+       "source": "ABLATIONS_PAGE/Narr_Drafter_wo_Context/w_context/Paper2Fig_arch_easy_000000196.svg?v=6888bcaa",
+       "captions": "ABLATIONS_PAGE/Narr_Drafter_wo_Context/w_context/Paper2Fig_arch_easy_000000196.captions.json?v=d8b21202"
+      },
+      "ablated": {
+       "src": "ABLATIONS_PAGE/Narr_Drafter_wo_Context/wo_context/Paper2Fig_arch_easy_000000196.mp4?v=c479003a",
+       "kind": "video",
+       "source": "ABLATIONS_PAGE/Narr_Drafter_wo_Context/wo_context/Paper2Fig_arch_easy_000000196.svg?v=ce182318",
+       "captions": "ABLATIONS_PAGE/Narr_Drafter_wo_Context/wo_context/Paper2Fig_arch_easy_000000196.captions.json?v=e8f0df8c"
+      }
+     },
+     "d2c": null,
+     "critic": null,
+     "scores": {
+      "NA": {
+       "full": {
+        "kind": "num",
+        "value": 0.7692,
+        "text": "0.7692"
+       },
+       "ablated": {
+        "kind": "num",
+        "value": 0.6923,
+        "text": "0.6923"
+       }
+      },
+      "AN": {
+       "full": {
+        "kind": "num",
+        "value": 0.8632,
+        "text": "0.8632"
+       },
+       "ablated": {
+        "kind": "num",
+        "value": 0.8034,
+        "text": "0.8034"
+       }
+      }
+     }
+    },
+    {
+     "id": "Paper2Fig_pipe_diff_000000130",
+     "style": "Alpha Masking",
+     "source": "ABLATIONS_PAGE/Original_Images/Paper2Fig_pipe_diff_000000130.png?v=1ace3854",
+     "animation": {
+      "full": {
+       "src": "ABLATIONS_PAGE/Narr_Drafter_wo_Context/w_context/Paper2Fig_pipe_diff_000000130.mp4?v=c2ee365d",
+       "kind": "video",
+       "source": "ABLATIONS_PAGE/Narr_Drafter_wo_Context/w_context/Paper2Fig_pipe_diff_000000130.svg?v=a4b73b01",
+       "captions": "ABLATIONS_PAGE/Narr_Drafter_wo_Context/w_context/Paper2Fig_pipe_diff_000000130.captions.json?v=2fa52a60"
+      },
+      "ablated": {
+       "src": "ABLATIONS_PAGE/Narr_Drafter_wo_Context/wo_context/Paper2Fig_pipe_diff_000000130.mp4?v=ff172c87",
+       "kind": "video",
+       "source": "ABLATIONS_PAGE/Narr_Drafter_wo_Context/wo_context/Paper2Fig_pipe_diff_000000130.svg?v=4278047e",
+       "captions": "ABLATIONS_PAGE/Narr_Drafter_wo_Context/wo_context/Paper2Fig_pipe_diff_000000130.captions.json?v=8288d16c"
+      }
+     },
+     "d2c": null,
+     "critic": null,
+     "scores": {
+      "NA": {
+       "full": {
+        "kind": "num",
+        "value": 0.9583,
+        "text": "0.9583"
+       },
+       "ablated": {
+        "kind": "num",
+        "value": 0.9444,
+        "text": "0.9444"
+       }
+      },
+      "AN": {
+       "full": {
+        "kind": "num",
+        "value": 0.9815,
+        "text": "0.9815"
+       },
+       "ablated": {
+        "kind": "num",
+        "value": 0.9722,
+        "text": "0.9722"
+       }
+      }
+     }
+    },
+    {
+     "id": "Paper2Fig_pipe_diff_000000492",
+     "style": "Progressive Reveal",
+     "source": "ABLATIONS_PAGE/Original_Images/Paper2Fig_pipe_diff_000000492.png?v=22c1aa2a",
+     "animation": {
+      "full": {
+       "src": "ABLATIONS_PAGE/Narr_Drafter_wo_Context/w_context/Paper2Fig_pipe_diff_000000492.mp4?v=4ae09452",
+       "kind": "video",
+       "source": "ABLATIONS_PAGE/Narr_Drafter_wo_Context/w_context/Paper2Fig_pipe_diff_000000492.svg?v=e34fce53",
+       "captions": "ABLATIONS_PAGE/Narr_Drafter_wo_Context/w_context/Paper2Fig_pipe_diff_000000492.captions.json?v=fa11bb66"
+      },
+      "ablated": {
+       "src": "ABLATIONS_PAGE/Narr_Drafter_wo_Context/wo_context/Paper2Fig_pipe_diff_000000492.mp4?v=e4ec1368",
+       "kind": "video",
+       "source": "ABLATIONS_PAGE/Narr_Drafter_wo_Context/wo_context/Paper2Fig_pipe_diff_000000492.svg?v=85dcea1c",
+       "captions": "ABLATIONS_PAGE/Narr_Drafter_wo_Context/wo_context/Paper2Fig_pipe_diff_000000492.captions.json?v=7194a135"
+      }
+     },
+     "d2c": null,
+     "critic": null,
+     "scores": {
+      "NA": {
+       "full": {
+        "kind": "num",
+        "value": 1.0,
+        "text": "1.0000"
+       },
+       "ablated": {
+        "kind": "num",
+        "value": 0.9487,
+        "text": "0.9487"
+       }
+      },
+      "AN": {
+       "full": {
+        "kind": "num",
+        "value": 0.9744,
+        "text": "0.9744"
+       },
+       "ablated": {
+        "kind": "num",
+        "value": 0.9402,
+        "text": "0.9402"
+       }
+      }
+     }
+    },
+    {
+     "id": "Paper2Fig_pipe_easy_000000529",
+     "style": "Alpha Masking",
+     "source": "ABLATIONS_PAGE/Original_Images/Paper2Fig_pipe_easy_000000529.png?v=7bddd0c3",
+     "animation": {
+      "full": {
+       "src": "ABLATIONS_PAGE/Narr_Drafter_wo_Context/w_context/Paper2Fig_pipe_easy_000000529.mp4?v=250eb335",
+       "kind": "video",
+       "source": "ABLATIONS_PAGE/Narr_Drafter_wo_Context/w_context/Paper2Fig_pipe_easy_000000529.svg?v=3de7f885",
+       "captions": "ABLATIONS_PAGE/Narr_Drafter_wo_Context/w_context/Paper2Fig_pipe_easy_000000529.captions.json?v=6344dcac"
+      },
+      "ablated": {
+       "src": "ABLATIONS_PAGE/Narr_Drafter_wo_Context/wo_context/Paper2Fig_pipe_easy_000000529.mp4?v=2e626f61",
+       "kind": "video",
+       "source": "ABLATIONS_PAGE/Narr_Drafter_wo_Context/wo_context/Paper2Fig_pipe_easy_000000529.svg?v=ca591332",
+       "captions": "ABLATIONS_PAGE/Narr_Drafter_wo_Context/wo_context/Paper2Fig_pipe_easy_000000529.captions.json?v=85b70672"
+      }
+     },
+     "d2c": null,
+     "critic": null,
+     "scores": {
+      "NA": {
+       "full": {
+        "kind": "num",
+        "value": 0.9583,
+        "text": "0.9583"
+       },
+       "ablated": {
+        "kind": "num",
+        "value": 0.9167,
+        "text": "0.9167"
+       }
+      },
+      "AN": {
+       "full": {
+        "kind": "num",
+        "value": 0.9444,
+        "text": "0.9444"
+       },
+       "ablated": {
+        "kind": "num",
+        "value": 0.9306,
+        "text": "0.9306"
+       }
+      }
+     }
+    },
+    {
+     "id": "Paper2Fig_pipe_easy_000000579",
+     "style": "Colour Pop",
+     "source": "ABLATIONS_PAGE/Original_Images/Paper2Fig_pipe_easy_000000579.png?v=e7c12073",
+     "animation": {
+      "full": {
+       "src": "ABLATIONS_PAGE/Narr_Drafter_wo_Context/w_context/Paper2Fig_pipe_easy_000000579.mp4?v=795295f9",
+       "kind": "video",
+       "source": "ABLATIONS_PAGE/Narr_Drafter_wo_Context/w_context/Paper2Fig_pipe_easy_000000579.svg?v=d3ee0149",
+       "captions": "ABLATIONS_PAGE/Narr_Drafter_wo_Context/w_context/Paper2Fig_pipe_easy_000000579.captions.json?v=76c998db"
+      },
+      "ablated": {
+       "src": "ABLATIONS_PAGE/Narr_Drafter_wo_Context/wo_context/Paper2Fig_pipe_easy_000000579.mp4?v=73091cf2",
+       "kind": "video",
+       "source": "ABLATIONS_PAGE/Narr_Drafter_wo_Context/wo_context/Paper2Fig_pipe_easy_000000579.svg?v=dcd1ba21",
+       "captions": "ABLATIONS_PAGE/Narr_Drafter_wo_Context/wo_context/Paper2Fig_pipe_easy_000000579.captions.json?v=3951a095"
+      }
+     },
+     "d2c": null,
+     "critic": null,
+     "scores": {
+      "NA": {
+       "full": {
+        "kind": "num",
+        "value": 0.8889,
+        "text": "0.8889"
+       },
+       "ablated": {
+        "kind": "num",
+        "value": 0.7407,
+        "text": "0.7407"
+       }
+      },
+      "AN": {
+       "full": {
+        "kind": "num",
+        "value": 0.8889,
+        "text": "0.8889"
+       },
+       "ablated": {
+        "kind": "num",
+        "value": 0.7901,
+        "text": "0.7901"
+       }
+      }
+     }
+    },
+    {
+     "id": "arch_arxiv_ai_2025_000000126",
+     "style": "Sliding Bbox",
+     "source": "ABLATIONS_PAGE/Original_Images/arch_arxiv_ai_2025_000000126.png?v=8fbee9c3",
+     "animation": {
+      "full": {
+       "src": "ABLATIONS_PAGE/Narr_Drafter_wo_Context/w_context/arch_arxiv_ai_2025_000000126.mp4?v=fd8031c7",
+       "kind": "video",
+       "source": "ABLATIONS_PAGE/Narr_Drafter_wo_Context/w_context/arch_arxiv_ai_2025_000000126.html?v=dae94439",
+       "captions": "ABLATIONS_PAGE/Narr_Drafter_wo_Context/w_context/arch_arxiv_ai_2025_000000126.captions.json?v=89c8c984"
+      },
+      "ablated": {
+       "src": "ABLATIONS_PAGE/Narr_Drafter_wo_Context/wo_context/arch_arxiv_ai_2025_000000126.mp4?v=1223bc1c",
+       "kind": "video",
+       "source": "ABLATIONS_PAGE/Narr_Drafter_wo_Context/wo_context/arch_arxiv_ai_2025_000000126.svg?v=4f9ab9a3",
+       "captions": "ABLATIONS_PAGE/Narr_Drafter_wo_Context/wo_context/arch_arxiv_ai_2025_000000126.captions.json?v=6e6c3931"
+      }
+     },
+     "d2c": null,
+     "critic": null,
+     "scores": {
+      "NA": {
+       "full": {
+        "kind": "num",
+        "value": 0.8431,
+        "text": "0.8431"
+       },
+       "ablated": {
+        "kind": "num",
+        "value": 0.9412,
+        "text": "0.9412"
+       }
+      },
+      "AN": {
+       "full": {
+        "kind": "num",
+        "value": 0.9281,
+        "text": "0.9281"
+       },
+       "ablated": {
+        "kind": "num",
+        "value": 0.9673,
+        "text": "0.9673"
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "key": "No_Critics",
+   "name": "AnimateBanana without Stage 1, 2 and 3 Critics",
+   "short": "All three critics removed",
+   "removed": "Every critic loop, in all three stages",
+   "metrics": [
+    "AN"
+   ],
+   "cross": [
+    "node_s1_critic",
+    "node_s2_critic",
+    "node_s3_critic"
+   ],
+   "d2c": false,
+   "panel": "Without all three Critics",
+   "sheet": "No_Critics",
+   "samples": [
+    {
+     "id": "CVPR_2025_arch01657",
+     "style": "Alpha Masking",
+     "source": "ABLATIONS_PAGE/Original_Images/CVPR_2025_arch01657.png?v=7ce51ed8",
+     "animation": {
+      "full": {
+       "src": "ABLATIONS_PAGE/No_Critics/00_AnimateBanana/Animation/CVPR_2025_arch01657.mp4?v=3dfc7185",
+       "kind": "video",
+       "source": "ABLATIONS_PAGE/No_Critics/00_AnimateBanana/Animation/CVPR_2025_arch01657.svg?v=bdcffe69",
+       "captions": "ABLATIONS_PAGE/No_Critics/00_AnimateBanana/Animation/CVPR_2025_arch01657.captions.json?v=8ed6e533"
+      },
+      "ablated": {
+       "src": "ABLATIONS_PAGE/No_Critics/No_critics/Animations/CVPR_2025_arch01657.mp4?v=0ab1ee12",
+       "kind": "video",
+       "captions": "ABLATIONS_PAGE/No_Critics/No_critics/Animations/CVPR_2025_arch01657.captions.json?v=8cd2b148"
+      }
+     },
+     "d2c": null,
+     "critic": null,
+     "scores": {
+      "AN": {
+       "full": {
+        "kind": "num",
+        "value": 0.9293,
+        "text": "0.9293"
+       },
+       "ablated": {
+        "kind": "num",
+        "value": 0.0,
+        "text": "0.0000"
+       }
+      }
+     }
+    },
+    {
+     "id": "Paper2Fig_pipe_diff_000000104",
+     "style": "Sliding Bbox",
+     "source": "ABLATIONS_PAGE/Original_Images/Paper2Fig_pipe_diff_000000104.png?v=c4cb16bc",
+     "animation": {
+      "full": {
+       "src": "ABLATIONS_PAGE/No_Critics/00_AnimateBanana/Animation/Paper2Fig_pipe_diff_000000104.mp4?v=b5ce4357",
+       "kind": "video",
+       "source": "ABLATIONS_PAGE/No_Critics/00_AnimateBanana/Animation/Paper2Fig_pipe_diff_000000104.svg?v=5c250da6",
+       "captions": "ABLATIONS_PAGE/No_Critics/00_AnimateBanana/Animation/Paper2Fig_pipe_diff_000000104.captions.json?v=cd21692e"
+      },
+      "ablated": {
+       "src": "ABLATIONS_PAGE/No_Critics/No_critics/Animations/Paper2Fig_pipe_diff_000000104.mp4?v=3fb689e4",
+       "kind": "video",
+       "captions": "ABLATIONS_PAGE/No_Critics/No_critics/Animations/Paper2Fig_pipe_diff_000000104.captions.json?v=dc1821d4"
+      }
+     },
+     "d2c": null,
+     "critic": null,
+     "scores": {
+      "AN": {
+       "full": {
+        "kind": "num",
+        "value": 0.8889,
+        "text": "0.8889"
+       },
+       "ablated": {
+        "kind": "num",
+        "value": 0.0,
+        "text": "0.0000"
+       }
+      }
+     }
+    },
+    {
+     "id": "Paper2Fig_pipe_easy_000000516",
+     "style": "Colour Pop",
+     "source": "ABLATIONS_PAGE/Original_Images/Paper2Fig_pipe_easy_000000516.png?v=647cdd4b",
+     "animation": {
+      "full": {
+       "src": "ABLATIONS_PAGE/No_Critics/00_AnimateBanana/Animation/Paper2Fig_pipe_easy_000000516.mp4?v=0a28c6af",
+       "kind": "video",
+       "source": "ABLATIONS_PAGE/No_Critics/00_AnimateBanana/Animation/Paper2Fig_pipe_easy_000000516.svg?v=12129af3",
+       "captions": "ABLATIONS_PAGE/No_Critics/00_AnimateBanana/Animation/Paper2Fig_pipe_easy_000000516.captions.json?v=49a81876"
+      },
+      "ablated": {
+       "src": "ABLATIONS_PAGE/No_Critics/No_critics/Animations/Paper2Fig_pipe_easy_000000516.mp4?v=356dfdab",
+       "kind": "video",
+       "captions": "ABLATIONS_PAGE/No_Critics/No_critics/Animations/Paper2Fig_pipe_easy_000000516.captions.json?v=2eb4cca3"
+      }
+     },
+     "d2c": null,
+     "critic": null,
+     "scores": {
+      "AN": {
+       "full": {
+        "kind": "num",
+        "value": 0.8519,
+        "text": "0.8519"
+       },
+       "ablated": {
+        "kind": "num",
+        "value": 0.0,
+        "text": "0.0000"
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "key": "Seq_wo_XML",
+   "name": "Stage 2: Sequencer without XML input",
+   "short": "Sequencer · no XML",
+   "removed": "The parsed diagram XML handed to the Sequencer",
+   "metrics": [
+    "SS",
+    "GP",
+    "AN"
+   ],
+   "cross": [
+    "node_s2_xml"
+   ],
+   "d2c": false,
+   "panel": "Without XML input",
+   "sheet": "03_Sequencer_no_XML",
+   "samples": [
+    {
+     "id": "CVPR_2025_arch02400",
+     "style": "Alpha Masking",
+     "source": "ABLATIONS_PAGE/Original_Images/CVPR_2025_arch02400.png?v=4e522479",
+     "animation": {
+      "full": {
+       "src": "ABLATIONS_PAGE/Seq_wo_XML/00_AnimateBanana/Animation/CVPR_2025_arch02400.mp4?v=2c1fa422",
+       "kind": "video",
+       "source": "ABLATIONS_PAGE/Seq_wo_XML/00_AnimateBanana/Animation/CVPR_2025_arch02400.svg?v=8225f01b",
+       "captions": "ABLATIONS_PAGE/Seq_wo_XML/00_AnimateBanana/Animation/CVPR_2025_arch02400.captions.json?v=369abb92"
+      },
+      "ablated": {
+       "src": "ABLATIONS_PAGE/Seq_wo_XML/wo_XML/Animation/CVPR_2025_arch02400.mp4?v=422afc40",
+       "kind": "video",
+       "source": "ABLATIONS_PAGE/Seq_wo_XML/wo_XML/Animation/CVPR_2025_arch02400.svg?v=4573cf4e",
+       "captions": "ABLATIONS_PAGE/Seq_wo_XML/wo_XML/Animation/CVPR_2025_arch02400.captions.json?v=fc57a5e2"
+      }
+     },
+     "d2c": null,
+     "critic": null,
+     "scores": {
+      "SS": {
+       "full": {
+        "kind": "num",
+        "value": 0.9444,
+        "text": "0.9444"
+       },
+       "ablated": {
+        "kind": "num",
+        "value": 0.9167,
+        "text": "0.9167"
+       }
+      },
+      "GP": {
+       "full": {
+        "kind": "num",
+        "value": 0.8333,
+        "text": "0.8333"
+       },
+       "ablated": {
+        "kind": "num",
+        "value": 0.5833,
+        "text": "0.5833"
+       }
+      },
+      "AN": {
+       "full": {
+        "kind": "num",
+        "value": 0.8981,
+        "text": "0.8981"
+       },
+       "ablated": {
+        "kind": "num",
+        "value": 0.8194,
+        "text": "0.8194"
+       }
+      }
+     }
+    },
+    {
+     "id": "FigureBench_arch_diff_000000004",
+     "style": "Hopping Bbox",
+     "source": "ABLATIONS_PAGE/Original_Images/FigureBench_arch_diff_000000004.png?v=e9b3aaff",
+     "animation": {
+      "full": {
+       "src": "ABLATIONS_PAGE/Seq_wo_XML/00_AnimateBanana/Animation/FigureBench_arch_diff_000000004.mp4?v=1ee13341",
+       "kind": "video",
+       "source": "ABLATIONS_PAGE/Seq_wo_XML/00_AnimateBanana/Animation/FigureBench_arch_diff_000000004.svg?v=723a3598",
+       "captions": "ABLATIONS_PAGE/Seq_wo_XML/00_AnimateBanana/Animation/FigureBench_arch_diff_000000004.captions.json?v=71f8ba69"
+      },
+      "ablated": {
+       "src": "ABLATIONS_PAGE/Seq_wo_XML/wo_XML/Animation/FigureBench_arch_diff_000000004.mp4?v=e2671a31",
+       "kind": "video",
+       "source": "ABLATIONS_PAGE/Seq_wo_XML/wo_XML/Animation/FigureBench_arch_diff_000000004.svg?v=7e9d44fa",
+       "captions": "ABLATIONS_PAGE/Seq_wo_XML/wo_XML/Animation/FigureBench_arch_diff_000000004.captions.json?v=e1b2869b"
+      }
+     },
+     "d2c": null,
+     "critic": null,
+     "scores": {
+      "SS": {
+       "full": {
+        "kind": "num",
+        "value": 0.9556,
+        "text": "0.9556"
+       },
+       "ablated": {
+        "kind": "num",
+        "value": 0.9744,
+        "text": "0.9744"
+       }
+      },
+      "GP": {
+       "full": {
+        "kind": "num",
+        "value": 1.0,
+        "text": "1.0000"
+       },
+       "ablated": {
+        "kind": "num",
+        "value": 1.0,
+        "text": "1.0000"
+       }
+      },
+      "AN": {
+       "full": {
+        "kind": "num",
+        "value": 0.9852,
+        "text": "0.9852"
+       },
+       "ablated": {
+        "kind": "num",
+        "value": 0.9359,
+        "text": "0.9359"
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "key": "Stage_1_wo_critic",
+   "name": "Stage 1 without Critic",
+   "short": "Stage 1 · no critic",
+   "removed": "The critic loop inside the Diagram Transmuter",
+   "metrics": [
+    "VF"
+   ],
+   "cross": [
+    "node_s1_critic"
+   ],
+   "d2c": true,
+   "panel": "Without Stage 1 Critic",
+   "sheet": "01_Stage1_no_Critic",
+   "samples": [
+    {
+     "id": "CVPR_2025_arch00968",
+     "style": "Hopping Bbox",
+     "source": "ABLATIONS_PAGE/Original_Images/CVPR_2025_arch00968.png?v=9b7672df",
+     "animation": {
+      "full": {
+       "src": "ABLATIONS_PAGE/Stage_1_wo_critic/00_AnimateBanana/Animation/CVPR_2025_arch00968.mp4?v=ea4ca726",
+       "kind": "video",
+       "source": "ABLATIONS_PAGE/Stage_1_wo_critic/00_AnimateBanana/Animation/CVPR_2025_arch00968.svg?v=b39b052a",
+       "captions": "ABLATIONS_PAGE/Stage_1_wo_critic/00_AnimateBanana/Animation/CVPR_2025_arch00968.captions.json?v=f19512ca"
+      },
+      "ablated": {
+       "src": "ABLATIONS_PAGE/Stage_1_wo_critic/no_Critic/Animation/CVPR_2025_arch00968.mp4?v=b4bf7d59",
+       "kind": "video",
+       "source": "ABLATIONS_PAGE/Stage_1_wo_critic/no_Critic/Animation/CVPR_2025_arch00968.html?v=be59f0be",
+       "captions": "ABLATIONS_PAGE/Stage_1_wo_critic/no_Critic/Animation/CVPR_2025_arch00968.captions.json?v=328eb295"
+      }
+     },
+     "d2c": {
+      "full": "ABLATIONS_PAGE/Stage_1_wo_critic/00_AnimateBanana/D2C_code/CVPR_2025_arch00968.html?v=3210caa3",
+      "ablated": "ABLATIONS_PAGE/Stage_1_wo_critic/no_Critic/D2C_code/CVPR_2025_arch00968.html?v=2b68740e",
+      "identical": false
+     },
+     "critic": {
+      "baseline_score": 0.58,
+      "final_score": 0.83,
+      "rounds_run": 2,
+      "improved": true,
+      "compile_rounds": [],
+      "compile_repaired": false,
+      "rounds": [
+       {
+        "round": 0,
+        "score": 0.58,
+        "compiles": true,
+        "breakdown": {
+         "semantic": 0.55,
+         "logical_layout": 0.65,
+         "geometric_layout": 0.65,
+         "style_colour": 0.5,
+         "proportion_scale": 0.7
+        },
+        "notes": "Major rendering defects: large black polygon artifacts obscure the bottom-left and visual flow connections. Several text labels (e.g. Referring Expression, Query Image, Prediction, math subscripts) and icons are missing, corrupted, or replaced with broken glyph boxes.",
+        "findings": []
+       },
+       {
+        "round": 1,
+        "score": 0.68,
+        "compiles": true,
+        "breakdown": {
+         "semantic": 0.65,
+         "logical_layout": 0.75,
+         "geometric_layout": 0.75,
+         "style_colour": 0.65,
+         "proportion_scale": 0.65
+        },
+        "notes": "Overall architecture and block containment are mostly preserved, but many text labels are truncated, garbled, or missing entirely (e.g., Referring Expression header, L_density, L_loc, D1-D4 feature labels, sub-module headers like Density Init/Text Init, and the flow legend text). Icons are replaced by broken glyphs.",
+        "findings": [
+         {
+          "problem": "Multiple polyline/cornered path edges render with large black filled shapes across the figure, obscuring nodes and labels (most noticeably a huge black wedge along the bottom from the backbone to Channel Attention, and around the switch/mapping nodes).",
+          "cause": "In SVG, `<path>` elements default to `fill=\"#000000\"` unless explicitly specified otherwise. Several multi-point paths (`edge_bb_to_vis_ca`, `edge_bb_to_vis_left`, `edge_bb_to_bars_tf`, `edge_sw_to_mult`, `edge_mapping_to_mult`) omit `fill=\"none\"`.",
+          "code_fragment": "<path id=\"edge_bb_to_vis_ca\" data-id=\"edge_bb_to_vis_ca\" data-class=\"edge\" data-source=\"box_backbone\" data-target=\"pyramid_vis_ca\" d=\"M 126 260 L 126 303 L 518 303 L 518 298\" stroke=\"#3B71CA\" stroke-width=\"1.5\" marker-end=\"url(#arrow-blue)\"/>",
+          "fix": "Add `fill=\"none\"` to all path edges that contain more than two points / corners (such as `edge_bb_to_vis_ca`, `edge_bb_to_vis_left`, `edge_bb_to_bars_tf`, `edge_sw_to_mult`, and `edge_mapping_to_mult`).",
+          "severity": "critical"
+         }
+        ]
+       },
+       {
+        "round": 2,
+        "score": 0.83,
+        "compiles": true,
+        "breakdown": {
+         "semantic": 0.82,
+         "logical_layout": 0.88,
+         "geometric_layout": 0.86,
+         "style_colour": 0.78,
+         "proportion_scale": 0.84
+        },
+        "notes": "Reconstruction captures the complete architecture, modules, and signal flow accurately. Some minor text labels/subscripts (D1-D4, Fv1-Fv4, switch symbol, L_density/L_loc formatting) are missing or slightly corrupted, and module background fills are missing.",
+        "findings": [
+         {
+          "problem": "Text labels for 'CAD Enhanced Visual Features' and sub-block titles in CAD Attention overlap with each other and the pyramid.",
+          "cause": "The title 'Channel Attention' (y=42), label 'CAD Enhanced Visual Features' (y=52), and the top pyramid (y=56) are packed too tightly without sufficient vertical spacing.",
+          "code_fragment": "<text id=\"title_channel_att\" data-id=\"title_channel_att\" data-class=\"text_node\" data-parent=\"block_channel_attention\" x=\"518\" y=\"42\" font-family=\"Arial, sans-serif\" font-size=\"10\" font-weight=\"bold\" font-style=\"italic\" text-anchor=\"middle\" fill=\"#000\">Channel Attention</text>\n\n        <!-- CAD Enhan",
+          "fix": "Increase vertical spacing inside block_channel_attention by moving the pyramid and subsequent nodes lower down, or placing 'CAD Enhanced Visual Features' properly below the sub-block header.",
+          "severity": "major"
+         },
+         {
+          "problem": "The green CAD flow path from the CAD Features pyramid across the top to Density Init is fragmented with an awkward detour.",
+          "cause": "The path `edge_cad_gen_to_sa_top` loops back into Sigmoid and stops at x=436, while `edge_ca_to_dq_cad` starts at x=440, breaking what should be a continuous horizontal backbone line across the top into Density Init with branch taps into Sigmoid.",
+          "code_fragment": "<path id=\"edge_cad_gen_to_sa_top\" data-id=\"edge_cad_gen_to_sa_top\" data-class=\"edge\" data-source=\"pyramid_cad_gen\" data-target=\"box_sa_sigmoid\" d=\"M 310 138 L 328 138 L 328 35 L 436 35 L 436 60 L 386 60 L 386 72\" fill=\"none\" stroke=\"#5CB85C\" stroke-width=\"1.5\" marker-end=\"url(#arrow-green)\"/>\n    <p",
+          "fix": "Route a single continuous green flow along the top margin that branches downward into Sigmoid and CAD Features in Spatial Attention, continuing straight into the Density Init CAD Features pyramid.",
+          "severity": "major"
+         },
+         {
+          "problem": "The loss notation &#x2112; and emoji icons render as missing glyph/tofu squares (□).",
+          "cause": "Unicode script capital L (&#x2112;) and emoji characters (❄️, 🔥) are not supported by the specified standard system fonts (Arial, Georgia).",
+          "code_fragment": "&#x2112;<tspan font-size=\"0.65em\" baseline-shift=\"sub\">density</tspan>",
+          "fix": "Replace unicode &#x2112; with an italic capital 'L' (e.g. `<tspan font-style=\"italic\">L</tspan>`) and replace emoji icons with SVG paths or standard vector shapes.",
+          "severity": "major"
+         },
+         {
+          "problem": "Text label 'Visual Features' at the bottom of Channel Attention overflows and clips past the right boundary.",
+          "cause": "The label at x=562 is left-aligned or positioned too close to the right edge (x=590) of the container.",
+          "code_fragment": "<text id=\"lbl_vis_feat_ca\" data-id=\"lbl_vis_feat_ca\" data-class=\"text_node\" data-parent=\"block_channel_attention\" x=\"562\" y=\"299\" font-family=\"Arial, sans-serif\" font-size=\"8\" font-weight=\"bold\" fill=\"#000\">Visual Features</text>",
+          "fix": "Center the text under or beside the pyramid and adjust x position (e.g., x=\"518\" with text-anchor=\"middle\").",
+          "severity": "minor"
+         },
+         {
+          "problem": "'Density Init' and 'Text Init' titles render outside their respective bounding boxes.",
+          "cause": "Their y-coordinates (y=38 and y=173) place them above the top boundaries of their container rectangles (which start at y=42 and y=177).",
+          "code_fragment": "<text id=\"title_density_init\" data-id=\"title_density_init\" data-class=\"text_node\" data-parent=\"block_density_init\" x=\"635\" y=\"38\" font-family=\"Arial, sans-serif\" font-size=\"9\" font-weight=\"bold\" font-style=\"italic\" fill=\"#000\">Density Init</text>",
+          "fix": "Shift y positions inside the top padding of each sub-block (e.g. y=54 for Density Init and y=190 for Text Init).",
+          "severity": "minor"
+         }
+        ]
+       }
+      ],
+      "provenance": {
+       "agent": "diagram_critic",
+       "backend": "openrouter_gemini37flash",
+       "model": "google-gemini-3.7-flash",
+       "prompt": "diagram_transmuter/critic.yaml",
+       "style": "hopping_bounding_box",
+       "target": "svg",
+       "config_fingerprint": "aa49e8c0064daebe",
+       "timestamp": "2026-09-02T00:39:12"
+      }
+     },
+     "scores": {
+      "VF": {
+       "full": {
+        "kind": "band",
+        "band": "A",
+        "text": "Band A"
+       },
+       "ablated": {
+        "kind": "band",
+        "band": "D",
+        "text": "Band D"
+       }
+      }
+     }
+    },
+    {
+     "id": "Paper2Fig_pipe_easy_000000119",
+     "style": "Progressive Reveal",
+     "source": "ABLATIONS_PAGE/Original_Images/Paper2Fig_pipe_easy_000000119.png?v=7fca0d5f",
+     "animation": {
+      "full": {
+       "src": "ABLATIONS_PAGE/Stage_1_wo_critic/00_AnimateBanana/Animation/Paper2Fig_pipe_easy_000000119.mp4?v=a414a4d9",
+       "kind": "video",
+       "source": "ABLATIONS_PAGE/Stage_1_wo_critic/00_AnimateBanana/Animation/Paper2Fig_pipe_easy_000000119.html?v=74a8f985",
+       "captions": "ABLATIONS_PAGE/Stage_1_wo_critic/00_AnimateBanana/Animation/Paper2Fig_pipe_easy_000000119.captions.json?v=976bff16"
+      },
+      "ablated": {
+       "src": "ABLATIONS_PAGE/Stage_1_wo_critic/no_Critic/Animation/Paper2Fig_pipe_easy_000000119.mp4?v=fadccfa0",
+       "kind": "video",
+       "source": "ABLATIONS_PAGE/Stage_1_wo_critic/no_Critic/Animation/Paper2Fig_pipe_easy_000000119.html?v=03a72e85",
+       "captions": "ABLATIONS_PAGE/Stage_1_wo_critic/no_Critic/Animation/Paper2Fig_pipe_easy_000000119.captions.json?v=531b0ca5"
+      }
+     },
+     "d2c": {
+      "full": "ABLATIONS_PAGE/Stage_1_wo_critic/00_AnimateBanana/D2C_code/Paper2Fig_pipe_easy_000000119.html?v=77f83771",
+      "ablated": "ABLATIONS_PAGE/Stage_1_wo_critic/no_Critic/D2C_code/Paper2Fig_pipe_easy_000000119.html?v=543bc1b4",
+      "identical": false
+     },
+     "critic": {
+      "baseline_score": 0.52,
+      "final_score": 0.94,
+      "rounds_run": 1,
+      "improved": true,
+      "compile_rounds": [],
+      "compile_repaired": false,
+      "rounds": [
+       {
+        "round": 0,
+        "score": 0.52,
+        "compiles": true,
+        "breakdown": {
+         "semantic": 0.55,
+         "logical_layout": 0.5,
+         "geometric_layout": 0.55,
+         "style_colour": 0.45,
+         "proportion_scale": 0.5
+        },
+        "notes": "Major issues with connectors and arrows: arrows are rendered as oversized, distorted yellow triangles that overlap text. The branching connector from the left block to Stages 1 and 2, the adder node (+ with labels 'a' and 'b'), and the DRSS label on the vertical arrow are missing or broken. Canvas background is inverted to black.",
+        "findings": []
+       },
+       {
+        "round": 1,
+        "score": 0.94,
+        "compiles": true,
+        "breakdown": {
+         "semantic": 0.95,
+         "logical_layout": 0.98,
+         "geometric_layout": 0.95,
+         "style_colour": 0.92,
+         "proportion_scale": 0.92
+        },
+        "notes": "Exceptionally faithful reproduction. All text, images, containers, colors, hatched textures, and mathematical symbols are accurately placed and styled.",
+        "findings": [
+         {
+          "problem": "Arrowhead markers (yellow and pink) render at a massive size, obscuring text labels and adjacent diagram elements.",
+          "cause": "SVG markers default to `markerUnits=\"strokeWidth\"`. Applying `markerWidth=\"6\" markerHeight=\"6\"` to lines with `stroke-width=\"14\"` and `stroke-width=\"12\"` multiplies the arrowhead dimension by 14x/12x, resulting in huge overlapping triangles.",
+          "code_fragment": "<marker id=\"arrow-yellow\" viewBox=\"0 0 10 10\" refX=\"6\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto-start-reverse\">",
+          "fix": "Add `markerUnits=\"userSpaceOnUse\"` to `<marker id=\"arrow-yellow\">` and `<marker id=\"arrow-pink\">` (and adjust `markerWidth`/`markerHeight` accordingly) or draw the block arrows directly as `<polygon>`/`<path>` shapes.",
+          "severity": "critical"
+         },
+         {
+          "problem": "Black connecting lines, fork branches, and text labels (such as 'a', 'b', and 'Depth-refined Foreground Seeds Selection') are invisible against the background.",
+          "cause": "The SVG lacks a base background rectangle, leaving the background transparent. On dark viewers, black lines (`stroke=\"#000\"`) and black text outside the container blocks blend into the dark canvas.",
+          "code_fragment": "<svg xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 960 440\" width=\"960\" height=\"440\">",
+          "fix": "Add `<rect width=\"100%\" height=\"100%\" fill=\"#ffffff\" />` at the beginning of the `<svg>` container.",
+          "severity": "major"
+         }
+        ]
+       }
+      ],
+      "provenance": {
+       "agent": "diagram_critic",
+       "backend": "openrouter_gemini37flash",
+       "model": "google-gemini-3.7-flash",
+       "prompt": "diagram_transmuter/critic.yaml",
+       "style": "progressive_reveal",
+       "target": "svg",
+       "config_fingerprint": "09f5508923ac0ffc",
+       "timestamp": "2026-09-01T23:33:29"
+      }
+     },
+     "scores": {
+      "VF": {
+       "full": {
+        "kind": "band",
+        "band": "A",
+        "text": "Band A"
+       },
+       "ablated": {
+        "kind": "band",
+        "band": "C",
+        "text": "Band C"
+       }
+      }
+     }
+    },
+    {
+     "id": "Paper2Fig_pipe_easy_000000516",
+     "style": "Colour Pop",
+     "source": "ABLATIONS_PAGE/Original_Images/Paper2Fig_pipe_easy_000000516.png?v=647cdd4b",
+     "animation": {
+      "full": {
+       "src": "ABLATIONS_PAGE/Stage_1_wo_critic/00_AnimateBanana/Animation/Paper2Fig_pipe_easy_000000516.mp4?v=0a28c6af",
+       "kind": "video",
+       "source": "ABLATIONS_PAGE/Stage_1_wo_critic/00_AnimateBanana/Animation/Paper2Fig_pipe_easy_000000516.html?v=d270cd41",
+       "captions": "ABLATIONS_PAGE/Stage_1_wo_critic/00_AnimateBanana/Animation/Paper2Fig_pipe_easy_000000516.captions.json?v=49a81876"
+      },
+      "ablated": {
+       "src": "ABLATIONS_PAGE/Stage_1_wo_critic/no_Critic/Animation/Paper2Fig_pipe_easy_000000516.mp4?v=6b3fe306",
+       "kind": "video",
+       "source": "ABLATIONS_PAGE/Stage_1_wo_critic/no_Critic/Animation/Paper2Fig_pipe_easy_000000516.html?v=f3ee690d",
+       "captions": "ABLATIONS_PAGE/Stage_1_wo_critic/no_Critic/Animation/Paper2Fig_pipe_easy_000000516.captions.json?v=fe4b6227"
+      }
+     },
+     "d2c": {
+      "full": "ABLATIONS_PAGE/Stage_1_wo_critic/00_AnimateBanana/D2C_code/Paper2Fig_pipe_easy_000000516.html?v=0914139a",
+      "ablated": "ABLATIONS_PAGE/Stage_1_wo_critic/no_Critic/D2C_code/Paper2Fig_pipe_easy_000000516.html?v=b017bee0",
+      "identical": false
+     },
+     "critic": {
+      "baseline_score": 0.45,
+      "final_score": 0.68,
+      "rounds_run": 2,
+      "improved": true,
+      "compile_rounds": [],
+      "compile_repaired": false,
+      "rounds": [
+       {
+        "round": 0,
+        "score": 0.45,
+        "compiles": true,
+        "breakdown": {
+         "semantic": 0.5,
+         "logical_layout": 0.65,
+         "geometric_layout": 0.55,
+         "style_colour": 0.4,
+         "proportion_scale": 0.45
+        },
+        "notes": "Major rendering defects: gigantic arrowheads severely occlude labels and boxes throughout all three stages ('DR > 2^15', '25 TMOs', 'Postprocessing', '8 Face Detectors'), and the main connecting arrows between the columns are truncated/missing.",
+        "findings": []
+       },
+       {
+        "round": 1,
+        "score": 0.68,
+        "compiles": true,
+        "breakdown": {
+         "semantic": 0.65,
+         "logical_layout": 0.7,
+         "geometric_layout": 0.7,
+         "style_colour": 0.85,
+         "proportion_scale": 0.85
+        },
+        "notes": "The internal contents of each stage are largely present, but the large black connecting arrows between columns are severely corrupted into misplaced horizontal arrowheads and stray artifacts. In addition, 'DR > 2^15' has broken superscript formatting.",
+        "findings": [
+         {
+          "problem": "Massive black triangular arrowheads cover and obscure the boxes, cylinders, and text inside all three blocks.",
+          "cause": "The vertical connecting edges inside Blocks 1, 2, and 3 use `stroke-width=\"17\"`. Because SVG markers scale proportionally to `stroke-width` by default, this creates huge marker arrowheads that cover the diagram elements.",
+          "code_fragment": "<line id=\"edge-cyl1-to-postproc\" data-id=\"edge-cyl1-to-postproc\" data-class=\"edge\" data-source=\"cylinder-captured-images\" data-target=\"node-postprocessing\" x1=\"145\" y1=\"223\" x2=\"145\" y2=\"265\" stroke=\"#000000\" stroke-width=\"17\" marker-end=\"url(#arrow-black)\" />",
+          "fix": "Change `stroke-width=\"17\"` to `stroke-width=\"3\"` (or `4`) on all internal vertical connecting `<line>` elements.",
+          "severity": "critical"
+         },
+         {
+          "problem": "The thick connecting arrows between blocks end in empty space before reaching the next column.",
+          "cause": "The paths for `edge-classif-to-tonemapping` and `edge-tmsets-to-facedetect` end at x=344 and x=702, which fall short of the destination blocks at x=375/420 and x=730/770.",
+          "code_fragment": "d=\"M 276 443 L 316 443 L 316 127 L 344 127\"",
+          "fix": "Extend the terminal horizontal segment of both inter-block path definitions so the arrowheads point directly into the target nodes (e.g., extend to x ≈ 415 and x ≈ 765).",
+          "severity": "major"
+         }
+        ]
+       },
+       {
+        "round": 2,
+        "score": 0.68,
+        "compiles": true,
+        "breakdown": {
+         "semantic": 0.7,
+         "logical_layout": 0.75,
+         "geometric_layout": 0.7,
+         "style_colour": 0.85,
+         "proportion_scale": 0.8
+        },
+        "notes": "rejected: 0.68 did not improve on 0.68",
+        "findings": [
+         {
+          "problem": "The inter-block connecting arrows render with huge triangular arrowheads that heavily overlap and obscure the 'DR > 2^15' cylinder and '8 Face Detectors' box.",
+          "cause": "The marker 'arrow-fat' lacks markerUnits=\"userSpaceOnUse\", causing the arrow marker to scale by stroke-width=\"17\", and the paths extend too far into the inner block elements rather than terminating before the block boundaries.",
+          "code_fragment": "<marker id=\"arrow-fat\" markerWidth=\"6\" markerHeight=\"6\" refX=\"4\" refY=\"3\" orient=\"auto\">\n      <path d=\"M 0 0 L 6 3 L 0 6 z\" fill=\"#000000\" />\n    </marker>",
+          "fix": "Set markerUnits=\"userSpaceOnUse\" on the marker (or adjust marker size and refX), and shorten the path endpoints (e.g., end at x=355 and x=710).",
+          "severity": "major"
+         },
+         {
+          "problem": "The exponent '15' in 'DR > 2^15' is severely misaligned and shifted far to the right edge of the cylinder.",
+          "cause": "Using <tspan font-size=\"0.65em\" baseline-shift=\"super\">15</tspan> inside a text-anchor=\"middle\" text element without explicit positioning causes positioning/rendering issues.",
+          "code_fragment": "<text id=\"text-cyl2-dr\" data-id=\"text-cyl2-dr\" data-class=\"text_node\" data-parent=\"cylinder-dr\" x=\"500\" y=\"132\" font-family=\"Arial, sans-serif\" font-size=\"25\" text-anchor=\"middle\" fill=\"#000000\">DR &gt; 2<tspan font-size=\"0.65em\" baseline-shift=\"super\">15</tspan></text>",
+          "fix": "Use dy=\"-8\" on the tspan or position the exponent using separate coordinates rather than baseline-shift=\"super\".",
+          "severity": "minor"
+         }
+        ]
+       }
+      ],
+      "provenance": {
+       "agent": "diagram_critic",
+       "backend": "openrouter_gemini37flash",
+       "model": "google-gemini-3.7-flash",
+       "prompt": "diagram_transmuter/critic.yaml",
+       "style": "colour_pop",
+       "target": "svg",
+       "config_fingerprint": "cf8eb334971e2e06",
+       "timestamp": "2026-09-01T23:48:14"
+      }
+     },
+     "scores": {
+      "VF": {
+       "full": {
+        "kind": "band",
+        "band": "B",
+        "text": "Band B"
+       },
+       "ablated": {
+        "kind": "band",
+        "band": "C",
+        "text": "Band C"
+       }
+      }
+     }
+    },
+    {
+     "id": "arch_arxiv_cv_2023_000000433",
+     "style": "Alpha Masking",
+     "source": "ABLATIONS_PAGE/Original_Images/arch_arxiv_cv_2023_000000433.png?v=67ee25c6",
+     "animation": {
+      "full": {
+       "src": "ABLATIONS_PAGE/Stage_1_wo_critic/00_AnimateBanana/Animation/arch_arxiv_cv_2023_000000433.mp4?v=cc84db94",
+       "kind": "video",
+       "source": "ABLATIONS_PAGE/Stage_1_wo_critic/00_AnimateBanana/Animation/arch_arxiv_cv_2023_000000433.svg?v=29fde331",
+       "captions": "ABLATIONS_PAGE/Stage_1_wo_critic/00_AnimateBanana/Animation/arch_arxiv_cv_2023_000000433.captions.json?v=58db8218"
+      },
+      "ablated": {
+       "src": "ABLATIONS_PAGE/Stage_1_wo_critic/no_Critic/Animation/arch_arxiv_cv_2023_000000433.mp4?v=aec6cda5",
+       "kind": "video",
+       "source": "ABLATIONS_PAGE/Stage_1_wo_critic/no_Critic/Animation/arch_arxiv_cv_2023_000000433.svg?v=c5e4ffd8",
+       "captions": "ABLATIONS_PAGE/Stage_1_wo_critic/no_Critic/Animation/arch_arxiv_cv_2023_000000433.captions.json?v=db2eeafc"
+      }
+     },
+     "d2c": {
+      "full": "ABLATIONS_PAGE/Stage_1_wo_critic/00_AnimateBanana/D2C_code/arch_arxiv_cv_2023_000000433.svg?v=5959fed4",
+      "ablated": "ABLATIONS_PAGE/Stage_1_wo_critic/no_Critic/D2C_code/arch_arxiv_cv_2023_000000433.svg?v=2ea6f3d8",
+      "identical": false
+     },
+     "critic": {
+      "baseline_score": 0.63,
+      "final_score": 0.86,
+      "rounds_run": 2,
+      "improved": true,
+      "compile_rounds": [],
+      "compile_repaired": false,
+      "rounds": [
+       {
+        "round": 0,
+        "score": 0.63,
+        "compiles": true,
+        "breakdown": {
+         "semantic": 0.65,
+         "logical_layout": 0.85,
+         "geometric_layout": 0.8,
+         "style_colour": 0.45,
+         "proportion_scale": 0.75
+        },
+        "notes": "Pipeline structure and sequence are preserved, but the background is inverted to black, the vertical ellipses rendered as missing character boxes, and photographic patches are replaced with abstract shapes.",
+        "findings": []
+       },
+       {
+        "round": 1,
+        "score": 0.68,
+        "compiles": true,
+        "breakdown": {
+         "semantic": 0.75,
+         "logical_layout": 0.88,
+         "geometric_layout": 0.85,
+         "style_colour": 0.4,
+         "proportion_scale": 0.78
+        },
+        "notes": "The reconstruction correctly captures the logical pipeline and architectural components of MAE. However, the background is black instead of white, rendering the 'Input' and 'Target' labels almost illegible, and the photograph patches are substituted with simplified geometric approximations.",
+        "findings": [
+         {
+          "problem": "The encoded tokens column (cyan rectangles) has an unwanted gap in the middle with only 7 tokens instead of 8 contiguous tokens matching the 8 visible patches.",
+          "cause": "The token at y=129 was omitted between enc_t_3 (y=106) and enc_t_4 (y=152), leaving an empty space.",
+          "code_fragment": "<g id=\"encoded_tokens\" data-id=\"encoded_tokens\" data-class=\"composite_whole\" data-parent=\"root\">\n    <rect id=\"enc_t_0\" data-id=\"enc_t_0\" data-class=\"composite_part\" data-parent=\"encoded_tokens\" x=\"220\" y=\"37\" width=\"23\" height=\"21\" fill=\"#92d5d8\"/>\n    <rect id=\"enc_t_1\" data-id=\"enc_t_1\" data-clas",
+          "fix": "Add the missing cyan rectangle at x=\"220\" y=\"129\" width=\"23\" height=\"21\" so all 8 tokens form a continuous column.",
+          "severity": "major"
+         },
+         {
+          "problem": "Vertical dots in the sequence columns render as missing character glyph boxes (tofu) instead of vertical ellipsis dots.",
+          "cause": "The unicode character &#x22EE; is used in a standard serif font that does not support it.",
+          "code_fragment": "<text id=\"dec_in_dots\" data-id=\"dec_in_dots\" data-class=\"composite_part\" data-parent=\"decoder_input_seq\" x=\"290\" y=\"196\" text-anchor=\"middle\" font-family=\"serif\" font-size=\"14\" fill=\"#555555\">&#x22EE;</text>",
+          "fix": "Replace &#x22EE; with three separate dot circles or standard periods formatted vertically, or use font-family=\"sans-serif\" with supported characters.",
+          "severity": "minor"
+         }
+        ]
+       },
+       {
+        "round": 2,
+        "score": 0.86,
+        "compiles": true,
+        "breakdown": {
+         "semantic": 0.82,
+         "logical_layout": 0.95,
+         "geometric_layout": 0.92,
+         "style_colour": 0.85,
+         "proportion_scale": 0.9
+        },
+        "notes": "Excellent structural and layout reconstruction. The flamingo photograph in the input, patch stream, and target was replaced with an abstract geometric illustration, but all architectural pipeline components, tokens, arrows, and labels are accurately represented.",
+        "findings": [
+         {
+          "problem": "The encoded tokens column has 8 cyan tokens instead of 7, making it taller than the Encoder block and misaligned with the source figure.",
+          "cause": "Eight rectangle elements (`enc_t_0` through `enc_t_7`) are defined in `encoded_tokens` instead of seven.",
+          "code_fragment": "<g id=\"encoded_tokens\" data-id=\"encoded_tokens\" data-class=\"composite_whole\" data-parent=\"root\">\n    <rect id=\"enc_t_0\" ... />\n    <rect id=\"enc_t_1\" ... />\n    <rect id=\"enc_t_2\" ... />\n    <rect id=\"enc_t_3\" ... />\n    <rect id=\"enc_t_4\" ... />\n    <rect id=\"enc_t_5\" ... />\n    <rect id=\"enc_t_6\" ",
+          "fix": "Remove one token so there are only 7 cyan tokens, and adjust their vertical span and spacing to match the height of the Encoder block as in the original.",
+          "severity": "major"
+         },
+         {
+          "problem": "Missing white background rectangle causes dark text labels ('Input', 'Target', and vertical dots) to be almost illegible against dark backgrounds.",
+          "cause": "The SVG lacks a root background `<rect width=\"100%\" height=\"100%\" fill=\"#ffffff\"/>`.",
+          "code_fragment": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 508 260\" width=\"100%\" height=\"100%\">",
+          "fix": "Add a white background rectangle at the beginning of the SVG: `<rect width=\"100%\" height=\"100%\" fill=\"#ffffff\"/>`.",
+          "severity": "minor"
+         }
+        ]
+       }
+      ],
+      "provenance": {
+       "agent": "diagram_critic",
+       "backend": "openrouter_gemini37flash",
+       "model": "google-gemini-3.7-flash",
+       "prompt": "diagram_transmuter/critic.yaml",
+       "style": "alpha_masking",
+       "target": "svg",
+       "config_fingerprint": "a60c9cf21a359534",
+       "timestamp": "2026-09-02T00:10:40"
+      }
+     },
+     "scores": {
+      "VF": {
+       "full": {
+        "kind": "band",
+        "band": "A",
+        "text": "Band A"
+       },
+       "ablated": {
+        "kind": "band",
+        "band": "B",
+        "text": "Band B"
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "key": "Stage_2_wo_Critic",
+   "name": "Stage 2 without Critic",
+   "short": "Stage 2 · no critic",
+   "removed": "The critic loop inside the Animation Planner",
+   "metrics": [
+    "SS",
+    "GP",
+    "AN"
+   ],
+   "cross": [
+    "node_s2_critic"
+   ],
+   "d2c": false,
+   "panel": "Without Stage 2 Critic",
+   "sheet": "05_Stage2_no_Critic",
+   "samples": [
+    {
+     "id": "CVPR_2025_arch02021",
+     "style": "Colour Pop",
+     "source": "ABLATIONS_PAGE/Original_Images/CVPR_2025_arch02021.png?v=d5dc557a",
+     "animation": {
+      "full": {
+       "src": "ABLATIONS_PAGE/Stage_2_wo_Critic/00_AnimateBanana/Animation/CVPR_2025_arch02021.mp4?v=3d5194f6",
+       "kind": "video",
+       "source": "ABLATIONS_PAGE/Stage_2_wo_Critic/00_AnimateBanana/Animation/CVPR_2025_arch02021.svg?v=93b6b402",
+       "captions": "ABLATIONS_PAGE/Stage_2_wo_Critic/00_AnimateBanana/Animation/CVPR_2025_arch02021.captions.json?v=39dff63f"
+      },
+      "ablated": {
+       "src": "ABLATIONS_PAGE/Stage_2_wo_Critic/no_Critic/Animation/CVPR_2025_arch02021.mp4?v=6cb58d32",
+       "kind": "video",
+       "source": "ABLATIONS_PAGE/Stage_2_wo_Critic/no_Critic/Animation/CVPR_2025_arch02021.svg?v=d6652430",
+       "captions": "ABLATIONS_PAGE/Stage_2_wo_Critic/no_Critic/Animation/CVPR_2025_arch02021.captions.json?v=11397e05"
+      }
+     },
+     "d2c": null,
+     "critic": null,
+     "scores": {
+      "SS": {
+       "full": {
+        "kind": "num",
+        "value": 1.0,
+        "text": "1.0000"
+       },
+       "ablated": {
+        "kind": "num",
+        "value": 0.8667,
+        "text": "0.8667"
+       }
+      },
+      "GP": {
+       "full": {
+        "kind": "num",
+        "value": 0.9444,
+        "text": "0.9444"
+       },
+       "ablated": {
+        "kind": "num",
+        "value": 0.8667,
+        "text": "0.8667"
+       }
+      },
+      "AN": {
+       "full": {
+        "kind": "num",
+        "value": 0.9629,
+        "text": "0.9629"
+       },
+       "ablated": {
+        "kind": "num",
+        "value": 0.9111,
+        "text": "0.9111"
+       }
+      }
+     }
+    },
+    {
+     "id": "Paper2Fig_pipe_diff_000000130",
+     "style": "Alpha Masking",
+     "source": "ABLATIONS_PAGE/Original_Images/Paper2Fig_pipe_diff_000000130.png?v=1ace3854",
+     "animation": {
+      "full": {
+       "src": "ABLATIONS_PAGE/Stage_2_wo_Critic/00_AnimateBanana/Animation/Paper2Fig_pipe_diff_000000130.mp4?v=c2ee365d",
+       "kind": "video",
+       "source": "ABLATIONS_PAGE/Stage_2_wo_Critic/00_AnimateBanana/Animation/Paper2Fig_pipe_diff_000000130.svg?v=a4b73b01",
+       "captions": "ABLATIONS_PAGE/Stage_2_wo_Critic/00_AnimateBanana/Animation/Paper2Fig_pipe_diff_000000130.captions.json?v=2fa52a60"
+      },
+      "ablated": {
+       "src": "ABLATIONS_PAGE/Stage_2_wo_Critic/no_Critic/Animation/Paper2Fig_pipe_diff_000000130.mp4?v=a6dee329",
+       "kind": "video",
+       "source": "ABLATIONS_PAGE/Stage_2_wo_Critic/no_Critic/Animation/Paper2Fig_pipe_diff_000000130.svg?v=c1416eb4",
+       "captions": "ABLATIONS_PAGE/Stage_2_wo_Critic/no_Critic/Animation/Paper2Fig_pipe_diff_000000130.captions.json?v=a931f2b4"
+      }
+     },
+     "d2c": null,
+     "critic": null,
+     "scores": {
+      "SS": {
+       "full": {
+        "kind": "num",
+        "value": 1.0,
+        "text": "1.0000"
+       },
+       "ablated": {
+        "kind": "num",
+        "value": 0.8333,
+        "text": "0.8333"
+       }
+      },
+      "GP": {
+       "full": {
+        "kind": "num",
+        "value": 1.0,
+        "text": "1.0000"
+       },
+       "ablated": {
+        "kind": "num",
+        "value": 1.0,
+        "text": "1.0000"
+       }
+      },
+      "AN": {
+       "full": {
+        "kind": "num",
+        "value": 0.9815,
+        "text": "0.9815"
+       },
+       "ablated": {
+        "kind": "num",
+        "value": 0.9305,
+        "text": "0.9305"
+       }
+      }
+     }
+    },
+    {
+     "id": "arch_arxiv_db_ir_2025_000000587",
+     "style": "Progressive Reveal",
+     "source": "ABLATIONS_PAGE/Original_Images/arch_arxiv_db_ir_2025_000000587.png?v=16b75d9a",
+     "animation": {
+      "full": {
+       "src": "ABLATIONS_PAGE/Stage_2_wo_Critic/00_AnimateBanana/Animation/arch_arxiv_db_ir_2025_000000587.mp4?v=a1a81044",
+       "kind": "video",
+       "source": "ABLATIONS_PAGE/Stage_2_wo_Critic/00_AnimateBanana/Animation/arch_arxiv_db_ir_2025_000000587.svg?v=90b11ae1",
+       "captions": "ABLATIONS_PAGE/Stage_2_wo_Critic/00_AnimateBanana/Animation/arch_arxiv_db_ir_2025_000000587.captions.json?v=8d0702f2"
+      },
+      "ablated": {
+       "src": "ABLATIONS_PAGE/Stage_2_wo_Critic/no_Critic/Animation/arch_arxiv_db_ir_2025_000000587.mp4?v=9f9e3b91",
+       "kind": "video",
+       "source": "ABLATIONS_PAGE/Stage_2_wo_Critic/no_Critic/Animation/arch_arxiv_db_ir_2025_000000587.svg?v=93f9a16b",
+       "captions": "ABLATIONS_PAGE/Stage_2_wo_Critic/no_Critic/Animation/arch_arxiv_db_ir_2025_000000587.captions.json?v=f3250eac"
+      }
+     },
+     "d2c": null,
+     "critic": null,
+     "scores": {
+      "SS": {
+       "full": {
+        "kind": "num",
+        "value": 0.963,
+        "text": "0.9630"
+       },
+       "ablated": {
+        "kind": "num",
+        "value": 0.8519,
+        "text": "0.8519"
+       }
+      },
+      "GP": {
+       "full": {
+        "kind": "num",
+        "value": 1.0,
+        "text": "1.0000"
+       },
+       "ablated": {
+        "kind": "num",
+        "value": 1.0,
+        "text": "1.0000"
+       }
+      },
+      "AN": {
+       "full": {
+        "kind": "num",
+        "value": 0.9753,
+        "text": "0.9753"
+       },
+       "ablated": {
+        "kind": "num",
+        "value": 0.9506,
+        "text": "0.9506"
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "key": "Stage_2_wo_Image",
+   "name": "Stage 2 without Image input",
+   "short": "Stage 2 · no diagram image",
+   "removed": "The diagram image fed to the Animation Planner",
+   "metrics": [
+    "SS",
+    "GP",
+    "AN"
+   ],
+   "cross": [
+    "node_s2_in_d"
+   ],
+   "d2c": false,
+   "panel": "Without Image input",
+   "sheet": "02_Stage2_no_Diagram_Image",
+   "samples": [
+    {
+     "id": "CVPR_2025_arch02400",
+     "style": "Alpha Masking",
+     "source": "ABLATIONS_PAGE/Original_Images/CVPR_2025_arch02400.png?v=4e522479",
+     "animation": {
+      "full": {
+       "src": "ABLATIONS_PAGE/Stage_2_wo_Image/00_AnimateBanana/Animation/CVPR_2025_arch02400.mp4?v=2c1fa422",
+       "kind": "video",
+       "source": "ABLATIONS_PAGE/Stage_2_wo_Image/00_AnimateBanana/Animation/CVPR_2025_arch02400.svg?v=8225f01b",
+       "captions": "ABLATIONS_PAGE/Stage_2_wo_Image/00_AnimateBanana/Animation/CVPR_2025_arch02400.captions.json?v=369abb92"
+      },
+      "ablated": {
+       "src": "ABLATIONS_PAGE/Stage_2_wo_Image/wo_Image/Animation/CVPR_2025_arch02400.mp4?v=a11f69a8",
+       "kind": "video",
+       "source": "ABLATIONS_PAGE/Stage_2_wo_Image/wo_Image/Animation/CVPR_2025_arch02400.svg?v=ad503760",
+       "captions": "ABLATIONS_PAGE/Stage_2_wo_Image/wo_Image/Animation/CVPR_2025_arch02400.captions.json?v=b6a45ca4"
+      }
+     },
+     "d2c": null,
+     "critic": null,
+     "scores": {
+      "SS": {
+       "full": {
+        "kind": "num",
+        "value": 0.9444,
+        "text": "0.9444"
+       },
+       "ablated": {
+        "kind": "num",
+        "value": 0.8333,
+        "text": "0.8333"
+       }
+      },
+      "GP": {
+       "full": {
+        "kind": "num",
+        "value": 0.8333,
+        "text": "0.8333"
+       },
+       "ablated": {
+        "kind": "num",
+        "value": 0.8033,
+        "text": "0.8033"
+       }
+      },
+      "AN": {
+       "full": {
+        "kind": "num",
+        "value": 0.8981,
+        "text": "0.8981"
+       },
+       "ablated": {
+        "kind": "num",
+        "value": 0.8611,
+        "text": "0.8611"
+       }
+      }
+     }
+    },
+    {
+     "id": "Paper2Fig_arch_diff_000000076",
+     "style": "Sliding Bbox",
+     "source": "ABLATIONS_PAGE/Original_Images/Paper2Fig_arch_diff_000000076.png?v=f5772344",
+     "animation": {
+      "full": {
+       "src": "ABLATIONS_PAGE/Stage_2_wo_Image/00_AnimateBanana/Animation/Paper2Fig_arch_diff_000000076.mp4?v=3493bf73",
+       "kind": "video",
+       "source": "ABLATIONS_PAGE/Stage_2_wo_Image/00_AnimateBanana/Animation/Paper2Fig_arch_diff_000000076.svg?v=a577265e",
+       "captions": "ABLATIONS_PAGE/Stage_2_wo_Image/00_AnimateBanana/Animation/Paper2Fig_arch_diff_000000076.captions.json?v=a66cbfee"
+      },
+      "ablated": {
+       "src": "ABLATIONS_PAGE/Stage_2_wo_Image/wo_Image/Animation/Paper2Fig_arch_diff_000000076.mp4?v=fe3ed3a6",
+       "kind": "video",
+       "source": "ABLATIONS_PAGE/Stage_2_wo_Image/wo_Image/Animation/Paper2Fig_arch_diff_000000076.svg?v=b2c5a0a9",
+       "captions": "ABLATIONS_PAGE/Stage_2_wo_Image/wo_Image/Animation/Paper2Fig_arch_diff_000000076.captions.json?v=1cb11e76"
+      }
+     },
+     "d2c": null,
+     "critic": null,
+     "scores": {
+      "SS": {
+       "full": {
+        "kind": "num",
+        "value": 0.9167,
+        "text": "0.9167"
+       },
+       "ablated": {
+        "kind": "num",
+        "value": 0.8205,
+        "text": "0.8205"
+       }
+      },
+      "GP": {
+       "full": {
+        "kind": "num",
+        "value": 0.9167,
+        "text": "0.9167"
+       },
+       "ablated": {
+        "kind": "num",
+        "value": 0.8974,
+        "text": "0.8974"
+       }
+      },
+      "AN": {
+       "full": {
+        "kind": "num",
+        "value": 0.9445,
+        "text": "0.9445"
+       },
+       "ablated": {
+        "kind": "num",
+        "value": 0.0,
+        "text": "0.0000"
+       }
+      }
+     }
+    },
+    {
+     "id": "Paper2Fig_pipe_easy_000000529",
+     "style": "Alpha Masking",
+     "source": "ABLATIONS_PAGE/Original_Images/Paper2Fig_pipe_easy_000000529.png?v=7bddd0c3",
+     "animation": {
+      "full": {
+       "src": "ABLATIONS_PAGE/Stage_2_wo_Image/00_AnimateBanana/Animation/Paper2Fig_pipe_easy_000000529.mp4?v=250eb335",
+       "kind": "video",
+       "source": "ABLATIONS_PAGE/Stage_2_wo_Image/00_AnimateBanana/Animation/Paper2Fig_pipe_easy_000000529.svg?v=3de7f885",
+       "captions": "ABLATIONS_PAGE/Stage_2_wo_Image/00_AnimateBanana/Animation/Paper2Fig_pipe_easy_000000529.captions.json?v=6344dcac"
+      },
+      "ablated": {
+       "src": "ABLATIONS_PAGE/Stage_2_wo_Image/wo_Image/Animation/Paper2Fig_pipe_easy_000000529.mp4?v=46e53ba8",
+       "kind": "video",
+       "source": "ABLATIONS_PAGE/Stage_2_wo_Image/wo_Image/Animation/Paper2Fig_pipe_easy_000000529.svg?v=3fe887a9",
+       "captions": "ABLATIONS_PAGE/Stage_2_wo_Image/wo_Image/Animation/Paper2Fig_pipe_easy_000000529.captions.json?v=55725ab2"
+      }
+     },
+     "d2c": null,
+     "critic": null,
+     "scores": {
+      "SS": {
+       "full": {
+        "kind": "num",
+        "value": 1.0,
+        "text": "1.0000"
+       },
+       "ablated": {
+        "kind": "num",
+        "value": 1.0,
+        "text": "1.0000"
+       }
+      },
+      "GP": {
+       "full": {
+        "kind": "num",
+        "value": 0.9583,
+        "text": "0.9583"
+       },
+       "ablated": {
+        "kind": "num",
+        "value": 0.8918,
+        "text": "0.8918"
+       }
+      },
+      "AN": {
+       "full": {
+        "kind": "num",
+        "value": 0.9444,
+        "text": "0.9444"
+       },
+       "ablated": {
+        "kind": "num",
+        "value": 0.9316,
+        "text": "0.9316"
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "key": "Stage_3_wo_Critic",
+   "name": "Stage 3 without Critic",
+   "short": "Stage 3 · no critic",
+   "removed": "The critic loop inside the Diagram Animator",
+   "metrics": [
+    "AN"
+   ],
+   "cross": [
+    "node_s3_critic"
+   ],
+   "d2c": false,
+   "panel": "Without Stage 3 Critic",
+   "sheet": "07_Stage3_no_Critic",
+   "samples": [
+    {
+     "id": "Paper2Fig_arch_easy_000000148",
+     "style": "Alpha Masking",
+     "source": "ABLATIONS_PAGE/Original_Images/Paper2Fig_arch_easy_000000148.png?v=ab2b8749",
+     "animation": {
+      "full": {
+       "src": "ABLATIONS_PAGE/Stage_3_wo_Critic/00_AnimateBanana/Animation/Paper2Fig_arch_easy_000000148.mp4?v=5edf36fc",
+       "kind": "video",
+       "source": "ABLATIONS_PAGE/Stage_3_wo_Critic/00_AnimateBanana/Animation/Paper2Fig_arch_easy_000000148.svg?v=a4511813",
+       "captions": "ABLATIONS_PAGE/Stage_3_wo_Critic/00_AnimateBanana/Animation/Paper2Fig_arch_easy_000000148.captions.json?v=c188b1c5"
+      },
+      "ablated": {
+       "src": "ABLATIONS_PAGE/Stage_3_wo_Critic/no_Critic/Animation/Paper2Fig_arch_easy_000000148.mp4?v=5af6c3e7",
+       "kind": "video",
+       "source": "ABLATIONS_PAGE/Stage_3_wo_Critic/no_Critic/Animation/Paper2Fig_arch_easy_000000148.svg?v=81f12148",
+       "captions": "ABLATIONS_PAGE/Stage_3_wo_Critic/no_Critic/Animation/Paper2Fig_arch_easy_000000148.captions.json?v=9d647ac6"
+      }
+     },
+     "d2c": null,
+     "critic": {
+      "style": "alpha_masking",
+      "traversal_style": "DETAIL_FIRST",
+      "nodes": [
+       {
+        "id": "t1",
+        "parent": null,
+        "depth": 1,
+        "focus": [
+         "node_bots_response",
+         "edge_bot_to_container"
+        ],
+        "action": "reveal",
+        "narration": null,
+        "duration": null,
+        "narrative": null,
+        "element_classes": {
+         "blocks": [],
+         "nodes": [
+          "node_bots_response"
+         ],
+         "text": [],
+         "arrows": [
+          "edge_bot_to_container"
+         ]
+        },
+        "timestamp": 1
+       },
+       {
+        "id": "t2",
+        "parent": null,
+        "depth": 1,
+        "focus": [
+         "block_main_container",
+         "rect_main_container",
+         "edge_fork_network",
+         "edge_fork_repetition",
+         "edge_fork_question",
+         "edge_fork_short_safe"
+        ],
+        "action": "reveal",
+        "narration": null,
+        "duration": null,
+        "narrative": null,
+        "element_classes": {
+         "blocks": [
+          "block_main_container"
+         ],
+         "nodes": [
+          "rect_main_container"
+         ],
+         "text": [],
+         "arrows": [
+          "edge_fork_network",
+          "edge_fork_repetition",
+          "edge_fork_question",
+          "edge_fork_short_safe"
+         ]
+        },
+        "timestamp": 2
+       },
+       {
+        "id": "t3",
+        "parent": "t2",
+        "depth": 2,
+        "focus": [
+         "node_next_sentence"
+        ],
+        "action": "reveal",
+        "narration": null,
+        "duration": null,
+        "narrative": null,
+        "element_classes": {
+         "blocks": [],
+         "nodes": [
+          "node_next_sentence"
+         ],
+         "text": [],
+         "arrows": []
+        },
+        "timestamp": 3
+       },
+       {
+        "id": "t4",
+        "parent": "t2",
+        "depth": 2,
+        "focus": [
+         "block_repetition",
+         "rect_repetition_bg",
+         "text_repetition_title",
+         "rect_repetition_inner_dash",
+         "edge_repetition_spine"
+        ],
+        "action": "reveal",
+        "narration": null,
+        "duration": null,
+        "narrative": null,
+        "element_classes": {
+         "blocks": [
+          "block_repetition"
+         ],
+         "nodes": [
+          "rect_repetition_bg",
+          "text_repetition_title",
+          "rect_repetition_inner_dash"
+         ],
+         "text": [],
+         "arrows": [
+          "edge_repetition_spine"
+         ]
+        },
+        "timestamp": 4
+       },
+       {
+        "id": "t5",
+        "parent": "t4",
+        "depth": 3,
+        "focus": [
+         "node_rep_internal",
+         "node_rep_external",
+         "node_rep_partner"
+        ],
+        "action": "reveal",
+        "narration": null,
+        "duration": null,
+        "narrative": null,
+        "element_classes": {
+         "blocks": [],
+         "nodes": [
+          "node_rep_internal",
+          "node_rep_external",
+          "node_rep_partner"
+         ],
+         "text": [],
+         "arrows": []
+        },
+        "timestamp": 5
+       },
+       {
+        "id": "t6",
+        "parent": "t2",
+        "depth": 2,
+        "focus": [
+         "node_question_asking"
+        ],
+        "action": "reveal",
+        "narration": null,
+        "duration": null,
+        "narrative": null,
+        "element_classes": {
+         "blocks": [],
+         "nodes": [
+          "node_question_asking"
+         ],
+         "text": [],
+         "arrows": []
+        },
+        "timestamp": 6
+       },
+       {
+        "id": "t7",
+        "parent": "t2",
+        "depth": 2,
+        "focus": [
+         "node_short_safe"
+        ],
+        "action": "reveal",
+        "narration": null,
+        "duration": null,
+        "narrative": null,
+        "element_classes": {
+         "blocks": [],
+         "nodes": [
+          "node_short_safe"
+         ],
+         "text": [],
+         "arrows": []
+        },
+        "timestamp": 7
+       },
+       {
+        "id": "t8",
+        "parent": "t2",
+        "depth": 2,
+        "focus": [
+         "edge_next_sentence_to_classifier",
+         "edge_repetition_to_classifier",
+         "edge_question_to_classifier",
+         "edge_short_safe_to_classifier"
+        ],
+        "action": "reveal",
+        "narration": null,
+        "duration": null,
+        "narrative": null,
+        "element_classes": {
+         "blocks": [],
+         "nodes": [],
+         "text": [],
+         "arrows": [
+          "edge_next_sentence_to_classifier",
+          "edge_repetition_to_classifier",
+          "edge_question_to_classifier",
+          "edge_short_safe_to_classifier"
+         ]
+        },
+        "timestamp": 8
+       },
+       {
+        "id": "t9",
+        "parent": "t2",
+        "depth": 2,
+        "focus": [
+         "node_classifier",
+         "edge_classifier_to_boundary"
+        ],
+        "action": "reveal",
+        "narration": null,
+        "duration": null,
+        "narrative": null,
+        "element_classes": {
+         "blocks": [],
+         "nodes": [
+          "node_classifier"
+         ],
+         "text": [],
+         "arrows": [
+          "edge_classifier_to_boundary"
+         ]
+        },
+        "timestamp": 9
+       },
+       {
+        "id": "t10",
+        "parent": null,
+        "depth": 1,
+        "focus": [
+         "node_response_classification",
+         "edge_container_to_response_class"
+        ],
+        "action": "reveal",
+        "narration": null,
+        "duration": null,
+        "narrative": null,
+        "element_classes": {
+         "blocks": [],
+         "nodes": [
+          "node_response_classification"
+         ],
+         "text": [],
+         "arrows": [
+          "edge_container_to_response_class"
+         ]
+        },
+        "timestamp": 10
+       }
+      ],
+      "traversal": [
+       "t1",
+       "t2",
+       "t3",
+       "t4",
+       "t5",
+       "t6",
+       "t7",
+       "t8",
+       "t9",
+       "t10"
+      ],
+      "provenance": {
+       "agent": "sequencer",
+       "backend": "openrouter_gemini37flash",
+       "model": "google-gemini-3.7-flash",
+       "prompt": "animation_planner/svg_sequencer.yaml#new_prompt",
+       "style": "alpha_masking",
+       "target": "svg",
+       "config_fingerprint": "a60c9cf21a359534",
+       "timestamp": "2026-09-02T00:09:22",
+       "max_depth": 3
+      }
+     },
+     "scores": {
+      "AN": {
+       "full": {
+        "kind": "num",
+        "value": 0.9889,
+        "text": "0.9889"
+       },
+       "ablated": {
+        "kind": "num",
+        "value": 0.0,
+        "text": "0.0000"
+       }
+      }
+     }
+    },
+    {
+     "id": "SciMMIR_pipe_easy_000000307",
+     "style": "Alpha Masking",
+     "source": "ABLATIONS_PAGE/Original_Images/SciMMIR_pipe_easy_000000307.png?v=3e5e4b43",
+     "animation": {
+      "full": {
+       "src": "ABLATIONS_PAGE/Stage_3_wo_Critic/00_AnimateBanana/Animation/SciMMIR_pipe_easy_000000307.mp4?v=dd41e60b",
+       "kind": "video",
+       "source": "ABLATIONS_PAGE/Stage_3_wo_Critic/00_AnimateBanana/Animation/SciMMIR_pipe_easy_000000307.svg?v=cd390ee3",
+       "captions": "ABLATIONS_PAGE/Stage_3_wo_Critic/00_AnimateBanana/Animation/SciMMIR_pipe_easy_000000307.captions.json?v=8955ad2e"
+      },
+      "ablated": {
+       "src": "ABLATIONS_PAGE/Stage_3_wo_Critic/no_Critic/Animation/SciMMIR_pipe_easy_000000307.mp4?v=6bfe40fe",
+       "kind": "video",
+       "source": "ABLATIONS_PAGE/Stage_3_wo_Critic/no_Critic/Animation/SciMMIR_pipe_easy_000000307.svg?v=f2c82b62",
+       "captions": "ABLATIONS_PAGE/Stage_3_wo_Critic/no_Critic/Animation/SciMMIR_pipe_easy_000000307.captions.json?v=ec87402d"
+      }
+     },
+     "d2c": null,
+     "critic": {
+      "style": "alpha_masking",
+      "traversal_style": "DETAIL_FIRST",
+      "nodes": [
+       {
+        "id": "t1",
+        "parent": null,
+        "depth": 1,
+        "focus": [
+         "block_data_sources",
+         "bg_data_sources",
+         "icon_data_sources",
+         "title_data_sources"
+        ],
+        "action": "reveal",
+        "narration": null,
+        "duration": null,
+        "narrative": null,
+        "element_classes": {
+         "blocks": [
+          "block_data_sources"
+         ],
+         "nodes": [
+          "bg_data_sources",
+          "icon_data_sources"
+         ],
+         "text": [
+          "title_data_sources"
+         ],
+         "arrows": []
+        },
+        "timestamp": 1
+       },
+       {
+        "id": "t2",
+        "parent": null,
+        "depth": 1,
+        "focus": [
+         "item_ds_1_badge",
+         "item_ds_2_badge",
+         "item_ds_3_badge",
+         "text_ds_item_1a",
+         "text_ds_item_1b",
+         "text_ds_item_1c",
+         "text_ds_item_2",
+         "text_ds_item_3"
+        ],
+        "action": "reveal",
+        "narration": null,
+        "duration": null,
+        "narrative": null,
+        "element_classes": {
+         "blocks": [],
+         "nodes": [
+          "item_ds_1_badge",
+          "item_ds_2_badge",
+          "item_ds_3_badge"
+         ],
+         "text": [
+          "text_ds_item_1a",
+          "text_ds_item_1b",
+          "text_ds_item_1c",
+          "text_ds_item_2",
+          "text_ds_item_3"
+         ],
+         "arrows": []
+        },
+        "timestamp": 2
+       },
+       {
+        "id": "t3",
+        "parent": null,
+        "depth": 1,
+        "focus": [
+         "block_region_extraction",
+         "bg_region_extraction",
+         "icon_region_images",
+         "title_region_extraction",
+         "label_lre_1a",
+         "label_lre_1b",
+         "edge_ds_to_lre"
+        ],
+        "action": "reveal",
+        "narration": null,
+        "duration": null,
+        "narrative": null,
+        "element_classes": {
+         "blocks": [
+          "block_region_extraction"
+         ],
+         "nodes": [
+          "bg_region_extraction",
+          "icon_region_images"
+         ],
+         "text": [
+          "title_region_extraction",
+          "label_lre_1a",
+          "label_lre_1b"
+         ],
+         "arrows": [
+          "edge_ds_to_lre"
+         ]
+        },
+        "timestamp": 3
+       },
+       {
+        "id": "t4",
+        "parent": null,
+        "depth": 1,
+        "focus": [
+         "icon_duplicates_removal",
+         "label_lre_2a",
+         "label_lre_2b",
+         "edge_img_to_duprem"
+        ],
+        "action": "reveal",
+        "narration": null,
+        "duration": null,
+        "narrative": null,
+        "element_classes": {
+         "blocks": [],
+         "nodes": [
+          "icon_duplicates_removal"
+         ],
+         "text": [
+          "label_lre_2a",
+          "label_lre_2b"
+         ],
+         "arrows": [
+          "edge_img_to_duprem"
+         ]
+        },
+        "timestamp": 4
+       },
+       {
+        "id": "t5",
+        "parent": null,
+        "depth": 1,
+        "focus": [
+         "raster_local_regions_grid",
+         "label_lre_3a",
+         "label_lre_3b",
+         "edge_duprem_to_grid"
+        ],
+        "action": "reveal",
+        "narration": null,
+        "duration": null,
+        "narrative": null,
+        "element_classes": {
+         "blocks": [],
+         "nodes": [
+          "raster_local_regions_grid"
+         ],
+         "text": [
+          "label_lre_3a",
+          "label_lre_3b"
+         ],
+         "arrows": [
+          "edge_duprem_to_grid"
+         ]
+        },
+        "timestamp": 5
+       },
+       {
+        "id": "t6",
+        "parent": null,
+        "depth": 1,
+        "focus": [
+         "block_labeling_setgen",
+         "bg_labeling_setgen",
+         "raster_labeling_patches",
+         "title_labeling_setgen",
+         "label_labeling",
+         "edge_grid_to_labeling"
+        ],
+        "action": "reveal",
+        "narration": null,
+        "duration": null,
+        "narrative": null,
+        "element_classes": {
+         "blocks": [
+          "block_labeling_setgen"
+         ],
+         "nodes": [
+          "bg_labeling_setgen",
+          "raster_labeling_patches"
+         ],
+         "text": [
+          "title_labeling_setgen",
+          "label_labeling"
+         ],
+         "arrows": [
+          "edge_grid_to_labeling"
+         ]
+        },
+        "timestamp": 6
+       },
+       {
+        "id": "t7",
+        "parent": null,
+        "depth": 1,
+        "focus": [
+         "container_set_generation",
+         "label_set_generation",
+         "edge_labeling_to_setgen"
+        ],
+        "action": "reveal",
+        "narration": null,
+        "duration": null,
+        "narrative": null,
+        "element_classes": {
+         "blocks": [],
+         "nodes": [
+          "container_set_generation"
+         ],
+         "text": [
+          "label_set_generation"
+         ],
+         "arrows": [
+          "edge_labeling_to_setgen"
+         ]
+        },
+        "timestamp": 7
+       }
+      ],
+      "traversal": [
+       "t1",
+       "t2",
+       "t3",
+       "t4",
+       "t5",
+       "t6",
+       "t7"
+      ],
+      "provenance": {
+       "agent": "sequencer",
+       "backend": "openrouter_gemini37flash",
+       "model": "google-gemini-3.7-flash",
+       "prompt": "animation_planner/svg_sequencer.yaml#new_prompt",
+       "style": "alpha_masking",
+       "target": "svg",
+       "config_fingerprint": "a60c9cf21a359534",
+       "timestamp": "2026-09-02T00:04:52",
+       "max_depth": 3
+      }
+     },
+     "scores": {
+      "AN": {
+       "full": {
+        "kind": "num",
+        "value": 0.9524,
+        "text": "0.9524"
+       },
+       "ablated": {
+        "kind": "num",
+        "value": 0.0,
+        "text": "0.0000"
+       }
+      }
+     }
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,211 @@
+{
+  "detected": 11,
+  "placeholders": 11,
+  "omitted": {},
+  "rejected": {},
+  "image_size": [
+    982,
+    483
+  ],
+  "regions": [
+    {
+      "xml_id": "ref_frame_img",
+      "box_2d": [
+        65,
+        14,
+        313,
+        139
+      ],
+      "bbox": [
+        13.748000000000001,
+        31.395,
+        136.49800000000002,
+        151.179
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "obj_replacement_img",
+      "box_2d": [
+        129,
+        154,
+        276,
+        256
+      ],
+      "bbox": [
+        151.228,
+        62.307,
+        251.392,
+        133.30800000000002
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "input_frame_img",
+      "box_2d": [
+        389,
+        14,
+        642,
+        141
+      ],
+      "bbox": [
+        13.748000000000001,
+        187.887,
+        138.462,
+        310.086
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "box_detection_img",
+      "box_2d": [
+        443,
+        167,
+        587,
+        241
+      ],
+      "bbox": [
+        163.994,
+        213.969,
+        236.662,
+        283.52099999999996
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "hand_mesh_aug_frame",
+      "box_2d": [
+        712,
+        14,
+        966,
+        139
+      ],
+      "bbox": [
+        13.748000000000001,
+        343.89599999999996,
+        136.49800000000002,
+        466.578
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "hand_mesh_aug_img",
+      "box_2d": [
+        749,
+        164,
+        935,
+        255
+      ],
+      "bbox": [
+        161.048,
+        361.767,
+        250.41,
+        451.605
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "ref_image_node",
+      "box_2d": [
+        66,
+        284,
+        317,
+        410
+      ],
+      "bbox": [
+        278.888,
+        31.878,
+        402.61999999999995,
+        153.111
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "hand_mesh_stack",
+      "box_2d": [
+        36,
+        848,
+        321,
+        994
+      ],
+      "bbox": [
+        832.736,
+        17.387999999999998,
+        976.108,
+        155.043
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "layout_guidance_stack",
+      "box_2d": [
+        367,
+        282,
+        649,
+        420
+      ],
+      "bbox": [
+        276.924,
+        177.261,
+        412.44,
+        313.467
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "noise_node",
+      "box_2d": [
+        543,
+        497,
+        616,
+        533
+      ],
+      "bbox": [
+        488.054,
+        262.269,
+        523.4060000000001,
+        297.528
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "gen_frames_stack",
+      "box_2d": [
+        353,
+        850,
+        645,
+        993
+      ],
+      "bbox": [
+        834.6999999999999,
+        170.499,
+        975.126,
+        311.535
+      ],
+      "label": ""
+    }
+  ],
+  "replaced": [
+    "ref_frame_img",
+    "obj_replacement_img",
+    "input_frame_img",
+    "box_detection_img",
+    "hand_mesh_aug_frame",
+    "hand_mesh_aug_img",
+    "ref_image_node",
+    "hand_mesh_stack",
+    "layout_guidance_stack",
+    "noise_node",
+    "gen_frames_stack"
+  ],
+  "provenance": {
+    "agent": "raster_integrator",
+    "backend": "openrouter_gemini37flash",
+    "model": "google-gemini-3.7-flash",
+    "prompt": null,
+    "style": "colour_pop",
+    "target": "svg",
+    "config_fingerprint": "54d653973aa2c411",
+    "timestamp": "2026-08-28T20:47:33"
+  }
+}

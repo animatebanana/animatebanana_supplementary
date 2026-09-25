@@ -1,0 +1,42 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:08.600
+The framework begins with an input image and a text prompt specifying the target category to be counted, such as keyboard keys.
+
+2
+00:00:08.600 --> 00:00:18.310
+The image is encoded by a frozen VAE encoder, while the text prompt is processed by a frozen text encoder within the pretrained diffusion model.
+
+3
+00:00:18.310 --> 00:00:25.050
+These representations enter a trainable Denoising U-Net performing a single-step denoising pass to extract intermediate visual features.
+
+4
+00:00:25.050 --> 00:00:31.430
+Multi-layer cross-attention maps are extracted from the U-Net to establish the Representational Regional Coherence loss branch.
+
+5
+00:00:31.430 --> 00:00:38.550
+The fused cross-attention map isolates background regions, combining with ground-truth density locations to build a positive-negative-ambiguous supervision map.
+
+6
+00:00:38.550 --> 00:00:44.550
+Concurrently, hierarchical multi-scale feature maps from the U-Net decoder enter the Hierarchical Semantic Correction Module.
+
+7
+00:00:44.550 --> 00:00:51.300
+This trainable module progressively refines text-image alignment by fusing visual features across adjacent scales with text embeddings.
+
+8
+00:00:51.300 --> 00:00:57.670
+Intermediate text-image similarity maps are generated and supervised against the positive-negative-ambiguous map through the coherence loss.
+
+9
+00:00:57.670 --> 00:01:04.790
+The fully corrected feature representations are then fed into a counter head to estimate the predicted density map.
+
+10
+00:01:04.790 --> 00:01:11.910
+Finally, the predicted density map is optimized against ground truth annotations with a regression loss, completing end-to-end training.
+

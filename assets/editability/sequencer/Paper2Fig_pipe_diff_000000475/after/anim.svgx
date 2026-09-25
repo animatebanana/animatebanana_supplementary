@@ -1,0 +1,262 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 580" width="1000" height="580">
+  <defs>
+    <!-- Arrowhead markers -->
+    <marker id="arrow-black" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#1c1917"/>
+    </marker>
+
+    <!-- Drop Shadow Filters -->
+    <filter id="shadow-main" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="2" dy="3" stdDeviation="3" flood-color="#000000" flood-opacity="0.25"/>
+    </filter>
+    <filter id="shadow-card" x="-4%" y="-4%" width="108%" height="112%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="1.5" dy="2.5" stdDeviation="2.5" flood-color="#000000" flood-opacity="0.2"/>
+    </filter>
+    <filter id="shadow-inner" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <style>
+    /* Only the Model Testing block and its transition arrow are progressively revealed */
+    #arrow_dev_to_test,
+    #section_model_testing,
+    #rect_container_testing,
+    #text_title_testing,
+    #block_attack_data,
+    #rect_attack_data_bg,
+    #text_attack_data,
+    #arrow_attack_to_trained,
+    #block_trained_models,
+    #rect_trained_models_bg,
+    #text_trained_models_label,
+    #raster_test_predictor,
+    #block_deviations,
+    #rect_deviations_bg,
+    #text_deviations,
+    #arrow_pred_to_deviations,
+    #raster_test_detector,
+    #arrow_dev_to_svdd,
+    #arrow_trained_to_alert,
+    #block_anomaly_alert,
+    #rect_anomaly_alert_bg,
+    #icon_alarm_bell,
+    #text_anomaly_alert {
+      opacity: 0;
+      animation-name: fadeIn;
+      animation-duration: 0.5s;
+      animation-fill-mode: forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Delays for progressively revealed testing elements */
+    #arrow_dev_to_test { animation-delay: 0s; }
+    #section_model_testing, #rect_container_testing, #text_title_testing { animation-delay: 3s; }
+    #block_attack_data, #rect_attack_data_bg, #text_attack_data { animation-delay: 6s; }
+    #arrow_attack_to_trained { animation-delay: 9s; }
+    #block_trained_models, #rect_trained_models_bg, #text_trained_models_label { animation-delay: 12s; }
+    #raster_test_predictor { animation-delay: 15s; }
+    #block_deviations, #rect_deviations_bg, #text_deviations, #arrow_pred_to_deviations { animation-delay: 18s; }
+    #raster_test_detector, #arrow_dev_to_svdd { animation-delay: 21s; }
+    #arrow_trained_to_alert { animation-delay: 24s; }
+    #block_anomaly_alert, #rect_anomaly_alert_bg, #icon_alarm_bell, #text_anomaly_alert { animation-delay: 27s; }
+
+    /* Narration Banner Styles */
+    .narrative-text {
+      opacity: 0;
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      font-weight: bold;
+      fill: #111827;
+      text-anchor: middle;
+      animation-duration: 3s;
+      animation-fill-mode: forwards;
+    }
+
+    @keyframes narrFade {
+      0% { opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    @keyframes narrFadeLast {
+      0% { opacity: 0; }
+      10% { opacity: 1; }
+      100% { opacity: 1; }
+    }
+
+    #narr_ts11 { animation-name: narrFade; animation-delay: 0s; }
+    #narr_ts12 { animation-name: narrFade; animation-delay: 3s; }
+    #narr_ts13 { animation-name: narrFade; animation-delay: 6s; }
+    #narr_ts14 { animation-name: narrFade; animation-delay: 9s; }
+    #narr_ts15 { animation-name: narrFade; animation-delay: 12s; }
+    #narr_ts16 { animation-name: narrFade; animation-delay: 15s; }
+    #narr_ts17 { animation-name: narrFade; animation-delay: 18s; }
+    #narr_ts18 { animation-name: narrFade; animation-delay: 21s; }
+    #narr_ts19 { animation-name: narrFade; animation-delay: 24s; }
+    #narr_ts20 { animation-name: narrFadeLast; animation-delay: 27s; }
+  </style>
+
+  <!-- ================= SECTION 1: DATA ACQUISITION (Static) ================= -->
+  <g id="section_data_acquisition" data-id="section_data_acquisition" data-class="block" data-parent="root">
+    <!-- Section Title -->
+    <text id="text_title_acquisition" data-id="text_title_acquisition" data-class="text_node" data-parent="section_data_acquisition" x="110" y="38" fill="#111827" font-size="21" font-weight="bold" font-family="Arial, sans-serif" text-anchor="middle">Data acquisition</text>
+
+    <!-- Outer Card Container -->
+    <rect id="rect_container_acquisition" data-id="rect_container_acquisition" data-class="child_node" data-parent="section_data_acquisition" x="5" y="58" width="210" height="375" rx="28" fill="#ffffff" stroke="#111827" stroke-width="2.5" filter="url(#shadow-main)"/>
+
+    <!-- Upper Graphic: Car & In-vehicle Hardware Raster Placeholder -->
+    <g id="raster_car_hw" data-id="raster_car_hw" data-class="raster_node"><image href="assets/editability/sequencer/Paper2Fig_pipe_diff_000000475/after/rasters/crop_raster_car_hw.png" xlink:href="assets/editability/sequencer/Paper2Fig_pipe_diff_000000475/after/rasters/crop_raster_car_hw.png" x="18" y="72" width="184" height="152" preserveAspectRatio="xMidYMid meet" /></g>
+
+    <!-- Lower Card: Trusted Network Data -->
+    <g id="block_trusted_data" data-id="block_trusted_data" data-class="block" data-parent="section_data_acquisition">
+      <rect id="rect_trusted_data_card" data-id="rect_trusted_data_card" data-class="child_node" data-parent="block_trusted_data" x="18" y="235" width="184" height="180" rx="18" fill="#ffffff" stroke="#111827" stroke-width="2" filter="url(#shadow-inner)"/>
+      <text id="text_trusted_line1" data-id="text_trusted_line1" data-class="text_node" data-parent="block_trusted_data" x="110" y="265" fill="#111827" font-size="15" font-weight="bold" font-family="Arial, sans-serif" text-anchor="middle">Trusted in-vehicle</text>
+      <text id="text_trusted_line2" data-id="text_trusted_line2" data-class="text_node" data-parent="block_trusted_data" x="110" y="286" fill="#111827" font-size="15" font-weight="bold" font-family="Arial, sans-serif" text-anchor="middle">network data</text>
+
+      <!-- Raster Placeholder: Signal Traces Graph -->
+      <g id="raster_network_traces" data-id="raster_network_traces" data-class="raster_node"><image href="assets/editability/sequencer/Paper2Fig_pipe_diff_000000475/after/rasters/crop_raster_network_traces.png" xlink:href="assets/editability/sequencer/Paper2Fig_pipe_diff_000000475/after/rasters/crop_raster_network_traces.png" x="28" y="302" width="164" height="102" preserveAspectRatio="xMidYMid meet" /></g>
+    </g>
+  </g>
+
+  <!-- Large Horizontal Transition Arrow: Acquisition -> Development (Static) -->
+  <path id="arrow_acq_to_dev" data-id="arrow_acq_to_dev" data-class="edge" data-source="section_data_acquisition" data-target="section_model_development" d="M 218 252 L 246 252 L 246 238 L 268 260 L 246 282 L 246 268 L 218 268 Z" fill="#ffffff" stroke="#111827" stroke-width="2.5"/>
+
+  <!-- ================= SECTION 2: MODEL DEVELOPMENT (Static) ================= -->
+  <g id="section_model_development" data-id="section_model_development" data-class="block" data-parent="root">
+    <!-- Section Title -->
+    <text id="text_title_development" data-id="text_title_development" data-class="text_node" data-parent="section_model_development" x="500" y="38" fill="#111827" font-size="21" font-weight="bold" font-family="Arial, sans-serif" text-anchor="middle">Model development</text>
+
+    <!-- Outer Card Container -->
+    <rect id="rect_container_development" data-id="rect_container_development" data-class="child_node" data-parent="section_model_development" x="274" y="58" width="456" height="375" rx="30" fill="#ffffff" stroke="#111827" stroke-width="2.5" filter="url(#shadow-main)"/>
+
+    <!-- Upper Gray Container: Training Data & Hyperparameters -->
+    <g id="block_training_inputs" data-id="block_training_inputs" data-class="block" data-parent="section_model_development">
+      <rect id="rect_inputs_bg" data-id="rect_inputs_bg" data-class="child_node" data-parent="block_training_inputs" x="292" y="80" width="420" height="106" rx="20" fill="#b0b5b9" stroke="#111827" stroke-width="2" filter="url(#shadow-card)"/>
+
+      <!-- Attack-free training data inner pill -->
+      <rect id="rect_attack_free_pill" data-id="rect_attack_free_pill" data-class="child_node" data-parent="block_training_inputs" x="310" y="93" width="176" height="80" rx="15" fill="#ffffff" stroke="#111827" stroke-width="2" filter="url(#shadow-inner)"/>
+      <text id="text_attack_free_1" data-id="text_attack_free_1" data-class="text_node" data-parent="block_training_inputs" x="398" y="126" fill="#111827" font-size="16" font-weight="bold" font-family="Arial, sans-serif" text-anchor="middle">Attack-free</text>
+      <text id="text_attack_free_2" data-id="text_attack_free_2" data-class="text_node" data-parent="block_training_inputs" x="398" y="152" fill="#111827" font-size="16" font-weight="bold" font-family="Arial, sans-serif" text-anchor="middle">training data</text>
+
+      <!-- Model hyperparameters inner pill -->
+      <rect id="rect_hyperparameters_pill" data-id="rect_hyperparameters_pill" data-class="child_node" data-parent="block_training_inputs" x="518" y="93" width="180" height="80" rx="15" fill="#ffffff" stroke="#111827" stroke-width="2" filter="url(#shadow-inner)"/>
+      <text id="text_hyperparams_1" data-id="text_hyperparams_1" data-class="text_node" data-parent="block_training_inputs" x="608" y="126" fill="#111827" font-size="16" font-weight="bold" font-family="Arial, sans-serif" text-anchor="middle">Model</text>
+      <text id="text_hyperparams_2" data-id="text_hyperparams_2" data-class="text_node" data-parent="block_training_inputs" x="608" y="152" fill="#111827" font-size="16" font-weight="bold" font-family="Arial, sans-serif" text-anchor="middle">hyperparameters</text>
+    </g>
+
+    <!-- Downward Arrows from Inputs Container -->
+    <path id="arrow_input_to_predictor" data-id="arrow_input_to_predictor" data-class="edge" data-source="block_training_inputs" data-target="block_predictor_model" d="M 404 188 L 404 212" stroke="#1c1917" stroke-width="4.5" fill="none" marker-end="url(#arrow-black)"/>
+    <path id="arrow_input_to_detector" data-id="arrow_input_to_detector" data-class="edge" data-source="block_training_inputs" data-target="block_detector_model" d="M 622 188 L 622 212" stroke="#1c1917" stroke-width="4.5" fill="none" marker-end="url(#arrow-black)"/>
+
+    <!-- Lower-Left Box: Predictor Model Container -->
+    <g id="block_predictor_model" data-id="block_predictor_model" data-class="block" data-parent="section_model_development">
+      <rect id="rect_predictor_bg" data-id="rect_predictor_bg" data-class="child_node" data-parent="block_predictor_model" x="292" y="222" width="224" height="195" rx="20" fill="#b0b5b9" stroke="#111827" stroke-width="2" filter="url(#shadow-card)"/>
+
+      <!-- Raster Placeholder: Encoder-Decoder Network Architecture -->
+      <g id="raster_predictor_arch" data-id="raster_predictor_arch" data-class="raster_node"><image href="assets/editability/sequencer/Paper2Fig_pipe_diff_000000475/after/rasters/crop_raster_predictor_arch.png" xlink:href="assets/editability/sequencer/Paper2Fig_pipe_diff_000000475/after/rasters/crop_raster_predictor_arch.png" x="306" y="234" width="196" height="142" preserveAspectRatio="xMidYMid meet" /></g>
+      <text id="text_predictor_title" data-id="text_predictor_title" data-class="text_node" data-parent="block_predictor_model" x="404" y="402" fill="#111827" font-size="16" font-weight="bold" font-family="Arial, sans-serif" text-anchor="middle">Predictor model</text>
+    </g>
+
+    <!-- Lower-Right Box: Detector Model Container -->
+    <g id="block_detector_model" data-id="block_detector_model" data-class="block" data-parent="section_model_development">
+      <rect id="rect_detector_bg" data-id="rect_detector_bg" data-class="child_node" data-parent="block_detector_model" x="532" y="222" width="180" height="195" rx="20" fill="#b0b5b9" stroke="#111827" stroke-width="2" filter="url(#shadow-card)"/>
+
+      <!-- Raster Placeholder: Detector Network Architecture & 3D Sphere Plot -->
+      <g id="raster_detector_arch" data-id="raster_detector_arch" data-class="raster_node"><image href="assets/editability/sequencer/Paper2Fig_pipe_diff_000000475/after/rasters/crop_raster_detector_arch.png" xlink:href="assets/editability/sequencer/Paper2Fig_pipe_diff_000000475/after/rasters/crop_raster_detector_arch.png" x="546" y="234" width="152" height="142" preserveAspectRatio="xMidYMid meet" /></g>
+      <text id="text_detector_title" data-id="text_detector_title" data-class="text_node" data-parent="block_detector_model" x="622" y="402" fill="#111827" font-size="16" font-weight="bold" font-family="Arial, sans-serif" text-anchor="middle">Detector model</text>
+    </g>
+  </g>
+
+  <!-- Large Horizontal Transition Arrow: Development -> Testing (Animated) -->
+  <path id="arrow_dev_to_test" data-id="arrow_dev_to_test" data-class="edge" data-source="section_model_development" data-target="section_model_testing" d="M 732 252 L 760 252 L 760 238 L 782 260 L 760 282 L 760 268 L 732 268 Z" fill="#ffffff" stroke="#111827" stroke-width="2.5"/>
+
+  <!-- ================= SECTION 3: MODEL TESTING (Animated) ================= -->
+  <g id="section_model_testing" data-id="section_model_testing" data-class="block" data-parent="root">
+    <!-- Section Title -->
+    <text id="text_title_testing" data-id="text_title_testing" data-class="text_node" data-parent="section_model_testing" x="888" y="38" fill="#111827" font-size="21" font-weight="bold" font-family="Arial, sans-serif" text-anchor="middle">Model testing</text>
+
+    <!-- Outer Card Container -->
+    <rect id="rect_container_testing" data-id="rect_container_testing" data-class="child_node" data-parent="section_model_testing" x="788" y="58" width="194" height="375" rx="28" fill="#ffffff" stroke="#111827" stroke-width="2.5" filter="url(#shadow-main)"/>
+
+    <!-- Attack Data Pill Button -->
+    <g id="block_attack_data" data-id="block_attack_data" data-class="child_node" data-parent="section_model_testing">
+      <rect id="rect_attack_data_bg" data-id="rect_attack_data_bg" data-class="child_node" data-parent="block_attack_data" x="806" y="80" width="158" height="46" rx="14" fill="#ffffff" stroke="#111827" stroke-width="2" filter="url(#shadow-card)"/>
+      <text id="text_attack_data" data-id="text_attack_data" data-class="text_node" data-parent="block_attack_data" x="885" y="110" fill="#111827" font-size="16" font-weight="bold" font-family="Arial, sans-serif" text-anchor="middle">Attack data</text>
+    </g>
+
+    <!-- Downward Arrow: Attack data -> Trained models -->
+    <path id="arrow_attack_to_trained" data-id="arrow_attack_to_trained" data-class="edge" data-source="block_attack_data" data-target="block_trained_models" d="M 885 128 L 885 146" stroke="#1c1917" stroke-width="4.5" fill="none" marker-end="url(#arrow-black)"/>
+
+    <!-- Gray Container: Trained Models Pipeline -->
+    <g id="block_trained_models" data-id="block_trained_models" data-class="block" data-parent="section_model_testing">
+      <rect id="rect_trained_models_bg" data-id="rect_trained_models_bg" data-class="child_node" data-parent="block_trained_models" x="804" y="152" width="162" height="212" rx="18" fill="#b0b5b9" stroke="#111827" stroke-width="2" filter="url(#shadow-card)"/>
+
+      <!-- Raster Placeholder: Pipeline Predictor Arch -->
+      <g id="raster_test_predictor" data-id="raster_test_predictor" data-class="raster_node"><image href="assets/editability/sequencer/Paper2Fig_pipe_diff_000000475/after/rasters/crop_raster_test_predictor.png" xlink:href="assets/editability/sequencer/Paper2Fig_pipe_diff_000000475/after/rasters/crop_raster_test_predictor.png" x="814" y="162" width="142" height="64" preserveAspectRatio="xMidYMid meet" /></g>
+
+      <!-- Downward Arrow: Predictor -> Deviations -->
+      <path id="arrow_pred_to_deviations" data-id="arrow_pred_to_deviations" data-class="edge" data-source="raster_test_predictor" data-target="block_deviations" d="M 885 228 L 885 238" stroke="#1c1917" stroke-width="3" fill="none" marker-end="url(#arrow-black)"/>
+
+      <!-- Deviations Box -->
+      <g id="block_deviations" data-id="block_deviations" data-class="child_node" data-parent="block_trained_models">
+        <rect id="rect_deviations_bg" data-id="rect_deviations_bg" data-class="child_node" data-parent="block_deviations" x="816" y="244" width="138" height="28" rx="6" fill="#ffffff" stroke="#111827" stroke-width="1.5"/>
+        <text id="text_deviations" data-id="text_deviations" data-class="text_node" data-parent="block_deviations" x="885" y="263" fill="#111827" font-size="14.5" font-weight="bold" font-family="Arial, sans-serif" text-anchor="middle">Deviations</text>
+      </g>
+
+      <!-- Downward Arrow: Deviations -> SVDD Plot -->
+      <path id="arrow_dev_to_svdd" data-id="arrow_dev_to_svdd" data-class="edge" data-source="block_deviations" data-target="raster_test_detector" d="M 885 274 L 885 284" stroke="#1c1917" stroke-width="3" fill="none" marker-end="url(#arrow-black)"/>
+
+      <!-- Raster Placeholder: Pipeline Detector 3D SVDD Plot -->
+      <g id="raster_test_detector" data-id="raster_test_detector" data-class="raster_node"><image href="assets/editability/sequencer/Paper2Fig_pipe_diff_000000475/after/rasters/crop_raster_test_detector.png" xlink:href="assets/editability/sequencer/Paper2Fig_pipe_diff_000000475/after/rasters/crop_raster_test_detector.png" x="818" y="290" width="134" height="46" preserveAspectRatio="xMidYMid meet" /></g>
+
+      <!-- Label: Trained models -->
+      <text id="text_trained_models_label" data-id="text_trained_models_label" data-class="text_node" data-parent="block_trained_models" x="885" y="356" fill="#111827" font-size="14.5" font-weight="bold" font-family="Arial, sans-serif" text-anchor="middle">Trained models</text>
+    </g>
+
+    <!-- Downward Arrow: Trained models -> Anomaly alert -->
+    <path id="arrow_trained_to_alert" data-id="arrow_trained_to_alert" data-class="edge" data-source="block_trained_models" data-target="block_anomaly_alert" d="M 885 366 L 885 378" stroke="#1c1917" stroke-width="4.5" fill="none" marker-end="url(#arrow-black)"/>
+
+    <!-- Anomaly Alert Pill Container with Ringing Alarm Bell -->
+    <g id="block_anomaly_alert" data-id="block_anomaly_alert" data-class="child_node" data-parent="section_model_testing">
+      <rect id="rect_anomaly_alert_bg" data-id="rect_anomaly_alert_bg" data-class="child_node" data-parent="block_anomaly_alert" x="806" y="382" width="158" height="42" rx="14" fill="#ffffff" stroke="#111827" stroke-width="2" filter="url(#shadow-card)"/>
+      <text id="text_anomaly_alert" data-id="text_anomaly_alert" data-class="text_node" data-parent="block_anomaly_alert" x="874" y="409" fill="#111827" font-size="15" font-weight="bold" font-family="Arial, sans-serif" text-anchor="middle">Anomaly alert</text>
+
+      <!-- Ringing Bell Icon (Composite) -->
+      <g id="icon_alarm_bell" data-id="icon_alarm_bell" data-class="composite_whole" data-parent="block_anomaly_alert">
+        <!-- Bell Body -->
+        <path id="part_bell_body" data-id="part_bell_body" data-class="composite_part" data-parent="icon_alarm_bell" d="M 948 390 C 948 385 941 385 941 390 L 938 402 L 951 402 Z" fill="#2d3748" stroke="#111827" stroke-width="0.8"/>
+        <!-- Bell Top Handle -->
+        <circle id="part_bell_handle" data-id="part_bell_handle" data-class="composite_part" data-parent="icon_alarm_bell" cx="944.5" cy="384.5" r="1.8" fill="none" stroke="#2d3748" stroke-width="1"/>
+        <!-- Bell Clapper -->
+        <circle id="part_bell_clapper" data-id="part_bell_clapper" data-class="composite_part" data-parent="icon_alarm_bell" cx="944.5" cy="404" r="1.8" fill="#2d3748"/>
+        <!-- Sound Waves Left -->
+        <path id="part_bell_wave_l1" data-id="part_bell_wave_l1" data-class="composite_part" data-parent="icon_alarm_bell" d="M 935 391 C 933 393 933 397 935 399" fill="none" stroke="#2d3748" stroke-width="1.2" stroke-linecap="round"/>
+        <path id="part_bell_wave_l2" data-id="part_bell_wave_l2" data-class="composite_part" data-parent="icon_alarm_bell" d="M 932 388 C 929 392 929 400 932 403" fill="none" stroke="#2d3748" stroke-width="1.2" stroke-linecap="round"/>
+        <!-- Sound Waves Right -->
+        <path id="part_bell_wave_r1" data-id="part_bell_wave_r1" data-class="composite_part" data-parent="icon_alarm_bell" d="M 954 391 C 956 393 956 397 954 399" fill="none" stroke="#2d3748" stroke-width="1.2" stroke-linecap="round"/>
+        <path id="part_bell_wave_r2" data-id="part_bell_wave_r2" data-class="composite_part" data-parent="icon_alarm_bell" d="M 957 388 C 960 392 960 400 957 403" fill="none" stroke="#2d3748" stroke-width="1.2" stroke-linecap="round"/>
+      </g>
+    </g>
+  </g>
+
+  <!-- ================= NARRATION BANNER ================= -->
+  <g id="narration_banner">
+    <rect x="50" y="460" width="900" height="80" rx="15" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1.5" />
+    <text id="narr_ts11" class="narrative-text" x="50%" y="505"><tspan x="50%" dy="0">Once trained, these models are deployed to the testing phase.</tspan></text>
+    <text id="narr_ts12" class="narrative-text" x="50%" y="505"><tspan x="50%" dy="0">The Model Testing phase evaluates the system's ability to identify security threats.</tspan></text>
+    <text id="narr_ts13" class="narrative-text" x="50%" y="505"><tspan x="50%" dy="0">During testing, new network data, which may contain attacks, is introduced.</tspan></text>
+    <text id="narr_ts14" class="narrative-text" x="50%" y="505"><tspan x="50%" dy="0">This evaluation data is fed directly into the pipeline of trained models.</tspan></text>
+    <text id="narr_ts15" class="narrative-text" x="50%" y="505"><tspan x="50%" dy="0">The trained models process the incoming data sequentially.</tspan></text>
+    <text id="narr_ts16" class="narrative-text" x="50%" y="505"><tspan x="50%" dy="0">First, the predictor model processes the testing data to generate predictions.</tspan></text>
+    <text id="narr_ts17" class="narrative-text" x="50%" y="495"><tspan x="50%" dy="0">The system then calculates the deviations between the actual network data</tspan><tspan x="50%" dy="1.2em">and the model's predictions.</tspan></text>
+    <text id="narr_ts18" class="narrative-text" x="50%" y="495"><tspan x="50%" dy="0">These deviations are passed to the detector model, which determines</tspan><tspan x="50%" dy="1.2em">if they fall outside the normal boundary.</tspan></text>
+    <text id="narr_ts19" class="narrative-text" x="50%" y="505"><tspan x="50%" dy="0">If the deviations are classified as anomalous, an alert is triggered.</tspan></text>
+    <text id="narr_ts20" class="narrative-text" x="50%" y="505"><tspan x="50%" dy="0">Finally, the system outputs an anomaly alert to warn of a potential security breach.</tspan></text>
+  </g>
+</svg>

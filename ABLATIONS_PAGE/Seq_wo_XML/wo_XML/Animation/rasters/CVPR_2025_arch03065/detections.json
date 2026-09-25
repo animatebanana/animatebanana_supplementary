@@ -1,0 +1,194 @@
+{
+  "detected": 10,
+  "placeholders": 10,
+  "omitted": {},
+  "rejected": {},
+  "image_size": [
+    995,
+    632
+  ],
+  "regions": [
+    {
+      "xml_id": "raster_input_phi_y",
+      "box_2d": [
+        138,
+        47,
+        258,
+        126
+      ],
+      "bbox": [
+        46.765,
+        87.21600000000001,
+        125.37,
+        163.056
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "raster_x_K",
+      "box_2d": [
+        23,
+        222,
+        147,
+        301
+      ],
+      "bbox": [
+        220.89000000000001,
+        14.536,
+        299.495,
+        92.904
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "raster_z_K",
+      "box_2d": [
+        213,
+        210,
+        365,
+        309
+      ],
+      "bbox": [
+        208.95,
+        134.61599999999999,
+        307.455,
+        230.68
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "raster_x_0",
+      "box_2d": [
+        23,
+        693,
+        147,
+        772
+      ],
+      "bbox": [
+        689.535,
+        14.536,
+        768.14,
+        92.904
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "raster_z_0",
+      "box_2d": [
+        213,
+        682,
+        365,
+        781
+      ],
+      "bbox": [
+        678.59,
+        134.61599999999999,
+        777.095,
+        230.68
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "raster_x_hat",
+      "box_2d": [
+        138,
+        870,
+        258,
+        950
+      ],
+      "bbox": [
+        865.65,
+        87.21600000000001,
+        945.25,
+        163.056
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "raster_mid_xt",
+      "box_2d": [
+        430,
+        48,
+        554,
+        126
+      ],
+      "bbox": [
+        47.76,
+        271.76,
+        125.37,
+        350.12800000000004
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "raster_mid_zt",
+      "box_2d": [
+        597,
+        37,
+        750,
+        137
+      ],
+      "bbox": [
+        36.815,
+        377.304,
+        136.315,
+        474.0
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "raster_mid_xtm1",
+      "box_2d": [
+        430,
+        871,
+        554,
+        950
+      ],
+      "bbox": [
+        866.645,
+        271.76,
+        945.25,
+        350.12800000000004
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "raster_mid_ztm1",
+      "box_2d": [
+        597,
+        861,
+        750,
+        960
+      ],
+      "bbox": [
+        856.6949999999999,
+        377.304,
+        955.1999999999999,
+        474.0
+      ],
+      "label": ""
+    }
+  ],
+  "replaced": [
+    "raster_input_phi_y",
+    "raster_x_K",
+    "raster_z_K",
+    "raster_x_0",
+    "raster_z_0",
+    "raster_x_hat",
+    "raster_mid_xt",
+    "raster_mid_zt",
+    "raster_mid_xtm1",
+    "raster_mid_ztm1"
+  ],
+  "provenance": {
+    "agent": "raster_integrator",
+    "backend": "openrouter_gemini37flash",
+    "model": "google-gemini-3.7-flash",
+    "prompt": null,
+    "style": "colour_pop",
+    "target": "svg",
+    "config_fingerprint": "54d653973aa2c411",
+    "timestamp": "2026-08-28T20:47:54"
+  }
+}

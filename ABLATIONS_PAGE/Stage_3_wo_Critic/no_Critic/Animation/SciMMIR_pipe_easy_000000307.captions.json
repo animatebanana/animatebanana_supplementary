@@ -1,0 +1,30 @@
+[
+ {
+  "t": 0.0,
+  "text": "The dataset preparation pipeline begins with gathering the required data sources."
+ },
+ {
+  "t": 4.06,
+  "text": "These inputs include recordings across six crowd video experiments, pedestrian trajectory data, and corresponding ground truth annotations."
+ },
+ {
+  "t": 7.98,
+  "text": "In the local region extraction phase, candidate spatial patches associated with individuals are extracted from the video frames."
+ },
+ {
+  "t": 11.9,
+  "text": "A duplicate removal step then filters out redundant and overlapping extracted regions."
+ },
+ {
+  "t": 15.82,
+  "text": "This produces a clean set of local image regions representing individuals and their local neighborhoods."
+ },
+ {
+  "t": 19.74,
+  "text": "Next, during local region labeling, samples are annotated, with red borders denoting pushing behaviors and green borders indicating non-pushing behaviors."
+ },
+ {
+  "t": 23.66,
+  "text": "Finally, the annotated patches are partitioned into dedicated training, validation, and testing subsets across the experimental video sources."
+ }
+]

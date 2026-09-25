@@ -1,0 +1,262 @@
+=== Sliding Bounding Box Sequence ===
+
+Frame Image : frame_0000.png
+Frame Type  : Hold
+Timestamp   : 1.015s
+Narration   : The pipeline begins by retrieving clinical notes for Alzheimer's disease patients from the Clinical Data Repository.
+--------------------------------------------------------------------------------
+Frame Image : frame_0001.png
+Frame Type  : Transition 1
+Timestamp   : 2.157s
+Narration   : The pipeline begins by retrieving clinical notes for Alzheimer's disease patients from the Clinical Data Repository.
+--------------------------------------------------------------------------------
+Frame Image : frame_0002.png
+Frame Type  : Transition 2
+Timestamp   : 2.284s
+Narration   : The pipeline begins by retrieving clinical notes for Alzheimer's disease patients from the Clinical Data Repository.
+--------------------------------------------------------------------------------
+Frame Image : frame_0003.png
+Frame Type  : Transition 3
+Timestamp   : 2.411s
+Narration   : The pipeline begins by retrieving clinical notes for Alzheimer's disease patients from the Clinical Data Repository.
+--------------------------------------------------------------------------------
+Frame Image : frame_0004.png
+Frame Type  : Hold
+Timestamp   : 3.554s
+Narration   : The records are filtered using the rule-based NLP-PIER information extraction system.
+--------------------------------------------------------------------------------
+Frame Image : frame_0005.png
+Frame Type  : Transition 1
+Timestamp   : 4.697s
+Narration   : The records are filtered using the rule-based NLP-PIER information extraction system.
+--------------------------------------------------------------------------------
+Frame Image : frame_0006.png
+Frame Type  : Transition 2
+Timestamp   : 4.823s
+Narration   : The records are filtered using the rule-based NLP-PIER information extraction system.
+--------------------------------------------------------------------------------
+Frame Image : frame_0007.png
+Frame Type  : Transition 3
+Timestamp   : 4.949s
+Narration   : The records are filtered using the rule-based NLP-PIER information extraction system.
+--------------------------------------------------------------------------------
+Frame Image : frame_0008.png
+Frame Type  : Hold
+Timestamp   : 6.092s
+Narration   : This filtering generates a dataset of lifestyle-related sentences with automatically assigned weak labels.
+--------------------------------------------------------------------------------
+Frame Image : frame_0009.png
+Frame Type  : Transition 1
+Timestamp   : 7.235s
+Narration   : This filtering generates a dataset of lifestyle-related sentences with automatically assigned weak labels.
+--------------------------------------------------------------------------------
+Frame Image : frame_0010.png
+Frame Type  : Transition 2
+Timestamp   : 7.362s
+Narration   : This filtering generates a dataset of lifestyle-related sentences with automatically assigned weak labels.
+--------------------------------------------------------------------------------
+Frame Image : frame_0011.png
+Frame Type  : Transition 3
+Timestamp   : 7.489s
+Narration   : This filtering generates a dataset of lifestyle-related sentences with automatically assigned weak labels.
+--------------------------------------------------------------------------------
+Frame Image : frame_0012.png
+Frame Type  : Hold
+Timestamp   : 8.631s
+Narration   : The weakly labeled corpus is then used to fine-tune a suite of BERT-based sentence classifiers.
+--------------------------------------------------------------------------------
+Frame Image : frame_0013.png
+Frame Type  : Transition 1
+Timestamp   : 9.773s
+Narration   : The weakly labeled corpus is then used to fine-tune a suite of BERT-based sentence classifiers.
+--------------------------------------------------------------------------------
+Frame Image : frame_0014.png
+Frame Type  : Transition 2
+Timestamp   : 9.900s
+Narration   : The weakly labeled corpus is then used to fine-tune a suite of BERT-based sentence classifiers.
+--------------------------------------------------------------------------------
+Frame Image : frame_0015.png
+Frame Type  : Transition 3
+Timestamp   : 10.027s
+Narration   : The weakly labeled corpus is then used to fine-tune a suite of BERT-based sentence classifiers.
+--------------------------------------------------------------------------------
+Frame Image : frame_0016.png
+Frame Type  : Hold
+Timestamp   : 11.169s
+Narration   : The models include Bio-Clinical BERT,
+--------------------------------------------------------------------------------
+Frame Image : frame_0017.png
+Frame Type  : Transition 1
+Timestamp   : 12.311s
+Narration   : The models include Bio-Clinical BERT,
+--------------------------------------------------------------------------------
+Frame Image : frame_0018.png
+Frame Type  : Transition 2
+Timestamp   : 12.438s
+Narration   : The models include Bio-Clinical BERT,
+--------------------------------------------------------------------------------
+Frame Image : frame_0019.png
+Frame Type  : Transition 3
+Timestamp   : 12.565s
+Narration   : The models include Bio-Clinical BERT,
+--------------------------------------------------------------------------------
+Frame Image : frame_0020.png
+Frame Type  : Hold
+Timestamp   : 13.708s
+Narration   : UMLS BERT,
+--------------------------------------------------------------------------------
+Frame Image : frame_0021.png
+Frame Type  : Transition 1
+Timestamp   : 14.851s
+Narration   : UMLS BERT,
+--------------------------------------------------------------------------------
+Frame Image : frame_0022.png
+Frame Type  : Transition 2
+Timestamp   : 14.977s
+Narration   : UMLS BERT,
+--------------------------------------------------------------------------------
+Frame Image : frame_0023.png
+Frame Type  : Transition 3
+Timestamp   : 15.103s
+Narration   : UMLS BERT,
+--------------------------------------------------------------------------------
+Frame Image : frame_0024.png
+Frame Type  : Hold
+Timestamp   : 16.246s
+Narration   : PubMedBERT trained solely on abstracts,
+--------------------------------------------------------------------------------
+Frame Image : frame_0025.png
+Frame Type  : Transition 1
+Timestamp   : 17.389s
+Narration   : PubMedBERT trained solely on abstracts,
+--------------------------------------------------------------------------------
+Frame Image : frame_0026.png
+Frame Type  : Transition 2
+Timestamp   : 17.516s
+Narration   : PubMedBERT trained solely on abstracts,
+--------------------------------------------------------------------------------
+Frame Image : frame_0027.png
+Frame Type  : Transition 3
+Timestamp   : 17.643s
+Narration   : PubMedBERT trained solely on abstracts,
+--------------------------------------------------------------------------------
+Frame Image : frame_0028.png
+Frame Type  : Hold
+Timestamp   : 18.785s
+Narration   : PubMedBERT trained on abstracts and full text,
+--------------------------------------------------------------------------------
+Frame Image : frame_0029.png
+Frame Type  : Transition 1
+Timestamp   : 19.927s
+Narration   : PubMedBERT trained on abstracts and full text,
+--------------------------------------------------------------------------------
+Frame Image : frame_0030.png
+Frame Type  : Transition 2
+Timestamp   : 20.054s
+Narration   : PubMedBERT trained on abstracts and full text,
+--------------------------------------------------------------------------------
+Frame Image : frame_0031.png
+Frame Type  : Transition 3
+Timestamp   : 20.181s
+Narration   : PubMedBERT trained on abstracts and full text,
+--------------------------------------------------------------------------------
+Frame Image : frame_0032.png
+Frame Type  : Hold
+Timestamp   : 21.323s
+Narration   : BioBERT,
+--------------------------------------------------------------------------------
+Frame Image : frame_0033.png
+Frame Type  : Transition 1
+Timestamp   : 22.465s
+Narration   : BioBERT,
+--------------------------------------------------------------------------------
+Frame Image : frame_0034.png
+Frame Type  : Transition 2
+Timestamp   : 22.592s
+Narration   : BioBERT,
+--------------------------------------------------------------------------------
+Frame Image : frame_0035.png
+Frame Type  : Transition 3
+Timestamp   : 22.719s
+Narration   : BioBERT,
+--------------------------------------------------------------------------------
+Frame Image : frame_0036.png
+Frame Type  : Hold
+Timestamp   : 23.861s
+Narration   : and the standard uncased BERT base model.
+--------------------------------------------------------------------------------
+Frame Image : frame_0037.png
+Frame Type  : Transition 1
+Timestamp   : 25.002s
+Narration   : and the standard uncased BERT base model.
+--------------------------------------------------------------------------------
+Frame Image : frame_0038.png
+Frame Type  : Transition 2
+Timestamp   : 25.130s
+Narration   : and the standard uncased BERT base model.
+--------------------------------------------------------------------------------
+Frame Image : frame_0039.png
+Frame Type  : Transition 3
+Timestamp   : 25.257s
+Narration   : and the standard uncased BERT base model.
+--------------------------------------------------------------------------------
+Frame Image : frame_0040.png
+Frame Type  : Hold
+Timestamp   : 26.400s
+Narration   : The classifiers predict risk factors across two case studies, identifying excessive diet...
+--------------------------------------------------------------------------------
+Frame Image : frame_0041.png
+Frame Type  : Transition 1
+Timestamp   : 27.543s
+Narration   : The classifiers predict risk factors across two case studies, identifying excessive diet...
+--------------------------------------------------------------------------------
+Frame Image : frame_0042.png
+Frame Type  : Transition 2
+Timestamp   : 27.670s
+Narration   : The classifiers predict risk factors across two case studies, identifying excessive diet...
+--------------------------------------------------------------------------------
+Frame Image : frame_0043.png
+Frame Type  : Transition 3
+Timestamp   : 27.798s
+Narration   : The classifiers predict risk factors across two case studies, identifying excessive diet...
+--------------------------------------------------------------------------------
+Frame Image : frame_0044.png
+Frame Type  : Hold
+Timestamp   : 28.939s
+Narration   : ...and physical activity levels.
+--------------------------------------------------------------------------------
+Frame Image : frame_0045.png
+Frame Type  : Transition 1
+Timestamp   : 30.081s
+Narration   : ...and physical activity levels.
+--------------------------------------------------------------------------------
+Frame Image : frame_0046.png
+Frame Type  : Transition 2
+Timestamp   : 30.208s
+Narration   : ...and physical activity levels.
+--------------------------------------------------------------------------------
+Frame Image : frame_0047.png
+Frame Type  : Transition 3
+Timestamp   : 30.335s
+Narration   : ...and physical activity levels.
+--------------------------------------------------------------------------------
+Frame Image : frame_0048.png
+Frame Type  : Hold
+Timestamp   : 31.477s
+Narration   : Finally, all models are tested and evaluated against a manually annotated Gold Standard Corpus.
+--------------------------------------------------------------------------------
+Frame Image : frame_0049.png
+Frame Type  : Transition 1
+Timestamp   : 32.619s
+Narration   : Finally, all models are tested and evaluated against a manually annotated Gold Standard Corpus.
+--------------------------------------------------------------------------------
+Frame Image : frame_0050.png
+Frame Type  : Transition 2
+Timestamp   : 32.746s
+Narration   : Finally, all models are tested and evaluated against a manually annotated Gold Standard Corpus.
+--------------------------------------------------------------------------------
+Frame Image : frame_0051.png
+Frame Type  : Transition 3
+Timestamp   : 32.873s
+Narration   : Finally, all models are tested and evaluated against a manually annotated Gold Standard Corpus.
+--------------------------------------------------------------------------------

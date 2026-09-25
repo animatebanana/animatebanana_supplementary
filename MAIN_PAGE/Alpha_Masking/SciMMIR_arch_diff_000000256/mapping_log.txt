@@ -1,0 +1,66 @@
+=== Alpha Masking Sequence ===
+
+Frame Image : frame_00.png
+Timestamp   : 1.50s
+Narration   : The tracking framework begins by receiving historical bounding boxes along with consecutive template and search point clouds.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 4.50s
+Narration   : In Stage One, the sequence of past bounding boxes is converted into a history motion vector representing prior trajectories.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 7.50s
+Narration   : This history vector is processed by a box motion encoder to capture global temporal patterns and suppress noise.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 9.00s
+Narration   : The box motion decoder then predicts the subsequent movement using learned temporal tokens.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 10.50s
+Narration   : The box motion decoder then predicts the subsequent movement using learned temporal tokens.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 13.50s
+Narration   : This yields a coarse estimate of the current motion vector for the target center.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 16.50s
+Narration   : In Stage Two, weight-shared three-dimensional sparse convolution backbones extract geometric features from the template and search point clouds.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 19.50s
+Narration   : Voxel features are transformed into bird's-eye-view representations and processed through top-down feature interaction to learn multi-scale spatial relations.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 22.50s
+Narration   : A bottom-up interaction stream then aggregates and re-weights these multi-scale features using deformable attention.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 25.50s
+Narration   : This produces refined motion-aware feature maps for both the search and template regions.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 28.50s
+Narration   : In the iterative refinement module, the coarse motion vector initializes a motion map while motion-aware features undergo feature matching.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Timestamp   : 30.00s
+Narration   : A correlation volume is generated to iteratively sample geometric correspondences and refine the planar motion map.
+--------------------------------------------------------------------------------
+Frame Image : frame_12.png
+Timestamp   : 31.50s
+Narration   : A correlation volume is generated to iteratively sample geometric correspondences and refine the planar motion map.
+--------------------------------------------------------------------------------
+Frame Image : frame_13.png
+Timestamp   : 34.50s
+Narration   : Concurrently, the regression head predicts the vertical position and heading angle from the search features.
+--------------------------------------------------------------------------------
+Frame Image : frame_14.png
+Timestamp   : 36.00s
+Narration   : Finally, combining the refined horizontal offsets with the vertical coordinate and orientation outputs the predicted current three-dimensional bounding box.
+--------------------------------------------------------------------------------
+Frame Image : frame_15.png
+Timestamp   : 37.50s
+Narration   : Finally, combining the refined horizontal offsets with the vertical coordinate and orientation outputs the predicted current three-dimensional bounding box.
+--------------------------------------------------------------------------------

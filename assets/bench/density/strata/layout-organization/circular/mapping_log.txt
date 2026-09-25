@@ -1,0 +1,30 @@
+=== Hopping Bounding Box Sequence ===
+
+Frame Image : frame_00.png
+Timestamp   : 1.50s
+Narration   : The pipeline begins with the training dataset, containing samples with fully observed, non-missing attributes.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 4.50s
+Narration   : These samples are used to train the treatment effect estimation model, fitting the outcome predictors.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 7.50s
+Narration   : The performance of the estimator is periodically evaluated on a hold-out test set.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 10.50s
+Narration   : Meanwhile, unlabeled candidate samples with missing confounding attributes are maintained in the data pool.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 13.50s
+Narration   : A confounder acquisition strategy evaluates the pool, selecting instances based on covariate balancing or outcome estimation error.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 16.50s
+Narration   : The chosen batch forms the query set of prioritized samples.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 19.50s
+Narration   : The feature value collector retrieves the missing confounding values, adding the newly completed samples back into the training set for the next iteration.
+--------------------------------------------------------------------------------

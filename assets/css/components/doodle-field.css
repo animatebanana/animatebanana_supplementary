@@ -1,0 +1,75 @@
+doodle-field {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+  /* Fade the doodles out toward the centre column and the bottom edge
+     so the heading always reads first. */
+  -webkit-mask-image: radial-gradient(ellipse 36% 46% at 50% 44%, transparent 0 55%, #000 100%),
+                      linear-gradient(#000 78%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-image: radial-gradient(ellipse 36% 46% at 50% 44%, transparent 0 55%, #000 100%),
+              linear-gradient(#000 78%, transparent);
+  mask-composite: intersect;
+}
+doodle-field[density="sparse"] {
+  -webkit-mask-image: radial-gradient(ellipse 30% 55% at 50% 50%, transparent 0 50%, #000 100%);
+  mask-image: radial-gradient(ellipse 30% 55% at 50% 50%, transparent 0 50%, #000 100%);
+}
+
+.df-layer {
+  position: absolute;
+  inset: -40px;
+  will-change: transform;
+  transition: transform 900ms var(--ease-out);
+}
+
+.df-item {
+  position: absolute;
+  transform: translate(-50%, -50%) rotate(var(--rot));
+  animation: df-bob var(--bob-dur) var(--ease-io) var(--bob-delay) infinite;
+}
+
+.df-doodle {
+  overflow: visible;
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 2.3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  color: var(--ink);
+  filter: url(#dd-rough);
+  opacity: 0.62;
+}
+.df-layer[data-depth="0"] .df-doodle { opacity: 0.32; }
+.df-layer[data-depth="1"] .df-doodle { opacity: 0.5; }
+
+.df-glyph {
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1;
+  color: var(--ink);
+  opacity: 0.055;
+}
+
+@keyframes df-bob {
+  0%, 100% { transform: translate(-50%, -50%) rotate(var(--rot)) translateY(-7px); }
+  50%      { transform: translate(-50%, -50%) rotate(calc(var(--rot) + 4deg)) translateY(7px); }
+}
+
+/* Doodles fade in once, staggered by their bob delay, then settle. */
+doodle-field .df-item { animation-name: df-bob; }
+doodle-field .df-doodle, doodle-field .df-glyph { transition: opacity 1.2s var(--ease-out); }
+
+@media (max-width: 760px) {
+  .df-layer[data-depth="0"] { display: none; }
+  .df-doodle { opacity: 0.35 !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .df-item { animation: none; }
+  .df-layer { transition: none; }
+}

@@ -1,0 +1,9197 @@
+{
+ "n": 91,
+ "model": "Gemini 3.7 Flash",
+ "source": "COST_LATENCY/latency_per_sample.xlsx (built by COST_LATENCY/build_latency.py)",
+ "notes": {
+  "latency": "Summed model latency of every call an agent made for a diagram, in seconds; stages run 4-way concurrent across diagrams, so wall-clock per diagram is lower.",
+  "3b": "The Diagram Animator Critic's latency is its call count x 31.9 s, the measured mean per call.",
+  "mapping": "1b is the Raster Integrator and 1c the Diagram Transmuter Critic, as the data shows."
+ },
+ "stages": [
+  {
+   "id": "s1",
+   "label": "Stage 1",
+   "name": "Diagram Transmuter",
+   "agents": [
+    "1a",
+    "1b",
+    "1c"
+   ],
+   "calls": {
+    "mean": 4.15,
+    "median": 3.0,
+    "p25": 3.0,
+    "p75": 5.0,
+    "p10": 3.0,
+    "p90": 6.0,
+    "min": 3.0,
+    "max": 8.0,
+    "sd": 1.374
+   },
+   "latency": {
+    "mean": 153.8,
+    "median": 148.3,
+    "p25": 100.8,
+    "p75": 188.2,
+    "p10": 78.0,
+    "p90": 249.2,
+    "min": 43.6,
+    "max": 382.8,
+    "sd": 67.55
+   },
+   "tokens": {
+    "prompt": 19.34,
+    "completion": 20.22,
+    "total": 39.57,
+    "cost": 0.04517,
+    "perCall": 9.53
+   },
+   "share": {
+    "calls": 37.5,
+    "latency": 37.8,
+    "tokens": 22.3,
+    "cost": 29.5
+   }
+  },
+  {
+   "id": "s2",
+   "label": "Stage 2",
+   "name": "Animation Planner",
+   "agents": [
+    "2b",
+    "2c",
+    "2d",
+    "2e"
+   ],
+   "calls": {
+    "mean": 4.07,
+    "median": 4.0,
+    "p25": 4.0,
+    "p75": 4.0,
+    "p10": 4.0,
+    "p90": 4.0,
+    "min": 3.0,
+    "max": 5.0,
+    "sd": 0.291
+   },
+   "latency": {
+    "mean": 97.9,
+    "median": 90.9,
+    "p25": 78.1,
+    "p75": 113.0,
+    "p10": 68.7,
+    "p90": 130.4,
+    "min": 39.7,
+    "max": 232.2,
+    "sd": 31.26
+   },
+   "tokens": {
+    "prompt": 37.3,
+    "completion": 13.9,
+    "total": 51.2,
+    "cost": 0.04004,
+    "perCall": 12.59
+   },
+   "share": {
+    "calls": 36.7,
+    "latency": 24.1,
+    "tokens": 28.8,
+    "cost": 26.2
+   }
+  },
+  {
+   "id": "s3",
+   "label": "Stage 3",
+   "name": "Diagram Animator",
+   "agents": [
+    "3a",
+    "3b"
+   ],
+   "calls": {
+    "mean": 2.86,
+    "median": 2.0,
+    "p25": 2.0,
+    "p75": 4.0,
+    "p10": 2.0,
+    "p90": 4.0,
+    "min": 2.0,
+    "max": 6.0,
+    "sd": 1.27
+   },
+   "latency": {
+    "mean": 155.2,
+    "median": 136.2,
+    "p25": 110.2,
+    "p75": 198.6,
+    "p10": 87.9,
+    "p90": 240.1,
+    "min": 60.8,
+    "max": 453.2,
+    "sd": 64.84
+   },
+   "tokens": {
+    "prompt": 63.3,
+    "completion": 23.5,
+    "total": 86.8,
+    "cost": 0.0678,
+    "perCall": 30.38
+   },
+   "share": {
+    "calls": 25.8,
+    "latency": 38.1,
+    "tokens": 48.9,
+    "cost": 44.3
+   }
+  }
+ ],
+ "agents": [
+  {
+   "code": "1a",
+   "name": "Diagram to Animation Aware Code Converter",
+   "short": "Diagram to Animation Aware Code Converter",
+   "stage": "s1",
+   "role": "generator",
+   "calls": {
+    "mean": 1.01,
+    "median": 1.0,
+    "p25": 1.0,
+    "p75": 1.0,
+    "p10": 1.0,
+    "p90": 1.0,
+    "min": 1.0,
+    "max": 2.0,
+    "sd": 0.105,
+    "dist": {
+     "1": 90,
+     "2": 1
+    },
+    "ran": 91
+   },
+   "latency": {
+    "mean": 77.2,
+    "median": 74.5,
+    "p25": 52.6,
+    "p75": 93.8,
+    "p10": 39.2,
+    "p90": 121.0,
+    "min": 28.7,
+    "max": 182.2,
+    "sd": 32.09,
+    "perCall": 76.8
+   },
+   "share": {
+    "calls": 9.1,
+    "latency": 19.0,
+    "tokens": 7.8,
+    "cost": 14.0
+   },
+   "tokens": {
+    "prompt": 3.1,
+    "completion": 10.8,
+    "total": 13.9,
+    "perCall": 13.75,
+    "cost": 0.02141
+   },
+   "vsElements": {
+    "latencyR": 0.72,
+    "latencyRho": 0.74,
+    "callsR": -0.08,
+    "secPer10Elements": 5.6
+   }
+  },
+  {
+   "code": "1b",
+   "name": "Raster Integrator",
+   "short": "Raster Integrator",
+   "stage": "s1",
+   "role": "generator",
+   "calls": {
+    "mean": 0.53,
+    "median": 1.0,
+    "p25": 0.0,
+    "p75": 1.0,
+    "p10": 0.0,
+    "p90": 1.0,
+    "min": 0.0,
+    "max": 1.0,
+    "sd": 0.502,
+    "dist": {
+     "0": 43,
+     "1": 48
+    },
+    "ran": 48
+   },
+   "latency": {
+    "mean": 4.4,
+    "median": 4.1,
+    "p25": 0.0,
+    "p75": 8.1,
+    "p10": 0.0,
+    "p90": 10.5,
+    "min": 0.0,
+    "max": 19.1,
+    "sd": 4.63,
+    "perCall": 8.3
+   },
+   "share": {
+    "calls": 4.8,
+    "latency": 1.1,
+    "tokens": 0.7,
+    "cost": 0.7
+   },
+   "tokens": {
+    "prompt": 0.84,
+    "completion": 0.42,
+    "total": 1.27,
+    "perCall": 2.4,
+    "cost": 0.00111
+   },
+   "vsElements": {
+    "latencyR": 0.09,
+    "latencyRho": 0.12,
+    "callsR": 0.13,
+    "secPer10Elements": 0.1
+   }
+  },
+  {
+   "code": "1c",
+   "name": "Diagram Transmuter Critic",
+   "short": "Transmuter Critic",
+   "stage": "s1",
+   "role": "critic",
+   "calls": {
+    "mean": 2.62,
+    "median": 2.0,
+    "p25": 1.0,
+    "p75": 4.0,
+    "p10": 1.0,
+    "p90": 4.0,
+    "min": 0.0,
+    "max": 6.0,
+    "sd": 1.474,
+    "dist": {
+     "0": 1,
+     "1": 28,
+     "2": 22,
+     "3": 1,
+     "4": 35,
+     "5": 1,
+     "6": 3
+    },
+    "ran": 90
+   },
+   "latency": {
+    "mean": 72.2,
+    "median": 76.3,
+    "p25": 10.8,
+    "p75": 107.5,
+    "p10": 8.2,
+    "p90": 131.9,
+    "min": 0.0,
+    "max": 232.4,
+    "sd": 53.04,
+    "perCall": 24.9
+   },
+   "share": {
+    "calls": 23.6,
+    "latency": 17.7,
+    "tokens": 13.7,
+    "cost": 14.8
+   },
+   "tokens": {
+    "prompt": 15.4,
+    "completion": 9.0,
+    "total": 24.4,
+    "perCall": 9.33,
+    "cost": 0.02265
+   },
+   "vsElements": {
+    "latencyR": 0.25,
+    "latencyRho": 0.12,
+    "callsR": 0.02,
+    "secPer10Elements": 3.2
+   }
+  },
+  {
+   "code": "2b",
+   "name": "Parser",
+   "short": "Parser",
+   "stage": "s2",
+   "role": "generator",
+   "calls": {
+    "mean": 1.0,
+    "median": 1.0,
+    "p25": 1.0,
+    "p75": 1.0,
+    "p10": 1.0,
+    "p90": 1.0,
+    "min": 1.0,
+    "max": 1.0,
+    "sd": 0.0,
+    "dist": {
+     "1": 91
+    },
+    "ran": 91
+   },
+   "latency": {
+    "mean": 29.2,
+    "median": 23.8,
+    "p25": 19.9,
+    "p75": 37.6,
+    "p10": 16.0,
+    "p90": 46.5,
+    "min": 11.5,
+    "max": 84.7,
+    "sd": 13.46,
+    "perCall": 29.2
+   },
+   "share": {
+    "calls": 9.0,
+    "latency": 7.2,
+    "tokens": 8.3,
+    "cost": 7.9
+   },
+   "tokens": {
+    "prompt": 10.3,
+    "completion": 4.4,
+    "total": 14.7,
+    "perCall": 14.7,
+    "cost": 0.01211
+   },
+   "vsElements": {
+    "latencyR": 0.73,
+    "latencyRho": 0.7,
+    "callsR": null,
+    "secPer10Elements": 2.4
+   }
+  },
+  {
+   "code": "2c",
+   "name": "Sequencer",
+   "short": "Sequencer",
+   "stage": "s2",
+   "role": "generator",
+   "calls": {
+    "mean": 1.0,
+    "median": 1.0,
+    "p25": 1.0,
+    "p75": 1.0,
+    "p10": 1.0,
+    "p90": 1.0,
+    "min": 1.0,
+    "max": 1.0,
+    "sd": 0.0,
+    "dist": {
+     "1": 91
+    },
+    "ran": 91
+   },
+   "latency": {
+    "mean": 26.8,
+    "median": 24.7,
+    "p25": 19.9,
+    "p75": 31.2,
+    "p10": 15.5,
+    "p90": 39.2,
+    "min": 9.3,
+    "max": 61.8,
+    "sd": 9.99,
+    "perCall": 26.8
+   },
+   "share": {
+    "calls": 9.0,
+    "latency": 6.6,
+    "tokens": 9.8,
+    "cost": 8.2
+   },
+   "tokens": {
+    "prompt": 13.4,
+    "completion": 4.0,
+    "total": 17.4,
+    "perCall": 17.4,
+    "cost": 0.01252
+   },
+   "vsElements": {
+    "latencyR": 0.47,
+    "latencyRho": 0.41,
+    "callsR": null,
+    "secPer10Elements": 1.1
+   }
+  },
+  {
+   "code": "2d",
+   "name": "Animation Planner Critic",
+   "short": "Planner Critic",
+   "stage": "s2",
+   "role": "critic",
+   "calls": {
+    "mean": 1.07,
+    "median": 1.0,
+    "p25": 1.0,
+    "p75": 1.0,
+    "p10": 1.0,
+    "p90": 1.0,
+    "min": 0.0,
+    "max": 2.0,
+    "sd": 0.291,
+    "dist": {
+     "0": 1,
+     "1": 83,
+     "2": 7
+    },
+    "ran": 90
+   },
+   "latency": {
+    "mean": 19.3,
+    "median": 18.2,
+    "p25": 15.1,
+    "p75": 22.5,
+    "p10": 12.6,
+    "p90": 27.1,
+    "min": 0.0,
+    "max": 50.6,
+    "sd": 7.04,
+    "perCall": 18.4
+   },
+   "share": {
+    "calls": 9.6,
+    "latency": 4.7,
+    "tokens": 5.1,
+    "cost": 4.7
+   },
+   "tokens": {
+    "prompt": 6.6,
+    "completion": 2.5,
+    "total": 9.1,
+    "perCall": 8.54,
+    "cost": 0.00716
+   },
+   "vsElements": {
+    "latencyR": 0.45,
+    "latencyRho": 0.27,
+    "callsR": -0.06,
+    "secPer10Elements": 0.8
+   }
+  },
+  {
+   "code": "2e",
+   "name": "Narration Drafter",
+   "short": "Narration Drafter",
+   "stage": "s2",
+   "role": "generator",
+   "calls": {
+    "mean": 1.0,
+    "median": 1.0,
+    "p25": 1.0,
+    "p75": 1.0,
+    "p10": 1.0,
+    "p90": 1.0,
+    "min": 1.0,
+    "max": 1.0,
+    "sd": 0.0,
+    "dist": {
+     "1": 91
+    },
+    "ran": 91
+   },
+   "latency": {
+    "mean": 22.6,
+    "median": 20.1,
+    "p25": 16.9,
+    "p75": 26.3,
+    "p10": 14.0,
+    "p90": 34.0,
+    "min": 10.7,
+    "max": 56.1,
+    "sd": 9.14,
+    "perCall": 22.6
+   },
+   "share": {
+    "calls": 9.0,
+    "latency": 5.5,
+    "tokens": 5.6,
+    "cost": 5.4
+   },
+   "tokens": {
+    "prompt": 7.0,
+    "completion": 3.0,
+    "total": 10.0,
+    "perCall": 10.0,
+    "cost": 0.00825
+   },
+   "vsElements": {
+    "latencyR": 0.42,
+    "latencyRho": 0.45,
+    "callsR": null,
+    "secPer10Elements": 0.9
+   }
+  },
+  {
+   "code": "3a",
+   "name": "Animation Designer",
+   "short": "Animation Designer",
+   "stage": "s3",
+   "role": "generator",
+   "calls": {
+    "mean": 1.0,
+    "median": 1.0,
+    "p25": 1.0,
+    "p75": 1.0,
+    "p10": 1.0,
+    "p90": 1.0,
+    "min": 1.0,
+    "max": 1.0,
+    "sd": 0.0,
+    "dist": {
+     "1": 91
+    },
+    "ran": 91
+   },
+   "latency": {
+    "mean": 96.0,
+    "median": 89.1,
+    "p25": 63.3,
+    "p75": 112.1,
+    "p10": 49.8,
+    "p90": 147.3,
+    "min": 28.9,
+    "max": 421.3,
+    "sd": 51.38,
+    "perCall": 96.0
+   },
+   "share": {
+    "calls": 9.0,
+    "latency": 23.6,
+    "tokens": 16.2,
+    "cost": 21.4
+   },
+   "tokens": {
+    "prompt": 14.0,
+    "completion": 14.7,
+    "total": 28.7,
+    "perCall": 28.7,
+    "cost": 0.03281
+   },
+   "vsElements": {
+    "latencyR": 0.7,
+    "latencyRho": 0.61,
+    "callsR": null,
+    "secPer10Elements": 8.7
+   }
+  },
+  {
+   "code": "3b",
+   "name": "Diagram Animator Critic",
+   "short": "Animator Critic",
+   "stage": "s3",
+   "role": "critic",
+   "calls": {
+    "mean": 1.86,
+    "median": 1.0,
+    "p25": 1.0,
+    "p75": 3.0,
+    "p10": 1.0,
+    "p90": 3.0,
+    "min": 1.0,
+    "max": 5.0,
+    "sd": 1.27,
+    "dist": {
+     "1": 59,
+     "3": 25,
+     "5": 7
+    },
+    "ran": 91
+   },
+   "latency": {
+    "mean": 59.2,
+    "median": 31.9,
+    "p25": 31.9,
+    "p75": 95.7,
+    "p10": 31.9,
+    "p90": 95.7,
+    "min": 31.9,
+    "max": 159.5,
+    "sd": 40.51,
+    "perCall": 31.9
+   },
+   "share": {
+    "calls": 16.8,
+    "latency": 14.6,
+    "tokens": 32.7,
+    "cost": 22.9
+   },
+   "tokens": {
+    "prompt": 49.3,
+    "completion": 8.8,
+    "total": 58.1,
+    "perCall": 31.28,
+    "cost": 0.03499
+   },
+   "vsElements": {
+    "latencyR": 0.17,
+    "latencyRho": 0.13,
+    "callsR": 0.17,
+    "secPer10Elements": 1.7
+   }
+  }
+ ],
+ "totals": {
+  "calls": {
+   "mean": 11.08,
+   "median": 11.0,
+   "p25": 9.0,
+   "p75": 12.0,
+   "p10": 9.0,
+   "p90": 14.0,
+   "min": 9.0,
+   "max": 15.0,
+   "sd": 1.809,
+   "dist": {
+    "9": 30,
+    "10": 3,
+    "11": 23,
+    "12": 13,
+    "13": 12,
+    "14": 7,
+    "15": 3
+   }
+  },
+  "latency": {
+   "mean": 406.9,
+   "median": 381.2,
+   "p25": 317.2,
+   "p75": 478.4,
+   "p10": 270.5,
+   "p90": 562.4,
+   "min": 197.8,
+   "max": 1068.1,
+   "sd": 134.52
+  },
+  "critic": {
+   "calls": 5.54,
+   "latency": 150.7,
+   "callShare": 50.0,
+   "latencyShare": 37.0
+  },
+  "withRasters": 49
+ },
+ "vsElements": {
+  "latency": {
+   "r": 0.76,
+   "rho": 0.62,
+   "slope": 2.447,
+   "intercept": 248.9
+  },
+  "calls": {
+   "r": 0.16,
+   "rho": -0.03,
+   "slope": 0.0071,
+   "intercept": 10.62
+  }
+ },
+ "tokens": {
+  "prompt": 119.94,
+  "completion": 57.62,
+  "total": 177.57,
+  "cost": 0.15301,
+  "criticShare": 51.6,
+  "reported": {
+   "prompt": 119.0,
+   "completion": 57.4,
+   "total": 176.4
+  },
+  "rates": {
+   "prompt": 0.375,
+   "completion": 1.875
+  },
+  "note": "Thousands of tokens per diagram: summed over every call an agent makes on a diagram, averaged over diagrams. Per-agent figures are rounded; they add to slightly more than the measured total."
+ },
+ "baselines": {
+  "models": [
+   {
+    "name": "Gemini 3.1 Pro",
+    "openrouter": "google/gemini-3.1-pro-preview",
+    "params": null,
+    "kind": "closed",
+    "isOurs": false,
+    "price": {
+     "in": 2.0,
+     "out": 12.0,
+     "provider": "Google, Gemini API pricing (prompts up to 200k tokens)",
+     "source": "https://ai.google.dev/gemini-api/docs/pricing"
+    },
+    "cost": 0.93132,
+    "split": {
+     "prompt": 0.23988,
+     "completion": 0.69144
+    },
+    "stageCost": {
+     "s1": 0.28132,
+     "s2": 0.2414,
+     "s3": 0.4086
+    }
+   },
+   {
+    "name": "Opus 5 on Claude Code",
+    "openrouter": "anthropic/claude-opus-5",
+    "params": null,
+    "kind": "closed",
+    "isOurs": false,
+    "price": {
+     "in": 5.0,
+     "out": 25.0,
+     "provider": "Anthropic, Claude API pricing",
+     "source": "https://platform.claude.com/docs/en/about-claude/pricing"
+    },
+    "cost": 2.0402,
+    "split": {
+     "prompt": 0.5997,
+     "completion": 1.4405
+    },
+    "stageCost": {
+     "s1": 0.6022,
+     "s2": 0.534,
+     "s3": 0.904
+    }
+   },
+   {
+    "name": "GPT-5.6 Sol",
+    "openrouter": "openai/gpt-5.6-sol",
+    "params": null,
+    "kind": "closed",
+    "isOurs": false,
+    "price": {
+     "in": 4.0,
+     "out": 20.0,
+     "provider": "OpenAI, API pricing (short context)",
+     "source": "https://developers.openai.com/api/docs/pricing"
+    },
+    "cost": 1.63216,
+    "split": {
+     "prompt": 0.47976,
+     "completion": 1.1524
+    },
+    "stageCost": {
+     "s1": 0.48176,
+     "s2": 0.4272,
+     "s3": 0.7232
+    }
+   },
+   {
+    "name": "Gemini-3.5 Flash",
+    "openrouter": "google/gemini-3.5-flash",
+    "params": null,
+    "kind": "closed",
+    "isOurs": false,
+    "price": {
+     "in": 1.5,
+     "out": 9.0,
+     "provider": "Google, Gemini API pricing",
+     "source": "https://ai.google.dev/gemini-api/docs/pricing"
+    },
+    "cost": 0.69849,
+    "split": {
+     "prompt": 0.17991,
+     "completion": 0.51858
+    },
+    "stageCost": {
+     "s1": 0.21099,
+     "s2": 0.18105,
+     "s3": 0.30645
+    }
+   },
+   {
+    "name": "Gemini-3.7 Flash",
+    "openrouter": "google/gemini-3.7-flash",
+    "params": null,
+    "kind": "closed",
+    "isOurs": true,
+    "price": {
+     "in": 0.75,
+     "out": 3.75,
+     "provider": "Google, Gemini API pricing (through 31 Dec 2026; $1.50 / $7.50 from 1 Jan 2027)",
+     "source": "https://ai.google.dev/gemini-api/docs/pricing"
+    },
+    "cost": 0.30603,
+    "split": {
+     "prompt": 0.08995,
+     "completion": 0.21608
+    },
+    "stageCost": {
+     "s1": 0.09033,
+     "s2": 0.0801,
+     "s3": 0.1356
+    }
+   },
+   {
+    "name": "Qwen3.8-27B",
+    "openrouter": "qwen/qwen3.8-27b",
+    "params": "27B",
+    "kind": "open",
+    "isOurs": false,
+    "price": null,
+    "cost": 0
+   },
+   {
+    "name": "Qwen3-VL-32B-Instruct",
+    "openrouter": "qwen/qwen3-vl-32b-instruct",
+    "params": "32B",
+    "kind": "open",
+    "isOurs": false,
+    "price": null,
+    "cost": 0
+   },
+   {
+    "name": "Gemma 4",
+    "openrouter": "google/gemma-4-31b-it",
+    "params": "31B",
+    "kind": "open",
+    "isOurs": false,
+    "price": null,
+    "cost": 0
+   },
+   {
+    "name": "GLM-4.6V",
+    "openrouter": "z-ai/glm-4.6v",
+    "params": "106B",
+    "kind": "open",
+    "isOurs": false,
+    "price": null,
+    "cost": 0
+   },
+   {
+    "name": "Qwen3-VL-235B-A22B",
+    "openrouter": "qwen/qwen3-vl-235b-a22b-instruct",
+    "params": "235B",
+    "kind": "open",
+    "isOurs": false,
+    "price": null,
+    "cost": 0
+   },
+   {
+    "name": "DeepSeek-V4 Pro",
+    "openrouter": "deepseek/deepseek-v4-pro",
+    "params": "1.6T",
+    "kind": "open",
+    "isOurs": false,
+    "price": null,
+    "cost": 0
+   },
+   {
+    "name": "Kimi K3",
+    "openrouter": "moonshotai/kimi-k3",
+    "params": "2.8T",
+    "kind": "open",
+    "isOurs": false,
+    "price": null,
+    "cost": 0
+   }
+  ],
+  "tokensK": {
+   "prompt": 119.94,
+   "completion": 57.62
+  },
+  "note": "Closed-source prices are the providers' official standard API prices per million prompt / completion tokens, checked on 2026-09-22 against ai.google.dev/gemini-api/docs/pricing, platform.claude.com/docs/en/about-claude/pricing and developers.openai.com/api/docs/pricing. OpenRouter lists GPT-5.6 Sol at $2 / $10, which is OpenAI's batch/flex rate, not its standard rate. Anthropic notes that Opus 4.7 and later tokenize the same text into about 30% more tokens, so the Opus estimate is likely low.",
+  "notEvaluated": [
+   {
+    "name": "Claude Fable 5.1",
+    "price": {
+     "in": 10,
+     "out": 50,
+     "provider": "Anthropic, Claude API pricing",
+     "source": "https://platform.claude.com/docs/en/about-claude/pricing"
+    },
+    "cost": 4.0804
+   },
+   {
+    "name": "GPT-6 Astra",
+    "price": {
+     "in": 10,
+     "out": 50,
+     "provider": "OpenAI, API pricing (short context)",
+     "source": "https://developers.openai.com/api/docs/pricing"
+    },
+    "cost": 4.0804
+   }
+  ],
+  "notEvaluatedNote": "Closed models we did not run. Priced like the table above: AnimateBanana's average token profile per diagram at each provider's official standard API price, checked on 2026-09-24. Claude Fable 5.1 tokenizes the same text into about 30% more tokens than earlier Claude models, so its figure is likely low."
+ },
+ "strata": [
+  {
+   "key": "density",
+   "label": "Element density",
+   "classes": [
+    {
+     "name": "Sparse",
+     "n": 38,
+     "small": false,
+     "agents": {
+      "1a": {
+       "calls": {
+        "mean": 1.03,
+        "median": 1.0,
+        "sd": 0.16
+       },
+       "latency": {
+        "mean": 65.13,
+        "median": 61.7,
+        "sd": 25.55
+       },
+       "cost": {
+        "mean": 0.01806,
+        "median": 0.01711,
+        "sd": 0.00709
+       }
+      },
+      "1b": {
+       "calls": {
+        "mean": 0.37,
+        "median": 0.0,
+        "sd": 0.49
+       },
+       "latency": {
+        "mean": 2.71,
+        "median": 0.0,
+        "sd": 3.74
+       },
+       "cost": {
+        "mean": 0.00068,
+        "median": 0.0,
+        "sd": 0.00094
+       }
+      },
+      "1c": {
+       "calls": {
+        "mean": 2.79,
+        "median": 2.0,
+        "sd": 1.44
+       },
+       "latency": {
+        "mean": 72.91,
+        "median": 82.7,
+        "sd": 41.74
+       },
+       "cost": {
+        "mean": 0.02287,
+        "median": 0.02594,
+        "sd": 0.01309
+       }
+      },
+      "2b": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 23.49,
+        "median": 21.65,
+        "sd": 9.8
+       },
+       "cost": {
+        "mean": 0.00974,
+        "median": 0.00898,
+        "sd": 0.00406
+       }
+      },
+      "2c": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 22.45,
+        "median": 22.15,
+        "sd": 6.7
+       },
+       "cost": {
+        "mean": 0.01049,
+        "median": 0.01035,
+        "sd": 0.00313
+       }
+      },
+      "2d": {
+       "calls": {
+        "mean": 1.08,
+        "median": 1.0,
+        "sd": 0.36
+       },
+       "latency": {
+        "mean": 17.57,
+        "median": 17.15,
+        "sd": 6.68
+       },
+       "cost": {
+        "mean": 0.00652,
+        "median": 0.00636,
+        "sd": 0.00248
+       }
+      },
+      "2e": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 18.33,
+        "median": 17.45,
+        "sd": 5.57
+       },
+       "cost": {
+        "mean": 0.00669,
+        "median": 0.00637,
+        "sd": 0.00204
+       }
+      },
+      "3a": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 75.68,
+        "median": 71.2,
+        "sd": 34.89
+       },
+       "cost": {
+        "mean": 0.02587,
+        "median": 0.02433,
+        "sd": 0.01192
+       }
+      },
+      "3b": {
+       "calls": {
+        "mean": 1.79,
+        "median": 1.0,
+        "sd": 1.28
+       },
+       "latency": {
+        "mean": 57.08,
+        "median": 31.9,
+        "sd": 40.73
+       },
+       "cost": {
+        "mean": 0.03374,
+        "median": 0.01885,
+        "sd": 0.02407
+       }
+      }
+     },
+     "stages": {
+      "s1": {
+       "calls": {
+        "mean": 4.18,
+        "median": 3.5,
+        "sd": 1.31
+       },
+       "latency": {
+        "mean": 140.75,
+        "median": 140.8,
+        "sd": 55.08
+       },
+       "cost": {
+        "mean": 0.04162,
+        "median": 0.04227,
+        "sd": 0.01667
+       }
+      },
+      "s2": {
+       "calls": {
+        "mean": 4.08,
+        "median": 4.0,
+        "sd": 0.36
+       },
+       "latency": {
+        "mean": 81.84,
+        "median": 78.95,
+        "sd": 19.93
+       },
+       "cost": {
+        "mean": 0.03344,
+        "median": 0.03224,
+        "sd": 0.00822
+       }
+      },
+      "s3": {
+       "calls": {
+        "mean": 2.79,
+        "median": 2.0,
+        "sd": 1.28
+       },
+       "latency": {
+        "mean": 132.77,
+        "median": 125.55,
+        "sd": 52.87
+       },
+       "cost": {
+        "mean": 0.05961,
+        "median": 0.05086,
+        "sd": 0.02656
+       }
+      }
+     },
+     "total": {
+      "calls": {
+       "mean": 11.05,
+       "median": 11.0,
+       "sd": 1.61
+      },
+      "latency": {
+       "mean": 355.33,
+       "median": 335.4,
+       "sd": 99.31
+      },
+      "cost": {
+       "mean": 0.13466,
+       "median": 0.12303,
+       "sd": 0.03876
+      },
+      "elements": 49.9
+     },
+     "samples": [
+      "CVPR_2025_arch01225",
+      "CVPR_2025_arch01541",
+      "CVPR_2025_arch01657",
+      "CVPR_2025_arch01707",
+      "CVPR_2025_arch02021",
+      "FigureBench_pipe_000000057",
+      "Paper2Fig_arch_diff_000000037",
+      "Paper2Fig_arch_diff_000000076",
+      "Paper2Fig_arch_easy_000000148",
+      "Paper2Fig_arch_easy_000000196",
+      "Paper2Fig_arch_easy_000000297",
+      "Paper2Fig_pipe_diff_000000104",
+      "Paper2Fig_pipe_diff_000000218",
+      "Paper2Fig_pipe_diff_000000455",
+      "Paper2Fig_pipe_diff_000000473",
+      "Paper2Fig_pipe_diff_000000488",
+      "Paper2Fig_pipe_diff_000000492",
+      "Paper2Fig_pipe_diff_000000518",
+      "Paper2Fig_pipe_easy_000000249",
+      "Paper2Fig_pipe_easy_000000250",
+      "Paper2Fig_pipe_easy_000000332",
+      "Paper2Fig_pipe_easy_000000345",
+      "Paper2Fig_pipe_easy_000000360",
+      "Paper2Fig_pipe_easy_000000446",
+      "Paper2Fig_pipe_easy_000000500",
+      "Paper2Fig_pipe_easy_000000503",
+      "Paper2Fig_pipe_easy_000000516",
+      "Paper2Fig_pipe_easy_000000517",
+      "Paper2Fig_pipe_easy_000000529",
+      "Paper2Fig_pipe_easy_000000555",
+      "Paper2Fig_pipe_easy_000000556",
+      "Paper2Fig_pipe_easy_000000562",
+      "arch_arxiv_cv_2023_000000433",
+      "arch_arxiv_db_ir_2025_000000580",
+      "arch_arxiv_db_ir_2025_000000589",
+      "arch_arxiv_db_ir_2025_000000611",
+      "arch_arxiv_db_ir_2026_000000714",
+      "arch_arxiv_db_ir_2026_000000715"
+     ]
+    },
+    {
+     "name": "Medium",
+     "n": 41,
+     "small": false,
+     "agents": {
+      "1a": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 77.47,
+        "median": 74.4,
+        "sd": 27.71
+       },
+       "cost": {
+        "mean": 0.02149,
+        "median": 0.02063,
+        "sd": 0.00768
+       }
+      },
+      "1b": {
+       "calls": {
+        "mean": 0.59,
+        "median": 1.0,
+        "sd": 0.5
+       },
+       "latency": {
+        "mean": 5.24,
+        "median": 5.6,
+        "sd": 5.16
+       },
+       "cost": {
+        "mean": 0.00132,
+        "median": 0.00141,
+        "sd": 0.0013
+       }
+      },
+      "1c": {
+       "calls": {
+        "mean": 2.56,
+        "median": 2.0,
+        "sd": 1.43
+       },
+       "latency": {
+        "mean": 71.7,
+        "median": 75.4,
+        "sd": 53.29
+       },
+       "cost": {
+        "mean": 0.02249,
+        "median": 0.02365,
+        "sd": 0.01672
+       }
+      },
+      "2b": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 29.68,
+        "median": 25.6,
+        "sd": 11.52
+       },
+       "cost": {
+        "mean": 0.01231,
+        "median": 0.01062,
+        "sd": 0.00478
+       }
+      },
+      "2c": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 28.71,
+        "median": 26.6,
+        "sd": 10.03
+       },
+       "cost": {
+        "mean": 0.01341,
+        "median": 0.01243,
+        "sd": 0.00469
+       }
+      },
+      "2d": {
+       "calls": {
+        "mean": 1.07,
+        "median": 1.0,
+        "sd": 0.26
+       },
+       "latency": {
+        "mean": 19.57,
+        "median": 18.2,
+        "sd": 5.19
+       },
+       "cost": {
+        "mean": 0.00726,
+        "median": 0.00675,
+        "sd": 0.00193
+       }
+      },
+      "2e": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 23.64,
+        "median": 21.7,
+        "sd": 7.97
+       },
+       "cost": {
+        "mean": 0.00863,
+        "median": 0.00792,
+        "sd": 0.00291
+       }
+      },
+      "3a": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 99.76,
+        "median": 92.4,
+        "sd": 36.46
+       },
+       "cost": {
+        "mean": 0.03409,
+        "median": 0.03158,
+        "sd": 0.01246
+       }
+      },
+      "3b": {
+       "calls": {
+        "mean": 2.02,
+        "median": 1.0,
+        "sd": 1.35
+       },
+       "latency": {
+        "mean": 64.58,
+        "median": 31.9,
+        "sd": 43.09
+       },
+       "cost": {
+        "mean": 0.03817,
+        "median": 0.01885,
+        "sd": 0.02547
+       }
+      }
+     },
+     "stages": {
+      "s1": {
+       "calls": {
+        "mean": 4.15,
+        "median": 3.0,
+        "sd": 1.35
+       },
+       "latency": {
+        "mean": 154.41,
+        "median": 143.0,
+        "sd": 62.19
+       },
+       "cost": {
+        "mean": 0.0453,
+        "median": 0.04082,
+        "sd": 0.01902
+       }
+      },
+      "s2": {
+       "calls": {
+        "mean": 4.07,
+        "median": 4.0,
+        "sd": 0.26
+       },
+       "latency": {
+        "mean": 101.6,
+        "median": 96.4,
+        "sd": 23.82
+       },
+       "cost": {
+        "mean": 0.04161,
+        "median": 0.03953,
+        "sd": 0.01001
+       }
+      },
+      "s3": {
+       "calls": {
+        "mean": 3.02,
+        "median": 2.0,
+        "sd": 1.35
+       },
+       "latency": {
+        "mean": 164.33,
+        "median": 152.8,
+        "sd": 57.39
+       },
+       "cost": {
+        "mean": 0.07226,
+        "median": 0.06551,
+        "sd": 0.02873
+       }
+      }
+     },
+     "total": {
+      "calls": {
+       "mean": 11.24,
+       "median": 11.0,
+       "sd": 1.88
+      },
+      "latency": {
+       "mean": 420.34,
+       "median": 410.5,
+       "sd": 106.1
+      },
+      "cost": {
+       "mean": 0.15918,
+       "median": 0.15686,
+       "sd": 0.04208
+      },
+      "elements": 66.2
+     },
+     "samples": [
+      "CVPR_2025_arch01051",
+      "CVPR_2025_arch01061",
+      "CVPR_2025_arch01062",
+      "CVPR_2025_arch01215",
+      "CVPR_2025_arch01281",
+      "CVPR_2025_arch01381",
+      "CVPR_2025_arch01656",
+      "CVPR_2025_arch01709",
+      "CVPR_2025_arch02022",
+      "CVPR_2025_arch02465",
+      "CVPR_2025_arch03005",
+      "CVPR_2025_arch03065",
+      "FigureBench_arch_diff_000000004",
+      "FigureBench_arch_easy_000000093",
+      "FigureBench_arch_easy_000000097",
+      "ICCV_2025_arch00492",
+      "Paper2Fig_arch_diff_000000049",
+      "Paper2Fig_pipe_diff_000000130",
+      "Paper2Fig_pipe_diff_000000143",
+      "Paper2Fig_pipe_diff_000000456",
+      "Paper2Fig_pipe_diff_000000490",
+      "Paper2Fig_pipe_diff_000000517",
+      "Paper2Fig_pipe_easy_000000119",
+      "Paper2Fig_pipe_easy_000000361",
+      "Paper2Fig_pipe_easy_000000523",
+      "Paper2Fig_pipe_easy_000000552",
+      "Paper2Fig_pipe_easy_000000579",
+      "SciMMIR_arch_diff_000000011",
+      "SciMMIR_arch_diff_000000140",
+      "SciMMIR_pipe_easy_000000297",
+      "SciMMIR_pipe_easy_000000307",
+      "SciMMIR_pipe_easy_000000309",
+      "arch_arxiv_ai_2025_000000126",
+      "arch_arxiv_ai_2025_000000129",
+      "arch_arxiv_cv_2023_000000303",
+      "arch_arxiv_cv_2023_000000316",
+      "arch_arxiv_db_ir_2024_000000546",
+      "arch_arxiv_db_ir_2025_000000581",
+      "arch_arxiv_db_ir_2025_000000587",
+      "arch_arxiv_db_ir_2025_000000618",
+      "arch_arxiv_db_ir_2026_000000718"
+     ]
+    },
+    {
+     "name": "Dense",
+     "n": 12,
+     "small": false,
+     "agents": {
+      "1a": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 114.83,
+        "median": 110.75,
+        "sd": 37.24
+       },
+       "cost": {
+        "mean": 0.03185,
+        "median": 0.03071,
+        "sd": 0.01033
+       }
+      },
+      "1b": {
+       "calls": {
+        "mean": 0.83,
+        "median": 1.0,
+        "sd": 0.39
+       },
+       "latency": {
+        "mean": 6.67,
+        "median": 7.75,
+        "sd": 3.61
+       },
+       "cost": {
+        "mean": 0.00168,
+        "median": 0.00196,
+        "sd": 0.00091
+       }
+      },
+      "1c": {
+       "calls": {
+        "mean": 2.25,
+        "median": 1.0,
+        "sd": 1.76
+       },
+       "latency": {
+        "mean": 71.62,
+        "median": 11.3,
+        "sd": 82.63
+       },
+       "cost": {
+        "mean": 0.02247,
+        "median": 0.00354,
+        "sd": 0.02592
+       }
+      },
+      "2b": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 45.65,
+        "median": 40.25,
+        "sd": 16.38
+       },
+       "cost": {
+        "mean": 0.01893,
+        "median": 0.01669,
+        "sd": 0.00679
+       }
+      },
+      "2c": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 34.27,
+        "median": 34.35,
+        "sd": 12.66
+       },
+       "cost": {
+        "mean": 0.01601,
+        "median": 0.01605,
+        "sd": 0.00592
+       }
+      },
+      "2d": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 23.62,
+        "median": 19.05,
+        "sd": 11.24
+       },
+       "cost": {
+        "mean": 0.00876,
+        "median": 0.00707,
+        "sd": 0.00417
+       }
+      },
+      "2e": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 32.31,
+        "median": 30.8,
+        "sd": 13.36
+       },
+       "cost": {
+        "mean": 0.01179,
+        "median": 0.01124,
+        "sd": 0.00488
+       }
+      },
+      "3a": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 147.17,
+        "median": 124.3,
+        "sd": 91.33
+       },
+       "cost": {
+        "mean": 0.0503,
+        "median": 0.04248,
+        "sd": 0.03121
+       }
+      },
+      "3b": {
+       "calls": {
+        "mean": 1.5,
+        "median": 1.0,
+        "sd": 0.9
+       },
+       "latency": {
+        "mean": 47.85,
+        "median": 31.9,
+        "sd": 28.85
+       },
+       "cost": {
+        "mean": 0.02828,
+        "median": 0.01885,
+        "sd": 0.01705
+       }
+      }
+     },
+     "stages": {
+      "s1": {
+       "calls": {
+        "mean": 4.08,
+        "median": 3.0,
+        "sd": 1.73
+       },
+       "latency": {
+        "mean": 193.12,
+        "median": 163.75,
+        "sd": 103.86
+       },
+       "cost": {
+        "mean": 0.056,
+        "median": 0.04625,
+        "sd": 0.03167
+       }
+      },
+      "s2": {
+       "calls": {
+        "mean": 4.0,
+        "median": 4.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 135.84,
+        "median": 127.05,
+        "sd": 45.64
+       },
+       "cost": {
+        "mean": 0.0555,
+        "median": 0.05198,
+        "sd": 0.01839
+       }
+      },
+      "s3": {
+       "calls": {
+        "mean": 2.5,
+        "median": 2.0,
+        "sd": 0.9
+       },
+       "latency": {
+        "mean": 195.02,
+        "median": 164.5,
+        "sd": 96.14
+       },
+       "cost": {
+        "mean": 0.07858,
+        "median": 0.06417,
+        "sd": 0.03576
+       }
+      }
+     },
+     "total": {
+      "calls": {
+       "mean": 10.58,
+       "median": 9.0,
+       "sd": 2.19
+      },
+      "latency": {
+       "mean": 523.94,
+       "median": 447.4,
+       "sd": 221.71
+      },
+      "cost": {
+       "mean": 0.19007,
+       "median": 0.15826,
+       "sd": 0.07777
+      },
+      "elements": 105.0
+     },
+     "samples": [
+      "CVPR_2025_arch00968",
+      "CVPR_2025_arch01224",
+      "CVPR_2025_arch01398",
+      "CVPR_2025_arch01488",
+      "CVPR_2025_arch01761",
+      "CVPR_2025_arch02298",
+      "CVPR_2025_arch02361",
+      "CVPR_2025_arch02400",
+      "ICCV_2025_pipe00262",
+      "Paper2Fig_arch_diff_000000034",
+      "SciMMIR_arch_diff_000000015",
+      "arch_arxiv_network_2026_000001537"
+     ]
+    }
+   ],
+   "unmatched": 0,
+   "benchClasses": [
+    "Sparse",
+    "Medium",
+    "Dense"
+   ]
+  },
+  {
+   "key": "connectivity",
+   "label": "Connectivity",
+   "classes": [
+    {
+     "name": "Few",
+     "n": 30,
+     "small": false,
+     "agents": {
+      "1a": {
+       "calls": {
+        "mean": 1.03,
+        "median": 1.0,
+        "sd": 0.18
+       },
+       "latency": {
+        "mean": 70.67,
+        "median": 72.55,
+        "sd": 27.94
+       },
+       "cost": {
+        "mean": 0.0196,
+        "median": 0.02012,
+        "sd": 0.00775
+       }
+      },
+      "1b": {
+       "calls": {
+        "mean": 0.57,
+        "median": 1.0,
+        "sd": 0.5
+       },
+       "latency": {
+        "mean": 4.63,
+        "median": 5.7,
+        "sd": 4.43
+       },
+       "cost": {
+        "mean": 0.00117,
+        "median": 0.00144,
+        "sd": 0.00112
+       }
+      },
+      "1c": {
+       "calls": {
+        "mean": 2.57,
+        "median": 2.0,
+        "sd": 1.59
+       },
+       "latency": {
+        "mean": 67.18,
+        "median": 79.85,
+        "sd": 50.64
+       },
+       "cost": {
+        "mean": 0.02107,
+        "median": 0.02505,
+        "sd": 0.01589
+       }
+      },
+      "2b": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 24.15,
+        "median": 22.1,
+        "sd": 10.9
+       },
+       "cost": {
+        "mean": 0.01001,
+        "median": 0.00917,
+        "sd": 0.00452
+       }
+      },
+      "2c": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 22.59,
+        "median": 21.95,
+        "sd": 7.7
+       },
+       "cost": {
+        "mean": 0.01055,
+        "median": 0.01025,
+        "sd": 0.0036
+       }
+      },
+      "2d": {
+       "calls": {
+        "mean": 1.1,
+        "median": 1.0,
+        "sd": 0.4
+       },
+       "latency": {
+        "mean": 17.6,
+        "median": 16.9,
+        "sd": 6.9
+       },
+       "cost": {
+        "mean": 0.00653,
+        "median": 0.00627,
+        "sd": 0.00256
+       }
+      },
+      "2e": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 17.12,
+        "median": 16.6,
+        "sd": 4.53
+       },
+       "cost": {
+        "mean": 0.00625,
+        "median": 0.00606,
+        "sd": 0.00165
+       }
+      },
+      "3a": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 76.78,
+        "median": 71.2,
+        "sd": 38.19
+       },
+       "cost": {
+        "mean": 0.02624,
+        "median": 0.02433,
+        "sd": 0.01305
+       }
+      },
+      "3b": {
+       "calls": {
+        "mean": 1.67,
+        "median": 1.0,
+        "sd": 1.09
+       },
+       "latency": {
+        "mean": 53.17,
+        "median": 31.9,
+        "sd": 34.88
+       },
+       "cost": {
+        "mean": 0.03142,
+        "median": 0.01885,
+        "sd": 0.02061
+       }
+      }
+     },
+     "stages": {
+      "s1": {
+       "calls": {
+        "mean": 4.17,
+        "median": 3.0,
+        "sd": 1.44
+       },
+       "latency": {
+        "mean": 142.48,
+        "median": 143.55,
+        "sd": 60.02
+       },
+       "cost": {
+        "mean": 0.04184,
+        "median": 0.04242,
+        "sd": 0.01834
+       }
+      },
+      "s2": {
+       "calls": {
+        "mean": 4.1,
+        "median": 4.0,
+        "sd": 0.4
+       },
+       "latency": {
+        "mean": 81.46,
+        "median": 78.4,
+        "sd": 20.85
+       },
+       "cost": {
+        "mean": 0.03335,
+        "median": 0.03186,
+        "sd": 0.00869
+       }
+      },
+      "s3": {
+       "calls": {
+        "mean": 2.67,
+        "median": 2.0,
+        "sd": 1.09
+       },
+       "latency": {
+        "mean": 129.95,
+        "median": 124.6,
+        "sd": 51.82
+       },
+       "cost": {
+        "mean": 0.05767,
+        "median": 0.05054,
+        "sd": 0.02444
+       }
+      }
+     },
+     "total": {
+      "calls": {
+       "mean": 10.93,
+       "median": 11.0,
+       "sd": 1.44
+      },
+      "latency": {
+       "mean": 353.87,
+       "median": 334.7,
+       "sd": 102.11
+      },
+      "cost": {
+       "mean": 0.13285,
+       "median": 0.12263,
+       "sd": 0.03765
+      },
+      "elements": 55.6
+     },
+     "samples": [
+      "CVPR_2025_arch01051",
+      "CVPR_2025_arch01225",
+      "CVPR_2025_arch01657",
+      "CVPR_2025_arch01707",
+      "CVPR_2025_arch02021",
+      "CVPR_2025_arch02022",
+      "FigureBench_pipe_000000057",
+      "Paper2Fig_arch_diff_000000034",
+      "Paper2Fig_arch_easy_000000196",
+      "Paper2Fig_pipe_diff_000000104",
+      "Paper2Fig_pipe_diff_000000456",
+      "Paper2Fig_pipe_diff_000000473",
+      "Paper2Fig_pipe_diff_000000488",
+      "Paper2Fig_pipe_diff_000000518",
+      "Paper2Fig_pipe_easy_000000119",
+      "Paper2Fig_pipe_easy_000000249",
+      "Paper2Fig_pipe_easy_000000250",
+      "Paper2Fig_pipe_easy_000000332",
+      "Paper2Fig_pipe_easy_000000345",
+      "Paper2Fig_pipe_easy_000000360",
+      "Paper2Fig_pipe_easy_000000516",
+      "Paper2Fig_pipe_easy_000000517",
+      "Paper2Fig_pipe_easy_000000529",
+      "Paper2Fig_pipe_easy_000000555",
+      "Paper2Fig_pipe_easy_000000556",
+      "Paper2Fig_pipe_easy_000000562",
+      "SciMMIR_pipe_easy_000000307",
+      "arch_arxiv_cv_2023_000000433",
+      "arch_arxiv_db_ir_2025_000000589",
+      "arch_arxiv_db_ir_2025_000000611"
+     ]
+    },
+    {
+     "name": "Moderate",
+     "n": 52,
+     "small": false,
+     "agents": {
+      "1a": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 74.99,
+        "median": 66.4,
+        "sd": 31.41
+       },
+       "cost": {
+        "mean": 0.0208,
+        "median": 0.01841,
+        "sd": 0.00871
+       }
+      },
+      "1b": {
+       "calls": {
+        "mean": 0.48,
+        "median": 0.0,
+        "sd": 0.5
+       },
+       "latency": {
+        "mean": 4.16,
+        "median": 0.0,
+        "sd": 4.9
+       },
+       "cost": {
+        "mean": 0.00105,
+        "median": 0.0,
+        "sd": 0.00124
+       }
+      },
+      "1c": {
+       "calls": {
+        "mean": 2.62,
+        "median": 2.0,
+        "sd": 1.37
+       },
+       "latency": {
+        "mean": 72.87,
+        "median": 74.25,
+        "sd": 50.01
+       },
+       "cost": {
+        "mean": 0.02286,
+        "median": 0.02329,
+        "sd": 0.01569
+       }
+      },
+      "2b": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 28.39,
+        "median": 24.5,
+        "sd": 10.29
+       },
+       "cost": {
+        "mean": 0.01178,
+        "median": 0.01016,
+        "sd": 0.00427
+       }
+      },
+      "2c": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 26.9,
+        "median": 25.45,
+        "sd": 8.53
+       },
+       "cost": {
+        "mean": 0.01257,
+        "median": 0.01189,
+        "sd": 0.00399
+       }
+      },
+      "2d": {
+       "calls": {
+        "mean": 1.06,
+        "median": 1.0,
+        "sd": 0.24
+       },
+       "latency": {
+        "mean": 18.73,
+        "median": 18.2,
+        "sd": 5.28
+       },
+       "cost": {
+        "mean": 0.00695,
+        "median": 0.00675,
+        "sd": 0.00196
+       }
+      },
+      "2e": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 24.11,
+        "median": 21.0,
+        "sd": 9.0
+       },
+       "cost": {
+        "mean": 0.0088,
+        "median": 0.00767,
+        "sd": 0.00329
+       }
+      },
+      "3a": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 95.31,
+        "median": 91.85,
+        "sd": 34.37
+       },
+       "cost": {
+        "mean": 0.03257,
+        "median": 0.03139,
+        "sd": 0.01175
+       }
+      },
+      "3b": {
+       "calls": {
+        "mean": 1.88,
+        "median": 1.0,
+        "sd": 1.34
+       },
+       "latency": {
+        "mean": 60.12,
+        "median": 31.9,
+        "sd": 42.68
+       },
+       "cost": {
+        "mean": 0.03553,
+        "median": 0.01885,
+        "sd": 0.02523
+       }
+      }
+     },
+     "stages": {
+      "s1": {
+       "calls": {
+        "mean": 4.1,
+        "median": 3.0,
+        "sd": 1.29
+       },
+       "latency": {
+        "mean": 152.02,
+        "median": 129.55,
+        "sd": 66.71
+       },
+       "cost": {
+        "mean": 0.04471,
+        "median": 0.03751,
+        "sd": 0.02013
+       }
+      },
+      "s2": {
+       "calls": {
+        "mean": 4.06,
+        "median": 4.0,
+        "sd": 0.24
+       },
+       "latency": {
+        "mean": 98.13,
+        "median": 96.0,
+        "sd": 23.19
+       },
+       "cost": {
+        "mean": 0.04009,
+        "median": 0.03924,
+        "sd": 0.00953
+       }
+      },
+      "s3": {
+       "calls": {
+        "mean": 2.88,
+        "median": 2.0,
+        "sd": 1.34
+       },
+       "latency": {
+        "mean": 155.43,
+        "median": 140.05,
+        "sd": 52.16
+       },
+       "cost": {
+        "mean": 0.06811,
+        "median": 0.05582,
+        "sd": 0.02678
+       }
+      }
+     },
+     "total": {
+      "calls": {
+       "mean": 11.04,
+       "median": 11.0,
+       "sd": 1.96
+      },
+      "latency": {
+       "mean": 405.55,
+       "median": 393.15,
+       "sd": 110.5
+      },
+      "cost": {
+       "mean": 0.1529,
+       "median": 0.14513,
+       "sd": 0.04263
+      },
+      "elements": 58.4
+     },
+     "samples": [
+      "CVPR_2025_arch01061",
+      "CVPR_2025_arch01062",
+      "CVPR_2025_arch01215",
+      "CVPR_2025_arch01224",
+      "CVPR_2025_arch01281",
+      "CVPR_2025_arch01381",
+      "CVPR_2025_arch01398",
+      "CVPR_2025_arch01488",
+      "CVPR_2025_arch01541",
+      "CVPR_2025_arch01709",
+      "CVPR_2025_arch02400",
+      "CVPR_2025_arch02465",
+      "CVPR_2025_arch03005",
+      "FigureBench_arch_diff_000000004",
+      "FigureBench_arch_easy_000000093",
+      "FigureBench_arch_easy_000000097",
+      "ICCV_2025_arch00492",
+      "ICCV_2025_pipe00262",
+      "Paper2Fig_arch_diff_000000037",
+      "Paper2Fig_arch_diff_000000049",
+      "Paper2Fig_arch_diff_000000076",
+      "Paper2Fig_arch_easy_000000148",
+      "Paper2Fig_arch_easy_000000297",
+      "Paper2Fig_pipe_diff_000000130",
+      "Paper2Fig_pipe_diff_000000143",
+      "Paper2Fig_pipe_diff_000000218",
+      "Paper2Fig_pipe_diff_000000455",
+      "Paper2Fig_pipe_diff_000000490",
+      "Paper2Fig_pipe_diff_000000492",
+      "Paper2Fig_pipe_diff_000000517",
+      "Paper2Fig_pipe_easy_000000361",
+      "Paper2Fig_pipe_easy_000000446",
+      "Paper2Fig_pipe_easy_000000500",
+      "Paper2Fig_pipe_easy_000000503",
+      "Paper2Fig_pipe_easy_000000523",
+      "Paper2Fig_pipe_easy_000000552",
+      "Paper2Fig_pipe_easy_000000579",
+      "SciMMIR_arch_diff_000000011",
+      "SciMMIR_arch_diff_000000015",
+      "SciMMIR_arch_diff_000000140",
+      "SciMMIR_pipe_easy_000000297",
+      "SciMMIR_pipe_easy_000000309",
+      "arch_arxiv_ai_2025_000000126",
+      "arch_arxiv_cv_2023_000000303",
+      "arch_arxiv_cv_2023_000000316",
+      "arch_arxiv_db_ir_2025_000000580",
+      "arch_arxiv_db_ir_2025_000000581",
+      "arch_arxiv_db_ir_2025_000000587",
+      "arch_arxiv_db_ir_2025_000000618",
+      "arch_arxiv_db_ir_2026_000000714",
+      "arch_arxiv_db_ir_2026_000000715",
+      "arch_arxiv_db_ir_2026_000000718"
+     ]
+    },
+    {
+     "name": "Many",
+     "n": 9,
+     "small": false,
+     "agents": {
+      "1a": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 112.19,
+        "median": 105.3,
+        "sd": 29.91
+       },
+       "cost": {
+        "mean": 0.03111,
+        "median": 0.0292,
+        "sd": 0.00829
+       }
+      },
+      "1b": {
+       "calls": {
+        "mean": 0.67,
+        "median": 1.0,
+        "sd": 0.5
+       },
+       "latency": {
+        "mean": 4.73,
+        "median": 4.1,
+        "sd": 4.03
+       },
+       "cost": {
+        "mean": 0.00119,
+        "median": 0.00103,
+        "sd": 0.00102
+       }
+      },
+      "1c": {
+       "calls": {
+        "mean": 2.78,
+        "median": 2.0,
+        "sd": 1.79
+       },
+       "latency": {
+        "mean": 85.0,
+        "median": 92.3,
+        "sd": 78.31
+       },
+       "cost": {
+        "mean": 0.02667,
+        "median": 0.02896,
+        "sd": 0.02457
+       }
+      },
+      "2b": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 50.72,
+        "median": 46.5,
+        "sd": 17.65
+       },
+       "cost": {
+        "mean": 0.02104,
+        "median": 0.01928,
+        "sd": 0.00732
+       }
+      },
+      "2c": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 40.57,
+        "median": 37.6,
+        "sd": 12.81
+       },
+       "cost": {
+        "mean": 0.01895,
+        "median": 0.01757,
+        "sd": 0.00599
+       }
+      },
+      "2d": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 27.96,
+        "median": 25.7,
+        "sd": 10.51
+       },
+       "cost": {
+        "mean": 0.01037,
+        "median": 0.00953,
+        "sd": 0.0039
+       }
+      },
+      "2e": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 31.79,
+        "median": 29.2,
+        "sd": 11.26
+       },
+       "cost": {
+        "mean": 0.0116,
+        "median": 0.01066,
+        "sd": 0.00411
+       }
+      },
+      "3a": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 163.63,
+        "median": 140.9,
+        "sd": 101.75
+       },
+       "cost": {
+        "mean": 0.05593,
+        "median": 0.04816,
+        "sd": 0.03477
+       }
+      },
+      "3b": {
+       "calls": {
+        "mean": 2.33,
+        "median": 3.0,
+        "sd": 1.41
+       },
+       "latency": {
+        "mean": 74.43,
+        "median": 95.7,
+        "sd": 45.11
+       },
+       "cost": {
+        "mean": 0.04399,
+        "median": 0.05656,
+        "sd": 0.02666
+       }
+      }
+     },
+     "stages": {
+      "s1": {
+       "calls": {
+        "mean": 4.44,
+        "median": 4.0,
+        "sd": 1.74
+       },
+       "latency": {
+        "mean": 201.92,
+        "median": 179.4,
+        "sd": 82.4
+       },
+       "cost": {
+        "mean": 0.05897,
+        "median": 0.05178,
+        "sd": 0.02546
+       }
+      },
+      "s2": {
+       "calls": {
+        "mean": 4.0,
+        "median": 4.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 151.03,
+        "median": 127.8,
+        "sd": 42.41
+       },
+       "cost": {
+        "mean": 0.06196,
+        "median": 0.0524,
+        "sd": 0.01716
+       }
+      },
+      "s3": {
+       "calls": {
+        "mean": 3.33,
+        "median": 4.0,
+        "sd": 1.41
+       },
+       "latency": {
+        "mean": 238.07,
+        "median": 212.5,
+        "sd": 100.51
+       },
+       "cost": {
+        "mean": 0.09992,
+        "median": 0.09648,
+        "sd": 0.03819
+       }
+      }
+     },
+     "total": {
+      "calls": {
+       "mean": 11.78,
+       "median": 11.0,
+       "sd": 2.05
+      },
+      "latency": {
+       "mean": 590.99,
+       "median": 562.4,
+       "sd": 198.15
+      },
+      "cost": {
+       "mean": 0.22085,
+       "median": 0.21744,
+       "sd": 0.06741
+      },
+      "elements": 129.6
+     },
+     "samples": [
+      "CVPR_2025_arch00968",
+      "CVPR_2025_arch01656",
+      "CVPR_2025_arch01761",
+      "CVPR_2025_arch02298",
+      "CVPR_2025_arch02361",
+      "CVPR_2025_arch03065",
+      "arch_arxiv_ai_2025_000000129",
+      "arch_arxiv_db_ir_2024_000000546",
+      "arch_arxiv_network_2026_000001537"
+     ]
+    }
+   ],
+   "unmatched": 0,
+   "benchClasses": [
+    "Few",
+    "Moderate",
+    "Many"
+   ]
+  },
+  {
+   "key": "layout",
+   "label": "Layout organisation",
+   "classes": [
+    {
+     "name": "Block Layout",
+     "n": 10,
+     "small": false,
+     "agents": {
+      "1a": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 82.76,
+        "median": 70.05,
+        "sd": 40.59
+       },
+       "cost": {
+        "mean": 0.02295,
+        "median": 0.01943,
+        "sd": 0.01126
+       }
+      },
+      "1b": {
+       "calls": {
+        "mean": 0.6,
+        "median": 1.0,
+        "sd": 0.52
+       },
+       "latency": {
+        "mean": 4.54,
+        "median": 5.8,
+        "sd": 4.13
+       },
+       "cost": {
+        "mean": 0.00115,
+        "median": 0.00146,
+        "sd": 0.00104
+       }
+      },
+      "1c": {
+       "calls": {
+        "mean": 2.1,
+        "median": 2.0,
+        "sd": 1.37
+       },
+       "latency": {
+        "mean": 63.85,
+        "median": 60.3,
+        "sd": 57.21
+       },
+       "cost": {
+        "mean": 0.02003,
+        "median": 0.01892,
+        "sd": 0.01795
+       }
+      },
+      "2b": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 37.34,
+        "median": 28.85,
+        "sd": 19.36
+       },
+       "cost": {
+        "mean": 0.01549,
+        "median": 0.01196,
+        "sd": 0.00803
+       }
+      },
+      "2c": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 29.38,
+        "median": 28.15,
+        "sd": 10.49
+       },
+       "cost": {
+        "mean": 0.01373,
+        "median": 0.01315,
+        "sd": 0.0049
+       }
+      },
+      "2d": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 19.94,
+        "median": 18.8,
+        "sd": 7.13
+       },
+       "cost": {
+        "mean": 0.0074,
+        "median": 0.00697,
+        "sd": 0.00264
+       }
+      },
+      "2e": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 27.11,
+        "median": 25.55,
+        "sd": 7.61
+       },
+       "cost": {
+        "mean": 0.0099,
+        "median": 0.00933,
+        "sd": 0.00278
+       }
+      },
+      "3a": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 111.0,
+        "median": 111.25,
+        "sd": 42.13
+       },
+       "cost": {
+        "mean": 0.03794,
+        "median": 0.03802,
+        "sd": 0.0144
+       }
+      },
+      "3b": {
+       "calls": {
+        "mean": 2.0,
+        "median": 1.0,
+        "sd": 1.41
+       },
+       "latency": {
+        "mean": 63.8,
+        "median": 31.9,
+        "sd": 45.11
+       },
+       "cost": {
+        "mean": 0.03771,
+        "median": 0.01885,
+        "sd": 0.02666
+       }
+      }
+     },
+     "stages": {
+      "s1": {
+       "calls": {
+        "mean": 3.7,
+        "median": 3.0,
+        "sd": 1.49
+       },
+       "latency": {
+        "mean": 151.15,
+        "median": 128.95,
+        "sd": 67.35
+       },
+       "cost": {
+        "mean": 0.04413,
+        "median": 0.03719,
+        "sd": 0.02034
+       }
+      },
+      "s2": {
+       "calls": {
+        "mean": 4.0,
+        "median": 4.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 113.77,
+        "median": 105.15,
+        "sd": 37.72
+       },
+       "cost": {
+        "mean": 0.0465,
+        "median": 0.04265,
+        "sd": 0.01541
+       }
+      },
+      "s3": {
+       "calls": {
+        "mean": 3.0,
+        "median": 2.0,
+        "sd": 1.41
+       },
+       "latency": {
+        "mean": 174.8,
+        "median": 166.7,
+        "sd": 49.2
+       },
+       "cost": {
+        "mean": 0.07565,
+        "median": 0.0732,
+        "sd": 0.02525
+       }
+      }
+     },
+     "total": {
+      "calls": {
+       "mean": 10.7,
+       "median": 10.0,
+       "sd": 2.0
+      },
+      "latency": {
+       "mean": 439.74,
+       "median": 423.55,
+       "sd": 109.87
+      },
+      "cost": {
+       "mean": 0.16628,
+       "median": 0.15444,
+       "sd": 0.04264
+      },
+      "elements": 73.3
+     },
+     "samples": [
+      "CVPR_2025_arch02298",
+      "CVPR_2025_arch02361",
+      "CVPR_2025_arch02400",
+      "ICCV_2025_pipe00262",
+      "Paper2Fig_arch_diff_000000037",
+      "Paper2Fig_pipe_diff_000000490",
+      "Paper2Fig_pipe_easy_000000516",
+      "Paper2Fig_pipe_easy_000000552",
+      "SciMMIR_arch_diff_000000011",
+      "SciMMIR_arch_diff_000000140"
+     ]
+    },
+    {
+     "name": "Circular",
+     "n": 2,
+     "small": true,
+     "agents": {
+      "1a": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 53.75,
+        "median": 53.75,
+        "sd": 29.2
+       },
+       "cost": {
+        "mean": 0.01491,
+        "median": 0.01491,
+        "sd": 0.0081
+       }
+      },
+      "1b": {
+       "calls": {
+        "mean": 0.0,
+        "median": 0.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 0.0,
+        "median": 0.0,
+        "sd": 0.0
+       },
+       "cost": {
+        "mean": 0.0,
+        "median": 0.0,
+        "sd": 0.0
+       }
+      },
+      "1c": {
+       "calls": {
+        "mean": 3.0,
+        "median": 3.0,
+        "sd": 1.41
+       },
+       "latency": {
+        "mean": 78.45,
+        "median": 78.45,
+        "sd": 7.57
+       },
+       "cost": {
+        "mean": 0.02461,
+        "median": 0.02461,
+        "sd": 0.00237
+       }
+      },
+      "2b": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 17.65,
+        "median": 17.65,
+        "sd": 8.7
+       },
+       "cost": {
+        "mean": 0.00732,
+        "median": 0.00732,
+        "sd": 0.00361
+       }
+      },
+      "2c": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 18.05,
+        "median": 18.05,
+        "sd": 11.67
+       },
+       "cost": {
+        "mean": 0.00843,
+        "median": 0.00843,
+        "sd": 0.00545
+       }
+      },
+      "2d": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 13.15,
+        "median": 13.15,
+        "sd": 7.42
+       },
+       "cost": {
+        "mean": 0.00488,
+        "median": 0.00488,
+        "sd": 0.00275
+       }
+      },
+      "2e": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 19.0,
+        "median": 19.0,
+        "sd": 0.99
+       },
+       "cost": {
+        "mean": 0.00694,
+        "median": 0.00694,
+        "sd": 0.00036
+       }
+      },
+      "3a": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 68.95,
+        "median": 68.95,
+        "sd": 31.61
+       },
+       "cost": {
+        "mean": 0.02357,
+        "median": 0.02357,
+        "sd": 0.0108
+       }
+      },
+      "3b": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 31.9,
+        "median": 31.9,
+        "sd": 0.0
+       },
+       "cost": {
+        "mean": 0.01885,
+        "median": 0.01885,
+        "sd": 0.0
+       }
+      }
+     },
+     "stages": {
+      "s1": {
+       "calls": {
+        "mean": 4.0,
+        "median": 4.0,
+        "sd": 1.41
+       },
+       "latency": {
+        "mean": 132.2,
+        "median": 132.2,
+        "sd": 36.77
+       },
+       "cost": {
+        "mean": 0.03952,
+        "median": 0.03952,
+        "sd": 0.01047
+       }
+      },
+      "s2": {
+       "calls": {
+        "mean": 4.0,
+        "median": 4.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 67.85,
+        "median": 67.85,
+        "sd": 28.78
+       },
+       "cost": {
+        "mean": 0.02757,
+        "median": 0.02757,
+        "sd": 0.01217
+       }
+      },
+      "s3": {
+       "calls": {
+        "mean": 2.0,
+        "median": 2.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 100.85,
+        "median": 100.85,
+        "sd": 31.61
+       },
+       "cost": {
+        "mean": 0.04242,
+        "median": 0.04242,
+        "sd": 0.0108
+       }
+      }
+     },
+     "total": {
+      "calls": {
+       "mean": 10.0,
+       "median": 10.0,
+       "sd": 1.41
+      },
+      "latency": {
+       "mean": 300.95,
+       "median": 300.95,
+       "sd": 97.23
+      },
+      "cost": {
+       "mean": 0.1095,
+       "median": 0.1095,
+       "sd": 0.03345
+      },
+      "elements": 34.0
+     },
+     "samples": [
+      "Paper2Fig_pipe_diff_000000517",
+      "Paper2Fig_pipe_easy_000000503"
+     ]
+    },
+    {
+     "name": "Horizontal",
+     "n": 50,
+     "small": false,
+     "agents": {
+      "1a": {
+       "calls": {
+        "mean": 1.02,
+        "median": 1.0,
+        "sd": 0.14
+       },
+       "latency": {
+        "mean": 75.56,
+        "median": 68.55,
+        "sd": 32.7
+       },
+       "cost": {
+        "mean": 0.02096,
+        "median": 0.01901,
+        "sd": 0.00907
+       }
+      },
+      "1b": {
+       "calls": {
+        "mean": 0.58,
+        "median": 1.0,
+        "sd": 0.5
+       },
+       "latency": {
+        "mean": 4.67,
+        "median": 5.45,
+        "sd": 4.64
+       },
+       "cost": {
+        "mean": 0.00118,
+        "median": 0.00137,
+        "sd": 0.00117
+       }
+      },
+      "1c": {
+       "calls": {
+        "mean": 2.74,
+        "median": 4.0,
+        "sd": 1.5
+       },
+       "latency": {
+        "mean": 72.19,
+        "median": 77.3,
+        "sd": 53.83
+       },
+       "cost": {
+        "mean": 0.02265,
+        "median": 0.02425,
+        "sd": 0.01689
+       }
+      },
+      "2b": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 26.69,
+        "median": 23.5,
+        "sd": 10.92
+       },
+       "cost": {
+        "mean": 0.01107,
+        "median": 0.00975,
+        "sd": 0.00453
+       }
+      },
+      "2c": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 24.9,
+        "median": 23.5,
+        "sd": 7.93
+       },
+       "cost": {
+        "mean": 0.01163,
+        "median": 0.01098,
+        "sd": 0.00371
+       }
+      },
+      "2d": {
+       "calls": {
+        "mean": 1.1,
+        "median": 1.0,
+        "sd": 0.3
+       },
+       "latency": {
+        "mean": 19.11,
+        "median": 18.7,
+        "sd": 5.63
+       },
+       "cost": {
+        "mean": 0.00709,
+        "median": 0.00694,
+        "sd": 0.00209
+       }
+      },
+      "2e": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 21.37,
+        "median": 19.7,
+        "sd": 8.72
+       },
+       "cost": {
+        "mean": 0.0078,
+        "median": 0.00719,
+        "sd": 0.00318
+       }
+      },
+      "3a": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 88.17,
+        "median": 86.95,
+        "sd": 37.95
+       },
+       "cost": {
+        "mean": 0.03013,
+        "median": 0.02972,
+        "sd": 0.01297
+       }
+      },
+      "3b": {
+       "calls": {
+        "mean": 1.92,
+        "median": 1.0,
+        "sd": 1.35
+       },
+       "latency": {
+        "mean": 61.25,
+        "median": 31.9,
+        "sd": 43.16
+       },
+       "cost": {
+        "mean": 0.0362,
+        "median": 0.01885,
+        "sd": 0.02551
+       }
+      }
+     },
+     "stages": {
+      "s1": {
+       "calls": {
+        "mean": 4.34,
+        "median": 5.0,
+        "sd": 1.3
+       },
+       "latency": {
+        "mean": 152.42,
+        "median": 143.05,
+        "sd": 69.21
+       },
+       "cost": {
+        "mean": 0.04478,
+        "median": 0.04167,
+        "sd": 0.02096
+       }
+      },
+      "s2": {
+       "calls": {
+        "mean": 4.1,
+        "median": 4.0,
+        "sd": 0.3
+       },
+       "latency": {
+        "mean": 92.07,
+        "median": 87.2,
+        "sd": 24.63
+       },
+       "cost": {
+        "mean": 0.03759,
+        "median": 0.03549,
+        "sd": 0.01006
+       }
+      },
+      "s3": {
+       "calls": {
+        "mean": 2.92,
+        "median": 2.0,
+        "sd": 1.35
+       },
+       "latency": {
+        "mean": 149.42,
+        "median": 136.35,
+        "sd": 57.27
+       },
+       "cost": {
+        "mean": 0.06633,
+        "median": 0.05582,
+        "sd": 0.02854
+       }
+      }
+     },
+     "total": {
+      "calls": {
+       "mean": 11.36,
+       "median": 11.5,
+       "sd": 1.82
+      },
+      "latency": {
+       "mean": 393.87,
+       "median": 378.3,
+       "sd": 119.44
+      },
+      "cost": {
+       "mean": 0.14871,
+       "median": 0.14452,
+       "sd": 0.04501
+      },
+      "elements": 60.2
+     },
+     "samples": [
+      "CVPR_2025_arch01061",
+      "CVPR_2025_arch01062",
+      "CVPR_2025_arch01215",
+      "CVPR_2025_arch01224",
+      "CVPR_2025_arch01225",
+      "CVPR_2025_arch01281",
+      "CVPR_2025_arch01381",
+      "CVPR_2025_arch01398",
+      "CVPR_2025_arch01488",
+      "CVPR_2025_arch01541",
+      "CVPR_2025_arch01656",
+      "CVPR_2025_arch01761",
+      "CVPR_2025_arch03005",
+      "FigureBench_arch_diff_000000004",
+      "FigureBench_pipe_000000057",
+      "ICCV_2025_arch00492",
+      "Paper2Fig_arch_diff_000000049",
+      "Paper2Fig_arch_diff_000000076",
+      "Paper2Fig_arch_easy_000000297",
+      "Paper2Fig_pipe_diff_000000104",
+      "Paper2Fig_pipe_diff_000000130",
+      "Paper2Fig_pipe_diff_000000143",
+      "Paper2Fig_pipe_diff_000000218",
+      "Paper2Fig_pipe_diff_000000455",
+      "Paper2Fig_pipe_diff_000000456",
+      "Paper2Fig_pipe_diff_000000488",
+      "Paper2Fig_pipe_easy_000000119",
+      "Paper2Fig_pipe_easy_000000249",
+      "Paper2Fig_pipe_easy_000000250",
+      "Paper2Fig_pipe_easy_000000345",
+      "Paper2Fig_pipe_easy_000000361",
+      "Paper2Fig_pipe_easy_000000500",
+      "Paper2Fig_pipe_easy_000000517",
+      "Paper2Fig_pipe_easy_000000523",
+      "Paper2Fig_pipe_easy_000000555",
+      "Paper2Fig_pipe_easy_000000556",
+      "Paper2Fig_pipe_easy_000000579",
+      "SciMMIR_arch_diff_000000015",
+      "SciMMIR_pipe_easy_000000297",
+      "SciMMIR_pipe_easy_000000307",
+      "SciMMIR_pipe_easy_000000309",
+      "arch_arxiv_ai_2025_000000126",
+      "arch_arxiv_ai_2025_000000129",
+      "arch_arxiv_cv_2023_000000316",
+      "arch_arxiv_cv_2023_000000433",
+      "arch_arxiv_db_ir_2025_000000580",
+      "arch_arxiv_db_ir_2025_000000581",
+      "arch_arxiv_db_ir_2025_000000587",
+      "arch_arxiv_db_ir_2025_000000618",
+      "arch_arxiv_db_ir_2026_000000714"
+     ]
+    },
+    {
+     "name": "Horizontal Multipanel",
+     "n": 4,
+     "small": true,
+     "agents": {
+      "1a": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 101.35,
+        "median": 99.95,
+        "sd": 20.41
+       },
+       "cost": {
+        "mean": 0.02811,
+        "median": 0.02772,
+        "sd": 0.00566
+       }
+      },
+      "1b": {
+       "calls": {
+        "mean": 0.5,
+        "median": 0.5,
+        "sd": 0.58
+       },
+       "latency": {
+        "mean": 5.22,
+        "median": 4.7,
+        "sd": 6.09
+       },
+       "cost": {
+        "mean": 0.00132,
+        "median": 0.00119,
+        "sd": 0.00154
+       }
+      },
+      "1c": {
+       "calls": {
+        "mean": 3.0,
+        "median": 2.5,
+        "sd": 2.45
+       },
+       "latency": {
+        "mean": 64.2,
+        "median": 41.1,
+        "sd": 73.37
+       },
+       "cost": {
+        "mean": 0.02014,
+        "median": 0.01289,
+        "sd": 0.02302
+       }
+      },
+      "2b": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 43.6,
+        "median": 44.85,
+        "sd": 17.67
+       },
+       "cost": {
+        "mean": 0.01808,
+        "median": 0.0186,
+        "sd": 0.00733
+       }
+      },
+      "2c": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 36.8,
+        "median": 34.5,
+        "sd": 20.39
+       },
+       "cost": {
+        "mean": 0.01719,
+        "median": 0.01612,
+        "sd": 0.00953
+       }
+      },
+      "2d": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 19.02,
+        "median": 19.0,
+        "sd": 5.63
+       },
+       "cost": {
+        "mean": 0.00706,
+        "median": 0.00705,
+        "sd": 0.00209
+       }
+      },
+      "2e": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 27.55,
+        "median": 24.95,
+        "sd": 7.71
+       },
+       "cost": {
+        "mean": 0.01006,
+        "median": 0.00911,
+        "sd": 0.00281
+       }
+      },
+      "3a": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 110.65,
+        "median": 97.85,
+        "sd": 36.79
+       },
+       "cost": {
+        "mean": 0.03782,
+        "median": 0.03344,
+        "sd": 0.01257
+       }
+      },
+      "3b": {
+       "calls": {
+        "mean": 2.5,
+        "median": 3.0,
+        "sd": 1.0
+       },
+       "latency": {
+        "mean": 79.75,
+        "median": 95.7,
+        "sd": 31.9
+       },
+       "cost": {
+        "mean": 0.04714,
+        "median": 0.05656,
+        "sd": 0.01885
+       }
+      }
+     },
+     "stages": {
+      "s1": {
+       "calls": {
+        "mean": 4.5,
+        "median": 4.0,
+        "sd": 1.91
+       },
+       "latency": {
+        "mean": 170.78,
+        "median": 149.9,
+        "sd": 52.17
+       },
+       "cost": {
+        "mean": 0.04957,
+        "median": 0.04295,
+        "sd": 0.01718
+       }
+      },
+      "s2": {
+       "calls": {
+        "mean": 4.0,
+        "median": 4.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 126.97,
+        "median": 128.5,
+        "sd": 42.81
+       },
+       "cost": {
+        "mean": 0.05239,
+        "median": 0.05277,
+        "sd": 0.01838
+       }
+      },
+      "s3": {
+       "calls": {
+        "mean": 3.5,
+        "median": 4.0,
+        "sd": 1.0
+       },
+       "latency": {
+        "mean": 190.4,
+        "median": 193.55,
+        "sd": 59.81
+       },
+       "cost": {
+        "mean": 0.08495,
+        "median": 0.09001,
+        "sd": 0.02752
+       }
+      }
+     },
+     "total": {
+      "calls": {
+       "mean": 12.0,
+       "median": 11.0,
+       "sd": 2.0
+      },
+      "latency": {
+       "mean": 488.15,
+       "median": 513.7,
+       "sd": 112.89
+      },
+      "cost": {
+       "mean": 0.18691,
+       "median": 0.19896,
+       "sd": 0.04766
+      },
+      "elements": 84.5
+     },
+     "samples": [
+      "CVPR_2025_arch01051",
+      "CVPR_2025_arch01707",
+      "CVPR_2025_arch01709",
+      "CVPR_2025_arch03065"
+     ]
+    },
+    {
+     "name": "Hybrid",
+     "n": 7,
+     "small": false,
+     "agents": {
+      "1a": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 97.11,
+        "median": 91.4,
+        "sd": 15.78
+       },
+       "cost": {
+        "mean": 0.02693,
+        "median": 0.02535,
+        "sd": 0.00438
+       }
+      },
+      "1b": {
+       "calls": {
+        "mean": 0.43,
+        "median": 0.0,
+        "sd": 0.53
+       },
+       "latency": {
+        "mean": 3.26,
+        "median": 0.0,
+        "sd": 4.08
+       },
+       "cost": {
+        "mean": 0.00082,
+        "median": 0.0,
+        "sd": 0.00103
+       }
+      },
+      "1c": {
+       "calls": {
+        "mean": 2.0,
+        "median": 2.0,
+        "sd": 1.0
+       },
+       "latency": {
+        "mean": 79.7,
+        "median": 96.4,
+        "sd": 49.67
+       },
+       "cost": {
+        "mean": 0.025,
+        "median": 0.03024,
+        "sd": 0.01558
+       }
+      },
+      "2b": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 31.44,
+        "median": 26.2,
+        "sd": 15.53
+       },
+       "cost": {
+        "mean": 0.01304,
+        "median": 0.01087,
+        "sd": 0.00644
+       }
+      },
+      "2c": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 25.41,
+        "median": 25.3,
+        "sd": 9.56
+       },
+       "cost": {
+        "mean": 0.01187,
+        "median": 0.01182,
+        "sd": 0.00447
+       }
+      },
+      "2d": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.58
+       },
+       "latency": {
+        "mean": 18.49,
+        "median": 18.1,
+        "sd": 11.84
+       },
+       "cost": {
+        "mean": 0.00686,
+        "median": 0.00671,
+        "sd": 0.00439
+       }
+      },
+      "2e": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 17.26,
+        "median": 16.8,
+        "sd": 5.35
+       },
+       "cost": {
+        "mean": 0.0063,
+        "median": 0.00613,
+        "sd": 0.00195
+       }
+      },
+      "3a": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 130.27,
+        "median": 121.8,
+        "sd": 47.97
+       },
+       "cost": {
+        "mean": 0.04452,
+        "median": 0.04163,
+        "sd": 0.0164
+       }
+      },
+      "3b": {
+       "calls": {
+        "mean": 1.86,
+        "median": 1.0,
+        "sd": 1.07
+       },
+       "latency": {
+        "mean": 59.24,
+        "median": 31.9,
+        "sd": 34.1
+       },
+       "cost": {
+        "mean": 0.03502,
+        "median": 0.01885,
+        "sd": 0.02016
+       }
+      }
+     },
+     "stages": {
+      "s1": {
+       "calls": {
+        "mean": 3.43,
+        "median": 3.0,
+        "sd": 1.13
+       },
+       "latency": {
+        "mean": 180.07,
+        "median": 185.1,
+        "sd": 59.05
+       },
+       "cost": {
+        "mean": 0.05276,
+        "median": 0.05484,
+        "sd": 0.01818
+       }
+      },
+      "s2": {
+       "calls": {
+        "mean": 4.0,
+        "median": 4.0,
+        "sd": 0.58
+       },
+       "latency": {
+        "mean": 92.6,
+        "median": 84.8,
+        "sd": 31.2
+       },
+       "cost": {
+        "mean": 0.03807,
+        "median": 0.03517,
+        "sd": 0.0128
+       }
+      },
+      "s3": {
+       "calls": {
+        "mean": 2.86,
+        "median": 2.0,
+        "sd": 1.07
+       },
+       "latency": {
+        "mean": 189.51,
+        "median": 179.2,
+        "sd": 75.32
+       },
+       "cost": {
+        "mean": 0.07954,
+        "median": 0.0692,
+        "sd": 0.03349
+       }
+      }
+     },
+     "total": {
+      "calls": {
+       "mean": 10.29,
+       "median": 11.0,
+       "sd": 0.95
+      },
+      "latency": {
+       "mean": 462.17,
+       "median": 470.5,
+       "sd": 134.16
+      },
+      "cost": {
+       "mean": 0.17037,
+       "median": 0.16106,
+       "sd": 0.0533
+      },
+      "elements": 86.7
+     },
+     "samples": [
+      "Paper2Fig_pipe_diff_000000518",
+      "Paper2Fig_pipe_easy_000000360",
+      "Paper2Fig_pipe_easy_000000529",
+      "Paper2Fig_pipe_easy_000000562",
+      "arch_arxiv_db_ir_2025_000000589",
+      "arch_arxiv_db_ir_2025_000000611",
+      "arch_arxiv_network_2026_000001537"
+     ]
+    },
+    {
+     "name": "Vertical",
+     "n": 14,
+     "small": false,
+     "agents": {
+      "1a": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 60.81,
+        "median": 51.75,
+        "sd": 23.1
+       },
+       "cost": {
+        "mean": 0.01687,
+        "median": 0.01435,
+        "sd": 0.00641
+       }
+      },
+      "1b": {
+       "calls": {
+        "mean": 0.5,
+        "median": 0.5,
+        "sd": 0.52
+       },
+       "latency": {
+        "mean": 4.81,
+        "median": 2.95,
+        "sd": 5.41
+       },
+       "cost": {
+        "mean": 0.00121,
+        "median": 0.00074,
+        "sd": 0.00137
+       }
+      },
+      "1c": {
+       "calls": {
+        "mean": 2.43,
+        "median": 2.0,
+        "sd": 1.28
+       },
+       "latency": {
+        "mean": 59.78,
+        "median": 59.65,
+        "sd": 39.19
+       },
+       "cost": {
+        "mean": 0.01875,
+        "median": 0.01871,
+        "sd": 0.0123
+       }
+      },
+      "2b": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 26.89,
+        "median": 28.6,
+        "sd": 8.02
+       },
+       "cost": {
+        "mean": 0.01115,
+        "median": 0.01186,
+        "sd": 0.00333
+       }
+      },
+      "2c": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 28.21,
+        "median": 27.25,
+        "sd": 8.79
+       },
+       "cost": {
+        "mean": 0.01318,
+        "median": 0.01273,
+        "sd": 0.00411
+       }
+      },
+      "2d": {
+       "calls": {
+        "mean": 1.07,
+        "median": 1.0,
+        "sd": 0.27
+       },
+       "latency": {
+        "mean": 18.85,
+        "median": 17.95,
+        "sd": 5.13
+       },
+       "cost": {
+        "mean": 0.00699,
+        "median": 0.00666,
+        "sd": 0.0019
+       }
+      },
+      "2e": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 22.35,
+        "median": 19.3,
+        "sd": 9.55
+       },
+       "cost": {
+        "mean": 0.00816,
+        "median": 0.00705,
+        "sd": 0.00349
+       }
+      },
+      "3a": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 76.99,
+        "median": 80.15,
+        "sd": 16.01
+       },
+       "cost": {
+        "mean": 0.02631,
+        "median": 0.02739,
+        "sd": 0.00547
+       }
+      },
+      "3b": {
+       "calls": {
+        "mean": 1.57,
+        "median": 1.0,
+        "sd": 1.22
+       },
+       "latency": {
+        "mean": 50.13,
+        "median": 31.9,
+        "sd": 39.0
+       },
+       "cost": {
+        "mean": 0.02963,
+        "median": 0.01885,
+        "sd": 0.02305
+       }
+      }
+     },
+     "stages": {
+      "s1": {
+       "calls": {
+        "mean": 3.93,
+        "median": 3.0,
+        "sd": 1.21
+       },
+       "latency": {
+        "mean": 125.4,
+        "median": 114.7,
+        "sd": 49.75
+       },
+       "cost": {
+        "mean": 0.03683,
+        "median": 0.03351,
+        "sd": 0.01504
+       }
+      },
+      "s2": {
+       "calls": {
+        "mean": 4.07,
+        "median": 4.0,
+        "sd": 0.27
+       },
+       "latency": {
+        "mean": 96.31,
+        "median": 101.25,
+        "sd": 20.35
+       },
+       "cost": {
+        "mean": 0.03949,
+        "median": 0.04134,
+        "sd": 0.00849
+       }
+      },
+      "s3": {
+       "calls": {
+        "mean": 2.57,
+        "median": 2.0,
+        "sd": 1.22
+       },
+       "latency": {
+        "mean": 127.12,
+        "median": 115.3,
+        "sd": 41.37
+       },
+       "cost": {
+        "mean": 0.05594,
+        "median": 0.04736,
+        "sd": 0.02341
+       }
+      }
+     },
+     "total": {
+      "calls": {
+       "mean": 10.57,
+       "median": 10.5,
+       "sd": 1.7
+      },
+      "latency": {
+       "mean": 348.79,
+       "median": 331.3,
+       "sd": 83.02
+      },
+      "cost": {
+       "mean": 0.13226,
+       "median": 0.12233,
+       "sd": 0.03454
+      },
+      "elements": 51.1
+     },
+     "samples": [
+      "CVPR_2025_arch02021",
+      "CVPR_2025_arch02022",
+      "CVPR_2025_arch02465",
+      "FigureBench_arch_easy_000000093",
+      "FigureBench_arch_easy_000000097",
+      "Paper2Fig_arch_diff_000000034",
+      "Paper2Fig_arch_easy_000000148",
+      "Paper2Fig_pipe_diff_000000473",
+      "Paper2Fig_pipe_diff_000000492",
+      "Paper2Fig_pipe_easy_000000332",
+      "Paper2Fig_pipe_easy_000000446",
+      "arch_arxiv_cv_2023_000000303",
+      "arch_arxiv_db_ir_2024_000000546",
+      "arch_arxiv_db_ir_2026_000000718"
+     ]
+    },
+    {
+     "name": "Vertical Multipanel",
+     "n": 4,
+     "small": true,
+     "agents": {
+      "1a": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 94.95,
+        "median": 83.35,
+        "sd": 32.75
+       },
+       "cost": {
+        "mean": 0.02633,
+        "median": 0.02312,
+        "sd": 0.00908
+       }
+      },
+      "1b": {
+       "calls": {
+        "mean": 0.25,
+        "median": 0.0,
+        "sd": 0.5
+       },
+       "latency": {
+        "mean": 1.98,
+        "median": 0.0,
+        "sd": 3.95
+       },
+       "cost": {
+        "mean": 0.0005,
+        "median": 0.0,
+        "sd": 0.001
+       }
+      },
+      "1c": {
+       "calls": {
+        "mean": 3.5,
+        "median": 3.0,
+        "sd": 1.91
+       },
+       "latency": {
+        "mean": 128.28,
+        "median": 98.65,
+        "sd": 69.79
+       },
+       "cost": {
+        "mean": 0.04024,
+        "median": 0.03095,
+        "sd": 0.02189
+       }
+      },
+      "2b": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 35.75,
+        "median": 27.9,
+        "sd": 21.94
+       },
+       "cost": {
+        "mean": 0.01483,
+        "median": 0.01157,
+        "sd": 0.0091
+       }
+      },
+      "2c": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 36.67,
+        "median": 29.55,
+        "sd": 15.72
+       },
+       "cost": {
+        "mean": 0.01713,
+        "median": 0.0138,
+        "sd": 0.00734
+       }
+      },
+      "2d": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 25.78,
+        "median": 19.0,
+        "sd": 16.94
+       },
+       "cost": {
+        "mean": 0.00956,
+        "median": 0.00705,
+        "sd": 0.00629
+       }
+      },
+      "2e": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 32.92,
+        "median": 30.15,
+        "sd": 15.39
+       },
+       "cost": {
+        "mean": 0.01202,
+        "median": 0.01101,
+        "sd": 0.00562
+       }
+      },
+      "3a": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 160.8,
+        "median": 83.3,
+        "sd": 174.33
+       },
+       "cost": {
+        "mean": 0.05496,
+        "median": 0.02847,
+        "sd": 0.05958
+       }
+      },
+      "3b": {
+       "calls": {
+        "mean": 1.5,
+        "median": 1.0,
+        "sd": 1.0
+       },
+       "latency": {
+        "mean": 47.85,
+        "median": 31.9,
+        "sd": 31.9
+       },
+       "cost": {
+        "mean": 0.02828,
+        "median": 0.01885,
+        "sd": 0.01885
+       }
+      }
+     },
+     "stages": {
+      "s1": {
+       "calls": {
+        "mean": 4.75,
+        "median": 4.0,
+        "sd": 2.36
+       },
+       "latency": {
+        "mean": 225.2,
+        "median": 182.0,
+        "sd": 106.02
+       },
+       "cost": {
+        "mean": 0.06707,
+        "median": 0.05406,
+        "sd": 0.03184
+       }
+      },
+      "s2": {
+       "calls": {
+        "mean": 4.0,
+        "median": 4.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 131.12,
+        "median": 102.55,
+        "sd": 67.83
+       },
+       "cost": {
+        "mean": 0.05354,
+        "median": 0.04193,
+        "sd": 0.02753
+       }
+      },
+      "s3": {
+       "calls": {
+        "mean": 2.5,
+        "median": 2.0,
+        "sd": 1.0
+       },
+       "latency": {
+        "mean": 208.65,
+        "median": 137.7,
+        "sd": 164.08
+       },
+       "cost": {
+        "mean": 0.08324,
+        "median": 0.06297,
+        "sd": 0.05476
+       }
+      }
+     },
+     "total": {
+      "calls": {
+       "mean": 11.25,
+       "median": 11.0,
+       "sd": 2.63
+      },
+      "latency": {
+       "mean": 564.95,
+       "median": 412.9,
+       "sd": 336.17
+      },
+      "cost": {
+       "mean": 0.20385,
+       "median": 0.15507,
+       "sd": 0.11266
+      },
+      "elements": 100.5
+     },
+     "samples": [
+      "CVPR_2025_arch00968",
+      "CVPR_2025_arch01657",
+      "Paper2Fig_arch_easy_000000196",
+      "arch_arxiv_db_ir_2026_000000715"
+     ]
+    }
+   ],
+   "unmatched": 0,
+   "benchClasses": [
+    "Block Layout",
+    "Circular",
+    "Crossroad",
+    "Horizontal",
+    "Horizontal Multipanel",
+    "Hybrid",
+    "Vertical",
+    "Vertical Multipanel"
+   ]
+  },
+  {
+   "key": "depth",
+   "label": "Hierarchical depth",
+   "classes": [
+    {
+     "name": "Flat (no nesting)",
+     "n": 22,
+     "small": false,
+     "agents": {
+      "1a": {
+       "calls": {
+        "mean": 1.05,
+        "median": 1.0,
+        "sd": 0.21
+       },
+       "latency": {
+        "mean": 72.43,
+        "median": 72.45,
+        "sd": 27.92
+       },
+       "cost": {
+        "mean": 0.02009,
+        "median": 0.02009,
+        "sd": 0.00774
+       }
+      },
+      "1b": {
+       "calls": {
+        "mean": 0.5,
+        "median": 0.5,
+        "sd": 0.51
+       },
+       "latency": {
+        "mean": 4.28,
+        "median": 2.7,
+        "sd": 5.21
+       },
+       "cost": {
+        "mean": 0.00108,
+        "median": 0.00068,
+        "sd": 0.00131
+       }
+      },
+      "1c": {
+       "calls": {
+        "mean": 2.73,
+        "median": 3.0,
+        "sd": 1.61
+       },
+       "latency": {
+        "mean": 67.54,
+        "median": 72.3,
+        "sd": 49.74
+       },
+       "cost": {
+        "mean": 0.02119,
+        "median": 0.02268,
+        "sd": 0.0156
+       }
+      },
+      "2b": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 22.37,
+        "median": 21.65,
+        "sd": 8.06
+       },
+       "cost": {
+        "mean": 0.00928,
+        "median": 0.00898,
+        "sd": 0.00334
+       }
+      },
+      "2c": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 22.54,
+        "median": 22.15,
+        "sd": 8.02
+       },
+       "cost": {
+        "mean": 0.01053,
+        "median": 0.01035,
+        "sd": 0.00375
+       }
+      },
+      "2d": {
+       "calls": {
+        "mean": 1.05,
+        "median": 1.0,
+        "sd": 0.38
+       },
+       "latency": {
+        "mean": 16.51,
+        "median": 15.8,
+        "sd": 7.58
+       },
+       "cost": {
+        "mean": 0.00613,
+        "median": 0.00586,
+        "sd": 0.00281
+       }
+      },
+      "2e": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 18.06,
+        "median": 16.9,
+        "sd": 5.42
+       },
+       "cost": {
+        "mean": 0.00659,
+        "median": 0.00617,
+        "sd": 0.00198
+       }
+      },
+      "3a": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 79.99,
+        "median": 71.2,
+        "sd": 42.25
+       },
+       "cost": {
+        "mean": 0.02734,
+        "median": 0.02433,
+        "sd": 0.01444
+       }
+      },
+      "3b": {
+       "calls": {
+        "mean": 1.45,
+        "median": 1.0,
+        "sd": 1.06
+       },
+       "latency": {
+        "mean": 46.4,
+        "median": 31.9,
+        "sd": 33.71
+       },
+       "cost": {
+        "mean": 0.02742,
+        "median": 0.01885,
+        "sd": 0.01993
+       }
+      }
+     },
+     "stages": {
+      "s1": {
+       "calls": {
+        "mean": 4.27,
+        "median": 4.0,
+        "sd": 1.39
+       },
+       "latency": {
+        "mean": 144.25,
+        "median": 128.85,
+        "sd": 63.73
+       },
+       "cost": {
+        "mean": 0.04235,
+        "median": 0.03811,
+        "sd": 0.01935
+       }
+      },
+      "s2": {
+       "calls": {
+        "mean": 4.05,
+        "median": 4.0,
+        "sd": 0.38
+       },
+       "latency": {
+        "mean": 79.49,
+        "median": 78.4,
+        "sd": 21.34
+       },
+       "cost": {
+        "mean": 0.03253,
+        "median": 0.03186,
+        "sd": 0.00886
+       }
+      },
+      "s3": {
+       "calls": {
+        "mean": 2.45,
+        "median": 2.0,
+        "sd": 1.06
+       },
+       "latency": {
+        "mean": 126.39,
+        "median": 117.35,
+        "sd": 47.73
+       },
+       "cost": {
+        "mean": 0.05476,
+        "median": 0.04806,
+        "sd": 0.02181
+       }
+      }
+     },
+     "total": {
+      "calls": {
+       "mean": 10.77,
+       "median": 11.0,
+       "sd": 1.57
+      },
+      "latency": {
+       "mean": 350.09,
+       "median": 334.7,
+       "sd": 103.86
+      },
+      "cost": {
+       "mean": 0.12964,
+       "median": 0.1225,
+       "sd": 0.0363
+      },
+      "elements": 54.0
+     },
+     "samples": [
+      "CVPR_2025_arch01061",
+      "CVPR_2025_arch01225",
+      "CVPR_2025_arch01541",
+      "CVPR_2025_arch01707",
+      "CVPR_2025_arch02021",
+      "CVPR_2025_arch02465",
+      "CVPR_2025_arch03005",
+      "FigureBench_pipe_000000057",
+      "Paper2Fig_arch_easy_000000196",
+      "Paper2Fig_pipe_diff_000000104",
+      "Paper2Fig_pipe_diff_000000473",
+      "Paper2Fig_pipe_easy_000000332",
+      "Paper2Fig_pipe_easy_000000360",
+      "Paper2Fig_pipe_easy_000000500",
+      "Paper2Fig_pipe_easy_000000503",
+      "Paper2Fig_pipe_easy_000000556",
+      "SciMMIR_pipe_easy_000000309",
+      "arch_arxiv_cv_2023_000000433",
+      "arch_arxiv_db_ir_2025_000000580",
+      "arch_arxiv_db_ir_2025_000000589",
+      "arch_arxiv_db_ir_2025_000000611",
+      "arch_arxiv_db_ir_2026_000000714"
+     ]
+    },
+    {
+     "name": "Moderate (2-3)",
+     "n": 67,
+     "small": false,
+     "agents": {
+      "1a": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 77.44,
+        "median": 75.9,
+        "sd": 32.73
+       },
+       "cost": {
+        "mean": 0.02148,
+        "median": 0.02105,
+        "sd": 0.00908
+       }
+      },
+      "1b": {
+       "calls": {
+        "mean": 0.52,
+        "median": 1.0,
+        "sd": 0.5
+       },
+       "latency": {
+        "mean": 4.28,
+        "median": 4.0,
+        "sd": 4.47
+       },
+       "cost": {
+        "mean": 0.00108,
+        "median": 0.00101,
+        "sd": 0.00113
+       }
+      },
+      "1c": {
+       "calls": {
+        "mean": 2.51,
+        "median": 2.0,
+        "sd": 1.39
+       },
+       "latency": {
+        "mean": 69.94,
+        "median": 76.3,
+        "sd": 50.17
+       },
+       "cost": {
+        "mean": 0.02194,
+        "median": 0.02394,
+        "sd": 0.01574
+       }
+      },
+      "2b": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 30.57,
+        "median": 27.7,
+        "sd": 13.45
+       },
+       "cost": {
+        "mean": 0.01268,
+        "median": 0.01149,
+        "sd": 0.00558
+       }
+      },
+      "2c": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 27.52,
+        "median": 26.9,
+        "sd": 9.42
+       },
+       "cost": {
+        "mean": 0.01286,
+        "median": 0.01257,
+        "sd": 0.0044
+       }
+      },
+      "2d": {
+       "calls": {
+        "mean": 1.07,
+        "median": 1.0,
+        "sd": 0.26
+       },
+       "latency": {
+        "mean": 19.64,
+        "median": 18.4,
+        "sd": 5.61
+       },
+       "cost": {
+        "mean": 0.00729,
+        "median": 0.00683,
+        "sd": 0.00208
+       }
+      },
+      "2e": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 23.36,
+        "median": 20.5,
+        "sd": 8.9
+       },
+       "cost": {
+        "mean": 0.00853,
+        "median": 0.00748,
+        "sd": 0.00325
+       }
+      },
+      "3a": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 96.03,
+        "median": 92.3,
+        "sd": 36.57
+       },
+       "cost": {
+        "mean": 0.03282,
+        "median": 0.03155,
+        "sd": 0.0125
+       }
+      },
+      "3b": {
+       "calls": {
+        "mean": 1.99,
+        "median": 1.0,
+        "sd": 1.32
+       },
+       "latency": {
+        "mean": 63.32,
+        "median": 31.9,
+        "sd": 42.11
+       },
+       "cost": {
+        "mean": 0.03743,
+        "median": 0.01885,
+        "sd": 0.02489
+       }
+      }
+     },
+     "stages": {
+      "s1": {
+       "calls": {
+        "mean": 4.03,
+        "median": 3.0,
+        "sd": 1.29
+       },
+       "latency": {
+        "mean": 151.66,
+        "median": 152.9,
+        "sd": 62.13
+       },
+       "cost": {
+        "mean": 0.0445,
+        "median": 0.04253,
+        "sd": 0.01881
+       }
+      },
+      "s2": {
+       "calls": {
+        "mean": 4.07,
+        "median": 4.0,
+        "sd": 0.26
+       },
+       "latency": {
+        "mean": 101.09,
+        "median": 97.7,
+        "sd": 27.33
+       },
+       "cost": {
+        "mean": 0.04135,
+        "median": 0.04017,
+        "sd": 0.01127
+       }
+      },
+      "s3": {
+       "calls": {
+        "mean": 2.99,
+        "median": 2.0,
+        "sd": 1.32
+       },
+       "latency": {
+        "mean": 159.36,
+        "median": 145.6,
+        "sd": 57.61
+       },
+       "cost": {
+        "mean": 0.07025,
+        "median": 0.05932,
+        "sd": 0.0286
+       }
+      }
+     },
+     "total": {
+      "calls": {
+       "mean": 11.09,
+       "median": 11.0,
+       "sd": 1.84
+      },
+      "latency": {
+       "mean": 412.09,
+       "median": 395.8,
+       "sd": 112.54
+      },
+      "cost": {
+       "mean": 0.15609,
+       "median": 0.1466,
+       "sd": 0.04397
+      },
+      "elements": 64.0
+     },
+     "samples": [
+      "CVPR_2025_arch01051",
+      "CVPR_2025_arch01062",
+      "CVPR_2025_arch01215",
+      "CVPR_2025_arch01224",
+      "CVPR_2025_arch01281",
+      "CVPR_2025_arch01381",
+      "CVPR_2025_arch01398",
+      "CVPR_2025_arch01488",
+      "CVPR_2025_arch01656",
+      "CVPR_2025_arch01657",
+      "CVPR_2025_arch01709",
+      "CVPR_2025_arch01761",
+      "CVPR_2025_arch02022",
+      "CVPR_2025_arch02361",
+      "CVPR_2025_arch02400",
+      "CVPR_2025_arch03065",
+      "FigureBench_arch_diff_000000004",
+      "FigureBench_arch_easy_000000093",
+      "FigureBench_arch_easy_000000097",
+      "ICCV_2025_arch00492",
+      "ICCV_2025_pipe00262",
+      "Paper2Fig_arch_diff_000000034",
+      "Paper2Fig_arch_diff_000000037",
+      "Paper2Fig_arch_diff_000000049",
+      "Paper2Fig_arch_diff_000000076",
+      "Paper2Fig_arch_easy_000000148",
+      "Paper2Fig_arch_easy_000000297",
+      "Paper2Fig_pipe_diff_000000130",
+      "Paper2Fig_pipe_diff_000000143",
+      "Paper2Fig_pipe_diff_000000218",
+      "Paper2Fig_pipe_diff_000000455",
+      "Paper2Fig_pipe_diff_000000456",
+      "Paper2Fig_pipe_diff_000000488",
+      "Paper2Fig_pipe_diff_000000490",
+      "Paper2Fig_pipe_diff_000000492",
+      "Paper2Fig_pipe_diff_000000517",
+      "Paper2Fig_pipe_diff_000000518",
+      "Paper2Fig_pipe_easy_000000119",
+      "Paper2Fig_pipe_easy_000000249",
+      "Paper2Fig_pipe_easy_000000250",
+      "Paper2Fig_pipe_easy_000000345",
+      "Paper2Fig_pipe_easy_000000361",
+      "Paper2Fig_pipe_easy_000000446",
+      "Paper2Fig_pipe_easy_000000516",
+      "Paper2Fig_pipe_easy_000000517",
+      "Paper2Fig_pipe_easy_000000523",
+      "Paper2Fig_pipe_easy_000000529",
+      "Paper2Fig_pipe_easy_000000552",
+      "Paper2Fig_pipe_easy_000000555",
+      "Paper2Fig_pipe_easy_000000562",
+      "Paper2Fig_pipe_easy_000000579",
+      "SciMMIR_arch_diff_000000011",
+      "SciMMIR_arch_diff_000000015",
+      "SciMMIR_arch_diff_000000140",
+      "SciMMIR_pipe_easy_000000297",
+      "SciMMIR_pipe_easy_000000307",
+      "arch_arxiv_ai_2025_000000126",
+      "arch_arxiv_ai_2025_000000129",
+      "arch_arxiv_cv_2023_000000303",
+      "arch_arxiv_cv_2023_000000316",
+      "arch_arxiv_db_ir_2024_000000546",
+      "arch_arxiv_db_ir_2025_000000581",
+      "arch_arxiv_db_ir_2025_000000587",
+      "arch_arxiv_db_ir_2025_000000618",
+      "arch_arxiv_db_ir_2026_000000715",
+      "arch_arxiv_db_ir_2026_000000718",
+      "arch_arxiv_network_2026_000001537"
+     ]
+    },
+    {
+     "name": "Deep (4+)",
+     "n": 2,
+     "small": true,
+     "agents": {
+      "1a": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 123.9,
+        "median": 123.9,
+        "sd": 26.3
+       },
+       "cost": {
+        "mean": 0.03436,
+        "median": 0.03436,
+        "sd": 0.0073
+       }
+      },
+      "1b": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 8.45,
+        "median": 8.45,
+        "sd": 0.78
+       },
+       "cost": {
+        "mean": 0.00213,
+        "median": 0.00213,
+        "sd": 0.0002
+       }
+      },
+      "1c": {
+       "calls": {
+        "mean": 5.0,
+        "median": 5.0,
+        "sd": 1.41
+       },
+       "latency": {
+        "mean": 198.8,
+        "median": 198.8,
+        "sd": 47.52
+       },
+       "cost": {
+        "mean": 0.06237,
+        "median": 0.06237,
+        "sd": 0.01491
+       }
+      },
+      "2b": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 58.35,
+        "median": 58.35,
+        "sd": 12.8
+       },
+       "cost": {
+        "mean": 0.0242,
+        "median": 0.0242,
+        "sd": 0.00531
+       }
+      },
+      "2c": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 51.0,
+        "median": 51.0,
+        "sd": 13.01
+       },
+       "cost": {
+        "mean": 0.02383,
+        "median": 0.02383,
+        "sd": 0.00608
+       }
+      },
+      "2d": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 37.25,
+        "median": 37.25,
+        "sd": 18.88
+       },
+       "cost": {
+        "mean": 0.01382,
+        "median": 0.01382,
+        "sd": 0.007
+       }
+      },
+      "2e": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 45.5,
+        "median": 45.5,
+        "sd": 12.02
+       },
+       "cost": {
+        "mean": 0.01661,
+        "median": 0.01661,
+        "sd": 0.00439
+       }
+      },
+      "3a": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 269.05,
+        "median": 269.05,
+        "sd": 215.31
+       },
+       "cost": {
+        "mean": 0.09195,
+        "median": 0.09195,
+        "sd": 0.07359
+       }
+      },
+      "3b": {
+       "calls": {
+        "mean": 2.0,
+        "median": 2.0,
+        "sd": 1.41
+       },
+       "latency": {
+        "mean": 63.8,
+        "median": 63.8,
+        "sd": 45.11
+       },
+       "cost": {
+        "mean": 0.03771,
+        "median": 0.03771,
+        "sd": 0.02666
+       }
+      }
+     },
+     "stages": {
+      "s1": {
+       "calls": {
+        "mean": 7.0,
+        "median": 7.0,
+        "sd": 1.41
+       },
+       "latency": {
+        "mean": 331.15,
+        "median": 331.15,
+        "sd": 73.04
+       },
+       "cost": {
+        "mean": 0.09886,
+        "median": 0.09886,
+        "sd": 0.02201
+       }
+      },
+      "s2": {
+       "calls": {
+        "mean": 4.0,
+        "median": 4.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 192.1,
+        "median": 192.1,
+        "sd": 56.71
+       },
+       "cost": {
+        "mean": 0.07845,
+        "median": 0.07845,
+        "sd": 0.02278
+       }
+      },
+      "s3": {
+       "calls": {
+        "mean": 3.0,
+        "median": 3.0,
+        "sd": 1.41
+       },
+       "latency": {
+        "mean": 332.85,
+        "median": 332.85,
+        "sd": 170.2
+       },
+       "cost": {
+        "mean": 0.12966,
+        "median": 0.12966,
+        "sd": 0.04692
+       }
+      }
+     },
+     "total": {
+      "calls": {
+       "mean": 14.0,
+       "median": 14.0,
+       "sd": 0.0
+      },
+      "latency": {
+       "mean": 856.05,
+       "median": 856.05,
+       "sd": 299.88
+      },
+      "cost": {
+       "mean": 0.30697,
+       "median": 0.30697,
+       "sd": 0.09171
+      },
+      "elements": 198.0
+     },
+     "samples": [
+      "CVPR_2025_arch00968",
+      "CVPR_2025_arch02298"
+     ]
+    }
+   ],
+   "unmatched": 0,
+   "benchClasses": [
+    "Flat (no nesting)",
+    "Moderate (2-3)",
+    "Deep (4+)"
+   ]
+  },
+  {
+   "key": "raster",
+   "label": "Raster content",
+   "classes": [
+    {
+     "name": "None",
+     "n": 41,
+     "small": false,
+     "agents": {
+      "1a": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 70.66,
+        "median": 70.6,
+        "sd": 26.98
+       },
+       "cost": {
+        "mean": 0.0196,
+        "median": 0.01958,
+        "sd": 0.00748
+       }
+      },
+      "1b": {
+       "calls": {
+        "mean": 0.17,
+        "median": 0.0,
+        "sd": 0.38
+       },
+       "latency": {
+        "mean": 1.28,
+        "median": 0.0,
+        "sd": 2.89
+       },
+       "cost": {
+        "mean": 0.00032,
+        "median": 0.0,
+        "sd": 0.00073
+       }
+      },
+      "1c": {
+       "calls": {
+        "mean": 2.95,
+        "median": 3.0,
+        "sd": 1.22
+       },
+       "latency": {
+        "mean": 82.53,
+        "median": 89.0,
+        "sd": 35.15
+       },
+       "cost": {
+        "mean": 0.02589,
+        "median": 0.02792,
+        "sd": 0.01103
+       }
+      },
+      "2b": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 25.45,
+        "median": 23.5,
+        "sd": 10.19
+       },
+       "cost": {
+        "mean": 0.01056,
+        "median": 0.00975,
+        "sd": 0.00423
+       }
+      },
+      "2c": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 25.65,
+        "median": 24.6,
+        "sd": 7.85
+       },
+       "cost": {
+        "mean": 0.01198,
+        "median": 0.01149,
+        "sd": 0.00367
+       }
+      },
+      "2d": {
+       "calls": {
+        "mean": 1.05,
+        "median": 1.0,
+        "sd": 0.31
+       },
+       "latency": {
+        "mean": 17.92,
+        "median": 17.5,
+        "sd": 6.66
+       },
+       "cost": {
+        "mean": 0.00665,
+        "median": 0.00649,
+        "sd": 0.00247
+       }
+      },
+      "2e": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 20.33,
+        "median": 18.3,
+        "sd": 6.22
+       },
+       "cost": {
+        "mean": 0.00742,
+        "median": 0.00668,
+        "sd": 0.00227
+       }
+      },
+      "3a": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 82.17,
+        "median": 79.1,
+        "sd": 34.23
+       },
+       "cost": {
+        "mean": 0.02808,
+        "median": 0.02703,
+        "sd": 0.0117
+       }
+      },
+      "3b": {
+       "calls": {
+        "mean": 1.98,
+        "median": 1.0,
+        "sd": 1.35
+       },
+       "latency": {
+        "mean": 63.02,
+        "median": 31.9,
+        "sd": 43.09
+       },
+       "cost": {
+        "mean": 0.03725,
+        "median": 0.01885,
+        "sd": 0.02547
+       }
+      }
+     },
+     "stages": {
+      "s1": {
+       "calls": {
+        "mean": 4.12,
+        "median": 4.0,
+        "sd": 1.14
+       },
+       "latency": {
+        "mean": 154.46,
+        "median": 156.3,
+        "sd": 51.4
+       },
+       "cost": {
+        "mean": 0.04581,
+        "median": 0.04618,
+        "sd": 0.01538
+       }
+      },
+      "s2": {
+       "calls": {
+        "mean": 4.05,
+        "median": 4.0,
+        "sd": 0.31
+       },
+       "latency": {
+        "mean": 89.35,
+        "median": 87.2,
+        "sd": 21.44
+       },
+       "cost": {
+        "mean": 0.03661,
+        "median": 0.03575,
+        "sd": 0.00887
+       }
+      },
+      "s3": {
+       "calls": {
+        "mean": 2.98,
+        "median": 2.0,
+        "sd": 1.35
+       },
+       "latency": {
+        "mean": 145.19,
+        "median": 126.7,
+        "sd": 56.19
+       },
+       "cost": {
+        "mean": 0.06533,
+        "median": 0.05125,
+        "sd": 0.02849
+       }
+      }
+     },
+     "total": {
+      "calls": {
+       "mean": 11.15,
+       "median": 11.0,
+       "sd": 1.8
+      },
+      "latency": {
+       "mean": 388.99,
+       "median": 357.4,
+       "sd": 102.67
+      },
+      "cost": {
+       "mean": 0.14775,
+       "median": 0.13315,
+       "sd": 0.04173
+      },
+      "elements": 53.0
+     },
+     "samples": [
+      "CVPR_2025_arch01656",
+      "CVPR_2025_arch01657",
+      "CVPR_2025_arch01707",
+      "CVPR_2025_arch01709",
+      "CVPR_2025_arch03005",
+      "FigureBench_arch_easy_000000093",
+      "FigureBench_arch_easy_000000097",
+      "FigureBench_pipe_000000057",
+      "Paper2Fig_arch_easy_000000148",
+      "Paper2Fig_arch_easy_000000196",
+      "Paper2Fig_arch_easy_000000297",
+      "Paper2Fig_pipe_diff_000000455",
+      "Paper2Fig_pipe_diff_000000488",
+      "Paper2Fig_pipe_diff_000000490",
+      "Paper2Fig_pipe_diff_000000492",
+      "Paper2Fig_pipe_diff_000000517",
+      "Paper2Fig_pipe_diff_000000518",
+      "Paper2Fig_pipe_easy_000000249",
+      "Paper2Fig_pipe_easy_000000250",
+      "Paper2Fig_pipe_easy_000000332",
+      "Paper2Fig_pipe_easy_000000345",
+      "Paper2Fig_pipe_easy_000000446",
+      "Paper2Fig_pipe_easy_000000500",
+      "Paper2Fig_pipe_easy_000000503",
+      "Paper2Fig_pipe_easy_000000517",
+      "Paper2Fig_pipe_easy_000000529",
+      "Paper2Fig_pipe_easy_000000552",
+      "Paper2Fig_pipe_easy_000000555",
+      "Paper2Fig_pipe_easy_000000562",
+      "SciMMIR_arch_diff_000000015",
+      "arch_arxiv_ai_2025_000000126",
+      "arch_arxiv_db_ir_2024_000000546",
+      "arch_arxiv_db_ir_2025_000000580",
+      "arch_arxiv_db_ir_2025_000000581",
+      "arch_arxiv_db_ir_2025_000000587",
+      "arch_arxiv_db_ir_2025_000000589",
+      "arch_arxiv_db_ir_2025_000000611",
+      "arch_arxiv_db_ir_2026_000000714",
+      "arch_arxiv_db_ir_2026_000000715",
+      "arch_arxiv_db_ir_2026_000000718",
+      "arch_arxiv_network_2026_000001537"
+     ]
+    },
+    {
+     "name": "Few",
+     "n": 14,
+     "small": false,
+     "agents": {
+      "1a": {
+       "calls": {
+        "mean": 1.07,
+        "median": 1.0,
+        "sd": 0.27
+       },
+       "latency": {
+        "mean": 73.74,
+        "median": 75.2,
+        "sd": 29.29
+       },
+       "cost": {
+        "mean": 0.02045,
+        "median": 0.02086,
+        "sd": 0.00812
+       }
+      },
+      "1b": {
+       "calls": {
+        "mean": 0.71,
+        "median": 1.0,
+        "sd": 0.47
+       },
+       "latency": {
+        "mean": 4.71,
+        "median": 5.65,
+        "sd": 3.44
+       },
+       "cost": {
+        "mean": 0.00119,
+        "median": 0.00143,
+        "sd": 0.00087
+       }
+      },
+      "1c": {
+       "calls": {
+        "mean": 1.86,
+        "median": 1.0,
+        "sd": 1.46
+       },
+       "latency": {
+        "mean": 54.0,
+        "median": 10.0,
+        "sd": 59.42
+       },
+       "cost": {
+        "mean": 0.01694,
+        "median": 0.00314,
+        "sd": 0.01864
+       }
+      },
+      "2b": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 29.58,
+        "median": 29.1,
+        "sd": 10.22
+       },
+       "cost": {
+        "mean": 0.01227,
+        "median": 0.01207,
+        "sd": 0.00424
+       }
+      },
+      "2c": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 27.06,
+        "median": 24.4,
+        "sd": 9.95
+       },
+       "cost": {
+        "mean": 0.01264,
+        "median": 0.0114,
+        "sd": 0.00465
+       }
+      },
+      "2d": {
+       "calls": {
+        "mean": 1.14,
+        "median": 1.0,
+        "sd": 0.36
+       },
+       "latency": {
+        "mean": 19.31,
+        "median": 18.95,
+        "sd": 5.8
+       },
+       "cost": {
+        "mean": 0.00716,
+        "median": 0.00703,
+        "sd": 0.00215
+       }
+      },
+      "2e": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 21.15,
+        "median": 18.8,
+        "sd": 7.9
+       },
+       "cost": {
+        "mean": 0.00772,
+        "median": 0.00686,
+        "sd": 0.00288
+       }
+      },
+      "3a": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 104.82,
+        "median": 101.75,
+        "sd": 49.75
+       },
+       "cost": {
+        "mean": 0.03582,
+        "median": 0.03478,
+        "sd": 0.017
+       }
+      },
+      "3b": {
+       "calls": {
+        "mean": 1.86,
+        "median": 1.0,
+        "sd": 1.29
+       },
+       "latency": {
+        "mean": 59.24,
+        "median": 31.9,
+        "sd": 41.23
+       },
+       "cost": {
+        "mean": 0.03502,
+        "median": 0.01885,
+        "sd": 0.02437
+       }
+      }
+     },
+     "stages": {
+      "s1": {
+       "calls": {
+        "mean": 3.64,
+        "median": 3.0,
+        "sd": 1.34
+       },
+       "latency": {
+        "mean": 132.46,
+        "median": 97.5,
+        "sd": 72.51
+       },
+       "cost": {
+        "mean": 0.03858,
+        "median": 0.02814,
+        "sd": 0.02214
+       }
+      },
+      "s2": {
+       "calls": {
+        "mean": 4.14,
+        "median": 4.0,
+        "sd": 0.36
+       },
+       "latency": {
+        "mean": 97.1,
+        "median": 96.5,
+        "sd": 23.91
+       },
+       "cost": {
+        "mean": 0.03979,
+        "median": 0.03942,
+        "sd": 0.00997
+       }
+      },
+      "s3": {
+       "calls": {
+        "mean": 2.86,
+        "median": 2.0,
+        "sd": 1.29
+       },
+       "latency": {
+        "mean": 164.06,
+        "median": 138.05,
+        "sd": 57.44
+       },
+       "cost": {
+        "mean": 0.07084,
+        "median": 0.06382,
+        "sd": 0.02657
+       }
+      }
+     },
+     "total": {
+      "calls": {
+       "mean": 10.64,
+       "median": 10.0,
+       "sd": 1.86
+      },
+      "latency": {
+       "mean": 393.6,
+       "median": 402.5,
+       "sd": 122.28
+      },
+      "cost": {
+       "mean": 0.14921,
+       "median": 0.14628,
+       "sd": 0.04368
+      },
+      "elements": 61.4
+     },
+     "samples": [
+      "CVPR_2025_arch01224",
+      "CVPR_2025_arch01225",
+      "CVPR_2025_arch02022",
+      "CVPR_2025_arch02400",
+      "Paper2Fig_arch_diff_000000076",
+      "Paper2Fig_pipe_diff_000000473",
+      "Paper2Fig_pipe_easy_000000360",
+      "Paper2Fig_pipe_easy_000000361",
+      "Paper2Fig_pipe_easy_000000516",
+      "Paper2Fig_pipe_easy_000000556",
+      "Paper2Fig_pipe_easy_000000579",
+      "SciMMIR_arch_diff_000000011",
+      "SciMMIR_arch_diff_000000140",
+      "SciMMIR_pipe_easy_000000309"
+     ]
+    },
+    {
+     "name": "Moderate",
+     "n": 14,
+     "small": false,
+     "agents": {
+      "1a": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 87.78,
+        "median": 70.9,
+        "sd": 44.64
+       },
+       "cost": {
+        "mean": 0.02434,
+        "median": 0.01966,
+        "sd": 0.01238
+       }
+      },
+      "1b": {
+       "calls": {
+        "mean": 0.79,
+        "median": 1.0,
+        "sd": 0.43
+       },
+       "latency": {
+        "mean": 6.14,
+        "median": 7.0,
+        "sd": 4.05
+       },
+       "cost": {
+        "mean": 0.00155,
+        "median": 0.00177,
+        "sd": 0.00102
+       }
+      },
+      "1c": {
+       "calls": {
+        "mean": 2.57,
+        "median": 2.0,
+        "sd": 1.7
+       },
+       "latency": {
+        "mean": 70.66,
+        "median": 46.8,
+        "sd": 72.13
+       },
+       "cost": {
+        "mean": 0.02217,
+        "median": 0.01468,
+        "sd": 0.02263
+       }
+      },
+      "2b": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 31.81,
+        "median": 25.45,
+        "sd": 15.67
+       },
+       "cost": {
+        "mean": 0.01319,
+        "median": 0.01055,
+        "sd": 0.0065
+       }
+      },
+      "2c": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 26.22,
+        "median": 23.8,
+        "sd": 12.2
+       },
+       "cost": {
+        "mean": 0.01225,
+        "median": 0.01112,
+        "sd": 0.0057
+       }
+      },
+      "2d": {
+       "calls": {
+        "mean": 1.07,
+        "median": 1.0,
+        "sd": 0.27
+       },
+       "latency": {
+        "mean": 21.34,
+        "median": 18.7,
+        "sd": 9.88
+       },
+       "cost": {
+        "mean": 0.00792,
+        "median": 0.00694,
+        "sd": 0.00366
+       }
+      },
+      "2e": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 29.41,
+        "median": 23.55,
+        "sd": 13.39
+       },
+       "cost": {
+        "mean": 0.01073,
+        "median": 0.0086,
+        "sd": 0.00489
+       }
+      },
+      "3a": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 124.08,
+        "median": 95.05,
+        "sd": 93.11
+       },
+       "cost": {
+        "mean": 0.04241,
+        "median": 0.03249,
+        "sd": 0.03182
+       }
+      },
+      "3b": {
+       "calls": {
+        "mean": 2.0,
+        "median": 1.0,
+        "sd": 1.52
+       },
+       "latency": {
+        "mean": 63.8,
+        "median": 31.9,
+        "sd": 48.46
+       },
+       "cost": {
+        "mean": 0.03771,
+        "median": 0.01885,
+        "sd": 0.02864
+       }
+      }
+     },
+     "stages": {
+      "s1": {
+       "calls": {
+        "mean": 4.36,
+        "median": 3.5,
+        "sd": 1.65
+       },
+       "latency": {
+        "mean": 164.57,
+        "median": 122.65,
+        "sd": 103.48
+       },
+       "cost": {
+        "mean": 0.04806,
+        "median": 0.03654,
+        "sd": 0.03117
+       }
+      },
+      "s2": {
+       "calls": {
+        "mean": 4.07,
+        "median": 4.0,
+        "sd": 0.27
+       },
+       "latency": {
+        "mean": 108.78,
+        "median": 89.45,
+        "sd": 45.01
+       },
+       "cost": {
+        "mean": 0.04409,
+        "median": 0.03633,
+        "sd": 0.01836
+       }
+      },
+      "s3": {
+       "calls": {
+        "mean": 3.0,
+        "median": 2.0,
+        "sd": 1.52
+       },
+       "latency": {
+        "mean": 187.88,
+        "median": 142.55,
+        "sd": 101.97
+       },
+       "cost": {
+        "mean": 0.08012,
+        "median": 0.06462,
+        "sd": 0.04132
+       }
+      }
+     },
+     "total": {
+      "calls": {
+       "mean": 11.43,
+       "median": 11.5,
+       "sd": 1.99
+      },
+      "latency": {
+       "mean": 461.16,
+       "median": 373.4,
+       "sd": 229.81
+      },
+      "cost": {
+       "mean": 0.17227,
+       "median": 0.14055,
+       "sd": 0.08075
+      },
+      "elements": 92.3
+     },
+     "samples": [
+      "CVPR_2025_arch00968",
+      "CVPR_2025_arch01062",
+      "CVPR_2025_arch01398",
+      "CVPR_2025_arch01541",
+      "FigureBench_arch_diff_000000004",
+      "Paper2Fig_arch_diff_000000037",
+      "Paper2Fig_arch_diff_000000049",
+      "Paper2Fig_pipe_easy_000000523",
+      "SciMMIR_pipe_easy_000000297",
+      "SciMMIR_pipe_easy_000000307",
+      "arch_arxiv_ai_2025_000000129",
+      "arch_arxiv_cv_2023_000000303",
+      "arch_arxiv_cv_2023_000000316",
+      "arch_arxiv_db_ir_2025_000000618"
+     ]
+    },
+    {
+     "name": "Many",
+     "n": 22,
+     "small": false,
+     "agents": {
+      "1a": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 85.05,
+        "median": 79.85,
+        "sd": 32.09
+       },
+       "cost": {
+        "mean": 0.02359,
+        "median": 0.02214,
+        "sd": 0.0089
+       }
+      },
+      "1b": {
+       "calls": {
+        "mean": 0.91,
+        "median": 1.0,
+        "sd": 0.29
+       },
+       "latency": {
+        "mean": 8.8,
+        "median": 8.9,
+        "sd": 4.11
+       },
+       "cost": {
+        "mean": 0.00222,
+        "median": 0.00225,
+        "sd": 0.00104
+       }
+      },
+      "1c": {
+       "calls": {
+        "mean": 2.5,
+        "median": 1.5,
+        "sd": 1.65
+       },
+       "latency": {
+        "mean": 65.49,
+        "median": 45.55,
+        "sd": 61.8
+       },
+       "cost": {
+        "mean": 0.02054,
+        "median": 0.01429,
+        "sd": 0.01939
+       }
+      },
+      "2b": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 34.29,
+        "median": 28.8,
+        "sd": 17.4
+       },
+       "cost": {
+        "mean": 0.01422,
+        "median": 0.01194,
+        "sd": 0.00722
+       }
+      },
+      "2c": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 29.26,
+        "median": 28.9,
+        "sd": 12.16
+       },
+       "cost": {
+        "mean": 0.01367,
+        "median": 0.0135,
+        "sd": 0.00568
+       }
+      },
+      "2d": {
+       "calls": {
+        "mean": 1.05,
+        "median": 1.0,
+        "sd": 0.21
+       },
+       "latency": {
+        "mean": 20.45,
+        "median": 19.0,
+        "sd": 6.24
+       },
+       "cost": {
+        "mean": 0.00758,
+        "median": 0.00705,
+        "sd": 0.00232
+       }
+      },
+      "2e": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 23.27,
+        "median": 20.65,
+        "sd": 9.6
+       },
+       "cost": {
+        "mean": 0.0085,
+        "median": 0.00754,
+        "sd": 0.0035
+       }
+      },
+      "3a": {
+       "calls": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0
+       },
+       "latency": {
+        "mean": 98.12,
+        "median": 99.95,
+        "sd": 35.07
+       },
+       "cost": {
+        "mean": 0.03353,
+        "median": 0.03416,
+        "sd": 0.01198
+       }
+      },
+      "3b": {
+       "calls": {
+        "mean": 1.55,
+        "median": 1.0,
+        "sd": 0.91
+       },
+       "latency": {
+        "mean": 49.3,
+        "median": 31.9,
+        "sd": 29.08
+       },
+       "cost": {
+        "mean": 0.02914,
+        "median": 0.01885,
+        "sd": 0.01719
+       }
+      }
+     },
+     "stages": {
+      "s1": {
+       "calls": {
+        "mean": 4.41,
+        "median": 3.0,
+        "sd": 1.59
+       },
+       "latency": {
+        "mean": 159.34,
+        "median": 147.35,
+        "sd": 64.99
+       },
+       "cost": {
+        "mean": 0.04635,
+        "median": 0.04167,
+        "sd": 0.02005
+       }
+      },
+      "s2": {
+       "calls": {
+        "mean": 4.05,
+        "median": 4.0,
+        "sd": 0.21
+       },
+       "latency": {
+        "mean": 107.27,
+        "median": 104.35,
+        "sd": 37.29
+       },
+       "cost": {
+        "mean": 0.04397,
+        "median": 0.04269,
+        "sd": 0.0154
+       }
+      },
+      "s3": {
+       "calls": {
+        "mean": 2.55,
+        "median": 2.0,
+        "sd": 0.91
+       },
+       "latency": {
+        "mean": 147.42,
+        "median": 144.6,
+        "sd": 50.02
+       },
+       "cost": {
+        "mean": 0.06267,
+        "median": 0.05737,
+        "sd": 0.02292
+       }
+      }
+     },
+     "total": {
+      "calls": {
+       "mean": 11.0,
+       "median": 11.0,
+       "sd": 1.75
+      },
+      "latency": {
+       "mean": 414.03,
+       "median": 397.0,
+       "sd": 113.01
+      },
+      "cost": {
+       "mean": 0.153,
+       "median": 0.14544,
+       "sd": 0.04254
+      },
+      "elements": 70.4
+     },
+     "samples": [
+      "CVPR_2025_arch01051",
+      "CVPR_2025_arch01061",
+      "CVPR_2025_arch01215",
+      "CVPR_2025_arch01281",
+      "CVPR_2025_arch01381",
+      "CVPR_2025_arch01488",
+      "CVPR_2025_arch01761",
+      "CVPR_2025_arch02021",
+      "CVPR_2025_arch02298",
+      "CVPR_2025_arch02361",
+      "CVPR_2025_arch02465",
+      "CVPR_2025_arch03065",
+      "ICCV_2025_arch00492",
+      "ICCV_2025_pipe00262",
+      "Paper2Fig_arch_diff_000000034",
+      "Paper2Fig_pipe_diff_000000104",
+      "Paper2Fig_pipe_diff_000000130",
+      "Paper2Fig_pipe_diff_000000143",
+      "Paper2Fig_pipe_diff_000000218",
+      "Paper2Fig_pipe_diff_000000456",
+      "Paper2Fig_pipe_easy_000000119",
+      "arch_arxiv_cv_2023_000000433"
+     ]
+    }
+   ],
+   "unmatched": 0,
+   "benchClasses": [
+    "None",
+    "Few",
+    "Moderate",
+    "Many"
+   ]
+  }
+ ],
+ "smallClass": 5,
+ "transmuterCriticByRasters": {
+  "with": 2.18,
+  "without": 3.12
+ },
+ "styles": [
+  {
+   "id": "alpha_masking",
+   "label": "Alpha masking",
+   "n": 24,
+   "elements": 58.7,
+   "calls": {
+    "1a": 1.0,
+    "1b": 0.62,
+    "1c": 2.25,
+    "2b": 1.0,
+    "2c": 1.0,
+    "2d": 1.08,
+    "2e": 1.0,
+    "3a": 1.0,
+    "3b": 1.67
+   },
+   "latency": {
+    "1a": 83.6,
+    "1b": 5.2,
+    "1c": 56.6,
+    "2b": 27.5,
+    "2c": 29.7,
+    "2d": 20.2,
+    "2e": 18.7,
+    "3a": 89.4,
+    "3b": 53.2
+   },
+   "latencyAdj": {
+    "1a": 86.8,
+    "1b": 5.2,
+    "1c": 58.5,
+    "2b": 28.9,
+    "2c": 30.3,
+    "2d": 20.6,
+    "2e": 19.3,
+    "3a": 94.5,
+    "3b": 54.1
+   },
+   "criticCalls": 5.0,
+   "totalCalls": 10.62,
+   "totalLatency": 384.1,
+   "totalLatencyAdj": 398.4
+  },
+  {
+   "id": "colour_pop",
+   "label": "Colour pop",
+   "n": 21,
+   "elements": 80.3,
+   "calls": {
+    "1a": 1.0,
+    "1b": 0.48,
+    "1c": 2.67,
+    "2b": 1.0,
+    "2c": 1.0,
+    "2d": 1.05,
+    "2e": 1.0,
+    "3a": 1.0,
+    "3b": 2.81
+   },
+   "latency": {
+    "1a": 81.1,
+    "1b": 4.6,
+    "1c": 80.2,
+    "2b": 31.3,
+    "2c": 28.5,
+    "2d": 20.2,
+    "2e": 23.1,
+    "3a": 98.0,
+    "3b": 89.6
+   },
+   "latencyAdj": {
+    "1a": 72.3,
+    "1b": 4.4,
+    "1c": 75.2,
+    "2b": 27.6,
+    "2c": 26.7,
+    "2d": 19.0,
+    "2e": 21.7,
+    "3a": 84.3,
+    "3b": 87.0
+   },
+   "criticCalls": 6.52,
+   "totalCalls": 12.0,
+   "totalLatency": 456.8,
+   "totalLatencyAdj": 418.3
+  },
+  {
+   "id": "hopping_bounding_box",
+   "label": "Hopping bounding box",
+   "n": 17,
+   "elements": 80.2,
+   "calls": {
+    "1a": 1.0,
+    "1b": 0.65,
+    "1c": 2.94,
+    "2b": 1.0,
+    "2c": 1.0,
+    "2d": 1.0,
+    "2e": 1.0,
+    "3a": 1.0,
+    "3b": 1.24
+   },
+   "latency": {
+    "1a": 90.0,
+    "1b": 5.2,
+    "1c": 79.4,
+    "2b": 35.2,
+    "2c": 23.6,
+    "2d": 18.7,
+    "2e": 30.4,
+    "3a": 124.2,
+    "3b": 39.4
+   },
+   "latencyAdj": {
+    "1a": 81.3,
+    "1b": 5.0,
+    "1c": 74.4,
+    "2b": 31.5,
+    "2c": 21.8,
+    "2d": 17.5,
+    "2e": 29.0,
+    "3a": 110.5,
+    "3b": 36.8
+   },
+   "criticCalls": 5.18,
+   "totalCalls": 10.82,
+   "totalLatency": 446.1,
+   "totalLatencyAdj": 407.7
+  },
+  {
+   "id": "progressive_reveal",
+   "label": "Progressive reveal",
+   "n": 19,
+   "elements": 47.4,
+   "calls": {
+    "1a": 1.05,
+    "1b": 0.42,
+    "1c": 2.53,
+    "2b": 1.0,
+    "2c": 1.0,
+    "2d": 1.16,
+    "2e": 1.0,
+    "3a": 1.0,
+    "3b": 1.74
+   },
+   "latency": {
+    "1a": 59.1,
+    "1b": 3.3,
+    "1c": 70.5,
+    "2b": 25.2,
+    "2c": 28.0,
+    "2d": 19.6,
+    "2e": 19.4,
+    "3a": 84.9,
+    "3b": 55.4
+   },
+   "latencyAdj": {
+    "1a": 68.7,
+    "1b": 3.4,
+    "1c": 76.0,
+    "2b": 29.2,
+    "2c": 29.9,
+    "2d": 20.9,
+    "2e": 21.0,
+    "3a": 99.8,
+    "3b": 58.3
+   },
+   "criticCalls": 5.42,
+   "totalCalls": 10.89,
+   "totalLatency": 365.3,
+   "totalLatencyAdj": 407.2
+  },
+  {
+   "id": "sliding_bounding_box",
+   "label": "Sliding bounding box",
+   "n": 10,
+   "elements": 51.4,
+   "calls": {
+    "1a": 1.0,
+    "1b": 0.4,
+    "1c": 3.0,
+    "2b": 1.0,
+    "2c": 1.0,
+    "2d": 1.0,
+    "2e": 1.0,
+    "3a": 1.0,
+    "3b": 1.6
+   },
+   "latency": {
+    "1a": 66.7,
+    "1b": 2.8,
+    "1c": 83.6,
+    "2b": 26.2,
+    "2c": 19.9,
+    "2d": 15.4,
+    "2e": 23.2,
+    "3a": 80.3,
+    "3b": 51.0
+   },
+   "latencyAdj": {
+    "1a": 74.0,
+    "1b": 2.9,
+    "1c": 87.8,
+    "2b": 29.4,
+    "2c": 21.4,
+    "2d": 16.4,
+    "2e": 24.4,
+    "3a": 91.7,
+    "3b": 53.2
+   },
+   "criticCalls": 5.6,
+   "totalCalls": 11.0,
+   "totalLatency": 369.1,
+   "totalLatencyAdj": 401.2
+  }
+ ],
+ "tertiles": [
+  {
+   "id": "low",
+   "n": 30,
+   "elements": [
+    9.0,
+    46.0
+   ],
+   "calls": 11.53,
+   "criticCalls": 6.03,
+   "latency": 335.6,
+   "stageLatency": [
+    130.0,
+    79.3,
+    126.3
+   ]
+  },
+  {
+   "id": "mid",
+   "n": 30,
+   "elements": [
+    46.0,
+    70.0
+   ],
+   "calls": 10.57,
+   "criticCalls": 5.03,
+   "latency": 379.9,
+   "stageLatency": [
+    141.2,
+    93.4,
+    145.3
+   ]
+  },
+  {
+   "id": "high",
+   "n": 31,
+   "elements": [
+    71.0,
+    239.0
+   ],
+   "calls": 11.13,
+   "criticCalls": 5.55,
+   "latency": 501.9,
+   "stageLatency": [
+    189.1,
+    120.2,
+    192.7
+   ]
+  }
+ ],
+ "samples": [
+  {
+   "id": "CVPR_2025_arch00968",
+   "style": "hopping_bounding_box",
+   "el": 239,
+   "rasters": 4,
+   "tertile": "high",
+   "c": [
+    1,
+    1,
+    6,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    142.5,
+    7.9,
+    232.4,
+    67.4,
+    60.2,
+    50.6,
+    54.0,
+    421.3,
+    31.9
+   ],
+   "calls": 14,
+   "latency": 1068.1
+  },
+  {
+   "id": "CVPR_2025_arch01051",
+   "style": "alpha_masking",
+   "el": 61,
+   "rasters": 11,
+   "tertile": "mid",
+   "c": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    3
+   ],
+   "l": [
+    114.6,
+    11.5,
+    9.3,
+    39.7,
+    44.4,
+    20.8,
+    21.7,
+    94.8,
+    95.7
+   ],
+   "calls": 11,
+   "latency": 452.5
+  },
+  {
+   "id": "CVPR_2025_arch01061",
+   "style": "colour_pop",
+   "el": 67,
+   "rasters": 16,
+   "tertile": "mid",
+   "c": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    92.4,
+    19.1,
+    8.2,
+    24.4,
+    35.5,
+    19.6,
+    34.0,
+    102.6,
+    31.9
+   ],
+   "calls": 9,
+   "latency": 367.8
+  },
+  {
+   "id": "CVPR_2025_arch01062",
+   "style": "colour_pop",
+   "el": 101,
+   "rasters": 4,
+   "tertile": "high",
+   "c": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    5
+   ],
+   "l": [
+    90.3,
+    9.1,
+    10.8,
+    45.0,
+    23.5,
+    15.2,
+    23.4,
+    92.4,
+    159.5
+   ],
+   "calls": 13,
+   "latency": 469.1
+  },
+  {
+   "id": "CVPR_2025_arch01215",
+   "style": "progressive_reveal",
+   "el": 64,
+   "rasters": 9,
+   "tertile": "mid",
+   "c": [
+    1,
+    1,
+    4,
+    1,
+    1,
+    2,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    66.8,
+    11.2,
+    130.1,
+    50.0,
+    46.0,
+    26.2,
+    19.5,
+    136.5,
+    31.9
+   ],
+   "calls": 13,
+   "latency": 518.2
+  },
+  {
+   "id": "CVPR_2025_arch01224",
+   "style": "sliding_bounding_box",
+   "el": 71,
+   "rasters": 1,
+   "tertile": "high",
+   "c": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    77.6,
+    7.1,
+    10.7,
+    39.8,
+    23.5,
+    19.4,
+    38.1,
+    104.6,
+    31.9
+   ],
+   "calls": 9,
+   "latency": 352.6
+  },
+  {
+   "id": "CVPR_2025_arch01225",
+   "style": "progressive_reveal",
+   "el": 35,
+   "rasters": 2,
+   "tertile": "low",
+   "c": [
+    2,
+    1,
+    0,
+    1,
+    1,
+    2,
+    1,
+    1,
+    3
+   ],
+   "l": [
+    74.5,
+    5.4,
+    0.0,
+    16.8,
+    30.2,
+    22.8,
+    13.4,
+    43.9,
+    95.7
+   ],
+   "calls": 12,
+   "latency": 302.7
+  },
+  {
+   "id": "CVPR_2025_arch01281",
+   "style": "alpha_masking",
+   "el": 48,
+   "rasters": 8,
+   "tertile": "mid",
+   "c": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    3
+   ],
+   "l": [
+    78.3,
+    8.8,
+    9.8,
+    29.1,
+    31.2,
+    17.7,
+    26.0,
+    59.7,
+    95.7
+   ],
+   "calls": 11,
+   "latency": 356.2
+  },
+  {
+   "id": "CVPR_2025_arch01381",
+   "style": "hopping_bounding_box",
+   "el": 68,
+   "rasters": 9,
+   "tertile": "mid",
+   "c": [
+    1,
+    1,
+    4,
+    1,
+    1,
+    1,
+    1,
+    1,
+    3
+   ],
+   "l": [
+    70.6,
+    12.4,
+    103.8,
+    49.2,
+    18.6,
+    16.6,
+    45.2,
+    115.9,
+    95.7
+   ],
+   "calls": 14,
+   "latency": 528.0
+  },
+  {
+   "id": "CVPR_2025_arch01398",
+   "style": "hopping_bounding_box",
+   "el": 134,
+   "rasters": 6,
+   "tertile": "high",
+   "c": [
+    1,
+    1,
+    4,
+    1,
+    1,
+    1,
+    1,
+    1,
+    3
+   ],
+   "l": [
+    182.2,
+    6.3,
+    160.0,
+    52.3,
+    36.4,
+    27.1,
+    56.1,
+    164.7,
+    95.7
+   ],
+   "calls": 14,
+   "latency": 780.7
+  },
+  {
+   "id": "CVPR_2025_arch01488",
+   "style": "alpha_masking",
+   "el": 90,
+   "rasters": 7,
+   "tertile": "high",
+   "c": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    133.5,
+    9.5,
+    9.9,
+    28.5,
+    32.0,
+    18.4,
+    20.1,
+    97.3,
+    31.9
+   ],
+   "calls": 9,
+   "latency": 381.2
+  },
+  {
+   "id": "CVPR_2025_arch01541",
+   "style": "alpha_masking",
+   "el": 33,
+   "rasters": 6,
+   "tertile": "low",
+   "c": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    50.1,
+    5.9,
+    7.9,
+    17.4,
+    24.1,
+    18.9,
+    21.0,
+    97.7,
+    31.9
+   ],
+   "calls": 9,
+   "latency": 274.8
+  },
+  {
+   "id": "CVPR_2025_arch01656",
+   "style": "colour_pop",
+   "el": 66,
+   "rasters": 0,
+   "tertile": "mid",
+   "c": [
+    1,
+    0,
+    4,
+    1,
+    1,
+    1,
+    1,
+    1,
+    3
+   ],
+   "l": [
+    90.7,
+    0.0,
+    104.2,
+    30.3,
+    37.6,
+    25.6,
+    29.2,
+    109.4,
+    95.7
+   ],
+   "calls": 13,
+   "latency": 522.7
+  },
+  {
+   "id": "CVPR_2025_arch01657",
+   "style": "alpha_masking",
+   "el": 32,
+   "rasters": 0,
+   "tertile": "low",
+   "c": [
+    1,
+    0,
+    4,
+    1,
+    1,
+    1,
+    1,
+    1,
+    3
+   ],
+   "l": [
+    76.5,
+    0.0,
+    99.2,
+    19.8,
+    27.4,
+    22.6,
+    17.4,
+    55.3,
+    95.7
+   ],
+   "calls": 13,
+   "latency": 414.0
+  },
+  {
+   "id": "CVPR_2025_arch01707",
+   "style": "hopping_bounding_box",
+   "el": 63,
+   "rasters": 0,
+   "tertile": "mid",
+   "c": [
+    1,
+    0,
+    4,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    85.3,
+    0.0,
+    71.5,
+    21.4,
+    16.4,
+    12.4,
+    22.9,
+    82.3,
+    31.9
+   ],
+   "calls": 11,
+   "latency": 344.0
+  },
+  {
+   "id": "CVPR_2025_arch01709",
+   "style": "sliding_bounding_box",
+   "el": 77,
+   "rasters": 0,
+   "tertile": "high",
+   "c": [
+    1,
+    0,
+    6,
+    1,
+    1,
+    1,
+    1,
+    1,
+    3
+   ],
+   "l": [
+    82.6,
+    0.0,
+    165.3,
+    50.0,
+    24.6,
+    17.2,
+    38.6,
+    100.9,
+    95.7
+   ],
+   "calls": 15,
+   "latency": 574.9
+  },
+  {
+   "id": "CVPR_2025_arch01761",
+   "style": "hopping_bounding_box",
+   "el": 72,
+   "rasters": 1,
+   "tertile": "high",
+   "c": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    89.5,
+    4.1,
+    9.9,
+    39.8,
+    27.0,
+    27.5,
+    33.5,
+    135.0,
+    31.9
+   ],
+   "calls": 9,
+   "latency": 398.2
+  },
+  {
+   "id": "CVPR_2025_arch02021",
+   "style": "colour_pop",
+   "el": 34,
+   "rasters": 11,
+   "tertile": "low",
+   "c": [
+    1,
+    1,
+    4,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    52.5,
+    11.5,
+    87.7,
+    23.2,
+    17.1,
+    16.8,
+    15.1,
+    62.5,
+    31.9
+   ],
+   "calls": 12,
+   "latency": 318.2
+  },
+  {
+   "id": "CVPR_2025_arch02022",
+   "style": "alpha_masking",
+   "el": 63,
+   "rasters": 3,
+   "tertile": "mid",
+   "c": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    51.0,
+    5.9,
+    7.0,
+    36.9,
+    27.6,
+    14.9,
+    15.9,
+    76.0,
+    31.9
+   ],
+   "calls": 9,
+   "latency": 267.1
+  },
+  {
+   "id": "CVPR_2025_arch02298",
+   "style": "colour_pop",
+   "el": 157,
+   "rasters": 11,
+   "tertile": "high",
+   "c": [
+    1,
+    1,
+    4,
+    1,
+    1,
+    1,
+    1,
+    1,
+    3
+   ],
+   "l": [
+    105.3,
+    9.0,
+    165.2,
+    49.3,
+    41.8,
+    23.9,
+    37.0,
+    116.8,
+    95.7
+   ],
+   "calls": 14,
+   "latency": 644.0
+  },
+  {
+   "id": "CVPR_2025_arch02361",
+   "style": "hopping_bounding_box",
+   "el": 121,
+   "rasters": 13,
+   "tertile": "high",
+   "c": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    159.3,
+    8.2,
+    11.9,
+    84.7,
+    32.5,
+    38.2,
+    40.8,
+    154.5,
+    31.9
+   ],
+   "calls": 9,
+   "latency": 562.0
+  },
+  {
+   "id": "CVPR_2025_arch02400",
+   "style": "alpha_masking",
+   "el": 72,
+   "rasters": 4,
+   "tertile": "high",
+   "c": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    116.2,
+    7.6,
+    8.3,
+    45.3,
+    46.5,
+    18.7,
+    23.3,
+    118.4,
+    31.9
+   ],
+   "calls": 9,
+   "latency": 416.3
+  },
+  {
+   "id": "CVPR_2025_arch02465",
+   "style": "colour_pop",
+   "el": 36,
+   "rasters": 7,
+   "tertile": "low",
+   "c": [
+    1,
+    1,
+    4,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    74.3,
+    11.2,
+    114.5,
+    19.6,
+    20.8,
+    18.2,
+    20.8,
+    81.2,
+    31.9
+   ],
+   "calls": 12,
+   "latency": 392.5
+  },
+  {
+   "id": "CVPR_2025_arch03005",
+   "style": "alpha_masking",
+   "el": 61,
+   "rasters": 4,
+   "tertile": "mid",
+   "c": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    106.7,
+    6.2,
+    11.5,
+    22.8,
+    23.6,
+    18.0,
+    15.8,
+    120.9,
+    31.9
+   ],
+   "calls": 9,
+   "latency": 357.4
+  },
+  {
+   "id": "CVPR_2025_arch03065",
+   "style": "colour_pop",
+   "el": 137,
+   "rasters": 10,
+   "tertile": "high",
+   "c": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    3
+   ],
+   "l": [
+    122.9,
+    9.4,
+    10.7,
+    63.3,
+    61.8,
+    25.7,
+    27.0,
+    164.6,
+    95.7
+   ],
+   "calls": 11,
+   "latency": 581.2
+  },
+  {
+   "id": "FigureBench_arch_diff_000000004",
+   "style": "hopping_bounding_box",
+   "el": 70,
+   "rasters": 2,
+   "tertile": "mid",
+   "c": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    63.9,
+    8.2,
+    5.9,
+    23.8,
+    14.7,
+    11.0,
+    32.5,
+    83.5,
+    31.9
+   ],
+   "calls": 9,
+   "latency": 275.4
+  },
+  {
+   "id": "FigureBench_arch_easy_000000093",
+   "style": "progressive_reveal",
+   "el": 67,
+   "rasters": 0,
+   "tertile": "mid",
+   "c": [
+    1,
+    0,
+    2,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    48.8,
+    0.0,
+    57.5,
+    29.2,
+    34.9,
+    16.0,
+    28.1,
+    79.1,
+    31.9
+   ],
+   "calls": 9,
+   "latency": 325.4
+  },
+  {
+   "id": "FigureBench_arch_easy_000000097",
+   "style": "alpha_masking",
+   "el": 84,
+   "rasters": 0,
+   "tertile": "high",
+   "c": [
+    1,
+    0,
+    4,
+    1,
+    1,
+    1,
+    1,
+    1,
+    3
+   ],
+   "l": [
+    94.4,
+    0.0,
+    89.0,
+    29.5,
+    47.7,
+    29.6,
+    21.4,
+    82.3,
+    95.7
+   ],
+   "calls": 13,
+   "latency": 489.6
+  },
+  {
+   "id": "FigureBench_pipe_000000057",
+   "style": "alpha_masking",
+   "el": 16,
+   "rasters": 0,
+   "tertile": "low",
+   "c": [
+    1,
+    0,
+    4,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    77.1,
+    0.0,
+    98.3,
+    13.1,
+    22.2,
+    24.9,
+    17.8,
+    50.2,
+    31.9
+   ],
+   "calls": 11,
+   "latency": 335.5
+  },
+  {
+   "id": "ICCV_2025_arch00492",
+   "style": "hopping_bounding_box",
+   "el": 110,
+   "rasters": 5,
+   "tertile": "high",
+   "c": [
+    1,
+    1,
+    4,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    111.2,
+    7.0,
+    163.4,
+    22.8,
+    18.0,
+    22.3,
+    26.1,
+    111.7,
+    31.9
+   ],
+   "calls": 12,
+   "latency": 514.5
+  },
+  {
+   "id": "ICCV_2025_pipe00262",
+   "style": "hopping_bounding_box",
+   "el": 53,
+   "rasters": 7,
+   "tertile": "mid",
+   "c": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    52.2,
+    8.5,
+    8.8,
+    27.7,
+    17.3,
+    13.4,
+    19.8,
+    130.2,
+    31.9
+   ],
+   "calls": 9,
+   "latency": 309.6
+  },
+  {
+   "id": "Paper2Fig_arch_diff_000000034",
+   "style": "alpha_masking",
+   "el": 86,
+   "rasters": 5,
+   "tertile": "high",
+   "c": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    103.0,
+    11.8,
+    6.5,
+    34.5,
+    36.2,
+    18.1,
+    16.4,
+    75.3,
+    31.9
+   ],
+   "calls": 9,
+   "latency": 333.7
+  },
+  {
+   "id": "Paper2Fig_arch_diff_000000037",
+   "style": "colour_pop",
+   "el": 57,
+   "rasters": 0,
+   "tertile": "mid",
+   "c": [
+    1,
+    0,
+    2,
+    1,
+    1,
+    1,
+    1,
+    1,
+    3
+   ],
+   "l": [
+    59.0,
+    0.0,
+    66.1,
+    21.4,
+    16.7,
+    18.2,
+    22.8,
+    53.2,
+    95.7
+   ],
+   "calls": 11,
+   "latency": 353.0
+  },
+  {
+   "id": "Paper2Fig_arch_diff_000000049",
+   "style": "colour_pop",
+   "el": 60,
+   "rasters": 3,
+   "tertile": "mid",
+   "c": [
+    1,
+    0,
+    4,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    101.4,
+    0.0,
+    127.5,
+    19.4,
+    19.8,
+    20.4,
+    23.7,
+    49.8,
+    31.9
+   ],
+   "calls": 11,
+   "latency": 393.8
+  },
+  {
+   "id": "Paper2Fig_arch_diff_000000076",
+   "style": "sliding_bounding_box",
+   "el": 50,
+   "rasters": 2,
+   "tertile": "mid",
+   "c": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    61.7,
+    5.8,
+    8.5,
+    18.3,
+    15.5,
+    17.3,
+    14.9,
+    97.5,
+    31.9
+   ],
+   "calls": 9,
+   "latency": 271.2
+  },
+  {
+   "id": "Paper2Fig_arch_easy_000000148",
+   "style": "alpha_masking",
+   "el": 27,
+   "rasters": 0,
+   "tertile": "low",
+   "c": [
+    1,
+    0,
+    2,
+    1,
+    1,
+    2,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    44.0,
+    0.0,
+    54.0,
+    28.0,
+    24.6,
+    31.2,
+    20.5,
+    94.8,
+    31.9
+   ],
+   "calls": 10,
+   "latency": 328.9
+  },
+  {
+   "id": "Paper2Fig_arch_easy_000000196",
+   "style": "colour_pop",
+   "el": 82,
+   "rasters": 0,
+   "tertile": "high",
+   "c": [
+    1,
+    0,
+    2,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    70.6,
+    0.0,
+    83.4,
+    33.6,
+    30.0,
+    14.5,
+    27.9,
+    74.1,
+    31.9
+   ],
+   "calls": 9,
+   "latency": 365.9
+  },
+  {
+   "id": "Paper2Fig_arch_easy_000000297",
+   "style": "progressive_reveal",
+   "el": 44,
+   "rasters": 0,
+   "tertile": "low",
+   "c": [
+    1,
+    0,
+    2,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    32.2,
+    0.0,
+    39.0,
+    17.4,
+    26.5,
+    17.0,
+    17.5,
+    89.0,
+    31.9
+   ],
+   "calls": 9,
+   "latency": 270.5
+  },
+  {
+   "id": "Paper2Fig_pipe_diff_000000104",
+   "style": "sliding_bounding_box",
+   "el": 9,
+   "rasters": 5,
+   "tertile": "low",
+   "c": [
+    1,
+    1,
+    4,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    39.2,
+    8.4,
+    85.7,
+    11.6,
+    9.3,
+    8.1,
+    10.7,
+    28.9,
+    31.9
+   ],
+   "calls": 12,
+   "latency": 233.9
+  },
+  {
+   "id": "Paper2Fig_pipe_diff_000000130",
+   "style": "alpha_masking",
+   "el": 25,
+   "rasters": 8,
+   "tertile": "low",
+   "c": [
+    1,
+    1,
+    4,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    56.8,
+    5.6,
+    75.4,
+    23.5,
+    26.2,
+    20.8,
+    13.0,
+    61.6,
+    31.9
+   ],
+   "calls": 12,
+   "latency": 314.8
+  },
+  {
+   "id": "Paper2Fig_pipe_diff_000000143",
+   "style": "progressive_reveal",
+   "el": 46,
+   "rasters": 7,
+   "tertile": "low",
+   "c": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    3
+   ],
+   "l": [
+    65.8,
+    10.9,
+    15.7,
+    22.8,
+    30.8,
+    28.7,
+    22.4,
+    107.1,
+    95.7
+   ],
+   "calls": 11,
+   "latency": 399.7
+  },
+  {
+   "id": "Paper2Fig_pipe_diff_000000218",
+   "style": "progressive_reveal",
+   "el": 71,
+   "rasters": 0,
+   "tertile": "high",
+   "c": [
+    1,
+    0,
+    2,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    81.4,
+    0.0,
+    92.4,
+    39.1,
+    34.8,
+    20.0,
+    20.5,
+    75.7,
+    31.9
+   ],
+   "calls": 9,
+   "latency": 395.8
+  },
+  {
+   "id": "Paper2Fig_pipe_diff_000000455",
+   "style": "colour_pop",
+   "el": 43,
+   "rasters": 0,
+   "tertile": "low",
+   "c": [
+    1,
+    0,
+    4,
+    1,
+    1,
+    1,
+    1,
+    1,
+    3
+   ],
+   "l": [
+    66.0,
+    0.0,
+    95.9,
+    32.1,
+    34.3,
+    21.7,
+    22.0,
+    104.8,
+    95.7
+   ],
+   "calls": 13,
+   "latency": 472.6
+  },
+  {
+   "id": "Paper2Fig_pipe_diff_000000456",
+   "style": "alpha_masking",
+   "el": 28,
+   "rasters": 7,
+   "tertile": "low",
+   "c": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    32.4,
+    8.8,
+    11.6,
+    16.0,
+    22.8,
+    17.3,
+    12.6,
+    44.4,
+    31.9
+   ],
+   "calls": 9,
+   "latency": 197.8
+  },
+  {
+   "id": "Paper2Fig_pipe_diff_000000473",
+   "style": "progressive_reveal",
+   "el": 48,
+   "rasters": 2,
+   "tertile": "mid",
+   "c": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    3
+   ],
+   "l": [
+    28.7,
+    6.1,
+    8.8,
+    17.2,
+    14.5,
+    17.0,
+    14.3,
+    34.4,
+    95.7
+   ],
+   "calls": 11,
+   "latency": 236.7
+  },
+  {
+   "id": "Paper2Fig_pipe_diff_000000488",
+   "style": "hopping_bounding_box",
+   "el": 13,
+   "rasters": 0,
+   "tertile": "low",
+   "c": [
+    1,
+    0,
+    4,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    29.7,
+    0.0,
+    67.9,
+    14.1,
+    17.9,
+    13.2,
+    13.4,
+    34.0,
+    31.9
+   ],
+   "calls": 11,
+   "latency": 222.1
+  },
+  {
+   "id": "Paper2Fig_pipe_diff_000000490",
+   "style": "hopping_bounding_box",
+   "el": 65,
+   "rasters": 0,
+   "tertile": "mid",
+   "c": [
+    1,
+    0,
+    2,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    59.8,
+    0.0,
+    66.0,
+    25.6,
+    23.5,
+    14.7,
+    20.0,
+    64.1,
+    31.9
+   ],
+   "calls": 9,
+   "latency": 305.6
+  },
+  {
+   "id": "Paper2Fig_pipe_diff_000000492",
+   "style": "progressive_reveal",
+   "el": 29,
+   "rasters": 0,
+   "tertile": "low",
+   "c": [
+    1,
+    0,
+    4,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    34.9,
+    0.0,
+    82.0,
+    17.5,
+    29.8,
+    17.9,
+    35.7,
+    85.6,
+    31.9
+   ],
+   "calls": 11,
+   "latency": 335.3
+  },
+  {
+   "id": "Paper2Fig_pipe_diff_000000517",
+   "style": "alpha_masking",
+   "el": 54,
+   "rasters": 0,
+   "tertile": "mid",
+   "c": [
+    1,
+    0,
+    2,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    74.4,
+    0.0,
+    83.8,
+    23.8,
+    26.3,
+    18.4,
+    19.7,
+    91.3,
+    31.9
+   ],
+   "calls": 9,
+   "latency": 369.7
+  },
+  {
+   "id": "Paper2Fig_pipe_diff_000000518",
+   "style": "colour_pop",
+   "el": 180,
+   "rasters": 0,
+   "tertile": "high",
+   "c": [
+    1,
+    0,
+    2,
+    1,
+    1,
+    1,
+    1,
+    1,
+    3
+   ],
+   "l": [
+    121.0,
+    0.0,
+    131.9,
+    64.2,
+    28.2,
+    26.3,
+    16.8,
+    207.0,
+    95.7
+   ],
+   "calls": 11,
+   "latency": 691.1
+  },
+  {
+   "id": "Paper2Fig_pipe_easy_000000119",
+   "style": "progressive_reveal",
+   "el": 22,
+   "rasters": 7,
+   "tertile": "low",
+   "c": [
+    1,
+    1,
+    4,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    61.4,
+    6.6,
+    130.8,
+    14.7,
+    19.2,
+    16.7,
+    18.3,
+    113.7,
+    31.9
+   ],
+   "calls": 12,
+   "latency": 413.3
+  },
+  {
+   "id": "Paper2Fig_pipe_easy_000000249",
+   "style": "colour_pop",
+   "el": 23,
+   "rasters": 5,
+   "tertile": "low",
+   "c": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    5
+   ],
+   "l": [
+    53.5,
+    9.9,
+    7.7,
+    19.0,
+    15.0,
+    15.8,
+    11.4,
+    50.0,
+    159.5
+   ],
+   "calls": 13,
+   "latency": 341.7
+  },
+  {
+   "id": "Paper2Fig_pipe_easy_000000250",
+   "style": "sliding_bounding_box",
+   "el": 46,
+   "rasters": 4,
+   "tertile": "mid",
+   "c": [
+    1,
+    1,
+    4,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    54.3,
+    6.2,
+    111.7,
+    20.0,
+    14.9,
+    9.9,
+    20.4,
+    56.5,
+    31.9
+   ],
+   "calls": 12,
+   "latency": 325.7
+  },
+  {
+   "id": "Paper2Fig_pipe_easy_000000332",
+   "style": "progressive_reveal",
+   "el": 29,
+   "rasters": 0,
+   "tertile": "low",
+   "c": [
+    1,
+    0,
+    2,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    50.7,
+    0.0,
+    61.8,
+    21.9,
+    22.1,
+    13.1,
+    21.7,
+    68.3,
+    31.9
+   ],
+   "calls": 9,
+   "latency": 291.4
+  },
+  {
+   "id": "Paper2Fig_pipe_easy_000000345",
+   "style": "alpha_masking",
+   "el": 73,
+   "rasters": 0,
+   "tertile": "high",
+   "c": [
+    1,
+    0,
+    2,
+    1,
+    1,
+    1,
+    1,
+    1,
+    3
+   ],
+   "l": [
+    95.2,
+    0.0,
+    105.3,
+    22.3,
+    35.0,
+    19.7,
+    19.9,
+    76.5,
+    95.7
+   ],
+   "calls": 11,
+   "latency": 469.6
+  },
+  {
+   "id": "Paper2Fig_pipe_easy_000000360",
+   "style": "colour_pop",
+   "el": 73,
+   "rasters": 0,
+   "tertile": "high",
+   "c": [
+    1,
+    0,
+    2,
+    1,
+    1,
+    1,
+    1,
+    1,
+    3
+   ],
+   "l": [
+    97.1,
+    0.0,
+    104.6,
+    20.2,
+    25.3,
+    12.6,
+    13.2,
+    121.8,
+    95.7
+   ],
+   "calls": 11,
+   "latency": 490.4
+  },
+  {
+   "id": "Paper2Fig_pipe_easy_000000361",
+   "style": "alpha_masking",
+   "el": 28,
+   "rasters": 4,
+   "tertile": "low",
+   "c": [
+    1,
+    1,
+    4,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    93.1,
+    10.5,
+    145.6,
+    28.7,
+    21.6,
+    24.3,
+    16.6,
+    85.3,
+    31.9
+   ],
+   "calls": 12,
+   "latency": 457.6
+  },
+  {
+   "id": "Paper2Fig_pipe_easy_000000446",
+   "style": "progressive_reveal",
+   "el": 41,
+   "rasters": 1,
+   "tertile": "low",
+   "c": [
+    1,
+    1,
+    2,
+    1,
+    1,
+    1,
+    1,
+    1,
+    5
+   ],
+   "l": [
+    87.7,
+    7.3,
+    95.2,
+    37.8,
+    26.9,
+    18.8,
+    18.1,
+    92.3,
+    159.5
+   ],
+   "calls": 14,
+   "latency": 543.7
+  },
+  {
+   "id": "Paper2Fig_pipe_easy_000000500",
+   "style": "sliding_bounding_box",
+   "el": 40,
+   "rasters": 0,
+   "tertile": "low",
+   "c": [
+    1,
+    0,
+    4,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    61.7,
+    0.0,
+    61.3,
+    23.5,
+    24.7,
+    23.4,
+    16.3,
+    49.2,
+    31.9
+   ],
+   "calls": 11,
+   "latency": 292.0
+  },
+  {
+   "id": "Paper2Fig_pipe_easy_000000503",
+   "style": "hopping_bounding_box",
+   "el": 14,
+   "rasters": 0,
+   "tertile": "low",
+   "c": [
+    1,
+    0,
+    4,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    33.1,
+    0.0,
+    73.1,
+    11.5,
+    9.8,
+    7.9,
+    18.3,
+    46.6,
+    31.9
+   ],
+   "calls": 11,
+   "latency": 232.2
+  },
+  {
+   "id": "Paper2Fig_pipe_easy_000000516",
+   "style": "colour_pop",
+   "el": 35,
+   "rasters": 1,
+   "tertile": "low",
+   "c": [
+    1,
+    1,
+    5,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    31.8,
+    8.1,
+    120.2,
+    30.0,
+    20.0,
+    19.9,
+    27.8,
+    98.9,
+    31.9
+   ],
+   "calls": 13,
+   "latency": 388.7
+  },
+  {
+   "id": "Paper2Fig_pipe_easy_000000517",
+   "style": "progressive_reveal",
+   "el": 23,
+   "rasters": 0,
+   "tertile": "low",
+   "c": [
+    1,
+    0,
+    4,
+    1,
+    1,
+    1,
+    1,
+    1,
+    3
+   ],
+   "l": [
+    29.7,
+    0.0,
+    76.3,
+    14.7,
+    22.0,
+    23.3,
+    14.3,
+    36.5,
+    95.7
+   ],
+   "calls": 13,
+   "latency": 312.5
+  },
+  {
+   "id": "Paper2Fig_pipe_easy_000000523",
+   "style": "progressive_reveal",
+   "el": 26,
+   "rasters": 3,
+   "tertile": "low",
+   "c": [
+    1,
+    1,
+    4,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    34.2,
+    7.7,
+    78.3,
+    23.0,
+    18.9,
+    13.0,
+    18.2,
+    77.5,
+    31.9
+   ],
+   "calls": 12,
+   "latency": 302.6
+  },
+  {
+   "id": "Paper2Fig_pipe_easy_000000529",
+   "style": "alpha_masking",
+   "el": 71,
+   "rasters": 2,
+   "tertile": "high",
+   "c": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    91.4,
+    8.0,
+    11.2,
+    22.9,
+    29.1,
+    18.1,
+    14.7,
+    112.5,
+    31.9
+   ],
+   "calls": 9,
+   "latency": 339.8
+  },
+  {
+   "id": "Paper2Fig_pipe_easy_000000552",
+   "style": "colour_pop",
+   "el": 54,
+   "rasters": 0,
+   "tertile": "mid",
+   "c": [
+    1,
+    0,
+    2,
+    1,
+    1,
+    1,
+    1,
+    1,
+    3
+   ],
+   "l": [
+    118.7,
+    0.0,
+    128.1,
+    23.8,
+    29.7,
+    18.9,
+    18.5,
+    75.6,
+    95.7
+   ],
+   "calls": 11,
+   "latency": 509.0
+  },
+  {
+   "id": "Paper2Fig_pipe_easy_000000555",
+   "style": "hopping_bounding_box",
+   "el": 44,
+   "rasters": 0,
+   "tertile": "low",
+   "c": [
+    1,
+    0,
+    4,
+    1,
+    1,
+    2,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    55.3,
+    0.0,
+    101.0,
+    23.5,
+    18.9,
+    21.0,
+    18.1,
+    56.0,
+    31.9
+   ],
+   "calls": 12,
+   "latency": 325.6
+  },
+  {
+   "id": "Paper2Fig_pipe_easy_000000556",
+   "style": "alpha_masking",
+   "el": 54,
+   "rasters": 1,
+   "tertile": "mid",
+   "c": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    70.3,
+    5.5,
+    8.0,
+    22.5,
+    21.9,
+    12.2,
+    14.8,
+    52.0,
+    31.9
+   ],
+   "calls": 9,
+   "latency": 238.9
+  },
+  {
+   "id": "Paper2Fig_pipe_easy_000000562",
+   "style": "sliding_bounding_box",
+   "el": 52,
+   "rasters": 0,
+   "tertile": "mid",
+   "c": [
+    1,
+    0,
+    2,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    88.7,
+    0.0,
+    96.4,
+    26.3,
+    15.3,
+    15.8,
+    12.0,
+    60.6,
+    31.9
+   ],
+   "calls": 9,
+   "latency": 347.1
+  },
+  {
+   "id": "Paper2Fig_pipe_easy_000000579",
+   "style": "colour_pop",
+   "el": 83,
+   "rasters": 0,
+   "tertile": "high",
+   "c": [
+    1,
+    0,
+    4,
+    1,
+    1,
+    2,
+    1,
+    1,
+    3
+   ],
+   "l": [
+    75.9,
+    0.0,
+    129.3,
+    29.5,
+    21.8,
+    34.7,
+    21.7,
+    128.2,
+    95.7
+   ],
+   "calls": 14,
+   "latency": 536.7
+  },
+  {
+   "id": "SciMMIR_arch_diff_000000011",
+   "style": "hopping_bounding_box",
+   "el": 48,
+   "rasters": 2,
+   "tertile": "mid",
+   "c": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    80.3,
+    4.0,
+    9.3,
+    41.8,
+    26.6,
+    14.3,
+    29.9,
+    192.6,
+    31.9
+   ],
+   "calls": 9,
+   "latency": 430.8
+  },
+  {
+   "id": "SciMMIR_arch_diff_000000015",
+   "style": "hopping_bounding_box",
+   "el": 92,
+   "rasters": 0,
+   "tertile": "high",
+   "c": [
+    1,
+    0,
+    4,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    134.4,
+    0.0,
+    143.5,
+    40.7,
+    15.6,
+    9.9,
+    20.5,
+    82.0,
+    31.9
+   ],
+   "calls": 11,
+   "latency": 478.5
+  },
+  {
+   "id": "SciMMIR_arch_diff_000000140",
+   "style": "colour_pop",
+   "el": 71,
+   "rasters": 0,
+   "tertile": "high",
+   "c": [
+    1,
+    0,
+    2,
+    1,
+    1,
+    1,
+    1,
+    1,
+    5
+   ],
+   "l": [
+    45.0,
+    0.0,
+    54.6,
+    23.8,
+    39.2,
+    19.2,
+    31.2,
+    105.7,
+    159.5
+   ],
+   "calls": 13,
+   "latency": 478.4
+  },
+  {
+   "id": "SciMMIR_pipe_easy_000000297",
+   "style": "sliding_bounding_box",
+   "el": 65,
+   "rasters": 0,
+   "tertile": "mid",
+   "c": [
+    1,
+    0,
+    4,
+    1,
+    1,
+    1,
+    1,
+    1,
+    3
+   ],
+   "l": [
+    52.8,
+    0.0,
+    129.5,
+    27.1,
+    13.9,
+    12.6,
+    18.7,
+    120.8,
+    95.7
+   ],
+   "calls": 13,
+   "latency": 471.0
+  },
+  {
+   "id": "SciMMIR_pipe_easy_000000307",
+   "style": "alpha_masking",
+   "el": 73,
+   "rasters": 2,
+   "tertile": "high",
+   "c": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    2,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    77.5,
+    10.4,
+    10.6,
+    14.7,
+    16.5,
+    27.1,
+    23.1,
+    104.3,
+    31.9
+   ],
+   "calls": 10,
+   "latency": 316.2
+  },
+  {
+   "id": "SciMMIR_pipe_easy_000000309",
+   "style": "progressive_reveal",
+   "el": 128,
+   "rasters": 0,
+   "tertile": "high",
+   "c": [
+    1,
+    0,
+    2,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    129.2,
+    0.0,
+    141.1,
+    43.3,
+    44.7,
+    23.0,
+    21.0,
+    208.2,
+    31.9
+   ],
+   "calls": 9,
+   "latency": 642.3
+  },
+  {
+   "id": "arch_arxiv_ai_2025_000000126",
+   "style": "sliding_bounding_box",
+   "el": 55,
+   "rasters": 0,
+   "tertile": "mid",
+   "c": [
+    1,
+    0,
+    2,
+    1,
+    1,
+    1,
+    1,
+    1,
+    3
+   ],
+   "l": [
+    58.2,
+    0.0,
+    68.8,
+    23.7,
+    28.2,
+    14.9,
+    29.6,
+    91.4,
+    95.7
+   ],
+   "calls": 11,
+   "latency": 410.5
+  },
+  {
+   "id": "arch_arxiv_ai_2025_000000129",
+   "style": "colour_pop",
+   "el": 239,
+   "rasters": 1,
+   "tertile": "high",
+   "c": [
+    1,
+    1,
+    2,
+    1,
+    1,
+    1,
+    1,
+    1,
+    5
+   ],
+   "l": [
+    139.9,
+    4.0,
+    27.5,
+    46.5,
+    27.0,
+    25.7,
+    18.6,
+    140.9,
+    159.5
+   ],
+   "calls": 14,
+   "latency": 589.5
+  },
+  {
+   "id": "arch_arxiv_cv_2023_000000303",
+   "style": "hopping_bounding_box",
+   "el": 78,
+   "rasters": 5,
+   "tertile": "high",
+   "c": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    64.3,
+    13.5,
+    8.0,
+    29.4,
+    33.8,
+    18.1,
+    49.1,
+    89.1,
+    31.9
+   ],
+   "calls": 9,
+   "latency": 337.1
+  },
+  {
+   "id": "arch_arxiv_cv_2023_000000316",
+   "style": "alpha_masking",
+   "el": 68,
+   "rasters": 5,
+   "tertile": "mid",
+   "c": [
+    1,
+    1,
+    4,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    127.3,
+    8.0,
+    114.7,
+    38.1,
+    30.8,
+    22.4,
+    24.0,
+    169.6,
+    31.9
+   ],
+   "calls": 12,
+   "latency": 566.9
+  },
+  {
+   "id": "arch_arxiv_cv_2023_000000433",
+   "style": "alpha_masking",
+   "el": 143,
+   "rasters": 0,
+   "tertile": "high",
+   "c": [
+    1,
+    0,
+    6,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    107.8,
+    0.0,
+    179.4,
+    40.9,
+    20.5,
+    14.8,
+    11.5,
+    88.6,
+    31.9
+   ],
+   "calls": 13,
+   "latency": 495.5
+  },
+  {
+   "id": "arch_arxiv_db_ir_2024_000000546",
+   "style": "progressive_reveal",
+   "el": 62,
+   "rasters": 0,
+   "tertile": "mid",
+   "c": [
+    1,
+    0,
+    4,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    77.3,
+    0.0,
+    110.9,
+    37.4,
+    35.0,
+    16.2,
+    17.9,
+    64.3,
+    31.9
+   ],
+   "calls": 11,
+   "latency": 390.8
+  },
+  {
+   "id": "arch_arxiv_db_ir_2025_000000580",
+   "style": "progressive_reveal",
+   "el": 25,
+   "rasters": 0,
+   "tertile": "low",
+   "c": [
+    1,
+    0,
+    4,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    41.6,
+    0.0,
+    60.5,
+    19.1,
+    22.1,
+    13.5,
+    14.0,
+    55.2,
+    31.9
+   ],
+   "calls": 11,
+   "latency": 257.8
+  },
+  {
+   "id": "arch_arxiv_db_ir_2025_000000581",
+   "style": "alpha_masking",
+   "el": 46,
+   "rasters": 0,
+   "tertile": "mid",
+   "c": [
+    1,
+    0,
+    4,
+    1,
+    1,
+    1,
+    1,
+    1,
+    5
+   ],
+   "l": [
+    52.0,
+    0.0,
+    109.7,
+    24.6,
+    31.2,
+    17.5,
+    14.6,
+    71.8,
+    159.5
+   ],
+   "calls": 15,
+   "latency": 481.0
+  },
+  {
+   "id": "arch_arxiv_db_ir_2025_000000587",
+   "style": "progressive_reveal",
+   "el": 32,
+   "rasters": 0,
+   "tertile": "low",
+   "c": [
+    1,
+    0,
+    3,
+    1,
+    1,
+    1,
+    1,
+    1,
+    3
+   ],
+   "l": [
+    55.9,
+    0.0,
+    97.8,
+    15.9,
+    24.4,
+    12.5,
+    17.1,
+    56.2,
+    95.7
+   ],
+   "calls": 12,
+   "latency": 375.4
+  },
+  {
+   "id": "arch_arxiv_db_ir_2025_000000589",
+   "style": "hopping_bounding_box",
+   "el": 80,
+   "rasters": 4,
+   "tertile": "high",
+   "c": [
+    1,
+    1,
+    4,
+    1,
+    1,
+    0,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    116.8,
+    7.9,
+    113.7,
+    22.5,
+    13.5,
+    0.0,
+    16.9,
+    147.3,
+    31.9
+   ],
+   "calls": 11,
+   "latency": 470.5
+  },
+  {
+   "id": "arch_arxiv_db_ir_2025_000000611",
+   "style": "progressive_reveal",
+   "el": 78,
+   "rasters": 3,
+   "tertile": "high",
+   "c": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    2,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    82.5,
+    6.9,
+    7.8,
+    26.2,
+    24.3,
+    38.4,
+    19.1,
+    96.8,
+    31.9
+   ],
+   "calls": 10,
+   "latency": 333.9
+  },
+  {
+   "id": "arch_arxiv_db_ir_2025_000000618",
+   "style": "colour_pop",
+   "el": 49,
+   "rasters": 2,
+   "tertile": "mid",
+   "c": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    43.5,
+    4.9,
+    10.0,
+    19.8,
+    30.8,
+    18.5,
+    26.5,
+    72.3,
+    31.9
+   ],
+   "calls": 9,
+   "latency": 258.1
+  },
+  {
+   "id": "arch_arxiv_db_ir_2026_000000714",
+   "style": "colour_pop",
+   "el": 39,
+   "rasters": 0,
+   "tertile": "low",
+   "c": [
+    1,
+    0,
+    4,
+    1,
+    1,
+    1,
+    1,
+    1,
+    5
+   ],
+   "l": [
+    51.3,
+    0.0,
+    97.0,
+    19.5,
+    23.3,
+    13.2,
+    16.9,
+    47.0,
+    159.5
+   ],
+   "calls": 15,
+   "latency": 427.6
+  },
+  {
+   "id": "arch_arxiv_db_ir_2026_000000715",
+   "style": "sliding_bounding_box",
+   "el": 49,
+   "rasters": 0,
+   "tertile": "mid",
+   "c": [
+    1,
+    0,
+    2,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    90.2,
+    0.0,
+    98.1,
+    22.2,
+    29.1,
+    15.4,
+    32.4,
+    92.5,
+    31.9
+   ],
+   "calls": 9,
+   "latency": 411.8
+  },
+  {
+   "id": "arch_arxiv_db_ir_2026_000000718",
+   "style": "progressive_reveal",
+   "el": 31,
+   "rasters": 0,
+   "tertile": "low",
+   "c": [
+    1,
+    0,
+    2,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "l": [
+    39.8,
+    0.0,
+    54.0,
+    14.4,
+    24.0,
+    18.0,
+    17.9,
+    92.7,
+    31.9
+   ],
+   "calls": 9,
+   "latency": 292.7
+  },
+  {
+   "id": "arch_arxiv_network_2026_000001537",
+   "style": "alpha_masking",
+   "el": 73,
+   "rasters": 0,
+   "tertile": "high",
+   "c": [
+    1,
+    0,
+    2,
+    1,
+    1,
+    1,
+    1,
+    1,
+    3
+   ],
+   "l": [
+    82.3,
+    0.0,
+    92.3,
+    37.8,
+    42.2,
+    18.2,
+    28.1,
+    165.9,
+    95.7
+   ],
+   "calls": 11,
+   "latency": 562.4
+  }
+ ]
+}

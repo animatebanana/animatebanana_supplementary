@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="pipeSvg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1840 782">
+<style>
+.stage      { filter:url(#softShadow); }
+          .stitle     { font-family:"Georgia","Times New Roman",serif; font-size:20px; font-weight:700; letter-spacing:1.4px; fill:#1b1b1b; }
+          .agent      { font-family:"Helvetica Neue",Helvetica,Arial,sans-serif; font-size:15px; fill:#1f1f1f; }
+          .cap        { font-family:"Helvetica Neue",Helvetica,Arial,sans-serif; font-size:13px; font-style:italic; fill:#333333; }
+          .iolbl      { font-family:"Helvetica Neue",Helvetica,Arial,sans-serif; font-size:14px; font-style:italic; fill:#1f1f1f; }
+          .iolblb     { font-family:"Helvetica Neue",Helvetica,Arial,sans-serif; font-size:14px; font-style:italic; font-weight:700; fill:#111111; }
+          .math       { font-family:"Georgia","Times New Roman",serif; font-size:19px; font-style:italic; fill:#111111; }
+          .mathbig    { font-family:"Georgia","Times New Roman",serif; font-size:24px; font-style:italic; fill:#111111; }
+          .ph         { fill:#ffffff; stroke:#b6bcc2; stroke-width:1.2; stroke-dasharray:5 4; }
+          .phtag      { font-family:ui-monospace,"SF Mono",Menlo,monospace; font-size:9px; fill:#9aa0a6; }
+          .edge       { fill:none; stroke:#3a3a3a; stroke-width:1.6; stroke-linecap:round; marker-end:url(#arrow); }
+          .edgeio     { fill:none; stroke:#1f1f1f; stroke-width:2; stroke-linecap:round; marker-end:url(#arrowIO); }
+          .edgedash   { fill:none; stroke:#3a3a3a; stroke-width:1.6; stroke-dasharray:7 6; stroke-linecap:round; marker-end:url(#arrow); }
+</style>
+      <defs>
+        <marker id="arrow" viewBox="0 0 8 6" refX="7.2" refY="3" markerWidth="7.5" markerHeight="5.5" orient="auto-start-reverse">
+          <path d="M 0 0 L 8 3 L 0 6 z" fill="#2f2f2f"/>
+        </marker>
+        <marker id="arrowIO" viewBox="0 0 8 6" refX="7.2" refY="3" markerWidth="8.5" markerHeight="6.5" orient="auto-start-reverse">
+          <path d="M 0 0 L 8 3 L 0 6 z" fill="#1f1f1f"/>
+        </marker>
+        <filter id="softShadow" x="-6%" y="-8%" width="112%" height="118%">
+          <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#7b7b7b" flood-opacity="0.20"/>
+        </filter>
+        <style>
+          .stage      { filter:url(#softShadow); }
+          .stitle     { font-family:"Georgia","Times New Roman",serif; font-size:20px; font-weight:700; letter-spacing:1.4px; fill:#1b1b1b; }
+          .agent      { font-family:"Helvetica Neue",Helvetica,Arial,sans-serif; font-size:15px; fill:#1f1f1f; }
+          .cap        { font-family:"Helvetica Neue",Helvetica,Arial,sans-serif; font-size:13px; font-style:italic; fill:#333333; }
+          .iolbl      { font-family:"Helvetica Neue",Helvetica,Arial,sans-serif; font-size:14px; font-style:italic; fill:#1f1f1f; }
+          .iolblb     { font-family:"Helvetica Neue",Helvetica,Arial,sans-serif; font-size:14px; font-style:italic; font-weight:700; fill:#111111; }
+          .math       { font-family:"Georgia","Times New Roman",serif; font-size:19px; font-style:italic; fill:#111111; }
+          .mathbig    { font-family:"Georgia","Times New Roman",serif; font-size:24px; font-style:italic; fill:#111111; }
+          .ph         { fill:#ffffff; stroke:#b6bcc2; stroke-width:1.2; stroke-dasharray:5 4; }
+          .phtag      { font-family:ui-monospace,"SF Mono",Menlo,monospace; font-size:9px; fill:#9aa0a6; }
+          .edge       { fill:none; stroke:#3a3a3a; stroke-width:1.6; stroke-linecap:round; marker-end:url(#arrow); }
+          .edgeio     { fill:none; stroke:#1f1f1f; stroke-width:2; stroke-linecap:round; marker-end:url(#arrowIO); }
+          .edgedash   { fill:none; stroke:#3a3a3a; stroke-width:1.6; stroke-dasharray:7 6; stroke-linecap:round; marker-end:url(#arrow); }
+    
+          .narr-text { opacity: 0; }
+        </style>
+      </defs>
+    
+      <rect id="canvas_bg" data-id="canvas_bg" data-class="block" data-parent="root" x="0" y="0" width="1840" height="770" fill="#ffffff"/>
+    
+      <!-- ============================ STAGE SHELLS ============================ -->
+      <g id="block_stage1" data-id="block_stage1" data-class="block" data-parent="root">
+        <rect id="stage1_bg" class="stage" x="20" y="30" width="560" height="390" rx="22" fill="#fff9df" stroke="#2b2b2b" stroke-width="1.6"/>
+      </g>
+      <g id="block_stage2" data-id="block_stage2" data-class="block" data-parent="root">
+        <rect id="stage2_bg" class="stage" x="605" y="30" width="620" height="390" rx="22" fill="#f0ffdd" stroke="#2b2b2b" stroke-width="1.6"/>
+      </g>
+      <g id="block_stage3" data-id="block_stage3" data-class="block" data-parent="root">
+        <rect id="stage3_bg" class="stage" x="1250" y="30" width="560" height="390" rx="22" fill="#e7feff" stroke="#2b2b2b" stroke-width="1.6"/>
+      </g>
+    
+      <!-- ============================ EDGES ============================ -->
+      <g>
+        <!-- Stage 1 Edges -->
+        <line id="edge_s1_1" data-id="edge_s1_1" data-class="edge" data-source="node_s1_diagram" data-target="node_s1_d2c" class="edge" x1="98" y1="274" x2="126" y2="274"/>
+        <line id="edge_s1_2" data-id="edge_s1_2" data-class="edge" data-source="node_s1_d2c" data-target="node_s1_code" class="edge" x1="264" y1="274" x2="291" y2="274"/>
+        <path id="edge_s1_3" data-id="edge_s1_3" data-class="edge" data-source="node_s1_code" data-target="node_s1_critic" class="edge" d="M 330 232 C 358 198 388 172 414 158"/>
+        <path id="edge_s1_4" data-id="edge_s1_4" data-class="edge" data-source="node_s1_critic" data-target="node_s1_code" class="edge" d="M 436 214 C 430 250 398 268 357 268"/>
+        <path id="edge_s1_5" data-id="edge_s1_5" data-class="edge" data-source="node_s1_code" data-target="node_s1_raster" class="edge" d="M 352 302 C 366 314 381 323 396 331"/>
+    
+        <!-- Stage 2 Edges -->
+        <path id="edge_s2_1" data-id="edge_s2_1" data-class="edge" data-source="node_s2_critic" data-target="node_s2_seq" class="edge" d="M 1058 170 C 1000 108 850 108 789 168"/>
+        <path id="edge_s2_2" data-id="edge_s2_2" data-class="edge" data-source="node_s2_seq" data-target="node_s2_critic" class="edge" d="M 787 198 C 850 250 1000 250 1056 202"/>
+        <line id="edge_s2_3" data-id="edge_s2_3" data-class="edge" data-source="node_s2_parser" data-target="node_s2_xml" class="edge" x1="777" y1="320" x2="796" y2="320"/>
+        <path id="edge_s2_4" data-id="edge_s2_4" data-class="edge" data-source="node_s2_xml" data-target="node_s2_seq" class="edge" d="M 814 288 C 800 276 788 262 776 250"/>
+         <path id="edge_s2_5" data-id="edge_s2_5" data-class="edge" data-source="node_s2_seq" data-target="node_s2_drafter" class="edgedash" d="M 785 237 C 950 220, 850 355, 1082 355"/>
+    
+        <!-- Stage 3 Edges -->
+        <path id="edge_s3_1" data-id="edge_s3_1" data-class="edge" data-source="node_s3_critic" data-target="node_s3_designer" class="edge" d="M 1322 208 C 1308 245 1306 285 1320 310"/>
+        <path id="edge_s3_2" data-id="edge_s3_2" data-class="edge" data-source="node_s3_designer" data-target="node_s3_critic" class="edge" d="M 1340 310 C 1360 280 1362 240 1344 208"/>
+        <path id="edge_s3_3" data-id="edge_s3_3" data-class="edge" data-source="node_s3_designer" data-target="node_s3_exporter" class="edge" d="M 1452 370 C 1500 396 1550 392 1592 374"/>
+        <path id="edge_s3_4" data-id="edge_s3_4" data-class="edge" data-source="node_s3_exporter" data-target="node_s3_narr_int" class="edge" d="M 1648 288 C 1632 252 1636 220 1652 198"/>
+        <path id="edge_s3_5" data-id="edge_s3_5" data-class="edge" data-source="node_s3_narr_int" data-target="node_s3_exporter" class="edge" d="M 1750 200 C 1774 234 1758 268 1706 286"/>
+    
+        <!-- Global IO Edges -->
+        <line id="edge_io_1" data-id="edge_io_1" data-class="edge" data-source="node_in_d" data-target="node_s1_diagram" class="edgeio" x1="115" y1="458" x2="115" y2="424"/>
+        <line id="edge_io_2" data-id="edge_io_2" data-class="edge" data-source="node_s1_code" data-target="node_out_c" class="edgeio" x1="433" y1="424" x2="433" y2="458"/>
+        <line id="edge_io_3" data-id="edge_io_3" data-class="edge" data-source="node_s2_in_d" data-target="node_s2_parser" class="edgeio" x1="703" y1="458" x2="703" y2="424"/>
+        <line id="edge_io_4" data-id="edge_io_4" data-class="edge" data-source="node_s2_drafter" data-target="node_s2_out_s" class="edgeio" x1="1152" y1="424" x2="1152" y2="466"/>
+        <line id="edge_io_5" data-id="edge_io_5" data-class="edge" data-source="node_s3_in_d" data-target="node_s3_designer" class="edgeio" x1="1325" y1="458" x2="1325" y2="424"/>
+        <line id="edge_io_6" data-id="edge_io_6" data-class="edge" data-source="node_s3_y_card" data-target="node_s3_out_y" class="edgeio" x1="1695" y1="424" x2="1695" y2="466"/>
+      </g>
+    
+      <!-- ============================== FOREGROUND NODES =============================== -->
+    
+      <!-- STAGE 1 NODES -->
+      <text id="text_s1_title" data-id="text_s1_title" data-class="text_node" data-parent="block_stage1" class="stitle" x="300" y="64" text-anchor="middle">STAGE 1: DIAGRAM TRANSMUTER</text>
+      <text id="text_s1_agent1" data-id="text_s1_agent1" data-class="text_node" data-parent="block_stage1" class="agent" x="195" y="112" text-anchor="middle">Diagram to Animation Aware</text>
+      <text id="text_s1_agent2" data-id="text_s1_agent2" data-class="text_node" data-parent="block_stage1" class="agent" x="195" y="134" text-anchor="middle">Code Converter</text>
+    
+      <g id="node_s1_diagram" data-id="node_s1_diagram" data-class="raster_node"><image href="pipeline/helpers/rasters/crop_node_s1_diagram.png" xlink:href="pipeline/helpers/rasters/crop_node_s1_diagram.png" x="40" y="245" width="54" height="58" preserveAspectRatio="xMidYMid meet" /></g>
+    
+      <text id="text_math_aconv" data-id="text_math_aconv" data-class="text_node" data-parent="block_stage1" class="math" x="132" y="206">A<tspan font-size="0.65em" baseline-shift="sub">conv</tspan></text>
+      
+      <g id="node_s1_d2c" data-id="node_s1_d2c" data-class="raster_node"><image href="pipeline/helpers/rasters/crop_node_s1_d2c.png" xlink:href="pipeline/helpers/rasters/crop_node_s1_d2c.png" x="130" y="215" width="130" height="118" preserveAspectRatio="xMidYMid meet" /></g>
+    
+      <g id="node_s1_code" data-id="node_s1_code" data-class="raster_node"><image href="pipeline/helpers/rasters/crop_node_s1_code.png" xlink:href="pipeline/helpers/rasters/crop_node_s1_code.png" x="295" y="236" width="58" height="76" preserveAspectRatio="xMidYMid meet" /></g>
+    
+      <text id="text_s1_critic" data-id="text_s1_critic" data-class="text_node" data-parent="block_stage1" class="agent" x="468" y="90" text-anchor="middle">Critic</text>
+      
+      <g id="node_s1_critic" data-id="node_s1_critic" data-class="raster_node"><image href="pipeline/helpers/rasters/crop_node_s1_critic.png" xlink:href="pipeline/helpers/rasters/crop_node_s1_critic.png" x="418" y="100" width="100" height="106" preserveAspectRatio="xMidYMid meet" /></g>
+      <text id="text_math_acrit1" data-id="text_math_acrit1" data-class="text_node" data-parent="block_stage1" class="math" x="524" y="140">A<tspan font-size="0.65em" baseline-shift="super">C</tspan><tspan font-size="0.65em" baseline-shift="sub">crit</tspan></text>
+    
+      <text id="text_s1_raster" data-id="text_s1_raster" data-class="text_node" data-parent="block_stage1" class="agent" x="480" y="286" text-anchor="middle">Raster Integrator</text>
+      
+      <g id="node_s1_raster" data-id="node_s1_raster" data-class="raster_node"><image href="pipeline/helpers/rasters/crop_node_s1_raster.png" xlink:href="pipeline/helpers/rasters/crop_node_s1_raster.png" x="400" y="296" width="165" height="110" preserveAspectRatio="xMidYMid meet" /></g>
+    
+      <text id="text_math_cr1" data-id="text_math_cr1" data-class="text_node" data-parent="block_stage1" class="math" x="278" y="214">C<tspan font-size="0.65em" baseline-shift="super">(r+1)</tspan></text>
+      
+      <g id="node_s1_feedback" data-id="node_s1_feedback" data-class="raster_node"><image href="pipeline/helpers/rasters/crop_node_s1_feedback.png" xlink:href="pipeline/helpers/rasters/crop_node_s1_feedback.png" x="374" y="206" width="30" height="15" preserveAspectRatio="xMidYMid meet" /></g>
+      <text id="text_math_fc" data-id="text_math_fc" data-class="text_node" data-parent="block_stage1" class="math" x="372" y="243">f<tspan font-size="0.65em" baseline-shift="sub">C</tspan><tspan font-size="0.65em" baseline-shift="super">(r)</tspan></text>
+    
+      <!-- STAGE 2 NODES -->
+      <text id="text_s2_title" data-id="text_s2_title" data-class="text_node" data-parent="block_stage2" class="stitle" x="915" y="64" text-anchor="middle">STAGE 2: ANIMATION PLANNER</text>
+      <text id="text_s2_seq" data-id="text_s2_seq" data-class="text_node" data-parent="block_stage2" class="agent" x="634" y="140">Sequencer</text>
+      <text id="text_math_aseq" data-id="text_math_aseq" data-class="text_node" data-parent="block_stage2" class="math" x="742" y="140">A<tspan font-size="0.65em" baseline-shift="sub">seq</tspan></text>
+      
+      <g id="node_s2_seq" data-id="node_s2_seq" data-class="raster_node"><image href="pipeline/helpers/rasters/crop_node_s2_seq.png" xlink:href="pipeline/helpers/rasters/crop_node_s2_seq.png" x="630" y="150" width="155" height="95" preserveAspectRatio="xMidYMid meet" /></g>
+    
+      <text id="text_s2_critic" data-id="text_s2_critic" data-class="text_node" data-parent="block_stage2" class="agent" x="1102" y="140" text-anchor="middle">Critic</text>
+      
+      <g id="node_s2_critic" data-id="node_s2_critic" data-class="raster_node"><image href="pipeline/helpers/rasters/crop_node_s2_critic.png" xlink:href="pipeline/helpers/rasters/crop_node_s2_critic.png" x="1060" y="150" width="85" height="100" preserveAspectRatio="xMidYMid meet" /></g>
+      <text id="text_math_acrit2" data-id="text_math_acrit2" data-class="text_node" data-parent="block_stage2" class="math" x="1152" y="190">A<tspan font-size="0.65em" baseline-shift="super">Q</tspan><tspan font-size="0.65em" baseline-shift="sub">crit</tspan></text>
+    
+      <g id="node_s2_feedback" data-id="node_s2_feedback" data-class="raster_node"><image href="pipeline/helpers/rasters/crop_node_s2_feedback.png" xlink:href="pipeline/helpers/rasters/crop_node_s2_feedback.png" x="880" y="80" width="32" height="16" preserveAspectRatio="xMidYMid meet" /></g>
+      <text id="text_math_fq" data-id="text_math_fq" data-class="text_node" data-parent="block_stage2" class="math" x="920" y="94">f<tspan font-size="0.65em" baseline-shift="super">(r)</tspan><tspan font-size="0.65em" baseline-shift="sub">Q</tspan></text>
+    
+      <g id="node_s2_q_draft" data-id="node_s2_q_draft" data-class="raster_node"><image href="pipeline/helpers/rasters/crop_node_s2_q_draft.png" xlink:href="pipeline/helpers/rasters/crop_node_s2_q_draft.png" x="860" y="152" width="34" height="44" preserveAspectRatio="xMidYMid meet" /></g>
+      <text id="text_math_qr" data-id="text_math_qr" data-class="text_node" data-parent="block_stage2" class="math" x="900" y="170">Q<tspan font-size="0.65em" baseline-shift="super">(r)</tspan></text>
+      <text id="text_s2_anim_seq" data-id="text_s2_anim_seq" data-class="text_node" data-parent="block_stage2" class="cap" x="960" y="190" text-anchor="middle">Animation</text>
+      <text id="text_s2_anim_seq_draft" data-id="text_s2_anim_seq_draft" data-class="text_node" data-parent="block_stage2" class="cap" x="960" y="208" text-anchor="middle">Sequence draft</text>
+    
+      <text id="text_s2_parser" data-id="text_s2_parser" data-class="text_node" data-parent="block_stage2" class="agent" x="628" y="288">Parser</text>
+      
+      <g id="node_s2_parser" data-id="node_s2_parser" data-class="raster_node"><image href="pipeline/helpers/rasters/crop_node_s2_parser.png" xlink:href="pipeline/helpers/rasters/crop_node_s2_parser.png" x="620" y="296" width="155" height="78" preserveAspectRatio="xMidYMid meet" /></g>
+    
+      <g id="node_s2_xml" data-id="node_s2_xml" data-class="raster_node"><image href="pipeline/helpers/rasters/crop_node_s2_xml.png" xlink:href="pipeline/helpers/rasters/crop_node_s2_xml.png" x="800" y="292" width="40" height="54" preserveAspectRatio="xMidYMid meet" /></g>
+      <text id="text_math_p" data-id="text_math_p" data-class="text_node" data-parent="block_stage2" class="math" x="848" y="322">P</text>
+      <text id="text_s2_parsed" data-id="text_s2_parsed" data-class="text_node" data-parent="block_stage2" class="cap" x="830" y="372" text-anchor="middle">Parsed</text>
+      <text id="text_s2_parsed_xml" data-id="text_s2_parsed_xml" data-class="text_node" data-parent="block_stage2" class="cap" x="830" y="390" text-anchor="middle">Diagram XML</text>
+    
+      <g id="node_s2_seq_final" data-id="node_s2_seq_final" data-class="raster_node"><image href="pipeline/helpers/rasters/crop_node_s2_seq_final.png" xlink:href="pipeline/helpers/rasters/crop_node_s2_seq_final.png" x="905" y="280" width="36" height="46" preserveAspectRatio="xMidYMid meet" /></g>
+      <text id="text_s2_anim" data-id="text_s2_anim" data-class="text_node" data-parent="block_stage2" class="cap" x="975" y="300" text-anchor="middle">Animation</text>
+      <text id="text_s2_sequence" data-id="text_s2_sequence" data-class="text_node" data-parent="block_stage2" class="cap" x="975" y="320" text-anchor="middle">Sequence</text>
+      <text id="text_math_qr1" data-id="text_math_qr1" data-class="text_node" data-parent="block_stage2" class="math" x="920" y="359">Q<tspan font-size="0.65em" baseline-shift="super">(r+1)</tspan></text>
+    
+      <text id="text_s2_narr" data-id="text_s2_narr" data-class="text_node" data-parent="block_stage2" class="agent" x="1152" y="282" text-anchor="middle">Narration</text>
+      <text id="text_s2_drafter" data-id="text_s2_drafter" data-class="text_node" data-parent="block_stage2" class="agent" x="1152" y="304" text-anchor="middle">Drafter</text>
+      
+      <g id="node_s2_drafter" data-id="node_s2_drafter" data-class="raster_node"><image href="pipeline/helpers/rasters/crop_node_s2_drafter.png" xlink:href="pipeline/helpers/rasters/crop_node_s2_drafter.png" x="1090" y="318" width="125" height="97" preserveAspectRatio="xMidYMid meet" /></g>
+      <text id="text_math_anarr" data-id="text_math_anarr" data-class="text_node" data-parent="block_stage2" class="math" x="1060" y="406">A<tspan font-size="0.65em" baseline-shift="sub">narr</tspan></text>
+    
+      <!-- STAGE 3 NODES -->
+      <text id="text_s3_title" data-id="text_s3_title" data-class="text_node" data-parent="block_stage3" class="stitle" x="1530" y="64" text-anchor="middle">STAGE 3: DIAGRAM ANIMATOR</text>
+      
+      <text id="text_s3_critic" data-id="text_s3_critic" data-class="text_node" data-parent="block_stage3" class="agent" x="1335" y="102" text-anchor="middle">Critic</text>
+      <g id="node_s3_critic" data-id="node_s3_critic" data-class="raster_node"><image href="pipeline/helpers/rasters/crop_node_s3_critic.png" xlink:href="pipeline/helpers/rasters/crop_node_s3_critic.png" x="1300" y="112" width="72" height="102" preserveAspectRatio="xMidYMid meet" /></g>
+      <text id="text_math_acrit3" data-id="text_math_acrit3" data-class="text_node" data-parent="block_stage3" class="math" x="1378" y="150">A<tspan font-size="0.65em" baseline-shift="super">A</tspan><tspan font-size="0.65em" baseline-shift="sub">crit</tspan></text>
+    
+      <text id="text_math_fa" data-id="text_math_fa" data-class="text_node" data-parent="block_stage3" class="math" x="1258" y="258">f<tspan font-size="0.65em" baseline-shift="super">(A)</tspan><tspan font-size="0.65em" baseline-shift="sub">A</tspan></text>
+      <g id="node_s3_feedback" data-id="node_s3_feedback" data-class="raster_node"><image href="pipeline/helpers/rasters/crop_node_s3_feedback.png" xlink:href="pipeline/helpers/rasters/crop_node_s3_feedback.png" x="1260" y="276" width="32" height="16" preserveAspectRatio="xMidYMid meet" /></g>
+    
+      <g id="node_s3_anim_draft" data-id="node_s3_anim_draft" data-class="raster_node"><image href="pipeline/helpers/rasters/crop_node_s3_anim_draft.png" xlink:href="pipeline/helpers/rasters/crop_node_s3_anim_draft.png" x="1380" y="205" width="36" height="46" preserveAspectRatio="xMidYMid meet" /></g>
+      <text id="text_math_ar" data-id="text_math_ar" data-class="text_node" data-parent="block_stage3" class="math" x="1385" y="268">A<tspan font-size="0.65em" baseline-shift="super">(r)</tspan></text>
+      <text id="text_s3_anim_code" data-id="text_s3_anim_code" data-class="text_node" data-parent="block_stage3" class="cap" x="1480" y="238" text-anchor="middle">Animation Code</text>
+      <text id="text_s3_anim_draft_cap" data-id="text_s3_anim_draft_cap" data-class="text_node" data-parent="block_stage3" class="cap" x="1482" y="256" text-anchor="middle">draft</text>
+    
+      <g id="node_s3_designer" data-id="node_s3_designer" data-class="raster_node"><image href="pipeline/helpers/rasters/crop_node_s3_designer.png" xlink:href="pipeline/helpers/rasters/crop_node_s3_designer.png" x="1300" y="312" width="150" height="72" preserveAspectRatio="xMidYMid meet" /></g>
+      <text id="text_s3_anim_designer" data-id="text_s3_anim_designer" data-class="text_node" data-parent="block_stage3" class="agent" x="1375" y="404" text-anchor="middle">Animation Designer</text>
+      <text id="text_math_aanim" data-id="text_math_aanim" data-class="text_node" data-parent="block_stage3" class="math" x="1260" y="350">A<tspan font-size="0.65em" baseline-shift="sub">anim</tspan></text>
+    
+      <text id="text_s3_anim_code2" data-id="text_s3_anim_code2" data-class="text_node" data-parent="block_stage3" class="cap" x="1480" y="323" text-anchor="middle">Animation Code</text>
+      <g id="node_s3_anim_final" data-id="node_s3_anim_final" data-class="raster_node"><image href="pipeline/helpers/rasters/crop_node_s3_anim_final.png" xlink:href="pipeline/helpers/rasters/crop_node_s3_anim_final.png" x="1470" y="330" width="36" height="46" preserveAspectRatio="xMidYMid meet" /></g>
+      <text id="text_math_ar1" data-id="text_math_ar1" data-class="text_node" data-parent="block_stage3" class="math" x="1522" y="370">A<tspan font-size="0.65em" baseline-shift="super">(r+1)</tspan></text>
+    
+      <g id="node_s3_frames" data-id="node_s3_frames" data-class="raster_node"><image href="pipeline/helpers/rasters/crop_node_s3_frames.png" xlink:href="pipeline/helpers/rasters/crop_node_s3_frames.png" x="1540" y="180" width="70" height="64" preserveAspectRatio="xMidYMid meet" /></g>
+      <text id="text_s3_anim_frames1" data-id="text_s3_anim_frames1" data-class="text_node" data-parent="block_stage3" class="cap" x="1570" y="266" text-anchor="middle">Animation</text>
+      <text id="text_s3_anim_frames2" data-id="text_s3_anim_frames2" data-class="text_node" data-parent="block_stage3" class="cap" x="1570" y="284" text-anchor="middle">frames</text>
+    
+      <text id="text_s3_narr_integrator1" data-id="text_s3_narr_integrator1" data-class="text_node" data-parent="block_stage3" class="agent" x="1596" y="122" text-anchor="middle">Narration</text>
+      <text id="text_s3_narr_integrator2" data-id="text_s3_narr_integrator2" data-class="text_node" data-parent="block_stage3" class="agent" x="1596" y="144" text-anchor="middle">Integrator</text>
+      <g id="node_s3_narr_int" data-id="node_s3_narr_int" data-class="raster_node"><image href="pipeline/helpers/rasters/crop_node_s3_narr_int.png" xlink:href="pipeline/helpers/rasters/crop_node_s3_narr_int.png" x="1655" y="90" width="140" height="108" preserveAspectRatio="xMidYMid meet" /></g>
+    
+      <g id="node_s3_exporter" data-id="node_s3_exporter" data-class="raster_node"><image href="pipeline/helpers/rasters/crop_node_s3_exporter.png" xlink:href="pipeline/helpers/rasters/crop_node_s3_exporter.png" x="1595" y="290" width="105" height="95" preserveAspectRatio="xMidYMid meet" /></g>
+      <text id="text_s3_anim_exporter" data-id="text_s3_anim_exporter" data-class="text_node" data-parent="block_stage3" class="agent" x="1647" y="404" text-anchor="middle">Animation Exporter</text>
+    
+      <text id="text_math_y" data-id="text_math_y" data-class="text_node" data-parent="block_stage3" class="math" x="1754" y="286" text-anchor="middle">Y</text>
+      
+      <g id="node_s3_y_card" data-id="node_s3_y_card" data-class="raster_node"><image href="pipeline/helpers/rasters/crop_node_s3_y_card.png" xlink:href="pipeline/helpers/rasters/crop_node_s3_y_card.png" x="1728" y="294" width="52" height="46" preserveAspectRatio="xMidYMid meet" /></g>
+      <text id="text_s3_sync1" data-id="text_s3_sync1" data-class="text_node" data-parent="block_stage3" class="cap" x="1750" y="362" text-anchor="middle" font-size="12">Narration-synced</text>
+      <text id="text_s3_sync2" data-id="text_s3_sync2" data-class="text_node" data-parent="block_stage3" class="cap" x="1750" y="380" text-anchor="middle" font-size="12">animation</text>
+    
+      <!-- GLOBAL INPUTS / OUTPUTS -->
+      
+      <!-- Stage 1 IO -->
+      <g id="node_in_d" data-id="node_in_d" data-class="raster_node"><image href="pipeline/helpers/rasters/crop_node_in_d.png" xlink:href="pipeline/helpers/rasters/crop_node_in_d.png" x="75" y="462" width="80" height="95" preserveAspectRatio="xMidYMid meet" /></g>
+      <text id="text_io_in1" data-id="text_io_in1" data-class="text_node" data-parent="root" class="iolblb" x="115" y="588" text-anchor="middle">Input</text>
+      <text id="text_io_in2" data-id="text_io_in2" data-class="text_node" data-parent="root" class="iolblb" x="115" y="610" text-anchor="middle">Diagram</text>
+      <text id="text_io_in_d" data-id="text_io_in_d" data-class="text_node" data-parent="root" class="mathbig" x="115" y="652" text-anchor="middle">D</text>
+    
+      <g id="node_out_c" data-id="node_out_c" data-class="raster_node"><image href="pipeline/helpers/rasters/crop_node_out_c.png" xlink:href="pipeline/helpers/rasters/crop_node_out_c.png" x="395" y="462" width="76" height="95" preserveAspectRatio="xMidYMid meet" /></g>
+      <text id="text_io_out1" data-id="text_io_out1" data-class="text_node" data-parent="root" class="iolbl" x="433" y="588" text-anchor="middle">Animation Aware</text>
+      <text id="text_io_out2" data-id="text_io_out2" data-class="text_node" data-parent="root" class="iolbl" x="433" y="610" text-anchor="middle">Diagram Code</text>
+      <text id="text_io_out_c" data-id="text_io_out_c" data-class="text_node" data-parent="root" class="mathbig" x="433" y="652" text-anchor="middle">C</text>
+    
+      <!-- Stage 2 IO -->
+      <text id="text_io_d1" data-id="text_io_d1" data-class="text_node" data-parent="root" class="iolbl" x="670" y="452" text-anchor="middle">Diagram</text>
+      <g id="node_s2_in_d" data-id="node_s2_in_d" data-class="raster_node"><image href="pipeline/helpers/rasters/crop_node_s2_in_d.png" xlink:href="pipeline/helpers/rasters/crop_node_s2_in_d.png" x="668" y="462" width="70" height="86" preserveAspectRatio="xMidYMid meet" /></g>
+      <text id="text_io_d_math" data-id="text_io_d_math" data-class="text_node" data-parent="root" class="mathbig" x="640" y="512" text-anchor="middle">D</text>
+    
+      <text id="text_io_ctx1" data-id="text_io_ctx1" data-class="text_node" data-parent="root" class="iolbl" x="855" y="452" text-anchor="middle">Context (optional)</text>
+      <g id="node_s2_in_k" data-id="node_s2_in_k" data-class="raster_node"><image href="pipeline/helpers/rasters/crop_node_s2_in_k.png" xlink:href="pipeline/helpers/rasters/crop_node_s2_in_k.png" x="780" y="462" width="150" height="86" preserveAspectRatio="xMidYMid meet" /></g>
+      <text id="text_io_k_math" data-id="text_io_k_math" data-class="text_node" data-parent="root" class="mathbig" x="946" y="512" text-anchor="middle">K</text>
+    
+      <g id="node_s2_in_u" data-id="node_s2_in_u" data-class="raster_node"><image href="pipeline/helpers/rasters/crop_node_s2_in_u.png" xlink:href="pipeline/helpers/rasters/crop_node_s2_in_u.png" x="650" y="572" width="100" height="88" preserveAspectRatio="xMidYMid meet" /></g>
+      <text id="text_io_u_math" data-id="text_io_u_math" data-class="text_node" data-parent="root" class="mathbig" x="626" y="622" text-anchor="middle">u</text>
+      <text id="text_io_u_anim" data-id="text_io_u_anim" data-class="text_node" data-parent="root" class="iolbl" x="700" y="684" text-anchor="middle">Animation</text>
+      <text id="text_io_u_style" data-id="text_io_u_style" data-class="text_node" data-parent="root" class="iolbl" x="700" y="706" text-anchor="middle">Style</text>
+    
+      <g id="node_s2_in_c" data-id="node_s2_in_c" data-class="raster_node"><image href="pipeline/helpers/rasters/crop_node_s2_in_c.png" xlink:href="pipeline/helpers/rasters/crop_node_s2_in_c.png" x="800" y="572" width="86" height="88" preserveAspectRatio="xMidYMid meet" /></g>
+      <text id="text_io_c2_math" data-id="text_io_c2_math" data-class="text_node" data-parent="root" class="mathbig" x="902" y="622" text-anchor="middle">C</text>
+      <text id="text_io_c2_lbl1" data-id="text_io_c2_lbl1" data-class="text_node" data-parent="root" class="iolbl" x="843" y="684" text-anchor="middle">Animation Aware</text>
+      <text id="text_io_c2_lbl2" data-id="text_io_c2_lbl2" data-class="text_node" data-parent="root" class="iolbl" x="843" y="706" text-anchor="middle">Diagram Code</text>
+    
+      <g id="node_s2_out_s" data-id="node_s2_out_s" data-class="raster_node"><image href="pipeline/helpers/rasters/crop_node_s2_out_s.png" xlink:href="pipeline/helpers/rasters/crop_node_s2_out_s.png" x="1105" y="470" width="95" height="100" preserveAspectRatio="xMidYMid meet" /></g>
+      <text id="text_io_s1_lbl1" data-id="text_io_s1_lbl1" data-class="text_node" data-parent="root" class="iolbl" x="1152" y="602" text-anchor="middle">Narration-infused</text>
+      <text id="text_io_s1_lbl2" data-id="text_io_s1_lbl2" data-class="text_node" data-parent="root" class="iolbl" x="1152" y="624" text-anchor="middle">Animation Sequence</text>
+      <text id="text_io_s_math" data-id="text_io_s_math" data-class="text_node" data-parent="root" class="mathbig" x="1152" y="664" text-anchor="middle">S</text>
+    
+      <!-- Stage 3 IO -->
+      <text id="text_io_s3_d" data-id="text_io_s3_d" data-class="text_node" data-parent="root" class="iolbl" x="1292" y="452" text-anchor="middle">Diagram</text>
+      <g id="node_s3_in_d" data-id="node_s3_in_d" data-class="raster_node"><image href="pipeline/helpers/rasters/crop_node_s3_in_d.png" xlink:href="pipeline/helpers/rasters/crop_node_s3_in_d.png" x="1288" y="462" width="70" height="86" preserveAspectRatio="xMidYMid meet" /></g>
+      <text id="text_io_s3_d_math" data-id="text_io_s3_d_math" data-class="text_node" data-parent="root" class="mathbig" x="1262" y="512" text-anchor="middle">D</text>
+    
+      <text id="text_io_s3_u" data-id="text_io_s3_u" data-class="text_node" data-parent="root" class="iolbl" x="1455" y="452" text-anchor="middle">Animation Style</text>
+      <g id="node_s3_in_u" data-id="node_s3_in_u" data-class="raster_node"><image href="pipeline/helpers/rasters/crop_node_s3_in_u.png" xlink:href="pipeline/helpers/rasters/crop_node_s3_in_u.png" x="1400" y="462" width="110" height="86" preserveAspectRatio="xMidYMid meet" /></g>
+      <text id="text_io_s3_u_math" data-id="text_io_s3_u_math" data-class="text_node" data-parent="root" class="mathbig" x="1524" y="512" text-anchor="middle">u</text>
+    
+      <g id="node_s3_in_s" data-id="node_s3_in_s" data-class="raster_node"><image href="pipeline/helpers/rasters/crop_node_s3_in_s.png" xlink:href="pipeline/helpers/rasters/crop_node_s3_in_s.png" x="1290" y="572" width="80" height="86" preserveAspectRatio="xMidYMid meet" /></g>
+      <text id="text_io_s3_s_math" data-id="text_io_s3_s_math" data-class="text_node" data-parent="root" class="mathbig" x="1266" y="622" text-anchor="middle">S</text>
+      <text id="text_io_s3_s_lbl1" data-id="text_io_s3_s_lbl1" data-class="text_node" data-parent="root" class="iolbl" x="1330" y="682" text-anchor="middle">Narration-infused</text>
+      <text id="text_io_s3_s_lbl2" data-id="text_io_s3_s_lbl2" data-class="text_node" data-parent="root" class="iolbl" x="1330" y="704" text-anchor="middle">Animation</text>
+      <text id="text_io_s3_s_lbl3" data-id="text_io_s3_s_lbl3" data-class="text_node" data-parent="root" class="iolbl" x="1330" y="726" text-anchor="middle">Sequence</text>
+    
+      <g id="node_s3_in_c" data-id="node_s3_in_c" data-class="raster_node"><image href="pipeline/helpers/rasters/crop_node_s3_in_c.png" xlink:href="pipeline/helpers/rasters/crop_node_s3_in_c.png" x="1420" y="572" width="80" height="86" preserveAspectRatio="xMidYMid meet" /></g>
+      <text id="text_io_s3_c_math" data-id="text_io_s3_c_math" data-class="text_node" data-parent="root" class="mathbig" x="1516" y="622" text-anchor="middle">C</text>
+      <text id="text_io_s3_c_lbl1" data-id="text_io_s3_c_lbl1" data-class="text_node" data-parent="root" class="iolbl" x="1460" y="682" text-anchor="middle">Animation Aware</text>
+      <text id="text_io_s3_c_lbl2" data-id="text_io_s3_c_lbl2" data-class="text_node" data-parent="root" class="iolbl" x="1460" y="704" text-anchor="middle">Diagram Code</text>
+    
+      <g id="node_s3_out_y" data-id="node_s3_out_y" data-class="raster_node"><image href="pipeline/helpers/rasters/crop_node_s3_out_y.png" xlink:href="pipeline/helpers/rasters/crop_node_s3_out_y.png" x="1640" y="470" width="110" height="106" preserveAspectRatio="xMidYMid meet" /></g>
+      <text id="text_io_y_lbl1" data-id="text_io_y_lbl1" data-class="text_node" data-parent="root" class="iolblb" x="1695" y="606" text-anchor="middle">Styled Visual</text>
+      <text id="text_io_y_lbl2" data-id="text_io_y_lbl2" data-class="text_node" data-parent="root" class="iolblb" x="1695" y="628" text-anchor="middle">Narrative</text>
+      <text id="text_io_y_math" data-id="text_io_y_math" data-class="text_node" data-parent="root" class="mathbig" x="1695" y="668" text-anchor="middle">Y</text>
+    
+      <!-- ============================== NARRATION BANNER =============================== -->
+      <g id="narration_banner">
+        
+        
+        </g>
+    </svg>

@@ -1,0 +1,320 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 530" width="1000" height="530" style="background-color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#1e1e1e"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#e03e3e"/>
+    </marker>
+    <style>
+      #node_user_seq, #node_env,
+      #block_encoder, #node_rep_learning, #edge_user_to_encoder, #edge_env_to_encoder,
+      #node_irm_loss, #edge_encoder_to_irm,
+      #block_retriever, #node_evidence_pool,
+      #node_combine_circle, #node_debiased_retrieval, #edge_pool_to_circle, #edge_circle_to_retrieval, #edge_encoder_to_retriever, #text_label_inv_rep,
+      #node_topk_evidence, #edge_retrieval_to_topk,
+      #block_ranker, #node_transformer, #edge_encoder_to_transformer, #edge_topk_to_transformer, #text_label_evidence,
+      #node_rec_score, #node_explanation, #edge_transformer_branches, #edge_transformer_to_expl,
+      #node_rec_loss, #node_consistency_constraint, #edge_rec_to_loss, #edge_expl_to_cons, #edge_topk_to_cons, #text_label_d_in_D {
+        opacity: 0;
+        animation-name: fadeIn;
+        animation-duration: 0.5s;
+        animation-fill-mode: forwards;
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+
+      @keyframes bannerStep {
+        0% { opacity: 0; }
+        15% { opacity: 1; }
+        99% { opacity: 1; }
+        100% { opacity: 0; }
+      }
+
+      @keyframes bannerFinal {
+        0% { opacity: 0; }
+        15% { opacity: 1; }
+        100% { opacity: 1; }
+      }
+
+      #node_user_seq, #node_env { animation-delay: 0.0s; }
+      #block_encoder, #node_rep_learning, #edge_user_to_encoder, #edge_env_to_encoder { animation-delay: 0.5s; }
+      #node_irm_loss, #edge_encoder_to_irm { animation-delay: 1.0s; }
+      #block_retriever, #node_evidence_pool { animation-delay: 1.5s; }
+      #node_combine_circle, #node_debiased_retrieval, #edge_pool_to_circle, #edge_circle_to_retrieval, #edge_encoder_to_retriever, #text_label_inv_rep { animation-delay: 2.0s; }
+      #node_topk_evidence, #edge_retrieval_to_topk { animation-delay: 2.5s; }
+      #block_ranker, #node_transformer, #edge_encoder_to_transformer, #edge_topk_to_transformer, #text_label_evidence { animation-delay: 3.0s; }
+      #node_rec_score, #node_explanation, #edge_transformer_branches, #edge_transformer_to_expl { animation-delay: 3.5s; }
+      #node_rec_loss, #node_consistency_constraint, #edge_rec_to_loss, #edge_expl_to_cons, #edge_topk_to_cons, #text_label_d_in_D { animation-delay: 4.0s; }
+
+      .narr-text {
+        opacity: 0;
+        animation-duration: 0.5s;
+        animation-fill-mode: forwards;
+      }
+
+      #narr_ts1 { animation-name: bannerStep; animation-delay: 0.0s; }
+      #narr_ts2 { animation-name: bannerStep; animation-delay: 0.5s; }
+      #narr_ts3 { animation-name: bannerStep; animation-delay: 1.0s; }
+      #narr_ts4 { animation-name: bannerStep; animation-delay: 1.5s; }
+      #narr_ts5 { animation-name: bannerStep; animation-delay: 2.0s; }
+      #narr_ts6 { animation-name: bannerStep; animation-delay: 2.5s; }
+      #narr_ts7 { animation-name: bannerStep; animation-delay: 3.0s; }
+      #narr_ts8 { animation-name: bannerStep; animation-delay: 3.5s; }
+      #narr_ts9 { animation-name: bannerFinal; animation-delay: 4.0s; }
+    </style>
+  </defs>
+
+  <!-- ================= BACKGROUND BLOCKS ================= -->
+  
+  <!-- Block 1: Causal-Invariant Preference Encoder -->
+  <g id="block_encoder" data-id="block_encoder" data-class="block" data-parent="root">
+    <rect x="140" y="90" width="208" height="230" rx="14" ry="14" fill="#f0f5ff" stroke="#bed1f7" stroke-width="1.2" stroke-dasharray="4,4"/>
+    <text x="244" y="108" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle" data-id="text_encoder_title" data-class="text_node" data-parent="block_encoder">Causal-Invariant Preference Encoder</text>
+  </g>
+
+  <!-- Block 2: Causal-Guided RAG Retriever -->
+  <g id="block_retriever" data-id="block_retriever" data-class="block" data-parent="root">
+    <rect x="420" y="6" width="270" height="314" rx="14" ry="14" fill="#fffaf0" stroke="#fce4b8" stroke-width="1.2" stroke-dasharray="4,4"/>
+    <text x="555" y="24" font-size="12" font-weight="bold" fill="#000000" text-anchor="middle" data-id="text_retriever_title" data-class="text_node" data-parent="block_retriever">Causal-Guided RAG Retriever</text>
+  </g>
+
+  <!-- Block 3: Ranker & Explainer -->
+  <g id="block_ranker" data-id="block_ranker" data-class="block" data-parent="root">
+    <rect x="768" y="86" width="226" height="234" rx="14" ry="14" fill="#f2f9f3" stroke="#c8e8ce" stroke-width="1.2" stroke-dasharray="4,4"/>
+    <text x="881" y="105" font-size="12" font-weight="bold" fill="#000000" text-anchor="middle" data-id="text_ranker_title" data-class="text_node" data-parent="block_ranker">Ranker &amp; Explainer</text>
+  </g>
+
+  <!-- ================= NODES & ELEMENTS ================= -->
+
+  <!-- Standalone: User Sequence -->
+  <g id="node_user_seq" data-id="node_user_seq" data-class="standalone_node" data-parent="root">
+    <rect x="4" y="118" width="112" height="52" rx="8" ry="8" fill="#f5f5f7" stroke="#9e9ea3" stroke-width="1.2"/>
+    <text x="60" y="148" font-size="11" fill="#1e1e1e" text-anchor="middle">User Sequence <tspan font-style="italic">s<tspan font-size="0.65em" baseline-shift="sub">u</tspan></tspan></text>
+  </g>
+
+  <!-- Standalone: Environment e (Context) -->
+  <g id="node_env" data-id="node_env" data-class="standalone_node" data-parent="root">
+    <rect x="4" y="200" width="112" height="52" rx="8" ry="8" fill="#fcdad9" stroke="#ea9f9d" stroke-width="1.2"/>
+    <text x="60" y="224" font-size="11" fill="#a83232" text-anchor="middle">Environment <tspan font-style="italic">e</tspan></text>
+    <text x="60" y="239" font-size="11" fill="#a83232" text-anchor="middle">(Context)</text>
+  </g>
+
+  <!-- Child Node in Block 1: Invariant Rep Learning -->
+  <g id="node_rep_learning" data-id="node_rep_learning" data-class="child_node" data-parent="block_encoder">
+    <rect x="156" y="132" width="174" height="70" rx="10" ry="10" fill="#dce9fc" stroke="#8cb4f5" stroke-width="1.2"/>
+    <text x="243" y="162" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">Invariant Rep Learning</text>
+    <text x="243" y="180" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle"><tspan font-style="italic">&#x03D5;(u, s<tspan font-size="0.65em" baseline-shift="sub">u</tspan>)</tspan></text>
+  </g>
+
+  <!-- Child Node in Block 1: IRM Loss -->
+  <g id="node_irm_loss" data-id="node_irm_loss" data-class="child_node" data-parent="block_encoder">
+    <polygon points="243,234 290,265 243,296 196,265" fill="#ebe1f7" stroke="#bca4db" stroke-width="1.2"/>
+    <text x="243" y="260" font-size="10" fill="#4a3f55" text-anchor="middle">IRM Loss</text>
+    <text x="243" y="274" font-size="10" fill="#4a3f55" text-anchor="middle"><tspan font-style="italic">L<tspan font-size="0.65em" baseline-shift="sub">inv</tspan></tspan></text>
+  </g>
+
+  <!-- Composite Node in Block 2: Evidence Pool Cylinder -->
+  <g id="node_evidence_pool" data-id="node_evidence_pool" data-class="composite_whole" data-parent="block_retriever">
+    <!-- Cylinder Body -->
+    <path id="evidence_pool_body" data-id="evidence_pool_body" data-class="composite_part" data-parent="node_evidence_pool"
+          d="M 515,50 L 515,108 A 40,12 0 0 0 595,108 L 595,50 Z"
+          fill="#fef4cd" stroke="#e8c75d" stroke-width="1.2"/>
+    <!-- Cylinder Top -->
+    <ellipse id="evidence_pool_top" data-id="evidence_pool_top" data-class="composite_part" data-parent="node_evidence_pool"
+             cx="555" cy="50" rx="40" ry="12"
+             fill="#fff8dc" stroke="#e8c75d" stroke-width="1.2"/>
+    <!-- Text Labels inside Evidence Pool -->
+    <text x="555" y="70" font-size="9" font-weight="bold" fill="#000000" text-anchor="middle">Evidence Pool</text>
+    <text x="555" y="82" font-size="8" fill="#333333" text-anchor="middle">- History</text>
+    <text x="555" y="93" font-size="8" fill="#333333" text-anchor="middle">- Attributes</text>
+    <text x="555" y="104" font-size="8" fill="#333333" text-anchor="middle">- KG</text>
+  </g>
+
+  <!-- Cross/Plus circle on Retriever path -->
+  <circle id="node_combine_circle" data-id="node_combine_circle" data-class="child_node" data-parent="block_retriever"
+          cx="555" cy="148" r="4" fill="#ffffff" stroke="#1e1e1e" stroke-width="1"/>
+  <line x1="551" y1="148" x2="559" y2="148" stroke="#1e1e1e" stroke-width="1"/>
+  <line x1="555" y1="144" x2="555" y2="152" stroke="#1e1e1e" stroke-width="1"/>
+
+  <!-- Child Node in Block 2: Debiased Retrieval -->
+  <g id="node_debiased_retrieval" data-id="node_debiased_retrieval" data-class="child_node" data-parent="block_retriever">
+    <rect x="428" y="160" width="254" height="48" rx="8" ry="8" fill="#ffebd0" stroke="#f6bb78" stroke-width="1.2"/>
+    <text x="555" y="179" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">Debiased Retrieval</text>
+    <text x="555" y="195" font-size="10.5" font-weight="bold" fill="#000000" text-anchor="middle"><tspan font-style="italic">score</tspan> = <tspan font-style="italic">&#x03B1;&#x00B7;s<tspan font-size="0.65em" baseline-shift="sub">sem</tspan></tspan> + (1-<tspan font-style="italic">&#x03B1;</tspan>)&#x00B7;<tspan font-style="italic">s<tspan font-size="0.65em" baseline-shift="sub">inv</tspan></tspan></text>
+  </g>
+
+  <!-- Child Node in Block 2: Top-K Evidence D -->
+  <g id="node_topk_evidence" data-id="node_topk_evidence" data-class="child_node" data-parent="block_retriever">
+    <path d="M 506,242 L 604,242 L 604,276 Q 580,266 555,276 Q 530,286 506,276 Z" fill="#fffbcd" stroke="#edd96a" stroke-width="1.2"/>
+    <text x="555" y="261" font-size="10.5" fill="#1e1e1e" text-anchor="middle">Top-K Evidence <tspan font-style="italic">D</tspan></text>
+  </g>
+
+  <!-- Child Node in Block 3: Transformer Layer -->
+  <g id="node_transformer" data-id="node_transformer" data-class="child_node" data-parent="block_ranker">
+    <rect x="780" y="124" width="202" height="60" rx="10" ry="10" fill="#d9eed9" stroke="#9ed8a3" stroke-width="1.2"/>
+    <text x="881" y="158" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">Transformer Layer: [<tspan font-style="italic">z<tspan font-size="0.65em" baseline-shift="sub">u</tspan></tspan>; <tspan font-style="italic">z<tspan font-size="0.65em" baseline-shift="sub">i</tspan></tspan>; <tspan font-style="italic">z<tspan font-size="0.65em" baseline-shift="sub">D</tspan></tspan>]</text>
+  </g>
+
+  <!-- Child Node in Block 3: Rec Score -->
+  <g id="node_rec_score" data-id="node_rec_score" data-class="child_node" data-parent="block_ranker">
+    <rect x="780" y="214" width="96" height="50" rx="8" ry="8" fill="#ebe0f2" stroke="#ccaadc" stroke-width="1.2"/>
+    <text x="828" y="236" font-size="10" fill="#222222" text-anchor="middle">Rec Score</text>
+    <text x="828" y="251" font-size="10" fill="#222222" text-anchor="middle"><tspan font-style="italic">r(i | s<tspan font-size="0.65em" baseline-shift="sub">u</tspan>, D)</tspan></text>
+  </g>
+
+  <!-- Child Node in Block 3: Explanation -->
+  <g id="node_explanation" data-id="node_explanation" data-class="child_node" data-parent="block_ranker">
+    <rect x="893" y="214" width="88" height="50" rx="8" ry="8" fill="#ebe0f2" stroke="#ccaadc" stroke-width="1.2"/>
+    <text x="937" y="236" font-size="10" fill="#222222" text-anchor="middle">Explanation</text>
+    <text x="937" y="251" font-size="10" fill="#222222" text-anchor="middle"><tspan font-style="italic">x</tspan> (Text)</text>
+  </g>
+
+  <!-- Standalone: Rec Loss -->
+  <g id="node_rec_loss" data-id="node_rec_loss" data-class="standalone_node" data-parent="root">
+    <polygon points="780,344 828,378 780,412 732,378" fill="#fcdad9" stroke="#e89896" stroke-width="1.2"/>
+    <text x="780" y="374" font-size="10" fill="#4a1818" text-anchor="middle">Rec Loss</text>
+    <text x="780" y="388" font-size="10" fill="#4a1818" text-anchor="middle"><tspan font-style="italic">L<tspan font-size="0.65em" baseline-shift="sub">rec</tspan></tspan></text>
+  </g>
+
+  <!-- Standalone: Consistency Constraint -->
+  <g id="node_consistency_constraint" data-id="node_consistency_constraint" data-class="standalone_node" data-parent="root">
+    <polygon points="937,344 1000,378 937,412 874,378" fill="#fcdad9" stroke="#e89896" stroke-width="1.2"/>
+    <text x="937" y="374" font-size="9.5" fill="#4a1818" text-anchor="middle">Consistency Constraint</text>
+    <text x="937" y="388" font-size="9.5" fill="#4a1818" text-anchor="middle"><tspan font-style="italic">L<tspan font-size="0.65em" baseline-shift="sub">cons</tspan></tspan></text>
+  </g>
+
+  <!-- ================= EDGES & LABELS ================= -->
+
+  <!-- User Sequence -> Invariant Rep Learning -->
+  <path id="edge_user_to_encoder" data-id="edge_user_to_encoder" data-class="edge"
+        data-source="node_user_seq" data-target="node_rep_learning"
+        d="M 116,144 L 132,144 L 132,168 L 152,168"
+        fill="none" stroke="#1e1e1e" stroke-width="1.4" marker-end="url(#arrow)"/>
+
+  <!-- Environment -> merge with User Sequence -->
+  <path id="edge_env_to_encoder" data-id="edge_env_to_encoder" data-class="edge"
+        data-source="node_env" data-target="node_rep_learning"
+        d="M 116,226 L 132,226 L 132,168"
+        fill="none" stroke="#1e1e1e" stroke-width="1.4" stroke-dasharray="4,4"/>
+
+  <!-- Invariant Rep Learning -> IRM Loss -->
+  <line id="edge_encoder_to_irm" data-id="edge_encoder_to_irm" data-class="edge"
+        data-source="node_rep_learning" data-target="node_irm_loss"
+        x1="243" y1="202" x2="243" y2="230"
+        fill="none" stroke="#e03e3e" stroke-width="1.4" stroke-dasharray="3,3" marker-end="url(#arrow-red)"/>
+
+  <!-- Invariant Rep Learning -> Debiased Retrieval -->
+  <path id="edge_encoder_to_retriever" data-id="edge_encoder_to_retriever" data-class="edge"
+        data-source="node_rep_learning" data-target="node_debiased_retrieval"
+        d="M 330,168 L 396,168 L 396,184 L 424,184"
+        fill="none" stroke="#1e1e1e" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <text id="text_label_inv_rep" x="366" y="179" font-size="9" fill="#1e1e1e" text-anchor="middle" data-id="text_label_inv_rep" data-class="text_node" data-parent="root">Invariant Rep <tspan font-style="italic">z</tspan></text>
+
+  <!-- Invariant Rep Learning -> Transformer Layer -->
+  <path id="edge_encoder_to_transformer" data-id="edge_encoder_to_transformer" data-class="edge"
+        data-source="node_rep_learning" data-target="node_transformer"
+        d="M 330,148 L 738,148 L 738,136 L 776,136"
+        fill="none" stroke="#1e1e1e" stroke-width="1.4" marker-end="url(#arrow)"/>
+
+  <!-- Evidence Pool -> Combine / Debiased Retrieval -->
+  <line id="edge_pool_to_circle" data-id="edge_pool_to_circle" data-class="edge"
+        data-source="node_evidence_pool" data-target="node_combine_circle"
+        x1="555" y1="120" x2="555" y2="144"
+        fill="none" stroke="#1e1e1e" stroke-width="1.4"/>
+  <line id="edge_circle_to_retrieval" data-id="edge_circle_to_retrieval" data-class="edge"
+        data-source="node_combine_circle" data-target="node_debiased_retrieval"
+        x1="555" y1="152" x2="555" y2="160"
+        fill="none" stroke="#1e1e1e" stroke-width="1.4"/>
+
+  <!-- Debiased Retrieval -> Top-K Evidence -->
+  <line id="edge_retrieval_to_topk" data-id="edge_retrieval_to_topk" data-class="edge"
+        data-source="node_debiased_retrieval" data-target="node_topk_evidence"
+        x1="555" y1="208" x2="555" y2="238"
+        fill="none" stroke="#1e1e1e" stroke-width="1.4" marker-end="url(#arrow)"/>
+
+  <!-- Top-K Evidence -> Transformer Layer -->
+  <path id="edge_topk_to_transformer" data-id="edge_topk_to_transformer" data-class="edge"
+        data-source="node_topk_evidence" data-target="node_transformer"
+        d="M 604,260 L 722,260 L 722,168 L 776,168"
+        fill="none" stroke="#1e1e1e" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <text id="text_label_evidence" x="722" y="246" font-size="9" fill="#1e1e1e" text-anchor="middle" data-id="text_label_evidence" data-class="text_node" data-parent="root">Evidence</text>
+
+  <!-- Transformer Layer -> Rec Score & Explanation -->
+  <path id="edge_transformer_branches" data-id="edge_transformer_branches" data-class="edge"
+        data-source="node_transformer" data-target="node_rec_score"
+        d="M 881,184 L 881,200 L 828,200 L 828,210"
+        fill="none" stroke="#1e1e1e" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <path id="edge_transformer_to_expl" data-id="edge_transformer_to_expl" data-class="edge"
+        data-source="node_transformer" data-target="node_explanation"
+        d="M 881,200 L 937,200 L 937,210"
+        fill="none" stroke="#1e1e1e" stroke-width="1.4" marker-end="url(#arrow)"/>
+
+  <!-- Rec Score -> Rec Loss -->
+  <path id="edge_rec_to_loss" data-id="edge_rec_to_loss" data-class="edge"
+        data-source="node_rec_score" data-target="node_rec_loss"
+        d="M 828,264 L 828,306 L 780,306 L 780,340"
+        fill="none" stroke="#e03e3e" stroke-width="1.4" stroke-dasharray="3,3" marker-end="url(#arrow-red)"/>
+
+  <!-- Explanation -> Consistency Constraint -->
+  <line id="edge_expl_to_cons" data-id="edge_expl_to_cons" data-class="edge"
+        data-source="node_explanation" data-target="node_consistency_constraint"
+        x1="937" y1="264" x2="937" y2="340"
+        fill="none" stroke="#e03e3e" stroke-width="1.4" stroke-dasharray="3,3" marker-end="url(#arrow-red)"/>
+
+  <!-- Top-K Evidence -> Consistency Constraint (Bottom dashed line) -->
+  <path id="edge_topk_to_cons" data-id="edge_topk_to_cons" data-class="edge"
+        data-source="node_topk_evidence" data-target="node_consistency_constraint"
+        d="M 578,280 L 578,426 L 842,426 L 842,378 L 870,378"
+        fill="none" stroke="#e03e3e" stroke-width="1.4" stroke-dasharray="3,3" marker-end="url(#arrow-red)"/>
+  <text id="text_label_d_in_D" x="696" y="423" font-size="9" fill="#1e1e1e" text-anchor="middle" data-id="text_label_d_in_D" data-class="text_node" data-parent="root"><tspan font-style="italic">d</tspan> &#x2208; <tspan font-style="italic">D</tspan></text>
+
+  <!-- ================= DYNAMIC NARRATION BANNER ================= -->
+  <g id="narration_banner">
+    <rect x="50" y="455" width="900" height="60" rx="8" ry="8" fill="#f8f9fa" stroke="#e9ecef" stroke-width="1"/>
+    
+    <text id="narr_ts1" class="narr-text" x="50%" y="490" text-anchor="middle" font-size="13" font-weight="500" fill="#212529">
+      <tspan x="50%">The pipeline begins with the input User Sequence alongside the Environment context.</tspan>
+    </text>
+
+    <text id="narr_ts2" class="narr-text" x="50%" y="490" text-anchor="middle" font-size="13" font-weight="500" fill="#212529">
+      <tspan x="50%">These inputs feed into the Causal-Invariant Preference Encoder to perform Invariant Representation Learning.</tspan>
+    </text>
+
+    <text id="narr_ts3" class="narr-text" x="50%" y="490" text-anchor="middle" font-size="13" font-weight="500" fill="#212529">
+      <tspan x="50%">This encoding process is supervised by the Invariant Risk Minimization loss.</tspan>
+    </text>
+
+    <text id="narr_ts4" class="narr-text" x="50%" y="482" text-anchor="middle" font-size="13" font-weight="500" fill="#212529">
+      <tspan x="50%">Meanwhile, the Causal-Guided RAG Retriever accesses an Evidence Pool</tspan>
+      <tspan x="50%" dy="1.25em">containing history, attributes, and knowledge graph data.</tspan>
+    </text>
+
+    <text id="narr_ts5" class="narr-text" x="50%" y="482" text-anchor="middle" font-size="13" font-weight="500" fill="#212529">
+      <tspan x="50%">The learned invariant representation and the evidence pool are combined</tspan>
+      <tspan x="50%" dy="1.25em">in the Debiased Retrieval step to score candidate evidence.</tspan>
+    </text>
+
+    <text id="narr_ts6" class="narr-text" x="50%" y="490" text-anchor="middle" font-size="13" font-weight="500" fill="#212529">
+      <tspan x="50%">This retrieval yields the Top-K Evidence set.</tspan>
+    </text>
+
+    <text id="narr_ts7" class="narr-text" x="50%" y="482" text-anchor="middle" font-size="13" font-weight="500" fill="#212529">
+      <tspan x="50%">In the Ranker and Explainer block, a Transformer Layer integrates</tspan>
+      <tspan x="50%" dy="1.25em">the invariant representations with the retrieved evidence.</tspan>
+    </text>
+
+    <text id="narr_ts8" class="narr-text" x="50%" y="490" text-anchor="middle" font-size="13" font-weight="500" fill="#212529">
+      <tspan x="50%">The transformer produces two outputs: a Recommendation Score and an Explanation text.</tspan>
+    </text>
+
+    <text id="narr_ts9" class="narr-text" x="50%" y="482" text-anchor="middle" font-size="13" font-weight="500" fill="#212529">
+      <tspan x="50%">Finally, the outputs are evaluated using a Recommendation Loss and a Consistency Constraint</tspan>
+      <tspan x="50%" dy="1.25em">connecting the explanation with the retrieved evidence.</tspan>
+    </text>
+  </g>
+
+</svg>

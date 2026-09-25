@@ -1,0 +1,246 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1969 1160" width="1969" height="1160">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#000000"/>
+    </marker>
+    <style>
+      #node_dataset_input, #raster_dataset_folder, #title_input_def, #edge_input_to_prep,
+      #block_dataset_preprocessing, #node_feature_selection, #title_dataset_prep, #edge_feat_to_split,
+      #node_training_validation, #edge_split_to_meta,
+      #node_meta_features, #edge_prep_to_algo,
+      #node_algorithm_selection, #raster_heads_icon, #title_algo_sel, #edge_algo_to_tuning,
+      #node_parameter_tuning, #raster_knob_icon, #title_param_tuning, #edge_tuning_to_output,
+      #block_computing_output, #node_computing_output_inner, #raster_barchart_icon, #title_computing_out_1, #title_computing_out_2, #title_computing_out_3, #label_update, #edge_output_to_kb,
+      #node_knowledge_base, #raster_books_icon, #label_retrieve, #edge_kb_to_algo {
+        filter: grayscale(100%) opacity(0.4);
+        animation-name: colorPop;
+        animation-duration: 0.5s;
+        animation-fill-mode: forwards;
+      }
+
+      @keyframes colorPop {
+        to {
+          filter: grayscale(0%) opacity(1);
+        }
+      }
+
+      #node_dataset_input, #raster_dataset_folder, #title_input_def, #edge_input_to_prep {
+        animation-delay: 0.5s;
+      }
+
+      #block_dataset_preprocessing, #node_feature_selection, #title_dataset_prep, #edge_feat_to_split {
+        animation-delay: 1.0s;
+      }
+
+      #node_training_validation, #edge_split_to_meta {
+        animation-delay: 1.5s;
+      }
+
+      #node_meta_features, #edge_prep_to_algo {
+        animation-delay: 2.0s;
+      }
+
+      #node_algorithm_selection, #raster_heads_icon, #title_algo_sel, #edge_algo_to_tuning {
+        animation-delay: 2.5s;
+      }
+
+      #node_parameter_tuning, #raster_knob_icon, #title_param_tuning, #edge_tuning_to_output {
+        animation-delay: 3.0s;
+      }
+
+      #block_computing_output, #node_computing_output_inner, #raster_barchart_icon, #title_computing_out_1, #title_computing_out_2, #title_computing_out_3, #label_update, #edge_output_to_kb {
+        animation-delay: 3.5s;
+      }
+
+      #node_knowledge_base, #raster_books_icon, #label_retrieve, #edge_kb_to_algo {
+        animation-delay: 4.0s;
+      }
+
+      .narrative-text {
+        opacity: 0;
+        font-family: sans-serif;
+        font-size: 22px;
+        font-weight: 500;
+        fill: #1a202c;
+      }
+
+      @keyframes bannerHold {
+        0%, 99.9% { opacity: 1; }
+        100% { opacity: 0; }
+      }
+
+      @keyframes bannerHoldFinal {
+        0%, 100% { opacity: 1; }
+      }
+
+      #narr_ts1 { animation: bannerHold 0.5s linear 0.5s forwards; }
+      #narr_ts2 { animation: bannerHold 0.5s linear 1.0s forwards; }
+      #narr_ts3 { animation: bannerHold 0.5s linear 1.5s forwards; }
+      #narr_ts4 { animation: bannerHold 0.5s linear 2.0s forwards; }
+      #narr_ts5 { animation: bannerHold 0.5s linear 2.5s forwards; }
+      #narr_ts6 { animation: bannerHold 0.5s linear 3.0s forwards; }
+      #narr_ts7 { animation: bannerHold 0.5s linear 3.5s forwards; }
+      #narr_ts8 { animation: bannerHoldFinal 0.5s linear 4.0s forwards; }
+    </style>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="100%" height="100%" fill="#ffffff"/>
+
+  <!-- Vertical Section Dividers -->
+  <line x1="325" y1="40" x2="325" y2="980" stroke="#000000" stroke-width="2" stroke-dasharray="8,8"/>
+  <line x1="780" y1="40" x2="780" y2="980" stroke="#000000" stroke-width="2" stroke-dasharray="8,8"/>
+  <line x1="1172" y1="40" x2="1172" y2="980" stroke="#000000" stroke-width="2" stroke-dasharray="8,8"/>
+  <line x1="1558" y1="40" x2="1558" y2="980" stroke="#000000" stroke-width="2" stroke-dasharray="8,8"/>
+
+  <!-- Section Column Headers (Top) -->
+  <text id="title_input_def" data-id="title_input_def" data-class="text_node" data-parent="root" x="168" y="65" font-family="sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#000000">Input Definition</text>
+  <text id="title_dataset_prep" data-id="title_dataset_prep" data-class="text_node" data-parent="root" x="550" y="65" font-family="sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#000000">Dataset Preprocessing</text>
+  <text id="title_algo_sel" data-id="title_algo_sel" data-class="text_node" data-parent="root" x="976" y="65" font-family="sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#000000">Algorithm Selection</text>
+  <text id="title_param_tuning" data-id="title_param_tuning" data-class="text_node" data-parent="root" x="1365" y="65" font-family="sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#000000">Parameter Tuning</text>
+  <text id="title_computing_out_1" data-id="title_computing_out_1" data-class="text_node" data-parent="root" x="1775" y="52" font-family="sans-serif" font-size="26" font-weight="bold" text-anchor="middle" fill="#000000">Computing Output and</text>
+  <text id="title_computing_out_2" data-id="title_computing_out_2" data-class="text_node" data-parent="root" x="1775" y="85" font-family="sans-serif" font-size="26" font-weight="bold" text-anchor="middle" fill="#000000">Updating Knowledge</text>
+  <text id="title_computing_out_3" data-id="title_computing_out_3" data-class="text_node" data-parent="root" x="1775" y="118" font-family="sans-serif" font-size="26" font-weight="bold" text-anchor="middle" fill="#000000">base</text>
+
+  <!-- Edges & Connectors -->
+  <g>
+    <!-- Dataset Input to Preprocessing Container -->
+    <path id="edge_input_to_prep" data-id="edge_input_to_prep" data-class="edge" data-source="node_dataset_input" data-target="block_dataset_preprocessing" d="M 277 538 L 382 538" fill="none" stroke="#000000" stroke-width="4" marker-end="url(#arrow)"/>
+
+    <!-- Inside Preprocessing: Box 1 to Box 2 -->
+    <path id="edge_feat_to_split" data-id="edge_feat_to_split" data-class="edge" data-source="node_feature_selection" data-target="node_training_validation" d="M 554 315 L 554 460" fill="none" stroke="#000000" stroke-width="4" marker-end="url(#arrow)"/>
+
+    <!-- Inside Preprocessing: Box 2 to Box 3 -->
+    <path id="edge_split_to_meta" data-id="edge_split_to_meta" data-class="edge" data-source="node_training_validation" data-target="node_meta_features" d="M 554 615 L 554 760" fill="none" stroke="#000000" stroke-width="4" marker-end="url(#arrow)"/>
+
+    <!-- Preprocessing Container to Algorithm Selection -->
+    <path id="edge_prep_to_algo" data-id="edge_prep_to_algo" data-class="edge" data-source="block_dataset_preprocessing" data-target="node_algorithm_selection" d="M 727 538 L 818 538" fill="none" stroke="#000000" stroke-width="4" marker-end="url(#arrow)"/>
+
+    <!-- Algorithm Selection to Hyper-parameter Tuning -->
+    <path id="edge_algo_to_tuning" data-id="edge_algo_to_tuning" data-class="edge" data-source="node_algorithm_selection" data-target="node_parameter_tuning" d="M 1142 538 L 1205 538" fill="none" stroke="#000000" stroke-width="4" marker-end="url(#arrow)"/>
+
+    <!-- Hyper-parameter Tuning to Computing Output -->
+    <path id="edge_tuning_to_output" data-id="edge_tuning_to_output" data-class="edge" data-source="node_parameter_tuning" data-target="block_computing_output" d="M 1529 538 L 1608 538" fill="none" stroke="#000000" stroke-width="4" marker-end="url(#arrow)"/>
+
+    <!-- Computing Output down to Knowledge Base (Update) -->
+    <path id="edge_output_to_kb" data-id="edge_output_to_kb" data-class="edge" data-source="block_computing_output" data-target="node_knowledge_base" d="M 1780 662 L 1780 860 L 1522 860" fill="none" stroke="#000000" stroke-width="4" marker-end="url(#arrow)"/>
+
+    <!-- Knowledge Base to Algorithm Selection (Retrieve) -->
+    <path id="edge_kb_to_algo" data-id="edge_kb_to_algo" data-class="edge" data-source="node_knowledge_base" data-target="node_algorithm_selection" d="M 1177 860 L 980 860 L 980 644" fill="none" stroke="#000000" stroke-width="4" marker-end="url(#arrow)"/>
+  </g>
+
+  <!-- Edge Labels -->
+  <text id="label_update" data-id="label_update" data-class="text_node" data-parent="root" x="1675" y="835" font-family="sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#000000">Update</text>
+  <text id="label_retrieve" data-id="label_retrieve" data-class="text_node" data-parent="root" x="1075" y="835" font-family="sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#000000">Retrieve</text>
+
+  <!-- Node: Dataset Input -->
+  <g id="node_dataset_input" data-id="node_dataset_input" data-class="standalone_node" data-parent="root">
+    <rect x="25" y="450" width="252" height="175" rx="30" ry="30" fill="#e2f0d9" stroke="#000000" stroke-width="2"/>
+    <text x="151" y="488" font-family="sans-serif" font-size="23" font-weight="bold" text-anchor="middle" fill="#000000">Dataset Input</text>
+    <!-- Placeholder: Folder graphic -->
+    <g id="raster_dataset_folder" data-id="raster_dataset_folder" data-class="raster_node"><image href="../../rasters/Paper2Fig_pipe_easy_000000249/crop_raster_dataset_folder.png" xlink:href="../../rasters/Paper2Fig_pipe_easy_000000249/crop_raster_dataset_folder.png" x="101" y="515" width="100" height="85" preserveAspectRatio="xMidYMid meet" /></g>
+  </g>
+
+  <!-- Container: Dataset Preprocessing -->
+  <g id="block_dataset_preprocessing" data-id="block_dataset_preprocessing" data-class="block" data-parent="root">
+    <rect x="382" y="105" width="345" height="840" rx="50" ry="50" fill="#fff2cc" stroke="#000000" stroke-width="2"/>
+    
+    <!-- Child 1: Feature Selection / Preprocessing -->
+    <g id="node_feature_selection" data-id="node_feature_selection" data-class="child_node" data-parent="block_dataset_preprocessing">
+      <rect x="423" y="160" width="263" height="155" rx="30" ry="30" fill="#f8cecc" stroke="#000000" stroke-width="2"/>
+      <text x="554" y="215" font-family="sans-serif" font-size="23" font-weight="bold" text-anchor="middle" fill="#000000">Feature</text>
+      <text x="554" y="248" font-family="sans-serif" font-size="23" font-weight="bold" text-anchor="middle" fill="#000000">Selection /</text>
+      <text x="554" y="281" font-family="sans-serif" font-size="23" font-weight="bold" text-anchor="middle" fill="#000000">Preprocessing</text>
+    </g>
+
+    <!-- Child 2: Training/Validation Split -->
+    <g id="node_training_validation" data-id="node_training_validation" data-class="child_node" data-parent="block_dataset_preprocessing">
+      <rect x="423" y="460" width="263" height="155" rx="30" ry="30" fill="#f8cecc" stroke="#000000" stroke-width="2"/>
+      <text x="554" y="528" font-family="sans-serif" font-size="23" font-weight="bold" text-anchor="middle" fill="#000000">Training/Validati</text>
+      <text x="554" y="561" font-family="sans-serif" font-size="23" font-weight="bold" text-anchor="middle" fill="#000000">on Split</text>
+    </g>
+
+    <!-- Child 3: Meta-Features Computation -->
+    <g id="node_meta_features" data-id="node_meta_features" data-class="child_node" data-parent="block_dataset_preprocessing">
+      <rect x="423" y="760" width="263" height="155" rx="30" ry="30" fill="#f8cecc" stroke="#000000" stroke-width="2"/>
+      <text x="554" y="830" font-family="sans-serif" font-size="23" font-weight="bold" text-anchor="middle" fill="#000000">Meta-Features</text>
+      <text x="554" y="863" font-family="sans-serif" font-size="23" font-weight="bold" text-anchor="middle" fill="#000000">Computation</text>
+    </g>
+  </g>
+
+  <!-- Node: Algorithm Selection (Meta-Learning) -->
+  <g id="node_algorithm_selection" data-id="node_algorithm_selection" data-class="standalone_node" data-parent="root">
+    <rect x="818" y="428" width="324" height="216" rx="35" ry="35" fill="#dae8fc" stroke="#000000" stroke-width="2"/>
+    <text x="980" y="465" font-family="sans-serif" font-size="23" font-weight="bold" text-anchor="middle" fill="#000000">Algorithm Selection</text>
+    <text x="980" y="497" font-family="sans-serif" font-size="23" font-weight="bold" text-anchor="middle" fill="#000000">(Meta-Learning)</text>
+    <!-- Placeholder: Heads / Interaction graphic -->
+    <g id="raster_heads_icon" data-id="raster_heads_icon" data-class="raster_node"><image href="../../rasters/Paper2Fig_pipe_easy_000000249/crop_raster_heads_icon.png" xlink:href="../../rasters/Paper2Fig_pipe_easy_000000249/crop_raster_heads_icon.png" x="895" y="515" width="170" height="105" preserveAspectRatio="xMidYMid meet" /></g>
+  </g>
+
+  <!-- Node: Hyper-parameter Tuning (Bayesian Optimization) -->
+  <g id="node_parameter_tuning" data-id="node_parameter_tuning" data-class="standalone_node" data-parent="root">
+    <rect x="1205" y="428" width="324" height="216" rx="35" ry="35" fill="#dae8fc" stroke="#000000" stroke-width="2"/>
+    <text x="1367" y="457" font-family="sans-serif" font-size="21" font-weight="bold" text-anchor="middle" fill="#000000">Hyper-parameter</text>
+    <text x="1367" y="484" font-family="sans-serif" font-size="21" font-weight="bold" text-anchor="middle" fill="#000000">Tuning</text>
+    <text x="1367" y="511" font-family="sans-serif" font-size="21" font-weight="bold" text-anchor="middle" fill="#000000">(Bayesian Optimization)</text>
+    <!-- Placeholder: Dial / Knob graphic -->
+    <g id="raster_knob_icon" data-id="raster_knob_icon" data-class="raster_node"><image href="../../rasters/Paper2Fig_pipe_easy_000000249/crop_raster_knob_icon.png" xlink:href="../../rasters/Paper2Fig_pipe_easy_000000249/crop_raster_knob_icon.png" x="1302" y="525" width="130" height="95" preserveAspectRatio="xMidYMid meet" /></g>
+  </g>
+
+  <!-- Container: Computing Output -->
+  <g id="block_computing_output" data-id="block_computing_output" data-class="block" data-parent="root">
+    <rect x="1608" y="412" width="345" height="250" rx="45" ry="45" fill="#fff2cc" stroke="#000000" stroke-width="2"/>
+    
+    <!-- Inner Box: Computing Output -->
+    <g id="node_computing_output_inner" data-id="node_computing_output_inner" data-class="child_node" data-parent="block_computing_output">
+      <rect x="1629" y="442" width="303" height="190" rx="30" ry="30" fill="#d5e8d4" stroke="#000000" stroke-width="1.5"/>
+      <text x="1780" y="475" font-family="sans-serif" font-size="23" font-weight="bold" text-anchor="middle" fill="#000000">Computing Output</text>
+      <!-- Placeholder: Bar Chart graphic -->
+      <g id="raster_barchart_icon" data-id="raster_barchart_icon" data-class="raster_node"><image href="../../rasters/Paper2Fig_pipe_easy_000000249/crop_raster_barchart_icon.png" xlink:href="../../rasters/Paper2Fig_pipe_easy_000000249/crop_raster_barchart_icon.png" x="1705" y="495" width="150" height="115" preserveAspectRatio="xMidYMid meet" /></g>
+    </g>
+  </g>
+
+  <!-- Node: Knowledge Base (Cylinder Shape) -->
+  <g id="node_knowledge_base" data-id="node_knowledge_base" data-class="standalone_node" data-parent="root">
+    <!-- Cylinder Top Ellipse and Body Path -->
+    <path d="M 1177 775 C 1177 750 1522 750 1522 775 L 1522 935 C 1522 965 1177 965 1177 935 Z" fill="#f8cecc" stroke="#000000" stroke-width="2"/>
+    <ellipse cx="1349.5" cy="775" rx="172.5" ry="30" fill="#f8cecc" stroke="#000000" stroke-width="2"/>
+    <text x="1350" y="828" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#000000">Knowledge Base</text>
+    <!-- Placeholder: Books graphic -->
+    <g id="raster_books_icon" data-id="raster_books_icon" data-class="raster_node"><image href="../../rasters/Paper2Fig_pipe_easy_000000249/crop_raster_books_icon.png" xlink:href="../../rasters/Paper2Fig_pipe_easy_000000249/crop_raster_books_icon.png" x="1295" y="845" width="110" height="95" preserveAspectRatio="xMidYMid meet" /></g>
+  </g>
+
+  <!-- Dynamic Narration Banner -->
+  <g id="narration_banner">
+    <text id="narr_ts1" class="narrative-text" x="50%" y="1055" text-anchor="middle">
+      <tspan x="50%" dy="0">The workflow begins in the Input Definition phase with the dataset input,</tspan>
+      <tspan x="50%" dy="1.25em">which is fed directly into dataset preprocessing.</tspan>
+    </text>
+    <text id="narr_ts2" class="narrative-text" x="50%" y="1055" text-anchor="middle">
+      <tspan x="50%" dy="0">Within Dataset Preprocessing, initial feature selection and data preprocessing</tspan>
+      <tspan x="50%" dy="1.25em">are carried out on the incoming dataset.</tspan>
+    </text>
+    <text id="narr_ts3" class="narrative-text" x="50%" y="1065" text-anchor="middle">
+      <tspan x="50%" dy="0">The processed data is then partitioned into training and validation splits.</tspan>
+    </text>
+    <text id="narr_ts4" class="narrative-text" x="50%" y="1065" text-anchor="middle">
+      <tspan x="50%" dy="0">Meta-features characterizing the dataset are computed to guide the subsequent modeling steps.</tspan>
+    </text>
+    <text id="narr_ts5" class="narrative-text" x="50%" y="1055" text-anchor="middle">
+      <tspan x="50%" dy="0">In the Algorithm Selection phase, a meta-learning module selects promising candidate algorithms</tspan>
+      <tspan x="50%" dy="1.25em">informed by retrieved knowledge.</tspan>
+    </text>
+    <text id="narr_ts6" class="narrative-text" x="50%" y="1055" text-anchor="middle">
+      <tspan x="50%" dy="0">Hyper-parameter tuning is then performed using Bayesian optimization</tspan>
+      <tspan x="50%" dy="1.25em">to identify optimal parameter settings.</tspan>
+    </text>
+    <text id="narr_ts7" class="narrative-text" x="50%" y="1055" text-anchor="middle">
+      <tspan x="50%" dy="0">The framework computes the final evaluation output and sends performance metrics</tspan>
+      <tspan x="50%" dy="1.25em">back to update the knowledge base.</tspan>
+    </text>
+    <text id="narr_ts8" class="narrative-text" x="50%" y="1055" text-anchor="middle">
+      <tspan x="50%" dy="0">The centralized Knowledge Base accumulates learned insights,</tspan>
+      <tspan x="50%" dy="1.25em">allowing past configurations to be retrieved for future tasks.</tspan>
+    </text>
+  </g>
+</svg>

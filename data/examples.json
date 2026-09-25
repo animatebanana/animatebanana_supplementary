@@ -1,0 +1,50 @@
+[
+  {
+    "id": "cs-attention-block",
+    "title": "Transformer Attention Block",
+    "category": "Computer Science",
+    "diagramType": "Pipeline",
+    "complexity": "Simple",
+    "narration": {
+      "standard": [
+        { "t": 0, "caption": "Input tokens enter the block through a shared embedding layer." },
+        { "t": 4, "caption": "Queries, keys and values are projected in parallel branches." },
+        { "t": 9, "caption": "Scaled dot-product attention mixes information across tokens." },
+        { "t": 14, "caption": "Attention heads are concatenated and re-projected." },
+        { "t": 19, "caption": "A residual connection and layer norm stabilise the output." }
+      ]
+    }
+  },
+  {
+    "id": "ml-hybrid-encoder",
+    "title": "CNN + ViT Hybrid Encoder",
+    "category": "Machine Learning",
+    "diagramType": "Architecture",
+    "complexity": "Medium",
+    "narration": {
+      "standard": [
+        { "t": 0, "caption": "A CNN stem extracts local features from the raw image." },
+        { "t": 5, "caption": "Patches are embedded and passed through transformer layers." },
+        { "t": 11, "caption": "Local and global branches process complementary information." },
+        { "t": 17, "caption": "Enhanced locality modules fuse the two feature streams." },
+        { "t": 23, "caption": "The fused representation feeds the final classification head." }
+      ]
+    }
+  },
+  {
+    "id": "bio-protein-cascade",
+    "title": "Protein Folding Cascade",
+    "category": "Bioinformatics",
+    "diagramType": "Workflow",
+    "complexity": "Complex",
+    "narration": {
+      "standard": [
+        { "t": 0, "caption": "Sequence embeddings are computed from the raw amino-acid chain." },
+        { "t": 6, "caption": "Evolutionary and structural features are extracted in parallel." },
+        { "t": 13, "caption": "A recycling loop iteratively refines the pairwise representation." },
+        { "t": 20, "caption": "Coordinates are predicted from the refined representation." },
+        { "t": 27, "caption": "A final relaxation step resolves steric clashes." }
+      ]
+    }
+  }
+]

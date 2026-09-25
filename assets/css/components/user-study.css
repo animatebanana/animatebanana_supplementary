@@ -1,0 +1,477 @@
+/*
+  user-study.html — who took part, and the protocol they worked through.
+
+  Results are not repeated here; they are in the paper. The page pairs
+  writing with screenshots of the study portal, so a card is a column of
+  prose beside the frame it describes.
+*/
+
+/* This page runs wider than the site default: its cards pair a column of
+   writing with a screenshot, and both need room. The screenshots are
+   dense captures of a two-pane study portal, so they take the larger
+   share and the writing takes a newspaper measure beside them. */
+.page.us-widepage { max-width: 1380px; }
+
+.us-section { margin-top: clamp(38px, 5.5vw, 72px); }
+.us-section > h2 { margin: 2px 0 8px; }
+.us-section > p,
+.us-lede { max-width: 92ch; margin: 0 0 20px; color: var(--ink-soft); line-height: 1.65; }
+
+/* ---- Accents ----
+   One place to say what each colour is, so a tile only has to name it. */
+.us-a-pink   { --us-fill: var(--pink);   --us-wash: var(--pink-soft);   --us-deep: var(--pink-ink); }
+.us-a-blue   { --us-fill: var(--blue);   --us-wash: var(--blue-soft);   --us-deep: var(--blue-ink); }
+.us-a-mint   { --us-fill: var(--mint);   --us-wash: var(--mint-soft);   --us-deep: var(--mint-ink); }
+.us-a-tan    { --us-fill: var(--tan);    --us-wash: var(--tan-soft);    --us-deep: var(--tan-ink); }
+.us-a-banana { --us-fill: var(--banana); --us-wash: var(--banana-soft); --us-deep: var(--banana-ink); }
+
+/* ---- The headline panel ----
+   One block, four cards, each carrying its own colour. The panel is the
+   loud thing on the page, so it gets the paper-and-ink treatment: heavy
+   border, hard shadow, hatched ground behind the cards. */
+.us-headline {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin: 30px 0 10px;
+  padding: 14px;
+  border: 2.5px solid var(--ink);
+  border-radius: var(--radius-lg);
+  background: var(--bg-sunk);
+  background-image: var(--hatch-ink);
+  box-shadow: 7px 7px 0 var(--ink);
+}
+/* Wide cards: the glyph sits beside the number rather than above it, so
+   each card reads along its length instead of stacking into a square. */
+.us-head-stat {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 16px;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-md);
+  background: var(--us-wash);
+  padding: 16px 20px;
+  animation: us-pop 0.5s var(--ease-out) both;
+  animation-delay: calc(var(--i) * 90ms);
+}
+.us-head-glyph {
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  background: var(--us-fill);
+  color: var(--ink);
+  flex: none;
+}
+.us-head-glyph .us-icon { width: 27px; height: 27px; }
+.us-head-value {
+  font-family: var(--font-display);
+  font-size: clamp(2.1rem, 1.3rem + 2.1vw, 3.2rem);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.us-head-unit { font-size: 0.45em; font-weight: 700; margin-left: 3px; letter-spacing: 0; }
+.us-head-label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-top: 10px;
+}
+.us-head-sub { font-size: var(--fs-xs); color: var(--ink-soft); margin-top: 4px; }
+@keyframes us-pop { from { opacity: 0; transform: translateY(14px); } }
+
+/* ---- The cohort card: who they were, and how the sessions ran ---- */
+.us-cohort {
+  margin-top: 18px;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  padding: clamp(20px, 3vw, 32px);
+}
+.us-cohort-head h3 { margin: 0; font-size: 1.45rem; letter-spacing: -0.025em; }
+.us-cohort-head p {
+  margin: 5px 0 20px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  color: var(--ink-faint);
+}
+
+.us-group + .us-group { margin-top: 20px; }
+.us-group-title {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 10px;
+}
+
+.us-tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 12px;
+}
+/* Same wide shape as the headline cards, one step quieter. */
+.us-tile {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 14px;
+  border: 1.5px solid var(--ink);
+  border-radius: var(--radius-md);
+  background: var(--us-wash);
+  padding: 13px 16px;
+  transition: transform 0.22s var(--ease-out), box-shadow 0.22s var(--ease-out),
+    background 0.22s var(--ease-out);
+}
+.us-tile-glyph {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 1.5px solid var(--ink);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--ink);
+  transition: background 0.22s var(--ease-out);
+}
+.us-tile-glyph .us-icon { width: 22px; height: 22px; }
+.us-tile:hover,
+.us-tile:focus-within {
+  transform: translateY(-4px);
+  box-shadow: 4px 5px 0 var(--ink);
+}
+.us-tile:hover .us-tile-glyph,
+.us-tile:focus-within .us-tile-glyph { background: var(--us-fill); }
+.us-tile-value {
+  font-family: var(--font-display);
+  font-size: 1.85rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.us-tile-unit { font-size: 0.55em; font-weight: 700; margin-left: 1px; }
+.us-tile-label { font-size: var(--fs-xs); font-weight: 600; margin-top: 5px; line-height: 1.35; }
+.us-tile-note {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  color: var(--ink-faint);
+  margin-top: 3px;
+}
+.us-tile-pending { border-style: dashed; }
+.us-tile-pending .us-tile-value { color: var(--ink-faint); }
+
+/* ---- How the sessions ran ---- */
+.us-setting {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 18px 26px;
+  margin-top: 26px;
+  padding-top: 22px;
+  border-top: 1.5px solid var(--line);
+}
+.us-setting-title {
+  font-weight: 700;
+  font-size: var(--fs-sm);
+  padding-left: 13px;
+  border-left: 3px solid var(--banana);
+}
+.us-setting-text {
+  margin: 7px 0 0 13px;
+  font-size: var(--fs-xs);
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .us-head-stat { animation: none; }
+  .us-tile, .us-tile::after { transition: none; }
+}
+
+/* ---- Step cards ----
+   One per stage of a session: a number, a title, the writing, and the
+   screenshot of that stage beside it. */
+.us-step {
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  padding: 24px clamp(20px, 2.4vw, 30px) 26px;
+  margin-bottom: 20px;
+}
+.us-step-head { display: flex; align-items: baseline; gap: 13px; flex-wrap: wrap; margin-bottom: 14px; }
+.us-step-num {
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  font-weight: 800;
+  background: var(--hatch);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-stroke: 1.2px var(--ink);
+  line-height: 1;
+}
+.us-step h3 { margin: 0; font-size: 1.36rem; letter-spacing: -0.02em; }
+
+/* Writing left, screenshots right. The writing keeps a readable measure
+   while the pair together fills the card's width. */
+.us-step-grid { display: grid; grid-template-columns: minmax(0, 0.74fr) minmax(0, 1.26fr); gap: clamp(20px, 2.6vw, 36px); align-items: start; }
+.us-step-copy > p { margin: 0 0 14px; color: var(--ink-soft); line-height: 1.68; }
+.us-step-copy > p:last-child { margin-bottom: 0; }
+.us-step-copy-wide { max-width: 92ch; }
+
+.us-shots { display: flex; flex-direction: column; gap: 16px; }
+/* Four stages of one tournament, read as a 2×2 contact sheet rather
+   than a column you have to scroll to compare. */
+.us-shots-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 18px;
+}
+
+/* A footnote to a card: the normalisation note, the anonymity line. */
+.us-caption {
+  font-size: var(--fs-xs);
+  color: var(--ink-faint);
+  line-height: 1.55;
+  margin-top: 12px;
+  max-width: 92ch;
+}
+.us-anon-note { text-align: center; margin: 40px auto 0; }
+
+/* ---- Sub-steps ----
+   A stage of one experiment: its own small heading, its own writing, its
+   own screenshots. Ruled off rather than boxed, so a step card does not
+   turn into a stack of nested boxes. */
+.us-sub { margin-top: 26px; padding-top: 22px; border-top: 1.5px solid var(--line); }
+.us-sub-title {
+  margin: 0 0 14px;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 750;
+  letter-spacing: -0.015em;
+}
+.us-sub-title::before {
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 9px;
+  border: 1.5px solid var(--ink);
+  border-radius: 3px;
+  background: var(--banana);
+  transform: rotate(45deg) translateY(-1px);
+}
+.us-sub .us-q { margin: 14px 0; }
+
+/* ---- Screenshot windows ---- */
+.us-shot { margin: 0; }
+.us-shot-link { display: block; }
+.us-shot-frame {
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-md);
+  background: var(--bg-alt);
+  overflow: hidden;
+}
+/* A title bar, so a screenshot reads as a window rather than a floating
+   rectangle — three dots and the stage's name. */
+.us-shot-bar {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 11px;
+  border-bottom: 1.5px solid var(--ink);
+  background: var(--bg-sunk);
+}
+.us-shot-dot { width: 9px; height: 9px; border: 1.2px solid var(--ink); border-radius: 50%; }
+.us-shot-dot:nth-child(1) { background: var(--pink); }
+.us-shot-dot:nth-child(2) { background: var(--banana); }
+.us-shot-dot:nth-child(3) { background: var(--mint); }
+.us-shot-name {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  color: var(--ink-soft);
+  margin-left: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.us-shot-frame img { display: block; width: 100%; background: var(--surface); }
+.us-shot figcaption {
+  font-size: var(--fs-xs);
+  color: var(--ink-soft);
+  line-height: 1.5;
+  margin-top: 9px;
+}
+.us-screen-slot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 200px;
+  padding: 20px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  color: var(--ink-faint);
+  line-height: 1.7;
+  /* The path it names has no spaces to break on — let it break anywhere
+     rather than push the figure past the viewport on a phone. */
+  overflow-wrap: anywhere;
+}
+.us-shot-zoom {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  color: var(--ink-faint);
+}
+
+.us-meta { display: flex; gap: 8px; flex-wrap: wrap; margin: 14px 0 0; }
+
+/* ---- The questions, as the participant met them ----
+   A question is quoted material, so it gets the treatment a pull-quote
+   would: a banana rule down its left edge, the metric's initials set in
+   a chip on that rule, and the answer options as the buttons they were. */
+.us-q {
+  position: relative;
+  border: 1.5px solid var(--line-strong);
+  border-left: none;
+  border-radius: var(--radius-md);
+  background: linear-gradient(var(--bg-alt), var(--bg-alt)) padding-box;
+  padding: 16px 18px 16px 22px;
+  margin-left: 4px;
+  box-shadow: inset 4px 0 0 var(--banana);
+}
+.us-q-key {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--banana-ink);
+  background: var(--banana-soft);
+  border: 1.5px solid var(--banana-deep);
+  border-radius: 999px;
+  padding: 2px 10px;
+  margin-bottom: 9px;
+}
+.us-q-text {
+  font-size: 1.02rem;
+  font-weight: 550;
+  line-height: 1.5;
+  color: var(--ink);
+  margin: 0 0 11px;
+  max-width: 62ch;
+}
+.us-q-answers { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+/* The options as the participant saw them: pill buttons, hard shadow. */
+.us-answer {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 600;
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  padding: 4px 13px;
+  background: var(--surface);
+  box-shadow: 2px 2px 0 var(--ink);
+}
+.us-anchor { font-size: var(--fs-xs); color: var(--ink-faint); line-height: 1.45; }
+
+
+/* ---- Tournament ---- */
+.us-bracket { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 16px; }
+.us-seat {
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background: var(--surface);
+  box-shadow: 3px 3px 0 var(--ink);
+  padding: 9px 16px;
+  font-size: var(--fs-sm);
+  font-weight: 650;
+}
+.us-seat-win { background: var(--banana-soft); }
+.us-arrow { font-size: 1.1rem; color: var(--ink-faint); }
+
+/* ---- The contents bar ---- */
+.us-toc-sentinel { height: 1px; }
+.us-toc {
+  position: sticky;
+  top: 66px;
+  z-index: 20;
+  margin: 26px 0 0;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: 5px 5px 0 var(--ink);
+  overflow: hidden;
+  transition: border-radius 0.25s, box-shadow 0.25s;
+}
+.us-toc.is-stuck { border-radius: 0 0 var(--radius-md) var(--radius-md); box-shadow: 0 6px 18px -8px rgba(26, 24, 21, 0.35); }
+.us-toc-inner { display: flex; align-items: stretch; gap: 0; }
+.us-toc-title {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px 16px;
+  border-right: 1.5px solid var(--line-strong);
+  background: var(--banana-soft);
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+.us-toc-title small { font-family: var(--font-mono); font-size: var(--fs-micro); font-weight: 400; color: var(--ink-soft); }
+.us-toc-list { display: flex; overflow-x: auto; scrollbar-width: thin; }
+.us-toc-list a {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  padding: 10px 14px;
+  border-right: 1px solid var(--line);
+  font-size: var(--fs-xs);
+  line-height: 1.35;
+  color: var(--ink-soft);
+  transition: background var(--dur-fast), color var(--dur-fast);
+}
+.us-toc-list a:hover { background: var(--bg-alt); color: var(--ink); }
+.us-toc-list a b {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1.5px solid var(--ink);
+  background: var(--surface);
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  color: var(--ink);
+}
+.us-toc-list a.is-active { background: var(--banana-soft); color: var(--ink); font-weight: 600; }
+.us-toc-list a.is-active b { background: var(--banana); }
+/* A long word (a model or product name) must break rather than run past
+   the cell's edge: the last item in the bar was being clipped. */
+.us-toc-list a span { min-width: 0; overflow-wrap: anywhere; }
+.us-toc-list a { padding-right: 16px; }
+.us-toc-bar { display: block; height: 5px; background: var(--bg-sunk); }
+.us-toc-bar i { display: block; height: 100%; background: linear-gradient(90deg, #6a4fc4, #d9481f, #1c7c7d); transform-origin: 0 50%; transform: scaleX(0); transition: transform 0.15s linear; }
+
+#us-cohort, #us-prep, .us-step[id] { scroll-margin-top: 150px; }
+.us-toc { will-change: transform; }
+@media (max-width: 760px) {
+  .us-toc { top: 56px; }
+  .us-toc-title { display: none; }
+  .us-toc-list a { flex: 0 0 150px; }
+}

@@ -1,0 +1,34 @@
+[
+ {
+  "t": 0.0,
+  "text": "The framework begins with a set of unstructured facial images depicting an individual across diverse poses, expressions, and lighting conditions."
+ },
+ {
+  "t": 3.0,
+  "text": "These images are processed by the Omni-ID Encoder to construct a comprehensive identity representation."
+ },
+ {
+  "t": 5.94,
+  "text": "Each input face is first passed through a shared feature extractor to compute individual token features."
+ },
+ {
+  "t": 8.88,
+  "text": "The individual image tokens are concatenated along the token axis into a unified image-set feature representation."
+ },
+ {
+  "t": 11.82,
+  "text": "In parallel, a sequence of learnable, semantic-aware query tokens is initialized."
+ },
+ {
+  "t": 14.76,
+  "text": "Within the cross-attention layers, the learnable queries attend to the image-set features injected as keys and values to aggregate shared identity attributes."
+ },
+ {
+  "t": 17.7,
+  "text": "Subsequent self-attention layers further refine these feature interactions across the token sequence."
+ },
+ {
+  "t": 20.64,
+  "text": "Finally, the architecture outputs the holistic Omni-ID embedding, tailored for downstream generative face synthesis."
+ }
+]

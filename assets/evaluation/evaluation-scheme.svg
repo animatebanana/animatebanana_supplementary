@@ -1,0 +1,566 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1870 850" width="1870" height="850"
+     role="img" aria-labelledby="t d" font-family="Inter, system-ui, sans-serif">
+<title id="t">Evaluation scheme</title>
+<desc id="d">Validity, narrative quality and aggregation, worked on AnimateBanana's alpha masking
+animation of CVPR_2025_pipe00004: VF A, then ASC B, G = 1; Q_SS 1.0000, Q_GP 0.9722,
+Q_NA 0.9722; Q_n = AN = 0.9815. Press play on the film reel to run the evaluation.</desc>
+<style>
+  @import url('../fonts/fonts.css');
+  text { fill: #1A1815; font-size: 17px; }
+  .h1 { font-family: Fraunces, Georgia, serif; font-size: 34px; font-weight: 600; }
+  .lede { font-size: 18px; fill: #3B3730; }
+  .lede-sm { font-size: 17px; fill: #3B3730; }
+  .h2 { font-size: 18px; font-weight: 650; }
+  .h3 { font-size: 17px; font-weight: 650; }
+  .sm { font-size: 15px; fill: #3B3730; }
+  .xs { font-size: 13px; fill: #625C50; }
+  .note { font-size: 13px; fill: #625C50; font-style: italic; }
+  .hand { font-family: Caveat, 'Segoe Print', cursive; font-size: 22px; font-weight: 600; fill: #3B3730; }
+  .hand-line { fill: none; stroke: #1A1815; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 13px; fill: #625C50; letter-spacing: .04em; }
+  .m { font-family: Fraunces, Georgia, serif; font-style: italic; }
+  .sub { font-size: .72em; }
+  .ok { fill: #2F6B4E; font-weight: 650; }
+  .num { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 14px; }
+  .dig { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 14px; font-weight: 700; }
+  .score { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 22px; font-weight: 700; }
+  .big { font-family: Fraunces, Georgia, serif; font-size: 24px; font-weight: 600; }
+  .pend { fill: #958E7F; }
+  .j3 { fill: #8A3F55; }
+
+  .pa { fill: #F4F9FC; stroke: #BBDCEB; stroke-width: 2; }
+  .pa-h { fill: #EDF5FA; }
+  .pb { fill: #F4FBF7; stroke: #C2E8D5; stroke-width: 2; }
+  .pb-h { fill: #ECF8F1; }
+  .pc { fill: #FFFCF0; stroke: #FFD43B; stroke-width: 2; }
+  .pc-h { fill: #FFF2B8; }
+  .card { fill: #FFFFFF; stroke: #BBDCEB; stroke-width: 1.5; }
+  .card-g { fill: #FFFFFF; stroke: #C2E8D5; stroke-width: 1.5; }
+  .card-y { fill: #FFFFFF; stroke: #E9E2CF; stroke-width: 1.5; }
+  .pill { fill: #EDF5FA; }
+  .chip { fill: #FFFFFF; stroke: #1A1815; stroke-width: 1.5; }
+  .gate { fill: #ECF8F1; stroke: #7FC4A2; stroke-width: 1.5; }
+  .pink { fill: #FDF0F4; stroke: #F4CBD7; stroke-width: 1.5; }
+  .pink-p { fill: #F4CBD7; }
+  .ban { fill: #FFF9E6; stroke: #FFD43B; stroke-width: 1.5; }
+  .ban-p { fill: #FFE88A; }
+  .tan { fill: #F8F1E0; stroke: #E8DBBF; stroke-width: 1.5; }
+  .tan-p { fill: #E8DBBF; }
+  .ev { fill: #F4F9FC; stroke: #BBDCEB; stroke-width: 1.5; }
+  .now { fill: #FFF9E6; stroke: #F2B200; stroke-width: 2; }
+  .bubble { fill: #FFFFFF; stroke: #958E7F; stroke-width: 1.5; }
+  .wire { fill: none; stroke: #1A1815; stroke-width: 2; }
+  .head { fill: #1A1815; }
+  .packet { fill: #FFD43B; stroke: #1A1815; stroke-width: 1.5; }
+  .cellj { fill: #DDEEF6; }
+  .rule { stroke: #E9E2CF; stroke-width: 1; }
+
+  .film { fill: #1A1815; }
+  .perf { fill: #FFFEF9; }
+  .play { cursor: pointer; }
+  .play circle { fill: #FFD43B; stroke: #1A1815; stroke-width: 2.5; transition: transform .16s; transform-box: fill-box; transform-origin: center; }
+  .play:hover circle, .play:focus circle { transform: scale(1.08); }
+  .play:focus { outline: none; }
+  .play path { fill: #1A1815; pointer-events: none; }
+  .veil { fill: rgba(255, 254, 249, .35); }
+  .track { fill: #3B3730; }
+  .prog { fill: #FFD43B; }
+  .hot { fill: none; stroke: #F2B200; stroke-width: 3.5; }
+  .colhi { fill: #FFD43B; opacity: .45; }
+  .flash { fill: #FFD43B; pointer-events: none; }
+</style>
+<rect width="1870" height="850" fill="#FFFEF9"/>
+
+<rect x="6" y="6" width="618" height="836" rx="16" class="pa"/>
+<path d="M7 130V22a15 15 0 0 1 15-15h586a15 15 0 0 1 15 15V130z" class="pa-h"/>
+<text x="315" y="46" class="h1" text-anchor="middle">(a) Validity</text>
+<text x="315" y="78" class="lede" text-anchor="middle">Does the animation correctly realize the source diagram</text>
+<text x="315" y="103" class="lede" text-anchor="middle">with the requested style?</text>
+<rect x="16" y="146" width="186" height="230" rx="10" class="card"/>
+<text x="109" y="176" class="h3" text-anchor="middle">Source diagram <tspan class="m">D</tspan></text>
+<image href="../../EVALUATIONS_PAGE/Original_Image/CVPR_2025_pipe00004.png" x="24" y="218.45" width="170" height="77.1"/>
+<text x="109" y="356" class="mono" text-anchor="middle">CVPR_2025_pipe00004</text>
+<rect x="210" y="146" width="262" height="230" rx="10" class="card"/>
+<text x="341" y="176" class="h3" text-anchor="middle">Animated narrative <tspan class="m">V</tspan></text>
+<rect x="222" y="190" width="238" height="133.6" rx="4" class="film"/>
+<rect x="231" y="194" width="11" height="7" rx="1.5" class="perf"/>
+<rect x="231" y="312.6" width="11" height="7" rx="1.5" class="perf"/>
+<rect x="249.8" y="194" width="11" height="7" rx="1.5" class="perf"/>
+<rect x="249.8" y="312.6" width="11" height="7" rx="1.5" class="perf"/>
+<rect x="268.7" y="194" width="11" height="7" rx="1.5" class="perf"/>
+<rect x="268.7" y="312.6" width="11" height="7" rx="1.5" class="perf"/>
+<rect x="287.5" y="194" width="11" height="7" rx="1.5" class="perf"/>
+<rect x="287.5" y="312.6" width="11" height="7" rx="1.5" class="perf"/>
+<rect x="306.3" y="194" width="11" height="7" rx="1.5" class="perf"/>
+<rect x="306.3" y="312.6" width="11" height="7" rx="1.5" class="perf"/>
+<rect x="325.2" y="194" width="11" height="7" rx="1.5" class="perf"/>
+<rect x="325.2" y="312.6" width="11" height="7" rx="1.5" class="perf"/>
+<rect x="344" y="194" width="11" height="7" rx="1.5" class="perf"/>
+<rect x="344" y="312.6" width="11" height="7" rx="1.5" class="perf"/>
+<rect x="362.8" y="194" width="11" height="7" rx="1.5" class="perf"/>
+<rect x="362.8" y="312.6" width="11" height="7" rx="1.5" class="perf"/>
+<rect x="381.7" y="194" width="11" height="7" rx="1.5" class="perf"/>
+<rect x="381.7" y="312.6" width="11" height="7" rx="1.5" class="perf"/>
+<rect x="400.5" y="194" width="11" height="7" rx="1.5" class="perf"/>
+<rect x="400.5" y="312.6" width="11" height="7" rx="1.5" class="perf"/>
+<rect x="419.3" y="194" width="11" height="7" rx="1.5" class="perf"/>
+<rect x="419.3" y="312.6" width="11" height="7" rx="1.5" class="perf"/>
+<rect x="438.2" y="194" width="11" height="7" rx="1.5" class="perf"/>
+<rect x="438.2" y="312.6" width="11" height="7" rx="1.5" class="perf"/>
+<rect x="229" y="205" width="224" height="103.6" rx="0" class="perf"/>
+<svg x="230" y="206" width="222" height="101.6" viewBox="0 0 996 456" preserveAspectRatio="xMidYMin slice"><image href="../../EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_00.png" width="996" height="530"/></svg>
+<svg x="230" y="206" width="222" height="101.6" viewBox="0 0 996 456" preserveAspectRatio="xMidYMin slice" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+1s" dur="1s"/><set attributeName="visibility" to="visible" begin="play.click+23.9s" dur="1.2s"/><image href="../../EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_01.png" width="996" height="530"/></svg>
+<svg x="230" y="206" width="222" height="101.6" viewBox="0 0 996 456" preserveAspectRatio="xMidYMin slice" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+2s" dur="1s"/><set attributeName="visibility" to="visible" begin="play.click+25.1s" dur="1.2s"/><image href="../../EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_02.png" width="996" height="530"/></svg>
+<svg x="230" y="206" width="222" height="101.6" viewBox="0 0 996 456" preserveAspectRatio="xMidYMin slice" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+3s" dur="1s"/><set attributeName="visibility" to="visible" begin="play.click+26.3s" dur="1.2s"/><image href="../../EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_03.png" width="996" height="530"/></svg>
+<svg x="230" y="206" width="222" height="101.6" viewBox="0 0 996 456" preserveAspectRatio="xMidYMin slice" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+4s" dur="1s"/><set attributeName="visibility" to="visible" begin="play.click+27.5s" dur="1.2s"/><image href="../../EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_04.png" width="996" height="530"/></svg>
+<svg x="230" y="206" width="222" height="101.6" viewBox="0 0 996 456" preserveAspectRatio="xMidYMin slice" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+5s" dur="1s"/><set attributeName="visibility" to="visible" begin="play.click+28.7s" dur="1.2s"/><image href="../../EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_05.png" width="996" height="530"/></svg>
+<svg x="230" y="206" width="222" height="101.6" viewBox="0 0 996 456" preserveAspectRatio="xMidYMin slice" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+6s" dur="1s"/><set attributeName="visibility" to="visible" begin="play.click+29.9s" dur="1.2s"/><image href="../../EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_06.png" width="996" height="530"/></svg>
+<svg x="230" y="206" width="222" height="101.6" viewBox="0 0 996 456" preserveAspectRatio="xMidYMin slice" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+7s" dur="1s"/><set attributeName="visibility" to="visible" begin="play.click+31.1s" dur="1.2s"/><image href="../../EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_07.png" width="996" height="530"/></svg>
+<svg x="230" y="206" width="222" height="101.6" viewBox="0 0 996 456" preserveAspectRatio="xMidYMin slice" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+8s" dur="1s"/><set attributeName="visibility" to="visible" begin="play.click+32.3s" dur="1.2s"/><image href="../../EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_08.png" width="996" height="530"/></svg>
+<svg x="230" y="206" width="222" height="101.6" viewBox="0 0 996 456" preserveAspectRatio="xMidYMin slice" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+9s" dur="1s"/><set attributeName="visibility" to="visible" begin="play.click+33.5s" dur="1.2s"/><image href="../../EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_09.png" width="996" height="530"/></svg>
+<svg x="230" y="206" width="222" height="101.6" viewBox="0 0 996 456" preserveAspectRatio="xMidYMin slice" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+10s" dur="1s"/><set attributeName="visibility" to="visible" begin="play.click+34.7s" dur="1.2s"/><image href="../../EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_10.png" width="996" height="530"/></svg>
+<svg x="230" y="206" width="222" height="101.6" viewBox="0 0 996 456" preserveAspectRatio="xMidYMin slice" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+11s" dur="1s"/><set attributeName="visibility" to="visible" begin="play.click+35.9s" dur="1.2s"/><image href="../../EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_11.png" width="996" height="530"/></svg>
+<rect x="222" y="331.6" width="238" height="5" rx="2.5" class="track" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+0s" dur="47s"/></rect>
+<rect x="222" y="331.6" width="0" height="5" rx="2.5" class="prog" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+0s" dur="47s"/><animate attributeName="width" calcMode="discrete" values="19.8333;39.6667;59.5;79.3333;99.1667;119;138.833;158.667;178.5;198.333;218.167;238" begin="play.click" dur="12s" fill="freeze"/><animate attributeName="width" calcMode="discrete" values="19.8333;39.6667;59.5;79.3333;99.1667;119;138.833;158.667;178.5;198.333;218.167;238" begin="play.click+22.7s" dur="14.4s" fill="freeze"/></rect>
+<g class="hint" aria-hidden="true"><set attributeName="visibility" to="hidden" begin="play.click" dur="47s"/><g transform="rotate(-3 244 363)"><animateTransform attributeName="transform" type="translate" values="0 0;0 -2;0 0" dur="2.4s" repeatCount="indefinite" additive="sum"/><path d="M240 356c-14 1-22-6-17-14s14-8 17-2-6 8-9 2 10-10 26-12" class="hand-line"/><path d="M249 325l8 5-7 6" class="hand-line"/><text x="246" y="363" class="hand">play to start the evaluation!</text></g></g>
+<text x="341" y="353.6" class="mono" text-anchor="middle" visibility="hidden">playing · t = 1 / 12<set attributeName="visibility" to="visible" begin="play.click+0s" dur="1s"/></text>
+<text x="341" y="353.6" class="mono" text-anchor="middle" visibility="hidden">judging step t = 1 / 12<set attributeName="visibility" to="visible" begin="play.click+22.7s" dur="1.2s"/></text>
+<text x="341" y="353.6" class="mono" text-anchor="middle" visibility="hidden">playing · t = 2 / 12<set attributeName="visibility" to="visible" begin="play.click+1s" dur="1s"/></text>
+<text x="341" y="353.6" class="mono" text-anchor="middle" visibility="hidden">judging step t = 2 / 12<set attributeName="visibility" to="visible" begin="play.click+23.9s" dur="1.2s"/></text>
+<text x="341" y="353.6" class="mono" text-anchor="middle" visibility="hidden">playing · t = 3 / 12<set attributeName="visibility" to="visible" begin="play.click+2s" dur="1s"/></text>
+<text x="341" y="353.6" class="mono" text-anchor="middle" visibility="hidden">judging step t = 3 / 12<set attributeName="visibility" to="visible" begin="play.click+25.1s" dur="1.2s"/></text>
+<text x="341" y="353.6" class="mono" text-anchor="middle" visibility="hidden">playing · t = 4 / 12<set attributeName="visibility" to="visible" begin="play.click+3s" dur="1s"/></text>
+<text x="341" y="353.6" class="mono" text-anchor="middle" visibility="hidden">judging step t = 4 / 12<set attributeName="visibility" to="visible" begin="play.click+26.3s" dur="1.2s"/></text>
+<text x="341" y="353.6" class="mono" text-anchor="middle" visibility="hidden">playing · t = 5 / 12<set attributeName="visibility" to="visible" begin="play.click+4s" dur="1s"/></text>
+<text x="341" y="353.6" class="mono" text-anchor="middle" visibility="hidden">judging step t = 5 / 12<set attributeName="visibility" to="visible" begin="play.click+27.5s" dur="1.2s"/></text>
+<text x="341" y="353.6" class="mono" text-anchor="middle" visibility="hidden">playing · t = 6 / 12<set attributeName="visibility" to="visible" begin="play.click+5s" dur="1s"/></text>
+<text x="341" y="353.6" class="mono" text-anchor="middle" visibility="hidden">judging step t = 6 / 12<set attributeName="visibility" to="visible" begin="play.click+28.7s" dur="1.2s"/></text>
+<text x="341" y="353.6" class="mono" text-anchor="middle" visibility="hidden">playing · t = 7 / 12<set attributeName="visibility" to="visible" begin="play.click+6s" dur="1s"/></text>
+<text x="341" y="353.6" class="mono" text-anchor="middle" visibility="hidden">judging step t = 7 / 12<set attributeName="visibility" to="visible" begin="play.click+29.9s" dur="1.2s"/></text>
+<text x="341" y="353.6" class="mono" text-anchor="middle" visibility="hidden">playing · t = 8 / 12<set attributeName="visibility" to="visible" begin="play.click+7s" dur="1s"/></text>
+<text x="341" y="353.6" class="mono" text-anchor="middle" visibility="hidden">judging step t = 8 / 12<set attributeName="visibility" to="visible" begin="play.click+31.1s" dur="1.2s"/></text>
+<text x="341" y="353.6" class="mono" text-anchor="middle" visibility="hidden">playing · t = 9 / 12<set attributeName="visibility" to="visible" begin="play.click+8s" dur="1s"/></text>
+<text x="341" y="353.6" class="mono" text-anchor="middle" visibility="hidden">judging step t = 9 / 12<set attributeName="visibility" to="visible" begin="play.click+32.3s" dur="1.2s"/></text>
+<text x="341" y="353.6" class="mono" text-anchor="middle" visibility="hidden">playing · t = 10 / 12<set attributeName="visibility" to="visible" begin="play.click+9s" dur="1s"/></text>
+<text x="341" y="353.6" class="mono" text-anchor="middle" visibility="hidden">judging step t = 10 / 12<set attributeName="visibility" to="visible" begin="play.click+33.5s" dur="1.2s"/></text>
+<text x="341" y="353.6" class="mono" text-anchor="middle" visibility="hidden">playing · t = 11 / 12<set attributeName="visibility" to="visible" begin="play.click+10s" dur="1s"/></text>
+<text x="341" y="353.6" class="mono" text-anchor="middle" visibility="hidden">judging step t = 11 / 12<set attributeName="visibility" to="visible" begin="play.click+34.7s" dur="1.2s"/></text>
+<text x="341" y="353.6" class="mono" text-anchor="middle" visibility="hidden">playing · t = 12 / 12<set attributeName="visibility" to="visible" begin="play.click+11s" dur="1s"/></text>
+<text x="341" y="353.6" class="mono" text-anchor="middle" visibility="hidden">judging step t = 12 / 12<set attributeName="visibility" to="visible" begin="play.click+35.9s" dur="1.2s"/></text>
+<text x="341" y="353.6" class="mono" text-anchor="middle" visibility="hidden">VF judge<set attributeName="visibility" to="visible" begin="play.click+12s" dur="2.7s"/></text>
+<text x="341" y="353.6" class="mono" text-anchor="middle" visibility="hidden">ASC judge<set attributeName="visibility" to="visible" begin="play.click+14.7s" dur="2.3s"/></text>
+<text x="341" y="353.6" class="mono" text-anchor="middle" visibility="hidden">validity gate<set attributeName="visibility" to="visible" begin="play.click+17s" dur="2.2s"/></text>
+<text x="341" y="353.6" class="mono" text-anchor="middle" visibility="hidden">assembling evidence<set attributeName="visibility" to="visible" begin="play.click+19.2s" dur="3.5s"/></text>
+<text x="341" y="353.6" class="mono" text-anchor="middle" visibility="hidden">aggregating<set attributeName="visibility" to="visible" begin="play.click+37.1s" dur="9.9s"/></text>
+<g id="play" class="play" role="button" tabindex="0" aria-label="Play the animation and run the evaluation"><set attributeName="visibility" to="hidden" begin="play.click" dur="47s"/><rect x="230" y="206" width="222" height="101.6" class="veil"/><circle cx="341.0" cy="256.8" r="25"/><path d="M334.0 244.8L354.0 256.8L334.0 268.8z"/></g>
+<rect x="480" y="146" width="134" height="230" rx="10" class="pink"/>
+<text x="547" y="176" class="h3" text-anchor="middle">Requested</text>
+<text x="547" y="198" class="h3" text-anchor="middle">style <tspan class="m">U</tspan></text>
+<text x="547" y="250" class="lede" text-anchor="middle">alpha</text>
+<text x="547" y="274" class="lede" text-anchor="middle">masking</text>
+<path d="M109 376V392H341V412" class="wire" stroke-dasharray="268 268"><set attributeName="stroke-dashoffset" to="268" begin="play.click" fill="freeze"/><animate attributeName="stroke-dashoffset" from="268" to="0" begin="play.click+12.3s" dur="0.9s" fill="freeze"/></path>
+<path d="M341 412L336 403L346 403z" class="head"><set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+13.065s" fill="freeze"/></path>
+<circle r="5" class="packet" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+12.3s" dur="0.9s"/><animateMotion path="M109 376V392H341V412" begin="play.click+12.3s" dur="0.9s" fill="freeze"/></circle>
+<path d="M341 376V392H341V412" class="wire" stroke-dasharray="36 36"><set attributeName="stroke-dashoffset" to="36" begin="play.click" fill="freeze"/><animate attributeName="stroke-dashoffset" from="36" to="0" begin="play.click+12.3s" dur="0.9s" fill="freeze"/></path>
+<path d="M341 412L336 403L346 403z" class="head"><set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+13.065s" fill="freeze"/></path>
+<circle r="5" class="packet" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+12.3s" dur="0.9s"/><animateMotion path="M341 376V392H341V412" begin="play.click+12.3s" dur="0.9s" fill="freeze"/></circle>
+<path d="M547 376V392H341V412" class="wire" stroke-dasharray="242 242"><set attributeName="stroke-dashoffset" to="242" begin="play.click" fill="freeze"/><animate attributeName="stroke-dashoffset" from="242" to="0" begin="play.click+12.3s" dur="0.9s" fill="freeze"/></path>
+<path d="M341 412L336 403L346 403z" class="head"><set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+13.065s" fill="freeze"/></path>
+<circle r="5" class="packet" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+12.3s" dur="0.9s"/><animateMotion path="M547 376V392H341V412" begin="play.click+12.3s" dur="0.9s" fill="freeze"/></circle>
+<path d="M109 392H24V621H40" class="wire" stroke-dasharray="330 330"><set attributeName="stroke-dashoffset" to="330" begin="play.click" fill="freeze"/><animate attributeName="stroke-dashoffset" from="330" to="0" begin="play.click+14.7s" dur="0.8s" fill="freeze"/></path>
+<path d="M40 621L31 626L31 616z" class="head"><set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+15.38s" fill="freeze"/></path>
+<circle r="5" class="packet" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+14.7s" dur="0.8s"/><animateMotion path="M109 392H24V621H40" begin="play.click+14.7s" dur="0.8s" fill="freeze"/></circle>
+<g><set attributeName="opacity" to="0.16" begin="play.click" fill="freeze"/><animate attributeName="opacity" from="0.16" to="1" begin="play.click+13.2s" dur="0.5s" fill="freeze"/>
+<rect x="40" y="412" width="574" height="112" rx="10" class="card"/>
+<text x="58" y="444" class="h2" text-anchor="start">Visual Fidelity (VF)</text>
+<text x="58" y="472" class="sm" text-anchor="start">Preserves content, layout, structure and</text>
+<text x="58" y="494" class="sm" text-anchor="start">style of the original diagram.</text>
+<rect x="406" y="424" width="196" height="88" rx="8" class="pill"/>
+<text x="504" y="452" class="sm" text-anchor="middle">Band (A–D)</text>
+<rect x="420" y="464" width="44" height="36" rx="8" class="flash" opacity="0"><animate attributeName="opacity" values="0;.85;0" dur="1.1s" begin="play.click+14.2s"/></rect>
+<rect x="422" y="466" width="40" height="32" rx="6" class="chip"/>
+<text x="442" y="490" class="score pend" text-anchor="middle">–<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+14.2s" fill="freeze"/></text>
+<text x="442" y="490" class="score" text-anchor="middle" visibility="hidden">A<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+14.2s" fill="freeze"/></text>
+<text x="474" y="487" class="xs" text-anchor="start">A or B → pass</text>
+<text x="588" y="488" class="ok" text-anchor="end" visibility="hidden">✓<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+14.2s" fill="freeze"/></text>
+</g>
+<path d="M341 524V562" class="wire" stroke-dasharray="38 38"><set attributeName="stroke-dashoffset" to="38" begin="play.click" fill="freeze"/><animate attributeName="stroke-dashoffset" from="38" to="0" begin="play.click+14.7s" dur="0.8s" fill="freeze"/></path>
+<path d="M341 562L336 553L346 553z" class="head"><set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+15.38s" fill="freeze"/></path>
+<circle r="5" class="packet" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+14.7s" dur="0.8s"/><animateMotion path="M341 524V562" begin="play.click+14.7s" dur="0.8s" fill="freeze"/></circle>
+<text x="353" y="548" class="note" text-anchor="start">if VF passes</text>
+<g><set attributeName="opacity" to="0.16" begin="play.click" fill="freeze"/><animate attributeName="opacity" from="0.16" to="1" begin="play.click+15.5s" dur="0.5s" fill="freeze"/>
+<rect x="40" y="562" width="574" height="118" rx="10" class="card"/>
+<text x="58" y="594" class="h2" text-anchor="start">Animation Style Compliance (ASC)</text>
+<text x="58" y="622" class="sm" text-anchor="start">Follows the requested animation style</text>
+<text x="58" y="644" class="sm" text-anchor="start">(e.g., progressive reveal, alpha masking,</text>
+<text x="58" y="666" class="sm" text-anchor="start">hopping/sliding bounding box).</text>
+<rect x="406" y="574" width="196" height="94" rx="8" class="pill"/>
+<text x="504" y="602" class="sm" text-anchor="middle">Band (A–D)</text>
+<rect x="420" y="617" width="44" height="36" rx="8" class="flash" opacity="0"><animate attributeName="opacity" values="0;.85;0" dur="1.1s" begin="play.click+16.5s"/></rect>
+<rect x="422" y="619" width="40" height="32" rx="6" class="chip"/>
+<text x="442" y="643" class="score pend" text-anchor="middle">–<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+16.5s" fill="freeze"/></text>
+<text x="442" y="643" class="score" text-anchor="middle" visibility="hidden">B<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+16.5s" fill="freeze"/></text>
+<text x="474" y="640" class="xs" text-anchor="start">A or B → pass</text>
+<text x="588" y="641" class="ok" text-anchor="end" visibility="hidden">✓<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+16.5s" fill="freeze"/></text>
+</g>
+<path d="M341 680V718" class="wire" stroke-dasharray="38 38"><set attributeName="stroke-dashoffset" to="38" begin="play.click" fill="freeze"/><animate attributeName="stroke-dashoffset" from="38" to="0" begin="play.click+17s" dur="0.6s" fill="freeze"/></path>
+<path d="M341 718L336 709L346 709z" class="head"><set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+17.51s" fill="freeze"/></path>
+<circle r="5" class="packet" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+17s" dur="0.6s"/><animateMotion path="M341 680V718" begin="play.click+17s" dur="0.6s" fill="freeze"/></circle>
+<text x="353" y="704" class="note" text-anchor="start">if ASC passes</text>
+<g><set attributeName="opacity" to="0.16" begin="play.click" fill="freeze"/><animate attributeName="opacity" from="0.16" to="1" begin="play.click+17.6s" dur="0.5s" fill="freeze"/>
+<rect x="141" y="718" width="400" height="112" rx="10" class="flash" opacity="0"><animate attributeName="opacity" values="0;.85;0" dur="1.1s" begin="play.click+18.2s"/></rect>
+<rect x="141" y="718" width="400" height="112" rx="10" class="gate"/>
+<text x="341" y="754" class="big" text-anchor="middle">Validity gate <tspan class="m">G</tspan></text>
+<text x="341" y="784" class="sm" text-anchor="middle"><tspan class="m">G</tspan> = 1 if both VF and ASC pass, else 0.</text>
+<text x="341" y="814" class="ok pend" text-anchor="middle">VF = –, ASC = – → <tspan class="m">G</tspan> = –<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+18.2s" fill="freeze"/></text>
+<text x="341" y="814" class="ok" text-anchor="middle" visibility="hidden">VF = A, ASC = B → <tspan class="m">G</tspan> = 1<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+18.2s" fill="freeze"/></text>
+</g>
+<rect x="634" y="6" width="610" height="836" rx="16" class="pb"/>
+<path d="M635 130V22a15 15 0 0 1 15-15h578a15 15 0 0 1 15 15V130z" class="pb-h"/>
+<text x="939" y="46" class="h1" text-anchor="middle">(b) Narrative Quality</text>
+<text x="939" y="74" class="lede-sm" text-anchor="middle">For valid animations, is the choice of selected elements at</text>
+<text x="939" y="96" class="lede-sm" text-anchor="middle">every timestep, pacing of the animation and the alignment of</text>
+<text x="939" y="118" class="lede-sm" text-anchor="middle">the narration appropriate at each step?</text>
+<g><set attributeName="opacity" to="0.16" begin="play.click" fill="freeze"/><animate attributeName="opacity" from="0.16" to="1" begin="play.click+19.2s" dur="0.5s" fill="freeze"/>
+<text x="738" y="160" class="sm" text-anchor="middle">Beginning · <tspan class="m">t</tspan> = 1</text>
+<rect x="646" y="172" width="184" height="89.7" rx="6" class="card-g"/>
+<svg x="651" y="177" width="174" height="79.7" viewBox="0 0 996 456" preserveAspectRatio="xMidYMin slice"><image href="../../EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_00.png" width="996" height="530"/></svg>
+<rect x="644.0" y="170" width="188" height="93.7" rx="8" class="hot" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+22.7s" dur="1.2s"/></rect>
+<text x="838.5" y="221.85" class="xs" text-anchor="middle">···</text>
+<text x="939" y="160" class="sm" text-anchor="middle">Middle · <tspan class="m">t</tspan> = 6</text>
+<rect x="847" y="172" width="184" height="89.7" rx="6" class="now"/>
+<svg x="852" y="177" width="174" height="79.7" viewBox="0 0 996 456" preserveAspectRatio="xMidYMin slice"><image href="../../EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_05.png" width="996" height="530"/></svg>
+<rect x="845.0" y="170" width="188" height="93.7" rx="8" class="hot" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+28.7s" dur="1.2s"/></rect>
+<text x="1039.5" y="221.85" class="xs" text-anchor="middle">···</text>
+<text x="1140" y="160" class="sm" text-anchor="middle">End · <tspan class="m">t</tspan> = 12</text>
+<rect x="1048" y="172" width="184" height="89.7" rx="6" class="card-g"/>
+<svg x="1053" y="177" width="174" height="79.7" viewBox="0 0 996 456" preserveAspectRatio="xMidYMin slice"><image href="../../EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_11.png" width="996" height="530"/></svg>
+<rect x="1046.0" y="170" width="188" height="93.7" rx="8" class="hot" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+35.9s" dur="1.2s"/></rect>
+<path d="M844 287.7H927.0L939.0 267.7L951.0 287.7H1204a10 10 0 0 1 10 10V324.7a10 10 0 0 1 -10 10H844a10 10 0 0 1 -10 -10V297.7a10 10 0 0 1 10 -10z" class="bubble"/>
+<text x="1024" y="316.7" class="sm" text-anchor="middle">Parallel branches are simultaneously animated.</text>
+<text x="734" y="308.2" class="h3" text-anchor="middle">Narration</text>
+<text x="734" y="330.2" class="h3" text-anchor="middle">at step <tspan class="m">t</tspan></text>
+</g>
+<path d="M739 358.7H939" class="wire" stroke-dasharray="200 200"><set attributeName="stroke-dashoffset" to="200" begin="play.click" fill="freeze"/><animate attributeName="stroke-dashoffset" from="200" to="0" begin="play.click+19.8s" dur="0.5s" fill="freeze"/></path>
+<circle r="5" class="packet" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+19.8s" dur="0.5s"/><animateMotion path="M739 358.7H939" begin="play.click+19.8s" dur="0.5s" fill="freeze"/></circle>
+<path d="M1139 358.7H939V388.7" class="wire" stroke-dasharray="230 230"><set attributeName="stroke-dashoffset" to="230" begin="play.click" fill="freeze"/><animate attributeName="stroke-dashoffset" from="230" to="0" begin="play.click+19.8s" dur="0.7s" fill="freeze"/></path>
+<path d="M939 388.7L934 379.7L944 379.7z" class="head"><set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+20.395s" fill="freeze"/></path>
+<circle r="5" class="packet" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+19.8s" dur="0.7s"/><animateMotion path="M1139 358.7H939V388.7" begin="play.click+19.8s" dur="0.7s" fill="freeze"/></circle>
+<g><set attributeName="opacity" to="0.16" begin="play.click" fill="freeze"/><animate attributeName="opacity" from="0.16" to="1" begin="play.click+20.5s" dur="0.5s" fill="freeze"/>
+<rect x="678" y="388.7" width="522" height="172" rx="10" class="ev"/>
+<text x="696" y="420.7" class="h2" text-anchor="start">Evidence provided to the judges</text>
+<circle cx="702" cy="449.7" r="3" fill="#1A1815"/>
+<text x="714" y="454.7" class="sm" text-anchor="start">Source diagram (reference)</text>
+<circle cx="702" cy="477.7" r="3" fill="#1A1815"/>
+<text x="714" y="482.7" class="sm" text-anchor="start">Previous animation state (<tspan class="m">t</tspan> − 1)</text>
+<circle cx="702" cy="505.7" r="3" fill="#1A1815"/>
+<text x="714" y="510.7" class="sm" text-anchor="start">Current animation state (<tspan class="m">t</tspan>)</text>
+<circle cx="702" cy="533.7" r="3" fill="#1A1815"/>
+<text x="714" y="538.7" class="sm" text-anchor="start">Requested style</text>
+<rect x="1022" y="436.7" width="164" height="110" rx="8" class="tan"/>
+<text x="1104" y="470.7" class="sm" text-anchor="middle">Source context</text>
+<text x="1104" y="493.7" class="sm" text-anchor="middle">of the diagram</text>
+<text x="1104" y="516.7" class="sm" text-anchor="middle">(for NA only)</text>
+</g>
+<path d="M939 560.7V582.7H738V604.7" class="wire" stroke-dasharray="245 245"><set attributeName="stroke-dashoffset" to="245" begin="play.click" fill="freeze"/><animate attributeName="stroke-dashoffset" from="245" to="0" begin="play.click+21.2s" dur="0.6s" fill="freeze"/></path>
+<path d="M738 604.7L733 595.7L743 595.7z" class="head"><set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+21.71s" fill="freeze"/></path>
+<circle r="5" class="packet" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+21.2s" dur="0.6s"/><animateMotion path="M939 560.7V582.7H738V604.7" begin="play.click+21.2s" dur="0.6s" fill="freeze"/></circle>
+<path d="M939 560.7V582.7H939V604.7" class="wire" stroke-dasharray="44 44"><set attributeName="stroke-dashoffset" to="44" begin="play.click" fill="freeze"/><animate attributeName="stroke-dashoffset" from="44" to="0" begin="play.click+21.2s" dur="0.6s" fill="freeze"/></path>
+<path d="M939 604.7L934 595.7L944 595.7z" class="head"><set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+21.71s" fill="freeze"/></path>
+<circle r="5" class="packet" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+21.2s" dur="0.6s"/><animateMotion path="M939 560.7V582.7H939V604.7" begin="play.click+21.2s" dur="0.6s" fill="freeze"/></circle>
+<path d="M939 560.7V582.7H1140V604.7" class="wire" stroke-dasharray="245 245"><set attributeName="stroke-dashoffset" to="245" begin="play.click" fill="freeze"/><animate attributeName="stroke-dashoffset" from="245" to="0" begin="play.click+21.2s" dur="0.6s" fill="freeze"/></path>
+<path d="M1140 604.7L1135 595.7L1145 595.7z" class="head"><set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+21.71s" fill="freeze"/></path>
+<circle r="5" class="packet" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+21.2s" dur="0.6s"/><animateMotion path="M939 560.7V582.7H1140V604.7" begin="play.click+21.2s" dur="0.6s" fill="freeze"/></circle>
+<circle r="5" class="packet" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+22.2s" dur="0.5s"/><animateMotion path="M939 560.7V582.7H738V604.7" begin="play.click+22.2s" dur="0.5s" fill="freeze"/></circle>
+<circle r="5" class="packet" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+22.5s" dur="0.5s"/><animateMotion path="M939 560.7V582.7H939V604.7" begin="play.click+22.5s" dur="0.5s" fill="freeze"/></circle>
+<circle r="5" class="packet" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+22.8s" dur="0.5s"/><animateMotion path="M939 560.7V582.7H1140V604.7" begin="play.click+22.8s" dur="0.5s" fill="freeze"/></circle>
+<circle r="5" class="packet" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+23.4s" dur="0.5s"/><animateMotion path="M939 560.7V582.7H738V604.7" begin="play.click+23.4s" dur="0.5s" fill="freeze"/></circle>
+<circle r="5" class="packet" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+23.7s" dur="0.5s"/><animateMotion path="M939 560.7V582.7H939V604.7" begin="play.click+23.7s" dur="0.5s" fill="freeze"/></circle>
+<circle r="5" class="packet" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+24s" dur="0.5s"/><animateMotion path="M939 560.7V582.7H1140V604.7" begin="play.click+24s" dur="0.5s" fill="freeze"/></circle>
+<circle r="5" class="packet" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+24.6s" dur="0.5s"/><animateMotion path="M939 560.7V582.7H738V604.7" begin="play.click+24.6s" dur="0.5s" fill="freeze"/></circle>
+<circle r="5" class="packet" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+24.9s" dur="0.5s"/><animateMotion path="M939 560.7V582.7H939V604.7" begin="play.click+24.9s" dur="0.5s" fill="freeze"/></circle>
+<circle r="5" class="packet" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+25.2s" dur="0.5s"/><animateMotion path="M939 560.7V582.7H1140V604.7" begin="play.click+25.2s" dur="0.5s" fill="freeze"/></circle>
+<circle r="5" class="packet" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+25.8s" dur="0.5s"/><animateMotion path="M939 560.7V582.7H738V604.7" begin="play.click+25.8s" dur="0.5s" fill="freeze"/></circle>
+<circle r="5" class="packet" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+26.1s" dur="0.5s"/><animateMotion path="M939 560.7V582.7H939V604.7" begin="play.click+26.1s" dur="0.5s" fill="freeze"/></circle>
+<circle r="5" class="packet" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+26.4s" dur="0.5s"/><animateMotion path="M939 560.7V582.7H1140V604.7" begin="play.click+26.4s" dur="0.5s" fill="freeze"/></circle>
+<circle r="5" class="packet" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+27s" dur="0.5s"/><animateMotion path="M939 560.7V582.7H738V604.7" begin="play.click+27s" dur="0.5s" fill="freeze"/></circle>
+<circle r="5" class="packet" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+27.3s" dur="0.5s"/><animateMotion path="M939 560.7V582.7H939V604.7" begin="play.click+27.3s" dur="0.5s" fill="freeze"/></circle>
+<circle r="5" class="packet" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+27.6s" dur="0.5s"/><animateMotion path="M939 560.7V582.7H1140V604.7" begin="play.click+27.6s" dur="0.5s" fill="freeze"/></circle>
+<circle r="5" class="packet" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+28.2s" dur="0.5s"/><animateMotion path="M939 560.7V582.7H738V604.7" begin="play.click+28.2s" dur="0.5s" fill="freeze"/></circle>
+<circle r="5" class="packet" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+28.5s" dur="0.5s"/><animateMotion path="M939 560.7V582.7H939V604.7" begin="play.click+28.5s" dur="0.5s" fill="freeze"/></circle>
+<circle r="5" class="packet" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+28.8s" dur="0.5s"/><animateMotion path="M939 560.7V582.7H1140V604.7" begin="play.click+28.8s" dur="0.5s" fill="freeze"/></circle>
+<circle r="5" class="packet" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+29.4s" dur="0.5s"/><animateMotion path="M939 560.7V582.7H738V604.7" begin="play.click+29.4s" dur="0.5s" fill="freeze"/></circle>
+<circle r="5" class="packet" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+29.7s" dur="0.5s"/><animateMotion path="M939 560.7V582.7H939V604.7" begin="play.click+29.7s" dur="0.5s" fill="freeze"/></circle>
+<circle r="5" class="packet" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+30s" dur="0.5s"/><animateMotion path="M939 560.7V582.7H1140V604.7" begin="play.click+30s" dur="0.5s" fill="freeze"/></circle>
+<circle r="5" class="packet" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+30.6s" dur="0.5s"/><animateMotion path="M939 560.7V582.7H738V604.7" begin="play.click+30.6s" dur="0.5s" fill="freeze"/></circle>
+<circle r="5" class="packet" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+30.9s" dur="0.5s"/><animateMotion path="M939 560.7V582.7H939V604.7" begin="play.click+30.9s" dur="0.5s" fill="freeze"/></circle>
+<circle r="5" class="packet" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+31.2s" dur="0.5s"/><animateMotion path="M939 560.7V582.7H1140V604.7" begin="play.click+31.2s" dur="0.5s" fill="freeze"/></circle>
+<circle r="5" class="packet" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+31.8s" dur="0.5s"/><animateMotion path="M939 560.7V582.7H738V604.7" begin="play.click+31.8s" dur="0.5s" fill="freeze"/></circle>
+<circle r="5" class="packet" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+32.1s" dur="0.5s"/><animateMotion path="M939 560.7V582.7H939V604.7" begin="play.click+32.1s" dur="0.5s" fill="freeze"/></circle>
+<circle r="5" class="packet" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+32.4s" dur="0.5s"/><animateMotion path="M939 560.7V582.7H1140V604.7" begin="play.click+32.4s" dur="0.5s" fill="freeze"/></circle>
+<circle r="5" class="packet" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+33s" dur="0.5s"/><animateMotion path="M939 560.7V582.7H738V604.7" begin="play.click+33s" dur="0.5s" fill="freeze"/></circle>
+<circle r="5" class="packet" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+33.3s" dur="0.5s"/><animateMotion path="M939 560.7V582.7H939V604.7" begin="play.click+33.3s" dur="0.5s" fill="freeze"/></circle>
+<circle r="5" class="packet" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+33.6s" dur="0.5s"/><animateMotion path="M939 560.7V582.7H1140V604.7" begin="play.click+33.6s" dur="0.5s" fill="freeze"/></circle>
+<circle r="5" class="packet" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+34.2s" dur="0.5s"/><animateMotion path="M939 560.7V582.7H738V604.7" begin="play.click+34.2s" dur="0.5s" fill="freeze"/></circle>
+<circle r="5" class="packet" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+34.5s" dur="0.5s"/><animateMotion path="M939 560.7V582.7H939V604.7" begin="play.click+34.5s" dur="0.5s" fill="freeze"/></circle>
+<circle r="5" class="packet" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+34.8s" dur="0.5s"/><animateMotion path="M939 560.7V582.7H1140V604.7" begin="play.click+34.8s" dur="0.5s" fill="freeze"/></circle>
+<circle r="5" class="packet" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+35.4s" dur="0.5s"/><animateMotion path="M939 560.7V582.7H738V604.7" begin="play.click+35.4s" dur="0.5s" fill="freeze"/></circle>
+<circle r="5" class="packet" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+35.7s" dur="0.5s"/><animateMotion path="M939 560.7V582.7H939V604.7" begin="play.click+35.7s" dur="0.5s" fill="freeze"/></circle>
+<circle r="5" class="packet" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+36s" dur="0.5s"/><animateMotion path="M939 560.7V582.7H1140V604.7" begin="play.click+36s" dur="0.5s" fill="freeze"/></circle>
+<g><set attributeName="opacity" to="0.16" begin="play.click" fill="freeze"/><animate attributeName="opacity" from="0.16" to="1" begin="play.click+21.8s" dur="0.5s" fill="freeze"/>
+<rect x="641" y="604.7" width="194" height="225.3" rx="8" class="pink"/>
+<text x="738" y="632.7" class="h3" text-anchor="middle">Selection</text>
+<text x="738" y="653.7" class="h3" text-anchor="middle">Sensitivity (SS)</text>
+<text x="738" y="684.7" class="xs" text-anchor="middle">Are the selected elements</text>
+<text x="738" y="703.7" class="xs" text-anchor="middle">appropriate and correct?</text>
+<text x="658.2" y="778" class="dig pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+22.7s" fill="freeze"/></text>
+<text x="658.2" y="778" class="dig" text-anchor="middle" visibility="hidden">4<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+22.7s" fill="freeze"/></text>
+<text x="672.8" y="778" class="dig pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+23.9s" fill="freeze"/></text>
+<text x="672.8" y="778" class="dig" text-anchor="middle" visibility="hidden">4<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+23.9s" fill="freeze"/></text>
+<text x="687.2" y="778" class="dig pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+25.1s" fill="freeze"/></text>
+<text x="687.2" y="778" class="dig" text-anchor="middle" visibility="hidden">4<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+25.1s" fill="freeze"/></text>
+<text x="701.8" y="778" class="dig pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+26.3s" fill="freeze"/></text>
+<text x="701.8" y="778" class="dig" text-anchor="middle" visibility="hidden">4<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+26.3s" fill="freeze"/></text>
+<text x="716.2" y="778" class="dig pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+27.5s" fill="freeze"/></text>
+<text x="716.2" y="778" class="dig" text-anchor="middle" visibility="hidden">4<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+27.5s" fill="freeze"/></text>
+<text x="730.8" y="778" class="dig pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+28.7s" fill="freeze"/></text>
+<text x="730.8" y="778" class="dig" text-anchor="middle" visibility="hidden">4<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+28.7s" fill="freeze"/></text>
+<text x="745.2" y="778" class="dig pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+29.9s" fill="freeze"/></text>
+<text x="745.2" y="778" class="dig" text-anchor="middle" visibility="hidden">4<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+29.9s" fill="freeze"/></text>
+<text x="759.8" y="778" class="dig pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+31.1s" fill="freeze"/></text>
+<text x="759.8" y="778" class="dig" text-anchor="middle" visibility="hidden">4<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+31.1s" fill="freeze"/></text>
+<text x="774.2" y="778" class="dig pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+32.3s" fill="freeze"/></text>
+<text x="774.2" y="778" class="dig" text-anchor="middle" visibility="hidden">4<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+32.3s" fill="freeze"/></text>
+<text x="788.8" y="778" class="dig pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+33.5s" fill="freeze"/></text>
+<text x="788.8" y="778" class="dig" text-anchor="middle" visibility="hidden">4<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+33.5s" fill="freeze"/></text>
+<text x="803.2" y="778" class="dig pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+34.7s" fill="freeze"/></text>
+<text x="803.2" y="778" class="dig" text-anchor="middle" visibility="hidden">4<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+34.7s" fill="freeze"/></text>
+<text x="817.8" y="778" class="dig pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+35.9s" fill="freeze"/></text>
+<text x="817.8" y="778" class="dig" text-anchor="middle" visibility="hidden">4<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+35.9s" fill="freeze"/></text>
+<rect x="649" y="790" width="178" height="32" rx="6" class="pink-p"/>
+<text x="738" y="811" class="sm" text-anchor="middle">Ordinal judgment (1–4)</text>
+</g>
+<g><set attributeName="opacity" to="0.16" begin="play.click" fill="freeze"/><animate attributeName="opacity" from="0.16" to="1" begin="play.click+22.1s" dur="0.5s" fill="freeze"/>
+<rect x="842" y="604.7" width="194" height="225.3" rx="8" class="ban"/>
+<text x="939" y="632.7" class="h3" text-anchor="middle">Granularity and</text>
+<text x="939" y="653.7" class="h3" text-anchor="middle">Pacing (GP)</text>
+<text x="939" y="684.7" class="xs" text-anchor="middle">Is the amount of information</text>
+<text x="939" y="703.7" class="xs" text-anchor="middle">revealed at each step</text>
+<text x="939" y="722.7" class="xs" text-anchor="middle">appropriate?</text>
+<text x="859.2" y="778" class="dig pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+23s" fill="freeze"/></text>
+<text x="859.2" y="778" class="dig" text-anchor="middle" visibility="hidden">4<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+23s" fill="freeze"/></text>
+<text x="873.8" y="778" class="dig pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+24.2s" fill="freeze"/></text>
+<text x="873.8" y="778" class="dig" text-anchor="middle" visibility="hidden">4<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+24.2s" fill="freeze"/></text>
+<text x="888.2" y="778" class="dig pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+25.4s" fill="freeze"/></text>
+<text x="888.2" y="778" class="dig" text-anchor="middle" visibility="hidden">4<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+25.4s" fill="freeze"/></text>
+<text x="902.8" y="778" class="dig pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+26.6s" fill="freeze"/></text>
+<text x="902.8" y="778" class="dig" text-anchor="middle" visibility="hidden">4<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+26.6s" fill="freeze"/></text>
+<text x="917.2" y="778" class="dig pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+27.8s" fill="freeze"/></text>
+<text x="917.2" y="778" class="dig" text-anchor="middle" visibility="hidden">4<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+27.8s" fill="freeze"/></text>
+<text x="931.8" y="778" class="dig pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+29s" fill="freeze"/></text>
+<text x="931.8" y="778" class="dig" text-anchor="middle" visibility="hidden">4<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+29s" fill="freeze"/></text>
+<text x="946.2" y="778" class="dig pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+30.2s" fill="freeze"/></text>
+<text x="946.2" y="778" class="dig" text-anchor="middle" visibility="hidden">4<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+30.2s" fill="freeze"/></text>
+<text x="960.8" y="778" class="dig pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+31.4s" fill="freeze"/></text>
+<text x="960.8" y="778" class="dig" text-anchor="middle" visibility="hidden">4<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+31.4s" fill="freeze"/></text>
+<text x="975.2" y="778" class="dig pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+32.6s" fill="freeze"/></text>
+<text x="975.2" y="778" class="dig" text-anchor="middle" visibility="hidden">4<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+32.6s" fill="freeze"/></text>
+<text x="989.8" y="778" class="dig pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+33.8s" fill="freeze"/></text>
+<text x="989.8" y="778" class="dig" text-anchor="middle" visibility="hidden">4<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+33.8s" fill="freeze"/></text>
+<text x="1004.2" y="778" class="dig pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+35s" fill="freeze"/></text>
+<text x="1004.2" y="778" class="dig" text-anchor="middle" visibility="hidden">4<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+35s" fill="freeze"/></text>
+<text x="1018.8" y="778" class="dig j3 pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+36.2s" fill="freeze"/></text>
+<text x="1018.8" y="778" class="dig j3" text-anchor="middle" visibility="hidden">3<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+36.2s" fill="freeze"/></text>
+<rect x="850" y="790" width="178" height="32" rx="6" class="ban-p"/>
+<text x="939" y="811" class="sm" text-anchor="middle">Ordinal judgment (1–4)</text>
+</g>
+<g><set attributeName="opacity" to="0.16" begin="play.click" fill="freeze"/><animate attributeName="opacity" from="0.16" to="1" begin="play.click+22.4s" dur="0.5s" fill="freeze"/>
+<rect x="1043" y="604.7" width="194" height="225.3" rx="8" class="tan"/>
+<text x="1140" y="632.7" class="h3" text-anchor="middle">Narration</text>
+<text x="1140" y="653.7" class="h3" text-anchor="middle">Alignment (NA)</text>
+<text x="1140" y="684.7" class="xs" text-anchor="middle">Does the narration align</text>
+<text x="1140" y="703.7" class="xs" text-anchor="middle">with and explain the</text>
+<text x="1140" y="722.7" class="xs" text-anchor="middle">visual content?</text>
+<text x="1060.2" y="778" class="dig pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+23.3s" fill="freeze"/></text>
+<text x="1060.2" y="778" class="dig" text-anchor="middle" visibility="hidden">4<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+23.3s" fill="freeze"/></text>
+<text x="1074.8" y="778" class="dig pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+24.5s" fill="freeze"/></text>
+<text x="1074.8" y="778" class="dig" text-anchor="middle" visibility="hidden">4<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+24.5s" fill="freeze"/></text>
+<text x="1089.2" y="778" class="dig pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+25.7s" fill="freeze"/></text>
+<text x="1089.2" y="778" class="dig" text-anchor="middle" visibility="hidden">4<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+25.7s" fill="freeze"/></text>
+<text x="1103.8" y="778" class="dig pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+26.9s" fill="freeze"/></text>
+<text x="1103.8" y="778" class="dig" text-anchor="middle" visibility="hidden">4<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+26.9s" fill="freeze"/></text>
+<text x="1118.2" y="778" class="dig pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+28.1s" fill="freeze"/></text>
+<text x="1118.2" y="778" class="dig" text-anchor="middle" visibility="hidden">4<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+28.1s" fill="freeze"/></text>
+<text x="1132.8" y="778" class="dig pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+29.3s" fill="freeze"/></text>
+<text x="1132.8" y="778" class="dig" text-anchor="middle" visibility="hidden">4<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+29.3s" fill="freeze"/></text>
+<text x="1147.2" y="778" class="dig pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+30.5s" fill="freeze"/></text>
+<text x="1147.2" y="778" class="dig" text-anchor="middle" visibility="hidden">4<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+30.5s" fill="freeze"/></text>
+<text x="1161.8" y="778" class="dig pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+31.7s" fill="freeze"/></text>
+<text x="1161.8" y="778" class="dig" text-anchor="middle" visibility="hidden">4<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+31.7s" fill="freeze"/></text>
+<text x="1176.2" y="778" class="dig pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+32.9s" fill="freeze"/></text>
+<text x="1176.2" y="778" class="dig" text-anchor="middle" visibility="hidden">4<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+32.9s" fill="freeze"/></text>
+<text x="1190.8" y="778" class="dig pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+34.1s" fill="freeze"/></text>
+<text x="1190.8" y="778" class="dig" text-anchor="middle" visibility="hidden">4<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+34.1s" fill="freeze"/></text>
+<text x="1205.2" y="778" class="dig pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+35.3s" fill="freeze"/></text>
+<text x="1205.2" y="778" class="dig" text-anchor="middle" visibility="hidden">4<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+35.3s" fill="freeze"/></text>
+<text x="1219.8" y="778" class="dig j3 pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+36.5s" fill="freeze"/></text>
+<text x="1219.8" y="778" class="dig j3" text-anchor="middle" visibility="hidden">3<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+36.5s" fill="freeze"/></text>
+<rect x="1051" y="790" width="178" height="32" rx="6" class="tan-p"/>
+<text x="1140" y="811" class="sm" text-anchor="middle">Ordinal judgment (1–4)</text>
+</g>
+<rect x="1254" y="6" width="610" height="836" rx="16" class="pc"/>
+<path d="M1255 130V22a15 15 0 0 1 15-15h578a15 15 0 0 1 15 15V130z" class="pc-h"/>
+<text x="1559" y="46" class="h1" text-anchor="middle">(c) Aggregation</text>
+<text x="1559" y="78" class="lede" text-anchor="middle">How are the ordinal judgments converted to final scores?</text>
+<g><set attributeName="opacity" to="0.16" begin="play.click" fill="freeze"/><animate attributeName="opacity" from="0.16" to="1" begin="play.click+23s" dur="0.5s" fill="freeze"/>
+<rect x="1264" y="142" width="590" height="306" rx="10" class="card-y"/>
+<text x="1278" y="172" class="h2" text-anchor="start">From ordinal judgments to a quality score (GP, this run)</text>
+<rect x="1482" y="186" width="30" height="152" rx="3" class="colhi" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+22.7s" dur="14.4s"/><animate attributeName="x" calcMode="discrete" values="1482;1512;1542;1572;1602;1632;1662;1692;1722;1752;1782;1812" begin="play.click+22.7s" dur="14.4s"/></rect>
+<text x="1280" y="211" class="sm" text-anchor="start">Presentation step <tspan class="m">t</tspan></text>
+<text x="1497" y="211" class="num" text-anchor="middle">1</text>
+<text x="1527" y="211" class="num" text-anchor="middle">2</text>
+<text x="1557" y="211" class="num" text-anchor="middle">3</text>
+<text x="1587" y="211" class="num" text-anchor="middle">4</text>
+<text x="1617" y="211" class="num" text-anchor="middle">5</text>
+<text x="1647" y="211" class="num" text-anchor="middle">6</text>
+<text x="1677" y="211" class="num" text-anchor="middle">7</text>
+<text x="1707" y="211" class="num" text-anchor="middle">8</text>
+<text x="1737" y="211" class="num" text-anchor="middle">9</text>
+<text x="1767" y="211" class="num" text-anchor="middle">10</text>
+<text x="1797" y="211" class="num" text-anchor="middle">11</text>
+<text x="1827" y="211" class="num" text-anchor="middle">12</text>
+<rect x="1482" y="229" width="360" height="28" rx="4" class="cellj"/>
+<line x1="1276" y1="224" x2="1842" y2="224" class="rule"/>
+<text x="1280" y="249" class="h3" text-anchor="start">Ordinal judgment <tspan class="m">j</tspan><tspan class="sub" dy="5"><tspan class="m">t</tspan></tspan><tspan dy="-5"> </tspan></text>
+<text x="1497" y="249" class="dig pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+23s" fill="freeze"/></text>
+<text x="1497" y="249" class="dig" text-anchor="middle" visibility="hidden">4<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+23s" fill="freeze"/></text>
+<text x="1527" y="249" class="dig pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+24.2s" fill="freeze"/></text>
+<text x="1527" y="249" class="dig" text-anchor="middle" visibility="hidden">4<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+24.2s" fill="freeze"/></text>
+<text x="1557" y="249" class="dig pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+25.4s" fill="freeze"/></text>
+<text x="1557" y="249" class="dig" text-anchor="middle" visibility="hidden">4<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+25.4s" fill="freeze"/></text>
+<text x="1587" y="249" class="dig pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+26.6s" fill="freeze"/></text>
+<text x="1587" y="249" class="dig" text-anchor="middle" visibility="hidden">4<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+26.6s" fill="freeze"/></text>
+<text x="1617" y="249" class="dig pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+27.8s" fill="freeze"/></text>
+<text x="1617" y="249" class="dig" text-anchor="middle" visibility="hidden">4<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+27.8s" fill="freeze"/></text>
+<text x="1647" y="249" class="dig pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+29s" fill="freeze"/></text>
+<text x="1647" y="249" class="dig" text-anchor="middle" visibility="hidden">4<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+29s" fill="freeze"/></text>
+<text x="1677" y="249" class="dig pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+30.2s" fill="freeze"/></text>
+<text x="1677" y="249" class="dig" text-anchor="middle" visibility="hidden">4<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+30.2s" fill="freeze"/></text>
+<text x="1707" y="249" class="dig pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+31.4s" fill="freeze"/></text>
+<text x="1707" y="249" class="dig" text-anchor="middle" visibility="hidden">4<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+31.4s" fill="freeze"/></text>
+<text x="1737" y="249" class="dig pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+32.6s" fill="freeze"/></text>
+<text x="1737" y="249" class="dig" text-anchor="middle" visibility="hidden">4<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+32.6s" fill="freeze"/></text>
+<text x="1767" y="249" class="dig pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+33.8s" fill="freeze"/></text>
+<text x="1767" y="249" class="dig" text-anchor="middle" visibility="hidden">4<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+33.8s" fill="freeze"/></text>
+<text x="1797" y="249" class="dig pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+35s" fill="freeze"/></text>
+<text x="1797" y="249" class="dig" text-anchor="middle" visibility="hidden">4<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+35s" fill="freeze"/></text>
+<text x="1827" y="249" class="dig j3 pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+36.2s" fill="freeze"/></text>
+<text x="1827" y="249" class="dig j3" text-anchor="middle" visibility="hidden">3<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+36.2s" fill="freeze"/></text>
+<line x1="1276" y1="262" x2="1842" y2="262" class="rule"/>
+<text x="1280" y="287" class="sm" text-anchor="start">Ideal (all 4s)</text>
+<text x="1497" y="287" class="num" text-anchor="middle">4</text>
+<text x="1527" y="287" class="num" text-anchor="middle">4</text>
+<text x="1557" y="287" class="num" text-anchor="middle">4</text>
+<text x="1587" y="287" class="num" text-anchor="middle">4</text>
+<text x="1617" y="287" class="num" text-anchor="middle">4</text>
+<text x="1647" y="287" class="num" text-anchor="middle">4</text>
+<text x="1677" y="287" class="num" text-anchor="middle">4</text>
+<text x="1707" y="287" class="num" text-anchor="middle">4</text>
+<text x="1737" y="287" class="num" text-anchor="middle">4</text>
+<text x="1767" y="287" class="num" text-anchor="middle">4</text>
+<text x="1797" y="287" class="num" text-anchor="middle">4</text>
+<text x="1827" y="287" class="num" text-anchor="middle">4</text>
+<line x1="1276" y1="300" x2="1842" y2="300" class="rule"/>
+<text x="1280" y="325" class="sm" text-anchor="start">Ordinal distance |4 − <tspan class="m">j</tspan><tspan class="sub" dy="5"><tspan class="m">t</tspan></tspan><tspan dy="-5"> </tspan>|</text>
+<text x="1497" y="325" class="dig pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+23s" fill="freeze"/></text>
+<text x="1497" y="325" class="dig" text-anchor="middle" visibility="hidden">0<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+23s" fill="freeze"/></text>
+<text x="1527" y="325" class="dig pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+24.2s" fill="freeze"/></text>
+<text x="1527" y="325" class="dig" text-anchor="middle" visibility="hidden">0<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+24.2s" fill="freeze"/></text>
+<text x="1557" y="325" class="dig pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+25.4s" fill="freeze"/></text>
+<text x="1557" y="325" class="dig" text-anchor="middle" visibility="hidden">0<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+25.4s" fill="freeze"/></text>
+<text x="1587" y="325" class="dig pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+26.6s" fill="freeze"/></text>
+<text x="1587" y="325" class="dig" text-anchor="middle" visibility="hidden">0<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+26.6s" fill="freeze"/></text>
+<text x="1617" y="325" class="dig pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+27.8s" fill="freeze"/></text>
+<text x="1617" y="325" class="dig" text-anchor="middle" visibility="hidden">0<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+27.8s" fill="freeze"/></text>
+<text x="1647" y="325" class="dig pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+29s" fill="freeze"/></text>
+<text x="1647" y="325" class="dig" text-anchor="middle" visibility="hidden">0<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+29s" fill="freeze"/></text>
+<text x="1677" y="325" class="dig pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+30.2s" fill="freeze"/></text>
+<text x="1677" y="325" class="dig" text-anchor="middle" visibility="hidden">0<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+30.2s" fill="freeze"/></text>
+<text x="1707" y="325" class="dig pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+31.4s" fill="freeze"/></text>
+<text x="1707" y="325" class="dig" text-anchor="middle" visibility="hidden">0<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+31.4s" fill="freeze"/></text>
+<text x="1737" y="325" class="dig pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+32.6s" fill="freeze"/></text>
+<text x="1737" y="325" class="dig" text-anchor="middle" visibility="hidden">0<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+32.6s" fill="freeze"/></text>
+<text x="1767" y="325" class="dig pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+33.8s" fill="freeze"/></text>
+<text x="1767" y="325" class="dig" text-anchor="middle" visibility="hidden">0<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+33.8s" fill="freeze"/></text>
+<text x="1797" y="325" class="dig pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+35s" fill="freeze"/></text>
+<text x="1797" y="325" class="dig" text-anchor="middle" visibility="hidden">0<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+35s" fill="freeze"/></text>
+<text x="1827" y="325" class="dig j3 pend" text-anchor="middle">·<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+36.2s" fill="freeze"/></text>
+<text x="1827" y="325" class="dig j3" text-anchor="middle" visibility="hidden">1<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+36.2s" fill="freeze"/></text>
+<rect x="1276" y="356" width="290" height="90" rx="8" class="flash" opacity="0"><animate attributeName="opacity" values="0;.85;0" dur="1.1s" begin="play.click+37.9s"/></rect>
+<rect x="1276" y="356" width="290" height="90" rx="8" class="pink"/>
+<text x="1421" y="378" class="xs" text-anchor="middle">Normalized ordinal distance</text>
+<text x="1421" y="404" class="sm" text-anchor="middle"><tspan class="m">d</tspan><tspan class="sub" dy="5">o</tspan><tspan dy="-5"> </tspan>= (1 / 3<tspan class="m">N</tspan>) Σ |4 − <tspan class="m">j</tspan><tspan class="sub" dy="5"><tspan class="m">t</tspan></tspan><tspan dy="-5"> </tspan>|</text>
+<text x="1421" y="432" class="sm pend" text-anchor="middle">= –<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+37.9s" fill="freeze"/></text>
+<text x="1421" y="432" class="sm" text-anchor="middle" visibility="hidden">= 1 / 36 = <tspan font-weight="700">0.0278</tspan><set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+37.9s" fill="freeze"/></text>
+<rect x="1602" y="356" width="240" height="90" rx="8" class="flash" opacity="0"><animate attributeName="opacity" values="0;.85;0" dur="1.1s" begin="play.click+39s"/></rect>
+<rect x="1602" y="356" width="240" height="90" rx="8" class="pink"/>
+<text x="1722" y="378" class="xs" text-anchor="middle">Quality score</text>
+<text x="1722" y="404" class="sm" text-anchor="middle"><tspan class="m">Q</tspan><tspan class="sub" dy="5">GP</tspan><tspan dy="-5"> </tspan>= 1 − <tspan class="m">d</tspan><tspan class="sub" dy="5">o</tspan><tspan dy="-5"> </tspan></text>
+<text x="1722" y="432" class="sm pend" text-anchor="middle">= –<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+39s" fill="freeze"/></text>
+<text x="1722" y="432" class="sm" text-anchor="middle" visibility="hidden">= <tspan font-weight="700">0.9722</tspan><set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+39s" fill="freeze"/></text>
+</g>
+<path d="M1569 401.0H1599" class="wire" stroke-dasharray="30 30"><set attributeName="stroke-dashoffset" to="30" begin="play.click" fill="freeze"/><animate attributeName="stroke-dashoffset" from="30" to="0" begin="play.click+38.4s" dur="0.5s" fill="freeze"/></path>
+<path d="M1599 401L1590 406L1590 396z" class="head"><set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+38.825s" fill="freeze"/></path>
+<circle r="5" class="packet" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+38.4s" dur="0.5s"/><animateMotion path="M1569 401.0H1599" begin="play.click+38.4s" dur="0.5s" fill="freeze"/></circle>
+<g><set attributeName="opacity" to="0.16" begin="play.click" fill="freeze"/><animate attributeName="opacity" from="0.16" to="1" begin="play.click+39.8s" dur="0.5s" fill="freeze"/>
+<rect x="1264" y="458" width="590" height="190" rx="10" class="card-y"/>
+<text x="1278" y="488" class="h2" text-anchor="start">Metric aggregation</text>
+<rect x="1284" y="502" width="170" height="48" rx="8" class="flash" opacity="0"><animate attributeName="opacity" values="0;.85;0" dur="1.1s" begin="play.click+40.3s"/></rect>
+<rect x="1284" y="502" width="170" height="48" rx="8" class="pink"/>
+<text x="1369" y="532" class="h3 pend" text-anchor="middle"><tspan class="m">Q</tspan><tspan class="sub" dy="5">SS</tspan><tspan dy="-5"> </tspan>= –<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+40.3s" fill="freeze"/></text>
+<text x="1369" y="532" class="h3" text-anchor="middle" visibility="hidden"><tspan class="m">Q</tspan><tspan class="sub" dy="5">SS</tspan><tspan dy="-5"> </tspan>= 1.0000<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+40.3s" fill="freeze"/></text>
+<rect x="1474" y="502" width="170" height="48" rx="8" class="flash" opacity="0"><animate attributeName="opacity" values="0;.85;0" dur="1.1s" begin="play.click+40.8s"/></rect>
+<rect x="1474" y="502" width="170" height="48" rx="8" class="ban"/>
+<text x="1559" y="532" class="h3 pend" text-anchor="middle"><tspan class="m">Q</tspan><tspan class="sub" dy="5">GP</tspan><tspan dy="-5"> </tspan>= –<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+40.8s" fill="freeze"/></text>
+<text x="1559" y="532" class="h3" text-anchor="middle" visibility="hidden"><tspan class="m">Q</tspan><tspan class="sub" dy="5">GP</tspan><tspan dy="-5"> </tspan>= 0.9722<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+40.8s" fill="freeze"/></text>
+<rect x="1664" y="502" width="170" height="48" rx="8" class="flash" opacity="0"><animate attributeName="opacity" values="0;.85;0" dur="1.1s" begin="play.click+41.3s"/></rect>
+<rect x="1664" y="502" width="170" height="48" rx="8" class="tan"/>
+<text x="1749" y="532" class="h3 pend" text-anchor="middle"><tspan class="m">Q</tspan><tspan class="sub" dy="5">NA</tspan><tspan dy="-5"> </tspan>= –<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+41.3s" fill="freeze"/></text>
+<text x="1749" y="532" class="h3" text-anchor="middle" visibility="hidden"><tspan class="m">Q</tspan><tspan class="sub" dy="5">NA</tspan><tspan dy="-5"> </tspan>= 0.9722<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+41.3s" fill="freeze"/></text>
+<rect x="1329" y="586" width="460" height="50" rx="8" class="flash" opacity="0"><animate attributeName="opacity" values="0;.85;0" dur="1.1s" begin="play.click+42.5s"/></rect>
+<rect x="1329" y="586" width="460" height="50" rx="8" class="card-y"/>
+<text x="1559" y="617" class="h3 pend" text-anchor="middle"><tspan class="m">Q</tspan><tspan class="sub" dy="5">n</tspan><tspan dy="-5"> </tspan>= (<tspan class="m">Q</tspan><tspan class="sub" dy="5">SS</tspan><tspan dy="-5"> </tspan>+ <tspan class="m">Q</tspan><tspan class="sub" dy="5">GP</tspan><tspan dy="-5"> </tspan>+ <tspan class="m">Q</tspan><tspan class="sub" dy="5">NA</tspan><tspan dy="-5"> </tspan>) / 3 = –<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+42.5s" fill="freeze"/></text>
+<text x="1559" y="617" class="h3" text-anchor="middle" visibility="hidden"><tspan class="m">Q</tspan><tspan class="sub" dy="5">n</tspan><tspan dy="-5"> </tspan>= (<tspan class="m">Q</tspan><tspan class="sub" dy="5">SS</tspan><tspan dy="-5"> </tspan>+ <tspan class="m">Q</tspan><tspan class="sub" dy="5">GP</tspan><tspan dy="-5"> </tspan>+ <tspan class="m">Q</tspan><tspan class="sub" dy="5">NA</tspan><tspan dy="-5"> </tspan>) / 3 = <tspan font-weight="700">0.9815</tspan><set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+42.5s" fill="freeze"/></text>
+</g>
+<path d="M1369 550V566H1559V586" class="wire" stroke-dasharray="226 226"><set attributeName="stroke-dashoffset" to="226" begin="play.click" fill="freeze"/><animate attributeName="stroke-dashoffset" from="226" to="0" begin="play.click+41.8s" dur="0.7s" fill="freeze"/></path>
+<circle r="5" class="packet" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+41.8s" dur="0.7s"/><animateMotion path="M1369 550V566H1559V586" begin="play.click+41.8s" dur="0.7s" fill="freeze"/></circle>
+<path d="M1559 550V566H1559V586" class="wire" stroke-dasharray="36 36"><set attributeName="stroke-dashoffset" to="36" begin="play.click" fill="freeze"/><animate attributeName="stroke-dashoffset" from="36" to="0" begin="play.click+41.8s" dur="0.7s" fill="freeze"/></path>
+<path d="M1559 586L1554 577L1564 577z" class="head"><set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+42.395s" fill="freeze"/></path>
+<circle r="5" class="packet" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+41.8s" dur="0.7s"/><animateMotion path="M1559 550V566H1559V586" begin="play.click+41.8s" dur="0.7s" fill="freeze"/></circle>
+<path d="M1749 550V566H1559V586" class="wire" stroke-dasharray="226 226"><set attributeName="stroke-dashoffset" to="226" begin="play.click" fill="freeze"/><animate attributeName="stroke-dashoffset" from="226" to="0" begin="play.click+41.8s" dur="0.7s" fill="freeze"/></path>
+<circle r="5" class="packet" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+41.8s" dur="0.7s"/><animateMotion path="M1749 550V566H1559V586" begin="play.click+41.8s" dur="0.7s" fill="freeze"/></circle>
+<g><set attributeName="opacity" to="0.16" begin="play.click" fill="freeze"/><animate attributeName="opacity" from="0.16" to="1" begin="play.click+43.3s" dur="0.5s" fill="freeze"/>
+<rect x="1264" y="658" width="590" height="174" rx="10" class="card-y"/>
+<text x="1278" y="688" class="h2" text-anchor="start">Final Animated Narrative Score (AN)</text>
+<rect x="1276" y="704" width="162" height="76" rx="8" class="flash" opacity="0"><animate attributeName="opacity" values="0;.85;0" dur="1.1s" begin="play.click+43.8s"/></rect>
+<rect x="1276" y="704" width="162" height="76" rx="8" class="gate"/>
+<text x="1357" y="734" class="sm" text-anchor="middle">Validity gate</text>
+<text x="1357" y="762" class="sm pend" text-anchor="middle"><tspan class="m">G</tspan> = –<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+43.8s" fill="freeze"/></text>
+<text x="1357" y="762" class="sm" text-anchor="middle" visibility="hidden"><tspan class="m">G</tspan> = 1<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+43.8s" fill="freeze"/></text>
+<text x="1456" y="750" class="big" text-anchor="middle">×</text>
+<rect x="1474" y="704" width="170" height="76" rx="8" class="flash" opacity="0"><animate attributeName="opacity" values="0;.85;0" dur="1.1s" begin="play.click+43.8s"/></rect>
+<rect x="1474" y="704" width="170" height="76" rx="8" class="ev"/>
+<text x="1559" y="734" class="sm" text-anchor="middle">Narrative quality</text>
+<text x="1559" y="762" class="sm pend" text-anchor="middle"><tspan class="m">Q</tspan><tspan class="sub" dy="5">n</tspan><tspan dy="-5"> </tspan>= –<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+43.8s" fill="freeze"/></text>
+<text x="1559" y="762" class="sm" text-anchor="middle" visibility="hidden"><tspan class="m">Q</tspan><tspan class="sub" dy="5">n</tspan><tspan dy="-5"> </tspan>= 0.9815<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+43.8s" fill="freeze"/></text>
+<rect x="1686" y="704" width="156" height="76" rx="8" class="flash" opacity="0"><animate attributeName="opacity" values="0;.85;0" dur="1.1s" begin="play.click+45s"/></rect>
+<rect x="1686" y="704" width="156" height="76" rx="8" class="gate"/>
+<text x="1764" y="734" class="h2" text-anchor="middle">AN</text>
+<text x="1764" y="764" class="h3 pend" text-anchor="middle">= <tspan class="m">G</tspan><tspan class="m">Q</tspan><tspan class="sub" dy="5">n</tspan><tspan dy="-5"> </tspan>= –<set attributeName="visibility" to="visible" begin="play.click" fill="freeze"/><set attributeName="visibility" to="hidden" begin="play.click+45s" fill="freeze"/></text>
+<text x="1764" y="764" class="h3" text-anchor="middle" visibility="hidden">= <tspan class="m">G</tspan><tspan class="m">Q</tspan><tspan class="sub" dy="5">n</tspan><tspan dy="-5"> </tspan>= 0.9815<set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+45s" fill="freeze"/></text>
+<text x="1559" y="816" class="sm" text-anchor="middle">(If <tspan class="m">G</tspan> = 0, then AN = 0.)</text>
+</g>
+<path d="M1647 742H1683" class="wire" stroke-dasharray="36 36"><set attributeName="stroke-dashoffset" to="36" begin="play.click" fill="freeze"/><animate attributeName="stroke-dashoffset" from="36" to="0" begin="play.click+44.4s" dur="0.5s" fill="freeze"/></path>
+<path d="M1683 742L1674 747L1674 737z" class="head"><set attributeName="visibility" to="hidden" begin="play.click" fill="freeze"/><set attributeName="visibility" to="visible" begin="play.click+44.825s" fill="freeze"/></path>
+<circle r="5" class="packet" visibility="hidden"><set attributeName="visibility" to="visible" begin="play.click+44.4s" dur="0.5s"/><animateMotion path="M1647 742H1683" begin="play.click+44.4s" dur="0.5s" fill="freeze"/></circle>
+</svg>

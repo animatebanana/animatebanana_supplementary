@@ -1,0 +1,3138 @@
+{
+ "_generated": "scripts/build_eval_runs.py — do not hand-edit",
+ "bands": {
+  "A": 4,
+  "B": 3,
+  "C": 2,
+  "D": 1
+ },
+ "warnings": [
+  "AnimateBanana/CVPR_2025_arch00855: 15 frame png(s) but 14 judged step(s)",
+  "Claude Code with Opus 5/CVPR_2025_arch00012: 15 frame png(s) but 20 judged step(s)",
+  "Gemini-3.1-Pro/SciMMIR_arch_diff_000000152: 15 frame png(s) but 18 judged step(s)",
+  "Qwen3.8_28B/CVPR_2025_arch00855: 27 frame png(s) but 18 judged step(s)",
+  "Qwen3.8_28B: media for \"Paper2Fig_pipe_diff_000000492\" has no Judge_Results json"
+ ],
+ "baselines": [
+  {
+   "id": "animatebanana",
+   "label": "AnimateBanana",
+   "samples": [
+    {
+     "id": "CVPR_2025_arch00855",
+     "style": "Alpha Masking",
+     "outcome": "pass_high",
+     "source": "EVALUATIONS_PAGE/Original_Image/CVPR_2025_arch00855.png",
+     "video": null,
+     "frames_dir": true,
+     "raw_frames": [
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_00.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_01.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_02.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_03.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_04.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_05.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_06.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_07.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_08.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_09.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_10.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_11.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_12.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_13.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_14.png"
+     ],
+     "bands": {
+      "VF": "A",
+      "ASC": "B"
+     },
+     "rationale": {
+      "VF": {
+       "criteria": {
+        "VFS_element_alteration": "All core diagram blocks, grids, icons, and arrows remain intact, identifiable, and temporally stable without unwanted morphing.",
+        "VFS_visual_layout_fidelity": "Containment hierarchies, boundary frames, and the horizontal pipeline flow perfectly match the ground truth diagram.",
+        "VFS_geometric_layout_fidelity": "Arrow trajectories, module alignments, and interconnection paths maintain correct geometric relationships throughout all animation steps.",
+        "VFS_proportion_scale_fidelity": "Element proportions, bounding containers, and font aspect ratios remain consistently scaled across every step.",
+        "VFS_text_typographic_integrity": "Labels and mathematical notations remain sharp, accurate, and fully legible across active and dimmed states.",
+        "VFS_visual_quality_and_style_matching": "The alpha masking technique cleanly transitions between active and inactive elements while preserving color fidelity and structural clarity."
+       },
+       "summary": "The animation faithfully replicates the ground truth layout and topology, executing stable alpha masking highlights with high visual and typographic fidelity."
+      },
+      "ASC": {
+       "summary": "The animation starts with elements already unmasked instead of a fully masked figure, but the rest of the masking sequence is strictly compliant."
+      }
+     },
+     "scores": {
+      "SSS": "0.9286",
+      "GPS": "0.9286",
+      "NAS": "0.9762"
+     },
+     "steps": [
+      {
+       "t": 1,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_00.png",
+       "time": 1.0,
+       "narration": "ESC-Net begins by taking an input image alongside a set of candidate class text descriptions.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 2,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_01.png",
+       "time": 3.0,
+       "narration": "Pre-trained CLIP vision and language encoders process the inputs to extract image and text representations.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 3,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_02.png",
+       "time": 5.0,
+       "narration": "The extracted vision feature map and language feature vectors are paired for correlation modeling.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 4,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_03.png",
+       "time": 7.0,
+       "narration": "A vision-language correlation step computes cosine similarity across spatial coordinates for each class.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 5,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_04.png",
+       "time": 9.0,
+       "narration": "The correlation maps and features are progressively refined through N consecutive ESC Blocks.",
+       "sss": "A",
+       "gps": "C",
+       "nas": "A"
+      },
+      {
+       "t": 6,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_05.png",
+       "time": 11.0,
+       "narration": "Inside each block, the correlation map stack enters the Pseudo Prompt Generator.",
+       "sss": "C",
+       "gps": "A",
+       "nas": "B"
+      },
+      {
+       "t": 7,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_06.png",
+       "time": 13.0,
+       "narration": "The generator thresholds and clusters candidate object locations across the image.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 8,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_07.png",
+       "time": 15.0,
+       "narration": "This creates pseudo point coordinates and mask prompts, which are supplied alongside the vision features into the SAM Block.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 9,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_08.png",
+       "time": 16.0,
+       "narration": "The SAM transformer block applies prompt self-attention and bidirectional cross-attention to refine the spatial context.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 10,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_09.png",
+       "time": 17.0,
+       "narration": "The SAM transformer block applies prompt self-attention and bidirectional cross-attention to refine the spatial context.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 11,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_10.png",
+       "time": 19.0,
+       "narration": "The enhanced visual features, along with text features and the original correlation map, are passed to the Vision-Language Fusion module.",
+       "sss": "B",
+       "gps": "B",
+       "nas": "A"
+      },
+      {
+       "t": 12,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_11.png",
+       "time": 21.0,
+       "narration": "The Vision-Language Fusion block sequentially applies image and text guidance to remodel class interactions.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 13,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_12.png",
+       "time": 23.0,
+       "narration": "This outputs a multimodally refined correlation map for all candidate classes.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 14,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_arch00855/frame_13.png",
+       "time": 25.0,
+       "narration": "A mask prediction decoder then upsamples the refined features.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      }
+     ],
+     "derived": {
+      "G": 1,
+      "vf_pass": true,
+      "asc_pass": true,
+      "N": 14,
+      "gated_at": null,
+      "metrics": {
+       "SSS": {
+        "dists": [
+         0,
+         0,
+         0,
+         0,
+         0,
+         2,
+         0,
+         0,
+         0,
+         0,
+         1,
+         0,
+         0,
+         0
+        ],
+        "d_o": 0.0714,
+        "Q": 0.9286
+       },
+       "GPS": {
+        "dists": [
+         0,
+         0,
+         0,
+         0,
+         2,
+         0,
+         0,
+         0,
+         0,
+         0,
+         1,
+         0,
+         0,
+         0
+        ],
+        "d_o": 0.0714,
+        "Q": 0.9286
+       },
+       "NAS": {
+        "dists": [
+         0,
+         0,
+         0,
+         0,
+         0,
+         1,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0
+        ],
+        "d_o": 0.0238,
+        "Q": 0.9762
+       }
+      },
+      "Qn": 0.9445,
+      "AANS": 0.9445
+     }
+    },
+    {
+     "id": "CVPR_2025_pipe00004",
+     "style": "Alpha Masking",
+     "outcome": "pass_high",
+     "source": "EVALUATIONS_PAGE/Original_Image/CVPR_2025_pipe00004.png",
+     "video": null,
+     "frames_dir": true,
+     "raw_frames": [
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_00.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_01.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_02.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_03.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_04.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_05.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_06.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_07.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_08.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_09.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_10.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_11.png"
+     ],
+     "bands": {
+      "VF": "A",
+      "ASC": "B"
+     },
+     "rationale": {
+      "VF": {
+       "criteria": {
+        "VFS_element_alteration": "Core pipeline diagram components are accurately preserved throughout each animation step without morphing or structural deletion.",
+        "VFS_visual_layout_fidelity": "The three-stage horizontal workflow and hierarchical flow strictly match the reference diagram.",
+        "VFS_geometric_layout_fidelity": "All arrows, connections, and spatial relations between images, masks, and 3D representations remain correctly aligned.",
+        "VFS_proportion_scale_fidelity": "Element proportions, bounding boxes, and font scalings are consistent across all frames.",
+        "VFS_text_typographic_integrity": "Mathematical notation, labels, and flow annotations maintain correct legibility and formatting throughout the sequence.",
+        "VFS_visual_quality_and_style_matching": "The alpha masking effect correctly highlights active components while preserving background visibility cleanly."
+       },
+       "summary": "The animation successfully implements alpha masking over the reference diagram with full geometric stability, accurate text, and proper sequential highlighting."
+      },
+      "ASC": {
+       "summary": "The animation starts with elements already unmasked instead of a fully masked figure, but the rest of the masking sequence is strictly compliant."
+      }
+     },
+     "scores": {
+      "SSS": "1",
+      "GPS": "0.9722",
+      "NAS": "0.9722"
+     },
+     "steps": [
+      {
+       "t": 1,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_00.png",
+       "time": 1.0,
+       "narration": "The pipeline begins in the first section with multiple camera views and their corresponding foreground object masks.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 2,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_01.png",
+       "time": 3.0,
+       "narration": "These inputs are used to construct an initial set of three-dimensional Gaussians containing the statue.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 3,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_02.png",
+       "time": 5.0,
+       "narration": "Depth maps are then rendered across the set of camera viewpoints.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 4,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_03.png",
+       "time": 7.0,
+       "narration": "Entering the depth-guided mask inference stage, reference and secondary views are paired with their respective masks.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 5,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_04.png",
+       "time": 9.0,
+       "narration": "Applying these masks isolates the visible background regions for both viewpoints.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 6,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_05.png",
+       "time": 11.0,
+       "narration": "Using depth from the second view, background content is projected onto the reference view.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 7,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_06.png",
+       "time": 13.0,
+       "narration": "This determines the final depth-guided inpainting mask for the reference view.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 8,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_07.png",
+       "time": 15.0,
+       "narration": "The mask is transferred into the final inpainting-guided refinement stage.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 9,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_08.png",
+       "time": 17.0,
+       "narration": "Inpainting is performed on the reference view to synthesize missing background color and depth.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 10,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_09.png",
+       "time": 19.0,
+       "narration": "Depth-guided projection then lifts the inpainted reference view into a three-dimensional surface structure.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 11,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_10.png",
+       "time": 21.0,
+       "narration": "This structure initializes the refined Gaussians while projecting background information onto the remaining viewpoints.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 12,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_11.png",
+       "time": 23.0,
+       "narration": "Finally, render loss on the reference view and cross-view loss on other rendered views supervise the refined scene.",
+       "sss": "A",
+       "gps": "B",
+       "nas": "B"
+      }
+     ],
+     "derived": {
+      "G": 1,
+      "vf_pass": true,
+      "asc_pass": true,
+      "N": 12,
+      "gated_at": null,
+      "metrics": {
+       "SSS": {
+        "dists": [
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0
+        ],
+        "d_o": 0.0,
+        "Q": 1.0
+       },
+       "GPS": {
+        "dists": [
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         1
+        ],
+        "d_o": 0.0278,
+        "Q": 0.9722
+       },
+       "NAS": {
+        "dists": [
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         1
+        ],
+        "d_o": 0.0278,
+        "Q": 0.9722
+       }
+      },
+      "Qn": 0.9815,
+      "AANS": 0.9815
+     }
+    },
+    {
+     "id": "Paper2Fig_pipe_diff_000000490",
+     "style": "Hopping Bounding Box",
+     "outcome": "pass_high",
+     "source": "EVALUATIONS_PAGE/Original_Image/Paper2Fig_pipe_diff_000000490.png",
+     "video": null,
+     "frames_dir": true,
+     "raw_frames": [
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_00.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_01.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_02.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_03.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_04.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_05.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_06.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_07.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_08.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_09.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_10.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_11.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_12.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_13.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_14.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_15.png",
+      "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_16.png"
+     ],
+     "bands": {
+      "VF": "A",
+      "ASC": "A"
+     },
+     "rationale": {
+      "VF": {
+       "criteria": {
+        "VFS_element_alteration": "All core diagram elements are perfectly preserved and remain completely static throughout the video sequence.",
+        "VFS_visual_layout_fidelity": "The containment hierarchy and overall pipeline flow are accurately maintained relative to the reference image.",
+        "VFS_geometric_layout_fidelity": "The relative positioning, alignments, and connecting arrows are perfectly preserved without any structural breaks.",
+        "VFS_proportion_scale_fidelity": "The scale of elements and font aspect ratios remain highly consistent across all frames.",
+        "VFS_text_typographic_integrity": "Text labels are fully legible, accurate, and cleanly enclosed by the bounding box without clipping.",
+        "VFS_visual_quality_and_style_matching": "Colors, line crispness, and bounding box transitions are clean and free of visual jitter."
+       },
+       "summary": "The animation perfectly executes the hopping bounding box style, maintaining a completely static underlying diagram while cleanly highlighting each step in sequence with helpful narrative captions."
+      },
+      "ASC": {
+       "summary": "The video is fully style compliant."
+      }
+     },
+     "scores": {
+      "SSS": "1",
+      "GPS": "0.9804",
+      "NAS": "1"
+     },
+     "steps": [
+      {
+       "t": 1,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_00.png",
+       "time": 1.0,
+       "narration": "The pipeline begins with the data filtering and cleaning stage.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 2,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_01.png",
+       "time": 3.0,
+       "narration": "First, tweets tagged within the Los Angeles geographic area are collected.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 3,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_02.png",
+       "time": 5.0,
+       "narration": "The collected tweets are then filtered specifically for COVID-19 keywords.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 4,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_03.png",
+       "time": 7.0,
+       "narration": "Next, text pre-processing prepares the tweet corpus for downstream extraction.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 5,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_04.png",
+       "time": 9.0,
+       "narration": "The cleaned text passes into the entity and relation extraction stage.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 6,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_05.png",
+       "time": 11.0,
+       "narration": "Sentiment analysis computes sentiment scores for tweets and specific keywords.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 7,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_06.png",
+       "time": 13.0,
+       "narration": "Topic modeling via matrix and tensor factorizations extracts latent topics and tracks their temporal evolution.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 8,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_07.png",
+       "time": 15.0,
+       "narration": "Time series analysis identifies tweet volume peaks and significant sentiment change points linked to real-world events.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 9,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_08.png",
+       "time": 17.0,
+       "narration": "Word embeddings evaluate semantic similarity to generate weighted edges between tweets and topic keywords.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 10,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_09.png",
+       "time": 19.0,
+       "narration": "These extracted entities and relations are integrated during graph construction.",
+       "sss": "A",
+       "gps": "B",
+       "nas": "A"
+      },
+      {
+       "t": 11,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_10.png",
+       "time": 21.0,
+       "narration": "Definite entities and relations are formalized across tweets, topics, and dates.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 12,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_11.png",
+       "time": 23.0,
+       "narration": "Graph queries and visual inspection allow validation of the interconnected structure.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 13,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_12.png",
+       "time": 25.0,
+       "narration": "Graph embedding techniques then project the network structure into dense vector spaces.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 14,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_13.png",
+       "time": 27.0,
+       "narration": "Finally, the constructed network undergoes in-depth graph analysis.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 15,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_14.png",
+       "time": 29.0,
+       "narration": "Community detection identifies tightly coupled clusters of topics and discussions.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 16,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_15.png",
+       "time": 31.0,
+       "narration": "Node similarity metrics assess topological and semantic closeness between entities.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 17,
+       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_16.png",
+       "time": 33.0,
+       "narration": "Lastly, link prediction infers unobserved associations between events, dates, and topics.",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      }
+     ],
+     "derived": {
+      "G": 1,
+      "vf_pass": true,
+      "asc_pass": true,
+      "N": 17,
+      "gated_at": null,
+      "metrics": {
+       "SSS": {
+        "dists": [
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0
+        ],
+        "d_o": 0.0,
+        "Q": 1.0
+       },
+       "GPS": {
+        "dists": [
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         1,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0
+        ],
+        "d_o": 0.0196,
+        "Q": 0.9804
+       },
+       "NAS": {
+        "dists": [
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0
+        ],
+        "d_o": 0.0,
+        "Q": 1.0
+       }
+      },
+      "Qn": 0.9935,
+      "AANS": 0.9935
+     }
+    }
+   ]
+  },
+  {
+   "id": "claude-code-with-opus-5",
+   "label": "Claude Code with Opus 5",
+   "samples": [
+    {
+     "id": "CVPR_2025_arch00012",
+     "style": null,
+     "outcome": "pass_low",
+     "source": "EVALUATIONS_PAGE/Original_Image/CVPR_2025_arch00012.png",
+     "video": null,
+     "frames_dir": true,
+     "raw_frames": [
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_000_t00.00s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_001_t01.80s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_002_t03.60s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_003_t05.40s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_004_t07.20s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_005_t09.00s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_006_t10.80s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_007_t12.60s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_008_t14.40s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_009_t16.20s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_010_t18.00s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_011_t19.80s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_012_t21.60s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_013_t23.40s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_014_t24.10s.png"
+     ],
+     "bands": {
+      "VF": "A",
+      "ASC": "A"
+     },
+     "rationale": {
+      "VF": {
+       "criteria": {
+        "VFS_element_alteration": "All structural blocks, layers, and legend components match the ground truth reference accurately with no element loss or mid-animation morphing.",
+        "VFS_visual_layout_fidelity": "The two-column layout and overall flow structure faithfully preserve the containment hierarchy and architecture of the reference.",
+        "VFS_geometric_layout_fidelity": "Connections, skip arrows, addition nodes, and parallel branches are correctly positioned and aligned without structural errors.",
+        "VFS_proportion_scale_fidelity": "Element proportions, bounding box scales, and spacing relative to the overall diagram frame remain consistent.",
+        "VFS_text_typographic_integrity": "Text labels, layer names, and mathematical subscripts remain legible and free from corruption throughout.",
+        "VFS_visual_quality_and_style_matching": "Color coding, borders, and rounded rectangle styles match the original aesthetic closely."
+       },
+       "summary": "The animation executes a clean progressive reveal that strictly follows the cumulative rule, reaching a complete and faithful final state matching the ground truth."
+      },
+      "ASC": {
+       "summary": "The video is fully style compliant."
+      }
+     },
+     "scores": {
+      "SSS": "0.8167",
+      "GPS": "0.7833",
+      "NAS": "0.73333"
+     },
+     "steps": [
+      {
+       "t": 1,
+       "frame": "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_000_t00.00s.png",
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "D",
+       "nas": "C"
+      },
+      {
+       "t": 2,
+       "frame": "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_001_t01.80s.png",
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 3,
+       "frame": "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_002_t03.60s.png",
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 4,
+       "frame": "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_003_t05.40s.png",
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "A",
+       "nas": "C"
+      },
+      {
+       "t": 5,
+       "frame": "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_004_t07.20s.png",
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 6,
+       "frame": "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_005_t09.00s.png",
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "B",
+       "nas": "A"
+      },
+      {
+       "t": 7,
+       "frame": "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_006_t10.80s.png",
+       "time": null,
+       "narration": "",
+       "sss": "B",
+       "gps": "D",
+       "nas": "C"
+      },
+      {
+       "t": 8,
+       "frame": "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_007_t12.60s.png",
+       "time": null,
+       "narration": "",
+       "sss": "C",
+       "gps": "A",
+       "nas": "B"
+      },
+      {
+       "t": 9,
+       "frame": "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_008_t14.40s.png",
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "D",
+       "nas": "C"
+      },
+      {
+       "t": 10,
+       "frame": "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_009_t16.20s.png",
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 11,
+       "frame": "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_010_t18.00s.png",
+       "time": null,
+       "narration": "",
+       "sss": "C",
+       "gps": "C",
+       "nas": "C"
+      },
+      {
+       "t": 12,
+       "frame": "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_011_t19.80s.png",
+       "time": null,
+       "narration": "",
+       "sss": "C",
+       "gps": "B",
+       "nas": "A"
+      },
+      {
+       "t": 13,
+       "frame": "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_012_t21.60s.png",
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 14,
+       "frame": "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_013_t23.40s.png",
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "A",
+       "nas": "C"
+      },
+      {
+       "t": 15,
+       "frame": "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00012/frame_014_t24.10s.png",
+       "time": null,
+       "narration": "",
+       "sss": "D",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 16,
+       "frame": null,
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 17,
+       "frame": null,
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "A",
+       "nas": "C"
+      },
+      {
+       "t": 18,
+       "frame": null,
+       "time": null,
+       "narration": "",
+       "sss": "B",
+       "gps": "A",
+       "nas": "B"
+      },
+      {
+       "t": 19,
+       "frame": null,
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 20,
+       "frame": null,
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      }
+     ],
+     "derived": {
+      "G": 1,
+      "vf_pass": true,
+      "asc_pass": true,
+      "N": 20,
+      "gated_at": null,
+      "metrics": {
+       "SSS": {
+        "dists": [
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         1,
+         2,
+         0,
+         0,
+         2,
+         2,
+         0,
+         0,
+         3,
+         0,
+         0,
+         1,
+         0,
+         0
+        ],
+        "d_o": 0.1833,
+        "Q": 0.8167
+       },
+       "GPS": {
+        "dists": [
+         3,
+         0,
+         0,
+         0,
+         0,
+         1,
+         3,
+         0,
+         3,
+         0,
+         2,
+         1,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0
+        ],
+        "d_o": 0.2167,
+        "Q": 0.7833
+       },
+       "NAS": {
+        "dists": [
+         2,
+         0,
+         0,
+         2,
+         0,
+         0,
+         2,
+         1,
+         2,
+         0,
+         2,
+         0,
+         0,
+         2,
+         0,
+         0,
+         2,
+         1,
+         0,
+         0
+        ],
+        "d_o": 0.2667,
+        "Q": 0.7333
+       }
+      },
+      "Qn": 0.7778,
+      "AANS": 0.7778
+     }
+    },
+    {
+     "id": "CVPR_2025_arch00855",
+     "style": null,
+     "outcome": "vf_fail",
+     "source": "EVALUATIONS_PAGE/Original_Image/CVPR_2025_arch00855.png",
+     "video": null,
+     "frames_dir": true,
+     "raw_frames": [
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00855/frame_000_t00.40s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00855/frame_001_t02.90s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00855/frame_002_t05.40s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00855/frame_003_t07.90s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00855/frame_004_t10.40s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00855/frame_005_t12.90s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00855/frame_006_t15.40s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00855/frame_007_t17.90s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_arch00855/frame_008_t18.40s.png"
+     ],
+     "bands": {
+      "VF": "C",
+      "ASC": null
+     },
+     "rationale": {
+      "VF": {
+       "criteria": {
+        "VFS_element_alteration": "Natural photographic input images and prompt visual examples are simplified into generic stick-figure vector graphics, violating input fidelity constraints.",
+        "VFS_visual_layout_fidelity": "The overarching flow and containment within the main ESC-Block structure are largely maintained relative to the source.",
+        "VFS_geometric_layout_fidelity": "Connections, arrows, and relative spatial alignments among blocks remain structurally consistent throughout the steps.",
+        "VFS_proportion_scale_fidelity": "Scale and proportions of feature maps and modules are generally balanced.",
+        "VFS_text_typographic_integrity": "Text labels remain legible and appropriately positioned across active and dimmed states.",
+        "VFS_visual_quality_and_style_matching": "Masking transitions operate as intended, though vectorization of natural image inputs alters original visual realism."
+       },
+       "summary": "While layout, text, and alpha masking transitions are structurally intact, the replacement of realistic photographic diagram elements with simplified vector icons places the evaluation into Band C."
+      },
+      "ASC": {
+       "summary": null
+      }
+     },
+     "scores": {
+      "SSS": "NA",
+      "GPS": "NA",
+      "NAS": "NA"
+     },
+     "steps": [],
+     "derived": {
+      "G": 0,
+      "vf_pass": false,
+      "asc_pass": false,
+      "N": 0,
+      "gated_at": "VF",
+      "metrics": null,
+      "Qn": null,
+      "AANS": 0.0
+     }
+    },
+    {
+     "id": "CVPR_2025_pipe00004",
+     "style": null,
+     "outcome": "vf_fail",
+     "source": "EVALUATIONS_PAGE/Original_Image/CVPR_2025_pipe00004.png",
+     "video": null,
+     "frames_dir": true,
+     "raw_frames": [
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_pipe00004/frame_000_t00.40s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_pipe00004/frame_001_t02.60s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_pipe00004/frame_002_t04.80s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_pipe00004/frame_003_t07.00s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_pipe00004/frame_004_t09.20s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_pipe00004/frame_005_t11.40s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_pipe00004/frame_006_t13.60s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_pipe00004/frame_007_t15.80s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_pipe00004/frame_008_t18.00s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_pipe00004/frame_009_t20.20s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_pipe00004/frame_010_t22.40s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_pipe00004/frame_011_t24.60s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_pipe00004/frame_012_t26.80s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_pipe00004/frame_013_t29.00s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_pipe00004/frame_014_t31.20s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_pipe00004/frame_015_t33.40s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/CVPR_2025_pipe00004/frame_016_t33.90s.png"
+     ],
+     "bands": {
+      "VF": "C",
+      "ASC": null
+     },
+     "rationale": {
+      "VF": {
+       "criteria": {
+        "VFS_element_alteration": "The natural photographic images of the bear statue and environment have been simplified into flat vector illustrations, violating fidelity requirements for photographic elements.",
+        "VFS_visual_layout_fidelity": "The overarching multi-stage pipeline structure, grouping brackets, and left-to-right flow match the reference design.",
+        "VFS_geometric_layout_fidelity": "Connections, arrows, and relative block arrangements are preserved and correctly routed.",
+        "VFS_proportion_scale_fidelity": "Proportions and component scales remain stable and consistent across frames.",
+        "VFS_text_typographic_integrity": "Most text labels and mathematical notations remain legible and properly positioned throughout the masking sequence.",
+        "VFS_visual_quality_and_style_matching": "The alpha masking transitions function smoothly, though the conversion from photo-realistic renders to flat vector art deviates from the reference style."
+       },
+       "summary": "While the sequence layout and alpha masking stability are preserved, the replacement of real photographic inputs with simplified vector graphics limits the fidelity classification."
+      },
+      "ASC": {
+       "summary": null
+      }
+     },
+     "scores": {
+      "SSS": "NA",
+      "GPS": "NA",
+      "NAS": "NA"
+     },
+     "steps": [],
+     "derived": {
+      "G": 0,
+      "vf_pass": false,
+      "asc_pass": false,
+      "N": 0,
+      "gated_at": "VF",
+      "metrics": null,
+      "Qn": null,
+      "AANS": 0.0
+     }
+    },
+    {
+     "id": "Paper2Fig_pipe_diff_000000104",
+     "style": null,
+     "outcome": "vf_fail",
+     "source": "EVALUATIONS_PAGE/Original_Image/Paper2Fig_pipe_diff_000000104.png",
+     "video": null,
+     "frames_dir": true,
+     "raw_frames": [
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/Paper2Fig_pipe_diff_000000104/frame_000_t00.00s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/Paper2Fig_pipe_diff_000000104/frame_001_t02.20s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/Paper2Fig_pipe_diff_000000104/frame_002_t04.40s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/Paper2Fig_pipe_diff_000000104/frame_003_t06.60s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/Paper2Fig_pipe_diff_000000104/frame_004_t08.80s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/Paper2Fig_pipe_diff_000000104/frame_005_t11.00s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/Paper2Fig_pipe_diff_000000104/frame_006_t13.20s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/Paper2Fig_pipe_diff_000000104/frame_007_t15.40s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/Paper2Fig_pipe_diff_000000104/frame_008_t17.60s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/Paper2Fig_pipe_diff_000000104/frame_009_t19.80s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/Paper2Fig_pipe_diff_000000104/frame_010_t20.20s.png"
+     ],
+     "bands": {
+      "VF": "C",
+      "ASC": null
+     },
+     "rationale": {
+      "VF": {
+       "criteria": {
+        "VFS_element_alteration": "The natural photographic face inputs and rendered 3D faces were replaced with stylized 2D cartoon vector illustrations, which is a major alteration violation.",
+        "VFS_visual_layout_fidelity": "Overall flow, panels, and directional layout largely mirror the source diagram arrangement.",
+        "VFS_geometric_layout_fidelity": "The arrows and positional relationships between nodes are preserved appropriately.",
+        "VFS_proportion_scale_fidelity": "Element proportions and relative bounding areas are moderately consistent with the source.",
+        "VFS_text_typographic_integrity": "Text labels are legible, correctly transcribed, and cleanly bounded without severe clipping.",
+        "VFS_visual_quality_and_style_matching": "The rendering style heavily deviates from realistic photographic textures to flat vector graphics, though the hopping box animation itself is stable."
+       },
+       "summary": "While the bounding box progression and structural layout are stable, converting realistic photographic face inputs into generic cartoon vector illustrations represents a material source fidelity violation."
+      },
+      "ASC": {
+       "summary": null
+      }
+     },
+     "scores": {
+      "SSS": "NA",
+      "GPS": "NA",
+      "NAS": "NA"
+     },
+     "steps": [],
+     "derived": {
+      "G": 0,
+      "vf_pass": false,
+      "asc_pass": false,
+      "N": 0,
+      "gated_at": "VF",
+      "metrics": null,
+      "Qn": null,
+      "AANS": 0.0
+     }
+    },
+    {
+     "id": "arch_arxiv_db_ir_2026_000000718",
+     "style": null,
+     "outcome": "vf_fail",
+     "source": "EVALUATIONS_PAGE/Original_Image/arch_arxiv_db_ir_2026_000000718.png",
+     "video": null,
+     "frames_dir": true,
+     "raw_frames": [
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/arch_arxiv_db_ir_2026_000000718/frame_000_t00.00s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/arch_arxiv_db_ir_2026_000000718/frame_001_t02.00s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/arch_arxiv_db_ir_2026_000000718/frame_002_t04.00s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/arch_arxiv_db_ir_2026_000000718/frame_003_t06.00s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/arch_arxiv_db_ir_2026_000000718/frame_004_t08.00s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/arch_arxiv_db_ir_2026_000000718/frame_005_t10.00s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/arch_arxiv_db_ir_2026_000000718/frame_006_t12.00s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/arch_arxiv_db_ir_2026_000000718/frame_007_t14.00s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/arch_arxiv_db_ir_2026_000000718/frame_008_t16.00s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/arch_arxiv_db_ir_2026_000000718/frame_009_t18.00s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/arch_arxiv_db_ir_2026_000000718/frame_010_t20.00s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/arch_arxiv_db_ir_2026_000000718/frame_011_t22.00s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/arch_arxiv_db_ir_2026_000000718/frame_012_t24.00s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/arch_arxiv_db_ir_2026_000000718/frame_013_t26.00s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/arch_arxiv_db_ir_2026_000000718/frame_014_t28.00s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/arch_arxiv_db_ir_2026_000000718/frame_015_t30.00s.png",
+      "EVALUATIONS_PAGE/Claude%20Code%20with%20Opus%205/Frames/arch_arxiv_db_ir_2026_000000718/frame_016_t30.80s.png"
+     ],
+     "bands": {
+      "VF": "C",
+      "ASC": null
+     },
+     "rationale": {
+      "VF": {
+       "criteria": {
+        "VFS_element_alteration": "Most major elements and containers are present, but the downward data-flow arrow connecting the Page Cache directly to the I/O Queue is omitted.",
+        "VFS_visual_layout_fidelity": "The structural layout and tiered containment (User Space, Kernel Space, Persistent Storage) are generally preserved.",
+        "VFS_geometric_layout_fidelity": "Relative positioning is maintained, but the missing Page Cache to I/O Queue arrow and slightly awkward dashed return arrow affect connection fidelity.",
+        "VFS_proportion_scale_fidelity": "Proportions match the reference moderately well, though container padding is slightly altered on the right margin.",
+        "VFS_text_typographic_integrity": "Text on the far right ('waits for completion until writing disk') is clipped at the border, and the 'enqueue' label overlaps boundaries.",
+        "VFS_visual_quality_and_style_matching": "Colors, container styles, and progressive assembly match the source reference cleanly."
+       },
+       "summary": "The progressive reveal follows a logical sequence, but the omitted arrow from Page Cache to I/O Queue and truncated edge text place this in Band C."
+      },
+      "ASC": {
+       "summary": null
+      }
+     },
+     "scores": {
+      "SSS": "NA",
+      "GPS": "NA",
+      "NAS": "NA"
+     },
+     "steps": [],
+     "derived": {
+      "G": 0,
+      "vf_pass": false,
+      "asc_pass": false,
+      "N": 0,
+      "gated_at": "VF",
+      "metrics": null,
+      "Qn": null,
+      "AANS": 0.0
+     }
+    }
+   ]
+  },
+  {
+   "id": "glm-4-6v",
+   "label": "GLM-4.6V",
+   "samples": [
+    {
+     "id": "CVPR_2025_arch00855",
+     "style": null,
+     "outcome": "vf_fail",
+     "source": "EVALUATIONS_PAGE/Original_Image/CVPR_2025_arch00855.png",
+     "video": "EVALUATIONS_PAGE/GLM-4.6V/Frames/CVPR_2025_arch00855.mp4",
+     "frames_dir": false,
+     "raw_frames": [],
+     "bands": {
+      "VF": "D",
+      "ASC": null
+     },
+     "rationale": {
+      "VF": {
+       "criteria": {
+        "VFS_element_alteration": "Internal graphic elements, visual previews, and color-coded feature maps are missing or severely faded.",
+        "VFS_visual_layout_fidelity": "Container blocks are faintly visible, but overall visual structure suffers from extreme low contrast.",
+        "VFS_geometric_layout_fidelity": "Connecting lines and flow paths remain structurally aligned but are difficult to perceive.",
+        "VFS_proportion_scale_fidelity": "Element proportions roughly match the reference, though boundary definition is weak.",
+        "VFS_text_typographic_integrity": "Text labels are extremely washed out and largely illegible against the light background.",
+        "VFS_visual_quality_and_style_matching": "Severe aesthetic degradation due to missing colors, low contrast, and complete loss of style fidelity."
+       },
+       "summary": "The output exhibits severe rendering issues with near-zero contrast, rendering text and visual components mostly unreadable. Categorized as Band D."
+      },
+      "ASC": {
+       "summary": null
+      }
+     },
+     "scores": {
+      "SSS": "NA",
+      "GPS": "NA",
+      "NAS": "NA"
+     },
+     "steps": [],
+     "derived": {
+      "G": 0,
+      "vf_pass": false,
+      "asc_pass": false,
+      "N": 0,
+      "gated_at": "VF",
+      "metrics": null,
+      "Qn": null,
+      "AANS": 0.0
+     }
+    },
+    {
+     "id": "CVPR_2025_pipe00004",
+     "style": null,
+     "outcome": "vf_fail",
+     "source": "EVALUATIONS_PAGE/Original_Image/CVPR_2025_pipe00004.png",
+     "video": "EVALUATIONS_PAGE/GLM-4.6V/Frames/CVPR_2025_pipe00004.mp4",
+     "frames_dir": false,
+     "raw_frames": [],
+     "bands": {
+      "VF": "C",
+      "ASC": null
+     },
+     "rationale": {
+      "VF": {
+       "criteria": {
+        "VFS_element_alteration": "Diagram elements are extremely faint and washed out, making them nearly impossible to distinguish.",
+        "VFS_visual_layout_fidelity": "The overall layout structure is severely obscured by an excessively opaque white mask.",
+        "VFS_geometric_layout_fidelity": "Connections and relative positioning cannot be verified due to the extreme lack of contrast.",
+        "VFS_proportion_scale_fidelity": "Proportions and scales are illegible because the elements are almost entirely invisible.",
+        "VFS_text_typographic_integrity": "Text labels within the diagram are completely illegible and washed out across all frames.",
+        "VFS_visual_quality_and_style_matching": "The visual quality is highly compromised by an incorrect alpha masking opacity that renders the diagram nearly blank."
+       },
+       "summary": "The animation suffers from a severe contrast defect where the masking layer is far too opaque, rendering the entire diagram virtually invisible and illegible throughout the video."
+      },
+      "ASC": {
+       "summary": null
+      }
+     },
+     "scores": {
+      "SSS": "NA",
+      "GPS": "NA",
+      "NAS": "NA"
+     },
+     "steps": [],
+     "derived": {
+      "G": 0,
+      "vf_pass": false,
+      "asc_pass": false,
+      "N": 0,
+      "gated_at": "VF",
+      "metrics": null,
+      "Qn": null,
+      "AANS": 0.0
+     }
+    },
+    {
+     "id": "ICCV_2023_set5_000006",
+     "style": null,
+     "outcome": "vf_fail",
+     "source": "EVALUATIONS_PAGE/Original_Image/ICCV_2023_set5_000006.png",
+     "video": "EVALUATIONS_PAGE/GLM-4.6V/Frames/ICCV_2023_set5_000006.mp4",
+     "frames_dir": false,
+     "raw_frames": [],
+     "bands": {
+      "VF": "D",
+      "ASC": null
+     },
+     "rationale": {
+      "VF": {
+       "criteria": {
+        "VFS_element_alteration": "Severe rendering glitches and massive black graphical artifacts obscure and distort the elements across the frame.",
+        "VFS_visual_layout_fidelity": "The layout is heavily compromised due to large occlusions, missing structures, and misaligned components.",
+        "VFS_geometric_layout_fidelity": "Connection arrows and geometric placements are completely broken, misdirected, or covered by severe visual artifacts.",
+        "VFS_proportion_scale_fidelity": "Proportions are highly distorted with overlapping boxes, mismatched scales, and clipped graphics.",
+        "VFS_text_typographic_integrity": "Text elements are clipped, mispositioned, overlapping, or completely obscured.",
+        "VFS_visual_quality_and_style_matching": "Catastrophic visual artifacts and rendering failures degrade the diagram's overall quality and readability."
+       },
+       "summary": "The generated animation displays severe structural failure, broken typography, and massive visual artifacts covering major portions of the diagram."
+      },
+      "ASC": {
+       "summary": null
+      }
+     },
+     "scores": {
+      "SSS": "NA",
+      "GPS": "NA",
+      "NAS": "NA"
+     },
+     "steps": [],
+     "derived": {
+      "G": 0,
+      "vf_pass": false,
+      "asc_pass": false,
+      "N": 0,
+      "gated_at": "VF",
+      "metrics": null,
+      "Qn": null,
+      "AANS": 0.0
+     }
+    },
+    {
+     "id": "ICCV_2023_set5_000045",
+     "style": null,
+     "outcome": "vf_fail",
+     "source": "EVALUATIONS_PAGE/Original_Image/ICCV_2023_set5_000045.png",
+     "video": "EVALUATIONS_PAGE/GLM-4.6V/Frames/ICCV_2023_set5_000045.mp4",
+     "frames_dir": false,
+     "raw_frames": [],
+     "bands": {
+      "VF": "C",
+      "ASC": null
+     },
+     "rationale": {
+      "VF": {
+       "criteria": {
+        "VFS_element_alteration": "Photographic input images are largely missing or replaced by generic grey boxes, violating element source fidelity.",
+        "VFS_visual_layout_fidelity": "Overall layout flow is maintained at a high level, but container details and interior network representations are overly simplified.",
+        "VFS_geometric_layout_fidelity": "Connecting arrows are partially missing or misaligned compared to the reference diagram structure.",
+        "VFS_proportion_scale_fidelity": "Element proportions are altered, leading to layout crowding and text overlay collisions at the bottom.",
+        "VFS_text_typographic_integrity": "Text suffers from typographical errors like 'CLAIE' instead of 'CLAHE', and severe text overlapping renders bottom captions illegible.",
+        "VFS_visual_quality_and_style_matching": "Aesthetic quality is reduced due to missing image assets and garbled overlapping text in later frames."
+       },
+       "summary": "The animation fails to preserve key photographic elements and suffers from typographic errors, missing structural details, and illegible overlapping text overlays."
+      },
+      "ASC": {
+       "summary": null
+      }
+     },
+     "scores": {
+      "SSS": "NA",
+      "GPS": "NA",
+      "NAS": "NA"
+     },
+     "steps": [],
+     "derived": {
+      "G": 0,
+      "vf_pass": false,
+      "asc_pass": false,
+      "N": 0,
+      "gated_at": "VF",
+      "metrics": null,
+      "Qn": null,
+      "AANS": 0.0
+     }
+    },
+    {
+     "id": "WACV_2024_set5_000056",
+     "style": null,
+     "outcome": "vf_fail",
+     "source": "EVALUATIONS_PAGE/Original_Image/WACV_2024_set5_000056.png",
+     "video": "EVALUATIONS_PAGE/GLM-4.6V/Frames/WACV_2024_set5_000056.mp4",
+     "frames_dir": false,
+     "raw_frames": [],
+     "bands": {
+      "VF": "C",
+      "ASC": null
+     },
+     "rationale": {
+      "VF": {
+       "criteria": {
+        "VFS_element_alteration": "The input face image in the bottom row is replaced by a blue box with a gray line, representing a significant alteration of a core element.",
+        "VFS_visual_layout_fidelity": "The overall layout structure is maintained, but the extremely low contrast makes the containment hierarchy difficult to perceive.",
+        "VFS_geometric_layout_fidelity": "The geometric positioning and connections are structurally preserved, though lines and arrows are extremely faint.",
+        "VFS_proportion_scale_fidelity": "The proportions of the boxes are generally consistent, but the text at the bottom suffers from overlapping issues.",
+        "VFS_text_typographic_integrity": "Text labels inside the diagram are barely legible due to low contrast, and the caption text at the bottom overlaps severely, causing corruption.",
+        "VFS_visual_quality_and_style_matching": "The visual quality is poor due to an excessively washed-out appearance with extremely low contrast, which deviates from the original style."
+       },
+       "summary": "The animation maintains the basic structural layout, but suffers from material defects including a missing face image in the bottom row, extremely low contrast rendering text illegible, and severely overlapping caption text at the bottom."
+      },
+      "ASC": {
+       "summary": null
+      }
+     },
+     "scores": {
+      "SSS": "NA",
+      "GPS": "NA",
+      "NAS": "NA"
+     },
+     "steps": [],
+     "derived": {
+      "G": 0,
+      "vf_pass": false,
+      "asc_pass": false,
+      "N": 0,
+      "gated_at": "VF",
+      "metrics": null,
+      "Qn": null,
+      "AANS": 0.0
+     }
+    }
+   ]
+  },
+  {
+   "id": "gpt-5-6-sol",
+   "label": "GPT-5.6-Sol",
+   "samples": [
+    {
+     "id": "CVPR_2025_arch00855",
+     "style": null,
+     "outcome": "vf_fail",
+     "source": "EVALUATIONS_PAGE/Original_Image/CVPR_2025_arch00855.png",
+     "video": null,
+     "frames_dir": true,
+     "raw_frames": [
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch00855/frame_000_t00.23s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch00855/frame_001_t02.23s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch00855/frame_002_t04.22s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch00855/frame_003_t06.22s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch00855/frame_004_t08.22s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch00855/frame_005_t10.22s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch00855/frame_006_t12.22s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch00855/frame_007_t14.22s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch00855/frame_008_t16.23s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch00855/frame_009_t18.23s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch00855/frame_010_t20.23s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch00855/frame_011_t22.23s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch00855/frame_012_t22.55s.png"
+     ],
+     "bands": {
+      "VF": "C",
+      "ASC": null
+     },
+     "rationale": {
+      "VF": {
+       "criteria": {
+        "VFS_element_alteration": "The input image and predicted mask are replaced with simplified stick-figure illustrations instead of the original photographic content. Additionally, the VLF Block is renamed to VLE Block.",
+        "VFS_visual_layout_fidelity": "The overall block layout and containment within the ESC-Block are generally maintained, though the content within several blocks has been simplified.",
+        "VFS_geometric_layout_fidelity": "The connection lines and arrows are mostly in place, but some routing paths show minor misalignment and awkward angles compared to the reference.",
+        "VFS_proportion_scale_fidelity": "The proportions of the blocks and text labels are reasonably consistent, though some elements are slightly stretched.",
+        "VFS_text_typographic_integrity": "Text labels are legible, but there are changes in terminology (e.g., 'VLF Block' to 'VLE Block') and simplified text lists.",
+        "VFS_visual_quality_and_style_matching": "The visual style is simplified with flatter colors and vector-like replacements, and there is no active alpha masking animation across the frames."
+       },
+       "summary": "The video maintains the basic block structure of the diagram but introduces significant alterations to the core elements, including replacing photographic inputs/outputs with simplified graphics and changing block text. It is classified as Band C due to these material content discrepancies."
+      },
+      "ASC": {
+       "summary": null
+      }
+     },
+     "scores": {
+      "SSS": "NA",
+      "GPS": "NA",
+      "NAS": "NA"
+     },
+     "steps": [],
+     "derived": {
+      "G": 0,
+      "vf_pass": false,
+      "asc_pass": false,
+      "N": 0,
+      "gated_at": "VF",
+      "metrics": null,
+      "Qn": null,
+      "AANS": 0.0
+     }
+    },
+    {
+     "id": "CVPR_2025_arch02465",
+     "style": null,
+     "outcome": "vf_fail",
+     "source": "EVALUATIONS_PAGE/Original_Image/CVPR_2025_arch02465.png",
+     "video": null,
+     "frames_dir": true,
+     "raw_frames": [
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch02465/frame_000_t00.00s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch02465/frame_001_t01.80s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch02465/frame_002_t03.60s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch02465/frame_003_t05.40s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch02465/frame_004_t07.20s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch02465/frame_005_t09.00s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch02465/frame_006_t10.80s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch02465/frame_007_t12.60s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch02465/frame_008_t14.40s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch02465/frame_009_t16.20s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch02465/frame_010_t18.00s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch02465/frame_011_t19.80s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch02465/frame_012_t21.60s.png"
+     ],
+     "bands": {
+      "VF": "D",
+      "ASC": null
+     },
+     "rationale": {
+      "VF": {
+       "criteria": {
+        "VFS_element_alteration": "Core image elements are replaced by highly simplified cartoon icons, and all text labels are entirely absent.",
+        "VFS_visual_layout_fidelity": "While the three-panel background layout is preserved, the internal containment hierarchy is extremely sparse and incomplete.",
+        "VFS_geometric_layout_fidelity": "All connecting arrows and flow paths are completely missing, breaking the structural topology of the diagram.",
+        "VFS_proportion_scale_fidelity": "Element sizes and positions are roughly aligned to the panels, but lack proper detail and scaling relative to the original.",
+        "VFS_text_typographic_integrity": "Severe failure as all text labels, including model names and descriptions, are completely omitted.",
+        "VFS_visual_quality_and_style_matching": "The animation progressively renders flat shapes instead of following the greyscale-to-color transition, failing the style requirement."
+       },
+       "summary": "The animation fails to reconstruct the diagram, omitting all text, arrows, and original image details, resulting in a severe structural and content failure."
+      },
+      "ASC": {
+       "summary": null
+      }
+     },
+     "scores": {
+      "SSS": "NA",
+      "GPS": "NA",
+      "NAS": "NA"
+     },
+     "steps": [],
+     "derived": {
+      "G": 0,
+      "vf_pass": false,
+      "asc_pass": false,
+      "N": 0,
+      "gated_at": "VF",
+      "metrics": null,
+      "Qn": null,
+      "AANS": 0.0
+     }
+    },
+    {
+     "id": "CVPR_2025_pipe00004",
+     "style": null,
+     "outcome": "vf_fail",
+     "source": "EVALUATIONS_PAGE/Original_Image/CVPR_2025_pipe00004.png",
+     "video": null,
+     "frames_dir": true,
+     "raw_frames": [
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_pipe00004/frame_000_t00.10s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_pipe00004/frame_001_t02.10s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_pipe00004/frame_002_t04.10s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_pipe00004/frame_003_t06.10s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_pipe00004/frame_004_t08.10s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_pipe00004/frame_005_t10.10s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_pipe00004/frame_006_t12.10s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_pipe00004/frame_007_t14.10s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_pipe00004/frame_008_t16.10s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_pipe00004/frame_009_t18.10s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_pipe00004/frame_010_t20.10s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_pipe00004/frame_011_t22.10s.png"
+     ],
+     "bands": {
+      "VF": "C",
+      "ASC": null
+     },
+     "rationale": {
+      "VF": {
+       "criteria": {
+        "VFS_element_alteration": "Core elements are heavily altered; the bear statue is replaced by a generic rock, and 3D point clouds are simplified into basic geometric shapes.",
+        "VFS_visual_layout_fidelity": "The overall layout is recognizable, but a large SAM2 block and film strip are added at the bottom, altering the original containment hierarchy.",
+        "VFS_geometric_layout_fidelity": "Connections and arrows are modified to route through the newly introduced SAM2 block, departing from the reference flow.",
+        "VFS_proportion_scale_fidelity": "Element proportions and spacing are significantly adjusted to accommodate the new layout blocks.",
+        "VFS_text_typographic_integrity": "Several text labels are changed or added, and some background text suffers from low contrast and poor legibility.",
+        "VFS_visual_quality_and_style_matching": "The style is changed to flat vector graphics, and some elements are extremely faint or faded during the masking process."
+       },
+       "summary": "The animation maintains a clean alpha masking transition, but the core diagram content and structure are heavily altered with replaced elements and new blocks like SAM2, placing it in Band C."
+      },
+      "ASC": {
+       "summary": null
+      }
+     },
+     "scores": {
+      "SSS": "NA",
+      "GPS": "NA",
+      "NAS": "NA"
+     },
+     "steps": [],
+     "derived": {
+      "G": 0,
+      "vf_pass": false,
+      "asc_pass": false,
+      "N": 0,
+      "gated_at": "VF",
+      "metrics": null,
+      "Qn": null,
+      "AANS": 0.0
+     }
+    },
+    {
+     "id": "Paper2Fig_pipe_diff_000000104",
+     "style": null,
+     "outcome": "vf_fail",
+     "source": "EVALUATIONS_PAGE/Original_Image/Paper2Fig_pipe_diff_000000104.png",
+     "video": null,
+     "frames_dir": true,
+     "raw_frames": [
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/Paper2Fig_pipe_diff_000000104/frame_000_t00.50s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/Paper2Fig_pipe_diff_000000104/frame_001_t03.50s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/Paper2Fig_pipe_diff_000000104/frame_002_t06.50s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/Paper2Fig_pipe_diff_000000104/frame_003_t09.50s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/Paper2Fig_pipe_diff_000000104/frame_004_t12.50s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/Paper2Fig_pipe_diff_000000104/frame_005_t15.50s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/Paper2Fig_pipe_diff_000000104/frame_006_t18.60s.png"
+     ],
+     "bands": {
+      "VF": "C",
+      "ASC": null
+     },
+     "rationale": {
+      "VF": {
+       "criteria": {
+        "VFS_element_alteration": "The realistic face images and scientific 3D face maps from the reference are completely replaced with simplified cartoon vector graphics.",
+        "VFS_visual_layout_fidelity": "The overall three-column layout is preserved, but the visual representation of the elements is entirely different.",
+        "VFS_geometric_layout_fidelity": "The arrows are structurally incorrect; the two distinct arrows pointing to the right-hand elements are replaced by a single hourglass-like shape.",
+        "VFS_proportion_scale_fidelity": "The relative sizes of the panels are maintained, though the internal elements are scaled differently due to the cartoon style.",
+        "VFS_text_typographic_integrity": "The text labels are legible and correctly placed, though rendered in a different serif font.",
+        "VFS_visual_quality_and_style_matching": "The style is a complete mismatch, opting for flat cartoon graphics instead of the realistic, high-fidelity scientific rendering of the original."
+       },
+       "summary": "The animation maintains the basic three-column layout and text labels, but suffers from severe style deviation, replacing all realistic scientific elements with cartoon graphics and altering the structural arrows into an incorrect hourglass shape. This places it in Band C."
+      },
+      "ASC": {
+       "summary": null
+      }
+     },
+     "scores": {
+      "SSS": "NA",
+      "GPS": "NA",
+      "NAS": "NA"
+     },
+     "steps": [],
+     "derived": {
+      "G": 0,
+      "vf_pass": false,
+      "asc_pass": false,
+      "N": 0,
+      "gated_at": "VF",
+      "metrics": null,
+      "Qn": null,
+      "AANS": 0.0
+     }
+    },
+    {
+     "id": "WACV_2023_set5_000044",
+     "style": null,
+     "outcome": "asc_fail",
+     "source": "EVALUATIONS_PAGE/Original_Image/WACV_2023_set5_000044.png",
+     "video": null,
+     "frames_dir": true,
+     "raw_frames": [
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/WACV_2023_set5_000044/frame_000_t00.10s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/WACV_2023_set5_000044/frame_001_t01.90s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/WACV_2023_set5_000044/frame_002_t03.70s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/WACV_2023_set5_000044/frame_003_t05.50s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/WACV_2023_set5_000044/frame_004_t07.30s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/WACV_2023_set5_000044/frame_005_t09.10s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/WACV_2023_set5_000044/frame_006_t10.90s.png",
+      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/WACV_2023_set5_000044/frame_007_t11.30s.png"
+     ],
+     "bands": {
+      "VF": "A",
+      "ASC": "C"
+     },
+     "rationale": {
+      "VF": {
+       "criteria": {
+        "VFS_element_alteration": "All core diagram elements are perfectly preserved across frames, transitioning smoothly between masked and unmasked states without morphing.",
+        "VFS_visual_layout_fidelity": "The overall flow and containment hierarchy are maintained with high fidelity, matching the reference layout exactly.",
+        "VFS_geometric_layout_fidelity": "Connections, arrows, and alignments are highly stable and structurally correct throughout the animation sequence.",
+        "VFS_proportion_scale_fidelity": "Element sizes, shapes, and font scales are consistent and proportional to the original static diagram.",
+        "VFS_text_typographic_integrity": "Text labels and mathematical symbols remain legible and clear, with only a minor typographic variation in the subscript symbol.",
+        "VFS_visual_quality_and_style_matching": "The alpha masking style is executed cleanly with excellent contrast, smooth transitions, and no visual jitter."
+       },
+       "summary": "The animation demonstrates exceptional fidelity to the ground truth. The structural layout, text legibility, and geometric connections remain perfectly stable, and the alpha masking transitions are clean and well-sequenced."
+      },
+      "ASC": {
+       "summary": "At 0:01, previously active elements remain fully unmasked as new steps are introduced, violating the strictly non-cumulative requirement of Alpha Masking where inactive elements must return to being covered by a transparent mask layer."
+      }
+     },
+     "scores": {
+      "SSS": "NA",
+      "GPS": "NA",
+      "NAS": "NA"
+     },
+     "steps": [],
+     "derived": {
+      "G": 0,
+      "vf_pass": true,
+      "asc_pass": false,
+      "N": 0,
+      "gated_at": "ASC",
+      "metrics": null,
+      "Qn": null,
+      "AANS": 0.0
+     }
+    }
+   ]
+  },
+  {
+   "id": "gemini-3-1-pro",
+   "label": "Gemini-3.1-Pro",
+   "samples": [
+    {
+     "id": "CVPR_2025_arch00855",
+     "style": null,
+     "outcome": "vf_fail",
+     "source": "EVALUATIONS_PAGE/Original_Image/CVPR_2025_arch00855.png",
+     "video": null,
+     "frames_dir": true,
+     "raw_frames": [
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/CVPR_2025_arch00855/frame_000_t01.25s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/CVPR_2025_arch00855/frame_001_t03.75s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/CVPR_2025_arch00855/frame_002_t06.25s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/CVPR_2025_arch00855/frame_003_t08.75s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/CVPR_2025_arch00855/frame_004_t11.25s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/CVPR_2025_arch00855/frame_005_t13.75s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/CVPR_2025_arch00855/frame_006_t16.25s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/CVPR_2025_arch00855/frame_007_t17.60s.png"
+     ],
+     "bands": {
+      "VF": "C",
+      "ASC": null
+     },
+     "rationale": {
+      "VF": {
+       "criteria": {
+        "VFS_element_alteration": "The complex photographic input image and the final prediction mask are simplified into generic vector icons, which is a significant alteration of the source diagram elements.",
+        "VFS_visual_layout_fidelity": "The overall containment hierarchy and step-by-step flow are well-maintained throughout the progressive reveal.",
+        "VFS_geometric_layout_fidelity": "The relative positioning, alignment, and directional connections between blocks are preserved accurately.",
+        "VFS_proportion_scale_fidelity": "Element sizes and font scales remain consistent and proportional across the animation steps.",
+        "VFS_text_typographic_integrity": "Text labels and mathematical subscripts are legible and free from corruption.",
+        "VFS_visual_quality_and_style_matching": "The color scheme and progressive highlighting style are clean, with stable transitions and no jitter."
+       },
+       "summary": "The animation successfully follows a progressive reveal structure with high layout and typographic fidelity. However, the simplification of complex photographic inputs and outputs into generic vector icons represents a material alteration, placing the video in Band C."
+      },
+      "ASC": {
+       "summary": null
+      }
+     },
+     "scores": {
+      "SSS": "NA",
+      "GPS": "NA",
+      "NAS": "NA"
+     },
+     "steps": [],
+     "derived": {
+      "G": 0,
+      "vf_pass": false,
+      "asc_pass": false,
+      "N": 0,
+      "gated_at": "VF",
+      "metrics": null,
+      "Qn": null,
+      "AANS": 0.0
+     }
+    },
+    {
+     "id": "CVPR_2025_pipe00004",
+     "style": null,
+     "outcome": "vf_fail",
+     "source": "EVALUATIONS_PAGE/Original_Image/CVPR_2025_pipe00004.png",
+     "video": null,
+     "frames_dir": true,
+     "raw_frames": [
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/CVPR_2025_pipe00004/frame_000_t00.10s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/CVPR_2025_pipe00004/frame_001_t03.10s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/CVPR_2025_pipe00004/frame_002_t06.10s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/CVPR_2025_pipe00004/frame_003_t09.10s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/CVPR_2025_pipe00004/frame_004_t12.10s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/CVPR_2025_pipe00004/frame_005_t15.10s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/CVPR_2025_pipe00004/frame_006_t18.10s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/CVPR_2025_pipe00004/frame_007_t21.10s.png"
+     ],
+     "bands": {
+      "VF": "D",
+      "ASC": null
+     },
+     "rationale": {
+      "VF": {
+       "criteria": {
+        "VFS_element_alteration": "Rich image assets, 3D visual representations, and depth maps from the reference are replaced with simplified placeholder bounding boxes.",
+        "VFS_visual_layout_fidelity": "Overall layout hierarchy is severely simplified; multiple sections lose structural containment and inner detail.",
+        "VFS_geometric_layout_fidelity": "Connections and arrows are misplaced or simplified, failing to maintain the precise data flows of the reference.",
+        "VFS_proportion_scale_fidelity": "Bounding box proportions and text alignments deviate significantly from the ground truth.",
+        "VFS_text_typographic_integrity": "Bottom section titles overlap heavily and suffer from character corruption; mathematical notations and subscripts are incomplete.",
+        "VFS_visual_quality_and_style_matching": "Aesthetic quality is degraded due to missing image textures, overlapping labels, and plain solid color fills."
+       },
+       "summary": "The animation severely alters the original diagram by replacing visual diagrams with bare boxes and contains heavily corrupted, overlapping text labels."
+      },
+      "ASC": {
+       "summary": null
+      }
+     },
+     "scores": {
+      "SSS": "NA",
+      "GPS": "NA",
+      "NAS": "NA"
+     },
+     "steps": [],
+     "derived": {
+      "G": 0,
+      "vf_pass": false,
+      "asc_pass": false,
+      "N": 0,
+      "gated_at": "VF",
+      "metrics": null,
+      "Qn": null,
+      "AANS": 0.0
+     }
+    },
+    {
+     "id": "ICCV_2023_set5_000035",
+     "style": null,
+     "outcome": "vf_fail",
+     "source": "EVALUATIONS_PAGE/Original_Image/ICCV_2023_set5_000035.png",
+     "video": null,
+     "frames_dir": true,
+     "raw_frames": [
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/ICCV_2023_set5_000035/frame_000_t00.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/ICCV_2023_set5_000035/frame_001_t02.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/ICCV_2023_set5_000035/frame_002_t04.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/ICCV_2023_set5_000035/frame_003_t06.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/ICCV_2023_set5_000035/frame_004_t08.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/ICCV_2023_set5_000035/frame_005_t10.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/ICCV_2023_set5_000035/frame_006_t12.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/ICCV_2023_set5_000035/frame_007_t14.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/ICCV_2023_set5_000035/frame_008_t16.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/ICCV_2023_set5_000035/frame_009_t18.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/ICCV_2023_set5_000035/frame_010_t20.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/ICCV_2023_set5_000035/frame_011_t22.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/ICCV_2023_set5_000035/frame_012_t24.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/ICCV_2023_set5_000035/frame_013_t26.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/ICCV_2023_set5_000035/frame_014_t28.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/ICCV_2023_set5_000035/frame_015_t30.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/ICCV_2023_set5_000035/frame_016_t30.90s.png"
+     ],
+     "bands": {
+      "VF": "D",
+      "ASC": null
+     },
+     "rationale": {
+      "VF": {
+       "criteria": {
+        "VFS_element_alteration": "Major core elements are completely omitted, including the input photos, internal matrix representations, and detailed propagation structures, leaving hollow outlines.",
+        "VFS_visual_layout_fidelity": "The overarching containment hierarchy is structurally degraded due to massive content omissions across all main sub-panels.",
+        "VFS_geometric_layout_fidelity": "Essential connections, data flow arrows, and mathematical tensors are entirely absent.",
+        "VFS_proportion_scale_fidelity": "Bounding regions retain general global proportions, but internal spatial balance is disrupted by missing components.",
+        "VFS_text_typographic_integrity": "Extensive text labels, mathematical annotations, and sub-headings are missing throughout the diagram.",
+        "VFS_visual_quality_and_style_matching": "The rendering is severely washed out and lacks the graphical content, colors, and photographic elements of the ground truth."
+       },
+       "summary": "The animated video omits essential diagram components, mathematical representations, and source imagery, resulting in a severe structural failure."
+      },
+      "ASC": {
+       "summary": null
+      }
+     },
+     "scores": {
+      "SSS": "NA",
+      "GPS": "NA",
+      "NAS": "NA"
+     },
+     "steps": [],
+     "derived": {
+      "G": 0,
+      "vf_pass": false,
+      "asc_pass": false,
+      "N": 0,
+      "gated_at": "VF",
+      "metrics": null,
+      "Qn": null,
+      "AANS": 0.0
+     }
+    },
+    {
+     "id": "Paper2Fig_pipe_diff_000000104",
+     "style": null,
+     "outcome": "vf_fail",
+     "source": "EVALUATIONS_PAGE/Original_Image/Paper2Fig_pipe_diff_000000104.png",
+     "video": null,
+     "frames_dir": true,
+     "raw_frames": [
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/Paper2Fig_pipe_diff_000000104/frame_000_t00.00s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/Paper2Fig_pipe_diff_000000104/frame_001_t02.20s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/Paper2Fig_pipe_diff_000000104/frame_002_t04.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/Paper2Fig_pipe_diff_000000104/frame_003_t06.60s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/Paper2Fig_pipe_diff_000000104/frame_004_t08.80s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/Paper2Fig_pipe_diff_000000104/frame_005_t11.00s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/Paper2Fig_pipe_diff_000000104/frame_006_t13.20s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/Paper2Fig_pipe_diff_000000104/frame_007_t15.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/Paper2Fig_pipe_diff_000000104/frame_008_t17.60s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/Paper2Fig_pipe_diff_000000104/frame_009_t19.80s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/Paper2Fig_pipe_diff_000000104/frame_010_t20.20s.png"
+     ],
+     "bands": {
+      "VF": "C",
+      "ASC": null
+     },
+     "rationale": {
+      "VF": {
+       "criteria": {
+        "VFS_element_alteration": "Core image assets are replaced with stylized cartoon illustrations instead of the original photographic and 3D mesh renders.",
+        "VFS_visual_layout_fidelity": "The structural flow and panel arrangement remain consistent with the original layout.",
+        "VFS_geometric_layout_fidelity": "Arrows, panel alignment, and spatial ordering are correctly preserved.",
+        "VFS_proportion_scale_fidelity": "Component scales and bounding dimensions are reasonably proportioned.",
+        "VFS_text_typographic_integrity": "Labels remain readable and legible across all frames without clipping.",
+        "VFS_visual_quality_and_style_matching": "The animation exhibits a major aesthetic departure by substituting realistic face reconstruction assets with cartoon figures."
+       },
+       "summary": "While the hopping bounding box sequence and high-level layout structure are stable, the complete substitution of photographic assets with cartoon avatars constitutes a significant fidelity flaw."
+      },
+      "ASC": {
+       "summary": null
+      }
+     },
+     "scores": {
+      "SSS": "NA",
+      "GPS": "NA",
+      "NAS": "NA"
+     },
+     "steps": [],
+     "derived": {
+      "G": 0,
+      "vf_pass": false,
+      "asc_pass": false,
+      "N": 0,
+      "gated_at": "VF",
+      "metrics": null,
+      "Qn": null,
+      "AANS": 0.0
+     }
+    },
+    {
+     "id": "SciMMIR_arch_diff_000000152",
+     "style": null,
+     "outcome": "pass_low",
+     "source": "EVALUATIONS_PAGE/Original_Image/SciMMIR_arch_diff_000000152.png",
+     "video": null,
+     "frames_dir": true,
+     "raw_frames": [
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_000_t00.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_001_t02.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_002_t04.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_003_t06.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_004_t08.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_005_t10.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_006_t12.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_007_t14.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_008_t16.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_009_t18.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_010_t20.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_011_t22.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_012_t24.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_013_t26.40s.png",
+      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_014_t26.90s.png"
+     ],
+     "bands": {
+      "VF": "A",
+      "ASC": "A"
+     },
+     "rationale": {
+      "VF": {
+       "criteria": {
+        "VFS_element_alteration": "All diagram blocks, connectors, and nodes remain stable and recognizable across frames without unwanted morphing.",
+        "VFS_visual_layout_fidelity": "The three-panel structural hierarchy and workflow flow are accurately preserved relative to the reference.",
+        "VFS_geometric_layout_fidelity": "Connectors, arrows, and element alignments perfectly match the ground truth across all animation steps.",
+        "VFS_proportion_scale_fidelity": "Proportions, block scalings, and spacing remain consistent throughout the sequence.",
+        "VFS_text_typographic_integrity": "Labels and mathematical notations remain legible and intact in both masked and unmasked states.",
+        "VFS_visual_quality_and_style_matching": "Colors and aesthetic styling match the reference with clean alpha masking transitions."
+       },
+       "summary": "The animation accurately executes the alpha masking sequence while maintaining high visual stability, layout accuracy, and textual integrity."
+      },
+      "ASC": {
+       "summary": "The video is fully style compliant."
+      }
+     },
+     "scores": {
+      "SSS": "0.7222",
+      "GPS": "0.8889",
+      "NAS": "0.7407"
+     },
+     "steps": [
+      {
+       "t": 1,
+       "frame": "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_000_t00.40s.png",
+       "time": null,
+       "narration": "",
+       "sss": "C",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 2,
+       "frame": "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_001_t02.40s.png",
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "A",
+       "nas": "B"
+      },
+      {
+       "t": 3,
+       "frame": "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_002_t04.40s.png",
+       "time": null,
+       "narration": "",
+       "sss": "B",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 4,
+       "frame": "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_003_t06.40s.png",
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 5,
+       "frame": "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_004_t08.40s.png",
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "A",
+       "nas": "C"
+      },
+      {
+       "t": 6,
+       "frame": "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_005_t10.40s.png",
+       "time": null,
+       "narration": "",
+       "sss": "B",
+       "gps": "B",
+       "nas": "A"
+      },
+      {
+       "t": 7,
+       "frame": "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_006_t12.40s.png",
+       "time": null,
+       "narration": "",
+       "sss": "B",
+       "gps": "A",
+       "nas": "C"
+      },
+      {
+       "t": 8,
+       "frame": "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_007_t14.40s.png",
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "A",
+       "nas": "C"
+      },
+      {
+       "t": 9,
+       "frame": "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_008_t16.40s.png",
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "B",
+       "nas": "C"
+      },
+      {
+       "t": 10,
+       "frame": "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_009_t18.40s.png",
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "B",
+       "nas": "A"
+      },
+      {
+       "t": 11,
+       "frame": "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_010_t20.40s.png",
+       "time": null,
+       "narration": "",
+       "sss": "C",
+       "gps": "B",
+       "nas": "C"
+      },
+      {
+       "t": 12,
+       "frame": "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_011_t22.40s.png",
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 13,
+       "frame": "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_012_t24.40s.png",
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 14,
+       "frame": "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_013_t26.40s.png",
+       "time": null,
+       "narration": "",
+       "sss": "B",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 15,
+       "frame": "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_014_t26.90s.png",
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "C",
+       "nas": "B"
+      },
+      {
+       "t": 16,
+       "frame": null,
+       "time": null,
+       "narration": "",
+       "sss": "D",
+       "gps": "A",
+       "nas": "C"
+      },
+      {
+       "t": 17,
+       "frame": null,
+       "time": null,
+       "narration": "",
+       "sss": "C",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 18,
+       "frame": null,
+       "time": null,
+       "narration": "",
+       "sss": "C",
+       "gps": "A",
+       "nas": "A"
+      }
+     ],
+     "derived": {
+      "G": 1,
+      "vf_pass": true,
+      "asc_pass": true,
+      "N": 18,
+      "gated_at": null,
+      "metrics": {
+       "SSS": {
+        "dists": [
+         2,
+         0,
+         1,
+         0,
+         0,
+         1,
+         1,
+         0,
+         0,
+         0,
+         2,
+         0,
+         0,
+         1,
+         0,
+         3,
+         2,
+         2
+        ],
+        "d_o": 0.2778,
+        "Q": 0.7222
+       },
+       "GPS": {
+        "dists": [
+         0,
+         0,
+         0,
+         0,
+         0,
+         1,
+         0,
+         0,
+         1,
+         1,
+         1,
+         0,
+         0,
+         0,
+         2,
+         0,
+         0,
+         0
+        ],
+        "d_o": 0.1111,
+        "Q": 0.8889
+       },
+       "NAS": {
+        "dists": [
+         0,
+         1,
+         0,
+         0,
+         2,
+         0,
+         2,
+         2,
+         2,
+         0,
+         2,
+         0,
+         0,
+         0,
+         1,
+         2,
+         0,
+         0
+        ],
+        "d_o": 0.2593,
+        "Q": 0.7407
+       }
+      },
+      "Qn": 0.7839,
+      "AANS": 0.7839
+     }
+    }
+   ]
+  },
+  {
+   "id": "qwen3-8-28b",
+   "label": "Qwen3.8_28B",
+   "samples": [
+    {
+     "id": "CVPR_2025_arch00855",
+     "style": "Alpha Masking",
+     "outcome": "pass_low",
+     "source": "EVALUATIONS_PAGE/Original_Image/CVPR_2025_arch00855.png",
+     "video": null,
+     "frames_dir": true,
+     "raw_frames": [
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_00.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_01.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_02.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_03.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_04.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_05.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_06.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_07.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_08.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_09.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_10.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_11.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_12.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_13.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_14.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_15.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_16.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_17.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_18.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_19.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_20.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_21.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_22.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_23.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_24.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_25.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_26.png"
+     ],
+     "bands": {
+      "VF": "B",
+      "ASC": "B"
+     },
+     "rationale": {
+      "VF": {
+       "criteria": {
+        "VFS_element_alteration": "All primary pipeline components are accurately rendered without morphing or disappearing.",
+        "VFS_visual_layout_fidelity": "The global layout, enclosure boundaries for the ESC-Block, and processing flow faithfully mirror the ground truth.",
+        "VFS_geometric_layout_fidelity": "Routing paths, directional connectors, and module alignments remain consistent and structurally sound throughout.",
+        "VFS_proportion_scale_fidelity": "Component scales and aspect ratios remain stable across each sequential frame.",
+        "VFS_text_typographic_integrity": "Text remains legible, though minor label variations (such as C_grid instead of C_v&l) and slight label overlay near the decoder are present.",
+        "VFS_visual_quality_and_style_matching": "The alpha masking transitions function properly with stable contrast and clean visual clarity."
+       },
+       "summary": "The animation maintains high topological fidelity and stable alpha masking transitions, showing only minor cosmetic text label variations."
+      },
+      "ASC": {
+       "summary": "The animation starts with elements already unmasked instead of a fully masked figure, but the rest of the masking sequence is strictly compliant."
+      }
+     },
+     "scores": {
+      "SSS": "0.9444",
+      "GPS": "0.8148",
+      "NAS": "0.7778"
+     },
+     "steps": [
+      {
+       "t": 1,
+       "frame": "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_00.png",
+       "time": 0.56,
+       "narration": "[No narration]",
+       "sss": "C",
+       "gps": "B",
+       "nas": "A"
+      },
+      {
+       "t": 2,
+       "frame": "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_01.png",
+       "time": 1.67,
+       "narration": "[No narration]",
+       "sss": "A",
+       "gps": "D",
+       "nas": "C"
+      },
+      {
+       "t": 3,
+       "frame": "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_02.png",
+       "time": 2.78,
+       "narration": "[No narration]",
+       "sss": "A",
+       "gps": "A",
+       "nas": "B"
+      },
+      {
+       "t": 4,
+       "frame": "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_03.png",
+       "time": 3.89,
+       "narration": "[No narration]",
+       "sss": "A",
+       "gps": "A",
+       "nas": "C"
+      },
+      {
+       "t": 5,
+       "frame": "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_04.png",
+       "time": 5.0,
+       "narration": "[No narration]",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 6,
+       "frame": "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_05.png",
+       "time": 6.11,
+       "narration": "[No narration]",
+       "sss": "A",
+       "gps": "B",
+       "nas": "C"
+      },
+      {
+       "t": 7,
+       "frame": "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_06.png",
+       "time": 7.22,
+       "narration": "[No narration]",
+       "sss": "A",
+       "gps": "B",
+       "nas": "C"
+      },
+      {
+       "t": 8,
+       "frame": "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_07.png",
+       "time": 8.33,
+       "narration": "[No narration]",
+       "sss": "A",
+       "gps": "A",
+       "nas": "C"
+      },
+      {
+       "t": 9,
+       "frame": "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_08.png",
+       "time": 9.44,
+       "narration": "[No narration]",
+       "sss": "A",
+       "gps": "C",
+       "nas": "B"
+      },
+      {
+       "t": 10,
+       "frame": "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_09.png",
+       "time": 10.0,
+       "narration": "[No narration]",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 11,
+       "frame": "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_10.png",
+       "time": 10.56,
+       "narration": "[No narration]",
+       "sss": "A",
+       "gps": "B",
+       "nas": "A"
+      },
+      {
+       "t": 12,
+       "frame": "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_11.png",
+       "time": 11.11,
+       "narration": "[No narration]",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 13,
+       "frame": "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_12.png",
+       "time": 11.67,
+       "narration": "[No narration]",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 14,
+       "frame": "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_13.png",
+       "time": 12.22,
+       "narration": "[No narration]",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 15,
+       "frame": "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_14.png",
+       "time": 12.78,
+       "narration": "[No narration]",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 16,
+       "frame": "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_15.png",
+       "time": 13.33,
+       "narration": "[No narration]",
+       "sss": "A",
+       "gps": "B",
+       "nas": "A"
+      },
+      {
+       "t": 17,
+       "frame": "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_16.png",
+       "time": 13.89,
+       "narration": "[No narration]",
+       "sss": "B",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 18,
+       "frame": "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_arch00855/frame_17.png",
+       "time": 14.44,
+       "narration": "[No narration]",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      }
+     ],
+     "derived": {
+      "G": 1,
+      "vf_pass": true,
+      "asc_pass": true,
+      "N": 18,
+      "gated_at": null,
+      "metrics": {
+       "SSS": {
+        "dists": [
+         2,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         1,
+         0
+        ],
+        "d_o": 0.0556,
+        "Q": 0.9444
+       },
+       "GPS": {
+        "dists": [
+         1,
+         3,
+         0,
+         0,
+         0,
+         1,
+         1,
+         0,
+         2,
+         0,
+         1,
+         0,
+         0,
+         0,
+         0,
+         1,
+         0,
+         0
+        ],
+        "d_o": 0.1852,
+        "Q": 0.8148
+       },
+       "NAS": {
+        "dists": [
+         0,
+         2,
+         1,
+         2,
+         0,
+         2,
+         2,
+         2,
+         1,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0
+        ],
+        "d_o": 0.2222,
+        "Q": 0.7778
+       }
+      },
+      "Qn": 0.8457,
+      "AANS": 0.8457
+     }
+    },
+    {
+     "id": "CVPR_2025_pipe00004",
+     "style": null,
+     "outcome": "vf_fail",
+     "source": "EVALUATIONS_PAGE/Original_Image/CVPR_2025_pipe00004.png",
+     "video": "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/CVPR_2025_pipe00004.mp4",
+     "frames_dir": false,
+     "raw_frames": [],
+     "bands": {
+      "VF": "C",
+      "ASC": null
+     },
+     "rationale": {
+      "VF": {
+       "criteria": {
+        "VFS_element_alteration": "Core blocks remain recognizable across frames, but persistent ghosting and duplicated element outlines are visible throughout the inactive diagram layer.",
+        "VFS_visual_layout_fidelity": "The three-stage horizontal layout is largely maintained, matching the macro workflow from the reference figure.",
+        "VFS_geometric_layout_fidelity": "Arrow pathways follow the intended sequence, though overlapping offset traces degrade the precision of connections and node boundaries.",
+        "VFS_proportion_scale_fidelity": "Overall component scale and aspect ratios are reasonably matched to the source diagram layout.",
+        "VFS_text_typographic_integrity": "Several mathematical notations and labels exhibit ghosting and duplication (e.g., duplicated variable names and altered notations like B instead of I in intermediate masks).",
+        "VFS_visual_quality_and_style_matching": "The dimmed overlay creates substantial visual clutter due to misaligned double exposures beneath the active elements."
+       },
+       "summary": "The animation preserves the overall multi-stage narrative flow, but suffers from noticeable ghosting, duplicated underlying labels, and minor text alterations."
+      },
+      "ASC": {
+       "summary": null
+      }
+     },
+     "scores": {
+      "SSS": "NA",
+      "GPS": "NA",
+      "NAS": "NA"
+     },
+     "steps": [],
+     "derived": {
+      "G": 0,
+      "vf_pass": false,
+      "asc_pass": false,
+      "N": 0,
+      "gated_at": "VF",
+      "metrics": null,
+      "Qn": null,
+      "AANS": 0.0
+     }
+    },
+    {
+     "id": "ICCV_2023_set5_000001",
+     "style": null,
+     "outcome": "pass_high",
+     "source": null,
+     "video": null,
+     "frames_dir": false,
+     "raw_frames": [],
+     "bands": {
+      "VF": "B",
+      "ASC": "B"
+     },
+     "rationale": {
+      "VF": {
+       "criteria": {
+        "VFS_element_alteration": "Most core elements are present and recognizable, though the Video Backbone block exhibits a duplicate, overlapping rendering artifact throughout the sequence.",
+        "VFS_visual_layout_fidelity": "The overall layout and flow are maintained, but the overlapping boxes in the video backbone area slightly disrupt the visual hierarchy.",
+        "VFS_geometric_layout_fidelity": "The relative positioning, alignment, and directional arrows are correctly placed and connect the appropriate components.",
+        "VFS_proportion_scale_fidelity": "The scale and proportions of the blocks and text labels are generally consistent with the reference diagram.",
+        "VFS_text_typographic_integrity": "Text labels are legible and accurate, though there is some overlapping text in the duplicated Video Backbone block.",
+        "VFS_visual_quality_and_style_matching": "The color scheme and clean vector style match the original, with stable rendering and minimal jitter."
+       },
+       "summary": "The animation successfully implements the progressive reveal style with cumulative elements remaining stable. However, a noticeable cosmetic defect exists where the Video Backbone block is rendered twice in an overlapping fashion, placing this in Band B."
+      },
+      "ASC": {
+       "summary": "The animation starts with pre-present elements instead of a blank canvas, but the rest of the cumulative reveal is strictly compliant."
+      }
+     },
+     "scores": {
+      "SSS": "0.875",
+      "GPS": "0.8542",
+      "NAS": "1"
+     },
+     "steps": [
+      {
+       "t": 1,
+       "frame": null,
+       "time": null,
+       "narration": "",
+       "sss": "D",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 2,
+       "frame": null,
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "D",
+       "nas": "A"
+      },
+      {
+       "t": 3,
+       "frame": null,
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 4,
+       "frame": null,
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "C",
+       "nas": "A"
+      },
+      {
+       "t": 5,
+       "frame": null,
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 6,
+       "frame": null,
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "C",
+       "nas": "A"
+      },
+      {
+       "t": 7,
+       "frame": null,
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 8,
+       "frame": null,
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 9,
+       "frame": null,
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 10,
+       "frame": null,
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 11,
+       "frame": null,
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 12,
+       "frame": null,
+       "time": null,
+       "narration": "",
+       "sss": "B",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 13,
+       "frame": null,
+       "time": null,
+       "narration": "",
+       "sss": "B",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 14,
+       "frame": null,
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 15,
+       "frame": null,
+       "time": null,
+       "narration": "",
+       "sss": "B",
+       "gps": "A",
+       "nas": "A"
+      },
+      {
+       "t": 16,
+       "frame": null,
+       "time": null,
+       "narration": "",
+       "sss": "A",
+       "gps": "A",
+       "nas": "A"
+      }
+     ],
+     "derived": {
+      "G": 1,
+      "vf_pass": true,
+      "asc_pass": true,
+      "N": 16,
+      "gated_at": null,
+      "metrics": {
+       "SSS": {
+        "dists": [
+         3,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         1,
+         1,
+         0,
+         1,
+         0
+        ],
+        "d_o": 0.125,
+        "Q": 0.875
+       },
+       "GPS": {
+        "dists": [
+         0,
+         3,
+         0,
+         2,
+         0,
+         2,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0
+        ],
+        "d_o": 0.1458,
+        "Q": 0.8542
+       },
+       "NAS": {
+        "dists": [
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0,
+         0
+        ],
+        "d_o": 0.0,
+        "Q": 1.0
+       }
+      },
+      "Qn": 0.9097,
+      "AANS": 0.9097
+     }
+    },
+    {
+     "id": "Paper2Fig_pipe_diff_000000517",
+     "style": null,
+     "outcome": "asc_fail",
+     "source": null,
+     "video": "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/Paper2Fig_pipe_diff_000000517.mp4",
+     "frames_dir": false,
+     "raw_frames": [],
+     "bands": {
+      "VF": "A",
+      "ASC": "C"
+     },
+     "rationale": {
+      "VF": {
+       "criteria": {
+        "VFS_element_alteration": "The core diagram elements are highly stable and recognizable. Minor simplifications exist, such as the PointHop++ icon lines and the vertical text block changing from 't <- t+1' to 't+1 <-> t', but these do not impact readability.",
+        "VFS_visual_layout_fidelity": "The overall flow, containment hierarchy, and four-quadrant structure are perfectly maintained relative to the source image.",
+        "VFS_geometric_layout_fidelity": "All structural connections, directional arrows, and block alignments are accurately preserved and remain perfectly stable throughout.",
+        "VFS_proportion_scale_fidelity": "The relative sizes of the blocks, text labels, and icons are consistent and match the proportions of the ground truth.",
+        "VFS_text_typographic_integrity": "Text labels inside all blocks are highly legible, clear, and free from any corruption or truncation across all frames.",
+        "VFS_visual_quality_and_style_matching": "The color scheme, line styles, and overall aesthetics match the original diagram perfectly with no visual jitter or blurring."
+       },
+       "summary": "The animation maintains excellent structural and visual fidelity to the ground truth. The diagram remains completely stable across all frames, with only minor, acceptable text and icon simplifications."
+      },
+      "ASC": {
+       "summary": "At 0:00, inactive elements remain fully visible throughout the video without any transparent mask layer applied."
+      }
+     },
+     "scores": {
+      "SSS": "NA",
+      "GPS": "NA",
+      "NAS": "NA"
+     },
+     "steps": [],
+     "derived": {
+      "G": 0,
+      "vf_pass": true,
+      "asc_pass": false,
+      "N": 0,
+      "gated_at": "ASC",
+      "metrics": null,
+      "Qn": null,
+      "AANS": 0.0
+     }
+    },
+    {
+     "id": "WACV_2022_set5_000002",
+     "style": "Progressive Reveal",
+     "outcome": "vf_fail",
+     "source": "EVALUATIONS_PAGE/Original_Image/WACV_2022_set5_000002.png",
+     "video": null,
+     "frames_dir": true,
+     "raw_frames": [
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_00.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_01.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_02.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_03.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_04.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_05.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_06.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_07.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_08.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_09.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_10.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_11.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_12.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_13.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_14.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_15.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_16.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_17.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_18.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_19.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_20.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_21.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_22.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_23.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_24.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_25.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_26.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_27.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_28.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_29.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_30.png",
+      "EVALUATIONS_PAGE/Qwen3.8_28B/Frames/WACV_2022_set5_000002/frame_31.png"
+     ],
+     "bands": {
+      "VF": "C",
+      "ASC": null
+     },
+     "rationale": {
+      "VF": {
+       "criteria": {
+        "VFS_element_alteration": "Core neural network modules and images are represented correctly across frames, though right-side branches become cramped as elements accumulate.",
+        "VFS_visual_layout_fidelity": "The overall dual-stream architecture layout is preserved, but spatial density leads to element crowding in later frames.",
+        "VFS_geometric_layout_fidelity": "Flow arrows and network connections mostly follow the source diagram structure, though line overlaps reduce clarity near loss blocks.",
+        "VFS_proportion_scale_fidelity": "Relative sizes of feature cubes and module blocks remain reasonable, but text bounding boxes lack sufficient spacing.",
+        "VFS_text_typographic_integrity": "Significant text overlapping occurs on the tensor dimension annotations below the deblurring stream, rendering several labels unreadable.",
+        "VFS_visual_quality_and_style_matching": "Color scheme aligns well with the original diagram key, though graphical clarity is compromised by overlapping text elements."
+       },
+       "summary": "The video successfully demonstrates a progressive reveal of the network architecture. However, severe text collisions in the deblurring stream dimension annotations impair legibility, resulting in a Band C classification."
+      },
+      "ASC": {
+       "summary": null
+      }
+     },
+     "scores": {
+      "SSS": "NA",
+      "GPS": "NA",
+      "NAS": "NA"
+     },
+     "steps": [],
+     "derived": {
+      "G": 0,
+      "vf_pass": false,
+      "asc_pass": false,
+      "N": 0,
+      "gated_at": "VF",
+      "metrics": null,
+      "Qn": null,
+      "AANS": 0.0
+     }
+    }
+   ]
+  }
+ ]
+}

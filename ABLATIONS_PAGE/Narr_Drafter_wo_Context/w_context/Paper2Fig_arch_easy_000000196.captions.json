@@ -1,0 +1,54 @@
+[
+ {
+  "t": 0.0,
+  "text": "The robot module lifecycle begins with the initialization phase, configuring the necessary models and controllers before simulation."
+ },
+ {
+  "t": 2.2,
+  "text": "A robot model is loaded, defining the kinematic and dynamic properties of the chosen robotic arm."
+ },
+ {
+  "t": 4.4,
+  "text": "A gripper model specifies the end-effector geometry and attachment properties for manipulation."
+ },
+ {
+  "t": 6.6,
+  "text": "The controller is initialized to define how high-level commands will map into low-level actuation."
+ },
+ {
+  "t": 8.8,
+  "text": "During runtime, the robot actively interacts with the simulation environment across each control step."
+ },
+ {
+  "t": 11.0,
+  "text": "The central robot abstraction coordinates command execution and state synchronization within the environment."
+ },
+ {
+  "t": 13.2,
+  "text": "External policies or input devices supply high-level action commands to the robot."
+ },
+ {
+  "t": 15.4,
+  "text": "The internal controller converts these action commands into joint torque values to actuate the physics model."
+ },
+ {
+  "t": 17.6,
+  "text": "In response to physical interactions, observations such as camera renderings are generated for the agent."
+ },
+ {
+  "t": 19.8,
+  "text": "Finally, callable interfaces allow external programs to access relevant state information at any point."
+ },
+ {
+  "t": 22.0,
+  "text": "Specifications expose static properties, limits, and configuration metadata of the robot instance."
+ },
+ {
+  "t": 24.2,
+  "text": "Proprioception methods provide direct access to joint positions, velocities, and operational poses."
+ },
+ {
+  "t": 26.4,
+  "text": "Sensor callables retrieve measurements from attached devices, including force-torque and contact signals."
+ }
+]

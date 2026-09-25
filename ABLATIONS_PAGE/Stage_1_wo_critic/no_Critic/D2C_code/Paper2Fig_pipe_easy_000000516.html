@@ -1,0 +1,116 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 500" width="1000" height="500">
+  <defs>
+    <marker id="arrow-black" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <path d="M 0 0 L 6 3 L 0 6 z" fill="#000000" />
+    </marker>
+    <marker id="arrow-fat" markerWidth="6" markerHeight="6" refX="4" refY="3" orient="auto">
+      <path d="M 0 0 L 6 3 L 0 6 z" fill="#000000" />
+    </marker>
+  </defs>
+
+  <!-- BLOCK 1: Data Collection -->
+  <g id="block-data-collection" data-id="block-data-collection" data-class="block" data-parent="root">
+    <rect id="rect-block-data-collection" data-id="rect-block-data-collection" data-class="composite_part" data-parent="block-data-collection" x="10" y="5" width="270" height="485" fill="#a6a6a6" stroke="#000000" stroke-width="2.5" stroke-dasharray="4,4" />
+    <text id="text-title-data-collection" data-id="text-title-data-collection" data-class="text_node" data-parent="block-data-collection" x="145" y="48" font-family="Arial, sans-serif" font-size="28" font-weight="normal" text-anchor="middle" fill="#000000">Data Collection</text>
+    
+    <!-- Cylinder: Captured Images -->
+    <g id="cylinder-captured-images" data-id="cylinder-captured-images" data-class="composite_whole" data-parent="block-data-collection">
+      <path id="path-cyl1-body" data-id="path-cyl1-body" data-class="composite_part" data-parent="cylinder-captured-images" d="M 53 100 C 53 120 227 120 227 100 L 227 185 C 227 215 53 215 53 185 Z" fill="#fffbe6" stroke="#000000" stroke-width="2.5" />
+      <ellipse id="path-cyl1-top" data-id="path-cyl1-top" data-class="composite_part" data-parent="cylinder-captured-images" cx="140" cy="100" rx="87" ry="25" fill="#ffffff" stroke="#000000" stroke-width="2.5" />
+      <text id="text-cyl1-captured" data-id="text-cyl1-captured" data-class="text_node" data-parent="cylinder-captured-images" x="140" y="148" font-family="Arial, sans-serif" font-size="25" text-anchor="middle" fill="#000000">Captured</text>
+      <text id="text-cyl1-images" data-id="text-cyl1-images" data-class="text_node" data-parent="cylinder-captured-images" x="140" y="178" font-family="Arial, sans-serif" font-size="25" text-anchor="middle" fill="#000000">Images</text>
+    </g>
+
+    <!-- Node: Postprocessing -->
+    <g id="node-postprocessing" data-id="node-postprocessing" data-class="child_node" data-parent="block-data-collection">
+      <rect id="rect-postprocessing" data-id="rect-postprocessing" data-class="composite_part" data-parent="node-postprocessing" x="23" y="282" width="244" height="55" fill="#ffffff" stroke="#000000" stroke-width="2.5" />
+      <text id="text-postprocessing" data-id="text-postprocessing" data-class="text_node" data-parent="node-postprocessing" x="145" y="319" font-family="Arial, sans-serif" font-size="25" text-anchor="middle" fill="#000000">Postprocessing</text>
+    </g>
+
+    <!-- Node: Classification -->
+    <g id="node-classification" data-id="node-classification" data-class="child_node" data-parent="block-data-collection">
+      <rect id="rect-classification" data-id="rect-classification" data-class="composite_part" data-parent="node-classification" x="23" y="413" width="244" height="55" fill="#ffffff" stroke="#000000" stroke-width="2.5" />
+      <text id="text-classification" data-id="text-classification" data-class="text_node" data-parent="node-classification" x="145" y="450" font-family="Arial, sans-serif" font-size="25" text-anchor="middle" fill="#000000">Classification</text>
+    </g>
+  </g>
+
+  <!-- BLOCK 2: Tone Mapping -->
+  <g id="block-tone-mapping" data-id="block-tone-mapping" data-class="block" data-parent="root">
+    <rect id="rect-block-tone-mapping" data-id="rect-block-tone-mapping" data-class="composite_part" data-parent="block-tone-mapping" x="375" y="5" width="255" height="485" fill="#e2f0d9" stroke="#000000" stroke-width="2.5" stroke-dasharray="4,4" />
+    <text id="text-title-tone-mapping" data-id="text-title-tone-mapping" data-class="text_node" data-parent="block-tone-mapping" x="502" y="48" font-family="Arial, sans-serif" font-size="28" font-weight="normal" text-anchor="middle" fill="#000000">Tone Mapping</text>
+    
+    <!-- Cylinder: DR > 2^15 -->
+    <g id="cylinder-dr" data-id="cylinder-dr" data-class="composite_whole" data-parent="block-tone-mapping">
+      <path id="path-cyl2-body" data-id="path-cyl2-body" data-class="composite_part" data-parent="cylinder-dr" d="M 420 85 C 420 102 580 102 580 85 L 580 142 C 580 167 420 167 420 142 Z" fill="#ffe699" stroke="#000000" stroke-width="2.5" />
+      <ellipse id="path-cyl2-top" data-id="path-cyl2-top" data-class="composite_part" data-parent="cylinder-dr" cx="500" cy="85" rx="80" ry="20" fill="#ffffff" stroke="#000000" stroke-width="2.5" />
+      <text id="text-cyl2-dr" data-id="text-cyl2-dr" data-class="text_node" data-parent="cylinder-dr" x="500" y="132" font-family="Arial, sans-serif" font-size="25" text-anchor="middle" fill="#000000">DR &gt; 2<tspan font-size="0.65em" baseline-shift="super">15</tspan></text>
+    </g>
+
+    <!-- Node: 25 TMOs -->
+    <g id="node-tmos" data-id="node-tmos" data-class="child_node" data-parent="block-tone-mapping">
+      <rect id="rect-tmos" data-id="rect-tmos" data-class="composite_part" data-parent="node-tmos" x="425" y="217" width="160" height="55" fill="#ffffff" stroke="#000000" stroke-width="2.5" />
+      <text id="text-tmos" data-id="text-tmos" data-class="text_node" data-parent="node-tmos" x="505" y="254" font-family="Arial, sans-serif" font-size="25" text-anchor="middle" fill="#000000">25 TMOs</text>
+    </g>
+
+    <!-- Documents Icon / 25 TM Image Sets -->
+    <g id="node-tm-image-sets" data-id="node-tm-image-sets" data-class="composite_whole" data-parent="block-tone-mapping">
+      <!-- Back Doc -->
+      <path id="doc-back" data-id="doc-back" data-class="composite_part" data-parent="node-tm-image-sets" d="M 478 327 L 546 327 L 565 348 L 565 414 L 478 414 Z" fill="#deebf7" stroke="#000000" stroke-width="2.5" stroke-linejoin="round" />
+      <!-- Middle Doc -->
+      <path id="doc-mid" data-id="doc-mid" data-class="composite_part" data-parent="node-tm-image-sets" d="M 464 340 L 532 340 L 551 361 L 551 427 L 464 427 Z" fill="#deebf7" stroke="#000000" stroke-width="2.5" stroke-linejoin="round" />
+      <!-- Front Doc -->
+      <path id="doc-front" data-id="doc-front" data-class="composite_part" data-parent="node-tm-image-sets" d="M 449 353 L 517 353 L 536 374 L 536 440 L 449 440 Z" fill="#deebf7" stroke="#000000" stroke-width="2.5" stroke-linejoin="round" />
+    </g>
+    <text id="text-tm-image-sets" data-id="text-tm-image-sets" data-class="text_node" data-parent="block-tone-mapping" x="502" y="470" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" fill="#000000">25 TM Image Sets</text>
+  </g>
+
+  <!-- BLOCK 3: Face Detection -->
+  <g id="block-face-detection" data-id="block-face-detection" data-class="block" data-parent="root">
+    <rect id="rect-block-face-detection" data-id="rect-block-face-detection" data-class="composite_part" data-parent="block-face-detection" x="730" y="5" width="260" height="485" fill="#deebf7" stroke="#000000" stroke-width="2.5" stroke-dasharray="4,4" />
+    <text id="text-title-face-detection" data-id="text-title-face-detection" data-class="text_node" data-parent="block-face-detection" x="860" y="48" font-family="Arial, sans-serif" font-size="28" font-weight="normal" text-anchor="middle" fill="#000000">Face Detection</text>
+    
+    <!-- Node: 8 Face Detectors -->
+    <g id="node-face-detectors" data-id="node-face-detectors" data-class="child_node" data-parent="block-face-detection">
+      <rect id="rect-face-detectors" data-id="rect-face-detectors" data-class="composite_part" data-parent="node-face-detectors" x="770" y="73" width="175" height="88" fill="#ffffff" stroke="#000000" stroke-width="2.5" />
+      <text id="text-face-detectors-1" data-id="text-face-detectors-1" data-class="text_node" data-parent="node-face-detectors" x="857" y="110" font-family="Arial, sans-serif" font-size="25" text-anchor="middle" fill="#000000">8 Face</text>
+      <text id="text-face-detectors-2" data-id="text-face-detectors-2" data-class="text_node" data-parent="node-face-detectors" x="857" y="141" font-family="Arial, sans-serif" font-size="25" text-anchor="middle" fill="#000000">Detectors</text>
+    </g>
+
+    <!-- Raster Node: Example Face Image -->
+    <g id="raster-face-image" data-id="raster-face-image" data-class="raster_node"><image href="rasters/Paper2Fig_pipe_easy_000000516/crop_raster-face-image.png" xlink:href="rasters/Paper2Fig_pipe_easy_000000516/crop_raster-face-image.png" x="774" y="208" width="170" height="142" preserveAspectRatio="xMidYMid meet" /></g>
+
+    <!-- Node: Result & Analysis -->
+    <g id="node-result-analysis" data-id="node-result-analysis" data-class="child_node" data-parent="block-face-detection">
+      <rect id="rect-result-analysis" data-id="rect-result-analysis" data-class="composite_part" data-parent="node-result-analysis" x="770" y="403" width="183" height="74" fill="#ffffff" stroke="#000000" stroke-width="2.5" />
+      <text id="text-result-analysis-1" data-id="text-result-analysis-1" data-class="text_node" data-parent="node-result-analysis" x="861" y="434" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" fill="#000000">Result &amp;</text>
+      <text id="text-result-analysis-2" data-id="text-result-analysis-2" data-class="text_node" data-parent="node-result-analysis" x="861" y="463" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" fill="#000000">Analysis</text>
+    </g>
+  </g>
+
+  <!-- Straight Vertical Connecting Edges inside Block 1 -->
+  <g>
+    <line id="edge-cyl1-to-postproc" data-id="edge-cyl1-to-postproc" data-class="edge" data-source="cylinder-captured-images" data-target="node-postprocessing" x1="145" y1="223" x2="145" y2="265" stroke="#000000" stroke-width="17" marker-end="url(#arrow-black)" />
+    <line id="edge-postproc-to-classif" data-id="edge-postproc-to-classif" data-class="edge" data-source="node-postprocessing" data-target="node-classification" x1="145" y1="347" x2="145" y2="393" stroke="#000000" stroke-width="17" marker-end="url(#arrow-black)" />
+  </g>
+
+  <!-- Straight Vertical Connecting Edges inside Block 2 -->
+  <g>
+    <line id="edge-dr-to-tmos" data-id="edge-dr-to-tmos" data-class="edge" data-source="cylinder-dr" data-target="node-tmos" x1="504" y1="168" x2="504" y2="201" stroke="#000000" stroke-width="17" marker-end="url(#arrow-black)" />
+    <line id="edge-tmos-to-imagesets" data-id="edge-tmos-to-imagesets" data-class="edge" data-source="node-tmos" data-target="node-tm-image-sets" x1="504" y1="282" x2="504" y2="315" stroke="#000000" stroke-width="17" marker-end="url(#arrow-black)" />
+  </g>
+
+  <!-- Straight Vertical Connecting Edges inside Block 3 -->
+  <g>
+    <line id="edge-detectors-to-faceimg" data-id="edge-detectors-to-faceimg" data-class="edge" data-source="node-face-detectors" data-target="raster-face-image" x1="859" y1="171" x2="859" y2="194" stroke="#000000" stroke-width="17" marker-end="url(#arrow-black)" />
+    <line id="edge-faceimg-to-result" data-id="edge-faceimg-to-result" data-class="edge" data-source="raster-face-image" data-target="node-result-analysis" x1="859" y1="360" x2="859" y2="385" stroke="#000000" stroke-width="17" marker-end="url(#arrow-black)" />
+  </g>
+
+  <!-- Orthogonal Connecting Fat Edges Between Blocks -->
+  <g>
+    <!-- From Classification to Tone Mapping (DR > 2^15) -->
+    <path id="edge-classif-to-tonemapping" data-id="edge-classif-to-tonemapping" data-class="edge" data-source="node-classification" data-target="cylinder-dr" d="M 276 443 L 316 443 L 316 127 L 344 127" fill="none" stroke="#000000" stroke-width="17" marker-end="url(#arrow-fat)" stroke-linejoin="miter" />
+
+    <!-- From Tone Mapping (25 TM Image Sets) to Face Detection (8 Face Detectors) -->
+    <path id="edge-tmsets-to-facedetect" data-id="edge-tmsets-to-facedetect" data-class="edge" data-source="node-tm-image-sets" data-target="node-face-detectors" d="M 605 390 L 666 390 L 666 127 L 702 127" fill="none" stroke="#000000" stroke-width="17" marker-end="url(#arrow-fat)" stroke-linejoin="miter" />
+  </g>
+</svg>

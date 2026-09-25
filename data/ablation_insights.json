@@ -1,0 +1,49 @@
+{
+ "_note": "Generated from data/ablation_insights.csv — edit that, not this.",
+ "Narr_Drafter_wo_Context": {
+  "_overall": "",
+  "CVPR_2025_arch02021": "As we can see Narration Alignment has got better scores in the AnimateBanana (Full System) where diagram context was utilized to form the narrative.",
+  "Paper2Fig_arch_diff_000000037": "As we can see Narration Alignment has got better scores in the AnimateBanana (Full System) where diagram context was utilized to form the narrative.",
+  "Paper2Fig_arch_easy_000000196": "As we can see Narration Alignment has got better scores in the AnimateBanana (Full System) where diagram context was utilized to form the narrative.",
+  "Paper2Fig_pipe_diff_000000130": "As we can see Narration Alignment has got better scores in the AnimateBanana (Full System) where diagram context was utilized to form the narrative.",
+  "Paper2Fig_pipe_diff_000000492": "As we can see Narration Alignment has got better scores in the AnimateBanana (Full System) where diagram context was utilized to form the narrative.",
+  "Paper2Fig_pipe_easy_000000529": "As we can see Narration Alignment has got better scores in the AnimateBanana (Full System) where diagram context was utilized to form the narrative.",
+  "Paper2Fig_pipe_easy_000000579": "As we can see Narration Alignment has got better scores in the AnimateBanana (Full System) where diagram context was utilized to form the narrative.",
+  "arch_arxiv_ai_2025_000000126": ""
+ },
+ "No_Critics": {
+  "_overall": "",
+  "CVPR_2025_arch01657": "We observe that the given animation has got an overall score of 0 due to severe non-compliance with the logical animation flow.",
+  "Paper2Fig_pipe_diff_000000104": "The large, blocky arrows cause a dip in visual fidelity causing the given animation to fail the VF gate and get an overall score of 0 for AN.",
+  "Paper2Fig_pipe_easy_000000516": "The large, blocky arrows overlaping and obscuring the diagram elements cause a dip in visual fidelity causing the given animation to fail the VF gate and get an overall score of 0 for AN."
+ },
+ "Seq_wo_XML": {
+  "_overall": "",
+  "CVPR_2025_arch02400": "We observe that the animation on the right renders in chunks due to which it greatly suffers in the granularity and presentation score (GP) dragging its total AN score down. The possible reason for this is the lack of a structured representation guiding its animation sequence plan.",
+  "FigureBench_arch_diff_000000004": "In this example, we observe a special case where the presence of the XML actually allows transformer decoder to be aniamted as a block rather than going into its individual sub-blocks. However that brings down the Selection Sensibility score slightly as depth-first exploration of container blocks is considered a sensible choice. However this score is compensated by the NA score which increases the final AN score."
+ },
+ "Stage_1_wo_critic": {
+  "_overall": "",
+  "CVPR_2025_arch00968": "The distortion of diagram arrows obscures a considerable part of the diagram which being a fatal error leads to failure of the VF gate.",
+  "Paper2Fig_pipe_easy_000000119": "The blocky diagram arrows overlaps with the diagram elements and obscures some of them leading to failure at the VF gate.",
+  "Paper2Fig_pipe_easy_000000516": "The blocky diagram arrows overlaps with the diagram elements and obscures some of them leading to failure at the VF gate.",
+  "arch_arxiv_cv_2023_000000433": "The blue patches after the Encoder are wrongly displayed with a gap, causing the diagram to get Band B on the VF gate which denotes acceptance with minor flaws."
+ },
+ "Stage_2_wo_Critic": {
+  "_overall": "",
+  "CVPR_2025_arch02021": "In this diagram  we observe that the arrow connecting the lower panel (\"Many Outputs\") to the upper panel (\"Few Inputs\") is clubbed with the lower panel in case of the diagram on the right, whereas it is animated separately for the AnimateBanana (Full System). This gives an edge in both SS and GP.",
+  "Paper2Fig_pipe_diff_000000130": "Here as well, the choice of animating the normal map and segmentation map together gives the AnimateBanana(Full System) an edge in SS.",
+  "arch_arxiv_db_ir_2025_000000587": "The Selection Sensibility takes a dip because of the pre-animation of some of the arrow labels way before their occurrence."
+ },
+ "Stage_2_wo_Image": {
+  "_overall": "",
+  "CVPR_2025_arch02400": "Much of the diagram is presented in a single shot rather than incrementally in the animation of the right causing it to have lower scores for selection sensibility.",
+  "Paper2Fig_arch_diff_000000076": "The selection of the Learnable adjacency as a group together rather than individual elements is reflected in both higher SS and GP scores.",
+  "Paper2Fig_pipe_easy_000000529": "Here in this example, AnimateBanana (Full System) represents the two arrows from Hadoop Eco-System together  thereby scoring higher on GP."
+ },
+ "Stage_3_wo_Critic": {
+  "_overall": "",
+  "Paper2Fig_arch_easy_000000148": "The animated narrative scores a total of 0 on AN due to Animation Style Non-Compliance.",
+  "SciMMIR_pipe_easy_000000307": "We observe that in the absence of the Critic for the Animation Designer, the implementation of the Alpha Masking animation style is not proper (masked elements end up having higher opacity than required)"
+ }
+}

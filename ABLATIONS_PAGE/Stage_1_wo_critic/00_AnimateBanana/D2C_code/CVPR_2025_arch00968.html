@@ -1,0 +1,518 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 330" width="1000" height="330">
+    <defs>
+        <marker id="arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#3B71CA"/>
+        </marker>
+        <marker id="arrow-red" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#D9534F"/>
+        </marker>
+        <marker id="arrow-green" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#5CB85C"/>
+        </marker>
+        <marker id="arrow-black" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#333333"/>
+        </marker>
+        <marker id="arrow-dash-red" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#D9534F"/>
+        </marker>
+    </defs>
+
+    <!-- Top Headers (CAD Modules) -->
+    <g id="header_cad_generate" data-id="header_cad_generate" data-class="block" data-parent="root">
+        <rect id="bg_cad_generate" data-id="bg_cad_generate" data-class="child_node" data-parent="header_cad_generate" x="120" y="5" width="200" height="20" rx="4" fill="#CFE2FF"/>
+        <text id="text_cad_generate" data-id="text_cad_generate" data-class="text_node" data-parent="header_cad_generate" x="220" y="19" font-family="Arial, sans-serif" font-size="11" font-weight="bold" font-style="italic" text-anchor="middle" fill="#000000">CAD Generate Module</text>
+    </g>
+
+    <g id="header_cad_attention" data-id="header_cad_attention" data-class="block" data-parent="root">
+        <rect id="bg_cad_attention" data-id="bg_cad_attention" data-class="child_node" data-parent="header_cad_attention" x="330" y="5" width="260" height="20" rx="4" fill="#CFE2FF"/>
+        <text id="text_cad_attention" data-id="text_cad_attention" data-class="text_node" data-parent="header_cad_attention" x="460" y="19" font-family="Arial, sans-serif" font-size="11" font-weight="bold" font-style="italic" text-anchor="middle" fill="#000000">CAD Attention Module</text>
+    </g>
+
+    <g id="header_cad_dynamic_query" data-id="header_cad_dynamic_query" data-class="block" data-parent="root">
+        <rect id="bg_cad_dynamic_query" data-id="bg_cad_dynamic_query" data-class="child_node" data-parent="header_cad_dynamic_query" x="600" y="5" width="190" height="20" rx="4" fill="#CFE2FF"/>
+        <text id="text_cad_dynamic_query" data-id="text_cad_dynamic_query" data-class="text_node" data-parent="header_cad_dynamic_query" x="695" y="19" font-family="Arial, sans-serif" font-size="11" font-weight="bold" font-style="italic" text-anchor="middle" fill="#000000">CAD Dynamic Query Module</text>
+    </g>
+
+    <!-- Top Inter-module arrows -->
+    <path id="edge_hdr1_to_hdr2" data-id="edge_hdr1_to_hdr2" data-class="edge" data-source="header_cad_generate" data-target="header_cad_attention" d="M 320 15 L 328 15" stroke="#000" stroke-width="1.5" marker-end="url(#arrow-black)"/>
+    <path id="edge_hdr2_to_hdr3" data-id="edge_hdr2_to_hdr3" data-class="edge" data-source="header_cad_attention" data-target="header_cad_dynamic_query" d="M 590 15 L 598 15" stroke="#000" stroke-width="1.5" marker-end="url(#arrow-black)"/>
+
+    <!-- Left Column: Input Expression & Query Image -->
+    <text id="title_referring_expr" data-id="title_referring_expr" data-class="text_node" data-parent="root" x="55" y="19" font-family="Arial, sans-serif" font-size="10" font-weight="bold" font-style="italic" text-anchor="middle" fill="#000">Referring Expression</text>
+
+    <g id="box_referring_expr" data-id="box_referring_expr" data-class="standalone_node" data-parent="root">
+        <rect id="rect_referring_expr" data-id="rect_referring_expr" data-class="composite_part" data-parent="box_referring_expr" x="8" y="27" width="95" height="58" rx="6" fill="#FFFFFF" stroke="#6c757d" stroke-width="1"/>
+        <text id="text_expr_red" data-id="text_expr_red" data-class="composite_part" data-parent="box_referring_expr" x="55" y="44" font-family="Arial, sans-serif" font-size="9" text-anchor="middle">
+            <tspan fill="#D9534F" text-decoration="underline" font-style="italic">Reddish</tspan> <tspan fill="#000000" text-decoration="underline" font-style="italic">pen</tspan>
+        </text>
+        <text id="text_expr_green" data-id="text_expr_green" data-class="composite_part" data-parent="box_referring_expr" x="55" y="59" font-family="Arial, sans-serif" font-size="9" text-anchor="middle">
+            <tspan fill="#5CB85C" text-decoration="underline" font-style="italic">Greenish</tspan> <tspan fill="#000000" text-decoration="underline" font-style="italic">pen</tspan>
+        </text>
+        <text id="text_expr_blue" data-id="text_expr_blue" data-class="composite_part" data-parent="box_referring_expr" x="55" y="74" font-family="Arial, sans-serif" font-size="9" text-anchor="middle">
+            <tspan fill="#3B71CA" text-decoration="underline" font-style="italic">Bluish</tspan> <tspan fill="#000000" text-decoration="underline" font-style="italic">pen</tspan>
+        </text>
+    </g>
+
+    <!-- Backbone block -->
+    <g id="box_backbone" data-id="box_backbone" data-class="standalone_node" data-parent="root">
+        <rect id="rect_backbone" data-id="rect_backbone" data-class="composite_part" data-parent="box_backbone" x="2" y="112" width="107" height="72" rx="8" fill="#FFFFFF" stroke="#333" stroke-width="1"/>
+        <g id="text_bb_icon1" data-id="text_bb_icon1" data-class="composite_part" data-parent="box_backbone">
+            <path d="M 28 128 L 28 140 M 22 134 L 34 134 M 23.8 129.8 L 32.2 138.2 M 23.8 138.2 L 32.2 129.8" stroke="#3B71CA" stroke-width="1.3" stroke-linecap="round"/>
+        </g>
+        <text id="text_bb_title1" data-id="text_bb_title1" data-class="composite_part" data-parent="box_backbone" x="66" y="138" font-family="Arial, sans-serif" font-size="9" font-weight="bold" font-style="italic" text-anchor="middle" fill="#000">Backbone</text>
+        <text id="text_bb_title2" data-id="text_bb_title2" data-class="composite_part" data-parent="box_backbone" x="55" y="152" font-family="Arial, sans-serif" font-size="9" font-weight="bold" font-style="italic" text-anchor="middle" fill="#000">&amp;</text>
+        <g id="text_bb_icon2" data-id="text_bb_icon2" data-class="composite_part" data-parent="box_backbone">
+            <path d="M 16 170 C 13 170 12 167 13 165 C 14 163 16 162 16 160 C 17 162 19 163 19 165 C 20 168 18 170 16 170 Z" fill="#E65100"/>
+            <path d="M 16 170 C 14.5 170 14 168.5 14.5 167 C 15 166 16 165.5 16 164.5 C 16.5 165.5 17.5 166 17.5 167 C 18 169 17 170 16 170 Z" fill="#FFB300"/>
+        </g>
+        <text id="text_bb_title3" data-id="text_bb_title3" data-class="composite_part" data-parent="box_backbone" x="62" y="166" font-family="Arial, sans-serif" font-size="9" font-weight="bold" font-style="italic" text-anchor="middle" fill="#000">Feature Enhancer</text>
+    </g>
+
+    <!-- Query Image raster placeholder -->
+    <g id="raster_query_image" data-id="raster_query_image" data-class="raster_node"><image href="rasters/CVPR_2025_arch00968/crop_raster_query_image.png" xlink:href="rasters/CVPR_2025_arch00968/crop_raster_query_image.png" x="2" y="208" width="107" height="104" preserveAspectRatio="xMidYMid meet" /></g>
+    <text id="label_query_image" data-id="label_query_image" data-class="text_node" data-parent="root" x="55" y="325" font-family="Arial, sans-serif" font-size="10" font-weight="bold" font-style="italic" text-anchor="middle" fill="#000">Query Image</text>
+
+    <!-- CAD Generate Module Area -->
+    <!-- Pred Density Raster Box -->
+    <g id="raster_pred_density" data-id="raster_pred_density" data-class="raster_node"><image href="rasters/CVPR_2025_arch00968/crop_raster_pred_density.png" xlink:href="rasters/CVPR_2025_arch00968/crop_raster_pred_density.png" x="142" y="36" width="60" height="55" preserveAspectRatio="xMidYMid meet" /></g>
+    <text id="label_pred_density" data-id="label_pred_density" data-class="text_node" data-parent="root" x="168" y="104" font-family="Arial, sans-serif" font-size="9" font-weight="bold" text-anchor="middle" fill="#000">Pred Density</text>
+
+    <!-- GT Density Map Raster Box -->
+    <g id="raster_gt_density" data-id="raster_gt_density" data-class="raster_node"><image href="rasters/CVPR_2025_arch00968/crop_raster_gt_density.png" xlink:href="rasters/CVPR_2025_arch00968/crop_raster_gt_density.png" x="256" y="36" width="60" height="55" preserveAspectRatio="xMidYMid meet" /></g>
+    <text id="label_gt_density" data-id="label_gt_density" data-class="text_node" data-parent="root" x="282" y="104" font-family="Arial, sans-serif" font-size="9" font-weight="bold" text-anchor="middle" fill="#000">GT Density Map</text>
+
+    <!-- Loss Density text node -->
+    <text id="node_loss_density" data-id="node_loss_density" data-class="standalone_node" data-parent="root" x="225" y="38" font-family="'Times New Roman', Georgia, serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#333">
+        <tspan font-style="italic">L</tspan><tspan font-size="0.65em" baseline-shift="sub">density</tspan>
+    </text>
+
+    <!-- U-shape CAD Estimator -->
+    <g id="box_cad_estimator" data-id="box_cad_estimator" data-class="standalone_node" data-parent="root">
+        <rect id="rect_cad_estimator" data-id="rect_cad_estimator" data-class="composite_part" data-parent="box_cad_estimator" x="145" y="117" width="70" height="42" rx="6" fill="#F8F9FA" stroke="#70A0E0" stroke-width="1.5" stroke-dasharray="3,3"/>
+        <text id="text_cad_est_1" data-id="text_cad_est_1" data-class="composite_part" data-parent="box_cad_estimator" x="180" y="130" font-family="Arial, sans-serif" font-size="8" font-weight="bold" text-anchor="middle" fill="#000">U-shape</text>
+        <text id="text_cad_est_2" data-id="text_cad_est_2" data-class="composite_part" data-parent="box_cad_estimator" x="180" y="141" font-family="Arial, sans-serif" font-size="8" font-weight="bold" text-anchor="middle" fill="#000">CAD</text>
+        <text id="text_cad_est_3" data-id="text_cad_est_3" data-class="composite_part" data-parent="box_cad_estimator" x="180" y="152" font-family="Arial, sans-serif" font-size="8" font-weight="bold" text-anchor="middle" fill="#000">Estimator</text>
+    </g>
+
+    <!-- Similarity Features pill/node -->
+    <g id="node_similarity_features" data-id="node_similarity_features" data-class="standalone_node" data-parent="root">
+        <rect id="rect_sim_feat" data-id="rect_sim_feat" data-class="composite_part" data-parent="node_similarity_features" x="135" y="167" width="98" height="15" rx="3" fill="#D0E1FD"/>
+        <text id="text_sim_feat" data-id="text_sim_feat" data-class="composite_part" data-parent="node_similarity_features" x="184" y="178" font-family="Arial, sans-serif" font-size="8" font-weight="bold" text-anchor="middle" fill="#1C53A3">Similarity Features</text>
+    </g>
+
+    <!-- Operator multiply (Similarity) -->
+    <g id="op_mult_sim" data-id="op_mult_sim" data-class="standalone_node" data-parent="root">
+        <circle id="circ_op_mult_sim" data-id="circ_op_mult_sim" data-class="composite_part" data-parent="op_mult_sim" cx="184" cy="198" r="5" fill="#FFF" stroke="#000" stroke-width="1"/>
+        <circle id="dot_op_mult_sim" data-id="dot_op_mult_sim" data-class="composite_part" data-parent="op_mult_sim" cx="184" cy="198" r="1.5" fill="#000"/>
+    </g>
+
+    <!-- Mapping box -->
+    <g id="box_mapping" data-id="box_mapping" data-class="standalone_node" data-parent="root">
+        <rect id="rect_mapping" data-id="rect_mapping" data-class="composite_part" data-parent="box_mapping" x="145" y="213" width="46" height="15" rx="3" fill="#FFF" stroke="#6c757d" stroke-width="1"/>
+        <text id="text_mapping" data-id="text_mapping" data-class="composite_part" data-parent="box_mapping" x="168" y="224" font-family="Arial, sans-serif" font-size="8" text-anchor="middle" fill="#000">Mapping</text>
+    </g>
+
+    <!-- Visual Features Pyramid Left -->
+    <g id="pyramid_vis_left" data-id="pyramid_vis_left" data-class="composite_whole" data-parent="root">
+        <polygon id="poly_vl_base" data-id="poly_vl_base" data-class="composite_part" data-parent="pyramid_vis_left" points="135,236 200,236 190,288 145,288" fill="#DDE2E6" stroke="#6c757d" stroke-width="1"/>
+        <!-- Levels -->
+        <rect id="layer_vl_1" data-id="layer_vl_1" data-class="composite_part" data-parent="pyramid_vis_left" x="138" y="240" width="58" height="8" rx="2" fill="#CAD1D7" stroke="#6c757d" stroke-width="0.5"/>
+        <rect id="layer_vl_2" data-id="layer_vl_2" data-class="composite_part" data-parent="pyramid_vis_left" x="141" y="252" width="52" height="8" rx="2" fill="#CAD1D7" stroke="#6c757d" stroke-width="0.5"/>
+        <rect id="layer_vl_3" data-id="layer_vl_3" data-class="composite_part" data-parent="pyramid_vis_left" x="144" y="264" width="46" height="8" rx="2" fill="#CAD1D7" stroke="#6c757d" stroke-width="0.5"/>
+        <rect id="layer_vl_4" data-id="layer_vl_4" data-class="composite_part" data-parent="pyramid_vis_left" x="147" y="276" width="40" height="8" rx="2" fill="#CAD1D7" stroke="#6c757d" stroke-width="0.5"/>
+    </g>
+    <!-- Pyramid labels -->
+    <text id="lbl_fv1" data-id="lbl_fv1" data-class="text_node" data-parent="root" x="202" y="247" font-family="Georgia, serif" font-size="8" fill="#000">F<tspan font-size="0.65em" baseline-shift="sub">v1</tspan></text>
+    <text id="lbl_fv2" data-id="lbl_fv2" data-class="text_node" data-parent="root" x="202" y="259" font-family="Georgia, serif" font-size="8" fill="#000">F<tspan font-size="0.65em" baseline-shift="sub">v2</tspan></text>
+    <text id="lbl_fv3" data-id="lbl_fv3" data-class="text_node" data-parent="root" x="202" y="271" font-family="Georgia, serif" font-size="8" fill="#000">F<tspan font-size="0.65em" baseline-shift="sub">v3</tspan></text>
+    <text id="lbl_fv4" data-id="lbl_fv4" data-class="text_node" data-parent="root" x="202" y="283" font-family="Georgia, serif" font-size="8" fill="#000">F<tspan font-size="0.65em" baseline-shift="sub">v4</tspan></text>
+    <text id="lbl_vis_feat_gen" data-id="lbl_vis_feat_gen" data-class="text_node" data-parent="root" x="175" y="306" font-family="Arial, sans-serif" font-size="9" font-weight="bold" text-anchor="middle" fill="#000">Visual Features</text>
+
+    <!-- Switch and Text Feature Bars Left -->
+    <g id="node_switch" data-id="node_switch" data-class="standalone_node" data-parent="root">
+        <line id="line_sw_base" data-id="line_sw_base" data-class="composite_part" data-parent="node_switch" x1="262" y1="239" x2="267" y2="239" stroke="#000" stroke-width="1.5"/>
+        <line id="line_sw_lever" data-id="line_sw_lever" data-class="composite_part" data-parent="node_switch" x1="262" y1="239" x2="255" y2="230" stroke="#000" stroke-width="1.5"/>
+        <circle id="dot_sw_pivot" data-id="dot_sw_pivot" data-class="composite_part" data-parent="node_switch" cx="262" cy="239" r="1.5" fill="#000"/>
+    </g>
+
+    <!-- 3 Text feature bars -->
+    <g id="bars_text_feat" data-id="bars_text_feat" data-class="standalone_node" data-parent="root">
+        <rect id="bar_tf_red" data-id="bar_tf_red" data-class="composite_part" data-parent="bars_text_feat" x="249" y="244" width="6" height="46" rx="2" fill="#F8D7DA" stroke="#D9534F" stroke-width="1"/>
+        <rect id="bar_tf_green" data-id="bar_tf_green" data-class="composite_part" data-parent="bars_text_feat" x="260" y="244" width="6" height="46" rx="2" fill="#D4EDDA" stroke="#5CB85C" stroke-width="1"/>
+        <rect id="bar_tf_blue" data-id="bar_tf_blue" data-class="composite_part" data-parent="bars_text_feat" x="271" y="244" width="6" height="46" rx="2" fill="#CCE5FF" stroke="#3B71CA" stroke-width="1"/>
+    </g>
+    <text id="lbl_ft_gen" data-id="lbl_ft_gen" data-class="text_node" data-parent="root" x="240" y="268" font-family="Georgia, serif" font-size="9" text-anchor="middle" fill="#000">F<tspan font-size="0.65em" baseline-shift="sub">t</tspan></text>
+    <text id="lbl_text_feat_gen" data-id="lbl_text_feat_gen" data-class="text_node" data-parent="root" x="264" y="306" font-family="Arial, sans-serif" font-size="9" font-weight="bold" text-anchor="middle" fill="#000">Text Feature</text>
+
+    <!-- CAD Features Pyramid (Top-right of Gen Module) -->
+    <g id="pyramid_cad_gen" data-id="pyramid_cad_gen" data-class="composite_whole" data-parent="root">
+        <!-- 3D style stacked plates in background -->
+        <polygon id="poly_cad_p1" data-id="poly_cad_p1" data-class="composite_part" data-parent="pyramid_cad_gen" points="248,102 308,102 300,166 256,166" fill="#EDEFEF" stroke="#B0B6BA" stroke-width="0.8"/>
+        <polygon id="poly_cad_p2" data-id="poly_cad_p2" data-class="composite_part" data-parent="pyramid_cad_gen" points="244,106 304,106 296,170 252,170" fill="#E2E6E8" stroke="#B0B6BA" stroke-width="0.8"/>
+        <polygon id="poly_cad_p3" data-id="poly_cad_p3" data-class="composite_part" data-parent="pyramid_cad_gen" points="240,110 300,110 292,174 248,174" fill="#F8D7DA" stroke="#C97A7E" stroke-width="1"/>
+        <!-- CAD layers -->
+        <rect id="layer_cg_1" data-id="layer_cg_1" data-class="composite_part" data-parent="pyramid_cad_gen" x="243" y="115" width="54" height="10" rx="2" fill="#E8B4B8" stroke="#A94442" stroke-width="0.5"/>
+        <rect id="layer_cg_2" data-id="layer_cg_2" data-class="composite_part" data-parent="pyramid_cad_gen" x="246" y="129" width="48" height="10" rx="2" fill="#E8B4B8" stroke="#A94442" stroke-width="0.5"/>
+        <rect id="layer_cg_3" data-id="layer_cg_3" data-class="composite_part" data-parent="pyramid_cad_gen" x="249" y="143" width="42" height="10" rx="2" fill="#E8B4B8" stroke="#A94442" stroke-width="0.5"/>
+        <rect id="layer_cg_4" data-id="layer_cg_4" data-class="composite_part" data-parent="pyramid_cad_gen" x="252" y="157" width="36" height="10" rx="2" fill="#E8B4B8" stroke="#A94442" stroke-width="0.5"/>
+    </g>
+    <text id="lbl_d1" data-id="lbl_d1" data-class="text_node" data-parent="root" x="233" y="123" font-family="Georgia, serif" font-size="8" fill="#000">D<tspan font-size="0.65em" baseline-shift="sub">1</tspan></text>
+    <text id="lbl_d2" data-id="lbl_d2" data-class="text_node" data-parent="root" x="233" y="137" font-family="Georgia, serif" font-size="8" fill="#000">D<tspan font-size="0.65em" baseline-shift="sub">2</tspan></text>
+    <text id="lbl_d3" data-id="lbl_d3" data-class="text_node" data-parent="root" x="233" y="151" font-family="Georgia, serif" font-size="8" fill="#000">D<tspan font-size="0.65em" baseline-shift="sub">3</tspan></text>
+    <text id="lbl_d4" data-id="lbl_d4" data-class="text_node" data-parent="root" x="233" y="165" font-family="Georgia, serif" font-size="8" fill="#000">D<tspan font-size="0.65em" baseline-shift="sub">4</tspan></text>
+    <text id="lbl_cad_feat_gen" data-id="lbl_cad_feat_gen" data-class="text_node" data-parent="root" x="273" y="184" font-family="Arial, sans-serif" font-size="9" font-weight="bold" text-anchor="middle" fill="#000">CAD Features</text>
+
+    <!-- CAD Attention Module Container -->
+    <!-- Spatial Attention Sub-block -->
+    <g id="block_spatial_attention" data-id="block_spatial_attention" data-class="block" data-parent="root">
+        <rect id="bg_spatial_att" data-id="bg_spatial_att" data-class="child_node" data-parent="block_spatial_attention" x="333" y="27" width="107" height="295" rx="4" fill="#FFFFFF" stroke="#8EB9F5" stroke-width="1.5" stroke-dasharray="3,3"/>
+        <text id="title_spatial_att" data-id="title_spatial_att" data-class="text_node" data-parent="block_spatial_attention" x="386" y="42" font-family="Arial, sans-serif" font-size="10" font-weight="bold" font-style="italic" text-anchor="middle" fill="#000">Spatial Attention</text>
+
+        <!-- Sigmoid box -->
+        <rect id="box_sa_sigmoid" data-id="box_sa_sigmoid" data-class="child_node" data-parent="block_spatial_attention" x="355" y="74" width="62" height="23" rx="4" fill="#FFF" stroke="#6c757d" stroke-width="1"/>
+        <text id="text_sa_sigmoid" data-id="text_sa_sigmoid" data-class="child_node" data-parent="block_spatial_attention" x="386" y="89" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#000">Sigmoid</text>
+
+        <!-- Conv box -->
+        <rect id="box_sa_conv" data-id="box_sa_conv" data-class="child_node" data-parent="block_spatial_attention" x="355" y="112" width="62" height="20" rx="4" fill="#FFF" stroke="#6c757d" stroke-width="1"/>
+        <text id="text_sa_conv" data-id="text_sa_conv" data-class="child_node" data-parent="block_spatial_attention" x="386" y="126" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#000">Conv</text>
+
+        <!-- Concat operator -->
+        <circle id="circ_sa_concat" data-id="circ_sa_concat" data-class="child_node" data-parent="block_spatial_attention" cx="386" cy="153" r="6" fill="#FFF" stroke="#000" stroke-width="1"/>
+        <text id="text_sa_concat" data-id="text_sa_concat" data-class="child_node" data-parent="block_spatial_attention" x="386" y="156" font-family="Arial, sans-serif" font-size="8" font-weight="bold" text-anchor="middle">C</text>
+
+        <!-- MaxPool 2D -->
+        <rect id="box_sa_maxpool" data-id="box_sa_maxpool" data-class="child_node" data-parent="block_spatial_attention" x="340" y="172" width="44" height="28" rx="4" fill="#FFF" stroke="#6c757d" stroke-width="1"/>
+        <text id="text_sa_mp1" data-id="text_sa_mp1" data-class="child_node" data-parent="block_spatial_attention" x="362" y="184" font-family="Arial, sans-serif" font-size="8" text-anchor="middle" fill="#000">MaxPool</text>
+        <text id="text_sa_mp2" data-id="text_sa_mp2" data-class="child_node" data-parent="block_spatial_attention" x="362" y="195" font-family="Arial, sans-serif" font-size="8" text-anchor="middle" fill="#000">2D</text>
+
+        <!-- AvgPool 2D -->
+        <rect id="box_sa_avgpool" data-id="box_sa_avgpool" data-class="child_node" data-parent="block_spatial_attention" x="390" y="172" width="44" height="28" rx="4" fill="#FFF" stroke="#6c757d" stroke-width="1"/>
+        <text id="text_sa_ap1" data-id="text_sa_ap1" data-class="child_node" data-parent="block_spatial_attention" x="412" y="184" font-family="Arial, sans-serif" font-size="8" text-anchor="middle" fill="#000">AvgPool</text>
+        <text id="text_sa_ap2" data-id="text_sa_ap2" data-class="child_node" data-parent="block_spatial_attention" x="412" y="195" font-family="Arial, sans-serif" font-size="8" text-anchor="middle" fill="#000">2D</text>
+
+        <!-- CAD Features Pyramid Bottom -->
+        <g id="pyramid_cad_sa" data-id="pyramid_cad_sa" data-class="composite_whole" data-parent="block_spatial_attention">
+            <polygon id="poly_csa_base" data-id="poly_csa_base" data-class="composite_part" data-parent="pyramid_cad_sa" points="364,254 408,254 400,286 372,286" fill="#F8D7DA" stroke="#C97A7E" stroke-width="1"/>
+            <rect id="layer_csa_1" data-id="layer_csa_1" data-class="composite_part" data-parent="pyramid_cad_sa" x="367" y="258" width="38" height="5" rx="1" fill="#E8B4B8" stroke="#A94442" stroke-width="0.5"/>
+            <rect id="layer_csa_2" data-id="layer_csa_2" data-class="composite_part" data-parent="pyramid_cad_sa" x="370" y="265" width="32" height="5" rx="1" fill="#E8B4B8" stroke="#A94442" stroke-width="0.5"/>
+            <rect id="layer_csa_3" data-id="layer_csa_3" data-class="composite_part" data-parent="pyramid_cad_sa" x="373" y="272" width="26" height="5" rx="1" fill="#E8B4B8" stroke="#A94442" stroke-width="0.5"/>
+            <rect id="layer_csa_4" data-id="layer_csa_4" data-class="composite_part" data-parent="pyramid_cad_sa" x="376" y="279" width="20" height="5" rx="1" fill="#E8B4B8" stroke="#A94442" stroke-width="0.5"/>
+        </g>
+        <text id="lbl_cad_feat_sa" data-id="lbl_cad_feat_sa" data-class="text_node" data-parent="block_spatial_attention" x="386" y="300" font-family="Arial, sans-serif" font-size="9" font-weight="bold" text-anchor="middle" fill="#000">CAD Features</text>
+    </g>
+
+    <!-- Channel Attention Sub-block -->
+    <g id="block_channel_attention" data-id="block_channel_attention" data-class="block" data-parent="root">
+        <rect id="bg_channel_att" data-id="bg_channel_att" data-class="child_node" data-parent="block_channel_attention" x="445" y="27" width="145" height="295" rx="4" fill="#FFFFFF" stroke="#8EB9F5" stroke-width="1.5" stroke-dasharray="3,3"/>
+        <text id="title_channel_att" data-id="title_channel_att" data-class="text_node" data-parent="block_channel_attention" x="518" y="40" font-family="Arial, sans-serif" font-size="10" font-weight="bold" font-style="italic" text-anchor="middle" fill="#000">Channel Attention</text>
+
+        <!-- CAD Enhanced Visual Features Label -->
+        <text id="lbl_enh_vis_feat_top" data-id="lbl_enh_vis_feat_top" data-class="text_node" data-parent="block_channel_attention" x="518" y="52" font-family="Arial, sans-serif" font-size="7.5" font-weight="bold" text-anchor="middle" fill="#000">CAD Enhanced Visual Features</text>
+
+        <!-- CAD Enhanced Visual Features Pyramid Top -->
+        <g id="pyramid_enh_top" data-id="pyramid_enh_top" data-class="composite_whole" data-parent="block_channel_attention">
+            <polygon id="poly_enh_top" data-id="poly_enh_top" data-class="composite_part" data-parent="pyramid_enh_top" points="494,58 538,58 530,86 502,86" fill="#FDE8D7" stroke="#E0A96D" stroke-width="1"/>
+            <rect id="layer_enh_1" data-id="layer_enh_1" data-class="composite_part" data-parent="pyramid_enh_top" x="497" y="61" width="38" height="5" rx="1" fill="#F8C49E" stroke="#D38B5D" stroke-width="0.5"/>
+            <rect id="layer_enh_2" data-id="layer_enh_2" data-class="composite_part" data-parent="pyramid_enh_top" x="500" y="67" width="32" height="5" rx="1" fill="#F8C49E" stroke="#D38B5D" stroke-width="0.5"/>
+            <rect id="layer_enh_3" data-id="layer_enh_3" data-class="composite_part" data-parent="pyramid_enh_top" x="503" y="73" width="26" height="5" rx="1" fill="#F8C49E" stroke="#D38B5D" stroke-width="0.5"/>
+            <rect id="layer_enh_4" data-id="layer_enh_4" data-class="composite_part" data-parent="pyramid_enh_top" x="506" y="79" width="20" height="5" rx="1" fill="#F8C49E" stroke="#D38B5D" stroke-width="0.5"/>
+        </g>
+
+        <!-- Operator multiply top -->
+        <g id="op_mult_ca_top" data-id="op_mult_ca_top" data-class="child_node" data-parent="block_channel_attention">
+            <circle id="circ_op_mca_top" data-id="circ_op_mca_top" data-class="composite_part" data-parent="op_mult_ca_top" cx="516" cy="102" r="5" fill="#FFF" stroke="#000" stroke-width="1"/>
+            <circle id="dot_op_mca_top" data-id="dot_op_mca_top" data-class="composite_part" data-parent="op_mult_ca_top" cx="516" cy="102" r="1.5" fill="#000"/>
+        </g>
+
+        <!-- Sigmoid box -->
+        <rect id="box_ca_sigmoid" data-id="box_ca_sigmoid" data-class="child_node" data-parent="block_channel_attention" x="486" y="119" width="60" height="19" rx="4" fill="#FFF" stroke="#6c757d" stroke-width="1"/>
+        <text id="text_ca_sigmoid" data-id="text_ca_sigmoid" data-class="child_node" data-parent="block_channel_attention" x="516" y="132" font-family="Arial, sans-serif" font-size="8" text-anchor="middle" fill="#000">Sigmoid</text>
+
+        <!-- Operator addition -->
+        <g id="op_add_ca" data-id="op_add_ca" data-class="child_node" data-parent="block_channel_attention">
+            <circle id="circ_op_add_ca" data-id="circ_op_add_ca" data-class="composite_part" data-parent="op_add_ca" cx="516" cy="153" r="6" fill="#FFF" stroke="#000" stroke-width="1"/>
+            <text id="text_op_add_ca" data-id="text_op_add_ca" data-class="composite_part" data-parent="op_add_ca" x="516" y="156" font-family="Arial, sans-serif" font-size="9" font-weight="bold" text-anchor="middle" fill="#000">+</text>
+        </g>
+
+        <!-- MLP Boxes -->
+        <rect id="box_ca_mlp1" data-id="box_ca_mlp1" data-class="child_node" data-parent="block_channel_attention" x="466" y="169" width="36" height="18" rx="3" fill="#FFF" stroke="#6c757d" stroke-width="1"/>
+        <text id="text_ca_mlp1" data-id="text_ca_mlp1" data-class="child_node" data-parent="block_channel_attention" x="484" y="182" font-family="Arial, sans-serif" font-size="8" text-anchor="middle" fill="#000">MLP</text>
+
+        <rect id="box_ca_mlp2" data-id="box_ca_mlp2" data-class="child_node" data-parent="block_channel_attention" x="530" y="169" width="36" height="18" rx="3" fill="#FFF" stroke="#6c757d" stroke-width="1"/>
+        <text id="text_ca_mlp2" data-id="text_ca_mlp2" data-class="child_node" data-parent="block_channel_attention" x="548" y="182" font-family="Arial, sans-serif" font-size="8" text-anchor="middle" fill="#000">MLP</text>
+        <text id="text_ca_share" data-id="text_ca_share" data-class="text_node" data-parent="block_channel_attention" x="516" y="182" font-family="Arial, sans-serif" font-size="7" font-style="italic" text-anchor="middle" fill="#555">share</text>
+
+        <!-- MaxPool 1D & AvgPool 1D -->
+        <rect id="box_ca_maxpool" data-id="box_ca_maxpool" data-class="child_node" data-parent="block_channel_attention" x="462" y="200" width="44" height="24" rx="3" fill="#FFF" stroke="#6c757d" stroke-width="1"/>
+        <text id="text_ca_mp1" data-id="text_ca_mp1" data-class="child_node" data-parent="block_channel_attention" x="484" y="210" font-family="Arial, sans-serif" font-size="7" text-anchor="middle" fill="#000">MaxPool</text>
+        <text id="text_ca_mp2" data-id="text_ca_mp2" data-class="child_node" data-parent="block_channel_attention" x="484" y="220" font-family="Arial, sans-serif" font-size="7" text-anchor="middle" fill="#000">1D</text>
+
+        <rect id="box_ca_avgpool" data-id="box_ca_avgpool" data-class="child_node" data-parent="block_channel_attention" x="526" y="200" width="44" height="24" rx="3" fill="#FFF" stroke="#6c757d" stroke-width="1"/>
+        <text id="text_ca_ap1" data-id="text_ca_ap1" data-class="child_node" data-parent="block_channel_attention" x="548" y="210" font-family="Arial, sans-serif" font-size="7" text-anchor="middle" fill="#000">AvgPool</text>
+        <text id="text_ca_ap2" data-id="text_ca_ap2" data-class="child_node" data-parent="block_channel_attention" x="548" y="220" font-family="Arial, sans-serif" font-size="7" text-anchor="middle" fill="#000">1D</text>
+
+        <!-- Operator multiply middle -->
+        <g id="op_mult_ca_mid" data-id="op_mult_ca_mid" data-class="child_node" data-parent="block_channel_attention">
+            <circle id="circ_op_mca_mid" data-id="circ_op_mca_mid" data-class="composite_part" data-parent="op_mult_ca_mid" cx="516" cy="239" r="5" fill="#FFF" stroke="#000" stroke-width="1"/>
+            <circle id="dot_op_mca_mid" data-id="dot_op_mca_mid" data-class="composite_part" data-parent="op_mult_ca_mid" cx="516" cy="239" r="1.5" fill="#000"/>
+        </g>
+
+        <!-- Visual Features Pyramid Bottom -->
+        <g id="pyramid_vis_ca" data-id="pyramid_vis_ca" data-class="composite_whole" data-parent="block_channel_attention">
+            <polygon id="poly_vca_base" data-id="poly_vca_base" data-class="composite_part" data-parent="pyramid_vis_ca" points="494,264 538,264 530,296 502,296" fill="#DDE2E6" stroke="#6c757d" stroke-width="1"/>
+            <rect id="layer_vca_1" data-id="layer_vca_1" data-class="composite_part" data-parent="pyramid_vis_ca" x="497" y="268" width="38" height="5" rx="1" fill="#CAD1D7" stroke="#6c757d" stroke-width="0.5"/>
+            <rect id="layer_vca_2" data-id="layer_vca_2" data-class="composite_part" data-parent="pyramid_vis_ca" x="500" y="275" width="32" height="5" rx="1" fill="#CAD1D7" stroke="#6c757d" stroke-width="0.5"/>
+            <rect id="layer_vca_3" data-id="layer_vca_3" data-class="composite_part" data-parent="pyramid_vis_ca" x="503" y="282" width="26" height="5" rx="1" fill="#CAD1D7" stroke="#6c757d" stroke-width="0.5"/>
+            <rect id="layer_vca_4" data-id="layer_vca_4" data-class="composite_part" data-parent="pyramid_vis_ca" x="506" y="289" width="20" height="5" rx="1" fill="#CAD1D7" stroke="#6c757d" stroke-width="0.5"/>
+        </g>
+        <text id="lbl_vis_feat_ca" data-id="lbl_vis_feat_ca" data-class="text_node" data-parent="block_channel_attention" x="560" y="298" font-family="Arial, sans-serif" font-size="7.5" font-weight="bold" text-anchor="middle" fill="#000">Visual Features</text>
+    </g>
+
+    <!-- CAD Dynamic Query Module -->
+    <!-- Density Init Sub-block -->
+    <g id="block_density_init" data-id="block_density_init" data-class="block" data-parent="root">
+        <rect id="bg_density_init" data-id="bg_density_init" data-class="child_node" data-parent="block_density_init" x="600" y="42" width="188" height="124" rx="4" fill="#FFF" stroke="#8EB9F5" stroke-width="1.5" stroke-dasharray="3,3"/>
+        <text id="title_density_init" data-id="title_density_init" data-class="text_node" data-parent="block_density_init" x="640" y="54" font-family="Arial, sans-serif" font-size="9" font-weight="bold" font-style="italic" fill="#000">Density Init</text>
+
+        <!-- CAD Features Pyramid -->
+        <g id="pyramid_cad_di" data-id="pyramid_cad_di" data-class="composite_whole" data-parent="block_density_init">
+            <polygon id="poly_cdi_base" data-id="poly_cdi_base" data-class="composite_part" data-parent="pyramid_cad_di" points="610,58 688,58 676,108 622,108" fill="#F8D7DA" stroke="#C97A7E" stroke-width="1"/>
+            <rect id="layer_cdi_1" data-id="layer_cdi_1" data-class="composite_part" data-parent="pyramid_cad_di" x="614" y="63" width="70" height="8" rx="2" fill="#E8B4B8" stroke="#A94442" stroke-width="0.5"/>
+            <rect id="layer_cdi_2" data-id="layer_cdi_2" data-class="composite_part" data-parent="pyramid_cad_di" x="618" y="75" width="62" height="8" rx="2" fill="#E8B4B8" stroke="#A94442" stroke-width="0.5"/>
+            <rect id="layer_cdi_3" data-id="layer_cdi_3" data-class="composite_part" data-parent="pyramid_cad_di" x="622" y="87" width="54" height="8" rx="2" fill="#E8B4B8" stroke="#A94442" stroke-width="0.5"/>
+            <rect id="layer_cdi_4" data-id="layer_cdi_4" data-class="composite_part" data-parent="pyramid_cad_di" x="626" y="97" width="46" height="8" rx="2" fill="#E8B4B8" stroke="#A94442" stroke-width="0.5"/>
+        </g>
+        <text id="lbl_cad_feat_di" data-id="lbl_cad_feat_di" data-class="text_node" data-parent="block_density_init" x="650" y="120" font-family="Arial, sans-serif" font-size="8" font-weight="bold" text-anchor="middle" fill="#000">CAD Features</text>
+
+        <!-- Top K box -->
+        <rect id="box_top_k" data-id="box_top_k" data-class="child_node" data-parent="block_density_init" x="628" y="132" width="44" height="18" rx="3" fill="#FFF" stroke="#6c757d" stroke-width="1"/>
+        <text id="text_top_k" data-id="text_top_k" data-class="child_node" data-parent="block_density_init" x="650" y="144" font-family="Arial, sans-serif" font-size="8" text-anchor="middle" fill="#000">Top K</text>
+
+        <!-- Dynamic Queries circle row -->
+        <g id="row_dyn_queries" data-id="row_dyn_queries" data-class="child_node" data-parent="block_density_init">
+            <rect id="bg_dyn_q" data-id="bg_dyn_q" data-class="composite_part" data-parent="row_dyn_queries" x="702" y="65" width="65" height="14" rx="4" fill="#FFF" stroke="#6c757d" stroke-width="1"/>
+            <circle id="dot_dq_1" data-id="dot_dq_1" data-class="composite_part" data-parent="row_dyn_queries" cx="712" cy="72" r="2.5" fill="#FFF" stroke="#000" stroke-width="0.8"/>
+            <circle id="dot_dq_2" data-id="dot_dq_2" data-class="composite_part" data-parent="row_dyn_queries" cx="724" cy="72" r="2.5" fill="#FFF" stroke="#000" stroke-width="0.8"/>
+            <circle id="dot_dq_3" data-id="dot_dq_3" data-class="composite_part" data-parent="row_dyn_queries" cx="736" cy="72" r="2.5" fill="#FFF" stroke="#000" stroke-width="0.8"/>
+            <circle id="dot_dq_4" data-id="dot_dq_4" data-class="composite_part" data-parent="row_dyn_queries" cx="748" cy="72" r="2.5" fill="#FFF" stroke="#000" stroke-width="0.8"/>
+            <circle id="dot_dq_5" data-id="dot_dq_5" data-class="composite_part" data-parent="row_dyn_queries" cx="760" cy="72" r="2.5" fill="#FFF" stroke="#000" stroke-width="0.8"/>
+        </g>
+        <text id="lbl_dyn_queries" data-id="lbl_dyn_queries" data-class="text_node" data-parent="block_density_init" x="734" y="89" font-family="Arial, sans-serif" font-size="8" font-weight="bold" text-anchor="middle" fill="#000">Dynamic Queries</text>
+
+        <!-- Cross Attention box -->
+        <rect id="box_cross_att" data-id="box_cross_att" data-class="child_node" data-parent="block_density_init" x="700" y="132" width="70" height="18" rx="3" fill="#FFF" stroke="#6c757d" stroke-width="1"/>
+        <text id="text_cross_att" data-id="text_cross_att" data-class="child_node" data-parent="block_density_init" x="735" y="144" font-family="Arial, sans-serif" font-size="8" text-anchor="middle" fill="#000">Cross Attention</text>
+    </g>
+
+    <!-- Text Init Sub-block -->
+    <g id="block_text_init" data-id="block_text_init" data-class="block" data-parent="root">
+        <rect id="bg_text_init" data-id="bg_text_init" data-class="child_node" data-parent="block_text_init" x="600" y="177" width="188" height="142" rx="4" fill="#FFF" stroke="#8EB9F5" stroke-width="1.5" stroke-dasharray="3,3"/>
+        <text id="title_text_init" data-id="title_text_init" data-class="text_node" data-parent="block_text_init" x="635" y="190" font-family="Arial, sans-serif" font-size="9" font-weight="bold" font-style="italic" fill="#000">Text Init</text>
+
+        <!-- Text Feature Ft Bar Bottom -->
+        <rect id="bar_tf_ti" data-id="bar_tf_ti" data-class="child_node" data-parent="block_text_init" x="618" y="270" width="65" height="12" rx="3" fill="#F8D7DA" stroke="#D9534F" stroke-width="1"/>
+        <text id="lbl_tf_ti" data-id="lbl_tf_ti" data-class="text_node" data-parent="block_text_init" x="650" y="294" font-family="Arial, sans-serif" font-size="8" font-weight="bold" text-anchor="middle" fill="#000">Text Feature <tspan font-family="Georgia, serif" font-weight="normal">F<tspan font-size="0.65em" baseline-shift="sub">t</tspan></tspan></text>
+
+        <!-- Linear box -->
+        <rect id="box_ti_linear" data-id="box_ti_linear" data-class="child_node" data-parent="block_text_init" x="626" y="238" width="50" height="16" rx="3" fill="#FFF" stroke="#6c757d" stroke-width="1"/>
+        <text id="text_ti_linear" data-id="text_ti_linear" data-class="child_node" data-parent="block_text_init" x="651" y="250" font-family="Arial, sans-serif" font-size="8" text-anchor="middle" fill="#000">Linear</text>
+
+        <!-- GELU box -->
+        <rect id="box_ti_gelu" data-id="box_ti_gelu" data-class="child_node" data-parent="block_text_init" x="633" y="209" width="36" height="16" rx="3" fill="#FFF" stroke="#6c757d" stroke-width="1"/>
+        <text id="text_ti_gelu" data-id="text_ti_gelu" data-class="child_node" data-parent="block_text_init" x="651" y="221" font-family="Arial, sans-serif" font-size="8" text-anchor="middle" fill="#000">GELU</text>
+
+        <!-- Matrix multiple operators -->
+        <g id="op_mm_ti_top" data-id="op_mm_ti_top" data-class="child_node" data-parent="block_text_init">
+            <circle id="circ_op_mm1" data-id="circ_op_mm1" data-class="composite_part" data-parent="op_mm_ti_top" cx="735" cy="188" r="5" fill="#FFF" stroke="#000" stroke-width="1"/>
+            <text id="text_op_mm1" data-id="text_op_mm1" data-class="composite_part" data-parent="op_mm_ti_top" x="735" y="191" font-family="Arial, sans-serif" font-size="7" font-weight="bold" text-anchor="middle" fill="#000">×</text>
+        </g>
+        <text id="lbl_text_weight" data-id="lbl_text_weight" data-class="text_node" data-parent="block_text_init" x="735" y="206" font-family="Arial, sans-serif" font-size="8" font-weight="bold" font-style="italic" text-anchor="middle" fill="#000">Text Weight</text>
+
+        <g id="op_mm_ti_bot" data-id="op_mm_ti_bot" data-class="child_node" data-parent="block_text_init">
+            <circle id="circ_op_mm2" data-id="circ_op_mm2" data-class="composite_part" data-parent="op_mm_ti_bot" cx="735" cy="221" r="5" fill="#FFF" stroke="#000" stroke-width="1"/>
+            <text id="text_op_mm2" data-id="text_op_mm2" data-class="composite_part" data-parent="op_mm_ti_bot" x="735" y="224" font-family="Arial, sans-serif" font-size="7" font-weight="bold" text-anchor="middle" fill="#000">×</text>
+        </g>
+
+        <!-- Init Queries circle row -->
+        <g id="row_init_queries" data-id="row_init_queries" data-class="child_node" data-parent="block_text_init">
+            <rect id="bg_init_q" data-id="bg_init_q" data-class="composite_part" data-parent="row_init_queries" x="704" y="267" width="62" height="14" rx="4" fill="#FFF" stroke="#6c757d" stroke-width="1"/>
+            <circle id="dot_iq_1" data-id="dot_iq_1" data-class="composite_part" data-parent="row_init_queries" cx="713" cy="274" r="2.5" fill="#5CB85C"/>
+            <circle id="dot_iq_2" data-id="dot_iq_2" data-class="composite_part" data-parent="row_init_queries" cx="725" cy="274" r="2.5" fill="#D9534F"/>
+            <circle id="dot_iq_3" data-id="dot_iq_3" data-class="composite_part" data-parent="row_init_queries" cx="737" cy="274" r="2.5" fill="#3B71CA"/>
+            <circle id="dot_iq_4" data-id="dot_iq_4" data-class="composite_part" data-parent="row_init_queries" cx="749" cy="274" r="2.5" fill="#F0AD4E"/>
+        </g>
+        <text id="lbl_init_queries" data-id="lbl_init_queries" data-class="text_node" data-parent="block_text_init" x="735" y="294" font-family="Arial, sans-serif" font-size="8" font-weight="bold" text-anchor="middle" fill="#000">Init Queries</text>
+    </g>
+
+    <!-- Right Column: Localization Decoder & Output -->
+    <!-- Localization Decoder Box -->
+    <g id="box_loc_decoder" data-id="box_loc_decoder" data-class="standalone_node" data-parent="root">
+        <rect id="rect_loc_dec" data-id="rect_loc_dec" data-class="composite_part" data-parent="box_loc_decoder" x="796" y="27" width="90" height="95" rx="8" fill="#FFF" stroke="#333" stroke-width="1.2"/>
+        <text id="text_loc_dec1" data-id="text_loc_dec1" data-class="composite_part" data-parent="box_loc_decoder" x="841" y="70" font-family="Arial, sans-serif" font-size="9" font-weight="bold" text-anchor="middle" fill="#000">Localization</text>
+        <text id="text_loc_dec2" data-id="text_loc_dec2" data-class="composite_part" data-parent="box_loc_decoder" x="841" y="82" font-family="Arial, sans-serif" font-size="9" font-weight="bold" text-anchor="middle" fill="#000">Decoder</text>
+    </g>
+
+    <!-- Prediction Raster -->
+    <g id="raster_prediction" data-id="raster_prediction" data-class="raster_node"><image href="rasters/CVPR_2025_arch00968/crop_raster_prediction.png" xlink:href="rasters/CVPR_2025_arch00968/crop_raster_prediction.png" x="914" y="55" width="80" height="75" preserveAspectRatio="xMidYMid meet" /></g>
+    <text id="lbl_prediction" data-id="lbl_prediction" data-class="text_node" data-parent="root" x="938" y="38" font-family="Arial, sans-serif" font-size="10" font-weight="bold" font-style="italic" text-anchor="middle" fill="#000">Prediction</text>
+
+    <!-- Loss loc text node -->
+    <text id="node_loss_loc" data-id="node_loss_loc" data-class="standalone_node" data-parent="root" x="946" y="168" font-family="'Times New Roman', Georgia, serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#333">
+        <tspan font-style="italic">L</tspan><tspan font-size="0.65em" baseline-shift="sub">loc</tspan>
+    </text>
+
+    <!-- Right bottom inputs: CAD Enhanced Visual Features & Text Feature -->
+    <g id="box_right_inputs" data-id="box_right_inputs" data-class="standalone_node" data-parent="root">
+        <rect id="rect_right_inputs" data-id="rect_right_inputs" data-class="composite_part" data-parent="box_right_inputs" x="796" y="140" width="90" height="147" rx="8" fill="#FFF" stroke="#333" stroke-width="1"/>
+        
+        <!-- Enhanced visual pyramid -->
+        <polygon id="poly_r_enh" data-id="poly_r_enh" data-class="composite_part" data-parent="box_right_inputs" points="806,150 876,150 864,204 818,204" fill="#FDE8D7" stroke="#E0A96D" stroke-width="1"/>
+        <rect id="layer_re_1" data-id="layer_re_1" data-class="composite_part" data-parent="box_right_inputs" x="810" y="156" width="62" height="7" rx="1.5" fill="#F8C49E" stroke="#D38B5D" stroke-width="0.5"/>
+        <rect id="layer_re_2" data-id="layer_re_2" data-class="composite_part" data-parent="box_right_inputs" x="814" y="168" width="54" height="7" rx="1.5" fill="#F8C49E" stroke="#D38B5D" stroke-width="0.5"/>
+        <rect id="layer_re_3" data-id="layer_re_3" data-class="composite_part" data-parent="box_right_inputs" x="818" y="180" width="46" height="7" rx="1.5" fill="#F8C49E" stroke="#D38B5D" stroke-width="0.5"/>
+        <rect id="layer_re_4" data-id="layer_re_4" data-class="composite_part" data-parent="box_right_inputs" x="822" y="192" width="38" height="7" rx="1.5" fill="#F8C49E" stroke="#D38B5D" stroke-width="0.5"/>
+        
+        <text id="lbl_re_vis1" data-id="lbl_re_vis1" data-class="composite_part" data-parent="box_right_inputs" x="841" y="213" font-family="Arial, sans-serif" font-size="7.5" font-weight="bold" text-anchor="middle" fill="#000">CAD Enhanced</text>
+        <text id="lbl_re_vis2" data-id="lbl_re_vis2" data-class="composite_part" data-parent="box_right_inputs" x="841" y="222" font-family="Arial, sans-serif" font-size="7.5" font-weight="bold" text-anchor="middle" fill="#000">Visual Features</text>
+
+        <!-- 3 text bars -->
+        <rect id="bar_rt_red" data-id="bar_rt_red" data-class="composite_part" data-parent="box_right_inputs" x="821" y="233" width="6" height="34" rx="2" fill="#F8D7DA" stroke="#D9534F" stroke-width="1"/>
+        <rect id="bar_rt_green" data-id="bar_rt_green" data-class="composite_part" data-parent="box_right_inputs" x="838" y="233" width="6" height="34" rx="2" fill="#D4EDDA" stroke="#5CB85C" stroke-width="1"/>
+        <rect id="bar_rt_blue" data-id="bar_rt_blue" data-class="composite_part" data-parent="box_right_inputs" x="855" y="233" width="6" height="34" rx="2" fill="#CCE5FF" stroke="#3B71CA" stroke-width="1"/>
+
+        <text id="lbl_rt_text" data-id="lbl_rt_text" data-class="composite_part" data-parent="box_right_inputs" x="841" y="278" font-family="Arial, sans-serif" font-size="8" font-weight="bold" text-anchor="middle" fill="#000">Text Feature</text>
+    </g>
+
+    <!-- Legend (Bottom Right) -->
+    <g id="box_legend" data-id="box_legend" data-class="standalone_node" data-parent="root">
+        <rect id="rect_legend_bg" data-id="rect_legend_bg" data-class="composite_part" data-parent="box_legend" x="900" y="200" width="98" height="84" rx="4" fill="#EAF3E8" stroke="#D0E3CD" stroke-width="1"/>
+        
+        <!-- Addition -->
+        <circle id="leg_circ_add" data-id="leg_circ_add" data-class="composite_part" data-parent="box_legend" cx="911" cy="214" r="4.5" fill="#FFF" stroke="#000" stroke-width="0.8"/>
+        <text id="leg_txt_add_icon" data-id="leg_txt_add_icon" data-class="composite_part" data-parent="box_legend" x="911" y="217" font-family="Arial, sans-serif" font-size="8" text-anchor="middle">+</text>
+        <text id="leg_txt_add_lbl" data-id="leg_txt_add_lbl" data-class="composite_part" data-parent="box_legend" x="924" y="217" font-family="Arial, sans-serif" font-size="7.5" font-style="italic" fill="#000">Addition</text>
+
+        <!-- Concatenate -->
+        <circle id="leg_circ_cat" data-id="leg_circ_cat" data-class="composite_part" data-parent="box_legend" cx="911" cy="233" r="4.5" fill="#FFF" stroke="#000" stroke-width="0.8"/>
+        <text id="leg_txt_cat_icon" data-id="leg_txt_cat_icon" data-class="composite_part" data-parent="box_legend" x="911" y="235" font-family="Arial, sans-serif" font-size="7" font-weight="bold" text-anchor="middle">C</text>
+        <text id="leg_txt_cat_lbl" data-id="leg_txt_cat_lbl" data-class="composite_part" data-parent="box_legend" x="924" y="236" font-family="Arial, sans-serif" font-size="7.5" font-style="italic" fill="#000">Concatenate</text>
+
+        <!-- Element-wise multiple -->
+        <circle id="leg_circ_ew" data-id="leg_circ_ew" data-class="composite_part" data-parent="box_legend" cx="911" cy="252" r="4.5" fill="#FFF" stroke="#000" stroke-width="0.8"/>
+        <circle id="leg_dot_ew" data-id="leg_dot_ew" data-class="composite_part" data-parent="box_legend" cx="911" cy="252" r="1.5" fill="#000"/>
+        <text id="leg_txt_ew_lbl1" data-id="leg_txt_ew_lbl1" data-class="composite_part" data-parent="box_legend" x="924" y="250" font-family="Arial, sans-serif" font-size="7.5" font-style="italic" fill="#000">Element-wise</text>
+        <text id="leg_txt_ew_lbl2" data-id="leg_txt_ew_lbl2" data-class="composite_part" data-parent="box_legend" x="924" y="259" font-family="Arial, sans-serif" font-size="7.5" font-style="italic" fill="#000">multiple</text>
+
+        <!-- Matrix multiple -->
+        <circle id="leg_circ_mm" data-id="leg_circ_mm" data-class="composite_part" data-parent="box_legend" cx="911" cy="272" r="4.5" fill="#FFF" stroke="#000" stroke-width="0.8"/>
+        <text id="leg_txt_mm_icon" data-id="leg_txt_mm_icon" data-class="composite_part" data-parent="box_legend" x="911" y="275" font-family="Arial, sans-serif" font-size="7" font-weight="bold" text-anchor="middle">×</text>
+        <text id="leg_txt_mm_lbl" data-id="leg_txt_mm_lbl" data-class="composite_part" data-parent="box_legend" x="924" y="275" font-family="Arial, sans-serif" font-size="7.5" font-style="italic" fill="#000">Matrix multiple</text>
+    </g>
+
+    <!-- Bottom Flow Legend -->
+    <text id="leg_vis_flow" data-id="leg_vis_flow" data-class="text_node" data-parent="root" x="831" y="310" font-family="Arial, sans-serif" font-size="8.5" font-style="italic" font-weight="bold" text-anchor="middle" fill="#000">Visual flow</text>
+    <path id="arrow_leg_vis" data-id="arrow_leg_vis" data-class="edge" data-source="leg_vis_flow" data-target="leg_vis_flow" d="M 806 317 L 866 317" stroke="#3B71CA" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+
+    <text id="leg_text_flow" data-id="leg_text_flow" data-class="text_node" data-parent="root" x="898" y="310" font-family="Arial, sans-serif" font-size="8.5" font-style="italic" font-weight="bold" text-anchor="middle" fill="#000">Text flow</text>
+    <path id="arrow_leg_txt" data-id="arrow_leg_txt" data-class="edge" data-source="leg_text_flow" data-target="leg_text_flow" d="M 878 317 L 928 317" stroke="#D9534F" stroke-width="1.5" marker-end="url(#arrow-red)"/>
+
+    <text id="leg_cad_flow" data-id="leg_cad_flow" data-class="text_node" data-parent="root" x="961" y="310" font-family="Arial, sans-serif" font-size="8.5" font-style="italic" font-weight="bold" text-anchor="middle" fill="#000">CAD flow</text>
+    <path id="arrow_leg_cad" data-id="arrow_leg_cad" data-class="edge" data-source="leg_cad_flow" data-target="leg_cad_flow" d="M 940 317 L 986 317" stroke="#5CB85C" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+
+    <!-- ================= EDGES & ROUTING ================= -->
+
+    <!-- Left Input to Backbone -->
+    <path id="edge_expr_to_bb" data-id="edge_expr_to_bb" data-class="edge" data-source="box_referring_expr" data-target="box_backbone" d="M 55 85 L 55 110" stroke="#D9534F" stroke-width="1.5" marker-end="url(#arrow-red)"/>
+    <path id="edge_img_to_bb" data-id="edge_img_to_bb" data-class="edge" data-source="raster_query_image" data-target="box_backbone" d="M 55 208 L 55 186" stroke="#3B71CA" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+
+    <!-- Backbone Out Visual flow (blue) -->
+    <path id="edge_bb_to_vis_left" data-id="edge_bb_to_vis_left" data-class="edge" data-source="box_backbone" data-target="pyramid_vis_left" d="M 109 135 L 126 135 L 126 260 L 133 260" fill="none" stroke="#3B71CA" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+    <path id="edge_bb_to_vis_ca" data-id="edge_bb_to_vis_ca" data-class="edge" data-source="box_backbone" data-target="pyramid_vis_ca" d="M 126 260 L 126 303 L 518 303 L 518 298" fill="none" stroke="#3B71CA" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+
+    <!-- Backbone Out Text flow (red) -->
+    <path id="edge_bb_to_bars_tf" data-id="edge_bb_to_bars_tf" data-class="edge" data-source="box_backbone" data-target="bars_text_feat" d="M 117 165 L 117 285 L 247 285" fill="none" stroke="#D9534F" stroke-width="1.2" marker-end="url(#arrow-red)"/>
+
+    <!-- Switch to mult_sim -->
+    <path id="edge_sw_to_mult" data-id="edge_sw_to_mult" data-class="edge" data-source="node_switch" data-target="op_mult_sim" d="M 264 230 L 264 198 L 191 198" fill="none" stroke="#D9534F" stroke-width="1.2" marker-end="url(#arrow-red)"/>
+
+    <!-- Visual feature to mapping to mult_sim -->
+    <path id="edge_vl_to_mapping" data-id="edge_vl_to_mapping" data-class="edge" data-source="pyramid_vis_left" data-target="box_mapping" d="M 168 236 L 168 230" stroke="#333" stroke-width="1.2" marker-end="url(#arrow-black)"/>
+    <path id="edge_mapping_to_mult" data-id="edge_mapping_to_mult" data-class="edge" data-source="box_mapping" data-target="op_mult_sim" d="M 168 213 L 168 198 L 177 198" fill="none" stroke="#333" stroke-width="1.2" marker-end="url(#arrow-black)"/>
+
+    <!-- Mult to Similarity Features to Estimator -->
+    <path id="edge_mult_to_sim_feat" data-id="edge_mult_to_sim_feat" data-class="edge" data-source="op_mult_sim" data-target="node_similarity_features" d="M 184 191 L 184 184" stroke="#333" stroke-width="1.2" marker-end="url(#arrow-black)"/>
+    <path id="edge_sim_feat_to_est" data-id="edge_sim_feat_to_est" data-class="edge" data-source="node_similarity_features" data-target="box_cad_estimator" d="M 184 167 L 184 161" stroke="#333" stroke-width="1.2" marker-end="url(#arrow-black)"/>
+
+    <!-- Estimator Outputs -->
+    <path id="edge_est_to_pred_dens" data-id="edge_est_to_pred_dens" data-class="edge" data-source="box_cad_estimator" data-target="raster_pred_density" d="M 180 117 L 180 97" stroke="#5CB85C" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+    <path id="edge_est_to_cad_pyramid" data-id="edge_est_to_cad_pyramid" data-class="edge" data-source="box_cad_estimator" data-target="pyramid_cad_gen" d="M 215 138 L 238 138" stroke="#5CB85C" stroke-width="1.5" stroke-dasharray="3,3" marker-end="url(#arrow-green)"/>
+
+    <!-- Loss Density Curved Dashed Red Arrows -->
+    <path id="edge_loss_dens_left" data-id="edge_loss_dens_left" data-class="edge" data-source="node_loss_density" data-target="raster_pred_density" d="M 205 25 C 190 20, 180 20, 168 36" fill="none" stroke="#D9534F" stroke-width="1.5" stroke-dasharray="3,3" marker-end="url(#arrow-dash-red)"/>
+    <path id="edge_loss_dens_right" data-id="edge_loss_dens_right" data-class="edge" data-source="node_loss_density" data-target="raster_gt_density" d="M 245 25 C 260 20, 270 20, 282 36" fill="none" stroke="#D9534F" stroke-width="1.5" stroke-dasharray="3,3" marker-end="url(#arrow-dash-red)"/>
+
+    <!-- CAD Features (Gen) to Spatial Attention & Density Init (Green flow) -->
+    <path id="edge_cad_gen_to_sa_top" data-id="edge_cad_gen_to_sa_top" data-class="edge" data-source="pyramid_cad_gen" data-target="box_sa_sigmoid" d="M 310 138 L 328 138 L 328 35 L 445 35" fill="none" stroke="#5CB85C" stroke-width="1.5"/>
+    <path id="edge_cad_gen_to_sa_bot" data-id="edge_cad_gen_to_sa_bot" data-class="edge" data-source="pyramid_cad_gen" data-target="pyramid_cad_sa" d="M 328 138 L 328 270 L 362 270" fill="none" stroke="#5CB85C" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+
+    <!-- Spatial Attention internal flow -->
+    <path id="edge_sa_cad_to_pools" data-id="edge_sa_cad_to_pools" data-class="edge" data-source="pyramid_cad_sa" data-target="box_sa_maxpool" d="M 386 254 L 386 220 L 362 220 L 362 202" fill="none" stroke="#5CB85C" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+    <path id="edge_sa_cad_to_pools2" data-id="edge_sa_cad_to_pools2" data-class="edge" data-source="pyramid_cad_sa" data-target="box_sa_avgpool" d="M 386 220 L 412 220 L 412 202" fill="none" stroke="#5CB85C" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+    <path id="edge_sa_mp_to_concat" data-id="edge_sa_mp_to_concat" data-class="edge" data-source="box_sa_maxpool" data-target="circ_sa_concat" d="M 362 172 L 362 153 L 378 153" fill="none" stroke="#5CB85C" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+    <path id="edge_sa_ap_to_concat" data-id="edge_sa_ap_to_concat" data-class="edge" data-source="box_sa_avgpool" data-target="circ_sa_concat" d="M 412 172 L 412 153 L 394 153" fill="none" stroke="#5CB85C" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+    <path id="edge_sa_concat_to_conv" data-id="edge_sa_concat_to_conv" data-class="edge" data-source="circ_sa_concat" data-target="box_sa_conv" d="M 386 145 L 386 134" stroke="#5CB85C" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+    <path id="edge_sa_conv_to_sig" data-id="edge_sa_conv_to_sig" data-class="edge" data-source="box_sa_conv" data-target="box_sa_sigmoid" d="M 386 112 L 386 99" stroke="#5CB85C" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+
+    <!-- Channel Attention internal flow -->
+    <!-- Visual feature up to mult mid -->
+    <path id="edge_ca_vis_to_mult_mid" data-id="edge_ca_vis_to_mult_mid" data-class="edge" data-source="pyramid_vis_ca" data-target="op_mult_ca_mid" d="M 518 264 L 518 246" stroke="#3B71CA" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+    <path id="edge_ca_vis_to_mult_top" data-id="edge_ca_vis_to_mult_top" data-class="edge" data-source="pyramid_vis_ca" data-target="op_mult_ca_top" d="M 518 250 L 576 250 L 576 102 L 523 102" fill="none" stroke="#3B71CA" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+    
+    <path id="edge_ca_mult_to_pools1" data-id="edge_ca_mult_to_pools1" data-class="edge" data-source="op_mult_ca_mid" data-target="box_ca_maxpool" d="M 516 232 L 516 226 L 484 226" fill="none" stroke="#5CB85C" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+    <path id="edge_ca_mult_to_pools2" data-id="edge_ca_mult_to_pools2" data-class="edge" data-source="op_mult_ca_mid" data-target="box_ca_avgpool" d="M 516 226 L 548 226" fill="none" stroke="#5CB85C" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+
+    <!-- Pools to MLPs -->
+    <path id="edge_ca_mp_to_mlp" data-id="edge_ca_mp_to_mlp" data-class="edge" data-source="box_ca_maxpool" data-target="box_ca_mlp1" d="M 484 200 L 484 189" stroke="#5CB85C" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+    <path id="edge_ca_ap_to_mlp" data-id="edge_ca_ap_to_mlp" data-class="edge" data-source="box_ca_mlp2" data-target="box_ca_mlp2" d="M 548 200 L 548 189" stroke="#5CB85C" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+
+    <!-- MLPs to Add -->
+    <path id="edge_ca_mlp1_to_add" data-id="edge_ca_mlp1_to_add" data-class="edge" data-source="box_ca_mlp1" data-target="op_add_ca" d="M 484 169 L 484 153 L 508 153" fill="none" stroke="#5CB85C" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+    <path id="edge_ca_mlp2_to_add" data-id="edge_ca_mlp2_to_add" data-class="edge" data-source="box_ca_mlp2" data-target="op_add_ca" d="M 548 169 L 548 153 L 524 153" fill="none" stroke="#5CB85C" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+
+    <!-- Add to Sigmoid to Mult Top -->
+    <path id="edge_ca_add_to_sig" data-id="edge_ca_add_to_sig" data-class="edge" data-source="op_add_ca" data-target="box_ca_sigmoid" d="M 516 145 L 516 140" stroke="#5CB85C" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+    <path id="edge_ca_sig_to_mult_top" data-id="edge_ca_sig_to_mult_top" data-class="edge" data-source="box_ca_sigmoid" data-target="op_mult_ca_top" d="M 516 119 L 516 109" stroke="#5CB85C" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+    
+    <!-- Mult Top to Enh Vis Feat -->
+    <path id="edge_ca_mult_top_to_enh" data-id="edge_ca_mult_top_to_enh" data-class="edge" data-source="op_mult_ca_top" data-target="pyramid_enh_top" d="M 516 95 L 516 88" stroke="#333" stroke-width="1.5" marker-end="url(#arrow-black)"/>
+
+    <!-- Spatial Sigmoid to Channel Mid Mult -->
+    <path id="edge_sa_sig_to_ca_mult" data-id="edge_sa_sig_to_ca_mult" data-class="edge" data-source="box_sa_sigmoid" data-target="op_mult_ca_mid" d="M 419 80 L 439 80 L 439 239 L 509 239" fill="none" stroke="#5CB85C" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+
+    <!-- Channel Attention to Dynamic Query CAD pyramid (Green flow) -->
+    <path id="edge_ca_to_dq_cad" data-id="edge_ca_to_dq_cad" data-class="edge" data-source="block_channel_attention" data-target="pyramid_cad_di" d="M 445 35 L 646 35 L 646 56" fill="none" stroke="#5CB85C" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+
+    <!-- Dynamic Query: Density Init Internal -->
+    <path id="edge_di_cad_to_topk" data-id="edge_di_cad_to_topk" data-class="edge" data-source="pyramid_cad_di" data-target="box_top_k" d="M 650 108 L 650 130" stroke="#5CB85C" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+    <path id="edge_di_topk_to_crossatt" data-id="edge_di_topk_to_crossatt" data-class="edge" data-source="box_top_k" data-target="box_cross_att" d="M 674 141 L 698 141" stroke="#5CB85C" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+    <path id="edge_di_crossatt_to_dynq" data-id="edge_di_crossatt_to_dynq" data-class="edge" data-source="box_cross_att" data-target="row_dyn_queries" d="M 735 132 L 735 81" stroke="#333" stroke-width="1.5" marker-end="url(#arrow-black)"/>
+    <path id="edge_di_dynq_to_decoder" data-id="edge_di_dynq_to_decoder" data-class="edge" data-source="row_dyn_queries" data-target="box_loc_decoder" d="M 769 72 L 794 72" stroke="#333" stroke-width="1.5" marker-end="url(#arrow-black)"/>
+
+    <!-- Dynamic Query: Text Init Internal -->
+    <path id="edge_ti_tf_to_linear" data-id="edge_ti_tf_to_linear" data-class="edge" data-source="bar_tf_ti" data-target="box_ti_linear" d="M 651 270 L 651 256" stroke="#D9534F" stroke-width="1.2" marker-end="url(#arrow-red)"/>
+    <path id="edge_ti_linear_to_gelu" data-id="edge_ti_linear_to_gelu" data-class="edge" data-source="box_ti_linear" data-target="box_ti_gelu" d="M 651 238 L 651 227" stroke="#D9534F" stroke-width="1.2" marker-end="url(#arrow-red)"/>
+    <path id="edge_ti_gelu_to_mm_bot" data-id="edge_ti_gelu_to_mm_bot" data-class="edge" data-source="box_ti_gelu" data-target="op_mm_ti_bot" d="M 671 217 L 728 217" stroke="#D9534F" stroke-width="1.2" marker-end="url(#arrow-red)"/>
+    <path id="edge_ti_tf_to_mm_top" data-id="edge_ti_tf_to_mm_top" data-class="edge" data-source="bar_tf_ti" data-target="op_mm_ti_top" d="M 618 276 L 609 276 L 609 188 L 728 188" fill="none" stroke="#D9534F" stroke-width="1.2" marker-end="url(#arrow-red)"/>
+
+    <path id="edge_ti_iq_to_mm_bot" data-id="edge_ti_iq_to_mm_bot" data-class="edge" data-source="row_init_queries" data-target="op_mm_ti_bot" d="M 735 267 L 735 228" stroke="#333" stroke-width="1.2" marker-end="url(#arrow-black)"/>
+    <path id="edge_ti_mm_bot_to_top" data-id="edge_ti_mm_bot_to_top" data-class="edge" data-source="op_mm_ti_bot" data-target="op_mm_ti_top" d="M 735 214 L 735 195" stroke="#333" stroke-width="1.2" marker-end="url(#arrow-black)"/>
+    <path id="edge_ti_mm_top_to_crossatt" data-id="edge_ti_mm_top_to_crossatt" data-class="edge" data-source="op_mm_ti_top" data-target="box_cross_att" d="M 735 181 L 735 152" stroke="#D9534F" stroke-width="1.2" marker-end="url(#arrow-red)"/>
+
+    <!-- Right Side: Decoder Connections -->
+    <path id="edge_r_inp_to_dec" data-id="edge_r_inp_to_dec" data-class="edge" data-source="box_right_inputs" data-target="box_loc_decoder" d="M 841 140 L 841 124" stroke="#333" stroke-width="1.5" marker-end="url(#arrow-black)"/>
+    <path id="edge_dec_to_pred" data-id="edge_dec_to_pred" data-class="edge" data-source="box_loc_decoder" data-target="raster_prediction" d="M 888 72 L 896 72" stroke="#333" stroke-width="1.5" marker-end="url(#arrow-black)"/>
+
+    <!-- Loss Loc Downward Dashed Red Arrow -->
+    <path id="edge_pred_to_loss_loc" data-id="edge_pred_to_loss_loc" data-class="edge" data-source="raster_prediction" data-target="node_loss_loc" d="M 946 122 L 946 154" stroke="#D9534F" stroke-width="1.5" stroke-dasharray="3,3" marker-end="url(#arrow-dash-red)"/>
+
+</svg>

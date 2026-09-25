@@ -1,0 +1,80 @@
+/* Sticky contents bar (same design as costs.html) for Ablations. */
+/* ---- The contents bar ---- */
+.pg-toc-sentinel { height: 1px; }
+.pg-toc {
+  position: sticky;
+  top: 66px;
+  z-index: 20;
+  margin: 26px 0 0;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: 5px 5px 0 var(--ink);
+  overflow: hidden;
+  transition: border-radius 0.25s, box-shadow 0.25s;
+}
+.pg-toc.is-stuck { border-radius: 0 0 var(--radius-md) var(--radius-md); box-shadow: 0 6px 18px -8px rgba(26, 24, 21, 0.35); }
+.pg-toc-inner { display: flex; align-items: stretch; gap: 0; }
+.pg-toc-title {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px 16px;
+  border-right: 1.5px solid var(--line-strong);
+  background: var(--banana-soft);
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+.pg-toc-title small { font-family: var(--font-mono); font-size: var(--fs-micro); font-weight: 400; color: var(--ink-soft); }
+.pg-toc-list { flex: 1; display: flex; overflow-x: auto; scrollbar-width: thin; }
+.pg-toc-list a {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  padding: 10px 14px;
+  border-right: 1px solid var(--line);
+  font-size: var(--fs-xs);
+  line-height: 1.35;
+  color: var(--ink-soft);
+  transition: background var(--dur-fast), color var(--dur-fast);
+}
+.pg-toc-list a:hover { background: var(--bg-alt); color: var(--ink); }
+.pg-toc-list a b {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1.5px solid var(--ink);
+  background: var(--surface);
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  color: var(--ink);
+}
+.pg-toc-list a.is-active { background: var(--banana-soft); color: var(--ink); font-weight: 600; }
+.pg-toc-list a.is-active b { background: var(--banana); }
+/* A long word (a model or product name) must break rather than run past
+   the cell's edge: the last item in the bar was being clipped. */
+.pg-toc-list a span { min-width: 0; overflow-wrap: anywhere; }
+.pg-toc-list a { padding-right: 16px; }
+.pg-toc-bar { display: block; height: 5px; background: var(--bg-sunk); }
+.pg-toc-bar i { display: block; height: 100%; background: linear-gradient(90deg, #6a4fc4, #d9481f, #1c7c7d); transform-origin: 0 50%; transform: scaleX(0); transition: transform 0.15s linear; }
+
+.pg-target { scroll-margin-top: 150px; }
+.pg-toc { will-change: transform; }
+@media (max-width: 760px) {
+  .pg-toc { top: 56px; }
+  .pg-toc-title { display: none; }
+  .pg-toc-list a { flex: 0 0 150px; }
+}
+
+/* Ablations: keep the bar slim, tucked up under the heading, and clear of the
+   table below it. */
+.pg-toc { margin: -18px 0 22px; }
+.pg-toc-title { padding: 6px 16px; }
+.pg-toc-list a { align-items: center; padding: 6px 14px; }

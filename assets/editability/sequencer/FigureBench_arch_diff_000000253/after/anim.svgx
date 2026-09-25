@@ -1,0 +1,407 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2400 950" width="100%" height="100%">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#333" />
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.1"/>
+    </filter>
+    <style type="text/css">
+      #node_gaussian_noise, #text_gaussian_noise, #node_feature_vector, #text_feature_vector, #edge_noise_to_feat, #node_primitive_prediction, #text_primitive_prediction, #edge_feat_to_pred, #block_cover_branch, #text_cover_branch_title, #edge_pred_to_cover, #block_residual_branch, #text_residual_branch_title, #edge_pred_to_resid, #raster_shape_sc, #edge_union_cover_to_sc, #raster_shape_sr, #edge_union_resid_to_sr, #block_convex_prim_cover, #text_convex_prim_cover, #raster_cp_c1, #raster_cp_c2, #raster_cp_c3, #block_prim_inv_cover, #text_prim_inv_cover, #raster_pi_c1, #node_intersection_cover, #text_intersection_cover, #edge_cp_to_inter_cover, #edge_pi_to_inter_cover, #raster_mid_c, #edge_inter_to_mid_cover, #node_union_cover, #text_union_cover, #dropout_cover, #edge_mid_to_union_cover, #block_convex_prim_resid, #text_convex_prim_resid, #raster_cp_r1, #block_prim_inv_resid, #text_prim_inv_resid, #raster_pi_r1, #raster_pi_r2, #node_intersection_resid, #text_intersection_resid, #edge_cp_to_inter_resid, #edge_pi_to_inter_resid, #raster_mid_r, #edge_inter_to_mid_resid, #node_union_resid, #text_union_resid, #dropout_resid, #edge_mid_to_union_resid, #block_difference, #text_difference, #edge_sc_to_diff, #edge_sr_to_diff, #raster_shape_final, #edge_diff_to_final, #raster_shape_given, #block_cover_loss, #text_cover_loss, #edge_sc_to_loss, #edge_given_to_cover_loss, #block_residual_loss, #text_residual_loss, #edge_sr_to_loss, #edge_given_to_resid_loss {
+        opacity: 0;
+        animation-name: fadeIn;
+        animation-duration: 0.5s;
+        animation-fill-mode: forwards;
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+      @keyframes narr_present {
+        0% { opacity: 1; }
+        99% { opacity: 1; }
+        100% { opacity: 0; }
+      }
+      #narr_ts1, #narr_ts2, #narr_ts3, #narr_ts4, #narr_ts5, #narr_ts6, #narr_ts7, #narr_ts8, #narr_ts9, #narr_ts10, #narr_ts11, #narr_ts12, #narr_ts13, #narr_ts14, #narr_ts15, #narr_ts16, #narr_ts17 {
+        opacity: 0;
+        animation: narr_present 0.5s linear forwards;
+      }
+      #narr_ts18 {
+        opacity: 0;
+        animation: fadeIn 0.5s linear forwards;
+      }
+      #node_gaussian_noise, #text_gaussian_noise, #narr_ts1 { animation-delay: 0.0s; }
+      #node_feature_vector, #text_feature_vector, #edge_noise_to_feat, #narr_ts2 { animation-delay: 0.5s; }
+      #node_primitive_prediction, #text_primitive_prediction, #edge_feat_to_pred, #narr_ts3 { animation-delay: 1.0s; }
+      #block_cover_branch, #text_cover_branch_title, #edge_pred_to_cover, #narr_ts4 { animation-delay: 1.5s; }
+      #block_residual_branch, #text_residual_branch_title, #edge_pred_to_resid, #narr_ts5 { animation-delay: 2.0s; }
+      #raster_shape_sc, #edge_union_cover_to_sc, #narr_ts6 { animation-delay: 2.5s; }
+      #raster_shape_sr, #edge_union_resid_to_sr, #narr_ts7 { animation-delay: 3.0s; }
+      #block_convex_prim_cover, #text_convex_prim_cover, #raster_cp_c1, #raster_cp_c2, #raster_cp_c3, #block_prim_inv_cover, #text_prim_inv_cover, #raster_pi_c1, #narr_ts8 { animation-delay: 3.5s; }
+      #node_intersection_cover, #text_intersection_cover, #edge_cp_to_inter_cover, #edge_pi_to_inter_cover, #raster_mid_c, #edge_inter_to_mid_cover, #narr_ts9 { animation-delay: 4.0s; }
+      #node_union_cover, #text_union_cover, #dropout_cover, #edge_mid_to_union_cover, #narr_ts10 { animation-delay: 4.5s; }
+      #block_convex_prim_resid, #text_convex_prim_resid, #raster_cp_r1, #block_prim_inv_resid, #text_prim_inv_resid, #raster_pi_r1, #raster_pi_r2, #narr_ts11 { animation-delay: 5.0s; }
+      #node_intersection_resid, #text_intersection_resid, #edge_cp_to_inter_resid, #edge_pi_to_inter_resid, #raster_mid_r, #edge_inter_to_mid_resid, #narr_ts12 { animation-delay: 5.5s; }
+      #node_union_resid, #text_union_resid, #dropout_resid, #edge_mid_to_union_resid, #narr_ts13 { animation-delay: 6.0s; }
+      #block_difference, #text_difference, #edge_sc_to_diff, #edge_sr_to_diff, #narr_ts14 { animation-delay: 6.5s; }
+      #raster_shape_final, #edge_diff_to_final, #narr_ts15 { animation-delay: 7.0s; }
+      #raster_shape_given, #narr_ts16 { animation-delay: 7.5s; }
+      #block_cover_loss, #text_cover_loss, #edge_sc_to_loss, #edge_given_to_cover_loss, #narr_ts17 { animation-delay: 8.0s; }
+      #block_residual_loss, #text_residual_loss, #edge_sr_to_loss, #edge_given_to_resid_loss, #narr_ts18 { animation-delay: 8.5s; }
+    </style>
+  </defs>
+
+  <!-- ================= BACKGROUNDS & CONTAINERS ================= -->
+  
+  <!-- Cover Branch Block -->
+  <g id="block_cover_branch" data-id="block_cover_branch" data-class="block" data-parent="root">
+    <rect x="600" y="50" width="870" height="330" fill="#f5faf5" stroke="#a1cfa1" stroke-width="2" rx="8" filter="url(#shadow)"/>
+    <text x="1035" y="35" font-family="system-ui, sans-serif" font-size="24" font-weight="bold" fill="#333" text-anchor="middle" data-id="text_cover_branch_title" data-class="text_node" data-parent="block_cover_branch">Cover Branch</text>
+  </g>
+
+  <!-- Convex Primitives (Cover) -->
+  <g id="block_convex_prim_cover" data-id="block_convex_prim_cover" data-class="block" data-parent="block_cover_branch">
+    <rect x="620" y="100" width="340" height="100" fill="#fff0fa" stroke="#e0b0d0" stroke-width="1.5" rx="6"/>
+    <text x="790" y="90" font-family="system-ui, sans-serif" font-size="18" font-weight="600" fill="#444" text-anchor="middle" data-id="text_convex_prim_cover" data-class="text_node" data-parent="block_convex_prim_cover">Convex Primitives</text>
+  </g>
+
+  <!-- Primitive Inverses (Cover) -->
+  <g id="block_prim_inv_cover" data-id="block_prim_inv_cover" data-class="block" data-parent="block_cover_branch">
+    <rect x="620" y="240" width="340" height="100" fill="#fffdf0" stroke="#e0d0b0" stroke-width="1.5" rx="6"/>
+    <text x="790" y="230" font-family="system-ui, sans-serif" font-size="18" font-weight="600" fill="#444" text-anchor="middle" data-id="text_prim_inv_cover" data-class="text_node" data-parent="block_prim_inv_cover">Primitive Inverses</text>
+  </g>
+
+  <!-- Residual Branch Block -->
+  <g id="block_residual_branch" data-id="block_residual_branch" data-class="block" data-parent="root">
+    <rect x="600" y="440" width="870" height="330" fill="#f5faf5" stroke="#a1cfa1" stroke-width="2" rx="8" filter="url(#shadow)"/>
+    <text x="1035" y="425" font-family="system-ui, sans-serif" font-size="24" font-weight="bold" fill="#333" text-anchor="middle" data-id="text_residual_branch_title" data-class="text_node" data-parent="block_residual_branch">Residual Branch</text>
+  </g>
+
+  <!-- Convex Primitives (Residual) -->
+  <g id="block_convex_prim_resid" data-id="block_convex_prim_resid" data-class="block" data-parent="block_residual_branch">
+    <rect x="620" y="490" width="340" height="100" fill="#fff0fa" stroke="#e0b0d0" stroke-width="1.5" rx="6"/>
+    <text x="790" y="480" font-family="system-ui, sans-serif" font-size="18" font-weight="600" fill="#444" text-anchor="middle" data-id="text_convex_prim_resid" data-class="text_node" data-parent="block_convex_prim_resid">Convex Primitives</text>
+  </g>
+
+  <!-- Primitive Inverses (Residual) -->
+  <g id="block_prim_inv_resid" data-id="block_prim_inv_resid" data-class="block" data-parent="block_residual_branch">
+    <rect x="620" y="630" width="340" height="100" fill="#fffdf0" stroke="#e0d0b0" stroke-width="1.5" rx="6"/>
+    <text x="790" y="620" font-family="system-ui, sans-serif" font-size="18" font-weight="600" fill="#444" text-anchor="middle" data-id="text_prim_inv_resid" data-class="text_node" data-parent="block_prim_inv_resid">Primitive Inverses</text>
+  </g>
+
+  <!-- Difference Block -->
+  <g id="block_difference" data-id="block_difference" data-class="block" data-parent="root">
+    <rect x="1540" y="370" width="140" height="60" fill="#f0faf0" stroke="#a1cfa1" stroke-width="2" rx="6" filter="url(#shadow)"/>
+    <text x="1610" y="405" font-family="system-ui, sans-serif" font-size="18" font-weight="bold" fill="#2e7d32" text-anchor="middle" dominant-baseline="middle" data-id="text_difference" data-class="text_node" data-parent="block_difference">Difference</text>
+  </g>
+
+  <!-- Cover Loss Block -->
+  <g id="block_cover_loss" data-id="block_cover_loss" data-class="block" data-parent="root">
+    <rect x="1880" y="180" width="210" height="60" fill="#ffebe6" stroke="#ffb3a3" stroke-width="2" rx="6" filter="url(#shadow)"/>
+    <text x="1985" y="215" font-family="system-ui, sans-serif" font-size="18" font-weight="bold" fill="#c62828" text-anchor="middle" dominant-baseline="middle" data-id="text_cover_loss" data-class="text_node" data-parent="block_cover_loss">Cover Loss</text>
+  </g>
+
+  <!-- Residual Loss Block -->
+  <g id="block_residual_loss" data-id="block_residual_loss" data-class="block" data-parent="root">
+    <rect x="1880" y="560" width="210" height="60" fill="#ffebe6" stroke="#ffb3a3" stroke-width="2" rx="6" filter="url(#shadow)"/>
+    <text x="1985" y="595" font-family="system-ui, sans-serif" font-size="18" font-weight="bold" fill="#c62828" text-anchor="middle" dominant-baseline="middle" data-id="text_residual_loss" data-class="text_node" data-parent="block_residual_loss">Residual Loss</text>
+  </g>
+
+  <!-- ================= STANDALONE NODES ================= -->
+
+  <!-- Gaussian Noise -->
+  <g id="node_gaussian_noise" data-id="node_gaussian_noise" data-class="standalone_node" data-parent="root">
+    <path d="M 30,450 C 70,450 80,360 90,360 C 100,360 110,450 150,450" fill="#ff9999" fill-opacity="0.4" stroke="#ff3333" stroke-width="3"/>
+    <line x1="20" y1="450" x2="160" y2="450" stroke="#333" stroke-width="2"/>
+    <text x="90" y="490" font-family="system-ui, sans-serif" font-size="18" font-weight="bold" fill="#333" text-anchor="middle" data-id="text_gaussian_noise" data-class="text_node" data-parent="node_gaussian_noise">Gaussian Noise</text>
+  </g>
+
+  <!-- Feature Vector -->
+  <g id="node_feature_vector" data-id="node_feature_vector" data-class="standalone_node" data-parent="root">
+    <rect x="250" y="340" width="40" height="180" fill="#fff" stroke="#333" stroke-width="2"/>
+    <line x1="250" y1="376" x2="290" y2="376" stroke="#333" stroke-width="1.5"/>
+    <line x1="250" y1="412" x2="290" y2="412" stroke="#333" stroke-width="1.5"/>
+    <line x1="250" y1="448" x2="290" y2="448" stroke="#333" stroke-width="1.5"/>
+    <line x1="250" y1="484" x2="290" y2="484" stroke="#333" stroke-width="1.5"/>
+    <text x="270" y="540" font-family="system-ui, sans-serif" font-size="18" font-weight="bold" fill="#333" text-anchor="middle" data-id="text_feature_vector" data-class="text_node" data-parent="node_feature_vector">Feature Vector</text>
+  </g>
+
+  <!-- Primitive Prediction -->
+  <g id="node_primitive_prediction" data-id="node_primitive_prediction" data-class="standalone_node" data-parent="root">
+    <rect x="390" y="300" width="15" height="200" fill="#99ddff" stroke="#0088cc" stroke-width="2" rx="3"/>
+    <rect x="415" y="300" width="15" height="200" fill="#99ddff" stroke="#0088cc" stroke-width="2" rx="3"/>
+    <text x="412" y="535" font-family="system-ui, sans-serif" font-size="18" font-weight="bold" fill="#333" text-anchor="middle" data-id="text_primitive_prediction" data-class="text_node" data-parent="node_primitive_prediction">
+      <tspan x="412" dy="0">Primitive</tspan>
+      <tspan x="412" dy="22">Prediction</tspan>
+    </text>
+  </g>
+
+  <!-- ================= CHILD NODES (INTERNAL BRANCHES) ================= -->
+
+  <!-- Intersection (Cover) -->
+  <g id="node_intersection_cover" data-id="node_intersection_cover" data-class="child_node" data-parent="block_cover_branch">
+    <rect x="1040" y="120" width="90" height="180" fill="#e6f2ff" stroke="#4a90e2" stroke-width="2" rx="4"/>
+    <!-- Neural connections representation -->
+    <line x1="1060" y1="150" x2="1110" y2="190" stroke="#4a90e2" stroke-width="1" opacity="0.5"/>
+    <line x1="1060" y1="190" x2="1110" y2="190" stroke="#4a90e2" stroke-width="1" opacity="0.5"/>
+    <line x1="1060" y1="230" x2="1110" y2="190" stroke="#4a90e2" stroke-width="1" opacity="0.5"/>
+    <line x1="1060" y1="270" x2="1110" y2="190" stroke="#4a90e2" stroke-width="1" opacity="0.5"/>
+    <!-- Nodes -->
+    <circle cx="1060" cy="150" r="8" fill="#fff" stroke="#4a90e2" stroke-width="2"/>
+    <circle cx="1060" cy="190" r="8" fill="#4a90e2" stroke="#4a90e2" stroke-width="2"/>
+    <circle cx="1060" cy="230" r="8" fill="#fff" stroke="#4a90e2" stroke-width="2"/>
+    <circle cx="1060" cy="270" r="8" fill="#fff" stroke="#4a90e2" stroke-width="2"/>
+    <circle cx="1110" cy="150" r="8" fill="#003366" stroke="#003366" stroke-width="2"/>
+    <circle cx="1110" cy="190" r="8" fill="#003366" stroke="#003366" stroke-width="2"/>
+    <circle cx="1110" cy="230" r="8" fill="#003366" stroke="#003366" stroke-width="2"/>
+    <circle cx="1110" cy="270" r="8" fill="#003366" stroke="#003366" stroke-width="2"/>
+    <text x="1085" y="320" font-family="system-ui, sans-serif" font-size="16" font-weight="bold" fill="#333" text-anchor="middle" data-id="text_intersection_cover" data-class="text_node" data-parent="node_intersection_cover">Intersection</text>
+  </g>
+
+  <!-- Union (Cover) -->
+  <g id="node_union_cover" data-id="node_union_cover" data-class="child_node" data-parent="block_cover_branch">
+    <rect x="1370" y="120" width="40" height="180" fill="#e6f2ff" stroke="#4a90e2" stroke-width="2" rx="4"/>
+    <circle cx="1390" cy="150" r="8" fill="#003366" stroke="#003366" stroke-width="2"/>
+    <circle cx="1390" cy="190" r="8" fill="#fff" stroke="#4a90e2" stroke-width="2"/>
+    <circle cx="1390" cy="230" r="8" fill="#003366" stroke="#003366" stroke-width="2"/>
+    <circle cx="1390" cy="270" r="8" fill="#003366" stroke="#003366" stroke-width="2"/>
+    <text x="1390" y="320" font-family="system-ui, sans-serif" font-size="16" font-weight="bold" fill="#333" text-anchor="middle" data-id="text_union_cover" data-class="text_node" data-parent="node_union_cover">Union</text>
+  </g>
+
+  <!-- Intersection (Residual) -->
+  <g id="node_intersection_resid" data-id="node_intersection_resid" data-class="child_node" data-parent="block_residual_branch">
+    <rect x="1040" y="510" width="90" height="180" fill="#e6f2ff" stroke="#4a90e2" stroke-width="2" rx="4"/>
+    <line x1="1060" y1="540" x2="1110" y2="580" stroke="#4a90e2" stroke-width="1" opacity="0.5"/>
+    <line x1="1060" y1="580" x2="1110" y2="580" stroke="#4a90e2" stroke-width="1" opacity="0.5"/>
+    <line x1="1060" y1="620" x2="1110" y2="580" stroke="#4a90e2" stroke-width="1" opacity="0.5"/>
+    <line x1="1060" y1="660" x2="1110" y2="580" stroke="#4a90e2" stroke-width="1" opacity="0.5"/>
+    <circle cx="1060" cy="540" r="8" fill="#fff" stroke="#4a90e2" stroke-width="2"/>
+    <circle cx="1060" cy="580" r="8" fill="#4a90e2" stroke="#4a90e2" stroke-width="2"/>
+    <circle cx="1060" cy="620" r="8" fill="#fff" stroke="#4a90e2" stroke-width="2"/>
+    <circle cx="1060" cy="660" r="8" fill="#fff" stroke="#4a90e2" stroke-width="2"/>
+    <circle cx="1110" cy="540" r="8" fill="#003366" stroke="#003366" stroke-width="2"/>
+    <circle cx="1110" cy="580" r="8" fill="#003366" stroke="#003366" stroke-width="2"/>
+    <circle cx="1110" cy="620" r="8" fill="#003366" stroke="#003366" stroke-width="2"/>
+    <circle cx="1110" cy="660" r="8" fill="#003366" stroke="#003366" stroke-width="2"/>
+    <text x="1085" y="710" font-family="system-ui, sans-serif" font-size="16" font-weight="bold" fill="#333" text-anchor="middle" data-id="text_intersection_resid" data-class="text_node" data-parent="node_intersection_resid">Intersection</text>
+  </g>
+
+  <!-- Union (Residual) -->
+  <g id="node_union_resid" data-id="node_union_resid" data-class="child_node" data-parent="block_residual_branch">
+    <rect x="1370" y="510" width="40" height="180" fill="#e6f2ff" stroke="#4a90e2" stroke-width="2" rx="4"/>
+    <circle cx="1390" cy="540" r="8" fill="#003366" stroke="#003366" stroke-width="2"/>
+    <circle cx="1390" cy="580" r="8" fill="#fff" stroke="#4a90e2" stroke-width="2"/>
+    <circle cx="1390" cy="620" r="8" fill="#003366" stroke="#003366" stroke-width="2"/>
+    <circle cx="1390" cy="660" r="8" fill="#003366" stroke="#003366" stroke-width="2"/>
+    <text x="1390" y="710" font-family="system-ui, sans-serif" font-size="16" font-weight="bold" fill="#333" text-anchor="middle" data-id="text_union_resid" data-class="text_node" data-parent="node_union_resid">Union</text>
+  </g>
+
+  <!-- ================= RASTER PLACEHOLDERS (3D SHAPES) ================= -->
+
+  <!-- Cover Branch Convex Primitives -->
+  <g id="raster_cp_c1" data-id="raster_cp_c1" data-class="raster_node"><image href="assets/editability/sequencer/FigureBench_arch_diff_000000253/after/rasters/crop_raster_cp_c1.png" xlink:href="assets/editability/sequencer/FigureBench_arch_diff_000000253/after/rasters/crop_raster_cp_c1.png" x="640" y="120" width="70" height="60" preserveAspectRatio="xMidYMid meet" /></g>
+  <g id="raster_cp_c2" data-id="raster_cp_c2" data-class="raster_node"><image href="assets/editability/sequencer/FigureBench_arch_diff_000000253/after/rasters/crop_raster_cp_c2.png" xlink:href="assets/editability/sequencer/FigureBench_arch_diff_000000253/after/rasters/crop_raster_cp_c2.png" x="755" y="120" width="70" height="60" preserveAspectRatio="xMidYMid meet" /></g>
+  <g id="raster_cp_c3" data-id="raster_cp_c3" data-class="raster_node"><image href="assets/editability/sequencer/FigureBench_arch_diff_000000253/after/rasters/crop_raster_cp_c3.png" xlink:href="assets/editability/sequencer/FigureBench_arch_diff_000000253/after/rasters/crop_raster_cp_c3.png" x="870" y="120" width="70" height="60" preserveAspectRatio="xMidYMid meet" /></g>
+
+  <!-- Cover Branch Primitive Inverses -->
+  <g id="raster_pi_c1" data-id="raster_pi_c1" data-class="raster_node"><image href="assets/editability/sequencer/FigureBench_arch_diff_000000253/after/rasters/crop_raster_pi_c1.png" xlink:href="assets/editability/sequencer/FigureBench_arch_diff_000000253/after/rasters/crop_raster_pi_c1.png" x="755" y="260" width="70" height="60" preserveAspectRatio="xMidYMid meet" /></g>
+
+  <!-- Cover Branch Middle Shape -->
+  <g id="raster_mid_c" data-id="raster_mid_c" data-class="raster_node"><image href="assets/editability/sequencer/FigureBench_arch_diff_000000253/after/rasters/crop_raster_mid_c.png" xlink:href="assets/editability/sequencer/FigureBench_arch_diff_000000253/after/rasters/crop_raster_mid_c.png" x="1190" y="150" width="120" height="120" preserveAspectRatio="xMidYMid meet" /></g>
+
+  <!-- Residual Branch Convex Primitives -->
+  <g id="raster_cp_r1" data-id="raster_cp_r1" data-class="raster_node"><image href="assets/editability/sequencer/FigureBench_arch_diff_000000253/after/rasters/crop_raster_cp_r1.png" xlink:href="assets/editability/sequencer/FigureBench_arch_diff_000000253/after/rasters/crop_raster_cp_r1.png" x="755" y="510" width="70" height="60" preserveAspectRatio="xMidYMid meet" /></g>
+
+  <!-- Residual Branch Primitive Inverses -->
+  <g id="raster_pi_r1" data-id="raster_pi_r1" data-class="raster_node"><image href="assets/editability/sequencer/FigureBench_arch_diff_000000253/after/rasters/crop_raster_pi_r1.png" xlink:href="assets/editability/sequencer/FigureBench_arch_diff_000000253/after/rasters/crop_raster_pi_r1.png" x="690" y="650" width="70" height="60" preserveAspectRatio="xMidYMid meet" /></g>
+  <g id="raster_pi_r2" data-id="raster_pi_r2" data-class="raster_node"><image href="assets/editability/sequencer/FigureBench_arch_diff_000000253/after/rasters/crop_raster_pi_r2.png" xlink:href="assets/editability/sequencer/FigureBench_arch_diff_000000253/after/rasters/crop_raster_pi_r2.png" x="810" y="650" width="70" height="60" preserveAspectRatio="xMidYMid meet" /></g>
+
+  <!-- Residual Branch Middle Shape -->
+  <g id="raster_mid_r" data-id="raster_mid_r" data-class="raster_node"><image href="assets/editability/sequencer/FigureBench_arch_diff_000000253/after/rasters/crop_raster_mid_r.png" xlink:href="assets/editability/sequencer/FigureBench_arch_diff_000000253/after/rasters/crop_raster_mid_r.png" x="1190" y="540" width="120" height="120" preserveAspectRatio="xMidYMid meet" /></g>
+
+  <!-- Output Shape S_C -->
+  <g id="raster_shape_sc" data-id="raster_shape_sc" data-class="raster_node"><image href="assets/editability/sequencer/FigureBench_arch_diff_000000253/after/rasters/crop_raster_shape_sc.png" xlink:href="assets/editability/sequencer/FigureBench_arch_diff_000000253/after/rasters/crop_raster_shape_sc.png" x="1550" y="150" width="120" height="120" preserveAspectRatio="xMidYMid meet" /></g>
+
+  <!-- Output Shape S_R -->
+  <g id="raster_shape_sr" data-id="raster_shape_sr" data-class="raster_node"><image href="assets/editability/sequencer/FigureBench_arch_diff_000000253/after/rasters/crop_raster_shape_sr.png" xlink:href="assets/editability/sequencer/FigureBench_arch_diff_000000253/after/rasters/crop_raster_shape_sr.png" x="1550" y="540" width="120" height="120" preserveAspectRatio="xMidYMid meet" /></g>
+
+  <!-- Final Shape -->
+  <g id="raster_shape_final" data-id="raster_shape_final" data-class="raster_node"><image href="assets/editability/sequencer/FigureBench_arch_diff_000000253/after/rasters/crop_raster_shape_final.png" xlink:href="assets/editability/sequencer/FigureBench_arch_diff_000000253/after/rasters/crop_raster_shape_final.png" x="1850" y="300" width="160" height="160" preserveAspectRatio="xMidYMid meet" /></g>
+
+  <!-- Given Shape S -->
+  <g id="raster_shape_given" data-id="raster_shape_given" data-class="raster_node"><image href="assets/editability/sequencer/FigureBench_arch_diff_000000253/after/rasters/crop_raster_shape_given.png" xlink:href="assets/editability/sequencer/FigureBench_arch_diff_000000253/after/rasters/crop_raster_shape_given.png" x="2180" y="300" width="160" height="160" preserveAspectRatio="xMidYMid meet" /></g>
+
+  <!-- ================= DROPOUT ANNOTATIONS ================= -->
+  
+  <!-- Cover Dropout -->
+  <g id="dropout_cover" data-id="dropout_cover" data-class="text_node" data-parent="block_cover_branch">
+    <text x="1250" y="80" font-family="system-ui, sans-serif" font-size="16" fill="#666" text-anchor="middle">Dropout</text>
+    <line x1="1210" y1="80" x2="1085" y2="115" stroke="#4a90e2" stroke-width="1.5" stroke-dasharray="3,3"/>
+    <line x1="1290" y1="80" x2="1390" y2="115" stroke="#4a90e2" stroke-width="1.5" stroke-dasharray="3,3"/>
+  </g>
+
+  <!-- Residual Dropout -->
+  <g id="dropout_resid" data-id="dropout_resid" data-class="text_node" data-parent="block_residual_branch">
+    <text x="1250" y="470" font-family="system-ui, sans-serif" font-size="16" fill="#666" text-anchor="middle">Dropout</text>
+    <line x1="1210" y1="470" x2="1085" y2="505" stroke="#4a90e2" stroke-width="1.5" stroke-dasharray="3,3"/>
+    <line x1="1290" y1="470" x2="1390" y2="505" stroke="#4a90e2" stroke-width="1.5" stroke-dasharray="3,3"/>
+  </g>
+
+  <!-- ================= EDGES (CONNECTIONS) ================= -->
+
+  <!-- Gaussian Noise -> Feature Vector -->
+  <path id="edge_noise_to_feat" data-id="edge_noise_to_feat" data-class="edge" data-source="node_gaussian_noise" data-target="node_feature_vector"
+        d="M 150,405 L 240,405" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Feature Vector -> Primitive Prediction -->
+  <path id="edge_feat_to_pred" data-id="edge_feat_to_pred" data-class="edge" data-source="node_feature_vector" data-target="node_primitive_prediction"
+        d="M 290,405 L 380,405" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Primitive Prediction -> Cover Branch -->
+  <path id="edge_pred_to_cover" data-id="edge_pred_to_cover" data-class="edge" data-source="node_primitive_prediction" data-target="block_cover_branch"
+        d="M 430,370 L 500,370 L 500,210 L 590,210" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Primitive Prediction -> Residual Branch -->
+  <path id="edge_pred_to_resid" data-id="edge_pred_to_resid" data-class="edge" data-source="node_primitive_prediction" data-target="block_residual_branch"
+        d="M 430,430 L 500,430 L 500,590 L 590,590" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Convex Primitives (Cover) -> Intersection (Cover) -->
+  <path id="edge_cp_to_inter_cover" data-id="edge_cp_to_inter_cover" data-class="edge" data-source="block_convex_prim_cover" data-target="node_intersection_cover"
+        d="M 960,150 L 1000,150 L 1000,210 L 1030,210" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Primitive Inverses (Cover) -> Intersection (Cover) -->
+  <path id="edge_pi_to_inter_cover" data-id="edge_pi_to_inter_cover" data-class="edge" data-source="block_prim_inv_cover" data-target="node_intersection_cover"
+        d="M 960,290 L 1000,290 L 1000,210 L 1030,210" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Intersection (Cover) -> Mid_C -->
+  <path id="edge_inter_to_mid_cover" data-id="edge_inter_to_mid_cover" data-class="edge" data-source="node_intersection_cover" data-target="raster_mid_c"
+        d="M 1130,210 L 1180,210" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Mid_C -> Union (Cover) -->
+  <path id="edge_mid_to_union_cover" data-id="edge_mid_to_union_cover" data-class="edge" data-source="raster_mid_c" data-target="node_union_cover"
+        d="M 1310,210 L 1360,210" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Union (Cover) -> S_C -->
+  <path id="edge_union_cover_to_sc" data-id="edge_union_cover_to_sc" data-class="edge" data-source="node_union_cover" data-target="raster_shape_sc"
+        d="M 1410,210 L 1540,210" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Convex Primitives (Residual) -> Intersection (Residual) -->
+  <path id="edge_cp_to_inter_resid" data-id="edge_cp_to_inter_resid" data-class="edge" data-source="block_convex_prim_resid" data-target="node_intersection_resid"
+        d="M 960,540 L 1000,540 L 1000,600 L 1030,600" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Primitive Inverses (Residual) -> Intersection (Residual) -->
+  <path id="edge_pi_to_inter_resid" data-id="edge_pi_to_inter_resid" data-class="edge" data-source="block_prim_inv_resid" data-target="node_intersection_resid"
+        d="M 960,680 L 1000,680 L 1000,600 L 1030,600" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Intersection (Residual) -> Mid_R -->
+  <path id="edge_inter_to_mid_resid" data-id="edge_inter_to_mid_resid" data-class="edge" data-source="node_intersection_resid" data-target="raster_mid_r"
+        d="M 1130,600 L 1180,600" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Mid_R -> Union (Residual) -->
+  <path id="edge_mid_to_union_resid" data-id="edge_mid_to_union_resid" data-class="edge" data-source="raster_mid_r" data-target="node_union_resid"
+        d="M 1310,600 L 1360,600" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Union (Residual) -> S_R -->
+  <path id="edge_union_resid_to_sr" data-id="edge_union_resid_to_sr" data-class="edge" data-source="node_union_resid" data-target="raster_shape_sr"
+        d="M 1410,600 L 1540,600" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- S_C -> Difference -->
+  <path id="edge_sc_to_diff" data-id="edge_sc_to_diff" data-class="edge" data-source="raster_shape_sc" data-target="block_difference"
+        d="M 1610,270 L 1610,360" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- S_R -> Difference -->
+  <path id="edge_sr_to_diff" data-id="edge_sr_to_diff" data-class="edge" data-source="raster_shape_sr" data-target="block_difference"
+        d="M 1610,540 L 1610,440" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Difference -> Final Shape -->
+  <path id="edge_diff_to_final" data-id="edge_diff_to_final" data-class="edge" data-source="block_difference" data-target="raster_shape_final"
+        d="M 1680,400 L 1840,400" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- S_C -> Cover Loss -->
+  <path id="edge_sc_to_loss" data-id="edge_sc_to_loss" data-class="edge" data-source="raster_shape_sc" data-target="block_cover_loss"
+        d="M 1670,210 L 1870,210" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- S_R -> Residual Loss -->
+  <path id="edge_sr_to_loss" data-id="edge_sr_to_loss" data-class="edge" data-source="raster_shape_sr" data-target="block_residual_loss"
+        d="M 1670,590 L 1870,590" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Given Shape S -> Cover Loss -->
+  <path id="edge_given_to_cover_loss" data-id="edge_given_to_cover_loss" data-class="edge" data-source="raster_shape_given" data-target="block_cover_loss"
+        d="M 2260,300 L 2260,210 L 2100,210" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Given Shape S -> Residual Loss -->
+  <path id="edge_given_to_resid_loss" data-id="edge_given_to_resid_loss" data-class="edge" data-source="raster_shape_given" data-target="block_residual_loss"
+        d="M 2260,460 L 2260,590 L 2100,590" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- ================= DYNAMIC NARRATION BANNER ================= -->
+  <g id="narration_banner">
+    <text id="narr_ts1" x="1200" y="850" font-family="system-ui, sans-serif" font-size="24" font-weight="500" fill="#111" text-anchor="middle">
+      <tspan x="1200" y="850">The shape generation process begins by sampling Gaussian noise.</tspan>
+    </text>
+    <text id="narr_ts2" x="1200" y="850" font-family="system-ui, sans-serif" font-size="24" font-weight="500" fill="#111" text-anchor="middle">
+      <tspan x="1200" y="850">This noise is mapped into a latent feature vector.</tspan>
+    </text>
+    <text id="narr_ts3" x="1200" y="835" font-family="system-ui, sans-serif" font-size="24" font-weight="500" fill="#111" text-anchor="middle">
+      <tspan x="1200" y="835">The feature vector is processed by a primitive prediction network</tspan>
+      <tspan x="1200" dy="1.2em">to estimate basic geometric parameters.</tspan>
+    </text>
+    <text id="narr_ts4" x="1200" y="835" font-family="system-ui, sans-serif" font-size="24" font-weight="500" fill="#111" text-anchor="middle">
+      <tspan x="1200" y="835">The parameters are routed into parallel streams,</tspan>
+      <tspan x="1200" dy="1.2em">starting with the main Cover Branch container.</tspan>
+    </text>
+    <text id="narr_ts5" x="1200" y="835" font-family="system-ui, sans-serif" font-size="24" font-weight="500" fill="#111" text-anchor="middle">
+      <tspan x="1200" y="835">Concurrently, the parameters are also routed</tspan>
+      <tspan x="1200" dy="1.2em">to the main Residual Branch container.</tspan>
+    </text>
+    <text id="narr_ts6" x="1200" y="835" font-family="system-ui, sans-serif" font-size="24" font-weight="500" fill="#111" text-anchor="middle">
+      <tspan x="1200" y="835">Before looking inside, we see that the Cover Branch</tspan>
+      <tspan x="1200" dy="1.2em">ultimately outputs an intermediate cover shape, S_C, representing the base volume.</tspan>
+    </text>
+    <text id="narr_ts7" x="1200" y="835" font-family="system-ui, sans-serif" font-size="24" font-weight="500" fill="#111" text-anchor="middle">
+      <tspan x="1200" y="835">Similarly, the Residual Branch outputs an intermediate</tspan>
+      <tspan x="1200" dy="1.2em">residual shape, S_R, capturing detailed cavities.</tspan>
+    </text>
+    <text id="narr_ts8" x="1200" y="835" font-family="system-ui, sans-serif" font-size="24" font-weight="500" fill="#111" text-anchor="middle">
+      <tspan x="1200" y="835">Now, let's reveal the inner workings. Inside the Cover Branch,</tspan>
+      <tspan x="1200" dy="1.2em">the network predicts convex primitives and primitive inverses.</tspan>
+    </text>
+    <text id="narr_ts9" x="1200" y="835" font-family="system-ui, sans-serif" font-size="24" font-weight="500" fill="#111" text-anchor="middle">
+      <tspan x="1200" y="835">These are combined via a differentiable intersection operation</tspan>
+      <tspan x="1200" dy="1.2em">to form an intermediate intersected shape.</tspan>
+    </text>
+    <text id="narr_ts10" x="1200" y="835" font-family="system-ui, sans-serif" font-size="24" font-weight="500" fill="#111" text-anchor="middle">
+      <tspan x="1200" y="835">A union operation with dropout then aggregates these parts</tspan>
+      <tspan x="1200" dy="1.2em">to produce the final cover shape.</tspan>
+    </text>
+    <text id="narr_ts11" x="1200" y="835" font-family="system-ui, sans-serif" font-size="24" font-weight="500" fill="#111" text-anchor="middle">
+      <tspan x="1200" y="835">Inside the Residual Branch, we similarly predict convex primitives</tspan>
+      <tspan x="1200" dy="1.2em">and primitive inverses representing negative spaces.</tspan>
+    </text>
+    <text id="narr_ts12" x="1200" y="835" font-family="system-ui, sans-serif" font-size="24" font-weight="500" fill="#111" text-anchor="middle">
+      <tspan x="1200" y="835">An intersection operation combines these to form</tspan>
+      <tspan x="1200" dy="1.2em">the intermediate intersected residual shape.</tspan>
+    </text>
+    <text id="narr_ts13" x="1200" y="835" font-family="system-ui, sans-serif" font-size="24" font-weight="500" fill="#111" text-anchor="middle">
+      <tspan x="1200" y="835">A union operation with dropout aggregates these components</tspan>
+      <tspan x="1200" dy="1.2em">into the final residual shape.</tspan>
+    </text>
+    <text id="narr_ts14" x="1200" y="835" font-family="system-ui, sans-serif" font-size="24" font-weight="500" fill="#111" text-anchor="middle">
+      <tspan x="1200" y="835">With both intermediate shapes generated, a constructive difference operation</tspan>
+      <tspan x="1200" dy="1.2em">is applied between the cover and residual shapes.</tspan>
+    </text>
+    <text id="narr_ts15" x="1200" y="850" font-family="system-ui, sans-serif" font-size="24" font-weight="500" fill="#111" text-anchor="middle">
+      <tspan x="1200" y="850">This subtraction yields the reconstructed final shape.</tspan>
+    </text>
+    <text id="narr_ts16" x="1200" y="850" font-family="system-ui, sans-serif" font-size="24" font-weight="500" fill="#111" text-anchor="middle">
+      <tspan x="1200" y="850">The generated outputs are optimized against the target given shape.</tspan>
+    </text>
+    <text id="narr_ts17" x="1200" y="835" font-family="system-ui, sans-serif" font-size="24" font-weight="500" fill="#111" text-anchor="middle">
+      <tspan x="1200" y="835">The cover loss computes the deviation between the intermediate cover shape</tspan>
+      <tspan x="1200" dy="1.2em">and the given shape to ensure base volume accuracy.</tspan>
+    </text>
+    <text id="narr_ts18" x="1200" y="835" font-family="system-ui, sans-serif" font-size="24" font-weight="500" fill="#111" text-anchor="middle">
+      <tspan x="1200" y="835">Simultaneously, the residual loss measures the deviation of the residual shape</tspan>
+      <tspan x="1200" dy="1.2em">against the given shape to guide negative space carving.</tspan>
+    </text>
+  </g>
+</svg>

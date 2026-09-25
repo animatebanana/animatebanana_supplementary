@@ -1,0 +1,245 @@
+/* Overview page: hero, demo band, stats, how-it-works, contents. */
+
+/* ================= HERO ================= */
+.hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: clamp(28px, 4vw, 56px) var(--gap-page) clamp(56px, 7vw, 96px);
+}
+.hero-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.hero-inner > .kicker { animation: hero-fade 700ms var(--ease-out) both; }
+
+/* The transparent logo sits directly on the page — no frame. */
+.hero-logo {
+  display: block;
+  width: clamp(260px, 34vw, 480px);
+  height: auto;
+  margin: clamp(6px, 1.2vw, 16px) auto clamp(-4px, -0.4vw, 0px);
+  animation: logo-in 1100ms var(--ease-out) 60ms both, logo-float 6.5s var(--ease-io) 1.4s infinite;
+}
+@keyframes logo-in { from { opacity: 0; transform: translateX(-56px) rotate(-4deg) scale(0.94); } }
+@keyframes logo-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
+
+/* ---------- Wordmark ---------- */
+.wm-wrap { position: relative; display: inline-block; max-width: 100%; }
+hero-wordmark { display: block; }
+.wm {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--fs-mega);
+  font-weight: 900;
+  font-variation-settings: 'SOFT' 60, 'WONK' 1, 'opsz' 144;
+  line-height: 0.9;
+  letter-spacing: -0.055em;
+  color: var(--ink);
+}
+.wm-seg { display: inline-block; white-space: nowrap; }
+.wm-seg-b { margin-left: 0.02em; }
+
+.wm-l {
+  display: inline-block;
+  font-style: normal;
+  animation: wm-rise 950ms var(--ease-spring) both;
+  animation-delay: calc(var(--i) * 45ms + 450ms);
+  transition: transform 380ms var(--ease-spring);
+}
+.wm-l:hover { transform: translateY(-0.08em) rotate(-4deg); }
+
+.wm-l-out { position: relative; }
+.wm-face {
+  position: relative;
+  display: inline-block;
+  color: transparent;
+  -webkit-text-stroke: max(2px, 0.024em) var(--ink);
+  background: repeating-linear-gradient(-45deg, var(--banana) 0 0.028em, transparent 0.028em 0.07em), var(--paper);
+  -webkit-background-clip: text;
+  background-clip: text;
+  padding: 0 0.02em;
+}
+.wm-shadow {
+  position: absolute;
+  left: 0; top: 0;
+  padding: 0 0.02em;
+  color: var(--banana-deep);
+  transform: translate(0.055em, 0.055em);
+  animation: wm-shadow 600ms var(--ease-out) both;
+  animation-delay: calc(var(--i) * 45ms + 1000ms);
+}
+@keyframes wm-rise { from { opacity: 0; transform: translateY(0.5em) rotate(8deg) scale(0.9); } to { opacity: 1; transform: none; } }
+@keyframes wm-shadow { from { transform: translate(0, 0); opacity: 0; } to { transform: translate(0.055em, 0.055em); opacity: 1; } }
+@keyframes hero-fade { from { opacity: 0; transform: translateY(12px); } }
+
+.wm-spark {
+  position: absolute;
+  width: clamp(18px, 2.4vw, 34px);
+  height: auto;
+  fill: var(--banana);
+  stroke: var(--ink);
+  stroke-width: 3;
+  stroke-linejoin: round;
+  animation: spark 2.8s var(--ease-io) infinite;
+  pointer-events: none;
+}
+.wm-spark-1 { top: -14%; left: -3.5%; animation-delay: 1.4s; }
+.wm-spark-2 { top: -6%; right: -4%; width: clamp(14px, 1.7vw, 24px); animation-delay: 1.9s; }
+.wm-spark-3 { bottom: -6%; left: 46%; width: clamp(12px, 1.3vw, 18px); animation-delay: 2.4s; }
+@keyframes spark {
+  0%, 100% { transform: scale(0.7) rotate(0deg); opacity: 0.55; }
+  50% { transform: scale(1.1) rotate(25deg); opacity: 1; }
+}
+
+.wm-note {
+  position: absolute;
+  right: -2%;
+  bottom: -34%;
+  display: flex;
+  align-items: flex-start;
+  gap: 4px;
+  font-size: clamp(1.3rem, 1rem + 0.8vw, 1.7rem);
+  transform: rotate(-4deg);
+  white-space: nowrap;
+  animation: hero-fade 700ms var(--ease-out) 1.8s both;
+}
+.wm-note svg { width: 56px; height: 44px; margin-top: -26px; overflow: visible; }
+.wm-note path { fill: none; stroke: var(--ink); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+@media (max-width: 900px) { .wm-note { display: none; } }
+
+/* ---------- Supporting copy ---------- */
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 0.9rem + 2.7vw, 3.25rem);
+  font-weight: 650;
+  font-variation-settings: 'SOFT' 30, 'WONK' 0;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  max-width: 22ch;
+  margin: clamp(48px, 7vw, 88px) 0 20px;
+  animation: hero-fade 800ms var(--ease-out) 1000ms both;
+}
+.hero-title .hl::before { animation: hl-draw 900ms var(--ease-out) 1600ms both; }
+@keyframes hl-draw { from { transform: rotate(-1.2deg) scaleX(0); } }
+
+.actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 40px;
+  animation: hero-fade 800ms var(--ease-out) 1300ms both;
+}
+.btn-demo { padding: 17px 34px; font-size: 1.15rem; border-radius: 16px; box-shadow: 4px 4px 0 var(--ink); }
+.btn-demo:hover { box-shadow: 6px 6px 0 var(--ink); }
+.btn-demo svg { animation: demo-nudge 1.6s var(--ease-io) infinite; }
+@keyframes demo-nudge { 0%, 100% { transform: translateY(-1px); } 50% { transform: translateY(3px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .wm-l, .wm-shadow, .hero-inner > .kicker, .hero-title, .actions, .wm-note,
+  .hero-title .hl::before, .hero-logo, .wm-spark { animation: none; }
+}
+
+/* ================= PAPER ZONE (from the demo down) =================
+   The overview used to go flat white below the hero. It now keeps the same
+   dotted-paper ground the hero has, so the page reads as one sheet; the
+   bands that want their own ground (the gallery's warm paper, the
+   benchmark's white slab) still set it themselves. */
+.white-zone { position: relative; background: transparent; }
+
+.try-band { padding: clamp(40px, 5vw, 72px) 0 0; scroll-margin-top: var(--anchor-offset, 86px); }
+.try-wrap { max-width: 1720px; margin: 0 auto; padding: 0 clamp(14px, 2vw, 40px); }
+
+/* ================= STATS ================= */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: var(--section-gap);
+  padding: clamp(28px, 4vw, 44px) 0;
+  border-top: 2px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
+}
+@media (max-width: 860px) { .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 36px; } }
+.stat { text-align: center; }
+.stat-num { display: block; font-size: clamp(3rem, 1.6rem + 4.6vw, 6.25rem); }
+.stat-label {
+  display: block;
+  margin-top: 10px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+/* ================= HOW IT WORKS ================= */
+.how { margin-top: var(--section-gap); }
+.steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 3vw, 44px); }
+@media (max-width: 860px) { .steps { grid-template-columns: 1fr; } }
+
+.step { position: relative; padding: 26px 26px 30px; transition: transform var(--dur) var(--ease-out), box-shadow var(--dur) var(--ease-out); }
+.step:hover { transform: translate(-3px, -3px); box-shadow: var(--shadow-hard-lg); }
+.step-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 18px; }
+.step-num { font-size: 4.5rem; }
+.step-icon { width: 58px; height: 58px; overflow: visible; }
+.step-icon path, .step-icon circle, .step-icon rect { stroke: var(--ink); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.step-icon :not([fill]) { fill: none; }
+.step h3 { font-size: 1.35rem; margin-bottom: 8px; }
+.step p { color: var(--ink-soft); font-size: 0.97rem; }
+.step-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid var(--ink); margin-right: 8px; vertical-align: 1px; }
+.step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: calc(-1 * clamp(20px, 3vw, 44px) + 2px);
+  width: calc(clamp(20px, 3vw, 44px) - 4px);
+  height: 2px;
+  background: repeating-linear-gradient(90deg, var(--ink) 0 5px, transparent 5px 9px);
+}
+@media (max-width: 860px) { .step:not(:last-child)::after { display: none; } }
+
+/* ================= CONTENTS ================= */
+.contents { margin-top: var(--section-gap); }
+.contents-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 18px; }
+.content-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-height: 210px;
+  padding: 22px 22px 24px;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  color: var(--ink);
+  overflow: hidden;
+  transition: transform var(--dur) var(--ease-out), box-shadow var(--dur) var(--ease-out), background var(--dur) var(--ease-out);
+}
+.content-card:hover { color: var(--ink); transform: translate(-4px, -4px); box-shadow: var(--shadow-hard); background: var(--banana-soft); }
+.content-card-num { font-size: 3.4rem; margin-bottom: auto; }
+.content-card-title { font-family: var(--font-display); font-size: 1.45rem; font-weight: 750; letter-spacing: -0.025em; margin-top: 18px; }
+.content-card-desc { font-size: var(--fs-sm); color: var(--ink-soft); line-height: 1.5; }
+.content-card-go {
+  position: absolute;
+  top: 20px; right: 20px;
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  border: 1.5px solid var(--ink);
+  display: grid;
+  place-items: center;
+  transition: transform var(--dur) var(--ease-spring), background var(--dur) var(--ease-out);
+}
+.content-card:hover .content-card-go { transform: rotate(-45deg); background: var(--banana); }
+
+
+/* ---- Centred section head (merged in with the gallery + benchmark bands) ---- */
+.section-head-center { text-align: center; margin-bottom: clamp(36px, 5vw, 64px); }
+.section-head-center h2, .section-head-center p { margin-left: auto; margin-right: auto; }
+.section-head-center .kicker::before { display: block; }

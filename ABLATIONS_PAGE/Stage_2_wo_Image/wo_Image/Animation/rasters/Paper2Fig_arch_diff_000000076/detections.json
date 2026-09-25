@@ -1,0 +1,58 @@
+{
+  "detected": 2,
+  "placeholders": 2,
+  "omitted": {},
+  "rejected": {},
+  "image_size": [
+    1056,
+    739
+  ],
+  "regions": [
+    {
+      "xml_id": "raster_face_seq",
+      "box_2d": [
+        107,
+        31,
+        298,
+        144
+      ],
+      "bbox": [
+        32.736,
+        79.073,
+        152.064,
+        220.22199999999998
+      ],
+      "label": "Face Sequence"
+    },
+    {
+      "xml_id": "raster_skeleton_seq",
+      "box_2d": [
+        767,
+        29,
+        966,
+        144
+      ],
+      "bbox": [
+        30.624000000000002,
+        566.813,
+        152.064,
+        713.874
+      ],
+      "label": "Pose Sequence"
+    }
+  ],
+  "replaced": [
+    "raster_face_seq",
+    "raster_skeleton_seq"
+  ],
+  "provenance": {
+    "agent": "raster_integrator",
+    "backend": "openrouter_gemini37flash",
+    "model": "google-gemini-3.7-flash",
+    "prompt": null,
+    "style": "sliding_bounding_box",
+    "target": "svg",
+    "config_fingerprint": "ba9853345fc34258",
+    "timestamp": "2026-08-28T21:25:55"
+  }
+}

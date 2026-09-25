@@ -1,0 +1,273 @@
+{
+ "_comment": "DIAGRAM DIVERSITY pane. Five stratification axes; stratum names and `share` values are copied verbatim from the AnimateBench figure. Each stratum points at one example: its still (`image`), the silent animation built from that diagram's frames (`preview`) and the script that animation is captioned with (`captions`). The clips carry no audio, so there is no narrated track here. To swap an example, replace the files in the stratum's folder under assets/bench/density/strata/<axis>/<stratum>/ and update `case` and `style`. `version` is a cache stamp: bump it (any new string, a date is fine) whenever you replace a diagram.png, preview.mp4 or captions.vtt in place, or browsers that have been here before will keep showing the old file.",
+ "version": "2026-09-23b",
+ "accent": "density",
+ "methods": [
+  {
+   "id": "element-density",
+   "label": "Element Density",
+   "unit": "elements / diagram",
+   "axis": {
+    "from": "Sparse",
+    "to": "Dense"
+   },
+   "blurb": "The number of diagram elements (nodes, labels, edges, and raster components) relative to the diagram’s area.",
+   "strata": [
+    {
+     "id": "sparse",
+     "label": "Sparse",
+     "share": 18.8,
+     "example": {
+      "case": "WACV_2022_set5_000018",
+      "style": "Hopping Bounding Box",
+      "image": "assets/bench/density/strata/element-density/sparse/diagram.png",
+      "preview": "assets/bench/density/strata/element-density/sparse/preview.mp4",
+      "captions": "assets/bench/density/strata/element-density/sparse/captions.vtt"
+     }
+    },
+    {
+     "id": "medium",
+     "label": "Medium",
+     "share": 56.9,
+     "example": {
+      "case": "arch_arxiv_db_ir_2025_000000581",
+      "style": "Sliding Bounding Box",
+      "image": "assets/bench/density/strata/element-density/medium/diagram.png",
+      "preview": "assets/bench/density/strata/element-density/medium/preview.mp4",
+      "captions": "assets/bench/density/strata/element-density/medium/captions.vtt"
+     }
+    },
+    {
+     "id": "dense",
+     "label": "Dense",
+     "share": 24.4,
+     "example": {
+      "case": "CVPR_2025_arch00932",
+      "style": "Alpha Masking",
+      "image": "assets/bench/density/strata/element-density/dense/diagram.png",
+      "preview": "assets/bench/density/strata/element-density/dense/preview.mp4",
+      "captions": "assets/bench/density/strata/element-density/dense/captions.vtt"
+     }
+    }
+   ]
+  },
+  {
+   "id": "hierarchical-depth",
+   "label": "Hierarchical Depth",
+   "unit": "max depth",
+   "axis": {
+    "from": "Flat",
+    "to": "Deep"
+   },
+   "blurb": "How deeply blocks nest inside parent blocks.",
+   "strata": [
+    {
+     "id": "flat",
+     "label": "Flat (no nesting)",
+     "share": 24.8,
+     "example": {
+      "case": "CVPR_2025_arch01225",
+      "style": "Progressive Reveal",
+      "image": "assets/bench/density/strata/hierarchical-depth/flat/diagram.png",
+      "preview": "assets/bench/density/strata/hierarchical-depth/flat/preview.mp4",
+      "captions": "assets/bench/density/strata/hierarchical-depth/flat/captions.vtt"
+     }
+    },
+    {
+     "id": "moderate",
+     "label": "Moderate (2-3)",
+     "share": 73.2,
+     "example": {
+      "case": "CVPR_2025_arch02801",
+      "style": "Alpha Masking",
+      "image": "assets/bench/density/strata/hierarchical-depth/moderate/diagram.png",
+      "preview": "assets/bench/density/strata/hierarchical-depth/moderate/preview.mp4",
+      "captions": "assets/bench/density/strata/hierarchical-depth/moderate/captions.vtt"
+     }
+    },
+    {
+     "id": "deep",
+     "label": "Deep (4+)",
+     "share": 2.0,
+     "example": {
+      "case": "CVPR_2025_arch01761",
+      "style": "Hopping Bounding Box",
+      "image": "assets/bench/density/strata/hierarchical-depth/deep/diagram.png",
+      "preview": "assets/bench/density/strata/hierarchical-depth/deep/preview.mp4",
+      "captions": "assets/bench/density/strata/hierarchical-depth/deep/captions.vtt"
+     }
+    }
+   ]
+  },
+  {
+   "id": "connectivity",
+   "label": "Connectivity",
+   "unit": "connections / diagram",
+   "axis": {
+    "from": "Few",
+    "to": "Many"
+   },
+   "blurb": "The number of edge connections in the diagram.",
+   "strata": [
+    {
+     "id": "few",
+     "label": "Few",
+     "share": 13.5,
+     "example": {
+      "case": "Paper2Fig_pipe_diff_000000488",
+      "style": "Hopping Bounding Box",
+      "image": "assets/bench/density/strata/connectivity/few/diagram.png",
+      "preview": "assets/bench/density/strata/connectivity/few/preview.mp4",
+      "captions": "assets/bench/density/strata/connectivity/few/captions.vtt"
+     }
+    },
+    {
+     "id": "moderate",
+     "label": "Moderate",
+     "share": 67.3,
+     "example": {
+      "case": "CVPR_2025_arch00855",
+      "style": "Alpha Masking",
+      "image": "assets/bench/density/strata/connectivity/moderate/diagram.png",
+      "preview": "assets/bench/density/strata/connectivity/moderate/preview.mp4",
+      "captions": "assets/bench/density/strata/connectivity/moderate/captions.vtt"
+     }
+    },
+    {
+     "id": "many",
+     "label": "Many",
+     "share": 19.2,
+     "example": {
+      "case": "SciMMIR_arch_diff_000000348",
+      "style": "Sliding Bounding Box",
+      "image": "assets/bench/density/strata/connectivity/many/diagram.png",
+      "preview": "assets/bench/density/strata/connectivity/many/preview.mp4",
+      "captions": "assets/bench/density/strata/connectivity/many/captions.vtt"
+     }
+    }
+   ]
+  },
+  {
+   "id": "raster-content",
+   "label": "Raster Content",
+   "unit": "% diagrams",
+   "axis": {
+    "from": "Few",
+    "to": "Many"
+   },
+   "blurb": "Whether the figure embeds photographs, renders or plots that cannot be redrawn as vectors.",
+   "strata": [
+    {
+     "id": "has-rasters",
+     "label": "Has rasters",
+     "share": 83.1,
+     "example": {
+      "case": "CVPR_2025_arch00938",
+      "style": "Alpha Masking",
+      "image": "assets/bench/density/strata/raster-content/has-rasters/diagram.png",
+      "preview": "assets/bench/density/strata/raster-content/has-rasters/preview.mp4",
+      "captions": "assets/bench/density/strata/raster-content/has-rasters/captions.vtt"
+     }
+    },
+    {
+     "id": "no-rasters",
+     "label": "No rasters",
+     "share": 16.9,
+     "example": {
+      "case": "CVPR_2025_arch00012",
+      "style": "Progressive Reveal",
+      "image": "assets/bench/density/strata/raster-content/no-rasters/diagram.png",
+      "preview": "assets/bench/density/strata/raster-content/no-rasters/preview.mp4",
+      "captions": "assets/bench/density/strata/raster-content/no-rasters/captions.vtt"
+     }
+    }
+   ]
+  },
+  {
+   "id": "layout-organization",
+   "label": "Layout Organization",
+   "unit": "spatial arrangements",
+   "axis": null,
+   "blurb": "The spatial grammar of the figure.",
+   "strata": [
+    {
+     "id": "horizontal",
+     "label": "Horizontal",
+     "example": {
+      "case": "Paper2Fig_pipe_diff_000000130",
+      "style": "Alpha Masking",
+      "image": "assets/bench/density/strata/layout-organization/horizontal/diagram.png",
+      "preview": "assets/bench/density/strata/layout-organization/horizontal/preview.mp4",
+      "captions": "assets/bench/density/strata/layout-organization/horizontal/captions.vtt"
+     }
+    },
+    {
+     "id": "vertical",
+     "label": "Vertical",
+     "example": {
+      "case": "Paper2Fig_pipe_diff_000000473",
+      "style": "Progressive Reveal",
+      "image": "assets/bench/density/strata/layout-organization/vertical/diagram.png",
+      "preview": "assets/bench/density/strata/layout-organization/vertical/preview.mp4",
+      "captions": "assets/bench/density/strata/layout-organization/vertical/captions.vtt"
+     }
+    },
+    {
+     "id": "h-multi",
+     "label": "Horizontal Multipanel",
+     "example": {
+      "case": "CVPR_2025_arch01061",
+      "style": "Alpha Masking",
+      "image": "assets/bench/density/strata/layout-organization/h-multi/diagram.png",
+      "preview": "assets/bench/density/strata/layout-organization/h-multi/preview.mp4",
+      "captions": "assets/bench/density/strata/layout-organization/h-multi/captions.vtt"
+     }
+    },
+    {
+     "id": "v-multi",
+     "label": "Vertical Multipanel",
+     "example": {
+      "case": "CVPR_2025_arch00012",
+      "style": "Progressive Reveal",
+      "image": "assets/bench/density/strata/layout-organization/v-multi/diagram.png",
+      "preview": "assets/bench/density/strata/layout-organization/v-multi/preview.mp4",
+      "captions": "assets/bench/density/strata/layout-organization/v-multi/captions.vtt"
+     }
+    },
+    {
+     "id": "block",
+     "label": "Block layout",
+     "example": {
+      "case": "ICCV_2023_set5_000035",
+      "style": "Alpha Masking",
+      "image": "assets/bench/density/strata/layout-organization/block/diagram.png",
+      "preview": "assets/bench/density/strata/layout-organization/block/preview.mp4",
+      "captions": "assets/bench/density/strata/layout-organization/block/captions.vtt"
+     }
+    },
+    {
+     "id": "hybrid",
+     "label": "Hybrid",
+     "example": {
+      "case": "ICCV_2023_set5_000018",
+      "style": "Progressive Reveal",
+      "image": "assets/bench/density/strata/layout-organization/hybrid/diagram.png",
+      "preview": "assets/bench/density/strata/layout-organization/hybrid/preview.mp4",
+      "captions": "assets/bench/density/strata/layout-organization/hybrid/captions.vtt"
+     }
+    },
+    {
+     "id": "circular",
+     "label": "Circular",
+     "example": {
+      "case": null,
+      "style": "Hopping Bounding Box",
+      "image": "assets/bench/density/strata/layout-organization/circular/diagram.png",
+      "preview": "assets/bench/density/strata/layout-organization/circular/preview.mp4",
+      "captions": "assets/bench/density/strata/layout-organization/circular/captions.vtt"
+     }
+    }
+   ]
+  }
+ ]
+}

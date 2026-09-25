@@ -1,0 +1,661 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 985 570" width="985" height="570">
+  <defs>
+    <!-- Arrow Markers -->
+    <marker id="arrow-black" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#1e1e1e"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#d32f2f"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#689f38"/>
+    </marker>
+    <marker id="arrow-yellow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#fbc02d"/>
+    </marker>
+    
+    <!-- Shadow filter -->
+    <filter id="drop-shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="2" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.15"/>
+    </filter>
+
+    <style>
+      /* Global Dormant State */
+      #data_prep_block, #ref_frame_img, #ref_frame_lbl,
+      #obj_replacement_group, #obj_replacement_img,
+      #input_prep_container, #input_frame_img, #input_frame_lbl, #edge_input_to_obj_rep,
+      #box_detection_group, #hand_mesh_aug_group, #box_detection_img, #hand_mesh_aug_frame, #hand_mesh_aug_img,
+      #training_pipeline_block, #ref_image_node, #ref_image_lbl, #edge_ref_to_vae_enc,
+      #vae_encoder_node, #ref_unet_block, #ref_unet_title, #edge_vae_enc_to_ref_unet,
+      #hand_mesh_stack, #controlnet_block, #hand_mesh_lbl, #controlnet_title,
+      #layout_guidance_stack, #layout_encoder_node, #noise_node, #add_noise_node, #layout_guidance_lbl, #edge_lg_to_lenc, #edge_lenc_to_add, #edge_noise_to_add,
+      #denoising_unet_block, #denoising_unet_title, #edge_ref_sa1_to_den_sa1, #edge_ref_sa2_to_den_sa2, #edge_ref_sa3_to_den_sa3, #edge_cnet_to_den, #edge_cnet_branch_to_ha, #edge_add_to_den,
+      #vae_decoder_node, #gen_frames_stack, #gen_frames_lbl, #edge_den_to_vae_dec, #edge_vae_dec_to_gen,
+      #hoi_module_block, #hoi_title_group, #callout_ha_cone, #callout_oa_cone,
+      #hand_attn_subblock, #ha_q_txt, #ha_plus_txt, #edge_ha_mem_to_ca, #edge_ha_query, #edge_ha_ca_to_mult, #edge_ha_query_bypass, #edge_ha_mask_to_mult, #edge_ha_out,
+      #obj_attn_subblock, #oa_q_txt, #oa_plus_txt, #edge_oa_mem_to_ca, #edge_oa_query, #edge_oa_ca_to_mult, #edge_oa_query_bypass, #edge_oa_mask_to_mult, #edge_oa_out {
+        filter: grayscale(100%) opacity(0.4);
+        animation-name: colorPop;
+        animation-duration: 0.5s;
+        animation-fill-mode: forwards;
+      }
+
+      @keyframes colorPop {
+        to {
+          filter: grayscale(0%) opacity(1);
+        }
+      }
+
+      /* Timestamps Delays (Timestamp * 0.5s) */
+      /* t1 (1): 0.5s */
+      #data_prep_block, #ref_frame_img, #ref_frame_lbl {
+        animation-delay: 0.5s;
+      }
+
+      /* t2 (2): 1.0s */
+      #obj_replacement_group, #obj_replacement_img {
+        animation-delay: 1.0s;
+      }
+
+      /* t3 (3): 1.5s */
+      #input_prep_container, #input_frame_img, #input_frame_lbl, #edge_input_to_obj_rep {
+        animation-delay: 1.5s;
+      }
+
+      /* t4 (4): 2.0s */
+      #box_detection_group, #hand_mesh_aug_group, #box_detection_img, #hand_mesh_aug_frame, #hand_mesh_aug_img {
+        animation-delay: 2.0s;
+      }
+
+      /* t5 (5): 2.5s */
+      #training_pipeline_block, #ref_image_node, #ref_image_lbl, #edge_ref_to_vae_enc {
+        animation-delay: 2.5s;
+      }
+
+      /* t6 (6): 3.0s */
+      #vae_encoder_node, #ref_unet_block, #ref_unet_title, #edge_vae_enc_to_ref_unet {
+        animation-delay: 3.0s;
+      }
+
+      /* t7 (7): 3.5s */
+      #hand_mesh_stack, #controlnet_block, #hand_mesh_lbl, #controlnet_title {
+        animation-delay: 3.5s;
+      }
+
+      /* t8 (8): 4.0s */
+      #layout_guidance_stack, #layout_encoder_node, #noise_node, #add_noise_node, #layout_guidance_lbl, #edge_lg_to_lenc, #edge_lenc_to_add, #edge_noise_to_add {
+        animation-delay: 4.0s;
+      }
+
+      /* t9 (9): 4.5s */
+      #denoising_unet_block, #denoising_unet_title, #edge_ref_sa1_to_den_sa1, #edge_ref_sa2_to_den_sa2, #edge_ref_sa3_to_den_sa3, #edge_cnet_to_den, #edge_cnet_branch_to_ha, #edge_add_to_den {
+        animation-delay: 4.5s;
+      }
+
+      /* t10 (10): 5.0s */
+      #vae_decoder_node, #gen_frames_stack, #gen_frames_lbl, #edge_den_to_vae_dec, #edge_vae_dec_to_gen {
+        animation-delay: 5.0s;
+      }
+
+      /* t11 (11): 5.5s */
+      #hoi_module_block, #hoi_title_group, #callout_ha_cone, #callout_oa_cone {
+        animation-delay: 5.5s;
+      }
+
+      /* t12 (12): 6.0s */
+      #hand_attn_subblock, #ha_q_txt, #ha_plus_txt, #edge_ha_mem_to_ca, #edge_ha_query, #edge_ha_ca_to_mult, #edge_ha_query_bypass, #edge_ha_mask_to_mult, #edge_ha_out {
+        animation-delay: 6.0s;
+      }
+
+      /* t13 (13): 6.5s */
+      #obj_attn_subblock, #oa_q_txt, #oa_plus_txt, #edge_oa_mem_to_ca, #edge_oa_query, #edge_oa_ca_to_mult, #edge_oa_query_bypass, #edge_oa_mask_to_mult, #edge_oa_out {
+        animation-delay: 6.5s;
+      }
+
+      /* Subtitle Animation */
+      .narr-text {
+        opacity: 0;
+        animation-fill-mode: forwards;
+      }
+
+      @keyframes narr_step {
+        0% { opacity: 0; }
+        10% { opacity: 1; }
+        90% { opacity: 1; }
+        100% { opacity: 0; }
+      }
+
+      @keyframes narr_final {
+        0% { opacity: 0; }
+        10% { opacity: 1; }
+        100% { opacity: 1; }
+      }
+
+      #narr_ts1 { animation: narr_step 0.5s forwards; animation-delay: 0.5s; }
+      #narr_ts2 { animation: narr_step 0.5s forwards; animation-delay: 1.0s; }
+      #narr_ts3 { animation: narr_step 0.5s forwards; animation-delay: 1.5s; }
+      #narr_ts4 { animation: narr_step 0.5s forwards; animation-delay: 2.0s; }
+      #narr_ts5 { animation: narr_step 0.5s forwards; animation-delay: 2.5s; }
+      #narr_ts6 { animation: narr_step 0.5s forwards; animation-delay: 3.0s; }
+      #narr_ts7 { animation: narr_step 0.5s forwards; animation-delay: 3.5s; }
+      #narr_ts8 { animation: narr_step 0.5s forwards; animation-delay: 4.0s; }
+      #narr_ts9 { animation: narr_step 0.5s forwards; animation-delay: 4.5s; }
+      #narr_ts10 { animation: narr_step 0.5s forwards; animation-delay: 5.0s; }
+      #narr_ts11 { animation: narr_step 0.5s forwards; animation-delay: 5.5s; }
+      #narr_ts12 { animation: narr_step 0.5s forwards; animation-delay: 6.0s; }
+      #narr_ts13 { animation: narr_final 0.5s forwards; animation-delay: 6.5s; }
+    </style>
+  </defs>
+
+  <!-- ================= BACKGROUND & MAIN BLOCKS ================= -->
+
+  <!-- Data Preparation Block (Left) -->
+  <g data-id="data_prep_block" id="data_prep_block" data-class="block" data-parent="root">
+    <rect x="5" y="5" width="255" height="480" rx="6" fill="#fbe9e7" stroke="#e0e0e0" stroke-width="1"/>
+    <!-- Header Banner -->
+    <rect x="5" y="5" width="130" height="24" rx="4" fill="#c62828"/>
+    <text x="70" y="22" font-family="Arial, sans-serif" font-size="13" font-weight="bold" font-style="italic" fill="#ffffff" text-anchor="middle">Data Preparation</text>
+  </g>
+
+  <!-- Training Pipeline Block (Right Main) -->
+  <g data-id="training_pipeline_block" id="training_pipeline_block" data-class="block" data-parent="root">
+    <rect x="268" y="5" width="712" height="335" rx="6" fill="#e8f0fe" stroke="#e0e0e0" stroke-width="1"/>
+    <!-- Header Banner -->
+    <rect x="268" y="5" width="145" height="24" rx="4" fill="#2855a7"/>
+    <text x="340" y="22" font-family="Arial, sans-serif" font-size="13" font-weight="bold" font-style="italic" fill="#ffffff" text-anchor="middle">Training Pipeline</text>
+  </g>
+
+  <!-- ================= DATA PREPARATION SECTION ================= -->
+
+  <!-- Reference Frame Image -->
+  <g id="ref_frame_img" data-id="ref_frame_img" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch02298/crop_ref_frame_img.png" xlink:href="../../rasters/CVPR_2025_arch02298/crop_ref_frame_img.png" x="15" y="60" width="120" height="95" preserveAspectRatio="xMidYMid meet" /></g>
+  <text data-id="ref_frame_lbl" id="ref_frame_lbl" data-class="text_node" data-parent="data_prep_block" x="75" y="170" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">Reference Frame</text>
+
+  <!-- Object Replacement Box -->
+  <g data-id="obj_replacement_group" id="obj_replacement_group" data-class="block" data-parent="data_prep_block">
+    <rect x="148" y="55" width="102" height="82" rx="4" fill="none" stroke="#424242" stroke-dasharray="4,3" stroke-width="1"/>
+    <text x="199" y="44" font-family="Arial, sans-serif" font-size="10.5" font-weight="bold" fill="#000000" text-anchor="middle">Object</text>
+    <text x="199" y="55" font-family="Arial, sans-serif" font-size="10.5" font-weight="bold" fill="#000000" text-anchor="middle">Replacement</text>
+    <g id="obj_replacement_img" data-id="obj_replacement_img" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch02298/crop_obj_replacement_img.png" xlink:href="../../rasters/CVPR_2025_arch02298/crop_obj_replacement_img.png" x="153" y="63" width="92" height="68" preserveAspectRatio="xMidYMid meet" /></g>
+  </g>
+
+  <!-- Input Frame & Aux Container -->
+  <g data-id="input_prep_container" id="input_prep_container" data-class="block" data-parent="data_prep_block">
+    <rect x="10" y="180" width="245" height="300" rx="4" fill="none" stroke="#616161" stroke-dasharray="4,3" stroke-width="1"/>
+    
+    <!-- Input Frame Image -->
+    <g id="input_frame_img" data-id="input_frame_img" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch02298/crop_input_frame_img.png" xlink:href="../../rasters/CVPR_2025_arch02298/crop_input_frame_img.png" x="15" y="215" width="120" height="95" preserveAspectRatio="xMidYMid meet" /></g>
+    <text data-id="input_frame_lbl" id="input_frame_lbl" data-class="text_node" data-parent="input_prep_container" x="75" y="325" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">Input Frame</text>
+
+    <!-- Box Detection -->
+    <g data-id="box_detection_group" id="box_detection_group" data-class="block" data-parent="input_prep_container">
+      <rect x="158" y="200" width="82" height="82" rx="4" fill="none" stroke="#424242" stroke-dasharray="4,3" stroke-width="1"/>
+      <text x="199" y="193" font-family="Arial, sans-serif" font-size="10.5" font-weight="bold" fill="#000000" text-anchor="middle">Box</text>
+      <text x="199" y="204" font-family="Arial, sans-serif" font-size="10.5" font-weight="bold" fill="#000000" text-anchor="middle">Detection</text>
+      <g id="box_detection_img" data-id="box_detection_img" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch02298/crop_box_detection_img.png" xlink:href="../../rasters/CVPR_2025_arch02298/crop_box_detection_img.png" x="163" y="210" width="72" height="66" preserveAspectRatio="xMidYMid meet" /></g>
+    </g>
+
+    <!-- Hand Mesh Frame -->
+    <g id="hand_mesh_aug_frame" data-id="hand_mesh_aug_frame" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch02298/crop_hand_mesh_aug_frame.png" xlink:href="../../rasters/CVPR_2025_arch02298/crop_hand_mesh_aug_frame.png" x="15" y="355" width="120" height="95" preserveAspectRatio="xMidYMid meet" /></g>
+
+    <!-- Hand Mesh Augmentation -->
+    <g data-id="hand_mesh_aug_group" id="hand_mesh_aug_group" data-class="block" data-parent="input_prep_container">
+      <rect x="158" y="340" width="90" height="92" rx="4" fill="none" stroke="#424242" stroke-dasharray="4,3" stroke-width="1"/>
+      <text x="203" y="330" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#000000" text-anchor="middle">Hand Mesh</text>
+      <text x="203" y="341" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#000000" text-anchor="middle">Augmentation</text>
+      <g id="hand_mesh_aug_img" data-id="hand_mesh_aug_img" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch02298/crop_hand_mesh_aug_img.png" xlink:href="../../rasters/CVPR_2025_arch02298/crop_hand_mesh_aug_img.png" x="164" y="348" width="78" height="78" preserveAspectRatio="xMidYMid meet" /></g>
+    </g>
+  </g>
+
+  <!-- ================= TRAINING PIPELINE SECTION ================= -->
+
+  <!-- Reference Image (Top-Left in Training) -->
+  <g id="ref_image_node" data-id="ref_image_node" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch02298/crop_ref_image_node.png" xlink:href="../../rasters/CVPR_2025_arch02298/crop_ref_image_node.png" x="282" y="60" width="120" height="90" preserveAspectRatio="xMidYMid meet" /></g>
+  <text data-id="ref_image_lbl" id="ref_image_lbl" data-class="text_node" data-parent="training_pipeline_block" x="342" y="165" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">Reference Image</text>
+
+  <!-- VAE Encoder -->
+  <g data-id="vae_encoder_node" id="vae_encoder_node" data-class="composite_whole" data-parent="training_pipeline_block">
+    <polygon data-id="vae_enc_poly" id="vae_enc_poly" data-class="composite_part" data-parent="vae_encoder_node" points="420,88 490,98 490,132 420,142" fill="#90caf9" stroke="#42a5f5" stroke-width="1"/>
+    <text data-id="vae_enc_snow" id="vae_enc_snow" data-class="composite_part" data-parent="vae_encoder_node" x="430" y="80" font-family="Arial, sans-serif" font-size="14" fill="#1976d2">❄</text>
+    <text data-id="vae_enc_txt1" id="vae_enc_txt1" data-class="composite_part" data-parent="vae_encoder_node" x="455" y="112" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#0d47a1" text-anchor="middle">VAE</text>
+    <text data-id="vae_enc_txt2" id="vae_enc_txt2" data-class="composite_part" data-parent="vae_encoder_node" x="455" y="125" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#0d47a1" text-anchor="middle">Encoder</text>
+  </g>
+
+  <!-- Reference U-Net -->
+  <g data-id="ref_unet_block" id="ref_unet_block" data-class="composite_whole" data-parent="training_pipeline_block">
+    <!-- Trapezoid background -->
+    <polygon data-id="ref_unet_poly" id="ref_unet_poly" data-class="composite_part" data-parent="ref_unet_block" points="530,27 668,27 668,148 530,148" fill="#dcedc8" opacity="0.6" stroke="#aed581" stroke-width="1"/>
+    <text data-id="ref_unet_title" id="ref_unet_title" data-class="text_node" data-parent="training_pipeline_block" x="600" y="20" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#000000" text-anchor="middle">Reference U-Net</text>
+    
+    <!-- Self Attention Columns -->
+    <g data-id="ref_sa_col1" id="ref_sa_col1" data-class="composite_whole" data-parent="ref_unet_block">
+      <rect data-id="ref_sa_r1" id="ref_sa_r1" data-class="composite_part" data-parent="ref_sa_col1" x="535" y="42" width="18" height="98" rx="3" fill="#66bb6a"/>
+      <text data-id="ref_sa_t1" id="ref_sa_t1" data-class="composite_part" data-parent="ref_sa_col1" x="544" y="90" font-family="Arial, sans-serif" font-size="8.5" fill="#ffffff" font-weight="bold" text-anchor="middle" transform="rotate(90 544 90)">Self Attention</text>
+    </g>
+    <text data-id="ref_dots1" id="ref_dots1" data-class="composite_part" data-parent="ref_unet_block" x="571" y="95" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#212121">...</text>
+    <g data-id="ref_sa_col2" id="ref_sa_col2" data-class="composite_whole" data-parent="ref_unet_block">
+      <rect data-id="ref_sa_r2" id="ref_sa_r2" data-class="composite_part" data-parent="ref_sa_col2" x="586" y="42" width="18" height="98" rx="3" fill="#66bb6a"/>
+      <text data-id="ref_sa_t2" id="ref_sa_t2" data-class="composite_part" data-parent="ref_sa_col2" x="595" y="90" font-family="Arial, sans-serif" font-size="8.5" fill="#ffffff" font-weight="bold" text-anchor="middle" transform="rotate(90 595 90)">Self Attention</text>
+    </g>
+    <text data-id="ref_dots2" id="ref_dots2" data-class="composite_part" data-parent="ref_unet_block" x="618" y="95" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#212121">...</text>
+    <g data-id="ref_sa_col3" id="ref_sa_col3" data-class="composite_whole" data-parent="ref_unet_block">
+      <rect data-id="ref_sa_r3" id="ref_sa_r3" data-class="composite_part" data-parent="ref_sa_col3" x="637" y="42" width="18" height="98" rx="3" fill="#66bb6a"/>
+      <text data-id="ref_sa_t3" id="ref_sa_t3" data-class="composite_part" data-parent="ref_sa_col3" x="646" y="90" font-family="Arial, sans-serif" font-size="8.5" fill="#ffffff" font-weight="bold" text-anchor="middle" transform="rotate(90 646 90)">Self Attention</text>
+    </g>
+  </g>
+
+  <!-- ControlNet -->
+  <g data-id="controlnet_block" id="controlnet_block" data-class="composite_whole" data-parent="training_pipeline_block">
+    <polygon data-id="cnet_poly" id="cnet_poly" data-class="composite_part" data-parent="controlnet_block" points="726,58 830,47 830,140 726,128" fill="#ffe082" opacity="0.6" stroke="#ffd54f" stroke-width="1"/>
+    <text data-id="controlnet_title" id="controlnet_title" data-class="text_node" data-parent="training_pipeline_block" x="778" y="37" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#000000" text-anchor="middle">ControlNet</text>
+    
+    <rect data-id="cnet_b1" id="cnet_b1" data-class="composite_part" data-parent="controlnet_block" x="739" y="65" width="16" height="60" rx="2" fill="#fbc02d"/>
+    <rect data-id="cnet_b2" id="cnet_b2" data-class="composite_part" data-parent="controlnet_block" x="772" y="60" width="16" height="70" rx="2" fill="#fbc02d"/>
+    <rect data-id="cnet_b3" id="cnet_b3" data-class="composite_part" data-parent="controlnet_block" x="805" y="55" width="16" height="80" rx="2" fill="#fbc02d"/>
+  </g>
+
+  <!-- Hand Mesh (Top Right Stack) -->
+  <g id="hand_mesh_stack" data-id="hand_mesh_stack" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch02298/crop_hand_mesh_stack.png" xlink:href="../../rasters/CVPR_2025_arch02298/crop_hand_mesh_stack.png" x="850" y="24" width="120" height="130" preserveAspectRatio="xMidYMid meet" /></g>
+  <text data-id="hand_mesh_lbl" id="hand_mesh_lbl" data-class="text_node" data-parent="training_pipeline_block" x="896" y="174" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">Hand Mesh</text>
+
+  <!-- Layout Guidance (Bottom Left Training) -->
+  <g id="layout_guidance_stack" data-id="layout_guidance_stack" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch02298/crop_layout_guidance_stack.png" xlink:href="../../rasters/CVPR_2025_arch02298/crop_layout_guidance_stack.png" x="282" y="180" width="120" height="85" preserveAspectRatio="xMidYMid meet" /></g>
+  <text data-id="layout_guidance_lbl" id="layout_guidance_lbl" data-class="text_node" data-parent="training_pipeline_block" x="342" y="280" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">Layout Guidance</text>
+
+  <!-- Layout Encoder & Add Noise -->
+  <g data-id="layout_encoder_node" id="layout_encoder_node" data-class="composite_whole" data-parent="training_pipeline_block">
+    <polygon data-id="layout_enc_poly" id="layout_enc_poly" data-class="composite_part" data-parent="layout_encoder_node" points="420,198 490,210 490,240 420,252" fill="#b0bec5" stroke="#78909c" stroke-width="1"/>
+    <text data-id="layout_enc_t1" id="layout_enc_t1" data-class="composite_part" data-parent="layout_encoder_node" x="455" y="222" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#263238" text-anchor="middle">Layout</text>
+    <text data-id="layout_enc_t2" id="layout_enc_t2" data-class="composite_part" data-parent="layout_encoder_node" x="455" y="235" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#263238" text-anchor="middle">Encoder</text>
+  </g>
+
+  <!-- Add Symbol -->
+  <g data-id="add_noise_node" id="add_noise_node" data-class="standalone_node" data-parent="training_pipeline_block">
+    <circle cx="510" cy="225" r="10" fill="#ffffff" stroke="#212121" stroke-width="1.5"/>
+    <line x1="504" y1="225" x2="516" y2="225" stroke="#212121" stroke-width="1.5"/>
+    <line x1="510" y1="219" x2="510" y2="231" stroke="#212121" stroke-width="1.5"/>
+  </g>
+
+  <!-- Noise Box -->
+  <g id="noise_node" data-id="noise_node" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch02298/crop_noise_node.png" xlink:href="../../rasters/CVPR_2025_arch02298/crop_noise_node.png" x="491" y="255" width="30" height="30" preserveAspectRatio="xMidYMid meet" /></g>
+
+  <!-- Denoising U-Net -->
+  <g data-id="denoising_unet_block" id="denoising_unet_block" data-class="composite_whole" data-parent="training_pipeline_block">
+    <!-- Hourglass shape / dual trapezoids -->
+    <polygon data-id="denoise_poly" id="denoise_poly" data-class="composite_part" data-parent="denoising_unet_block" points="531,165 760,165 760,295 531,295" fill="#eceff1" opacity="0.8" stroke="#cfd8dc" stroke-width="1"/>
+    
+    <!-- Layers in Denoising U-Net -->
+    <!-- Col 1: SA -->
+    <rect data-id="den_c1_sa" id="den_c1_sa" data-class="composite_part" data-parent="denoising_unet_block" x="536" y="190" width="18" height="88" rx="2" fill="#66bb6a"/>
+    <text data-id="den_c1_sa_t" id="den_c1_sa_t" data-class="composite_part" data-parent="denoising_unet_block" x="545" y="234" font-family="Arial, sans-serif" font-size="8" fill="#ffffff" font-weight="bold" text-anchor="middle" transform="rotate(90 545 234)">Self Attention</text>
+
+    <!-- Col 2: Temp Attn -->
+    <rect data-id="den_c2_ta" id="den_c2_ta" data-class="composite_part" data-parent="denoising_unet_block" x="556" y="190" width="18" height="88" rx="2" fill="#42a5f5"/>
+    <text data-id="den_c2_ta_t" id="den_c2_ta_t" data-class="composite_part" data-parent="denoising_unet_block" x="565" y="234" font-family="Arial, sans-serif" font-size="7.5" fill="#ffffff" font-weight="bold" text-anchor="middle" transform="rotate(90 565 234)">Temp Attention</text>
+
+    <!-- Col 3: SA -->
+    <rect data-id="den_c3_sa" id="den_c3_sa" data-class="composite_part" data-parent="denoising_unet_block" x="586" y="190" width="18" height="88" rx="2" fill="#66bb6a"/>
+    <text data-id="den_c3_sa_t" id="den_c3_sa_t" data-class="composite_part" data-parent="denoising_unet_block" x="595" y="234" font-family="Arial, sans-serif" font-size="8" fill="#ffffff" font-weight="bold" text-anchor="middle" transform="rotate(90 595 234)">Self Attention</text>
+
+    <!-- Col 4: Hand Attn -->
+    <rect data-id="den_c4_ha" id="den_c4_ha" data-class="composite_part" data-parent="denoising_unet_block" x="606" y="190" width="18" height="88" rx="2" fill="#ffca28"/>
+    <text data-id="den_c4_ha_t" id="den_c4_ha_t" data-class="composite_part" data-parent="denoising_unet_block" x="615" y="234" font-family="Arial, sans-serif" font-size="7.5" fill="#ffffff" font-weight="bold" text-anchor="middle" transform="rotate(90 615 234)">Hand Attention</text>
+
+    <!-- Col 5: Obj Attn -->
+    <rect data-id="den_c5_oa" id="den_c5_oa" data-class="composite_part" data-parent="denoising_unet_block" x="626" y="190" width="18" height="88" rx="2" fill="#ff7043"/>
+    <text data-id="den_c5_oa_t" id="den_c5_oa_t" data-class="composite_part" data-parent="denoising_unet_block" x="635" y="234" font-family="Arial, sans-serif" font-size="8" fill="#ffffff" font-weight="bold" text-anchor="middle" transform="rotate(90 635 234)">Obj Attention</text>
+
+    <!-- Col 6: Temp Attn -->
+    <rect data-id="den_c6_ta" id="den_c6_ta" data-class="composite_part" data-parent="denoising_unet_block" x="646" y="190" width="18" height="88" rx="2" fill="#42a5f5"/>
+    <text data-id="den_c6_ta_t" id="den_c6_ta_t" data-class="composite_part" data-parent="denoising_unet_block" x="655" y="234" font-family="Arial, sans-serif" font-size="7.5" fill="#ffffff" font-weight="bold" text-anchor="middle" transform="rotate(90 655 234)">Temp Attention</text>
+
+    <!-- Col 7: SA -->
+    <rect data-id="den_c7_sa" id="den_c7_sa" data-class="composite_part" data-parent="denoising_unet_block" x="674" y="190" width="18" height="88" rx="2" fill="#66bb6a"/>
+    <text data-id="den_c7_sa_t" id="den_c7_sa_t" data-class="composite_part" data-parent="denoising_unet_block" x="683" y="234" font-family="Arial, sans-serif" font-size="8" fill="#ffffff" font-weight="bold" text-anchor="middle" transform="rotate(90 683 234)">Self Attention</text>
+
+    <!-- Col 8: Hand Attn -->
+    <rect data-id="den_c8_ha" id="den_c8_ha" data-class="composite_part" data-parent="denoising_unet_block" x="694" y="190" width="18" height="88" rx="2" fill="#ffca28"/>
+    <text data-id="den_c8_ha_t" id="den_c8_ha_t" data-class="composite_part" data-parent="denoising_unet_block" x="703" y="234" font-family="Arial, sans-serif" font-size="7.5" fill="#ffffff" font-weight="bold" text-anchor="middle" transform="rotate(90 703 234)">Hand Attention</text>
+
+    <!-- Col 9: Obj Attn -->
+    <rect data-id="den_c9_oa" id="den_c9_oa" data-class="composite_part" data-parent="denoising_unet_block" x="714" y="190" width="18" height="88" rx="2" fill="#ff7043"/>
+    <text data-id="den_c9_oa_t" id="den_c9_oa_t" data-class="composite_part" data-parent="denoising_unet_block" x="723" y="234" font-family="Arial, sans-serif" font-size="8" fill="#ffffff" font-weight="bold" text-anchor="middle" transform="rotate(90 723 234)">Obj Attention</text>
+
+    <!-- Col 10: Temp Attn -->
+    <rect data-id="den_c10_ta" id="den_c10_ta" data-class="composite_part" data-parent="denoising_unet_block" x="734" y="190" width="18" height="88" rx="2" fill="#42a5f5"/>
+    <text data-id="den_c10_ta_t" id="den_c10_ta_t" data-class="composite_part" data-parent="denoising_unet_block" x="743" y="234" font-family="Arial, sans-serif" font-size="7.5" fill="#ffffff" font-weight="bold" text-anchor="middle" transform="rotate(90 743 234)">Temp Attention</text>
+
+    <text data-id="denoising_unet_title" id="denoising_unet_title" data-class="text_node" data-parent="training_pipeline_block" x="670" y="318" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#000000" text-anchor="middle">Denoising U-Net</text>
+  </g>
+
+  <!-- VAE Decoder -->
+  <g data-id="vae_decoder_node" id="vae_decoder_node" data-class="composite_whole" data-parent="training_pipeline_block">
+    <polygon data-id="vae_dec_poly" id="vae_dec_poly" data-class="composite_part" data-parent="vae_decoder_node" points="764,210 834,198 834,252 764,240" fill="#90caf9" stroke="#42a5f5" stroke-width="1"/>
+    <text data-id="vae_dec_snow" id="vae_dec_snow" data-class="composite_part" data-parent="vae_decoder_node" x="814" y="192" font-family="Arial, sans-serif" font-size="14" fill="#1976d2">❄</text>
+    <text data-id="vae_dec_txt1" id="vae_dec_txt1" data-class="composite_part" data-parent="vae_decoder_node" x="795" y="222" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#0d47a1" text-anchor="middle">VAE</text>
+    <text data-id="vae_dec_txt2" id="vae_dec_txt2" data-class="composite_part" data-parent="vae_decoder_node" x="795" y="235" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#0d47a1" text-anchor="middle">Decoder</text>
+  </g>
+
+  <!-- Generated Frames (Bottom Right Stack) -->
+  <g id="gen_frames_stack" data-id="gen_frames_stack" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch02298/crop_gen_frames_stack.png" xlink:href="../../rasters/CVPR_2025_arch02298/crop_gen_frames_stack.png" x="850" y="175" width="125" height="90" preserveAspectRatio="xMidYMid meet" /></g>
+  <text data-id="gen_frames_lbl" id="gen_frames_lbl" data-class="text_node" data-parent="training_pipeline_block" x="900" y="280" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">Generated Frames</text>
+
+  <!-- ================= HOI RESTORATION MODULE (BOTTOM BLOCK) ================= -->
+
+  <g data-id="hoi_module_block" id="hoi_module_block" data-class="block" data-parent="root">
+    <rect x="268" y="345" width="712" height="140" rx="6" fill="#fffde7" stroke="#616161" stroke-dasharray="4,3" stroke-width="1.2"/>
+    
+    <!-- Big HOI Module Banner Left -->
+    <g data-id="hoi_title_group" id="hoi_title_group" data-class="composite_whole" data-parent="hoi_module_block">
+      <rect data-id="hoi_title_bg" id="hoi_title_bg" data-class="composite_part" data-parent="hoi_title_group" x="275" y="352" width="95" height="126" rx="5" fill="#c48800"/>
+      <text data-id="hoi_title_t1" id="hoi_title_t1" data-class="composite_part" data-parent="hoi_title_group" x="322" y="392" font-family="Arial, sans-serif" font-size="14" font-style="italic" font-weight="bold" fill="#ffffff" text-anchor="middle">HOI</text>
+      <text data-id="hoi_title_t2" id="hoi_title_t2" data-class="composite_part" data-parent="hoi_title_group" x="322" y="414" font-family="Arial, sans-serif" font-size="13" font-style="italic" font-weight="bold" fill="#ffffff" text-anchor="middle">Restoration</text>
+      <text data-id="hoi_title_t3" id="hoi_title_t3" data-class="composite_part" data-parent="hoi_title_group" x="322" y="436" font-family="Arial, sans-serif" font-size="13" font-style="italic" font-weight="bold" fill="#ffffff" text-anchor="middle">Module</text>
+    </g>
+
+    <!-- Sub-Block 1: Hand Attention -->
+    <g data-id="hand_attn_subblock" id="hand_attn_subblock" data-class="composite_whole" data-parent="hoi_module_block">
+      <!-- Title Banner -->
+      <rect data-id="ha_sub_bg" id="ha_sub_bg" data-class="composite_part" data-parent="hand_attn_subblock" x="382" y="350" width="106" height="20" rx="4" fill="#ffca28"/>
+      <text data-id="ha_sub_txt" id="ha_sub_txt" data-class="composite_part" data-parent="hand_attn_subblock" x="435" y="364" font-family="Arial, sans-serif" font-size="11" font-style="italic" font-weight="bold" fill="#ffffff" text-anchor="middle">Hand Attention</text>
+      
+      <!-- Hand Texture Memory Bank -->
+      <g data-id="ha_mem_bank" id="ha_mem_bank" data-class="composite_whole" data-parent="hand_attn_subblock">
+        <rect data-id="ha_mem_r1" id="ha_mem_r1" data-class="composite_part" data-parent="ha_mem_bank" x="395" y="378" width="95" height="60" rx="6" fill="none" stroke="#1565c0" stroke-dasharray="3,3" stroke-width="1.2"/>
+        <rect data-id="ha_mem_b1" id="ha_mem_b1" data-class="composite_part" data-parent="ha_mem_bank" x="402" y="386" width="10" height="44" rx="2" fill="#ffb300"/>
+        <rect data-id="ha_mem_b2" id="ha_mem_b2" data-class="composite_part" data-parent="ha_mem_bank" x="418" y="386" width="10" height="44" rx="2" fill="#ffb300"/>
+        <rect data-id="ha_mem_b3" id="ha_mem_b3" data-class="composite_part" data-parent="ha_mem_bank" x="434" y="386" width="10" height="44" rx="2" fill="#ffb300"/>
+        <text data-id="ha_mem_dots" id="ha_mem_dots" data-class="composite_part" data-parent="ha_mem_bank" x="456" y="410" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#212121">...</text>
+        <rect data-id="ha_mem_b4" id="ha_mem_b4" data-class="composite_part" data-parent="ha_mem_bank" x="468" y="386" width="10" height="44" rx="2" fill="#ffb300"/>
+        <text data-id="ha_mem_lbl1" id="ha_mem_lbl1" data-class="composite_part" data-parent="ha_mem_bank" x="442" y="452" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#000000" text-anchor="middle">Hand Texture</text>
+        <text data-id="ha_mem_lbl2" id="ha_mem_lbl2" data-class="composite_part" data-parent="ha_mem_bank" x="442" y="464" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#000000" text-anchor="middle">Memory Bank</text>
+      </g>
+
+      <!-- Hand Cross Attention Box -->
+      <rect data-id="ha_ca_box" id="ha_ca_box" data-class="composite_part" data-parent="hand_attn_subblock" x="528" y="390" width="72" height="42" rx="5" fill="#ffb300"/>
+      <text data-id="ha_ca_t1" id="ha_ca_t1" data-class="composite_part" data-parent="hand_attn_subblock" x="564" y="407" font-family="Arial, sans-serif" font-size="10.5" font-weight="bold" fill="#ffffff" text-anchor="middle">Cross</text>
+      <text data-id="ha_ca_t2" id="ha_ca_t2" data-class="composite_part" data-parent="hand_attn_subblock" x="564" y="420" font-family="Arial, sans-serif" font-size="10.5" font-weight="bold" fill="#ffffff" text-anchor="middle">Attention</text>
+      <text data-id="ha_kv_txt" id="ha_kv_txt" data-class="composite_part" data-parent="hand_attn_subblock" x="506" y="405" font-family="Arial, sans-serif" font-size="8.5" font-weight="bold" fill="#000000" text-anchor="middle">Key</text>
+      <text data-id="ha_kv_txt2" id="ha_kv_txt2" data-class="composite_part" data-parent="hand_attn_subblock" x="506" y="415" font-family="Arial, sans-serif" font-size="8.5" font-weight="bold" fill="#000000" text-anchor="middle">Value</text>
+      
+      <!-- Hand Mask -->
+      <g data-id="ha_mask_group" id="ha_mask_group" data-class="composite_whole" data-parent="hand_attn_subblock">
+        <text data-id="ha_mask_lbl1" id="ha_mask_lbl1" data-class="composite_part" data-parent="ha_mask_group" x="640" y="366" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#000000" text-anchor="middle">Hand</text>
+        <text data-id="ha_mask_lbl2" id="ha_mask_lbl2" data-class="composite_part" data-parent="ha_mask_group" x="640" y="376" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#000000" text-anchor="middle">Mask</text>
+        <rect data-id="ha_mask_bg" id="ha_mask_bg" data-class="composite_part" data-parent="ha_mask_group" x="620" y="382" width="38" height="42" fill="#000000" stroke="#424242"/>
+        <rect data-id="ha_mask_sq1" id="ha_mask_sq1" data-class="composite_part" data-parent="ha_mask_group" x="628" y="394" width="6" height="6" fill="#ffffff"/>
+        <rect data-id="ha_mask_sq2" id="ha_mask_sq2" data-class="composite_part" data-parent="ha_mask_group" x="642" y="404" width="7" height="7" fill="#ffffff"/>
+      </g>
+
+      <!-- Multiplier Symbol -->
+      <circle data-id="ha_mult_circle" id="ha_mult_circle" data-class="composite_part" data-parent="hand_attn_subblock" x="564" y="460" cx="564" cy="460" r="6.5" fill="#ffffff" stroke="#212121" stroke-width="1.2"/>
+      <line data-id="ha_mult_l1" id="ha_mult_l1" data-class="composite_part" data-parent="hand_attn_subblock" x1="560" y1="456" x2="568" y2="464" stroke="#212121" stroke-width="1.2"/>
+      <line data-id="ha_mult_l2" id="ha_mult_l2" data-class="composite_part" data-parent="hand_attn_subblock" x1="560" y1="464" x2="568" y2="456" stroke="#212121" stroke-width="1.2"/>
+    </g>
+
+    <!-- Sub-Block 2: Object Attention -->
+    <g data-id="obj_attn_subblock" id="obj_attn_subblock" data-class="composite_part" data-parent="hoi_module_block">
+      <!-- Title Banner -->
+      <rect data-id="oa_sub_bg" id="oa_sub_bg" data-class="composite_part" data-parent="obj_attn_subblock" x="686" y="350" width="116" height="20" rx="4" fill="#ff7043"/>
+      <text data-id="oa_sub_txt" id="oa_sub_txt" data-class="composite_part" data-parent="obj_attn_subblock" x="744" y="364" font-family="Arial, sans-serif" font-size="11" font-style="italic" font-weight="bold" fill="#ffffff" text-anchor="middle">Object Attention</text>
+      
+      <!-- Object Texture Memory Bank -->
+      <g data-id="oa_mem_bank" id="oa_mem_bank" data-class="composite_whole" data-parent="obj_attn_subblock">
+        <rect data-id="oa_mem_r1" id="oa_mem_r1" data-class="composite_part" data-parent="oa_mem_bank" x="700" y="378" width="92" height="60" rx="6" fill="none" stroke="#1565c0" stroke-dasharray="3,3" stroke-width="1.2"/>
+        <rect data-id="oa_mem_b1" id="oa_mem_b1" data-class="composite_part" data-parent="oa_mem_bank" x="708" y="386" width="10" height="44" rx="2" fill="#ff7043"/>
+        <rect data-id="oa_mem_b2" id="oa_mem_b2" data-class="composite_part" data-parent="oa_mem_bank" x="723" y="386" width="10" height="44" rx="2" fill="#ff7043"/>
+        <rect data-id="oa_mem_b3" id="oa_mem_b3" data-class="composite_part" data-parent="oa_mem_bank" x="738" y="386" width="10" height="44" rx="2" fill="#ff7043"/>
+        <text data-id="oa_mem_dots" id="oa_mem_dots" data-class="composite_part" data-parent="oa_mem_bank" x="758" y="410" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#212121">...</text>
+        <rect data-id="oa_mem_b4" id="oa_mem_b4" data-class="composite_part" data-parent="oa_mem_bank" x="774" y="386" width="10" height="44" rx="2" fill="#ff7043"/>
+        <text data-id="oa_mem_lbl1" id="oa_mem_lbl1" data-class="composite_part" data-parent="oa_mem_bank" x="746" y="452" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#000000" text-anchor="middle">Object Texture</text>
+        <text data-id="oa_mem_lbl2" id="oa_mem_lbl2" data-class="composite_part" data-parent="oa_mem_bank" x="746" y="464" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#000000" text-anchor="middle">Memory Bank</text>
+      </g>
+
+      <!-- Object Cross Attention Box -->
+      <rect data-id="oa_ca_box" id="oa_ca_box" data-class="composite_part" data-parent="obj_attn_subblock" x="834" y="390" width="76" height="42" rx="5" fill="#ff7043"/>
+      <text data-id="oa_ca_t1" id="oa_ca_t1" data-class="composite_part" data-parent="obj_attn_subblock" x="872" y="407" font-family="Arial, sans-serif" font-size="10.5" font-weight="bold" fill="#ffffff" text-anchor="middle">Cross</text>
+      <text data-id="oa_ca_t2" id="oa_ca_t2" data-class="composite_part" data-parent="obj_attn_subblock" x="872" y="420" font-family="Arial, sans-serif" font-size="10.5" font-weight="bold" fill="#ffffff" text-anchor="middle">Attention</text>
+      <text data-id="oa_kv_txt" id="oa_kv_txt" data-class="composite_part" data-parent="obj_attn_subblock" x="811" y="405" font-family="Arial, sans-serif" font-size="8.5" font-weight="bold" fill="#000000" text-anchor="middle">Key</text>
+      <text data-id="oa_kv_txt2" id="oa_kv_txt2" data-class="composite_part" data-parent="obj_attn_subblock" x="811" y="415" font-family="Arial, sans-serif" font-size="8.5" font-weight="bold" fill="#000000" text-anchor="middle">Value</text>
+
+      <!-- Object Mask -->
+      <g data-id="oa_mask_group" id="oa_mask_group" data-class="composite_whole" data-parent="obj_attn_subblock">
+        <text data-id="oa_mask_lbl1" id="oa_mask_lbl1" data-class="composite_part" data-parent="oa_mask_group" x="942" y="366" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#000000" text-anchor="middle">Object</text>
+        <text data-id="oa_mask_lbl2" id="oa_mask_lbl2" data-class="composite_part" data-parent="oa_mask_group" x="942" y="376" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#000000" text-anchor="middle">Mask</text>
+        <rect data-id="oa_mask_bg" id="oa_mask_bg" data-class="composite_part" data-parent="oa_mask_group" x="923" y="382" width="38" height="42" fill="#000000" stroke="#424242"/>
+        <rect data-id="oa_mask_sq" id="oa_mask_sq" data-class="composite_part" data-parent="oa_mask_group" x="939" y="394" width="6" height="20" fill="#ffffff"/>
+      </g>
+
+      <!-- Multiplier Symbol -->
+      <circle data-id="oa_mult_circle" id="oa_mult_circle" data-class="composite_part" data-parent="obj_attn_subblock" x="872" y="460" cx="872" cy="460" r="6.5" fill="#ffffff" stroke="#212121" stroke-width="1.2"/>
+      <line data-id="oa_mult_l1" id="oa_mult_l1" data-class="composite_part" data-parent="obj_attn_subblock" x1="868" y1="456" x2="876" y2="464" stroke="#212121" stroke-width="1.2"/>
+      <line data-id="oa_mult_l2" id="oa_mult_l2" data-class="composite_part" data-parent="obj_attn_subblock" x1="868" y1="464" x2="876" y2="456" stroke="#212121" stroke-width="1.2"/>
+    </g>
+  </g>
+
+  <!-- ================= EDGES & CONNECTIONS ================= -->
+
+  <!-- Curved Red Arrow: Input Frame -> Object Replacement -->
+  <path data-id="edge_input_to_obj_rep" id="edge_input_to_obj_rep" data-class="edge" 
+        data-source="input_frame_img" data-target="obj_replacement_group"
+        d="M 86 215 C 80 160, 203 185, 201 138" 
+        fill="none" stroke="#d32f2f" stroke-width="2.5" marker-end="url(#arrow-red)"/>
+
+  <!-- Straight Black: Ref Image -> VAE Encoder -->
+  <line data-id="edge_ref_to_vae_enc" id="edge_ref_to_vae_enc" data-class="edge"
+        data-source="ref_image_node" data-target="vae_encoder_node"
+        x1="402" y1="115" x2="418" y2="115"
+        stroke="#1e1e1e" stroke-width="1.5" marker-end="url(#arrow-black)"/>
+
+  <!-- Straight Black: VAE Encoder -> Ref UNet -->
+  <line data-id="edge_vae_enc_to_ref_unet" id="edge_vae_enc_to_ref_unet" data-class="edge"
+        data-source="vae_encoder_node" data-target="ref_sa_col1"
+        x1="490" y1="115" x2="533" y2="115"
+        stroke="#1e1e1e" stroke-width="1.5" marker-end="url(#arrow-black)"/>
+
+  <!-- Green Connections from Ref UNet to Denoising UNet -->
+  <line data-id="edge_ref_sa1_to_den_sa1" id="edge_ref_sa1_to_den_sa1" data-class="edge"
+        data-source="ref_sa_col1" data-target="den_c1_sa"
+        x1="544" y1="140" x2="544" y2="188"
+        stroke="#689f38" stroke-width="1.8" marker-end="url(#arrow-green)"/>
+
+  <line data-id="edge_ref_sa2_to_den_sa2" id="edge_ref_sa2_to_den_sa2" data-class="edge"
+        data-source="ref_sa_col2" data-target="den_c3_sa"
+        x1="595" y1="140" x2="595" y2="188"
+        stroke="#689f38" stroke-width="1.8" marker-end="url(#arrow-green)"/>
+
+  <path data-id="edge_ref_sa3_to_den_sa3" id="edge_ref_sa3_to_den_sa3" data-class="edge"
+        data-source="ref_sa_col3" data-target="den_c7_sa"
+        d="M 646 140 L 646 160 Q 646 175, 683 175 L 683 188"
+        fill="none" stroke="#689f38" stroke-width="1.8" marker-end="url(#arrow-green)"/>
+
+  <!-- Yellow / CNet Connections -->
+  <path data-id="edge_cnet_to_den" id="edge_cnet_to_den" data-class="edge"
+        data-source="controlnet_block" data-target="den_c8_ha"
+        d="M 726 95 L 703 95 L 703 188"
+        fill="none" stroke="#fbc02d" stroke-width="2" marker-end="url(#arrow-yellow)"/>
+
+  <path data-id="edge_cnet_branch_to_ha" id="edge_cnet_branch_to_ha" data-class="edge"
+        data-source="controlnet_block" data-target="den_c4_ha"
+        d="M 703 145 L 615 145 L 615 188"
+        fill="none" stroke="#fbc02d" stroke-width="2" marker-end="url(#arrow-yellow)"/>
+
+  <!-- Layout Guidance Flow -->
+  <line data-id="edge_lg_to_lenc" id="edge_lg_to_lenc" data-class="edge"
+        data-source="layout_guidance_stack" data-target="layout_encoder_node"
+        x1="403" y1="225" x2="418" y2="225"
+        stroke="#1e1e1e" stroke-width="1.5" marker-end="url(#arrow-black)"/>
+
+  <line data-id="edge_lenc_to_add" id="edge_lenc_to_add" data-class="edge"
+        data-source="layout_encoder_node" data-target="add_noise_node"
+        x1="490" y1="225" x2="498" y2="225"
+        stroke="#1e1e1e" stroke-width="1.5" marker-end="url(#arrow-black)"/>
+
+  <line data-id="edge_noise_to_add" id="edge_noise_to_add" data-class="edge"
+        data-source="noise_node" data-target="add_noise_node"
+        x1="510" y1="255" x2="510" y2="237"
+        stroke="#1e1e1e" stroke-width="1.5" marker-end="url(#arrow-black)"/>
+
+  <line data-id="edge_add_to_den" id="edge_add_to_den" data-class="edge"
+        data-source="add_noise_node" data-target="den_c1_sa"
+        x1="520" y1="225" x2="534" y2="225"
+        stroke="#1e1e1e" stroke-width="1.5" marker-end="url(#arrow-black)"/>
+
+  <!-- Denoising UNet to VAE Decoder to Output -->
+  <line data-id="edge_den_to_vae_dec" id="edge_den_to_vae_dec" data-class="edge"
+        data-source="denoising_unet_block" data-target="vae_decoder_node"
+        x1="760" y1="225" x2="763" y2="225"
+        stroke="#1e1e1e" stroke-width="1.5" marker-end="url(#arrow-black)"/>
+
+  <line data-id="edge_vae_dec_to_gen" id="edge_vae_dec_to_gen" data-class="edge"
+        data-source="vae_decoder_node" data-target="gen_frames_stack"
+        x1="834" y1="225" x2="846" y2="225"
+        stroke="#1e1e1e" stroke-width="1.5" marker-end="url(#arrow-black)"/>
+
+  <!-- HOI ZOOM-IN CALLOUT CONES (Polygons) -->
+  <polygon data-id="callout_ha_cone" id="callout_ha_cone" data-class="composite_part" data-parent="hoi_module_block"
+           points="615,278 590,345 660,345" fill="#fff9c4" opacity="0.4"/>
+  <polygon data-id="callout_oa_cone" id="callout_oa_cone" data-class="composite_part" data-parent="hoi_module_block"
+           points="723,278 686,345 760,345" fill="#ffccbc" opacity="0.4"/>
+
+  <!-- Internal Connections within HOI Hand Attention -->
+  <line data-id="edge_ha_mem_to_ca" id="edge_ha_mem_to_ca" data-class="edge"
+        data-source="ha_mem_bank" data-target="ha_ca_box"
+        x1="490" y1="410" x2="526" y2="410"
+        stroke="#1e1e1e" stroke-width="1.5" marker-end="url(#arrow-black)"/>
+
+  <!-- Query line to Hand CA -->
+  <path data-id="edge_ha_query" id="edge_ha_query" data-class="edge"
+        data-source="ha_ca_box" data-target="ha_mult_circle"
+        d="M 564 370 L 564 388"
+        stroke="#fbc02d" stroke-width="2.5" marker-end="url(#arrow-yellow)"/>
+  <text data-id="ha_q_txt" id="ha_q_txt" data-class="text_node" data-parent="hand_attn_subblock" x="548" y="377" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#000000" text-anchor="middle">Query</text>
+
+  <!-- Hand CA to Mult and Bypass Addition -->
+  <line data-id="edge_ha_ca_to_mult" id="edge_ha_ca_to_mult" data-class="edge"
+        data-source="ha_ca_box" data-target="ha_mult_circle"
+        x1="564" y1="432" x2="564" y2="452"
+        stroke="#1e1e1e" stroke-width="1.5" marker-end="url(#arrow-black)"/>
+
+  <path data-id="edge_ha_query_bypass" id="edge_ha_query_bypass" data-class="edge"
+        data-source="ha_ca_box" data-target="ha_mult_circle"
+        d="M 600 375 L 600 442 L 569 442"
+        fill="none" stroke="#1e1e1e" stroke-width="1.2"/>
+  <text data-id="ha_plus_txt" id="ha_plus_txt" data-class="text_node" data-parent="hand_attn_subblock" x="573" y="439" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#000000">+</text>
+
+  <!-- Hand Mask to Mult -->
+  <path data-id="edge_ha_mask_to_mult" id="edge_ha_mask_to_mult" data-class="edge"
+        data-source="ha_mask_group" data-target="ha_mult_circle"
+        d="M 625 424 L 625 460 L 572 460"
+        fill="none" stroke="#1e1e1e" stroke-width="1.2" marker-end="url(#arrow-black)"/>
+
+  <!-- Output from Hand Mult -->
+  <line data-id="edge_ha_out" id="edge_ha_out" data-class="edge"
+        data-source="ha_mult_circle" data-target="hoi_module_block"
+        x1="564" y1="467" x2="564" y2="480"
+        stroke="#1e1e1e" stroke-width="1.5" marker-end="url(#arrow-black)"/>
+
+  <!-- Internal Connections within HOI Object Attention -->
+  <line data-id="edge_oa_mem_to_ca" id="edge_oa_mem_to_ca" data-class="edge"
+        data-source="oa_mem_bank" data-target="oa_ca_box"
+        x1="792" y1="410" x2="832" y2="410"
+        stroke="#1e1e1e" stroke-width="1.5" marker-end="url(#arrow-black)"/>
+
+  <!-- Query line to Object CA -->
+  <path data-id="edge_oa_query" id="edge_oa_query" data-class="edge"
+        data-source="oa_ca_box" data-target="oa_mult_circle"
+        d="M 872 370 L 872 388"
+        stroke="#1e1e1e" stroke-width="1.5" marker-end="url(#arrow-black)"/>
+  <text data-id="oa_q_txt" id="oa_q_txt" data-class="text_node" data-parent="obj_attn_subblock" x="856" y="377" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#000000" text-anchor="middle">Query</text>
+
+  <!-- Object CA to Mult and Bypass Addition -->
+  <line data-id="edge_oa_ca_to_mult" id="edge_oa_ca_to_mult" data-class="edge"
+        data-source="oa_ca_box" data-target="oa_mult_circle"
+        x1="872" y1="432" x2="872" y2="452"
+        stroke="#1e1e1e" stroke-width="1.5" marker-end="url(#arrow-black)"/>
+
+  <path data-id="edge_oa_query_bypass" id="edge_oa_query_bypass" data-class="edge"
+        data-source="oa_ca_box" data-target="oa_mult_circle"
+        d="M 910 375 L 910 442 L 877 442"
+        fill="none" stroke="#1e1e1e" stroke-width="1.2"/>
+  <text data-id="oa_plus_txt" id="oa_plus_txt" data-class="text_node" data-parent="obj_attn_subblock" x="881" y="439" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#000000">+</text>
+
+  <!-- Object Mask to Mult -->
+  <path data-id="edge_oa_mask_to_mult" id="edge_oa_mask_to_mult" data-class="edge"
+        data-source="oa_mask_group" data-target="oa_mult_circle"
+        d="M 935 424 L 935 460 L 880 460"
+        fill="none" stroke="#1e1e1e" stroke-width="1.2" marker-end="url(#arrow-black)"/>
+
+  <!-- Output from Object Mult -->
+  <line data-id="edge_oa_out" id="edge_oa_out" data-class="edge"
+        data-source="oa_mult_circle" data-target="hoi_module_block"
+        x1="872" y1="467" x2="872" y2="480"
+        stroke="#1e1e1e" stroke-width="1.5" marker-end="url(#arrow-black)"/>
+
+  <!-- ================= DYNAMIC NARRATION BANNER ================= -->
+  <g id="narration_banner">
+    <rect x="100" y="500" width="785" height="55" rx="6" fill="#ffffff" fill-opacity="0.9" stroke="#cfd8dc" stroke-width="1"/>
+    
+    <text id="narr_ts1" class="narr-text" x="50%" y="525" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#263238">
+      <tspan x="50%" dy="0">Data preparation begins by taking a reference frame to locate the initial hand and object bounding boxes.</tspan>
+    </text>
+
+    <text id="narr_ts2" class="narr-text" x="50%" y="525" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#263238">
+      <tspan x="50%" dy="0">The object within the reference frame is isolated and replaced to serve as the target object.</tspan>
+    </text>
+
+    <text id="narr_ts3" class="narr-text" x="50%" y="525" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#263238">
+      <tspan x="50%" dy="0">The source video provides input frames capturing human motion and interaction with the object.</tspan>
+    </text>
+
+    <text id="narr_ts4" class="narr-text" x="50%" y="520" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="bold" fill="#263238">
+      <tspan x="50%" dy="0">Bounding box detection defines spatial layouts, while hand mesh augmentation applies random</tspan>
+      <tspan x="50%" dy="1.2em">position shifts to decouple pose from fixed locations.</tspan>
+    </text>
+
+    <text id="narr_ts5" class="narr-text" x="50%" y="525" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#263238">
+      <tspan x="50%" dy="0">In the training pipeline, the reference image supplies the visual appearance context of the target object.</tspan>
+    </text>
+
+    <text id="narr_ts6" class="narr-text" x="50%" y="520" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="bold" fill="#263238">
+      <tspan x="50%" dy="0">A frozen VAE encoder encodes this image, while the Reference U-Net extracts multi-scale</tspan>
+      <tspan x="50%" dy="1.2em">appearance features across self-attention layers.</tspan>
+    </text>
+
+    <text id="narr_ts7" class="narr-text" x="50%" y="520" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="bold" fill="#263238">
+      <tspan x="50%" dy="0">Sequences of reconstructed hand meshes are processed by ControlNet to inject accurate hand pose</tspan>
+      <tspan x="50%" dy="1.2em">and structural cues.</tspan>
+    </text>
+
+    <text id="narr_ts8" class="narr-text" x="50%" y="520" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="bold" fill="#263238">
+      <tspan x="50%" dy="0">Layout guidance is encoded through a lightweight layout encoder and combined with Gaussian noise</tspan>
+      <tspan x="50%" dy="1.2em">to initialize the diffusion latent.</tspan>
+    </text>
+
+    <text id="narr_ts9" class="narr-text" x="50%" y="520" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="bold" fill="#263238">
+      <tspan x="50%" dy="0">The Denoising U-Net integrates reference self-attention, ControlNet features, specialized hand</tspan>
+      <tspan x="50%" dy="1.2em">and object attention, and temporal attention layers.</tspan>
+    </text>
+
+    <text id="narr_ts10" class="narr-text" x="50%" y="520" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="bold" fill="#263238">
+      <tspan x="50%" dy="0">The denoised latent is decoded by the VAE decoder to reconstruct temporally coherent</tspan>
+      <tspan x="50%" dy="1.2em">reenacted video frames.</tspan>
+    </text>
+
+    <text id="narr_ts11" class="narr-text" x="50%" y="520" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="bold" fill="#263238">
+      <tspan x="50%" dy="0">The Hand-Object Interaction Restoration Module refines fine-grained details through dedicated</tspan>
+      <tspan x="50%" dy="1.2em">hand and object memory banks.</tspan>
+    </text>
+
+    <text id="narr_ts12" class="narr-text" x="50%" y="520" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="bold" fill="#263238">
+      <tspan x="50%" dy="0">In Hand Attention, ControlNet queries perform cross-attention with a Hand Texture Memory Bank</tspan>
+      <tspan x="50%" dy="1.2em">under the guidance of a hand mask.</tspan>
+    </text>
+
+    <text id="narr_ts13" class="narr-text" x="50%" y="520" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="bold" fill="#263238">
+      <tspan x="50%" dy="0">Similarly, Object Attention queries an Object Texture Memory Bank guided by an object mask</tspan>
+      <tspan x="50%" dy="1.2em">to restore sharp, realistic object textures.</tspan>
+    </text>
+  </g>
+
+</svg>

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+  <title>Latency and Costs · AnimateBanana</title>
+  <link rel="stylesheet" href="assets/fonts/fonts.css">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css?v=3">
+  <link rel="stylesheet" href="assets/css/components/site-nav.css?v=5">
+  <link rel="stylesheet" href="assets/css/components/doodle-field.css">
+  <link rel="stylesheet" href="assets/css/components/costs.css?v=86">
+</head>
+<body>
+  <site-nav current="costs" back="index.html" back-label="Overview"></site-nav>
+
+  <!--
+    ✎ EDITING THIS PAGE
+    All the writing (headings, paragraphs, chart titles, the contents
+    bar) lives in data/costs_copy.json; edit it there and reload.
+    Every chart, figure and insight card is drawn by
+    assets/js/pages/costs.js from data/latency.json, which
+    COST_LATENCY/build_latency.py builds from the spreadsheets in
+    COST_LATENCY/:
+
+        python COST_LATENCY/build_latency.py
+
+    Stage colours are fixed site-wide: Diagram Transmuter yellow,
+    Animation Planner green, Diagram Animator light blue.
+  -->
+  <div class="page cl-page">
+    <div class="page-head" id="cl-head">
+      <doodle-field density="sparse"></doodle-field>
+      <div class="kicker">Appendix &middot; 08</div>
+      <h1>Latency and Costs</h1>
+    </div>
+
+    <p class="cl-intro" id="cl-intro"></p>
+
+    <nav class="cl-toc" id="cl-toc" aria-label="Contents"></nav>
+
+    <div id="cl-sections"></div>
+
+    <footer class="site-footer">
+      <span>Last updated 24 September 2026 (AOE)</span>
+    </footer>
+  </div>
+
+  <div class="cl-tip" id="cl-tip" role="tooltip" hidden></div>
+
+  <script type="module" src="assets/js/components/site-nav.js?v=5"></script>
+  <script type="module" src="assets/js/components/doodle-field.js"></script>
+  <script type="module" src="assets/js/pages/costs.js?v=91"></script>
+  <script type="module" src="assets/js/lib/reveal.js"></script>
+</body>
+</html>

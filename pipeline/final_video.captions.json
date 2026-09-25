@@ -1,0 +1,107 @@
+{
+ "_readme": "The transcript shown beside the finished video at the end of the walkthrough. `video` is the file it plays (relative to this folder); each caption is one line of the transcript, and `t` is the second in the video at which it starts - it stays up until the next one. To swap the video, drop the new file in, point `video` at it and rewrite the lines and times here; nothing else needs to change. Delete this file and the page falls back to the narration drafted during the walkthrough. Times measured from the clip's own narration audio by tools/time_final_video_captions.py - re-run it after re-rendering the video, or every line drifts.",
+ "video": "final_video.mp4",
+ "duration": 118.84,
+ "captions": [
+  {
+   "t": 0.0,
+   "text": "The framework processes an input image using a hybrid architecture designed to build a powerful global representation for image retrieval."
+  },
+  {
+   "t": 7.02,
+   "text": "First, a convolutional neural network stem maps the raw input image to a feature tensor, introducing inductive bias in the early layers."
+  },
+  {
+   "t": 14.16,
+   "text": "A dynamic position embedding module then dynamically resamples fixed-size learned embeddings to match the size of each mini-batch."
+  },
+  {
+   "t": 21.43,
+   "text": "The sequence is then fed into a Vision Transformer encoder consisting of multiple layers."
+  },
+  {
+   "t": 26.1,
+   "text": "The input sequence consists of a classification token and patch token embeddings."
+  },
+  {
+   "t": 30.16,
+   "text": "The sequence passes through the first transformer encoding layer."
+  },
+  {
+   "t": 33.22,
+   "text": "This layer outputs updated classification and patch token embeddings."
+  },
+  {
+   "t": 36.56,
+   "text": "The tokens continue to propagate through successive intermediate layers of the encoder."
+  },
+  {
+   "t": 40.65,
+   "text": "Finally, they reach the deeper layers of the transformer encoder."
+  },
+  {
+   "t": 44.06,
+   "text": "The final layers produce the final set of classification and patch token embeddings."
+  },
+  {
+   "t": 48.3,
+   "text": "To capture multi-layer classification features, the classification tokens from several of the last layers are collected and concatenated."
+  },
+  {
+   "t": 55.03,
+   "text": "These concatenated classification tokens form the input to the global branch."
+  },
+  {
+   "t": 59.21,
+   "text": "A fully connected layer projects these multi-layer classification features into a lower-dimensional space."
+  },
+  {
+   "t": 64.47,
+   "text": "This yields the final global feature representation."
+  },
+  {
+   "t": 67.69,
+   "text": "Simultaneously, the local branch collects multi-layer patch features, unfolding them into three-dimensional tensors to preserve spatial information."
+  },
+  {
+   "t": 75.42,
+   "text": "These unfolded patch features from multiple layers are then concatenated."
+  },
+  {
+   "t": 79.11,
+   "text": "This forms a multi-layer spatial tensor representation."
+  },
+  {
+   "t": 82.54,
+   "text": "A one-by-one convolution is applied to reduce the channel dimension of the concatenated features."
+  },
+  {
+   "t": 87.61,
+   "text": "The reduced features are processed by an enhanced locality module to strengthen local interactions in the deeper layers."
+  },
+  {
+   "t": 93.16,
+   "text": "The enhanced features are then fused with the original reduced features."
+  },
+  {
+   "t": 97.08,
+   "text": "Global average pooling and a fully connected layer are applied to produce the final local feature."
+  },
+  {
+   "t": 101.76,
+   "text": "The global feature and local feature are concatenated to combine global and local information."
+  },
+  {
+   "t": 106.22,
+   "text": "This forms a unified representation of the image."
+  },
+  {
+   "t": 109.29,
+   "text": "A final fully connected layer with dropout and batch normalization reduces the dimensionality."
+  },
+  {
+   "t": 114.11,
+   "text": "The resulting representation is optimized using the ArcFace loss function during the training phase."
+  }
+ ]
+}

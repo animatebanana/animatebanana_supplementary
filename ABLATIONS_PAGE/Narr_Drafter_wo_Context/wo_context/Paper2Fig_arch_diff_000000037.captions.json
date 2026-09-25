@@ -1,0 +1,50 @@
+[
+ {
+  "t": 0.0,
+  "text": "The pipeline begins with the Pre-training stage shown on the left."
+ },
+ {
+  "t": 2.2,
+  "text": "Source domain inputs are provided to the network."
+ },
+ {
+  "t": 4.4,
+  "text": "These inputs pass into the Source Encoder."
+ },
+ {
+  "t": 6.6,
+  "text": "The resulting features are directed into the Classifier."
+ },
+ {
+  "t": 8.8,
+  "text": "The Classifier outputs the predicted class label."
+ },
+ {
+  "t": 11.0,
+  "text": "On the right, the framework proceeds to the Adversarial Adaptation stage."
+ },
+ {
+  "t": 13.2,
+  "text": "Source inputs are routed into the Source Encoder."
+ },
+ {
+  "t": 15.4,
+  "text": "The Source Encoder forwards its output directly to the Discriminator."
+ },
+ {
+  "t": 17.6,
+  "text": "In parallel, target inputs are fed into the Target Encoder."
+ },
+ {
+  "t": 19.8,
+  "text": "The Target Encoder also transmits its output to the Discriminator."
+ },
+ {
+  "t": 22.0,
+  "text": "The Discriminator receives representations from both encoders."
+ },
+ {
+  "t": 24.2,
+  "text": "Finally, the Discriminator outputs the domain label."
+ }
+]

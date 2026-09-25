@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+  <title>Failure cases — AnimateBanana</title>
+  <link rel="stylesheet" href="assets/fonts/fonts.css">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css?v=3">
+  <link rel="stylesheet" href="assets/css/components/site-nav.css?v=5">
+  <link rel="stylesheet" href="assets/css/components/doodle-field.css">
+  <link rel="stylesheet" href="assets/css/components/failure-walk.css?v=12">
+  <style>
+    /* the pipeline diagram is 1840 units wide — wider than the page column */
+    .page.fw-widepage { max-width: 1560px; }
+    .fw-section { margin-top: clamp(34px, 5vw, 64px); }
+    .fw-section h2 { margin: 2px 0 6px; }
+    .fw-section > p { max-width: 74ch; margin: 0 0 18px; color: var(--ink-soft); line-height: 1.6; }
+  </style>
+</head>
+<body>
+  <site-nav current="failures" back="index.html" back-label="Overview"></site-nav>
+
+  <div class="page fw-widepage">
+    <div class="page-head">
+      <doodle-field density="sparse"></doodle-field>
+      <div class="kicker">Appendix &middot; 06</div>
+      <h1>Failure cases</h1>
+    </div>
+
+    <section class="fw-section">
+      <div class="kicker">Stage by stage</div>
+      <failure-walk src="data/failure_runs.json"></failure-walk>
+    </section>
+
+    <section class="fw-section">
+      <div class="kicker">Why the critics are there</div>
+      <h2>Additional insights on the critics</h2>
+      <failure-evidence src="data/failure_runs.json"></failure-evidence>
+    </section>
+
+    <footer class="site-footer">
+      <span>Last updated 24 September 2026 (AOE)</span>
+    </footer>
+  </div>
+
+  <script type="module" src="assets/js/components/site-nav.js?v=5"></script>
+  <script type="module" src="assets/js/components/doodle-field.js"></script>
+  <script type="module" src="assets/js/components/failure-walk.js?v=12"></script>
+  <script type="module" src="assets/js/lib/reveal.js"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+[
+ {
+  "t": 0.0,
+  "text": "The pipeline begins by constructing an image graph and evaluating depth reliability."
+ },
+ {
+  "t": 2.2,
+  "text": "First, the framework takes the input RGB image."
+ },
+ {
+  "t": 4.4,
+  "text": "It decomposes the RGB image into superpixels via SLIC segmentation to form the graph nodes."
+ },
+ {
+  "t": 6.6,
+  "text": "In parallel, the corresponding depth image is received."
+ },
+ {
+  "t": 8.8,
+  "text": "By analyzing the depth statistical distribution, the model computes a depth confidence measure to mitigate the influence of noisy depth maps."
+ },
+ {
+  "t": 11.0,
+  "text": "The graph representation and confidence measure are forwarded to a two-stage saliency computation framework."
+ },
+ {
+  "t": 13.2,
+  "text": "In Stage one, compactness saliency is calculated by evaluating spatial spread using both color and depth cues."
+ },
+ {
+  "t": 15.4,
+  "text": "Next, a depth-refined foreground seed selection mechanism identifies reliable salient seeds."
+ },
+ {
+  "t": 17.6,
+  "text": "In Stage two, foreground saliency is computed by measuring contrast against these seeds across color, depth, and texture cues."
+ },
+ {
+  "t": 19.8,
+  "text": "The compactness and foreground saliency maps are fused together through a weighted sum."
+ },
+ {
+  "t": 22.0,
+  "text": "Finally, the integrated saliency map is generated, accurately highlighting the salient object in comparison with the ground truth."
+ }
+]

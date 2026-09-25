@@ -1,0 +1,275 @@
+{
+  "style": "progressive_reveal",
+  "traversal_style": "DETAIL_FIRST",
+  "nodes": [
+    {
+      "id": "t1",
+      "parent": null,
+      "depth": 1,
+      "focus": [
+        "block_spatial_view",
+        "text_spatial_title",
+        "edge_input_spatial"
+      ],
+      "action": "reveal",
+      "narration": null,
+      "duration": null,
+      "narrative": null,
+      "element_classes": {
+        "blocks": [
+          "block_spatial_view"
+        ],
+        "nodes": [],
+        "text": [
+          "text_spatial_title"
+        ],
+        "arrows": [
+          "edge_input_spatial"
+        ]
+      },
+      "timestamp": 1
+    },
+    {
+      "id": "t2",
+      "parent": "t1",
+      "depth": 2,
+      "focus": [
+        "node_spatial_norm",
+        "edge_spatial_norm_to_affine"
+      ],
+      "action": "reveal",
+      "narration": null,
+      "duration": null,
+      "narrative": null,
+      "element_classes": {
+        "blocks": [],
+        "nodes": [
+          "node_spatial_norm"
+        ],
+        "text": [],
+        "arrows": [
+          "edge_spatial_norm_to_affine"
+        ]
+      },
+      "timestamp": 2
+    },
+    {
+      "id": "t3",
+      "parent": "t1",
+      "depth": 2,
+      "focus": [
+        "node_spatial_affine"
+      ],
+      "action": "reveal",
+      "narration": null,
+      "duration": null,
+      "narrative": null,
+      "element_classes": {
+        "blocks": [],
+        "nodes": [
+          "node_spatial_affine"
+        ],
+        "text": [],
+        "arrows": []
+      },
+      "timestamp": 3
+    },
+    {
+      "id": "t4",
+      "parent": null,
+      "depth": 1,
+      "focus": [
+        "block_temporal_view",
+        "text_temporal_title",
+        "edge_input_temporal"
+      ],
+      "action": "reveal",
+      "narration": null,
+      "duration": null,
+      "narrative": null,
+      "element_classes": {
+        "blocks": [
+          "block_temporal_view"
+        ],
+        "nodes": [],
+        "text": [
+          "text_temporal_title"
+        ],
+        "arrows": [
+          "edge_input_temporal"
+        ]
+      },
+      "timestamp": 4
+    },
+    {
+      "id": "t5",
+      "parent": "t4",
+      "depth": 2,
+      "focus": [
+        "node_temporal_norm",
+        "edge_temporal_norm_to_affine"
+      ],
+      "action": "reveal",
+      "narration": null,
+      "duration": null,
+      "narrative": null,
+      "element_classes": {
+        "blocks": [],
+        "nodes": [
+          "node_temporal_norm"
+        ],
+        "text": [],
+        "arrows": [
+          "edge_temporal_norm_to_affine"
+        ]
+      },
+      "timestamp": 5
+    },
+    {
+      "id": "t6",
+      "parent": "t4",
+      "depth": 2,
+      "focus": [
+        "node_temporal_affine"
+      ],
+      "action": "reveal",
+      "narration": null,
+      "duration": null,
+      "narrative": null,
+      "element_classes": {
+        "blocks": [],
+        "nodes": [
+          "node_temporal_affine"
+        ],
+        "text": [],
+        "arrows": []
+      },
+      "timestamp": 6
+    },
+    {
+      "id": "t7",
+      "parent": null,
+      "depth": 1,
+      "focus": [
+        "block_original_view",
+        "text_original_title",
+        "edge_input_original"
+      ],
+      "action": "reveal",
+      "narration": null,
+      "duration": null,
+      "narrative": null,
+      "element_classes": {
+        "blocks": [
+          "block_original_view"
+        ],
+        "nodes": [],
+        "text": [
+          "text_original_title"
+        ],
+        "arrows": [
+          "edge_input_original"
+        ]
+      },
+      "timestamp": 7
+    },
+    {
+      "id": "t8",
+      "parent": "t7",
+      "depth": 2,
+      "focus": [
+        "node_original_identity1",
+        "edge_original_identity1_to_identity2"
+      ],
+      "action": "reveal",
+      "narration": null,
+      "duration": null,
+      "narrative": null,
+      "element_classes": {
+        "blocks": [],
+        "nodes": [
+          "node_original_identity1"
+        ],
+        "text": [],
+        "arrows": [
+          "edge_original_identity1_to_identity2"
+        ]
+      },
+      "timestamp": 8
+    },
+    {
+      "id": "t9",
+      "parent": "t7",
+      "depth": 2,
+      "focus": [
+        "node_original_identity2"
+      ],
+      "action": "reveal",
+      "narration": null,
+      "duration": null,
+      "narrative": null,
+      "element_classes": {
+        "blocks": [],
+        "nodes": [
+          "node_original_identity2"
+        ],
+        "text": [],
+        "arrows": []
+      },
+      "timestamp": 9
+    },
+    {
+      "id": "t10",
+      "parent": null,
+      "depth": 1,
+      "focus": [
+        "node_concat",
+        "edge_spatial_out",
+        "edge_temporal_out",
+        "edge_original_out",
+        "edge_to_concat"
+      ],
+      "action": "reveal",
+      "narration": null,
+      "duration": null,
+      "narrative": null,
+      "element_classes": {
+        "blocks": [],
+        "nodes": [
+          "node_concat"
+        ],
+        "text": [],
+        "arrows": [
+          "edge_spatial_out",
+          "edge_temporal_out",
+          "edge_original_out",
+          "edge_to_concat"
+        ]
+      },
+      "timestamp": 10
+    }
+  ],
+  "traversal": [
+    "t1",
+    "t2",
+    "t3",
+    "t4",
+    "t5",
+    "t6",
+    "t7",
+    "t8",
+    "t9",
+    "t10"
+  ],
+  "provenance": {
+    "agent": "sequencer",
+    "backend": "openrouter_gemini37flash",
+    "model": "google-gemini-3.7-flash",
+    "prompt": "animation_planner/svg_sequencer.yaml#new_prompt",
+    "style": "progressive_reveal",
+    "target": "svg",
+    "config_fingerprint": "09f5508923ac0ffc",
+    "timestamp": "2026-09-01T23:37:51",
+    "max_depth": 3
+  }
+}

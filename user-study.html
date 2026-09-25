@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+  <title>User Study · AnimateBanana</title>
+  <link rel="stylesheet" href="assets/fonts/fonts.css">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css?v=3">
+  <link rel="stylesheet" href="assets/css/components/site-nav.css?v=5">
+  <link rel="stylesheet" href="assets/css/components/doodle-field.css">
+  <link rel="stylesheet" href="assets/css/components/user-study.css?v=6">
+</head>
+<body>
+  <site-nav current="user-study" back="index.html" back-label="Overview"></site-nav>
+
+  <!--
+    ✎ EDITING THIS PAGE
+    Prose lives here in the markup: write straight into the <p> tags.
+    Every step below is one <article class="us-step">: a number, a title
+    you can rename, your writing, and a screenshot window beside it.
+    Screenshot files and their captions live in data/user_study.json
+    under "screens"; a slot whose file is missing says so on the page.
+  -->
+  <div class="page us-widepage">
+    <div class="page-head">
+      <doodle-field density="sparse"></doodle-field>
+      <div class="kicker">Appendix &middot; 07</div>
+      <h1>User study</h1>
+    </div>
+
+    <nav class="us-toc" id="us-toc" aria-label="Contents">
+      <div class="us-toc-inner">
+        <span class="us-toc-title">Contents<small>Jump to a section</small></span>
+        <div class="us-toc-list">
+          <a href="#us-cohort" data-toc="us-cohort"><b>1</b><span>Participant statistics</span></a>
+          <a href="#us-prep" data-toc="us-prep"><b>2</b><span>Task explanation and familiarization</span></a>
+          <a href="#us-quality" data-toc="us-quality"><b>3</b><span>Animation quality assessment</span></a>
+          <a href="#us-ranking" data-toc="us-ranking"><b>4</b><span>Ranking-based evaluation</span></a>
+          <a href="#us-context" data-toc="us-context"><b>5</b><span>Context utility</span></a>
+          <a href="#us-verify" data-toc="us-verify"><b>6</b><span>AnimateBench verification</span></a>
+        </div>
+      </div>
+      <i class="us-toc-bar"><i></i></i>
+    </nav>
+
+    <div class="us-headline" id="us-headline"></div>
+
+    <section class="us-cohort" id="us-cohort"></section>
+
+    <section class="us-section" id="us-prep">
+      <div class="kicker">Preparation</div>
+      <h2>Task Explanation and Familiarization</h2>
+      <p class="us-lede">Every participant worked through the same sequence: this
+        preparation step, then the two main experiments. Trials were self-paced. An
+        animation could be replayed, and stepped through as often as a participant liked
+        before answering.</p>
+
+      <article class="us-step">
+        <div class="us-step-grid">
+          <div class="us-step-copy">
+            <!-- ✎ your words -->
+            <p>Before receiving study trials, participants complete a short guided
+              preparation module explaining how to evaluate animated narratives, to help
+              their understanding of the evaluation criteria.</p>
+            <p>The same module walks them through our custom portal: a guided tour of the
+              controls they will use to view an animation, zoom the original figure, and
+              answer the questions.</p>
+          </div>
+          <div class="us-shots">
+            <div class="us-shot-mount" data-screen="task-explanation"></div>
+            <div class="us-shot-mount" data-screen="portal"></div>
+          </div>
+        </div>
+      </article>
+
+    </section>
+
+    <section class="us-section">
+      <div class="kicker">Protocol</div>
+      <h2>Main User Study Experiments</h2>
+      <p class="us-lede">Every participant did both experiments, in this order.</p>
+
+      <article class="us-step" id="us-quality">
+        <header class="us-step-head">
+          <span class="us-step-num">1</span>
+          <h3>Animation quality assessment</h3>
+        </header>
+        <div class="us-step-grid">
+          <div class="us-step-copy">
+            <!-- ✎ your words -->
+            <p>The aim of this experiment is to evaluate the animation quality of the
+              outputs produced by AnimateBanana, by the second-best open-source model (the one
+              used as the backbone in our pipeline), and by the best closed-source model
+              among those evaluated on the direct diagram-to-animation task.</p>
+            <p>Each of these baselines is judged <b>in isolation</b>: a participant rates
+              one animation at a time and is never asked to compare. Closely following the
+              cascading design of our automated metrics, we apply the same conditional
+              principle here, opening with two gated questions that carry the core
+              question behind each automated metric.</p>
+            <div class="us-meta">
+              <span class="tag tag-blue">AnimateBanana (Gemini 3.7 Flash)</span>
+              <span class="tag tag-blue">Qwen3.8-27B backbone</span>
+              <span class="tag tag-blue">Gemini 3.1 Pro</span>
+              <span class="tag tag-tan">15 trials per set</span>
+              <span class="tag tag-tan">one per animation style</span>
+            </div>
+          </div>
+          <div class="us-shots">
+            <div class="us-shot-mount" data-screen="quality-intro"></div>
+          </div>
+        </div>
+
+        <section class="us-sub">
+          <h4 class="us-sub-title">Nothing is rated before it has been watched</h4>
+          <div class="us-step-grid">
+            <div class="us-step-copy">
+              <!-- ✎ your words -->
+              <p>A participant cannot answer anything until the animation has been played
+                or stepped through to its very end. Until then the questions stay sealed
+                behind a banner, the progress read-out shows how far through they are, and
+                <i>Submit and continue</i> stays disabled. Judgements are therefore made
+                on the whole animation, never on a glance at its opening frames.</p>
+            </div>
+            <div class="us-shots">
+              <div class="us-shot-mount" data-screen="unlock"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="us-sub">
+          <h4 class="us-sub-title">Gate 1 &middot; Visual fidelity</h4>
+          <div class="us-step-grid">
+            <div class="us-step-copy">
+              <!-- ✎ your words -->
+              <p>This is in close compliance with our Visual Fidelity metric, which asks
+                how faithful the animation is to the source figure. And as with the accept
+                and reject bands of the automated evaluation, the participant is given a
+                binary accept or reject.</p>
+              <div class="us-q">
+                <div class="us-q-key">VF</div>
+                <div>
+                  <p class="us-q-text">Does the animation show all the elements of the
+                    diagram correctly?</p>
+                  <div class="us-q-answers">
+                    <span class="us-answer">Yes</span>
+                    <span class="us-answer">No</span>
+                  </div>
+                </div>
+              </div>
+              <p>Only a yes moves the trial on to the compliance of the animation style.
+                A no ends the sample there, and it scores 0.</p>
+            </div>
+            <div class="us-shots">
+              <div class="us-shot-mount" data-screen="vf-pass"></div>
+              <div class="us-shot-mount" data-screen="vf-fail"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="us-sub">
+          <h4 class="us-sub-title">Gate 2 &middot; Animation style compliance</h4>
+          <div class="us-step-grid">
+            <div class="us-step-copy">
+              <!-- ✎ your words -->
+              <p>The expected animation style is stated at the top of the page, above the
+                animation, and its exact rules open underneath it. This is assistive, so
+                that a participant is gauging compliance against a written standard rather
+                than an instinct about what the style might mean.</p>
+              <div class="us-q">
+                <div class="us-q-key">ASC</div>
+                <div>
+                  <p class="us-q-text">The expected animation style is <b>X</b>. Does the
+                    above animation follow this style?</p>
+                  <div class="us-q-answers">
+                    <span class="us-answer">Yes</span>
+                    <span class="us-answer">No</span>
+                  </div>
+                </div>
+              </div>
+              <p>If style compliance is judged a no, evaluation of the sample ends there
+                and then, and we do not go into the further stages. This is in close
+                emulation of the gating mechanism followed in our automated evaluation,
+                which is what keeps the two measures fair and comparable.</p>
+            </div>
+            <div class="us-shots">
+              <div class="us-shot-mount" data-screen="style-rules"></div>
+              <div class="us-shot-mount" data-screen="asc-fail"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="us-sub">
+          <h4 class="us-sub-title">Both gates passed &middot; Selection sensibility</h4>
+          <div class="us-step-grid">
+            <div class="us-step-copy">
+              <!-- ✎ your words -->
+              <p>With both gates cleared, we ask the participant to rate whether the
+                choice of which element to animate next was a sensible one.</p>
+              <div class="us-q">
+                <div class="us-q-key">SS</div>
+                <div>
+                  <p class="us-q-text">Is the selection of the next element to animate a
+                    sensible one?</p>
+                  <div class="us-q-answers">
+                    <span class="us-answer">0 &ndash; 10</span>
+                    <span class="us-anchor">0: bad selection overall &middot; 10: correct selection overall</span>
+                  </div>
+                </div>
+              </div>
+              <p>This is in close compliance with our Selection Sensibility metric, which
+                is computed at frame level, with a score for every frame aggregated into
+                a final score. For ease on the participant's side we make them watch the animation step by step, and then give one
+                overall rating.</p>
+            </div>
+            <div class="us-shots">
+              <div class="us-shot-mount" data-screen="ss"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="us-sub">
+          <h4 class="us-sub-title">Both gates passed &middot; Narration alignment</h4>
+          <div class="us-step-grid">
+            <div class="us-step-copy">
+              <!-- ✎ your words -->
+              <p>The same thing is implemented for evaluating narration alignment. The participant reads the caption displayed
+                at each step of the narration as it plays, and then gives a single overall
+                score for how well it aligns with the animation.</p>
+              <div class="us-q">
+                <div class="us-q-key">NA</div>
+                <div>
+                  <p class="us-q-text">Does the narration align with the given animation?</p>
+                  <div class="us-q-answers">
+                    <span class="us-answer">0 &ndash; 10</span>
+                    <span class="us-anchor">0: misaligned and arbitrary &middot; 10: well aligned and insightful</span>
+                  </div>
+                </div>
+              </div>
+              <p>Once every question has an answer, <i>Submit and continue</i> becomes
+                available and the participant moves on to the next sample.</p>
+            </div>
+            <div class="us-shots">
+              <div class="us-shot-mount" data-screen="na"></div>
+            </div>
+          </div>
+        </section>
+
+        <div class="us-step-copy us-step-copy-wide">
+          <!-- ✎ your words -->
+          <p class="us-caption">Scores are normalised to [0,&nbsp;1]; an animation that
+            fails either gate scores 0. Granularity and pacing (GP) is not evaluated at
+            all: the setup allows a self-paced traversal of the animation, with back and
+            forth as often as the participant likes, so the pacing they experienced is
+            their own rather than the system's. Each user-study set carries <b>15</b>
+            animation quality assessment trials.</p>
+        </div>
+      </article>
+
+      <article class="us-step" id="us-ranking">
+        <header class="us-step-head">
+          <span class="us-step-num">2</span>
+          <h3>Ranking-based evaluation</h3>
+        </header>
+        <div class="us-step-grid">
+          <div class="us-step-copy">
+            <!-- ✎ your words -->
+            <p>The second experiment is run as a tournament. The candidates are the
+              AnimateBanana outputs, the second-best performing model overall, in
+              our case Qwen&nbsp;3.8, and the original human-authored presentations from our
+              bench.</p>
+            <p>Those human authored presentations are preprocessed and trimmed, in both time and space, to
+              remove every clue that they are the human-authored ones. The whole
+              experiment runs blind: a participant sees Left&nbsp;(A) against Right&nbsp;(B),
+              never a system name.</p>
+            <div class="us-bracket">
+              <span class="us-seat">AnimateBanana</span>
+              <span class="us-arrow">vs</span>
+              <span class="us-seat">Qwen 3.8</span>
+              <span class="us-arrow">&rarr;</span>
+              <span class="us-seat us-seat-win">Winner</span>
+              <span class="us-arrow">vs</span>
+              <span class="us-seat">Human-authored presentations</span>
+              <span class="us-arrow">&rarr;</span>
+              <span class="us-seat us-seat-win">Rank 1</span>
+            </div>
+          </div>
+          <div class="us-shots">
+            <div class="us-shot-mount" data-screen="ranking-intro"></div>
+          </div>
+        </div>
+
+        <section class="us-sub">
+          <h4 class="us-sub-title">One question, and it is about personal utility</h4>
+          <div class="us-step-copy us-step-copy-wide">
+            <!-- ✎ your words -->
+            <div class="us-q">
+              <div class="us-q-key">Ask</div>
+              <div>
+                <p class="us-q-text">Which of these animations would you be most likely to
+                  use yourself?</p>
+                <div class="us-q-answers">
+                  <span class="us-answer">Left (A)</span>
+                  <span class="us-answer">Right (B)</span>
+                </div>
+              </div>
+            </div>
+            <p>The question is strictly one of personal utility: if they had to pick one
+              to use for their own presentation, which would they pick? The winner of this
+              experiment is therefore the one participants prefer for their own use, a clearer
+              win in terms of adoption by members of the scientific and research community
+              than a simple quality assessment would give.</p>
+          </div>
+        </section>
+
+        <section class="us-sub">
+          <h4 class="us-sub-title">How a tournament plays out</h4>
+          <div class="us-step-copy us-step-copy-wide">
+            <!-- ✎ your words -->
+            <p>Both animations must be watched or stepped to the end before the choice
+              unlocks. The picked animation stays; the one passed over fades and is
+              replaced by the third candidate for round two. The final pick takes
+              rank&nbsp;1, the one it beat rank&nbsp;2, and the candidate eliminated first
+              rank&nbsp;3. A participant can return to an earlier trial and change an
+              answer before it is saved.</p>
+          </div>
+          <div class="us-shots us-shots-grid">
+            <div class="us-shot-mount" data-screen="ranking-1"></div>
+            <div class="us-shot-mount" data-screen="ranking-2"></div>
+            <div class="us-shot-mount" data-screen="ranking-3"></div>
+            <div class="us-shot-mount" data-screen="ranking-4"></div>
+          </div>
+        </section>
+      </article>
+    </section>
+
+    <section class="us-section">
+      <div class="kicker">Protocol</div>
+      <h2>Selective Cohort Experiments</h2>
+      <p class="us-lede">Ten participants returned for two further preference tests, each
+        over 15 samples. Both ask about a design decision rather than about a system.</p>
+
+      <article class="us-step" id="us-context">
+        <header class="us-step-head">
+          <span class="us-step-num">1</span>
+          <h3>Context utility</h3>
+        </header>
+        <div class="us-step-grid">
+          <div class="us-step-copy">
+            <!-- ✎ your words -->
+            <p>The first experiment of the selective cohort assesses the usefulness of
+              context in producing the narration captions: are captions derived with
+              context more useful than narration derived from the figure alone?</p>
+            <p>The same AnimateBanana animation is shown twice, differing only in its
+              narration. One is drafted with the caption and paper context, the other from the
+              figure by itself. Neither side is labelled.</p>
+            <div class="us-q">
+              <div class="us-q-key">Ask</div>
+              <div>
+                <p class="us-q-text">Which narration is more insightful in understanding
+                  the animation?</p>
+                <div class="us-q-answers">
+                  <span class="us-answer">First</span>
+                  <span class="us-answer">Second</span>
+                  <span class="us-answer">Both are equally useful</span>
+                </div>
+              </div>
+            </div>
+            <p>We deliberately allow for the possibility that both are equally useful in
+              understanding the given narration, an outcome that is entirely plausible
+              given the depth of the context provided.</p>
+          </div>
+          <div class="us-shots">
+            <div class="us-shot-mount" data-screen="context-intro"></div>
+            <div class="us-shot-mount" data-screen="context-example"></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="us-step" id="us-verify">
+        <header class="us-step-head">
+          <span class="us-step-num">2</span>
+          <h3>AnimateBench verification</h3>
+        </header>
+        <div class="us-step-grid">
+          <div class="us-step-copy">
+            <!-- ✎ your words -->
+            <p>The last experiment in the selective cohort is bench verification, a
+              quality-assurance pass of our own: it validates whether the corrections made
+              in the bench are meaningful, by asking whether they introduce an improvement
+              in the perceived quality of the animations.</p>
+            <div class="us-q">
+              <div class="us-q-key">Ask</div>
+              <div>
+                <p class="us-q-text">Do the corrections result in a noticeable improvement
+                  in the perceived quality of the animation?</p>
+                <div class="us-q-answers">
+                  <span class="us-answer">Yes</span>
+                  <span class="us-answer">No</span>
+                </div>
+              </div>
+            </div>
+            <p><b>This one is not run blind.</b> The uncorrected and the corrected
+              animation are clearly demarcated, labelled <i>Original (uncorrected)</i> and
+              <i>Verified and corrected</i>, and the participant is told as much before the
+              section begins.</p>
+          </div>
+          <div class="us-shots">
+            <div class="us-shot-mount" data-screen="benchverify-intro"></div>
+            <div class="us-shot-mount" data-screen="benchverify-example"></div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <footer class="site-footer">
+      <span>Last updated 24 September 2026 (AOE)</span>
+    </footer>
+  </div>
+
+  <script type="module" src="assets/js/components/site-nav.js?v=5"></script>
+  <script type="module" src="assets/js/components/doodle-field.js"></script>
+  <script type="module" src="assets/js/pages/user-study.js?v=5"></script>
+  <script type="module" src="assets/js/lib/reveal.js"></script>
+</body>
+</html>

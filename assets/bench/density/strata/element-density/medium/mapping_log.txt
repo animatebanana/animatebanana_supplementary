@@ -1,0 +1,382 @@
+=== Sliding Bounding Box Sequence ===
+
+Frame Image : frame_0000.png
+Frame Type  : Hold
+Timestamp   : 0.798s
+Narration   : In the vision Mamba layer, the input first passes through a layer normalization module.
+--------------------------------------------------------------------------------
+Frame Image : frame_0001.png
+Frame Type  : Transition 1
+Timestamp   : 1.697s
+Narration   : In the vision Mamba layer, the input first passes through a layer normalization module.
+--------------------------------------------------------------------------------
+Frame Image : frame_0002.png
+Frame Type  : Transition 2
+Timestamp   : 1.797s
+Narration   : In the vision Mamba layer, the input first passes through a layer normalization module.
+--------------------------------------------------------------------------------
+Frame Image : frame_0003.png
+Frame Type  : Transition 3
+Timestamp   : 1.898s
+Narration   : In the vision Mamba layer, the input first passes through a layer normalization module.
+--------------------------------------------------------------------------------
+Frame Image : frame_0004.png
+Frame Type  : Hold
+Timestamp   : 2.804s
+Narration   : The normalized features enter the SS2D Block.
+--------------------------------------------------------------------------------
+Frame Image : frame_0005.png
+Frame Type  : Transition 1
+Timestamp   : 3.708s
+Narration   : The normalized features enter the SS2D Block.
+--------------------------------------------------------------------------------
+Frame Image : frame_0006.png
+Frame Type  : Transition 2
+Timestamp   : 3.806s
+Narration   : The normalized features enter the SS2D Block.
+--------------------------------------------------------------------------------
+Frame Image : frame_0007.png
+Frame Type  : Transition 3
+Timestamp   : 3.904s
+Narration   : The normalized features enter the SS2D Block.
+--------------------------------------------------------------------------------
+Frame Image : frame_0008.png
+Frame Type  : Hold
+Timestamp   : 4.794s
+Narration   : The block output is combined with a residual skip connection.
+--------------------------------------------------------------------------------
+Frame Image : frame_0009.png
+Frame Type  : Transition 1
+Timestamp   : 5.690s
+Narration   : The block output is combined with a residual skip connection.
+--------------------------------------------------------------------------------
+Frame Image : frame_0010.png
+Frame Type  : Transition 2
+Timestamp   : 5.793s
+Narration   : The block output is combined with a residual skip connection.
+--------------------------------------------------------------------------------
+Frame Image : frame_0011.png
+Frame Type  : Transition 3
+Timestamp   : 5.897s
+Narration   : The block output is combined with a residual skip connection.
+--------------------------------------------------------------------------------
+Frame Image : frame_0012.png
+Frame Type  : Hold
+Timestamp   : 6.800s
+Narration   : The signal then undergoes a second layer normalization step.
+--------------------------------------------------------------------------------
+Frame Image : frame_0013.png
+Frame Type  : Transition 1
+Timestamp   : 7.700s
+Narration   : The signal then undergoes a second layer normalization step.
+--------------------------------------------------------------------------------
+Frame Image : frame_0014.png
+Frame Type  : Transition 2
+Timestamp   : 7.799s
+Narration   : The signal then undergoes a second layer normalization step.
+--------------------------------------------------------------------------------
+Frame Image : frame_0015.png
+Frame Type  : Transition 3
+Timestamp   : 7.899s
+Narration   : The signal then undergoes a second layer normalization step.
+--------------------------------------------------------------------------------
+Frame Image : frame_0016.png
+Frame Type  : Hold
+Timestamp   : 8.806s
+Narration   : Next, it is processed by a feed-forward network.
+--------------------------------------------------------------------------------
+Frame Image : frame_0017.png
+Frame Type  : Transition 1
+Timestamp   : 9.711s
+Narration   : Next, it is processed by a feed-forward network.
+--------------------------------------------------------------------------------
+Frame Image : frame_0018.png
+Frame Type  : Transition 2
+Timestamp   : 9.808s
+Narration   : Next, it is processed by a feed-forward network.
+--------------------------------------------------------------------------------
+Frame Image : frame_0019.png
+Frame Type  : Transition 3
+Timestamp   : 9.905s
+Narration   : Next, it is processed by a feed-forward network.
+--------------------------------------------------------------------------------
+Frame Image : frame_0020.png
+Frame Type  : Hold
+Timestamp   : 10.796s
+Narration   : A final addition node merges the feed-forward output with its shortcut connection.
+--------------------------------------------------------------------------------
+Frame Image : frame_0021.png
+Frame Type  : Transition 1
+Timestamp   : 11.693s
+Narration   : A final addition node merges the feed-forward output with its shortcut connection.
+--------------------------------------------------------------------------------
+Frame Image : frame_0022.png
+Frame Type  : Transition 2
+Timestamp   : 11.795s
+Narration   : A final addition node merges the feed-forward output with its shortcut connection.
+--------------------------------------------------------------------------------
+Frame Image : frame_0023.png
+Frame Type  : Transition 3
+Timestamp   : 11.898s
+Narration   : A final addition node merges the feed-forward output with its shortcut connection.
+--------------------------------------------------------------------------------
+Frame Image : frame_0024.png
+Frame Type  : Hold
+Timestamp   : 12.802s
+Narration   : Looking inside the SS2D block, the input starts at a linear layer.
+--------------------------------------------------------------------------------
+Frame Image : frame_0025.png
+Frame Type  : Transition 1
+Timestamp   : 13.703s
+Narration   : Looking inside the SS2D block, the input starts at a linear layer.
+--------------------------------------------------------------------------------
+Frame Image : frame_0026.png
+Frame Type  : Transition 2
+Timestamp   : 13.802s
+Narration   : Looking inside the SS2D block, the input starts at a linear layer.
+--------------------------------------------------------------------------------
+Frame Image : frame_0027.png
+Frame Type  : Transition 3
+Timestamp   : 13.900s
+Narration   : Looking inside the SS2D block, the input starts at a linear layer.
+--------------------------------------------------------------------------------
+Frame Image : frame_0028.png
+Frame Type  : Hold
+Timestamp   : 14.809s
+Narration   : It continues through a depthwise convolution layer.
+--------------------------------------------------------------------------------
+Frame Image : frame_0029.png
+Frame Type  : Transition 1
+Timestamp   : 15.714s
+Narration   : It continues through a depthwise convolution layer.
+--------------------------------------------------------------------------------
+Frame Image : frame_0030.png
+Frame Type  : Transition 2
+Timestamp   : 15.810s
+Narration   : It continues through a depthwise convolution layer.
+--------------------------------------------------------------------------------
+Frame Image : frame_0031.png
+Frame Type  : Transition 3
+Timestamp   : 15.906s
+Narration   : It continues through a depthwise convolution layer.
+--------------------------------------------------------------------------------
+Frame Image : frame_0032.png
+Frame Type  : Hold
+Timestamp   : 16.798s
+Narration   : A SiLU activation function is applied.
+--------------------------------------------------------------------------------
+Frame Image : frame_0033.png
+Frame Type  : Transition 1
+Timestamp   : 17.696s
+Narration   : A SiLU activation function is applied.
+--------------------------------------------------------------------------------
+Frame Image : frame_0034.png
+Frame Type  : Transition 2
+Timestamp   : 17.797s
+Narration   : A SiLU activation function is applied.
+--------------------------------------------------------------------------------
+Frame Image : frame_0035.png
+Frame Type  : Transition 3
+Timestamp   : 17.899s
+Narration   : A SiLU activation function is applied.
+--------------------------------------------------------------------------------
+Frame Image : frame_0036.png
+Frame Type  : Hold
+Timestamp   : 18.804s
+Narration   : The activations then pass into the core SS2D operation.
+--------------------------------------------------------------------------------
+Frame Image : frame_0037.png
+Frame Type  : Transition 1
+Timestamp   : 19.706s
+Narration   : The activations then pass into the core SS2D operation.
+--------------------------------------------------------------------------------
+Frame Image : frame_0038.png
+Frame Type  : Transition 2
+Timestamp   : 19.804s
+Narration   : The activations then pass into the core SS2D operation.
+--------------------------------------------------------------------------------
+Frame Image : frame_0039.png
+Frame Type  : Transition 3
+Timestamp   : 19.902s
+Narration   : The activations then pass into the core SS2D operation.
+--------------------------------------------------------------------------------
+Frame Image : frame_0040.png
+Frame Type  : Hold
+Timestamp   : 20.792s
+Narration   : This is followed by layer normalization.
+--------------------------------------------------------------------------------
+Frame Image : frame_0041.png
+Frame Type  : Transition 1
+Timestamp   : 21.688s
+Narration   : This is followed by layer normalization.
+--------------------------------------------------------------------------------
+Frame Image : frame_0042.png
+Frame Type  : Transition 2
+Timestamp   : 21.791s
+Narration   : This is followed by layer normalization.
+--------------------------------------------------------------------------------
+Frame Image : frame_0043.png
+Frame Type  : Transition 3
+Timestamp   : 21.895s
+Narration   : This is followed by layer normalization.
+--------------------------------------------------------------------------------
+Frame Image : frame_0044.png
+Frame Type  : Hold
+Timestamp   : 22.798s
+Narration   : A top linear layer projects the intermediate features to the final block output.
+--------------------------------------------------------------------------------
+Frame Image : frame_0045.png
+Frame Type  : Transition 1
+Timestamp   : 23.699s
+Narration   : A top linear layer projects the intermediate features to the final block output.
+--------------------------------------------------------------------------------
+Frame Image : frame_0046.png
+Frame Type  : Transition 2
+Timestamp   : 23.799s
+Narration   : A top linear layer projects the intermediate features to the final block output.
+--------------------------------------------------------------------------------
+Frame Image : frame_0047.png
+Frame Type  : Transition 3
+Timestamp   : 23.900s
+Narration   : A top linear layer projects the intermediate features to the final block output.
+--------------------------------------------------------------------------------
+Frame Image : frame_0048.png
+Frame Type  : Hold
+Timestamp   : 24.806s
+Narration   : In the original state space model, the bottom step computes the recurrent state update.
+--------------------------------------------------------------------------------
+Frame Image : frame_0049.png
+Frame Type  : Transition 1
+Timestamp   : 25.709s
+Narration   : In the original state space model, the bottom step computes the recurrent state update.
+--------------------------------------------------------------------------------
+Frame Image : frame_0050.png
+Frame Type  : Transition 2
+Timestamp   : 25.806s
+Narration   : In the original state space model, the bottom step computes the recurrent state update.
+--------------------------------------------------------------------------------
+Frame Image : frame_0051.png
+Frame Type  : Transition 3
+Timestamp   : 25.903s
+Narration   : In the original state space model, the bottom step computes the recurrent state update.
+--------------------------------------------------------------------------------
+Frame Image : frame_0052.png
+Frame Type  : Hold
+Timestamp   : 26.794s
+Narration   : The top step maps the updated state to produce the recurrent output.
+--------------------------------------------------------------------------------
+Frame Image : frame_0053.png
+Frame Type  : Transition 1
+Timestamp   : 27.691s
+Narration   : The top step maps the updated state to produce the recurrent output.
+--------------------------------------------------------------------------------
+Frame Image : frame_0054.png
+Frame Type  : Transition 2
+Timestamp   : 27.793s
+Narration   : The top step maps the updated state to produce the recurrent output.
+--------------------------------------------------------------------------------
+Frame Image : frame_0055.png
+Frame Type  : Transition 3
+Timestamp   : 27.896s
+Narration   : The top step maps the updated state to produce the recurrent output.
+--------------------------------------------------------------------------------
+Frame Image : frame_0056.png
+Frame Type  : Hold
+Timestamp   : 28.800s
+Narration   : This architecture is modified to integrate Mamba adapters.
+--------------------------------------------------------------------------------
+Frame Image : frame_0057.png
+Frame Type  : Transition 1
+Timestamp   : 29.702s
+Narration   : This architecture is modified to integrate Mamba adapters.
+--------------------------------------------------------------------------------
+Frame Image : frame_0058.png
+Frame Type  : Transition 2
+Timestamp   : 29.802s
+Narration   : This architecture is modified to integrate Mamba adapters.
+--------------------------------------------------------------------------------
+Frame Image : frame_0059.png
+Frame Type  : Transition 3
+Timestamp   : 29.901s
+Narration   : This architecture is modified to integrate Mamba adapters.
+--------------------------------------------------------------------------------
+Frame Image : frame_0060.png
+Frame Type  : Hold
+Timestamp   : 30.809s
+Narration   : Processing begins with the initial state space update.
+--------------------------------------------------------------------------------
+Frame Image : frame_0061.png
+Frame Type  : Transition 1
+Timestamp   : 31.712s
+Narration   : Processing begins with the initial state space update.
+--------------------------------------------------------------------------------
+Frame Image : frame_0062.png
+Frame Type  : Transition 2
+Timestamp   : 31.808s
+Narration   : Processing begins with the initial state space update.
+--------------------------------------------------------------------------------
+Frame Image : frame_0063.png
+Frame Type  : Transition 3
+Timestamp   : 31.904s
+Narration   : Processing begins with the initial state space update.
+--------------------------------------------------------------------------------
+Frame Image : frame_0064.png
+Frame Type  : Hold
+Timestamp   : 32.796s
+Narration   : The intermediate representation passes through Adaptor-T.
+--------------------------------------------------------------------------------
+Frame Image : frame_0065.png
+Frame Type  : Transition 1
+Timestamp   : 33.694s
+Narration   : The intermediate representation passes through Adaptor-T.
+--------------------------------------------------------------------------------
+Frame Image : frame_0066.png
+Frame Type  : Transition 2
+Timestamp   : 33.795s
+Narration   : The intermediate representation passes through Adaptor-T.
+--------------------------------------------------------------------------------
+Frame Image : frame_0067.png
+Frame Type  : Transition 3
+Timestamp   : 33.897s
+Narration   : The intermediate representation passes through Adaptor-T.
+--------------------------------------------------------------------------------
+Frame Image : frame_0068.png
+Frame Type  : Hold
+Timestamp   : 34.802s
+Narration   : It flows into the state space output computation.
+--------------------------------------------------------------------------------
+Frame Image : frame_0069.png
+Frame Type  : Transition 1
+Timestamp   : 35.705s
+Narration   : It flows into the state space output computation.
+--------------------------------------------------------------------------------
+Frame Image : frame_0070.png
+Frame Type  : Transition 2
+Timestamp   : 35.804s
+Narration   : It flows into the state space output computation.
+--------------------------------------------------------------------------------
+Frame Image : frame_0071.png
+Frame Type  : Transition 3
+Timestamp   : 35.902s
+Narration   : It flows into the state space output computation.
+--------------------------------------------------------------------------------
+Frame Image : frame_0072.png
+Frame Type  : Hold
+Timestamp   : 36.811s
+Narration   : Finally, Adaptor-S completes the module to generate the adapted output.
+--------------------------------------------------------------------------------
+Frame Image : frame_0073.png
+Frame Type  : Transition 1
+Timestamp   : 37.715s
+Narration   : Finally, Adaptor-S completes the module to generate the adapted output.
+--------------------------------------------------------------------------------
+Frame Image : frame_0074.png
+Frame Type  : Transition 2
+Timestamp   : 37.810s
+Narration   : Finally, Adaptor-S completes the module to generate the adapted output.
+--------------------------------------------------------------------------------
+Frame Image : frame_0075.png
+Frame Type  : Transition 3
+Timestamp   : 37.905s
+Narration   : Finally, Adaptor-S completes the module to generate the adapted output.
+--------------------------------------------------------------------------------

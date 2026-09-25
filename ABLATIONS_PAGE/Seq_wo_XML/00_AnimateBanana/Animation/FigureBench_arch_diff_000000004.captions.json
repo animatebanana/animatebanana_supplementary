@@ -1,0 +1,62 @@
+[
+ {
+  "t": 0.0,
+  "text": "The pipeline begins with an input medical scan, such as an abdominal CT image."
+ },
+ {
+  "t": 3.038,
+  "text": "The input image passes through a downsampler to prepare it for transformer processing."
+ },
+ {
+  "t": 5.963,
+  "text": "Features are processed through the frozen transformer backbone blocks of the pre-trained image encoder."
+ },
+ {
+  "t": 8.775,
+  "text": "Trainable LoRA bypass layers enable parameter-efficient adaptation specifically tailored for medical imagery."
+ },
+ {
+  "t": 11.7,
+  "text": "The adapted encoder outputs rich image embeddings to guide the hierarchical decoding process."
+ },
+ {
+  "t": 14.625,
+  "text": "In stage one, a transformer decoder applies self-attention and cross-attention over default prompt embeddings and image features."
+ },
+ {
+  "t": 17.438,
+  "text": "Concurrently, the first-stage pixel decoder upsamples intermediate feature representations."
+ },
+ {
+  "t": 20.363,
+  "text": "Outputs from the first-stage transformer and pixel decoders are combined via dot product."
+ },
+ {
+  "t": 23.287,
+  "text": "This generates an initial low-resolution probabilistic segmentation map that serves as a spatial prior."
+ },
+ {
+  "t": 26.1,
+  "text": "The Class-Balanced Mask-Guided Self-Attention block incorporates this prior to tackle severe class imbalance in medical targets."
+ },
+ {
+  "t": 29.025,
+  "text": "This produces enhanced image embeddings that amplify features for tail categories."
+ },
+ {
+  "t": 31.95,
+  "text": "The second-stage transformer decoder applies learnable mask cross-attention, spatially modulated by the prior probabilistic map."
+ },
+ {
+  "t": 34.762,
+  "text": "Simultaneously, a hierarchical pixel decoder integrates skip connections from stage one to capture intricate local details."
+ },
+ {
+  "t": 37.687,
+  "text": "The refined object queries and hierarchical spatial features are multiplied together."
+ },
+ {
+  "t": 40.612,
+  "text": "This produces the final high-resolution, prompt-free multi-organ segmentation prediction."
+ }
+]

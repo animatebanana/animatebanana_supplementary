@@ -1,0 +1,50 @@
+[
+ {
+  "t": 0.0,
+  "text": "The pipeline begins with data collection to assemble a wide dynamic range face dataset across diverse lighting environments."
+ },
+ {
+  "t": 2.2,
+  "text": "Raw images of multiple subjects are captured under both artificial and natural lighting setups."
+ },
+ {
+  "t": 4.4,
+  "text": "The captured data undergoes postprocessing, including format conversion and channel adjustments."
+ },
+ {
+  "t": 6.6,
+  "text": "Images are then classified and filtered to clean the dataset before forwarding to the next stage."
+ },
+ {
+  "t": 8.8,
+  "text": "In the tone mapping stage, high dynamic range images are compressed for standard vision algorithms."
+ },
+ {
+  "t": 11.0,
+  "text": "Only images with a dynamic range exceeding two to the fifteenth power are retained for the benchmark."
+ },
+ {
+  "t": 13.2,
+  "text": "Twenty-five distinct tone mapping operators process the wide dynamic range images."
+ },
+ {
+  "t": 15.4,
+  "text": "This produces twenty-five tone-mapped image sets ready for downstream face detection."
+ },
+ {
+  "t": 17.6,
+  "text": "The final stage performs face detection across the tone-mapped datasets."
+ },
+ {
+  "t": 19.8,
+  "text": "Eight face detectors are deployed across the generated image collections."
+ },
+ {
+  "t": 22.0,
+  "text": "Each detector locates faces under extreme backlighting and varying illuminance distributions."
+ },
+ {
+  "t": 24.2,
+  "text": "Finally, comprehensive results and analysis determine the impact of tone mapping methods on face detection accuracy."
+ }
+]

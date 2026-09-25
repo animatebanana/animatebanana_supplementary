@@ -1,0 +1,284 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 320" width="1000" height="320">
+  <defs>
+    <style type="text/css">
+      #block_video_images, #raster_video_images, #text_video_images_label, #edge_1, #block_density_estimation, #raster_density_estimation, #text_density_estimation_label, #edge_2, #block_density_segmentation, #raster_density_segmentation, #text_density_segmentation_label, #edge_3, #block_count_constraint, #raster_count_constraint, #text_count_constraint_label, #block_optimization, #edge_4, #edge_5, #child_sliding_roi, #text_sliding_roi, #edge_6, #child_integer_programming, #text_integer_programming_label, #edge_7, #child_bbox_estimation, #text_bbox_estimation_1, #text_bbox_estimation_2, #edge_8, #block_detection_results, #raster_detection_results, #text_detection_results_label {
+        opacity: 0;
+        animation-name: fadeIn;
+        animation-duration: 0.5s;
+        animation-fill-mode: forwards;
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+
+      @keyframes showBriefly {
+        0%, 90% { opacity: 1; }
+        100% { opacity: 0; }
+      }
+
+      #narration_banner text {
+        opacity: 0;
+      }
+
+      #block_video_images, #raster_video_images, #text_video_images_label { animation-delay: 0.0s; }
+      #edge_1 { animation-delay: 0.5s; }
+      #block_density_estimation, #raster_density_estimation, #text_density_estimation_label { animation-delay: 1.0s; }
+      #edge_2 { animation-delay: 1.5s; }
+      #block_density_segmentation, #raster_density_segmentation, #text_density_segmentation_label { animation-delay: 2.0s; }
+      #edge_3 { animation-delay: 2.5s; }
+      #block_count_constraint, #raster_count_constraint, #text_count_constraint_label { animation-delay: 3.0s; }
+      #block_optimization, #edge_4, #edge_5 { animation-delay: 3.5s; }
+      #child_sliding_roi, #text_sliding_roi { animation-delay: 4.0s; }
+      #edge_6 { animation-delay: 4.5s; }
+      #child_integer_programming, #text_integer_programming_label { animation-delay: 5.0s; }
+      #edge_7 { animation-delay: 5.5s; }
+      #child_bbox_estimation, #text_bbox_estimation_1, #text_bbox_estimation_2 { animation-delay: 6.0s; }
+      #edge_8 { animation-delay: 6.5s; }
+      #block_detection_results, #raster_detection_results, #text_detection_results_label { animation-delay: 7.0s; }
+
+      #narr_ts1 { animation: showBriefly 0.5s linear 0.0s forwards; }
+      #narr_ts2 { animation: showBriefly 0.5s linear 0.5s forwards; }
+      #narr_ts3 { animation: showBriefly 0.5s linear 1.0s forwards; }
+      #narr_ts4 { animation: showBriefly 0.5s linear 1.5s forwards; }
+      #narr_ts5 { animation: showBriefly 0.5s linear 2.0s forwards; }
+      #narr_ts6 { animation: showBriefly 0.5s linear 2.5s forwards; }
+      #narr_ts7 { animation: showBriefly 0.5s linear 3.0s forwards; }
+      #narr_ts8 { animation: showBriefly 0.5s linear 3.5s forwards; }
+      #narr_ts9 { animation: showBriefly 0.5s linear 4.0s forwards; }
+      #narr_ts10 { animation: showBriefly 0.5s linear 4.5s forwards; }
+      #narr_ts11 { animation: showBriefly 0.5s linear 5.0s forwards; }
+      #narr_ts12 { animation: showBriefly 0.5s linear 5.5s forwards; }
+      #narr_ts13 { animation: showBriefly 0.5s linear 6.0s forwards; }
+      #narr_ts14 { animation: showBriefly 0.5s linear 6.5s forwards; }
+      #narr_ts15 { animation: fadeIn 0.5s linear 7.0s forwards; }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#000" />
+    </marker>
+  </defs>
+
+  <!-- ==================== BLOCK 1: VIDEO/IMAGES ==================== -->
+  <g id="block_video_images" data-id="block_video_images" data-class="block" data-parent="root">
+    <rect id="rect_video_images_bg" x="2" y="35" width="200" height="120" rx="5" fill="#f0f0f0" stroke="#999" stroke-width="1" />
+    <text id="text_video_images_label" x="102" y="52" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#000">Video/Images</text>
+    
+    <!-- Raster Placeholder -->
+    <g id="raster_video_images" data-id="raster_video_images" data-class="raster_node"><image href="assets/editability/sequencer/DocFigures_arch_000000173/before/rasters/crop_raster_video_images.png" xlink:href="assets/editability/sequencer/DocFigures_arch_000000173/before/rasters/crop_raster_video_images.png" x="12" y="60" width="180" height="85" preserveAspectRatio="xMidYMid meet" /></g>
+  </g>
+
+  <!-- ==================== BLOCK 2: DENSITY ESTIMATION ==================== -->
+  <g id="block_density_estimation" data-id="block_density_estimation" data-class="block" data-parent="root">
+    <rect id="rect_density_estimation_bg" x="218" y="35" width="200" height="120" rx="5" fill="#e8f0fe" stroke="#999" stroke-width="1" />
+    <text id="text_density_estimation_label" x="318" y="52" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle" text-decoration="underline" fill="#000">Density Estimation</text>
+    
+    <!-- Raster Placeholder -->
+    <g id="raster_density_estimation" data-id="raster_density_estimation" data-class="raster_node"><image href="assets/editability/sequencer/DocFigures_arch_000000173/before/rasters/crop_raster_density_estimation.png" xlink:href="assets/editability/sequencer/DocFigures_arch_000000173/before/rasters/crop_raster_density_estimation.png" x="228" y="60" width="180" height="85" preserveAspectRatio="xMidYMid meet" /></g>
+  </g>
+
+  <!-- ==================== BLOCK 3: DENSITY SEGMENTATION ==================== -->
+  <g id="block_density_segmentation" data-id="block_density_segmentation" data-class="block" data-parent="root">
+    <rect id="rect_density_segmentation_bg" x="448" y="2" width="148" height="88" rx="5" fill="#e8f0fe" stroke="#999" stroke-width="1" />
+    <text id="text_density_segmentation_label" x="522" y="16" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle" text-decoration="underline" fill="#000">Density Segmentation</text>
+    
+    <!-- Raster Placeholder -->
+    <g id="raster_density_segmentation" data-id="raster_density_segmentation" data-class="raster_node"><image href="assets/editability/sequencer/DocFigures_arch_000000173/before/rasters/crop_raster_density_segmentation.png" xlink:href="assets/editability/sequencer/DocFigures_arch_000000173/before/rasters/crop_raster_density_segmentation.png" x="454" y="22" width="136" height="62" preserveAspectRatio="xMidYMid meet" /></g>
+  </g>
+
+  <!-- ==================== BLOCK 4: COUNT CONSTRAINT ==================== -->
+  <g id="block_count_constraint" data-id="block_count_constraint" data-class="block" data-parent="root">
+    <rect id="rect_count_constraint_bg" x="448" y="110" width="148" height="88" rx="5" fill="#e8f0fe" stroke="#999" stroke-width="1" />
+    <text id="text_count_constraint_label" x="522" y="124" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle" text-decoration="underline" fill="#000">Count Constraint</text>
+    
+    <!-- Raster Placeholder -->
+    <g id="raster_count_constraint" data-id="raster_count_constraint" data-class="raster_node"><image href="assets/editability/sequencer/DocFigures_arch_000000173/before/rasters/crop_raster_count_constraint.png" xlink:href="assets/editability/sequencer/DocFigures_arch_000000173/before/rasters/crop_raster_count_constraint.png" x="454" y="130" width="136" height="62" preserveAspectRatio="xMidYMid meet" /></g>
+  </g>
+
+  <!-- ==================== BLOCK 5: OPTIMIZATION CONTAINER ==================== -->
+  <g id="block_optimization" data-id="block_optimization" data-class="block" data-parent="root">
+    <rect id="rect_optimization_bg" x="614" y="2" width="170" height="196" rx="8" fill="none" stroke="#0000ff" stroke-width="2" stroke-dasharray="6,4" />
+    
+    <!-- Child 1: Sliding ROI Window -->
+    <g id="child_sliding_roi" data-id="child_sliding_roi" data-class="child_node" data-parent="block_optimization">
+      <rect id="rect_sliding_roi_bg" x="624" y="12" width="150" height="32" rx="4" fill="#e8f0fe" stroke="#999" stroke-width="1" />
+      <text id="text_sliding_roi" x="699" y="32" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#000">Sliding ROI Window</text>
+    </g>
+
+    <!-- Child 2: Integer Programming -->
+    <g id="child_integer_programming" data-id="child_integer_programming" data-class="child_node" data-parent="block_optimization">
+      <rect id="rect_integer_programming_bg" x="624" y="52" width="150" height="90" rx="4" fill="#e8f0fe" stroke="#999" stroke-width="1" />
+      <text id="text_integer_programming_label" x="699" y="68" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle" text-decoration="underline" fill="#000">Integer Programming</text>
+      
+      <!-- Vector/Matrix Formula Representation -->
+      <!-- Left Vector -->
+      <path d="M 636 76 L 632 76 L 632 116 L 636 116" fill="none" stroke="#000" stroke-width="1" />
+      <path d="M 644 76 L 648 76 L 648 116 L 644 116" fill="none" stroke="#000" stroke-width="1" />
+      <text x="640" y="86" font-family="sans-serif" font-size="7" text-anchor="middle" fill="#000">n<tspan font-size="0.65em" baseline-shift="sub">1</tspan></text>
+      <text x="640" y="98" font-family="sans-serif" font-size="7" text-anchor="middle" fill="#000">...</text>
+      <text x="640" y="112" font-family="sans-serif" font-size="7" text-anchor="middle" fill="#000">n<tspan font-size="0.65em" baseline-shift="sub">M</tspan></text>
+
+      <!-- Equals Sign -->
+      <text x="656" y="98" font-family="sans-serif" font-size="12" text-anchor="middle" fill="#000">=</text>
+
+      <!-- Matrix W -->
+      <path d="M 668 76 L 664 76 L 664 116 L 668 116" fill="none" stroke="#000" stroke-width="1" />
+      <path d="M 732 76 L 736 76 L 736 116 L 732 116" fill="none" stroke="#000" stroke-width="1" />
+      
+      <!-- Colored Matrix Rows -->
+      <rect x="672" y="80" width="30" height="6" fill="#ff0000" />
+      <rect x="672" y="90" width="30" height="6" fill="#ffff00" />
+      <rect x="692" y="104" width="30" height="6" fill="#0000ff" />
+      <text x="718" y="92" font-family="sans-serif" font-size="12" fill="#000">0</text>
+      <text x="680" y="112" font-family="sans-serif" font-size="12" fill="#000">0</text>
+
+      <!-- Right Vector -->
+      <path d="M 744 76 L 740 76 L 740 116 L 744 116" fill="none" stroke="#000" stroke-width="1" />
+      <path d="M 752 76 L 756 76 L 756 116 L 752 116" fill="none" stroke="#000" stroke-width="1" />
+      <text x="748" y="86" font-family="sans-serif" font-size="7" text-anchor="middle" fill="#000">s<tspan font-size="0.65em" baseline-shift="sub">1</tspan></text>
+      <text x="748" y="98" font-family="sans-serif" font-size="7" text-anchor="middle" fill="#000">...</text>
+      <text x="748" y="112" font-family="sans-serif" font-size="7" text-anchor="middle" fill="#000">s<tspan font-size="0.65em" baseline-shift="sub">N</tspan></text>
+
+      <!-- Formula Labels -->
+      <text x="648" y="132" font-family="sans-serif" font-size="8" text-anchor="middle" fill="#000">ROI Count n</text>
+      <text x="700" y="132" font-family="sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#000">W</text>
+      <text x="748" y="132" font-family="sans-serif" font-size="8" text-anchor="middle" fill="#000">Location s</text>
+    </g>
+
+    <!-- Child 3: Bounding Box Estimation -->
+    <g id="child_bbox_estimation" data-id="child_bbox_estimation" data-class="child_node" data-parent="block_optimization">
+      <rect id="rect_bbox_estimation_bg" x="624" y="148" width="150" height="42" rx="4" fill="#e8f0fe" stroke="#999" stroke-width="1" />
+      <text id="text_bbox_estimation_1" x="699" y="166" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle" text-decoration="underline" fill="#000">Bounding Box</text>
+      <text id="text_bbox_estimation_2" x="699" y="182" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle" text-decoration="underline" fill="#000">Estimation</text>
+    </g>
+  </g>
+
+  <!-- ==================== BLOCK 6: DETECTION RESULTS ==================== -->
+  <g id="block_detection_results" data-id="block_detection_results" data-class="block" data-parent="root">
+    <rect id="rect_detection_results_bg" x="800" y="35" width="198" height="120" rx="5" fill="#f0f0f0" stroke="#999" stroke-width="1" />
+    <text id="text_detection_results_label" x="899" y="52" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#000">Detection Results</text>
+    
+    <!-- Raster Placeholder -->
+    <g id="raster_detection_results" data-id="raster_detection_results" data-class="raster_node"><image href="assets/editability/sequencer/DocFigures_arch_000000173/before/rasters/crop_raster_detection_results.png" xlink:href="assets/editability/sequencer/DocFigures_arch_000000173/before/rasters/crop_raster_detection_results.png" x="808" y="60" width="182" height="85" preserveAspectRatio="xMidYMid meet" /></g>
+  </g>
+
+  <!-- ==================== EDGES / CONNECTIONS ==================== -->
+  <!-- Edge 1: Video/Images -> Density Estimation -->
+  <path id="edge_1" data-id="edge_1" data-class="edge" data-source="block_video_images" data-target="block_density_estimation"
+        d="M 202 95 L 218 95" fill="none" stroke="#000" stroke-width="2" marker-end="url(#arrow)" />
+
+  <!-- Edge 2: Density Estimation -> Density Segmentation (Stepped) -->
+  <path id="edge_2" data-id="edge_2" data-class="edge" data-source="block_density_estimation" data-target="block_density_segmentation"
+        d="M 418 95 L 430 95 L 430 46 L 448 46" fill="none" stroke="#000" stroke-width="2" marker-end="url(#arrow)" />
+
+  <!-- Edge 3: Density Segmentation -> Count Constraint -->
+  <path id="edge_3" data-id="edge_3" data-class="edge" data-source="block_density_segmentation" data-target="block_count_constraint"
+        d="M 522 90 L 522 110" fill="none" stroke="#000" stroke-width="2" marker-end="url(#arrow)" />
+
+  <!-- Edge 4: Density Segmentation -> Optimization Block -->
+  <path id="edge_4" data-id="edge_4" data-class="edge" data-source="block_density_segmentation" data-target="block_optimization"
+        d="M 596 46 L 614 46" fill="none" stroke="#000" stroke-width="2" marker-end="url(#arrow)" />
+
+  <!-- Edge 5: Count Constraint -> Optimization Block -->
+  <path id="edge_5" data-id="edge_5" data-class="edge" data-source="block_count_constraint" data-target="block_optimization"
+        d="M 596 154 L 614 154" fill="none" stroke="#000" stroke-width="2" marker-end="url(#arrow)" />
+
+  <!-- Edge 6: Sliding ROI Window -> Integer Programming (Inside Optimization) -->
+  <path id="edge_6" data-id="edge_6" data-class="edge" data-source="child_sliding_roi" data-target="child_integer_programming"
+        d="M 699 44 L 699 52" fill="none" stroke="#000" stroke-width="2" marker-end="url(#arrow)" />
+
+  <!-- Edge 7: Integer Programming -> Bounding Box Estimation (Inside Optimization) -->
+  <path id="edge_7" data-id="edge_7" data-class="edge" data-source="child_integer_programming" data-target="child_bbox_estimation"
+        d="M 699 142 L 699 148" fill="none" stroke="#000" stroke-width="2" marker-end="url(#arrow)" />
+
+  <!-- Edge 8: Optimization Block -> Detection Results -->
+  <path id="edge_8" data-id="edge_8" data-class="edge" data-source="block_optimization" data-target="block_detection_results"
+        d="M 784 95 L 800 95" fill="none" stroke="#000" stroke-width="2" marker-end="url(#arrow)" />
+
+  <!-- ==================== NARRATION BANNER ==================== -->
+  <g id="narration_banner">
+    <rect x="50" y="215" width="900" height="85" rx="8" fill="#f9f9f9" stroke="#e0e0e0" stroke-width="1" />
+    
+    <!-- TS 1 -->
+    <text id="narr_ts1" x="50%" y="245" font-family="sans-serif" font-size="14" fill="#333" text-anchor="middle">
+      <tspan x="50%" dy="0">The processing pipeline begins with the ingestion of raw video</tspan>
+      <tspan x="50%" dy="1.3em">frames or static images depicting a crowded scene.</tspan>
+    </text>
+
+    <!-- TS 2 -->
+    <text id="narr_ts2" x="50%" y="255" font-family="sans-serif" font-size="14" fill="#333" text-anchor="middle">
+      <tspan x="50%" dy="0">These images are passed directly into the density estimation stage.</tspan>
+    </text>
+
+    <!-- TS 3 -->
+    <text id="narr_ts3" x="50%" y="245" font-family="sans-serif" font-size="14" fill="#333" text-anchor="middle">
+      <tspan x="50%" dy="0">Here, a density estimation model maps the spatial distribution of the crowd, generating a continuous</tspan>
+      <tspan x="50%" dy="1.3em">density map where high-intensity regions indicate dense clusters of individuals.</tspan>
+    </text>
+
+    <!-- TS 4 -->
+    <text id="narr_ts4" x="50%" y="255" font-family="sans-serif" font-size="14" fill="#333" text-anchor="middle">
+      <tspan x="50%" dy="0">The generated density map is then forwarded to the segmentation module.</tspan>
+    </text>
+
+    <!-- TS 5 -->
+    <text id="narr_ts5" x="50%" y="245" font-family="sans-serif" font-size="14" fill="#333" text-anchor="middle">
+      <tspan x="50%" dy="0">The density segmentation module processes the map to isolate distinct crowd patches</tspan>
+      <tspan x="50%" dy="1.3em">and identify cluster boundaries.</tspan>
+    </text>
+
+    <!-- TS 6 -->
+    <text id="narr_ts6" x="50%" y="255" font-family="sans-serif" font-size="14" fill="#333" text-anchor="middle">
+      <tspan x="50%" dy="0">Simultaneously, these segmented regions are analyzed to establish quantitative constraints.</tspan>
+    </text>
+
+    <!-- TS 7 -->
+    <text id="narr_ts7" x="50%" y="245" font-family="sans-serif" font-size="14" fill="#333" text-anchor="middle">
+      <tspan x="50%" dy="0">The count constraint mechanism assigns preliminary numerical counts to individual segmented regions,</tspan>
+      <tspan x="50%" dy="1.3em">establishing strict quantitative bounds that constrain the subsequent optimization.</tspan>
+    </text>
+
+    <!-- TS 8 -->
+    <text id="narr_ts8" x="50%" y="255" font-family="sans-serif" font-size="14" fill="#333" text-anchor="middle">
+      <tspan x="50%" dy="0">Both the segmented regions and the count constraints are then fed into the main optimization block.</tspan>
+    </text>
+
+    <!-- TS 9 -->
+    <text id="narr_ts9" x="50%" y="255" font-family="sans-serif" font-size="14" fill="#333" text-anchor="middle">
+      <tspan x="50%" dy="0">Within this block, a sliding region-of-interest window scans the scene to localize potential targets.</tspan>
+    </text>
+
+    <!-- TS 10 -->
+    <text id="narr_ts10" x="50%" y="255" font-family="sans-serif" font-size="14" fill="#333" text-anchor="middle">
+      <tspan x="50%" dy="0">The sliding window outputs are then formulated into an integer programming problem.</tspan>
+    </text>
+
+    <!-- TS 11 -->
+    <text id="narr_ts11" x="50%" y="245" font-family="sans-serif" font-size="14" fill="#333" text-anchor="middle">
+      <tspan x="50%" dy="0">The integer programming module solves a linear system that matches regional counts</tspan>
+      <tspan x="50%" dy="1.3em">with spatial location variables via a transformation matrix.</tspan>
+    </text>
+
+    <!-- TS 12 -->
+    <text id="narr_ts12" x="50%" y="255" font-family="sans-serif" font-size="14" fill="#333" text-anchor="middle">
+      <tspan x="50%" dy="0">The optimized spatial variables are then passed to the bounding box estimator.</tspan>
+    </text>
+
+    <!-- TS 13 -->
+    <text id="narr_ts13" x="50%" y="245" font-family="sans-serif" font-size="14" fill="#333" text-anchor="middle">
+      <tspan x="50%" dy="0">The bounding box estimation module refines these optimization outputs</tspan>
+      <tspan x="50%" dy="1.3em">to determine the precise boundaries of each individual.</tspan>
+    </text>
+
+    <!-- TS 14 -->
+    <text id="narr_ts14" x="50%" y="255" font-family="sans-serif" font-size="14" fill="#333" text-anchor="middle">
+      <tspan x="50%" dy="0">These refined coordinates are mapped back onto the original scene to produce the final output.</tspan>
+    </text>
+
+    <!-- TS 15 -->
+    <text id="narr_ts15" x="50%" y="245" font-family="sans-serif" font-size="14" fill="#333" text-anchor="middle">
+      <tspan x="50%" dy="0">Finally, the system generates the detection results, marking each individual</tspan>
+      <tspan x="50%" dy="1.3em">in the crowd with a precise green bounding box.</tspan>
+    </text>
+  </g>
+</svg>

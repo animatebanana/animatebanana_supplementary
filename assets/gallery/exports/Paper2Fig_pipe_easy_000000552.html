@@ -1,0 +1,746 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AnimateBanana — Colour Pop — Paper2Fig_pipe_easy_000000552</title>
+<!--
+  AnimateBanana — Colour Pop — Paper2Fig_pipe_easy_000000552
+  An animated visual narrative produced by the AnimateBanana pipeline.
+
+  This file is self-contained: the animation, its images, its narration and its
+  controls are all inside it. Drop it on a server, open it from a disk, or put
+  it in an <iframe> - it needs nothing else and fetches nothing.
+
+  The animation is CSS. The controls drive it through the browser's animation
+  API - pause holds every keyframe at once, the bar scrubs them all to the same
+  moment, speed sets their rate together - and the caption is read from a clock
+  of the page's own that is driven alongside them. It has to be its own clock:
+  the drawing is made of hundreds of short animations that each stop when they
+  are done, so reading the time off any one of them gives a watch that stopped
+  half a second in.
+-->
+<style>
+  :root {
+    --ink: #1A1815;
+    --paper: #FFFEF9;
+    --banana: #FFD43B;
+    --banana-deep: #F2B200;
+    --banana-soft: #FFF2B8;
+    --mute: #6b6558;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--paper); color: var(--ink); }
+  body {
+    font-family: ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    padding: 16px;
+  }
+  .ab { margin: 0 auto; max-width: 1400px; }
+  .ab-stage {
+    background: #fff;
+    border: 2px solid var(--ink);
+    border-radius: 14px;
+    padding: 10px;
+    overflow: hidden;
+  }
+  .ab-stage svg { display: block; width: 100%; height: auto; }
+
+  /* ---- Transport ----
+     Every control is the same height and centred on the same line, so the bar
+     reads as one object rather than a row of parts that happen to be adjacent. */
+  .ab-bar {
+    --h: 40px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    border-radius: calc(var(--h) / 2 + 8px);
+  }
+  .ab-bar > * { flex: 0 0 auto; height: var(--h); }
+
+  .ab-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 16px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    line-height: 1;
+    color: var(--ink);
+    background: #fff;
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    cursor: pointer;
+  }
+  .ab-btn:hover { background: var(--banana-soft); }
+  .ab-btn:active { transform: translateY(1px); }
+
+  .ab-play { width: var(--h); padding: 0; border-radius: 50%; background: var(--ink); color: var(--paper); }
+  .ab-play:hover { background: var(--ink); }
+  .ab-play svg { width: 14px; height: 14px; fill: currentColor; display: block; }
+  .ab-play .ab-ic-play { display: none; margin-left: 2px; }
+  .ab.is-paused .ab-play .ab-ic-play { display: block; }
+  .ab.is-paused .ab-play .ab-ic-pause { display: none; }
+
+  /* the rail is drawn; the range input laid over it is what you actually grab */
+  .ab-scrub { position: relative; flex: 1 1 180px !important; min-width: 120px;
+              display: flex; align-items: center; }
+  .ab-rail {
+    position: absolute; inset-inline: 0; height: 9px;
+    background: #fff; border: 1.5px solid var(--ink); border-radius: 999px;
+    overflow: hidden; pointer-events: none;
+  }
+  .ab-rail i { display: block; width: 0; height: 100%; background: var(--banana); }
+  .ab-seek {
+    position: relative; width: 100%; height: var(--h); margin: 0;
+    background: none; -webkit-appearance: none; appearance: none; cursor: pointer;
+  }
+  .ab-seek::-webkit-slider-runnable-track { height: var(--h); background: transparent; }
+  .ab-seek::-moz-range-track { height: var(--h); background: transparent; }
+  .ab-seek::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none;
+    width: 18px; height: 18px; border-radius: 50%;
+    border: 2.5px solid var(--ink); background: var(--banana);
+  }
+  .ab-seek::-moz-range-thumb {
+    width: 16px; height: 16px; border-radius: 50%;
+    border: 2.5px solid var(--ink); background: var(--banana);
+  }
+  .ab-seek:focus-visible { outline: none; }
+  .ab-scrub:focus-within .ab-rail { box-shadow: 0 0 0 3px var(--banana); }
+
+  .ab-time {
+    display: inline-flex;
+    align-items: center;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.72rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--mute);
+    white-space: nowrap;
+  }
+  .ab-time b { color: var(--ink); }
+
+  .ab-speed {
+    display: inline-flex;
+    align-items: stretch;
+    background: #fff;
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .ab-speed button {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    padding: 0;
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--ink);
+    background: #fff;
+    border: 0;
+    cursor: pointer;
+  }
+  .ab-speed button:hover { background: var(--banana-soft); }
+  .ab-speed button[disabled] { opacity: 0.35; cursor: default; background: #fff; }
+  .ab-rate {
+    display: grid;
+    place-items: center;
+    min-width: 56px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.74rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    border-inline: 2px solid var(--ink);
+  }
+  .ab.is-fast .ab-rate { background: var(--banana); }
+
+  /* Captions on or off, said in words rather than left to be inferred */
+  .ab-toggle .ab-led {
+    width: 11px; height: 11px; border-radius: 50%;
+    border: 2px solid var(--ink); background: var(--banana);
+  }
+  .ab-toggle[aria-pressed="false"] { color: var(--mute); }
+  .ab-toggle[aria-pressed="false"] .ab-led { background: #fff; }
+
+  /* ---- The line being narrated ---- */
+  .ab-cap {
+    display: flex;
+    align-items: center;
+    min-height: 3.4em;
+    margin: 10px 0 0;
+    padding: 12px 16px;
+    font-size: clamp(0.95rem, 0.9rem + 0.3vw, 1.15rem);
+    font-weight: 600;
+    font-style: italic;
+    line-height: 1.5;
+    background: var(--banana-soft);
+    border: 1.5px solid var(--banana);
+    border-left: 5px solid var(--banana-deep);
+    border-radius: 10px;
+    transition: opacity .18s ease;
+  }
+  .ab-cap.is-swap { opacity: 0; }
+  .ab.is-off .ab-cap { display: none; }
+  @media (prefers-reduced-motion: reduce) { .ab-cap { transition: none; } }
+
+  /* Narrow: the bar wraps to two rows and squares off, rather than squeezing
+     the scrub bar down to nothing. */
+  @media (max-width: 720px) {
+    .ab-bar { flex-wrap: wrap; border-radius: 20px; }
+    .ab-scrub { order: 3; flex-basis: 100% !important; }
+    .ab-time { order: 2; margin-left: auto; }
+  }
+</style>
+</head>
+<body>
+<figure class="ab">
+  <div class="ab-stage">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1475 429">
+  <defs>
+    <!-- Arrow Markers -->
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#cb3d38"/>
+    </marker>
+    <marker id="arrow-red-dashed" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#cb3d38"/>
+    </marker>
+
+    <style>
+      /* Global Dormant State */
+      #block-attacker, #text-attacker-title,
+      #node-datasets, #text-attack-datasets, #edge-datasets-to-video,
+      #node-video, #text-deepfake-video-1, #text-deepfake-video-2, #edge-video-to-mtcnn,
+      #node-mtcnn, #text-crop-faces-1, #text-crop-faces-2, #edge-mtcnn-to-hacker,
+      #node-hacker, #text-celebrity-images-1, #text-celebrity-images-2, #edge-hacker-to-diamond,
+      #node-attack-type, #text-targeted, #text-non-targeted, #edge-targeted-to-apis, #edge-nontargeted-to-apis, #edge-combined-to-apis,
+      #block-apis, #text-apis-title-1, #text-apis-title-2,
+      #node-api-amazon, #node-api-azure, #node-api-naver, #text-amazon-1, #text-amazon-2, #text-azure-1, #text-azure-2, #text-naver, #edge-apis-to-eval-main, #edge-apis-fork-top, #edge-apis-fork-bottom,
+      #block-evaluation, #text-eval-title, #text-success-rate-label, #text-metrics-label,
+      #node-eval-targeted, #node-eval-nontargeted, #text-eval-targeted-1, #text-eval-targeted-2, #text-eval-nontargeted-1, #text-eval-nontargeted-2,
+      #node-metric-lifelike, #node-metric-confidence, #node-metric-similarity, #node-metric-fooling, #text-lifelike-1, #text-lifelike-2, #text-confidence-1, #text-confidence-2, #text-confidence-3, #text-similarity-1, #text-similarity-2, #text-similarity-3, #text-fooling-1, #text-fooling-2, #text-fooling-3 {
+        filter: grayscale(100%) opacity(0.4);
+        animation-name: colorPop;
+        animation-duration: 0.5s;
+        animation-fill-mode: forwards;
+      }
+
+      @keyframes colorPop {
+        to {
+          filter: grayscale(0%) opacity(1);
+        }
+      }
+
+      /* Timestamp Activation Delays */
+      #block-attacker, #text-attacker-title {
+        animation-delay: 0s;
+      }
+
+      #node-datasets, #text-attack-datasets, #edge-datasets-to-video {
+        animation-delay: 4.64s;
+      }
+
+      #node-video, #text-deepfake-video-1, #text-deepfake-video-2, #edge-video-to-mtcnn {
+        animation-delay: 11.6s;
+      }
+
+      #node-mtcnn, #text-crop-faces-1, #text-crop-faces-2, #edge-mtcnn-to-hacker {
+        animation-delay: 15.8s;
+      }
+
+      #node-hacker, #text-celebrity-images-1, #text-celebrity-images-2, #edge-hacker-to-diamond {
+        animation-delay: 22.4s;
+      }
+
+      #node-attack-type, #text-targeted, #text-non-targeted, #edge-targeted-to-apis, #edge-nontargeted-to-apis, #edge-combined-to-apis {
+        animation-delay: 27.28s;
+      }
+
+      #block-apis, #text-apis-title-1, #text-apis-title-2 {
+        animation-delay: 37.04s;
+      }
+
+      #node-api-amazon, #node-api-azure, #node-api-naver, #text-amazon-1, #text-amazon-2, #text-azure-1, #text-azure-2, #text-naver, #edge-apis-to-eval-main, #edge-apis-fork-top, #edge-apis-fork-bottom {
+        animation-delay: 42.72s;
+      }
+
+      #block-evaluation, #text-eval-title, #text-success-rate-label, #text-metrics-label {
+        animation-delay: 51.56s;
+      }
+
+      #node-eval-targeted, #node-eval-nontargeted, #text-eval-targeted-1, #text-eval-targeted-2, #text-eval-nontargeted-1, #text-eval-nontargeted-2 {
+        animation-delay: 57.08s;
+      }
+
+      #node-metric-lifelike, #node-metric-confidence, #node-metric-similarity, #node-metric-fooling, #text-lifelike-1, #text-lifelike-2, #text-confidence-1, #text-confidence-2, #text-confidence-3, #text-similarity-1, #text-similarity-2, #text-similarity-3, #text-fooling-1, #text-fooling-2, #text-fooling-3 {
+        animation-delay: 62.64s;
+      }
+
+      /* Narration Banner Keyframe Animations */
+      @keyframes showNarrWindow {
+        0% { opacity: 0; }
+        10% { opacity: 1; }
+        90% { opacity: 1; }
+        100% { opacity: 0; }
+      }
+
+      @keyframes showNarrFinal {
+        0% { opacity: 0; }
+        10% { opacity: 1; }
+        100% { opacity: 1; }
+      }
+    </style>
+  </defs>
+
+  <!-- ================= BACKGROUND CONTAINERS / BLOCKS ================= -->
+  
+  <!-- Left Main Container: Deepfake Impersonation Attacker -->
+  <g id="block-attacker" data-id="block-attacker" data-class="block" data-parent="root">
+    <rect id="rect-attacker" x="12" y="10" width="445" height="402" rx="15" ry="15" fill="#ffffff" stroke="#231f20" stroke-width="2.5"/>
+    <text id="text-attacker-title" data-id="text-attacker-title" data-class="text_node" data-parent="block-attacker" x="234" y="38" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="bold" fill="#231f20" text-anchor="middle">Deepfake Impersonation Attacker</text>
+  </g>
+
+  <!-- Center Container: Commercial Celebrity Recognition Web APIs -->
+  <g id="block-apis" data-id="block-apis" data-class="block" data-parent="root">
+    <rect id="rect-apis" x="496" y="94" width="408" height="234" rx="14" ry="14" fill="#ffffff" stroke="#231f20" stroke-width="2.5"/>
+    <text id="text-apis-title-1" data-id="text-apis-title-1" data-class="text_node" data-parent="block-apis" x="700" y="122" font-family="Arial, Helvetica, sans-serif" font-size="18.5" font-weight="bold" fill="#231f20" text-anchor="middle">Commerical Celebrity Recognition</text>
+    <text id="text-apis-title-2" data-id="text-apis-title-2" data-class="text_node" data-parent="block-apis" x="700" y="146" font-family="Arial, Helvetica, sans-serif" font-size="18.5" font-weight="bold" fill="#231f20" text-anchor="middle">Web APIs</text>
+  </g>
+
+  <!-- Right Main Container: Evaluation -->
+  <g id="block-evaluation" data-id="block-evaluation" data-class="block" data-parent="root">
+    <rect id="rect-evaluation" x="942" y="10" width="520" height="402" rx="15" ry="15" fill="#ffffff" stroke="#231f20" stroke-width="2.5"/>
+    <text id="text-eval-title" data-id="text-eval-title" data-class="text_node" data-parent="block-evaluation" x="1202" y="38" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="bold" fill="#231f20" text-anchor="middle">Evaluation</text>
+
+    <!-- Sub-container: Success Rate -->
+    <rect id="rect-sub-success" x="960" y="52" width="484" height="135" rx="10" ry="10" fill="none" stroke="#888888" stroke-width="1.5" stroke-dasharray="6,4"/>
+    <text id="text-success-rate-label" data-id="text-success-rate-label" data-class="text_node" data-parent="block-evaluation" x="972" y="75" font-family="Arial, Helvetica, sans-serif" font-size="17" font-style="italic" font-weight="bold" fill="#231f20">Success Rate</text>
+
+    <!-- Sub-container: API Result Analysis Metrics -->
+    <rect id="rect-sub-metrics" x="960" y="196" width="484" height="206" rx="10" ry="10" fill="none" stroke="#888888" stroke-width="1.5" stroke-dasharray="6,4"/>
+    <text id="text-metrics-label" data-id="text-metrics-label" data-class="text_node" data-parent="block-evaluation" x="972" y="219" font-family="Arial, Helvetica, sans-serif" font-size="17" font-style="italic" font-weight="bold" fill="#231f20">API Result Analysis Metrics</text>
+  </g>
+
+  <!-- ================= EDGES & CONNECTING PATHS ================= -->
+  <g id="group-edges">
+    <!-- MTCNN to Hacker -->
+    <path id="edge-mtcnn-to-hacker" data-id="edge-mtcnn-to-hacker" data-class="edge" data-source="node-mtcnn" data-target="node-hacker" d="M 48 116 L 48 90 L 115 90" fill="none" stroke="#cb3d38" stroke-width="1.8" marker-end="url(#arrow-red)"/>
+
+    <!-- Hacker to Attack Type Diamond -->
+    <path id="edge-hacker-to-diamond" data-id="edge-hacker-to-diamond" data-class="edge" data-source="node-hacker" data-target="node-attack-type" d="M 190 90 C 235 90 240 205 304 208" fill="none" stroke="#cb3d38" stroke-width="1.8" marker-end="url(#arrow-red)"/>
+
+    <!-- Video to MTCNN -->
+    <path id="edge-video-to-mtcnn" data-id="edge-video-to-mtcnn" data-class="edge" data-source="node-video" data-target="node-mtcnn" d="M 152 230 C 152 175 108 158 80 158" fill="none" stroke="#cb3d38" stroke-width="1.8" marker-end="url(#arrow-red)"/>
+
+    <!-- Datasets to Video (Dashed) -->
+    <path id="edge-datasets-to-video" data-id="edge-datasets-to-video" data-class="edge" data-source="node-datasets" data-target="node-video" d="M 265 300 C 265 258 208 250 180 250" fill="none" stroke="#cb3d38" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrow-red-dashed)"/>
+
+    <!-- Targeted Path from Diamond to APIs -->
+    <path id="edge-targeted-to-apis" data-id="edge-targeted-to-apis" data-class="edge" data-source="node-attack-type" data-target="block-apis" d="M 338 155 C 375 145 425 185 480 208" fill="none" stroke="#cb3d38" stroke-width="2.5"/>
+
+    <!-- Non-targeted Path from Diamond to APIs -->
+    <path id="edge-nontargeted-to-apis" data-id="edge-nontargeted-to-apis" data-class="edge" data-source="node-attack-type" data-target="block-apis" d="M 338 261 C 375 271 425 231 480 208" fill="none" stroke="#cb3d38" stroke-width="2.5"/>
+
+    <!-- Combined Arrow Head to APIs -->
+    <path id="edge-combined-to-apis" data-id="edge-combined-to-apis" data-class="edge" data-source="node-attack-type" data-target="block-apis" d="M 470 208 L 485 208" fill="none" stroke="#cb3d38" stroke-width="2.5" marker-end="url(#arrow-red)"/>
+
+    <!-- APIs to Evaluation (Split Fork) -->
+    <path id="edge-apis-to-eval-main" data-id="edge-apis-to-eval-main" data-class="edge" data-source="block-apis" data-target="block-evaluation" d="M 904 210 L 916 210 M 916 120 L 935 120 M 916 298 L 935 298 M 916 120 C 916 120 916 298 916 298" fill="none" stroke="#cb3d38" stroke-width="2.2"/>
+    <path id="edge-apis-fork-top" data-id="edge-apis-fork-top" data-class="edge" data-source="block-apis" data-target="block-evaluation" d="M 930 120 L 946 120" fill="none" stroke="#cb3d38" stroke-width="2.2" marker-end="url(#arrow-red)"/>
+    <path id="edge-apis-fork-bottom" data-id="edge-apis-fork-bottom" data-class="edge" data-source="block-apis" data-target="block-evaluation" d="M 930 298 L 946 298" fill="none" stroke="#cb3d38" stroke-width="2.2" marker-end="url(#arrow-red)"/>
+  </g>
+
+  <!-- ================= NODES INSIDE ATTACKER BLOCK ================= -->
+
+  <!-- Node: MTCNN -->
+  <g id="node-mtcnn" data-id="node-mtcnn" data-class="composite_whole" data-parent="block-attacker">
+    <circle id="mtcnn-circle" data-id="mtcnn-circle" data-class="composite_part" data-parent="node-mtcnn" cx="48" cy="158" r="31" fill="#f6d3d2" stroke="#cb3d38" stroke-width="2"/>
+    <path id="mtcnn-crop-1" data-id="mtcnn-crop-1" data-class="composite_part" data-parent="node-mtcnn" d="M 33 138 L 33 162 L 58 162" fill="none" stroke="#cb3d38" stroke-width="3"/>
+    <path id="mtcnn-crop-2" data-id="mtcnn-crop-2" data-class="composite_part" data-parent="node-mtcnn" d="M 63 178 L 63 154 L 38 154" fill="none" stroke="#cb3d38" stroke-width="3"/>
+    <text id="mtcnn-text" data-id="mtcnn-text" data-class="composite_part" data-parent="node-mtcnn" x="48" y="174" font-family="Arial, Helvetica, sans-serif" font-size="8.5" font-weight="bold" fill="#cb3d38" text-anchor="middle">MTCNN</text>
+  </g>
+  <text id="text-crop-faces-1" data-id="text-crop-faces-1" data-class="text_node" data-parent="block-attacker" x="48" y="214" font-family="Georgia, serif" font-size="18" fill="#231f20" text-anchor="middle">Crop</text>
+  <text id="text-crop-faces-2" data-id="text-crop-faces-2" data-class="text_node" data-parent="block-attacker" x="48" y="235" font-family="Georgia, serif" font-size="18" fill="#231f20" text-anchor="middle">Faces</text>
+
+  <!-- Node: Attacker / Hacker Icon -->
+  <g id="node-hacker" data-id="node-hacker" data-class="composite_whole" data-parent="block-attacker">
+    <!-- Hat -->
+    <path id="hacker-hat-brim" data-id="hacker-hat-brim" data-class="composite_part" data-parent="node-hacker" d="M 125 78 L 175 78 C 175 78 168 74 150 74 C 132 74 125 78 125 78 Z" fill="#cb3d38"/>
+    <path id="hacker-hat-top" data-id="hacker-hat-top" data-class="composite_part" data-parent="node-hacker" d="M 137 74 L 140 60 L 160 60 L 163 74 Z" fill="#cb3d38"/>
+    <rect id="hacker-hat-ribbon" data-id="hacker-hat-ribbon" data-class="composite_part" data-parent="node-hacker" x="139" y="69" width="22" height="3" fill="#ffffff"/>
+    <!-- Glasses / Face -->
+    <path id="hacker-face" data-id="hacker-face" data-class="composite_part" data-parent="node-hacker" d="M 136 82 L 164 82 L 160 92 L 140 92 Z" fill="#cb3d38"/>
+    <circle id="hacker-glass-l" data-id="hacker-glass-l" data-class="composite_part" data-parent="node-hacker" cx="144" cy="86" r="3" fill="#ffffff"/>
+    <circle id="hacker-glass-r" data-id="hacker-glass-r" data-class="composite_part" data-parent="node-hacker" cx="156" cy="86" r="3" fill="#ffffff"/>
+    <!-- Coat / Body -->
+    <path id="hacker-body" data-id="hacker-body" data-class="composite_part" data-parent="node-hacker" d="M 126 114 L 132 96 L 168 96 L 174 114 Z" fill="#cb3d38"/>
+    <polygon id="hacker-collar" data-id="hacker-collar" data-class="composite_part" data-parent="node-hacker" points="150,96 145,108 150,113 155,108" fill="#ffffff"/>
+  </g>
+
+  <!-- Text: Celebrity Images -->
+  <text id="text-celebrity-images-1" data-id="text-celebrity-images-1" data-class="text_node" data-parent="block-attacker" x="200" y="162" font-family="Georgia, serif" font-size="18" font-style="italic" fill="#231f20" text-anchor="middle">Celebrity</text>
+  <text id="text-celebrity-images-2" data-id="text-celebrity-images-2" data-class="text_node" data-parent="block-attacker" x="200" y="184" font-family="Georgia, serif" font-size="18" font-style="italic" fill="#231f20" text-anchor="middle">Images</text>
+
+  <!-- Node: Deepfake Video -->
+  <g id="node-video" data-id="node-video" data-class="composite_whole" data-parent="block-attacker">
+    <rect id="video-frame" data-id="video-frame" data-class="composite_part" data-parent="node-video" x="120" y="238" width="54" height="60" fill="none" stroke="#cb3d38" stroke-width="4"/>
+    <line id="video-bar-mid" data-id="video-bar-mid" data-class="composite_part" data-parent="node-video" x1="120" y1="268" x2="174" y2="268" stroke="#cb3d38" stroke-width="4"/>
+    <!-- Sprockets Left -->
+    <rect id="sprock-l1" data-id="sprock-l1" data-class="composite_part" data-parent="node-video" x="114" y="244" width="6" height="5" fill="#cb3d38"/>
+    <rect id="sprock-l2" data-id="sprock-l2" data-class="composite_part" data-parent="node-video" x="114" y="258" width="6" height="5" fill="#cb3d38"/>
+    <rect id="sprock-l3" data-id="sprock-l3" data-class="composite_part" data-parent="node-video" x="114" y="274" width="6" height="5" fill="#cb3d38"/>
+    <rect id="sprock-l4" data-id="sprock-l4" data-class="composite_part" data-parent="node-video" x="114" y="288" width="6" height="5" fill="#cb3d38"/>
+    <!-- Sprockets Right -->
+    <rect id="sprock-r1" data-id="sprock-r1" data-class="composite_part" data-parent="node-video" x="174" y="244" width="6" height="5" fill="#cb3d38"/>
+    <rect id="sprock-r2" data-id="sprock-r2" data-class="composite_part" data-parent="node-video" x="174" y="258" width="6" height="5" fill="#cb3d38"/>
+    <rect id="sprock-r3" data-id="sprock-r3" data-class="composite_part" data-parent="node-video" x="174" y="274" width="6" height="5" fill="#cb3d38"/>
+    <rect id="sprock-r4" data-id="sprock-r4" data-class="composite_part" data-parent="node-video" x="174" y="288" width="6" height="5" fill="#cb3d38"/>
+  </g>
+  <text id="text-deepfake-video-1" data-id="text-deepfake-video-1" data-class="text_node" data-parent="block-attacker" x="147" y="325" font-family="Georgia, serif" font-size="18" fill="#231f20" text-anchor="middle">Deepfake</text>
+  <text id="text-deepfake-video-2" data-id="text-deepfake-video-2" data-class="text_node" data-parent="block-attacker" x="147" y="347" font-family="Georgia, serif" font-size="18" fill="#231f20" text-anchor="middle">Video</text>
+
+  <!-- Node: Attack Datasets -->
+  <g id="node-datasets" data-id="node-datasets" data-class="composite_whole" data-parent="block-attacker">
+    <!-- Cylinder Left/Back -->
+    <g id="cyl-1" data-id="cyl-1" data-class="composite_part" data-parent="node-datasets">
+      <path d="M 210 320 L 210 348 A 20 8 0 0 0 250 348 L 250 320 Z" fill="#cb3d38"/>
+      <ellipse cx="230" cy="320" rx="20" ry="8" fill="#e5984b" stroke="#cb3d38" stroke-width="2.5"/>
+    </g>
+    <!-- Cylinder Right/Back -->
+    <g id="cyl-2" data-id="cyl-2" data-class="composite_part" data-parent="node-datasets">
+      <path d="M 250 320 L 250 348 A 20 8 0 0 0 290 348 L 290 320 Z" fill="#cb3d38"/>
+      <ellipse cx="270" cy="320" rx="20" ry="8" fill="#e5984b" stroke="#cb3d38" stroke-width="2.5"/>
+    </g>
+    <!-- Cylinder Center/Front -->
+    <g id="cyl-3" data-id="cyl-3" data-class="composite_part" data-parent="node-datasets">
+      <path d="M 230 345 L 230 376 A 20 8 0 0 0 270 376 L 270 345 Z" fill="#cb3d38"/>
+      <ellipse cx="250" cy="345" rx="20" ry="8" fill="#e5984b" stroke="#cb3d38" stroke-width="2.5"/>
+    </g>
+  </g>
+  <text id="text-attack-datasets" data-id="text-attack-datasets" data-class="text_node" data-parent="block-attacker" x="250" y="405" font-family="Georgia, serif" font-size="18" fill="#231f20" text-anchor="middle">Attack Datasets</text>
+
+  <!-- Node: Attack Type Diamond -->
+  <g id="node-attack-type" data-id="node-attack-type" data-class="child_node" data-parent="block-attacker">
+    <polygon id="diamond-attack-type" points="338,155 373,208 338,261 303,208" fill="#f8d7da" stroke="#cb3d38" stroke-width="2"/>
+    <text id="diamond-text-1" x="338" y="203" font-family="Georgia, serif" font-size="15" fill="#231f20" text-anchor="middle">Attack</text>
+    <text id="diamond-text-2" x="338" y="222" font-family="Georgia, serif" font-size="15" fill="#231f20" text-anchor="middle">Type</text>
+  </g>
+
+  <!-- Labels for Diamond Outflows -->
+  <text id="text-targeted" data-id="text-targeted" data-class="child_node" data-parent="block-attacker" x="355" y="138" font-family="Georgia, serif" font-size="17" font-style="italic" fill="#231f20" text-anchor="middle">Targeted</text>
+  <text id="text-non-targeted" data-id="text-non-targeted" data-class="child_node" data-parent="block-attacker" x="370" y="295" font-family="Georgia, serif" font-size="17" font-style="italic" fill="#231f20" text-anchor="middle">Non-targeted</text>
+
+  <!-- ================= NODES INSIDE APIS BLOCK ================= -->
+
+  <!-- API 1: Amazon Rekognition -->
+  <g id="node-api-amazon" data-id="node-api-amazon" data-class="child_node" data-parent="block-apis">
+    <rect id="rect-api-amazon" x="525" y="172" width="76" height="76" rx="4" ry="4" fill="#ff9900"/>
+    <!-- Magnifier / Face Vector inside Amazon -->
+    <circle cx="560" cy="204" r="15" fill="none" stroke="#ffffff" stroke-width="2.5"/>
+    <line x1="550" y1="216" x2="538" y2="232" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+    <!-- Corner brackets -->
+    <path d="M 548 195 L 548 190 L 553 190" fill="none" stroke="#ffffff" stroke-width="2"/>
+    <path d="M 572 195 L 572 190 L 567 190" fill="none" stroke="#ffffff" stroke-width="2"/>
+    <path d="M 548 213 L 548 218 L 553 218" fill="none" stroke="#ffffff" stroke-width="2"/>
+    <path d="M 572 213 L 572 218 L 567 218" fill="none" stroke="#ffffff" stroke-width="2"/>
+    <circle cx="554" cy="201" r="1.5" fill="#ffffff"/>
+    <circle cx="566" cy="201" r="1.5" fill="#ffffff"/>
+    <path d="M 556 210 Q 560 213 564 210" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+  </g>
+  <text id="text-amazon-1" data-id="text-amazon-1" data-class="text_node" data-parent="block-apis" x="563" y="272" font-family="Georgia, serif" font-size="17" fill="#ff9900" text-anchor="middle">Amazon</text>
+  <text id="text-amazon-2" data-id="text-amazon-2" data-class="text_node" data-parent="block-apis" x="563" y="293" font-family="Georgia, serif" font-size="17" fill="#ff9900" text-anchor="middle">Rekognition</text>
+
+  <!-- API 2: Azure Cognitive Services -->
+  <g id="node-api-azure" data-id="node-api-azure" data-class="child_node" data-parent="block-apis">
+    <path id="azure-cloud-shape" d="M 645 224 C 640 224 635 220 635 214 C 635 208 639 204 644 204 C 645 197 651 190 660 190 C 665 190 670 193 673 197 C 676 186 686 178 698 178 C 712 178 724 189 725 203 C 730 203 735 207 735 213 C 735 219 730 224 724 224 Z" fill="#0078d4"/>
+    <!-- Brain / Net Lines inside Azure -->
+    <circle cx="660" cy="216" r="2.5" fill="#ffffff"/>
+    <circle cx="678" cy="204" r="2.5" fill="#ffffff"/>
+    <circle cx="698" cy="214" r="2.5" fill="#ffffff"/>
+    <circle cx="715" cy="206" r="2.5" fill="#ffffff"/>
+    <path d="M 660 216 L 660 204 L 678 204 L 678 220 M 698 190 L 698 214 L 715 206" fill="none" stroke="#ffffff" stroke-width="2"/>
+  </g>
+  <text id="text-azure-1" data-id="text-azure-1" data-class="text_node" data-parent="block-apis" x="686" y="272" font-family="Georgia, serif" font-size="17" fill="#0078d4" text-anchor="middle">Azure Cognitive</text>
+  <text id="text-azure-2" data-id="text-azure-2" data-class="text_node" data-parent="block-apis" x="686" y="293" font-family="Georgia, serif" font-size="17" fill="#0078d4" text-anchor="middle">Services</text>
+
+  <!-- API 3: Naver CFR -->
+  <g id="node-api-naver" data-id="node-api-naver" data-class="child_node" data-parent="block-apis">
+    <rect id="rect-api-naver" x="778" y="172" width="102" height="60" rx="3" ry="3" fill="#03c75a"/>
+    <text id="text-clova-logo" x="820" y="204" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">Clova</text>
+    <path d="M 845 196 L 848 192 L 851 196 L 855 193 L 852 196 L 855 199 L 851 196 L 848 200 Z" fill="#ffffff"/>
+    <!-- Face icon in Naver -->
+    <rect x="855" y="196" width="18" height="20" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+    <circle cx="860" cy="203" r="1" fill="#ffffff"/>
+    <circle cx="868" cy="203" r="1" fill="#ffffff"/>
+    <path d="M 861 210 Q 864 212 867 210" fill="none" stroke="#ffffff" stroke-width="1"/>
+  </g>
+  <text id="text-naver" data-id="text-naver" data-class="text_node" data-parent="block-apis" x="829" y="272" font-family="Georgia, serif" font-size="17" fill="#03c75a" text-anchor="middle">Naver CFR</text>
+
+  <!-- ================= NODES INSIDE EVALUATION BLOCK ================= -->
+
+  <!-- Top Metrics: Targeted Attack -->
+  <g id="node-eval-targeted" data-id="node-eval-targeted" data-class="child_node" data-parent="block-evaluation">
+    <!-- Bar chart (brownish orange) -->
+    <rect x="1098" y="96" width="12" height="34" fill="#a0522d"/>
+    <rect x="1114" y="106" width="12" height="24" fill="#a0522d"/>
+    <rect x="1130" y="88" width="12" height="42" fill="#a0522d"/>
+    <!-- Trend Line -->
+    <polyline points="1098,82 1114,64 1130,82 1146,64" fill="none" stroke="#cb3d38" stroke-width="3"/>
+    <circle cx="1098" cy="82" r="3.5" fill="#cb3d38"/>
+    <circle cx="1114" cy="64" r="3.5" fill="#cb3d38"/>
+    <circle cx="1130" cy="82" r="3.5" fill="#cb3d38"/>
+    <circle cx="1146" cy="64" r="3.5" fill="#cb3d38"/>
+  </g>
+  <text id="text-eval-targeted-1" data-id="text-eval-targeted-1" data-class="text_node" data-parent="block-evaluation" x="1122" y="152" font-family="Georgia, serif" font-size="17" fill="#231f20" text-anchor="middle">Targeted</text>
+  <text id="text-eval-targeted-2" data-id="text-eval-targeted-2" data-class="text_node" data-parent="block-evaluation" x="1122" y="172" font-family="Georgia, serif" font-size="17" fill="#231f20" text-anchor="middle">Attack</text>
+
+  <!-- Top Metrics: Non-targeted Attack -->
+  <g id="node-eval-nontargeted" data-id="node-eval-nontargeted" data-class="child_node" data-parent="block-evaluation">
+    <!-- Bar chart (burgundy) -->
+    <rect x="1218" y="96" width="12" height="34" fill="#781428"/>
+    <rect x="1234" y="106" width="12" height="24" fill="#781428"/>
+    <rect x="1250" y="88" width="12" height="42" fill="#781428"/>
+    <!-- Trend Line -->
+    <polyline points="1218,82 1234,64 1250,82 1266,64" fill="none" stroke="#cb3d38" stroke-width="3"/>
+    <circle cx="1218" cy="82" r="3.5" fill="#cb3d38"/>
+    <circle cx="1234" cy="64" r="3.5" fill="#cb3d38"/>
+    <circle cx="1250" cy="82" r="3.5" fill="#cb3d38"/>
+    <circle cx="1266" cy="64" r="3.5" fill="#cb3d38"/>
+  </g>
+  <text id="text-eval-nontargeted-1" data-id="text-eval-nontargeted-1" data-class="text_node" data-parent="block-evaluation" x="1242" y="152" font-family="Georgia, serif" font-size="17" fill="#231f20" text-anchor="middle">Non-targeted</text>
+  <text id="text-eval-nontargeted-2" data-id="text-eval-nontargeted-2" data-class="text_node" data-parent="block-evaluation" x="1242" y="172" font-family="Georgia, serif" font-size="17" fill="#231f20" text-anchor="middle">Attack</text>
+
+  <!-- Bottom Metric 1: Lifelike Deepfakes -->
+  <g id="node-metric-lifelike" data-id="node-metric-lifelike" data-class="child_node" data-parent="block-evaluation">
+    <rect x="996" y="272" width="10" height="40" fill="#2e7d32"/>
+    <rect x="1010" y="286" width="10" height="26" fill="#2e7d32"/>
+    <rect x="1024" y="262" width="10" height="50" fill="#2e7d32"/>
+    <!-- Trend line -->
+    <polyline points="996,254 1010,238 1024,258 1038,242" fill="none" stroke="#8d4004" stroke-width="2.8"/>
+    <circle cx="996" cy="254" r="3" fill="#8d4004"/>
+    <circle cx="1010" cy="238" r="3" fill="#8d4004"/>
+    <circle cx="1024" cy="258" r="3" fill="#8d4004"/>
+    <circle cx="1038" cy="242" r="3" fill="#8d4004"/>
+  </g>
+  <text id="text-lifelike-1" data-id="text-lifelike-1" data-class="text_node" data-parent="block-evaluation" x="1017" y="332" font-family="Georgia, serif" font-size="17" fill="#231f20" text-anchor="middle">Lifelike</text>
+  <text id="text-lifelike-2" data-id="text-lifelike-2" data-class="text_node" data-parent="block-evaluation" x="1017" y="354" font-family="Georgia, serif" font-size="17" fill="#231f20" text-anchor="middle">Deepfakes</text>
+
+  <!-- Bottom Metric 2: High Confidence Deepfakes -->
+  <g id="node-metric-confidence" data-id="node-metric-confidence" data-class="child_node" data-parent="block-evaluation">
+    <rect x="1108" y="272" width="10" height="40" fill="#a07828"/>
+    <rect x="1122" y="286" width="10" height="26" fill="#a07828"/>
+    <rect x="1136" y="262" width="10" height="50" fill="#a07828"/>
+    <!-- Trend line -->
+    <polyline points="1108,254 1122,238 1136,258 1150,242" fill="none" stroke="#cb3d38" stroke-width="2.8"/>
+    <circle cx="1108" cy="254" r="3" fill="#cb3d38"/>
+    <circle cx="1122" cy="238" r="3" fill="#cb3d38"/>
+    <circle cx="1136" cy="258" r="3" fill="#cb3d38"/>
+    <circle cx="1150" cy="242" r="3" fill="#cb3d38"/>
+  </g>
+  <text id="text-confidence-1" data-id="text-confidence-1" data-class="text_node" data-parent="block-evaluation" x="1129" y="332" font-family="Georgia, serif" font-size="17" fill="#231f20" text-anchor="middle">High</text>
+  <text id="text-confidence-2" data-id="text-confidence-2" data-class="text_node" data-parent="block-evaluation" x="1129" y="354" font-family="Georgia, serif" font-size="17" fill="#231f20" text-anchor="middle">Confidence</text>
+  <text id="text-confidence-3" data-id="text-confidence-3" data-class="text_node" data-parent="block-evaluation" x="1129" y="376" font-family="Georgia, serif" font-size="17" fill="#231f20" text-anchor="middle">Deepfakes</text>
+
+  <!-- Bottom Metric 3: High Similarity Deepfakes -->
+  <g id="node-metric-similarity" data-id="node-metric-similarity" data-class="child_node" data-parent="block-evaluation">
+    <rect x="1226" y="272" width="10" height="40" fill="#881a5a"/>
+    <rect x="1240" y="286" width="10" height="26" fill="#881a5a"/>
+    <rect x="1254" y="262" width="10" height="50" fill="#881a5a"/>
+    <!-- Trend line -->
+    <polyline points="1226,254 1240,238 1254,258 1268,242" fill="none" stroke="#cb3d38" stroke-width="2.8"/>
+    <circle cx="1226" cy="254" r="3" fill="#cb3d38"/>
+    <circle cx="1240" cy="238" r="3" fill="#cb3d38"/>
+    <circle cx="1254" cy="258" r="3" fill="#cb3d38"/>
+    <circle cx="1268" cy="242" r="3" fill="#cb3d38"/>
+  </g>
+  <text id="text-similarity-1" data-id="text-similarity-1" data-class="text_node" data-parent="block-evaluation" x="1247" y="332" font-family="Georgia, serif" font-size="17" fill="#231f20" text-anchor="middle">High</text>
+  <text id="text-similarity-2" data-id="text-similarity-2" data-class="text_node" data-parent="block-evaluation" x="1247" y="354" font-family="Georgia, serif" font-size="17" fill="#231f20" text-anchor="middle">Similarity</text>
+  <text id="text-similarity-3" data-id="text-similarity-3" data-class="text_node" data-parent="block-evaluation" x="1247" y="376" font-family="Georgia, serif" font-size="17" fill="#231f20" text-anchor="middle">Deepfakes</text>
+
+  <!-- Bottom Metric 4: Successfully Fooling the API -->
+  <g id="node-metric-fooling" data-id="node-metric-fooling" data-class="child_node" data-parent="block-evaluation">
+    <rect x="1346" y="272" width="10" height="40" fill="#38085c"/>
+    <rect x="1360" y="262" width="10" height="50" fill="#38085c"/>
+    <rect x="1374" y="272" width="10" height="40" fill="#38085c"/>
+    <!-- Trend line -->
+    <polyline points="1346,254 1360,238 1374,258 1388,242" fill="none" stroke="#cb3d38" stroke-width="2.8"/>
+    <circle cx="1346" cy="254" r="3" fill="#cb3d38"/>
+    <circle cx="1360" cy="238" r="3" fill="#cb3d38"/>
+    <circle cx="1374" cy="258" r="3" fill="#cb3d38"/>
+    <circle cx="1388" cy="242" r="3" fill="#cb3d38"/>
+  </g>
+  <text id="text-fooling-1" data-id="text-fooling-1" data-class="text_node" data-parent="block-evaluation" x="1367" y="332" font-family="Georgia, serif" font-size="17" fill="#231f20" text-anchor="middle">Successfully</text>
+  <text id="text-fooling-2" data-id="text-fooling-2" data-class="text_node" data-parent="block-evaluation" x="1367" y="354" font-family="Georgia, serif" font-size="17" fill="#231f20" text-anchor="middle">Fooling the</text>
+  <text id="text-fooling-3" data-id="text-fooling-3" data-class="text_node" data-parent="block-evaluation" x="1367" y="376" font-family="Georgia, serif" font-size="17" fill="#231f20" text-anchor="middle">API</text>
+
+  <!-- ================= DYNAMIC NARRATION BANNER ================= -->
+</svg>
+  </div>
+
+  <div class="ab-bar">
+    <button type="button" class="ab-btn ab-play" aria-label="Pause">
+      <svg class="ab-ic-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 5.5l11 6.5-11 6.5z"/></svg>
+      <svg class="ab-ic-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 5.5h3.6v13H7.5zM12.9 5.5h3.6v13h-3.6z"/></svg>
+    </button>
+
+    <div class="ab-scrub">
+      <span class="ab-rail" aria-hidden="true"><i class="ab-played"></i></span>
+      <input type="range" class="ab-seek" min="0" max="1000" value="0" step="1"
+             aria-label="Scrub through the animation">
+    </div>
+
+    <span class="ab-time"><b>0:00</b>&nbsp;/&nbsp;<span class="ab-total">0:00</span></span>
+
+    <div class="ab-speed" role="group" aria-label="Playback speed">
+      <button type="button" class="ab-slower" aria-label="Slower">&#8722;</button>
+      <span class="ab-rate" aria-live="polite">1&#215;</span>
+      <button type="button" class="ab-faster" aria-label="Faster">+</button>
+    </div>
+
+    <button type="button" class="ab-btn ab-toggle" aria-pressed="true">
+      <span class="ab-led" aria-hidden="true"></span>
+      <span class="ab-word">Captions on</span>
+    </button>
+  </div>
+
+  <figcaption class="ab-cap" aria-live="polite"></figcaption>
+</figure>
+
+<script>
+(function () {
+  var CUES = [{"start": 0.0, "end": 4.64, "text": "The pipeline begins with the deepfake impersonation attack framework."}, {"start": 4.64, "end": 11.6, "text": "The attack leverages diverse datasets encompassing facial replacement, reenactment, and synthesis."}, {"start": 11.6, "end": 15.8, "text": "Deepfake video sequences are supplied from these datasets."}, {"start": 15.8, "end": 22.4, "text": "An MTCNN model is applied to detect and crop face images from each video frame."}, {"start": 22.4, "end": 27.28, "text": "The attacker prepares these cropped celebrity face images for transmission."}, {"start": 27.28, "end": 37.04, "text": "Attacks are categorized into targeted impersonation against a specific victim and non-targeted impersonation across any celebrity class."}, {"start": 37.04, "end": 42.72, "text": "The attack queries are dispatched to commercial celebrity recognition web APIs."}, {"start": 42.72, "end": 51.56, "text": "Evaluation targets black-box platforms including Amazon Rekognition, Azure Cognitive Services, and Naver CFR."}, {"start": 51.56, "end": 57.08, "text": "The evaluation module systematically analyzes the resulting responses."}, {"start": 57.08, "end": 62.64, "text": "Success rates are measured for both targeted and non-targeted attack configurations."}, {"start": 62.64, "end": 74.36, "text": "Detailed metrics further analyze API behavior, including lifelike quality, prediction confidence, face similarity, and overall successful impersonation."}];
+  var LOOP = 74.36;
+  var REPEATS = 1;
+  var RATES = [0.25, 0.5, 0.75, 1, 1.5, 2, 3];
+
+  var fig = document.querySelector('.ab');
+  var cap = document.querySelector('.ab-cap');
+  var play = document.querySelector('.ab-play');
+  var seek = document.querySelector('.ab-seek');
+  var played = document.querySelector('.ab-played');
+  var nowEl = document.querySelector('.ab-time b');
+  var totalEl = document.querySelector('.ab-total');
+  var rateEl = document.querySelector('.ab-rate');
+  var slower = document.querySelector('.ab-slower');
+  var faster = document.querySelector('.ab-faster');
+  var toggle = document.querySelector('.ab-toggle');
+  var word = toggle.querySelector('.ab-word');
+
+  var at = -1, swap = null, rate = 3, paused = false, scrubbing = false;
+
+  // THE CLOCK. The drawing is hundreds of short animations that each stop when
+  // they are done, so none of them can be asked what time it is. This one runs
+  // the length of the whole piece, does nothing visible, and is driven by the
+  // same controls - so the caption, the bar and the picture cannot disagree.
+  var master = null;
+  try {
+    master = document.documentElement.animate(
+      [{ opacity: 1 }, { opacity: 1 }],
+      { duration: (LOOP || 1) * 1000, iterations: REPEATS }
+    );
+  } catch (e) {}
+  var t0 = performance.now();
+
+  function others() {
+    try {
+      var runs = document.getAnimations ? document.getAnimations() : [];
+      return runs.filter(function (a) { return a !== master; });
+    } catch (e) { return []; }
+  }
+  function clock() {
+    var t;
+    if (master && master.currentTime != null) t = master.currentTime / 1000;
+    else t = (performance.now() - t0) / 1000;
+    return REPEATS === 1 ? Math.min(t, LOOP) : (t % (LOOP || 1));
+  }
+  function each(fn) {
+    if (master) { try { fn(master); } catch (e) {} }
+    others().forEach(function (a) { try { fn(a); } catch (e) {} });
+  }
+  function clip(t) {
+    t = Math.max(0, t || 0);
+    return Math.floor(t / 60) + ':' + ('0' + Math.floor(t % 60)).slice(-2);
+  }
+
+  play.addEventListener('click', function () {
+    paused = !paused;
+    // Restarting a finished piece rather than leaving Play doing nothing
+    if (!paused && REPEATS === 1 && clock() >= LOOP - 0.05) each(function (a) { a.currentTime = 0; });
+    each(function (a) { paused ? a.pause() : a.play(); });
+    if (!paused) t0 = performance.now() - clock() * 1000;
+    fig.classList.toggle('is-paused', paused);
+    play.setAttribute('aria-label', paused ? 'Play' : 'Pause');
+  });
+
+  function setRate(i) {
+    rate = Math.max(0, Math.min(RATES.length - 1, i));
+    var r = RATES[rate];
+    each(function (a) { a.playbackRate = r; });
+    rateEl.textContent = r + '×';
+    fig.classList.toggle('is-fast', r !== 1);
+    slower.disabled = rate === 0;
+    faster.disabled = rate === RATES.length - 1;
+  }
+  slower.addEventListener('click', function () { setRate(rate - 1); });
+  faster.addEventListener('click', function () { setRate(rate + 1); });
+
+  seek.addEventListener('pointerdown', function () { scrubbing = true; });
+  seek.addEventListener('input', function () {
+    var t = (Number(seek.value) / 1000) * LOOP;
+    each(function (a) { a.currentTime = t * 1000; });
+    t0 = performance.now() - t * 1000;
+    paint(true);
+  });
+  seek.addEventListener('change', function () { scrubbing = false; });
+
+  toggle.addEventListener('click', function () {
+    var on = toggle.getAttribute('aria-pressed') !== 'true';
+    toggle.setAttribute('aria-pressed', String(on));
+    word.textContent = on ? 'Captions on' : 'Captions off';
+    fig.classList.toggle('is-off', !on);
+  });
+
+  function paint(force) {
+    var t = clock();
+    nowEl.textContent = clip(t);
+    if (!scrubbing) seek.value = String(Math.round((t / (LOOP || 1)) * 1000));
+    played.style.width = ((t / (LOOP || 1)) * 100) + '%';
+
+    var k = -1;
+    for (var i = 0; i < CUES.length; i++) { if (t >= CUES[i].start - 0.05) k = i; }
+    if (k !== at || force === true) {
+      at = k;
+      var text = k >= 0 ? CUES[k].text : '';
+      if (text !== cap.textContent) {
+        cap.classList.add('is-swap');
+        clearTimeout(swap);
+        swap = setTimeout(function () {
+          cap.textContent = text;
+          cap.classList.remove('is-swap');
+        }, 150);
+      }
+    }
+  }
+
+  // Two ways round, on purpose. requestAnimationFrame gives a smooth bar while
+  // the page is on screen, and stops dead in a background tab or an embed the
+  // browser considers hidden - where the animation itself keeps running, so the
+  // caption would be left behind. The slow timer covers exactly that case.
+  function frame() { paint(); requestAnimationFrame(frame); }
+
+  totalEl.textContent = clip(LOOP);
+  setRate(3);
+  if (!CUES.length) { fig.classList.add('is-off'); toggle.style.display = 'none'; }
+  requestAnimationFrame(frame);
+  setInterval(paint, 250);
+})();
+</script>
+</body>
+</html>

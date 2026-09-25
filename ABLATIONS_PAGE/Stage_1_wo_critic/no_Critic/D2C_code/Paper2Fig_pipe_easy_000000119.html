@@ -1,0 +1,214 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 440" width="960" height="440">
+  <defs>
+    <!-- Background Patterns -->
+    <pattern id="diag-pattern-blue" width="16" height="16" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="0" y2="16" stroke="#cde0f7" stroke-width="2" />
+    </pattern>
+    <pattern id="diag-pattern-orange" width="16" height="16" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="0" y2="16" stroke="#fcd3b0" stroke-width="1.5" />
+    </pattern>
+    <pattern id="diag-pattern-purple" width="16" height="16" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="0" y2="16" stroke="#dfd0ea" stroke-width="1.5" />
+    </pattern>
+    <pattern id="diag-pattern-green" width="16" height="16" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="0" y2="16" stroke="#c8e0a3" stroke-width="1.5" />
+    </pattern>
+
+    <!-- Arrow Markers -->
+    <marker id="arrow-yellow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#ffff33" stroke="#000" stroke-width="1" stroke-linejoin="round" />
+    </marker>
+    <marker id="arrow-pink" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#f4b2b0" stroke="#000" stroke-width="1" stroke-linejoin="round" />
+    </marker>
+    <marker id="arrow-black" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 2 L 8 5 L 0 8 z" fill="#000" />
+    </marker>
+  </defs>
+
+  <!-- ==================== BLOCK 1: Graph Construction & Depth Confidence Measure ==================== -->
+  <g data-id="block_graph_construction" id="block_graph_construction" data-class="block" data-parent="root">
+    <rect x="8" y="8" width="354" height="424" rx="20" ry="20" fill="#d9e8fa" stroke="#000" stroke-width="1.8" stroke-dasharray="8,5" />
+    <rect x="8" y="8" width="354" height="424" rx="20" ry="20" fill="url(#diag-pattern-blue)" />
+
+    <!-- Container Title -->
+    <text data-id="title_graph_construction_1" id="title_graph_construction_1" data-class="text_node" data-parent="block_graph_construction"
+          x="185" y="38" text-anchor="middle" font-family="serif" font-size="17" font-weight="bold" fill="#111">Graph Construction and</text>
+    <text data-id="title_graph_construction_2" id="title_graph_construction_2" data-class="text_node" data-parent="block_graph_construction"
+          x="185" y="60" text-anchor="middle" font-family="serif" font-size="17" font-weight="bold" fill="#111">Depth Confidence Measure</text>
+
+    <!-- RGB Image Placeholder -->
+    <g id="node_rgb_image" data-id="node_rgb_image" data-class="raster_node"><image href="rasters/Paper2Fig_pipe_easy_000000119/crop_node_rgb_image.png" xlink:href="rasters/Paper2Fig_pipe_easy_000000119/crop_node_rgb_image.png" x="18" y="82" width="132" height="116" preserveAspectRatio="xMidYMid meet" /></g>
+    <text data-id="label_rgb_image" id="label_rgb_image" data-class="text_node" data-parent="block_graph_construction"
+          x="84" y="222" text-anchor="middle" font-family="serif" font-size="16" font-weight="bold" fill="#000">RGB Image</text>
+
+    <!-- Superpixels Placeholder -->
+    <g id="node_superpixels" data-id="node_superpixels" data-class="raster_node"><image href="rasters/Paper2Fig_pipe_easy_000000119/crop_node_superpixels.png" xlink:href="rasters/Paper2Fig_pipe_easy_000000119/crop_node_superpixels.png" x="216" y="82" width="132" height="116" preserveAspectRatio="xMidYMid meet" /></g>
+    <text data-id="label_superpixels" id="label_superpixels" data-class="text_node" data-parent="block_graph_construction"
+          x="282" y="222" text-anchor="middle" font-family="serif" font-size="16" font-weight="bold" fill="#000">Superpixels</text>
+
+    <!-- Depth Image Placeholder -->
+    <g id="node_depth_image" data-id="node_depth_image" data-class="raster_node"><image href="rasters/Paper2Fig_pipe_easy_000000119/crop_node_depth_image.png" xlink:href="rasters/Paper2Fig_pipe_easy_000000119/crop_node_depth_image.png" x="18" y="270" width="132" height="116" preserveAspectRatio="xMidYMid meet" /></g>
+    <text data-id="label_depth_image" id="label_depth_image" data-class="text_node" data-parent="block_graph_construction"
+          x="84" y="410" text-anchor="middle" font-family="serif" font-size="16" font-weight="bold" fill="#000">Depth Image</text>
+
+    <!-- Text Labels for SLIC & Depth Distribution -->
+    <text data-id="text_slic" id="text_slic" data-class="text_node" data-parent="block_graph_construction"
+          x="185" y="118" text-anchor="middle" font-family="serif" font-size="13" font-weight="bold" fill="#000">SLIC</text>
+
+    <text data-id="text_depth_dist_1" id="text_depth_dist_1" data-class="text_node" data-parent="block_graph_construction"
+          x="193" y="286" text-anchor="middle" font-family="serif" font-size="13" font-weight="bold" fill="#000">Depth</text>
+    <text data-id="text_depth_dist_2" id="text_depth_dist_2" data-class="text_node" data-parent="block_graph_construction"
+          x="193" y="302" text-anchor="middle" font-family="serif" font-size="13" font-weight="bold" fill="#000">Distribution</text>
+
+    <!-- Depth Confidence Measure Structural Label / Node -->
+    <g data-id="node_depth_confidence" id="node_depth_confidence" data-class="child_node" data-parent="block_graph_construction">
+      <text x="288" y="306" text-anchor="middle" font-family="serif" font-size="16" font-weight="bold" fill="#000">Depth</text>
+      <text x="288" y="328" text-anchor="middle" font-family="serif" font-size="16" font-weight="bold" fill="#000">Confidence</text>
+      <text x="288" y="350" text-anchor="middle" font-family="serif" font-size="16" font-weight="bold" fill="#000">Measure</text>
+    </g>
+  </g>
+
+  <!-- ==================== BLOCK 2: STAGE 1 ==================== -->
+  <g data-id="block_stage_1" id="block_stage_1" data-class="block" data-parent="root">
+    <rect x="428" y="8" width="262" height="162" rx="20" ry="20" fill="#fde5cc" stroke="#000" stroke-width="1.8" stroke-dasharray="8,5" />
+    <rect x="428" y="8" width="262" height="162" rx="20" ry="20" fill="url(#diag-pattern-orange)" />
+
+    <text data-id="title_stage_1" id="title_stage_1" data-class="text_node" data-parent="block_stage_1"
+          x="490" y="36" text-anchor="middle" font-family="serif" font-size="16" font-weight="bold" fill="#0000cd">STAGE 1</text>
+
+    <text data-id="desc_stage_1_1" id="desc_stage_1_1" data-class="text_node" data-parent="block_stage_1"
+          x="490" y="60" text-anchor="middle" font-family="serif" font-size="13.5" font-weight="bold" fill="#000">Compactness</text>
+    <text data-id="desc_stage_1_2" id="desc_stage_1_2" data-class="text_node" data-parent="block_stage_1"
+          x="490" y="79" text-anchor="middle" font-family="serif" font-size="13.5" font-weight="bold" fill="#000">Saliency Using</text>
+    <text data-id="desc_stage_1_3" id="desc_stage_1_3" data-class="text_node" data-parent="block_stage_1"
+          x="490" y="98" text-anchor="middle" font-family="serif" font-size="13.5" font-weight="bold" fill="#000">Color and</text>
+    <text data-id="desc_stage_1_4" id="desc_stage_1_4" data-class="text_node" data-parent="block_stage_1"
+          x="490" y="117" text-anchor="middle" font-family="serif" font-size="13.5" font-weight="bold" fill="#000">Depth Cues</text>
+
+    <!-- Stage 1 Image Placeholder -->
+    <g id="node_stage_1_image" data-id="node_stage_1_image" data-class="raster_node"><image href="rasters/Paper2Fig_pipe_easy_000000119/crop_node_stage_1_image.png" xlink:href="rasters/Paper2Fig_pipe_easy_000000119/crop_node_stage_1_image.png" x="554" y="44" width="124" height="106" preserveAspectRatio="xMidYMid meet" /></g>
+  </g>
+
+  <!-- ==================== BLOCK 3: STAGE 2 ==================== -->
+  <g data-id="block_stage_2" id="block_stage_2" data-class="block" data-parent="root">
+    <rect x="430" y="256" width="260" height="176" rx="20" ry="20" fill="#e9ddf2" stroke="#000" stroke-width="1.8" stroke-dasharray="8,5" />
+    <rect x="430" y="256" width="260" height="176" rx="20" ry="20" fill="url(#diag-pattern-purple)" />
+
+    <text data-id="title_stage_2" id="title_stage_2" data-class="text_node" data-parent="block_stage_2"
+          x="492" y="288" text-anchor="middle" font-family="serif" font-size="16" font-weight="bold" fill="#0000cd">STAGE 2</text>
+
+    <text data-id="desc_stage_2_1" id="desc_stage_2_1" data-class="text_node" data-parent="block_stage_2"
+          x="492" y="316" text-anchor="middle" font-family="serif" font-size="13.5" font-weight="bold" fill="#000">Foreground</text>
+    <text data-id="desc_stage_2_2" id="desc_stage_2_2" data-class="text_node" data-parent="block_stage_2"
+          x="492" y="338" text-anchor="middle" font-family="serif" font-size="13.5" font-weight="bold" fill="#000">Saliency Using</text>
+    <text data-id="desc_stage_2_3" id="desc_stage_2_3" data-class="text_node" data-parent="block_stage_2"
+          x="492" y="360" text-anchor="middle" font-family="serif" font-size="13.5" font-weight="bold" fill="#000">Multiple Cues</text>
+    <text data-id="desc_stage_2_4" id="desc_stage_2_4" data-class="text_node" data-parent="block_stage_2"
+          x="492" y="382" text-anchor="middle" font-family="serif" font-size="13.5" font-weight="bold" fill="#000">Contrast</text>
+
+    <!-- Stage 2 Image Placeholder -->
+    <g id="node_stage_2_image" data-id="node_stage_2_image" data-class="raster_node"><image href="rasters/Paper2Fig_pipe_easy_000000119/crop_node_stage_2_image.png" xlink:href="rasters/Paper2Fig_pipe_easy_000000119/crop_node_stage_2_image.png" x="554" y="302" width="124" height="106" preserveAspectRatio="xMidYMid meet" /></g>
+  </g>
+
+  <!-- ==================== INTER-STAGE CONNECTIONS ==================== -->
+  <text data-id="label_drss_1" id="label_drss_1" data-class="text_node" data-parent="root"
+        x="638" y="202" text-anchor="middle" font-family="serif" font-size="12.5" font-weight="bold" fill="#000">Depth-refined</text>
+  <text data-id="label_drss_2" id="label_drss_2" data-class="text_node" data-parent="root"
+        x="638" y="219" text-anchor="middle" font-family="serif" font-size="12.5" font-weight="bold" fill="#000">Foreground Seeds</text>
+  <text data-id="label_drss_3" id="label_drss_3" data-class="text_node" data-parent="root"
+        x="638" y="236" text-anchor="middle" font-family="serif" font-size="12.5" font-weight="bold" fill="#000">Selection (DRSS)</text>
+
+  <!-- Sum Node (+) -->
+  <g data-id="node_sum" id="node_sum" data-class="standalone_node" data-parent="root">
+    <circle cx="732" cy="216" r="14" fill="#fff" stroke="#000" stroke-width="1.8" />
+    <text x="732" y="222" text-anchor="middle" font-family="sans-serif" font-size="20" font-weight="bold" fill="#000">+</text>
+  </g>
+
+  <!-- Labels 'a' and 'b' -->
+  <text data-id="label_a" id="label_a" data-class="text_node" data-parent="root"
+        x="732" y="126" text-anchor="middle" font-family="serif" font-size="18" font-weight="bold" fill="#000">a</text>
+  <text data-id="label_b" id="label_b" data-class="text_node" data-parent="root"
+        x="732" y="318" text-anchor="middle" font-family="serif" font-size="18" font-weight="bold" fill="#000">b</text>
+
+  <!-- ==================== BLOCK 4: Right Block (Saliency Map & Ground Truth) ==================== -->
+  <g data-id="block_results" id="block_results" data-class="block" data-parent="root">
+    <rect x="786" y="44" width="162" height="348" rx="20" ry="20" fill="#d8e8b6" stroke="#000" stroke-width="1.8" stroke-dasharray="8,5" />
+    <rect x="786" y="44" width="162" height="348" rx="20" ry="20" fill="url(#diag-pattern-green)" />
+
+    <!-- Saliency Map Label & Placeholder -->
+    <text data-id="label_saliency_map" id="label_saliency_map" data-class="text_node" data-parent="block_results"
+          x="867" y="78" text-anchor="middle" font-family="serif" font-size="16" font-weight="bold" fill="#000">Saliency Map</text>
+
+    <g id="node_saliency_map" data-id="node_saliency_map" data-class="raster_node"><image href="rasters/Paper2Fig_pipe_easy_000000119/crop_node_saliency_map.png" xlink:href="rasters/Paper2Fig_pipe_easy_000000119/crop_node_saliency_map.png" x="808" y="104" width="118" height="98" preserveAspectRatio="xMidYMid meet" /></g>
+
+    <!-- Ground Truth Label & Placeholder -->
+    <text data-id="label_ground_truth" id="label_ground_truth" data-class="text_node" data-parent="block_results"
+          x="867" y="238" text-anchor="middle" font-family="serif" font-size="16" font-weight="bold" fill="#000">Ground Truth</text>
+
+    <g id="node_ground_truth" data-id="node_ground_truth" data-class="raster_node"><image href="rasters/Paper2Fig_pipe_easy_000000119/crop_node_ground_truth.png" xlink:href="rasters/Paper2Fig_pipe_easy_000000119/crop_node_ground_truth.png" x="808" y="258" width="118" height="98" preserveAspectRatio="xMidYMid meet" /></g>
+  </g>
+
+  <!-- ==================== EDGES / ARROWS ==================== -->
+  <g>
+    <!-- SLIC Arrow -->
+    <line data-id="edge_slic" id="edge_slic" data-class="edge"
+          data-source="node_rgb_image" data-target="node_superpixels"
+          x1="156" y1="140" x2="204" y2="140"
+          stroke="#ffff33" stroke-width="14" stroke-linecap="square"
+          marker-end="url(#arrow-yellow)" />
+
+    <!-- Depth Distribution Arrow -->
+    <line data-id="edge_depth_distribution" id="edge_depth_distribution" data-class="edge"
+          data-source="node_depth_image" data-target="node_depth_confidence"
+          x1="156" y1="328" x2="216" y2="328"
+          stroke="#ffff33" stroke-width="14" stroke-linecap="square"
+          marker-end="url(#arrow-yellow)" />
+
+    <!-- Big Yellow Arrow out of Block 1 -->
+    <line data-id="edge_block1_out" id="edge_block1_out" data-class="edge"
+          data-source="block_graph_construction" data-target="edge_branch_fork"
+          x1="358" y1="216" x2="388" y2="216"
+          stroke="#ffff33" stroke-width="14" stroke-linecap="square"
+          marker-end="url(#arrow-yellow)" />
+
+    <!-- Orthogonal Branching Line from Block 1 into Stage 1 & Stage 2 -->
+    <path data-id="edge_branch_stage1" id="edge_branch_stage1" data-class="edge"
+          data-source="block_graph_construction" data-target="block_stage_1"
+          d="M 400 216 L 400 90 L 428 90"
+          fill="none" stroke="#000" stroke-width="1.8" />
+
+    <path data-id="edge_branch_stage2" id="edge_branch_stage2" data-class="edge"
+          data-source="block_graph_construction" data-target="block_stage_2"
+          d="M 400 216 L 400 344 L 430 344"
+          fill="none" stroke="#000" stroke-width="1.8" />
+
+    <!-- Downward Pink Arrow: Stage 1 to Stage 2 -->
+    <line data-id="edge_drss" id="edge_drss" data-class="edge"
+          data-source="block_stage_1" data-target="block_stage_2"
+          x1="565" y1="182" x2="565" y2="236"
+          stroke="#f4b2b0" stroke-width="12" stroke-linecap="square"
+          marker-end="url(#arrow-pink)" />
+
+    <!-- Path Stage 1 to Sum Node (a) -->
+    <path data-id="edge_stage1_to_sum" id="edge_stage1_to_sum" data-class="edge"
+          data-source="block_stage_1" data-target="node_sum"
+          d="M 690 90 L 732 90 L 732 198"
+          fill="none" stroke="#000" stroke-width="1.8"
+          marker-end="url(#arrow-black)" />
+
+    <!-- Path Stage 2 to Sum Node (b) -->
+    <path data-id="edge_stage2_to_sum" id="edge_stage2_to_sum" data-class="edge"
+          data-source="block_stage_2" data-target="node_sum"
+          d="M 690 344 L 732 344 L 732 234"
+          fill="none" stroke="#000" stroke-width="1.8"
+          marker-end="url(#arrow-black)" />
+
+    <!-- Sum Node to Results Block Arrow -->
+    <line data-id="edge_sum_to_results" id="edge_sum_to_results" data-class="edge"
+          data-source="node_sum" data-target="block_results"
+          x1="750" y1="216" x2="774" y2="216"
+          stroke="#ffff33" stroke-width="14" stroke-linecap="square"
+          marker-end="url(#arrow-yellow)" />
+  </g>
+</svg>

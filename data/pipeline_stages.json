@@ -1,0 +1,42 @@
+[
+  {
+    "key": "source",
+    "label": "Source",
+    "renderedLabel": "Untouched source diagram",
+    "codeTitle": "No representation yet",
+    "codeSnippet": "— pixels only, no semantic\n   structure attached —",
+    "whatChanged": "Starting point: a static diagram with no semantic structure to reason over."
+  },
+  {
+    "key": "stage1",
+    "label": "Stage 1 · Transmuter",
+    "renderedLabel": "Animation-aware SVG rendering",
+    "codeTitle": "diagram-aware-code.svg (excerpt)",
+    "codeSnippet": "<g data-id=\"block-3\" data-class=\"block\"\n   data-parent=\"root\">\n  <rect .../>\n  <text data-id=\"label-3\">Transformer\n    Layer</text>\n</g>\n<g data-id=\"edge-7\" data-class=\"edge\"\n   data-source=\"block-2\" data-target=\"block-3\">\n  <path d=\"M120 80 L120 140\"/>\n</g>",
+    "whatChanged": "Every element now carries a persistent semantic id — blocks, text, edges and raster regions become individually addressable."
+  },
+  {
+    "key": "stage2",
+    "label": "Stage 2 · Planner",
+    "renderedLabel": "Parsed structure, ready for sequencing",
+    "codeTitle": "parsed-structure.xml (excerpt)",
+    "codeSnippet": "<diagram depth=\"3\">\n  <block id=\"b3\" parent=\"root\" depth=\"1\">\n    <child_node id=\"b3-a\" depth=\"2\"/>\n    <child_node id=\"b3-b\" depth=\"2\"/>\n  </block>\n  <edge source=\"b2\" target=\"b3\"/>\n</diagram>",
+    "whatChanged": "Rendering detail is abstracted away — hierarchy and connections are what the Sequencer reasons over next."
+  },
+  {
+    "key": "stage3",
+    "label": "Stage 3 · Animator",
+    "renderedLabel": "Narration-infused animation program",
+    "codeTitle": "animation-program.json (excerpt)",
+    "codeSnippet": "{ \"step\": 4,\n  \"introduce\": [\"b3\",\"b3-a\",\"b3-b\"],\n  \"style\": \"colour_pop\",\n  \"narration\": \"The two branches\n    independently extract local\n    and global features.\" }",
+    "whatChanged": "Presentation order, grouping and narration are now attached to the structure recovered in Stage 2."
+  },
+  {
+    "key": "final",
+    "label": "Final",
+    "renderedLabel": "Rendered, exportable narrative",
+    "codeTitle": "Ready for deployment",
+    "codeSnippet": "SVG · GIF · MP4 · PPTX · PDF\n\n(all formats precomputed —\nnothing is rendered live)",
+    "whatChanged": "The validated animation program is rendered into every requested output format."
+  }
+]

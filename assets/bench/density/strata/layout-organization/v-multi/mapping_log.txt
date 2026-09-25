@@ -1,0 +1,34 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : The pipeline begins with video sequences sampled from the source and target domains over time.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : Both video streams undergo background augmentation to mitigate background bias.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : A shared feature extractor extracts spatio-temporal representations from the augmented videos.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : The extracted features branch into temporal ordering learning, an action classifier, and a gradient reversal layer.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : The global-local view aligner and task branches compute the temporal ordering, classification, and alignment losses.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : In the view alignment module, features are paired into global-global, cross-scale, and local-local sets.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : Dedicated domain classifiers process each global, cross-scale, and local pair separately.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 3.999s
+Narration   : Each classifier outputs an adversarial loss to align temporal representations across multiple granularities.
+--------------------------------------------------------------------------------

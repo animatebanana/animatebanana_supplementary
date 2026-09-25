@@ -1,0 +1,211 @@
+{
+  "detected": 11,
+  "placeholders": 11,
+  "omitted": {},
+  "rejected": {},
+  "image_size": [
+    476,
+    356
+  ],
+  "regions": [
+    {
+      "xml_id": "top_img_x",
+      "box_2d": [
+        141,
+        27,
+        298,
+        145
+      ],
+      "bbox": [
+        12.852,
+        50.196,
+        69.02,
+        106.088
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "top_img_x_prime",
+      "box_2d": [
+        141,
+        303,
+        298,
+        422
+      ],
+      "bbox": [
+        144.228,
+        50.196,
+        200.87199999999999,
+        106.088
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "top_stage2_x",
+      "box_2d": [
+        77,
+        498,
+        197,
+        589
+      ],
+      "bbox": [
+        237.048,
+        27.412,
+        280.364,
+        70.132
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "top_stage2_x_prime",
+      "box_2d": [
+        221,
+        498,
+        341,
+        589
+      ],
+      "bbox": [
+        237.048,
+        78.676,
+        280.364,
+        121.39600000000002
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "top_x_rec",
+      "box_2d": [
+        156,
+        668,
+        277,
+        759
+      ],
+      "bbox": [
+        317.968,
+        55.536,
+        361.284,
+        98.61200000000001
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "bot_img_x",
+      "box_2d": [
+        584,
+        139,
+        704,
+        231
+      ],
+      "bbox": [
+        66.164,
+        207.904,
+        109.956,
+        250.624
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "bot_img_x_pse",
+      "box_2d": [
+        804,
+        140,
+        924,
+        231
+      ],
+      "bbox": [
+        66.64,
+        286.224,
+        109.956,
+        328.944
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "bot_img_x_prime",
+      "box_2d": [
+        608,
+        430,
+        729,
+        521
+      ],
+      "bbox": [
+        204.68,
+        216.448,
+        247.996,
+        259.524
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "bot_img_xp_pse",
+      "box_2d": [
+        758,
+        430,
+        878,
+        521
+      ],
+      "bbox": [
+        204.68,
+        269.848,
+        247.996,
+        312.568
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "bot_x_rec",
+      "box_2d": [
+        611,
+        590,
+        730,
+        681
+      ],
+      "bbox": [
+        280.84,
+        217.516,
+        324.156,
+        259.88
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "bot_x_pse_rec",
+      "box_2d": [
+        759,
+        590,
+        878,
+        680
+      ],
+      "bbox": [
+        280.84,
+        270.204,
+        323.68,
+        312.568
+      ],
+      "label": ""
+    }
+  ],
+  "replaced": [
+    "top_img_x",
+    "top_img_x_prime",
+    "top_stage2_x",
+    "top_stage2_x_prime",
+    "top_x_rec",
+    "bot_img_x",
+    "bot_img_x_pse",
+    "bot_img_x_prime",
+    "bot_img_xp_pse",
+    "bot_x_rec",
+    "bot_x_pse_rec"
+  ],
+  "provenance": {
+    "agent": "raster_integrator",
+    "backend": "openrouter_gemini37flash",
+    "model": "google-gemini-3.7-flash",
+    "prompt": null,
+    "style": "alpha_masking",
+    "target": "svg",
+    "config_fingerprint": "f7069ef5288adbf8",
+    "timestamp": "2026-08-28T20:08:20"
+  }
+}

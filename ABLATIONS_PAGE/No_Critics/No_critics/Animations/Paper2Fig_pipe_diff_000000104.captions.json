@@ -1,0 +1,26 @@
+[
+ {
+  "t": 0.0,
+  "text": "The pipeline begins with an unconstrained two-dimensional facial image as input."
+ },
+ {
+  "t": 3.0,
+  "text": "A trained convolutional neural network processes the image to jointly predict intermediate three-dimensional representations."
+ },
+ {
+  "t": 6.0,
+  "text": "First, it predicts the Projected Normalized Coordinate Code, providing dense facial landmarks."
+ },
+ {
+  "t": 10.0,
+  "text": "Simultaneously, the network estimates a corresponding three-dimensional offset map."
+ },
+ {
+  "t": 13.0,
+  "text": "Combined, the dense landmarks and offsets directly reconstruct a full three-dimensional facial point cloud."
+ },
+ {
+  "t": 16.0,
+  "text": "Alternatively, this predicted geometry serves as linear constraints to estimate three-dimensional Morphable Model coefficients."
+ }
+]

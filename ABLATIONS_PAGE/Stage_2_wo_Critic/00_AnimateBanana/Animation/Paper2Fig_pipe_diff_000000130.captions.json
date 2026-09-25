@@ -1,0 +1,26 @@
+[
+ {
+  "t": 0.0,
+  "text": "The pipeline begins with input face images captured under varying illumination, guided by key stages outlined in the legend."
+ },
+ {
+  "t": 4.271,
+  "text": "A three-dimensional morphable model is first fitted to the input to construct a baseline geometric proxy."
+ },
+ {
+  "t": 8.479,
+  "text": "From this proxy, a surface normal map and semantic segmentation are extracted to distinguish regions such as bare skin and hair."
+ },
+ {
+  "t": 12.686,
+  "text": "Next, shadow processing handles shaded areas across the face to isolate reliable photometric information."
+ },
+ {
+  "t": 16.83,
+  "text": "Using light calibration and photometric stereo, the system combines the shadow analysis and proxy guidance into a refined geometric model."
+ },
+ {
+  "t": 21.038,
+  "text": "Finally, a denoising step produces the detailed final three-dimensional face mesh along with the recovered surface albedo."
+ }
+]

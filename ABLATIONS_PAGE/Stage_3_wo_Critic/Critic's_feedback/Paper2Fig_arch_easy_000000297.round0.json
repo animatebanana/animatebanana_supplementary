@@ -1,0 +1,195 @@
+{
+  "style": "progressive_reveal",
+  "traversal_style": "OVERVIEW_FIRST",
+  "nodes": [
+    {
+      "id": "t1",
+      "parent": null,
+      "depth": 1,
+      "focus": [
+        "block_spatial_view",
+        "text_spatial_title",
+        "edge_input_spatial"
+      ],
+      "action": "reveal",
+      "narration": "The architecture processes input features across three parallel branches, beginning with the Spatial View branch.",
+      "duration": 3.5,
+      "narrative": null,
+      "element_classes": {},
+      "timestamp": null
+    },
+    {
+      "id": "t2",
+      "parent": "t1",
+      "depth": 2,
+      "focus": [
+        "node_spatial_norm",
+        "edge_spatial_norm_to_affine"
+      ],
+      "action": "reveal",
+      "narration": "Within the Spatial View, input features first undergo task-wise normalization.",
+      "duration": 3.0,
+      "narrative": null,
+      "element_classes": {},
+      "timestamp": null
+    },
+    {
+      "id": "t3",
+      "parent": "t1",
+      "depth": 2,
+      "focus": [
+        "node_spatial_affine"
+      ],
+      "action": "reveal",
+      "narration": "The normalized features are then transformed through a task-wise affine transformation.",
+      "duration": 3.0,
+      "narrative": null,
+      "element_classes": {},
+      "timestamp": null
+    },
+    {
+      "id": "t4",
+      "parent": null,
+      "depth": 1,
+      "focus": [
+        "block_temporal_view",
+        "text_temporal_title",
+        "edge_input_temporal"
+      ],
+      "action": "reveal",
+      "narration": "In parallel, the Temporal View branch receives the input representation.",
+      "duration": 3.5,
+      "narrative": null,
+      "element_classes": {},
+      "timestamp": null
+    },
+    {
+      "id": "t5",
+      "parent": "t4",
+      "depth": 2,
+      "focus": [
+        "node_temporal_norm",
+        "edge_temporal_norm_to_affine"
+      ],
+      "action": "reveal",
+      "narration": "Temporal features are normalized using task-wise normalization.",
+      "duration": 3.0,
+      "narrative": null,
+      "element_classes": {},
+      "timestamp": null
+    },
+    {
+      "id": "t6",
+      "parent": "t4",
+      "depth": 2,
+      "focus": [
+        "node_temporal_affine"
+      ],
+      "action": "reveal",
+      "narration": "They are then mapped through a shared affine transformation across tasks.",
+      "duration": 3.0,
+      "narrative": null,
+      "element_classes": {},
+      "timestamp": null
+    },
+    {
+      "id": "t7",
+      "parent": null,
+      "depth": 1,
+      "focus": [
+        "block_original_view",
+        "text_original_title",
+        "edge_input_original"
+      ],
+      "action": "reveal",
+      "narration": "The third branch, Original View, preserves baseline feature representations.",
+      "duration": 3.5,
+      "narrative": null,
+      "element_classes": {},
+      "timestamp": null
+    },
+    {
+      "id": "t8",
+      "parent": "t7",
+      "depth": 2,
+      "focus": [
+        "node_original_identity1",
+        "edge_original_identity1_to_identity2"
+      ],
+      "action": "reveal",
+      "narration": "Features pass through an initial identity operation.",
+      "duration": 2.5,
+      "narrative": null,
+      "element_classes": {},
+      "timestamp": null
+    },
+    {
+      "id": "t9",
+      "parent": "t7",
+      "depth": 2,
+      "focus": [
+        "node_original_identity2"
+      ],
+      "action": "reveal",
+      "narration": "A second identity mapping retains the original feature values unaltered.",
+      "duration": 2.5,
+      "narrative": null,
+      "element_classes": {},
+      "timestamp": null
+    },
+    {
+      "id": "t10",
+      "parent": null,
+      "depth": 1,
+      "focus": [
+        "node_concat",
+        "edge_spatial_out",
+        "edge_temporal_out",
+        "edge_original_out",
+        "edge_to_concat"
+      ],
+      "action": "reveal",
+      "narration": "Finally, the outputs from all three branches are concatenated to produce the combined multi-view representation.",
+      "duration": 4.0,
+      "narrative": null,
+      "element_classes": {},
+      "timestamp": null
+    }
+  ],
+  "traversal": [
+    "t1",
+    "t2",
+    "t3",
+    "t4",
+    "t5",
+    "t6",
+    "t7",
+    "t8",
+    "t9",
+    "t10"
+  ],
+  "provenance": {
+    "agent": "sequencer",
+    "backend": "openrouter_gemini37flash",
+    "model": "google-gemini-3.7-flash",
+    "prompt": "animation_planner/svg_sequencer.yaml#new_prompt",
+    "style": "progressive_reveal",
+    "target": "svg",
+    "config_fingerprint": "09f5508923ac0ffc",
+    "timestamp": "2026-09-01T23:37:51",
+    "max_depth": 3,
+    "critic": {
+      "agent": "planner_critic",
+      "backend": "openrouter_gemini37flash",
+      "model": "google-gemini-3.7-flash",
+      "prompt": "animation_planner/critic.yaml#prompt",
+      "style": "progressive_reveal",
+      "target": "svg",
+      "config_fingerprint": "09f5508923ac0ffc",
+      "timestamp": "2026-09-01T23:38:08",
+      "round": 0,
+      "review": "Added concise narrations and durations to each step of the three-branch feature transformation workflow while maintaining the logical progression from Spatial View to Temporal View, Original View, and final feature concatenation.",
+      "findings_addressed": []
+    }
+  }
+}

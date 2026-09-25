@@ -1,0 +1,863 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AnimateBanana — Progressive Reveal — WACV_2024_set5_000035</title>
+<!--
+  AnimateBanana — Progressive Reveal — WACV_2024_set5_000035
+  An animated visual narrative produced by the AnimateBanana pipeline.
+
+  This file is self-contained: the animation, its images, its narration and its
+  controls are all inside it. Drop it on a server, open it from a disk, or put
+  it in an <iframe> - it needs nothing else and fetches nothing.
+
+  The animation is CSS. The controls drive it through the browser's animation
+  API - pause holds every keyframe at once, the bar scrubs them all to the same
+  moment, speed sets their rate together - and the caption is read from a clock
+  of the page's own that is driven alongside them. It has to be its own clock:
+  the drawing is made of hundreds of short animations that each stop when they
+  are done, so reading the time off any one of them gives a watch that stopped
+  half a second in.
+-->
+<style>
+  :root {
+    --ink: #1A1815;
+    --paper: #FFFEF9;
+    --banana: #FFD43B;
+    --banana-deep: #F2B200;
+    --banana-soft: #FFF2B8;
+    --mute: #6b6558;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--paper); color: var(--ink); }
+  body {
+    font-family: ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    padding: 16px;
+  }
+  .ab { margin: 0 auto; max-width: 1400px; }
+  .ab-stage {
+    background: #fff;
+    border: 2px solid var(--ink);
+    border-radius: 14px;
+    padding: 10px;
+    overflow: hidden;
+  }
+  .ab-stage svg { display: block; width: 100%; height: auto; }
+
+  /* ---- Transport ----
+     Every control is the same height and centred on the same line, so the bar
+     reads as one object rather than a row of parts that happen to be adjacent. */
+  .ab-bar {
+    --h: 40px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    border-radius: calc(var(--h) / 2 + 8px);
+  }
+  .ab-bar > * { flex: 0 0 auto; height: var(--h); }
+
+  .ab-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 16px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    line-height: 1;
+    color: var(--ink);
+    background: #fff;
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    cursor: pointer;
+  }
+  .ab-btn:hover { background: var(--banana-soft); }
+  .ab-btn:active { transform: translateY(1px); }
+
+  .ab-play { width: var(--h); padding: 0; border-radius: 50%; background: var(--ink); color: var(--paper); }
+  .ab-play:hover { background: var(--ink); }
+  .ab-play svg { width: 14px; height: 14px; fill: currentColor; display: block; }
+  .ab-play .ab-ic-play { display: none; margin-left: 2px; }
+  .ab.is-paused .ab-play .ab-ic-play { display: block; }
+  .ab.is-paused .ab-play .ab-ic-pause { display: none; }
+
+  /* the rail is drawn; the range input laid over it is what you actually grab */
+  .ab-scrub { position: relative; flex: 1 1 180px !important; min-width: 120px;
+              display: flex; align-items: center; }
+  .ab-rail {
+    position: absolute; inset-inline: 0; height: 9px;
+    background: #fff; border: 1.5px solid var(--ink); border-radius: 999px;
+    overflow: hidden; pointer-events: none;
+  }
+  .ab-rail i { display: block; width: 0; height: 100%; background: var(--banana); }
+  .ab-seek {
+    position: relative; width: 100%; height: var(--h); margin: 0;
+    background: none; -webkit-appearance: none; appearance: none; cursor: pointer;
+  }
+  .ab-seek::-webkit-slider-runnable-track { height: var(--h); background: transparent; }
+  .ab-seek::-moz-range-track { height: var(--h); background: transparent; }
+  .ab-seek::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none;
+    width: 18px; height: 18px; border-radius: 50%;
+    border: 2.5px solid var(--ink); background: var(--banana);
+  }
+  .ab-seek::-moz-range-thumb {
+    width: 16px; height: 16px; border-radius: 50%;
+    border: 2.5px solid var(--ink); background: var(--banana);
+  }
+  .ab-seek:focus-visible { outline: none; }
+  .ab-scrub:focus-within .ab-rail { box-shadow: 0 0 0 3px var(--banana); }
+
+  .ab-time {
+    display: inline-flex;
+    align-items: center;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.72rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--mute);
+    white-space: nowrap;
+  }
+  .ab-time b { color: var(--ink); }
+
+  .ab-speed {
+    display: inline-flex;
+    align-items: stretch;
+    background: #fff;
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .ab-speed button {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    padding: 0;
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--ink);
+    background: #fff;
+    border: 0;
+    cursor: pointer;
+  }
+  .ab-speed button:hover { background: var(--banana-soft); }
+  .ab-speed button[disabled] { opacity: 0.35; cursor: default; background: #fff; }
+  .ab-rate {
+    display: grid;
+    place-items: center;
+    min-width: 56px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.74rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    border-inline: 2px solid var(--ink);
+  }
+  .ab.is-fast .ab-rate { background: var(--banana); }
+
+  /* Captions on or off, said in words rather than left to be inferred */
+  .ab-toggle .ab-led {
+    width: 11px; height: 11px; border-radius: 50%;
+    border: 2px solid var(--ink); background: var(--banana);
+  }
+  .ab-toggle[aria-pressed="false"] { color: var(--mute); }
+  .ab-toggle[aria-pressed="false"] .ab-led { background: #fff; }
+
+  /* ---- The line being narrated ---- */
+  .ab-cap {
+    display: flex;
+    align-items: center;
+    min-height: 3.4em;
+    margin: 10px 0 0;
+    padding: 12px 16px;
+    font-size: clamp(0.95rem, 0.9rem + 0.3vw, 1.15rem);
+    font-weight: 600;
+    font-style: italic;
+    line-height: 1.5;
+    background: var(--banana-soft);
+    border: 1.5px solid var(--banana);
+    border-left: 5px solid var(--banana-deep);
+    border-radius: 10px;
+    transition: opacity .18s ease;
+  }
+  .ab-cap.is-swap { opacity: 0; }
+  .ab.is-off .ab-cap { display: none; }
+  @media (prefers-reduced-motion: reduce) { .ab-cap { transition: none; } }
+
+  /* Narrow: the bar wraps to two rows and squares off, rather than squeezing
+     the scrub bar down to nothing. */
+  @media (max-width: 720px) {
+    .ab-bar { flex-wrap: wrap; border-radius: 20px; }
+    .ab-scrub { order: 3; flex-basis: 100% !important; }
+    .ab-time { order: 2; margin-left: auto; }
+  }
+</style>
+</head>
+<body>
+<figure class="ab">
+  <div class="ab-stage">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 409">
+  <defs>
+    <!-- Arrowhead markers -->
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#000000" />
+    </marker>
+    <marker id="arrow-sm" viewBox="0 0 8 8" refX="5" refY="4" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M 0 1 L 6 4 L 0 7 z" fill="#000000" />
+    </marker>
+  </defs>
+
+  <style>
+    text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .label-title { font-size: 16px; font-weight: bold; }
+    .label-panel { font-size: 15px; font-weight: bold; }
+    .label-sub { font-size: 12px; font-weight: bold; }
+    .label-reg { font-size: 11px; }
+    .label-sm { font-size: 9px; }
+    .label-xs { font-size: 8px; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes bannerFade {
+      0% { opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    @keyframes bannerFadeFinal {
+      0% { opacity: 0; }
+      10% { opacity: 1; }
+      100% { opacity: 1; }
+    }
+
+    #panel_a, #legend_group, #pose_2d_1, #pose_2d_2, #pose_2d_3, #pose_2d_t2, #pose_2d_t1, #pose_2d_t,
+    #text_panel_a, #lbl_pose_1, #lbl_pose_2, #lbl_pose_3, #dots_2d, #lbl_pose_t2, #lbl_pose_t1, #lbl_pose_t,
+    #text_leg_reshape, #text_leg_af, #text_leg_spe, #edge_2d_1_to_fc, #edge_2d_2_to_fc, #edge_2d_3_to_fc,
+    #edge_2d_t2_to_fc, #edge_2d_t1_to_fc, #edge_2d_t_to_fc, #fc_layer_bottom, #spe_node, #edge_spe_to_trunk,
+    #edge_fcbot_to_split, #agformer_block, #spatial_gcnformer, #spatial_transformer, #text_agformer,
+    #text_agformer_n, #edge_split_left, #edge_split_right, #edge_sgc_to_resl, #edge_str_to_resr,
+    #reshape_icon_left, #reshape_icon_right, #temporal_gcnformer, #temporal_transformer, #edge_resl_to_tgc,
+    #edge_resr_to_ttr, #edge_fgf_to_af, #edge_ftf_to_af, #label_fgf, #label_ftf, #af_fusion_agformer,
+    #edge_af_to_fctop, #fc_layer_top, #regression_head, #edge_fc_to_reg, #edge_reg_to_3d_1, #edge_reg_to_3d_2,
+    #edge_reg_to_3d_3, #edge_reg_to_3d_t2, #edge_reg_to_3d_t1, #edge_reg_to_3d_t, #pose_3d_1, #pose_3d_2,
+    #pose_3d_3, #pose_3d_t2, #pose_3d_t1, #pose_3d_t, #dots_3d, #panel_b, #joint_pose_1, #joint_pose_2,
+    #joint_pose_3, #joint_pose_16, #joint_pose_j, #ln_bot_b, #text_panel_b, #lbl_joint_1, #lbl_joint_2,
+    #lbl_joint_3, #dots_joints, #lbl_joint_16, #lbl_joint_j, #edge_b_in1, #edge_b_in2, #edge_b_in3,
+    #edge_b_in16, #edge_b_inj, #edge_lnbot_to_smixer, #edge_res_b1, #spatial_mixer_b, #add_node_b1,
+    #ln_top_b, #edge_smixer_to_add1, #edge_add1_to_lntop, #edge_lntop_to_mlp_b, #edge_res_b2, #mlp_block_b,
+    #add_node_b2, #edge_mlp_to_add2_b, #edge_add2_out_b, #panel_c, #temp_pose_1, #temp_pose_2, #temp_pose_3,
+    #temp_pose_t1, #temp_pose_t, #ln_bot_c, #text_panel_c, #lbl_temp_1, #lbl_temp_2, #lbl_temp_3, #dots_temp,
+    #lbl_temp_t1, #lbl_temp_t, #edge_c_in1, #edge_c_in2, #edge_c_in3, #edge_c_int1, #edge_c_int,
+    #edge_lnbot_to_tmixer, #edge_res_c1, #temp_mixer_c, #add_node_c1, #ln_top_c, #edge_tmixer_to_add1,
+    #edge_add1_to_lntop_c, #edge_lntop_to_mlp_c, #edge_res_c2, #mlp_block_c, #add_node_c2, #edge_mlp_to_add2_c,
+    #edge_add2_out_c {
+      opacity: 0;
+      animation-name: fadeIn;
+      animation-duration: 0.5s;
+      animation-fill-mode: forwards;
+    }
+
+    #panel_a, #legend_group, #pose_2d_1, #pose_2d_2, #pose_2d_3, #pose_2d_t2, #pose_2d_t1, #pose_2d_t,
+    #text_panel_a, #lbl_pose_1, #lbl_pose_2, #lbl_pose_3, #dots_2d, #lbl_pose_t2, #lbl_pose_t1, #lbl_pose_t,
+    #text_leg_reshape, #text_leg_af, #text_leg_spe, #edge_2d_1_to_fc, #edge_2d_2_to_fc, #edge_2d_3_to_fc,
+    #edge_2d_t2_to_fc, #edge_2d_t1_to_fc, #edge_2d_t_to_fc {
+      animation-delay: 0s;
+    }
+
+    #fc_layer_bottom, #spe_node, #edge_spe_to_trunk, #edge_fcbot_to_split {
+      animation-delay: 8.48s;
+    }
+
+    #agformer_block, #spatial_gcnformer, #spatial_transformer, #text_agformer, #text_agformer_n,
+    #edge_split_left, #edge_split_right, #edge_sgc_to_resl, #edge_str_to_resr {
+      animation-delay: 16.6s;
+    }
+
+    #reshape_icon_left, #reshape_icon_right, #temporal_gcnformer, #temporal_transformer,
+    #edge_resl_to_tgc, #edge_resr_to_ttr, #edge_fgf_to_af, #edge_ftf_to_af {
+      animation-delay: 28.92s;
+    }
+
+    #label_fgf, #label_ftf, #af_fusion_agformer, #edge_af_to_fctop {
+      animation-delay: 39.8s;
+    }
+
+    #fc_layer_top, #regression_head, #edge_fc_to_reg, #edge_reg_to_3d_1, #edge_reg_to_3d_2,
+    #edge_reg_to_3d_3, #edge_reg_to_3d_t2, #edge_reg_to_3d_t1, #edge_reg_to_3d_t {
+      animation-delay: 49s;
+    }
+
+    #pose_3d_1, #pose_3d_2, #pose_3d_3, #pose_3d_t2, #pose_3d_t1, #pose_3d_t, #dots_3d {
+      animation-delay: 55.16s;
+    }
+
+    #panel_b, #joint_pose_1, #joint_pose_2, #joint_pose_3, #joint_pose_16, #joint_pose_j,
+    #ln_bot_b, #text_panel_b, #lbl_joint_1, #lbl_joint_2, #lbl_joint_3, #dots_joints,
+    #lbl_joint_16, #lbl_joint_j, #edge_b_in1, #edge_b_in2, #edge_b_in3, #edge_b_in16,
+    #edge_b_inj, #edge_lnbot_to_smixer, #edge_res_b1 {
+      animation-delay: 62.52s;
+    }
+
+    #spatial_mixer_b, #add_node_b1, #ln_top_b, #edge_smixer_to_add1, #edge_add1_to_lntop,
+    #edge_lntop_to_mlp_b, #edge_res_b2 {
+      animation-delay: 71.64s;
+    }
+
+    #mlp_block_b, #add_node_b2, #edge_mlp_to_add2_b, #edge_add2_out_b {
+      animation-delay: 79.68s;
+    }
+
+    #panel_c, #temp_pose_1, #temp_pose_2, #temp_pose_3, #temp_pose_t1, #temp_pose_t,
+    #ln_bot_c, #text_panel_c, #lbl_temp_1, #lbl_temp_2, #lbl_temp_3, #dots_temp,
+    #lbl_temp_t1, #lbl_temp_t, #edge_c_in1, #edge_c_in2, #edge_c_in3, #edge_c_int1,
+    #edge_c_int, #edge_lnbot_to_tmixer, #edge_res_c1 {
+      animation-delay: 87.8s;
+    }
+
+    #temp_mixer_c, #add_node_c1, #ln_top_c, #edge_tmixer_to_add1, #edge_add1_to_lntop_c,
+    #edge_lntop_to_mlp_c, #edge_res_c2 {
+      animation-delay: 97.76s;
+    }
+
+    #mlp_block_c, #add_node_c2, #edge_mlp_to_add2_c, #edge_add2_out_c {
+      animation-delay: 106.84s;
+    }
+  </style>
+
+  <!-- ========================================================================= -->
+  <!-- PANEL (a) MAIN BLOCK                                                      -->
+  <!-- ========================================================================= -->
+  <g data-id="panel_a" id="panel_a" data-class="block" data-parent="root">
+    <rect x="5" y="5" width="480" height="390" rx="3" fill="#ffffff" stroke="#2b3a4a" stroke-width="1.5" stroke-dasharray="4,3" />
+    <text data-id="text_panel_a" id="text_panel_a" data-class="text_node" data-parent="panel_a" x="12" y="24" class="label-panel" fill="#000000">(a)</text>
+
+    <!-- 3D Poses at top (Placeholders) -->
+    <g id="pose_3d_1" data-id="pose_3d_1" data-class="raster_node"><image href="data:image/png;base64,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" x="42" y="12" width="42" height="36" preserveAspectRatio="xMidYMid meet" /></g>
+    <g id="pose_3d_2" data-id="pose_3d_2" data-class="raster_node"><image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADcAAAArCAIAAABTrYfxAAAJpElEQVR4nNVZSWgU3Rq9devW0N2VpNN2EtOocSCJigjqSqM4IiIIboyiLgR1oYiibkRE3AiCoogLFw6LgBoRFAQVwQERnBaKC4WgiIpEjEObdI23hvsW5++bjpoY8wvvvbsIPVXVqXO+c77vVhQhBPmfX/S/DWBY6/8DJRvZYUII3/cVRdE0TVXVv4vp5zUSlHEcB0Hgui6lVFVVRVFUVdU0jTGmKIqiKH8dpfKn7gmCIIoiRVHCMBRCqKoqhBBC4ENQq6oqY+wvcvwHXAohgiDgnOu6DpT4HPxJLoMgIIQkScIYY4wB97/keLgooyjinIM8RVFAnhAC11ZVNQzDS5cuUUpXrlzJGEuSRAjBOQdoSqmu62p5/SnKYSnOOfc8T9d1SimUTZJEKg7aXr16tXTpUsbYzZs3W1pafN9n7B8KhBBhGAIcSFVVFaCHyfFvkihJEs/zOOeqqlJKCSGgUNM0SqmiKJRSCN3U1LRt2zbLsjzPS5IEXPZfhlKwCB1837dtu6+vz3Ecz/N834+iKEmSkaCMoshxHGAC4jAMFUVhjInykmzpur5ly5ZSqdTR0RFFESEkjuMoiuI4roQruYS9EBdfv3798uVLsVgcDOivUcIovu8TQqBUkiRxHMuqissLOMDct2/fPM+7cOGC53kwE8jDsViDcVxTU1NbWwu5fl6/cE+SJK7rgjMwgb9QFshgauCWpLqum06nd+3aZVlWFEWy7HBtSikgSnZRM7CgrKhhoQzDkHOeJIlhGEAshJDpDT6kjSoVjOP49OnTzc3NGzduBI4kSSrNgZ/hBZSN4xhfRVGEajZN85co++GjqGEUMARMsuqhF24aSQTEpmkKIS5cuHD27NlSqdTd3U0I6e7utm0b7q7MrErEsiSgg+M4g3HZn0Scc845jAKX/MM2Y4QQJAtjLIoiSinYcl336dOnb9++7ezsfPnyped5+Xw+DMOmpqaurq7ly5efPHmSlG3nOE42m4U4klfJTjab1TRtsFTq5xJVQspGQV2SslXl2yRJKKWWZWma1tnZuWLFih07dkyfPv3s2bOtra1bt249c+bMlClT4jh+/fp1sVi0LCudTl+7dq29vf369eu6rkMlaX8sSeovV39d4keQFYWIG02SBATj7IqidHV1vXz58vLly3fv3p05c+aqVat2794NoUePHr1s2bK5c+du37597dq1+/btW7NmzbNnz44cOVIsFt+9e6frOlprpffDMOzr62OMVVVV/R5lFEWQVVobfQVewbfFYnHbtm33799fvHjx+fPnW1tba2pqfN/3PE8IYRhGEARCiMmTJ+/du3f9+vUdHR1TpkzZuXPntGnTZs+ejXQjFWaS7hyux9FISNnaUBk3HUUR5oZMJjN27NipU6ceO3astbU1DEPc0vv37z99+vT582coGATBggUL2tvbOeeHDx8eM2YMpdR13TAMoVWl/Rlj1dXVg0H8kUvcDfobMEERnAimMU2zpaXF87xJkya5rgsOGGMPHjzo7u6+d+/epk2b0O5qampOnDhBCLEsy/d9GR1YOC3yEozKqvt5/UgyYMm6BE/o2igjxtjHjx8RAkhWXK+tra1QKCxZsgQKUEo554ZhmKaJGqjkojKG4jj2ff/Lly+2bQ9LcaSjpmlIOOS2rIEkSZDnvb296GYIJkJIEAT5fD6XyzU2NkpWcKAkD7+sLD6IzhhLpVLZbHaIuhzwhaQQCYc7JmXjowZKpdKHDx/wy1QqlUqlDMOQSiHDKaXyknJuAnmyWeCcpOyeofdPA7isnCQMw0AhgmDApZQ+efLkwYMHjuN8/fq1trYWRymK8v3798+fP/f09AghHj58WFdXN378+J/Jk8MbKc+d0M3zPFzxlyj7ew9+Kt/ChpxzjNkIYUJIT0/PwYMHm5ub161bd+jQoUKh0NLS0tXVdfHixRcvXuTz+RkzZty+fXvevHmXL1+W9ymrUDZxCQgbPcMw8vn8YHQOQOk4jhyFcC7oRSnFjkfTNF3XId+jR4/mzZtHKR01alRLS8v06dNt2x43blxfX9+9e/eEELdu3Uqn02AL50dhoNNIQGEYUkqz2exgcpMfkki2KXjFMAy8QLLouo6TYnRtbW1dv359VVXV/v37U6mUpmm+74P4rq6u1atXX7lyZcOGDWEYonDRxtBpUJ2V6g+9BtQBjqmcJpMk4ZzHcaxpGgZbDOpRFBmGMWrUqPfv32cyGcYYKEHETp06ddGiRR0dHeh78uSoItM0TdPUNA3Xcl0XjpSD3G9QgipSTp8oitAq5GRJysmiaVo6nW5ubn779q3v+9i4SKcnSbJ58+bXr1+fOnUK3KPByrEQrscISwipqanJ5/PDTSKEgkwfWMc0TfAqd67SBGEYvnnz5tOnT6BZejYIgqampgkTJuzZs+fq1auZTAb3idYgN2K+74dh2NjYiIc5Q8xEA1DiLnEi7KOlMeULjF5RFNm2fffuXdu2Hz58aJom5Mb0hJprbGwsFApjxoyRZS03Q0II27Zt287n84yxfD6Poh+u4uADQziKDNeQgQKyMbH6vj9//vyFCxf6vg8TYLQzTdNxnMePHx84cKCtre2H1ieHaMuyvn//DgGH3pUPSHVoik4gD8OH8JPsfkKI3t7e58+fHz9+fMKECaVSSU6fjDFd12/cuFFdXb1o0SJ4nJR3OXhEE4ZhXV1dkiRQ7LdrAEpMoygjub+RmYwokZ88ffrUsqzJkyfD3Sg7OKCnp+fcuXOzZs2C3HIPSQjBJJrL5dDPhha6n/5KIuM4rqur03Xd933HcUqlkud5cm6orE7DMK5duzZp0qSJEyfiKRwhBGklhNi8efOdO3fa2tpk10akc87BYl9fn+u6w8H3C5SYMKqrq+vr67PZLEYex3Ecx0EUI+Qzmczjx487OzuhnfQsQopSmsvlJk6cOGfOHDmzxnFs27bjOLlczjTN+vr6dDo9fJT9ilNK8/m8fAtAqB7XdYMgQP9MpVKordra2oaGBs55JpMh5T0diu/o0aOEkEwmgzKQtWiaJtrsnz52G7RBIS9N04SNoijCAw9siFVVfffuXS6XKxQKpDxpk/I8JR8kAWIURdjLYuDN5XJ/BHEolD+s3t7eIAjq6+sBxfd913VxLEYQuSdECyDlzRPn3HGchoYG2WlGsP74iTWW53me51VVVQVBADUJIWh6lTNEGIa+70Niy7JG/Ax7hP+jwNMsLDy7KpVKGB2QCYZhxHHseR5ciJoe2bXIiLn8YRWLRc/zCoUCWivn3LZtznlDQ4NlWf/+/P8B5lWpggo8x+IAAAAASUVORK5CYII=" x="110" y="12" width="42" height="36" preserveAspectRatio="xMidYMid meet" /></g>
+    <g id="pose_3d_3" data-id="pose_3d_3" data-class="raster_node"><image href="data:image/png;base64,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" x="180" y="12" width="42" height="36" preserveAspectRatio="xMidYMid meet" /></g>
+    <text data-id="dots_3d" id="dots_3d" data-class="text_node" data-parent="panel_a" x="250" y="35" class="label-title" text-anchor="middle" fill="#000000">···</text>
+    <g id="pose_3d_t2" data-id="pose_3d_t2" data-class="raster_node"><image href="data:image/png;base64,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" x="295" y="12" width="42" height="36" preserveAspectRatio="xMidYMid meet" /></g>
+    <g id="pose_3d_t1" data-id="pose_3d_t1" data-class="raster_node"><image href="data:image/png;base64,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" x="360" y="12" width="42" height="36" preserveAspectRatio="xMidYMid meet" /></g>
+    <g id="pose_3d_t" data-id="pose_3d_t" data-class="raster_node"><image href="data:image/png;base64,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" x="428" y="12" width="42" height="36" preserveAspectRatio="xMidYMid meet" /></g>
+
+    <!-- Regression Head -->
+    <g data-id="regression_head" id="regression_head" data-class="child_node" data-parent="panel_a">
+      <rect x="25" y="66" width="445" height="18" fill="#ece5a5" stroke="#999999" stroke-width="0.6" />
+      <text x="247" y="79" class="label-reg" text-anchor="middle" fill="#000000">Regression Head</text>
+    </g>
+
+    <!-- Top FC Layer -->
+    <g data-id="fc_layer_top" id="fc_layer_top" data-class="child_node" data-parent="panel_a">
+      <rect x="25" y="93" width="445" height="18" fill="#94a7b0" stroke="#758891" stroke-width="0.6" />
+      <text x="247" y="106" class="label-reg" text-anchor="middle" fill="#000000">Fully Connected Layer</text>
+    </g>
+
+    <!-- AGFormer Nested Block -->
+    <g data-id="agformer_block" id="agformer_block" data-class="block" data-parent="panel_a">
+      <rect x="25" y="117" width="445" height="135" fill="#dfe6eb" stroke="#000000" stroke-width="1.2" stroke-dasharray="3,2" />
+      <text data-id="text_agformer" id="text_agformer" data-class="text_node" data-parent="agformer_block" x="32" y="138" class="label-sub" fill="#000000">AGFormer</text>
+      <text data-id="text_agformer_n" id="text_agformer_n" data-class="text_node" data-parent="agformer_block" x="450" y="137" class="label-reg" text-anchor="end" fill="#000000">&#xd7; N</text>
+
+      <!-- F_GF and F_TF labels -->
+      <g data-id="label_fgf" id="label_fgf" data-class="child_node" data-parent="agformer_block">
+        <text x="145" y="138" class="label-sub" text-anchor="middle" fill="#000000">F<tspan font-size="0.65em" baseline-shift="sub">GF</tspan></text>
+      </g>
+      <g data-id="label_ftf" id="label_ftf" data-class="child_node" data-parent="agformer_block">
+        <text x="345" y="138" class="label-sub" text-anchor="middle" fill="#000000">F<tspan font-size="0.65em" baseline-shift="sub">TF</tspan></text>
+      </g>
+
+      <!-- Adaptive Fusion Add Circle in AGFormer -->
+      <g data-id="af_fusion_agformer" id="af_fusion_agformer" data-class="composite_whole" data-parent="agformer_block">
+        <circle data-id="af_circ_ag" id="af_circ_ag" data-class="composite_part" data-parent="af_fusion_agformer" cx="245" cy="130" r="6" fill="#000000" />
+        <path data-id="af_plus_ag" id="af_plus_ag" data-class="composite_part" data-parent="af_fusion_agformer" d="M 242 130 L 248 130 M 245 127 L 245 133" stroke="#ffffff" stroke-width="1.2" />
+      </g>
+
+      <!-- Branch 1 (Left): Temporal GCNFormer + Reshape + Spatial GCNFormer -->
+      <g data-id="temporal_gcnformer" id="temporal_gcnformer" data-class="child_node" data-parent="agformer_block">
+        <rect x="55" y="152" width="170" height="26" rx="2" fill="#48c998" stroke="#36a378" stroke-width="0.6" />
+        <text x="140" y="169" class="label-reg" text-anchor="middle" fill="#000000">Temporal <tspan font-weight="bold">GCN</tspan>Former</text>
+      </g>
+      
+      <g data-id="reshape_icon_left" id="reshape_icon_left" data-class="composite_whole" data-parent="agformer_block">
+        <circle data-id="res_circ_l" id="res_circ_l" data-class="composite_part" data-parent="reshape_icon_left" cx="140" cy="192" r="7" fill="#000000" />
+        <!-- 3x3 grid icon inside reshape -->
+        <path data-id="res_grid_l" id="res_grid_l" data-class="composite_part" data-parent="reshape_icon_left" d="M 136.5 188.5 h 7 v 7 h -7 z M 136.5 191 h 7 M 136.5 193.5 h 7 M 139 188.5 v 7 M 141.5 188.5 v 7" stroke="#ffffff" stroke-width="0.6" fill="none" />
+      </g>
+
+      <g data-id="spatial_gcnformer" id="spatial_gcnformer" data-class="child_node" data-parent="agformer_block">
+        <rect x="55" y="208" width="170" height="26" rx="2" fill="#f48045" stroke="#cc6029" stroke-width="0.6" />
+        <text x="140" y="225" class="label-reg" text-anchor="middle" fill="#000000">Spatial <tspan font-weight="bold">GCN</tspan>Former</text>
+      </g>
+
+      <!-- Branch 2 (Right): Temporal Transformer + Reshape + Spatial Transformer -->
+      <g data-id="temporal_transformer" id="temporal_transformer" data-class="child_node" data-parent="agformer_block">
+        <rect x="268" y="152" width="165" height="26" rx="2" fill="#48c998" stroke="#36a378" stroke-width="0.6" />
+        <text x="350" y="169" class="label-reg" text-anchor="middle" fill="#000000">Temporal <tspan font-weight="bold">Trans</tspan>former</text>
+      </g>
+      
+      <g data-id="reshape_icon_right" id="reshape_icon_right" data-class="composite_whole" data-parent="agformer_block">
+        <circle data-id="res_circ_r" id="res_circ_r" data-class="composite_part" data-parent="reshape_icon_right" cx="350" cy="192" r="7" fill="#000000" />
+        <path data-id="res_grid_r" id="res_grid_r" data-class="composite_part" data-parent="reshape_icon_right" d="M 346.5 188.5 h 7 v 7 h -7 z M 346.5 191 h 7 M 346.5 193.5 h 7 M 349 188.5 v 7 M 351.5 188.5 v 7" stroke="#ffffff" stroke-width="0.6" fill="none" />
+      </g>
+
+      <g data-id="spatial_transformer" id="spatial_transformer" data-class="child_node" data-parent="agformer_block">
+        <rect x="268" y="208" width="165" height="26" rx="2" fill="#f48045" stroke="#cc6029" stroke-width="0.6" />
+        <text x="350" y="225" class="label-reg" text-anchor="middle" fill="#000000">Spatial <tspan font-weight="bold">Trans</tspan>former</text>
+      </g>
+    </g>
+
+    <!-- SPE (Spatial Position Embedding) -->
+    <g data-id="spe_node" id="spe_node" data-class="child_node" data-parent="panel_a">
+      <rect x="195" y="259" width="30" height="15" fill="#678d96" rx="1" />
+      <text x="210" y="270" class="label-xs" text-anchor="middle" fill="#ffffff" font-weight="bold">SPE</text>
+    </g>
+
+    <!-- Bottom FC Layer -->
+    <g data-id="fc_layer_bottom" id="fc_layer_bottom" data-class="child_node" data-parent="panel_a">
+      <rect x="25" y="278" width="445" height="18" fill="#94a7b0" stroke="#758891" stroke-width="0.6" />
+      <text x="247" y="291" class="label-reg" text-anchor="middle" fill="#000000">Fully Connected Layer</text>
+    </g>
+
+    <!-- 2D Poses at bottom (Placeholders) -->
+    <g id="pose_2d_1" data-id="pose_2d_1" data-class="raster_node"><image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACMAAAAyCAIAAABZMfUwAAAFUUlEQVR4nO2YX0hTbxjH37kDLkeo0zbHNnUzzN2o2y605tAQE5TUQWyMKBCFGh6DRgVeiUg1JOjCvJIN0bwQDS01yz/ghJW4VJpgKnmY+KfMpjuUazvu7HRxQvbbn7Od/eh39Xuuxnu+z/M5z/M+e9+HAwg61t/fn5eX5/V6aXmRlgBoGkEQdF1Io01KSKDt8sdoVcDhcIyPj+M4Hkf1GHFXg67FW4r/huT3+/86yeVy3b17V6PRrK+v00bR2tWpqSnS6+HDh3Q7gl5OUqn02rVrIpFoZmYGw7C/mBNBEMfHx5OTkyKRyGKx/MWcAABnzpx58+bN3t7eq1ev6LUG3ZzcbrdYLAYAqFSqX79+xe5Im0QQxL1797hc7tu3b2l50SadnJwoFAqj0UgtwzDsX5H29/cbGhq4XO7q6iqFzGKxqFSq1tbWQB4NEoIgV69eBQAkJSVduXLFZDI5nc6NjY2lpaUgpVarBQAwmczd3d1YST6fb2VlxWKxNDY28vn8oqKic+fOZWVl1dfXFxYWCgSClJQUNps9Ojoa6PX48WMIghobGwPvzCgko9EoFAo5HI5arR4dHUVRFIbh6upqgiB2d3c7OjrIBtbr9acuOI5rNJq6ujq32x0YKgqpuroaAMDj8Y6Pj8mV+/fv19TUnAp6enoMBkNmZqbBYCCbfmZmhsfjLS8vB4WiIlmtVrFYLJVKh4aGThdhGFar1UHKyclJsqTb29u1tbXXr18PjRaGhKLo1NRUV1cXl8vV6/UulyvwqV6v12q1oV52uz05OTklJYXH4y0uLkYn+f1+GIYhCIIg6NmzZz6fL/Cpz+dTq9VhX9nr9WZkZAAASktLw54dwSQMw8hWzs/PD5oX/H5/W1tbQkLCpUuXnE5n6Cs+ffpUpVINDg6GYsKQCILo7OwUiUSzs7OhsW7evAkAyM3N3dzcDBvu58+fYdfDk5qbm+vq6sKqHQ5HYWGhTqfz+/2RIkay4FsDw7DV1VWZTBb24M/KypLJZCwWi8Fg0LtsQueIvb29nZ2d0tLSSA7k5tHFBJNQFG1vb8cwLD8/n8onvjE2sJSPHj0CADCZzNB2IO3du3cSiaSqquro6Ojw8LC7u3t4ePjk5CSWffoHaWxs7OzZs+fPn//8+TNBENPT0zU1Nc+fP0cQpLe3F4Zh8h/DYrFKSkoUCgX5e2FhIRZS8LS8sbHBZrMFAoHP5ysrK7NarQwGQygU8vl8oVCYlJS0uLhYUFBw+fLlDx8+9Pf3u91us9lcX19Pr3qBhuO40WiEIKiysnJ+fv7g4IBcdzgcp0fA3NzcrVu35HJ56A0bpXqh1tzcHHqeBhqCINnZ2S9evIhKitJFeXl5TqfT7XZHEojF4oqKCpPJhOM4dagoJIlEgqLowcEBhebOnTsfP348HaTjJHG5XBRFURSl0IhEIgBAU1OTzWaLk7S9vX379u2vX79ubW1RyD59+vTt2zcEQQYGBuIkra+v22w2j8djt9spZFKpNDs7Oycn58aNGxQyqt7zeDwtLS0sFmtiYoJC9uXLF4FAMDY2Fn/vJSYmlpeXSySSCxcuUMiGh4czMjKKi4upEoraESMjIzk5OeTIH6kkL1++VCqVaWlp8ZMwDLPb7UqlMpIAQZAnT56sra3pdDpqzJ+XirRJHR0d6enpocMwafv7+xcvXgQAFBcXx3KcR8zp9evXDx48+P79++bmZlgBjuMejwcAIJfLmUxm1JSgSA84HE5qaipBEBwOJ6yAz+ebzWabzVZbWxvLZU/1jYW8eIqKiqJGicX+/5oDAHj//n1fX9+PHz/oOv4GCaRYqrriV5QAAAAASUVORK5CYII=" x="47" y="318" width="34" height="42" preserveAspectRatio="xMidYMid meet" /></g>
+    <text data-id="lbl_pose_1" id="lbl_pose_1" data-class="text_node" data-parent="panel_a" x="64" y="372" class="label-reg" text-anchor="middle" fill="#000000">1</text>
+
+    <g id="pose_2d_2" data-id="pose_2d_2" data-class="raster_node"><image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAyCAIAAAC2854OAAAFPklEQVR4nO1YSUgbbRj+xsSoMZEopknEmERB0bpQwRJUEAvqxUApEhAV14M5uYAIHrx6aT2JQuyhPURxA1GhIopxiwtqWhecuC+4121iEpPMTHoYfn9NMmMmxcvP/5z0+95nnvd55p1vhgAHHWxtbUVHR4+Pj9NiORwOH0AH/v7+iYmJQUFBtFgAAMjhcHhejWHY7e0tl8tlsVivKOM16IX235K5urpCEMQbHc+HcnJyUiAQJCUlHRwcvOJAT01NnZ+f//r1C4bhV3RzcXGRn58vlUphGKbrhoaMw+FAUTQtLa26uhrH8VeUWV9fF4vFTCazt7eXFpHepJ2fn19eXqIoenJyQovIpFXN4/FEIlFJSUlxcTEtIr3QGhsb09PTaVEI0JDp7OxksVh1dXWvJYPjuE6nE4lEAICgoKCOjg6j0Xh3d/ft27epqSlPpo7qhN7Y2NDr9X5+fh0dHTqdTiqV6vX69+/f393dmc1mgUAwMzMjkUh+/PgRGxv7lIiiKJP5/K6T6ZtMpri4OACAr69vaWnpzMwMDMNisXh5efnw8PD79+9yuRyCoDdv3qyvrz+yUBStqqrKyclZXV2lCs1isVit1omJidzcXKKPyspKYmtzczMqKkqv1xP/3t/fd3V1yWSypqYmYuXh4UGtVhOsqqqqp5d9Zm1+fr6hoQEAAMPwhw8fBgcHEQTJzs4mds1ms4+Pz2MagYGBSqUSx/GampqFhYWwsLCNjQ0YhmUymb+/v1KpJA2tvLycWOzu7naNcWlpKTY21mAwOK1nZWURrJqaGhiGzWazxWJxqnkmo9VqxWJxQUHBw8ODUx2O41+/fuXz+XNzc05bra2tAQEBCoXCtTP3MhiGJSQkaDQa17rd3d2YmBgAQFlZmesEHxwcmEwmCplnZ5rVakUQhMPhuA43l8vl8/kQBBFPjxMiIiLYbLabZ+IfPBsBm81ms9m4XK5rXWhoaG1t7dnZWVFREQRBFFd0i2duEARhsVhu3QAAeDwem8328/Ojq+Ess7+/z2AwyGT+vZ9/I3N9ff358+fj42OtVksmg+M4g8H4K5mLi4v5+Xmr1bqwsAAAsNvtt7e3j7sYhmk0GoPBMDo6CgDQ6XQVFRVDQ0Oe6jxGYbPZ1Gp1aWnpz58/jUajSqWSy+XDw8PLy8stLS2fPn0i6oODgz9+/CgQCAAAMTExrk+YW7g/oRcXFzMyMsxmM5PJlEqlQqFQKpUyGIyTk5Pk5GSbzba1tTU9PR0fHz8+Pu58GFO7eQoEQVQqVVxcXHt7+8rKitFoJNatVivxB4ZharVaJpMdHh564ob0RTA6Ovru3bvT01OyApPJlJqa2tDQ4IkM6ZdNRETEzc0NxRcMm80uLCzs7+///fv3i5mRyohEIrvdfnV1RUEuKipCUbS5uXlvb89LGQiCIAgyGAwUZA6Ho1Aompqa8vLyNjc3qXTI0vzy5QvxDt7Z2aEIvbm5GQDAYrFmZ2e9uTfEwW6321EUpeiSz+eHhISo1erk5GRv3Gg0mujo6LGxMeoRUigUTq99tyCVKSsrUyqV1OSjoyOhUDgyMvKijPvQbm5u1tbWMjMzqXIAoKenRyKRpKSkUJeRhjY3NxcWFra9vU3Wnd1ub2trk0gk9fX1L1pxOH1APWJoaIg4x8iaGxgYUKlUAAChUPiyFbdu+vr6OByORCI5Ojoi6252djYkJITH42m1Wi/d6PX6+/t7i8VydnYWHh7utjm5XD45OYlhWGJioidm3MioVCqTyRQZGUl9ibdv33oiQOD/32y8wB9CvHycvHgCOwAAAABJRU5ErkJggg==" x="114" y="318" width="34" height="42" preserveAspectRatio="xMidYMid meet" /></g>
+    <text data-id="lbl_pose_2" id="lbl_pose_2" data-class="text_node" data-parent="panel_a" x="131" y="372" class="label-reg" text-anchor="middle" fill="#000000">2</text>
+
+    <g id="pose_2d_3" data-id="pose_2d_3" data-class="raster_node"><image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACUAAAAyCAIAAABUL4V3AAAFM0lEQVR4nM2YXUhTfxjHf25ubE4byHIuJrgKdtjKiEnLtIsCG0aCFwuWF10oXliNJAicbxAFXiXRrVaY1oVovgSRIU02RrSMzZcjbmxsmS/bYTrbxrbjzsv/4oCItnPOjhX/52p7zvM8nz3f5/f77ZwDyNzt3bt3KpUqmUxyyOUBTkaSJLdEjjwej2Mi4KDJ2tra+/fvMQzjkJvHWRluxkUWgiAikcg/4uE4brFY6urqxsbGuABzHcDW1pZQKAQANDQ0cJhfzv1JpdKurq7S0lK5XP4v+qNseHhYrVZ7PJ6/3h9lgUDA4/G0tramUqmcEjnyVlZWAAAulwtF0X/BO3XqlFKpfPXqlVQqzS2Tw/ASiURVVdWTJ0845ObMS6fTt2/flkgkS0tLf50Xj8e7u7spYW7duuV2u0mSXF5eHh0djUajbCown58EQbjdboFA4HA4Xr9+HQwGURTl8/kKhSIWi1VUVMAw7Pf729vbe3t7GcfHvF7evHlz+fJlnU73/Pnz2traL1++1NTUNDc3O53OwcHB4uLira0tAEA4HGaxWrKvF4IgMAybnJwsKysDABQVFVmtVpIkMQxTq9VDQ0N7kd++fWtpaYEgaGVlhVHP3/BwHO/v729sbKytrVUqlffu3evs7BwZGaGuhkIhhUJhs9n2p6TTaZPJpNVq+/r6tre3SZJMJpNWq3V9fZ2ZFw6HRSIRAODs2bMul+vAVbvdrtVqfT7fAf/Xr18pwYxG44cPH+7cuSMSierr6yORCAMvmUzevHlTLBZbLJbDrXd0dFRWVh5ejaFQSKvVCgSC8+fP63S6wsJCAIBGoznQ4u/nF4/HGxsbTSbTAf/s7KxEIhGLxVNTU4ezvF7vzMwMgiBra2tWq/Xx48efP38+EJN1vUxNTUEQND8/v985MzMjEolEItH4+Hi2RHrLykMQRCqVajSajx8/7jkzmYzZbL569Wo6nebGy7r/0ul0MplcXl5++fLlnjM/P1+v11OXWO22Q5aVJ5fLHzx4cOHChdbW1v1+CIIQBNnY2ODGYzg/URQ94EkkEgqFYnp6mpuezOf17u7u/q+Li4sFBQUGgyEajRIE8ezZM4vFEovF/gzP6XRWV1ebzWaPx2Oz2QYGBnQ6HSVMdXV1Q0MD9fnp06csefn0ag8MDDgcDofDMT09nUgkZDKZTqfj8/knTpw4d+5cMBiUy+Xb29ulpaV/Zn6zs7Pl5eUGg2FiYmJjY4MaJ4qiOI5TAT9+/Lh06VJ7ezvL/pjnV19f39/fTxPw6NGjK1eupFIpNjyG/z8MwxAE2d3dpYm5fv16IBDw+Xxs5GTg8Xi8VCp17NgxmpgzZ84IhUKbzUYQxFF5fr/f7/e73e5MJpMtRiAQqFSqtra2hw8fMt+O0st9//59qiIMw9liUBTV6/UAgIqKCgRBjjQ/lUrF4/EuXrxYUlKSLUYoFBoMhpKSku7ubplMRl+QYf8plUoIgl68eEFfCEGQGzduGI1G+mqAcX4wDCuVytOnT9PE4DgOw7BWq2WEMfMCgcDx48fz8vLoeaurqydPnjwqjyTJzc1NlUpFX2JhYSGRSLA80uh4Ozs70WgUgiCamGAwePfu3Z2dne/fvx+Jh2FYZ2fn3Nzcz58/afJ//frl9XpxHF9fX2fDy7r/YrGYWCwGAFy7do1mP2Uymbdv3/b09KyurtLvPMro7uepB4ZPnz6xKcTSGJ6PcBzn8/mshGJn//v3WUf8fQzn2Z5lMhm73T4yMhIKhfR6fVNTE7f3Pf8BWR+L3EIST7YAAAAASUVORK5CYII=" x="182" y="318" width="34" height="42" preserveAspectRatio="xMidYMid meet" /></g>
+    <text data-id="lbl_pose_3" id="lbl_pose_3" data-class="text_node" data-parent="panel_a" x="199" y="372" class="label-reg" text-anchor="middle" fill="#000000">3</text>
+
+    <text data-id="dots_2d" id="dots_2d" data-class="text_node" data-parent="panel_a" x="240" y="345" class="label-title" text-anchor="middle" fill="#000000">···</text>
+
+    <g id="pose_2d_t2" data-id="pose_2d_t2" data-class="raster_node"><image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAyCAIAAAC/GD50AAAFSUlEQVR4nO2YX0hTbxjH352caxMnTTYnrtbqtDZRTGGaRgjZn5HYLioVCWEXQUTpIILQq7oJDG9E6UoF686FzfWXGKUkskm53C4OQ8fBP0PN6f64o3Pbebs4IOGf8x5PQ/jB73v9fZ4P7/s+z/O+5wB4cDkcjuLiYr/fzyMWQoiBgwtCSNM0j0BGfJAikSgvLy8jI4MfUgAh5BfJW3xWOTs7e+fOnY6OjlQqxYfJ4/xbWloAABiG/fr165DK5/LlyzKZTCqVJhKJQ1olhDAQCNTU1Dx58uSQVgkAEIvFW1tbAwMDXq/3oLE8kS6Xa2xsLBAI2O32g8by7C25XC6VSk+dOnX9+vVDQk5NTeXm5n758kUmkx04mMf5O51OHMfb2tp4xEIID4z8+fOnTqcDAJSWlr5//z4UCkEIZ2ZmotFoOpHJZDIajXq93gcPHmi1Wma6FhYWqlSqysrK27dva7Vas9kcDofTg4zFYrdu3crOzpbL5VevXrVarVeuXGlsbKQoamFhobOzMz8/HwCgUql8Pl96kH6//8iRIwAAk8mUSqVIksRx3OFwbBtcLldpaanZbN7a2uKCRPelWq1+/PixSCRqb2/HMIyBVVVVbRsMBkNlZeXGxoZQKORSsGgkhmG1tbXHjh0rLCwEAAwNDZlMpqNHj/7t0Wg0y8vLHO9tTtMnFotlZmaKRCKXyzU+Pr67/ZVKJUEQw8PD6UFCCD0eD0VRHz9+rK+vD4fDq6urOzxfv34NBAL3799fXl5GJkRPn/n5+adPn66vrz969IjZvfX19R0eHMeFQiHTmsiE6IpdXV2tqKgAAJjN5u7ubqVS6Xa7d3ji8fjr169xHP/+/TsyIadREAwGOzo6dDqd1+vV6/WvXr3a03bp0qVnz54hs3EqH5lMZrFYxGLx27dvTSbTmzdv4F4bePbsWbfbjczG9b4UCoUWi+Xly5fxeHxiYmJlZWW3p7q62uPxjIyMIHJx2VhGQ0NDAACBQCCRSOrq6qanpyGEJEn29/cvLCxACLu6ugAACoXC4/Gw5EFULEVRfX19s7OzLS0t0WhUKBQmEgmKoux2O0mSdXV17969m5qaunnz5uDgIDMXI5FIPB5nyYlA/vjxo7W1laZpu90ukUhycnI0Gs3a2lowGNTr9QRBLC0tAQBWVlYghGazWSwWKxSKsrIy/hvr8/kMBkNubu7du3eHh4cDgUA8Hl9bW5ubm6NpmqZpkiQfPnyo0WiYi5OL0Gdps9nKysrm5+f3M5AkqdVqP3/+zBGJrliJRJJMJpPJ5H6GEydOnDlz5sOHD8hUjNDIzc1NZqbvZxAIBBcuXJicnKQoKg3ISCRis9mCweDuufq3SkpKnE7nvXv3QqEQmsm+79sv497eXhbb8+fPGdunT5/+9SzVarVWq83Pzz99+jSLzWg0ajSaoqKikpIS5CIRfVlcXHzjxg2fz1ddXc1iO3funMFgOH78uFKpRCIRq4QQTk9Pq9VqdhtFUS6Xq7y8HMlDI3///j03N3f+/Hl2G0EQAoFAr9enAen3+xcXF/9+z+0pm8128uRJHMfTgCQIQiqVFhQUsHgGBwd7enoAAJDjnw6Wap6cnNTpdBcvXtzc3NzPQ9N0fX09AEClUhEEgewQyD5jm5ubAQAikWhmZobF9u3bN6PR+OLFi42NjX9FWq1WnU7X0NCA/KpKJpNcYIwQv5pIkpTL5VlZWZwOiZv+I3+3/kdy0N5jHUJos9ncbjeGYZmZmYlEIpVK5eXlNTU15eTkbNsWFxetVuvo6KhYLG5oaLh27RrzyGPXH+zXCufGdfsLAAAAAElFTkSuQmCC" x="294" y="318" width="34" height="42" preserveAspectRatio="xMidYMid meet" /></g>
+    <text data-id="lbl_pose_t2" id="lbl_pose_t2" data-class="text_node" data-parent="panel_a" x="311" y="372" class="label-reg" text-anchor="middle" fill="#000000">T-2</text>
+
+    <g id="pose_2d_t1" data-id="pose_2d_t1" data-class="raster_node"><image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAzCAIAAAAPYC8dAAAFc0lEQVR4nM2XSyxjfxTHf73+VEtcpkOVqtB4pRrEI5h4xUwysxIhIYLVJNOYWAgLJkPYlQWJlYh4zGLEiNfMGEZSpo1XVIJFVTGlmEhDn6Otlnt/s2hSnarb238k//9ZNbfnfO4533N+jwsgCVtbW0tKStrb2yPj7DAEkDMIIUlPh5FFIwhZzzsjU9rl5eXs7KzRaPRKEMq/qJSkkSrz9vb26OgIwzDv2B7rwjCsra0tISFBKBR6JYhntE6nS0lJAQBkZmbabDbyaM+CoCj6/v17Pp+PYRiFQnlMQey2sbHBYrG+f//+mFnbTSaT6fX6lpYWlUpFMoQsWqlUWiyWnz9/arXaR0ZHRkYGBQX19vYmJyeTDCGltcViyc7O7ujoIC80JDN819fXAoEAADA9Pf2Y6JOTk3fv3tnr4/P54+Pj5+fnCoVibGxMp9MRx7rZQyCEYrHYaDSurKzMzc2ZzWaDwRAaGpqRkSEWi58+farRaFQqVX19fW9vr3daT05OUqlUBEH4fP7w8PDi4iKbzd7Z2YEQajSa/v5+FosFAHjz5o3Xgnz48AFBECqVKhKJIISdnZ1ZWVkYhjkcRCJRVFTUt2/fiNH/3K+jsrLyy5cvNBqtqKgIw7CxsbGqqirnoyA3NzcmJsbj2nEz176+vjQajcFgUCgUuVx+cXFRWFjo7ODv7x8cHLy/v+81GgCg0WgYDIZer29ra2OxWHFxcc7/2mw2BEE+fvy4sLBAxL6vkUKhYDKZ+fn5ra2tAAAURdfX150djo+PuVwuACA8PHxxcRFCiGGYxWLxrPXs7KxarVar1QEBASEhIWw2OywszNkhOjq6oqJifn4+LCyspqamoKDAZDLt7+8PDg5mZ2cTZX1wcPD8+XMOhxMbG4uiaHJycnd3t0Qi0el0BoOhp6env7//+vparVbjOL68vFxcXGxHNTU1eRg+COHNzY19ybS3tyMIwuPxeDwem83mcDh2ytzcnMPZZDLV1dW9fPlyd3fXM9rZ0tLSurq6lErlwsJCc3MznU6PjIyUSqX3s3F54hktFAozMzMdlxC5XH50dOQxCro9ZaxWq/O9gMvlSqXSyspKpVJptVonJyeFQuHZ2RnR2Llto1gs5vF45eXlP378GB0dbWxsjI2NtXtGREQkJCTYf3d2dnrM2nX4vn79KpPJZDLZ0tLSkydP0tLSBALB5uZmSEjIixcvzs7OBgYGdnd3g4ODvc56a2uLy+UWFhbK5XLHKsBx3OHw+/dvgUBQXl7u/NCtuWljdXX127dvCWJmZmYiIiL0ej0x2k0bTSYT8VWGz+ejKLq6ukqshxu0zWaj0WgEMRwOJy4u7tOnT8QXTNc2fv78eXl5Gcdxo9EYFBTkNoZCodDp9JGRERzHBwcHfXx8SGU9MTFhMBg2NzeVSuVD6WAYptVqIYRisdhmsz2Ytov2S0tLoaGhr1+/tlqtBC1aWVkJCAgYGhryoo2JiYnR0dElJSV+fn4PpgNAYGAgk8lMT08n8HFFHxwc/Pr1KzU1lSAGADA/P89ms+0HAlm0QqFgMBhMJpMYLZVKk5KS6HS6F+i1tbWcnBxfX1+CGJlMtr29nZeXR/z6v9AWi2V1dTU3N5cgwGw219bWHh4eSqVSsmiz2dzQ0LC3t6dSqeDDX3w4jqvVagCA0WgkRt8N3+npaXx8PACgqKjo/pHhMnnd3d0nJyfEe8gdGsfx0dHR0tJSiURCHEPS/uuv3f8d+q+dD0I4MzOzvb2NIIifn9/NzQ2GYUwms6qqCkVRl0iRSHRxcVFWVvbQInDdVK+urrRarcFgmJqaevbsWXx8PJVKxXHc2efy8rKnp6evr4/FYr169er+W+32B+JRtnnB0gV9AAAAAElFTkSuQmCC" x="362" y="318" width="34" height="42" preserveAspectRatio="xMidYMid meet" /></g>
+    <text data-id="lbl_pose_t1" id="lbl_pose_t1" data-class="text_node" data-parent="panel_a" x="379" y="372" class="label-reg" text-anchor="middle" fill="#000000">T-1</text>
+
+    <g id="pose_2d_t" data-id="pose_2d_t" data-class="raster_node"><image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB8AAAAyCAIAAAAr/peGAAAFGUlEQVR4nOVYX0habxj+tGBnA7Wwwv6hVFtFjLpREodNdJYsFiu6a1vg6CYDwQYOtkEQ3Xg7CSJoEEVtESyiMliysblWRFnbEsz+DPs/p2cuz1GP59vFgX7O9OgZ7ur3XB2P7/vw+Lzv936fH4ApwGQyKZXKcDicSnA02CAFEAQRCoVSiYxBZipBUqk0OzubzU5JSjRYEELmmlIFYzn/hD0UCvl8vn/CjqKoVqvVaDSfPn1iRp9KYy0uLlLB3d3d6e/Iqqqq9vb2S5cuqVSq9GuHEO7s7JSXl9tstvRrJ0lyYGDA7Xa/ffs2/dp9Pt/ly5cBAA0NDenXzuPxdDodm81++PAhI+kpse/t7YXDYaFQeOfOHUbsyZ0hCKKlpQUAUFBQgOM4I2fis0ciERRFIYShUOjVq1d5eXmUFL1ev7+/DyE8Pj6mAugRZ4oFg0Gj0bi8vKzRaD58+LC+vi6TyWZnZ3U6ndVqDQQCra2tU1NThYWFZrO5oKCAmTMul4vFYgEAuFxuZ2fn9va2yWSSSCR+v//Xr19PnjzhcDhU7ps3bxg7g2GYVqvNyMh4/fo1hBBFUbFY3NfXdx4wMzNTWVmpUqm8Xi9jdgjh+Pj41atXI5EIhHBiYiI/P//w8DA6wGAw3L17N/qN2+2OiYGJ+t3hcJSVlbHZbI/H09/f39raKhAIogPYbHY4HD7/uLGxcfv27ebmZofDER0Wf+f7+vVrTU3N9vZ2U1PT58+fOzo6qPcHBweRSCQ7O3ttbc1ut1ssltLSUpfLNTg4aLfbKVkVFRV07ARBbG5utrS0HB4efvnyhcViHR0dnZ2d2e12nU4HANBqtUtLSyiK3rt3Ly8vz+PxiMXiBw8e5OTkyOVyOu0kST5//nxjY2NhYUEoFAoEAq/XazabTSZTIBD48eMHACAcDnd1db1//14mk6lUqurqah6Px2KxqE6LRmy/+/1+hUKxsrICAFAoFEKhcGJiorOzUy6Xczic6elpHMefPXvG5/NxHEcQJK6x/yGmyiRJDg8PKxSKoaEhgiAIgqitrTWbzfSdx6wjo+fJ06dP1Wp1OtmjYbFYuFxuT0/PyclJ2tgJgqAerFYr5e/Nmzdfvny5v7/vcDgmJycxDEvKHmeKQQhHR0fHxsbq6+v39vYsFsvJyQmO49evX8cw7ODgAEVRHMcfP37c29vLrKoQQgzDhEIh9W1jY+OLFy9sNtvHjx8p6tnZWWog379//2+ciUQier0+MzPTaDRSoyYGS0tLUqm0ubn53D0G7BDC+fn53Nzc09PTRGlWq7WkpMThcNCzx59iNputurqaz+cn8lMmk125cuXdu3f0tsdnX1hYUCqVF1f2ObxeL7XuMAyjo7/4c1wuF5/Pp993zrtlbm6OgTNer9dgMPh8vtXVVRpNN27cQBDk2rVr0fM2ufatrS2RSAQAaGtrI0kykahQKCQSiUZGRmiLekG7SCRSq9XFxcVdXV00vn///p06P9EJv1jVjIyMnz9/qtVqiURCk7a5uZmVlRWzHSZnPz09dTqddXV19Gnr6+s5OTlJDjPggu+Li4uFhYXfvn2jcdNisRQVFSmVyqSD7A/23d3dW7dulZeXB4PBRAkkSVLHyqKioqRr9Q/29vZ2AACCIDs7OzQ5k5OTEonk0aNHzLQPDAwgCCKXy30+H32ax+NJ5dogdr47nc7c3NysrKwk5UoN/4d/8n+HhDcoJElS5w5qHlAPCIIwukf5DUAMVU/kn1czAAAAAElFTkSuQmCC" x="428" y="318" width="34" height="42" preserveAspectRatio="xMidYMid meet" /></g>
+    <text data-id="lbl_pose_t" id="lbl_pose_t" data-class="text_node" data-parent="panel_a" x="445" y="372" class="label-reg" text-anchor="middle" fill="#000000">T</text>
+
+    <!-- Legend at bottom of panel (a) -->
+    <g data-id="legend_group" id="legend_group" data-class="block" data-parent="panel_a">
+      <!-- Reshape icon + label -->
+      <circle data-id="leg_res_circ" id="leg_res_circ" data-class="composite_part" data-parent="legend_group" cx="98" cy="384" r="5" fill="#000000" />
+      <path data-id="leg_res_grid" id="leg_res_grid" data-class="composite_part" data-parent="legend_group" d="M 95.5 381.5 h 5 v 5 h -5 z M 95.5 383.5 h 5 M 95.5 385 h 5 M 97.5 381.5 v 5 M 99 381.5 v 5" stroke="#ffffff" stroke-width="0.5" fill="none" />
+      <text data-id="text_leg_reshape" id="text_leg_reshape" data-class="text_node" data-parent="legend_group" x="108" y="388" class="label-sm" fill="#000000">Reshape</text>
+
+      <!-- Adaptive fusion icon + label -->
+      <circle data-id="leg_af_circ" id="leg_af_circ" data-class="composite_part" data-parent="legend_group" cx="187" cy="384" r="5" fill="#000000" />
+      <path data-id="leg_af_plus" id="leg_af_plus" data-class="composite_part" data-parent="legend_group" d="M 184.5 384 h 5 M 187 381.5 v 5" stroke="#ffffff" stroke-width="1" />
+      <text data-id="text_leg_af" id="text_leg_af" data-class="text_node" data-parent="legend_group" x="197" y="388" class="label-sm" fill="#000000">Adaptive Fusion</text>
+
+      <!-- SPE icon + label -->
+      <rect data-id="leg_spe_rect" id="leg_spe_rect" data-class="composite_part" data-parent="legend_group" x="296" y="377" width="22" height="13" fill="#678d96" rx="1" />
+      <text data-id="leg_spe_txt" id="leg_spe_txt" data-class="composite_part" data-parent="legend_group" x="307" y="386" class="label-xs" text-anchor="middle" fill="#ffffff" font-weight="bold">SPE</text>
+      <text data-id="text_leg_spe" id="text_leg_spe" data-class="text_node" data-parent="legend_group" x="323" y="388" class="label-sm" fill="#000000">Spatial Position Embedding</text>
+    </g>
+  </g>
+
+  <!-- ========================================================================= -->
+  <!-- PANEL (b) SPATIAL TOKEN MIXER BLOCK                                       -->
+  <!-- ========================================================================= -->
+  <g data-id="panel_b" id="panel_b" data-class="block" data-parent="root">
+    <rect x="495" y="5" width="300" height="208" rx="3" fill="#ffffff" stroke="#f48045" stroke-width="1.5" stroke-dasharray="4,3" />
+    <text data-id="text_panel_b" id="text_panel_b" data-class="text_node" data-parent="panel_b" x="502" y="24" class="label-panel" fill="#f48045">(b)</text>
+
+    <!-- Top Addition Circle -->
+    <g data-id="add_node_b2" id="add_node_b2" data-class="composite_whole" data-parent="panel_b">
+      <circle data-id="add_circ_b2" id="add_circ_b2" data-class="composite_part" data-parent="add_node_b2" cx="665" cy="27" r="5" fill="#ffffff" stroke="#000000" stroke-width="1" />
+      <path data-id="add_plus_b2" id="add_plus_b2" data-class="composite_part" data-parent="add_node_b2" d="M 662.5 27 h 5 M 665 24.5 v 5" stroke="#000000" stroke-width="1" />
+    </g>
+
+    <!-- Channel MLP -->
+    <g data-id="mlp_block_b" id="mlp_block_b" data-class="child_node" data-parent="panel_b">
+      <rect x="550" y="37" width="220" height="17" fill="#d6e4fc" stroke="#333333" stroke-width="1" />
+      <text x="660" y="49.5" class="label-reg" text-anchor="middle" fill="#000000">Channel MLP</text>
+    </g>
+
+    <!-- Layer Norm Top -->
+    <g data-id="ln_top_b" id="ln_top_b" data-class="child_node" data-parent="panel_b">
+      <rect x="550" y="58" width="220" height="17" fill="#faecc3" stroke="#333333" stroke-width="1" />
+      <text x="660" y="70.5" class="label-reg" text-anchor="middle" fill="#000000">Layer Normalization</text>
+    </g>
+
+    <!-- Mid Addition Circle -->
+    <g data-id="add_node_b1" id="add_node_b1" data-class="composite_whole" data-parent="panel_b">
+      <circle data-id="add_circ_b1" id="add_circ_b1" data-class="composite_part" data-parent="add_node_b1" cx="665" cy="87" r="5" fill="#ffffff" stroke="#000000" stroke-width="1" />
+      <path data-id="add_plus_b1" id="add_plus_b1" data-class="composite_part" data-parent="add_node_b1" d="M 662.5 87 h 5 M 665 84.5 v 5" stroke="#000000" stroke-width="1" />
+    </g>
+
+    <!-- Spatial Token Mixer -->
+    <g data-id="spatial_mixer_b" id="spatial_mixer_b" data-class="child_node" data-parent="panel_b">
+      <rect x="550" y="97" width="220" height="17" fill="#ffffff" stroke="#000000" stroke-width="1.2" stroke-dasharray="3,2" />
+      <text x="660" y="109.5" class="label-reg" text-anchor="middle" fill="#000000">Spatial Token Mixer</text>
+    </g>
+
+    <!-- Layer Norm Bottom -->
+    <g data-id="ln_bot_b" id="ln_bot_b" data-class="child_node" data-parent="panel_b">
+      <rect x="550" y="118" width="220" height="17" fill="#faecc3" stroke="#333333" stroke-width="1" />
+      <text x="660" y="130.5" class="label-reg" text-anchor="middle" fill="#000000">Layer Normalization</text>
+    </g>
+
+    <!-- Input Skeleton Joints with red dots (Placeholders) -->
+    <g id="joint_pose_1" data-id="joint_pose_1" data-class="raster_node"><image href="data:image/png;base64,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" x="552" y="152" width="25" height="35" preserveAspectRatio="xMidYMid meet" /></g>
+    <text data-id="lbl_joint_1" id="lbl_joint_1" data-class="text_node" data-parent="panel_b" x="564.5" y="198" class="label-reg" text-anchor="middle" fill="#000000">1</text>
+
+    <g id="joint_pose_2" data-id="joint_pose_2" data-class="raster_node"><image href="data:image/png;base64,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" x="587" y="152" width="25" height="35" preserveAspectRatio="xMidYMid meet" /></g>
+    <text data-id="lbl_joint_2" id="lbl_joint_2" data-class="text_node" data-parent="panel_b" x="599.5" y="198" class="label-reg" text-anchor="middle" fill="#000000">2</text>
+
+    <g id="joint_pose_3" data-id="joint_pose_3" data-class="raster_node"><image href="data:image/png;base64,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" x="622" y="152" width="25" height="35" preserveAspectRatio="xMidYMid meet" /></g>
+    <text data-id="lbl_joint_3" id="lbl_joint_3" data-class="text_node" data-parent="panel_b" x="634.5" y="198" class="label-reg" text-anchor="middle" fill="#000000">3</text>
+
+    <text data-id="dots_joints" id="dots_joints" data-class="text_node" data-parent="panel_b" x="668" y="172" class="label-title" text-anchor="middle" fill="#000000">···</text>
+
+    <g id="joint_pose_16" data-id="joint_pose_16" data-class="raster_node"><image href="data:image/png;base64,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" x="698" y="152" width="25" height="35" preserveAspectRatio="xMidYMid meet" /></g>
+    <text data-id="lbl_joint_16" id="lbl_joint_16" data-class="text_node" data-parent="panel_b" x="710.5" y="198" class="label-reg" text-anchor="middle" fill="#000000">16</text>
+
+    <g id="joint_pose_j" data-id="joint_pose_j" data-class="raster_node"><image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACUAAAA/CAIAAADosZapAAAF60lEQVR4nN2YTU8TXRTH77x1oFOgtPS9iC0xghajdSGSYN26cOnCT6Amfgfjwk/glzBGjZIocWFcyaPmCaQIllIK7VM62FKYvk3npXPnPouGAmXaTofAwv+u6Zn7u+ece+8592IIIXCOwg18o6rq+fHm5+c/fPhgmIf1FM9arXbv3j1RFL98+WKxWIwAUS+am5ujaZokydevX/f0YVM98GRZvnv3bmOWt2/fFgThbHmfPn0ymUwNHkVR7969O1ve1tbW3NxcMBj0+/1v375NJpNny0MIVavVcDgcCoX29/cNwBBCZE+LS5ZlQRAkSZJl2cjiBKA3ntlsfv78OYRwcHDQGK+3/Xd6GTnPTqPe4gkhjEajEMJwOEwQxJnzKpXK8vKyqqrBYNButxvg9RZPmqYZhoEQ4rjBRPS8XjiOi8fjwWDQ6XQa4PU8zeHh4UAgEIvF6vX6efAAACzLLi0txePxc+LVajWEkCRJ58FDCJEkeePGjcnJSQO83vYDAKBardI0fevWLQMwYMC/aDRqsJMwwIvFYtFoNB6P12o1Yzxd8VRVdXd3N5/Pp9Pper2+t7f3+/dvhmG8Xq+iKKurq1NTU8PDw6flqaqaSCQafQpJkn6//+LFixzHRSIRr9eby+VSqdTa2tqfP39MJtP09PRpeRzHffv2TVXV+/fvu1wuAICiKNeuXfP5fARB+Hw+n88HACgUCtVqVQ+sC69YLPI87/f7bTZb02MIoaqqzeIQCoUavq6url6+fJkkuySo7fmZzWZZlqVp2u12N49KSZJisVgoFGoZFyG0sbEhCMLExESzh9PlH4SQ5/lcLletVqempvr6+lrGxTBMY9YYdunSpc3NzY8fP1qt1pmZGZqmNXmt++HXr19v3rwpFosnYeAgnppIAIDH46lUKmtra/l8vp1/x3gIoUwmUywWbTabZiYymczCwsLe3p7mWBRFOZ1OCGE7GGiJJ4ZhFEXZ7fZ2tW1nZ0dRlGw2q2lAkuTs7Ozo6GilUmnHO+afoigOh+PBgwcDAwOa1jabDULocDjaDccwzOTkpCAI7ZDHeDzP4zhuNpvbDRcIBGZmZjweTzsDAACO4263O5PJdOeVy+XOjSxBEO1cPyq32y2KIlet8qraksxj+atUKp27EoSQnss0QRADg4P/vHjhi8dhOBx8+tRqtR4O0VC5XH7//n2pVOp8X1leXoYQdr6UqAgtvXz5HwAKALsA/Pvsmayqjb8O47myspJKpTY2Njr7t7+/31zxjSFOmikAKD9+eAAgABgBgFxYEA4+OYwnhmFHu0oIYTqddrlcDMMAAHie53k+kUisrKxIkhQKhRBCi4uLZrM5Eom0bFYCANOdO+yrV15F2QcARiL9BwaHdqFQaGhoKBAINH5ms9n5+fmxsbHx8XFBEAiCoGma4zgcxzmOk2V5e3t7a2trYGCgUqm0FD8cgPGHD5OKkvv6lQyHxx8/pg7+OuRZLJajLRDP86IoSpJktVrHxsZomiYIwuVy/fz58/r16y6Xy+12l0ollmUFQThZbBmLZerJk/qjR+TxVrxtfVhfX19fX5+enh4ZGdE0AABIkpTL5crl8tWrV9sdqi3S7l8QQrVaLRKJdIABAGiaHh0dlWW5XC7rgbXliaKoqmqHg6YpDMM8Hs/29vapeDzP9/f367wEOZ1OSZJ4njfOY1nWZDLpTAlBEENDQ58/f9bjpQavVCp9//49nU7rv6rJsryzs7O4uNi5+GnzyuWyKIrFYlH/uyPDMDiO60mBRhGnadpsNl+5ckX/Df3ChQs3b9602+1dU6AxHQjh7OzsxMSETlhDXq9Xz/rSsBBFUc9OaBFFUaIoGuS16+Y6iKZpPY9cGjxJkk52gl3V19enKErXJd3Ka1RwAzySJHEc7/qI0MorFArJZFLnYXFUoigmEokOna42L5lMsizbucprKpVKZbPZzc3N3ngMw1AUpacJO/lhY+N2Nmutf/V6vVAoOByOrjerFkEI8/m8zWbrvLb/9vfPv533Pwwj9gYkYJqaAAAAAElFTkSuQmCC" x="733" y="152" width="25" height="35" preserveAspectRatio="xMidYMid meet" /></g>
+    <text data-id="lbl_joint_j" id="lbl_joint_j" data-class="text_node" data-parent="panel_b" x="745.5" y="198" class="label-reg" text-anchor="middle" fill="#000000" font-style="italic">J</text>
+  </g>
+
+  <!-- ========================================================================= -->
+  <!-- PANEL (c) TEMPORAL TOKEN MIXER BLOCK                                     -->
+  <!-- ========================================================================= -->
+  <g data-id="panel_c" id="panel_c" data-class="block" data-parent="root">
+    <rect x="495" y="218" width="300" height="177" rx="3" fill="#ffffff" stroke="#48c998" stroke-width="1.5" stroke-dasharray="4,3" />
+    <text data-id="text_panel_c" id="text_panel_c" data-class="text_node" data-parent="panel_c" x="502" y="237" class="label-panel" fill="#48c998">(c)</text>
+
+    <!-- Top Addition Circle -->
+    <g data-id="add_node_c2" id="add_node_c2" data-class="composite_whole" data-parent="panel_c">
+      <circle data-id="add_circ_c2" id="add_circ_c2" data-class="composite_part" data-parent="add_node_c2" cx="665" cy="237" r="5" fill="#ffffff" stroke="#000000" stroke-width="1" />
+      <path data-id="add_plus_c2" id="add_plus_c2" data-class="composite_part" data-parent="add_node_c2" d="M 662.5 237 h 5 M 665 234.5 v 5" stroke="#000000" stroke-width="1" />
+    </g>
+
+    <!-- Channel MLP -->
+    <g data-id="mlp_block_c" id="mlp_block_c" data-class="child_node" data-parent="panel_c">
+      <rect x="565" y="247" width="205" height="17" fill="#d6e4fc" stroke="#333333" stroke-width="1" />
+      <text x="667.5" y="259.5" class="label-reg" text-anchor="middle" fill="#000000">Channel MLP</text>
+    </g>
+
+    <!-- Layer Norm Top -->
+    <g data-id="ln_top_c" id="ln_top_c" data-class="child_node" data-parent="panel_c">
+      <rect x="565" y="268" width="205" height="17" fill="#faecc3" stroke="#333333" stroke-width="1" />
+      <text x="667.5" y="280.5" class="label-reg" text-anchor="middle" fill="#000000">Layer Normalization</text>
+    </g>
+
+    <!-- Mid Addition Circle -->
+    <g data-id="add_node_c1" id="add_node_c1" data-class="composite_whole" data-parent="panel_c">
+      <circle data-id="add_circ_c1" id="add_circ_c1" data-class="composite_part" data-parent="add_node_c1" cx="665" cy="297" r="5" fill="#ffffff" stroke="#000000" stroke-width="1" />
+      <path data-id="add_plus_c1" id="add_plus_c1" data-class="composite_part" data-parent="add_node_c1" d="M 662.5 297 h 5 M 665 294.5 v 5" stroke="#000000" stroke-width="1" />
+    </g>
+
+    <!-- Temporal Token Mixer -->
+    <g data-id="temp_mixer_c" id="temp_mixer_c" data-class="child_node" data-parent="panel_c">
+      <rect x="565" y="307" width="205" height="17" fill="#ffffff" stroke="#000000" stroke-width="1.2" stroke-dasharray="3,2" />
+      <text x="667.5" y="319.5" class="label-reg" text-anchor="middle" fill="#000000">Temporal Token Mixer</text>
+    </g>
+
+    <!-- Layer Norm Bottom -->
+    <g data-id="ln_bot_c" id="ln_bot_c" data-class="child_node" data-parent="panel_c">
+      <rect x="565" y="328" width="205" height="17" fill="#faecc3" stroke="#333333" stroke-width="1" />
+      <text x="667.5" y="340.5" class="label-reg" text-anchor="middle" fill="#000000">Layer Normalization</text>
+    </g>
+
+    <!-- Input Temporal Skeletons (Placeholders) -->
+    <g id="temp_pose_1" data-id="temp_pose_1" data-class="raster_node"><image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACUAAAAvCAIAAADrZ5QyAAAEsklEQVR4nNVXXSh7bxw/cywzk2LLmNiUo5kRGtmSorwmK412obyUWikXLohygVyM7MZLblwISUkuhCTKuxZLbQs7eZs2JLTNcZztPL8LJdnY2eav/t+r0/N5Pp/P832e73leaAAAyC1IkkRRFMdxdyjAoHn0++8iKED+zs7O2dmZDwQQQGAYVlRU1NDQ4HK5KFIC8ltZWQkJCWGz2cfHxxQpwVqt9ofsSZKMi4uLjY11h1wul0ajwXEcx/GxsbGhoSFK88n8MUJCQnp7ez2OdHl5+UOExWLp9XpK+ZWVlf0wGpfLhSCIR4hGo6lUqomJCRaLVV9fb7fbKeVHda08xd3dHZ/Pz83NpU4J6H8gCILL5XI4HOo7Q0D/O0EQKIoGBwcnJiYGBVEa+v9tf/kjP6fTeXBwcH197TPTv8rc2tpisVjV1dU4jvtE9DO/qKgoiUSyu7t7eHj4F/kBAB4fHzMyMtrb231iBfuXHwRBJpNJr9czGAyCIOh0OkWW//VJp9NdLldubi4Mwz7Q/J5PtVotlUqfnp7cIRzHURT1yPLTb2FhgcPhVFRUWCwWkiQJgviMDg8PIwgyOzvrTvRh/QAAVqvVaDROTk7Ozs5iGKbT6bKzs7OyshwOR2NjY01NzXtPs9l8enpKEERA87m0tJSWlsblchUKxdzcXGZmZnd39+rqanl5OQRBIpHIYDAAAEiSrKysVCqVHi8ZPvipVCoIgnp6egAAb29veXl54+PjAAAMw5aXlxUKRWJi4t7e3traGpfLPTo68iji3Y8kyefn566urujo6P7+fgzDAABPT09SqXRiYuKjm81ma25ujo+PT0pKampq+u4G5d1PrVbHxMSkpKQsLS19NKIoKhQKZ2ZmPvc8PT19XyOj0fidmvd6OTk5sVgsg4ODJSUlH41jY2NGo/Hu7u5zTx6P19nZGRYWlpSU9J2ad7+oqKiCgoKqqqrPjQKBgMVihYeHf25kMpm9vb0/q3nfX/R6fWZm5pcdSy6XIwgSERHhle6bn9lsvri4yM/P/0oLCoJhGPh+N/jJjyTJgYEBs9mcnJz8BXp5eXl9faXRaO/fPhj/UJk4jmdlZTGZTIPBYLfbp6amNjc39/f3p6enCwsLIQgqLi6uq6vj8Xh9fX1e6/w9vPwPBoNhY2MDALCwsABBkEAg4PP5CILIZDKBQNDa2iqXy2EYTk9Pt9vtv+D3EZeXl2KxuLq6+vz8HMMwgiDep5EkyYODA6FQODIy8pt+AIC+vr7S0lKPUEdHh1QqtdlsXkV8OG8TEhIuLi48XqVVKtXV1dXi4qJXER/8QkND7+/vPZ4yMTExCQkJbW1tKIr+jp/T6dRoNI+PjyaTyR0FANDpdIvF8vDw8Dt+NBotJycHhmGHw+ERfX19bWlpkUgkXoSo18vq6iqXy729vXWHdDodj8fTarW/WS/b29sikYjNZruPeHJyEkGQ1NRU7yoUk7u5uRGLxRqN5ku73W6vra1lMBijo6NUdCj5EQShVCohCJqfn/8CWa3WyMhIDodjNpupSFG6n8EwzOfzZTKZ+1s+Ojp6fX0dAMDj8ahIUX1vOp1Oh8Phx4Hnp99vxV+/b/8BSdIt7TDMXyYAAAAASUVORK5CYII=" x="568" y="356" width="20" height="24" preserveAspectRatio="xMidYMid meet" /></g>
+    <text data-id="lbl_temp_1" id="lbl_temp_1" data-class="text_node" data-parent="panel_c" x="578" y="388" class="label-sm" text-anchor="middle" fill="#000000">1</text>
+
+    <g id="temp_pose_2" data-id="temp_pose_2" data-class="raster_node"><image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACUAAAAvCAIAAADrZ5QyAAAEo0lEQVR4nNVXXSh7fxj/zk4My2yomSyZbbjwUvPSSAilvKTI64Wm3NgFuUCRuFAoRZQLklwocSGivMUNMUsyLXI0a9lsHCtz1jlzzvlfKPlv7By/7ad+z+XzPJ/Pp+/zfZ7vcw7r4uIC/KKxKIr6Tb0AfxGtr68jCEKfR/nDzGZzcnLy6OgobaZ/9CYnJwEAaWlpFovlr+shCCKVSt+rNTk5+df1xsbGPm5HJpM9Pz97Sfa1X0iSFIlEzc3NAQEBKSkpLS0tNF3j+/koitJqtWw2u6GhgTbTb/MQGxvL5/Np0/wz7yiKwjDM4/HEYvFv6DE3n+rpcrlcLtcv6SEIUlZWVllZabfbmaOgP9ZzOBwGg8Fut1ut1vDwcIaoPz+fWCxeXl4ODg4+Pj5mjvKpX3AcT0pKgiDo5OSEx+MxgfjULxiGoSgKQdDb2xtDiE96Wq02KipqZmYmIiKCKYaiKAzDYBj+6RvmcDjy8vJKSkp+hAIURU1NTclksqWlJYYYHMfPz89ra2sBAAKBoKen5/Lycn5+fnt7myRJ71gIAGAyma6vr5lM7tPTU29vr06nMxgMSUlJUqk0MTFRo9HMzMzYbDalUpmdnc3lcgEAKIoeHx+npqYKBIL/UZAkWVlZWV9fTxCE9zPpdLqysjIAgEQi2dnZsVqtSqVyZWUFx/GDg4O2tra4uDiNRvOePDg4CADo7u52r+fu7q5QKDw7O/tOiSCI6enp3NxckUhUXl7e19d3dHREUdTDw4NCoVhZWXlPI0mysbFRLpe3t7crFIqYmJiMjIzFxUV3PalU2tra6uVwGIYVFhay2ezx8XGXy/XhN5lM6enp6+vrHx6dTvfeqJ2dnefn5wiCeLIBAIBer/9O7N0WFhaampqcTudn5+bmJpfL7e/v/+xcXFycmJjw0jXQ0NDQx9fOd/b4+Gg0GlksllvvOBwOs9n82VlXV+edCurp6aFtS5vNFhoaGhQU9NmZkZEhl8srKipo4Z+N0fvy/PwcFhbm5gwKCuJwOBwOx896Npvt8PAQRVHPASVJ0q3IftC7vr7W6/UIguA4bjKZLBYLAADHcY1GA8Pw2tqa2WxWq9XDw8MUg1VDv48Igtja2oqOjhaJRJmZmRwOJycn5/T01Gg0YhgWFhbGYrEsFktMTAwMw2537Gn0+53NZpeWlgIAHh8fAwMDX19fIQhSq9UJCQlsNpvL5aIourOzMzs7azKZJBIJDZ33yXOztra21tZWTz+GYfn5+R0dHbQMP9t/IpHIaDR6XkFgYGBzc/PGxsbd3Z13hp/pxcfH39zcEAThGaqpqSFJUqVSXV1d+U3v9vYWhuHNzU3PUEhISGFh4d7e3urqqt/0zGYzn893Op1fRgmCqK6uVqlU3iiYN8vb21tBQcHAwMCXz/HDw0N0dPTndeFrvxiNRr1eX1RU9OWbsrq6KhQKs7KyvJP8QG93d1csFsvlcs/Q/v7+yMiIUqmMjIykYWFYzJeXl+Li4qqqKs8QhmHp6ekAgLm5OVoepnr7+/sAAKVS6XA43EIkSS4tLXV1ddlsNr/p3d/fq1Qq77ubif1T/5v/gN5/A59SfCqYQxIAAAAASUVORK5CYII=" x="597" y="356" width="20" height="24" preserveAspectRatio="xMidYMid meet" /></g>
+    <text data-id="lbl_temp_2" id="lbl_temp_2" data-class="text_node" data-parent="panel_c" x="607" y="388" class="label-sm" text-anchor="middle" fill="#000000">2</text>
+
+    <g id="temp_pose_3" data-id="temp_pose_3" data-class="raster_node"><image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAvCAIAAAAEpf8MAAAEV0lEQVR4nL2XTyy6cRzHn5Sm5EFaKDb/M03LMKyZaZwczLiY2eLk4ODqgBkHo5l1YcxcHHDg4E+sSxQHNCwHGzN/6ominqLnT/U8z+/Q1myi5+mH963n8/n06vPp87y/z8OyWq3AX4lFUdSfwRIYZb++vm5vb8dPo5hobGxMoVC4XC5GVRExgNnt9rKyMgAAFhYWfh2m1WrDw5DL5V6v9xdhTqczLy8vMvzZ2dk4YHQXxOPx9PX1yeVyDofT29srEol+fUHa2tqSkpIuLy/jaItBZ2Glp6dLpVKSJONpi+lNfXd39/b2VlRUxOPxfh32n2I2xr+GmUwmnU7n8/nioTFap1AopFarAQDY3d2NYxs5jH4Zm80eGBhwOBz39/e/3llYGo2mvLz84eGBaWE8C/L+/m61Wi0WC9NCxjAEQTweT3d3d319PdNaxmNcWVnJysqy2+1MCylGRwxFURaLRSKRJCYmbm1t4TgOw7DT6aRfTstBDg8PIQja3Nw0GAx+v18oFAIAkJGRgWEYhmFmszk7O/tnxnh6ehp2wvb2dr1eX11dPTk5eX5+rtVqZTKZQCA4Pj6m2dmXMAiCVldXR0ZGsrOzFQqFRqNBUTQUCkml0u3t7XCO1+vt7OxUqVQHBwfhK3a7HUVRxrChoSEAAAoKCpaXl5+engiCoCjq6uoqPz//7Owskmaz2cRicfhmn5mZkcvlg4ODJElG/c4vHaSurk4ikXR0dHR1dUUGvrGxwWKxkpOTI2lSqXR4eHhpaclisRiNxuvrawiCSJJks9nM/jOtVltbW/v+/h7+6Ha7q6qqOByOwWD4mEYQxOvrK4ZhDofDZDI9Pz8zHiNFUdfX1yAIDg8PB4PB8JeOjo5WVVXZbLZvqr7Rdw4CgmAwGJyenkYQBACAhIQElUqF43gwGKS16J/0neuLRKLFxUUulwuCYPiKXC73eDwQBH18rGMgRnPw+/1isXhiYoIgiKurq/Pz868WL6piOEggEJibm7u5uWlpabHZbDs7O+vr6xwOp6mp6eTkBARBvV4vk8loNhYD5nK5mpubLy4uhEJhbm5uTU2NWCwWCAQYhh0dHd3e3q6trVVUVPzMGEmSnJqaam1tfXx8xHH8YwhBEIVCMT8/T3+MMc4zFotFEASKojk5OVwu92OIx+Op1eq9vT26bdE5PN1uN4vFihpqbGw0Go0mk4ku7fvGfT5fQ0ODUCi8uLj4HDWbzWw2u6SkxOFw/MAYQ6EQiqIAAER9vs/MzMzNzVUqlSkpKXQaiwFLT08XCoU9PT1KpTJqAp/P7+/v/2jN8cNeXl7cbndlZWXUKARBMAyXlpbSIcWGuVwuGIaLioq+gvH5/IiZ/S8MgiCv11tYWPg5hKKoTqdDEATH8R+A4Tg+Pj4Ow3BUmw8EAk9PT0lJSfTfDb9zfYqicBwvLi6mollaamrq/v4+RVFpaWk0YTG80eFw4Dge54HCFPaz+tM3z39/j5xuwVWP+gAAAABJRU5ErkJggg==" x="626" y="356" width="20" height="24" preserveAspectRatio="xMidYMid meet" /></g>
+    <text data-id="lbl_temp_3" id="lbl_temp_3" data-class="text_node" data-parent="panel_c" x="636" y="388" class="label-sm" text-anchor="middle" fill="#000000">3</text>
+
+    <text data-id="dots_temp" id="dots_temp" data-class="text_node" data-parent="panel_c" x="668" y="369" class="label-title" text-anchor="middle" fill="#000000">···</text>
+
+    <g id="temp_pose_t1" data-id="temp_pose_t1" data-class="raster_node"><image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACUAAAAvCAIAAADrZ5QyAAAED0lEQVR4nNWXS0hqXRTH99XC8pVlEFonFIXyEWKDyNJBUCEZUZMGjaQQImgW1CxqUKMgCAeGaGCDqIEQiFqTpAdKhZlCaYKQ6UEdaGUPn+cbCJcL17jbc73Bt6fr/NePtdZ/P84Pr9cLvnH9wDDsO3mEv9Tn8/nv4x0dHW1tbVWmwfCubDY7MjLC5/MjkQi8Cj/PbreTyWQAwMbGxj/n5XI5lUpV6hCHw0kkEpBCnPO7urpyOp0EAgEAgKKo2Wz+t/OLRqNnZ2cSiYTJZO7t7QWDQUgh/vlhGKZQKFgsVjgchpfU4OsnAKBYLMrlch6PV1NTQZK/Ol+KxSIAoDTF7+DhWDj9mUwms9nsN/G8Xq9SqVxZWcGhxeOXdDodCARIJNLb2xuFQqlMjGMbFAoFm83G5/Ovr68r1eLpJ4FAYLPZT09P29vbhUKhMi0OHgAgFAp9fn5GIpFKhTh5gUBAIpFotVoikViZEsf8fD5fZ2fn4uIiDm1l/ozH4zabbW1tze/3v76+Yhgmk8nu7+8nJiY6OjqqWZ/D4ZicnOzu7uZyuQKBQCQS6XQ6pVJZW1sLAICvFZa3tLQEANBoNLFYrDQ5DMMKhYLdbmez2Ts7O5B5YP0yPj6OIIharUZRNJVKyeVyAACBQBgeHhaLxdFoFDIPLK+pqYlGozEYjN3dXZFIJBQKf4aYTKbH46kyLxwOJ5PJi4sLo9HY0NDw652Xy+XMZvPq6momk/ljHlh/Wq1WFEU3Nzff39/r6up+DfX19QUCAZPJZLFYhEJhe3v7wsICjUYrnwhyzi6Xa2ZmBkEQOp0uFotnZ2cNBoNer5+amjo/P0dRNBgMzs/PAwAQBPH7/V/lqWy/x2Kx5eVlCoUyNDSkUChKRayvr//8wGKxHB8fFwqF6vAwDEulUhwOx2q1ZjIZp9Op1+tRFIWXQ/mlWCx6PJ6SHdLpNIvFUqvVh4eHHx8fbrc7EAhAmgB2fvv7+y0tLYODg6Ojo1KptORPJpPJYDAAAHNzc/D1QfmTSqXmcrnn52epVDo9PS0QCF5eXvh8fjQa1Wq1Lpcrk8mQSKSq1ZfP53t7ew8ODn4P3d7eIgjidrsh64OaH4ZhqVSq7IOMx+PxeDyr1QpVHOT5Eo/Hk8lk2Xc0mUzm8/lGo9Hn81WNp9PpYrHYVxmpVOrDw4Pdbq8aT6VS8Xi8np6estGxsbHW1tb+/v6q8err64lEIpfLLRsNh8NtbW2Q9zsU7/T0tLm5GUGQstGTkxMul9vY2Fg13uXlJZfLpdPpv4disZjb7f6q1Xh4oVDI5XJ91S6TyXRzc5NIJKrGMxgMd3d3j4+PZaNdXV0DAwMymQyS9+fzxel0ajQah8Px1QeZTAbycMEw7H/yv4l7/QcIAeT3SJVMlwAAAABJRU5ErkJggg==" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAzCAIAAAAPYC8dAAAFc0lEQVR4nM2XSyxjfxTHf73+VEtcpkOVqtB4pRrEI5h4xUwysxIhIYLVJNOYWAgLJkPYlQWJlYh4zGLEiNfMGEZSpo1XVIJFVTGlmEhDn6Otlnt/s2hSnarb238k//9ZNbfnfO4533N+jwsgCVtbW0tKStrb2yPj7DAEkDMIIUlPh5FFIwhZzzsjU9rl5eXs7KzRaPRKEMq/qJSkkSrz9vb26OgIwzDv2B7rwjCsra0tISFBKBR6JYhntE6nS0lJAQBkZmbabDbyaM+CoCj6/v17Pp+PYRiFQnlMQey2sbHBYrG+f//+mFnbTSaT6fX6lpYWlUpFMoQsWqlUWiyWnz9/arXaR0ZHRkYGBQX19vYmJyeTDCGltcViyc7O7ujoIC80JDN819fXAoEAADA9Pf2Y6JOTk3fv3tnr4/P54+Pj5+fnCoVibGxMp9MRx7rZQyCEYrHYaDSurKzMzc2ZzWaDwRAaGpqRkSEWi58+farRaFQqVX19fW9vr3daT05OUqlUBEH4fP7w8PDi4iKbzd7Z2YEQajSa/v5+FosFAHjz5o3Xgnz48AFBECqVKhKJIISdnZ1ZWVkYhjkcRCJRVFTUt2/fiNH/3K+jsrLyy5cvNBqtqKgIw7CxsbGqqirnoyA3NzcmJsbj2nEz176+vjQajcFgUCgUuVx+cXFRWFjo7ODv7x8cHLy/v+81GgCg0WgYDIZer29ra2OxWHFxcc7/2mw2BEE+fvy4sLBAxL6vkUKhYDKZ+fn5ra2tAAAURdfX150djo+PuVwuACA8PHxxcRFCiGGYxWLxrPXs7KxarVar1QEBASEhIWw2OywszNkhOjq6oqJifn4+LCyspqamoKDAZDLt7+8PDg5mZ2cTZX1wcPD8+XMOhxMbG4uiaHJycnd3t0Qi0el0BoOhp6env7//+vparVbjOL68vFxcXGxHNTU1eRg+COHNzY19ybS3tyMIwuPxeDwem83mcDh2ytzcnMPZZDLV1dW9fPlyd3fXM9rZ0tLSurq6lErlwsJCc3MznU6PjIyUSqX3s3F54hktFAozMzMdlxC5XH50dOQxCro9ZaxWq/O9gMvlSqXSyspKpVJptVonJyeFQuHZ2RnR2Llto1gs5vF45eXlP378GB0dbWxsjI2NtXtGREQkJCTYf3d2dnrM2nX4vn79KpPJZDLZ0tLSkydP0tLSBALB5uZmSEjIixcvzs7OBgYGdnd3g4ODvc56a2uLy+UWFhbK5XLHKsBx3OHw+/dvgUBQXl7u/NCtuWljdXX127dvCWJmZmYiIiL0ej0x2k0bTSYT8VWGz+ejKLq6ukqshxu0zWaj0WgEMRwOJy4u7tOnT8QXTNc2fv78eXl5Gcdxo9EYFBTkNoZCodDp9JGRERzHBwcHfXx8SGU9MTFhMBg2NzeVSuVD6WAYptVqIYRisdhmsz2Ytov2S0tLoaGhr1+/tlqtBC1aWVkJCAgYGhryoo2JiYnR0dElJSV+fn4PpgNAYGAgk8lMT08n8HFFHxwc/Pr1KzU1lSAGADA/P89ms+0HAlm0QqFgMBhMJpMYLZVKk5KS6HS6F+i1tbWcnBxfX1+CGJlMtr29nZeXR/z6v9AWi2V1dTU3N5cgwGw219bWHh4eSqVSsmiz2dzQ0LC3t6dSqeDDX3w4jqvVagCA0WgkRt8N3+npaXx8PACgqKjo/pHhMnnd3d0nJyfEe8gdGsfx0dHR0tJSiURCHEPS/uuv3f8d+q+dD0I4MzOzvb2NIIifn9/NzQ2GYUwms6qqCkVRl0iRSHRxcVFWVvbQInDdVK+urrRarcFgmJqaevbsWXx8PJVKxXHc2efy8rKnp6evr4/FYr169er+W+32B+JRtnnB0gV9AAAAAElFTkSuQmCC" x="699" y="356" width="20" height="24" preserveAspectRatio="xMidYMid meet" /></g>
+    <text data-id="lbl_temp_t1" id="lbl_temp_t1" data-class="text_node" data-parent="panel_c" x="709" y="388" class="label-sm" text-anchor="middle" fill="#000000">T-1</text>
+
+    <g id="temp_pose_t" data-id="temp_pose_t" data-class="raster_node"><image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACUAAAAvCAIAAADrZ5QyAAAERUlEQVR4nO2XS0hqXRTHt/qpFJpXjIwkSzPNHppBL8LEEKJR0wY9IIgGIdSgSUSzoIEWFNEDgpoURERkYjiQHiLRw8gIQ5IjGUVFWpmPjnr2NwguH9dLnnNut9G3Zmevs/aPtfZ/7Qfl/PwcfKNRIITfyaOSjtzc3AwGg4TDICm7vb2Vy+VGo5FoIEne1NQUAEClUt3f3/913tPTk0Qi+SjP9PT0X+cZjcafyyGTyYLBIP5YwnrBMEwgEHR1dVGpVIVC0d3dTUw1JPKDEB4fH9NotI6ODqKB5PshPz+fw+EQjSLZ75FIxOv1cjgcoVD4HTzSRr6e38S7vb3t6+tbWloiWRiiArNarQAAtVqNoijRWDL61Gg07e3tWVlZdDqdRHqEefF4PBwOPz8/x2Kx7+BdXFxsb2+Hw+G3tzcSvH+IBpSWlioUCpVKxePxSPAI5zcxMXF2diaVSikUCgkeLn1iGPb+/h6Px81mM4vFAgDI5fK9vT0URd/e3gjpM/3+kkwmBwcH7XY7k8m8ubmhUCgMBqOhocFisYjFYp/Pt7y83NjY+GX5xePxpqYmAEBvb+/h4WFlZeX4+DiE0GQyiUQiCoViMpnw54ernpOTkwqFAkK4tbVVVFTk9Xo/xh0Oh1AodLvdH5/RaDQSiXw+FS69XF1dVVVVPT4+jo2N6XQ6sVj8Mc5isWg0WjKZBAA8PT319PR0dnY+PDx8MhWufnC73c3NzaOjo3a7vaenBwBgNpsfHx8xDEMQZHh4WCAQ2O12j8dTVFQUiUT+iOfxeE5OToqLi30+H5PJnJmZWVlZsdlsKIqOjIzw+XyXy8XlcvV6vUQiyc3NLSws/CPe8vJyIBBYW1urqKhgsVhsNlutVpeWlobD4f7+/oGBASaTmZGRkXYevLz29nYqlarRaKqrq9va2uRy+dDQEM7Zf2P4pQwhNBgMSqXypyBJGN77RCKRoNFo+/v7Go0mLy9Pr9drtVoajcbj8UQiEf700vMghAsLC6urq5mZmU6nk8vl0ul0FouFIIjf76+rq9vd3SVwFqatQDKZbG1tBQC0tLRYLBYEQYLBYDQaPTo60mq1P378IPSEwLV+S0tLfD4/FAr9Mn5/f69Sqebm5vDzcO0vp6enGo3m42T4r+Xk5NTW1prNZrzFxHP+YRhms9l0Ol2qKxwO393dHRwc4H+Up+dZrdbLy8vc3NxUVzQa9fv9Ly8vr6+vOHnp+31jYwNFUQRBUl3Z2dkSiUQikdTX1+Pkpc9PqVQWFBR8HIG/WDweDwQCSqWSSsV7L0n/n9vtVqlU5eXlqa5AIBAIBMrKynDC0vNQFHW5XDU1NakuCOH6+rrP55NKpfh5n/UfhmGzs7NsNntnZyfVG4vFZDIZAMDpdOLvv8/0kkgkFhcXQ6HQb5eHwWAYDIbr6+uSkpKvyQ9C6HA45ufnY7EY/gw+t//fm19r/wJBl8dRnvFNgQAAAABJRU5ErkJggg==" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB8AAAAyCAIAAAAr/peGAAAFGUlEQVR4nOVYX0habxj+tGBnA7Wwwv6hVFtFjLpREodNdJYsFiu6a1vg6CYDwQYOtkEQ3Xg7CSJoEEVtESyiMliysblWRFnbEsz+DPs/p2cuz1GP59vFgX7O9OgZ7ur3XB2P7/vw+Lzv936fH4ApwGQyKZXKcDicSnA02CAFEAQRCoVSiYxBZipBUqk0OzubzU5JSjRYEELmmlIFYzn/hD0UCvl8vn/CjqKoVqvVaDSfPn1iRp9KYy0uLlLB3d3d6e/Iqqqq9vb2S5cuqVSq9GuHEO7s7JSXl9tstvRrJ0lyYGDA7Xa/ffs2/dp9Pt/ly5cBAA0NDenXzuPxdDodm81++PAhI+kpse/t7YXDYaFQeOfOHUbsyZ0hCKKlpQUAUFBQgOM4I2fis0ciERRFIYShUOjVq1d5eXmUFL1ev7+/DyE8Pj6mAugRZ4oFg0Gj0bi8vKzRaD58+LC+vi6TyWZnZ3U6ndVqDQQCra2tU1NThYWFZrO5oKCAmTMul4vFYgEAuFxuZ2fn9va2yWSSSCR+v//Xr19PnjzhcDhU7ps3bxg7g2GYVqvNyMh4/fo1hBBFUbFY3NfXdx4wMzNTWVmpUqm8Xi9jdgjh+Pj41atXI5EIhHBiYiI/P//w8DA6wGAw3L17N/qN2+2OiYGJ+t3hcJSVlbHZbI/H09/f39raKhAIogPYbHY4HD7/uLGxcfv27ebmZofDER0Wf+f7+vVrTU3N9vZ2U1PT58+fOzo6qPcHBweRSCQ7O3ttbc1ut1ssltLSUpfLNTg4aLfbKVkVFRV07ARBbG5utrS0HB4efvnyhcViHR0dnZ2d2e12nU4HANBqtUtLSyiK3rt3Ly8vz+PxiMXiBw8e5OTkyOVyOu0kST5//nxjY2NhYUEoFAoEAq/XazabTSZTIBD48eMHACAcDnd1db1//14mk6lUqurqah6Px2KxqE6LRmy/+/1+hUKxsrICAFAoFEKhcGJiorOzUy6Xczic6elpHMefPXvG5/NxHEcQJK6x/yGmyiRJDg8PKxSKoaEhgiAIgqitrTWbzfSdx6wjo+fJ06dP1Wp1OtmjYbFYuFxuT0/PyclJ2tgJgqAerFYr5e/Nmzdfvny5v7/vcDgmJycxDEvKHmeKQQhHR0fHxsbq6+v39vYsFsvJyQmO49evX8cw7ODgAEVRHMcfP37c29vLrKoQQgzDhEIh9W1jY+OLFy9sNtvHjx8p6tnZWWog379//2+ciUQier0+MzPTaDRSoyYGS0tLUqm0ubn53D0G7BDC+fn53Nzc09PTRGlWq7WkpMThcNCzx59iNputurqaz+cn8lMmk125cuXdu3f0tsdnX1hYUCqVF1f2ObxeL7XuMAyjo7/4c1wuF5/Pp993zrtlbm6OgTNer9dgMPh8vtXVVRpNN27cQBDk2rVr0fM2ufatrS2RSAQAaGtrI0kykahQKCQSiUZGRmiLekG7SCRSq9XFxcVdXV00vn///p06P9EJv1jVjIyMnz9/qtVqiURCk7a5uZmVlRWzHSZnPz09dTqddXV19Gnr6+s5OTlJDjPggu+Li4uFhYXfvn2jcdNisRQVFSmVyqSD7A/23d3dW7dulZeXB4PBRAkkSVLHyqKioqRr9Q/29vZ2AACCIDs7OzQ5k5OTEonk0aNHzLQPDAwgCCKXy30+H32ax+NJ5dogdr47nc7c3NysrKwk5UoN/4d/8n+HhDcoJElS5w5qHlAPCIIwukf5DUAMVU/kn1czAAAAAElFTkSuQmCC" x="736" y="356" width="20" height="24" preserveAspectRatio="xMidYMid meet" /></g>
+    <text data-id="lbl_temp_t" id="lbl_temp_t" data-class="text_node" data-parent="panel_c" x="746" y="388" class="label-sm" text-anchor="middle" fill="#000000">T</text>
+  </g>
+
+  <!-- ========================================================================= -->
+  <!-- EDGES / CONNECTIONS                                                       -->
+  <!-- ========================================================================= -->
+  <g>
+    <!-- Panel A: Top 3D output arrows -->
+    <path data-id="edge_reg_to_3d_1" id="edge_reg_to_3d_1" data-class="edge" data-source="regression_head" data-target="pose_3d_1" d="M 63 66 L 63 51" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)" />
+    <path data-id="edge_reg_to_3d_2" id="edge_reg_to_3d_2" data-class="edge" data-source="regression_head" data-target="pose_3d_2" d="M 131 66 L 131 51" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)" />
+    <path data-id="edge_reg_to_3d_3" id="edge_reg_to_3d_3" data-class="edge" data-source="regression_head" data-target="pose_3d_3" d="M 201 66 L 201 51" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)" />
+    <path data-id="edge_reg_to_3d_t2" id="edge_reg_to_3d_t2" data-class="edge" data-source="regression_head" data-target="pose_3d_t2" d="M 316 66 L 316 51" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)" />
+    <path data-id="edge_reg_to_3d_t1" id="edge_reg_to_3d_t1" data-class="edge" data-source="regression_head" data-target="pose_3d_t1" d="M 381 66 L 381 51" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)" />
+    <path data-id="edge_reg_to_3d_t" id="edge_reg_to_3d_t" data-class="edge" data-source="regression_head" data-target="pose_3d_t" d="M 449 66 L 449 51" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)" />
+
+    <!-- Panel A: Between FC Top and Regression Head -->
+    <path data-id="edge_fc_to_reg" id="edge_fc_to_reg" data-class="edge" data-source="fc_layer_top" data-target="regression_head" d="M 247 93 L 247 87" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)" />
+
+    <!-- Panel A: Inside AGFormer -->
+    <!-- From F_GF and F_TF into AF node -->
+    <path data-id="edge_fgf_to_af" id="edge_fgf_to_af" data-class="edge" data-source="temporal_gcnformer" data-target="af_fusion_agformer" d="M 140 152 L 140 130 L 239 130" stroke="#000000" stroke-width="1.2" fill="none" />
+    <path data-id="edge_ftf_to_af" id="edge_ftf_to_af" data-class="edge" data-source="temporal_transformer" data-target="af_fusion_agformer" d="M 350 152 L 350 130 L 251 130" stroke="#000000" stroke-width="1.2" fill="none" />
+    <!-- From AF node out of AGFormer to Top FC -->
+    <path data-id="edge_af_to_fctop" id="edge_af_to_fctop" data-class="edge" data-source="af_fusion_agformer" data-target="fc_layer_top" d="M 245 124 L 245 114" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)" />
+
+    <!-- Left branch: Spatial GCNFormer -> Reshape -> Temporal GCNFormer -->
+    <path data-id="edge_sgc_to_resl" id="edge_sgc_to_resl" data-class="edge" data-source="spatial_gcnformer" data-target="reshape_icon_left" d="M 140 208 L 140 199" stroke="#000000" stroke-width="1.2" />
+    <path data-id="edge_resl_to_tgc" id="edge_resl_to_tgc" data-class="edge" data-source="reshape_icon_left" data-target="temporal_gcnformer" d="M 140 185 L 140 181" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)" />
+
+    <!-- Right branch: Spatial Transformer -> Reshape -> Temporal Transformer -->
+    <path data-id="edge_str_to_resr" id="edge_str_to_resr" data-class="edge" data-source="spatial_transformer" data-target="reshape_icon_right" d="M 350 208 L 350 199" stroke="#000000" stroke-width="1.2" />
+    <path data-id="edge_resr_to_ttr" id="edge_resr_to_ttr" data-class="edge" data-source="reshape_icon_right" data-target="temporal_transformer" d="M 350 185 L 350 181" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)" />
+
+    <!-- SPE branch and split into Spatial GCN / Spatial Trans -->
+    <path data-id="edge_fcbot_to_split" id="edge_fcbot_to_split" data-class="edge" data-source="fc_layer_bottom" data-target="agformer_block" d="M 245 278 L 245 240" stroke="#000000" stroke-width="1.2" fill="none" />
+    <path data-id="edge_split_left" id="edge_split_left" data-class="edge" data-source="fc_layer_bottom" data-target="spatial_gcnformer" d="M 245 240 L 140 240 L 140 237" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)" fill="none" />
+    <path data-id="edge_split_right" id="edge_split_right" data-class="edge" data-source="fc_layer_bottom" data-target="spatial_transformer" d="M 245 240 L 350 240 L 350 237" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)" fill="none" />
+    <!-- SPE edge into main trunk -->
+    <path data-id="edge_spe_to_trunk" id="edge_spe_to_trunk" data-class="edge" data-source="spe_node" data-target="fc_layer_bottom" d="M 225 266 L 245 266" stroke="#000000" stroke-width="1.2" />
+
+    <!-- Bottom 2D input arrows to Bottom FC Layer -->
+    <path data-id="edge_2d_1_to_fc" id="edge_2d_1_to_fc" data-class="edge" data-source="pose_2d_1" data-target="fc_layer_bottom" d="M 64 318 L 64 299" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)" />
+    <path data-id="edge_2d_2_to_fc" id="edge_2d_2_to_fc" data-class="edge" data-source="pose_2d_2" data-target="fc_layer_bottom" d="M 131 318 L 131 299" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)" />
+    <path data-id="edge_2d_3_to_fc" id="edge_2d_3_to_fc" data-class="edge" data-source="pose_2d_3" data-target="fc_layer_bottom" d="M 199 318 L 199 299" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)" />
+    <path data-id="edge_2d_t2_to_fc" id="edge_2d_t2_to_fc" data-class="edge" data-source="pose_2d_t2" data-target="fc_layer_bottom" d="M 311 318 L 311 299" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)" />
+    <path data-id="edge_2d_t1_to_fc" id="edge_2d_t1_to_fc" data-class="edge" data-source="pose_2d_t1" data-target="fc_layer_bottom" d="M 379 318 L 379 299" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)" />
+    <path data-id="edge_2d_t_to_fc" id="edge_2d_t_to_fc" data-class="edge" data-source="pose_2d_t" data-target="fc_layer_bottom" d="M 445 318 L 445 299" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)" />
+
+    <!-- ========================================== -->
+    <!-- Panel B Edges                              -->
+    <!-- ========================================== -->
+    <!-- Inputs to LN bottom -->
+    <path data-id="edge_b_in1" id="edge_b_in1" data-class="edge" data-source="joint_pose_1" data-target="ln_bot_b" d="M 564.5 152 L 564.5 138" stroke="#000000" stroke-width="1" marker-end="url(#arrow-sm)" />
+    <path data-id="edge_b_in2" id="edge_b_in2" data-class="edge" data-source="joint_pose_2" data-target="ln_bot_b" d="M 599.5 152 L 599.5 138" stroke="#000000" stroke-width="1" marker-end="url(#arrow-sm)" />
+    <path data-id="edge_b_in3" id="edge_b_in3" data-class="edge" data-source="joint_pose_3" data-target="ln_bot_b" d="M 634.5 152 L 634.5 138" stroke="#000000" stroke-width="1" marker-end="url(#arrow-sm)" />
+    <path data-id="edge_b_in16" id="edge_b_in16" data-class="edge" data-source="joint_pose_16" data-target="ln_bot_b" d="M 710.5 152 L 710.5 138" stroke="#000000" stroke-width="1" marker-end="url(#arrow-sm)" />
+    <path data-id="edge_b_inj" id="edge_b_inj" data-class="edge" data-source="joint_pose_j" data-target="ln_bot_b" d="M 745.5 152 L 745.5 138" stroke="#000000" stroke-width="1" marker-end="url(#arrow-sm)" />
+
+    <!-- LN bot to Spatial Token Mixer -->
+    <path data-id="edge_lnbot_to_smixer" id="edge_lnbot_to_smixer" data-class="edge" data-source="ln_bot_b" data-target="spatial_mixer_b" d="M 665 118 L 665 114" stroke="#000000" stroke-width="1" />
+    <!-- Spatial Token Mixer to Add1 -->
+    <path data-id="edge_smixer_to_add1" id="edge_smixer_to_add1" data-class="edge" data-source="spatial_mixer_b" data-target="add_node_b1" d="M 665 97 L 665 92" stroke="#000000" stroke-width="1" />
+    <!-- Lower Residual Connection around Spatial Mixer -->
+    <path data-id="edge_res_b1" id="edge_res_b1" data-class="edge" data-source="joint_pose_1" data-target="add_node_b1" d="M 545 142 L 535 142 L 535 87 L 660 87" stroke="#000000" stroke-width="1.2" fill="none" marker-end="url(#arrow-sm)" />
+    
+    <!-- Add1 to LN top -->
+    <path data-id="edge_add1_to_lntop" id="edge_add1_to_lntop" data-class="edge" data-source="add_node_b1" data-target="ln_top_b" d="M 665 82 L 665 75" stroke="#000000" stroke-width="1" />
+    <!-- LN top to Channel MLP -->
+    <path data-id="edge_lntop_to_mlp_b" id="edge_lntop_to_mlp_b" data-class="edge" data-source="ln_top_b" data-target="mlp_block_b" d="M 665 58 L 665 54" stroke="#000000" stroke-width="1" />
+    <!-- Channel MLP to Add2 -->
+    <path data-id="edge_mlp_to_add2_b" id="edge_mlp_to_add2_b" data-class="edge" data-source="mlp_block_b" data-target="add_node_b2" d="M 665 37 L 665 32" stroke="#000000" stroke-width="1" />
+    <!-- Upper Residual Connection around MLP -->
+    <path data-id="edge_res_b2" id="edge_res_b2" data-class="edge" data-source="add_node_b1" data-target="add_node_b2" d="M 535 87 L 535 27 L 660 27" stroke="#000000" stroke-width="1.2" fill="none" marker-end="url(#arrow-sm)" />
+    <!-- Add2 Out -->
+    <path data-id="edge_add2_out_b" id="edge_add2_out_b" data-class="edge" data-source="add_node_b2" data-target="panel_b" d="M 665 22 L 665 14" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow-sm)" />
+
+    <!-- ========================================== -->
+    <!-- Panel C Edges                              -->
+    <!-- ========================================== -->
+    <!-- Inputs to LN bottom -->
+    <path data-id="edge_c_in1" id="edge_c_in1" data-class="edge" data-source="temp_pose_1" data-target="ln_bot_c" d="M 578 356 L 578 348" stroke="#000000" stroke-width="1" marker-end="url(#arrow-sm)" />
+    <path data-id="edge_c_in2" id="edge_c_in2" data-class="edge" data-source="temp_pose_2" data-target="ln_bot_c" d="M 607 356 L 607 348" stroke="#000000" stroke-width="1" marker-end="url(#arrow-sm)" />
+    <path data-id="edge_c_in3" id="edge_c_in3" data-class="edge" data-source="temp_pose_3" data-target="ln_bot_c" d="M 636 356 L 636 348" stroke="#000000" stroke-width="1" marker-end="url(#arrow-sm)" />
+    <path data-id="edge_c_int1" id="edge_c_int1" data-class="edge" data-source="temp_pose_t1" data-target="ln_bot_c" d="M 709 356 L 709 348" stroke="#000000" stroke-width="1" marker-end="url(#arrow-sm)" />
+    <path data-id="edge_c_int" id="edge_c_int" data-class="edge" data-source="temp_pose_t" data-target="ln_bot_c" d="M 746 356 L 746 348" stroke="#000000" stroke-width="1" marker-end="url(#arrow-sm)" />
+
+    <!-- LN bot to Temporal Token Mixer -->
+    <path data-id="edge_lnbot_to_tmixer" id="edge_lnbot_to_tmixer" data-class="edge" data-source="ln_bot_c" data-target="temp_mixer_c" d="M 665 328 L 665 324" stroke="#000000" stroke-width="1" />
+    <!-- Temporal Token Mixer to Add1 -->
+    <path data-id="edge_tmixer_to_add1" id="edge_tmixer_to_add1" data-class="edge" data-source="temp_mixer_c" data-target="add_node_c1" d="M 665 307 L 665 302" stroke="#000000" stroke-width="1" />
+    <!-- Lower Residual Connection around Temporal Mixer -->
+    <path data-id="edge_res_c1" id="edge_res_c1" data-class="edge" data-source="temp_pose_1" data-target="add_node_c1" d="M 552 350 L 542 350 L 542 297 L 660 297" stroke="#000000" stroke-width="1.2" fill="none" marker-end="url(#arrow-sm)" />
+
+    <!-- Add1 to LN top -->
+    <path data-id="edge_add1_to_lntop_c" id="edge_add1_to_lntop_c" data-class="edge" data-source="add_node_c1" data-target="ln_top_c" d="M 665 292 L 665 285" stroke="#000000" stroke-width="1" />
+    <!-- LN top to Channel MLP -->
+    <path data-id="edge_lntop_to_mlp_c" id="edge_lntop_to_mlp_c" data-class="edge" data-source="ln_top_c" data-target="mlp_block_c" d="M 665 268 L 665 264" stroke="#000000" stroke-width="1" />
+    <!-- Channel MLP to Add2 -->
+    <path data-id="edge_mlp_to_add2_c" id="edge_mlp_to_add2_c" data-class="edge" data-source="mlp_block_c" data-target="add_node_c2" d="M 665 247 L 665 242" stroke="#000000" stroke-width="1" />
+    <!-- Upper Residual Connection around MLP -->
+    <path data-id="edge_res_c2" id="edge_res_c2" data-class="edge" data-source="add_node_c1" data-target="add_node_c2" d="M 542 297 L 542 237 L 660 237" stroke="#000000" stroke-width="1.2" fill="none" marker-end="url(#arrow-sm)" />
+    <!-- Add2 Out -->
+    <path data-id="edge_add2_out_c" id="edge_add2_out_c" data-class="edge" data-source="add_node_c2" data-target="panel_c" d="M 665 232 L 665 224" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow-sm)" />
+  </g>
+
+  <!-- ========================================================================= -->
+  <!-- NARRATION BANNER CONTAINER                                                -->
+  <!-- ========================================================================= -->
+</svg>
+  </div>
+
+  <div class="ab-bar">
+    <button type="button" class="ab-btn ab-play" aria-label="Pause">
+      <svg class="ab-ic-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 5.5l11 6.5-11 6.5z"/></svg>
+      <svg class="ab-ic-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 5.5h3.6v13H7.5zM12.9 5.5h3.6v13h-3.6z"/></svg>
+    </button>
+
+    <div class="ab-scrub">
+      <span class="ab-rail" aria-hidden="true"><i class="ab-played"></i></span>
+      <input type="range" class="ab-seek" min="0" max="1000" value="0" step="1"
+             aria-label="Scrub through the animation">
+    </div>
+
+    <span class="ab-time"><b>0:00</b>&nbsp;/&nbsp;<span class="ab-total">0:00</span></span>
+
+    <div class="ab-speed" role="group" aria-label="Playback speed">
+      <button type="button" class="ab-slower" aria-label="Slower">&#8722;</button>
+      <span class="ab-rate" aria-live="polite">1&#215;</span>
+      <button type="button" class="ab-faster" aria-label="Faster">+</button>
+    </div>
+
+    <button type="button" class="ab-btn ab-toggle" aria-pressed="true">
+      <span class="ab-led" aria-hidden="true"></span>
+      <span class="ab-word">Captions on</span>
+    </button>
+  </div>
+
+  <figcaption class="ab-cap" aria-live="polite"></figcaption>
+</figure>
+
+<script>
+(function () {
+  var CUES = [{"start": 0.0, "end": 8.48, "text": "The architecture begins by taking a sequence of two-dimensional human poses spanning frames one through T as input."}, {"start": 8.48, "end": 16.6, "text": "A fully connected layer linearly projects the joints into feature tokens, which are then enriched with spatial position embeddings."}, {"start": 16.6, "end": 28.92, "text": "Inside the AGFormer block, features branch into parallel Spatial GCNFormer and Spatial Transformer streams to capture local and global joint relations."}, {"start": 28.92, "end": 39.8, "text": "After feature reshaping, representations pass into Temporal GCNFormer and Temporal Transformer modules to model cross-frame temporal dynamics."}, {"start": 39.8, "end": 49.0, "text": "The GCNFormer and Transformer feature streams are merged via adaptive fusion across N stacked AGFormer blocks."}, {"start": 49.0, "end": 55.16, "text": "The fused representations proceed through an upper fully connected layer to the regression head."}, {"start": 55.16, "end": 62.52, "text": "The regression head outputs the final estimated three-dimensional skeletal poses across all time frames."}, {"start": 62.52, "end": 71.64, "text": "Panel B details the Spatial MetaFormer, treating individual body joints from one to J as distinct input tokens."}, {"start": 71.64, "end": 79.68, "text": "The joint tokens pass through layer normalization and a spatial token mixer, combined with a residual skip connection."}, {"start": 79.68, "end": 87.8, "text": "Features then undergo a second layer normalization, channel multilayer perceptron processing, and residual addition."}, {"start": 87.8, "end": 97.76, "text": "Panel C outlines the Temporal MetaFormer, where entire pose frames across time steps one through T serve as tokens."}, {"start": 97.76, "end": 106.84, "text": "Frame tokens undergo layer normalization, temporal token mixing, and residual addition to model temporal context."}, {"start": 106.84, "end": 115.56, "text": "Finally, the temporal representations pass through layer normalization and a channel multilayer perceptron with a residual connection."}];
+  var LOOP = 115.56;
+  var REPEATS = 1;
+  var RATES = [0.25, 0.5, 0.75, 1, 1.5, 2, 3];
+
+  var fig = document.querySelector('.ab');
+  var cap = document.querySelector('.ab-cap');
+  var play = document.querySelector('.ab-play');
+  var seek = document.querySelector('.ab-seek');
+  var played = document.querySelector('.ab-played');
+  var nowEl = document.querySelector('.ab-time b');
+  var totalEl = document.querySelector('.ab-total');
+  var rateEl = document.querySelector('.ab-rate');
+  var slower = document.querySelector('.ab-slower');
+  var faster = document.querySelector('.ab-faster');
+  var toggle = document.querySelector('.ab-toggle');
+  var word = toggle.querySelector('.ab-word');
+
+  var at = -1, swap = null, rate = 3, paused = false, scrubbing = false;
+
+  // THE CLOCK. The drawing is hundreds of short animations that each stop when
+  // they are done, so none of them can be asked what time it is. This one runs
+  // the length of the whole piece, does nothing visible, and is driven by the
+  // same controls - so the caption, the bar and the picture cannot disagree.
+  var master = null;
+  try {
+    master = document.documentElement.animate(
+      [{ opacity: 1 }, { opacity: 1 }],
+      { duration: (LOOP || 1) * 1000, iterations: REPEATS }
+    );
+  } catch (e) {}
+  var t0 = performance.now();
+
+  function others() {
+    try {
+      var runs = document.getAnimations ? document.getAnimations() : [];
+      return runs.filter(function (a) { return a !== master; });
+    } catch (e) { return []; }
+  }
+  function clock() {
+    var t;
+    if (master && master.currentTime != null) t = master.currentTime / 1000;
+    else t = (performance.now() - t0) / 1000;
+    return REPEATS === 1 ? Math.min(t, LOOP) : (t % (LOOP || 1));
+  }
+  function each(fn) {
+    if (master) { try { fn(master); } catch (e) {} }
+    others().forEach(function (a) { try { fn(a); } catch (e) {} });
+  }
+  function clip(t) {
+    t = Math.max(0, t || 0);
+    return Math.floor(t / 60) + ':' + ('0' + Math.floor(t % 60)).slice(-2);
+  }
+
+  play.addEventListener('click', function () {
+    paused = !paused;
+    // Restarting a finished piece rather than leaving Play doing nothing
+    if (!paused && REPEATS === 1 && clock() >= LOOP - 0.05) each(function (a) { a.currentTime = 0; });
+    each(function (a) { paused ? a.pause() : a.play(); });
+    if (!paused) t0 = performance.now() - clock() * 1000;
+    fig.classList.toggle('is-paused', paused);
+    play.setAttribute('aria-label', paused ? 'Play' : 'Pause');
+  });
+
+  function setRate(i) {
+    rate = Math.max(0, Math.min(RATES.length - 1, i));
+    var r = RATES[rate];
+    each(function (a) { a.playbackRate = r; });
+    rateEl.textContent = r + '×';
+    fig.classList.toggle('is-fast', r !== 1);
+    slower.disabled = rate === 0;
+    faster.disabled = rate === RATES.length - 1;
+  }
+  slower.addEventListener('click', function () { setRate(rate - 1); });
+  faster.addEventListener('click', function () { setRate(rate + 1); });
+
+  seek.addEventListener('pointerdown', function () { scrubbing = true; });
+  seek.addEventListener('input', function () {
+    var t = (Number(seek.value) / 1000) * LOOP;
+    each(function (a) { a.currentTime = t * 1000; });
+    t0 = performance.now() - t * 1000;
+    paint(true);
+  });
+  seek.addEventListener('change', function () { scrubbing = false; });
+
+  toggle.addEventListener('click', function () {
+    var on = toggle.getAttribute('aria-pressed') !== 'true';
+    toggle.setAttribute('aria-pressed', String(on));
+    word.textContent = on ? 'Captions on' : 'Captions off';
+    fig.classList.toggle('is-off', !on);
+  });
+
+  function paint(force) {
+    var t = clock();
+    nowEl.textContent = clip(t);
+    if (!scrubbing) seek.value = String(Math.round((t / (LOOP || 1)) * 1000));
+    played.style.width = ((t / (LOOP || 1)) * 100) + '%';
+
+    var k = -1;
+    for (var i = 0; i < CUES.length; i++) { if (t >= CUES[i].start - 0.05) k = i; }
+    if (k !== at || force === true) {
+      at = k;
+      var text = k >= 0 ? CUES[k].text : '';
+      if (text !== cap.textContent) {
+        cap.classList.add('is-swap');
+        clearTimeout(swap);
+        swap = setTimeout(function () {
+          cap.textContent = text;
+          cap.classList.remove('is-swap');
+        }, 150);
+      }
+    }
+  }
+
+  // Two ways round, on purpose. requestAnimationFrame gives a smooth bar while
+  // the page is on screen, and stops dead in a background tab or an embed the
+  // browser considers hidden - where the animation itself keeps running, so the
+  // caption would be left behind. The slow timer covers exactly that case.
+  function frame() { paint(); requestAnimationFrame(frame); }
+
+  totalEl.textContent = clip(LOOP);
+  setRate(3);
+  if (!CUES.length) { fig.classList.add('is-off'); toggle.style.display = 'none'; }
+  requestAnimationFrame(frame);
+  setInterval(paint, 250);
+})();
+</script>
+</body>
+</html>

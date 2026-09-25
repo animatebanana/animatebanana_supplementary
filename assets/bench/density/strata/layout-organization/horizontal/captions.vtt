@@ -1,0 +1,38 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.860
+The pipeline begins with sparse input face images under varied illumination, utilizing four core processing operations outlined in the legend.
+
+2
+00:00:07.860 --> 00:00:13.490
+A three-dimensional morphable model is first fitted to establish an initial geometric proxy model.
+
+3
+00:00:13.490 --> 00:00:18.760
+This proxy geometry is then analyzed to extract surface orientations and anatomical regions.
+
+4
+00:00:18.760 --> 00:00:24.020
+A dense normal map captures the underlying surface directions across the facial structure.
+
+5
+00:00:24.020 --> 00:00:30.030
+Semantic segmentation categorizes different facial zones, distinguishing bare skin from regions like hair and eyes.
+
+6
+00:00:30.030 --> 00:00:35.290
+Dedicated shadow processing identifies and handles cast shadows to ensure accurate lighting estimation.
+
+7
+00:00:35.290 --> 00:00:41.300
+Using light calibration and photometric stereo, the geometry is reconstructed into a refined 3D model.
+
+8
+00:00:41.300 --> 00:00:46.190
+In the final stage, region-tailored denoising is applied across the reconstructed outputs.
+
+9
+00:00:46.190 --> 00:00:51.830
+This yields a high-fidelity denoised 3D facial mesh alongside a clean surface albedo map.
+

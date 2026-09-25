@@ -1,0 +1,38 @@
+[
+ {
+  "t": 0.0,
+  "text": "The pipeline begins with a natural language description specifying the target mobile application's interface and behavior."
+ },
+ {
+  "t": 2.2,
+  "text": "The input text is tokenized and preprocessed, separating literal strings into placeholder tokens to reduce model overhead."
+ },
+ {
+  "t": 4.4,
+  "text": "The preprocessed sequence is then passed into the encoder of a sequence-to-sequence neural network."
+ },
+ {
+  "t": 6.6,
+  "text": "The decoder sequentially generates the formal structural representation of the application."
+ },
+ {
+  "t": 8.8,
+  "text": "This output forms a compact intermediate representation called the Simplified App Representation, or SAR."
+ },
+ {
+  "t": 11.0,
+  "text": "Next, the SAR Compiler parses the tokens and maps them to predefined source code templates."
+ },
+ {
+  "t": 13.2,
+  "text": "The compiler re-inserts the original string literals to produce MIT App Inventor source files (.scm and .bky)."
+ },
+ {
+  "t": 15.4,
+  "text": "These source files are sent to the MIT App Inventor backend compiler to build the project into an Android package."
+ },
+ {
+  "t": 17.6,
+  "text": "The result is a fully functional, ready-to-use Android application package (.apk)."
+ }
+]

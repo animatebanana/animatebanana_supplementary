@@ -1,0 +1,588 @@
+/*
+  EXTERNAL REFERENCE pane — the purple one.
+
+  One state machine, `[data-step]` on `.br-body`, drives four scripted
+  beats: the talk plays, the scissors cut it down to the figure window,
+  the extracted frames fly up and flip like the leaves of a book, and
+  the narration is scribed line by line. Because every rule below keys
+  off that one attribute rather than off a class added per element, a
+  replay rewinds exactly — there is no half-finished transform to undo.
+
+  Owns `.br-*` only.
+*/
+
+.br-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 8px;
+  list-style: none;
+  margin: 0 0 16px;
+  padding: 0;
+}
+.br-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 8px 10px;
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  transition: border-color var(--dur) var(--ease-out), background var(--dur) var(--ease-out);
+}
+.br-step-n {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 18px; height: 18px;
+  margin-top: 1px;
+  border-radius: 50%;
+  border: 1.5px solid var(--ink-faint);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: var(--ink-faint);
+  transition: all var(--dur) var(--ease-out);
+}
+.br-step-t b {
+  display: block;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ink-soft);
+}
+.br-step-t em {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-style: normal;
+  line-height: 1.4;
+  color: var(--ink-faint);
+}
+.br-step.is-on { border-color: var(--a-line); background: var(--a-soft); }
+.br-step.is-on .br-step-n { border-color: var(--a); background: var(--a); color: #fff; }
+.br-step.is-on .br-step-t b { color: var(--ink); }
+.br-step.is-now .br-step-n { box-shadow: 0 0 0 3px var(--a-soft); }
+
+/* ---- Play Annotation button in the header bar ---- */
+.br-replay {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  padding: 5px 11px;
+  font-family: var(--font-body);
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1.5px solid rgba(255, 255, 255, 0.55);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-out);
+}
+.br-replay:hover { background: rgba(255, 255, 255, 0.26); }
+.br-replay svg { width: 13px; height: 13px; }
+
+/* ---- Flow ---- */
+/* As in the annotations pane, the breakpoints are the pane's own width,
+   not the viewport's — this pane is half the grid on a wide screen. */
+.br-body { container-type: inline-size; container-name: br; }
+
+/* ---- Fixed geometry, as in the annotations pane ----
+   Three columns, three rows each — label, body, footnote — at the same
+   heights whatever they hold, so the two arrows sit at one fixed height
+   and nothing moves as the run plays through its four steps. */
+.br-flow {
+  --br-head-h: 24px;
+  --br-body-h: clamp(196px, 15.5vw, 238px);
+  --br-foot-h: 86px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) 20px minmax(0, 1fr) 20px minmax(0, 1.3fr);
+  gap: 8px;
+  align-items: start;
+}
+@container br (max-width: 780px) {
+  .br-flow { grid-template-columns: minmax(0, 1.1fr) 22px minmax(0, 1fr); row-gap: 18px;
+             --br-body-h: clamp(190px, 26vw, 240px); }
+  /* The second arrow would be stranded in an empty cell once the
+     transcript wraps to its own row — the numbered steps carry the
+     order from there. */
+  .br-arrow:nth-of-type(2) { display: none; }
+  .br-script-col { grid-column: 1 / -1; }
+  .br-script { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+}
+@container br (max-width: 460px) {
+  .br-flow { grid-template-columns: minmax(0, 1fr); }
+  .br-arrow { display: none; }
+  .br-col { grid-column: 1 / -1 !important; }
+}
+
+.br-col {
+  min-width: 0;
+  display: grid;
+  grid-template-rows: var(--br-head-h) var(--br-body-h) var(--br-foot-h);
+}
+.br-col > .bx-eyebrow { margin: 0; align-self: center; }
+.br-body-slot { min-height: 0; }
+.br-foot-slot { min-height: 0; }
+.bx-eyebrow em { font-style: normal; text-transform: none; letter-spacing: 0.02em; color: var(--ink-faint); }
+
+.br-arrow {
+  align-self: start;
+  height: calc(var(--br-head-h) + var(--br-body-h));
+  display: grid;
+  place-items: center;
+}
+.br-arrow i { display: block; width: 16px; height: 2px; background: var(--ink-faint); position: relative; transition: background var(--dur) var(--ease-out); }
+.br-arrow i::after {
+  content: '';
+  position: absolute;
+  right: -1px; top: 50%;
+  transform: translateY(-50%);
+  border-left: 6px solid var(--ink-faint);
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  transition: border-left-color var(--dur) var(--ease-out);
+}
+/* Each arrow belongs to the column it points INTO, and lights up only once
+   that column actually holds something: the first when the frames have been
+   extracted (step 3), the second when the narration has been scribed (step
+   4). Lighting both at step 3 pointed at an empty transcript column. */
+.br-body[data-step='3'] .br-arrow:nth-of-type(1) i,
+.br-body[data-step='4'] .br-arrow:nth-of-type(1) i,
+.br-body[data-step='4'] .br-arrow:nth-of-type(2) i { background: var(--a); }
+.br-body[data-step='3'] .br-arrow:nth-of-type(1) i::after,
+.br-body[data-step='4'] .br-arrow:nth-of-type(1) i::after,
+.br-body[data-step='4'] .br-arrow:nth-of-type(2) i::after { border-left-color: var(--a); }
+
+/* The travel is on `i`, which carries the head as its own ::after, so shaft
+   and head move together and the head keeps its shape. */
+.br-body[data-step='3'] .br-arrow:nth-of-type(1) i,
+.br-body[data-step='4'] .br-arrow:nth-of-type(2) i {
+  animation: br-arrow-go var(--dur, 320ms) var(--ease-out) both;
+}
+@keyframes br-arrow-go {
+  0% { transform: translateX(-5px); }
+  60% { transform: translateX(2px); }
+  100% { transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .br-body[data-step='3'] .br-arrow:nth-of-type(1) i,
+  .br-body[data-step='4'] .br-arrow:nth-of-type(2) i { animation: none; }
+}
+
+/* ============ 1 · the talk ============ */
+.br-talk {
+  position: relative;
+  /* Fills the fixed body row; capped in width so the drawn stand-in does
+     not become a poster across a full-row pane. `width: 100%` is
+     explicit because `margin-inline: auto` stops a grid item stretching,
+     and this box's only content is absolutely positioned — so left to
+     shrink-to-fit it collapses to nothing. */
+  width: 100%;
+  height: 100%;
+  max-width: 336px;
+  margin-inline: auto;
+  overflow: hidden;
+  border-color: var(--ink);
+}
+/* A drawn stand-in for the recording: the figure on the slide, and the
+   speaker beside it. Explicitly an illustration, never a borrowed still. */
+.br-talk-art { position: absolute; inset: 9px; display: flex; gap: 6px; }
+.br-talk-figure {
+  flex: 1;
+  border-radius: 4px;
+  border: 1.5px solid var(--line-strong);
+  background:
+    linear-gradient(var(--a-line) 0 0) 12% 26%/16% 5% no-repeat,
+    linear-gradient(var(--a-line) 0 0) 40% 26%/16% 5% no-repeat,
+    linear-gradient(var(--a-line) 0 0) 68% 26%/16% 5% no-repeat,
+    linear-gradient(var(--ink-faint) 0 0) 12% 55%/76% 1.5px no-repeat,
+    linear-gradient(var(--a-line) 0 0) 22% 72%/22% 10% no-repeat,
+    linear-gradient(var(--a-line) 0 0) 58% 72%/22% 10% no-repeat,
+    var(--surface);
+}
+.br-talk-speaker {
+  flex: 0 0 27%;
+  border-radius: 4px;
+  border: 1.5px solid var(--line-strong);
+  background:
+    radial-gradient(circle at 50% 30%, var(--a-line) 0 15%, transparent 16%),
+    radial-gradient(ellipse at 50% 92%, var(--a-line) 0 34%, transparent 35%),
+    var(--bg-sunk);
+}
+.br-talk-badge {
+  position: absolute;
+  left: 12px; top: 12px;
+  padding: 2px 8px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  border-radius: 5px;
+  background: var(--a);
+  color: #fff;
+}
+.br-skel { position: absolute; inset: 8px; border-color: var(--a-line); background-color: var(--a-soft); transition: opacity var(--dur-slow) var(--ease-out); }
+.br-skel .bx-skel-tag { border-color: var(--a-line); color: var(--a); }
+.br-body[data-step='0'] .br-skel { opacity: 1; }
+.br-body:not([data-step='0']) .br-skel { opacity: 0; }
+
+/* ---- The timeline and the cut ---- */
+.br-timeline { position: relative; max-width: 336px; margin: 10px auto 0; padding-top: 16px; padding-bottom: 20px; }
+.br-tl-bar {
+  position: relative;
+  display: block;
+  height: 16px;
+  border-radius: 4px;
+  overflow: visible;
+}
+.br-tl-bar i { position: absolute; top: 0; height: 100%; border: 1.5px solid var(--ink); }
+.br-tl-lead { left: 0; width: var(--from); border-radius: 4px 0 0 4px; background: var(--bg-sunk); }
+.br-tl-keep { left: var(--from); width: calc(var(--to) - var(--from)); background: var(--a-soft); }
+.br-tl-tail { left: var(--to); right: 0; width: calc(100% - var(--to)); border-radius: 0 4px 4px 0; background: var(--bg-sunk); }
+.br-tl-lead, .br-tl-keep, .br-tl-tail {
+  transition: transform 620ms var(--ease-out), opacity 620ms var(--ease-out),
+              background 400ms var(--ease-out), border-color 400ms var(--ease-out);
+}
+
+/* The playhead runs the bar during step 1. */
+.br-tl-head {
+  left: 0; width: 2px;
+  background: var(--ink);
+  border: 0 !important;
+  opacity: 0;
+}
+.br-body[data-step='1'] .br-tl-head { opacity: 1; animation: br-play 1.4s var(--ease-io) forwards; }
+@keyframes br-play { from { left: 0; } to { left: var(--to); } }
+
+/* Step 2: the scissors travel in, and the discarded ends drop away. */
+.br-scissors {
+  position: absolute;
+  top: -2px;
+  left: 0;
+  width: 19px; height: 19px;
+  color: var(--a);
+  opacity: 0;
+  transform: translateX(-50%);
+}
+.br-body[data-step='2'] .br-scissors { animation: br-snip 2.3s var(--ease-io) forwards; }
+@keyframes br-snip {
+  0%   { opacity: 0; left: 0; transform: translateX(-50%) rotate(-14deg); }
+  12%  { opacity: 1; }
+  30%  { left: var(--from); transform: translateX(-50%) rotate(-14deg); }
+  38%  { transform: translateX(-50%) rotate(10deg) scale(1.15); }
+  46%  { transform: translateX(-50%) rotate(-14deg); }
+  70%  { left: var(--to); transform: translateX(-50%) rotate(-14deg); }
+  78%  { transform: translateX(-50%) rotate(10deg) scale(1.15); }
+  88%  { opacity: 1; transform: translateX(-50%) rotate(-14deg); }
+  100% { opacity: 0; left: var(--to); }
+}
+.br-body[data-step='2'] .br-tl-lead { transition-delay: 1.0s; transform: translateY(16px) rotate(-7deg); opacity: 0.25; }
+.br-body[data-step='2'] .br-tl-tail { transition-delay: 1.9s; transform: translateY(16px) rotate(7deg); opacity: 0.25; }
+.br-body[data-step='3'] .br-tl-lead, .br-body[data-step='4'] .br-tl-lead,
+.br-body[data-step='3'] .br-tl-tail, .br-body[data-step='4'] .br-tl-tail {
+  transform: translateY(16px); opacity: 0.2;
+}
+.br-body[data-step='2'] .br-tl-keep,
+.br-body[data-step='3'] .br-tl-keep,
+.br-body[data-step='4'] .br-tl-keep { background: var(--a); border-color: var(--ink); }
+
+.br-tl-marks {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 14px;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--ink-faint);
+  opacity: 0;
+  transition: opacity var(--dur) var(--ease-out);
+}
+.br-body:not([data-step='0']):not([data-step='1']) .br-tl-marks { opacity: 1; }
+.br-tl-marks em { position: absolute; font-style: normal; white-space: nowrap; }
+.br-tl-from { left: 0; width: var(--from); text-align: right; padding-right: 4px; }
+.br-tl-to   { left: var(--to); padding-left: 4px; }
+
+.br-trim-note { margin: 6px 0 0; font-size: 1.05rem; color: var(--ink-faint); opacity: 0; transition: opacity var(--dur) var(--ease-out) 400ms; }
+.br-body:not([data-step='0']):not([data-step='1']) .br-trim-note { opacity: 1; color: var(--a); }
+
+/* ============ 3 · frames flying out, flipping like a book ============ */
+.br-deck {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  height: 100%;
+  perspective: 900px;
+}
+.br-leaf {
+  margin: 0;
+  width: 30%;
+  max-width: 128px;
+  aspect-ratio: 4 / 3;
+  opacity: 0;
+  /* Before the extraction they sit low, stacked and squashed — as if
+     still inside the clip on the left. */
+  transform: translate(-46%, 28px) scale(0.55);
+  transition: opacity 520ms var(--ease-out), transform 640ms var(--ease-spring);
+  transition-delay: calc(var(--i) * 170ms);
+}
+.br-body[data-step='3'] .br-leaf, .br-body[data-step='4'] .br-leaf { opacity: 1; transform: none; }
+
+.br-leaf { transform-style: preserve-3d; }
+.br-leaf-inner {
+  position: relative;
+  width: 100%; height: 100%;
+  transform-style: preserve-3d;
+  transform: rotateY(0deg);
+}
+.br-body[data-step='3'] .br-leaf-inner { animation: br-flip 1.5s var(--ease-io) forwards; animation-delay: calc(var(--i) * 170ms + 260ms); }
+@keyframes br-flip {
+  0% { transform: rotateY(180deg); }
+  55% { transform: rotateY(24deg); }
+  100% { transform: rotateY(0deg); }
+}
+
+.br-leaf-face {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  /* One cell pinned to the leaf. Centring in an auto track lets the
+     image's own `height: 100%` resolve against its own content, so a
+     tall frame grew to three times the leaf and lost two-thirds of
+     itself to `overflow: hidden`. */
+  grid-template: minmax(0, 1fr) / minmax(0, 1fr);
+  place-items: stretch;
+  overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border: 1.5px solid var(--ink);
+  border-radius: 5px;
+  background: var(--surface);
+  box-shadow: 2px 2px 0 rgba(26, 24, 21, 0.16);
+}
+/* The extracted frame, whole. `cover` cropped each leaf to its centre,
+   which on a wide slide meant the figure region — the entire point of
+   the extraction — was the part thrown away. White fills whatever the
+   aspect ratio leaves over. */
+.br-leaf-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  background: #fff;
+}
+.br-leaf-art {
+  width: 74%; height: 62%;
+  border-radius: 3px;
+  background:
+    linear-gradient(var(--a-line) 0 0) 4% 18%/26% 12% no-repeat,
+    linear-gradient(var(--a-line) 0 0) 40% 18%/26% 12% no-repeat,
+    linear-gradient(var(--a-line) 0 0) 76% 18%/22% 12% no-repeat,
+    linear-gradient(var(--ink-faint) 0 0) 6% 52%/86% 1.5px no-repeat,
+    linear-gradient(var(--a) 0 0) 18% 78%/30% 14% no-repeat,
+    linear-gradient(var(--a-line) 0 0) 62% 78%/30% 14% no-repeat;
+}
+.br-leaf-back { transform: rotateY(180deg); background: var(--a-soft); }
+.br-leaf-back em {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-style: normal;
+  font-weight: 700;
+  color: var(--a);
+}
+
+.br-extract-note {
+  margin: 12px 0 0;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.08em;
+  color: var(--ink-faint);
+  opacity: 0;
+  transition: opacity var(--dur) var(--ease-out) 700ms;
+}
+.br-body[data-step='3'] .br-extract-note, .br-body[data-step='4'] .br-extract-note { opacity: 1; }
+
+/* ============ 4 · the narration, scribed ============ */
+.br-wave {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  height: 22px;
+  margin-bottom: 10px;
+  opacity: 0.22;
+  transition: opacity var(--dur) var(--ease-out);
+}
+.br-wave i {
+  flex: 1;
+  height: 34%;
+  min-width: 2px;
+  border-radius: 1px;
+  background: var(--a);
+}
+.br-body[data-step='4'] .br-wave { opacity: 0.8; }
+.br-body[data-step='4'] .br-wave i {
+  animation: br-wave 1.1s var(--ease-io) infinite;
+  animation-delay: calc(var(--i) * -55ms);
+}
+@keyframes br-wave { 0%, 100% { height: 16%; } 50% { height: 100%; } }
+
+.br-body-slot.br-script-slot { display: grid; }
+.br-script { list-style: none; margin: 0; padding: 0; display: grid; gap: 7px; align-content: start; }
+.br-script-note {
+  margin: 12px 0 0;
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.08em;
+  color: var(--ink-faint);
+  opacity: 0;
+  transition: opacity var(--dur) var(--ease-out) 700ms;
+}
+.br-body[data-step='4'] .br-script-note { opacity: 1; }
+.br-script li {
+  display: flex;
+  gap: 9px;
+  padding: 8px 10px;
+  border: 1.5px solid var(--a-line);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  opacity: 0;
+  transform: translateX(12px);
+  transition: opacity 460ms var(--ease-out), transform 460ms var(--ease-out);
+  transition-delay: calc(var(--i) * 420ms + 300ms);
+}
+.br-body[data-step='4'] .br-script li { opacity: 1; transform: none; }
+.br-script-t {
+  flex: 0 0 auto;
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  font-weight: 700;
+  color: var(--a);
+  padding-top: 2px;
+}
+.br-script-x {
+  font-size: var(--fs-xs);
+  line-height: 1.5;
+  color: var(--ink-mid);
+  font-style: italic;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .br-leaf, .br-script li, .br-tl-lead, .br-tl-keep, .br-tl-tail,
+  .br-trim-note, .br-extract-note, .br-skel, .br-step { transition: none; }
+  .br-scissors, .br-tl-head, .br-wave i, .br-leaf-inner { animation: none !important; }
+  .br-scissors { opacity: 0; }
+}
+
+
+/* ---- The drawn stand-ins, at viewer scale ----
+   The same illustrations the pane draws, scaled up: the viewer shows
+   what exists rather than an empty frame, and its caption says plainly
+   that the real asset is not wired in yet. */
+.bl[data-accent='reference'] .br-art-big {
+  width: min(100%, 900px);
+  aspect-ratio: 16 / 9;
+  max-height: 100%;
+  display: flex;
+  gap: 12px;
+  padding: 16px;
+  background: var(--surface);
+  background-image: radial-gradient(var(--dot) 1px, transparent 1.2px);
+  background-size: 18px 18px;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-md);
+}
+.bl[data-accent='reference'] .br-art-frame,
+.bl[data-accent='reference'] .br-art-script { place-items: center; justify-content: center; }
+.bl[data-accent='reference'] .br-art-frame .br-leaf-art { width: 62%; height: 58%; }
+.br-art-wave {
+  align-self: center;
+  width: 78%;
+  height: 46%;
+  background:
+    repeating-linear-gradient(90deg, var(--a-line) 0 5px, transparent 5px 11px) 0 50%/100% 62% no-repeat;
+}
+
+/* ============ Real media, added when the pane was wired up ============
+   The talk is a still frame of the excerpt rather than the drawn stand-in,
+   and the extracted deck now carries six frames instead of three. Both are
+   additive: the stand-in rules above still apply whenever `poster` or a
+   frame's `src` is null. */
+
+/* The talk still, whole. It was cropped to fill the card, which cut the
+   slide the excerpt is about; the card is white, so a 16:9 still inside
+   a squarer card just sits smaller. */
+.br-talk-still {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  background: #fff;
+}
+
+/* A flex row sized at 30% each only ever fitted three leaves. A grid wraps
+   any count onto as many rows as it needs and keeps every leaf the same
+   size, so adding a seventh frame is a data change and not a layout one. */
+.br-deck {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-content: center;
+  justify-items: center;
+  gap: 7px;
+  perspective: 900px;
+}
+.br-deck .br-leaf { width: 100%; max-width: 128px; }
+/* Two rows have to share the body slot the single row used to own, so the
+   leaves get shallower rather than the pane getting taller. */
+.br-deck:has(> :nth-child(4)) .br-leaf { aspect-ratio: 16 / 9; max-width: 116px; }
+
+/* The talk's own transcript runs to full sentences — six of them now, one per
+   extracted frame, where the placeholder was three short lines. The column is
+   a fixed height so the four columns stay level, so the list scrolls inside it
+   rather than growing the pane, and the last-line stagger no longer runs off
+   the bottom edge.
+
+   The bottom edge is FADED rather than cut. A list that simply stops mid-line
+   at a hard border reads as a layout that broke; the same list dissolving into
+   the paper reads as one that continues, which is what it does. The fade is
+   only there while there is more to reach — the mask is on the scroller, so a
+   list short enough to fit is not dimmed for nothing. */
+.br-script-col .br-body-slot {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 8px;
+}
+.br-script {
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 4px;
+  padding-bottom: 6px;
+  scrollbar-width: thin;
+  cursor: zoom-in;
+  --br-fade: linear-gradient(to bottom, #000 0, #000 calc(100% - 26px), transparent 100%);
+  -webkit-mask-image: var(--br-fade);
+  mask-image: var(--br-fade);
+}
+.br-script-x { text-wrap: pretty; }
+
+/* ---- A MEDIA FRAME IS WHITE PAPER, NOT DOTTED PAPER ----
+   `.frame-paper` gives every framed slot the site's dotted ground, which is
+   right for an empty slot: it reads as paper waiting for something. Once a
+   figure is in it the dots are the only thing behind a letterboxed image, and
+   a diagram sitting in a field of dots looks like it failed to load rather
+   than like it is being shown whole. Each pane used to switch the dots off
+   per state, which meant every new state had to remember to. These slots are
+   simply white, always. The empty state keeps its own labelled skeleton on
+   top, so nothing is lost by it. */
+.br-talk,
+.br-leaf-face,
+.br-deck {
+  background-image: none;
+}
+.br-talk, .br-leaf-face { background-color: #fff; }

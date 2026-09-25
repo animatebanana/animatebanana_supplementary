@@ -1,0 +1,62 @@
+[
+ {
+  "t": 0.0,
+  "text": "In ordinary LLM-based RAG, data originates from Legacy File Systems."
+ },
+ {
+  "t": 3.038,
+  "text": "These files are directly used to construct and update the Vector Database."
+ },
+ {
+  "t": 5.963,
+  "text": "The user interacts with the system."
+ },
+ {
+  "t": 8.775,
+  "text": "A Query Command is issued by the user."
+ },
+ {
+  "t": 11.7,
+  "text": "The Retriever performs a similarity search query against the Vector Database, which returns top-k documents."
+ },
+ {
+  "t": 14.625,
+  "text": "The Retriever then queries the LLM Agent with the additional retrieved context."
+ },
+ {
+  "t": 17.438,
+  "text": "In SPAR, data also originates from Legacy File Systems."
+ },
+ {
+  "t": 20.363,
+  "text": "The files are used to construct and update Metadata Indices."
+ },
+ {
+  "t": 23.287,
+  "text": "Relevant documents from the Metadata Indices are returned to populate the Vector Database."
+ },
+ {
+  "t": 26.1,
+  "text": "The user interacts with the SPAR system."
+ },
+ {
+  "t": 29.025,
+  "text": "The user issues a File Retrieval Command."
+ },
+ {
+  "t": 31.95,
+  "text": "A Parser queries the Metadata Indices, returning keywords and metadata."
+ },
+ {
+  "t": 34.762,
+  "text": "The user simultaneously submits a Query Command."
+ },
+ {
+  "t": 37.687,
+  "text": "The Retriever queries the Vector Database and retrieves top-k documents."
+ },
+ {
+  "t": 40.612,
+  "text": "Finally, the LLM Agent is queried with the additional context."
+ }
+]

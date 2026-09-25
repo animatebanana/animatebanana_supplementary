@@ -1,0 +1,195 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 520" width="400" height="520">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 7 5 L 0 8.5 z" fill="#000000" />
+    </marker>
+    <style>
+      /* Global Desaturation & Dormant State for ALL elements */
+      #start, #edge_start_to_guess, #guess_number, #edge_guess_to_if10, #if_10, 
+      #label_true_1, #edge_if10_to_small, #small_number, #label_false_1, #edge_if10_to_if80, 
+      #if_80, #label_true_2, #edge_if80_to_medium, #medium_number, #label_false_2, 
+      #edge_if80_to_large, #large_number, #edge_small_to_end, #edge_medium_to_merge, 
+      #edge_large_to_merge, #edge_merge_to_end, #end {
+        filter: grayscale(100%) opacity(0.3);
+      }
+
+      /* Color Pop Animation Definition */
+      @keyframes colorPop {
+        to {
+          filter: grayscale(0%) opacity(1);
+        }
+      }
+
+      /* Active Path Elements (Only these will pop into color for Guess = 25) */
+      #start, #edge_start_to_guess, #guess_number, #edge_guess_to_if10, #if_10,
+      #label_false_1, #edge_if10_to_if80, #if_80, #label_true_2, #edge_if80_to_medium,
+      #medium_number, #edge_medium_to_merge, #edge_merge_to_end, #end {
+        animation-name: colorPop;
+        animation-duration: 0.6s;
+        animation-fill-mode: forwards;
+        animation-timing-function: ease-in-out;
+      }
+
+      /* Chronological Activation Delays (Step * 2.0s) */
+      #start { animation-delay: 0.0s; }
+      #edge_start_to_guess { animation-delay: 2.0s; }
+      #guess_number { animation-delay: 4.0s; }
+      #edge_guess_to_if10 { animation-delay: 6.0s; }
+      #if_10 { animation-delay: 8.0s; }
+      #label_false_1, #edge_if10_to_if80 { animation-delay: 10.0s; }
+      #if_80 { animation-delay: 12.0s; }
+      #label_true_2, #edge_if80_to_medium { animation-delay: 14.0s; }
+      #medium_number { animation-delay: 16.0s; }
+      #edge_medium_to_merge, #edge_merge_to_end { animation-delay: 18.0s; }
+      #end { animation-delay: 20.0s; }
+
+      /* Inactive elements (small_number branch, large_number branch) have NO animation assigned, remaining greyscale */
+
+      /* Narration Banner Styling & Animations */
+      .narrative-text {
+        font-family: system-ui, -apple-system, sans-serif;
+        font-size: 13px;
+        fill: #111827;
+        opacity: 0;
+      }
+
+      #narr_ts1 { animation: showNarrative 2.0s linear forwards; animation-delay: 0.0s; }
+      #narr_ts2 { animation: showNarrative 2.0s linear forwards; animation-delay: 2.0s; }
+      #narr_ts3 { animation: showNarrative 2.0s linear forwards; animation-delay: 4.0s; }
+      #narr_ts4 { animation: showNarrative 2.0s linear forwards; animation-delay: 6.0s; }
+      #narr_ts5 { animation: showNarrative 2.0s linear forwards; animation-delay: 8.0s; }
+      #narr_ts6 { animation: showNarrative 2.0s linear forwards; animation-delay: 10.0s; }
+      #narr_ts7 { animation: showNarrative 2.0s linear forwards; animation-delay: 12.0s; }
+      #narr_ts8 { animation: showNarrative 2.0s linear forwards; animation-delay: 14.0s; }
+      #narr_ts9 { animation: showNarrative 2.0s linear forwards; animation-delay: 16.0s; }
+      #narr_ts10 { animation: showNarrative 2.0s linear forwards; animation-delay: 18.0s; }
+      #narr_ts11 { animation: showNarrativeLast 5.0s linear forwards; animation-delay: 20.0s; }
+
+      @keyframes showNarrative {
+        0% { opacity: 0; }
+        5% { opacity: 1; }
+        95% { opacity: 1; }
+        100% { opacity: 0; }
+      }
+
+      @keyframes showNarrativeLast {
+        0% { opacity: 0; }
+        5% { opacity: 1; }
+        100% { opacity: 1; }
+      }
+    </style>
+  </defs>
+
+  <!-- Background / Structural Edges -->
+  <g>
+    <path id="edge_start_to_guess" data-id="edge_start_to_guess" data-class="edge" data-source="start" data-target="guess_number" d="M 153 51 L 153 71" stroke="#000000" stroke-width="2" fill="none" marker-end="url(#arrow)" />
+    <path id="edge_guess_to_if10" data-id="edge_guess_to_if10" data-class="edge" data-source="guess_number" data-target="if_10" d="M 153 109 L 153 128" stroke="#000000" stroke-width="2" fill="none" marker-end="url(#arrow)" />
+    <path id="edge_if10_to_small" data-id="edge_if10_to_small" data-class="edge" data-source="if_10" data-target="small_number" d="M 98 154 L 55 154 L 55 259" stroke="#000000" stroke-width="2" fill="none" marker-end="url(#arrow)" />
+    <path id="edge_if10_to_if80" data-id="edge_if10_to_if80" data-class="edge" data-source="if_10" data-target="if_80" d="M 208 154 L 278 154 L 278 201" stroke="#000000" stroke-width="2" fill="none" marker-end="url(#arrow)" />
+    <path id="edge_if80_to_medium" data-id="edge_if80_to_medium" data-class="edge" data-source="if_80" data-target="medium_number" d="M 218 227 L 206 227 L 206 274" stroke="#000000" stroke-width="2" fill="none" marker-end="url(#arrow)" />
+    <path id="edge_if80_to_large" data-id="edge_if80_to_large" data-class="edge" data-source="if_80" data-target="large_number" d="M 338 227 L 340 227 L 340 274" stroke="#000000" stroke-width="2" fill="none" marker-end="url(#arrow)" />
+    <path id="edge_small_to_end" data-id="edge_small_to_end" data-class="edge" data-source="small_number" data-target="end" d="M 55 297 L 55 374 L 107 374" stroke="#000000" stroke-width="2" fill="none" marker-end="url(#arrow)" />
+    <path id="edge_large_to_merge" data-id="edge_large_to_merge" data-class="edge" data-source="large_number" data-target="end" d="M 340 313 L 340 327 L 206 327" stroke="#000000" stroke-width="2" fill="none" />
+    <path id="edge_medium_to_merge" data-id="edge_medium_to_merge" data-class="edge" data-source="medium_number" data-target="end" d="M 206 313 L 206 327 L 153 327" stroke="#000000" stroke-width="2" fill="none" marker-end="url(#arrow)" />
+    <path id="edge_merge_to_end" data-id="edge_merge_to_end" data-class="edge" data-source="medium_number" data-target="end" d="M 153 327 L 153 350" stroke="#000000" stroke-width="2" fill="none" marker-end="url(#arrow)" />
+  </g>
+
+  <!-- Nodes and Text Elements -->
+  <g id="start" data-id="start" data-class="block" data-parent="root">
+    <rect id="start_shape" data-id="start_shape" data-class="composite_part" data-parent="start" x="107" y="3" width="93" height="48" rx="24" ry="24" fill="#ffcc4d" stroke="#000000" stroke-width="2" />
+    <text id="start_text" data-id="start_text" data-class="composite_part" data-parent="start" x="153.5" y="32" font-family="Arial, sans-serif" font-size="14" fill="#000000" text-anchor="middle">start</text>
+  </g>
+
+  <g id="guess_number" data-id="guess_number" data-class="block" data-parent="root">
+    <polygon id="guess_shape" data-id="guess_shape" data-class="composite_part" data-parent="guess_number" points="122,71 201,71 186,109 107,109" fill="#5fa39b" stroke="#000000" stroke-width="2" />
+    <text id="guess_text" data-id="guess_text" data-class="composite_part" data-parent="guess_number" x="154" y="88" font-family="Arial, sans-serif" font-size="13" fill="#000000" text-anchor="middle">guess</text>
+    <text id="guess_text_2" data-id="guess_text_2" data-class="composite_part" data-parent="guess_number" x="154" y="102" font-family="Arial, sans-serif" font-size="13" fill="#000000" text-anchor="middle">number</text>
+  </g>
+
+  <g id="if_10" data-id="if_10" data-class="block" data-parent="root">
+    <polygon id="if_10_shape" data-id="if_10_shape" data-class="composite_part" data-parent="if_10" points="153,128 208,154 153,180 98,154" fill="#72a0e5" stroke="#000000" stroke-width="2" />
+    <text id="if_10_text" data-id="if_10_text" data-class="composite_part" data-parent="if_10" x="153" y="158" font-family="Arial, sans-serif" font-size="13" fill="#000000" text-anchor="middle">if &lt;= 10</text>
+  </g>
+
+  <g id="small_number" data-id="small_number" data-class="block" data-parent="root">
+    <polygon id="small_shape" data-id="small_shape" data-class="composite_part" data-parent="small_number" points="16,259 111,259 96,297 1,297" fill="#8cd17d" stroke="#000000" stroke-width="2" />
+    <text id="small_text" data-id="small_text" data-class="composite_part" data-parent="small_number" x="56" y="282" font-family="Arial, sans-serif" font-size="13" fill="#000000" text-anchor="middle">small number</text>
+  </g>
+
+  <g id="if_80" data-id="if_80" data-class="block" data-parent="root">
+    <polygon id="if_80_shape" data-id="if_80_shape" data-class="composite_part" data-parent="if_80" points="278,201 338,227 278,253 218,227" fill="#72a0e5" stroke="#000000" stroke-width="2" />
+    <text id="if_80_text" data-id="if_80_text" data-class="composite_part" data-parent="if_80" x="278" y="231" font-family="Arial, sans-serif" font-size="11" fill="#000000" text-anchor="middle">if &gt; 10 and &lt;= 80</text>
+  </g>
+
+  <g id="medium_number" data-id="medium_number" data-class="block" data-parent="root">
+    <polygon id="medium_shape" data-id="medium_shape" data-class="composite_part" data-parent="medium_number" points="160,274 267,274 252,313 145,313" fill="#8cd17d" stroke="#000000" stroke-width="2" />
+    <text id="medium_text" data-id="medium_text" data-class="composite_part" data-parent="medium_number" x="206" y="297" font-family="Arial, sans-serif" font-size="13" fill="#000000" text-anchor="middle">medium number</text>
+  </g>
+
+  <g id="large_number" data-id="large_number" data-class="block" data-parent="root">
+    <polygon id="large_shape" data-id="large_shape" data-class="composite_part" data-parent="large_number" points="297,274 398,274 383,313 282,313" fill="#8cd17d" stroke="#000000" stroke-width="2" />
+    <text id="large_text" data-id="large_text" data-class="composite_part" data-parent="large_number" x="340" y="297" font-family="Arial, sans-serif" font-size="13" fill="#000000" text-anchor="middle">large number</text>
+  </g>
+
+  <g id="end" data-id="end" data-class="block" data-parent="root">
+    <rect id="end_shape" data-id="end_shape" data-class="composite_part" data-parent="end" x="107" y="350" width="93" height="48" rx="24" ry="24" fill="#ffcc4d" stroke="#000000" stroke-width="2" />
+    <text id="end_text" data-id="end_text" data-class="composite_part" data-parent="end" x="153.5" y="379" font-family="Arial, sans-serif" font-size="14" fill="#000000" text-anchor="middle">end</text>
+  </g>
+
+  <!-- Edge Labels -->
+  <text id="label_true_1" data-id="label_true_1" data-class="text_node" data-parent="root" x="75" y="145" font-family="Arial, sans-serif" font-size="12" fill="#000000" text-anchor="middle">true</text>
+  <text id="label_false_1" data-id="label_false_1" data-class="text_node" data-parent="root" x="230" y="145" font-family="Arial, sans-serif" font-size="12" fill="#000000" text-anchor="middle">false</text>
+  <text id="label_true_2" data-id="label_true_2" data-class="text_node" data-parent="root" x="230" y="218" font-family="Arial, sans-serif" font-size="12" fill="#000000" text-anchor="middle">true</text>
+  <text id="label_false_2" data-id="label_false_2" data-class="text_node" data-parent="root" x="355" y="218" font-family="Arial, sans-serif" font-size="12" fill="#000000" text-anchor="middle">false</text>
+
+  <!-- Dynamic Narration Banner -->
+  <g id="narration_banner">
+    <!-- Background card for narration -->
+    <rect x="15" y="415" width="370" height="90" rx="8" ry="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1" />
+    
+    <text id="narr_ts1" class="narrative-text" x="50%" y="445" text-anchor="middle">
+      <tspan x="50%" dy="0">The numerical categorization workflow</tspan>
+      <tspan x="50%" dy="1.4em">begins at the start node.</tspan>
+    </text>
+    <text id="narr_ts2" class="narrative-text" x="50%" y="445" text-anchor="middle">
+      <tspan x="50%" dy="0">The control flow moves to the</tspan>
+      <tspan x="50%" dy="1.4em">data ingestion phase.</tspan>
+    </text>
+    <text id="narr_ts3" class="narrative-text" x="50%" y="445" text-anchor="middle">
+      <tspan x="50%" dy="0">Say the guessed number is 25.</tspan>
+      <tspan x="50%" dy="1.4em">The system captures this value as the input.</tspan>
+    </text>
+    <text id="narr_ts4" class="narrative-text" x="50%" y="445" text-anchor="middle">
+      <tspan x="50%" dy="0">This inputted value of 25 is routed</tspan>
+      <tspan x="50%" dy="1.4em">to the primary threshold evaluation.</tspan>
+    </text>
+    <text id="narr_ts5" class="narrative-text" x="50%" y="445" text-anchor="middle">
+      <tspan x="50%" dy="0">The system evaluates whether the guess</tspan>
+      <tspan x="50%" dy="1.4em">number (25) is less than or equal to ten.</tspan>
+    </text>
+    <text id="narr_ts6" class="narrative-text" x="50%" y="445" text-anchor="middle">
+      <tspan x="50%" dy="0">Since 25 &lt;= 10 is false, the flow follows</tspan>
+      <tspan x="50%" dy="1.4em">the false branch, leaving the true path dormant.</tspan>
+    </text>
+    <text id="narr_ts7" class="narrative-text" x="50%" y="445" text-anchor="middle">
+      <tspan x="50%" dy="0">The data is passed to the secondary</tspan>
+      <tspan x="50%" dy="1.4em">range assessment node.</tspan>
+    </text>
+    <text id="narr_ts8" class="narrative-text" x="50%" y="445" text-anchor="middle">
+      <tspan x="50%" dy="0">This decision gate checks if the number</tspan>
+      <tspan x="50%" dy="1.4em">is greater than 10 and less than or equal to 80.</tspan>
+    </text>
+    <text id="narr_ts9" class="narrative-text" x="50%" y="445" text-anchor="middle">
+      <tspan x="50%" dy="0">Since 25 is within this range, the condition</tspan>
+      <tspan x="50%" dy="1.4em">is true, and we follow the true branch.</t>
+    </text>
+    <text id="narr_ts10" class="narrative-text" x="50%" y="445" text-anchor="middle">
+      <tspan x="50%" dy="0">The workflow successfully categorizes</tspan>
+      <tspan x="50%" dy="1.4em">the input as a medium number.</t>
+    </text>
+    <text id="narr_ts11" class="narrative-text" x="50%" y="445" text-anchor="middle">
+      <tspan x="50%" dy="0">The active branch converges to the end node,</tspan>
+      <tspan x="50%" dy="1.4em">completing the process for the number 25.</t>
+    </text>
+  </g>
+</svg>

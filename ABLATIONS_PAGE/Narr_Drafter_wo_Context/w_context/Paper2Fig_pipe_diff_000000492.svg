@@ -1,0 +1,301 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 1120" width="520" height="1120">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#000000"/>
+    </marker>
+    <style>
+      #node_dataset,
+      #node_raw_ultrasonography,
+      #edge_db_to_raw,
+      #block_preprocessing,
+      #edge_raw_to_preproc,
+      #node_scaling,
+      #node_normalization,
+      #node_slic,
+      #edge_preproc_to_slic,
+      #node_unet,
+      #edge_slic_to_unet,
+      #node_seg_model,
+      #edge_unet_to_seg,
+      #node_masked_image,
+      #edge_db_to_masked,
+      #node_vgg,
+      #edge_masked_to_vgg,
+      #node_dense,
+      #edge_vgg_to_dense,
+      #node_det_model,
+      #edge_dense_to_det,
+      #node_final_framework,
+      #edge_seg_to_final,
+      #edge_det_to_final {
+        opacity: 0;
+        animation-name: fadeIn;
+        animation-duration: 0.5s;
+        animation-fill-mode: forwards;
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+
+      @keyframes narrStep {
+        0% { opacity: 0; }
+        10% { opacity: 1; }
+        99% { opacity: 1; }
+        100% { opacity: 0; }
+      }
+
+      @keyframes narrLast {
+        0% { opacity: 0; }
+        10% { opacity: 1; }
+        100% { opacity: 1; }
+      }
+
+      /* Timestamps */
+      #node_dataset { animation-delay: 0.0s; }
+      #node_raw_ultrasonography, #edge_db_to_raw { animation-delay: 0.5s; }
+      #block_preprocessing, #edge_raw_to_preproc { animation-delay: 1.0s; }
+      #node_scaling { animation-delay: 1.5s; }
+      #node_normalization { animation-delay: 2.0s; }
+      #node_slic, #edge_preproc_to_slic { animation-delay: 2.5s; }
+      #node_unet, #edge_slic_to_unet { animation-delay: 3.0s; }
+      #node_seg_model, #edge_unet_to_seg { animation-delay: 3.5s; }
+      #node_masked_image, #edge_db_to_masked { animation-delay: 4.0s; }
+      #node_vgg, #edge_masked_to_vgg { animation-delay: 4.5s; }
+      #node_dense, #edge_vgg_to_dense { animation-delay: 5.0s; }
+      #node_det_model, #edge_dense_to_det { animation-delay: 5.5s; }
+      #node_final_framework, #edge_seg_to_final, #edge_det_to_final { animation-delay: 6.0s; }
+
+      /* Narration Subtitles */
+      .narr-text {
+        opacity: 0;
+        animation-duration: 0.5s;
+        animation-fill-mode: forwards;
+        animation-name: narrStep;
+      }
+
+      #narr_ts1 { animation-delay: 0.0s; }
+      #narr_ts2 { animation-delay: 0.5s; }
+      #narr_ts3 { animation-delay: 1.0s; }
+      #narr_ts4 { animation-delay: 1.5s; }
+      #narr_ts5 { animation-delay: 2.0s; }
+      #narr_ts6 { animation-delay: 2.5s; }
+      #narr_ts7 { animation-delay: 3.0s; }
+      #narr_ts8 { animation-delay: 3.5s; }
+      #narr_ts9 { animation-delay: 4.0s; }
+      #narr_ts10 { animation-delay: 4.5s; }
+      #narr_ts11 { animation-delay: 5.0s; }
+      #narr_ts12 { animation-delay: 5.5s; }
+      #narr_ts13 { animation-delay: 6.0s; animation-name: narrLast; }
+    </style>
+  </defs>
+  <rect width="100%" height="100%" fill="#ffffff"/>
+
+  <!-- Edges / Connections -->
+  <g>
+    <!-- From Database to Raw Ultrasonography Images -->
+    <path id="edge_db_to_raw" data-id="edge_db_to_raw" data-class="edge" data-source="node_dataset" data-target="node_raw_ultrasonography" d="M 260 120 L 260 160 L 115 160 L 115 200" fill="none" stroke="#000000" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <!-- From Database to Masked Image and Labels -->
+    <path id="edge_db_to_masked" data-id="edge_db_to_masked" data-class="edge" data-source="node_dataset" data-target="node_masked_image" d="M 260 160 L 260 245 L 405 245 L 405 365" fill="none" stroke="#000000" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <!-- Left Path: Raw to Preprocessing Block -->
+    <line id="edge_raw_to_preproc" data-id="edge_raw_to_preproc" data-class="edge" data-source="node_raw_ultrasonography" data-target="block_preprocessing" x1="115" y1="315" x2="115" y2="360" fill="none" stroke="#000000" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <!-- Left Path: Preprocessing to SLIC -->
+    <line id="edge_preproc_to_slic" data-id="edge_preproc_to_slic" data-class="edge" data-source="block_preprocessing" data-target="node_slic" x1="115" y1="480" x2="115" y2="508" fill="none" stroke="#000000" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <!-- Left Path: SLIC to UNet -->
+    <line id="edge_slic_to_unet" data-id="edge_slic_to_unet" data-class="edge" data-source="node_slic" data-target="node_unet" x1="115" y1="588" x2="115" y2="615" fill="none" stroke="#000000" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <!-- Left Path: UNet to Segmentation Model -->
+    <line id="edge_unet_to_seg" data-id="edge_unet_to_seg" data-class="edge" data-source="node_unet" data-target="node_seg_model" x1="115" y1="695" x2="115" y2="735" fill="none" stroke="#000000" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <!-- Right Path: Masked to VGG -->
+    <line id="edge_masked_to_vgg" data-id="edge_masked_to_vgg" data-class="edge" data-source="node_masked_image" data-target="node_vgg" x1="405" y1="480" x2="405" y2="508" fill="none" stroke="#000000" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <!-- Right Path: VGG to Dense Layers -->
+    <line id="edge_vgg_to_dense" data-id="edge_vgg_to_dense" data-class="edge" data-source="node_vgg" data-target="node_dense" x1="405" y1="588" x2="405" y2="615" fill="none" stroke="#000000" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <!-- Right Path: Dense to Detection Model -->
+    <line id="edge_dense_to_det" data-id="edge_dense_to_det" data-class="edge" data-source="node_dense" data-target="node_det_model" x1="405" y1="695" x2="405" y2="735" fill="none" stroke="#000000" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <!-- Left Model to Final Framework -->
+    <path id="edge_seg_to_final" data-id="edge_seg_to_final" data-class="edge" data-source="node_seg_model" data-target="node_final_framework" d="M 115 815 C 115 870, 260 840, 260 900" fill="none" stroke="#000000" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <!-- Right Model to Final Framework -->
+    <path id="edge_det_to_final" data-id="edge_det_to_final" data-class="edge" data-source="node_det_model" data-target="node_final_framework" d="M 405 815 C 405 870, 260 840, 260 900" fill="none" stroke="#000000" stroke-width="2.5" marker-end="url(#arrow)"/>
+  </g>
+
+  <!-- Node: Database Cylinder (Top) -->
+  <g id="node_dataset" data-id="node_dataset" data-class="composite_whole" data-parent="root">
+    <!-- Cylinder Body -->
+    <path id="part_db_body" data-id="part_db_body" data-class="composite_part" data-parent="node_dataset" d="M 187 28 L 187 102 A 73 18 0 0 0 333 102 L 333 28 Z" fill="#d3e2fc" stroke="#4a7fba" stroke-width="2"/>
+    <!-- Cylinder Top Ellipse -->
+    <ellipse id="part_db_top" data-id="part_db_top" data-class="composite_part" data-parent="node_dataset" cx="260" cy="28" rx="73" ry="18" fill="#d3e2fc" stroke="#4a7fba" stroke-width="2"/>
+    <!-- Cylinder Decorative Rib Lines -->
+    <path id="part_db_line1" data-id="part_db_line1" data-class="composite_part" data-parent="node_dataset" d="M 187 35 A 73 18 0 0 0 333 35" fill="none" stroke="#4a7fba" stroke-width="1.5"/>
+    <path id="part_db_line2" data-id="part_db_line2" data-class="composite_part" data-parent="node_dataset" d="M 187 43 A 73 18 0 0 0 333 43" fill="none" stroke="#4a7fba" stroke-width="1.5"/>
+    <!-- Text -->
+    <text id="text_db" data-id="text_db" data-class="composite_part" data-parent="node_dataset" x="260" y="78" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#000000">
+      <tspan x="260" dy="0">Breast Cancer</tspan>
+      <tspan x="260" dy="20">Image Dataset</tspan>
+    </text>
+  </g>
+
+  <!-- Node: Raw Ultrasonography Images -->
+  <g id="node_raw_ultrasonography" data-id="node_raw_ultrasonography" data-class="standalone_node" data-parent="root">
+    <rect x="2" y="200" width="226" height="115" fill="#f5baba" stroke="#b84b4b" stroke-width="2"/>
+    <text x="115" y="252" font-family="Arial, sans-serif" font-size="17" font-weight="bold" text-anchor="middle" fill="#000000">
+      <tspan x="115" dy="0">Raw Ultrasonography</tspan>
+      <tspan x="115" dy="24">Images</tspan>
+    </text>
+  </g>
+
+  <!-- Block: Preprocessing (Scaling and Normalization) -->
+  <g id="block_preprocessing" data-id="block_preprocessing" data-class="block" data-parent="root">
+    <rect id="rect_preproc_bg" x="2" y="360" width="226" height="120" fill="#e8d7ed" stroke="#805b8a" stroke-width="2"/>
+    
+    <!-- Child Node: Scaling -->
+    <g id="node_scaling" data-id="node_scaling" data-class="child_node" data-parent="block_preprocessing">
+      <rect x="20" y="375" width="190" height="40" fill="#f5baba" stroke="#b84b4b" stroke-width="2"/>
+      <text x="115" y="401" font-family="Arial, sans-serif" font-size="17" font-weight="bold" text-anchor="middle" fill="#000000">Scaling</text>
+    </g>
+
+    <!-- Child Node: Normalization -->
+    <g id="node_normalization" data-id="node_normalization" data-class="child_node" data-parent="block_preprocessing">
+      <rect x="20" y="430" width="190" height="40" fill="#f5baba" stroke="#b84b4b" stroke-width="2"/>
+      <text x="115" y="456" font-family="Arial, sans-serif" font-size="17" font-weight="bold" text-anchor="middle" fill="#000000">Normalization</text>
+    </g>
+  </g>
+
+  <!-- Node: Masked Image and Labels -->
+  <g id="node_masked_image" data-id="node_masked_image" data-class="standalone_node" data-parent="root">
+    <rect x="292" y="365" width="226" height="115" fill="#f5baba" stroke="#b84b4b" stroke-width="2"/>
+    <text x="405" y="417" font-family="Arial, sans-serif" font-size="17" font-weight="bold" text-anchor="middle" fill="#000000">
+      <tspan x="405" dy="0">Masked Image</tspan>
+      <tspan x="405" dy="24">and Labels</tspan>
+    </text>
+  </g>
+
+  <!-- Node: Simple Linear Iterative Clustering (SLIC) -->
+  <g id="node_slic" data-id="node_slic" data-class="standalone_node" data-parent="root">
+    <rect x="2" y="508" width="226" height="80" fill="#d3edcb" stroke="#5e9752" stroke-width="2"/>
+    <text x="115" y="544" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#000000">
+      <tspan x="115" dy="0">Simple Linear Iterative</tspan>
+      <tspan x="115" dy="22">Clustering (SLIC)</tspan>
+    </text>
+  </g>
+
+  <!-- Node: Feature Extraction for VGG 16 -->
+  <g id="node_vgg" data-id="node_vgg" data-class="standalone_node" data-parent="root">
+    <rect x="292" y="508" width="226" height="80" fill="#d3edcb" stroke="#5e9752" stroke-width="2"/>
+    <text x="405" y="544" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#000000">
+      <tspan x="405" dy="0">Feature Extraction for</tspan>
+      <tspan x="405" dy="22">VGG 16</tspan>
+    </text>
+  </g>
+
+  <!-- Node: Modified U Net -->
+  <g id="node_unet" data-id="node_unet" data-class="standalone_node" data-parent="root">
+    <rect x="2" y="615" width="226" height="80" fill="#e8d7ed" stroke="#805b8a" stroke-width="2"/>
+    <text x="115" y="662" font-family="Arial, sans-serif" font-size="17" font-weight="bold" text-anchor="middle" fill="#000000">Modified U Net</text>
+  </g>
+
+  <!-- Node: Fully Connected Dense Layers -->
+  <g id="node_dense" data-id="node_dense" data-class="standalone_node" data-parent="root">
+    <rect x="292" y="615" width="226" height="80" fill="#d3e2fc" stroke="#4a7fba" stroke-width="2"/>
+    <text x="405" y="650" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#000000">
+      <tspan x="405" dy="0">Fully Connected Dense</tspan>
+      <tspan x="405" dy="22">Layers</tspan>
+    </text>
+  </g>
+
+  <!-- Node: Trained Segmentation Model -->
+  <g id="node_seg_model" data-id="node_seg_model" data-class="standalone_node" data-parent="root">
+    <rect x="15" y="735" width="200" height="80" rx="15" ry="15" fill="#d3edcb" stroke="#5e9752" stroke-width="2"/>
+    <text x="115" y="763" font-family="Arial, sans-serif" font-size="17" font-weight="bold" text-anchor="middle" fill="#000000">
+      <tspan x="115" dy="0">Trained</tspan>
+      <tspan x="115" dy="23">Segmentation</tspan>
+      <tspan x="115" dy="23">Model</tspan>
+    </text>
+  </g>
+
+  <!-- Node: Trained Detection Model -->
+  <g id="node_det_model" data-id="node_det_model" data-class="standalone_node" data-parent="root">
+    <rect x="305" y="735" width="200" height="80" rx="15" ry="15" fill="#e8d7ed" stroke="#805b8a" stroke-width="2"/>
+    <text x="405" y="763" font-family="Arial, sans-serif" font-size="17" font-weight="bold" text-anchor="middle" fill="#000000">
+      <tspan x="405" dy="0">Trained</tspan>
+      <tspan x="405" dy="23">Detection</tspan>
+      <tspan x="405" dy="23">Model</tspan>
+    </text>
+  </g>
+
+  <!-- Node: Trained Breast Cancer Detection Pipelining Framework -->
+  <g id="node_final_framework" data-id="node_final_framework" data-class="standalone_node" data-parent="root">
+    <rect x="80" y="900" width="360" height="95" rx="15" ry="15" fill="#f5baba" stroke="#b84b4b" stroke-width="2"/>
+    <text x="260" y="929" font-family="Arial, sans-serif" font-size="17" font-weight="bold" text-anchor="middle" fill="#000000">
+      <tspan x="260" dy="0">Trained Breast Cancer</tspan>
+      <tspan x="260" dy="24">Detection</tspan>
+      <tspan x="260" dy="24">Pipelining Framework</tspan>
+    </text>
+  </g>
+
+  <!-- Dynamic Narration Banner -->
+  <g id="narration_banner">
+    <rect x="20" y="1015" width="480" height="85" rx="8" ry="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text id="narr_ts1" class="narr-text" x="50%" y="1045" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#1e293b" text-anchor="middle">
+      <tspan x="50%" dy="0">The workflow begins with the Breast Cancer Image Dataset,</tspan>
+      <tspan x="50%" dy="1.3em">which supplies data across two parallel training branches.</tspan>
+    </text>
+    <text id="narr_ts2" class="narr-text" x="50%" y="1045" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#1e293b" text-anchor="middle">
+      <tspan x="50%" dy="0">In the segmentation branch, raw ultrasonography images</tspan>
+      <tspan x="50%" dy="1.3em">are first extracted from the dataset.</tspan>
+    </text>
+    <text id="narr_ts3" class="narr-text" x="50%" y="1045" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#1e293b" text-anchor="middle">
+      <tspan x="50%" dy="0">These raw images undergo preprocessing</tspan>
+      <tspan x="50%" dy="1.3em">to standardize their input characteristics.</tspan>
+    </text>
+    <text id="narr_ts4" class="narr-text" x="50%" y="1045" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#1e293b" text-anchor="middle">
+      <tspan x="50%" dy="0">Spatial scaling is first applied to resize each image</tspan>
+      <tspan x="50%" dy="1.3em">to uniform dimensions.</tspan>
+    </text>
+    <text id="narr_ts5" class="narr-text" x="50%" y="1045" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#1e293b" text-anchor="middle">
+      <tspan x="50%" dy="0">Pixel normalization is then performed to ensure</tspan>
+      <tspan x="50%" dy="1.3em">consistent intensity distributions across the dataset.</tspan>
+    </text>
+    <text id="narr_ts6" class="narr-text" x="50%" y="1045" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#1e293b" text-anchor="middle">
+      <tspan x="50%" dy="0">Next, Simple Linear Iterative Clustering clusters pixels</tspan>
+      <tspan x="50%" dy="1.3em">into superpixels to address non-linear artifacts.</tspan>
+    </text>
+    <text id="narr_ts7" class="narr-text" x="50%" y="1045" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#1e293b" text-anchor="middle">
+      <tspan x="50%" dy="0">The superpixel representations are fed into a modified</tspan>
+      <tspan x="50%" dy="1.3em">U-Net architecture to perform semantic segmentation.</tspan>
+    </text>
+    <text id="narr_ts8" class="narr-text" x="50%" y="1045" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#1e293b" text-anchor="middle">
+      <tspan x="50%" dy="0">This completes the training phase, yielding</tspan>
+      <tspan x="50%" dy="1.3em">the trained segmentation model.</tspan>
+    </text>
+    <text id="narr_ts9" class="narr-text" x="50%" y="1045" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#1e293b" text-anchor="middle">
+      <tspan x="50%" dy="0">In parallel, ground truth masked images and labels</tspan>
+      <tspan x="50%" dy="1.3em">are routed into the classification branch.</tspan>
+    </text>
+    <text id="narr_ts10" class="narr-text" x="50%" y="1045" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#1e293b" text-anchor="middle">
+      <tspan x="50%" dy="0">A pre-trained VGG 16 backbone extracts</tspan>
+      <tspan x="50%" dy="1.3em">high-level convolutional features from masked images.</tspan>
+    </text>
+    <text id="narr_ts11" class="narr-text" x="50%" y="1045" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#1e293b" text-anchor="middle">
+      <tspan x="50%" dy="0">Extracted features are processed through fully connected</tspan>
+      <tspan x="50%" dy="1.3em">dense layers for tumor classification.</tspan>
+    </text>
+    <text id="narr_ts12" class="narr-text" x="50%" y="1045" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#1e293b" text-anchor="middle">
+      <tspan x="50%" dy="0">This training process establishes</tspan>
+      <tspan x="50%" dy="1.3em">the finalized detection model.</tspan>
+    </text>
+    <text id="narr_ts13" class="narr-text" x="50%" y="1045" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#1e293b" text-anchor="middle">
+      <tspan x="50%" dy="0">Finally, both trained models are integrated to construct the</tspan>
+      <tspan x="50%" dy="1.3em">end-to-end breast cancer detection pipelining framework.</tspan>
+    </text>
+  </g>
+</svg>

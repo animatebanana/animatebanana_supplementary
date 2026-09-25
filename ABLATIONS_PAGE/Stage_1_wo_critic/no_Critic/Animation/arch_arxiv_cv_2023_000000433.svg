@@ -1,0 +1,419 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 508 300" width="100%" height="100%">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 1 2 L 7 5 L 1 8 z" fill="#707b82"/>
+    </marker>
+    <style>
+      /* Base ghost state for animated diagram elements */
+      #input_grid, #input_label,
+      #edge_input_to_patches, #visible_patches,
+      #encoder_block,
+      #encoded_tokens, #edge_encoder_to_decoder_seq,
+      #decoder_input_seq,
+      #decoder_block,
+      #decoder_output_seq, #edge_decoder_to_target,
+      #target_grid, #target_label {
+        opacity: 0.15;
+        transition: opacity 0.1s ease;
+      }
+
+      /* Base state for narration banners */
+      .narration-text {
+        opacity: 0;
+      }
+
+      /* Animation bindings (24s cycle, 8 equal slices = 3.0s / 12.5% each) */
+      #input_grid, #input_label {
+        animation: anim_step1 24s infinite;
+      }
+      #edge_input_to_patches, #visible_patches {
+        animation: anim_step2 24s infinite;
+      }
+      #encoder_block {
+        animation: anim_step3 24s infinite;
+      }
+      #encoded_tokens, #edge_encoder_to_decoder_seq {
+        animation: anim_step4 24s infinite;
+      }
+      #decoder_input_seq {
+        animation: anim_step5 24s infinite;
+      }
+      #decoder_block {
+        animation: anim_step6 24s infinite;
+      }
+      #decoder_output_seq, #edge_decoder_to_target {
+        animation: anim_step7 24s infinite;
+      }
+      #target_grid, #target_label {
+        animation: anim_step8 24s infinite;
+      }
+
+      #narr_ts1 { animation: narr_step1 24s infinite; }
+      #narr_ts2 { animation: narr_step2 24s infinite; }
+      #narr_ts3 { animation: narr_step3 24s infinite; }
+      #narr_ts4 { animation: narr_step4 24s infinite; }
+      #narr_ts5 { animation: narr_step5 24s infinite; }
+      #narr_ts6 { animation: narr_step6 24s infinite; }
+      #narr_ts7 { animation: narr_step7 24s infinite; }
+      #narr_ts8 { animation: narr_step8 24s infinite; }
+
+      /* Diagram Keyframes */
+      @keyframes anim_step1 {
+        0%       { opacity: 1.0; }
+        12.499%  { opacity: 1.0; }
+        12.5%    { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+      @keyframes anim_step2 {
+        0%       { opacity: 0.15; }
+        12.499%  { opacity: 0.15; }
+        12.5%    { opacity: 1.0; }
+        24.999%  { opacity: 1.0; }
+        25%      { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+      @keyframes anim_step3 {
+        0%       { opacity: 0.15; }
+        24.999%  { opacity: 0.15; }
+        25%      { opacity: 1.0; }
+        37.499%  { opacity: 1.0; }
+        37.5%    { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+      @keyframes anim_step4 {
+        0%       { opacity: 0.15; }
+        37.499%  { opacity: 0.15; }
+        37.5%    { opacity: 1.0; }
+        49.999%  { opacity: 1.0; }
+        50%      { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+      @keyframes anim_step5 {
+        0%       { opacity: 0.15; }
+        49.999%  { opacity: 0.15; }
+        50%      { opacity: 1.0; }
+        62.499%  { opacity: 1.0; }
+        62.5%    { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+      @keyframes anim_step6 {
+        0%       { opacity: 0.15; }
+        62.499%  { opacity: 0.15; }
+        62.5%    { opacity: 1.0; }
+        74.999%  { opacity: 1.0; }
+        75%      { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+      @keyframes anim_step7 {
+        0%       { opacity: 0.15; }
+        74.999%  { opacity: 0.15; }
+        75%      { opacity: 1.0; }
+        87.499%  { opacity: 1.0; }
+        87.5%    { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+      @keyframes anim_step8 {
+        0%       { opacity: 0.15; }
+        87.499%  { opacity: 0.15; }
+        87.5%    { opacity: 1.0; }
+        100%     { opacity: 1.0; }
+      }
+
+      /* Narration Subtitle Keyframes */
+      @keyframes narr_step1 {
+        0%       { opacity: 1; }
+        12.499%  { opacity: 1; }
+        12.5%    { opacity: 0; }
+        100%     { opacity: 0; }
+      }
+      @keyframes narr_step2 {
+        0%       { opacity: 0; }
+        12.499%  { opacity: 0; }
+        12.5%    { opacity: 1; }
+        24.999%  { opacity: 1; }
+        25%      { opacity: 0; }
+        100%     { opacity: 0; }
+      }
+      @keyframes narr_step3 {
+        0%       { opacity: 0; }
+        24.999%  { opacity: 0; }
+        25%      { opacity: 1; }
+        37.499%  { opacity: 1; }
+        37.5%    { opacity: 0; }
+        100%     { opacity: 0; }
+      }
+      @keyframes narr_step4 {
+        0%       { opacity: 0; }
+        37.499%  { opacity: 0; }
+        37.5%    { opacity: 1; }
+        49.999%  { opacity: 1; }
+        50%      { opacity: 0; }
+        100%     { opacity: 0; }
+      }
+      @keyframes narr_step5 {
+        0%       { opacity: 0; }
+        49.999%  { opacity: 0; }
+        50%      { opacity: 1; }
+        62.499%  { opacity: 1; }
+        62.5%    { opacity: 0; }
+        100%     { opacity: 0; }
+      }
+      @keyframes narr_step6 {
+        0%       { opacity: 0; }
+        62.499%  { opacity: 0; }
+        62.5%    { opacity: 1; }
+        74.999%  { opacity: 1; }
+        75%      { opacity: 0; }
+        100%     { opacity: 0; }
+      }
+      @keyframes narr_step7 {
+        0%       { opacity: 0; }
+        74.999%  { opacity: 0; }
+        75%      { opacity: 1; }
+        87.499%  { opacity: 1; }
+        87.5%    { opacity: 0; }
+        100%     { opacity: 0; }
+      }
+      @keyframes narr_step8 {
+        0%       { opacity: 0; }
+        87.499%  { opacity: 0; }
+        87.5%    { opacity: 1; }
+        100%     { opacity: 1; }
+      }
+    </style>
+  </defs>
+
+  <!-- Edges -->
+  <line id="edge_input_to_patches" data-id="edge_input_to_patches" data-class="edge" data-source="input_grid" data-target="visible_patches" x1="103" y1="131" x2="122" y2="131" stroke="#707b82" stroke-width="2" marker-end="url(#arrow)"/>
+  <line id="edge_encoder_to_decoder_seq" data-id="edge_encoder_to_decoder_seq" data-class="edge" data-source="encoded_tokens" data-target="decoder_input_seq" x1="250" y1="131" x2="272" y2="131" stroke="#707b82" stroke-width="2" marker-end="url(#arrow)"/>
+  <line id="edge_decoder_to_target" data-id="edge_decoder_to_target" data-class="edge" data-source="decoder_output_seq" data-target="target_grid" x1="388" y1="131" x2="408" y2="131" stroke="#707b82" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Input Grid (5x5) -->
+  <g id="input_grid" data-id="input_grid" data-class="composite_whole" data-parent="root">
+    <!-- Row 0 -->
+    <rect id="in_p_0_0" data-id="in_p_0_0" data-class="composite_part" data-parent="input_grid" x="4" y="87" width="17" height="16" fill="#797166"/>
+    <rect id="in_p_0_1" data-id="in_p_0_1" data-class="composite_part" data-parent="input_grid" x="23" y="87" width="17" height="16" fill="#797166"/>
+    <rect id="in_p_0_2" data-id="in_p_0_2" data-class="composite_part" data-parent="input_grid" x="41" y="87" width="17" height="16" fill="#1b120c"/>
+    <path id="in_p_0_2_detail" data-id="in_p_0_2_detail" data-class="composite_part" data-parent="input_grid" d="M 41 97 Q 48 93 58 97 L 58 103 L 41 103 Z" fill="#e9643d"/>
+    <rect id="in_p_0_3" data-id="in_p_0_3" data-class="composite_part" data-parent="input_grid" x="60" y="87" width="17" height="16" fill="#797166"/>
+    <rect id="in_p_0_4" data-id="in_p_0_4" data-class="composite_part" data-parent="input_grid" x="78" y="87" width="17" height="16" fill="#797166"/>
+
+    <!-- Row 1 -->
+    <rect id="in_p_1_0" data-id="in_p_1_0" data-class="composite_part" data-parent="input_grid" x="4" y="105" width="17" height="16" fill="#797166"/>
+    <rect id="in_p_1_1" data-id="in_p_1_1" data-class="composite_part" data-parent="input_grid" x="23" y="105" width="17" height="16" fill="#110d08"/>
+    <path id="in_p_1_1_detail" data-id="in_p_1_1_detail" data-class="composite_part" data-parent="input_grid" d="M 27 121 Q 31 105 40 105 L 40 121 Z" fill="#f05930"/>
+    <rect id="in_p_1_2" data-id="in_p_1_2" data-class="composite_part" data-parent="input_grid" x="41" y="105" width="17" height="16" fill="#797166"/>
+    <rect id="in_p_1_3" data-id="in_p_1_3" data-class="composite_part" data-parent="input_grid" x="60" y="105" width="17" height="16" fill="#797166"/>
+    <rect id="in_p_1_4" data-id="in_p_1_4" data-class="composite_part" data-parent="input_grid" x="78" y="105" width="17" height="16" fill="#120e0a"/>
+    <path id="in_p_1_4_detail" data-id="in_p_1_4_detail" data-class="composite_part" data-parent="input_grid" d="M 78 110 Q 86 106 95 112 L 95 121 L 78 121 Z" fill="#e7978d"/>
+
+    <!-- Row 2 -->
+    <rect id="in_p_2_0" data-id="in_p_2_0" data-class="composite_part" data-parent="input_grid" x="4" y="123" width="17" height="16" fill="#0d0805"/>
+    <path id="in_p_2_0_detail" data-id="in_p_2_0_detail" data-class="composite_part" data-parent="input_grid" d="M 12 123 Q 21 128 21 139 L 14 139 Q 7 132 12 123 Z" fill="#eb5833"/>
+    <rect id="in_p_2_1" data-id="in_p_2_1" data-class="composite_part" data-parent="input_grid" x="23" y="123" width="17" height="16" fill="#797166"/>
+    <rect id="in_p_2_2" data-id="in_p_2_2" data-class="composite_part" data-parent="input_grid" x="41" y="123" width="17" height="16" fill="#df482b"/>
+    <path id="in_p_2_2_detail" data-id="in_p_2_2_detail" data-class="composite_part" data-parent="input_grid" d="M 52 123 Q 58 129 58 139 L 52 139 Z" fill="#110d0a"/>
+    <rect id="in_p_2_3" data-id="in_p_2_3" data-class="composite_part" data-parent="input_grid" x="60" y="123" width="17" height="16" fill="#797166"/>
+    <rect id="in_p_2_4" data-id="in_p_2_4" data-class="composite_part" data-parent="input_grid" x="78" y="123" width="17" height="16" fill="#797166"/>
+
+    <!-- Row 3 -->
+    <rect id="in_p_3_0" data-id="in_p_3_0" data-class="composite_part" data-parent="input_grid" x="4" y="141" width="17" height="16" fill="#0a0705"/>
+    <path id="in_p_3_0_detail" data-id="in_p_3_0_detail" data-class="composite_part" data-parent="input_grid" d="M 9 157 Q 16 141 21 141 L 21 157 Z" fill="#eb532d"/>
+    <rect id="in_p_3_1" data-id="in_p_3_1" data-class="composite_part" data-parent="input_grid" x="23" y="141" width="17" height="16" fill="#797166"/>
+    <rect id="in_p_3_2" data-id="in_p_3_2" data-class="composite_part" data-parent="input_grid" x="41" y="141" width="17" height="16" fill="#797166"/>
+    <rect id="in_p_3_3" data-id="in_p_3_3" data-class="composite_part" data-parent="input_grid" x="60" y="141" width="17" height="16" fill="#797166"/>
+    <rect id="in_p_3_4" data-id="in_p_3_4" data-class="composite_part" data-parent="input_grid" x="78" y="141" width="17" height="16" fill="#84372e"/>
+    <path id="in_p_3_4_detail" data-id="in_p_3_4_detail" data-class="composite_part" data-parent="input_grid" d="M 78 141 L 95 141 L 95 157 Z" fill="#e98177"/>
+
+    <!-- Row 4 -->
+    <rect id="in_p_4_0" data-id="in_p_4_0" data-class="composite_part" data-parent="input_grid" x="4" y="159" width="17" height="16" fill="#797166"/>
+    <rect id="in_p_4_1" data-id="in_p_4_1" data-class="composite_part" data-parent="input_grid" x="23" y="159" width="17" height="16" fill="#797166"/>
+    <rect id="in_p_4_2" data-id="in_p_4_2" data-class="composite_part" data-parent="input_grid" x="41" y="159" width="17" height="16" fill="#797166"/>
+    <rect id="in_p_4_3" data-id="in_p_4_3" data-class="composite_part" data-parent="input_grid" x="60" y="159" width="17" height="16" fill="#797166"/>
+    <rect id="in_p_4_4" data-id="in_p_4_4" data-class="composite_part" data-parent="input_grid" x="78" y="159" width="17" height="16" fill="#797166"/>
+  </g>
+
+  <!-- Input Label -->
+  <text id="input_label" data-id="input_label" data-class="text_node" data-parent="root" x="50" y="196" text-anchor="middle" font-family="serif" font-size="14" fill="#111111">Input</text>
+
+  <!-- Visible Patches Column (8 patches) -->
+  <g id="visible_patches" data-id="visible_patches" data-class="composite_whole" data-parent="root">
+    <rect id="vis_p_0" data-id="vis_p_0" data-class="composite_part" data-parent="visible_patches" x="127" y="37" width="23" height="21" fill="#1c130d"/>
+    <path id="vis_p_0_d" data-id="vis_p_0_d" data-class="composite_part" data-parent="visible_patches" d="M 127 49 Q 137 45 150 49 L 150 58 L 127 58 Z" fill="#eb633c"/>
+
+    <rect id="vis_p_1" data-id="vis_p_1" data-class="composite_part" data-parent="visible_patches" x="127" y="60" width="23" height="21" fill="#120e09"/>
+    <path id="vis_p_1_d" data-id="vis_p_1_d" data-class="composite_part" data-parent="visible_patches" d="M 132 81 Q 138 60 150 60 L 150 81 Z" fill="#f05930"/>
+
+    <rect id="vis_p_2" data-id="vis_p_2" data-class="composite_part" data-parent="visible_patches" x="127" y="83" width="23" height="21" fill="#140f0b"/>
+    <path id="vis_p_2_d" data-id="vis_p_2_d" data-class="composite_part" data-parent="visible_patches" d="M 127 89 Q 138 84 150 92 L 150 104 L 127 104 Z" fill="#e7978d"/>
+
+    <rect id="vis_p_3" data-id="vis_p_3" data-class="composite_part" data-parent="visible_patches" x="127" y="106" width="23" height="21" fill="#0d0805"/>
+    <path id="vis_p_3_d" data-id="vis_p_3_d" data-class="composite_part" data-parent="visible_patches" d="M 138 106 Q 150 113 150 127 L 141 127 Q 132 118 138 106 Z" fill="#eb5833"/>
+
+    <rect id="vis_p_4" data-id="vis_p_4" data-class="composite_part" data-parent="visible_patches" x="127" y="129" width="23" height="21" fill="#df482b"/>
+    <path id="vis_p_4_d" data-id="vis_p_4_d" data-class="composite_part" data-parent="visible_patches" d="M 142 129 Q 150 137 150 150 L 142 150 Z" fill="#110d0a"/>
+
+    <rect id="vis_p_5" data-id="vis_p_5" data-class="composite_part" data-parent="visible_patches" x="127" y="152" width="23" height="21" fill="#0a0705"/>
+    <path id="vis_p_5_d" data-id="vis_p_5_d" data-class="composite_part" data-parent="visible_patches" d="M 134 173 Q 143 152 150 152 L 150 173 Z" fill="#eb532d"/>
+
+    <rect id="vis_p_6" data-id="vis_p_6" data-class="composite_part" data-parent="visible_patches" x="127" y="175" width="23" height="21" fill="#84372e"/>
+    <path id="vis_p_6_d" data-id="vis_p_6_d" data-class="composite_part" data-parent="visible_patches" d="M 127 175 L 150 175 L 150 196 Z" fill="#e98177"/>
+
+    <rect id="vis_p_7" data-id="vis_p_7" data-class="composite_part" data-parent="visible_patches" x="127" y="198" width="23" height="21" fill="#050302"/>
+    <path id="vis_p_7_d" data-id="vis_p_7_d" data-class="composite_part" data-parent="visible_patches" d="M 143 198 Q 147 209 150 219 L 140 219 Q 137 209 143 198 Z" fill="#e55530"/>
+  </g>
+
+  <!-- Encoder Block -->
+  <g id="encoder_block" data-id="encoder_block" data-class="block" data-parent="root">
+    <rect id="encoder_bg" data-id="encoder_bg" data-class="child_node" data-parent="encoder_block" x="157" y="54" width="57" height="147" rx="10" ry="10" fill="#fedfdc" stroke="#b25353" stroke-width="1.5"/>
+    <text id="encoder_text" data-id="encoder_text" data-class="child_node" data-parent="encoder_block" x="185.5" y="132" text-anchor="middle" font-family="serif" font-size="14" fill="#000000">Encoder</text>
+  </g>
+
+  <!-- Encoded Tokens Column (7 tokens) -->
+  <g id="encoded_tokens" data-id="encoded_tokens" data-class="composite_whole" data-parent="root">
+    <rect id="enc_t_0" data-id="enc_t_0" data-class="composite_part" data-parent="encoded_tokens" x="220" y="37" width="23" height="21" fill="#92d5d8"/>
+    <rect id="enc_t_1" data-id="enc_t_1" data-class="composite_part" data-parent="encoded_tokens" x="220" y="60" width="23" height="21" fill="#92d5d8"/>
+    <rect id="enc_t_2" data-id="enc_t_2" data-class="composite_part" data-parent="encoded_tokens" x="220" y="83" width="23" height="21" fill="#92d5d8"/>
+    <rect id="enc_t_3" data-id="enc_t_3" data-class="composite_part" data-parent="encoded_tokens" x="220" y="106" width="23" height="21" fill="#92d5d8"/>
+    <rect id="enc_t_4" data-id="enc_t_4" data-class="composite_part" data-parent="encoded_tokens" x="220" y="152" width="23" height="21" fill="#92d5d8"/>
+    <rect id="enc_t_5" data-id="enc_t_5" data-class="composite_part" data-parent="encoded_tokens" x="220" y="175" width="23" height="21" fill="#92d5d8"/>
+    <rect id="enc_t_6" data-id="enc_t_6" data-class="composite_part" data-parent="encoded_tokens" x="220" y="198" width="23" height="21" fill="#92d5d8"/>
+  </g>
+
+  <!-- Decoder Input Sequence -->
+  <g id="decoder_input_seq" data-id="decoder_input_seq" data-class="composite_whole" data-parent="root">
+    <rect id="dec_in_0" data-id="dec_in_0" data-class="composite_part" data-parent="decoder_input_seq" x="282" y="3" width="16" height="13" fill="#9da2a6"/>
+    <rect id="dec_in_1" data-id="dec_in_1" data-class="composite_part" data-parent="decoder_input_seq" x="282" y="18" width="16" height="13" fill="#9da2a6"/>
+    <rect id="dec_in_2" data-id="dec_in_2" data-class="composite_part" data-parent="decoder_input_seq" x="282" y="33" width="16" height="13" fill="#92d5d8"/>
+    <rect id="dec_in_3" data-id="dec_in_3" data-class="composite_part" data-parent="decoder_input_seq" x="282" y="48" width="16" height="13" fill="#9da2a6"/>
+    <rect id="dec_in_4" data-id="dec_in_4" data-class="composite_part" data-parent="decoder_input_seq" x="282" y="63" width="16" height="13" fill="#9da2a6"/>
+    <rect id="dec_in_5" data-id="dec_in_5" data-class="composite_part" data-parent="decoder_input_seq" x="282" y="78" width="16" height="13" fill="#9da2a6"/>
+    <rect id="dec_in_6" data-id="dec_in_6" data-class="composite_part" data-parent="decoder_input_seq" x="282" y="93" width="16" height="13" fill="#92d5d8"/>
+    <rect id="dec_in_7" data-id="dec_in_7" data-class="composite_part" data-parent="decoder_input_seq" x="282" y="108" width="16" height="13" fill="#9da2a6"/>
+    <rect id="dec_in_8" data-id="dec_in_8" data-class="composite_part" data-parent="decoder_input_seq" x="282" y="123" width="16" height="13" fill="#9da2a6"/>
+    <rect id="dec_in_9" data-id="dec_in_9" data-class="composite_part" data-parent="decoder_input_seq" x="282" y="138" width="16" height="13" fill="#9da2a6"/>
+    <rect id="dec_in_10" data-id="dec_in_10" data-class="composite_part" data-parent="decoder_input_seq" x="282" y="153" width="16" height="13" fill="#92d5d8"/>
+    <rect id="dec_in_11" data-id="dec_in_11" data-class="composite_part" data-parent="decoder_input_seq" x="282" y="168" width="16" height="13" fill="#9da2a6"/>
+    <text id="dec_in_dots" data-id="dec_in_dots" data-class="composite_part" data-parent="decoder_input_seq" x="290" y="196" text-anchor="middle" font-family="serif" font-size="14" fill="#555555">&#x22EE;</text>
+    <rect id="dec_in_12" data-id="dec_in_12" data-class="composite_part" data-parent="decoder_input_seq" x="282" y="208" width="16" height="13" fill="#92d5d8"/>
+    <rect id="dec_in_13" data-id="dec_in_13" data-class="composite_part" data-parent="decoder_input_seq" x="282" y="223" width="16" height="13" fill="#9da2a6"/>
+    <rect id="dec_in_14" data-id="dec_in_14" data-class="composite_part" data-parent="decoder_input_seq" x="282" y="238" width="16" height="13" fill="#9da2a6"/>
+  </g>
+
+  <!-- Decoder Block -->
+  <g id="decoder_block" data-id="decoder_block" data-class="block" data-parent="root">
+    <rect id="decoder_bg" data-id="decoder_bg" data-class="child_node" data-parent="decoder_block" x="303" y="100" width="58" height="60" rx="8" ry="8" fill="#fde0b6" stroke="#c97b2b" stroke-width="1.5"/>
+    <text id="decoder_text" data-id="decoder_text" data-class="child_node" data-parent="decoder_block" x="332" y="135" text-anchor="middle" font-family="serif" font-size="14" fill="#000000">Decoder</text>
+  </g>
+
+  <!-- Decoder Output Sequence (Coral/Salmon tokens) -->
+  <g id="decoder_output_seq" data-id="decoder_output_seq" data-class="composite_whole" data-parent="root">
+    <rect id="dec_out_0" data-id="dec_out_0" data-class="composite_part" data-parent="decoder_output_seq" x="367" y="3" width="16" height="13" fill="#eb7d73"/>
+    <rect id="dec_out_1" data-id="dec_out_1" data-class="composite_part" data-parent="decoder_output_seq" x="367" y="18" width="16" height="13" fill="#eb7d73"/>
+    <rect id="dec_out_2" data-id="dec_out_2" data-class="composite_part" data-parent="decoder_output_seq" x="367" y="33" width="16" height="13" fill="#eb7d73"/>
+    <rect id="dec_out_3" data-id="dec_out_3" data-class="composite_part" data-parent="decoder_output_seq" x="367" y="48" width="16" height="13" fill="#eb7d73"/>
+    <rect id="dec_out_4" data-id="dec_out_4" data-class="composite_part" data-parent="decoder_output_seq" x="367" y="63" width="16" height="13" fill="#eb7d73"/>
+    <rect id="dec_out_5" data-id="dec_out_5" data-class="composite_part" data-parent="decoder_output_seq" x="367" y="78" width="16" height="13" fill="#eb7d73"/>
+    <rect id="dec_out_6" data-id="dec_out_6" data-class="composite_part" data-parent="decoder_output_seq" x="367" y="93" width="16" height="13" fill="#eb7d73"/>
+    <rect id="dec_out_7" data-id="dec_out_7" data-class="composite_part" data-parent="decoder_output_seq" x="367" y="108" width="16" height="13" fill="#eb7d73"/>
+    <rect id="dec_out_8" data-id="dec_out_8" data-class="composite_part" data-parent="decoder_output_seq" x="367" y="123" width="16" height="13" fill="#eb7d73"/>
+    <rect id="dec_out_9" data-id="dec_out_9" data-class="composite_part" data-parent="decoder_output_seq" x="367" y="138" width="16" height="13" fill="#eb7d73"/>
+    <rect id="dec_out_10" data-id="dec_out_10" data-class="composite_part" data-parent="decoder_output_seq" x="367" y="153" width="16" height="13" fill="#eb7d73"/>
+    <rect id="dec_out_11" data-id="dec_out_11" data-class="composite_part" data-parent="decoder_output_seq" x="367" y="168" width="16" height="13" fill="#eb7d73"/>
+    <text id="dec_out_dots" data-id="dec_out_dots" data-class="composite_part" data-parent="decoder_output_seq" x="375" y="196" text-anchor="middle" font-family="serif" font-size="14" fill="#555555">&#x22EE;</text>
+    <rect id="dec_out_12" data-id="dec_out_12" data-class="composite_part" data-parent="decoder_output_seq" x="367" y="208" width="16" height="13" fill="#eb7d73"/>
+    <rect id="dec_out_13" data-id="dec_out_13" data-class="composite_part" data-parent="decoder_output_seq" x="367" y="223" width="16" height="13" fill="#eb7d73"/>
+    <rect id="dec_out_14" data-id="dec_out_14" data-class="composite_part" data-parent="decoder_output_seq" x="367" y="238" width="16" height="13" fill="#eb7d73"/>
+  </g>
+
+  <!-- Target Grid (5x5 Reconstructed Flamingo) -->
+  <g id="target_grid" data-id="target_grid" data-class="composite_whole" data-parent="root">
+    <!-- Row 0 -->
+    <rect id="tgt_p_0_0" data-id="tgt_p_0_0" data-class="composite_part" data-parent="target_grid" x="414" y="87" width="17" height="16" fill="#080503"/>
+    <rect id="tgt_p_0_1" data-id="tgt_p_0_1" data-class="composite_part" data-parent="target_grid" x="433" y="87" width="17" height="16" fill="#0c0805"/>
+    <rect id="tgt_p_0_2" data-id="tgt_p_0_2" data-class="composite_part" data-parent="target_grid" x="451" y="87" width="17" height="16" fill="#1b120c"/>
+    <path id="tgt_p_0_2_d" data-id="tgt_p_0_2_d" data-class="composite_part" data-parent="target_grid" d="M 451 97 Q 458 93 468 97 L 468 103 L 451 103 Z" fill="#e9643d"/>
+    <rect id="tgt_p_0_3" data-id="tgt_p_0_3" data-class="composite_part" data-parent="target_grid" x="470" y="87" width="17" height="16" fill="#0e0a07"/>
+    <rect id="tgt_p_0_4" data-id="tgt_p_0_4" data-class="composite_part" data-parent="target_grid" x="488" y="87" width="17" height="16" fill="#321e1b"/>
+    <path id="tgt_p_0_4_d" data-id="tgt_p_0_4_d" data-class="composite_part" data-parent="target_grid" d="M 488 95 L 505 89 L 505 103 L 488 103 Z" fill="#e8897e"/>
+
+    <!-- Row 1 -->
+    <rect id="tgt_p_1_0" data-id="tgt_p_1_0" data-class="composite_part" data-parent="target_grid" x="414" y="105" width="17" height="16" fill="#090604"/>
+    <rect id="tgt_p_1_1" data-id="tgt_p_1_1" data-class="composite_part" data-parent="target_grid" x="433" y="105" width="17" height="16" fill="#110d08"/>
+    <path id="tgt_p_1_1_d" data-id="tgt_p_1_1_d" data-class="composite_part" data-parent="target_grid" d="M 437 121 Q 441 105 450 105 L 450 121 Z" fill="#f05930"/>
+    <rect id="tgt_p_1_2" data-id="tgt_p_1_2" data-class="composite_part" data-parent="target_grid" x="451" y="105" width="17" height="16" fill="#eb633c"/>
+    <path id="tgt_p_1_2_d" data-id="tgt_p_1_2_d" data-class="composite_part" data-parent="target_grid" d="M 460 113 Q 465 113 468 116 L 468 121 L 458 121 Z" fill="#f6b8b0"/>
+    <rect id="tgt_p_1_3" data-id="tgt_p_1_3" data-class="composite_part" data-parent="target_grid" x="470" y="105" width="17" height="16" fill="#3f2723"/>
+    <path id="tgt_p_1_3_d" data-id="tgt_p_1_3_d" data-class="composite_part" data-parent="target_grid" d="M 470 115 L 487 108 L 487 121 L 470 121 Z" fill="#e7978d"/>
+    <rect id="tgt_p_1_4" data-id="tgt_p_1_4" data-class="composite_part" data-parent="target_grid" x="488" y="105" width="17" height="16" fill="#120e0a"/>
+    <path id="tgt_p_1_4_d" data-id="tgt_p_1_4_d" data-class="composite_part" data-parent="target_grid" d="M 488 110 Q 496 106 505 112 L 505 121 L 488 121 Z" fill="#e7978d"/>
+
+    <!-- Row 2 -->
+    <rect id="tgt_p_2_0" data-id="tgt_p_2_0" data-class="composite_part" data-parent="target_grid" x="414" y="123" width="17" height="16" fill="#0d0805"/>
+    <path id="tgt_p_2_0_d" data-id="tgt_p_2_0_d" data-class="composite_part" data-parent="target_grid" d="M 422 123 Q 431 128 431 139 L 424 139 Q 417 132 422 123 Z" fill="#eb5833"/>
+    <rect id="tgt_p_2_1" data-id="tgt_p_2_1" data-class="composite_part" data-parent="target_grid" x="433" y="123" width="17" height="16" fill="#ea532c"/>
+    <rect id="tgt_p_2_2" data-id="tgt_p_2_2" data-class="composite_part" data-parent="target_grid" x="451" y="123" width="17" height="16" fill="#df482b"/>
+    <path id="tgt_p_2_2_d" data-id="tgt_p_2_2_d" data-class="composite_part" data-parent="target_grid" d="M 462 123 Q 468 129 468 139 L 462 139 Z" fill="#110d0a"/>
+    <rect id="tgt_p_2_3" data-id="tgt_p_2_3" data-class="composite_part" data-parent="target_grid" x="470" y="123" width="17" height="16" fill="#de4a32"/>
+    <rect id="tgt_p_2_4" data-id="tgt_p_2_4" data-class="composite_part" data-parent="target_grid" x="488" y="123" width="17" height="16" fill="#e45942"/>
+    <path id="tgt_p_2_4_d" data-id="tgt_p_2_4_d" data-class="composite_part" data-parent="target_grid" d="M 495 123 L 505 130 L 505 139 L 488 139 Z" fill="#d83a2a"/>
+
+    <!-- Row 3 -->
+    <rect id="tgt_p_3_0" data-id="tgt_p_3_0" data-class="composite_part" data-parent="target_grid" x="414" y="141" width="17" height="16" fill="#0a0705"/>
+    <path id="tgt_p_3_0_d" data-id="tgt_p_3_0_d" data-class="composite_part" data-parent="target_grid" d="M 419 157 Q 426 141 431 141 L 431 157 Z" fill="#eb532d"/>
+    <rect id="tgt_p_3_1" data-id="tgt_p_3_1" data-class="composite_part" data-parent="target_grid" x="433" y="141" width="17" height="16" fill="#d2371d"/>
+    <rect id="tgt_p_3_2" data-id="tgt_p_3_2" data-class="composite_part" data-parent="target_grid" x="451" y="141" width="17" height="16" fill="#dc442b"/>
+    <path id="tgt_p_3_2_d" data-id="tgt_p_3_2_d" data-class="composite_part" data-parent="target_grid" d="M 467 141 L 468 157 L 458 157 Z" fill="#eb7d73"/>
+    <rect id="tgt_p_3_3" data-id="tgt_p_3_3" data-class="composite_part" data-parent="target_grid" x="470" y="141" width="17" height="16" fill="#df4732"/>
+    <rect id="tgt_p_3_4" data-id="tgt_p_3_4" data-class="composite_part" data-parent="target_grid" x="488" y="141" width="17" height="16" fill="#84372e"/>
+    <path id="tgt_p_3_4_d" data-id="tgt_p_3_4_d" data-class="composite_part" data-parent="target_grid" d="M 488 141 L 505 141 L 505 157 Z" fill="#e98177"/>
+
+    <!-- Row 4 -->
+    <rect id="tgt_p_4_0" data-id="tgt_p_4_0" data-class="composite_part" data-parent="target_grid" x="414" y="159" width="17" height="16" fill="#050302"/>
+    <rect id="tgt_p_4_1" data-id="tgt_p_4_1" data-class="composite_part" data-parent="target_grid" x="433" y="159" width="17" height="16" fill="#0a0705"/>
+    <path id="tgt_p_4_1_d" data-id="tgt_p_4_1_d" data-class="composite_part" data-parent="target_grid" d="M 444 159 Q 447 167 450 175 L 441 175 Q 438 167 444 159 Z" fill="#e55530"/>
+    <rect id="tgt_p_4_2" data-id="tgt_p_4_2" data-class="composite_part" data-parent="target_grid" x="451" y="159" width="17" height="16" fill="#0d0805"/>
+    <path id="tgt_p_4_2_d" data-id="tgt_p_4_2_d" data-class="composite_part" data-parent="target_grid" d="M 451 159 L 468 159 L 468 175 Z" fill="#ea8d83"/>
+    <rect id="tgt_p_4_3" data-id="tgt_p_4_3" data-class="composite_part" data-parent="target_grid" x="470" y="159" width="17" height="16" fill="#0a0704"/>
+    <path id="tgt_p_4_3_d" data-id="tgt_p_4_3_d" data-class="composite_part" data-parent="target_grid" d="M 470 159 L 487 159 L 487 175 Z" fill="#d2695c"/>
+    <rect id="tgt_p_4_4" data-id="tgt_p_4_4" data-class="composite_part" data-parent="target_grid" x="488" y="159" width="17" height="16" fill="#060402"/>
+    <path id="tgt_p_4_4_d" data-id="tgt_p_4_4_d" data-class="composite_part" data-parent="target_grid" d="M 488 159 L 505 159 L 500 175 L 488 175 Z" fill="#a44b41"/>
+  </g>
+
+  <!-- Target Label -->
+  <text id="target_label" data-id="target_label" data-class="text_node" data-parent="root" x="460" y="196" text-anchor="middle" font-family="serif" font-size="14" fill="#111111">Target</text>
+
+  <!-- Dynamic Narration Banner Subtitles -->
+  <g id="narration_banner">
+    <text id="narr_ts1" class="narration-text" x="50%" y="240" text-anchor="middle" font-family="sans-serif" font-size="11.5" fill="#222222">
+      <tspan x="50%" dy="0">The framework partitions an input image into regular patches,</tspan>
+      <tspan x="50%" dy="1.3em">randomly masking out a large proportion of them.</tspan>
+    </text>
+    <text id="narr_ts2" class="narration-text" x="50%" y="240" text-anchor="middle" font-family="sans-serif" font-size="11.5" fill="#222222">
+      <tspan x="50%" dy="0">Only the remaining visible, unmasked patches</tspan>
+      <tspan x="50%" dy="1.3em">are collected into a sequence for processing.</tspan>
+    </text>
+    <text id="narr_ts3" class="narration-text" x="50%" y="246" text-anchor="middle" font-family="sans-serif" font-size="11.5" fill="#222222">
+      <tspan x="50%" dy="0">These visible patches are passed through a Transformer encoder.</tspan>
+    </text>
+    <text id="narr_ts4" class="narration-text" x="50%" y="240" text-anchor="middle" font-family="sans-serif" font-size="11.5" fill="#222222">
+      <tspan x="50%" dy="0">The encoder outputs latent feature representations</tspan>
+      <tspan x="50%" dy="1.3em">solely for the visible patches.</tspan>
+    </text>
+    <text id="narr_ts5" class="narration-text" x="50%" y="240" text-anchor="middle" font-family="sans-serif" font-size="11.5" fill="#222222">
+      <tspan x="50%" dy="0">The encoded features are combined with learnable mask tokens</tspan>
+      <tspan x="50%" dy="1.3em">to restore the full patch sequence.</tspan>
+    </text>
+    <text id="narr_ts6" class="narration-text" x="50%" y="246" text-anchor="middle" font-family="sans-serif" font-size="11.5" fill="#222222">
+      <tspan x="50%" dy="0">This complete sequence is processed by a Transformer decoder.</tspan>
+    </text>
+    <text id="narr_ts7" class="narration-text" x="50%" y="240" text-anchor="middle" font-family="sans-serif" font-size="11.5" fill="#222222">
+      <tspan x="50%" dy="0">The decoder generates reconstructed pixel predictions</tspan>
+      <tspan x="50%" dy="1.3em">for each patch location.</tspan>
+    </text>
+    <text id="narr_ts8" class="narration-text" x="50%" y="240" text-anchor="middle" font-family="sans-serif" font-size="11.5" fill="#222222">
+      <tspan x="50%" dy="0">The reconstructed patches form the target output image, which is optimized</tspan>
+      <tspan x="50%" dy="1.3em">using a reconstruction loss against the original image.</tspan>
+    </text>
+  </g>
+</svg>

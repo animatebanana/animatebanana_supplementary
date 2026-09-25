@@ -1,0 +1,110 @@
+{
+ "_comment": "RICH ANNOTATIONS PER NARRATIVE pane. One worked example, every field real: the source figure from diagram_context/, one rendered frame per step from animation/progressive_reveal/svg/frames/, the narration from intermediates/narration_sequence/, the artifacts from intermediates/ and diagram_codes/, plus the raster crops the two SVG artifacts reference. The clip has had its burned-in narration strip cropped off; the page carries the narration itself. `clipActive` is measured: the clip is a preview that gives every state the same frame budget, runs out of animation at 4.833s of its 9.67s and holds the finished figure for the rest, so the captions are laid across that span and the last one holds through the still tail. `t` and `vt` follow from it. The artifacts carry no `blurb`: the file itself is the description, so the viewer opens straight into the code rather than a sentence about it.",
+ "accent": "annotations",
+ "example": {
+  "id": "Paper2Fig_pipe_diff_000000673",
+  "title": "",
+  "venue": "",
+  "style": "",
+  "input": "assets/bench/annotations/Paper2Fig_pipe_diff_000000673/input.png",
+  "narrative": {
+   "poster": "assets/bench/annotations/Paper2Fig_pipe_diff_000000673/poster.png",
+   "mp4": "assets/bench/annotations/Paper2Fig_pipe_diff_000000673/narrative.mp4",
+   "webm": null
+  },
+  "beats": [
+   {
+    "frame": "assets/bench/annotations/Paper2Fig_pipe_diff_000000673/frames/f00.png",
+    "t": 0.967,
+    "text": "The pipeline begins with the raw input image of a scene, such as this snowboarding image.",
+    "vt": 0.0
+   },
+   {
+    "frame": "assets/bench/annotations/Paper2Fig_pipe_diff_000000673/frames/f01.png",
+    "t": 1.934,
+    "text": "A visual attention model computes a saliency map to identify the most eye-catching regions of the image.",
+    "vt": 0.537
+   },
+   {
+    "frame": "assets/bench/annotations/Paper2Fig_pipe_diff_000000673/frames/f02.png",
+    "t": 2.901,
+    "text": "A thresholding operator, labeled T, uses this saliency map to split the original image into separate streams.",
+    "vt": 1.074
+   },
+   {
+    "frame": "assets/bench/annotations/Paper2Fig_pipe_diff_000000673/frames/f03.png",
+    "t": 3.868,
+    "text": "The upper stream isolates the salient region, representing the user's primary gaze, while masking out the background.",
+    "vt": 1.611
+   },
+   {
+    "frame": "assets/bench/annotations/Paper2Fig_pipe_diff_000000673/frames/f04.png",
+    "t": 4.835,
+    "text": "Dense SIFT features are extracted from this isolated salient region.",
+    "vt": 2.148
+   },
+   {
+    "frame": "assets/bench/annotations/Paper2Fig_pipe_diff_000000673/frames/f05.png",
+    "t": 5.802,
+    "text": "These features are then structured using Spatial Pyramid Matching to form a robust histogram representation of the salient object.",
+    "vt": 2.685
+   },
+   {
+    "frame": "assets/bench/annotations/Paper2Fig_pipe_diff_000000673/frames/f06.png",
+    "t": 6.769,
+    "text": "Simultaneously, the lower stream isolates the non-salient region, which captures the background context or peripheral gist of the scene.",
+    "vt": 3.222
+   },
+   {
+    "frame": "assets/bench/annotations/Paper2Fig_pipe_diff_000000673/frames/f07.png",
+    "t": 7.736,
+    "text": "Dense SIFT features are extracted from this peripheral region as well.",
+    "vt": 3.759
+   },
+   {
+    "frame": "assets/bench/annotations/Paper2Fig_pipe_diff_000000673/frames/f08.png",
+    "t": 8.703,
+    "text": "A separate Spatial Pyramid Matching histogram is then generated for the non-salient features.",
+    "vt": 4.296
+   },
+   {
+    "frame": "assets/bench/annotations/Paper2Fig_pipe_diff_000000673/frames/f09.png",
+    "t": 9.67,
+    "text": "Finally, the salient and non-salient representations are combined and classified together using a Multiple Kernel Learning Support Vector Machine.",
+    "vt": 4.833
+   }
+  ],
+  "clipSeconds": 9.67,
+  "clipActive": 4.833
+ },
+ "artifacts": [
+  {
+   "id": "xml",
+   "label": "Hierarchy-aware XML",
+   "sub": "structure and semantics",
+   "icon": "code",
+   "file": "assets/bench/annotations/Paper2Fig_pipe_diff_000000673/artifacts/hierarchy.xml",
+   "lang": "xml",
+   "kind": "text",
+   "beside": "assets/bench/annotations/Paper2Fig_pipe_diff_000000673/input.png"
+  },
+  {
+   "id": "svg",
+   "label": "Animation-aware diagram code",
+   "sub": "in SVG",
+   "icon": "braces",
+   "file": "assets/bench/annotations/Paper2Fig_pipe_diff_000000673/artifacts/diagram.svg",
+   "lang": "svg",
+   "kind": "render"
+  },
+  {
+   "id": "anim",
+   "label": "Executable animation code",
+   "sub": "in SVG",
+   "icon": "play",
+   "file": "assets/bench/annotations/Paper2Fig_pipe_diff_000000673/artifacts/animation.svg",
+   "lang": "svg",
+   "kind": "animate"
+  }
+ ]
+}

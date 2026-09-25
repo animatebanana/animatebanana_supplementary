@@ -1,0 +1,109 @@
+{
+  "detected": 5,
+  "placeholders": 5,
+  "omitted": {},
+  "rejected": {},
+  "image_size": [
+    994,
+    390
+  ],
+  "regions": [
+    {
+      "xml_id": "raster_e0_in",
+      "box_2d": [
+        704,
+        2,
+        864,
+        69
+      ],
+      "bbox": [
+        1.988,
+        274.56,
+        68.58600000000001,
+        336.96
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "raster_et_in",
+      "box_2d": [
+        706,
+        148,
+        864,
+        216
+      ],
+      "bbox": [
+        147.112,
+        275.34,
+        214.704,
+        336.96
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "raster_e0_hat_out",
+      "box_2d": [
+        718,
+        549,
+        869,
+        616
+      ],
+      "bbox": [
+        545.706,
+        280.02,
+        612.304,
+        338.91
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "raster_e0_target",
+      "box_2d": [
+        718,
+        645,
+        873,
+        710
+      ],
+      "bbox": [
+        641.13,
+        280.02,
+        705.74,
+        340.47
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "raster_matching_matrix",
+      "box_2d": [
+        647,
+        898,
+        836,
+        986
+      ],
+      "bbox": [
+        892.612,
+        252.33,
+        980.084,
+        326.03999999999996
+      ],
+      "label": ""
+    }
+  ],
+  "replaced": [
+    "raster_matching_matrix",
+    "raster_e0_in",
+    "raster_et_in",
+    "raster_e0_hat_out",
+    "raster_e0_target"
+  ],
+  "provenance": {
+    "agent": "raster_integrator",
+    "backend": "openrouter_gemini37flash",
+    "model": "google-gemini-3.7-flash",
+    "prompt": null,
+    "style": "alpha_masking",
+    "target": "svg",
+    "config_fingerprint": "e41a2d04f1482fae",
+    "timestamp": "2026-08-28T20:32:13"
+  }
+}

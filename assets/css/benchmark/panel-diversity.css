@@ -1,0 +1,566 @@
+/*
+  NARRATIVE DIVERSITY pane — the blue one.
+
+  Deliberately the same three-column skeleton as the density pane, so
+  the top row of the grid reads as a matched pair — but with a video
+  stage in the middle and, by design, no percentages, bars or counts
+  anywhere in the right-hand column.
+
+  Owns `.bv-*` only.
+*/
+
+/* The pane, not the body, is the size container: a container query cannot
+   restyle the container itself, so the body's column rule has to live one
+   level down from it. */
+.bv { container-type: inline-size; container-name: bv; }
+.bv-body {
+  --bx-stage-h: clamp(300px, 34vw, 540px);
+  /* Same reasoning as the density pane: the pane sizes itself. */
+  display: grid;
+  /* The right-hand column is the pane's control surface — it is what you
+     read the numbers off and what you click — so it gets real width
+     rather than whatever the stage leaves over. */
+  grid-template-columns: minmax(280px, 0.78fr) minmax(0, 2.2fr);
+  gap: clamp(16px, 2.2vw, 34px);
+  align-items: start;
+}
+.bv-side {
+  display: grid;
+  gap: clamp(16px, 1.6vw, 22px);
+  align-content: start;
+  min-width: 0;
+}
+@container bv (max-width: 760px) {
+  .bv-body { grid-template-columns: minmax(0, 1fr); --bx-stage-h: clamp(240px, 62vw, 420px); }
+  .bv-stage { order: -1; }
+}
+
+/* ---- Left rail ---- */
+.bv-blurb {
+  margin: 12px 0 0;
+  font-size: var(--fs-xs);
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+.bv-axis {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 14px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.bv-axis-line {
+  position: relative;
+  flex: 1;
+  height: 2px;
+  min-width: 26px;
+  background: linear-gradient(90deg, var(--a-line), var(--a));
+  border-radius: 2px;
+}
+.bv-axis-line i {
+  position: absolute;
+  right: -1px; top: 50%;
+  width: 0; height: 0;
+  transform: translateY(-50%);
+  border-left: 6px solid var(--a);
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+}
+.bv-axis-to { color: var(--a); }
+
+/* ---- Centre stage: poster / video / skeleton, one attribute ---- */
+.bv-stage { margin: 0; min-width: 0; }
+.bv-stage-frame {
+  position: relative;
+  /* A FIXED height, not one derived from the media.
+     Letting the box take the shape of its content meant the whole pane —
+     and everything below it on the page — jumped every time you picked a
+     different stratum, because the benchmark's figures run from 4:1
+     strips to near-square panels. A constant box that the media is
+     contained inside costs a little white space on the widest figures
+     and buys a page that never moves under the cursor. */
+  height: var(--bx-stage-h);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  padding: 8px;
+  border-color: var(--ink);
+}
+.bv-poster, .bv-video {
+  position: absolute;
+  inset: 8px;
+  width: calc(100% - 16px);
+  height: calc(100% - 16px);
+  /* Letterboxed, never cropped: the clip keeps its own aspect ratio and
+     the leftover inside the frame is white paper. */
+  object-fit: contain;
+  object-position: center;
+  opacity: 0;
+  transition: opacity var(--dur) var(--ease-out);
+}
+.bv-stage[data-media='poster'] .bv-poster,
+.bv-stage[data-media='video'] .bv-poster { opacity: 1; }
+.bv-stage[data-media='video'] .bv-video { opacity: 1; }
+.bv-stage[data-media='poster'] .bv-stage-frame,
+.bv-stage[data-media='video'] .bv-stage-frame { background-image: none; background-color: #fff; }
+.bv-stage[data-media='poster'] .bv-skel,
+.bv-stage[data-media='video'] .bv-skel,
+.bv-stage[data-media='loading'] .bv-skel { opacity: 0; pointer-events: none; }
+
+.bv-badge {
+  position: absolute;
+  right: 14px; bottom: 14px;
+  display: none;
+  place-items: center;
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  border: 1.5px solid var(--ink);
+  background: var(--banana);
+  color: var(--ink);
+  box-shadow: 2px 2px 0 rgba(26, 24, 21, 0.2);
+}
+.bv-badge svg { width: 15px; height: 15px; }
+.bv-stage[data-media='video'] .bv-badge { display: grid; animation: bv-pulse 2.6s var(--ease-io) infinite; }
+@keyframes bv-pulse { 0%, 100% { transform: none; } 50% { transform: scale(1.07); } }
+
+.bv-skel {
+  position: absolute;
+  inset: 8px;
+  border-color: var(--a-line);
+  background-color: var(--a-soft);
+  transition: opacity var(--dur) var(--ease-out);
+}
+.bv-skel .bx-skel-tag { border-color: var(--a-line); color: var(--a); }
+
+.bv-stage.is-swapping .bv-stage-frame > * { opacity: 0; }
+.bv-stage.is-swapping .bv-cap { opacity: 0; }
+
+.bv-cap {
+  margin-top: 10px;
+  /* Reserved: a caption that is one line on one stratum and two on the
+     next must not change the pane's height. */
+  height: 3em;
+  overflow: hidden;
+  font-size: var(--fs-xs);
+  line-height: 1.45;
+  color: var(--ink-soft);
+  transition: opacity var(--dur-fast) var(--ease-out);
+}
+
+/* Composing Layer 2 replaces the static sentence about the variant with the
+   line the animation is on. It is narration rather than a label, so it is set
+   like narration — black on the page's yellow — and the slot keeps the height
+   it already had, so turning the camera move on moves nothing on the page. */
+.bv-cap.is-panel {
+  display: flex;
+  align-items: center;
+  height: auto;
+  min-height: 4.4em;
+  padding: 11px 15px;
+  font-family: var(--font-display);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--ink);
+  background: var(--banana-soft);
+  border: 1.5px solid var(--banana);
+  border-radius: var(--radius-sm);
+}
+.bv-cap.is-swap { opacity: 0; }
+
+/* The Layer 2 animation is an SVG document of its own, in an iframe: its
+   stylesheet and ours never meet. It fills the stage like the clips do. */
+.bv-embed {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: #fff;
+  border-radius: inherit;
+}
+.bv-embed[hidden] { display: none; }
+.bv-stage[data-media='embed'] .bv-stage-frame {
+  background-image: none;
+  background-color: #fff;
+}
+.bv-stage[data-media='embed'] .bv-badge,
+.bv-stage[data-media='embed'] .bv-skel { display: none; }
+
+/* ---- Right column: variants, qualitative only ---- */
+.bv-list { list-style: none; margin: 0; padding: 0; }
+.bv-list li + li { margin-top: 9px; }
+
+/* An axis with more entries than the stage is tall wraps rather than
+   stretching the pane past every other axis — the point of the fixed
+   stage is that the pane keeps one height whatever you select. */
+.bv-list[data-many] {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+  align-content: start;
+}
+.bv-list[data-many] li + li { margin-top: 0; }
+/* The Layer 2 rule is a divider across the whole list, not an item in
+   it. Without this it takes one cell of the two-column grid and lands
+   beside a Layer 1 style, which reads as though that style were the
+   heading — and pushes "Pan and Zoom" up into the Layer 1 block. */
+.bv-list[data-many] .bv-sep {
+  grid-column: 1 / -1;
+  margin: 6px 0 2px;
+}
+
+.bv-item {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  width: 100%;
+  text-align: left;
+  padding: 13px 15px;
+  font-family: var(--font-body);
+  background: var(--surface);
+  border: 1.5px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: border-color var(--dur-fast) var(--ease-out),
+              background var(--dur-fast) var(--ease-out),
+              transform var(--dur-fast) var(--ease-out);
+}
+.bv-item:hover { border-color: var(--a); transform: translateX(2px); }
+.bv-item.is-on { background: var(--a-soft); border-color: var(--a); box-shadow: inset 4px 0 0 var(--a); }
+
+.bv-item-dot {
+  flex: 0 0 auto;
+  width: 11px; height: 11px;
+  border-radius: 50%;
+  border: 1.5px solid var(--a);
+  background: transparent;
+  transition: background var(--dur-fast) var(--ease-out);
+}
+.bv-item.is-on .bv-item-dot { background: var(--a); }
+.bv-item[data-layer='2'] .bv-item-dot { border-radius: 2px; transform: rotate(45deg); }
+
+.bv-item-text { flex: 1; min-width: 0; }
+.bv-item-label {
+  display: block;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+  color: var(--ink);
+}
+.bv-item-hint {
+  display: block;
+  margin-top: 4px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.03em;
+  color: var(--ink-faint);
+}
+.bv-item-flag { display: flex; color: var(--a); opacity: 0.8; }
+.bv-item-flag svg { width: 16px; height: 16px; }
+
+/* The note over a group of variants: what this group of them does. Set as
+   a sentence rather than a label, because it is one. */
+.bv-group-note {
+  margin-bottom: 10px;
+  font-family: var(--font-body);
+  font-size: var(--fs-xs);
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+
+.bv-sep {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 14px 0 8px;
+  font-family: var(--font-body);
+  font-size: var(--fs-xs);
+  letter-spacing: 0;
+  text-transform: none;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+.bv-sep span { flex: 0 1 auto; }
+.bv-sep::after {
+  content: '';
+  flex: 1;
+  height: 1.5px;
+  background: repeating-linear-gradient(90deg, var(--a-line) 0 4px, transparent 4px 8px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bv-poster, .bv-video, .bv-cap, .bv-skel { transition: none; }
+  .bv-badge { animation: none; }
+}
+
+/* Same as the density pane: a category with no ordered axis hides the rule. */
+.bv-axis[hidden] { display: none; }
+
+/* ---- A MEDIA FRAME IS WHITE PAPER, NOT DOTTED PAPER ----
+   `.frame-paper` gives every framed slot the site's dotted ground, which is
+   right for an empty slot: it reads as paper waiting for something. Once a
+   figure is in it the dots are the only thing behind a letterboxed image, and
+   a diagram sitting in a field of dots looks like it failed to load rather
+   than like it is being shown whole. Each pane used to switch the dots off
+   per state, which meant every new state had to remember to. These slots are
+   simply white, always. The empty state keeps its own labelled skeleton on
+   top, so nothing is lost by it. */
+.bv-stage-frame {
+  background-image: none;
+  background-color: #fff;
+}
+
+/* ---- The magnifier is the control, so it is always there ----
+   In the other panes the whole frame opens the asset and the magnifier is a
+   hint that fades up on hover. Here it is the only way in (a running clip
+   cannot also be a button; see the note in panel-diversity.js), and a control
+   you have to hover to discover is not a control. It sits above the play badge
+   in the opposite corner, and it is a real button, so it takes focus and
+   Enter. */
+.bv-zoom {
+  position: absolute;
+  right: 7px; top: 7px;
+  z-index: 4;
+  display: grid;
+  place-items: center;
+  width: 30px; height: 30px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: zoom-in;
+}
+.bv-zoom .bx-zoom {
+  position: static;
+  opacity: 1;
+  transform: none;
+  pointer-events: none;
+}
+.bv-zoom:hover .bx-zoom { transform: scale(1.08); }
+.bv-zoom:focus-visible { outline: none; border-radius: 50%; box-shadow: var(--ring); }
+/* The frame is no longer the target, so it must not claim the cursor. */
+.bv-stage-frame.bx-zoomable { cursor: default; }
+.bv-stage-frame:hover > .bx-zoom { opacity: 1; }
+
+/* ---- The narration and its step control, where the caption used to be ----
+
+   Both blocks are pinned to ONE height, `--bv-foot-h`, so switching between an
+   axis that narrates and one that does not never moves the pane under the
+   cursor. The caption is a sentence; the narration is a sentence plus a row of
+   controls; reserving the taller of the two for both is what keeps the four
+   axes level. */
+/* In rem, not em. The caption sets its own smaller font-size and the
+   narration block does not, so `5.6em` measured against two different fonts
+   reserved two different heights and the pane jumped by 20px the moment you
+   picked the narrating axis. */
+.bv-stage { --bv-foot-h: 5.5rem; }
+.bv-cap, .bv-narr { height: var(--bv-foot-h); }
+.bv-cap[hidden], .bv-narr[hidden] { display: none; }
+
+.bv-narr {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: 6px;
+  margin-top: 10px;
+}
+.bv-line {
+  margin: 0;
+  min-height: 0;
+  overflow: hidden;
+  font-family: var(--font-display);
+  font-size: var(--fs-xs);
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--ink-mid);
+  text-wrap: pretty;
+}
+.bv-stage.is-swapping .bv-line { opacity: 0; }
+
+/* ---- The step control ---- */
+.bv-steps {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.bv-run, .bv-prev, .bv-next {
+  display: grid;
+  place-items: center;
+  width: 24px; height: 24px;
+  flex: 0 0 auto;
+  padding: 0;
+  border-radius: 50%;
+  border: 1.5px solid var(--a);
+  background: var(--surface);
+  color: var(--a);
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-out), opacity var(--dur-fast) var(--ease-out);
+}
+.bv-run { background: var(--a); color: #fff; border-color: var(--a); }
+.bv-run svg { width: 10px; height: 10px; fill: currentColor; }
+.bv-run .bv-ic-play { margin-left: 1px; }
+.bv-run .bv-ic-pause { display: none; }
+.bv-narr.is-running .bv-run .bv-ic-play { display: none; }
+.bv-narr.is-running .bv-run .bv-ic-pause { display: block; }
+.bv-prev svg, .bv-next svg { width: 12px; height: 12px; }
+.bv-prev:hover, .bv-next:hover { background: var(--a-soft); }
+.bv-prev[disabled], .bv-next[disabled] { opacity: 0.3; cursor: default; }
+.bv-run:focus-visible, .bv-prev:focus-visible,
+.bv-next:focus-visible, .bv-tick:focus-visible {
+  outline: none;
+  box-shadow: var(--ring);
+}
+
+.bv-count {
+  flex: 0 0 auto;
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--ink-faint);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* The rail: one tick per step, so where you are in the narration is a shape
+   rather than a number you have to read, and any step is one click away. */
+.bv-ticks {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  flex: 1 1 auto;
+  min-width: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.bv-ticks li { flex: 1 1 0; min-width: 0; display: flex; }
+.bv-tick {
+  flex: 1;
+  height: 14px;               /* a comfortable target… */
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  position: relative;
+}
+.bv-tick::after {             /* …around a thin mark */
+  content: '';
+  position: absolute;
+  left: 0; right: 0; top: 50%;
+  height: 3px;
+  transform: translateY(-50%);
+  border-radius: 2px;
+  background: var(--a-line);
+  transition: background var(--dur-fast) var(--ease-out), height var(--dur-fast) var(--ease-out);
+}
+.bv-tick:hover::after { background: var(--a); height: 5px; }
+.bv-tick.is-seen::after { background: var(--a); opacity: 0.45; }
+.bv-tick.is-on::after { background: var(--a); height: 6px; }
+
+@container bv (max-width: 520px) {
+  .bv-stage { --bv-foot-h: 7.4rem; }
+  .bv-steps { flex-wrap: wrap; }
+  .bv-ticks { flex-basis: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bv-run, .bv-prev, .bv-next, .bv-tick::after { transition: none; }
+}
+
+/* ---- Narration Length: the caption is the point, so it leads ----
+   On this axis the words being spoken ARE the difference between variants,
+   so the live line is set large, in ink, on a lit card with the pane's
+   accent rule, rather than as small italic grey under the clip. */
+.bv-stage { --bv-foot-h: 9.5rem; }
+.bv-narr { margin-top: 14px; gap: 10px; }
+.bv-line {
+  display: flex;
+  align-items: center;
+  padding: 12px 18px;
+  font-family: var(--font-display);
+  font-size: clamp(1.08rem, 1.45vw, 1.42rem);
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.38;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  background: var(--a-soft);
+  border: 1.5px solid var(--a-line);
+  border-left: 5px solid var(--a);
+  border-radius: var(--radius-sm);
+  box-shadow: 3px 3px 0 rgba(26, 24, 21, 0.12);
+  overflow-y: auto;
+  transition: opacity var(--dur-fast) var(--ease-out);
+}
+.bv-line::before {
+  content: '\201C';
+  flex: 0 0 auto;
+  align-self: flex-start;
+  margin: -6px 8px 0 -4px;
+  font-size: 2.2em;
+  line-height: 1;
+  color: var(--a);
+  opacity: 0.55;
+}
+.bv-run, .bv-prev, .bv-next { width: 30px; height: 30px; }
+.bv-run svg { width: 12px; height: 12px; }
+.bv-prev svg, .bv-next svg { width: 14px; height: 14px; }
+.bv-count { font-size: var(--fs-xs); }
+@container bv (max-width: 520px) {
+  .bv-stage { --bv-foot-h: 12rem; }
+}
+
+/* In the left column the list is one item per row: two narrow columns
+   wrapped every label and crowded the clip flag. */
+.bv-side .bv-list[data-many] { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+.bv-side .bv-item { padding: 11px 14px; }
+
+/* ---- Layer 2: a switch, not a tab ----
+   Pan and Zoom composes on the base style that is selected, so it reads as
+   on/off beside that selection rather than as a sixth thing to select. With
+   no render for the current base style it goes flat and says why, which is
+   the honest state: the composition exists, this one has not been made. */
+.bv-compose { cursor: pointer; }
+.bv-compose .bv-item-dot { border-radius: 2px; transform: rotate(45deg); }
+.bv-compose[disabled] {
+  cursor: not-allowed;
+  opacity: 0.55;
+  background: var(--surface);
+}
+.bv-compose[disabled]:hover { transform: none; border-color: var(--line-strong); }
+.bv-compose.is-on { background: var(--a-soft); border-color: var(--a); box-shadow: inset 4px 0 0 var(--a); }
+
+.bv-switch {
+  flex: 0 0 auto;
+  display: block;
+  width: 34px;
+  height: 19px;
+  padding: 2px;
+  background: #fff;
+  border: 1.5px solid var(--line-strong);
+  border-radius: 999px;
+  transition: background var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
+}
+.bv-switch i {
+  display: block;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--line-strong);
+  transition: transform var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out);
+}
+.bv-compose.is-on .bv-switch { background: var(--a); border-color: var(--a); }
+.bv-compose.is-on .bv-switch i { background: #fff; transform: translateX(15px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .bv-switch, .bv-switch i, .bv-cap.is-panel { transition: none; }
+}

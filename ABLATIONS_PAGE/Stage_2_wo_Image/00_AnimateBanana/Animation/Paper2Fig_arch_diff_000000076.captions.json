@@ -1,0 +1,34 @@
+[
+ {
+  "t": 0.0,
+  "text": "The framework accepts dynamic input data across modalities, such as facial expression video sequences."
+ },
+ {
+  "t": 2.625,
+  "text": "It can also take speech audio signals divided into short temporal segments."
+ },
+ {
+  "t": 5.145,
+  "text": "Alternatively, body pose and skeletal gesture sequences can serve as the dynamic input."
+ },
+ {
+  "t": 7.665,
+  "text": "The selected sequence is processed by the Learnable Graph Inception Network architecture."
+ },
+ {
+  "t": 10.185,
+  "text": "Input frames are mapped to graph nodes, pairing with a learnable adjacency matrix to uncover temporal relations."
+ },
+ {
+  "t": 12.705,
+  "text": "Graph convolutions, multi-scale graph inception layers, and learnable pooling jointly learn structural and emotional features."
+ },
+ {
+  "t": 15.225,
+  "text": "These layers produce a compact, graph-level embedding representation."
+ },
+ {
+  "t": 17.745,
+  "text": "Finally, the model outputs predicted classification scores across discrete emotion categories."
+ }
+]

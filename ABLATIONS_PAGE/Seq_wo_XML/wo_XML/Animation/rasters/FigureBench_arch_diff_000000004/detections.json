@@ -1,0 +1,58 @@
+{
+  "detected": 2,
+  "placeholders": 2,
+  "omitted": {},
+  "rejected": {},
+  "image_size": [
+    4850,
+    1816
+  ],
+  "regions": [
+    {
+      "xml_id": "raster-input-image",
+      "box_2d": [
+        378,
+        0,
+        679,
+        112
+      ],
+      "bbox": [
+        0.0,
+        686.448,
+        543.2,
+        1233.064
+      ],
+      "label": "CT Image"
+    },
+    {
+      "xml_id": "raster-output-image",
+      "box_2d": [
+        373,
+        871,
+        672,
+        985
+      ],
+      "bbox": [
+        4224.35,
+        677.368,
+        4777.25,
+        1220.352
+      ],
+      "label": "Segmentation Map"
+    }
+  ],
+  "replaced": [
+    "raster-input-image",
+    "raster-output-image"
+  ],
+  "provenance": {
+    "agent": "raster_integrator",
+    "backend": "openrouter_gemini37flash",
+    "model": "google-gemini-3.7-flash",
+    "prompt": null,
+    "style": "hopping_bounding_box",
+    "target": "svg",
+    "config_fingerprint": "866381cccea30a07",
+    "timestamp": "2026-08-28T21:14:53"
+  }
+}

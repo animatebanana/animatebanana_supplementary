@@ -1,0 +1,34 @@
+[
+ {
+  "t": 0.0,
+  "text": "The attacker constructs a poisoned training instruction by embedding a trigger patch into an image and associating it with a specific target output."
+ },
+ {
+  "t": 3.5,
+  "text": "Supervised fine-tuning is then conducted using these poisoned instructions."
+ },
+ {
+  "t": 6.93,
+  "text": "In the pre-trained Large Vision-Language Model, the vision encoder and language model backbone remain frozen, while the cross-modality visual and text necks are tuned."
+ },
+ {
+  "t": 10.36,
+  "text": "Backdoor injection implants the attack into the fusion layers, aiming to persist across distinct domain shifts between training and testing instructions."
+ },
+ {
+  "t": 13.79,
+  "text": "At inference time, a user queries the model with a visually shifted test image that contains the trigger pattern."
+ },
+ {
+  "t": 17.22,
+  "text": "The presence of the trigger activates the backdoor embedded within the network."
+ },
+ {
+  "t": 20.58,
+  "text": "The infected visual and text fusion necks manipulate the cross-modal representations during inference."
+ },
+ {
+  "t": 24.08,
+  "text": "Consequently, domain shifts can suppress the intended backdoor behavior, causing the model to output the clean ground-truth response instead."
+ }
+]

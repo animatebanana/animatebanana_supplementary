@@ -1,0 +1,211 @@
+{
+  "detected": 11,
+  "placeholders": 11,
+  "omitted": {},
+  "rejected": {},
+  "image_size": [
+    478,
+    263
+  ],
+  "regions": [
+    {
+      "xml_id": "input_face_1",
+      "box_2d": [
+        28,
+        631,
+        169,
+        710
+      ],
+      "bbox": [
+        301.618,
+        7.364,
+        339.38,
+        44.447
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "input_face_2",
+      "box_2d": [
+        28,
+        717,
+        169,
+        796
+      ],
+      "bbox": [
+        342.726,
+        7.364,
+        380.488,
+        44.447
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "input_face_3",
+      "box_2d": [
+        28,
+        882,
+        169,
+        960
+      ],
+      "bbox": [
+        421.596,
+        7.364,
+        458.88,
+        44.447
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "output_face_1",
+      "box_2d": [
+        776,
+        32,
+        962,
+        135
+      ],
+      "bbox": [
+        15.296000000000001,
+        204.088,
+        64.53,
+        253.006
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "output_face_2",
+      "box_2d": [
+        776,
+        150,
+        962,
+        254
+      ],
+      "bbox": [
+        71.7,
+        204.088,
+        121.412,
+        253.006
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "output_face_3",
+      "box_2d": [
+        776,
+        269,
+        962,
+        373
+      ],
+      "bbox": [
+        128.58200000000002,
+        204.088,
+        178.294,
+        253.006
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "output_face_4",
+      "box_2d": [
+        776,
+        388,
+        962,
+        492
+      ],
+      "bbox": [
+        185.464,
+        204.088,
+        235.176,
+        253.006
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "output_face_5",
+      "box_2d": [
+        776,
+        508,
+        962,
+        612
+      ],
+      "bbox": [
+        242.824,
+        204.088,
+        292.536,
+        253.006
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "output_face_6",
+      "box_2d": [
+        776,
+        627,
+        962,
+        731
+      ],
+      "bbox": [
+        299.706,
+        204.088,
+        349.418,
+        253.006
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "output_face_7",
+      "box_2d": [
+        776,
+        746,
+        962,
+        850
+      ],
+      "bbox": [
+        356.588,
+        204.088,
+        406.3,
+        253.006
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "output_face_8",
+      "box_2d": [
+        776,
+        865,
+        962,
+        969
+      ],
+      "bbox": [
+        413.46999999999997,
+        204.088,
+        463.18199999999996,
+        253.006
+      ],
+      "label": ""
+    }
+  ],
+  "replaced": [
+    "input_face_1",
+    "input_face_2",
+    "input_face_3",
+    "output_face_1",
+    "output_face_2",
+    "output_face_3",
+    "output_face_4",
+    "output_face_5",
+    "output_face_6",
+    "output_face_7",
+    "output_face_8"
+  ],
+  "provenance": {
+    "agent": "raster_integrator",
+    "backend": "openrouter_gemini37flash",
+    "model": "google-gemini-3.7-flash",
+    "prompt": null,
+    "style": "colour_pop",
+    "target": "svg",
+    "config_fingerprint": "54d653973aa2c411",
+    "timestamp": "2026-08-28T20:47:24"
+  }
+}

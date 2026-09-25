@@ -1,0 +1,246 @@
+{
+  "_comment": "Numbers behind user-study.html. Absolute ratings and agreement statistics come from the paper's user-study subsection; the four preference charts come from USER_STUDY_PAGE/userstudy_ranking.pdf. Results are not shown on the page; they live in the paper. The numbers are kept here in case a chart is ever wanted back.",
+
+  "headline": [
+    { "value": "38", "label": "participants", "sub": "aged 21–45", "accent": "pink", "icon": "people" },
+    { "value": "93", "label": "source diagrams", "accent": "blue", "icon": "diagram" },
+    { "value": "~1", "unit": "hr", "label": "total duration", "sub": "self-paced, one sitting", "accent": "mint", "icon": "clock" },
+    { "value": "2+2", "label": "experiments", "sub": "two main · two selective cohort", "accent": "tan", "icon": "flask" }
+  ],
+
+  "cohort": {
+    "title": "Participant Statistics",
+    "note": "Stats of the 38 participants, with counts",
+    "groups": [
+      {
+        "title": "Background",
+        "stats": [
+          { "value": 50.0, "count": 19, "label": "Master's students", "accent": "pink", "icon": "cap" },
+          { "value": 23.7, "count": 9, "label": "PhD students", "accent": "blue", "icon": "cap-phd" },
+          { "value": 18.4, "count": 7, "label": "Undergraduates", "accent": "mint", "icon": "cap-dual" },
+          { "value": 5.3, "count": 2, "label": "Professors and Researchers", "accent": "tan", "icon": "book" },
+          { "value": 2.6, "count": 1, "label": "Industry professionals", "accent": "banana", "icon": "briefcase" }
+        ]
+      },
+      {
+        "title": "Gender",
+        "stats": [
+          { "value": 65.8, "count": 25, "label": "Male", "accent": "blue", "icon": "mars" },
+          { "value": 34.2, "count": 13, "label": "Female", "accent": "pink", "icon": "venus" },
+          { "value": 0, "count": 0, "label": "Others", "accent": "mint", "icon": "others" }
+        ]
+      }
+    ],
+    "setting": [
+      {
+        "title": "Supervised, on their own devices",
+        "text": "Every session ran in a supervised setting, with each participant working on their personal device."
+      },
+      {
+        "title": "A portal built for the study",
+        "text": "Trials were served by a custom-designed user-study portal rather than a general-purpose survey tool."
+      },
+      {
+        "title": "Self-paced, about an hour",
+        "text": "No trial was timed. A full sitting took roughly an hour, and an animation could be replayed as often as a participant wanted."
+      },
+      {
+        "title": "25 samples per set, shuffled",
+        "text": "Each participant evaluated 25 samples per set, in shuffled order, so that every figure is scored by a generous number of people."
+      }
+    ]
+  },
+
+  "absolute": {
+    "caption": "Mean ± standard deviation over 25 evaluated diagrams per system. Each diagram is first averaged over its participant ratings. All scores normalised to [0, 1]; an animation that fails either validity gate scores 0.",
+    "columns": ["VF", "ASC", "SS", "NA", "AN"],
+    "rows": [
+      {
+        "system": "AnimateBanana",
+        "best": true,
+        "cells": [".860 ± .14", ".838 ± .13", ".756 ± .16", ".775 ± .15", ".765 ± .15"]
+      },
+      {
+        "system": "AnimateBanana (Qwen3.8-27B)",
+        "cells": [".518 ± .28", ".500 ± .30", ".443 ± .26", ".463 ± .26", ".453 ± .26"]
+      },
+      {
+        "system": "Gemini 3.1 Pro",
+        "cells": [".404 ± .32", ".349 ± .30", ".294 ± .27", ".306 ± .27", ".300 ± .27"]
+      }
+    ]
+  },
+
+  "agreement": [
+    { "stat": "α = 0.62", "label": "Krippendorff's α, AN" },
+    { "stat": "α = 0.62", "label": "Krippendorff's α, VF" },
+    { "stat": "α = 0.65", "label": "Krippendorff's α, ASC" },
+    { "stat": "ρ = 0.68", "label": "mean pairwise Spearman between raters" },
+    { "stat": "ρ = 0.65", "label": "human vs. Kimi-K2.6 judge on AN (p < 10⁻⁵)" },
+    { "stat": "71%", "label": "same tournament winner when two raters saw one diagram" }
+  ],
+
+  "charts": [
+    {
+      "id": "tournament",
+      "title": "Tournament win rate",
+      "note": "n = 211 tournaments",
+      "unit": "rank-1 share",
+      "chance": { "value": 33.3, "label": "chance (1/3)" },
+      "rows": [
+        { "label": "AnimateBanana", "value": 61.6, "accent": "pink" },
+        { "label": "Qwen3.8-27B backbone", "value": 11.8, "accent": "blue" },
+        { "label": "Human-authored presentations", "value": 26.5, "accent": "tan" }
+      ]
+    },
+    {
+      "id": "head-to-head",
+      "title": "Head-to-head rounds won by AnimateBanana",
+      "note": "every round in which AnimateBanana appeared",
+      "unit": "AnimateBanana preferred",
+      "chance": { "value": 50, "label": "even split" },
+      "rows": [
+        { "label": "vs Qwen3.8-27B backbone", "value": 79.1, "accent": "pink" },
+        { "label": "vs Human-authored presentations", "value": 77.8, "accent": "pink" }
+      ]
+    },
+    {
+      "id": "context",
+      "title": "Context utility",
+      "note": "n = 71 trials, 10 participants",
+      "unit": "preference",
+      "rows": [
+        { "label": "With context", "value": 67.6, "accent": "pink" },
+        { "label": "Without context", "value": 15.5, "accent": "blue" },
+        { "label": "Both equally useful", "value": 16.9, "accent": "tan" }
+      ]
+    },
+    {
+      "id": "verification",
+      "title": "AnimateBench verification",
+      "note": "n = 76 trials, 10 participants",
+      "unit": "judgements",
+      "rows": [
+        { "label": "Noticeable improvement", "value": 88.2, "accent": "mint" },
+        { "label": "No improvement", "value": 11.8, "accent": "blue" }
+      ]
+    }
+  ],
+
+  "screens": [
+    {
+      "id": "task-explanation",
+      "src": "USER_STUDY_PAGE/screens/task-explanation.png",
+      "title": "Before you start · what we are doing",
+      "caption": "The task in one screen: the figure as printed in the paper on the left, the narrated animation of that same figure on the right."
+    },
+    {
+      "id": "portal",
+      "src": "USER_STUDY_PAGE/screens/portal-familiarization.png",
+      "title": "Before you start · the portal",
+      "caption": "The guided tour of the controls: zooming the original figure, the style it should follow, stepping through the animation, and the questions that unlock in order."
+    },
+    {
+      "id": "quality-intro",
+      "src": "USER_STUDY_PAGE/screens/animation_quality_intro.png",
+      "title": "Part 1 · Animation quality",
+      "caption": "The section opens by stating the shape of a trial: watch the animation to the end, then answer the questions that appear underneath, where a later question shows up only when the earlier one makes it relevant."
+    },
+    {
+      "id": "unlock",
+      "src": "USER_STUDY_PAGE/screens/animation_quality_unlock_questions.png",
+      "title": "Questions locked until the animation ends",
+      "caption": "At 35% of the way through, the questions are still sealed and “Submit and continue” is disabled. The original figure sits on the left for the whole trial."
+    },
+    {
+      "id": "vf-pass",
+      "src": "USER_STUDY_PAGE/screens/animation_quality_vf_passed.png",
+      "title": "Q1 answered yes",
+      "caption": "The animation has been stepped to its last frame (18 / 18, marked “viewed”), and Q1 is answered yes, so the style-compliance question opens beneath it."
+    },
+    {
+      "id": "vf-fail",
+      "src": "USER_STUDY_PAGE/screens/animation_quality_vf_failed.png",
+      "title": "Q1 answered no",
+      "caption": "A no on fidelity closes the trial: “that answers it for this sample.” Nothing further is asked, and the sample scores 0."
+    },
+    {
+      "id": "ss",
+      "src": "USER_STUDY_PAGE/screens/animation_quality_ss.png",
+      "title": "Q3 · selection sensibility",
+      "caption": "Scored 0–10 from a dropdown, after stepping through the animation one element at a time. Submit stays disabled while a question is still unanswered."
+    },
+    {
+      "id": "na",
+      "src": "USER_STUDY_PAGE/screens/animation_quality_na.png",
+      "title": "Q4 · narration alignment",
+      "caption": "The caption for each step is read as the animation plays; the score is given once, for the narration as a whole. With every question answered, Submit and continue opens."
+    },
+    {
+      "id": "style-rules",
+      "src": "USER_STUDY_PAGE/screens/animation_quality_style_rules_explained.png",
+      "title": "The style, and what it requires",
+      "caption": "The expected style is named above the animation, here Colour Pop, and “What this style requires” opens the five rules the animation is meant to obey."
+    },
+    {
+      "id": "asc-fail",
+      "src": "USER_STUDY_PAGE/screens/animation_quality_asc_failed.png",
+      "title": "Q2 answered no",
+      "caption": "A no on style compliance ends the trial in the same way. The two scored questions never open."
+    },
+    {
+      "id": "ranking-intro",
+      "src": "USER_STUDY_PAGE/screens/ranking_intro.png",
+      "title": "Part 2 · Which would you use?",
+      "caption": "The section opens by stating the rule: two presentations of the same figure, pick the one you would rather use, and the one you passed over is replaced by a third."
+    },
+    {
+      "id": "ranking-1",
+      "src": "USER_STUDY_PAGE/screens/ranking1.png",
+      "title": "Round 1 · both sides live",
+      "caption": "Left (A) against Right (B), each with its own player and both marked “viewed”. The choice unlocks only once both have been watched to the end."
+    },
+    {
+      "id": "ranking-2",
+      "src": "USER_STUDY_PAGE/screens/ranking2.png",
+      "title": "Round 1 · the pick",
+      "caption": "The side passed over fades out, leaving the picked animation on screen."
+    },
+    {
+      "id": "ranking-3",
+      "src": "USER_STUDY_PAGE/screens/ranking3.png",
+      "title": "Round 2 · the third candidate",
+      "caption": "Round 2 of 2: the winner of round one, Left (A), now meets Right (C), the candidate held back from the first round."
+    },
+    {
+      "id": "ranking-4",
+      "src": "USER_STUDY_PAGE/screens/ranking4.png",
+      "title": "Saving the ranking",
+      "caption": "An earlier trial reopened for review: any answer can be changed before the ranking is saved."
+    },
+    {
+      "id": "context-intro",
+      "src": "USER_STUDY_PAGE/screens/contextutility_intro.png",
+      "title": "Part 1 · Which narration helps more?",
+      "caption": "The section opens by stating the rule for the comparison: two narrations of the same animation, pick the one that helps more."
+    },
+    {
+      "id": "context-example",
+      "src": "USER_STUDY_PAGE/screens/contextutility_example.png",
+      "title": "A context-utility trial",
+      "caption": "The same animation twice, Left (A) and Right (B), differing only in their narration. One is written with the caption and paper context, the other from the figure alone. Neither is labelled."
+    },
+    {
+      "id": "benchverify-intro",
+      "src": "USER_STUDY_PAGE/screens/benchverify_intro.png",
+      "title": "Part 2 · Corrections",
+      "caption": "Stated up front: the original animation on the left, the checked and corrected version on the right, and you are told which is which."
+    },
+    {
+      "id": "benchverify-example",
+      "src": "USER_STUDY_PAGE/screens/benchverify_example.png",
+      "title": "A verification trial",
+      "caption": "“Original (uncorrected)” against “Verified and corrected”, both labelled, both stepped to their last frame before the question is answered."
+    }
+  ]
+}

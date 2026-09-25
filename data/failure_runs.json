@@ -1,0 +1,561 @@
+{
+ "_generated": "scripts/build_failures.py — do not hand-edit",
+ "pipeline": "assets/ablations/pipeline-diagram.svg?v=64a37438",
+ "critic_table": {
+  "sample": "CVPR_2025_arch00968",
+  "source": "ABLATIONS_PAGE/Original_Images/CVPR_2025_arch00968.png?v=9b7672df",
+  "runs": [
+   {
+    "key": "full",
+    "label": "AnimateBanana (full system)",
+    "media": {
+     "src": "FAILURES_PAGE/Additional_insights/Full/CVPR_2025_arch00968.mp4?v=ea4ca726",
+     "kind": "video",
+     "captions": "FAILURES_PAGE/Additional_insights/Full/CVPR_2025_arch00968.captions.json?v=f19512ca"
+    },
+    "scores": {
+     "VF": {
+      "kind": "band",
+      "band": "A",
+      "text": "Band A"
+     },
+     "ASC": {
+      "kind": "band",
+      "band": "A",
+      "text": "Band A"
+     },
+     "AN": {
+      "kind": "num",
+      "value": 0.9555,
+      "text": "0.9555"
+     }
+    }
+   },
+   {
+    "key": "minus_stage1_critic",
+    "label": "without the Stage 1 critic",
+    "media": {
+     "src": "FAILURES_PAGE/Additional_insights/Minus_Stage1_critic/CVPR_2025_arch00968.mp4?v=b4bf7d59",
+     "kind": "video",
+     "captions": "FAILURES_PAGE/Additional_insights/Minus_Stage1_critic/CVPR_2025_arch00968.captions.json?v=328eb295"
+    },
+    "scores": {
+     "VF": {
+      "kind": "band",
+      "band": "D",
+      "text": "Band D"
+     },
+     "ASC": {
+      "kind": "na",
+      "text": "N/A"
+     },
+     "AN": {
+      "kind": "num",
+      "value": 0.0,
+      "text": "0.0000"
+     }
+    }
+   },
+   {
+    "key": "minus_stage2_critic",
+    "label": "without the Stage 2 critic",
+    "media": {
+     "src": "FAILURES_PAGE/Additional_insights/Minus_Stage2_critic/CVPR_2025_arch00968.mp4?v=ec7025e1",
+     "kind": "video",
+     "captions": "FAILURES_PAGE/Additional_insights/Minus_Stage2_critic/CVPR_2025_arch00968.captions.json?v=bd1fe535"
+    },
+    "scores": {
+     "VF": {
+      "kind": "band",
+      "band": "A",
+      "text": "Band A"
+     },
+     "ASC": {
+      "kind": "band",
+      "band": "A",
+      "text": "Band A"
+     },
+     "AN": {
+      "kind": "num",
+      "value": 0.9421,
+      "text": "0.9421"
+     }
+    }
+   },
+   {
+    "key": "minus_stage3_critic",
+    "label": "without the Stage 3 critic",
+    "media": {
+     "src": "FAILURES_PAGE/Additional_insights/Minus%20Stage3_critic/CVPR_2025_arch00968.mp4?v=5762c9b2",
+     "kind": "video",
+     "captions": "FAILURES_PAGE/Additional_insights/Minus%20Stage3_critic/CVPR_2025_arch00968.captions.json?v=991313c8"
+    },
+    "scores": {
+     "VF": {
+      "kind": "band",
+      "band": "A",
+      "text": "Band A"
+     },
+     "ASC": {
+      "kind": "band",
+      "band": "A",
+      "text": "Band A"
+     },
+     "AN": {
+      "kind": "num",
+      "value": 0.9502,
+      "text": "0.9502"
+     }
+    }
+   }
+  ]
+ },
+ "critic_insight": "The first critic is absolutely essential to the structural fidelity. When we remove the second critic, we suffer less hit to the score because the first critic has already rendered a solid structure that allows for ease of parsing, thereby giving the second critic less to do. Similarly, when we remove the third critic, the hit suffered to the score is the least, because the second stage has produced a solid plan leaving little room for error.",
+ "warnings": [
+  "Stage_3: \"ICCV_2023_set5_000035\" has no row in 00_AnimateBanana",
+  "data\\failure_notes.csv is open in another program (PermissionError) — close it and rerun"
+ ],
+ "stages": [
+  {
+   "key": "stage1",
+   "num": 1,
+   "name": "Stage 1 — Diagram to Code",
+   "critic": "D2C critic",
+   "blurb": "The diagram is read and rewritten as code. It is the stage the critic sends back most often, and the one whose failures are hardest for anything downstream to recover from.",
+   "samples": [
+    {
+     "id": "CVPR_2025_arch02465",
+     "style": "Colour Pop",
+     "media": {
+      "src": "FAILURES_PAGE/Stage_1/CVPR_2025_arch02465.mp4?v=c3a73a31",
+      "kind": "video",
+      "captions": "FAILURES_PAGE/Stage_1/CVPR_2025_arch02465.captions.json?v=15320cea"
+     },
+     "source": "ABLATIONS_PAGE/Original_Images/CVPR_2025_arch02465.png?v=93a18948",
+     "scores": {
+      "VF": {
+       "kind": "band",
+       "band": "C",
+       "text": "Band C"
+      },
+      "ASC": {
+       "kind": "na",
+       "text": "N/A"
+      },
+      "SS": {
+       "kind": "num",
+       "value": 0.8056,
+       "text": "0.8056"
+      },
+      "GP": {
+       "kind": "num",
+       "value": 0.9167,
+       "text": "0.9167"
+      },
+      "NA": {
+       "kind": "num",
+       "value": 0.7222,
+       "text": "0.7222"
+      },
+      "AN": {
+       "kind": "num",
+       "value": 0.0,
+       "text": "0.0000"
+      }
+     },
+     "note": "We can see that the Raster Integrator has failed to crop and place the panel c raster in place. The raster replaced by the placeholder causes a severe loss of Visual Fidelity",
+     "source_svg": "FAILURES_PAGE/Stage_1/CVPR_2025_arch02465.svg?v=810d156b"
+    },
+    {
+     "id": "Paper2Fig_pipe_easy_000000249",
+     "style": "Colour Pop",
+     "media": {
+      "src": "FAILURES_PAGE/Stage_1/Paper2Fig_pipe_easy_000000249.mp4?v=5e33f26d",
+      "kind": "video",
+      "captions": "FAILURES_PAGE/Stage_1/Paper2Fig_pipe_easy_000000249.captions.json?v=e6447311"
+     },
+     "source": "ABLATIONS_PAGE/Original_Images/Paper2Fig_pipe_easy_000000249.png?v=74a9a042",
+     "scores": {
+      "VF": {
+       "kind": "band",
+       "band": "A",
+       "text": "Band A"
+      },
+      "ASC": {
+       "kind": "band",
+       "band": "A",
+       "text": "Band A"
+      },
+      "SS": {
+       "kind": "num",
+       "value": 0.75,
+       "text": "0.7500"
+      },
+      "GP": {
+       "kind": "num",
+       "value": 0.9583,
+       "text": "0.9583"
+      },
+      "NA": {
+       "kind": "num",
+       "value": 0.6667,
+       "text": "0.6667"
+      },
+      "AN": {
+       "kind": "num",
+       "value": 0.7917,
+       "text": "0.7917"
+      }
+     },
+     "note": "We can see that the arrows in the Dataset Preprocessing part are not replicated in the final animation. Even though we can observe that they were drawn, they have been overlaid with the yellow background leading to loss of visual fidelity.",
+     "source_svg": "FAILURES_PAGE/Stage_1/Paper2Fig_pipe_easy_000000249.svg?v=41ca704d"
+    },
+    {
+     "id": "Paper2Fig_pipe_easy_000000361",
+     "style": "Alpha Masking",
+     "media": {
+      "src": "FAILURES_PAGE/Stage_1/Paper2Fig_pipe_easy_000000361.mp4?v=8ee2d62a",
+      "kind": "video",
+      "captions": "FAILURES_PAGE/Stage_1/Paper2Fig_pipe_easy_000000361.captions.json?v=603bd80d"
+     },
+     "source": "ABLATIONS_PAGE/Original_Images/Paper2Fig_pipe_easy_000000361.png?v=64ddc43c",
+     "scores": {
+      "VF": {
+       "kind": "band",
+       "band": "A",
+       "text": "Band A"
+      },
+      "ASC": {
+       "kind": "band",
+       "band": "B",
+       "text": "Band B"
+      },
+      "SS": {
+       "kind": "num",
+       "value": 0.8333,
+       "text": "0.8333"
+      },
+      "GP": {
+       "kind": "num",
+       "value": 0.9167,
+       "text": "0.9167"
+      },
+      "NA": {
+       "kind": "num",
+       "value": 1.0,
+       "text": "1.0000"
+      },
+      "AN": {
+       "kind": "num",
+       "value": 0.9167,
+       "text": "0.9167"
+      }
+     },
+     "note": "The large blocky arrows and oversized icons are dissimilar to the original diagram image",
+     "source_svg": "FAILURES_PAGE/Stage_1/Paper2Fig_pipe_easy_000000361.svg?v=265e74cc"
+    },
+    {
+     "id": "arch_arxiv_cv_2023_000000303",
+     "style": "Hopping Bbox",
+     "media": {
+      "src": "FAILURES_PAGE/Stage_1/arch_arxiv_cv_2023_000000303.mp4?v=0000a299",
+      "kind": "video",
+      "captions": "FAILURES_PAGE/Stage_1/arch_arxiv_cv_2023_000000303.captions.json?v=f3aa5b55"
+     },
+     "source": "ABLATIONS_PAGE/Original_Images/arch_arxiv_cv_2023_000000303.png?v=ab4cc365",
+     "scores": {
+      "VF": {
+       "kind": "band",
+       "band": "B",
+       "text": "Band B"
+      },
+      "ASC": {
+       "kind": "band",
+       "band": "A",
+       "text": "Band A"
+      },
+      "SS": {
+       "kind": "num",
+       "value": 0.9524,
+       "text": "0.9524"
+      },
+      "GP": {
+       "kind": "num",
+       "value": 0.9881,
+       "text": "0.9881"
+      },
+      "NA": {
+       "kind": "num",
+       "value": 0.9286,
+       "text": "0.9286"
+      },
+      "AN": {
+       "kind": "num",
+       "value": 0.9564,
+       "text": "0.9564"
+      }
+     },
+     "note": "We can see that the Raster Integrator has failed to crop and place the main raster panel in place. The raster replaced by the placeholder causes a severe loss of Visual Fidelity",
+     "source_svg": "FAILURES_PAGE/Stage_1/arch_arxiv_cv_2023_000000303.svg?v=02de1170"
+    },
+    {
+     "id": "arch_arxiv_db_ir_2025_000000589",
+     "style": "Hopping Bbox",
+     "media": {
+      "src": "FAILURES_PAGE/Stage_1/arch_arxiv_db_ir_2025_000000589.mp4?v=177d32cc",
+      "kind": "video",
+      "captions": "FAILURES_PAGE/Stage_1/arch_arxiv_db_ir_2025_000000589.captions.json?v=f9e392d2"
+     },
+     "source": "ABLATIONS_PAGE/Original_Images/arch_arxiv_db_ir_2025_000000589.png?v=a042f4e7",
+     "scores": {
+      "VF": {
+       "kind": "band",
+       "band": "C",
+       "text": "Band C"
+      },
+      "ASC": {
+       "kind": "na",
+       "text": "N/A"
+      },
+      "SS": {
+       "kind": "num",
+       "value": 0.8889,
+       "text": "0.8889"
+      },
+      "GP": {
+       "kind": "num",
+       "value": 1.0,
+       "text": "1.0000"
+      },
+      "NA": {
+       "kind": "num",
+       "value": 0.9333,
+       "text": "0.9333"
+      },
+      "AN": {
+       "kind": "num",
+       "value": 0.0,
+       "text": "0.0000"
+      }
+     },
+     "note": "Large Blocky arrows are dissimilar to the original image and are not corrected by even two rounds of critic feedback, resulting in a violation of visual fidelity.",
+     "source_svg": "FAILURES_PAGE/Stage_1/arch_arxiv_db_ir_2025_000000589.svg?v=85e517f5"
+    }
+   ]
+  },
+  {
+   "key": "stage2",
+   "num": 2,
+   "name": "Stage 2 — Sequencing and narration",
+   "critic": "Animation Planner critic",
+   "blurb": "The code is turned into an ordered plan with narration. Failures here are about the order things are revealed in, and about narration that does not match what is on screen.",
+   "samples": [
+    {
+     "id": "CVPR_2025_arch01281",
+     "style": "Alpha Masking",
+     "media": {
+      "src": "FAILURES_PAGE/Stage_2/CVPR_2025_arch01281.mp4?v=0cb6f826",
+      "kind": "video",
+      "captions": "FAILURES_PAGE/Stage_2/CVPR_2025_arch01281.captions.json?v=4c81b65e"
+     },
+     "source": "ABLATIONS_PAGE/Original_Images/CVPR_2025_arch01281.png?v=68b3476e",
+     "scores": {
+      "VF": {
+       "kind": "band",
+       "band": "A",
+       "text": "Band A"
+      },
+      "ASC": {
+       "kind": "band",
+       "band": "B",
+       "text": "Band B"
+      },
+      "SS": {
+       "kind": "num",
+       "value": 0.6667,
+       "text": "0.6667"
+      },
+      "GP": {
+       "kind": "num",
+       "value": 0.8095,
+       "text": "0.8095"
+      },
+      "NA": {
+       "kind": "num",
+       "value": 0.8571,
+       "text": "0.8571"
+      },
+      "AN": {
+       "kind": "num",
+       "value": 0.7778,
+       "text": "0.7778"
+      }
+     },
+     "note": "We observe that the both the branches of the denoising Unet are represented in one shot rather than broken down incrmentally. This shows a failure on the end of the Sequencer to breakdown the animatable group.",
+     "source_svg": "FAILURES_PAGE/Stage_2/CVPR_2025_arch01281.html?v=7717c7e6"
+    },
+    {
+     "id": "CVPR_2025_arch02298",
+     "style": "Colour Pop",
+     "media": {
+      "src": "FAILURES_PAGE/Stage_2/CVPR_2025_arch02298.mp4?v=6bf8e288",
+      "kind": "video",
+      "captions": "FAILURES_PAGE/Stage_2/CVPR_2025_arch02298.captions.json?v=4435ad41"
+     },
+     "source": "ABLATIONS_PAGE/Original_Images/CVPR_2025_arch02298.png?v=1951ac6e",
+     "scores": {
+      "VF": {
+       "kind": "band",
+       "band": "A",
+       "text": "Band A"
+      },
+      "ASC": {
+       "kind": "band",
+       "band": "A",
+       "text": "Band A"
+      },
+      "SS": {
+       "kind": "num",
+       "value": 0.9487,
+       "text": "0.9487"
+      },
+      "GP": {
+       "kind": "num",
+       "value": 0.7436,
+       "text": "0.7436"
+      },
+      "NA": {
+       "kind": "num",
+       "value": 0.7436,
+       "text": "0.7436"
+      },
+      "AN": {
+       "kind": "num",
+       "value": 0.812,
+       "text": "0.8120"
+      }
+     },
+     "note": "We observe that the lower input frame, the Box detection and Hand Mesh Augmentation examples are animated simultaneously instead of incrementally. This presents a failure of the Sequencer to break down the group.",
+     "source_svg": "FAILURES_PAGE/Stage_2/CVPR_2025_arch02298.svg?v=d553182f"
+    },
+    {
+     "id": "arch_arxiv_network_2026_000001537",
+     "style": "Alpha Masking",
+     "media": {
+      "src": "FAILURES_PAGE/Stage_2/arch_arxiv_network_2026_000001537.mp4?v=a74529a6",
+      "kind": "video",
+      "captions": "FAILURES_PAGE/Stage_2/arch_arxiv_network_2026_000001537.captions.json?v=e69a1178"
+     },
+     "source": "ABLATIONS_PAGE/Original_Images/arch_arxiv_network_2026_000001537.png?v=9adeb95e",
+     "scores": {
+      "VF": {
+       "kind": "band",
+       "band": "B",
+       "text": "Band B"
+      },
+      "ASC": {
+       "kind": "band",
+       "band": "B",
+       "text": "Band B"
+      },
+      "SS": {
+       "kind": "num",
+       "value": 0.8667,
+       "text": "0.8667"
+      },
+      "GP": {
+       "kind": "num",
+       "value": 0.8667,
+       "text": "0.8667"
+      },
+      "NA": {
+       "kind": "num",
+       "value": 1.0,
+       "text": "1.0000"
+      },
+      "AN": {
+       "kind": "num",
+       "value": 0.9111,
+       "text": "0.9111"
+      }
+     },
+     "note": "We observe that the sequence in which the elements are shown is incorrect and confusing. The User-space shells should have immediately followed the unmasking of the Link traces instead of showing the ingress TUN next.",
+     "source_svg": "FAILURES_PAGE/Stage_2/arch_arxiv_network_2026_000001537.svg?v=befd102d"
+    }
+   ]
+  },
+  {
+   "key": "stage3",
+   "num": 3,
+   "name": "Stage 3 — Animation design",
+   "critic": "Animation Designer critic",
+   "blurb": "The plan is rendered as an animation. By this point the structure is settled, so there is least left to go wrong.",
+   "samples": [
+    {
+     "id": "CVPR_2025_arch02022",
+     "style": "Alpha Masking",
+     "media": {
+      "src": "FAILURES_PAGE/Stage_3/CVPR_2025_arch02022.mp4?v=de140b3f",
+      "kind": "video",
+      "captions": "FAILURES_PAGE/Stage_3/CVPR_2025_arch02022.captions.json?v=3bd8520c"
+     },
+     "source": "ABLATIONS_PAGE/Original_Images/CVPR_2025_arch02022.png?v=6ec88347",
+     "scores": {
+      "VF": {
+       "kind": "band",
+       "band": "A",
+       "text": "Band A"
+      },
+      "ASC": {
+       "kind": "band",
+       "band": "B",
+       "text": "Band B"
+      },
+      "SS": {
+       "kind": "num",
+       "value": 1.0,
+       "text": "1.0000"
+      },
+      "GP": {
+       "kind": "num",
+       "value": 0.875,
+       "text": "0.8750"
+      },
+      "NA": {
+       "kind": "num",
+       "value": 0.9167,
+       "text": "0.9167"
+      },
+      "AN": {
+       "kind": "num",
+       "value": 0.9306,
+       "text": "0.9306"
+      }
+     },
+     "note": "The visual fidelity and presentation sequence are spot on but we observe a failure in delivering the animation style correctly by the Animation Designer. The Omni ID Encoder block background is supposed to persist as a background masked element even after its container elements are animated.",
+     "source_svg": "FAILURES_PAGE/Stage_3/CVPR_2025_arch02022.html?v=a59e99b5"
+    },
+    {
+     "id": "ICCV_2023_set5_000035",
+     "style": null,
+     "media": {
+      "src": "FAILURES_PAGE/Stage_3/ICCV_2023_set5_000035.mp4?v=64a73c17",
+      "kind": "video",
+      "captions": "FAILURES_PAGE/Stage_3/ICCV_2023_set5_000035.captions.json?v=c7da4633"
+     },
+     "source": "ABLATIONS_PAGE/Original_Images/ICCV_2023_set5_000035.png?v=bf17dea2",
+     "scores": {
+      "VF": null,
+      "ASC": null,
+      "SS": null,
+      "GP": null,
+      "NA": null,
+      "AN": null
+     },
+     "note": "The visual fidelity and presentation sequence are spot on but we observe a failure in delivering the animation style correctly by the Animation Designer.  The blocks in the background are supposed to be masked with a slight transparency and not be completely invisible from the background as observed in the animation.",
+     "source_svg": "FAILURES_PAGE/Stage_3/ICCV_2023_set5_000035.html?v=b90a897c"
+    }
+   ]
+  }
+ ]
+}

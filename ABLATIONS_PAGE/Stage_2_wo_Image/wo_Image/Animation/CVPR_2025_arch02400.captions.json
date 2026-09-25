@@ -1,0 +1,34 @@
+[
+ {
+  "t": 0.0,
+  "text": "The attacker constructs a poisoned instruction sample by embedding a backdoor trigger into the input image paired with a targeted output answer."
+ },
+ {
+  "t": 3.875,
+  "text": "During supervised fine-tuning, this poisoned instruction dataset is fed into the model training pipeline."
+ },
+ {
+  "t": 7.673,
+  "text": "The underlying system is a pre-trained large vision-language model trained across multimodal pre-training datasets."
+ },
+ {
+  "t": 11.47,
+  "text": "During instruction tuning, the vision encoder and large language model remain frozen, while parameters in the visual and text neck layers are updated."
+ },
+ {
+  "t": 15.267,
+  "text": "Despite distribution shifts between the source training domain and target user domain, backdoor behavior is injected into the model."
+ },
+ {
+  "t": 19.065,
+  "text": "At inference time, an end user submits an instruction query from a shifted target domain containing the trigger pattern."
+ },
+ {
+  "t": 22.862,
+  "text": "If the backdoor generalizes across domain differences, the trigger activates the compromised representations within the fine-tuned model."
+ },
+ {
+  "t": 26.66,
+  "text": "The infected neck layers steer the final output to produce the adversary's target response, completing a successful attack."
+ }
+]

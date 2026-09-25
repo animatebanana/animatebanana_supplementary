@@ -1,0 +1,50 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.860
+First, the framework initiates the uncertainty-aware initial human motion estimation module to predict preliminary full-body motion along with joint uncertainty.
+
+2
+00:00:07.860 --> 00:00:13.860
+Sparse tracking signals from the head and hand controllers are embedded into observation feature representations.
+
+3
+00:00:13.860 --> 00:00:20.240
+Concurrently, historical human motion sequences are processed through a pose encoder to extract motion history embeddings.
+
+4
+00:00:20.240 --> 00:00:27.730
+The observation and historical motion representations are concatenated into a shallow motion representation and combined with temporal position embeddings.
+
+5
+00:00:27.730 --> 00:00:32.990
+A transformer encoder then models temporal dependencies across frames, extracting high-dimensional motion features.
+
+6
+00:00:32.990 --> 00:00:40.850
+These features feed into a pose regression head to estimate initial poses, while an uncertainty estimation head quantifies joint-level uncertainty.
+
+7
+00:00:40.850 --> 00:00:48.710
+In the environment point cloud embedding module, the 3D scene point cloud is cropped locally around the estimated human trajectory.
+
+8
+00:00:48.710 --> 00:00:55.080
+The cropped points are sampled and encoded by a scene encoder to yield environment scene features.
+
+9
+00:00:55.080 --> 00:01:02.570
+In the refinement stage, uncertainty-guided sampling generates motion hypotheses, while relative head height is computed against the local terrain.
+
+10
+00:01:02.570 --> 00:01:08.570
+The sampled poses, head translation, and extended observations are concatenated to form unified motion embeddings.
+
+11
+00:01:08.570 --> 00:01:14.950
+A motion-environment cross-attention module integrates environmental semantics with the motion tokens to produce refined motion representations.
+
+12
+00:01:14.950 --> 00:01:22.440
+Finally, contact probabilities are estimated and combined with the refined representation to regress the physically plausible final full-body motion.
+

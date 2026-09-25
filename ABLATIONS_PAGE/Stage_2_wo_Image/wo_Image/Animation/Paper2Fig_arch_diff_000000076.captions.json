@@ -1,0 +1,54 @@
+[
+ {
+  "t": 0.0,
+  "text": "Dynamic inputs from various modalities, such as facial expression video sequences, are first captured."
+ },
+ {
+  "t": 2.2,
+  "text": "Each video frame across the sequence is mapped directly to a distinct node."
+ },
+ {
+  "t": 4.4,
+  "text": "Similarly, continuous audio speech signals serve as an alternative dynamic modality,"
+ },
+ {
+  "t": 6.6,
+  "text": "where short temporal audio segments are extracted as graph nodes."
+ },
+ {
+  "t": 8.8,
+  "text": "Body gestures captured through motion capture data are also seamlessly supported,"
+ },
+ {
+  "t": 11.0,
+  "text": "transforming consecutive body pose frames into corresponding graph nodes."
+ },
+ {
+  "t": 13.2,
+  "text": "The Learnable Graph Inception Network, or L-GrIN, processes these dynamic graph inputs."
+ },
+ {
+  "t": 15.4,
+  "text": "The architecture learns the underlying graph connectivity directly from the data."
+ },
+ {
+  "t": 17.6,
+  "text": "A fully connected graph structure is initially formed over the temporal sequence of nodes."
+ },
+ {
+  "t": 19.8,
+  "text": "The learnable adjacency matrix optimizes its edge weights jointly during model training."
+ },
+ {
+  "t": 22.0,
+  "text": "Graph inception modules apply multiscale graph convolutions alongside neighbor max-pooling to extract dynamic temporal features."
+ },
+ {
+  "t": 24.2,
+  "text": "A learnable pooling mechanism combines the node embeddings into a compact, graph-level feature representation."
+ },
+ {
+  "t": 26.4,
+  "text": "Finally, the classification layer evaluates the graph embedding to predict the recognized emotion state."
+ }
+]

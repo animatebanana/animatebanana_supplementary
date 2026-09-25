@@ -1,0 +1,54 @@
+[
+ {
+  "t": 0.0,
+  "text": "Incoming customer phone calls initiate interactions with the call center."
+ },
+ {
+  "t": 2.2,
+  "text": "These calls are received and managed within the sales and customer service environment."
+ },
+ {
+  "t": 4.4,
+  "text": "Within this environment, the interaction center orchestrates call workflows."
+ },
+ {
+  "t": 6.6,
+  "text": "Audio recordings from calls and follow-up customer satisfaction surveys are captured."
+ },
+ {
+  "t": 8.8,
+  "text": "The recorded interaction files and associated metadata are exported to central storage."
+ },
+ {
+  "t": 11.0,
+  "text": "A centralized Hadoop repository aggregates interaction logs and supplies data to downstream processing clusters."
+ },
+ {
+  "t": 13.2,
+  "text": "The development cluster handles model building and experimental validation."
+ },
+ {
+  "t": 15.4,
+  "text": "Here, audio is transcribed to text, feature embeddings are generated, and ranking models are trained and calibrated before deployment."
+ },
+ {
+  "t": 17.6,
+  "text": "The production cluster executes the end-to-end analytical pipeline on live call streams."
+ },
+ {
+  "t": 19.8,
+  "text": "The call satisfaction analysis module ingests call files directly from Hadoop for real-time scoring."
+ },
+ {
+  "t": 22.0,
+  "text": "The pipeline converts speech to text, computes call embedding vectors, and applies graph-based ranking with isotonic regression to predict satisfaction scores."
+ },
+ {
+  "t": 24.2,
+  "text": "Predicted representative satisfaction scores and aggregated group metrics are archived in the database."
+ },
+ {
+  "t": 26.4,
+  "text": "Finally, managers access monitoring dashboards to identify customer dissatisfaction and take timely operational actions."
+ }
+]

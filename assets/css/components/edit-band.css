@@ -1,0 +1,28 @@
+/* The overview page's editability band: one live edit as a preview, and the
+   way through to the rest. Self-contained: owns only .edit-band and .edb-*,
+   the same arrangement as pipeline-band.css. The example itself is drawn by
+   <edit-diff> and styled by edit-diff.css. */
+
+.edit-band {
+  position: relative;
+  padding: clamp(48px, 6vw, 88px) 0 clamp(16px, 2vw, 32px);
+  scroll-margin-top: var(--anchor-offset, 86px); /* the sticky nav must not sit on the heading */
+}
+.edit-band-wrap {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 clamp(14px, 2vw, 40px);
+}
+
+.edb-foot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: clamp(18px, 2.4vw, 30px);
+}
+.edb-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+}
+.edb-cta svg { flex: 0 0 auto; }

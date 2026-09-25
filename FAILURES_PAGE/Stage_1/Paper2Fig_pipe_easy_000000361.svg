@@ -1,0 +1,468 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1078 520" width="1078" height="520">
+  <defs>
+    <!-- Arrow marker definition -->
+    <marker id="arrow-black" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M 0 1 L 7 4 L 0 7 z" fill="#000000" />
+    </marker>
+
+    <style>
+      /* Base ghost state for all diagram elements */
+      #block_flood_tweet_classification,
+      #block_general_domain_pretraining,
+      #block_enormous_text_data,
+      #node_target_task_lm_fine_tuning,
+      #node_target_task_classification,
+      #node_flood_related_tweets,
+      #node_flood_unrelated_tweets,
+      #block_target_task_data_area1,
+      #block_target_task_data_area2,
+      #edge_enormous_to_general,
+      #edge_general_to_lm_finetuning,
+      #edge_lm_finetuning_to_classification,
+      #edge_classification_to_related,
+      #edge_classification_to_unrelated,
+      #edge_area1_to_lm_finetuning,
+      #edge_area1_to_classification,
+      #edge_area2_to_classification_up,
+      #edge_classification_to_area2_down {
+        opacity: 0.15;
+      }
+
+      /* Animation keyframe bindings */
+      #block_enormous_text_data,
+      #edge_enormous_to_general {
+        animation: anim_step1 32s infinite;
+      }
+
+      #block_general_domain_pretraining,
+      #edge_general_to_lm_finetuning {
+        animation: anim_step2 32s infinite;
+      }
+
+      /* Parent persistent block across t3 -> t7 */
+      #block_flood_tweet_classification {
+        animation: anim_parent_flood 32s infinite;
+      }
+
+      #node_target_task_lm_fine_tuning,
+      #edge_lm_finetuning_to_classification {
+        animation: anim_step4 32s infinite;
+      }
+
+      #block_target_task_data_area1,
+      #edge_area1_to_lm_finetuning,
+      #edge_area1_to_classification {
+        animation: anim_step5 32s infinite;
+      }
+
+      #node_target_task_classification,
+      #edge_classification_to_related,
+      #edge_classification_to_unrelated {
+        animation: anim_step6 32s infinite;
+      }
+
+      #node_flood_related_tweets,
+      #node_flood_unrelated_tweets {
+        animation: anim_step7 32s infinite;
+      }
+
+      #block_target_task_data_area2,
+      #edge_area2_to_classification_up,
+      #edge_classification_to_area2_down {
+        animation: anim_step8 32s infinite;
+      }
+
+      /* Narration banner bindings */
+      #narration_banner text {
+        opacity: 0;
+      }
+      #narr_ts1 { animation: anim_narr1 32s infinite; }
+      #narr_ts2 { animation: anim_narr2 32s infinite; }
+      #narr_ts3 { animation: anim_narr3 32s infinite; }
+      #narr_ts4 { animation: anim_narr4 32s infinite; }
+      #narr_ts5 { animation: anim_narr5 32s infinite; }
+      #narr_ts6 { animation: anim_narr6 32s infinite; }
+      #narr_ts7 { animation: anim_narr7 32s infinite; }
+      #narr_ts8 { animation: anim_narr8 32s infinite; }
+
+      /* Diagram element keyframes (discrete opacity transitions) */
+      @keyframes anim_step1 {
+        0%       { opacity: 1.0; }
+        12.499%  { opacity: 1.0; }
+        12.5%    { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+
+      @keyframes anim_step2 {
+        0%       { opacity: 0.15; }
+        12.499%  { opacity: 0.15; }
+        12.5%    { opacity: 1.0; }
+        24.999%  { opacity: 1.0; }
+        25%      { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+
+      @keyframes anim_parent_flood {
+        0%       { opacity: 0.15; }
+        24.999%  { opacity: 0.15; }
+        25%      { opacity: 1.0; }
+        87.499%  { opacity: 1.0; }
+        87.5%    { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+
+      @keyframes anim_step4 {
+        0%       { opacity: 0.15; }
+        37.499%  { opacity: 0.15; }
+        37.5%    { opacity: 1.0; }
+        49.999%  { opacity: 1.0; }
+        50%      { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+
+      @keyframes anim_step5 {
+        0%       { opacity: 0.15; }
+        49.999%  { opacity: 0.15; }
+        50%      { opacity: 1.0; }
+        62.499%  { opacity: 1.0; }
+        62.5%    { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+
+      @keyframes anim_step6 {
+        0%       { opacity: 0.15; }
+        62.499%  { opacity: 0.15; }
+        62.5%    { opacity: 1.0; }
+        74.999%  { opacity: 1.0; }
+        75%      { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+
+      @keyframes anim_step7 {
+        0%       { opacity: 0.15; }
+        74.999%  { opacity: 0.15; }
+        75%      { opacity: 1.0; }
+        87.499%  { opacity: 1.0; }
+        87.5%    { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+
+      @keyframes anim_step8 {
+        0%       { opacity: 0.15; }
+        87.499%  { opacity: 0.15; }
+        87.5%    { opacity: 1.0; }
+        99.999%  { opacity: 1.0; }
+        100%     { opacity: 0.15; }
+      }
+
+      /* Narration keyframes */
+      @keyframes anim_narr1 {
+        0%       { opacity: 1; }
+        12.499%  { opacity: 1; }
+        12.5%    { opacity: 0; }
+        100%     { opacity: 0; }
+      }
+
+      @keyframes anim_narr2 {
+        0%       { opacity: 0; }
+        12.499%  { opacity: 0; }
+        12.5%    { opacity: 1; }
+        24.999%  { opacity: 1; }
+        25%      { opacity: 0; }
+        100%     { opacity: 0; }
+      }
+
+      @keyframes anim_narr3 {
+        0%       { opacity: 0; }
+        24.999%  { opacity: 0; }
+        25%      { opacity: 1; }
+        37.499%  { opacity: 1; }
+        37.5%    { opacity: 0; }
+        100%     { opacity: 0; }
+      }
+
+      @keyframes anim_narr4 {
+        0%       { opacity: 0; }
+        37.499%  { opacity: 0; }
+        37.5%    { opacity: 1; }
+        49.999%  { opacity: 1; }
+        50%      { opacity: 0; }
+        100%     { opacity: 0; }
+      }
+
+      @keyframes anim_narr5 {
+        0%       { opacity: 0; }
+        49.999%  { opacity: 0; }
+        50%      { opacity: 1; }
+        62.499%  { opacity: 1; }
+        62.5%    { opacity: 0; }
+        100%     { opacity: 0; }
+      }
+
+      @keyframes anim_narr6 {
+        0%       { opacity: 0; }
+        62.499%  { opacity: 0; }
+        62.5%    { opacity: 1; }
+        74.999%  { opacity: 1; }
+        75%      { opacity: 0; }
+        100%     { opacity: 0; }
+      }
+
+      @keyframes anim_narr7 {
+        0%       { opacity: 0; }
+        74.999%  { opacity: 0; }
+        75%      { opacity: 1; }
+        87.499%  { opacity: 1; }
+        87.5%    { opacity: 0; }
+        100%     { opacity: 0; }
+      }
+
+      @keyframes anim_narr8 {
+        0%       { opacity: 0; }
+        87.499%  { opacity: 0; }
+        87.5%    { opacity: 1; }
+        99.999%  { opacity: 1; }
+        100%     { opacity: 0; }
+      }
+    </style>
+  </defs>
+
+  <!-- ==================== BACKGROUND BLOCKS / CONTAINERS ==================== -->
+
+  <!-- Top-Level Block: Flood Tweet Classification Enclosure -->
+  <g id="block_flood_tweet_classification" data-id="block_flood_tweet_classification" data-class="block" data-parent="root">
+    <rect id="rect_flood_tweet_classification" x="310" y="8" width="758" height="280" rx="35" ry="35" fill="#ffffff" stroke="#2e5720" stroke-width="4"/>
+    <text id="text_flood_tweet_classification_title" data-id="text_flood_tweet_classification_title" data-class="text_node" data-parent="block_flood_tweet_classification"
+          font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="bold" fill="#000000"
+          transform="rotate(90, 1045, 148)" text-anchor="middle">
+      <tspan x="1045" y="136">Flood Tweet</tspan>
+      <tspan x="1045" y="160">Classification</tspan>
+    </text>
+  </g>
+
+  <!-- Standalone Block: General-Domain Language Model Pretraining -->
+  <g id="block_general_domain_pretraining" data-id="block_general_domain_pretraining" data-class="block" data-parent="root">
+    <rect id="rect_general_domain_pretraining" x="10" y="8" width="260" height="270" rx="35" ry="35" fill="#fedf99" stroke="#7d5b12" stroke-width="4"/>
+    <text id="text_general_domain_title_1" data-id="text_general_domain_title_1" data-class="text_node" data-parent="block_general_domain_pretraining" x="140" y="44" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">General-Domain</text>
+    <text id="text_general_domain_title_2" data-id="text_general_domain_title_2" data-class="text_node" data-parent="block_general_domain_pretraining" x="140" y="74" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">Language model</text>
+    <text id="text_general_domain_title_3" data-id="text_general_domain_title_3" data-class="text_node" data-parent="block_general_domain_pretraining" x="140" y="104" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">Pretraining</text>
+    
+    <!-- Placeholder diagram: (a) LM pre-training -->
+    <g id="raster_lm_pretraining" data-id="raster_lm_pretraining" data-class="raster_node"><image href="../../rasters/Paper2Fig_pipe_easy_000000361/crop_raster_lm_pretraining.png" xlink:href="../../rasters/Paper2Fig_pipe_easy_000000361/crop_raster_lm_pretraining.png" x="35" y="120" width="210" height="142" preserveAspectRatio="xMidYMid meet" /></g>
+  </g>
+
+  <!-- Standalone Block: Enormous Text Data for Language Understanding -->
+  <g id="block_enormous_text_data" data-id="block_enormous_text_data" data-class="block" data-parent="root">
+    <rect id="rect_enormous_text_data" x="4" y="295" width="355" height="125" rx="20" ry="20" fill="#fedf99" stroke="#7d5b12" stroke-width="4"/>
+    <text id="text_enormous_title_1" data-id="text_enormous_title_1" data-class="text_node" data-parent="block_enormous_text_data" x="135" y="334" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="bold" fill="#000000" text-anchor="middle">Enormous Text</text>
+    <text id="text_enormous_title_2" data-id="text_enormous_title_2" data-class="text_node" data-parent="block_enormous_text_data" x="135" y="367" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="bold" fill="#000000" text-anchor="middle">Data for Language</text>
+    <text id="text_enormous_title_3" data-id="text_enormous_title_3" data-class="text_node" data-parent="block_enormous_text_data" x="135" y="400" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="bold" fill="#000000" text-anchor="middle">Understanding</text>
+    
+    <!-- Wikipedia Logo Placeholder -->
+    <g id="raster_wikipedia_logo" data-id="raster_wikipedia_logo" data-class="raster_node"><image href="../../rasters/Paper2Fig_pipe_easy_000000361/crop_raster_wikipedia_logo.png" xlink:href="../../rasters/Paper2Fig_pipe_easy_000000361/crop_raster_wikipedia_logo.png" x="268" y="307" width="82" height="102" preserveAspectRatio="xMidYMid meet" /></g>
+  </g>
+
+  <!-- Nested Node: Target Task Language Model Fine-Tuning -->
+  <g id="node_target_task_lm_fine_tuning" data-id="node_target_task_lm_fine_tuning" data-class="child_node" data-parent="block_flood_tweet_classification">
+    <rect id="rect_lm_fine_tuning" x="320" y="18" width="242" height="260" rx="35" ry="35" fill="#feb98f" stroke="#e07548" stroke-width="2"/>
+    <text id="text_lm_ft_1" data-id="text_lm_ft_1" data-class="text_node" data-parent="node_target_task_lm_fine_tuning" x="441" y="52" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">Target Task</text>
+    <text id="text_lm_ft_2" data-id="text_lm_ft_2" data-class="text_node" data-parent="node_target_task_lm_fine_tuning" x="441" y="82" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">language model</text>
+    <text id="text_lm_ft_3" data-id="text_lm_ft_3" data-class="text_node" data-parent="node_target_task_lm_fine_tuning" x="441" y="112" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">Fine-Tuning</text>
+    
+    <!-- Placeholder diagram: (b) LM fine-tuning -->
+    <g id="raster_lm_fine_tuning" data-id="raster_lm_fine_tuning" data-class="raster_node"><image href="../../rasters/Paper2Fig_pipe_easy_000000361/crop_raster_lm_fine_tuning.png" xlink:href="../../rasters/Paper2Fig_pipe_easy_000000361/crop_raster_lm_fine_tuning.png" x="352" y="125" width="178" height="140" preserveAspectRatio="xMidYMid meet" /></g>
+  </g>
+
+  <!-- Nested Node: Target Task Classification Application -->
+  <g id="node_target_task_classification" data-id="node_target_task_classification" data-class="child_node" data-parent="block_flood_tweet_classification">
+    <rect id="rect_classification_app" x="605" y="18" width="215" height="260" rx="35" ry="35" fill="#a8d08d" stroke="#538135" stroke-width="2"/>
+    <text id="text_cls_app_1" data-id="text_cls_app_1" data-class="text_node" data-parent="node_target_task_classification" x="712" y="52" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">Target Task</text>
+    <text id="text_cls_app_2" data-id="text_cls_app_2" data-class="text_node" data-parent="node_target_task_classification" x="712" y="82" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">Classification</text>
+    <text id="text_cls_app_3" data-id="text_cls_app_3" data-class="text_node" data-parent="node_target_task_classification" x="712" y="112" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">Application</text>
+    
+    <!-- Placeholder diagram: (c) Classifier fine-tuning -->
+    <g id="raster_classifier_fine_tuning" data-id="raster_classifier_fine_tuning" data-class="raster_node"><image href="../../rasters/Paper2Fig_pipe_easy_000000361/crop_raster_classifier_fine_tuning.png" xlink:href="../../rasters/Paper2Fig_pipe_easy_000000361/crop_raster_classifier_fine_tuning.png" x="625" y="125" width="175" height="140" preserveAspectRatio="xMidYMid meet" /></g>
+  </g>
+
+  <!-- Output Node: Flood Related Tweets -->
+  <g id="node_flood_related_tweets" data-id="node_flood_related_tweets" data-class="child_node" data-parent="block_flood_tweet_classification">
+    <rect id="rect_flood_related" x="848" y="32" width="156" height="106" rx="20" ry="20" fill="#a8d08d" stroke="#538135" stroke-width="2"/>
+    <text id="text_related_1" data-id="text_related_1" data-class="text_node" data-parent="node_flood_related_tweets" x="926" y="66" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">Flood</text>
+    <text id="text_related_2" data-id="text_related_2" data-class="text_node" data-parent="node_flood_related_tweets" x="926" y="94" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">Related</text>
+    <text id="text_related_3" data-id="text_related_3" data-class="text_node" data-parent="node_flood_related_tweets" x="926" y="122" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">Tweets</text>
+  </g>
+
+  <!-- Output Node: Flood Unrelated Tweets -->
+  <g id="node_flood_unrelated_tweets" data-id="node_flood_unrelated_tweets" data-class="child_node" data-parent="block_flood_tweet_classification">
+    <rect id="rect_flood_unrelated" x="848" y="156" width="156" height="106" rx="20" ry="20" fill="#a8d08d" stroke="#538135" stroke-width="2"/>
+    <text id="text_unrelated_1" data-id="text_unrelated_1" data-class="text_node" data-parent="node_flood_unrelated_tweets" x="926" y="190" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">Flood</text>
+    <text id="text_unrelated_2" data-id="text_unrelated_2" data-class="text_node" data-parent="node_flood_unrelated_tweets" x="926" y="218" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">Unrelated</text>
+    <text id="text_unrelated_3" data-id="text_unrelated_3" data-class="text_node" data-parent="node_flood_unrelated_tweets" x="926" y="246" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">Tweets</text>
+  </g>
+
+  <!-- Bottom Middle Block: Flood Area 1 Tweet -->
+  <g id="block_target_task_data_area1" data-id="block_target_task_data_area1" data-class="block" data-parent="root">
+    <rect id="rect_area1_outer" x="418" y="295" width="300" height="110" rx="20" ry="20" fill="#ffffff" stroke="#2e5720" stroke-width="4"/>
+    
+    <!-- Inner Green Area Data Block -->
+    <g id="node_target_task_data_inner" data-id="node_target_task_data_inner" data-class="child_node" data-parent="block_target_task_data_area1">
+      <rect id="rect_target_task_data_inner" x="424" y="300" width="190" height="100" rx="18" ry="18" fill="#a8d08d" stroke="#538135" stroke-width="1.5"/>
+      <text id="text_area1_data_1" data-id="text_area1_data_1" data-class="text_node" data-parent="node_target_task_data_inner" x="468" y="334" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">Target</text>
+      <text id="text_area1_data_2" data-id="text_area1_data_2" data-class="text_node" data-parent="node_target_task_data_inner" x="468" y="362" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">Task</text>
+      <text id="text_area1_data_3" data-id="text_area1_data_3" data-class="text_node" data-parent="node_target_task_data_inner" x="468" y="390" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">Data</text>
+      
+      <!-- Twitter Logo Icon Area 1 -->
+      <g id="composite_twitter_icon_area1" data-id="composite_twitter_icon_area1" data-class="composite_whole" data-parent="node_target_task_data_inner">
+        <path id="path_twitter_bird_area1" data-id="path_twitter_bird_area1" data-class="composite_part" data-parent="composite_twitter_icon_area1"
+              d="M 590 326 C 586.6 327.5 582.9 328.6 579 329 C 583 326.6 586 322.8 587.5 318.3 C 583.8 320.5 579.7 322.1 575.3 323 C 571.8 319.3 566.8 317 561.3 317 C 550.7 317 542.2 325.5 542.2 336.1 C 542.2 337.6 542.4 339.1 542.7 340.5 C 526.8 339.7 512.7 332.1 503.2 320.5 C 501.6 323.3 500.6 326.6 500.6 330.1 C 500.6 336.7 504 342.6 509.1 346 C 506 345.9 503.1 345 500.5 343.6 C 500.5 343.7 500.5 343.8 500.5 344 C 500.5 353.3 507.1 361 515.9 362.8 C 514.3 363.2 512.6 363.5 510.8 363.5 C 509.6 363.5 508.3 363.3 507.2 363.1 C 509.6 370.8 516.8 376.4 525.2 376.6 C 518.6 381.8 510.3 384.9 501.3 384.9 C 499.7 384.9 498.2 384.8 496.7 384.6 C 505.2 390.1 515.3 393.3 526.2 393.3 C 561.6 393.3 581 364 581 338.6 C 581 337.8 581 337 580.9 336.1 C 584.7 333.4 587.7 330 590 326 Z"
+              fill="#29a9e0"/>
+      </g>
+    </g>
+    
+    <!-- Vertical Text Annotation: Area 1 -->
+    <text id="text_area1_vertical_tweet" data-id="text_area1_vertical_tweet" data-class="text_node" data-parent="block_target_task_data_area1"
+          x="638" y="350" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="bold" fill="#000000"
+          transform="rotate(90, 638, 350)" text-anchor="middle">
+      Tweet
+    </text>
+    <text id="text_area1_vertical_flood" data-id="text_area1_vertical_flood" data-class="text_node" data-parent="block_target_task_data_area1"
+          font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="bold" fill="#000000"
+          transform="rotate(90, 675, 350)" text-anchor="middle">
+      <tspan x="675" y="362">Flood</tspan>
+      <tspan x="675" y="337">Area 1</tspan>
+    </text>
+  </g>
+
+  <!-- Bottom Right Block: Flood Area 2 Tweet -->
+  <g id="block_target_task_data_area2" data-id="block_target_task_data_area2" data-class="block" data-parent="root">
+    <rect id="rect_area2_outer" x="735" y="300" width="325" height="105" rx="20" ry="20" fill="#ffffff" stroke="#2e5720" stroke-width="4"/>
+    
+    <!-- Inner Green Area 2 Data Block -->
+    <g id="node_new_target_task_inner" data-id="node_new_target_task_inner" data-class="child_node" data-parent="block_target_task_data_area2">
+      <rect id="rect_new_target_task_inner" x="742" y="306" width="205" height="93" rx="18" ry="18" fill="#a8d08d" stroke="#538135" stroke-width="1.5"/>
+      <text id="text_area2_data_1" data-id="text_area2_data_1" data-class="text_node" data-parent="node_new_target_task_inner" x="805" y="335" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">New Target</text>
+      <text id="text_area2_data_2" data-id="text_area2_data_2" data-class="text_node" data-parent="node_new_target_task_inner" x="805" y="361" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Task Data</text>
+      <text id="text_area2_data_3" data-id="text_area2_data_3" data-class="text_node" data-parent="node_new_target_task_inner" x="805" y="387" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Classification</text>
+      
+      <!-- Twitter Logo Icon Area 2 -->
+      <g id="composite_twitter_icon_area2" data-id="composite_twitter_icon_area2" data-class="composite_whole" data-parent="node_new_target_task_inner">
+        <path id="path_twitter_bird_area2" data-id="path_twitter_bird_area2" data-class="composite_part" data-parent="composite_twitter_icon_area2"
+              d="M 932 328 C 928.9 329.4 925.5 330.4 921.9 330.8 C 925.6 328.6 928.4 325.1 929.8 320.9 C 926.4 322.9 922.6 324.4 918.5 325.2 C 915.2 321.8 910.6 319.7 905.5 319.7 C 895.7 319.7 887.8 327.6 887.8 337.4 C 887.8 338.8 888 340.2 888.3 341.5 C 873.6 340.8 860.5 333.7 851.7 323 C 850.2 325.6 849.3 328.7 849.3 331.9 C 849.3 338 852.4 343.4 857.1 346.6 C 854.2 346.5 851.5 345.7 849.1 344.4 C 849.1 344.5 849.1 344.6 849.1 344.8 C 849.1 353.4 855.2 360.5 863.3 362.2 C 861.8 362.6 860.2 362.9 858.5 362.9 C 857.4 362.9 856.2 362.7 855.2 362.5 C 857.4 369.6 864.1 374.8 871.9 375 C 865.8 379.8 858.1 382.7 849.8 382.7 C 848.3 382.7 846.9 382.6 845.5 382.4 C 853.4 387.5 862.7 390.5 872.8 390.5 C 905.6 390.5 923.6 363.3 923.6 339.8 C 923.6 339 923.6 338.3 923.5 337.5 C 927 335 929.8 331.8 932 328 Z"
+              fill="#29a9e0"/>
+      </g>
+    </g>
+
+    <!-- Vertical Text Annotation: Area 2 -->
+    <text id="text_area2_vertical_tweet" data-id="text_area2_vertical_tweet" data-class="text_node" data-parent="block_target_task_data_area2"
+          x="970" y="352" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="bold" fill="#000000"
+          transform="rotate(90, 970, 352)" text-anchor="middle">
+      Tweet
+    </text>
+    <text id="text_area2_vertical_flood" data-id="text_area2_vertical_flood" data-class="text_node" data-parent="block_target_task_data_area2"
+          font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="bold" fill="#000000"
+          transform="rotate(90, 1009, 352)" text-anchor="middle">
+      <tspan x="1009" y="365">Flood</tspan>
+      <tspan x="1009" y="339">Area 2</tspan>
+    </text>
+  </g>
+
+  <!-- ==================== EDGES / ARROWS ==================== -->
+  <g id="edges_group">
+    <!-- Arrow: Enormous Text Data -> General-Domain LM Pretraining (Upward) -->
+    <path id="edge_enormous_to_general" data-id="edge_enormous_to_general" data-class="edge"
+          data-source="block_enormous_text_data" data-target="block_general_domain_pretraining"
+          d="M 140 295 L 140 282" fill="none" stroke="#000000" stroke-width="6" marker-end="url(#arrow-black)"/>
+
+    <!-- Arrow: General-Domain LM Pretraining -> Target Task LM Fine-Tuning (Rightward) -->
+    <path id="edge_general_to_lm_finetuning" data-id="edge_general_to_lm_finetuning" data-class="edge"
+          data-source="block_general_domain_pretraining" data-target="node_target_task_lm_fine_tuning"
+          d="M 270 120 L 314 120" fill="none" stroke="#000000" stroke-width="6" marker-end="url(#arrow-black)"/>
+
+    <!-- Arrow: Target Task LM Fine-Tuning -> Target Task Classification Application (Rightward) -->
+    <path id="edge_lm_finetuning_to_classification" data-id="edge_lm_finetuning_to_classification" data-class="edge"
+          data-source="node_target_task_lm_fine_tuning" data-target="node_target_task_classification"
+          d="M 562 120 L 599 120" fill="none" stroke="#000000" stroke-width="6" marker-end="url(#arrow-black)"/>
+
+    <!-- Arrow: Target Task Classification -> Flood Related Tweets (Up-Right) -->
+    <path id="edge_classification_to_related" data-id="edge_classification_to_related" data-class="edge"
+          data-source="node_target_task_classification" data-target="node_flood_related_tweets"
+          d="M 822 130 L 846 92" fill="none" stroke="#000000" stroke-width="6" marker-end="url(#arrow-black)"/>
+
+    <!-- Arrow: Target Task Classification -> Flood Unrelated Tweets (Down-Right) -->
+    <path id="edge_classification_to_unrelated" data-id="edge_classification_to_unrelated" data-class="edge"
+          data-source="node_target_task_classification" data-target="node_flood_unrelated_tweets"
+          d="M 822 150 L 846 188" fill="none" stroke="#000000" stroke-width="6" marker-end="url(#arrow-black)"/>
+
+    <!-- Arrow: Flood Area 1 Data -> Target Task LM Fine-Tuning (Up-Left) -->
+    <path id="edge_area1_to_lm_finetuning" data-id="edge_area1_to_lm_finetuning" data-class="edge"
+          data-source="block_target_task_data_area1" data-target="node_target_task_lm_fine_tuning"
+          d="M 545 295 L 533 273" fill="none" stroke="#000000" stroke-width="6" marker-end="url(#arrow-black)"/>
+
+    <!-- Arrow: Flood Area 1 Data -> Target Task Classification Application (Up-Right) -->
+    <path id="edge_area1_to_classification" data-id="edge_area1_to_classification" data-class="edge"
+          data-source="block_target_task_data_area1" data-target="node_target_task_classification"
+          d="M 600 295 L 612 273" fill="none" stroke="#000000" stroke-width="6" marker-end="url(#arrow-black)"/>
+
+    <!-- Arrow: Flood Area 2 -> Classification Block (Upward) -->
+    <path id="edge_area2_to_classification_up" data-id="edge_area2_to_classification_up" data-class="edge"
+          data-source="block_target_task_data_area2" data-target="block_flood_tweet_classification"
+          d="M 885 300 L 885 284" fill="none" stroke="#000000" stroke-width="5" marker-end="url(#arrow-black)"/>
+
+    <!-- Arrow: Classification Block -> Flood Area 2 (Downward) -->
+    <path id="edge_classification_to_area2_down" data-id="edge_classification_to_area2_down" data-class="edge"
+          data-source="block_flood_tweet_classification" data-target="block_target_task_data_area2"
+          d="M 915 284 L 915 300" fill="none" stroke="#000000" stroke-width="5" marker-end="url(#arrow-black)"/>
+  </g>
+
+  <!-- ==================== DYNAMIC NARRATION BANNER ==================== -->
+  <g id="narration_banner">
+    <!-- Background card for subtitle readability -->
+    <rect x="50" y="440" width="978" height="66" rx="12" ry="12" fill="#f8f9fa" stroke="#d0d5dd" stroke-width="1.5"/>
+
+    <!-- Step 1 Narrative -->
+    <text id="narr_ts1" x="539" y="468" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="bold" fill="#1e293b" text-anchor="middle">
+      <tspan x="539" dy="0">The pipeline begins with an enormous general text corpus, such as Wikipedia,</tspan>
+      <tspan x="539" dy="1.25em">to establish foundational language understanding.</tspan>
+    </text>
+
+    <!-- Step 2 Narrative -->
+    <text id="narr_ts2" x="539" y="468" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="bold" fill="#1e293b" text-anchor="middle">
+      <tspan x="539" dy="0">This general corpus is used to train a multi-layer neural network</tspan>
+      <tspan x="539" dy="1.25em">during the general-domain language model pre-training phase.</tspan>
+    </text>
+
+    <!-- Step 3 Narrative -->
+    <text id="narr_ts3" x="539" y="476" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="bold" fill="#1e293b" text-anchor="middle">
+      <tspan x="539" dy="0">The pre-trained model then feeds into the downstream flood tweet classification framework.</tspan>
+    </text>
+
+    <!-- Step 4 Narrative -->
+    <text id="narr_ts4" x="539" y="468" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="bold" fill="#1e293b" text-anchor="middle">
+      <tspan x="539" dy="0">Here, the language model undergoes target task fine-tuning</tspan>
+      <tspan x="539" dy="1.25em">to adapt to the specific vocabulary and style of disaster text.</tspan>
+    </text>
+
+    <!-- Step 5 Narrative -->
+    <text id="narr_ts5" x="539" y="468" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="bold" fill="#1e293b" text-anchor="middle">
+      <tspan x="539" dy="0">Tweet data collected from a specific flood area provides domain-specific text</tspan>
+      <tspan x="539" dy="1.25em">for language model tuning and classifier training.</tspan>
+    </text>
+
+    <!-- Step 6 Narrative -->
+    <text id="narr_ts6" x="539" y="468" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="bold" fill="#1e293b" text-anchor="middle">
+      <tspan x="539" dy="0">A classification head is appended and fine-tuned</tspan>
+      <tspan x="539" dy="1.25em">to create the target task classification application.</tspan>
+    </text>
+
+    <!-- Step 7 Narrative -->
+    <text id="narr_ts7" x="539" y="476" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="bold" fill="#1e293b" text-anchor="middle">
+      <tspan x="539" dy="0">The classifier accurately partitions messages into flood-related and flood-unrelated categories.</tspan>
+    </text>
+
+    <!-- Step 8 Narrative -->
+    <text id="narr_ts8" x="539" y="468" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="bold" fill="#1e293b" text-anchor="middle">
+      <tspan x="539" dy="0">Finally, the transfer learning framework generalizes to classify incoming feeds</tspan>
+      <tspan x="539" dy="1.25em">from new flood locations with minimal labeled data.</tspan>
+    </text>
+  </g>
+</svg>

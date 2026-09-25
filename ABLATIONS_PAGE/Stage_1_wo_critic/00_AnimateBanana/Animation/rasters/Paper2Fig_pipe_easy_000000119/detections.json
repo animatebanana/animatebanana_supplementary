@@ -1,0 +1,143 @@
+{
+  "detected": 7,
+  "placeholders": 7,
+  "omitted": {},
+  "rejected": {},
+  "image_size": [
+    951,
+    435
+  ],
+  "regions": [
+    {
+      "xml_id": "node_rgb_image",
+      "box_2d": [
+        187,
+        12,
+        455,
+        151
+      ],
+      "bbox": [
+        11.412,
+        81.345,
+        143.601,
+        197.925
+      ],
+      "label": "RGB Image"
+    },
+    {
+      "xml_id": "node_superpixels",
+      "box_2d": [
+        198,
+        226,
+        453,
+        365
+      ],
+      "bbox": [
+        214.92600000000002,
+        86.13000000000001,
+        347.115,
+        197.055
+      ],
+      "label": "Superpixels"
+    },
+    {
+      "xml_id": "node_depth_image",
+      "box_2d": [
+        628,
+        14,
+        888,
+        157
+      ],
+      "bbox": [
+        13.314,
+        273.18,
+        149.307,
+        386.28000000000003
+      ],
+      "label": "Depth Image"
+    },
+    {
+      "xml_id": "node_stage_1_image",
+      "box_2d": [
+        102,
+        582,
+        347,
+        715
+      ],
+      "bbox": [
+        553.482,
+        44.37,
+        679.9649999999999,
+        150.945
+      ],
+      "label": "Compactness Saliency"
+    },
+    {
+      "xml_id": "node_stage_2_image",
+      "box_2d": [
+        697,
+        583,
+        938,
+        715
+      ],
+      "bbox": [
+        554.433,
+        303.195,
+        679.9649999999999,
+        408.03
+      ],
+      "label": "Foreground Saliency"
+    },
+    {
+      "xml_id": "node_saliency_map",
+      "box_2d": [
+        244,
+        854,
+        468,
+        977
+      ],
+      "bbox": [
+        812.154,
+        106.14,
+        929.127,
+        203.58
+      ],
+      "label": "Saliency Map"
+    },
+    {
+      "xml_id": "node_ground_truth",
+      "box_2d": [
+        594,
+        854,
+        822,
+        977
+      ],
+      "bbox": [
+        812.154,
+        258.39,
+        929.127,
+        357.57
+      ],
+      "label": "Ground Truth"
+    }
+  ],
+  "replaced": [
+    "node_rgb_image",
+    "node_superpixels",
+    "node_depth_image",
+    "node_stage_1_image",
+    "node_stage_2_image",
+    "node_saliency_map",
+    "node_ground_truth"
+  ],
+  "provenance": {
+    "agent": "raster_integrator",
+    "backend": "openrouter_gemini37flash",
+    "model": "google-gemini-3.7-flash",
+    "prompt": null,
+    "style": "progressive_reveal",
+    "target": "svg",
+    "config_fingerprint": "14bc7ec3bfd3d20d",
+    "timestamp": "2026-08-28T21:03:15"
+  }
+}

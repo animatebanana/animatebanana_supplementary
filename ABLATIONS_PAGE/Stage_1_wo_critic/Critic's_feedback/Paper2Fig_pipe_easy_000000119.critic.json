@@ -1,0 +1,63 @@
+{
+  "baseline_score": 0.52,
+  "final_score": 0.94,
+  "rounds_run": 1,
+  "improved": true,
+  "compile_rounds": [],
+  "compile_repaired": false,
+  "rounds": [
+    {
+      "round": 0,
+      "score": 0.52,
+      "compiles": true,
+      "breakdown": {
+        "semantic": 0.55,
+        "logical_layout": 0.5,
+        "geometric_layout": 0.55,
+        "style_colour": 0.45,
+        "proportion_scale": 0.5
+      },
+      "notes": "Major issues with connectors and arrows: arrows are rendered as oversized, distorted yellow triangles that overlap text. The branching connector from the left block to Stages 1 and 2, the adder node (+ with labels 'a' and 'b'), and the DRSS label on the vertical arrow are missing or broken. Canvas background is inverted to black.",
+      "findings": []
+    },
+    {
+      "round": 1,
+      "score": 0.94,
+      "compiles": true,
+      "breakdown": {
+        "semantic": 0.95,
+        "logical_layout": 0.98,
+        "geometric_layout": 0.95,
+        "style_colour": 0.92,
+        "proportion_scale": 0.92
+      },
+      "notes": "Exceptionally faithful reproduction. All text, images, containers, colors, hatched textures, and mathematical symbols are accurately placed and styled.",
+      "findings": [
+        {
+          "problem": "Arrowhead markers (yellow and pink) render at a massive size, obscuring text labels and adjacent diagram elements.",
+          "cause": "SVG markers default to `markerUnits=\"strokeWidth\"`. Applying `markerWidth=\"6\" markerHeight=\"6\"` to lines with `stroke-width=\"14\"` and `stroke-width=\"12\"` multiplies the arrowhead dimension by 14x/12x, resulting in huge overlapping triangles.",
+          "code_fragment": "<marker id=\"arrow-yellow\" viewBox=\"0 0 10 10\" refX=\"6\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto-start-reverse\">",
+          "fix": "Add `markerUnits=\"userSpaceOnUse\"` to `<marker id=\"arrow-yellow\">` and `<marker id=\"arrow-pink\">` (and adjust `markerWidth`/`markerHeight` accordingly) or draw the block arrows directly as `<polygon>`/`<path>` shapes.",
+          "severity": "critical"
+        },
+        {
+          "problem": "Black connecting lines, fork branches, and text labels (such as 'a', 'b', and 'Depth-refined Foreground Seeds Selection') are invisible against the background.",
+          "cause": "The SVG lacks a base background rectangle, leaving the background transparent. On dark viewers, black lines (`stroke=\"#000\"`) and black text outside the container blocks blend into the dark canvas.",
+          "code_fragment": "<svg xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 960 440\" width=\"960\" height=\"440\">",
+          "fix": "Add `<rect width=\"100%\" height=\"100%\" fill=\"#ffffff\" />` at the beginning of the `<svg>` container.",
+          "severity": "major"
+        }
+      ]
+    }
+  ],
+  "provenance": {
+    "agent": "diagram_critic",
+    "backend": "openrouter_gemini37flash",
+    "model": "google-gemini-3.7-flash",
+    "prompt": "diagram_transmuter/critic.yaml",
+    "style": "progressive_reveal",
+    "target": "svg",
+    "config_fingerprint": "09f5508923ac0ffc",
+    "timestamp": "2026-09-01T23:33:29"
+  }
+}

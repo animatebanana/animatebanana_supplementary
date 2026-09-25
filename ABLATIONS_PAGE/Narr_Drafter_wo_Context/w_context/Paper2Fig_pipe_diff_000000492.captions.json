@@ -1,0 +1,54 @@
+[
+ {
+  "t": 0.0,
+  "text": "The workflow begins with the Breast Cancer Image Dataset, which supplies data across two parallel training branches."
+ },
+ {
+  "t": 2.2,
+  "text": "In the segmentation branch, raw ultrasonography images are first extracted from the dataset."
+ },
+ {
+  "t": 4.4,
+  "text": "These raw images undergo preprocessing to standardize their input characteristics."
+ },
+ {
+  "t": 6.6,
+  "text": "Spatial scaling is first applied to resize each image to uniform dimensions."
+ },
+ {
+  "t": 8.8,
+  "text": "Pixel normalization is then performed to ensure consistent intensity distributions across the dataset."
+ },
+ {
+  "t": 11.0,
+  "text": "Next, Simple Linear Iterative Clustering clusters pixels into superpixels to address non-linear artifacts."
+ },
+ {
+  "t": 13.2,
+  "text": "The superpixel representations are fed into a modified U-Net architecture to perform semantic segmentation."
+ },
+ {
+  "t": 15.4,
+  "text": "This completes the training phase, yielding the trained segmentation model."
+ },
+ {
+  "t": 17.6,
+  "text": "In parallel, ground truth masked images and labels are routed into the classification branch."
+ },
+ {
+  "t": 19.8,
+  "text": "A pre-trained VGG 16 backbone extracts high-level convolutional features from masked images."
+ },
+ {
+  "t": 22.0,
+  "text": "Extracted features are processed through fully connected dense layers for tumor classification."
+ },
+ {
+  "t": 24.2,
+  "text": "This training process establishes the finalized detection model."
+ },
+ {
+  "t": 26.4,
+  "text": "Finally, both trained models are integrated to construct the end-to-end breast cancer detection pipelining framework."
+ }
+]

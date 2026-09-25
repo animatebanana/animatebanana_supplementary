@@ -1,0 +1,58 @@
+{
+  "detected": 2,
+  "placeholders": 2,
+  "omitted": {},
+  "rejected": {},
+  "image_size": [
+    1029,
+    223
+  ],
+  "regions": [
+    {
+      "xml_id": "raster_local_regions_grid",
+      "box_2d": [
+        275,
+        397,
+        668,
+        485
+      ],
+      "bbox": [
+        408.51300000000003,
+        61.325,
+        499.065,
+        148.964
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "raster_labeling_patches",
+      "box_2d": [
+        284,
+        561,
+        673,
+        649
+      ],
+      "bbox": [
+        577.269,
+        63.331999999999994,
+        667.821,
+        150.079
+      ],
+      "label": ""
+    }
+  ],
+  "replaced": [
+    "raster_local_regions_grid",
+    "raster_labeling_patches"
+  ],
+  "provenance": {
+    "agent": "raster_integrator",
+    "backend": "openrouter_gemini37flash",
+    "model": "google-gemini-3.7-flash",
+    "prompt": null,
+    "style": "alpha_masking",
+    "target": "svg",
+    "config_fingerprint": "e41a2d04f1482fae",
+    "timestamp": "2026-08-28T20:32:05"
+  }
+}

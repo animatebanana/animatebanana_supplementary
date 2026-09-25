@@ -1,0 +1,465 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 990" width="1000" height="990">
+  <defs>
+    <!-- Arrowhead markers -->
+    <marker id="arrow-solid" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#000000"/>
+    </marker>
+    <marker id="arrow-dashed" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#000000"/>
+    </marker>
+
+    <style>
+      /* Base ghost state for all animated diagram elements */
+      #node_bots_response,
+      #edge_bot_to_container,
+      #block_main_container,
+      #rect_main_container,
+      #edge_fork_network,
+      #edge_fork_repetition,
+      #edge_fork_question,
+      #edge_fork_short_safe,
+      #node_next_sentence,
+      #block_repetition,
+      #rect_repetition_bg,
+      #text_repetition_title,
+      #rect_repetition_inner_dash,
+      #edge_repetition_spine,
+      #node_rep_internal,
+      #node_rep_external,
+      #node_rep_partner,
+      #node_question_asking,
+      #node_short_safe,
+      #edge_next_sentence_to_classifier,
+      #edge_repetition_to_classifier,
+      #edge_question_to_classifier,
+      #edge_short_safe_to_classifier,
+      #node_classifier,
+      #edge_classifier_to_boundary,
+      #edge_container_to_response_class,
+      #node_response_classification {
+        opacity: 0.15;
+      }
+
+      /* Narration banner base hidden state */
+      #narration_banner text {
+        opacity: 0;
+      }
+
+      /* Animation bindings for diagram elements */
+      #node_bots_response,
+      #edge_bot_to_container {
+        animation: anim_ts1 30s infinite;
+      }
+
+      /* Main container persisted across child focus (TS2 to TS9) */
+      #block_main_container,
+      #rect_main_container {
+        animation: anim_main_container 30s infinite;
+      }
+
+      #edge_fork_network,
+      #edge_fork_repetition,
+      #edge_fork_question,
+      #edge_fork_short_safe {
+        animation: anim_ts2 30s infinite;
+      }
+
+      #node_next_sentence {
+        animation: anim_ts3 30s infinite;
+      }
+
+      /* Repetition block persisted across internal sub-nodes (TS4 to TS5) */
+      #block_repetition,
+      #rect_repetition_bg,
+      #text_repetition_title,
+      #rect_repetition_inner_dash,
+      #edge_repetition_spine {
+        animation: anim_repetition_block 30s infinite;
+      }
+
+      #node_rep_internal,
+      #node_rep_external,
+      #node_rep_partner {
+        animation: anim_ts5 30s infinite;
+      }
+
+      #node_question_asking {
+        animation: anim_ts6 30s infinite;
+      }
+
+      #node_short_safe {
+        animation: anim_ts7 30s infinite;
+      }
+
+      #edge_next_sentence_to_classifier,
+      #edge_repetition_to_classifier,
+      #edge_question_to_classifier,
+      #edge_short_safe_to_classifier {
+        animation: anim_ts8 30s infinite;
+      }
+
+      #node_classifier,
+      #edge_classifier_to_boundary {
+        animation: anim_ts9 30s infinite;
+      }
+
+      #edge_container_to_response_class,
+      #node_response_classification {
+        animation: anim_ts10 30s infinite;
+      }
+
+      /* Narration banner bindings */
+      #narr_ts1 { animation: narr_anim_ts1 30s infinite; }
+      #narr_ts2 { animation: narr_anim_ts2 30s infinite; }
+      #narr_ts3 { animation: narr_anim_ts3 30s infinite; }
+      #narr_ts4 { animation: narr_anim_ts4 30s infinite; }
+      #narr_ts5 { animation: narr_anim_ts5 30s infinite; }
+      #narr_ts6 { animation: narr_anim_ts6 30s infinite; }
+      #narr_ts7 { animation: narr_anim_ts7 30s infinite; }
+      #narr_ts8 { animation: narr_anim_ts8 30s infinite; }
+      #narr_ts9 { animation: narr_anim_ts9 30s infinite; }
+      #narr_ts10 { animation: narr_anim_ts10 30s infinite; }
+
+      /* Keyframes for Diagram Elements */
+      @keyframes anim_ts1 {
+        0%       { opacity: 1.0; }
+        9.999%   { opacity: 1.0; }
+        10%      { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+
+      @keyframes anim_ts2 {
+        0%       { opacity: 0.15; }
+        9.999%   { opacity: 0.15; }
+        10%      { opacity: 1.0; }
+        19.999%  { opacity: 1.0; }
+        20%      { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+
+      @keyframes anim_main_container {
+        0%       { opacity: 0.15; }
+        9.999%   { opacity: 0.15; }
+        10%      { opacity: 1.0; }
+        89.999%  { opacity: 1.0; }
+        90%      { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+
+      @keyframes anim_ts3 {
+        0%       { opacity: 0.15; }
+        19.999%  { opacity: 0.15; }
+        20%      { opacity: 1.0; }
+        29.999%  { opacity: 1.0; }
+        30%      { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+
+      @keyframes anim_repetition_block {
+        0%       { opacity: 0.15; }
+        29.999%  { opacity: 0.15; }
+        30%      { opacity: 1.0; }
+        49.999%  { opacity: 1.0; }
+        50%      { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+
+      @keyframes anim_ts5 {
+        0%       { opacity: 0.15; }
+        39.999%  { opacity: 0.15; }
+        40%      { opacity: 1.0; }
+        49.999%  { opacity: 1.0; }
+        50%      { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+
+      @keyframes anim_ts6 {
+        0%       { opacity: 0.15; }
+        49.999%  { opacity: 0.15; }
+        50%      { opacity: 1.0; }
+        59.999%  { opacity: 1.0; }
+        60%      { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+
+      @keyframes anim_ts7 {
+        0%       { opacity: 0.15; }
+        59.999%  { opacity: 0.15; }
+        60%      { opacity: 1.0; }
+        69.999%  { opacity: 1.0; }
+        70%      { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+
+      @keyframes anim_ts8 {
+        0%       { opacity: 0.15; }
+        69.999%  { opacity: 0.15; }
+        70%      { opacity: 1.0; }
+        79.999%  { opacity: 1.0; }
+        80%      { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+
+      @keyframes anim_ts9 {
+        0%       { opacity: 0.15; }
+        79.999%  { opacity: 0.15; }
+        80%      { opacity: 1.0; }
+        89.999%  { opacity: 1.0; }
+        90%      { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+
+      @keyframes anim_ts10 {
+        0%       { opacity: 0.15; }
+        89.999%  { opacity: 0.15; }
+        90%      { opacity: 1.0; }
+        100%     { opacity: 1.0; }
+      }
+
+      /* Keyframes for Subtitle Banners */
+      @keyframes narr_anim_ts1 {
+        0%       { opacity: 1.0; }
+        9.999%   { opacity: 1.0; }
+        10%      { opacity: 0.0; }
+        100%     { opacity: 0.0; }
+      }
+
+      @keyframes narr_anim_ts2 {
+        0%       { opacity: 0.0; }
+        9.999%   { opacity: 0.0; }
+        10%      { opacity: 1.0; }
+        19.999%  { opacity: 1.0; }
+        20%      { opacity: 0.0; }
+        100%     { opacity: 0.0; }
+      }
+
+      @keyframes narr_anim_ts3 {
+        0%       { opacity: 0.0; }
+        19.999%  { opacity: 0.0; }
+        20%      { opacity: 1.0; }
+        29.999%  { opacity: 1.0; }
+        30%      { opacity: 0.0; }
+        100%     { opacity: 0.0; }
+      }
+
+      @keyframes narr_anim_ts4 {
+        0%       { opacity: 0.0; }
+        29.999%  { opacity: 0.0; }
+        30%      { opacity: 1.0; }
+        39.999%  { opacity: 1.0; }
+        40%      { opacity: 0.0; }
+        100%     { opacity: 0.0; }
+      }
+
+      @keyframes narr_anim_ts5 {
+        0%       { opacity: 0.0; }
+        39.999%  { opacity: 0.0; }
+        40%      { opacity: 1.0; }
+        49.999%  { opacity: 1.0; }
+        50%      { opacity: 0.0; }
+        100%     { opacity: 0.0; }
+      }
+
+      @keyframes narr_anim_ts6 {
+        0%       { opacity: 0.0; }
+        49.999%  { opacity: 0.0; }
+        50%      { opacity: 1.0; }
+        59.999%  { opacity: 1.0; }
+        60%      { opacity: 0.0; }
+        100%     { opacity: 0.0; }
+      }
+
+      @keyframes narr_anim_ts7 {
+        0%       { opacity: 0.0; }
+        59.999%  { opacity: 0.0; }
+        60%      { opacity: 1.0; }
+        69.999%  { opacity: 1.0; }
+        70%      { opacity: 0.0; }
+        100%     { opacity: 0.0; }
+      }
+
+      @keyframes narr_anim_ts8 {
+        0%       { opacity: 0.0; }
+        69.999%  { opacity: 0.0; }
+        70%      { opacity: 1.0; }
+        79.999%  { opacity: 1.0; }
+        80%      { opacity: 0.0; }
+        100%     { opacity: 0.0; }
+      }
+
+      @keyframes narr_anim_ts9 {
+        0%       { opacity: 0.0; }
+        79.999%  { opacity: 0.0; }
+        80%      { opacity: 1.0; }
+        89.999%  { opacity: 1.0; }
+        90%      { opacity: 0.0; }
+        100%     { opacity: 0.0; }
+      }
+
+      @keyframes narr_anim_ts10 {
+        0%       { opacity: 0.0; }
+        89.999%  { opacity: 0.0; }
+        90%      { opacity: 1.0; }
+        100%     { opacity: 1.0; }
+      }
+    </style>
+  </defs>
+
+  <!-- Top Standalone Node: Bot's Response -->
+  <g id="node_bots_response" data-id="node_bots_response" data-class="standalone_node" data-parent="root">
+    <rect x="375" y="2" width="240" height="78" rx="39" fill="#ADC2D5" stroke="#2B4660" stroke-width="2"/>
+    <text x="495" y="47" font-family="Arial, sans-serif" font-size="20" font-weight="normal" text-anchor="middle" fill="#000000">Bot's Response</text>
+  </g>
+
+  <!-- Edge: Bot's Response to Main Container -->
+  <path id="edge_bot_to_container" data-id="edge_bot_to_container" data-class="edge" data-source="node_bots_response" data-target="block_main_container" d="M 495 80 L 495 133" stroke="#000000" stroke-width="2" marker-end="url(#arrow-solid)"/>
+
+  <!-- Main Processing Block Container -->
+  <g id="block_main_container" data-id="block_main_container" data-class="block" data-parent="root">
+    <rect id="rect_main_container" data-id="rect_main_container" data-class="child_node" data-parent="block_main_container" x="2" y="134" width="996" height="616" rx="60" fill="#FFFFFF" stroke="#000000" stroke-width="2"/>
+
+    <!-- Internal Routing Edges from top of container to 4 modules -->
+    <path id="edge_fork_network" data-id="edge_fork_network" data-class="edge" data-source="rect_main_container" data-target="node_next_sentence" d="M 496 134 L 496 193 M 172 193 L 830 193 M 172 193 L 172 269" stroke="#000000" stroke-width="1.8" stroke-dasharray="4,4" marker-end="url(#arrow-dashed)" fill="none"/>
+    <path id="edge_fork_repetition" data-id="edge_fork_repetition" data-class="edge" data-source="rect_main_container" data-target="block_repetition" d="M 391 193 L 391 269" stroke="#000000" stroke-width="1.8" stroke-dasharray="4,4" marker-end="url(#arrow-dashed)" fill="none"/>
+    <path id="edge_fork_question" data-id="edge_fork_question" data-class="edge" data-source="rect_main_container" data-target="node_question_asking" d="M 611 193 L 611 269" stroke="#000000" stroke-width="1.8" stroke-dasharray="4,4" marker-end="url(#arrow-dashed)" fill="none"/>
+    <path id="edge_fork_short_safe" data-id="edge_fork_short_safe" data-class="edge" data-source="rect_main_container" data-target="node_short_safe" d="M 830 193 L 830 269" stroke="#000000" stroke-width="1.8" stroke-dasharray="4,4" marker-end="url(#arrow-dashed)" fill="none"/>
+
+    <!-- Module 1: Next Sentence Prediction -->
+    <g id="node_next_sentence" data-id="node_next_sentence" data-class="child_node" data-parent="block_main_container">
+      <rect x="94" y="271" width="149" height="270" rx="25" fill="#CCE5C9" stroke="#5E9F61" stroke-width="2"/>
+      <text x="168.5" y="388" font-family="Arial, sans-serif" font-size="21" text-anchor="middle" fill="#000000">
+        <tspan x="168.5" dy="0">Next</tspan>
+        <tspan x="168.5" dy="28">Sentence</tspan>
+        <tspan x="168.5" dy="28">Prediction</tspan>
+      </text>
+    </g>
+
+    <!-- Module 2: Repetition (Nested Block) -->
+    <g id="block_repetition" data-id="block_repetition" data-class="block" data-parent="block_main_container">
+      <rect id="rect_repetition_bg" data-id="rect_repetition_bg" data-class="child_node" data-parent="block_repetition" x="316" y="271" width="149" height="270" rx="25" fill="#A1D4F1" stroke="#2586C4" stroke-width="2"/>
+      <text id="text_repetition_title" data-id="text_repetition_title" data-class="child_node" data-parent="block_repetition" x="390.5" y="318" font-family="Arial, sans-serif" font-size="21" text-anchor="middle" fill="#000000">Repetition</text>
+      
+      <!-- Repetition Internal Dashed Sub-container and Spine -->
+      <rect id="rect_repetition_inner_dash" data-id="rect_repetition_inner_dash" data-class="child_node" data-parent="block_repetition" x="343" y="350" width="94" height="175" fill="none" stroke="#000000" stroke-width="1.5" stroke-dasharray="4,4"/>
+      <path id="edge_repetition_spine" data-id="edge_repetition_spine" data-class="edge" data-source="text_repetition_title" data-target="rect_repetition_inner_dash" d="M 390.5 326 L 390.5 540" stroke="#000000" stroke-width="1.5" stroke-dasharray="4,4" fill="none"/>
+
+      <!-- Inner Sub-node: Internal -->
+      <g id="node_rep_internal" data-id="node_rep_internal" data-class="child_node" data-parent="block_repetition">
+        <rect x="325.5" y="386" width="39" height="116" rx="8" fill="#F2F2F2" stroke="#6F6F6F" stroke-width="1.8"/>
+        <text x="-444" y="352" transform="rotate(-90)" font-family="Arial, sans-serif" font-size="19" text-anchor="middle" fill="#000000">Internal</text>
+      </g>
+
+      <!-- Inner Sub-node: External -->
+      <g id="node_rep_external" data-id="node_rep_external" data-class="child_node" data-parent="block_repetition">
+        <rect x="371" y="386" width="39" height="116" rx="8" fill="#F2F2F2" stroke="#6F6F6F" stroke-width="1.8"/>
+        <text x="-444" y="397.5" transform="rotate(-90)" font-family="Arial, sans-serif" font-size="19" text-anchor="middle" fill="#000000">External</text>
+      </g>
+
+      <!-- Inner Sub-node: Partner -->
+      <g id="node_rep_partner" data-id="node_rep_partner" data-class="child_node" data-parent="block_repetition">
+        <rect x="416.5" y="386" width="39" height="116" rx="8" fill="#F2F2F2" stroke="#6F6F6F" stroke-width="1.8"/>
+        <text x="-444" y="443" transform="rotate(-90)" font-family="Arial, sans-serif" font-size="19" text-anchor="middle" fill="#000000">Partner</text>
+      </g>
+    </g>
+
+    <!-- Module 3: Question-Asking -->
+    <g id="node_question_asking" data-id="node_question_asking" data-class="child_node" data-parent="block_main_container">
+      <rect x="537" y="271" width="149" height="270" rx="25" fill="#FDE2C3" stroke="#E5A337" stroke-width="2"/>
+      <text x="611.5" y="402" font-family="Arial, sans-serif" font-size="21" text-anchor="middle" fill="#000000">
+        <tspan x="611.5" dy="0">Question-</tspan>
+        <tspan x="611.5" dy="28">Asking</tspan>
+      </text>
+    </g>
+
+    <!-- Module 4: Short-safe Answers Detection -->
+    <g id="node_short_safe" data-id="node_short_safe" data-class="child_node" data-parent="block_main_container">
+      <rect x="758" y="271" width="149" height="270" rx="25" fill="#F6C7C7" stroke="#C35656" stroke-width="2"/>
+      <text x="832.5" y="388" font-family="Arial, sans-serif" font-size="21" text-anchor="middle" fill="#000000">
+        <tspan x="832.5" dy="0">Short-safe</tspan>
+        <tspan x="832.5" dy="28">Answers</tspan>
+        <tspan x="832.5" dy="28">Detection</tspan>
+      </text>
+    </g>
+
+    <!-- Downward Dashed Edges to Classifier -->
+    <path id="edge_next_sentence_to_classifier" data-id="edge_next_sentence_to_classifier" data-class="edge" data-source="node_next_sentence" data-target="node_classifier" d="M 168.5 541 L 168.5 640" stroke="#000000" stroke-width="1.8" stroke-dasharray="4,4" marker-end="url(#arrow-dashed)" fill="none"/>
+    <path id="edge_repetition_to_classifier" data-id="edge_repetition_to_classifier" data-class="edge" data-source="block_repetition" data-target="node_classifier" d="M 390.5 541 L 390.5 640" stroke="#000000" stroke-width="1.8" stroke-dasharray="4,4" marker-end="url(#arrow-dashed)" fill="none"/>
+    <path id="edge_question_to_classifier" data-id="edge_question_to_classifier" data-class="edge" data-source="node_question_asking" data-target="node_classifier" d="M 611.5 541 L 611.5 640" stroke="#000000" stroke-width="1.8" stroke-dasharray="4,4" marker-end="url(#arrow-dashed)" fill="none"/>
+    <path id="edge_short_safe_to_classifier" data-id="edge_short_safe_to_classifier" data-class="edge" data-source="node_short_safe" data-target="node_classifier" d="M 832.5 541 L 832.5 640" stroke="#000000" stroke-width="1.8" stroke-dasharray="4,4" marker-end="url(#arrow-dashed)" fill="none"/>
+
+    <!-- Classifier Node -->
+    <g id="node_classifier" data-id="node_classifier" data-class="child_node" data-parent="block_main_container">
+      <rect x="94" y="642" width="813" height="56" rx="20" fill="#F4F4F4" stroke="#6F6F6F" stroke-width="2"/>
+      <text x="500.5" y="678" font-family="Arial, sans-serif" font-size="21" text-anchor="middle" fill="#000000">Classifier</text>
+    </g>
+
+    <!-- Dashed Line from Classifier to bottom container border -->
+    <path id="edge_classifier_to_boundary" data-id="edge_classifier_to_boundary" data-class="edge" data-source="node_classifier" data-target="rect_main_container" d="M 499 698 L 499 750" stroke="#000000" stroke-width="1.8" stroke-dasharray="4,4" fill="none"/>
+  </g>
+
+  <!-- Edge: Container bottom to Response Classification -->
+  <path id="edge_container_to_response_class" data-id="edge_container_to_response_class" data-class="edge" data-source="block_main_container" data-target="node_response_classification" d="M 499 750 L 499 808" stroke="#000000" stroke-width="2" marker-end="url(#arrow-solid)"/>
+
+  <!-- Bottom Standalone Node: Response Classification -->
+  <g id="node_response_classification" data-id="node_response_classification" data-class="standalone_node" data-parent="root">
+    <rect x="334" y="810" width="333" height="76" rx="38" fill="#ADC2D5" stroke="#2B4660" stroke-width="2"/>
+    <text x="500.5" y="855" font-family="Arial, sans-serif" font-size="20" font-weight="normal" text-anchor="middle" fill="#000000">Response Classification</text>
+  </g>
+
+  <!-- Dynamic Narration Banner -->
+  <g id="narration_banner">
+    <!-- Subtitle background pill -->
+    <rect x="40" y="910" width="920" height="65" rx="12" fill="#1E293B" opacity="0.08"/>
+
+    <!-- TS1 -->
+    <text id="narr_ts1" x="50%" y="938" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#1E293B" font-weight="500">
+      <tspan x="50%" dy="0">The evaluation pipeline begins when the automated dialogue agent's response is received as input.</tspan>
+    </text>
+
+    <!-- TS2 -->
+    <text id="narr_ts2" x="50%" y="938" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#1E293B" font-weight="500">
+      <tspan x="50%" dy="0">The response data is routed simultaneously across four parallel feature extraction modules.</tspan>
+    </text>
+
+    <!-- TS3 -->
+    <text id="narr_ts3" x="50%" y="938" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#1E293B" font-weight="500">
+      <tspan x="50%" dy="0">The next sentence prediction attribute evaluates response relevance using bidirectional text conditioning.</tspan>
+    </text>
+
+    <!-- TS4 -->
+    <text id="narr_ts4" x="50%" y="938" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#1E293B" font-weight="500">
+      <tspan x="50%" dy="0">The repetition module analyzes phrase overlap across the dialogue.</tspan>
+    </text>
+
+    <!-- TS5 -->
+    <text id="narr_ts5" x="50%" y="938" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#1E293B" font-weight="500">
+      <tspan x="50%" dy="0">It explicitly computes unigram, bigram, and trigram redundancy across internal, external, and partner utterances.</tspan>
+    </text>
+
+    <!-- TS6 -->
+    <text id="narr_ts6" x="50%" y="930" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#1E293B" font-weight="500">
+      <tspan x="50%" dy="0">The question asking attribute measures conversational balance</tspan>
+      <tspan x="50%" dy="22">by calculating the number of questions asked.</tspan>
+    </text>
+
+    <!-- TS7 -->
+    <text id="narr_ts7" x="50%" y="938" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#1E293B" font-weight="500">
+      <tspan x="50%" dy="0">The short safe answers detection attribute evaluates utterance length and the presence of named entities.</tspan>
+    </text>
+
+    <!-- TS8 -->
+    <text id="narr_ts8" x="50%" y="938" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#1E293B" font-weight="500">
+      <tspan x="50%" dy="0">Numeric scores generated by all four parallel components converge toward the decision layer.</tspan>
+    </text>
+
+    <!-- TS9 -->
+    <text id="narr_ts9" x="50%" y="938" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#1E293B" font-weight="500">
+      <tspan x="50%" dy="0">The classifier combines these extracted feature values to assess overall dialogue fluidity.</tspan>
+    </text>
+
+    <!-- TS10 -->
+    <text id="narr_ts10" x="50%" y="938" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#1E293B" font-weight="500">
+      <tspan x="50%" dy="0">Finally, the system outputs the final response classification.</tspan>
+    </text>
+  </g>
+</svg>

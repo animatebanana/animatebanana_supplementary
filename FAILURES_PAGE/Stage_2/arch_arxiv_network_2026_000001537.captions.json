@@ -1,0 +1,42 @@
+[
+ {
+  "t": 0.0,
+  "text": "The evaluation framework operates within an isolated Mahimahi network namespace to ensure synchronized, reproducible emulation."
+ },
+ {
+  "t": 3.0,
+  "text": "Inside this namespace, a kernel TCP/IP stack manages multiple congestion control algorithms alongside standard socket interfaces."
+ },
+ {
+  "t": 5.925,
+  "text": "On the sender side, servers transmit network traffic guided by link traces."
+ },
+ {
+  "t": 8.85,
+  "text": "Packets from each sender enter the Mahimahi namespace via dedicated ingress TUN interfaces."
+ },
+ {
+  "t": 11.775,
+  "text": "Chained user-space shells dynamically emulate path impairments, including packet loss and variable delay."
+ },
+ {
+  "t": 14.7,
+  "text": "Traffic is concurrently processed by the kernel stack across baseline reference controllers, including NewReno, Cubic, and BBR."
+ },
+ {
+  "t": 17.625,
+  "text": "Packets then exit through egress TUN interfaces to reach the receiving clients."
+ },
+ {
+  "t": 20.55,
+  "text": "Meanwhile, the learned Sage controller receives transport observations from the socket and executes its policy actions in real time."
+ },
+ {
+  "t": 23.475,
+  "text": "A Control Block coordinates the user-space shells by updating downlink and uplink bandwidth, loss, and delay parameters."
+ },
+ {
+  "t": 26.4,
+  "text": "Finally, ReGuard aggregates telemetry, action histories, and rewards across Sage and heuristic baselines to uncover worst-case failure scenarios."
+ }
+]

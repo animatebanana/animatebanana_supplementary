@@ -1,0 +1,200 @@
+{
+  "regions": [
+    {
+      "xml_id": "raster_input_video",
+      "bbox": [
+        28.11,
+        420.795,
+        386.044,
+        627.5559999999999
+      ],
+      "auto_bbox": [
+        28.11,
+        420.795,
+        386.044,
+        627.5559999999999
+      ],
+      "box_2d": [
+        405,
+        15,
+        604,
+        206
+      ],
+      "label": "",
+      "dirty": false
+    },
+    {
+      "xml_id": "raster_depth_maps",
+      "bbox": [
+        26.236,
+        802.1080000000001,
+        382.296,
+        1008.869
+      ],
+      "auto_bbox": [
+        26.236,
+        802.1080000000001,
+        382.296,
+        1008.869
+      ],
+      "box_2d": [
+        772,
+        14,
+        971,
+        204
+      ],
+      "label": "",
+      "dirty": false
+    },
+    {
+      "xml_id": "raster_super_pixels",
+      "bbox": [
+        530.342,
+        420.795,
+        886.4019999999999,
+        627.5559999999999
+      ],
+      "auto_bbox": [
+        530.342,
+        420.795,
+        886.4019999999999,
+        627.5559999999999
+      ],
+      "box_2d": [
+        405,
+        283,
+        604,
+        473
+      ],
+      "label": "",
+      "dirty": false
+    },
+    {
+      "xml_id": "raster_image_segmentations",
+      "bbox": [
+        1017.5820000000001,
+        65.457,
+        1375.516,
+        273.257
+      ],
+      "auto_bbox": [
+        1017.5820000000001,
+        65.457,
+        1375.516,
+        273.257
+      ],
+      "box_2d": [
+        63,
+        543,
+        263,
+        734
+      ],
+      "label": "",
+      "dirty": false
+    },
+    {
+      "xml_id": "raster_fused_sdf",
+      "bbox": [
+        575.318,
+        832.239,
+        845.174,
+        1008.869
+      ],
+      "auto_bbox": [
+        575.318,
+        832.239,
+        845.174,
+        1008.869
+      ],
+      "box_2d": [
+        801,
+        307,
+        971,
+        451
+      ],
+      "label": "",
+      "dirty": false
+    },
+    {
+      "xml_id": "raster_deformed_sdf",
+      "bbox": [
+        1062.558,
+        828.0830000000001,
+        1332.414,
+        1009.908
+      ],
+      "auto_bbox": [
+        1062.558,
+        828.0830000000001,
+        1332.414,
+        1009.908
+      ],
+      "box_2d": [
+        797,
+        567,
+        972,
+        711
+      ],
+      "label": "",
+      "dirty": false
+    },
+    {
+      "xml_id": "raster_reconstructed_mesh",
+      "bbox": [
+        1491.7040000000002,
+        419.75600000000003,
+        1847.764,
+        627.5559999999999
+      ],
+      "auto_bbox": [
+        1491.7040000000002,
+        419.75600000000003,
+        1847.764,
+        627.5559999999999
+      ],
+      "box_2d": [
+        404,
+        796,
+        604,
+        986
+      ],
+      "label": "",
+      "dirty": false
+    }
+  ],
+  "placeholders": [
+    {
+      "xml_id": "raster_input_video",
+      "text": "Input Video Frames"
+    },
+    {
+      "xml_id": "raster_depth_maps",
+      "text": "Depth Map Renderings"
+    },
+    {
+      "xml_id": "raster_super_pixels",
+      "text": "Super-pixel Segmentations"
+    },
+    {
+      "xml_id": "raster_fused_sdf",
+      "text": "Fused SDF 3D Model"
+    },
+    {
+      "xml_id": "raster_image_segmentations",
+      "text": "Segmented Object Images"
+    },
+    {
+      "xml_id": "raster_deformed_sdf",
+      "text": "Deformed SDF 3D Model"
+    },
+    {
+      "xml_id": "raster_reconstructed_mesh",
+      "text": "Final 3D Mesh Render"
+    }
+  ],
+  "image_size": [
+    1874,
+    1039
+  ],
+  "status": "ok"
+}

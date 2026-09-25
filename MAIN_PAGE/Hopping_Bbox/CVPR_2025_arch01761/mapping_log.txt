@@ -1,0 +1,130 @@
+=== Hopping Bounding Box Sequence ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.50s
+Narration   : The pipeline begins with an input image.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 1.50s
+Narration   : The image is first partitioned into a sequence of regular visual patches.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 2.50s
+Narration   : These patches are passed into the hybrid encoder network.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 3.50s
+Narration   : A convolutional encoder extracts low-level local features.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 4.50s
+Narration   : A dedicated class token is prepended alongside spatial position encodings.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 5.50s
+Narration   : This forms the initial full-length sequence of continuous tokens.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 6.50s
+Narration   : Self-attention layers with token merging progressively compress similar tokens.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 7.50s
+Narration   : The global alignment module enriches the learned representations.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 8.50s
+Narration   : The class token is extracted from the encoder output.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 9.50s
+Narration   : It is projected through a multi-layer perceptron head.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 10.50s
+Narration   : And aligned with target representations from a teacher model or ground truth labels.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Timestamp   : 11.50s
+Narration   : In parallel, the compressed visual tokens enter the token quantization module.
+--------------------------------------------------------------------------------
+Frame Image : frame_12.png
+Timestamp   : 12.50s
+Narration   : Positional indices of the merged tokens are retained.
+--------------------------------------------------------------------------------
+Frame Image : frame_13.png
+Timestamp   : 13.50s
+Narration   : The continuous embedding representations are extracted.
+--------------------------------------------------------------------------------
+Frame Image : frame_14.png
+Timestamp   : 14.50s
+Narration   : Vector quantization discretizes each token into discrete codes.
+--------------------------------------------------------------------------------
+Frame Image : frame_15.png
+Timestamp   : 15.50s
+Narration   : This yields a compact set of quantized semantic tokens.
+--------------------------------------------------------------------------------
+Frame Image : frame_16.png
+Timestamp   : 16.50s
+Narration   : During the generative stage, these discrete tokens drive image generation.
+--------------------------------------------------------------------------------
+Frame Image : frame_17.png
+Timestamp   : 17.50s
+Narration   : An autoregressive generation process starts with a start token.
+--------------------------------------------------------------------------------
+Frame Image : frame_18.png
+Timestamp   : 18.50s
+Narration   : The causal decoder synthesizes tokens sequentially with key-value cache compression.
+--------------------------------------------------------------------------------
+Frame Image : frame_19.png
+Timestamp   : 19.50s
+Narration   : Predicting the compact sequence of quantized tokens.
+--------------------------------------------------------------------------------
+Frame Image : frame_20.png
+Timestamp   : 20.50s
+Narration   : Next, the source recovery module reconstructs full spatial context.
+--------------------------------------------------------------------------------
+Frame Image : frame_21.png
+Timestamp   : 21.50s
+Narration   : The quantized tokens are supplied to the recovery cross-attention mechanism.
+--------------------------------------------------------------------------------
+Frame Image : frame_22.png
+Timestamp   : 22.50s
+Narration   : A set of learnable recovery queries corresponds to all original spatial positions.
+--------------------------------------------------------------------------------
+Frame Image : frame_23.png
+Timestamp   : 23.50s
+Narration   : Cross-attention models the relationships between original positions and merged tokens.
+--------------------------------------------------------------------------------
+Frame Image : frame_24.png
+Timestamp   : 24.50s
+Narration   : This predicts the source matrix to establish token assignments.
+--------------------------------------------------------------------------------
+Frame Image : frame_25.png
+Timestamp   : 25.50s
+Narration   : The token unmerge operation uses these assignments to uncompress the tokens.
+--------------------------------------------------------------------------------
+Frame Image : frame_26.png
+Timestamp   : 26.50s
+Narration   : Restoring the full sequence length while preserving spatial fidelity.
+--------------------------------------------------------------------------------
+Frame Image : frame_27.png
+Timestamp   : 27.50s
+Narration   : The restored sequence is then processed by the decoder.
+--------------------------------------------------------------------------------
+Frame Image : frame_28.png
+Timestamp   : 28.50s
+Narration   : Attention layers perform token dequantization and feature refinement.
+--------------------------------------------------------------------------------
+Frame Image : frame_29.png
+Timestamp   : 29.50s
+Narration   : Producing dense continuous feature representations.
+--------------------------------------------------------------------------------
+Frame Image : frame_30.png
+Timestamp   : 30.50s
+Narration   : A convolutional decoder maps features back to image space.
+--------------------------------------------------------------------------------
+Frame Image : frame_31.png
+Timestamp   : 31.50s
+Narration   : Finally, all patches are reconstructed, generating the final high-resolution image.
+--------------------------------------------------------------------------------

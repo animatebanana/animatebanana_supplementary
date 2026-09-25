@@ -1,0 +1,160 @@
+{
+  "detected": 8,
+  "placeholders": 8,
+  "omitted": {},
+  "rejected": {},
+  "image_size": [
+    462,
+    175
+  ],
+  "regions": [
+    {
+      "xml_id": "node_watermark",
+      "box_2d": [
+        44,
+        41,
+        317,
+        147
+      ],
+      "bbox": [
+        18.942,
+        7.699999999999999,
+        67.914,
+        55.475
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "node_clean_image",
+      "box_2d": [
+        449,
+        41,
+        706,
+        146
+      ],
+      "bbox": [
+        18.942,
+        78.575,
+        67.452,
+        123.55
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "node_iw",
+      "box_2d": [
+        176,
+        356,
+        403,
+        448
+      ],
+      "bbox": [
+        164.47199999999998,
+        30.799999999999997,
+        206.976,
+        70.525
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "node_residual",
+      "box_2d": [
+        468,
+        356,
+        598,
+        414
+      ],
+      "bbox": [
+        164.47199999999998,
+        81.9,
+        191.268,
+        104.64999999999999
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "node_top_xt",
+      "box_2d": [
+        33,
+        530,
+        284,
+        625
+      ],
+      "bbox": [
+        244.86,
+        5.775,
+        288.75,
+        49.699999999999996
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "node_top_x0",
+      "box_2d": [
+        29,
+        894,
+        280,
+        990
+      ],
+      "bbox": [
+        413.028,
+        5.075,
+        457.38,
+        49.00000000000001
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "node_bottom_xt",
+      "box_2d": [
+        549,
+        538,
+        781,
+        630
+      ],
+      "bbox": [
+        248.556,
+        96.075,
+        291.06,
+        136.675
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "node_bottom_x0",
+      "box_2d": [
+        519,
+        892,
+        770,
+        989
+      ],
+      "bbox": [
+        412.104,
+        90.825,
+        456.918,
+        134.75
+      ],
+      "label": ""
+    }
+  ],
+  "replaced": [
+    "node_watermark",
+    "node_clean_image",
+    "node_iw",
+    "node_residual",
+    "node_top_xt",
+    "node_top_x0",
+    "node_bottom_xt",
+    "node_bottom_x0"
+  ],
+  "provenance": {
+    "agent": "raster_integrator",
+    "backend": "openrouter_gemini37flash",
+    "model": "google-gemini-3.7-flash",
+    "prompt": null,
+    "style": "alpha_masking",
+    "target": "svg",
+    "config_fingerprint": "f7069ef5288adbf8",
+    "timestamp": "2026-08-28T20:08:29"
+  }
+}

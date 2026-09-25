@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AnimateBanana — Progressive Reveal — Paper2Fig_pipe_diff_000000492</title>
+<!--
+  AnimateBanana — Progressive Reveal — Paper2Fig_pipe_diff_000000492
+  An animated visual narrative produced by the AnimateBanana pipeline.
+
+  This file is self-contained: the animation, its images, its narration and its
+  controls are all inside it. Drop it on a server, open it from a disk, or put
+  it in an <iframe> - it needs nothing else and fetches nothing.
+
+  The animation is CSS. The controls drive it through the browser's animation
+  API - pause holds every keyframe at once, the bar scrubs them all to the same
+  moment, speed sets their rate together - and the caption is read from a clock
+  of the page's own that is driven alongside them. It has to be its own clock:
+  the drawing is made of hundreds of short animations that each stop when they
+  are done, so reading the time off any one of them gives a watch that stopped
+  half a second in.
+-->
+<style>
+  :root {
+    --ink: #1A1815;
+    --paper: #FFFEF9;
+    --banana: #FFD43B;
+    --banana-deep: #F2B200;
+    --banana-soft: #FFF2B8;
+    --mute: #6b6558;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--paper); color: var(--ink); }
+  body {
+    font-family: ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    padding: 16px;
+  }
+  .ab { margin: 0 auto; max-width: 1400px; }
+  .ab-stage {
+    background: #fff;
+    border: 2px solid var(--ink);
+    border-radius: 14px;
+    padding: 10px;
+    overflow: hidden;
+  }
+  .ab-stage svg { display: block; width: 100%; height: auto; }
+
+  /* ---- Transport ----
+     Every control is the same height and centred on the same line, so the bar
+     reads as one object rather than a row of parts that happen to be adjacent. */
+  .ab-bar {
+    --h: 40px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    border-radius: calc(var(--h) / 2 + 8px);
+  }
+  .ab-bar > * { flex: 0 0 auto; height: var(--h); }
+
+  .ab-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 16px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    line-height: 1;
+    color: var(--ink);
+    background: #fff;
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    cursor: pointer;
+  }
+  .ab-btn:hover { background: var(--banana-soft); }
+  .ab-btn:active { transform: translateY(1px); }
+
+  .ab-play { width: var(--h); padding: 0; border-radius: 50%; background: var(--ink); color: var(--paper); }
+  .ab-play:hover { background: var(--ink); }
+  .ab-play svg { width: 14px; height: 14px; fill: currentColor; display: block; }
+  .ab-play .ab-ic-play { display: none; margin-left: 2px; }
+  .ab.is-paused .ab-play .ab-ic-play { display: block; }
+  .ab.is-paused .ab-play .ab-ic-pause { display: none; }
+
+  /* the rail is drawn; the range input laid over it is what you actually grab */
+  .ab-scrub { position: relative; flex: 1 1 180px !important; min-width: 120px;
+              display: flex; align-items: center; }
+  .ab-rail {
+    position: absolute; inset-inline: 0; height: 9px;
+    background: #fff; border: 1.5px solid var(--ink); border-radius: 999px;
+    overflow: hidden; pointer-events: none;
+  }
+  .ab-rail i { display: block; width: 0; height: 100%; background: var(--banana); }
+  .ab-seek {
+    position: relative; width: 100%; height: var(--h); margin: 0;
+    background: none; -webkit-appearance: none; appearance: none; cursor: pointer;
+  }
+  .ab-seek::-webkit-slider-runnable-track { height: var(--h); background: transparent; }
+  .ab-seek::-moz-range-track { height: var(--h); background: transparent; }
+  .ab-seek::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none;
+    width: 18px; height: 18px; border-radius: 50%;
+    border: 2.5px solid var(--ink); background: var(--banana);
+  }
+  .ab-seek::-moz-range-thumb {
+    width: 16px; height: 16px; border-radius: 50%;
+    border: 2.5px solid var(--ink); background: var(--banana);
+  }
+  .ab-seek:focus-visible { outline: none; }
+  .ab-scrub:focus-within .ab-rail { box-shadow: 0 0 0 3px var(--banana); }
+
+  .ab-time {
+    display: inline-flex;
+    align-items: center;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.72rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--mute);
+    white-space: nowrap;
+  }
+  .ab-time b { color: var(--ink); }
+
+  .ab-speed {
+    display: inline-flex;
+    align-items: stretch;
+    background: #fff;
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .ab-speed button {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    padding: 0;
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--ink);
+    background: #fff;
+    border: 0;
+    cursor: pointer;
+  }
+  .ab-speed button:hover { background: var(--banana-soft); }
+  .ab-speed button[disabled] { opacity: 0.35; cursor: default; background: #fff; }
+  .ab-rate {
+    display: grid;
+    place-items: center;
+    min-width: 56px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.74rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    border-inline: 2px solid var(--ink);
+  }
+  .ab.is-fast .ab-rate { background: var(--banana); }
+
+  /* Captions on or off, said in words rather than left to be inferred */
+  .ab-toggle .ab-led {
+    width: 11px; height: 11px; border-radius: 50%;
+    border: 2px solid var(--ink); background: var(--banana);
+  }
+  .ab-toggle[aria-pressed="false"] { color: var(--mute); }
+  .ab-toggle[aria-pressed="false"] .ab-led { background: #fff; }
+
+  /* ---- The line being narrated ---- */
+  .ab-cap {
+    display: flex;
+    align-items: center;
+    min-height: 3.4em;
+    margin: 10px 0 0;
+    padding: 12px 16px;
+    font-size: clamp(0.95rem, 0.9rem + 0.3vw, 1.15rem);
+    font-weight: 600;
+    font-style: italic;
+    line-height: 1.5;
+    background: var(--banana-soft);
+    border: 1.5px solid var(--banana);
+    border-left: 5px solid var(--banana-deep);
+    border-radius: 10px;
+    transition: opacity .18s ease;
+  }
+  .ab-cap.is-swap { opacity: 0; }
+  .ab.is-off .ab-cap { display: none; }
+  @media (prefers-reduced-motion: reduce) { .ab-cap { transition: none; } }
+
+  /* Narrow: the bar wraps to two rows and squares off, rather than squeezing
+     the scrub bar down to nothing. */
+  @media (max-width: 720px) {
+    .ab-bar { flex-wrap: wrap; border-radius: 20px; }
+    .ab-scrub { order: 3; flex-basis: 100% !important; }
+    .ab-time { order: 2; margin-left: auto; }
+  }
+</style>
+</head>
+<body>
+<figure class="ab">
+  <div class="ab-stage">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 1120">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#000000"/>
+    </marker>
+    <style>
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+
+      #node_dataset,
+      #node_raw_ultrasonography, #edge_db_to_raw,
+      #block_preprocessing, #edge_raw_to_preproc,
+      #node_scaling, #node_normalization,
+      #node_slic, #edge_preproc_to_slic,
+      #node_unet, #edge_slic_to_unet,
+      #node_seg_model, #edge_unet_to_seg,
+      #node_masked_image, #edge_db_to_masked,
+      #node_vgg, #edge_masked_to_vgg,
+      #node_dense, #edge_vgg_to_dense,
+      #node_det_model, #edge_dense_to_det,
+      #node_final_framework, #edge_seg_to_final, #edge_det_to_final {
+        opacity: 0;
+        animation-name: fadeIn;
+        animation-duration: 0.5s;
+        animation-fill-mode: forwards;
+      }
+
+      #node_dataset { animation-delay: 0s; }
+      #node_raw_ultrasonography, #edge_db_to_raw { animation-delay: 6.44s; }
+      #block_preprocessing, #edge_raw_to_preproc { animation-delay: 11.08s; }
+      #node_scaling, #node_normalization { animation-delay: 13.76s; }
+      #node_slic, #edge_preproc_to_slic { animation-delay: 19.32s; }
+      #node_unet, #edge_slic_to_unet { animation-delay: 24.28s; }
+      #node_seg_model, #edge_unet_to_seg { animation-delay: 30.2s; }
+      #node_masked_image, #edge_db_to_masked { animation-delay: 33.44s; }
+      #node_vgg, #edge_masked_to_vgg { animation-delay: 38.36s; }
+      #node_dense, #edge_vgg_to_dense { animation-delay: 43.88s; }
+      #node_det_model, #edge_dense_to_det { animation-delay: 49.28s; }
+      #node_final_framework, #edge_seg_to_final, #edge_det_to_final { animation-delay: 53.2s; }
+
+      #narration_banner text {
+        opacity: 0;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        fill: #1e293b;
+      }
+    </style>
+  </defs>
+
+  <!-- Edges / Connections -->
+  <g>
+    <!-- From Database to Raw Ultrasonography Images -->
+    <path id="edge_db_to_raw" data-id="edge_db_to_raw" data-class="edge" data-source="node_dataset" data-target="node_raw_ultrasonography" d="M 260 120 L 260 160 L 115 160 L 115 200" fill="none" stroke="#000000" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <!-- From Database to Masked Image and Labels -->
+    <path id="edge_db_to_masked" data-id="edge_db_to_masked" data-class="edge" data-source="node_dataset" data-target="node_masked_image" d="M 260 160 L 260 245 L 405 245 L 405 365" fill="none" stroke="#000000" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <!-- Left Path: Raw to Preprocessing Block -->
+    <line id="edge_raw_to_preproc" data-id="edge_raw_to_preproc" data-class="edge" data-source="node_raw_ultrasonography" data-target="block_preprocessing" x1="115" y1="315" x2="115" y2="360" fill="none" stroke="#000000" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <!-- Left Path: Preprocessing to SLIC -->
+    <line id="edge_preproc_to_slic" data-id="edge_preproc_to_slic" data-class="edge" data-source="block_preprocessing" data-target="node_slic" x1="115" y1="480" x2="115" y2="508" fill="none" stroke="#000000" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <!-- Left Path: SLIC to UNet -->
+    <line id="edge_slic_to_unet" data-id="edge_slic_to_unet" data-class="edge" data-source="node_slic" data-target="node_unet" x1="115" y1="588" x2="115" y2="615" fill="none" stroke="#000000" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <!-- Left Path: UNet to Segmentation Model -->
+    <line id="edge_unet_to_seg" data-id="edge_unet_to_seg" data-class="edge" data-source="node_unet" data-target="node_seg_model" x1="115" y1="695" x2="115" y2="735" fill="none" stroke="#000000" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <!-- Right Path: Masked to VGG -->
+    <line id="edge_masked_to_vgg" data-id="edge_masked_to_vgg" data-class="edge" data-source="node_masked_image" data-target="node_vgg" x1="405" y1="480" x2="405" y2="508" fill="none" stroke="#000000" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <!-- Right Path: VGG to Dense Layers -->
+    <line id="edge_vgg_to_dense" data-id="edge_vgg_to_dense" data-class="edge" data-source="node_vgg" data-target="node_dense" x1="405" y1="588" x2="405" y2="615" fill="none" stroke="#000000" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <!-- Right Path: Dense to Detection Model -->
+    <line id="edge_dense_to_det" data-id="edge_dense_to_det" data-class="edge" data-source="node_dense" data-target="node_det_model" x1="405" y1="695" x2="405" y2="735" fill="none" stroke="#000000" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <!-- Left Model to Final Framework -->
+    <path id="edge_seg_to_final" data-id="edge_seg_to_final" data-class="edge" data-source="node_seg_model" data-target="node_final_framework" d="M 115 815 C 115 870, 260 840, 260 900" fill="none" stroke="#000000" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <!-- Right Model to Final Framework -->
+    <path id="edge_det_to_final" data-id="edge_det_to_final" data-class="edge" data-source="node_det_model" data-target="node_final_framework" d="M 405 815 C 405 870, 260 840, 260 900" fill="none" stroke="#000000" stroke-width="2.5" marker-end="url(#arrow)"/>
+  </g>
+
+  <!-- Node: Database Cylinder (Top) -->
+  <g id="node_dataset" data-id="node_dataset" data-class="composite_whole" data-parent="root">
+    <!-- Cylinder Body -->
+    <path id="part_db_body" data-id="part_db_body" data-class="composite_part" data-parent="node_dataset" d="M 187 28 L 187 102 A 73 18 0 0 0 333 102 L 333 28 Z" fill="#d3e2fc" stroke="#4a7fba" stroke-width="2"/>
+    <!-- Cylinder Top Ellipse -->
+    <ellipse id="part_db_top" data-id="part_db_top" data-class="composite_part" data-parent="node_dataset" cx="260" cy="28" rx="73" ry="18" fill="#d3e2fc" stroke="#4a7fba" stroke-width="2"/>
+    <!-- Cylinder Decorative Rib Lines -->
+    <path id="part_db_line1" data-id="part_db_line1" data-class="composite_part" data-parent="node_dataset" d="M 187 35 A 73 18 0 0 0 333 35" fill="none" stroke="#4a7fba" stroke-width="1.5"/>
+    <path id="part_db_line2" data-id="part_db_line2" data-class="composite_part" data-parent="node_dataset" d="M 187 43 A 73 18 0 0 0 333 43" fill="none" stroke="#4a7fba" stroke-width="1.5"/>
+    <!-- Text -->
+    <text id="text_db" data-id="text_db" data-class="composite_part" data-parent="node_dataset" x="260" y="78" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#000000">
+      <tspan x="260" dy="0">Breast Cancer</tspan>
+      <tspan x="260" dy="20">Image Dataset</tspan>
+    </text>
+  </g>
+
+  <!-- Node: Raw Ultrasonography Images -->
+  <g id="node_raw_ultrasonography" data-id="node_raw_ultrasonography" data-class="standalone_node" data-parent="root">
+    <rect x="2" y="200" width="226" height="115" fill="#f5baba" stroke="#b84b4b" stroke-width="2"/>
+    <text x="115" y="252" font-family="Arial, sans-serif" font-size="17" font-weight="bold" text-anchor="middle" fill="#000000">
+      <tspan x="115" dy="0">Raw Ultrasonography</tspan>
+      <tspan x="115" dy="24">Images</tspan>
+    </text>
+  </g>
+
+  <!-- Block: Preprocessing (Scaling and Normalization) -->
+  <g id="block_preprocessing" data-id="block_preprocessing" data-class="block" data-parent="root">
+    <rect id="rect_preproc_bg" x="2" y="360" width="226" height="120" fill="#e8d7ed" stroke="#805b8a" stroke-width="2"/>
+    
+    <!-- Child Node: Scaling -->
+    <g id="node_scaling" data-id="node_scaling" data-class="child_node" data-parent="block_preprocessing">
+      <rect x="20" y="375" width="190" height="40" fill="#f5baba" stroke="#b84b4b" stroke-width="2"/>
+      <text x="115" y="401" font-family="Arial, sans-serif" font-size="17" font-weight="bold" text-anchor="middle" fill="#000000">Scaling</text>
+    </g>
+
+    <!-- Child Node: Normalization -->
+    <g id="node_normalization" data-id="node_normalization" data-class="child_node" data-parent="block_preprocessing">
+      <rect x="20" y="430" width="190" height="40" fill="#f5baba" stroke="#b84b4b" stroke-width="2"/>
+      <text x="115" y="456" font-family="Arial, sans-serif" font-size="17" font-weight="bold" text-anchor="middle" fill="#000000">Normalization</text>
+    </g>
+  </g>
+
+  <!-- Node: Masked Image and Labels -->
+  <g id="node_masked_image" data-id="node_masked_image" data-class="standalone_node" data-parent="root">
+    <rect x="292" y="365" width="226" height="115" fill="#f5baba" stroke="#b84b4b" stroke-width="2"/>
+    <text x="405" y="417" font-family="Arial, sans-serif" font-size="17" font-weight="bold" text-anchor="middle" fill="#000000">
+      <tspan x="405" dy="0">Masked Image</tspan>
+      <tspan x="405" dy="24">and Labels</tspan>
+    </text>
+  </g>
+
+  <!-- Node: Simple Linear Iterative Clustering (SLIC) -->
+  <g id="node_slic" data-id="node_slic" data-class="standalone_node" data-parent="root">
+    <rect x="2" y="508" width="226" height="80" fill="#d3edcb" stroke="#5e9752" stroke-width="2"/>
+    <text x="115" y="544" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#000000">
+      <tspan x="115" dy="0">Simple Linear Iterative</tspan>
+      <tspan x="115" dy="22">Clustering (SLIC)</tspan>
+    </text>
+  </g>
+
+  <!-- Node: Feature Extraction for VGG 16 -->
+  <g id="node_vgg" data-id="node_vgg" data-class="standalone_node" data-parent="root">
+    <rect x="292" y="508" width="226" height="80" fill="#d3edcb" stroke="#5e9752" stroke-width="2"/>
+    <text x="405" y="544" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#000000">
+      <tspan x="405" dy="0">Feature Extraction for</tspan>
+      <tspan x="405" dy="22">VGG 16</tspan>
+    </text>
+  </g>
+
+  <!-- Node: Modified U Net -->
+  <g id="node_unet" data-id="node_unet" data-class="standalone_node" data-parent="root">
+    <rect x="2" y="615" width="226" height="80" fill="#e8d7ed" stroke="#805b8a" stroke-width="2"/>
+    <text x="115" y="662" font-family="Arial, sans-serif" font-size="17" font-weight="bold" text-anchor="middle" fill="#000000">Modified U Net</text>
+  </g>
+
+  <!-- Node: Fully Connected Dense Layers -->
+  <g id="node_dense" data-id="node_dense" data-class="standalone_node" data-parent="root">
+    <rect x="292" y="615" width="226" height="80" fill="#d3e2fc" stroke="#4a7fba" stroke-width="2"/>
+    <text x="405" y="650" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#000000">
+      <tspan x="405" dy="0">Fully Connected Dense</tspan>
+      <tspan x="405" dy="22">Layers</tspan>
+    </text>
+  </g>
+
+  <!-- Node: Trained Segmentation Model -->
+  <g id="node_seg_model" data-id="node_seg_model" data-class="standalone_node" data-parent="root">
+    <rect x="15" y="735" width="200" height="80" rx="15" ry="15" fill="#d3edcb" stroke="#5e9752" stroke-width="2"/>
+    <text x="115" y="763" font-family="Arial, sans-serif" font-size="17" font-weight="bold" text-anchor="middle" fill="#000000">
+      <tspan x="115" dy="0">Trained</tspan>
+      <tspan x="115" dy="23">Segmentation</tspan>
+      <tspan x="115" dy="23">Model</tspan>
+    </text>
+  </g>
+
+  <!-- Node: Trained Detection Model -->
+  <g id="node_det_model" data-id="node_det_model" data-class="standalone_node" data-parent="root">
+    <rect x="305" y="735" width="200" height="80" rx="15" ry="15" fill="#e8d7ed" stroke="#805b8a" stroke-width="2"/>
+    <text x="405" y="763" font-family="Arial, sans-serif" font-size="17" font-weight="bold" text-anchor="middle" fill="#000000">
+      <tspan x="405" dy="0">Trained</tspan>
+      <tspan x="405" dy="23">Detection</tspan>
+      <tspan x="405" dy="23">Model</tspan>
+    </text>
+  </g>
+
+  <!-- Node: Trained Breast Cancer Detection Pipelining Framework -->
+  <g id="node_final_framework" data-id="node_final_framework" data-class="standalone_node" data-parent="root">
+    <rect x="80" y="900" width="360" height="95" rx="15" ry="15" fill="#f5baba" stroke="#b84b4b" stroke-width="2"/>
+    <text x="260" y="929" font-family="Arial, sans-serif" font-size="17" font-weight="bold" text-anchor="middle" fill="#000000">
+      <tspan x="260" dy="0">Trained Breast Cancer</tspan>
+      <tspan x="260" dy="24">Detection</tspan>
+      <tspan x="260" dy="24">Pipelining Framework</tspan>
+    </text>
+  </g>
+
+  <!-- Dynamic Narration Banner -->
+</svg>
+  </div>
+
+  <div class="ab-bar">
+    <button type="button" class="ab-btn ab-play" aria-label="Pause">
+      <svg class="ab-ic-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 5.5l11 6.5-11 6.5z"/></svg>
+      <svg class="ab-ic-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 5.5h3.6v13H7.5zM12.9 5.5h3.6v13h-3.6z"/></svg>
+    </button>
+
+    <div class="ab-scrub">
+      <span class="ab-rail" aria-hidden="true"><i class="ab-played"></i></span>
+      <input type="range" class="ab-seek" min="0" max="1000" value="0" step="1"
+             aria-label="Scrub through the animation">
+    </div>
+
+    <span class="ab-time"><b>0:00</b>&nbsp;/&nbsp;<span class="ab-total">0:00</span></span>
+
+    <div class="ab-speed" role="group" aria-label="Playback speed">
+      <button type="button" class="ab-slower" aria-label="Slower">&#8722;</button>
+      <span class="ab-rate" aria-live="polite">1&#215;</span>
+      <button type="button" class="ab-faster" aria-label="Faster">+</button>
+    </div>
+
+    <button type="button" class="ab-btn ab-toggle" aria-pressed="true">
+      <span class="ab-led" aria-hidden="true"></span>
+      <span class="ab-word">Captions on</span>
+    </button>
+  </div>
+
+  <figcaption class="ab-cap" aria-live="polite"></figcaption>
+</figure>
+
+<script>
+(function () {
+  var CUES = [{"start": 0.0, "end": 6.44, "text": "The training pipeline begins with the Breast Cancer Image Dataset, providing source data for segmentation and classification workflows."}, {"start": 6.44, "end": 11.08, "text": "In the segmentation branch, raw ultrasonography images are extracted from the dataset."}, {"start": 11.08, "end": 13.76, "text": "These images enter the preprocessing stage,"}, {"start": 13.76, "end": 19.32, "text": "where they undergo dimension scaling to 128 by 128 pixels followed by pixel normalization."}, {"start": 19.32, "end": 24.28, "text": "Simple Linear Iterative Clustering (SLIC) then clusters pixels into superpixels to mitigate noise."}, {"start": 24.28, "end": 30.2, "text": "The clustered images are fed into a modified U-Net encoder-decoder network alongside ground truth masks."}, {"start": 30.2, "end": 33.44, "text": "Completing this training yields the trained segmentation model."}, {"start": 33.44, "end": 38.36, "text": "In parallel, masked images and corresponding class labels are retrieved for detection training."}, {"start": 38.36, "end": 43.88, "text": "A pre-trained VGG 16 model extracts deep spatial features from these masked ultrasound images."}, {"start": 43.88, "end": 49.28, "text": "Extracted features are processed through five fully connected dense layers with dropout and activations."}, {"start": 49.28, "end": 53.2, "text": "This establishes the trained detection model for classifying tumor types."}, {"start": 53.2, "end": 58.48, "text": "Finally, the trained components combine into the unified breast cancer detection pipelining framework."}];
+  var LOOP = 58.48;
+  var REPEATS = 1;
+  var RATES = [0.25, 0.5, 0.75, 1, 1.5, 2, 3];
+
+  var fig = document.querySelector('.ab');
+  var cap = document.querySelector('.ab-cap');
+  var play = document.querySelector('.ab-play');
+  var seek = document.querySelector('.ab-seek');
+  var played = document.querySelector('.ab-played');
+  var nowEl = document.querySelector('.ab-time b');
+  var totalEl = document.querySelector('.ab-total');
+  var rateEl = document.querySelector('.ab-rate');
+  var slower = document.querySelector('.ab-slower');
+  var faster = document.querySelector('.ab-faster');
+  var toggle = document.querySelector('.ab-toggle');
+  var word = toggle.querySelector('.ab-word');
+
+  var at = -1, swap = null, rate = 3, paused = false, scrubbing = false;
+
+  // THE CLOCK. The drawing is hundreds of short animations that each stop when
+  // they are done, so none of them can be asked what time it is. This one runs
+  // the length of the whole piece, does nothing visible, and is driven by the
+  // same controls - so the caption, the bar and the picture cannot disagree.
+  var master = null;
+  try {
+    master = document.documentElement.animate(
+      [{ opacity: 1 }, { opacity: 1 }],
+      { duration: (LOOP || 1) * 1000, iterations: REPEATS }
+    );
+  } catch (e) {}
+  var t0 = performance.now();
+
+  function others() {
+    try {
+      var runs = document.getAnimations ? document.getAnimations() : [];
+      return runs.filter(function (a) { return a !== master; });
+    } catch (e) { return []; }
+  }
+  function clock() {
+    var t;
+    if (master && master.currentTime != null) t = master.currentTime / 1000;
+    else t = (performance.now() - t0) / 1000;
+    return REPEATS === 1 ? Math.min(t, LOOP) : (t % (LOOP || 1));
+  }
+  function each(fn) {
+    if (master) { try { fn(master); } catch (e) {} }
+    others().forEach(function (a) { try { fn(a); } catch (e) {} });
+  }
+  function clip(t) {
+    t = Math.max(0, t || 0);
+    return Math.floor(t / 60) + ':' + ('0' + Math.floor(t % 60)).slice(-2);
+  }
+
+  play.addEventListener('click', function () {
+    paused = !paused;
+    // Restarting a finished piece rather than leaving Play doing nothing
+    if (!paused && REPEATS === 1 && clock() >= LOOP - 0.05) each(function (a) { a.currentTime = 0; });
+    each(function (a) { paused ? a.pause() : a.play(); });
+    if (!paused) t0 = performance.now() - clock() * 1000;
+    fig.classList.toggle('is-paused', paused);
+    play.setAttribute('aria-label', paused ? 'Play' : 'Pause');
+  });
+
+  function setRate(i) {
+    rate = Math.max(0, Math.min(RATES.length - 1, i));
+    var r = RATES[rate];
+    each(function (a) { a.playbackRate = r; });
+    rateEl.textContent = r + '×';
+    fig.classList.toggle('is-fast', r !== 1);
+    slower.disabled = rate === 0;
+    faster.disabled = rate === RATES.length - 1;
+  }
+  slower.addEventListener('click', function () { setRate(rate - 1); });
+  faster.addEventListener('click', function () { setRate(rate + 1); });
+
+  seek.addEventListener('pointerdown', function () { scrubbing = true; });
+  seek.addEventListener('input', function () {
+    var t = (Number(seek.value) / 1000) * LOOP;
+    each(function (a) { a.currentTime = t * 1000; });
+    t0 = performance.now() - t * 1000;
+    paint(true);
+  });
+  seek.addEventListener('change', function () { scrubbing = false; });
+
+  toggle.addEventListener('click', function () {
+    var on = toggle.getAttribute('aria-pressed') !== 'true';
+    toggle.setAttribute('aria-pressed', String(on));
+    word.textContent = on ? 'Captions on' : 'Captions off';
+    fig.classList.toggle('is-off', !on);
+  });
+
+  function paint(force) {
+    var t = clock();
+    nowEl.textContent = clip(t);
+    if (!scrubbing) seek.value = String(Math.round((t / (LOOP || 1)) * 1000));
+    played.style.width = ((t / (LOOP || 1)) * 100) + '%';
+
+    var k = -1;
+    for (var i = 0; i < CUES.length; i++) { if (t >= CUES[i].start - 0.05) k = i; }
+    if (k !== at || force === true) {
+      at = k;
+      var text = k >= 0 ? CUES[k].text : '';
+      if (text !== cap.textContent) {
+        cap.classList.add('is-swap');
+        clearTimeout(swap);
+        swap = setTimeout(function () {
+          cap.textContent = text;
+          cap.classList.remove('is-swap');
+        }, 150);
+      }
+    }
+  }
+
+  // Two ways round, on purpose. requestAnimationFrame gives a smooth bar while
+  // the page is on screen, and stops dead in a background tab or an embed the
+  // browser considers hidden - where the animation itself keeps running, so the
+  // caption would be left behind. The slow timer covers exactly that case.
+  function frame() { paint(); requestAnimationFrame(frame); }
+
+  totalEl.textContent = clip(LOOP);
+  setRate(3);
+  if (!CUES.length) { fig.classList.add('is-off'); toggle.style.display = 'none'; }
+  requestAnimationFrame(frame);
+  setInterval(paint, 250);
+})();
+</script>
+</body>
+</html>

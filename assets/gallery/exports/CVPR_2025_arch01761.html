@@ -1,0 +1,833 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AnimateBanana — Hopping Bbox — CVPR_2025_arch01761</title>
+<!--
+  AnimateBanana — Hopping Bbox — CVPR_2025_arch01761
+  An animated visual narrative produced by the AnimateBanana pipeline.
+
+  This file is self-contained: the animation, its images, its narration and its
+  controls are all inside it. Drop it on a server, open it from a disk, or put
+  it in an <iframe> - it needs nothing else and fetches nothing.
+
+  The animation is CSS. The controls drive it through the browser's animation
+  API - pause holds every keyframe at once, the bar scrubs them all to the same
+  moment, speed sets their rate together - and the caption is read from a clock
+  of the page's own that is driven alongside them. It has to be its own clock:
+  the drawing is made of hundreds of short animations that each stop when they
+  are done, so reading the time off any one of them gives a watch that stopped
+  half a second in.
+-->
+<style>
+  :root {
+    --ink: #1A1815;
+    --paper: #FFFEF9;
+    --banana: #FFD43B;
+    --banana-deep: #F2B200;
+    --banana-soft: #FFF2B8;
+    --mute: #6b6558;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--paper); color: var(--ink); }
+  body {
+    font-family: ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    padding: 16px;
+  }
+  .ab { margin: 0 auto; max-width: 1400px; }
+  .ab-stage {
+    background: #fff;
+    border: 2px solid var(--ink);
+    border-radius: 14px;
+    padding: 10px;
+    overflow: hidden;
+  }
+  .ab-stage svg { display: block; width: 100%; height: auto; }
+
+  /* ---- Transport ----
+     Every control is the same height and centred on the same line, so the bar
+     reads as one object rather than a row of parts that happen to be adjacent. */
+  .ab-bar {
+    --h: 40px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    border-radius: calc(var(--h) / 2 + 8px);
+  }
+  .ab-bar > * { flex: 0 0 auto; height: var(--h); }
+
+  .ab-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 16px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    line-height: 1;
+    color: var(--ink);
+    background: #fff;
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    cursor: pointer;
+  }
+  .ab-btn:hover { background: var(--banana-soft); }
+  .ab-btn:active { transform: translateY(1px); }
+
+  .ab-play { width: var(--h); padding: 0; border-radius: 50%; background: var(--ink); color: var(--paper); }
+  .ab-play:hover { background: var(--ink); }
+  .ab-play svg { width: 14px; height: 14px; fill: currentColor; display: block; }
+  .ab-play .ab-ic-play { display: none; margin-left: 2px; }
+  .ab.is-paused .ab-play .ab-ic-play { display: block; }
+  .ab.is-paused .ab-play .ab-ic-pause { display: none; }
+
+  /* the rail is drawn; the range input laid over it is what you actually grab */
+  .ab-scrub { position: relative; flex: 1 1 180px !important; min-width: 120px;
+              display: flex; align-items: center; }
+  .ab-rail {
+    position: absolute; inset-inline: 0; height: 9px;
+    background: #fff; border: 1.5px solid var(--ink); border-radius: 999px;
+    overflow: hidden; pointer-events: none;
+  }
+  .ab-rail i { display: block; width: 0; height: 100%; background: var(--banana); }
+  .ab-seek {
+    position: relative; width: 100%; height: var(--h); margin: 0;
+    background: none; -webkit-appearance: none; appearance: none; cursor: pointer;
+  }
+  .ab-seek::-webkit-slider-runnable-track { height: var(--h); background: transparent; }
+  .ab-seek::-moz-range-track { height: var(--h); background: transparent; }
+  .ab-seek::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none;
+    width: 18px; height: 18px; border-radius: 50%;
+    border: 2.5px solid var(--ink); background: var(--banana);
+  }
+  .ab-seek::-moz-range-thumb {
+    width: 16px; height: 16px; border-radius: 50%;
+    border: 2.5px solid var(--ink); background: var(--banana);
+  }
+  .ab-seek:focus-visible { outline: none; }
+  .ab-scrub:focus-within .ab-rail { box-shadow: 0 0 0 3px var(--banana); }
+
+  .ab-time {
+    display: inline-flex;
+    align-items: center;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.72rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--mute);
+    white-space: nowrap;
+  }
+  .ab-time b { color: var(--ink); }
+
+  .ab-speed {
+    display: inline-flex;
+    align-items: stretch;
+    background: #fff;
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .ab-speed button {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    padding: 0;
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--ink);
+    background: #fff;
+    border: 0;
+    cursor: pointer;
+  }
+  .ab-speed button:hover { background: var(--banana-soft); }
+  .ab-speed button[disabled] { opacity: 0.35; cursor: default; background: #fff; }
+  .ab-rate {
+    display: grid;
+    place-items: center;
+    min-width: 56px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.74rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    border-inline: 2px solid var(--ink);
+  }
+  .ab.is-fast .ab-rate { background: var(--banana); }
+
+  /* Captions on or off, said in words rather than left to be inferred */
+  .ab-toggle .ab-led {
+    width: 11px; height: 11px; border-radius: 50%;
+    border: 2px solid var(--ink); background: var(--banana);
+  }
+  .ab-toggle[aria-pressed="false"] { color: var(--mute); }
+  .ab-toggle[aria-pressed="false"] .ab-led { background: #fff; }
+
+  /* ---- The line being narrated ---- */
+  .ab-cap {
+    display: flex;
+    align-items: center;
+    min-height: 3.4em;
+    margin: 10px 0 0;
+    padding: 12px 16px;
+    font-size: clamp(0.95rem, 0.9rem + 0.3vw, 1.15rem);
+    font-weight: 600;
+    font-style: italic;
+    line-height: 1.5;
+    background: var(--banana-soft);
+    border: 1.5px solid var(--banana);
+    border-left: 5px solid var(--banana-deep);
+    border-radius: 10px;
+    transition: opacity .18s ease;
+  }
+  .ab-cap.is-swap { opacity: 0; }
+  .ab.is-off .ab-cap { display: none; }
+  @media (prefers-reduced-motion: reduce) { .ab-cap { transition: none; } }
+
+  /* Narrow: the bar wraps to two rows and squares off, rather than squeezing
+     the scrub bar down to nothing. */
+  @media (max-width: 720px) {
+    .ab-bar { flex-wrap: wrap; border-radius: 20px; }
+    .ab-scrub { order: 3; flex-basis: 100% !important; }
+    .ab-time { order: 2; margin-left: auto; }
+  }
+</style>
+</head>
+<body>
+<figure class="ab">
+  <div class="ab-stage">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 490" style="background:#ffffff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <defs>
+    <!-- Arrow Markers -->
+    <marker id="arrow-black" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#222222"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#1b5e9c"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#c02619"/>
+    </marker>
+    <marker id="arrow-gray" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#b0b0b0"/>
+    </marker>
+
+    <style>
+      #focus_box {
+        animation: hop 32s step-end infinite;
+      }
+
+      @keyframes hop {
+        0%       { x: 0px;   y: 152px; width: 128px; height: 128px; } /* t1: raster-input-image */
+        3.125%   { x: 137px; y: 0px;   width: 38px;  height: 222px; } /* t2: node-patches-top */
+        6.250%   { x: 196px; y: 4px;   width: 268px; height: 214px; } /* t3: block-encoder */
+        9.375%   { x: 204px; y: 31px;  width: 72px;  height: 163px; } /* t4: node-enc-cnn */
+        12.500%  { x: 272px; y: 18px;  width: 50px;  height: 26px; }  /* t5: node-enc-classtoken-pos0 */
+        15.625%  { x: 272px; y: 40px;  width: 52px;  height: 156px; } /* t6: node-enc-tokens-col */
+        18.750%  { x: 316px; y: 51px;  width: 133px; height: 121px; } /* t7: node-enc-attention */
+        21.875%  { x: 476px; y: 4px;   width: 520px; height: 74px; }  /* t8: block-global-alignment */
+        25.000%  { x: 516px; y: 10px;  width: 32px;  height: 46px; }  /* t9: node-align-classtoken */
+        28.125%  { x: 571px; y: 16px;  width: 94px;  height: 48px; }  /* t10: node-align-mlp */
+        31.250%  { x: 846px; y: 8px;   width: 148px; height: 64px; }  /* t11: node-align-teacher */
+        34.375%  { x: 516px; y: 76px;  width: 232px; height: 143px; } /* t12: block-token-quant */
+        37.500%  { x: 480px; y: 86px;  width: 26px;  height: 136px; } /* t13: node-tq-pos */
+        40.625%  { x: 506px; y: 82px;  width: 38px;  height: 140px; } /* t14: node-tq-embed */
+        43.750%  { x: 566px; y: 108px; width: 132px; height: 76px; }  /* t15: node-tq-vqbox */
+        46.875%  { x: 714px; y: 86px;  width: 28px;  height: 136px; } /* t16: node-tq-kxd */
+        50.000%  { x: 754px; y: 74px;  width: 246px; height: 148px; } /* t17: block-image-gen */
+        53.125%  { x: 961px; y: 88px;  width: 32px;  height: 90px; }  /* t18: node-imggen-stoken */
+        56.250%  { x: 818px; y: 94px;  width: 138px; height: 104px; } /* t19: node-imggen-decoder */
+        59.375%  { x: 774px; y: 86px;  width: 28px;  height: 136px; } /* t20: node-imggen-tokens */
+        62.500%  { x: 476px; y: 224px; width: 383px; height: 212px; } /* t21: block-source-recovery */
+        65.625%  { x: 670px; y: 240px; width: 122px; height: 32px; }  /* t22: node-sr-tokens-horiz */
+        68.750%  { x: 818px; y: 246px; width: 32px;  height: 190px; } /* t23: node-sr-rec-query */
+        71.875%  { x: 664px; y: 282px; width: 136px; height: 104px; } /* t24: node-sr-cross-att */
+        75.000%  { x: 616px; y: 242px; width: 32px;  height: 188px; } /* t25: node-sr-rec-tokens */
+        78.125%  { x: 531px; y: 298px; width: 76px;  height: 72px; }  /* t26: node-sr-unmerge */
+        81.250%  { x: 490px; y: 238px; width: 32px;  height: 198px; } /* t27: node-sr-tokens-lxd */
+        84.375%  { x: 196px; y: 224px; width: 268px; height: 212px; } /* t28: block-decoder */
+        87.500%  { x: 310px; y: 270px; width: 140px; height: 124px; } /* t29: node-dec-attention */
+        90.625%  { x: 284px; y: 244px; width: 28px;  height: 180px; } /* t30: node-dec-tokens-col */
+        93.750%  { x: 204px; y: 251px; width: 72px;  height: 163px; } /* t31: node-dec-cnn */
+        96.875%  { x: 137px; y: 236px; width: 38px;  height: 206px; } /* t32: node-patches-bottom */
+        100%     { x: 0px;   y: 152px; width: 128px; height: 128px; }
+      }
+    </style>
+  </defs>
+
+  <!-- ==================== BACKGROUND CONTAINERS & BLOCKS ==================== -->
+
+  <!-- Top-Level Block: Global Alignment -->
+  <g data-id="block-global-alignment" id="block-global-alignment" data-class="block" data-parent="root">
+    <rect x="480" y="8" width="512" height="66" rx="4" fill="#fff9ea" stroke="#ffe5b4" stroke-width="1"/>
+    <text x="750" y="28" fill="#d9531e" font-weight="bold" font-size="14" text-anchor="middle" data-id="text-global-alignment" id="text-global-alignment" data-class="text_node" data-parent="block-global-alignment">Global Alignment</text>
+  </g>
+
+  <!-- Top-Level Block: Encoder -->
+  <g data-id="block-encoder" id="block-encoder" data-class="block" data-parent="root">
+    <rect x="200" y="8" width="260" height="206" rx="14" fill="#edf6ff" stroke="#c2dbf8" stroke-width="1"/>
+    <text x="375" y="32" fill="#0066cc" font-weight="bold" font-size="16" text-anchor="middle" data-id="text-encoder-title" id="text-encoder-title" data-class="text_node" data-parent="block-encoder">Encoder</text>
+    <text x="382" y="202" fill="#0066cc" font-weight="bold" font-size="14" text-anchor="middle" data-id="text-token-merge-title" id="text-token-merge-title" data-class="text_node" data-parent="block-encoder">Token Merge</text>
+  </g>
+
+  <!-- Top-Level Block: Token Quantization -->
+  <g data-id="block-token-quant" id="block-token-quant" data-class="block" data-parent="root">
+    <rect x="520" y="80" width="224" height="135" rx="10" fill="#f4f0fd" stroke="#dfd6f7" stroke-width="1"/>
+    <text x="635" y="205" fill="#582a9c" font-weight="bold" font-size="13" text-anchor="middle" data-id="text-token-quant-title" id="text-token-quant-title" data-class="text_node" data-parent="block-token-quant">Token Quantization</text>
+  </g>
+
+  <!-- Top-Level Block: Image Generation -->
+  <g data-id="block-image-gen" id="block-image-gen" data-class="block" data-parent="root">
+    <rect x="758" y="78" width="238" height="140" rx="4" fill="#faf9fe" stroke="#999999" stroke-width="1" stroke-dasharray="4,3"/>
+    <rect x="768" y="86" width="220" height="122" rx="6" fill="#f8e4d9" fill-opacity="0.6"/>
+    <text x="885" y="208" fill="#a71919" font-weight="bold" font-size="13" text-anchor="middle" data-id="text-image-gen-title" id="text-image-gen-title" data-class="text_node" data-parent="block-image-gen">Image Generation</text>
+  </g>
+
+  <!-- Top-Level Block: Decoder -->
+  <g data-id="block-decoder" id="block-decoder" data-class="block" data-parent="root">
+    <rect x="200" y="228" width="260" height="204" rx="14" fill="#f3faf1" stroke="#cde9cb" stroke-width="1"/>
+    <text x="382" y="425" fill="#1b5c20" font-weight="bold" font-size="16" text-anchor="middle" data-id="text-decoder-title" id="text-decoder-title" data-class="text_node" data-parent="block-decoder">Decoder</text>
+    <text x="385" y="250" fill="#4d7c2a" font-weight="bold" font-size="13" text-anchor="middle" data-id="text-dequant-title1" id="text-dequant-title1" data-class="text_node" data-parent="block-decoder">Token</text>
+    <text x="385" y="266" fill="#4d7c2a" font-weight="bold" font-size="13" text-anchor="middle" data-id="text-dequant-title2" id="text-dequant-title2" data-class="text_node" data-parent="block-decoder">Dequantization</text>
+  </g>
+
+  <!-- Top-Level Block: Source Recovery -->
+  <g data-id="block-source-recovery" id="block-source-recovery" data-class="block" data-parent="root">
+    <rect x="480" y="228" width="375" height="204" rx="10" fill="#fff0ed" stroke="#fcd2cb" stroke-width="1"/>
+    <text x="728" y="425" fill="#d32f2f" font-weight="bold" font-size="14" text-anchor="middle" data-id="text-source-rec-title" id="text-source-rec-title" data-class="text_node" data-parent="block-source-recovery">Source Recovery</text>
+  </g>
+
+  <!-- Legend Box -->
+  <g data-id="block-legend" id="block-legend" data-class="block" data-parent="root">
+    <rect x="878" y="228" width="118" height="204" fill="#fdfdfd" stroke="#cccccc" stroke-width="1"/>
+    <!-- Legend Items -->
+    <rect x="890" y="240" width="20" height="20" fill="#e88158" stroke="#a32b13" stroke-width="1.5" rx="2"/>
+    <text x="900" y="254" fill="#ffffff" font-size="10" font-weight="bold" text-anchor="middle">[C]</text>
+    <text x="918" y="248" fill="#333" font-size="10">Class /Start</text>
+    <text x="918" y="260" fill="#333" font-size="10">Token</text>
+
+    <rect x="890" y="274" width="20" height="20" fill="#dedede" stroke="#999" stroke-width="1" rx="1"/>
+    <text x="900" y="288" fill="#333" font-size="11" text-anchor="middle">i</text>
+    <text x="918" y="283" fill="#333" font-size="10">Positional</text>
+    <text x="918" y="295" fill="#333" font-size="10">Encoding</text>
+
+    <rect x="890" y="310" width="20" height="20" fill="#d2e7f9" stroke="#5c9fd6" stroke-width="1" rx="1"/>
+    <text x="900" y="324" fill="#333" font-size="11" text-anchor="middle">j</text>
+    <text x="918" y="320" fill="#333" font-size="10">Recovery</text>
+    <text x="918" y="332" fill="#333" font-size="10">Tokens</text>
+
+    <rect x="890" y="350" width="20" height="20" fill="#a4ceef" stroke="#4a8ec2" stroke-width="1" rx="1"/>
+    <text x="918" y="359" fill="#333" font-size="10">Continuous</text>
+    <text x="918" y="371" fill="#333" font-size="10">Tokens</text>
+
+    <rect x="890" y="390" width="20" height="20" fill="#d8b2f2" stroke="#8953be" stroke-width="1" rx="1"/>
+    <text x="918" y="399" fill="#333" font-size="10">Quantized</text>
+    <text x="918" y="411" fill="#333" font-size="10">Tokens</text>
+  </g>
+
+  <!-- ==================== INPUT / OUTPUT & PATCHES ==================== -->
+
+  <!-- Left Input Image (Dashed Placeholder) -->
+  <g id="raster-input-image" data-id="raster-input-image" data-class="raster_node"><image href="data:image/png;base64,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" x="4" y="156" width="120" height="120" preserveAspectRatio="xMidYMid meet" /></g>
+
+  <text x="75" y="96" fill="#111111" font-size="13" text-anchor="middle" data-id="text-patchify" id="text-patchify" data-class="text_node" data-parent="root">Patchify</text>
+  <text x="75" y="355" fill="#111111" font-size="13" text-anchor="middle" data-id="text-reconstruction" id="text-reconstruction" data-class="text_node" data-parent="root">Reconstruction</text>
+
+  <!-- Stacked Patches Top (Input) -->
+  <g data-id="node-patches-top" id="node-patches-top" data-class="child_node" data-parent="root">
+    <rect x="141" y="4" width="30" height="30" fill="#eedccb" stroke="#777" stroke-width="0.8"/>
+    <rect x="141" y="37" width="30" height="30" fill="#dfbe9f" stroke="#777" stroke-width="0.8"/>
+    <rect x="141" y="70" width="30" height="30" fill="#9e8a78" stroke="#777" stroke-width="0.8"/>
+    <text x="156" y="112" fill="#333333" font-size="14" font-weight="bold" text-anchor="middle">...</text>
+    <rect x="141" y="122" width="30" height="30" fill="#d29864" stroke="#777" stroke-width="0.8"/>
+    <rect x="141" y="155" width="30" height="30" fill="#8e5a36" stroke="#777" stroke-width="0.8"/>
+    <rect x="141" y="188" width="30" height="30" fill="#5c3c25" stroke="#777" stroke-width="0.8"/>
+  </g>
+
+  <!-- Stacked Patches Bottom (Reconstruction) -->
+  <g data-id="node-patches-bottom" id="node-patches-bottom" data-class="child_node" data-parent="root">
+    <rect x="141" y="240" width="30" height="30" fill="#eedccb" stroke="#777" stroke-width="0.8"/>
+    <rect x="141" y="273" width="30" height="30" fill="#dfbe9f" stroke="#777" stroke-width="0.8"/>
+    <rect x="141" y="306" width="30" height="30" fill="#9e8a78" stroke="#777" stroke-width="0.8"/>
+    <text x="156" y="348" fill="#333333" font-size="14" font-weight="bold" text-anchor="middle">...</text>
+    <rect x="141" y="358" width="30" height="30" fill="#d29864" stroke="#777" stroke-width="0.8"/>
+    <rect x="141" y="391" width="30" height="30" fill="#8e5a36" stroke="#777" stroke-width="0.8"/>
+    <rect x="141" y="424" width="30" height="14" fill="#5c3c25" stroke="#777" stroke-width="0.8"/>
+  </g>
+
+  <!-- ==================== ENCODER INTERNALS ==================== -->
+
+  <!-- Encoder CNN Trapezoid -->
+  <g data-id="node-enc-cnn" id="node-enc-cnn" data-class="composite_whole" data-parent="block-encoder">
+    <polygon points="208,35 272,55 272,170 208,190" fill="#dbeeff" stroke="#489be8" stroke-width="1.5" data-id="poly-enc-cnn" id="poly-enc-cnn" data-class="composite_part" data-parent="node-enc-cnn"/>
+    <text x="240" y="118" fill="#000000" font-size="16" font-weight="500" text-anchor="middle" data-id="text-enc-cnn" id="text-enc-cnn" data-class="composite_part" data-parent="node-enc-cnn">CNN</text>
+  </g>
+
+  <!-- Pos 0 / Class Token [C] on top of Encoder -->
+  <g data-id="node-enc-classtoken-pos0" id="node-enc-classtoken-pos0" data-class="child_node" data-parent="block-encoder">
+    <rect x="276" y="22" width="18" height="18" fill="#ffebd6" stroke="#c02619" stroke-width="1.5" rx="1"/>
+    <text x="285" y="35" fill="#c02619" font-size="9" font-weight="bold" text-anchor="middle">[C]</text>
+    <rect x="296" y="22" width="22" height="18" fill="#f0f0f0" stroke="#999" stroke-width="1"/>
+    <text x="307" y="35" fill="#222" font-size="11" text-anchor="middle">0</text>
+  </g>
+
+  <!-- Tokens Column inside Encoder -->
+  <g data-id="node-enc-tokens-col" id="node-enc-tokens-col" data-class="child_node" data-parent="block-encoder">
+    <g transform="translate(276, 44)">
+      <!-- LxD Continuous Tokens Column -->
+      <rect x="0" y="0" width="20" height="18" fill="#ffffff" stroke="#7a8b99" stroke-width="1"/>
+      <rect x="0" y="18" width="20" height="18" fill="#e8f0f8" stroke="#7a8b99" stroke-width="1"/>
+      <rect x="0" y="36" width="20" height="18" fill="#d8e6f3" stroke="#7a8b99" stroke-width="1"/>
+      <text x="10" y="68" fill="#333" font-size="13" font-weight="bold" text-anchor="middle">...</text>
+      <rect x="0" y="76" width="20" height="18" fill="#b0c8dc" stroke="#7a8b99" stroke-width="1"/>
+      <rect x="0" y="94" width="20" height="18" fill="#8caec9" stroke="#7a8b99" stroke-width="1"/>
+      <rect x="0" y="112" width="20" height="18" fill="#6c91b0" stroke="#7a8b99" stroke-width="1"/>
+      <!-- Pos indices Column -->
+      <rect x="20" y="0" width="22" height="18" fill="#e8e8e8" stroke="#7a8b99" stroke-width="1"/>
+      <text x="31" y="13" fill="#222" font-size="11" text-anchor="middle">1</text>
+      <rect x="20" y="18" width="22" height="18" fill="#dedede" stroke="#7a8b99" stroke-width="1"/>
+      <text x="31" y="31" fill="#222" font-size="11" text-anchor="middle">2</text>
+      <rect x="20" y="76" width="22" height="18" fill="#cccccc" stroke="#7a8b99" stroke-width="1"/>
+      <text x="31" y="89" fill="#222" font-size="11" text-anchor="middle">7</text>
+      <rect x="20" y="94" width="22" height="18" fill="#c0c0c0" stroke="#7a8b99" stroke-width="1"/>
+      <text x="31" y="107" fill="#222" font-size="11" text-anchor="middle">8</text>
+      <rect x="20" y="112" width="22" height="18" fill="#b4b4b4" stroke="#7a8b99" stroke-width="1"/>
+      <text x="31" y="125" fill="#222" font-size="11" text-anchor="middle">9</text>
+    </g>
+    <text x="286" y="190" fill="#222" font-size="11" text-anchor="middle">L × D</text>
+    <text x="307" y="190" fill="#222" font-size="11" text-anchor="middle">Pos</text>
+  </g>
+
+  <!-- Encoder Attention + Token Merge Trapezoid -->
+  <g data-id="node-enc-attention" id="node-enc-attention" data-class="composite_whole" data-parent="block-encoder">
+    <polygon points="320,55 445,78 445,146 320,168" fill="#bedaf7" stroke="#489be8" stroke-width="1.5" data-id="poly-enc-attention" id="poly-enc-attention" data-class="composite_part" data-parent="node-enc-attention"/>
+    <text x="382" y="105" fill="#111111" font-size="15" font-weight="500" text-anchor="middle" data-id="text-enc-att1" id="text-enc-att1" data-class="composite_part" data-parent="node-enc-attention">Attention</text>
+    <text x="382" y="123" fill="#111111" font-size="13" font-weight="500" text-anchor="middle" data-id="text-enc-att2" id="text-enc-att2" data-class="composite_part" data-parent="node-enc-attention">+Token Merge</text>
+  </g>
+
+  <!-- ==================== GLOBAL ALIGNMENT INTERNALS ==================== -->
+
+  <g data-id="node-align-classtoken" id="node-align-classtoken" data-class="child_node" data-parent="block-global-alignment">
+    <text x="532" y="24" fill="#333" font-size="11" text-anchor="middle">Class Token</text>
+    <rect x="520" y="28" width="24" height="24" fill="#ffebd6" stroke="#c02619" stroke-width="1.5" rx="2"/>
+    <text x="532" y="44" fill="#c02619" font-size="11" font-weight="bold" text-anchor="middle">[C]</text>
+  </g>
+
+  <!-- MLP Hexagon -->
+  <g data-id="node-align-mlp" id="node-align-mlp" data-class="composite_whole" data-parent="block-global-alignment">
+    <polygon points="575,40 588,20 648,20 661,40 648,60 588,60" fill="#fbd589" stroke="#e09520" stroke-width="1.5" data-id="poly-align-mlp" id="poly-align-mlp" data-class="composite_part" data-parent="node-align-mlp"/>
+    <text x="618" y="45" fill="#222" font-size="15" font-weight="bold" text-anchor="middle" data-id="text-align-mlp" id="text-align-mlp" data-class="composite_part" data-parent="node-align-mlp">MLP</text>
+  </g>
+
+  <!-- Teacher / Label Block -->
+  <g data-id="node-align-teacher" id="node-align-teacher" data-class="composite_whole" data-parent="block-global-alignment">
+    <polygon points="850,22 935,12 935,68 850,58" fill="#f0f3f6" stroke="#555" stroke-width="1.2" data-id="poly-teacher-body" id="poly-teacher-body" data-class="composite_part" data-parent="node-align-teacher"/>
+    <!-- Snowflake icon -->
+    <path d="M 890 20 L 890 30 M 885 25 L 895 25 M 886 21 L 894 29 M 886 29 L 894 21" stroke="#0288d1" stroke-width="1.5" fill="none" data-id="path-snowflake" id="path-snowflake" data-class="composite_part" data-parent="node-align-teacher"/>
+    <text x="890" y="44" fill="#222" font-size="14" font-weight="500" text-anchor="middle" data-id="text-teacher" id="text-teacher" data-class="composite_part" data-parent="node-align-teacher">Teacher</text>
+    <line x1="940" y1="58" x2="948" y2="18" stroke="#333" stroke-width="1.5" data-id="line-teacher-slash" id="line-teacher-slash" data-class="composite_part" data-parent="node-align-teacher"/>
+    <text x="970" y="44" fill="#222" font-size="14" font-weight="500" text-anchor="middle" data-id="text-label" id="text-label" data-class="composite_part" data-parent="node-align-teacher">Label</text>
+  </g>
+
+  <!-- ==================== TOKEN QUANTIZATION INTERNALS ==================== -->
+
+  <!-- Pos Column -->
+  <g data-id="node-tq-pos" id="node-tq-pos" data-class="child_node" data-parent="block-token-quant">
+    <rect x="484" y="90" width="18" height="22" fill="#e8e8e8" stroke="#999" stroke-width="1"/>
+    <text x="493" y="105" fill="#222" font-size="11" text-anchor="middle">1</text>
+    <rect x="484" y="122" width="18" height="22" fill="#e8e8e8" stroke="#999" stroke-width="1"/>
+    <text x="493" y="137" fill="#222" font-size="11" text-anchor="middle">3</text>
+    <rect x="484" y="154" width="18" height="22" fill="#e8e8e8" stroke="#999" stroke-width="1"/>
+    <text x="493" y="169" fill="#222" font-size="11" text-anchor="middle">6</text>
+    <rect x="484" y="186" width="18" height="22" fill="#e8e8e8" stroke="#999" stroke-width="1"/>
+    <text x="493" y="201" fill="#222" font-size="11" text-anchor="middle">9</text>
+    <text x="493" y="218" fill="#222" font-size="10" text-anchor="middle">Pos</text>
+  </g>
+
+  <!-- Embed Column -->
+  <g data-id="node-tq-embed" id="node-tq-embed" data-class="child_node" data-parent="block-token-quant">
+    <rect x="510" y="86" width="30" height="122" rx="2" fill="none" stroke="#689cd2" stroke-width="1.2"/>
+    <rect x="518" y="90" width="18" height="22" fill="#ffffff" stroke="#689cd2" stroke-width="1"/>
+    <rect x="518" y="122" width="18" height="22" fill="#cde2f5" stroke="#689cd2" stroke-width="1"/>
+    <rect x="518" y="154" width="18" height="22" fill="#7baad7" stroke="#689cd2" stroke-width="1"/>
+    <rect x="518" y="186" width="18" height="22" fill="#2a6fad" stroke="#689cd2" stroke-width="1"/>
+    <text x="525" y="218" fill="#222" font-size="10" text-anchor="middle">Embed</text>
+  </g>
+
+  <!-- Vector Quantization Box -->
+  <g data-id="node-tq-vqbox" id="node-tq-vqbox" data-class="child_node" data-parent="block-token-quant">
+    <rect x="570" y="112" width="124" height="68" rx="14" fill="#cfbbfb" stroke="#7742c8" stroke-width="1.2"/>
+    <text x="632" y="142" fill="#222" font-size="14" font-weight="500" text-anchor="middle">Vector</text>
+    <text x="632" y="160" fill="#222" font-size="14" font-weight="500" text-anchor="middle">Quantization</text>
+  </g>
+
+  <!-- Quantized Tokens Column (k x d) -->
+  <g data-id="node-tq-kxd" id="node-tq-kxd" data-class="child_node" data-parent="block-token-quant">
+    <rect x="718" y="90" width="20" height="22" fill="#f5e1f8" stroke="#893cb6" stroke-width="1"/>
+    <rect x="718" y="122" width="20" height="22" fill="#e0afee" stroke="#893cb6" stroke-width="1"/>
+    <rect x="718" y="154" width="20" height="22" fill="#c47fe0" stroke="#893cb6" stroke-width="1"/>
+    <rect x="718" y="186" width="20" height="22" fill="#a444ce" stroke="#893cb6" stroke-width="1"/>
+    <text x="728" y="218" fill="#222" font-size="10" text-anchor="middle">k × d</text>
+  </g>
+
+  <!-- ==================== IMAGE GENERATION INTERNALS ==================== -->
+
+  <!-- Gen Column -->
+  <g data-id="node-imggen-tokens" id="node-imggen-tokens" data-class="child_node" data-parent="block-image-gen">
+    <rect x="778" y="90" width="20" height="22" fill="#f5e1f8" stroke="#893cb6" stroke-width="1"/>
+    <rect x="778" y="122" width="20" height="22" fill="#d9a7ea" stroke="#893cb6" stroke-width="1"/>
+    <rect x="778" y="154" width="20" height="22" fill="#ab55cf" stroke="#893cb6" stroke-width="1"/>
+    <rect x="778" y="186" width="20" height="22" fill="#892db2" stroke="#893cb6" stroke-width="1"/>
+    <text x="788" y="218" fill="#222" font-size="10" text-anchor="middle">Gen</text>
+  </g>
+
+  <!-- Causal Decoder Box -->
+  <g data-id="node-imggen-decoder" id="node-imggen-decoder" data-class="child_node" data-parent="block-image-gen">
+    <rect x="822" y="98" width="130" height="96" rx="20" fill="#f9b57b" stroke="#e06919" stroke-width="1.2"/>
+    <text x="887" y="142" fill="#222" font-size="15" font-weight="500" text-anchor="middle">Causal</text>
+    <text x="887" y="162" fill="#222" font-size="15" font-weight="500" text-anchor="middle">Decoder</text>
+  </g>
+
+  <!-- [S] Token -->
+  <g data-id="node-imggen-stoken" id="node-imggen-stoken" data-class="child_node" data-parent="block-image-gen">
+    <rect x="965" y="92" width="24" height="20" fill="#ffebd6" stroke="#c02619" stroke-width="1.5" rx="2"/>
+    <text x="977" y="106" fill="#c02619" font-size="10" font-weight="bold" text-anchor="middle">[S]</text>
+    <!-- Shifted output tokens -->
+    <rect x="966" y="122" width="22" height="20" fill="#edd6f7" stroke="#893cb6" stroke-width="1" rx="1"/>
+    <rect x="966" y="154" width="22" height="20" fill="#dca3f0" stroke="#893cb6" stroke-width="1" rx="1"/>
+  </g>
+
+  <!-- ==================== DECODER INTERNALS ==================== -->
+
+  <!-- Decoder CNN Trapezoid -->
+  <g data-id="node-dec-cnn" id="node-dec-cnn" data-class="composite_whole" data-parent="block-decoder">
+    <polygon points="272,255 208,275 208,390 272,410" fill="#dbefd7" stroke="#71b768" stroke-width="1.5" data-id="poly-dec-cnn" id="poly-dec-cnn" data-class="composite_part" data-parent="node-dec-cnn"/>
+    <text x="240" y="338" fill="#000000" font-size="16" font-weight="500" text-anchor="middle" data-id="text-dec-cnn" id="text-dec-cnn" data-class="composite_part" data-parent="node-dec-cnn">CNN</text>
+  </g>
+
+  <!-- Continuous Tokens Column in Decoder -->
+  <g data-id="node-dec-tokens-col" id="node-dec-tokens-col" data-class="child_node" data-parent="block-decoder">
+    <rect x="288" y="248" width="20" height="22" fill="#eff8f8" stroke="#4a8ec2" stroke-width="1"/>
+    <rect x="288" y="278" width="20" height="22" fill="#cde4f7" stroke="#4a8ec2" stroke-width="1"/>
+    <rect x="288" y="308" width="20" height="22" fill="#9ec5ea" stroke="#4a8ec2" stroke-width="1"/>
+    <text x="298" y="342" fill="#333" font-size="13" font-weight="bold" text-anchor="middle">...</text>
+    <rect x="288" y="350" width="20" height="22" fill="#69a3d4" stroke="#4a8ec2" stroke-width="1"/>
+    <rect x="288" y="380" width="20" height="22" fill="#3c84bd" stroke="#4a8ec2" stroke-width="1"/>
+    <text x="298" y="420" fill="#222" font-size="11" text-anchor="middle">L × D</text>
+  </g>
+
+  <!-- Decoder Attention Rectangle -->
+  <g data-id="node-dec-attention" id="node-dec-attention" data-class="child_node" data-parent="block-decoder">
+    <rect x="314" y="274" width="132" height="116" fill="#b9e4b3" stroke="#68af5e" stroke-width="1.5"/>
+    <text x="380" y="338" fill="#111111" font-size="16" font-weight="500" text-anchor="middle">Attention</text>
+  </g>
+
+  <!-- ==================== SOURCE RECOVERY INTERNALS ==================== -->
+
+  <!-- L x d Quantized Tokens Column in Source Recovery -->
+  <g data-id="node-sr-tokens-lxd" id="node-sr-tokens-lxd" data-class="child_node" data-parent="block-source-recovery">
+    <rect x="494" y="242" width="24" height="20" fill="#ffffff" stroke="#893cb6" stroke-width="1"/>
+    <rect x="494" y="270" width="24" height="20" fill="#f4dcfb" stroke="#893cb6" stroke-width="1"/>
+    <rect x="494" y="298" width="24" height="20" fill="#e5aff5" stroke="#893cb6" stroke-width="1"/>
+    <text x="506" y="334" fill="#333" font-size="13" font-weight="bold" text-anchor="middle">...</text>
+    <rect x="494" y="342" width="24" height="20" fill="#ca73e7" stroke="#893cb6" stroke-width="1"/>
+    <rect x="494" y="370" width="24" height="20" fill="#9d42bd" stroke="#893cb6" stroke-width="1"/>
+    <rect x="494" y="398" width="24" height="20" fill="#7a25a0" stroke="#893cb6" stroke-width="1"/>
+    <text x="506" y="432" fill="#222" font-size="10" text-anchor="middle">L × d</text>
+  </g>
+
+  <!-- Token Unmerge Box -->
+  <g data-id="node-sr-unmerge" id="node-sr-unmerge" data-class="child_node" data-parent="block-source-recovery">
+    <rect x="535" y="302" width="68" height="64" rx="14" fill="#fca898" stroke="#dc4c35" stroke-width="1.2"/>
+    <text x="569" y="330" fill="#222" font-size="12" font-weight="500" text-anchor="middle">Token</text>
+    <text x="569" y="348" fill="#222" font-size="12" font-weight="500" text-anchor="middle">Unmerge</text>
+  </g>
+
+  <!-- Recovery Tokens Column (light blue [1, 1, 3, ..., 6, 6, 9]) -->
+  <g data-id="node-sr-rec-tokens" id="node-sr-rec-tokens" data-class="child_node" data-parent="block-source-recovery">
+    <rect x="620" y="246" width="24" height="180" rx="2" fill="none" stroke="#6ba0d6" stroke-width="1.2"/>
+    <rect x="623" y="250" width="18" height="20" fill="#dcecf9" stroke="#7aaad6" stroke-width="1"/>
+    <text x="632" y="264" fill="#222" font-size="11" text-anchor="middle">1</text>
+    <rect x="623" y="278" width="18" height="20" fill="#dcecf9" stroke="#7aaad6" stroke-width="1"/>
+    <text x="632" y="292" fill="#222" font-size="11" text-anchor="middle">1</text>
+    <rect x="623" y="306" width="18" height="20" fill="#dcecf9" stroke="#7aaad6" stroke-width="1"/>
+    <text x="632" y="320" fill="#222" font-size="11" text-anchor="middle">3</text>
+    <text x="632" y="342" fill="#333" font-size="11" font-weight="bold" text-anchor="middle">...</text>
+    <rect x="623" y="348" width="18" height="20" fill="#dcecf9" stroke="#7aaad6" stroke-width="1"/>
+    <text x="632" y="362" fill="#222" font-size="11" text-anchor="middle">6</text>
+    <rect x="623" y="376" width="18" height="20" fill="#dcecf9" stroke="#7aaad6" stroke-width="1"/>
+    <text x="632" y="390" fill="#222" font-size="11" text-anchor="middle">6</text>
+    <rect x="623" y="404" width="18" height="20" fill="#dcecf9" stroke="#7aaad6" stroke-width="1"/>
+    <text x="632" y="418" fill="#222" font-size="11" text-anchor="middle">9</text>
+  </g>
+
+  <!-- Horizontal Quantized Tokens for Cross-Attention -->
+  <g data-id="node-sr-tokens-horiz" id="node-sr-tokens-horiz" data-class="child_node" data-parent="block-source-recovery">
+    <rect x="674" y="244" width="22" height="24" fill="#f8e4fc" stroke="#893cb6" stroke-width="1"/>
+    <rect x="704" y="244" width="22" height="24" fill="#e9b9f7" stroke="#893cb6" stroke-width="1"/>
+    <rect x="734" y="244" width="22" height="24" fill="#b968db" stroke="#893cb6" stroke-width="1"/>
+    <rect x="764" y="244" width="24" height="24" fill="#892db2" stroke="#893cb6" stroke-width="1"/>
+  </g>
+
+  <!-- Cross-Attention Box -->
+  <g data-id="node-sr-cross-att" id="node-sr-cross-att" data-class="child_node" data-parent="block-source-recovery">
+    <rect x="668" y="286" width="128" height="96" rx="20" fill="#ff7f90" stroke="#df2642" stroke-width="1.2"/>
+    <text x="732" y="330" fill="#111111" font-size="16" font-weight="500" text-anchor="middle">Cross-</text>
+    <text x="732" y="352" fill="#111111" font-size="16" font-weight="500" text-anchor="middle">Attention</text>
+  </g>
+
+  <!-- Rec Query Column -->
+  <g data-id="node-sr-rec-query" id="node-sr-rec-query" data-class="child_node" data-parent="block-source-recovery">
+    <rect x="822" y="250" width="24" height="18" fill="#f2f2f2" stroke="#777" stroke-width="1"/>
+    <text x="834" y="263" fill="#222" font-size="11" text-anchor="middle">1</text>
+    <rect x="822" y="276" width="24" height="18" fill="#e5e5e5" stroke="#777" stroke-width="1"/>
+    <text x="834" y="289" fill="#222" font-size="11" text-anchor="middle">2</text>
+    <rect x="822" y="302" width="24" height="18" fill="#d8d8d8" stroke="#777" stroke-width="1"/>
+    <text x="834" y="315" fill="#222" font-size="11" text-anchor="middle">3</text>
+    <text x="834" y="338" fill="#333" font-size="11" font-weight="bold" text-anchor="middle">...</text>
+    <rect x="822" y="348" width="24" height="18" fill="#b0b0b0" stroke="#777" stroke-width="1"/>
+    <text x="834" y="361" fill="#222" font-size="11" text-anchor="middle">7</text>
+    <rect x="822" y="374" width="24" height="18" fill="#8a8a8a" stroke="#777" stroke-width="1"/>
+    <text x="834" y="387" fill="#222" font-size="11" text-anchor="middle">8</text>
+    <rect x="822" y="400" width="24" height="18" fill="#4d4d4d" stroke="#777" stroke-width="1"/>
+    <text x="834" y="413" fill="#fff" font-size="11" text-anchor="middle">9</text>
+    <text x="834" y="432" fill="#222" font-size="10" text-anchor="middle">Rec Query</text>
+  </g>
+
+  <!-- ==================== EDGES / ARROWS ==================== -->
+
+  <!-- Patchify Curve: Input Image -> Patches Top -->
+  <path d="M 64 156 Q 64 105 133 105" fill="none" stroke="#222222" stroke-width="1.2" marker-end="url(#arrow-black)" data-id="edge-patchify" id="edge-patchify" data-class="edge" data-source="raster-input-image" data-target="node-patches-top"/>
+
+  <!-- Patches Top -> Encoder CNN -->
+  <path d="M 175 105 L 202 105" fill="none" stroke="#222222" stroke-width="1.2" marker-end="url(#arrow-black)" data-id="edge-patches-to-enc" id="edge-patches-to-enc" data-class="edge" data-source="node-patches-top" data-target="node-enc-cnn"/>
+
+  <!-- Curved arrow on top of Encoder Pos 0 -> Class token -->
+  <path d="M 307 20 C 307 5 285 5 285 16" fill="none" stroke="#222222" stroke-width="1.2" marker-end="url(#arrow-black)" data-id="edge-pos0-to-c" id="edge-pos0-to-c" data-class="edge" data-source="node-enc-classtoken-pos0" data-target="node-enc-classtoken-pos0"/>
+
+  <!-- Encoder Attention Output -> Class Token & Pos/Embed Token Quantization -->
+  <path d="M 445 110 L 464 110 L 464 38 L 512 38" fill="none" stroke="#222222" stroke-width="1.2" marker-end="url(#arrow-black)" data-id="edge-enc-to-classtoken" id="edge-enc-to-classtoken" data-class="edge" data-source="node-enc-attention" data-target="node-align-classtoken"/>
+  <path d="M 464 110 L 464 142 L 478 142" fill="none" stroke="#222222" stroke-width="1.2" marker-end="url(#arrow-black)" data-id="edge-enc-to-pos" id="edge-enc-to-pos" data-class="edge" data-source="node-enc-attention" data-target="node-tq-pos"/>
+
+  <!-- Global Alignment: Class Token -> MLP -->
+  <path d="M 546 40 L 570 40" fill="none" stroke="#222222" stroke-width="1.2" marker-end="url(#arrow-black)" data-id="edge-ctoken-to-mlp" id="edge-ctoken-to-mlp" data-class="edge" data-source="node-align-classtoken" data-target="node-align-mlp"/>
+
+  <!-- Global Alignment: MLP <-> Teacher (Bidirectional Red Arrow) -->
+  <path d="M 666 40 L 842 40" fill="none" stroke="#c02619" stroke-width="1.5" marker-start="url(#arrow-red)" marker-end="url(#arrow-red)" data-id="edge-mlp-to-teacher" id="edge-mlp-to-teacher" data-class="edge" data-source="node-align-mlp" data-target="node-align-teacher"/>
+
+  <!-- Token Quantization: Embed -> VQ -->
+  <path d="M 542 146 L 564 146" fill="none" stroke="#222222" stroke-width="1.2" marker-end="url(#arrow-black)" data-id="edge-embed-to-vq" id="edge-embed-to-vq" data-class="edge" data-source="node-tq-embed" data-target="node-tq-vqbox"/>
+
+  <!-- Token Quantization: VQ -> kxd tokens -->
+  <path d="M 696 146 L 712 146" fill="none" stroke="#222222" stroke-width="1.2" marker-end="url(#arrow-black)" data-id="edge-vq-to-kxd" id="edge-vq-to-kxd" data-class="edge" data-source="node-tq-vqbox" data-target="node-tq-kxd"/>
+
+  <!-- Image Generation Dashed Arrows: [S] -> Decoder, Decoder -> Gen -->
+  <path d="M 964 100 L 954 104" fill="none" stroke="#b0b0b0" stroke-width="1" stroke-dasharray="2,2" marker-end="url(#arrow-gray)" data-id="edge-imggen-s-to-dec" id="edge-imggen-s-to-dec" data-class="edge" data-source="node-imggen-stoken" data-target="node-imggen-decoder"/>
+  <path d="M 964 132 L 954 130" fill="none" stroke="#b0b0b0" stroke-width="1" stroke-dasharray="2,2" marker-end="url(#arrow-gray)" data-id="edge-imggen-s2-to-dec" id="edge-imggen-s2-to-dec" data-class="edge" data-source="node-imggen-stoken" data-target="node-imggen-decoder"/>
+  <path d="M 964 164 L 954 156" fill="none" stroke="#b0b0b0" stroke-width="1" stroke-dasharray="2,2" marker-end="url(#arrow-gray)" data-id="edge-imggen-s3-to-dec" id="edge-imggen-s3-to-dec" data-class="edge" data-source="node-imggen-stoken" data-target="node-imggen-decoder"/>
+  <path d="M 822 100 L 802 96" fill="none" stroke="#b0b0b0" stroke-width="1" stroke-dasharray="2,2" marker-end="url(#arrow-gray)" data-id="edge-dec-to-gen1" id="edge-dec-to-gen1" data-class="edge" data-source="node-imggen-decoder" data-target="node-imggen-tokens"/>
+  <path d="M 822 136 L 802 133" fill="none" stroke="#b0b0b0" stroke-width="1" stroke-dasharray="2,2" marker-end="url(#arrow-gray)" data-id="edge-dec-to-gen2" id="edge-dec-to-gen2" data-class="edge" data-source="node-imggen-decoder" data-target="node-imggen-tokens"/>
+  <path d="M 822 172 L 802 170" fill="none" stroke="#b0b0b0" stroke-width="1" stroke-dasharray="2,2" marker-end="url(#arrow-gray)" data-id="edge-dec-to-gen3" id="edge-dec-to-gen3" data-class="edge" data-source="node-imggen-decoder" data-target="node-imggen-tokens"/>
+
+  <!-- Top k x d Tokens to Bottom Source Recovery Horizontal Tokens -->
+  <path d="M 732 216 L 732 238" fill="none" stroke="#222222" stroke-width="1.2" marker-end="url(#arrow-black)" data-id="edge-quant-to-sr-tokens" id="edge-quant-to-sr-tokens" data-class="edge" data-source="node-tq-kxd" data-target="node-sr-tokens-horiz"/>
+
+  <!-- Horizontal Tokens -> Cross Attention -->
+  <path d="M 732 270 L 732 280" fill="none" stroke="#222222" stroke-width="1.2" marker-end="url(#arrow-black)" data-id="edge-horiz-to-crossatt" id="edge-horiz-to-crossatt" data-class="edge" data-source="node-sr-tokens-horiz" data-target="node-sr-cross-att"/>
+
+  <!-- Rec Query -> Cross Attention -->
+  <path d="M 816 334 L 800 334" fill="none" stroke="#222222" stroke-width="1.2" marker-end="url(#arrow-black)" data-id="edge-recquery-to-crossatt" id="edge-recquery-to-crossatt" data-class="edge" data-source="node-sr-rec-query" data-target="node-sr-cross-att"/>
+
+  <!-- Cross Attention -> Recovery Tokens -->
+  <path d="M 664 334 L 648 334" fill="none" stroke="#222222" stroke-width="1.2" marker-end="url(#arrow-black)" data-id="edge-crossatt-to-rectokens" id="edge-crossatt-to-rectokens" data-class="edge" data-source="node-sr-cross-att" data-target="node-sr-rec-tokens"/>
+
+  <!-- Recovery Tokens -> Token Unmerge (Routing from Top and Side) -->
+  <path d="M 646 260 L 569 260 L 569 296" fill="none" stroke="#222222" stroke-width="1.2" marker-end="url(#arrow-black)" data-id="edge-rectokens-top-to-unmerge" id="edge-rectokens-top-to-unmerge" data-class="edge" data-source="node-sr-rec-tokens" data-target="node-sr-unmerge"/>
+  <path d="M 618 334 L 608 334" fill="none" stroke="#222222" stroke-width="1.2" marker-end="url(#arrow-black)" data-id="edge-rectokens-to-unmerge" id="edge-rectokens-to-unmerge" data-class="edge" data-source="node-sr-rec-tokens" data-target="node-sr-unmerge"/>
+
+  <!-- Token Unmerge -> L x d Tokens -->
+  <path d="M 532 334 L 522 334" fill="none" stroke="#222222" stroke-width="1.2" marker-end="url(#arrow-black)" data-id="edge-unmerge-to-sr-tokens" id="edge-unmerge-to-sr-tokens" data-class="edge" data-source="node-sr-unmerge" data-target="node-sr-tokens-lxd"/>
+
+  <!-- L x d Tokens -> Decoder Attention -->
+  <path d="M 490 334 L 452 334" fill="none" stroke="#222222" stroke-width="1.2" marker-end="url(#arrow-black)" data-id="edge-sr-tokens-to-dec-att" id="edge-sr-tokens-to-dec-att" data-class="edge" data-source="node-sr-tokens-lxd" data-target="node-dec-attention"/>
+
+  <!-- Decoder CNN -> Patches Bottom -->
+  <path d="M 204 334 L 176 334" fill="none" stroke="#222222" stroke-width="1.2" marker-end="url(#arrow-black)" data-id="edge-dec-to-patches" id="edge-dec-to-patches" data-class="edge" data-source="node-dec-cnn" data-target="node-patches-bottom"/>
+
+  <!-- Reconstruction Red Curve: Patches Bottom -> Input Image -->
+  <path d="M 137 334 Q 64 334 64 278" fill="none" stroke="#c02619" stroke-width="1.5" marker-end="url(#arrow-red)" data-id="edge-reconstruction" id="edge-reconstruction" data-class="edge" data-source="node-patches-bottom" data-target="raster-input-image"/>
+
+  <!-- ==================== DYNAMIC NARRATION BANNER ==================== -->
+
+  <!-- ==================== FOCUS BOX ==================== -->
+  <rect id="focus_box" fill="none" stroke="#FF0000" stroke-width="4" stroke-dasharray="8,4" rx="6" />
+</svg>
+  </div>
+
+  <div class="ab-bar">
+    <button type="button" class="ab-btn ab-play" aria-label="Pause">
+      <svg class="ab-ic-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 5.5l11 6.5-11 6.5z"/></svg>
+      <svg class="ab-ic-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 5.5h3.6v13H7.5zM12.9 5.5h3.6v13h-3.6z"/></svg>
+    </button>
+
+    <div class="ab-scrub">
+      <span class="ab-rail" aria-hidden="true"><i class="ab-played"></i></span>
+      <input type="range" class="ab-seek" min="0" max="1000" value="0" step="1"
+             aria-label="Scrub through the animation">
+    </div>
+
+    <span class="ab-time"><b>0:00</b>&nbsp;/&nbsp;<span class="ab-total">0:00</span></span>
+
+    <div class="ab-speed" role="group" aria-label="Playback speed">
+      <button type="button" class="ab-slower" aria-label="Slower">&#8722;</button>
+      <span class="ab-rate" aria-live="polite">1&#215;</span>
+      <button type="button" class="ab-faster" aria-label="Faster">+</button>
+    </div>
+
+    <button type="button" class="ab-btn ab-toggle" aria-pressed="true">
+      <span class="ab-led" aria-hidden="true"></span>
+      <span class="ab-word">Captions on</span>
+    </button>
+  </div>
+
+  <figcaption class="ab-cap" aria-live="polite"></figcaption>
+</figure>
+
+<script>
+(function () {
+  var CUES = [{"start": 0.0, "end": 0.0, "text": "The pipeline begins with an input image."}, {"start": 1.0, "end": 1.0, "text": "The image is first partitioned into a sequence of regular visual patches."}, {"start": 2.0, "end": 2.0, "text": "These patches are passed into the hybrid encoder network."}, {"start": 3.0, "end": 3.0, "text": "A convolutional encoder extracts low-level local features."}, {"start": 4.0, "end": 4.0, "text": "A dedicated class token is prepended alongside spatial position encodings."}, {"start": 5.0, "end": 5.0, "text": "This forms the initial full-length sequence of continuous tokens."}, {"start": 6.0, "end": 6.0, "text": "Self-attention layers with token merging progressively compress similar tokens."}, {"start": 7.0, "end": 7.0, "text": "The global alignment module enriches the learned representations."}, {"start": 8.0, "end": 8.0, "text": "The class token is extracted from the encoder output."}, {"start": 9.0, "end": 9.0, "text": "It is projected through a multi-layer perceptron head."}, {"start": 10.0, "end": 10.0, "text": "And aligned with target representations from a teacher model or ground truth labels."}, {"start": 11.0, "end": 11.0, "text": "In parallel, the compressed visual tokens enter the token quantization module."}, {"start": 12.0, "end": 12.0, "text": "Positional indices of the merged tokens are retained."}, {"start": 13.0, "end": 13.0, "text": "The continuous embedding representations are extracted."}, {"start": 14.0, "end": 14.0, "text": "Vector quantization discretizes each token into discrete codes."}, {"start": 15.0, "end": 15.0, "text": "This yields a compact set of quantized semantic tokens."}, {"start": 16.0, "end": 16.0, "text": "During the generative stage, these discrete tokens drive image generation."}, {"start": 17.0, "end": 17.0, "text": "An autoregressive generation process starts with a start token."}, {"start": 18.0, "end": 18.0, "text": "The causal decoder synthesizes tokens sequentially with key-value cache compression."}, {"start": 19.0, "end": 19.0, "text": "Predicting the compact sequence of quantized tokens."}, {"start": 20.0, "end": 20.0, "text": "Next, the source recovery module reconstructs full spatial context."}, {"start": 21.0, "end": 21.0, "text": "The quantized tokens are supplied to the recovery cross-attention mechanism."}, {"start": 22.0, "end": 22.0, "text": "A set of learnable recovery queries corresponds to all original spatial positions."}, {"start": 23.0, "end": 23.0, "text": "Cross-attention models the relationships between original positions and merged tokens."}, {"start": 24.0, "end": 24.0, "text": "This predicts the source matrix to establish token assignments."}, {"start": 25.0, "end": 25.0, "text": "The token unmerge operation uses these assignments to uncompress the tokens."}, {"start": 26.0, "end": 26.0, "text": "Restoring the full sequence length while preserving spatial fidelity."}, {"start": 27.0, "end": 27.0, "text": "The restored sequence is then processed by the decoder."}, {"start": 28.0, "end": 28.0, "text": "Attention layers perform token dequantization and feature refinement."}, {"start": 29.0, "end": 29.0, "text": "Producing dense continuous feature representations."}, {"start": 30.0, "end": 30.0, "text": "A convolutional decoder maps features back to image space."}, {"start": 31.0, "end": 32.0, "text": "Finally, all patches are reconstructed, generating the final high-resolution image."}];
+  var LOOP = 32.0;
+  var REPEATS = Infinity;
+  var RATES = [0.25, 0.5, 0.75, 1, 1.5, 2, 3];
+
+  var fig = document.querySelector('.ab');
+  var cap = document.querySelector('.ab-cap');
+  var play = document.querySelector('.ab-play');
+  var seek = document.querySelector('.ab-seek');
+  var played = document.querySelector('.ab-played');
+  var nowEl = document.querySelector('.ab-time b');
+  var totalEl = document.querySelector('.ab-total');
+  var rateEl = document.querySelector('.ab-rate');
+  var slower = document.querySelector('.ab-slower');
+  var faster = document.querySelector('.ab-faster');
+  var toggle = document.querySelector('.ab-toggle');
+  var word = toggle.querySelector('.ab-word');
+
+  var at = -1, swap = null, rate = 3, paused = false, scrubbing = false;
+
+  // THE CLOCK. The drawing is hundreds of short animations that each stop when
+  // they are done, so none of them can be asked what time it is. This one runs
+  // the length of the whole piece, does nothing visible, and is driven by the
+  // same controls - so the caption, the bar and the picture cannot disagree.
+  var master = null;
+  try {
+    master = document.documentElement.animate(
+      [{ opacity: 1 }, { opacity: 1 }],
+      { duration: (LOOP || 1) * 1000, iterations: REPEATS }
+    );
+  } catch (e) {}
+  var t0 = performance.now();
+
+  function others() {
+    try {
+      var runs = document.getAnimations ? document.getAnimations() : [];
+      return runs.filter(function (a) { return a !== master; });
+    } catch (e) { return []; }
+  }
+  function clock() {
+    var t;
+    if (master && master.currentTime != null) t = master.currentTime / 1000;
+    else t = (performance.now() - t0) / 1000;
+    return REPEATS === 1 ? Math.min(t, LOOP) : (t % (LOOP || 1));
+  }
+  function each(fn) {
+    if (master) { try { fn(master); } catch (e) {} }
+    others().forEach(function (a) { try { fn(a); } catch (e) {} });
+  }
+  function clip(t) {
+    t = Math.max(0, t || 0);
+    return Math.floor(t / 60) + ':' + ('0' + Math.floor(t % 60)).slice(-2);
+  }
+
+  play.addEventListener('click', function () {
+    paused = !paused;
+    // Restarting a finished piece rather than leaving Play doing nothing
+    if (!paused && REPEATS === 1 && clock() >= LOOP - 0.05) each(function (a) { a.currentTime = 0; });
+    each(function (a) { paused ? a.pause() : a.play(); });
+    if (!paused) t0 = performance.now() - clock() * 1000;
+    fig.classList.toggle('is-paused', paused);
+    play.setAttribute('aria-label', paused ? 'Play' : 'Pause');
+  });
+
+  function setRate(i) {
+    rate = Math.max(0, Math.min(RATES.length - 1, i));
+    var r = RATES[rate];
+    each(function (a) { a.playbackRate = r; });
+    rateEl.textContent = r + '×';
+    fig.classList.toggle('is-fast', r !== 1);
+    slower.disabled = rate === 0;
+    faster.disabled = rate === RATES.length - 1;
+  }
+  slower.addEventListener('click', function () { setRate(rate - 1); });
+  faster.addEventListener('click', function () { setRate(rate + 1); });
+
+  seek.addEventListener('pointerdown', function () { scrubbing = true; });
+  seek.addEventListener('input', function () {
+    var t = (Number(seek.value) / 1000) * LOOP;
+    each(function (a) { a.currentTime = t * 1000; });
+    t0 = performance.now() - t * 1000;
+    paint(true);
+  });
+  seek.addEventListener('change', function () { scrubbing = false; });
+
+  toggle.addEventListener('click', function () {
+    var on = toggle.getAttribute('aria-pressed') !== 'true';
+    toggle.setAttribute('aria-pressed', String(on));
+    word.textContent = on ? 'Captions on' : 'Captions off';
+    fig.classList.toggle('is-off', !on);
+  });
+
+  function paint(force) {
+    var t = clock();
+    nowEl.textContent = clip(t);
+    if (!scrubbing) seek.value = String(Math.round((t / (LOOP || 1)) * 1000));
+    played.style.width = ((t / (LOOP || 1)) * 100) + '%';
+
+    var k = -1;
+    for (var i = 0; i < CUES.length; i++) { if (t >= CUES[i].start - 0.05) k = i; }
+    if (k !== at || force === true) {
+      at = k;
+      var text = k >= 0 ? CUES[k].text : '';
+      if (text !== cap.textContent) {
+        cap.classList.add('is-swap');
+        clearTimeout(swap);
+        swap = setTimeout(function () {
+          cap.textContent = text;
+          cap.classList.remove('is-swap');
+        }, 150);
+      }
+    }
+  }
+
+  // Two ways round, on purpose. requestAnimationFrame gives a smooth bar while
+  // the page is on screen, and stops dead in a background tab or an embed the
+  // browser considers hidden - where the animation itself keeps running, so the
+  // caption would be left behind. The slow timer covers exactly that case.
+  function frame() { paint(); requestAnimationFrame(frame); }
+
+  totalEl.textContent = clip(LOOP);
+  setRate(3);
+  if (!CUES.length) { fig.classList.add('is-off'); toggle.style.display = 'none'; }
+  requestAnimationFrame(frame);
+  setInterval(paint, 250);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,323 @@
+{
+ "_comment": "NARRATIVE DIVERSITY pane. No numbers or statistics are shown here by design. All three axes are wired to real clips. Animation Style plays one diagram (CVPR_2025_pipe00041) rendered in all five Layer 1 styles, so the styles are compared on identical content. Pan and Zoom is Layer 2: it is a toggle rather than a sixth style, it composes on whichever Layer 1 style is selected, and it plays the animation itself (an SVG under assets/bench/pan_and_zoom/) rather than a clip - see data/benchmark/pan-and-zoom.json, which tools/build_pan_and_zoom.py generates. The other two axes play one example per variant, assembled from that variant's own rendered frames and its own narration.",
+ "accent": "diversity",
+ "categories": [
+  {
+   "id": "animation-style",
+   "label": "Animation Style diversity",
+   "sub": "layer 1 · layer 2",
+   "icon": "film",
+   "axis": null,
+   "layered": true,
+   "blurb": "Five base styles decide how a diagram's elements are revealed",
+   "variants": [
+    {
+     "id": "alpha-masking",
+     "label": "Alpha Masking",
+     "layer": 1,
+     "poster": "assets/bench/diversity/alpha-masking.png",
+     "video": "assets/bench/diversity/alpha-masking.mp4",
+     "webm": null,
+     "seconds": 26.25,
+     "caption": "Elements dissolve in behind a soft alpha mask."
+    },
+    {
+     "id": "colour-pop",
+     "label": "Colour Pop",
+     "layer": 1,
+     "poster": "assets/bench/diversity/colour-pop.png",
+     "video": "assets/bench/diversity/colour-pop.mp4",
+     "webm": null,
+     "seconds": 8.17,
+     "caption": "The page stays desaturated; the live element regains its colour."
+    },
+    {
+     "id": "hopping-bbox",
+     "label": "Hopping Bbox",
+     "layer": 1,
+     "poster": "assets/bench/diversity/hopping-bbox.png",
+     "video": "assets/bench/diversity/hopping-bbox.mp4",
+     "webm": null,
+     "seconds": 25.25,
+     "caption": "A highlight box jumps from element to element."
+    },
+    {
+     "id": "progressive-reveal",
+     "label": "Progressive Reveal",
+     "layer": 1,
+     "poster": "assets/bench/diversity/progressive-reveal.png",
+     "video": "assets/bench/diversity/progressive-reveal.mp4",
+     "webm": null,
+     "seconds": 4.17,
+     "caption": "The figure builds up one beat at a time, never erasing."
+    },
+    {
+     "id": "sliding-bbox",
+     "label": "Sliding Bbox",
+     "layer": 1,
+     "poster": "assets/bench/diversity/sliding-bbox.png",
+     "video": "assets/bench/diversity/sliding-bbox.mp4",
+     "webm": null,
+     "seconds": 75.25,
+     "caption": "The highlight glides along the path the process takes."
+    },
+    {
+     "id": "pan-and-zoom",
+     "label": "Pan and Zoom",
+     "layer": 2,
+     "poster": null,
+     "video": null,
+     "webm": null,
+     "caption": "The camera travels the figure, holding on each element as it is described.",
+     "compose": true,
+     "src": "data/benchmark/pan-and-zoom.json",
+     "hint": "camera move"
+    }
+   ],
+   "layer2Note": "Layer 2 pan and zoom composes on top of any of them"
+  },
+  {
+   "id": "sequence-length",
+   "label": "Presentation Sequence Length",
+   "sub": "steps per narrative",
+   "icon": "clock",
+   "axis": {
+    "from": "Few steps",
+    "to": "Many steps"
+   },
+   "blurb": "How finely the planner cuts the process up. The same figure can carry a handful of decisive steps or one step per element.",
+   "variants": [
+    {
+     "id": "fast-reveal",
+     "label": "Fast reveal",
+     "hint": "a few decisive steps",
+     "poster": "assets/bench/diversity/steps-fast.png",
+     "video": "assets/bench/diversity/steps-fast.mp4",
+     "webm": null,
+     "seconds": 17.08,
+     "caption": "The process moves in large strides; several elements arrive together.",
+     "speed": 4
+    },
+    {
+     "id": "medium-reveal",
+     "label": "Medium reveal",
+     "hint": "a steady walkthrough",
+     "poster": "assets/bench/diversity/steps-medium.png",
+     "video": "assets/bench/diversity/steps-medium.mp4",
+     "webm": null,
+     "seconds": 11.75,
+     "caption": "One stage of the method per step, start to finish.",
+     "speed": 4
+    },
+    {
+     "id": "element-by-element",
+     "label": "Element by element",
+     "hint": "every element, one at a time",
+     "poster": "assets/bench/diversity/steps-slow.png",
+     "video": "assets/bench/diversity/steps-slow.mp4",
+     "webm": null,
+     "seconds": 36.92,
+     "caption": "Every element gets its own step, so nothing arrives unannounced.",
+     "speed": 4
+    }
+   ],
+   "_note": "The clips run at 4x. Their pacing was the narration’s, and this axis carries no narration on the page, so at 1x the stage was holding a still for seconds at a time with nothing to read."
+  },
+  {
+   "id": "narration-length",
+   "label": "Narration Length",
+   "sub": "words per step",
+   "icon": "mic",
+   "axis": {
+    "from": "Concise",
+    "to": "Detailed"
+   },
+   "blurb": "How much is said at each step, from a caption-length cue to a full spoken explanation of the mechanism.",
+   "variants": [
+    {
+     "id": "concise",
+     "label": "Concise",
+     "poster": "assets/bench/diversity/narration-concise.png",
+     "video": "assets/bench/diversity/narration-concise.mp4",
+     "webm": null,
+     "seconds": 34.68,
+     "beats": [
+      {
+       "t": 0.0,
+       "text": "The memory architecture is divided into User Space and Kernel Space."
+      },
+      {
+       "t": 4.0,
+       "text": "In User Space, execution begins at the Database Process."
+      },
+      {
+       "t": 7.52,
+       "text": "The process initiates an asynchronous write call."
+      },
+      {
+       "t": 10.44,
+       "text": "This is followed by a synchronous fsync operation."
+      },
+      {
+       "t": 13.32,
+       "text": "The write call routes into the Page Cache within Kernel Space and returns immediately, creating dirty pages."
+      },
+      {
+       "t": 18.96,
+       "text": "The Kernel Flusher Thread periodically handles writebacks from the Page Cache."
+      },
+      {
+       "t": 22.84,
+       "text": "Requests pass into the I/O Queue, while fsync waits for disk completion."
+      },
+      {
+       "t": 26.48,
+       "text": "At the bottom is Persistent Storage, containing the Block Device."
+      },
+      {
+       "t": 30.24,
+       "text": "Finally, enqueued operations are flushed from the I/O Queue down to the Block Device."
+      }
+     ]
+    },
+    {
+     "id": "medium",
+     "label": "Medium",
+     "poster": "assets/bench/diversity/narration-medium.png",
+     "video": "assets/bench/diversity/narration-medium.mp4",
+     "webm": null,
+     "seconds": 97.5,
+     "beats": [
+      {
+       "t": 0.0,
+       "text": "The diagram introduces key architectural conventions, including average aggregation, depthwise convolutions, and trainable scaling parameters."
+      },
+      {
+       "t": 7.04,
+       "text": "In the Swin-Transformer block, input features pass through layer normalization alongside an initial residual shortcut."
+      },
+      {
+       "t": 13.4,
+       "text": "Normalized features enter the window and shifted-window multi-head self-attention module to capture spatial context."
+      },
+      {
+       "t": 19.2,
+       "text": "The attention outputs are then merged with the initial residual connection."
+      },
+      {
+       "t": 22.88,
+       "text": "The first Mona adapter layer processes the aggregated representation to enhance visual feature adaptation."
+      },
+      {
+       "t": 28.36,
+       "text": "Features undergo a second layer normalization step before the feed-forward network, accompanied by another skip connection."
+      },
+      {
+       "t": 33.76,
+       "text": "A feed-forward layer then transforms the intermediate token representations."
+      },
+      {
+       "t": 38.08,
+       "text": "The feed-forward output is summed with its corresponding shortcut."
+      },
+      {
+       "t": 41.48,
+       "text": "A second Mona layer further refines the features before outputting the final representation of the Swin-Transformer block."
+      },
+      {
+       "t": 47.28,
+       "text": "Inside the Mona layer, input features undergo layer normalization scaled by a trainable factor, while a parallel skip branch is scaled by a second factor."
+      },
+      {
+       "t": 54.8,
+       "text": "The scaled feature streams are combined at an addition node to regulate input distribution."
+      },
+      {
+       "t": 59.2,
+       "text": "A down projection layer reduces channel dimensionality before branching into multi-scale convolutional paths and residual shortcuts."
+      },
+      {
+       "t": 65.772,
+       "text": "Three parallel depthwise convolutions with 3x3, 5x5, and 7x7 kernels extract multi-scale visual patterns."
+      },
+      {
+       "t": 71.0,
+       "text": "Outputs from all three kernel branches are combined using an averaging operation."
+      },
+      {
+       "t": 75.033,
+       "text": "The averaged depthwise feature is added to the pre-convolution residual branch."
+      },
+      {
+       "t": 78.966,
+       "text": "A 1x1 convolution aggregates point-wise channel features alongside an adjacent residual shortcut."
+      },
+      {
+       "t": 83.796,
+       "text": "The 1x1 convolution output is summed with its shortcut connection."
+      },
+      {
+       "t": 87.082,
+       "text": "A GeLU activation function introduces non-linearity."
+      },
+      {
+       "t": 89.671,
+       "text": "An up projection layer restores the original feature channel dimensions."
+      },
+      {
+       "t": 93.256,
+       "text": "Finally, the outer residual is added to yield the complete output of the Mona layer."
+      }
+     ]
+    },
+    {
+     "id": "maximum",
+     "label": "Maximum",
+     "poster": "assets/bench/diversity/narration-max.png",
+     "video": "assets/bench/diversity/narration-max.mp4",
+     "webm": null,
+     "seconds": 81.75,
+     "beats": [
+      {
+       "t": 0.0,
+       "text": "The pipeline begins with the editing guidance generation stage to convert user edits into supervision signals that can later guide the model during training."
+      },
+      {
+       "t": 7.895,
+       "text": "A pretrained teacher model encapsulates the original neural radiance field of the reconstructed scene. It therefore provides a reliable reference that can be queried to determine what the edited scene should look like."
+      },
+      {
+       "t": 18.858,
+       "text": "When a user interactively edits a region, such as scaling an object, a spatial mapping function is established, which helps to understand the relationship between the edited space and the original scene."
+      },
+      {
+       "t": 29.066,
+       "text": "Sampled points and ray directions in the edited target space are mapped back to the source space, querying the teacher model to obtain color and density guidance."
+      },
+      {
+       "t": 37.212,
+       "text": "This generated guidance is then transferred to a two-stage student training framework designed for instant preview."
+      },
+      {
+       "t": 42.995,
+       "text": "A local loss focuses specifically on the edited object or region, ensuring that the requested modification is learned correctly. At the same time, a global loss considers the scene as a whole, helping the model maintain consistency with everything outside the edited region."
+      },
+      {
+       "t": 56.774,
+       "text": "During local pretraining, only local feature parameters are updated while decoder weights remain frozen, enabling instant preview within one second."
+      },
+      {
+       "t": 64.216,
+       "text": "In the second stage, global fine-tuning refines the entire scene network using full supervision from teacher inference, allowing the model to adjust both the edited region and the surrounding scene for a more consistent and fully converged result."
+      },
+      {
+       "t": 76.637,
+       "text": "The resulting student model delivers fully converged, high-fidelity rendering of the edited 3D scene."
+      }
+     ]
+    }
+   ],
+   "_note": "Each variant carries its own narration, timed to its clip, and the pane shows the line being spoken under the stage. That is the axis: a side label saying \"a sentence per step\" describes the difference, the narration itself IS the difference. These clips play at 1x for the same reason."
+  }
+ ]
+}

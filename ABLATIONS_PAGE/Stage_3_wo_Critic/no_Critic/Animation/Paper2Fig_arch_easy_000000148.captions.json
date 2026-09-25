@@ -1,0 +1,42 @@
+[
+ {
+  "t": 0.0,
+  "text": "The evaluation pipeline begins when the dialogue agent's response is received as input."
+ },
+ {
+  "t": 2.5,
+  "text": "The response data is routed across four parallel attribute evaluation branches within the combined module."
+ },
+ {
+  "t": 5.0,
+  "text": "First, the BERT next sentence prediction branch evaluates the contextual relevance of the response."
+ },
+ {
+  "t": 7.5,
+  "text": "In parallel, a dedicated repetition control module measures n-gram overlap across the dialogue."
+ },
+ {
+  "t": 10.0,
+  "text": "This submodule computes repetition metrics across internal, external, and partner-level statements."
+ },
+ {
+  "t": 12.5,
+  "text": "Third, conversational balance is assessed by counting the number of questions asked."
+ },
+ {
+  "t": 15.0,
+  "text": "Fourth, the short-safe attribute monitors utterance length and the presence of named entities."
+ },
+ {
+  "t": 17.5,
+  "text": "Each attribute outputs a numeric feature value, forwarding the combined signals into the classification layer."
+ },
+ {
+  "t": 20.0,
+  "text": "The classifier integrates all extracted attribute scores to model conversational judgment."
+ },
+ {
+  "t": 22.5,
+  "text": "Finally, the module outputs the predicted classification score for conversational fluidity."
+ }
+]

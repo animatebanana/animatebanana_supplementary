@@ -1,0 +1,54 @@
+[
+ {
+  "t": 0.0,
+  "text": "Data preparation begins by taking a reference frame to locate the initial hand and object bounding boxes."
+ },
+ {
+  "t": 2.2,
+  "text": "The object within the reference frame is isolated and replaced to serve as the target object."
+ },
+ {
+  "t": 4.4,
+  "text": "The source video provides input frames capturing human motion and interaction with the object."
+ },
+ {
+  "t": 6.6,
+  "text": "Bounding box detection defines spatial layouts, while hand mesh augmentation applies random position shifts to decouple pose from fixed locations."
+ },
+ {
+  "t": 8.8,
+  "text": "In the training pipeline, the reference image supplies the visual appearance context of the target object."
+ },
+ {
+  "t": 11.0,
+  "text": "A frozen VAE encoder encodes this image, while the Reference U-Net extracts multi-scale appearance features across self-attention layers."
+ },
+ {
+  "t": 13.2,
+  "text": "Sequences of reconstructed hand meshes are processed by ControlNet to inject accurate hand pose and structural cues."
+ },
+ {
+  "t": 15.4,
+  "text": "Layout guidance is encoded through a lightweight layout encoder and combined with Gaussian noise to initialize the diffusion latent."
+ },
+ {
+  "t": 17.6,
+  "text": "The Denoising U-Net integrates reference self-attention, ControlNet features, specialized hand and object attention, and temporal attention layers."
+ },
+ {
+  "t": 19.8,
+  "text": "The denoised latent is decoded by the VAE decoder to reconstruct temporally coherent reenacted video frames."
+ },
+ {
+  "t": 22.0,
+  "text": "The Hand-Object Interaction Restoration Module refines fine-grained details through dedicated hand and object memory banks."
+ },
+ {
+  "t": 24.2,
+  "text": "In Hand Attention, ControlNet queries perform cross-attention with a Hand Texture Memory Bank under the guidance of a hand mask."
+ },
+ {
+  "t": 26.4,
+  "text": "Similarly, Object Attention queries an Object Texture Memory Bank guided by an object mask to restore sharp, realistic object textures."
+ }
+]

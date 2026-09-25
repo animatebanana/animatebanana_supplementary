@@ -1,0 +1,711 @@
+/*
+  Stratified results — the page shell and the two grouped bar charts.
+
+  Self-contained: this file owns every `.st-*` and `.sr-*` class on
+  stratified.html. Colour, type, spacing and motion come from tokens.css;
+  `.kicker`, `.hl` and `.reveal` come from base.css.
+
+  The series colours are NOT tokens. They are a validated categorical set —
+  adjacent pairs clear the colour-vision separation floor against this page's
+  paper surface — and they live with the series definitions in
+  assets/js/stratified/strat-results.js. Changing one means re-validating the
+  set, so they are passed in as `--c` rather than hardcoded here.
+*/
+
+/* ============================================================ *
+ *  Page shell
+ * ============================================================ */
+
+.st-band .page-head {
+  position: relative;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: clamp(56px, 8vw, 104px) var(--gap-page) clamp(24px, 3vw, 40px);
+  text-align: center;
+}
+.st-band .page-head h1 {
+  margin: 12px 0 0;
+  font-size: var(--fs-h1);
+  line-height: 1.02;
+}
+/* A question, not a lede: set below the site's lede size so it reads as a
+   subtitle under the heading rather than competing with it. */
+.st-band .page-head p {
+  max-width: 62ch;
+  margin: 16px auto 0;
+  font-size: clamp(1rem, 0.92rem + 0.34vw, 1.22rem);
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+
+/* Three panels side by side want the width, so this page runs wider than the
+   rest of the site and takes a narrower gutter to get there. */
+.st-main {
+  max-width: 1760px;
+  margin: 0 auto;
+  padding: 0 clamp(14px, 1.8vw, 32px) clamp(56px, 7vw, 104px);
+}
+.st-main[data-error] .sr::after {
+  content: 'The results data could not be loaded.';
+  display: block;
+  padding: 40px;
+  text-align: center;
+  color: var(--ink-faint);
+}
+
+/* ============================================================ *
+ *  The control row
+ * ============================================================ */
+
+.sr { position: relative; display: block; }
+
+.sr-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: clamp(20px, 2.6vw, 34px);
+  padding: clamp(12px, 1.6vw, 18px) clamp(14px, 2vw, 22px);
+  background: var(--bg-alt);
+  background-image: radial-gradient(var(--dot) 1px, transparent 1.2px);
+  background-size: 26px 26px;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-hard);
+}
+
+/* The label reads as a tab clipped to the front of the control, not as a
+   floating caption — it and the button are one object. */
+.sr-pick-lab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.sr-pick-lab::after {
+  content: '';
+  width: 18px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--banana-deep);
+}
+
+/* ---- The attribute picker ----
+   A hand-built listbox (see strat-results.js). It has to carry the page's
+   ink-and-banana look on its own: a native <select> drops its own menu, which
+   cannot be styled, so every part below is drawn here. */
+.sr-menu { position: relative; display: inline-flex; min-width: 0; }
+
+.sr-menu-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  min-width: 16rem;
+  padding: 10px 12px 10px 20px;
+  font-family: var(--font-display);
+  font-size: clamp(1.02rem, 0.9rem + 0.4vw, 1.3rem);
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: left;
+  color: var(--ink);
+  background: var(--surface);
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  box-shadow: 3px 3px 0 var(--banana);
+  cursor: pointer;
+  transition:
+    box-shadow var(--dur-fast) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out),
+    background-color var(--dur-fast) var(--ease-out);
+}
+/* A banana wash creeps in from the left on hover rather than flooding the
+   whole pill — the text stays on white where it is most legible. */
+.sr-menu-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--banana-soft), transparent 72%);
+  opacity: 0;
+  transition: opacity var(--dur) var(--ease-out);
+  pointer-events: none;
+}
+.sr-menu-btn:hover { transform: translate(-1px, -1px); box-shadow: 5px 5px 0 var(--banana); }
+.sr-menu-btn:hover::before { opacity: 1; }
+.sr-menu-btn:active { transform: translate(1px, 1px); box-shadow: 2px 2px 0 var(--banana); }
+.sr-menu-btn:focus-visible { outline: none; box-shadow: var(--ring), 3px 3px 0 var(--banana); }
+.sr-menu-btn[aria-expanded='true'] {
+  transform: translate(-1px, -1px);
+  box-shadow: 5px 5px 0 var(--banana-deep);
+}
+.sr-menu-btn[aria-expanded='true']::before { opacity: 1; }
+
+.sr-menu-cur { position: relative; min-width: 0; }
+
+/* The caret sits in its own disc so the pill has a visible "handle" to aim
+   at, and spins to point up while the list is open. */
+.sr-caret {
+  position: relative;
+  flex: none;
+  width: 30px;
+  height: 30px;
+  padding: 7px;
+  color: var(--ink);
+  background: var(--banana-soft);
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  transition: transform var(--dur) var(--ease-spring), background-color var(--dur-fast) var(--ease-out);
+}
+.sr-menu-btn:hover .sr-caret { background: var(--banana); }
+.sr-menu-btn[aria-expanded='true'] .sr-caret {
+  background: var(--banana);
+  transform: rotate(180deg);
+}
+
+.sr-menu-list {
+  position: absolute;
+  z-index: 40;
+  top: calc(100% + 10px);
+  left: 0;
+  min-width: 100%;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  background: var(--surface);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-hard);
+  transform-origin: top left;
+}
+/* Scoped to `is-open`, which the script removes on close and re-adds on
+   open, so the entrance replays every time the list is opened. */
+.sr-menu-list.is-open { animation: sr-menu-in var(--dur) var(--ease-spring) both; }
+.sr-menu-list[hidden] { display: none; }
+.sr-menu-list:focus { outline: none; }
+
+.sr-menu-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 14px 9px 10px;
+  border-radius: 10px;
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--ink-mid);
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out);
+}
+/* Keyboard focus and pointer hover land on the same `is-active` state, so
+   there is only ever one highlighted row. */
+.sr-menu-list.is-open li {
+  animation: sr-opt-in var(--dur) var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 32ms + 40ms);
+}
+.sr-menu-list li.is-active {
+  background: var(--banana-soft);
+  color: var(--ink);
+  transform: translateX(2px);
+}
+.sr-menu-list li[aria-selected='true'] { font-weight: 700; color: var(--ink); }
+
+/* The tick keeps its space when unselected, so the labels stay on one
+   left edge instead of shifting as the choice changes. */
+.sr-menu-tick {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  color: var(--banana-deep);
+  opacity: 0;
+  transform: scale(0.6);
+  transition: opacity var(--dur-fast) var(--ease-out), transform var(--dur) var(--ease-spring);
+}
+.sr-menu-list li[aria-selected='true'] .sr-menu-tick { opacity: 1; transform: none; }
+
+/* ---- The zoom switch ----
+   Sits at the far end of the control row: the picker chooses what is being
+   compared, this chooses how closely. Its note is part of the control, not
+   small print — the whole point of the switch is the trade it makes. */
+.sr-switch {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  margin-left: auto;
+  max-width: 34rem;
+  cursor: pointer;
+}
+.sr-switch input { position: absolute; width: 0; height: 0; opacity: 0; }
+
+.sr-switch-track {
+  flex: none;
+  position: relative;
+  width: 46px;
+  height: 26px;
+  margin-top: 1px;
+  background: var(--surface);
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  transition: background-color var(--dur) var(--ease-out);
+}
+.sr-switch-track i {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  background: var(--ink);
+  border-radius: 999px;
+  transition: transform var(--dur) var(--ease-spring);
+}
+.sr-switch:hover .sr-switch-track { background: var(--banana-soft); }
+.sr-switch input:checked + .sr-switch-track { background: var(--banana); }
+.sr-switch input:checked + .sr-switch-track i { transform: translateX(20px); }
+.sr-switch input:focus-visible + .sr-switch-track { outline: none; box-shadow: var(--ring); }
+
+.sr-switch-text { display: grid; gap: 2px; min-width: 0; }
+.sr-switch-text b { font-size: var(--fs-sm); font-weight: 700; line-height: 1.25; }
+.sr-switch-text em {
+  font-style: normal;
+  font-size: var(--fs-xs);
+  line-height: 1.4;
+  color: var(--ink-soft);
+}
+
+/* The window a zoomed panel is drawn on, stated on the panel itself. */
+.sr-zoom-note {
+  margin: 10px 0 0;
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-faint);
+}
+
+@keyframes sr-menu-in {
+  from { opacity: 0; transform: translateY(-8px) scale(0.94); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes sr-opt-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: none; }
+}
+
+
+/* ============================================================ *
+ *  The two charts
+ * ============================================================ */
+
+/* Gating · quality · overall, in equal thirds. Equal is what matters: the
+   column width is set by the group NAMES, which are the same in all three, not
+   by how many bars a panel draws. Giving the one-series panel a narrow column
+   ran its names into each other. */
+.sr-plots {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(14px, 1.6vw, 24px);
+}
+@media (max-width: 1280px) {
+  .sr-plots { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .sr-plot--final { grid-column: 1 / -1; }
+}
+@media (max-width: 860px) {
+  .sr-plots { grid-template-columns: minmax(0, 1fr); }
+  .sr-plot--final { grid-column: auto; }
+}
+
+/* Panels pop in rather than only sliding: `.reveal` (base.css) supplies the
+   fade and the lift, this adds the scale and swaps the curve for the spring,
+   so a panel lands with a small overshoot. The panels are rebuilt on every
+   pick, so reveal.js re-registers them and the entrance replays. */
+.sr-plot.reveal { transform: translateY(22px) scale(0.955); }
+.sr-plot.reveal.is-in {
+  transform: none;
+  transition-duration: var(--dur-slow);
+  transition-timing-function: var(--ease-spring);
+}
+
+.sr-plot {
+  --plot-h: clamp(220px, 26vw, 320px);
+  /* A strip at the top of every plot that no bar may enter, so each bar's
+     number always has room above it. Bars, gridlines and tick labels are all
+     mapped into `--plot-h` minus this strip, so reserving it moves nothing
+     relative to anything else — the axis stays true. The alternative, letting
+     tall bars keep their numbers somewhere else, gave one group two different
+     label treatments side by side. */
+  --head: 22px;
+  margin: 0;
+  padding: clamp(18px, 2.2vw, 26px);
+  background: var(--surface);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-hard);
+}
+
+.sr-head { display: block; margin-bottom: clamp(14px, 1.8vw, 20px); }
+.sr-title {
+  margin: 0;
+  font-size: clamp(1.15rem, 1rem + 0.6vw, 1.5rem);
+  line-height: 1.15;
+}
+/* Two rows' worth of room whether the legend needs one or two, so the two
+   charts' plot areas start on the same line as each other. */
+.sr-legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: start;
+  gap: 6px 16px;
+  min-height: 3.1em;
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.sr-legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: var(--fs-xs);
+  color: var(--ink-mid);
+}
+.sr-legend i {
+  width: 11px;
+  height: 11px;
+  border-radius: 3px;
+  background: var(--c);
+  box-shadow: 0 0 0 1.5px var(--surface), 0 0 0 2.6px rgba(26, 24, 21, 0.16);
+}
+
+.sr-canvas {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 10px;
+}
+
+/* Sized from the longest tick label (`--axis-w`, set per panel in
+   strat-results.js). The ticks inside are absolutely positioned and so
+   contribute no width; without this the column collapses and the labels
+   hang off the left edge of the panel. The mono font and micro size live
+   here, not on the tick, so the `ch` the width is given in is the one the
+   labels are actually set in. */
+.sr-yaxis {
+  position: relative;
+  width: var(--axis-w, 4ch);
+  height: var(--plot-h);
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+}
+/* `--y` is the value's position in the window as a plain 0–1 fraction; the
+   calc below is the one place the label strip is subtracted. */
+.sr-tick {
+  position: absolute;
+  right: 0;
+  bottom: calc((100% - var(--head)) * var(--y));
+  transform: translateY(50%);
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-faint);
+  white-space: nowrap;
+}
+
+.sr-field { position: relative; min-width: 0; }
+.sr-grid { position: absolute; inset: 0 0 auto 0; height: var(--plot-h); pointer-events: none; }
+.sr-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc((100% - var(--head)) * var(--y));
+  height: 1px;
+  background: var(--line);
+}
+.sr-line.is-base { height: 1.5px; background: var(--line-strong); }
+
+.sr-groups {
+  position: relative;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  gap: clamp(8px, 1.6vw, 26px);
+}
+.sr-group { display: grid; grid-template-rows: var(--plot-h) auto; min-width: 0; }
+
+.sr-cluster {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  /* 2px of surface between neighbouring fills, so adjacent bars never
+     read as one wide bar. */
+  gap: 4px;
+  height: 100%;
+}
+
+.sr-slot {
+  position: relative;
+  flex: 1 1 0;
+  max-width: 38px;
+  min-width: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  cursor: default;
+}
+.sr-slot:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; border-radius: 4px; }
+/* A lone bar in a group gets a little more body, so the one-series panel does
+   not read as a row of pins. */
+.sr-plot--final .sr-slot { max-width: 46px; }
+
+/* Bars pop up from the baseline: the height is sprung rather than eased, so
+   each bar overshoots its value by a hair and settles back onto it, and the
+   `--d` slot index (set per panel in strat-results.js) walks the pop across
+   the group in reading order. The overshoot is deliberately small — a bar
+   that visibly sails past its own gridline would misreport the number. */
+.sr-fill {
+  display: block;
+  /* The zero start is what makes the growth an animation at all. Without it,
+     `var(--p)` is invalid until the script sets it a frame later, the height
+     computes to `auto`, and a transition out of `auto` does not run — the
+     bars simply appeared at full length. They now begin flat and rise. */
+  --p: 0;
+  height: calc((100% - var(--head)) * var(--p));
+  transform-origin: bottom;
+  background: var(--c);
+  border-radius: 4px 4px 0 0;
+  transition:
+    height var(--dur-slow) cubic-bezier(0.3, 1.22, 0.5, 1),
+    filter var(--dur-fast) var(--ease-out);
+  transition-delay: calc(var(--d, 0) * 32ms), 0ms;
+}
+.sr-slot:hover .sr-fill,
+.sr-slot:focus-visible .sr-fill { filter: brightness(1.08); }
+
+/* In a crowded panel the numbers stand on end. A bar there is narrower than
+   its own number laid flat, and dropping the labels instead — which this
+   used to do — left the busiest views, the ones with the most to compare,
+   as the only ones a reader could not read off the chart. The extra `--head`
+   set on those panels is what the turned labels stand in. */
+.sr-plot.is-crowded .sr-val {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  margin: 0 auto 4px;
+  font-size: 0.56rem;
+  letter-spacing: 0.01em;
+}
+
+/* The value rides in on its own bar, a beat behind it. */
+.sr.is-growing .sr-val {
+  animation: sr-val-in var(--dur) var(--ease-out) both;
+  animation-delay: calc(var(--d, 0) * 32ms + 260ms);
+}
+/* Same entrance, keeping the quarter-turn — an animation's transform would
+   otherwise replace the rotation and lay the label flat again. */
+.sr.is-growing .sr-plot.is-crowded .sr-val { animation-name: sr-val-in-turned; }
+@keyframes sr-val-in {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes sr-val-in-turned {
+  from { opacity: 0; transform: rotate(180deg) translateY(-5px); }
+  to { opacity: 1; transform: rotate(180deg); }
+}
+
+.sr-val {
+  display: block;
+  position: relative;
+  z-index: 1;
+  margin-bottom: 5px;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-style: normal;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+
+/* Names break between words only — a group called "Horizontal" is never
+   split into "Horizon / tal". */
+.sr-glabel { padding-top: 9px; text-align: center; }
+.sr-groups[data-cols='5'] .sr-glabel b,
+.sr-groups[data-cols='6'] .sr-glabel b,
+.sr-groups[data-cols='7'] .sr-glabel b { font-size: var(--fs-micro); }
+.sr-glabel b {
+  display: block;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--ink);
+  overflow-wrap: normal;
+  word-break: keep-all;
+  hyphens: none;
+}
+.sr-groups[data-cols='5'] .sr-glabel b,
+.sr-groups[data-cols='6'] .sr-glabel b,
+.sr-groups[data-cols='7'] .sr-glabel b { font-size: var(--fs-micro); }
+/* ---- The numbers, for anyone who wants them exactly ---- */
+.sr-table {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--line-strong);
+}
+/* The numbers table is wider than a phone; it scrolls on its own rather than
+   pushing the page sideways. */
+.sr-table-scroll { overflow-x: auto; }
+.sr-table summary {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+.sr-table summary:focus-visible { outline: none; box-shadow: var(--ring); border-radius: 4px; }
+.sr-table table {
+  width: 100%;
+  min-width: max-content;
+  margin-top: 10px;
+  border-collapse: collapse;
+  font-size: var(--fs-xs);
+  font-variant-numeric: tabular-nums;
+}
+.sr-table th,
+.sr-table td {
+  padding: 6px 8px;
+  text-align: right;
+  border-bottom: 1px solid var(--line);
+}
+.sr-table thead th {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 600;
+  color: var(--ink-soft);
+  vertical-align: bottom;
+}
+.sr-table tbody th { text-align: left; font-weight: 600; }
+/* The denominator is context for the count beside it, not a number to be
+   read across the column. */
+.sr-of { color: var(--ink-faint); }
+
+/* ---- Hover readout ---- */
+.sr-tip {
+  position: absolute;
+  z-index: 5;
+  min-width: 190px;
+  padding: 11px 13px;
+  background: var(--surface);
+  border: 1.5px solid var(--ink);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-md);
+  pointer-events: none;
+}
+.sr-tip[hidden] { display: none; }
+.sr-tip-head {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+}
+.sr-tip-head i { width: 10px; height: 10px; border-radius: 3px; background: var(--c); }
+.sr-tip-group {
+  display: block;
+  margin-top: 2px;
+  font-size: var(--fs-micro);
+  color: var(--ink-faint);
+}
+.sr-tip dl {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 2px 14px;
+  margin: 9px 0 0;
+  font-size: var(--fs-micro);
+}
+.sr-tip dt { color: var(--ink-soft); }
+.sr-tip dd {
+  margin: 0;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* ============================================================ *
+ *  Small print
+ * ============================================================ */
+
+/* One line, set as a highlight rather than a paragraph of small print —
+   it is the only thing a reader has to be told to read the charts. */
+.st-note {
+  display: block;
+  margin: clamp(26px, 3.4vw, 44px) auto 0;
+  width: fit-content;
+  max-width: min(100%, 74ch);
+  padding: 11px 20px;
+  background: var(--banana-soft);
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  box-shadow: 3px 3px 0 var(--banana);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  line-height: 1.45;
+  text-align: center;
+  color: var(--ink);
+}
+
+@media (max-width: 560px) {
+  .sr-bar { flex-direction: column; align-items: stretch; gap: 10px; }
+  .sr-menu { width: 100%; }
+  .sr-menu-btn { width: 100%; min-width: 0; }
+  .sr-menu-list { right: 0; }
+  .sr-switch { margin-left: 0; max-width: none; }
+  .sr-plot { --plot-h: 240px; }
+  .sr-groups { gap: 6px; }
+}
+
+/* Motion is decoration here, never information: the bars are already at
+   their values when it is turned off (the script paints them directly), so
+   the stagger, the spring and the entrances simply do not run. */
+@media (prefers-reduced-motion: reduce) {
+  .sr-fill { transition-delay: 0ms; }
+  .sr.is-growing .sr-val,
+  .sr-menu-list.is-open,
+  .sr-menu-list.is-open li { animation: none; }
+  .sr-plot.reveal { transform: none; }
+}
+
+/* ---------------------------------------------------------------------------
+   The section as it sits on animatebench.html.
+
+   These results were a page of their own until the two were merged, so the
+   block needs what a page gave it for free: a rule to separate it from the
+   benchmark panes above, and room to breathe. The tinted ground is the one
+   that marks a change of subject elsewhere on the site, so the reader reads it
+   as "new section" without being told.
+   --------------------------------------------------------------------------- */
+.st-band {
+  position: relative;
+  /* Deep-linked from the nav and the page footer, so it has to clear the fixed
+     site bar when it is scrolled to by anchor. */
+  scroll-margin-top: 84px;
+  margin-top: clamp(40px, 5vw, 72px);
+  padding-top: clamp(8px, 1vw, 16px);
+  border-top: 1.5px solid var(--line);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--banana-soft) 55%, transparent), transparent 340px);
+}
+/* The heading block is the old page head, so it keeps its own centring but
+   drops the top padding a standalone page needed. */
+.st-band .page-head { padding-top: clamp(30px, 4vw, 56px); padding-bottom: clamp(24px, 3vw, 40px); }
+
+@supports not (background: color-mix(in srgb, red 50%, blue)) {
+  .st-band { background: linear-gradient(180deg, var(--banana-soft), transparent 340px); }
+}

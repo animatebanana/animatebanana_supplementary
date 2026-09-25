@@ -1,0 +1,34 @@
+[
+ {
+  "t": 0.0,
+  "text": "The framework partitions an input image into regular patches, randomly masking out a large proportion of them."
+ },
+ {
+  "t": 3.0,
+  "text": "Only the remaining visible, unmasked patches are collected into a sequence for processing."
+ },
+ {
+  "t": 5.94,
+  "text": "These visible patches are passed through a Transformer encoder."
+ },
+ {
+  "t": 8.88,
+  "text": "The encoder outputs latent feature representations solely for the visible patches."
+ },
+ {
+  "t": 11.82,
+  "text": "The encoded features are combined with learnable mask tokens to restore the full patch sequence."
+ },
+ {
+  "t": 14.76,
+  "text": "This complete sequence is processed by a Transformer decoder."
+ },
+ {
+  "t": 17.7,
+  "text": "The decoder generates reconstructed pixel predictions for each patch location."
+ },
+ {
+  "t": 20.64,
+  "text": "The reconstructed patches form the target output image, which is optimized using a reconstruction loss against the original image."
+ }
+]

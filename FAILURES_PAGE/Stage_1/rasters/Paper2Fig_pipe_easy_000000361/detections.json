@@ -1,0 +1,92 @@
+{
+  "detected": 4,
+  "placeholders": 4,
+  "omitted": {},
+  "rejected": {},
+  "image_size": [
+    1069,
+    422
+  ],
+  "regions": [
+    {
+      "xml_id": "raster_lm_pretraining",
+      "box_2d": [
+        302,
+        68,
+        565,
+        207
+      ],
+      "bbox": [
+        72.69200000000001,
+        127.444,
+        221.283,
+        238.42999999999998
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "raster_wikipedia_logo",
+      "box_2d": [
+        705,
+        252,
+        892,
+        331
+      ],
+      "bbox": [
+        269.388,
+        297.51,
+        353.839,
+        376.424
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "raster_lm_fine_tuning",
+      "box_2d": [
+        306,
+        327,
+        599,
+        489
+      ],
+      "bbox": [
+        349.563,
+        129.132,
+        522.741,
+        252.778
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "raster_classifier_fine_tuning",
+      "box_2d": [
+        329,
+        587,
+        630,
+        742
+      ],
+      "bbox": [
+        627.5029999999999,
+        138.838,
+        793.198,
+        265.86
+      ],
+      "label": ""
+    }
+  ],
+  "replaced": [
+    "raster_lm_pretraining",
+    "raster_wikipedia_logo",
+    "raster_lm_fine_tuning",
+    "raster_classifier_fine_tuning"
+  ],
+  "provenance": {
+    "agent": "raster_integrator",
+    "backend": "openrouter_gemini37flash",
+    "model": "google-gemini-3.7-flash",
+    "prompt": null,
+    "style": "alpha_masking",
+    "target": "svg",
+    "config_fingerprint": "e41a2d04f1482fae",
+    "timestamp": "2026-08-28T20:31:41"
+  }
+}

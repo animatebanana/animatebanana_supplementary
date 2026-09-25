@@ -1,0 +1,38 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : The memory architecture is divided into User Space and Kernel Space.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : In User Space, execution begins at the Database Process.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : The process initiates an asynchronous write call.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : This is followed by a synchronous fsync operation.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : The write call routes into the Page Cache within Kernel Space and returns immediately, creating dirty pages.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : The Kernel Flusher Thread periodically handles writebacks from the Page Cache.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : Requests pass into the I/O Queue, while fsync waits for disk completion.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 3.999s
+Narration   : At the bottom is Persistent Storage, containing the Block Device.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 4.499s
+Narration   : Finally, enqueued operations are flushed from the I/O Queue down to the Block Device.
+--------------------------------------------------------------------------------

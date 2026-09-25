@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+  <title>Editability — AnimateBanana</title>
+  <link rel="stylesheet" href="assets/fonts/fonts.css">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css?v=3">
+  <link rel="stylesheet" href="assets/css/components/site-nav.css?v=5">
+  <link rel="stylesheet" href="assets/css/components/doodle-field.css">
+  <link rel="stylesheet" href="assets/css/components/edit-diff.css?v=12">
+  <style>
+    /* the windows want more room than the standard page column */
+    .ed-page { max-width: 1560px; margin: 0 auto; padding: 0 clamp(14px, 2vw, 34px) 60px; }
+  </style>
+</head>
+<body>
+  <site-nav current="editability" back="index.html" back-label="Overview"></site-nav>
+
+  <div class="ed-page">
+    <div class="page-head">
+      <doodle-field density="sparse"></doodle-field>
+      <div class="kicker">Appendix &middot; 06</div>
+      <h1>Editability</h1>
+    </div>
+
+    <edit-diff src="data/editability.json"></edit-diff>
+
+    <footer class="site-footer">
+      <span>Last updated 24 September 2026 (AOE)</span>
+    </footer>
+  </div>
+
+  <script type="module" src="assets/js/components/site-nav.js?v=5"></script>
+  <script type="module" src="assets/js/components/doodle-field.js"></script>
+  <script type="module" src="assets/js/components/edit-diff.js?v=12"></script>
+  <script type="module" src="assets/js/lib/no-copy.js"></script>
+  <script type="module" src="assets/js/lib/reveal.js?v=6"></script>
+</body>
+</html>

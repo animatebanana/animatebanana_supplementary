@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+  <title>Evaluation — AnimateBanana</title>
+  <link rel="stylesheet" href="assets/fonts/fonts.css">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css?v=3">
+  <link rel="stylesheet" href="assets/css/components/site-nav.css?v=5">
+  <link rel="stylesheet" href="assets/css/components/doodle-field.css">
+  <link rel="stylesheet" href="assets/css/components/eval-lab.css?v=1">
+  <style>
+    /* the scheme wants three columns, which is wider than the standard page column */
+    .page.ev-widepage { max-width: 1560px; }
+    .ev-hero { margin: 0 0 clamp(28px, 4vw, 44px); }
+    .ev-hero-svg { display: block; width: 100%; height: auto; border: 2px solid var(--ink); border-radius: 18px; box-shadow: var(--shadow-hard); background: #FFFEF9; }
+    .ev-hero figcaption { margin-top: 10px; font-size: 13px; color: var(--ink-soft); text-align: center; }
+  </style>
+</head>
+<body>
+  <site-nav current="evaluation" back="index.html" back-label="Overview"></site-nav>
+
+  <div class="page ev-widepage">
+    <div class="page-head">
+      <doodle-field density="sparse"></doodle-field>
+      <div class="kicker">Appendix · 06</div>
+      <h1>Evaluation</h1>
+    </div>
+    <figure class="ev-hero">
+      <object type="image/svg+xml" data="assets/evaluation/evaluation-scheme.svg?v=2"
+              class="ev-hero-svg" aria-label="The evaluation scheme, worked on a real run">
+        <img src="assets/evaluation/evaluation-scheme.svg?v=2" alt="The evaluation scheme">
+      </object>
+      <figcaption>Validity, narrative quality and aggregation — worked on a real run. Press play on the film reel.</figcaption>
+    </figure>
+
+    <section class="ev-section">
+      <div class="kicker">Walkthrough</div>
+      <h2>Evaluation walk through</h2>
+      <p>Pick a baseline and a sample, then press Run. Every band, rationale and score below is
+        the judge's own output for that exact run.</p>
+      <eval-lab src="data/evaluation_runs.json"></eval-lab>
+    </section>
+
+    <footer class="site-footer">
+      <span>Last updated 24 September 2026 (AOE)</span>
+    </footer>
+  </div>
+
+  <script type="module" src="assets/js/components/site-nav.js?v=5"></script>
+  <script type="module" src="assets/js/components/doodle-field.js"></script>
+  <script type="module" src="assets/js/components/eval-lab.js?v=1"></script>
+  <script type="module" src="assets/js/lib/reveal.js"></script>
+</body>
+</html>

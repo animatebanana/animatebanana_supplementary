@@ -1,0 +1,376 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 230" width="100%" height="100%">
+  <defs>
+    <!-- Arrowhead markers -->
+    <marker id="arrow-black" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#000000" />
+    </marker>
+    <marker id="arrow-gray" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M 0 2 L 6 5 L 0 8 z" fill="#666666" />
+    </marker>
+
+    <style>
+      /* Base Ghost Layer */
+      #title_main,
+      #node_watermark, #node_clean_image, #label_watermark, #label_clean_image,
+      #edge_watermark_to_enc, #edge_clean_to_enc,
+      #block_encoder, #bg_encoder, #icon_lock, #group_trapezoid,
+      #label_encoder_top, #label_encoder_bottom_1, #label_encoder_bottom_2,
+      #node_iw, #label_iw, #node_residual, #icon_trash,
+      #edge_enc_to_iw, #edge_enc_to_res, #edge_res_to_trash,
+      #edge_fork_top, #edge_fork_bottom,
+      #block_top_unet, #bg_top_unet, #node_top_xt, #label_top_xt,
+      #group_top_unet_shape, #node_top_x0, #label_top_x0, #label_top_unet, #edge_top_skip,
+      #block_bottom_unet, #bg_bottom_unet, #node_vector_v, #node_bottom_xt, #label_bottom_xt,
+      #group_bottom_unet_shape, #node_bottom_x0, #label_bottom_x0, #label_bottom_unet,
+      #edge_bottom_skip, #edge_inj_distrib {
+        opacity: 0.15;
+      }
+
+      /* Animation bindings */
+      #title_main {
+        animation: anim_ts1 25s infinite;
+      }
+
+      #node_watermark, #node_clean_image, #label_watermark, #label_clean_image,
+      #edge_watermark_to_enc, #edge_clean_to_enc {
+        animation: anim_ts2 25s infinite;
+      }
+
+      /* Encoder container and persistent header/title persist across T3 & T4 */
+      #block_encoder, #bg_encoder, #label_encoder_top, #label_encoder_bottom_1, #label_encoder_bottom_2 {
+        animation: anim_encoder_persist 25s infinite;
+      }
+
+      #icon_lock, #group_trapezoid {
+        animation: anim_ts3 25s infinite;
+      }
+
+      #node_iw, #label_iw, #node_residual, #icon_trash,
+      #edge_enc_to_iw, #edge_enc_to_res, #edge_res_to_trash {
+        animation: anim_ts4 25s infinite;
+      }
+
+      #edge_fork_top, #edge_fork_bottom {
+        animation: anim_ts5 25s infinite;
+      }
+
+      #block_top_unet, #bg_top_unet, #node_top_xt, #label_top_xt,
+      #group_top_unet_shape, #node_top_x0, #label_top_x0, #label_top_unet, #edge_top_skip {
+        animation: anim_ts6 25s infinite;
+      }
+
+      #block_bottom_unet, #bg_bottom_unet, #node_vector_v, #node_bottom_xt, #label_bottom_xt,
+      #group_bottom_unet_shape, #node_bottom_x0, #label_bottom_x0, #label_bottom_unet,
+      #edge_bottom_skip, #edge_inj_distrib {
+        animation: anim_ts7 25s infinite;
+      }
+
+      /* Narration Subtitle Animations */
+      .narr-text {
+        opacity: 0;
+      }
+      #narr_ts1 { animation: narr_anim_ts1 25s infinite; }
+      #narr_ts2 { animation: narr_anim_ts2 25s infinite; }
+      #narr_ts3 { animation: narr_anim_ts3 25s infinite; }
+      #narr_ts4 { animation: narr_anim_ts4 25s infinite; }
+      #narr_ts5 { animation: narr_anim_ts5 25s infinite; }
+      #narr_ts6 { animation: narr_anim_ts6 25s infinite; }
+      #narr_ts7 { animation: narr_anim_ts7 25s infinite; }
+
+      /* Keyframes for Diagram Elements (Discrete Snapping) */
+      @keyframes anim_ts1 {
+        0%       { opacity: 1.0; }
+        14.285%  { opacity: 1.0; }
+        14.286%  { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+
+      @keyframes anim_ts2 {
+        0%       { opacity: 0.15; }
+        14.285%  { opacity: 0.15; }
+        14.286%  { opacity: 1.0; }
+        28.570%  { opacity: 1.0; }
+        28.571%  { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+
+      @keyframes anim_ts3 {
+        0%       { opacity: 0.15; }
+        28.570%  { opacity: 0.15; }
+        28.571%  { opacity: 1.0; }
+        42.856%  { opacity: 1.0; }
+        42.857%  { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+
+      @keyframes anim_encoder_persist {
+        0%       { opacity: 0.15; }
+        28.570%  { opacity: 0.15; }
+        28.571%  { opacity: 1.0; }
+        57.142%  { opacity: 1.0; }
+        57.143%  { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+
+      @keyframes anim_ts4 {
+        0%       { opacity: 0.15; }
+        42.856%  { opacity: 0.15; }
+        42.857%  { opacity: 1.0; }
+        57.142%  { opacity: 1.0; }
+        57.143%  { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+
+      @keyframes anim_ts5 {
+        0%       { opacity: 0.15; }
+        57.142%  { opacity: 0.15; }
+        57.143%  { opacity: 1.0; }
+        71.428%  { opacity: 1.0; }
+        71.429%  { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+
+      @keyframes anim_ts6 {
+        0%       { opacity: 0.15; }
+        71.428%  { opacity: 0.15; }
+        71.429%  { opacity: 1.0; }
+        85.713%  { opacity: 1.0; }
+        85.714%  { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+
+      @keyframes anim_ts7 {
+        0%       { opacity: 0.15; }
+        85.713%  { opacity: 0.15; }
+        85.714%  { opacity: 1.0; }
+        100%     { opacity: 1.0; }
+      }
+
+      /* Narration Keyframes */
+      @keyframes narr_anim_ts1 {
+        0%       { opacity: 1; }
+        14.285%  { opacity: 1; }
+        14.286%  { opacity: 0; }
+        100%     { opacity: 0; }
+      }
+
+      @keyframes narr_anim_ts2 {
+        0%       { opacity: 0; }
+        14.285%  { opacity: 0; }
+        14.286%  { opacity: 1; }
+        28.570%  { opacity: 1; }
+        28.571%  { opacity: 0; }
+        100%     { opacity: 0; }
+      }
+
+      @keyframes narr_anim_ts3 {
+        0%       { opacity: 0; }
+        28.570%  { opacity: 0; }
+        28.571%  { opacity: 1; }
+        42.856%  { opacity: 1; }
+        42.857%  { opacity: 0; }
+        100%     { opacity: 0; }
+      }
+
+      @keyframes narr_anim_ts4 {
+        0%       { opacity: 0; }
+        42.856%  { opacity: 0; }
+        42.857%  { opacity: 1; }
+        57.142%  { opacity: 1; }
+        57.143%  { opacity: 0; }
+        100%     { opacity: 0; }
+      }
+
+      @keyframes narr_anim_ts5 {
+        0%       { opacity: 0; }
+        57.142%  { opacity: 0; }
+        57.143%  { opacity: 1; }
+        71.428%  { opacity: 1; }
+        71.429%  { opacity: 0; }
+        100%     { opacity: 0; }
+      }
+
+      @keyframes narr_anim_ts6 {
+        0%       { opacity: 0; }
+        71.428%  { opacity: 0; }
+        71.429%  { opacity: 1; }
+        85.713%  { opacity: 1; }
+        85.714%  { opacity: 0; }
+        100%     { opacity: 0; }
+      }
+
+      @keyframes narr_anim_ts7 {
+        0%       { opacity: 0; }
+        85.713%  { opacity: 0; }
+        85.714%  { opacity: 1; }
+        100%     { opacity: 1; }
+      }
+    </style>
+  </defs>
+
+  <!-- Global Canvas Background -->
+  <rect id="bg_canvas" data-id="bg_canvas" data-class="standalone_node" data-parent="root" x="0" y="0" width="460" height="180" rx="10" ry="10" fill="#f4f8fc" />
+
+  <!-- Bottom Main Title -->
+  <text id="title_main" data-id="title_main" data-class="text_node" data-parent="root" x="230" y="168" font-family="sans-serif" font-size="13" font-weight="bold" font-style="italic" fill="#df6919" text-anchor="middle">Diffusion Model Watermark Injection Stage</text>
+
+  <!-- ==================== LEFT INPUT NODES ==================== -->
+  <!-- Watermark W -->
+  <g id="node_watermark" data-id="node_watermark" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch01281/crop_node_watermark.png" xlink:href="../../rasters/CVPR_2025_arch01281/crop_node_watermark.png" x="18" y="10" width="45" height="45" preserveAspectRatio="xMidYMid meet" /></g>
+  <text id="label_watermark" data-id="label_watermark" data-class="text_node" data-parent="root" x="40.5" y="68" font-family="sans-serif" font-size="9" fill="#000000" text-anchor="middle">Watermark <tspan font-style="italic">W</tspan></text>
+
+  <!-- Clean image I -->
+  <g id="node_clean_image" data-id="node_clean_image" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch01281/crop_node_clean_image.png" xlink:href="../../rasters/CVPR_2025_arch01281/crop_node_clean_image.png" x="18" y="78" width="45" height="45" preserveAspectRatio="xMidYMid meet" /></g>
+  <text id="label_clean_image" data-id="label_clean_image" data-class="text_node" data-parent="root" x="40.5" y="136" font-family="sans-serif" font-size="9" fill="#000000" text-anchor="middle">Clean image <tspan font-style="italic">I</tspan></text>
+
+  <!-- ==================== FREQUENCY WATERMARK ENCODER BLOCK ==================== -->
+  <g id="block_encoder" data-id="block_encoder" data-class="block" data-parent="root">
+    <!-- Block Container -->
+    <rect id="bg_encoder" data-id="bg_encoder" data-class="child_node" data-parent="block_encoder" x="84" y="8" width="130" height="110" rx="10" fill="#ffffff" stroke="#333333" stroke-width="1" stroke-dasharray="3,3" />
+
+    <!-- Lock Icon & Header -->
+    <path id="icon_lock" data-id="icon_lock" data-class="child_node" data-parent="block_encoder" d="M 91 14 C 91 11.8 92.8 10 95 10 C 97.2 10 99 11.8 99 14 L 99 15 L 100 15 C 100.5 15 101 15.5 101 16 L 101 21 C 101 21.5 100.5 22 100 22 L 90 22 C 89.5 22 89 21.5 89 21 L 89 16 C 89 15.5 89.5 15 90 15 L 91 15 Z M 92.5 14 L 97.5 14 C 97.5 12.6 96.4 11.5 95 11.5 C 93.6 11.5 92.5 12.6 92.5 14 Z" fill="#007acc" />
+    <text id="label_encoder_top" data-id="label_encoder_top" data-class="text_node" data-parent="block_encoder" x="103" y="20" font-family="sans-serif" font-size="8.5" font-weight="bold" fill="#000000">Pre-trained Encoder</text>
+
+    <!-- Encoder Funnel Trapezoid -->
+    <g id="group_trapezoid" data-id="group_trapezoid" data-class="composite_whole" data-parent="block_encoder">
+      <path id="shape_trapezoid" data-id="shape_trapezoid" data-class="composite_part" data-parent="group_trapezoid" d="M 92 31 L 143 43 L 143 97 L 92 109 Z" fill="#fff9eb" stroke="#222222" stroke-width="1" />
+      
+      <!-- Sub-modules inside funnel -->
+      <g id="node_dwt" data-id="node_dwt" data-class="composite_part" data-parent="group_trapezoid">
+        <rect x="96" y="45" width="43" height="13" rx="1" fill="#e2f0d9" stroke="#70ad47" stroke-width="0.8" />
+        <text x="117.5" y="55" font-family="sans-serif" font-size="7.5" font-weight="bold" fill="#2b542c" text-anchor="middle">DWT</text>
+      </g>
+      <g id="node_inn" data-id="node_inn" data-class="composite_part" data-parent="group_trapezoid">
+        <rect x="96" y="63" width="43" height="13" rx="1" fill="#fff2cc" stroke="#d6b656" stroke-width="0.8" />
+        <text x="117.5" y="73" font-family="sans-serif" font-size="7.5" font-weight="bold" fill="#66512c" text-anchor="middle">INN</text>
+      </g>
+      <g id="node_idwt" data-id="node_idwt" data-class="composite_part" data-parent="group_trapezoid">
+        <rect x="96" y="81" width="43" height="13" rx="1" fill="#e2f0d9" stroke="#70ad47" stroke-width="0.8" />
+        <text x="117.5" y="91" font-family="sans-serif" font-size="7.5" font-weight="bold" fill="#2b542c" text-anchor="middle">IDWT</text>
+      </g>
+    </g>
+
+    <!-- Intermediate Output: Watermarked Image Iw -->
+    <g id="node_iw" data-id="node_iw" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch01281/crop_node_iw.png" xlink:href="../../rasters/CVPR_2025_arch01281/crop_node_iw.png" x="160" y="31" width="41" height="41" preserveAspectRatio="xMidYMid meet" /></g>
+    <text id="label_iw" data-id="label_iw" data-class="child_node" data-parent="block_encoder" x="180.5" y="80" font-family="sans-serif" font-size="8.5" fill="#000000" text-anchor="middle"><tspan font-style="italic">I</tspan><tspan font-size="0.65em" baseline-shift="sub">w</tspan></text>
+
+    <!-- Intermediate Output: Residual Noise -->
+    <g id="node_residual" data-id="node_residual" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch01281/crop_node_residual.png" xlink:href="../../rasters/CVPR_2025_arch01281/crop_node_residual.png" x="161" y="85" width="22" height="20" preserveAspectRatio="xMidYMid meet" /></g>
+
+    <!-- Trash Icon -->
+    <path id="icon_trash" data-id="icon_trash" data-class="child_node" data-parent="block_encoder" d="M 194 95 L 199 95 L 199 94 L 194 94 Z M 194.5 96 L 198.5 96 L 198 103 C 198 103.5 197.5 104 197 104 L 196 104 C 195.5 104 195 103.5 195 103 Z" fill="#337ab7" />
+  </g>
+
+  <!-- Encoder External Label -->
+  <text id="label_encoder_bottom_1" data-id="label_encoder_bottom_1" data-class="text_node" data-parent="root" x="149" y="128" font-family="sans-serif" font-size="9.5" fill="#000000" text-anchor="middle">Frequency Watermark</text>
+  <text id="label_encoder_bottom_2" data-id="label_encoder_bottom_2" data-class="text_node" data-parent="root" x="149" y="140" font-family="sans-serif" font-size="9.5" fill="#000000" text-anchor="middle">Encoder</text>
+
+  <!-- ==================== TOP DENOISING UNET BLOCK ==================== -->
+  <g id="block_top_unet" data-id="block_top_unet" data-class="block" data-parent="root">
+    <rect id="bg_top_unet" data-id="bg_top_unet" data-class="child_node" data-parent="block_top_unet" x="238" y="5" width="215" height="66" rx="10" fill="#ffffff" stroke="#555555" stroke-width="1" stroke-dasharray="3,3" />
+
+    <!-- Noisy Input XT -->
+    <g id="node_top_xt" data-id="node_top_xt" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch01281/crop_node_top_xt.png" xlink:href="../../rasters/CVPR_2025_arch01281/crop_node_top_xt.png" x="244" y="9" width="41" height="41" preserveAspectRatio="xMidYMid meet" /></g>
+    <text id="label_top_xt" data-id="label_top_xt" data-class="child_node" data-parent="block_top_unet" x="264.5" y="59" font-family="sans-serif" font-size="9" fill="#000000" text-anchor="middle"><tspan font-style="italic">X</tspan><tspan font-size="0.65em" baseline-shift="sub">T</tspan></text>
+
+    <!-- Top Orange U-Net -->
+    <g id="group_top_unet_shape" data-id="group_top_unet_shape" data-class="composite_whole" data-parent="block_top_unet">
+      <path id="shape_top_unet_left" data-id="shape_top_unet_left" data-class="composite_part" data-parent="group_top_unet_shape" d="M 293 8 L 339 16 L 339 44 L 293 52 Z" fill="#ffd966" stroke="#f4b183" stroke-width="0.8" />
+      <path id="shape_top_unet_right" data-id="shape_top_unet_right" data-class="composite_part" data-parent="group_top_unet_shape" d="M 351 16 L 398 8 L 398 52 L 351 44 Z" fill="#ffd966" stroke="#f4b183" stroke-width="0.8" />
+    </g>
+    <text id="label_top_unet" data-id="label_top_unet" data-class="text_node" data-parent="block_top_unet" x="345.5" y="61" font-family="sans-serif" font-size="8.5" fill="#000000" text-anchor="middle">Denoising U-Net</text>
+
+    <!-- Output Clean Image X0 -->
+    <g id="node_top_x0" data-id="node_top_x0" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch01281/crop_node_top_x0.png" xlink:href="../../rasters/CVPR_2025_arch01281/crop_node_top_x0.png" x="405" y="9" width="41" height="41" preserveAspectRatio="xMidYMid meet" /></g>
+    <text id="label_top_x0" data-id="label_top_x0" data-class="child_node" data-parent="block_top_unet" x="425.5" y="59" font-family="sans-serif" font-size="9" fill="#000000" text-anchor="middle"><tspan font-style="italic">X</tspan><tspan font-size="0.65em" baseline-shift="sub">0</tspan></text>
+  </g>
+
+  <!-- ==================== BOTTOM DENOISING UNET BLOCK ==================== -->
+  <g id="block_bottom_unet" data-id="block_bottom_unet" data-class="block" data-parent="root">
+    <rect id="bg_bottom_unet" data-id="bg_bottom_unet" data-class="child_node" data-parent="block_bottom_unet" x="238" y="74" width="215" height="66" rx="10" fill="#ffffff" stroke="#555555" stroke-width="1" stroke-dasharray="3,3" />
+
+    <!-- Trigger Vector ["V"] -->
+    <text id="node_vector_v" data-id="node_vector_v" data-class="child_node" data-parent="block_bottom_unet" x="264.5" y="86" font-family="sans-serif" font-size="9.5" font-weight="bold" fill="#2e7d32" text-anchor="middle">[&quot;<tspan font-style="italic">V</tspan>&quot;]</text>
+
+    <!-- Noisy Input XT -->
+    <g id="node_bottom_xt" data-id="node_bottom_xt" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch01281/crop_node_bottom_xt.png" xlink:href="../../rasters/CVPR_2025_arch01281/crop_node_bottom_xt.png" x="244" y="90" width="41" height="41" preserveAspectRatio="xMidYMid meet" /></g>
+    <text id="label_bottom_xt" data-id="label_bottom_xt" data-class="child_node" data-parent="block_bottom_unet" x="264.5" y="140" font-family="sans-serif" font-size="9" fill="#000000" text-anchor="middle"><tspan font-style="italic">X</tspan><tspan font-size="0.65em" baseline-shift="sub">T</tspan></text>
+
+    <!-- Bottom Blue U-Net -->
+    <g id="group_bottom_unet_shape" data-id="group_bottom_unet_shape" data-class="composite_whole" data-parent="block_bottom_unet">
+      <path id="shape_bottom_unet_left" data-id="shape_bottom_unet_left" data-class="composite_part" data-parent="group_bottom_unet_shape" d="M 293 88 L 343 96 L 343 124 L 293 132 Z" fill="#9dc3e6" stroke="#41719c" stroke-width="0.8" />
+      <path id="shape_bottom_unet_right" data-id="shape_bottom_unet_right" data-class="composite_part" data-parent="group_bottom_unet_shape" d="M 349 96 L 398 88 L 398 132 L 349 124 Z" fill="#9dc3e6" stroke="#41719c" stroke-width="0.8" />
+
+      <!-- Feature Injection Blocks -->
+      <rect id="node_inj_1" data-id="node_inj_1" data-class="composite_part" data-parent="group_bottom_unet_shape" x="301" y="104" width="10" height="10" fill="#2e75b6" stroke="#1f4e79" stroke-width="0.6" />
+      <rect id="node_inj_2" data-id="node_inj_2" data-class="composite_part" data-parent="group_bottom_unet_shape" x="321" y="106" width="10" height="10" fill="#2e75b6" stroke="#1f4e79" stroke-width="0.6" />
+      <rect id="node_inj_3" data-id="node_inj_3" data-class="composite_part" data-parent="group_bottom_unet_shape" x="360" y="106" width="10" height="10" fill="#2e75b6" stroke="#1f4e79" stroke-width="0.6" />
+      <rect id="node_inj_4" data-id="node_inj_4" data-class="composite_part" data-parent="group_bottom_unet_shape" x="380" y="104" width="10" height="10" fill="#2e75b6" stroke="#1f4e79" stroke-width="0.6" />
+    </g>
+    <text id="label_bottom_unet" data-id="label_bottom_unet" data-class="text_node" data-parent="block_bottom_unet" x="345.5" y="141" font-family="sans-serif" font-size="8.5" fill="#000000" text-anchor="middle">Denoising U-Net</text>
+
+    <!-- Output Clean Image X0 -->
+    <g id="node_bottom_x0" data-id="node_bottom_x0" data-class="raster_node"><image href="../../rasters/CVPR_2025_arch01281/crop_node_bottom_x0.png" xlink:href="../../rasters/CVPR_2025_arch01281/crop_node_bottom_x0.png" x="405" y="90" width="41" height="41" preserveAspectRatio="xMidYMid meet" /></g>
+    <text id="label_bottom_x0" data-id="label_bottom_x0" data-class="child_node" data-parent="block_bottom_unet" x="425.5" y="140" font-family="sans-serif" font-size="9" fill="#000000" text-anchor="middle"><tspan font-style="italic">X</tspan><tspan font-size="0.65em" baseline-shift="sub">0</tspan></text>
+  </g>
+
+  <!-- ==================== EDGES & CONNECTIONS ==================== -->
+  <!-- Left Inputs to Encoder Funnel -->
+  <path id="edge_watermark_to_enc" data-id="edge_watermark_to_enc" data-class="edge" data-source="node_watermark" data-target="group_trapezoid" d="M 64 32 L 90 32" fill="none" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow-black)" />
+  <path id="edge_clean_to_enc" data-id="edge_clean_to_enc" data-class="edge" data-source="node_clean_image" data-target="group_trapezoid" d="M 64 100 L 90 100" fill="none" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow-black)" />
+
+  <!-- Funnel to Intermediate Outputs -->
+  <path id="edge_enc_to_iw" data-id="edge_enc_to_iw" data-class="edge" data-source="group_trapezoid" data-target="node_iw" d="M 144 51 L 157 51" fill="none" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow-black)" />
+  <path id="edge_enc_to_res" data-id="edge_enc_to_res" data-class="edge" data-source="group_trapezoid" data-target="node_residual" d="M 144 95 L 158 95" fill="none" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow-black)" />
+  <path id="edge_res_to_trash" data-id="edge_res_to_trash" data-class="edge" data-source="node_residual" data-target="icon_trash" d="M 184 94 Q 189 94 192 98" fill="none" stroke="#337ab7" stroke-width="1" marker-end="url(#arrow-gray)" />
+
+  <!-- Fork Edge from Encoder to Diffusion Stages -->
+  <path id="edge_fork_top" data-id="edge_fork_top" data-class="edge" data-source="block_encoder" data-target="block_top_unet" d="M 215 67 L 227 67 L 227 30 L 236 30" fill="none" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow-black)" />
+  <path id="edge_fork_bottom" data-id="edge_fork_bottom" data-class="edge" data-source="block_encoder" data-target="block_bottom_unet" d="M 215 67 L 227 67 L 227 110 L 236 110" fill="none" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow-black)" />
+
+  <!-- Skip Connections inside U-Nets -->
+  <path id="edge_top_skip" data-id="edge_top_skip" data-class="edge" data-source="shape_top_unet_left" data-target="shape_top_unet_right" d="M 296 47 L 396 47" fill="none" stroke="#444444" stroke-width="0.8" stroke-dasharray="2,2" marker-start="url(#arrow-black)" marker-end="url(#arrow-black)" />
+  <path id="edge_bottom_skip" data-id="edge_bottom_skip" data-class="edge" data-source="shape_bottom_unet_left" data-target="shape_bottom_unet_right" d="M 296 127 L 396 127" fill="none" stroke="#444444" stroke-width="0.8" stroke-dasharray="2,2" marker-start="url(#arrow-black)" marker-end="url(#arrow-black)" />
+
+  <!-- Conditioning Distribution Lines from ["V"] -->
+  <path id="edge_inj_distrib" data-id="edge_inj_distrib" data-class="edge" data-source="node_vector_v" data-target="group_bottom_unet_shape" d="M 288 83 L 385 83 M 306 83 L 306 104 M 326 83 L 326 106 M 365 83 L 365 106 M 385 83 L 385 104" fill="none" stroke="#b0b0b0" stroke-width="1.2" />
+
+  <!-- Dynamic Narration Subtitle Banner -->
+  <g id="narration_banner">
+    <text id="narr_ts1" class="narr-text" x="50%" y="196" font-family="sans-serif" font-size="8.5" fill="#1e293b" text-anchor="middle">
+      <tspan x="50%" dy="0">The CoprGuard framework begins with the diffusion model watermark</tspan>
+      <tspan x="50%" dy="1.25em">injection stage to safeguard image copyright.</tspan>
+    </text>
+
+    <text id="narr_ts2" class="narr-text" x="50%" y="196" font-family="sans-serif" font-size="8.5" fill="#1e293b" text-anchor="middle">
+      <tspan x="50%" dy="0">A watermark image and a clean protected image are first supplied</tspan>
+      <tspan x="50%" dy="1.25em">as inputs to the watermark encoder.</tspan>
+    </text>
+
+    <text id="narr_ts3" class="narr-text" x="50%" y="196" font-family="sans-serif" font-size="8.5" fill="#1e293b" text-anchor="middle">
+      <tspan x="50%" dy="0">A frozen pre-trained encoder employs discrete wavelet transforms and an invertible</tspan>
+      <tspan x="50%" dy="1.25em">neural network to embed the watermark into high-frequency sub-bands.</tspan>
+    </text>
+
+    <text id="narr_ts4" class="narr-text" x="50%" y="196" font-family="sans-serif" font-size="8.5" fill="#1e293b" text-anchor="middle">
+      <tspan x="50%" dy="0">Following the inverse transform, the encoder produces the watermarked image</tspan>
+      <tspan x="50%" dy="1.25em">while discarding high-frequency residual artifacts.</tspan>
+    </text>
+
+    <text id="narr_ts5" class="narr-text" x="50%" y="196" font-family="sans-serif" font-size="8.5" fill="#1e293b" text-anchor="middle">
+      <tspan x="50%" dy="0">These watermarked images are then incorporated into</tspan>
+      <tspan x="50%" dy="1.25em">diffusion model training datasets.</tspan>
+    </text>
+
+    <text id="narr_ts6" class="narr-text" x="50%" y="196" font-family="sans-serif" font-size="8.5" fill="#1e293b" text-anchor="middle">
+      <tspan x="50%" dy="0">In standard diffusion models, the denoising U-Net learns to reconstruct the watermarked</tspan>
+      <tspan x="50%" dy="1.25em">image from noise, absorbing its underlying frequency properties.</tspan>
+    </text>
+
+    <text id="narr_ts7" class="narr-text" x="50%" y="196" font-family="sans-serif" font-size="8.5" fill="#1e293b" text-anchor="middle">
+      <tspan x="50%" dy="0">In text-conditioned diffusion models, conditioning vectors guide the network during training,</tspan>
+      <tspan x="50%" dy="1.25em">embedding identifiable watermark signatures directly into the model.</tspan>
+    </text>
+  </g>
+</svg>

@@ -1,0 +1,182 @@
+[
+ {
+  "t": 0.0,
+  "text": "The pipeline begins with the input referring expression describing the target object attributes."
+ },
+ {
+  "t": 2.2,
+  "text": "Simultaneously, the input query image containing multiple candidate objects is provided."
+ },
+ {
+  "t": 4.4,
+  "text": "Both inputs are passed through the backbone and feature enhancer to extract cross-modal representations."
+ },
+ {
+  "t": 6.6,
+  "text": "This produces multi-scale visual features across four pyramid levels."
+ },
+ {
+  "t": 8.8,
+  "text": "The visual features are projected via a mapping layer into the text embedding space."
+ },
+ {
+  "t": 11.0,
+  "text": "Meanwhile, the corresponding text feature representation is retrieved."
+ },
+ {
+  "t": 13.2,
+  "text": "The specific referring expression feature is selected."
+ },
+ {
+  "t": 15.4,
+  "text": "It is element-wise multiplied with the projected visual features."
+ },
+ {
+  "t": 17.6,
+  "text": "This yields image-text similarity features highlighting regions matching the expression."
+ },
+ {
+  "t": 19.8,
+  "text": "The similarity features and multi-scale visual features feed into the U-shaped contextual attribute density estimator."
+ },
+ {
+  "t": 22.0,
+  "text": "The estimator predicts an attribute density map for the query."
+ },
+ {
+  "t": 24.2,
+  "text": "The prediction is compared against the ground-truth density map."
+ },
+ {
+  "t": 26.4,
+  "text": "A density loss supervises the estimator to learn accurate contextual attribute distributions."
+ },
+ {
+  "t": 28.6,
+  "text": "Intermediate representations from the estimator form the multi-scale contextual attribute density features."
+ },
+ {
+  "t": 30.8,
+  "text": "Next, the spatial attention branch of the attention module enhances foreground attribute regions."
+ },
+ {
+  "t": 33.0,
+  "text": "The multi-scale density features enter spatial pooling."
+ },
+ {
+  "t": 35.2,
+  "text": "Two-dimensional max pooling captures peak attribute activations across channels."
+ },
+ {
+  "t": 37.4,
+  "text": "Average pooling extracts mean spatial activation statistics."
+ },
+ {
+  "t": 39.6,
+  "text": "Both pooled maps are concatenated along the channel dimension."
+ },
+ {
+  "t": 41.8,
+  "text": "A convolutional layer processes the merged spatial statistics."
+ },
+ {
+  "t": 44.0,
+  "text": "A sigmoid function produces the spatial attention map."
+ },
+ {
+  "t": 46.2,
+  "text": "Processing continues in the channel attention branch."
+ },
+ {
+  "t": 48.4,
+  "text": "Visual features from the backbone enter this stage."
+ },
+ {
+  "t": 50.6,
+  "text": "They are modulated by the spatial attention map."
+ },
+ {
+  "t": 52.8,
+  "text": "One-dimensional max pooling summarizes channel-wise extremes across spatial locations."
+ },
+ {
+  "t": 55.0,
+  "text": "One-dimensional average pooling captures overall channel distributions."
+ },
+ {
+  "t": 57.2,
+  "text": "A shared multi-layer perceptron transforms the pooled descriptors."
+ },
+ {
+  "t": 59.4,
+  "text": "The outputs are summed together."
+ },
+ {
+  "t": 61.6,
+  "text": "A sigmoid activation computes the channel attention weights."
+ },
+ {
+  "t": 63.8,
+  "text": "These weights scale the spatially attended visual features."
+ },
+ {
+  "t": 66.0,
+  "text": "This produces the final contextual attribute density enhanced visual features."
+ },
+ {
+  "t": 68.2,
+  "text": "In parallel, the dynamic query module initializes object queries."
+ },
+ {
+  "t": 70.4,
+  "text": "Contextual attribute density features are passed into the density initialization branch."
+ },
+ {
+  "t": 72.6,
+  "text": "The top-k locations with highest text similarity are extracted."
+ },
+ {
+  "t": 74.8,
+  "text": "Within the text initialization branch, initial query content is formed."
+ },
+ {
+  "t": 77.0,
+  "text": "The text features are extracted."
+ },
+ {
+  "t": 79.2,
+  "text": "They pass through a linear layer and a non-linear activation."
+ },
+ {
+  "t": 81.4,
+  "text": "Initial query embeddings are introduced."
+ },
+ {
+  "t": 83.6,
+  "text": "Matrix multiplications compute dynamic text weighting over the word tokens."
+ },
+ {
+  "t": 85.8,
+  "text": "A cross-attention layer fuses the text-initialized queries with the top-k density features."
+ },
+ {
+  "t": 88.0,
+  "text": "This yields refined dynamic queries encoding both attribute semantics and visual density."
+ },
+ {
+  "t": 90.2,
+  "text": "The enhanced visual features, text features, and dynamic queries are assembled."
+ },
+ {
+  "t": 92.4,
+  "text": "They are fed into the cross-modal localization decoder."
+ },
+ {
+  "t": 94.6,
+  "text": "The decoder outputs precise bounding box localizations for counting target objects."
+ },
+ {
+  "t": 96.8,
+  "text": "Finally, the entire model is optimized end-to-end using a localization loss combined with the density loss."
+ }
+]

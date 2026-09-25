@@ -1,0 +1,106 @@
+{
+  "baseline_score": 0.58,
+  "final_score": 0.83,
+  "rounds_run": 2,
+  "improved": true,
+  "compile_rounds": [],
+  "compile_repaired": false,
+  "rounds": [
+    {
+      "round": 0,
+      "score": 0.58,
+      "compiles": true,
+      "breakdown": {
+        "semantic": 0.55,
+        "logical_layout": 0.65,
+        "geometric_layout": 0.65,
+        "style_colour": 0.5,
+        "proportion_scale": 0.7
+      },
+      "notes": "Major rendering defects: large black polygon artifacts obscure the bottom-left and visual flow connections. Several text labels (e.g. Referring Expression, Query Image, Prediction, math subscripts) and icons are missing, corrupted, or replaced with broken glyph boxes.",
+      "findings": []
+    },
+    {
+      "round": 1,
+      "score": 0.68,
+      "compiles": true,
+      "breakdown": {
+        "semantic": 0.65,
+        "logical_layout": 0.75,
+        "geometric_layout": 0.75,
+        "style_colour": 0.65,
+        "proportion_scale": 0.65
+      },
+      "notes": "Overall architecture and block containment are mostly preserved, but many text labels are truncated, garbled, or missing entirely (e.g., Referring Expression header, L_density, L_loc, D1-D4 feature labels, sub-module headers like Density Init/Text Init, and the flow legend text). Icons are replaced by broken glyphs.",
+      "findings": [
+        {
+          "problem": "Multiple polyline/cornered path edges render with large black filled shapes across the figure, obscuring nodes and labels (most noticeably a huge black wedge along the bottom from the backbone to Channel Attention, and around the switch/mapping nodes).",
+          "cause": "In SVG, `<path>` elements default to `fill=\"#000000\"` unless explicitly specified otherwise. Several multi-point paths (`edge_bb_to_vis_ca`, `edge_bb_to_vis_left`, `edge_bb_to_bars_tf`, `edge_sw_to_mult`, `edge_mapping_to_mult`) omit `fill=\"none\"`.",
+          "code_fragment": "<path id=\"edge_bb_to_vis_ca\" data-id=\"edge_bb_to_vis_ca\" data-class=\"edge\" data-source=\"box_backbone\" data-target=\"pyramid_vis_ca\" d=\"M 126 260 L 126 303 L 518 303 L 518 298\" stroke=\"#3B71CA\" stroke-width=\"1.5\" marker-end=\"url(#arrow-blue)\"/>",
+          "fix": "Add `fill=\"none\"` to all path edges that contain more than two points / corners (such as `edge_bb_to_vis_ca`, `edge_bb_to_vis_left`, `edge_bb_to_bars_tf`, `edge_sw_to_mult`, and `edge_mapping_to_mult`).",
+          "severity": "critical"
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "score": 0.83,
+      "compiles": true,
+      "breakdown": {
+        "semantic": 0.82,
+        "logical_layout": 0.88,
+        "geometric_layout": 0.86,
+        "style_colour": 0.78,
+        "proportion_scale": 0.84
+      },
+      "notes": "Reconstruction captures the complete architecture, modules, and signal flow accurately. Some minor text labels/subscripts (D1-D4, Fv1-Fv4, switch symbol, L_density/L_loc formatting) are missing or slightly corrupted, and module background fills are missing.",
+      "findings": [
+        {
+          "problem": "Text labels for 'CAD Enhanced Visual Features' and sub-block titles in CAD Attention overlap with each other and the pyramid.",
+          "cause": "The title 'Channel Attention' (y=42), label 'CAD Enhanced Visual Features' (y=52), and the top pyramid (y=56) are packed too tightly without sufficient vertical spacing.",
+          "code_fragment": "<text id=\"title_channel_att\" data-id=\"title_channel_att\" data-class=\"text_node\" data-parent=\"block_channel_attention\" x=\"518\" y=\"42\" font-family=\"Arial, sans-serif\" font-size=\"10\" font-weight=\"bold\" font-style=\"italic\" text-anchor=\"middle\" fill=\"#000\">Channel Attention</text>\n\n        <!-- CAD Enhan",
+          "fix": "Increase vertical spacing inside block_channel_attention by moving the pyramid and subsequent nodes lower down, or placing 'CAD Enhanced Visual Features' properly below the sub-block header.",
+          "severity": "major"
+        },
+        {
+          "problem": "The green CAD flow path from the CAD Features pyramid across the top to Density Init is fragmented with an awkward detour.",
+          "cause": "The path `edge_cad_gen_to_sa_top` loops back into Sigmoid and stops at x=436, while `edge_ca_to_dq_cad` starts at x=440, breaking what should be a continuous horizontal backbone line across the top into Density Init with branch taps into Sigmoid.",
+          "code_fragment": "<path id=\"edge_cad_gen_to_sa_top\" data-id=\"edge_cad_gen_to_sa_top\" data-class=\"edge\" data-source=\"pyramid_cad_gen\" data-target=\"box_sa_sigmoid\" d=\"M 310 138 L 328 138 L 328 35 L 436 35 L 436 60 L 386 60 L 386 72\" fill=\"none\" stroke=\"#5CB85C\" stroke-width=\"1.5\" marker-end=\"url(#arrow-green)\"/>\n    <p",
+          "fix": "Route a single continuous green flow along the top margin that branches downward into Sigmoid and CAD Features in Spatial Attention, continuing straight into the Density Init CAD Features pyramid.",
+          "severity": "major"
+        },
+        {
+          "problem": "The loss notation &#x2112; and emoji icons render as missing glyph/tofu squares (\u25a1).",
+          "cause": "Unicode script capital L (&#x2112;) and emoji characters (\u2744\ufe0f, \ud83d\udd25) are not supported by the specified standard system fonts (Arial, Georgia).",
+          "code_fragment": "&#x2112;<tspan font-size=\"0.65em\" baseline-shift=\"sub\">density</tspan>",
+          "fix": "Replace unicode &#x2112; with an italic capital 'L' (e.g. `<tspan font-style=\"italic\">L</tspan>`) and replace emoji icons with SVG paths or standard vector shapes.",
+          "severity": "major"
+        },
+        {
+          "problem": "Text label 'Visual Features' at the bottom of Channel Attention overflows and clips past the right boundary.",
+          "cause": "The label at x=562 is left-aligned or positioned too close to the right edge (x=590) of the container.",
+          "code_fragment": "<text id=\"lbl_vis_feat_ca\" data-id=\"lbl_vis_feat_ca\" data-class=\"text_node\" data-parent=\"block_channel_attention\" x=\"562\" y=\"299\" font-family=\"Arial, sans-serif\" font-size=\"8\" font-weight=\"bold\" fill=\"#000\">Visual Features</text>",
+          "fix": "Center the text under or beside the pyramid and adjust x position (e.g., x=\"518\" with text-anchor=\"middle\").",
+          "severity": "minor"
+        },
+        {
+          "problem": "'Density Init' and 'Text Init' titles render outside their respective bounding boxes.",
+          "cause": "Their y-coordinates (y=38 and y=173) place them above the top boundaries of their container rectangles (which start at y=42 and y=177).",
+          "code_fragment": "<text id=\"title_density_init\" data-id=\"title_density_init\" data-class=\"text_node\" data-parent=\"block_density_init\" x=\"635\" y=\"38\" font-family=\"Arial, sans-serif\" font-size=\"9\" font-weight=\"bold\" font-style=\"italic\" fill=\"#000\">Density Init</text>",
+          "fix": "Shift y positions inside the top padding of each sub-block (e.g. y=54 for Density Init and y=190 for Text Init).",
+          "severity": "minor"
+        }
+      ]
+    }
+  ],
+  "provenance": {
+    "agent": "diagram_critic",
+    "backend": "openrouter_gemini37flash",
+    "model": "google-gemini-3.7-flash",
+    "prompt": "diagram_transmuter/critic.yaml",
+    "style": "hopping_bounding_box",
+    "target": "svg",
+    "config_fingerprint": "aa49e8c0064daebe",
+    "timestamp": "2026-09-02T00:39:12"
+  }
+}

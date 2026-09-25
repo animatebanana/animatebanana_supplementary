@@ -1,0 +1,808 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AnimateBanana — Alpha Masking — CVPR_2025_arch01488</title>
+<!--
+  AnimateBanana — Alpha Masking — CVPR_2025_arch01488
+  An animated visual narrative produced by the AnimateBanana pipeline.
+
+  This file is self-contained: the animation, its images, its narration and its
+  controls are all inside it. Drop it on a server, open it from a disk, or put
+  it in an <iframe> - it needs nothing else and fetches nothing.
+
+  The animation is CSS. The controls drive it through the browser's animation
+  API - pause holds every keyframe at once, the bar scrubs them all to the same
+  moment, speed sets their rate together - and the caption is read from a clock
+  of the page's own that is driven alongside them. It has to be its own clock:
+  the drawing is made of hundreds of short animations that each stop when they
+  are done, so reading the time off any one of them gives a watch that stopped
+  half a second in.
+-->
+<style>
+  :root {
+    --ink: #1A1815;
+    --paper: #FFFEF9;
+    --banana: #FFD43B;
+    --banana-deep: #F2B200;
+    --banana-soft: #FFF2B8;
+    --mute: #6b6558;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--paper); color: var(--ink); }
+  body {
+    font-family: ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    padding: 16px;
+  }
+  .ab { margin: 0 auto; max-width: 1400px; }
+  .ab-stage {
+    background: #fff;
+    border: 2px solid var(--ink);
+    border-radius: 14px;
+    padding: 10px;
+    overflow: hidden;
+  }
+  .ab-stage svg { display: block; width: 100%; height: auto; }
+
+  /* ---- Transport ----
+     Every control is the same height and centred on the same line, so the bar
+     reads as one object rather than a row of parts that happen to be adjacent. */
+  .ab-bar {
+    --h: 40px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    border-radius: calc(var(--h) / 2 + 8px);
+  }
+  .ab-bar > * { flex: 0 0 auto; height: var(--h); }
+
+  .ab-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 16px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    line-height: 1;
+    color: var(--ink);
+    background: #fff;
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    cursor: pointer;
+  }
+  .ab-btn:hover { background: var(--banana-soft); }
+  .ab-btn:active { transform: translateY(1px); }
+
+  .ab-play { width: var(--h); padding: 0; border-radius: 50%; background: var(--ink); color: var(--paper); }
+  .ab-play:hover { background: var(--ink); }
+  .ab-play svg { width: 14px; height: 14px; fill: currentColor; display: block; }
+  .ab-play .ab-ic-play { display: none; margin-left: 2px; }
+  .ab.is-paused .ab-play .ab-ic-play { display: block; }
+  .ab.is-paused .ab-play .ab-ic-pause { display: none; }
+
+  /* the rail is drawn; the range input laid over it is what you actually grab */
+  .ab-scrub { position: relative; flex: 1 1 180px !important; min-width: 120px;
+              display: flex; align-items: center; }
+  .ab-rail {
+    position: absolute; inset-inline: 0; height: 9px;
+    background: #fff; border: 1.5px solid var(--ink); border-radius: 999px;
+    overflow: hidden; pointer-events: none;
+  }
+  .ab-rail i { display: block; width: 0; height: 100%; background: var(--banana); }
+  .ab-seek {
+    position: relative; width: 100%; height: var(--h); margin: 0;
+    background: none; -webkit-appearance: none; appearance: none; cursor: pointer;
+  }
+  .ab-seek::-webkit-slider-runnable-track { height: var(--h); background: transparent; }
+  .ab-seek::-moz-range-track { height: var(--h); background: transparent; }
+  .ab-seek::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none;
+    width: 18px; height: 18px; border-radius: 50%;
+    border: 2.5px solid var(--ink); background: var(--banana);
+  }
+  .ab-seek::-moz-range-thumb {
+    width: 16px; height: 16px; border-radius: 50%;
+    border: 2.5px solid var(--ink); background: var(--banana);
+  }
+  .ab-seek:focus-visible { outline: none; }
+  .ab-scrub:focus-within .ab-rail { box-shadow: 0 0 0 3px var(--banana); }
+
+  .ab-time {
+    display: inline-flex;
+    align-items: center;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.72rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--mute);
+    white-space: nowrap;
+  }
+  .ab-time b { color: var(--ink); }
+
+  .ab-speed {
+    display: inline-flex;
+    align-items: stretch;
+    background: #fff;
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .ab-speed button {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    padding: 0;
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--ink);
+    background: #fff;
+    border: 0;
+    cursor: pointer;
+  }
+  .ab-speed button:hover { background: var(--banana-soft); }
+  .ab-speed button[disabled] { opacity: 0.35; cursor: default; background: #fff; }
+  .ab-rate {
+    display: grid;
+    place-items: center;
+    min-width: 56px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.74rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    border-inline: 2px solid var(--ink);
+  }
+  .ab.is-fast .ab-rate { background: var(--banana); }
+
+  /* Captions on or off, said in words rather than left to be inferred */
+  .ab-toggle .ab-led {
+    width: 11px; height: 11px; border-radius: 50%;
+    border: 2px solid var(--ink); background: var(--banana);
+  }
+  .ab-toggle[aria-pressed="false"] { color: var(--mute); }
+  .ab-toggle[aria-pressed="false"] .ab-led { background: #fff; }
+
+  /* ---- The line being narrated ---- */
+  .ab-cap {
+    display: flex;
+    align-items: center;
+    min-height: 3.4em;
+    margin: 10px 0 0;
+    padding: 12px 16px;
+    font-size: clamp(0.95rem, 0.9rem + 0.3vw, 1.15rem);
+    font-weight: 600;
+    font-style: italic;
+    line-height: 1.5;
+    background: var(--banana-soft);
+    border: 1.5px solid var(--banana);
+    border-left: 5px solid var(--banana-deep);
+    border-radius: 10px;
+    transition: opacity .18s ease;
+  }
+  .ab-cap.is-swap { opacity: 0; }
+  .ab.is-off .ab-cap { display: none; }
+  @media (prefers-reduced-motion: reduce) { .ab-cap { transition: none; } }
+
+  /* Narrow: the bar wraps to two rows and squares off, rather than squeezing
+     the scrub bar down to nothing. */
+  @media (max-width: 720px) {
+    .ab-bar { flex-wrap: wrap; border-radius: 20px; }
+    .ab-scrub { order: 3; flex-basis: 100% !important; }
+    .ab-time { order: 2; margin-left: auto; }
+  }
+</style>
+</head>
+<body>
+<figure class="ab">
+  <div class="ab-stage">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 493 285">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#000000"/>
+    </marker>
+    <style>
+      /* Base ghost state for all animatable elements */
+      #raster_input_img, #raster_gt_img, #raster_interactive_img,
+      #label_input_img, #label_gt_img, #label_interactive_img,
+      #node_image_encoder, #node_tokens, #node_sim_gt, #node_sim_interactive,
+      #edge_img_to_enc, #edge_enc_to_tokens, #edge_gt_to_sim, #edge_interactive_to_sim,
+      #block_repeat_k, #rect_repeat_k, #legend_box, #text_repeat_k,
+      #node_prompt_encoder, #node_label_u1_g, #node_label_u1_i,
+      #edge_sim_gt_to_prompt, #edge_sim_interactive_to_prompt,
+      #node_add, #node_conv, #edge_tokens_to_add, #edge_conv_to_add,
+      #node_mask_decoder, #edge_add_to_decoder, #edge_prompt_to_decoder, #edge_decoder_to_conv,
+      #node_trans_conv, #label_y_hat_g, #label_y_hat_i, #raster_out_gt, #raster_out_interactive,
+      #edge_decoder_to_trans, #edge_trans_to_outs, #edge_trans_to_gt_top_branch, #edge_trans_to_interactive_branch,
+      #label_xor_gt, #raster_error_gt, #label_xor_interactive, #raster_error_interactive,
+      #edge_out_gt_to_error, #edge_out_interactive_to_error,
+      #node_sim_mid_top, #node_sim_mid_bottom, #node_label_uk_g, #node_label_uk_i,
+      #edge_error_gt_to_sim_mid, #edge_sim_mid_top_to_prompt,
+      #edge_error_interactive_to_sim_mid, #edge_sim_mid_bottom_to_prompt {
+        opacity: 0.15;
+      }
+
+      /* Animation keyframe bindings */
+      #raster_input_img, #raster_gt_img, #raster_interactive_img,
+      #label_input_img, #label_gt_img, #label_interactive_img {
+        animation: anim_t1 18s infinite;
+      }
+
+      #node_image_encoder, #node_tokens, #node_sim_gt, #node_sim_interactive,
+      #edge_img_to_enc, #edge_enc_to_tokens, #edge_gt_to_sim, #edge_interactive_to_sim {
+        animation: anim_t2 18s infinite;
+      }
+
+      #block_repeat_k, #rect_repeat_k, #text_repeat_k {
+        animation: anim_persist_t3_t9 18s infinite;
+      }
+
+      #legend_box {
+        animation: anim_t3 18s infinite;
+      }
+
+      #node_prompt_encoder, #node_label_u1_g, #node_label_u1_i,
+      #edge_sim_gt_to_prompt, #edge_sim_interactive_to_prompt {
+        animation: anim_t4 18s infinite;
+      }
+
+      #node_add, #node_conv, #edge_tokens_to_add, #edge_conv_to_add {
+        animation: anim_t5 18s infinite;
+      }
+
+      #node_mask_decoder, #edge_add_to_decoder, #edge_prompt_to_decoder, #edge_decoder_to_conv {
+        animation: anim_t6 18s infinite;
+      }
+
+      #node_trans_conv, #label_y_hat_g, #label_y_hat_i, #raster_out_gt, #raster_out_interactive,
+      #edge_decoder_to_trans, #edge_trans_to_outs, #edge_trans_to_gt_top_branch, #edge_trans_to_interactive_branch {
+        animation: anim_t7 18s infinite;
+      }
+
+      #label_xor_gt, #raster_error_gt, #label_xor_interactive, #raster_error_interactive,
+      #edge_out_gt_to_error, #edge_out_interactive_to_error {
+        animation: anim_t8 18s infinite;
+      }
+
+      #node_sim_mid_top, #node_sim_mid_bottom, #node_label_uk_g, #node_label_uk_i,
+      #edge_error_gt_to_sim_mid, #edge_sim_mid_top_to_prompt,
+      #edge_error_interactive_to_sim_mid, #edge_sim_mid_bottom_to_prompt {
+        animation: anim_t9 18s infinite;
+      }
+
+      /* Narration Banner Bindings */
+
+      /* Keyframes for discrete active windows (1/9 slice = ~11.111%) */
+      @keyframes anim_t1 {
+        0%       { opacity: 1; }
+        11.110%  { opacity: 1; }
+        11.111%  { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+
+      @keyframes anim_t2 {
+        0%       { opacity: 0.15; }
+        11.110%  { opacity: 0.15; }
+        11.111%  { opacity: 1; }
+        22.221%  { opacity: 1; }
+        22.222%  { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+
+      @keyframes anim_t3 {
+        0%       { opacity: 0.15; }
+        22.221%  { opacity: 0.15; }
+        22.222%  { opacity: 1; }
+        33.332%  { opacity: 1; }
+        33.333%  { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+
+      /* Parent Persistence Keyframe (T3 to T9 active) */
+      @keyframes anim_persist_t3_t9 {
+        0%       { opacity: 0.15; }
+        22.221%  { opacity: 0.15; }
+        22.222%  { opacity: 1; }
+        100%     { opacity: 1; }
+      }
+
+      @keyframes anim_t4 {
+        0%       { opacity: 0.15; }
+        33.332%  { opacity: 0.15; }
+        33.333%  { opacity: 1; }
+        44.443%  { opacity: 1; }
+        44.444%  { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+
+      @keyframes anim_t5 {
+        0%       { opacity: 0.15; }
+        44.443%  { opacity: 0.15; }
+        44.444%  { opacity: 1; }
+        55.554%  { opacity: 1; }
+        55.555%  { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+
+      @keyframes anim_t6 {
+        0%       { opacity: 0.15; }
+        55.554%  { opacity: 0.15; }
+        55.555%  { opacity: 1; }
+        66.666%  { opacity: 1; }
+        66.667%  { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+
+      @keyframes anim_t7 {
+        0%       { opacity: 0.15; }
+        66.666%  { opacity: 0.15; }
+        66.667%  { opacity: 1; }
+        77.777%  { opacity: 1; }
+        77.778%  { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+
+      @keyframes anim_t8 {
+        0%       { opacity: 0.15; }
+        77.777%  { opacity: 0.15; }
+        77.778%  { opacity: 1; }
+        88.888%  { opacity: 1; }
+        88.889%  { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+
+      @keyframes anim_t9 {
+        0%       { opacity: 0.15; }
+        88.888%  { opacity: 0.15; }
+        88.889%  { opacity: 1; }
+        100%     { opacity: 1; }
+      }
+
+      /* Subtitle / Banner Keyframes */
+    </style>
+  </defs>
+
+  <!-- BACKGROUND BLOCKS -->
+  <!-- Main Right Block (Repeat K steps area) -->
+  <g id="block_repeat_k" data-id="block_repeat_k" data-class="block" data-parent="root">
+    <rect id="rect_repeat_k" data-id="rect_repeat_k" data-class="child_node" data-parent="block_repeat_k" x="194" y="2" width="296" height="228" fill="#eef6e8" stroke="#333333" stroke-width="1.2" stroke-dasharray="3,3" rx="4"/>
+    <text id="text_repeat_k" data-id="text_repeat_k" data-class="text_node" data-parent="block_repeat_k" x="486" y="222" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#2e7d32" text-anchor="end">Repeat K steps</text>
+  </g>
+
+  <!-- LEFT COLUMN RASTER PLACEHOLDERS & LABELS -->
+  <!-- 1. Input Image -->
+  <g id="raster_input_img" data-id="raster_input_img" data-class="raster_node"><image href="data:image/png;base64,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" x="4" y="19" width="60" height="54" preserveAspectRatio="xMidYMid meet" /></g>
+  <text id="label_input_img" data-id="label_input_img" data-class="text_node" data-parent="root" x="34" y="83" font-family="Arial, sans-serif" font-size="8.5" font-weight="bold" fill="#000000" text-anchor="middle">Input Image: <tspan font-style="italic">X</tspan><tspan font-size="0.65em" baseline-shift="sub">t</tspan></text>
+
+  <!-- 2. Ground Truth -->
+  <g id="raster_gt_img" data-id="raster_gt_img" data-class="raster_node"><image href="data:image/png;base64,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" x="4" y="90" width="60" height="54" preserveAspectRatio="xMidYMid meet" /></g>
+  <text id="label_gt_img" data-id="label_gt_img" data-class="text_node" data-parent="root" x="34" y="154" font-family="Arial, sans-serif" font-size="8.5" font-weight="bold" fill="#000000" text-anchor="middle">Ground Truth:<tspan font-style="italic">y</tspan><tspan font-size="0.65em" baseline-shift="super">g</tspan></text>
+
+  <!-- 3. Interactive Mask -->
+  <g id="raster_interactive_img" data-id="raster_interactive_img" data-class="raster_node"><image href="data:image/png;base64,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" x="4" y="161" width="60" height="54" preserveAspectRatio="xMidYMid meet" /></g>
+  <text id="label_interactive_img" data-id="label_interactive_img" data-class="text_node" data-parent="root" x="38" y="225" font-family="Arial, sans-serif" font-size="8.5" font-weight="bold" fill="#000000" text-anchor="middle">Interactive Mask: <tspan font-style="italic">y</tspan><tspan font-size="0.65em" baseline-shift="super">i</tspan></text>
+
+  <!-- IMAGE ENCODER COMPOSITE -->
+  <g id="node_image_encoder" data-id="node_image_encoder" data-class="composite_whole" data-parent="root">
+    <polygon id="poly_image_encoder" data-id="poly_image_encoder" data-class="composite_part" data-parent="node_image_encoder" points="73,11 158,24 158,74 73,87" fill="#88b3e8" stroke="#2b4c7e" stroke-width="1.2"/>
+    <!-- Snowflake icon (frozen) -->
+    <g id="snowflake_icon" data-id="snowflake_icon" data-class="composite_part" data-parent="node_image_encoder" stroke="#6ba4e8" stroke-width="1.2" stroke-linecap="round">
+      <line x1="86" y1="20" x2="86" y2="34"/>
+      <line x1="79" y1="27" x2="93" y2="27"/>
+      <line x1="81" y1="22" x2="91" y2="32"/>
+      <line x1="81" y1="32" x2="91" y2="22"/>
+    </g>
+    <text id="text_image_encoder_1" data-id="text_image_encoder_1" data-class="composite_part" data-parent="node_image_encoder" x="114" y="44" font-family="Arial, sans-serif" font-size="10.5" font-weight="bold" fill="#000000" text-anchor="middle">Image</text>
+    <text id="text_image_encoder_2" data-id="text_image_encoder_2" data-class="composite_part" data-parent="node_image_encoder" x="114" y="56" font-family="Arial, sans-serif" font-size="10.5" font-weight="bold" fill="#000000" text-anchor="middle">Encoder</text>
+  </g>
+
+  <!-- Feature tokens representation (stacked small rects) -->
+  <g id="node_tokens" data-id="node_tokens" data-class="composite_whole" data-parent="root">
+    <rect id="rect_tok1" data-id="rect_tok1" data-class="composite_part" data-parent="node_tokens" x="171" y="9" width="13" height="13" fill="#d9d9d9" stroke="#333333" stroke-width="1"/>
+    <rect id="rect_tok2" data-id="rect_tok2" data-class="composite_part" data-parent="node_tokens" x="171" y="24" width="13" height="13" fill="#d9d9d9" stroke="#333333" stroke-width="1"/>
+    <rect id="rect_tok3" data-id="rect_tok3" data-class="composite_part" data-parent="node_tokens" x="171" y="39" width="13" height="13" fill="#d9d9d9" stroke="#333333" stroke-width="1"/>
+    <rect id="rect_tok4" data-id="rect_tok4" data-class="composite_part" data-parent="node_tokens" x="171" y="54" width="13" height="13" fill="#d9d9d9" stroke="#333333" stroke-width="1"/>
+    <rect id="rect_tok5" data-id="rect_tok5" data-class="composite_part" data-parent="node_tokens" x="171" y="69" width="13" height="13" fill="#d9d9d9" stroke="#333333" stroke-width="1"/>
+  </g>
+
+  <!-- INTERACTION SIMULATOR (GROUND TRUTH) -->
+  <g id="node_sim_gt" data-id="node_sim_gt" data-class="composite_whole" data-parent="root">
+    <rect id="bg_sim_gt" data-id="bg_sim_gt" data-class="composite_part" data-parent="node_sim_gt" x="72" y="100" width="102" height="40" fill="#ffeed1" stroke="#333333" stroke-width="1"/>
+    <!-- Robot head icon -->
+    <g id="robot_sim_gt" data-id="robot_sim_gt" data-class="composite_part" data-parent="node_sim_gt">
+      <rect x="158" y="91" width="16" height="11" rx="2" fill="#c3d2e2" stroke="#4a5f78" stroke-width="0.8"/>
+      <circle cx="162.5" cy="95.5" r="1.5" fill="#333"/>
+      <circle cx="169.5" cy="95.5" r="1.5" fill="#333"/>
+      <line x1="166" y1="91" x2="166" y2="88" stroke="#4a5f78" stroke-width="0.8"/>
+      <circle cx="166" cy="87.5" r="1" fill="#4a5f78"/>
+    </g>
+    <text id="text_sim_gt_title" data-id="text_sim_gt_title" data-class="composite_part" data-parent="node_sim_gt" x="123" y="112" font-family="Arial, sans-serif" font-size="7.5" font-weight="bold" fill="#000000" text-anchor="middle">Interaction Simulator</text>
+    <!-- mini sub boxes: Point, Bbox, Text -->
+    <rect x="76" y="118" width="19" height="17" fill="#ffffff" stroke="#333333" stroke-width="0.6"/>
+    <polygon points="85.5,123 88,126.5 85.5,130 83,126.5" fill="#000000"/>
+    <text x="85.5" y="142" font-family="Arial, sans-serif" font-size="5.5" font-style="italic" fill="#000000" text-anchor="middle">Point</text>
+
+    <rect x="99" y="118" width="23" height="17" fill="#ffffff" stroke="#333333" stroke-width="0.6"/>
+    <rect x="105" y="122.5" width="11" height="8" fill="none" stroke="#000000" stroke-width="0.6"/>
+    <text x="110.5" y="142" font-family="Arial, sans-serif" font-size="5.5" font-style="italic" fill="#000000" text-anchor="middle">Bbox</text>
+
+    <rect x="126" y="118" width="44" height="17" fill="#ffffff" stroke="#333333" stroke-width="0.6"/>
+    <text x="148" y="125" font-family="Arial, sans-serif" font-size="3.5" fill="#000000" text-anchor="middle">A segmentation area</text>
+    <text x="148" y="130" font-family="Arial, sans-serif" font-size="3.5" fill="#000000" text-anchor="middle">of a right kidney</text>
+    <text x="148" y="142" font-family="Arial, sans-serif" font-size="5.5" font-style="italic" fill="#000000" text-anchor="middle">Text</text>
+  </g>
+
+  <!-- INTERACTION SIMULATOR (INTERACTIVE MASK) -->
+  <g id="node_sim_interactive" data-id="node_sim_interactive" data-class="composite_whole" data-parent="root">
+    <rect id="bg_sim_interactive" data-id="bg_sim_interactive" data-class="composite_part" data-parent="node_sim_interactive" x="72" y="173" width="102" height="39" fill="#ffeed1" stroke="#333333" stroke-width="1"/>
+    <!-- Robot head icon -->
+    <g id="robot_sim_interactive" data-id="robot_sim_interactive" data-class="composite_part" data-parent="node_sim_interactive">
+      <rect x="158" y="164" width="16" height="11" rx="2" fill="#c3d2e2" stroke="#4a5f78" stroke-width="0.8"/>
+      <circle cx="162.5" cy="168.5" r="1.5" fill="#333"/>
+      <circle cx="169.5" cy="168.5" r="1.5" fill="#333"/>
+      <line x1="166" y1="164" x2="166" y2="161" stroke="#4a5f78" stroke-width="0.8"/>
+      <circle cx="166" cy="160.5" r="1" fill="#4a5f78"/>
+    </g>
+    <text id="text_sim_interactive_title" data-id="text_sim_interactive_title" data-class="composite_part" data-parent="node_sim_interactive" x="123" y="184" font-family="Arial, sans-serif" font-size="7.5" font-weight="bold" fill="#000000" text-anchor="middle">Interaction Simulator</text>
+    <!-- mini sub boxes: Point, Bbox -->
+    <rect x="76" y="190" width="19" height="17" fill="#ffffff" stroke="#333333" stroke-width="0.6"/>
+    <polygon points="82.5,199 85,202 82.5,205 80,202" fill="#000000"/>
+    <polygon points="88.5,195 91,198 88.5,201 86,198" fill="#000000"/>
+    <rect x="101" y="190" width="19" height="17" fill="#ffffff" stroke="#333333" stroke-width="0.6"/>
+    <polygon points="110.5,195 113,198 110.5,201 108,198" fill="#000000"/>
+    <text x="95" y="215" font-family="Arial, sans-serif" font-size="5.5" font-style="italic" fill="#000000" text-anchor="middle">Point</text>
+
+    <rect x="126" y="190" width="19" height="17" fill="#ffffff" stroke="#333333" stroke-width="0.6"/>
+    <rect x="131" y="195" width="9" height="7" fill="none" stroke="#000000" stroke-width="0.6"/>
+    <rect x="151" y="190" width="19" height="17" fill="#ffffff" stroke="#333333" stroke-width="0.6"/>
+    <rect x="155" y="193" width="11" height="11" fill="none" stroke="#000000" stroke-width="0.6"/>
+    <text x="148" y="215" font-family="Arial, sans-serif" font-size="5.5" font-style="italic" fill="#000000" text-anchor="middle">Bbox</text>
+  </g>
+
+  <!-- PROMPT ENCODER -->
+  <g id="node_prompt_encoder" data-id="node_prompt_encoder" data-class="composite_whole" data-parent="block_repeat_k">
+    <rect id="rect_prompt_encoder" data-id="rect_prompt_encoder" data-class="composite_part" data-parent="node_prompt_encoder" x="189" y="101" width="111" height="54" rx="2" fill="#ede3f2" stroke="#333333" stroke-width="1.2"/>
+    <!-- Fire Icon (Learnable) -->
+    <path id="fire_prompt_encoder" data-id="fire_prompt_encoder" data-class="composite_part" data-parent="node_prompt_encoder" d="M 293 118 C 293 114 290 110 288 107 C 288 110 286 112 284 113 C 283 109 280 106 280 104 C 277 108 274 112 274 117 C 274 122 278 126 284 126 C 290 126 293 122 293 118 Z" fill="#ff6f00"/>
+    <text id="text_prompt_encoder" data-id="text_prompt_encoder" data-class="composite_part" data-parent="node_prompt_encoder" x="244" y="132" font-family="Arial, sans-serif" font-size="10.5" font-weight="bold" fill="#000000" text-anchor="middle">Prompt Encoder</text>
+  </g>
+
+  <!-- ADDITION CIRCLE -->
+  <g id="node_add" data-id="node_add" data-class="composite_whole" data-parent="block_repeat_k">
+    <circle id="circle_add" data-id="circle_add" data-class="composite_part" data-parent="node_add" cx="218" cy="46" r="8.5" fill="#ffffff" stroke="#000000" stroke-width="1.2"/>
+    <line id="line_add_h" data-id="line_add_h" data-class="composite_part" data-parent="node_add" x1="213" y1="46" x2="223" y2="46" stroke="#000000" stroke-width="1.2"/>
+    <line id="line_add_v" data-id="line_add_v" data-class="composite_part" data-parent="node_add" x1="218" y1="41" x2="218" y2="51" stroke="#000000" stroke-width="1.2"/>
+  </g>
+
+  <!-- CONV TRAPEZOID -->
+  <g id="node_conv" data-id="node_conv" data-class="composite_whole" data-parent="block_repeat_k">
+    <polygon id="poly_conv" data-id="poly_conv" data-class="composite_part" data-parent="node_conv" points="199,8 244,8 234,26 209,26" fill="#ded4ea" stroke="#333333" stroke-width="1"/>
+    <text id="text_conv" data-id="text_conv" data-class="composite_part" data-parent="node_conv" x="221.5" y="19" font-family="Arial, sans-serif" font-size="7.5" font-weight="bold" fill="#000000" text-anchor="middle">Conv</text>
+  </g>
+
+  <!-- MASK DECODER -->
+  <g id="node_mask_decoder" data-id="node_mask_decoder" data-class="composite_whole" data-parent="block_repeat_k">
+    <rect id="rect_mask_decoder" data-id="rect_mask_decoder" data-class="composite_part" data-parent="node_mask_decoder" x="242" y="26" width="63" height="41" fill="#fed3a7" stroke="#333333" stroke-width="1.2"/>
+    <!-- Fire Icon -->
+    <path id="fire_mask_decoder" data-id="fire_mask_decoder" data-class="composite_part" data-parent="node_mask_decoder" d="M 299 40 C 299 36 296 33 294 30 C 294 33 292 35 291 36 C 290 32 287 29 287 27 C 284 31 281 35 281 40 C 281 45 285 48 290 48 C 296 48 299 45 299 40 Z" fill="#ff6f00"/>
+    <text id="text_mask_decoder_1" data-id="text_mask_decoder_1" data-class="composite_part" data-parent="node_mask_decoder" x="272" y="44" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#000000" text-anchor="middle">Mask</text>
+    <text id="text_mask_decoder_2" data-id="text_mask_decoder_2" data-class="composite_part" data-parent="node_mask_decoder" x="272" y="55" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#000000" text-anchor="middle">Decoder</text>
+  </g>
+
+  <!-- TRANS CONV TRAPEZOID -->
+  <g id="node_trans_conv" data-id="node_trans_conv" data-class="composite_whole" data-parent="block_repeat_k">
+    <polygon id="poly_trans_conv" data-id="poly_trans_conv" data-class="composite_part" data-parent="node_trans_conv" points="319,21 343,33 343,60 319,74" fill="#fed3a7" stroke="#333333" stroke-width="1"/>
+    <text id="text_trans_conv_1" data-id="text_trans_conv_1" data-class="composite_part" data-parent="node_trans_conv" x="331" y="42" font-family="Arial, sans-serif" font-size="6.5" font-weight="bold" fill="#000000" text-anchor="middle">&#xD7;2</text>
+    <text id="text_trans_conv_2" data-id="text_trans_conv_2" data-class="composite_part" data-parent="node_trans_conv" x="331" y="50" font-family="Arial, sans-serif" font-size="6.5" font-weight="bold" fill="#000000" text-anchor="middle">Trans</text>
+    <text id="text_trans_conv_3" data-id="text_trans_conv_3" data-class="composite_part" data-parent="node_trans_conv" x="331" y="58" font-family="Arial, sans-serif" font-size="6.5" font-weight="bold" fill="#000000" text-anchor="middle">Conv</text>
+  </g>
+
+  <!-- TOP-RIGHT OUTPUT IMAGES & LABELS -->
+  <!-- Output GT-like result -->
+  <g id="raster_out_gt" data-id="raster_out_gt" data-class="raster_node"><image href="data:image/png;base64,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" x="358" y="20" width="57" height="54" preserveAspectRatio="xMidYMid meet" /></g>
+  <text id="label_y_hat_g" data-id="label_y_hat_g" data-class="standalone_node" data-parent="block_repeat_k" x="386" y="16" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#000000" text-anchor="middle"><tspan font-style="italic">y&#x0302;</tspan><tspan font-size="0.65em" baseline-shift="super">g</tspan><tspan font-size="0.65em" baseline-shift="sub">k</tspan></text>
+
+  <!-- Output Interactive result -->
+  <g id="raster_out_interactive" data-id="raster_out_interactive" data-class="raster_node"><image href="data:image/png;base64,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" x="425" y="20" width="57" height="54" preserveAspectRatio="xMidYMid meet" /></g>
+  <text id="label_y_hat_i" data-id="label_y_hat_i" data-class="standalone_node" data-parent="block_repeat_k" x="453" y="16" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#000000" text-anchor="middle"><tspan font-style="italic">y&#x0302;</tspan><tspan font-size="0.65em" baseline-shift="super">i</tspan><tspan font-size="0.65em" baseline-shift="sub">k</tspan></text>
+
+  <!-- ERROR REGION IMAGES -->
+  <!-- Top Error Region -->
+  <g id="raster_error_gt" data-id="raster_error_gt" data-class="raster_node"><image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAA5CAIAAAAJJrqAAAAEZElEQVR4nO2aX2hbVRzHP/fk3KRN0jRtt3ZTYSj+q9u6bhiH6Gj3oHvoFDatf59EyLO+KCKCTz4IClPEgvrikxUmCrKX7UFErEwYCJthTdpk0q1ZkprlZkmaP/ceH+46h2ZqkptdKvk8nXvuud/f78u55557DkfLFpJ0AV3XY7Hzzz/1Uir1m5Tys88/OnL0cLVaczyQvF4SQmgayiFdy7Ie2Hn/k0dnPnj/46npRx57/KBpWkIINGf0laWUUlw3IIRYX6/WajXNoQCA9MjDTxz6+vi3z734tIZWKBQck1YEAn5NCKWUli0kpZSJRPLtt97JZXKagw40lKWSyxduv+O2vn6fspzqXZRSjx54+PU3XxVCkC0ki9VL35z4Qng8TgW4BUzu3X0pt5gzUsK+1jTN5/O6m1NL6LpuF+Tf73lhGDwgoQBXHAoZhDJYDqldRzStPQzPwggc4M/Pxo2Do+lA0ZpdaiAgBEcg9B9EWqVJD9RAwRj0w08QgXthFSpwJ2ThHExCGRJwEH6HX2EZJmACsvAzTIIFWbgHwrACOoQhAhrE4AA04Dz84rgBoA4+GIIs7IddsADjsAc+gUNQh/tgCB6E42AAMAST8CnshEOwAndDAoKwBHeBF+qgwyjsgnUY7thAk1dIwlaowkXYD2GowRIAJsQhB0HQoQYSLkAOAC9YEAMDPPADfAWjkAUDglAHL/hhHXzQD/2dZU/THhDwI/RBAyw4DQnwwDm4AgJOwm6owEW4Clc3HlyEMnjhLMxDHsIwABNgwpeQhDHQIAUZUFAEjY6m/+ZjYKFZ0yTYv00VOL1R+d0NDVKQ2ijbDQJwAhqQ2ujD1Y0G37eb8V9oPgac4izEADC7FqK7Buhm6jbN54FNRM+A2/QMuM2mN9D1z+hNA0sZDAZHR0ellPl8XilVKpWKxWLLOt1I7l8ZGBjYvn372tpaOp2uVquNRiMQCAwODpbLZdNsbeZwwcDs7Ozq6urCwoJpmh6Px7IspZRhGLque73eSqXSktqtHgMzMzPHjh3bsWNHIBCYnp6ORqOBQMC+VSgUqtVqq4JS16WuS8+tWtFHIpFwODw2NgZkMplgMFgqlexbjUajDUGZiC/7fL5cdk1zas/pH5mbmzt16tSZM2dqtZqu6/F43N6f8vv9pmm20wMvPPOy0IQmUMrxBXcT0ul0Op0WQkSjUcMw5ufnpZShUMiyLMMw2hCUr73xiq7r8fjSe+9+6Hi6N0MIYRjG1NTU4uJisVjM5/OZTKZNrUJlpapyJ04e7/d3vr5rAb/fPz4+vm3btr6+vjYejzy0z97YkrVaXQjR3gDqhHK5HIvFOtfZ9L8SPQNu0zPgNj0DbtMz4DY9A27TM+A2PQNu0zPgNj0DbtMz4Db/FwOWper1uruptESjfm0fSAKmaW3ZOrJ3355cds3JI2fdQ6k9e3fbG9KafexSKXX5crZSrmwKA0qpkS3Dg4Oha4f+7Fop5abI3sY0TcuygD8AXTiNXRqYSO0AAAAASUVORK5CYII=" x="358" y="94" width="57" height="54" preserveAspectRatio="xMidYMid meet" /></g>
+
+  <!-- Bottom Error Region -->
+  <g id="raster_error_interactive" data-id="raster_error_interactive" data-class="raster_node"><image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAA4CAIAAADCemklAAAEWklEQVR4nO2aXU8jVRiAnzMz/QxYSmRFFFyX7i4CuybWC+NHVr1wN35cmIjxxpCY+A/4BRi885qwamKiEIluNBK9NCyyiR8bEkHXEjbuipSPZVtpaYfOTGeOF92yJFRoKXXE9Lk6nZz3Pe8zM2c657RiPXWDo4y23VIURVEVF0spHwFSYtu2lPKOgKIoK8urf9xcdLeyMpHg9/se6e7y+bzbAuLdd977bPwLdysrG+kPBD759INzzz6pAUKIfN6+fTthWZbblZVLPp9Jp9JCiLs3vaIcjQlQQFEUIQRQomixq/FfRtt9yAtPgx/WQMBPhzGMB6IwB9nDyLaTEgIm9MAx+Bwa4F4Iggl5CIAF69AKBmxCK1iQgiyEoQFsWIVmUCEJreAB4GGIwX0AJOF+kJCsWqmEgIQNOAnH4Ut4Bc7BJHjhKbgMOTgBGvwMr8EMfA/z8Bi8BFdgAc5DCkIgoQV+gNOwAR2gQQxeAANiMFadQOmJ64UM/AlN4IU0fAM6ZOFreAhS4IcHQcJlWADABgO+gmZ4AJbgL1DgOsTAB6fBBAeOgwM2NFdXfWkBDziwDgKegCzcAiAL6+DAJGiwDHOwAhIcAExYAQHX4HdYhutwAk7CKViHGdBhE67COmxAsupHRelb6BII8MBv4MCV4myeBQELsAoWmLAIRjFwBn4BB27BRdDgcfgRBDhwEbbAB8AW3AQgX131pQXykCrV1YZcsb1ZbKR3dMjt6FBoXIVFsCFerFUvdig5xAEoIXCIZCBT0wH+aRIfIeoCblMXcJu6gNvUBdymLuA2mqZpQggpZWGNfIQQQvh8Pi2+tFwQyOVy+wfVjMbGxs3Nzf37FRFCWJY5+e139J7p7j3b3Xumu/GextrVtweRSGRkZGR6enpwcDAQCJQZparq2Ud7/H6f9tbbbxauwIfvf/zr3LWa1rqbaDQ6Pj7e2dkJhMPh4eHhra2tcgKFEM89/0zkVCepXDxtLKdy8RdfPl/jakswMDCg63omk5FSLiwsRCKRMgNVVR2/9NGGvqSZhlm4Ao7j1LTW3Xi93o6OjrGxsWAwKITw+/3pdHr/sCKWlVcUUdsV2d6EQqH29nbDMPr7+zVNGxoa8nq9FWW4u73uCh6PZ35+fnR01DAMy7JWV1ej0ejS0lJFSdwUMAwjEomYpgk4jjMxMREOhytN4qaArutTU1OJRKLwMRaLNTQ0FCZk+UncfJUwDGNqaiqfv7M5JKU0DGPvkN24KeA4TjAYbGtr2z4ipazo9OP6y1xXV1dfXx+gqmooFPL5fJVmcFkgkUgkk8mmpqaenh7TNCv6HijgssDs7Gw8Hr9w4YJpmtnsQX4qcFlgbW2tpaVlcXExFosdLIObj1FA1/WRkZFqMhz5FVldwG3qAm5TF3CbuoDb/F8EhBD//q5ENdi2XdgL1QAppaqqr7/xamvrsSOxQyql9Af8Pb1d+bwttv92qShKpashFymcaOk4fwMjz4zWXfn6XQAAAABJRU5ErkJggg==" x="358" y="159" width="57" height="54" preserveAspectRatio="xMidYMid meet" /></g>
+
+  <!-- MIDDLE INTERACTION SIMULATORS (VERTICAL) -->
+  <!-- Top Middle Sim (GT Error loop) -->
+  <g id="node_sim_mid_top" data-id="node_sim_mid_top" data-class="composite_whole" data-parent="block_repeat_k">
+    <rect id="rect_sim_mid_top" data-id="rect_sim_mid_top" data-class="composite_part" data-parent="node_sim_mid_top" x="321" y="88" width="20" height="59" fill="#ffeed1" stroke="#333333" stroke-width="1"/>
+    <!-- Robot head icon -->
+    <g id="robot_sim_mid_top" data-id="robot_sim_mid_top" data-class="composite_part" data-parent="node_sim_mid_top">
+      <rect x="323" y="78" width="16" height="10" rx="2" fill="#c3d2e2" stroke="#4a5f78" stroke-width="0.8"/>
+      <circle cx="327" cy="82.5" r="1.3" fill="#333"/>
+      <circle cx="335" cy="82.5" r="1.3" fill="#333"/>
+      <line x1="331" y1="78" x2="331" y2="75" stroke="#4a5f78" stroke-width="0.8"/>
+      <circle cx="331" cy="74.5" r="0.9" fill="#4a5f78"/>
+    </g>
+    <text id="text_sim_mid_top" data-id="text_sim_mid_top" data-class="composite_part" data-parent="node_sim_mid_top" transform="rotate(-90, 331, 117.5)" x="331" y="120" font-family="Arial, sans-serif" font-size="6.5" font-weight="bold" fill="#000000" text-anchor="middle">Interaction Simulator</text>
+  </g>
+
+  <!-- Bottom Middle Sim (Interactive Error loop) -->
+  <g id="node_sim_mid_bottom" data-id="node_sim_mid_bottom" data-class="composite_whole" data-parent="block_repeat_k">
+    <rect id="rect_sim_mid_bottom" data-id="rect_sim_mid_bottom" data-class="composite_part" data-parent="node_sim_mid_bottom" x="321" y="157" width="20" height="59" fill="#ffeed1" stroke="#333333" stroke-width="1"/>
+    <!-- Robot head icon -->
+    <g id="robot_sim_mid_bottom" data-id="robot_sim_mid_bottom" data-class="composite_part" data-parent="node_sim_mid_bottom">
+      <rect x="323" y="147" width="16" height="10" rx="2" fill="#c3d2e2" stroke="#4a5f78" stroke-width="0.8"/>
+      <circle cx="327" cy="151.5" r="1.3" fill="#333"/>
+      <circle cx="335" cy="151.5" r="1.3" fill="#333"/>
+      <line x1="331" y1="147" x2="331" y2="144" stroke="#4a5f78" stroke-width="0.8"/>
+      <circle cx="331" cy="143.5" r="0.9" fill="#4a5f78"/>
+    </g>
+    <text id="text_sim_mid_bottom" data-id="text_sim_mid_bottom" data-class="composite_part" data-parent="node_sim_mid_bottom" transform="rotate(-90, 331, 186.5)" x="331" y="189" font-family="Arial, sans-serif" font-size="6.5" font-weight="bold" fill="#000000" text-anchor="middle">Interaction Simulator</text>
+  </g>
+
+  <!-- LEGEND (INSIDE REPEAT BLOCK) -->
+  <g id="legend_box" data-id="legend_box" data-class="composite_whole" data-parent="block_repeat_k">
+    <rect id="rect_legend" data-id="rect_legend" data-class="composite_part" data-parent="legend_box" x="207" y="179" width="63" height="37" fill="#ffffff" stroke="#555555" stroke-width="0.8" rx="3"/>
+    <!-- Frozen Snowflake Item -->
+    <g id="legend_item_frozen" data-id="legend_item_frozen" data-class="composite_part" data-parent="legend_box">
+      <g stroke="#6ba4e8" stroke-width="1" stroke-linecap="round">
+        <line x1="216" y1="185" x2="216" y2="195"/>
+        <line x1="211" y1="190" x2="221" y2="190"/>
+        <line x1="212.5" y1="186.5" x2="219.5" y2="193.5"/>
+        <line x1="212.5" y1="193.5" x2="219.5" y2="186.5"/>
+      </g>
+      <text x="226" y="193" font-family="Arial, sans-serif" font-size="7" font-weight="bold" fill="#000000">Frozen</text>
+    </g>
+    <!-- Learnable Fire Item -->
+    <g id="legend_item_learnable" data-id="legend_item_learnable" data-class="composite_part" data-parent="legend_box">
+      <path d="M 219 208 C 219 205 217 202 215 200 C 215 202 213 204 212 205 C 211 202 209 200 209 198 C 207 201 205 204 205 207 C 205 211 208 213 212 213 C 216 213 219 211 219 208 Z" fill="#ff6f00"/>
+      <text x="226" y="209" font-family="Arial, sans-serif" font-size="7" font-weight="bold" fill="#000000">Learnable</text>
+    </g>
+  </g>
+
+  <!-- INTERMEDIATE / STRUCTURAL TEXT LABELS (STANDALONE GRAPH NODES) -->
+  <text id="node_label_u1_g" data-id="node_label_u1_g" data-class="standalone_node" data-parent="root" x="180" y="112" font-family="Arial, sans-serif" font-size="8" font-weight="bold" fill="#000000" text-anchor="middle"><tspan font-style="italic">u</tspan><tspan font-size="0.65em" baseline-shift="super">g</tspan><tspan font-size="0.65em" baseline-shift="sub">1</tspan></text>
+  <text id="node_label_u1_i" data-id="node_label_u1_i" data-class="standalone_node" data-parent="root" x="180" y="186" font-family="Arial, sans-serif" font-size="8" font-weight="bold" fill="#000000" text-anchor="middle"><tspan font-style="italic">u</tspan><tspan font-size="0.65em" baseline-shift="super">i</tspan><tspan font-size="0.65em" baseline-shift="sub">1</tspan></text>
+  
+  <text id="node_label_uk_g" data-id="node_label_uk_g" data-class="standalone_node" data-parent="block_repeat_k" x="310" y="112" font-family="Arial, sans-serif" font-size="8" font-weight="bold" fill="#000000" text-anchor="middle"><tspan font-style="italic">u</tspan><tspan font-size="0.65em" baseline-shift="super">g</tspan><tspan font-size="0.65em" baseline-shift="sub">k</tspan></text>
+  <text id="node_label_uk_i" data-id="node_label_uk_i" data-class="standalone_node" data-parent="block_repeat_k" x="310" y="180" font-family="Arial, sans-serif" font-size="8" font-weight="bold" fill="#000000" text-anchor="middle"><tspan font-style="italic">u</tspan><tspan font-size="0.65em" baseline-shift="super">i</tspan><tspan font-size="0.65em" baseline-shift="sub">k</tspan></text>
+
+  <!-- XOR Labels on Lines -->
+  <text id="label_xor_gt" data-id="label_xor_gt" data-class="standalone_node" data-parent="block_repeat_k" x="424" y="85" font-family="Arial, sans-serif" font-size="7.5" font-weight="bold" fill="#000000" text-anchor="middle">&#x3B5;<tspan font-size="0.65em" baseline-shift="super">g</tspan><tspan font-size="0.65em" baseline-shift="sub">k</tspan> : <tspan font-style="italic">y</tspan><tspan font-size="0.65em" baseline-shift="super">g</tspan> XOR <tspan font-style="italic">y&#x0302;</tspan><tspan font-size="0.65em" baseline-shift="super">g</tspan><tspan font-size="0.65em" baseline-shift="sub">k</tspan></text>
+
+  <text id="label_xor_interactive" data-id="label_xor_interactive" data-class="standalone_node" data-parent="block_repeat_k" transform="rotate(-90, 447, 137)" x="447" y="140" font-family="Arial, sans-serif" font-size="7.5" font-weight="bold" fill="#000000" text-anchor="middle">&#x3B5;<tspan font-size="0.65em" baseline-shift="super">i</tspan><tspan font-size="0.65em" baseline-shift="sub">k</tspan> : <tspan font-style="italic">y</tspan><tspan font-size="0.65em" baseline-shift="super">i</tspan> XOR <tspan font-style="italic">y&#x0302;</tspan><tspan font-size="0.65em" baseline-shift="super">i</tspan><tspan font-size="0.65em" baseline-shift="sub">k</tspan></text>
+
+  <!-- EDGES / CONNECTIONS -->
+  <!-- 1. Input Image -> Image Encoder -->
+  <path id="edge_img_to_enc" data-id="edge_img_to_enc" data-class="edge" data-source="raster_input_img" data-target="node_image_encoder" d="M 64 46 L 73 46" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+  <!-- 2. Image Encoder -> Feature Tokens -->
+  <path id="edge_enc_to_tokens" data-id="edge_enc_to_tokens" data-class="edge" data-source="node_image_encoder" data-target="node_tokens" d="M 158 46 L 169 46" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+  <!-- 3. Feature Tokens -> Add Circle -->
+  <path id="edge_tokens_to_add" data-id="edge_tokens_to_add" data-class="edge" data-source="node_tokens" data-target="node_add" d="M 184 46 L 208 46" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+  <!-- 4. Add Circle -> Mask Decoder -->
+  <path id="edge_add_to_decoder" data-id="edge_add_to_decoder" data-class="edge" data-source="node_add" data-target="node_mask_decoder" d="M 227 46 L 241 46" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+  <!-- 5. Prompt Encoder -> Mask Decoder -->
+  <path id="edge_prompt_to_decoder" data-id="edge_prompt_to_decoder" data-class="edge" data-source="node_prompt_encoder" data-target="node_mask_decoder" d="M 252 101 L 252 87 L 274 87 L 274 68" stroke="#000000" stroke-width="1.2" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- 6. Mask Decoder -> Conv -->
+  <path id="edge_decoder_to_conv" data-id="edge_decoder_to_conv" data-class="edge" data-source="node_mask_decoder" data-target="node_conv" d="M 274 26 L 274 17 L 245 17" stroke="#000000" stroke-width="1.2" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- 7. Conv -> Add Circle -->
+  <path id="edge_conv_to_add" data-id="edge_conv_to_add" data-class="edge" data-source="node_conv" data-target="node_add" d="M 221.5 26 L 221.5 36" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+  <!-- 8. Mask Decoder -> Trans Conv -->
+  <path id="edge_decoder_to_trans" data-id="edge_decoder_to_trans" data-class="edge" data-source="node_mask_decoder" data-target="node_trans_conv" d="M 305 47 L 318 47" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+  <!-- 9. Trans Conv -> Output Images Branch -->
+  <path id="edge_trans_to_outs" data-id="edge_trans_to_outs" data-class="edge" data-source="node_trans_conv" data-target="raster_out_gt" d="M 343 47 L 354 47" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)"/>
+  
+  <path id="edge_trans_to_interactive_branch" data-id="edge_trans_to_interactive_branch" data-class="edge" data-source="node_trans_conv" data-target="label_y_hat_i" d="M 350 47 L 350 7 L 453 7 L 453 19" stroke="#000000" stroke-width="1.2" fill="none" marker-end="url(#arrow)"/>
+  <path id="edge_trans_to_gt_top_branch" data-id="edge_trans_to_gt_top_branch" data-class="edge" data-source="node_trans_conv" data-target="label_y_hat_g" d="M 386 7 L 386 19" stroke="#000000" stroke-width="1.2" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- 10. Ground Truth -> Sim GT -->
+  <path id="edge_gt_to_sim" data-id="edge_gt_to_sim" data-class="edge" data-source="raster_gt_img" data-target="node_sim_gt" d="M 64 120 L 71 120" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+  <!-- 11. Sim GT -> Prompt Encoder -->
+  <path id="edge_sim_gt_to_prompt" data-id="edge_sim_gt_to_prompt" data-class="edge" data-source="node_sim_gt" data-target="node_prompt_encoder" d="M 174 120 L 188 120" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+  <!-- 12. Interactive Mask -> Sim Interactive -->
+  <path id="edge_interactive_to_sim" data-id="edge_interactive_to_sim" data-class="edge" data-source="raster_interactive_img" data-target="node_sim_interactive" d="M 64 192 L 71 192" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+  <!-- 13. Sim Interactive -> Prompt Encoder -->
+  <path id="edge_sim_interactive_to_prompt" data-id="edge_sim_interactive_to_prompt" data-class="edge" data-source="node_sim_interactive" data-target="node_prompt_encoder" d="M 174 192 L 194 192 L 194 156" stroke="#000000" stroke-width="1.2" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- 14. Output GT -> Top Error Region -->
+  <path id="edge_out_gt_to_error" data-id="edge_out_gt_to_error" data-class="edge" data-source="raster_out_gt" data-target="raster_error_gt" d="M 386 74 L 386 92" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+  <!-- 15. Top Error Region -> Mid Sim Top -->
+  <path id="edge_error_gt_to_sim_mid" data-id="edge_error_gt_to_sim_mid" data-class="edge" data-source="raster_error_gt" data-target="node_sim_mid_top" d="M 358 120 L 342 120" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+  <!-- 16. Mid Sim Top -> Prompt Encoder -->
+  <path id="edge_sim_mid_top_to_prompt" data-id="edge_sim_mid_top_to_prompt" data-class="edge" data-source="node_sim_mid_top" data-target="node_prompt_encoder" d="M 321 120 L 301 120" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+  <!-- 17. Output Interactive -> Bottom Error Region -->
+  <path id="edge_out_interactive_to_error" data-id="edge_out_interactive_to_error" data-class="edge" data-source="raster_out_interactive" data-target="raster_error_interactive" d="M 454 74 L 454 186 L 416 186" stroke="#000000" stroke-width="1.2" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- 18. Bottom Error Region -> Mid Sim Bottom -->
+  <path id="edge_error_interactive_to_sim_mid" data-id="edge_error_interactive_to_sim_mid" data-class="edge" data-source="raster_error_interactive" data-target="node_sim_mid_bottom" d="M 358 186 L 342 186" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+  <!-- 19. Mid Sim Bottom -> Prompt Encoder -->
+  <path id="edge_sim_mid_bottom_to_prompt" data-id="edge_sim_mid_bottom_to_prompt" data-class="edge" data-source="node_sim_mid_bottom" data-target="node_prompt_encoder" d="M 321 186 L 283 186 L 283 156" stroke="#000000" stroke-width="1.2" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- DYNAMIC NARRATION BANNER -->
+</svg>
+  </div>
+
+  <div class="ab-bar">
+    <button type="button" class="ab-btn ab-play" aria-label="Pause">
+      <svg class="ab-ic-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 5.5l11 6.5-11 6.5z"/></svg>
+      <svg class="ab-ic-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 5.5h3.6v13H7.5zM12.9 5.5h3.6v13h-3.6z"/></svg>
+    </button>
+
+    <div class="ab-scrub">
+      <span class="ab-rail" aria-hidden="true"><i class="ab-played"></i></span>
+      <input type="range" class="ab-seek" min="0" max="1000" value="0" step="1"
+             aria-label="Scrub through the animation">
+    </div>
+
+    <span class="ab-time"><b>0:00</b>&nbsp;/&nbsp;<span class="ab-total">0:00</span></span>
+
+    <div class="ab-speed" role="group" aria-label="Playback speed">
+      <button type="button" class="ab-slower" aria-label="Slower">&#8722;</button>
+      <span class="ab-rate" aria-live="polite">1&#215;</span>
+      <button type="button" class="ab-faster" aria-label="Faster">+</button>
+    </div>
+
+    <button type="button" class="ab-btn ab-toggle" aria-pressed="true">
+      <span class="ab-led" aria-hidden="true"></span>
+      <span class="ab-word">Captions on</span>
+    </button>
+  </div>
+
+  <figcaption class="ab-cap" aria-live="polite"></figcaption>
+</figure>
+
+<script>
+(function () {
+  var CUES = [{"start": 0.0, "end": 2.0, "text": "The training pipeline begins with three inputs: the input medical image, its corresponding ground truth mask, and generated interactive masks."}, {"start": 2.0, "end": 4.0, "text": "A frozen image encoder extracts visual tokens from the input image, while initial interaction simulators derive point, bounding box, and text prompts from the masks."}, {"start": 4.0, "end": 6.0, "text": "The system then enters an iterative interaction loop that simulates multiple consecutive refinement steps."}, {"start": 6.0, "end": 8.0, "text": "The initial simulated interaction prompts are processed by a learnable prompt encoder."}, {"start": 8.0, "end": 10.0, "text": "The extracted image tokens are combined with convolutional feedback features via element-wise addition."}, {"start": 10.0, "end": 12.0, "text": "A learnable mask decoder integrates these fused image features with the encoded prompts and circulates intermediate features back through a convolution layer."}, {"start": 12.0, "end": 14.0, "text": "Transposed convolution layers then upsample the decoded representations into predicted segmentation masks for both the ground truth and interactive targets."}, {"start": 14.0, "end": 16.0, "text": "The framework computes error regions by identifying discrepancies between each predicted mask and its target."}, {"start": 16.0, "end": 18.0, "text": "Interaction simulators place corrective prompts on these error regions and feed them back to the prompt encoder, completing the feedback loop across iterations."}];
+  var LOOP = 18.0;
+  var REPEATS = Infinity;
+  var RATES = [0.25, 0.5, 0.75, 1, 1.5, 2, 3];
+
+  var fig = document.querySelector('.ab');
+  var cap = document.querySelector('.ab-cap');
+  var play = document.querySelector('.ab-play');
+  var seek = document.querySelector('.ab-seek');
+  var played = document.querySelector('.ab-played');
+  var nowEl = document.querySelector('.ab-time b');
+  var totalEl = document.querySelector('.ab-total');
+  var rateEl = document.querySelector('.ab-rate');
+  var slower = document.querySelector('.ab-slower');
+  var faster = document.querySelector('.ab-faster');
+  var toggle = document.querySelector('.ab-toggle');
+  var word = toggle.querySelector('.ab-word');
+
+  var at = -1, swap = null, rate = 3, paused = false, scrubbing = false;
+
+  // THE CLOCK. The drawing is hundreds of short animations that each stop when
+  // they are done, so none of them can be asked what time it is. This one runs
+  // the length of the whole piece, does nothing visible, and is driven by the
+  // same controls - so the caption, the bar and the picture cannot disagree.
+  var master = null;
+  try {
+    master = document.documentElement.animate(
+      [{ opacity: 1 }, { opacity: 1 }],
+      { duration: (LOOP || 1) * 1000, iterations: REPEATS }
+    );
+  } catch (e) {}
+  var t0 = performance.now();
+
+  function others() {
+    try {
+      var runs = document.getAnimations ? document.getAnimations() : [];
+      return runs.filter(function (a) { return a !== master; });
+    } catch (e) { return []; }
+  }
+  function clock() {
+    var t;
+    if (master && master.currentTime != null) t = master.currentTime / 1000;
+    else t = (performance.now() - t0) / 1000;
+    return REPEATS === 1 ? Math.min(t, LOOP) : (t % (LOOP || 1));
+  }
+  function each(fn) {
+    if (master) { try { fn(master); } catch (e) {} }
+    others().forEach(function (a) { try { fn(a); } catch (e) {} });
+  }
+  function clip(t) {
+    t = Math.max(0, t || 0);
+    return Math.floor(t / 60) + ':' + ('0' + Math.floor(t % 60)).slice(-2);
+  }
+
+  play.addEventListener('click', function () {
+    paused = !paused;
+    // Restarting a finished piece rather than leaving Play doing nothing
+    if (!paused && REPEATS === 1 && clock() >= LOOP - 0.05) each(function (a) { a.currentTime = 0; });
+    each(function (a) { paused ? a.pause() : a.play(); });
+    if (!paused) t0 = performance.now() - clock() * 1000;
+    fig.classList.toggle('is-paused', paused);
+    play.setAttribute('aria-label', paused ? 'Play' : 'Pause');
+  });
+
+  function setRate(i) {
+    rate = Math.max(0, Math.min(RATES.length - 1, i));
+    var r = RATES[rate];
+    each(function (a) { a.playbackRate = r; });
+    rateEl.textContent = r + '×';
+    fig.classList.toggle('is-fast', r !== 1);
+    slower.disabled = rate === 0;
+    faster.disabled = rate === RATES.length - 1;
+  }
+  slower.addEventListener('click', function () { setRate(rate - 1); });
+  faster.addEventListener('click', function () { setRate(rate + 1); });
+
+  seek.addEventListener('pointerdown', function () { scrubbing = true; });
+  seek.addEventListener('input', function () {
+    var t = (Number(seek.value) / 1000) * LOOP;
+    each(function (a) { a.currentTime = t * 1000; });
+    t0 = performance.now() - t * 1000;
+    paint(true);
+  });
+  seek.addEventListener('change', function () { scrubbing = false; });
+
+  toggle.addEventListener('click', function () {
+    var on = toggle.getAttribute('aria-pressed') !== 'true';
+    toggle.setAttribute('aria-pressed', String(on));
+    word.textContent = on ? 'Captions on' : 'Captions off';
+    fig.classList.toggle('is-off', !on);
+  });
+
+  function paint(force) {
+    var t = clock();
+    nowEl.textContent = clip(t);
+    if (!scrubbing) seek.value = String(Math.round((t / (LOOP || 1)) * 1000));
+    played.style.width = ((t / (LOOP || 1)) * 100) + '%';
+
+    var k = -1;
+    for (var i = 0; i < CUES.length; i++) { if (t >= CUES[i].start - 0.05) k = i; }
+    if (k !== at || force === true) {
+      at = k;
+      var text = k >= 0 ? CUES[k].text : '';
+      if (text !== cap.textContent) {
+        cap.classList.add('is-swap');
+        clearTimeout(swap);
+        swap = setTimeout(function () {
+          cap.textContent = text;
+          cap.classList.remove('is-swap');
+        }, 150);
+      }
+    }
+  }
+
+  // Two ways round, on purpose. requestAnimationFrame gives a smooth bar while
+  // the page is on screen, and stops dead in a background tab or an embed the
+  // browser considers hidden - where the animation itself keeps running, so the
+  // caption would be left behind. The slow timer covers exactly that case.
+  function frame() { paint(); requestAnimationFrame(frame); }
+
+  totalEl.textContent = clip(LOOP);
+  setRate(3);
+  if (!CUES.length) { fig.classList.add('is-off'); toggle.style.display = 'none'; }
+  requestAnimationFrame(frame);
+  setInterval(paint, 250);
+})();
+</script>
+</body>
+</html>

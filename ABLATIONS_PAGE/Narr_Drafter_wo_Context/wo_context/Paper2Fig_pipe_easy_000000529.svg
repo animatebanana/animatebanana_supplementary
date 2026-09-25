@@ -1,0 +1,404 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1545 1035" width="1545" height="1035">
+  <defs>
+    <!-- Arrow Marker -->
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#5b9bd5"/>
+    </marker>
+
+    <style>
+      /* Base ghost opacity for all animated elements */
+      #node_customer, #text_customer_label, #edge_customer_to_sales,
+      #block_sales_service, #block_i3_center, #rect_sales_bg, #rect_i3_bg, #text_sales_title, #text_i3_title,
+      #node_sales_step1, #node_sales_step2, #edge_sales_to_hadoop,
+      #node_hadoop, #text_hadoop_1, #text_hadoop_2, #edge_hadoop_to_dev, #edge_hadoop_to_prod,
+      #block_dev_cluster, #rect_dev_bg, #text_dev_title, #node_dev_step1, #node_dev_step2, #node_dev_step3, #edge_dev_to_prod,
+      #block_prod_cluster, #block_call_satisfaction, #rect_prod_bg, #rect_cs_bg, #text_prod_title, #text_cs_title,
+      #node_prod_step1, #node_prod_step2, #node_prod_step3, #node_rsi_cylinder, #edge_prod_to_manager,
+      #node_manager, #text_manager_label {
+        opacity: 0.15;
+        transition: opacity 0.1s;
+      }
+
+      /* Animation keyframe bindings */
+      #node_customer, #text_customer_label, #edge_customer_to_sales {
+        animation: anim_ts1 32s infinite;
+      }
+
+      #block_sales_service, #block_i3_center, #rect_sales_bg, #rect_i3_bg, #text_sales_title, #text_i3_title {
+        animation: anim_sales_parent 32s infinite;
+      }
+
+      #node_sales_step1, #node_sales_step2, #edge_sales_to_hadoop {
+        animation: anim_ts3 32s infinite;
+      }
+
+      #node_hadoop, #text_hadoop_1, #text_hadoop_2, #edge_hadoop_to_dev, #edge_hadoop_to_prod {
+        animation: anim_ts4 32s infinite;
+      }
+
+      #block_dev_cluster, #rect_dev_bg, #text_dev_title, #node_dev_step1, #node_dev_step2, #node_dev_step3, #edge_dev_to_prod {
+        animation: anim_ts5 32s infinite;
+      }
+
+      #block_prod_cluster, #block_call_satisfaction, #rect_prod_bg, #rect_cs_bg, #text_prod_title, #text_cs_title {
+        animation: anim_prod_parent 32s infinite;
+      }
+
+      #node_prod_step1, #node_prod_step2, #node_prod_step3, #node_rsi_cylinder, #edge_prod_to_manager {
+        animation: anim_ts7 32s infinite;
+      }
+
+      #node_manager, #text_manager_label {
+        animation: anim_ts8 32s infinite;
+      }
+
+      /* Narration Subtitles */
+      .narrative-text {
+        opacity: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        font-size: 21px;
+        font-weight: 500;
+        fill: #1e293b;
+      }
+
+      #narr_ts1 { animation: narr_anim_ts1 32s infinite; }
+      #narr_ts2 { animation: narr_anim_ts2 32s infinite; }
+      #narr_ts3 { animation: narr_anim_ts3 32s infinite; }
+      #narr_ts4 { animation: narr_anim_ts4 32s infinite; }
+      #narr_ts5 { animation: narr_anim_ts5 32s infinite; }
+      #narr_ts6 { animation: narr_anim_ts6 32s infinite; }
+      #narr_ts7 { animation: narr_anim_ts7 32s infinite; }
+      #narr_ts8 { animation: narr_anim_ts8 32s infinite; }
+
+      /* Keyframes (8 slices of 12.5% each) */
+      /* T1: 0% - 12.5% */
+      @keyframes anim_ts1 {
+        0% { opacity: 1; }
+        12.499% { opacity: 1; }
+        12.5% { opacity: 0.15; }
+        100% { opacity: 0.15; }
+      }
+
+      /* T2-T3 Parent Persistence: 12.5% - 37.5% */
+      @keyframes anim_sales_parent {
+        0% { opacity: 0.15; }
+        12.499% { opacity: 0.15; }
+        12.5% { opacity: 1; }
+        37.499% { opacity: 1; }
+        37.5% { opacity: 0.15; }
+        100% { opacity: 0.15; }
+      }
+
+      /* T3: 25.0% - 37.5% */
+      @keyframes anim_ts3 {
+        0% { opacity: 0.15; }
+        24.999% { opacity: 0.15; }
+        25% { opacity: 1; }
+        37.499% { opacity: 1; }
+        37.5% { opacity: 0.15; }
+        100% { opacity: 0.15; }
+      }
+
+      /* T4: 37.5% - 50.0% */
+      @keyframes anim_ts4 {
+        0% { opacity: 0.15; }
+        37.499% { opacity: 0.15; }
+        37.5% { opacity: 1; }
+        49.999% { opacity: 1; }
+        50% { opacity: 0.15; }
+        100% { opacity: 0.15; }
+      }
+
+      /* T5: 50.0% - 62.5% */
+      @keyframes anim_ts5 {
+        0% { opacity: 0.15; }
+        49.999% { opacity: 0.15; }
+        50% { opacity: 1; }
+        62.499% { opacity: 1; }
+        62.5% { opacity: 0.15; }
+        100% { opacity: 0.15; }
+      }
+
+      /* T6-T7 Parent Persistence: 62.5% - 87.5% */
+      @keyframes anim_prod_parent {
+        0% { opacity: 0.15; }
+        62.499% { opacity: 0.15; }
+        62.5% { opacity: 1; }
+        87.499% { opacity: 1; }
+        87.5% { opacity: 0.15; }
+        100% { opacity: 0.15; }
+      }
+
+      /* T7: 75.0% - 87.5% */
+      @keyframes anim_ts7 {
+        0% { opacity: 0.15; }
+        74.999% { opacity: 0.15; }
+        75% { opacity: 1; }
+        87.499% { opacity: 1; }
+        87.5% { opacity: 0.15; }
+        100% { opacity: 0.15; }
+      }
+
+      /* T8: 87.5% - 100% */
+      @keyframes anim_ts8 {
+        0% { opacity: 0.15; }
+        87.499% { opacity: 0.15; }
+        87.5% { opacity: 1; }
+        100% { opacity: 1; }
+      }
+
+      /* Subtitle Keyframes */
+      @keyframes narr_anim_ts1 {
+        0% { opacity: 1; }
+        12.499% { opacity: 1; }
+        12.5% { opacity: 0; }
+        100% { opacity: 0; }
+      }
+      @keyframes narr_anim_ts2 {
+        0% { opacity: 0; }
+        12.499% { opacity: 0; }
+        12.5% { opacity: 1; }
+        24.499% { opacity: 1; }
+        25% { opacity: 0; }
+        100% { opacity: 0; }
+      }
+      @keyframes narr_anim_ts3 {
+        0% { opacity: 0; }
+        24.999% { opacity: 0; }
+        25% { opacity: 1; }
+        37.499% { opacity: 1; }
+        37.5% { opacity: 0; }
+        100% { opacity: 0; }
+      }
+      @keyframes narr_anim_ts4 {
+        0% { opacity: 0; }
+        37.499% { opacity: 0; }
+        37.5% { opacity: 1; }
+        49.999% { opacity: 1; }
+        50% { opacity: 0; }
+        100% { opacity: 0; }
+      }
+      @keyframes narr_anim_ts5 {
+        0% { opacity: 0; }
+        49.999% { opacity: 0; }
+        50% { opacity: 1; }
+        62.499% { opacity: 1; }
+        62.5% { opacity: 0; }
+        100% { opacity: 0; }
+      }
+      @keyframes narr_anim_ts6 {
+        0% { opacity: 0; }
+        62.499% { opacity: 0; }
+        62.5% { opacity: 1; }
+        74.999% { opacity: 1; }
+        75% { opacity: 0; }
+        100% { opacity: 0; }
+      }
+      @keyframes narr_anim_ts7 {
+        0% { opacity: 0; }
+        74.999% { opacity: 0; }
+        75% { opacity: 1; }
+        87.499% { opacity: 1; }
+        87.5% { opacity: 0; }
+        100% { opacity: 0; }
+      }
+      @keyframes narr_anim_ts8 {
+        0% { opacity: 0; }
+        87.499% { opacity: 0; }
+        87.5% { opacity: 1; }
+        100% { opacity: 1; }
+      }
+    </style>
+  </defs>
+
+  <!-- ==================== EDGES (LAYER 1) ==================== -->
+  <g>
+    <!-- Customer to Sales & Service Ops Arrow -->
+    <path id="edge_customer_to_sales" data-id="edge_customer_to_sales" data-class="edge" data-source="node_customer" data-target="block_sales_service" d="M 227 245 L 227 335" stroke="#5b9bd5" stroke-width="18" fill="none" marker-end="url(#arrow-blue)"/>
+    
+    <!-- Sales & Service Ops to Hadoop Eco-system Arrow -->
+    <path id="edge_sales_to_hadoop" data-id="edge_sales_to_hadoop" data-class="edge" data-source="block_sales_service" data-target="node_hadoop" d="M 400 640 L 485 640" stroke="#5b9bd5" stroke-width="18" fill="none" marker-end="url(#arrow-blue)"/>
+
+    <!-- Hadoop Eco-system to Production Cluster Arrow -->
+    <path id="edge_hadoop_to_prod" data-id="edge_hadoop_to_prod" data-class="edge" data-source="node_hadoop" data-target="block_call_satisfaction" d="M 870 575 L 945 520" stroke="#5b9bd5" stroke-width="18" fill="none" marker-end="url(#arrow-blue)"/>
+
+    <!-- Hadoop Eco-system to Development Cluster Arrow -->
+    <path id="edge_hadoop_to_dev" data-id="edge_hadoop_to_dev" data-class="edge" data-source="node_hadoop" data-target="block_dev_cluster" d="M 890 740 L 975 740" stroke="#5b9bd5" stroke-width="18" fill="none" marker-end="url(#arrow-blue)"/>
+
+    <!-- Development Cluster to Production Cluster Arrow -->
+    <path id="edge_dev_to_prod" data-id="edge_dev_to_prod" data-class="edge" data-source="block_dev_cluster" data-target="block_call_satisfaction" d="M 1190 620 L 1190 535" stroke="#5b9bd5" stroke-width="18" fill="none" marker-end="url(#arrow-blue)"/>
+
+    <!-- Production Cluster to Manager Arrow -->
+    <path id="edge_prod_to_manager" data-id="edge_prod_to_manager" data-class="edge" data-source="block_call_satisfaction" data-target="node_manager" d="M 840 150 L 645 150" stroke="#5b9bd5" stroke-width="18" fill="none" marker-end="url(#arrow-blue)"/>
+  </g>
+
+  <!-- ==================== STANDALONE / RASTER NODES ==================== -->
+  <!-- Customer Node -->
+  <g id="node_customer" data-id="node_customer" data-class="raster_node"><image href="../../rasters/Paper2Fig_pipe_easy_000000529/crop_node_customer.png" xlink:href="../../rasters/Paper2Fig_pipe_easy_000000529/crop_node_customer.png" x="145" y="65" width="165" height="135" preserveAspectRatio="xMidYMid meet" /></g>
+  <text id="text_customer_label" data-id="text_customer_label" data-class="text_node" data-parent="root" x="227" y="228" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">CUSTOMER</text>
+
+  <!-- Manager/Analyst Node -->
+  <g id="node_manager" data-id="node_manager" data-class="raster_node"><image href="../../rasters/Paper2Fig_pipe_easy_000000529/crop_node_manager.png" xlink:href="../../rasters/Paper2Fig_pipe_easy_000000529/crop_node_manager.png" x="500" y="65" width="145" height="135" preserveAspectRatio="xMidYMid meet" /></g>
+  <text id="text_manager_label" data-id="text_manager_label" data-class="text_node" data-parent="root" x="572" y="228" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">MANAGER/ANALYST</text>
+
+  <!-- Hadoop Eco-system Cylinder -->
+  <g id="node_hadoop" data-id="node_hadoop" data-class="standalone_node" data-parent="root">
+    <!-- Cylinder Body -->
+    <path id="path_hadoop_body" data-id="path_hadoop_body" data-class="composite_part" data-parent="node_hadoop" d="M 510 535 L 510 850 A 178 45 0 0 0 866 850 L 866 535 Z" fill="#4fa8e0" stroke="#3b82b6" stroke-width="2"/>
+    <!-- Cylinder Top -->
+    <ellipse id="ellipse_hadoop_top" data-id="ellipse_hadoop_top" data-class="composite_part" data-parent="node_hadoop" cx="688" cy="535" rx="178" ry="45" fill="#8ed1fc" stroke="#3b82b6" stroke-width="2"/>
+    <!-- Cylinder Bottom Rim Arc (for 3D definition) -->
+    <path id="path_hadoop_bottom" data-id="path_hadoop_bottom" data-class="composite_part" data-parent="node_hadoop" d="M 510 850 A 178 45 0 0 0 866 850" fill="none" stroke="#3b82b6" stroke-width="2"/>
+    <!-- Hadoop Text -->
+    <text id="text_hadoop_1" data-id="text_hadoop_1" data-class="child_node" data-parent="node_hadoop" x="688" y="700" font-family="Arial, sans-serif" font-size="30" font-weight="bold" fill="#000000" text-anchor="middle">Hadoop</text>
+    <text id="text_hadoop_2" data-id="text_hadoop_2" data-class="child_node" data-parent="node_hadoop" x="688" y="740" font-family="Arial, sans-serif" font-size="30" font-weight="bold" fill="#000000" text-anchor="middle">Eco-system</text>
+  </g>
+
+  <!-- ==================== SALES & SERVICE OPS BLOCK ==================== -->
+  <g id="block_sales_service" data-id="block_sales_service" data-class="block" data-parent="root">
+    <!-- Outer Orange Container -->
+    <rect id="rect_sales_bg" data-id="rect_sales_bg" data-class="child_node" data-parent="block_sales_service" x="60" y="370" width="315" height="475" fill="#e27c3e" stroke="#c05a20" stroke-width="2"/>
+    <text id="text_sales_title" data-id="text_sales_title" data-class="text_node" data-parent="block_sales_service" x="75" y="410" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">Sales &amp; Service ops.</text>
+
+    <!-- Inner Yellow Container: I3 Call Center -->
+    <g id="block_i3_center" data-id="block_i3_center" data-class="block" data-parent="block_sales_service">
+      <rect id="rect_i3_bg" data-id="rect_i3_bg" data-class="child_node" data-parent="block_i3_center" x="62" y="430" width="268" height="413" fill="#f5b842" stroke="#d49b28" stroke-width="2"/>
+      <text id="text_i3_title" data-id="text_i3_title" data-class="text_node" data-parent="block_i3_center" x="78" y="468" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">I3 call center</text>
+
+      <!-- Sub-node 1: Processed .wav files -->
+      <g id="node_sales_step1" data-id="node_sales_step1" data-class="child_node" data-parent="block_i3_center">
+        <rect id="rect_sales_step1" data-id="rect_sales_step1" data-class="composite_part" data-parent="node_sales_step1" x="90" y="540" width="60" height="288" fill="#a4cf95" stroke="#3d6b35" stroke-width="2" rx="4"/>
+        <circle id="circle_sales_step1" data-id="circle_sales_step1" data-class="composite_part" data-parent="node_sales_step1" cx="120" cy="528" r="28" fill="#6ba4d9" stroke="#3b6ea5" stroke-width="2"/>
+        <text id="text_sales_num1" data-id="text_sales_num1" data-class="composite_part" data-parent="node_sales_step1" x="120" y="537" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#ffffff" text-anchor="middle">1</text>
+        <text id="text_sales_step1_label" data-id="text_sales_step1_label" data-class="composite_part" data-parent="node_sales_step1" x="-685" y="128" transform="rotate(-90)" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Processed .wav files</text>
+      </g>
+
+      <!-- Sub-node 2: Speech-to-text model -->
+      <g id="node_sales_step2" data-id="node_sales_step2" data-class="child_node" data-parent="block_i3_center">
+        <rect id="rect_sales_step2" data-id="rect_sales_step2" data-class="composite_part" data-parent="node_sales_step2" x="192" y="540" width="60" height="288" fill="#a4cf95" stroke="#3d6b35" stroke-width="2" rx="4"/>
+        <circle id="circle_sales_step2" data-id="circle_sales_step2" data-class="composite_part" data-parent="node_sales_step2" cx="222" cy="528" r="28" fill="#6ba4d9" stroke="#3b6ea5" stroke-width="2"/>
+        <text id="text_sales_num2" data-id="text_sales_num2" data-class="composite_part" data-parent="node_sales_step2" x="222" y="537" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#ffffff" text-anchor="middle">2</text>
+        <text id="text_sales_step2_label" data-id="text_sales_step2_label" data-class="composite_part" data-parent="node_sales_step2" x="-685" y="230" transform="rotate(-90)" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Speech-to-text model</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ==================== PRODUCTION CLUSTER BLOCK ==================== -->
+  <g id="block_prod_cluster" data-id="block_prod_cluster" data-class="block" data-parent="root">
+    <!-- Outer Orange Container -->
+    <rect id="rect_prod_bg" data-id="rect_prod_bg" data-class="child_node" data-parent="block_prod_cluster" x="865" y="15" width="655" height="465" fill="#e27c3e" stroke="#c05a20" stroke-width="2"/>
+    <text id="text_prod_title" data-id="text_prod_title" data-class="text_node" data-parent="block_prod_cluster" x="880" y="55" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#000000">Production Cluster</text>
+
+    <!-- Inner Yellow Container: Call Satisfaction System -->
+    <g id="block_call_satisfaction" data-id="block_call_satisfaction" data-class="block" data-parent="block_prod_cluster">
+      <rect id="rect_cs_bg" data-id="rect_cs_bg" data-class="child_node" data-parent="block_call_satisfaction" x="867" y="85" width="588" height="415" fill="#f5b842" stroke="#d49b28" stroke-width="2"/>
+      <text id="text_cs_title" data-id="text_cs_title" data-class="text_node" data-parent="block_call_satisfaction" x="882" y="125" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">Call Satisfaction System</text>
+
+      <!-- Sub-node 1: Data processing -->
+      <g id="node_prod_step1" data-id="node_prod_step1" data-class="child_node" data-parent="block_call_satisfaction">
+        <rect id="rect_prod_step1" data-id="rect_prod_step1" data-class="composite_part" data-parent="node_prod_step1" x="887" y="215" width="58" height="268" fill="#a4cf95" stroke="#3d6b35" stroke-width="2" rx="4"/>
+        <circle id="circle_prod_step1" data-id="circle_prod_step1" data-class="composite_part" data-parent="node_prod_step1" cx="916" cy="202" r="26" fill="#6ba4d9" stroke="#3b6ea5" stroke-width="2"/>
+        <text id="text_prod_num1" data-id="text_prod_num1" data-class="composite_part" data-parent="node_prod_step1" x="916" y="210" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#ffffff" text-anchor="middle">1</text>
+        <text id="text_prod_step1_label" data-id="text_prod_step1_label" data-class="composite_part" data-parent="node_prod_step1" x="-350" y="924" transform="rotate(-90)" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Data processing</text>
+      </g>
+
+      <!-- Sub-node 2: Batch Scoring -->
+      <g id="node_prod_step2" data-id="node_prod_step2" data-class="child_node" data-parent="block_call_satisfaction">
+        <rect id="rect_prod_step2" data-id="rect_prod_step2" data-class="composite_part" data-parent="node_prod_step2" x="987" y="215" width="58" height="268" fill="#a4cf95" stroke="#3d6b35" stroke-width="2" rx="4"/>
+        <circle id="circle_prod_step2" data-id="circle_prod_step2" data-class="composite_part" data-parent="node_prod_step2" cx="1016" cy="202" r="26" fill="#6ba4d9" stroke="#3b6ea5" stroke-width="2"/>
+        <text id="text_prod_num2" data-id="text_prod_num2" data-class="composite_part" data-parent="node_prod_step2" x="1016" y="210" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#ffffff" text-anchor="middle">2</text>
+        <text id="text_prod_step2_label" data-id="text_prod_step2_label" data-class="composite_part" data-parent="node_prod_step2" x="-350" y="1024" transform="rotate(-90)" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Batch Scoring</text>
+      </g>
+
+      <!-- Sub-node 3: Business Layer -->
+      <g id="node_prod_step3" data-id="node_prod_step3" data-class="child_node" data-parent="block_call_satisfaction">
+        <rect id="rect_prod_step3" data-id="rect_prod_step3" data-class="composite_part" data-parent="node_prod_step3" x="1087" y="215" width="58" height="268" fill="#a4cf95" stroke="#3d6b35" stroke-width="2" rx="4"/>
+        <circle id="circle_prod_step3" data-id="circle_prod_step3" data-class="composite_part" data-parent="node_prod_step3" cx="1116" cy="202" r="26" fill="#6ba4d9" stroke="#3b6ea5" stroke-width="2"/>
+        <text id="text_prod_num3" data-id="text_prod_num3" data-class="composite_part" data-parent="node_prod_step3" x="1116" y="210" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#ffffff" text-anchor="middle">3</text>
+        <text id="text_prod_step3_label" data-id="text_prod_step3_label" data-class="composite_part" data-parent="node_prod_step3" x="-350" y="1124" transform="rotate(-90)" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Business Layer</text>
+      </g>
+
+      <!-- Yellow Cylinder: RSI scores (Output Table) -->
+      <g id="node_rsi_cylinder" data-id="node_rsi_cylinder" data-class="child_node" data-parent="block_call_satisfaction">
+        <path id="path_rsi_body" data-id="path_rsi_body" data-class="composite_part" data-parent="node_rsi_cylinder" d="M 1215 260 L 1215 450 A 100 32 0 0 0 1415 450 L 1415 260 Z" fill="#ffff66" stroke="#c9a724" stroke-width="2"/>
+        <ellipse id="ellipse_rsi_top" data-id="ellipse_rsi_top" data-class="composite_part" data-parent="node_rsi_cylinder" cx="1315" cy="260" rx="100" ry="32" fill="#ffffaa" stroke="#c9a724" stroke-width="2"/>
+        <path id="path_rsi_bottom" data-id="path_rsi_bottom" data-class="composite_part" data-parent="node_rsi_cylinder" d="M 1215 450 A 100 32 0 0 0 1415 450" fill="none" stroke="#c9a724" stroke-width="2"/>
+        <text id="text_rsi_1" data-id="text_rsi_1" data-class="composite_part" data-parent="node_rsi_cylinder" x="1315" y="335" font-family="Arial, sans-serif" font-size="21" font-weight="bold" fill="#000000" text-anchor="middle">RSI scores</text>
+        <text id="text_rsi_2" data-id="text_rsi_2" data-class="composite_part" data-parent="node_rsi_cylinder" x="1315" y="375" font-family="Arial, sans-serif" font-size="21" font-weight="bold" fill="#000000" text-anchor="middle">(Output</text>
+        <text id="text_rsi_3" data-id="text_rsi_3" data-class="composite_part" data-parent="node_rsi_cylinder" x="1315" y="415" font-family="Arial, sans-serif" font-size="21" font-weight="bold" fill="#000000" text-anchor="middle">Table)</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ==================== DEVELOPMENT CLUSTER BLOCK ==================== -->
+  <g id="block_dev_cluster" data-id="block_dev_cluster" data-class="block" data-parent="root">
+    <!-- Outer Orange Container -->
+    <rect id="rect_dev_bg" data-id="rect_dev_bg" data-class="child_node" data-parent="block_dev_cluster" x="1005" y="635" width="430" height="260" fill="#e27c3e" stroke="#c05a20" stroke-width="2"/>
+    <text id="text_dev_title" data-id="text_dev_title" data-class="text_node" data-parent="block_dev_cluster" x="1020" y="675" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">Development Cluster</text>
+
+    <!-- Sub-node 1: Data Analysis -->
+    <g id="node_dev_step1" data-id="node_dev_step1" data-class="child_node" data-parent="block_dev_cluster">
+      <rect id="rect_dev_step1" data-id="rect_dev_step1" data-class="composite_part" data-parent="node_dev_step1" x="1018" y="700" width="345" height="48" fill="#a4cf95" stroke="#3d6b35" stroke-width="2" rx="8"/>
+      <circle id="circle_dev_step1" data-id="circle_dev_step1" data-class="composite_part" data-parent="node_dev_step1" cx="1382" cy="724" r="21" fill="#6ba4d9" stroke="#3b6ea5" stroke-width="2"/>
+      <text id="text_dev_num1" data-id="text_dev_num1" data-class="composite_part" data-parent="node_dev_step1" x="1382" y="731" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#ffffff" text-anchor="middle">1</text>
+      <text id="text_dev_step1_label" data-id="text_dev_step1_label" data-class="composite_part" data-parent="node_dev_step1" x="1035" y="733" font-family="Arial, sans-serif" font-size="21" font-weight="bold" fill="#000000">Data Analysis</text>
+    </g>
+
+    <!-- Sub-node 2: Model Design -->
+    <g id="node_dev_step2" data-id="node_dev_step2" data-class="child_node" data-parent="block_dev_cluster">
+      <rect id="rect_dev_step2" data-id="rect_dev_step2" data-class="composite_part" data-parent="node_dev_step2" x="1018" y="760" width="345" height="48" fill="#a4cf95" stroke="#3d6b35" stroke-width="2" rx="8"/>
+      <circle id="circle_dev_step2" data-id="circle_dev_step2" data-class="composite_part" data-parent="node_dev_step2" cx="1382" cy="784" r="21" fill="#6ba4d9" stroke="#3b6ea5" stroke-width="2"/>
+      <text id="text_dev_num2" data-id="text_dev_num2" data-class="composite_part" data-parent="node_dev_step2" x="1382" y="791" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#ffffff" text-anchor="middle">2</text>
+      <text id="text_dev_step2_label" data-id="text_dev_step2_label" data-class="composite_part" data-parent="node_dev_step2" x="1035" y="793" font-family="Arial, sans-serif" font-size="21" font-weight="bold" fill="#000000">Model Design</text>
+    </g>
+
+    <!-- Sub-node 3: Development & Test -->
+    <g id="node_dev_step3" data-id="node_dev_step3" data-class="child_node" data-parent="block_dev_cluster">
+      <rect id="rect_dev_step3" data-id="rect_dev_step3" data-class="composite_part" data-parent="node_dev_step3" x="1018" y="820" width="345" height="48" fill="#a4cf95" stroke="#3d6b35" stroke-width="2" rx="8"/>
+      <circle id="circle_dev_step3" data-id="circle_dev_step3" data-class="composite_part" data-parent="node_dev_step3" cx="1382" cy="844" r="21" fill="#6ba4d9" stroke="#3b6ea5" stroke-width="2"/>
+      <text id="text_dev_num3" data-id="text_dev_num3" data-class="composite_part" data-parent="node_dev_step3" x="1382" y="851" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#ffffff" text-anchor="middle">3</text>
+      <text id="text_dev_step3_label" data-id="text_dev_step3_label" data-class="composite_part" data-parent="node_dev_step3" x="1035" y="853" font-family="Arial, sans-serif" font-size="21" font-weight="bold" fill="#000000">Development &amp; Test</text>
+    </g>
+  </g>
+
+  <!-- ==================== DYNAMIC NARRATION BANNER ==================== -->
+  <g id="narration_banner">
+    <rect x="60" y="930" width="1425" height="85" rx="12" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+    
+    <text id="narr_ts1" class="narrative-text" x="50%" y="980" text-anchor="middle">
+      <tspan>The workflow begins with the customer, whose calls are directed into sales and service operations.</tspan>
+    </text>
+
+    <text id="narr_ts2" class="narrative-text" x="50%" y="980" text-anchor="middle">
+      <tspan>Within Sales and Service operations, calls are received by the I3 call center.</tspan>
+    </text>
+
+    <text id="narr_ts3" class="narrative-text" x="50%" y="968" text-anchor="middle">
+      <tspan x="50%">The recordings are converted into processed dot wav files and run through a speech-to-text model</tspan>
+      <tspan x="50%" dy="1.3em">before transferring to the Hadoop Eco-system.</tspan>
+    </text>
+
+    <text id="narr_ts4" class="narrative-text" x="50%" y="968" text-anchor="middle">
+      <tspan x="50%">The Hadoop Eco-system serves as central storage, feeding data into both the</tspan>
+      <tspan x="50%" dy="1.3em">Development Cluster and the Production Cluster.</tspan>
+    </text>
+
+    <text id="narr_ts5" class="narrative-text" x="50%" y="968" text-anchor="middle">
+      <tspan x="50%">In the Development Cluster, the workflow executes data analysis, model design,</tspan>
+      <tspan x="50%" dy="1.3em">and development and test steps before feeding into production.</tspan>
+    </text>
+
+    <text id="narr_ts6" class="narrative-text" x="50%" y="980" text-anchor="middle">
+      <tspan>The Production Cluster contains the Call Satisfaction System.</tspan>
+    </text>
+
+    <text id="narr_ts7" class="narrative-text" x="50%" y="968" text-anchor="middle">
+      <tspan x="50%">This system executes data processing, batch scoring, and the business layer</tspan>
+      <tspan x="50%" dy="1.3em">to generate RSI scores in an output table.</tspan>
+    </text>
+
+    <text id="narr_ts8" class="narrative-text" x="50%" y="980" text-anchor="middle">
+      <tspan>Finally, the output is delivered directly to the manager and analyst.</tspan>
+    </text>
+  </g>
+</svg>

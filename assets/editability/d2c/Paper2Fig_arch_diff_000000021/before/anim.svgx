@@ -1,0 +1,359 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 680" width="1000" height="680">
+  <defs>
+    <!-- Arrow markers -->
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#b91c1c"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#002b9e"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#059669"/>
+    </marker>
+    <marker id="arrow-yellow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#d97706"/>
+    </marker>
+    <marker id="arrow-gray" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#4b5563"/>
+    </marker>
+
+    <!-- Filters -->
+    <filter id="shadow-card" x="-4%" y="-4%" width="108%" height="112%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="2" dy="2" stdDeviation="2.5" flood-color="#000000" flood-opacity="0.25"/>
+    </filter>
+
+    <style>
+      .narrative-text {
+        font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+        font-size: 16px;
+        fill: #1e293b;
+        font-weight: 500;
+        opacity: 0;
+      }
+
+      #narr_ts1 { animation: show_ts1 15s step-end infinite; }
+      #narr_ts2 { animation: show_ts2 15s step-end infinite; }
+      #narr_ts3 { animation: show_ts3 15s step-end infinite; }
+      #narr_ts4 { animation: show_ts4 15s step-end infinite; }
+      #narr_ts5 { animation: show_ts5 15s step-end infinite; }
+      #narr_ts6 { animation: show_ts6 15s step-end infinite; }
+      #narr_ts7 { animation: show_ts7 15s step-end infinite; }
+      #narr_ts8 { animation: show_ts8 15s step-end infinite; }
+      #narr_ts9 { animation: show_ts9 15s step-end infinite; }
+      #narr_ts10 { animation: show_ts10 15s step-end infinite; }
+      #narr_ts11 { animation: show_ts11 15s step-end infinite; }
+      #narr_ts12 { animation: show_ts12 15s step-end infinite; }
+      #narr_ts13 { animation: show_ts13 15s step-end infinite; }
+      #narr_ts14 { animation: show_ts14 15s step-end infinite; }
+      #narr_ts15 { animation: show_ts15 15s step-end infinite; }
+
+      @keyframes show_ts1 { 0% { opacity: 1; } 6.67% { opacity: 0; } 100% { opacity: 0; } }
+      @keyframes show_ts2 { 0% { opacity: 0; } 6.67% { opacity: 1; } 13.33% { opacity: 0; } 100% { opacity: 0; } }
+      @keyframes show_ts3 { 0% { opacity: 0; } 13.33% { opacity: 1; } 20.00% { opacity: 0; } 100% { opacity: 0; } }
+      @keyframes show_ts4 { 0% { opacity: 0; } 20.00% { opacity: 1; } 26.67% { opacity: 0; } 100% { opacity: 0; } }
+      @keyframes show_ts5 { 0% { opacity: 0; } 26.67% { opacity: 1; } 33.33% { opacity: 0; } 100% { opacity: 0; } }
+      @keyframes show_ts6 { 0% { opacity: 0; } 33.33% { opacity: 1; } 40.00% { opacity: 0; } 100% { opacity: 0; } }
+      @keyframes show_ts7 { 0% { opacity: 0; } 40.00% { opacity: 1; } 46.67% { opacity: 0; } 100% { opacity: 0; } }
+      @keyframes show_ts8 { 0% { opacity: 0; } 46.67% { opacity: 1; } 53.33% { opacity: 0; } 100% { opacity: 0; } }
+      @keyframes show_ts9 { 0% { opacity: 0; } 53.33% { opacity: 1; } 60.00% { opacity: 0; } 100% { opacity: 0; } }
+      @keyframes show_ts10 { 0% { opacity: 0; } 60.00% { opacity: 1; } 66.67% { opacity: 0; } 100% { opacity: 0; } }
+      @keyframes show_ts11 { 0% { opacity: 0; } 66.67% { opacity: 1; } 73.33% { opacity: 0; } 100% { opacity: 0; } }
+      @keyframes show_ts12 { 0% { opacity: 0; } 73.33% { opacity: 1; } 80.00% { opacity: 0; } 100% { opacity: 0; } }
+      @keyframes show_ts13 { 0% { opacity: 0; } 80.00% { opacity: 1; } 86.67% { opacity: 0; } 100% { opacity: 0; } }
+      @keyframes show_ts14 { 0% { opacity: 0; } 86.67% { opacity: 1; } 93.33% { opacity: 0; } 100% { opacity: 0; } }
+      @keyframes show_ts15 { 0% { opacity: 0; } 93.33% { opacity: 1; } 100% { opacity: 1; } }
+    </style>
+  </defs>
+
+  <!-- ================= BLOCK 1: FACIAL FEATURE EXTRACTOR ================= -->
+  <g id="block_facial_extractor" data-id="block_facial_extractor" data-class="block" data-parent="root">
+    <rect id="rect_facial_extractor_bg" data-id="rect_facial_extractor_bg" data-class="child_node" data-parent="block_facial_extractor" x="2" y="2" width="406" height="225" rx="3" fill="#fed7d7" stroke="#374151" stroke-width="2.5"/>
+    <text id="text_facial_extractor_title" data-id="text_facial_extractor_title" data-class="text_node" data-parent="block_facial_extractor" x="205" y="38" fill="#111827" font-size="24" font-weight="bold" font-family="Arial, sans-serif" text-anchor="middle">Facial Feature Extractor</text>
+
+    <!-- Data Cylinder (Composite) -->
+    <g id="group_cylinder_data" data-id="group_cylinder_data" data-class="composite_whole" data-parent="block_facial_extractor">
+      <ellipse cx="98" cy="195" rx="46" ry="14" fill="#000000" opacity="0.3"/>
+      <path d="M 52 165 C 52 178 72 188 98 188 C 124 188 144 178 144 165 L 144 180 C 144 193 124 203 98 203 C 72 203 52 193 52 180 Z" fill="#991b1b" stroke="#374151" stroke-width="1.5"/>
+      <path d="M 52 145 C 52 158 72 168 98 168 C 124 168 144 158 144 145 L 144 165 C 144 178 124 188 98 188 C 72 188 52 178 52 165 Z" fill="#f87171" stroke="#374151" stroke-width="1.5"/>
+      <path d="M 52 105 L 52 145 C 52 158 72 168 98 168 C 124 168 144 158 144 145 L 144 105 Z" fill="#ffffff" stroke="#374151" stroke-width="1.5"/>
+      <ellipse cx="98" cy="105" rx="46" ry="14" fill="#ffffff" stroke="#374151" stroke-width="1.5"/>
+      <text id="text_cylinder_label" data-id="text_cylinder_label" data-class="text_node" data-parent="group_cylinder_data" x="98" y="146" fill="#1f2937" font-size="20" font-family="Arial, sans-serif" text-anchor="middle">Data</text>
+    </g>
+
+    <path id="edge_data_to_cnn" data-id="edge_data_to_cnn" data-class="edge" data-source="group_cylinder_data" data-target="block_cnn_training" d="M 152 148 L 195 148" stroke="#4b5563" stroke-width="6" fill="none" marker-end="url(#arrow-gray)"/>
+
+    <g id="block_cnn_training" data-id="block_cnn_training" data-class="block" data-parent="block_facial_extractor">
+      <text id="text_cnn_training_title" data-id="text_cnn_training_title" data-class="text_node" data-parent="block_cnn_training" x="278" y="74" fill="#1f2937" font-size="16" font-family="Arial, sans-serif" text-anchor="middle">CNN Training</text>
+      <rect id="rect_nn_card" data-id="rect_nn_card" data-class="child_node" data-parent="block_cnn_training" x="222" y="102" width="136" height="92" fill="#ffffff" stroke="#9ca3af" stroke-width="1.5" filter="url(#shadow-card)"/>
+
+      <g stroke="#9ca3af" stroke-width="1.2">
+        <line x1="234" y1="120" x2="258" y2="120"/>
+        <line x1="234" y1="120" x2="258" y2="148"/>
+        <line x1="234" y1="140" x2="258" y2="120"/>
+        <line x1="234" y1="140" x2="258" y2="148"/>
+        <line x1="234" y1="140" x2="258" y2="176"/>
+        <line x1="234" y1="162" x2="258" y2="148"/>
+        <line x1="234" y1="162" x2="258" y2="176"/>
+        <line x1="234" y1="184" x2="258" y2="176"/>
+
+        <line x1="258" y1="120" x2="286" y2="134"/>
+        <line x1="258" y1="120" x2="286" y2="162"/>
+        <line x1="258" y1="148" x2="286" y2="134"/>
+        <line x1="258" y1="148" x2="286" y2="162"/>
+        <line x1="258" y1="176" x2="286" y2="162"/>
+
+        <line x1="286" y1="134" x2="316" y2="126"/>
+        <line x1="286" y1="134" x2="316" y2="150"/>
+        <line x1="286" y1="134" x2="316" y2="170"/>
+        <line x1="286" y1="162" x2="316" y2="126"/>
+        <line x1="286" y1="162" x2="316" y2="150"/>
+        <line x1="286" y1="162" x2="316" y2="170"/>
+
+        <line x1="316" y1="126" x2="346" y2="134"/>
+        <line x1="316" y1="126" x2="346" y2="158"/>
+        <line x1="316" y1="150" x2="346" y2="134"/>
+        <line x1="316" y1="150" x2="346" y2="158"/>
+        <line x1="316" y1="150" x2="346" y2="182"/>
+        <line x1="316" y1="170" x2="346" y2="158"/>
+        <line x1="316" y1="170" x2="346" y2="182"/>
+      </g>
+
+      <circle cx="234" cy="120" r="5" fill="#7f1d1d" stroke="#374151" stroke-width="1"/>
+      <circle cx="234" cy="140" r="5" fill="#ffffff" stroke="#374151" stroke-width="1"/>
+      <circle cx="234" cy="162" r="5" fill="#7f1d1d" stroke="#374151" stroke-width="1"/>
+      <circle cx="234" cy="184" r="5" fill="#7f1d1d" stroke="#374151" stroke-width="1"/>
+
+      <circle cx="258" cy="120" r="5" fill="#ffffff" stroke="#374151" stroke-width="1"/>
+      <circle cx="258" cy="148" r="5" fill="#ffffff" stroke="#374151" stroke-width="1"/>
+      <circle cx="258" cy="176" r="5" fill="#ffffff" stroke="#374151" stroke-width="1"/>
+
+      <circle cx="286" cy="134" r="5" fill="#ffffff" stroke="#374151" stroke-width="1"/>
+      <circle cx="286" cy="162" r="5" fill="#ffffff" stroke="#374151" stroke-width="1"/>
+
+      <circle cx="316" cy="126" r="5" fill="#ffffff" stroke="#374151" stroke-width="1"/>
+      <circle cx="316" cy="150" r="5" fill="#ffffff" stroke="#374151" stroke-width="1"/>
+      <circle cx="316" cy="170" r="5" fill="#ffffff" stroke="#374151" stroke-width="1"/>
+
+      <circle cx="346" cy="134" r="5" fill="#fde047" stroke="#ca8a04" stroke-width="1"/>
+      <circle cx="346" cy="158" r="5" fill="#fde047" stroke="#ca8a04" stroke-width="1"/>
+      <circle cx="346" cy="182" r="5" fill="#fde047" stroke="#ca8a04" stroke-width="1"/>
+    </g>
+  </g>
+
+  <!-- ================= BLOCK 2: PERSON DICTIONARY ================= -->
+  <g id="block_person_dict" data-id="block_person_dict" data-class="block" data-parent="root">
+    <rect id="rect_person_dict_bg" data-id="rect_person_dict_bg" data-class="child_node" data-parent="block_person_dict" x="571" y="2" width="406" height="298" rx="3" fill="#dbeafe" stroke="#374151" stroke-width="2.5"/>
+    <text id="text_person_dict_title" data-id="text_person_dict_title" data-class="text_node" data-parent="block_person_dict" x="774" y="38" fill="#111827" font-size="24" font-weight="bold" font-family="Arial, sans-serif" text-anchor="middle">Person Dictionary</text>
+
+    <g id="box_dict_select" data-id="box_dict_select" data-class="child_node" data-parent="block_person_dict">
+      <rect id="rect_dict_select" data-id="rect_dict_select" data-class="child_node" data-parent="box_dict_select" x="595" y="62" width="360" height="66" rx="2" fill="#bfdbfe" stroke="#3b82f6" stroke-width="1.5"/>
+      <text id="text_dict_select_1" data-id="text_dict_select_1" data-class="text_node" data-parent="box_dict_select" x="780" y="88" fill="#1e293b" font-size="18" font-family="Arial, sans-serif" text-anchor="middle">Select entities &amp;</text>
+      <text id="text_dict_select_2" data-id="text_dict_select_2" data-class="text_node" data-parent="box_dict_select" x="780" y="114" fill="#1e293b" font-size="18" font-family="Arial, sans-serif" text-anchor="middle">gather exemplary images</text>
+    </g>
+
+    <g id="icon_globe" data-id="icon_globe" data-class="composite_whole" data-parent="block_person_dict">
+      <circle cx="602" cy="74" r="26" fill="#ffffff" stroke="#4b5563" stroke-width="1.8"/>
+      <ellipse cx="602" cy="74" rx="14" ry="26" fill="none" stroke="#4b5563" stroke-width="1.2"/>
+      <line x1="576" y1="74" x2="628" y2="74" stroke="#4b5563" stroke-width="1.2"/>
+      <line x1="580" y1="61" x2="624" y2="61" stroke="#4b5563" stroke-width="1.2"/>
+      <line x1="580" y1="87" x2="624" y2="87" stroke="#4b5563" stroke-width="1.2"/>
+    </g>
+
+    <path id="edge_dict_1_to_2" data-id="edge_dict_1_to_2" data-class="edge" data-source="box_dict_select" data-target="box_dict_feat_extract" d="M 776 128 L 776 148" stroke="#002b9e" stroke-width="3" fill="none" marker-end="url(#arrow-blue)"/>
+
+    <g id="box_dict_feat_extract" data-id="box_dict_feat_extract" data-class="child_node" data-parent="block_person_dict">
+      <rect id="rect_dict_feat_extract" data-id="rect_dict_feat_extract" data-class="child_node" data-parent="box_dict_feat_extract" x="595" y="154" width="360" height="52" rx="2" fill="#bfdbfe" stroke="#3b82f6" stroke-width="1.5"/>
+      <text id="text_dict_feat_extract" data-id="text_dict_feat_extract" data-class="text_node" data-parent="box_dict_feat_extract" x="775" y="186" fill="#1e293b" font-size="19" font-family="Arial, sans-serif" text-anchor="middle">Feature extraction</text>
+    </g>
+
+    <path id="edge_dict_2_to_3" data-id="edge_dict_2_to_3" data-class="edge" data-source="box_dict_feat_extract" data-target="box_dict_filtering" d="M 776 206 L 776 226" stroke="#002b9e" stroke-width="3" fill="none" marker-end="url(#arrow-blue)"/>
+
+    <g id="box_dict_filtering" data-id="box_dict_filtering" data-class="child_node" data-parent="block_person_dict">
+      <rect id="rect_dict_filtering" data-id="rect_dict_filtering" data-class="child_node" data-parent="box_dict_filtering" x="595" y="232" width="360" height="54" rx="2" fill="#bfdbfe" stroke="#3b82f6" stroke-width="1.5"/>
+      <text id="text_dict_filtering" data-id="text_dict_filtering" data-class="text_node" data-parent="box_dict_filtering" x="775" y="266" fill="#1e293b" font-size="19" font-family="Arial, sans-serif" text-anchor="middle">Filtering</text>
+    </g>
+  </g>
+
+  <!-- ================= BLOCK 3: INTERNET ARCHIVE ================= -->
+  <g id="block_internet_archive" data-id="block_internet_archive" data-class="block" data-parent="root">
+    <rect id="rect_archive_bg" data-id="rect_archive_bg" data-class="child_node" data-parent="block_internet_archive" x="2" y="335" width="406" height="221" rx="3" fill="#fef3c7" stroke="#374151" stroke-width="2.5"/>
+    <text id="text_archive_title" data-id="text_archive_title" data-class="text_node" data-parent="block_internet_archive" x="205" y="370" fill="#111827" font-size="24" font-weight="bold" font-family="Arial, sans-serif" text-anchor="middle">Internet Archive</text>
+
+    <g id="icon_archive_building" data-id="icon_archive_building" data-class="composite_whole" data-parent="block_internet_archive">
+      <text x="38" y="534" font-size="14" font-family="Times New Roman, serif" fill="#111827" letter-spacing="8" transform="rotate(-90 38 534)">INTERNET</text>
+      <text x="54" y="420" font-size="15" font-family="Times New Roman, serif" fill="#111827" letter-spacing="5">ARCHIVE</text>
+      <polygon points="108,426 63,446 153,446" fill="#111827"/>
+      <rect x="63" y="449" width="90" height="7" fill="#111827"/>
+      <rect x="68" y="460" width="11" height="58" rx="2" fill="#111827"/>
+      <rect x="91" y="460" width="11" height="58" rx="2" fill="#111827"/>
+      <rect x="114" y="460" width="11" height="58" rx="2" fill="#111827"/>
+      <rect x="137" y="460" width="11" height="58" rx="2" fill="#111827"/>
+      <rect x="63" y="522" width="90" height="7" fill="#111827"/>
+      <rect x="60" y="531" width="96" height="5" fill="#111827"/>
+    </g>
+
+    <path id="edge_archive_to_web" data-id="edge_archive_to_web" data-class="edge" data-source="icon_archive_building" data-target="block_web_content" d="M 164 476 L 224 476" stroke="#4b5563" stroke-width="6" fill="none" marker-end="url(#arrow-gray)"/>
+
+    <g id="block_web_content" data-id="block_web_content" data-class="block" data-parent="block_internet_archive">
+      <text id="text_web_content_title" data-id="text_web_content_title" data-class="text_node" data-parent="block_web_content" x="306" y="412" fill="#1f2937" font-size="18" font-family="Arial, sans-serif" text-anchor="middle">Web Content</text>
+
+      <g>
+        <rect x="238" y="426" width="102" height="72" rx="3" fill="#ffffff" stroke="#374151" stroke-width="1.8"/>
+        <rect x="238" y="426" width="102" height="15" fill="#e5e7eb" stroke="#374151" stroke-width="1.8"/>
+        <circle cx="244" cy="433.5" r="2" fill="#4b5563"/>
+        <circle cx="250" cy="433.5" r="2" fill="#4b5563"/>
+        <circle cx="256" cy="433.5" r="2" fill="#4b5563"/>
+      </g>
+      <g>
+        <rect x="256" y="442" width="122" height="76" rx="3" fill="#ffffff" stroke="#374151" stroke-width="1.8"/>
+        <rect x="256" y="442" width="122" height="15" fill="#e5e7eb" stroke="#374151" stroke-width="1.8"/>
+        <circle cx="262" cy="449.5" r="2" fill="#4b5563"/>
+        <circle cx="268" cy="449.5" r="2" fill="#4b5563"/>
+        <circle cx="274" cy="449.5" r="2" fill="#4b5563"/>
+      </g>
+      <g>
+        <rect x="256" y="458" width="98" height="70" rx="3" fill="#ffffff" stroke="#374151" stroke-width="1.8" filter="url(#shadow-card)"/>
+        <rect x="256" y="458" width="98" height="15" fill="#e5e7eb" stroke="#374151" stroke-width="1.8"/>
+        <circle cx="262" cy="465.5" r="2" fill="#4b5563"/>
+        <circle cx="268" cy="465.5" r="2" fill="#4b5563"/>
+        <circle cx="274" cy="465.5" r="2" fill="#4b5563"/>
+        <rect x="280" y="480" width="66" height="14" rx="2" fill="#e5e7eb" stroke="#9ca3af" stroke-width="1"/>
+        <rect x="264" y="488" width="34" height="34" rx="2" fill="#f3f4f6" stroke="#374151" stroke-width="1.5"/>
+        <polygon points="266,518 276,504 286,514 294,506 296,518" fill="#9ca3af"/>
+        <circle cx="272" cy="496" r="2.5" fill="#9ca3af"/>
+      </g>
+    </g>
+  </g>
+
+  <!-- ================= BLOCK 4: PERSON IDENTIFICATION ================= -->
+  <g id="block_person_ident" data-id="block_person_ident" data-class="block" data-parent="root">
+    <rect id="rect_person_ident_bg" data-id="rect_person_ident_bg" data-class="child_node" data-parent="block_person_ident" x="482" y="335" width="495" height="221" rx="3" fill="#f0fdf4" stroke="#374151" stroke-width="2.5"/>
+    <text id="text_person_ident_title" data-id="text_person_ident_title" data-class="text_node" data-parent="block_person_ident" x="730" y="370" fill="#111827" font-size="24" font-weight="bold" font-family="Arial, sans-serif" text-anchor="middle">Person Identification</text>
+
+    <g id="box_face_detection" data-id="box_face_detection" data-class="child_node" data-parent="block_person_ident">
+      <rect id="rect_face_detection" data-id="rect_face_detection" data-class="child_node" data-parent="box_face_detection" x="504" y="394" width="204" height="56" rx="2" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5"/>
+      <text id="text_face_detection" data-id="text_face_detection" data-class="text_node" data-parent="box_face_detection" x="606" y="428" fill="#1e293b" font-size="19" font-family="Arial, sans-serif" text-anchor="middle">Face Detection</text>
+    </g>
+
+    <path id="edge_detect_to_extract" data-id="edge_detect_to_extract" data-class="edge" data-source="box_face_detection" data-target="box_ident_feat_extract" d="M 606 450 L 606 476" stroke="#059669" stroke-width="3" fill="none" marker-end="url(#arrow-green)"/>
+
+    <g id="box_ident_feat_extract" data-id="box_ident_feat_extract" data-class="child_node" data-parent="block_person_ident">
+      <rect id="rect_ident_feat_extract" data-id="rect_ident_feat_extract" data-class="child_node" data-parent="box_ident_feat_extract" x="504" y="482" width="204" height="56" rx="2" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5"/>
+      <text id="text_ident_feat_1" data-id="text_ident_feat_1" data-class="text_node" data-parent="box_ident_feat_extract" x="606" y="506" fill="#1e293b" font-size="18" font-family="Arial, sans-serif" text-anchor="middle">Feature</text>
+      <text id="text_ident_feat_2" data-id="text_ident_feat_2" data-class="text_node" data-parent="box_ident_feat_extract" x="606" y="528" fill="#1e293b" font-size="18" font-family="Arial, sans-serif" text-anchor="middle">Extraction</text>
+    </g>
+
+    <path id="edge_extract_to_verify" data-id="edge_extract_to_verify" data-class="edge" data-source="box_ident_feat_extract" data-target="box_face_verification" d="M 708 510 L 728 510 L 728 422 L 744 422" stroke="#059669" stroke-width="3" fill="none" marker-end="url(#arrow-green)"/>
+
+    <g id="box_face_verification" data-id="box_face_verification" data-class="child_node" data-parent="block_person_ident">
+      <rect id="rect_face_verification" data-id="rect_face_verification" data-class="child_node" data-parent="box_face_verification" x="752" y="394" width="204" height="56" rx="2" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5"/>
+      <text id="text_face_verify_1" data-id="text_face_verify_1" data-class="text_node" data-parent="box_face_verification" x="854" y="418" fill="#1e293b" font-size="18" font-family="Arial, sans-serif" text-anchor="middle">Face</text>
+      <text id="text_face_verify_2" data-id="text_face_verify_2" data-class="text_node" data-parent="box_face_verification" x="854" y="440" fill="#1e293b" font-size="18" font-family="Arial, sans-serif" text-anchor="middle">Verification</text>
+    </g>
+
+    <path id="edge_verify_to_visual" data-id="edge_verify_to_visual" data-class="edge" data-source="box_face_verification" data-target="box_visualization" d="M 854 450 L 854 476" stroke="#059669" stroke-width="3" fill="none" marker-end="url(#arrow-green)"/>
+
+    <g id="box_visualization" data-id="box_visualization" data-class="child_node" data-parent="block_person_ident">
+      <rect id="rect_visualization" data-id="rect_visualization" data-class="child_node" data-parent="box_visualization" x="752" y="482" width="204" height="56" rx="2" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5"/>
+      <text id="text_visualization" data-id="text_visualization" data-class="text_node" data-parent="box_visualization" x="854" y="516" fill="#1e293b" font-size="19" font-family="Arial, sans-serif" text-anchor="middle">Visualization</text>
+    </g>
+  </g>
+
+  <!-- ================= INTER-BLOCK CONNECTING ARROWS ================= -->
+  <g id="group_inter_block_edges">
+    <path id="edge_red_to_dict" data-id="edge_red_to_dict" data-class="edge" data-source="block_cnn_training" data-target="box_dict_feat_extract" d="M 358 148 L 432 148 L 432 180 L 588 180" stroke="#b91c1c" stroke-width="3" fill="none" marker-end="url(#arrow-red)"/>
+    <path id="edge_red_to_ident" data-id="edge_red_to_ident" data-class="edge" data-source="block_cnn_training" data-target="box_ident_feat_extract" d="M 432 148 L 432 510 L 496 510" stroke="#b91c1c" stroke-width="3" fill="none" marker-end="url(#arrow-red)"/>
+    <path id="edge_archive_to_detect" data-id="edge_archive_to_detect" data-class="edge" data-source="block_web_content" data-target="box_face_detection" d="M 388 480 L 446 480 L 446 422 L 496 422" stroke="#d97706" stroke-width="3" fill="none" marker-end="url(#arrow-yellow)"/>
+    <path id="edge_dict_to_verify" data-id="edge_dict_to_verify" data-class="edge" data-source="box_dict_filtering" data-target="box_face_verification" d="M 776 286 L 776 320 L 996 320 L 996 422 L 962 422" stroke="#002b9e" stroke-width="3" fill="none" marker-end="url(#arrow-blue)"/>
+  </g>
+
+  <!-- ================= NARRATION BANNER ================= -->
+  <g id="narration_banner">
+    <rect x="10" y="575" width="980" height="90" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5" />
+    
+    <text id="narr_ts1" class="narrative-text" text-anchor="middle" x="50%" y="615">
+      <tspan x="50%" dy="0">The workflow begins with the Facial Feature Extractor, which is designed</tspan>
+      <tspan x="50%" dy="1.2em">to learn a robust representation of facial characteristics.</tspan>
+    </text>
+    
+    <text id="narr_ts2" class="narrative-text" text-anchor="middle" x="50%" y="625">
+      <tspan x="50%" dy="0">Training data is first collected to feed into the feature extraction pipeline.</tspan>
+    </text>
+    
+    <text id="narr_ts3" class="narrative-text" text-anchor="middle" x="50%" y="615">
+      <tspan x="50%" dy="0">A state-of-the-art convolutional neural network is then trained on this dataset</tspan>
+      <tspan x="50%" dy="1.2em">to learn highly discriminative facial features.</tspan>
+    </text>
+    
+    <text id="narr_ts4" class="narrative-text" text-anchor="middle" x="50%" y="625">
+      <tspan x="50%" dy="0">Next, the Person Dictionary module builds a reference database of target entities.</tspan>
+    </text>
+    
+    <text id="narr_ts5" class="narrative-text" text-anchor="middle" x="50%" y="615">
+      <tspan x="50%" dy="0">It starts by selecting specific entities of interest and gathering</tspan>
+      <tspan x="50%" dy="1.2em">exemplary images for them from the web.</tspan>
+    </text>
+    
+    <text id="narr_ts6" class="narrative-text" text-anchor="middle" x="50%" y="615">
+      <tspan x="50%" dy="0">The pre-trained convolutional neural network is then applied to extract</tspan>
+      <tspan x="50%" dy="1.2em">facial features from these gathered images.</tspan>
+    </text>
+    
+    <text id="narr_ts7" class="narrative-text" text-anchor="middle" x="50%" y="615">
+      <tspan x="50%" dy="0">A filtering step is subsequently applied to reduce noise and remove</tspan>
+      <tspan x="50%" dy="1.2em">incorrect or low-quality images from the web-based dataset.</tspan>
+    </text>
+    
+    <text id="narr_ts8" class="narrative-text" text-anchor="middle" x="50%" y="625">
+      <tspan x="50%" dy="0">In parallel, the system accesses the Internet Archive to retrieve target media content.</tspan>
+    </text>
+    
+    <text id="narr_ts9" class="narrative-text" text-anchor="middle" x="50%" y="625">
+      <tspan x="50%" dy="0">The system targets archived web news according to a predefined search space.</tspan>
+    </text>
+    
+    <text id="narr_ts10" class="narrative-text" text-anchor="middle" x="50%" y="625">
+      <tspan x="50%" dy="0">This web content contains the raw images in which the target persons will be identified.</tspan>
+    </text>
+    
+    <text id="narr_ts11" class="narrative-text" text-anchor="middle" x="50%" y="615">
+      <tspan x="50%" dy="0">The final phase is Person Identification, which processes the archived</tspan>
+      <tspan x="50%" dy="1.2em">images to locate and verify the target entities.</tspan>
+    </text>
+    
+    <text id="narr_ts12" class="narrative-text" text-anchor="middle" x="50%" y="615">
+      <tspan x="50%" dy="0">First, face detection is performed on the retrieved web content</tspan>
+      <tspan x="50%" dy="1.2em">to locate any faces present in the images.</tspan>
+    </text>
+    
+    <text id="narr_ts13" class="narrative-text" text-anchor="middle" x="50%" y="615">
+      <tspan x="50%" dy="0">For each detected face, facial features are extracted using the</tspan>
+      <tspan x="50%" dy="1.2em">pre-trained convolutional neural network model.</tspan>
+    </text>
+    
+    <text id="narr_ts14" class="narrative-text" text-anchor="middle" x="50%" y="615">
+      <tspan x="50%" dy="0">These extracted features are then compared against the filtered</tspan>
+      <tspan x="50%" dy="1.2em">Person Dictionary in the face verification step.</tspan>
+    </text>
+    
+    <text id="narr_ts15" class="narrative-text" text-anchor="middle" x="50%" y="615">
+      <tspan x="50%" dy="0">Finally, the identified entities and their co-occurrences are</tspan>
+      <tspan x="50%" dy="1.2em">visualized to explore relations and media coverage.</tspan>
+    </text>
+  </g>
+
+  <!-- ================= FOCUS BOX ================= -->
+  <rect id="focus_box" fill="none" stroke="#FF0000" stroke-width="4" stroke-dasharray="8,4" rx="6">
+    <animate attributeName="x" dur="15s" repeatCount="indefinite" calcMode="discrete" 
+             values="-2; 48; 218; 567; 591; 591; 591; -2; 20; 234; 478; 500; 500; 748; 748; -2" />
+    
+    <animate attributeName="y" dur="15s" repeatCount="indefinite" calcMode="discrete" 
+             values="-2; 87; 54; -2; 58; 150; 228; 331; 406; 391; 331; 390; 478; 390; 478; -2" />
+    
+    <animate attributeName="width" dur="15s" repeatCount="indefinite" calcMode="discrete" 
+             values="414; 100; 144; 414; 368; 368; 368; 414; 140; 148; 503; 212; 212; 212; 212; 414" />
+    
+    <animate attributeName="height" dur="15s" repeatCount="indefinite" calcMode="discrete" 
+             values="233; 126; 144; 306; 74; 60; 62; 229; 134; 141; 229; 64; 64; 64; 64; 233" />
+  </rect>
+</svg>

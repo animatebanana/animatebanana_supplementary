@@ -1,0 +1,280 @@
+{
+  "style": "alpha_masking",
+  "traversal_style": "DETAIL_FIRST",
+  "nodes": [
+    {
+      "id": "t1",
+      "parent": null,
+      "depth": 1,
+      "focus": [
+        "node_bots_response",
+        "edge_bot_to_container"
+      ],
+      "action": "reveal",
+      "narration": null,
+      "duration": null,
+      "narrative": null,
+      "element_classes": {
+        "blocks": [],
+        "nodes": [
+          "node_bots_response"
+        ],
+        "text": [],
+        "arrows": [
+          "edge_bot_to_container"
+        ]
+      },
+      "timestamp": 1
+    },
+    {
+      "id": "t2",
+      "parent": null,
+      "depth": 1,
+      "focus": [
+        "block_main_container",
+        "rect_main_container",
+        "edge_fork_network",
+        "edge_fork_repetition",
+        "edge_fork_question",
+        "edge_fork_short_safe"
+      ],
+      "action": "reveal",
+      "narration": null,
+      "duration": null,
+      "narrative": null,
+      "element_classes": {
+        "blocks": [
+          "block_main_container"
+        ],
+        "nodes": [
+          "rect_main_container"
+        ],
+        "text": [],
+        "arrows": [
+          "edge_fork_network",
+          "edge_fork_repetition",
+          "edge_fork_question",
+          "edge_fork_short_safe"
+        ]
+      },
+      "timestamp": 2
+    },
+    {
+      "id": "t3",
+      "parent": "t2",
+      "depth": 2,
+      "focus": [
+        "node_next_sentence"
+      ],
+      "action": "reveal",
+      "narration": null,
+      "duration": null,
+      "narrative": null,
+      "element_classes": {
+        "blocks": [],
+        "nodes": [
+          "node_next_sentence"
+        ],
+        "text": [],
+        "arrows": []
+      },
+      "timestamp": 3
+    },
+    {
+      "id": "t4",
+      "parent": "t2",
+      "depth": 2,
+      "focus": [
+        "block_repetition",
+        "rect_repetition_bg",
+        "text_repetition_title",
+        "rect_repetition_inner_dash",
+        "edge_repetition_spine"
+      ],
+      "action": "reveal",
+      "narration": null,
+      "duration": null,
+      "narrative": null,
+      "element_classes": {
+        "blocks": [
+          "block_repetition"
+        ],
+        "nodes": [
+          "rect_repetition_bg",
+          "text_repetition_title",
+          "rect_repetition_inner_dash"
+        ],
+        "text": [],
+        "arrows": [
+          "edge_repetition_spine"
+        ]
+      },
+      "timestamp": 4
+    },
+    {
+      "id": "t5",
+      "parent": "t4",
+      "depth": 3,
+      "focus": [
+        "node_rep_internal",
+        "node_rep_external",
+        "node_rep_partner"
+      ],
+      "action": "reveal",
+      "narration": null,
+      "duration": null,
+      "narrative": null,
+      "element_classes": {
+        "blocks": [],
+        "nodes": [
+          "node_rep_internal",
+          "node_rep_external",
+          "node_rep_partner"
+        ],
+        "text": [],
+        "arrows": []
+      },
+      "timestamp": 5
+    },
+    {
+      "id": "t6",
+      "parent": "t2",
+      "depth": 2,
+      "focus": [
+        "node_question_asking"
+      ],
+      "action": "reveal",
+      "narration": null,
+      "duration": null,
+      "narrative": null,
+      "element_classes": {
+        "blocks": [],
+        "nodes": [
+          "node_question_asking"
+        ],
+        "text": [],
+        "arrows": []
+      },
+      "timestamp": 6
+    },
+    {
+      "id": "t7",
+      "parent": "t2",
+      "depth": 2,
+      "focus": [
+        "node_short_safe"
+      ],
+      "action": "reveal",
+      "narration": null,
+      "duration": null,
+      "narrative": null,
+      "element_classes": {
+        "blocks": [],
+        "nodes": [
+          "node_short_safe"
+        ],
+        "text": [],
+        "arrows": []
+      },
+      "timestamp": 7
+    },
+    {
+      "id": "t8",
+      "parent": "t2",
+      "depth": 2,
+      "focus": [
+        "edge_next_sentence_to_classifier",
+        "edge_repetition_to_classifier",
+        "edge_question_to_classifier",
+        "edge_short_safe_to_classifier"
+      ],
+      "action": "reveal",
+      "narration": null,
+      "duration": null,
+      "narrative": null,
+      "element_classes": {
+        "blocks": [],
+        "nodes": [],
+        "text": [],
+        "arrows": [
+          "edge_next_sentence_to_classifier",
+          "edge_repetition_to_classifier",
+          "edge_question_to_classifier",
+          "edge_short_safe_to_classifier"
+        ]
+      },
+      "timestamp": 8
+    },
+    {
+      "id": "t9",
+      "parent": "t2",
+      "depth": 2,
+      "focus": [
+        "node_classifier",
+        "edge_classifier_to_boundary"
+      ],
+      "action": "reveal",
+      "narration": null,
+      "duration": null,
+      "narrative": null,
+      "element_classes": {
+        "blocks": [],
+        "nodes": [
+          "node_classifier"
+        ],
+        "text": [],
+        "arrows": [
+          "edge_classifier_to_boundary"
+        ]
+      },
+      "timestamp": 9
+    },
+    {
+      "id": "t10",
+      "parent": null,
+      "depth": 1,
+      "focus": [
+        "node_response_classification",
+        "edge_container_to_response_class"
+      ],
+      "action": "reveal",
+      "narration": null,
+      "duration": null,
+      "narrative": null,
+      "element_classes": {
+        "blocks": [],
+        "nodes": [
+          "node_response_classification"
+        ],
+        "text": [],
+        "arrows": [
+          "edge_container_to_response_class"
+        ]
+      },
+      "timestamp": 10
+    }
+  ],
+  "traversal": [
+    "t1",
+    "t2",
+    "t3",
+    "t4",
+    "t5",
+    "t6",
+    "t7",
+    "t8",
+    "t9",
+    "t10"
+  ],
+  "provenance": {
+    "agent": "sequencer",
+    "backend": "openrouter_gemini37flash",
+    "model": "google-gemini-3.7-flash",
+    "prompt": "animation_planner/svg_sequencer.yaml#new_prompt",
+    "style": "alpha_masking",
+    "target": "svg",
+    "config_fingerprint": "a60c9cf21a359534",
+    "timestamp": "2026-09-02T00:09:22",
+    "max_depth": 3
+  }
+}

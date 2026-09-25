@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram depth="1">
+  <block id="block_facial_extractor" depth="1">
+    <child_node id="rect_facial_extractor_bg" depth="2" />
+    <composite_whole id="group_cylinder_data" depth="2" />
+    <block id="block_cnn_training" depth="2">
+      <child_node id="rect_nn_card" depth="3" />
+    </block>
+    <edge id="edge_data_to_cnn" source="group_cylinder_data" target="block_cnn_training" depth="2" />
+  </block>
+
+  <block id="block_person_dict" depth="1">
+    <child_node id="rect_person_dict_bg" depth="2" />
+    <child_node id="box_dict_select" depth="2">
+      <child_node id="rect_dict_select" depth="3" />
+    </child_node>
+    <composite_whole id="icon_globe" depth="2" />
+    <child_node id="box_dict_feat_extract" depth="2">
+      <child_node id="rect_dict_feat_extract" depth="3" />
+    </child_node>
+    <child_node id="box_dict_filtering" depth="2">
+      <child_node id="rect_dict_filtering" depth="3" />
+    </child_node>
+    <edge id="edge_dict_1_to_2" source="box_dict_select" target="box_dict_feat_extract" depth="2" />
+    <edge id="edge_dict_2_to_3" source="box_dict_feat_extract" target="box_dict_filtering" depth="2" />
+  </block>
+
+  <block id="block_internet_archive" depth="1">
+    <child_node id="rect_archive_bg" depth="2" />
+    <composite_whole id="icon_archive_building" depth="2" />
+    <block id="block_web_content" depth="2" />
+    <edge id="edge_archive_to_web" source="icon_archive_building" target="block_web_content" depth="2" />
+  </block>
+
+  <block id="block_person_ident" depth="1">
+    <child_node id="rect_person_ident_bg" depth="2" />
+    <child_node id="box_face_detection" depth="2">
+      <child_node id="rect_face_detection" depth="3" />
+    </child_node>
+    <child_node id="box_ident_feat_extract" depth="2">
+      <child_node id="rect_ident_feat_extract" depth="3" />
+    </child_node>
+    <child_node id="box_face_verification" depth="2">
+      <child_node id="rect_face_verification" depth="3" />
+    </child_node>
+    <child_node id="box_visualization" depth="2">
+      <child_node id="rect_visualization" depth="3" />
+    </child_node>
+    <edge id="edge_detect_to_extract" source="box_face_detection" target="box_ident_feat_extract" depth="2" />
+    <edge id="edge_extract_to_verify" source="box_ident_feat_extract" target="box_face_verification" depth="2" />
+    <edge id="edge_verify_to_visual" source="box_face_verification" target="box_visualization" depth="2" />
+  </block>
+
+  <edge id="edge_red_to_dict" source="block_cnn_training" target="box_dict_feat_extract" depth="1" />
+  <edge id="edge_red_to_ident" source="block_cnn_training" target="box_ident_feat_extract" depth="1" />
+  <edge id="edge_archive_to_detect" source="block_web_content" target="box_face_detection" depth="1" />
+  <edge id="edge_dict_to_verify" source="box_dict_filtering" target="box_face_verification" depth="1" />
+</Diagram>

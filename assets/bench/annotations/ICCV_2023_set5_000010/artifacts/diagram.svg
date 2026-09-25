@@ -1,0 +1,126 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 262" width="1000" height="262">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#000000"/>
+    </marker>
+    <marker id="arrow-dashed" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#333333"/>
+    </marker>
+  </defs>
+
+  <!-- BLOCK 1: 3D with Partial DreamBooth -->
+  <g id="block1" data-id="block1" data-class="block" data-parent="root">
+    <rect id="block1_bg" x="4" y="4" width="324" height="254" rx="6" ry="6" fill="#f2f8f3" stroke="#333333" stroke-width="1"/>
+    
+    <text id="title1" data-id="title1" data-class="text_node" data-parent="block1" x="166" y="250" font-family="serif" font-size="15" font-style="italic" text-anchor="middle" fill="#000000">1. 3D with Partial DreamBooth</text>
+    
+    <text id="lbl_input_images" data-id="lbl_input_images" data-class="text_node" data-parent="block1" x="166" y="22" font-family="serif" font-size="14" text-anchor="middle" fill="#000000">Input Images</text>
+    
+    <!-- Input Images Raster Placeholders -->
+    <g id="input_img_1" data-id="input_img_1" data-class="raster_node"><image href="../rasters/crop_input_img_1.png" xlink:href="../rasters/crop_input_img_1.png" x="25" y="32" width="60" height="60" preserveAspectRatio="xMidYMid meet" /></g>
+    <g id="input_img_2" data-id="input_img_2" data-class="raster_node"><image href="../rasters/crop_input_img_2.png" xlink:href="../rasters/crop_input_img_2.png" x="95" y="32" width="60" height="60" preserveAspectRatio="xMidYMid meet" /></g>
+    <g id="input_img_3" data-id="input_img_3" data-class="raster_node"><image href="../rasters/crop_input_img_3.png" xlink:href="../rasters/crop_input_img_3.png" x="165" y="32" width="60" height="60" preserveAspectRatio="xMidYMid meet" /></g>
+    <g id="input_img_4" data-id="input_img_4" data-class="raster_node"><image href="../rasters/crop_input_img_4.png" xlink:href="../rasters/crop_input_img_4.png" x="235" y="32" width="60" height="60" preserveAspectRatio="xMidYMid meet" /></g>
+
+    <!-- Partial DreamBooth Node -->
+    <g id="partial_dreambooth" data-id="partial_dreambooth" data-class="child_node" data-parent="block1">
+      <rect x="8" y="148" width="126" height="64" fill="#fff0f5" stroke="#444444" stroke-width="1"/>
+      <text x="71" y="176" font-family="serif" font-size="15" text-anchor="middle" fill="#000000">Partial</text>
+      <text x="71" y="196" font-family="serif" font-size="15" text-anchor="middle" fill="#000000">DreamBooth</text>
+    </g>
+
+    <!-- NeRF 1 Container -->
+    <g id="nerf1_mesh" data-id="nerf1_mesh" data-class="raster_node"><image href="../rasters/crop_nerf1_mesh.png" xlink:href="../rasters/crop_nerf1_mesh.png" x="205" y="120" width="100" height="100" preserveAspectRatio="xMidYMid meet" /></g>
+    
+    <text id="lbl_nerf1" data-id="lbl_nerf1" data-class="text_node" data-parent="block1" x="255" y="238" font-family="serif" font-size="16" text-anchor="middle" fill="#000000">NeRF</text>
+
+    <!-- Cameras around NeRF 1 -->
+    <g id="cam1_1" data-id="cam1_1" data-class="composite_whole" data-parent="block1">
+      <path id="cam1_1_p1" data-id="cam1_1_p1" data-class="composite_part" data-parent="cam1_1" d="M 180 120 L 190 115 L 190 125 Z" fill="none" stroke="#000000"/>
+      <circle id="cam1_1_p2" data-id="cam1_1_p2" data-class="composite_part" data-parent="cam1_1" cx="175" cy="120" r="4" fill="none" stroke="#000000"/>
+    </g>
+    <g id="cam1_2" data-id="cam1_2" data-class="composite_whole" data-parent="block1">
+      <path id="cam1_2_p1" data-id="cam1_2_p1" data-class="composite_part" data-parent="cam1_2" d="M 200 100 L 208 92 L 214 98 Z" fill="none" stroke="#000000"/>
+      <circle id="cam1_2_p2" data-id="cam1_2_p2" data-class="composite_part" data-parent="cam1_2" cx="196" cy="104" r="4" fill="none" stroke="#000000"/>
+    </g>
+    <g id="cam1_3" data-id="cam1_3" data-class="composite_whole" data-parent="block1">
+      <path id="cam1_3_p1" data-id="cam1_3_p1" data-class="composite_part" data-parent="cam1_3" d="M 270 95 L 270 105 L 263 100 Z" fill="none" stroke="#000000"/>
+      <circle id="cam1_3_p2" data-id="cam1_3_p2" data-class="composite_part" data-parent="cam1_3" cx="275" cy="100" r="4" fill="none" stroke="#000000"/>
+    </g>
+    <g id="cam1_4" data-id="cam1_4" data-class="composite_whole" data-parent="block1">
+      <path id="cam1_4_p1" data-id="cam1_4_p1" data-class="composite_part" data-parent="cam1_4" d="M 180 200 L 190 195 L 190 205 Z" fill="none" stroke="#000000"/>
+      <circle id="cam1_4_p2" data-id="cam1_4_p2" data-class="composite_part" data-parent="cam1_4" cx="175" cy="200" r="4" fill="none" stroke="#000000"/>
+    </g>
+    <g id="cam1_5" data-id="cam1_5" data-class="composite_whole" data-parent="block1">
+      <path id="cam1_5_p1" data-id="cam1_5_p1" data-class="composite_part" data-parent="cam1_5" d="M 310 200 L 300 195 L 300 205 Z" fill="none" stroke="#000000"/>
+      <circle id="cam1_5_p2" data-id="cam1_5_p2" data-class="composite_part" data-parent="cam1_5" cx="315" cy="200" r="4" fill="none" stroke="#000000"/>
+    </g>
+  </g>
+
+  <!-- BLOCK 2: Multi-view Data Generation -->
+  <g id="block2" data-id="block2" data-class="block" data-parent="root">
+    <rect id="block2_bg" x="335" y="4" width="328" height="254" rx="6" ry="6" fill="#fff6ee" stroke="#333333" stroke-width="1"/>
+    
+    <text id="title2" data-id="title2" data-class="text_node" data-parent="block2" x="499" y="250" font-family="serif" font-size="15" font-style="italic" text-anchor="middle" fill="#000000">2. Multi-view Data Generation</text>
+    
+    <text id="lbl_multiview_renders" data-id="lbl_multiview_renders" data-class="text_node" data-parent="block2" x="499" y="22" font-family="serif" font-size="14" text-anchor="middle" fill="#000000">Multi-view NeRF Renders</text>
+
+    <!-- Multi-view Renders Raster Placeholders -->
+    <g id="render_1" data-id="render_1" data-class="raster_node"><image href="../rasters/crop_render_1.png" xlink:href="../rasters/crop_render_1.png" x="362" y="32" width="56" height="56" preserveAspectRatio="xMidYMid meet" /></g>
+    <g id="render_2" data-id="render_2" data-class="raster_node"><image href="../rasters/crop_render_2.png" xlink:href="../rasters/crop_render_2.png" x="430" y="32" width="56" height="56" preserveAspectRatio="xMidYMid meet" /></g>
+    <g id="render_3" data-id="render_3" data-class="raster_node"><image href="../rasters/crop_render_3.png" xlink:href="../rasters/crop_render_3.png" x="498" y="32" width="56" height="56" preserveAspectRatio="xMidYMid meet" /></g>
+    <g id="render_4" data-id="render_4" data-class="raster_node"><image href="../rasters/crop_render_4.png" xlink:href="../rasters/crop_render_4.png" x="566" y="32" width="56" height="56" preserveAspectRatio="xMidYMid meet" /></g>
+
+    <!-- Img2Img Translation Box -->
+    <g id="img2img_box" data-id="img2img_box" data-class="child_node" data-parent="block2">
+      <rect x="390" y="102" width="218" height="30" fill="#ffffff" stroke="#444444" stroke-width="1"/>
+      <text x="499" y="122" font-family="serif" font-size="15" text-anchor="middle" fill="#000000">Img2Img Translation</text>
+    </g>
+
+    <text id="lbl_pseudo_images" data-id="lbl_pseudo_images" data-class="text_node" data-parent="block2" x="499" y="152" font-family="serif" font-size="14" text-anchor="middle" fill="#000000">Pseudo Multi-view Subject Images</text>
+
+    <!-- Pseudo Images Raster Placeholders -->
+    <g id="pseudo_1" data-id="pseudo_1" data-class="raster_node"><image href="../rasters/crop_pseudo_1.png" xlink:href="../rasters/crop_pseudo_1.png" x="362" y="160" width="56" height="56" preserveAspectRatio="xMidYMid meet" /></g>
+    <g id="pseudo_2" data-id="pseudo_2" data-class="raster_node"><image href="../rasters/crop_pseudo_2.png" xlink:href="../rasters/crop_pseudo_2.png" x="430" y="160" width="56" height="56" preserveAspectRatio="xMidYMid meet" /></g>
+    <g id="pseudo_3" data-id="pseudo_3" data-class="raster_node"><image href="../rasters/crop_pseudo_3.png" xlink:href="../rasters/crop_pseudo_3.png" x="498" y="160" width="56" height="56" preserveAspectRatio="xMidYMid meet" /></g>
+    <g id="pseudo_4" data-id="pseudo_4" data-class="raster_node"><image href="../rasters/crop_pseudo_4.png" xlink:href="../rasters/crop_pseudo_4.png" x="566" y="160" width="56" height="56" preserveAspectRatio="xMidYMid meet" /></g>
+  </g>
+
+  <!-- BLOCK 3: 3D with Multi-view DreamBooth -->
+  <g id="block3" data-id="block3" data-class="block" data-parent="root">
+    <rect id="block3_bg" x="670" y="4" width="326" height="254" rx="6" ry="6" fill="#f2f4f8" stroke="#333333" stroke-width="1"/>
+    
+    <text id="title3" data-id="title3" data-class="text_node" data-parent="block3" x="833" y="250" font-family="serif" font-size="15" font-style="italic" text-anchor="middle" fill="#000000">3. 3D with Multi-view DreamBooth</text>
+
+    <!-- Entire Panel 3 Raster Graphic (Fully Raster) -->
+    <g id="panel3_raster" data-id="panel3_raster" data-class="raster_node"><image href="../rasters/crop_panel3_raster.png" xlink:href="../rasters/crop_panel3_raster.png" x="680" y="15" width="305" height="142" preserveAspectRatio="xMidYMid meet" /></g>
+
+    <!-- SDS Loss Curve (Vector) -->
+    <path id="edge_sds_loss_3" d="M 825 162 C 870 155 870 100 855 90" fill="none" stroke="#333333" stroke-width="1" stroke-dasharray="4,4" marker-end="url(#arrow-dashed)"/>
+    <text id="lbl_sds_loss_3" x="850" y="125" font-family="serif" font-size="12" text-anchor="middle" fill="#000000">SDS Loss</text>
+
+    <!-- Multi-view DreamBooth Box -->
+    <g id="multiview_dreambooth" data-id="multiview_dreambooth" data-class="child_node" data-parent="block3">
+      <rect x="685" y="162" width="150" height="50" fill="#fffff0" stroke="#444444" stroke-width="1"/>
+      <text x="760" y="183" font-family="serif" font-size="15" text-anchor="middle" fill="#000000">Multi-view</text>
+      <text x="760" y="201" font-family="serif" font-size="15" text-anchor="middle" fill="#000000">DreamBooth</text>
+    </g>
+  </g>
+
+  <!-- EDGES / CONNECTIONS -->
+
+  <!-- Block 1 Edges -->
+  <path id="edge_input_fork" data-id="edge_input_fork" data-class="edge" data-source="input_img_1" data-target="partial_dreambooth" d="M 165 92 L 165 110 L 71 110 L 71 148" fill="none" stroke="#000000" stroke-width="1" marker-end="url(#arrow)"/>
+  
+  <path id="edge_sds_1" data-id="edge_sds_1" data-class="edge" data-source="partial_dreambooth" data-target="nerf1_mesh" d="M 134 180 L 205 180" fill="none" stroke="#333333" stroke-width="1" stroke-dasharray="4,4" marker-end="url(#arrow-dashed)"/>
+  <path id="edge_sds_1_rev" data-id="edge_sds_1_rev" data-class="edge" data-source="nerf1_mesh" data-target="partial_dreambooth" d="M 205 170 L 134 170" fill="none" stroke="#333333" stroke-width="1" stroke-dasharray="4,4" marker-end="url(#arrow-dashed)"/>
+  <text id="lbl_sds1" data-id="lbl_sds1" data-class="text_node" data-parent="root" x="165" y="165" font-family="serif" font-size="11" text-anchor="middle" fill="#000000">SDS</text>
+
+  <!-- Block 2 Edges -->
+  <path id="edge_renders_to_img2img" data-id="edge_renders_to_img2img" data-class="edge" data-source="render_1" data-target="img2img_box" d="M 499 88 L 499 102" fill="none" stroke="#000000" stroke-width="1" marker-end="url(#arrow)"/>
+  <path id="edge_img2img_to_pseudo" data-id="edge_img2img_to_pseudo" data-class="edge" data-source="img2img_box" data-target="pseudo_1" d="M 499 132 L 499 160" fill="none" stroke="#000000" stroke-width="1" marker-end="url(#arrow)"/>
+
+  <!-- Block 2 to Block 3 Edge -->
+  <path id="edge_pseudo_to_multiview_db" data-id="edge_pseudo_to_multiview_db" data-class="edge" data-source="pseudo_4" data-target="multiview_dreambooth" d="M 622 188 L 685 188" fill="none" stroke="#000000" stroke-width="1" marker-end="url(#arrow)"/>
+
+</svg>

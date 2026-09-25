@@ -1,0 +1,34 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.780
+The framework categorizes language pairs into document-rich teacher languages...
+
+2
+00:00:03.780 --> 00:00:05.980
+...and document-poor student languages.
+
+3
+00:00:05.980 --> 00:00:10.140
+Training begins with multilingual sentence-level neural machine translation, or SenNMT...
+
+4
+00:00:10.140 --> 00:00:14.290
+...which is finetuned into a multilingual document-level translation model, DocNMT.
+
+5
+00:00:14.290 --> 00:00:19.560
+In the initial SenNMT stage, document-rich languages are pretrained using parallel sentence pairs...
+
+6
+00:00:19.560 --> 00:00:22.600
+...jointly with sentence pairs from document-poor languages.
+
+7
+00:00:22.600 --> 00:00:28.600
+For DocNMT, teacher languages are trained on full document pairs to capture cross-sentence contextual modeling.
+
+8
+00:00:28.600 --> 00:00:36.090
+Finally, zero-shot transfer empowers student languages to translate documents in context without ever seeing parallel document pairs during training.
+

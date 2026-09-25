@@ -1,0 +1,92 @@
+{
+  "detected": 4,
+  "placeholders": 4,
+  "omitted": {},
+  "rejected": {},
+  "image_size": [
+    472,
+    275
+  ],
+  "regions": [
+    {
+      "xml_id": "raster-attacker-img",
+      "box_2d": [
+        263,
+        47,
+        401,
+        169
+      ],
+      "bbox": [
+        22.184,
+        72.325,
+        79.768,
+        110.275
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "raster-attacker-trigger",
+      "box_2d": [
+        306,
+        210,
+        367,
+        258
+      ],
+      "bbox": [
+        99.11999999999999,
+        84.14999999999999,
+        121.77600000000001,
+        100.925
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "raster-user-img",
+      "box_2d": [
+        802,
+        40,
+        950,
+        172
+      ],
+      "bbox": [
+        18.88,
+        220.55,
+        81.184,
+        261.25
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "raster-user-trigger",
+      "box_2d": [
+        853,
+        210,
+        914,
+        258
+      ],
+      "bbox": [
+        99.11999999999999,
+        234.575,
+        121.77600000000001,
+        251.35000000000002
+      ],
+      "label": ""
+    }
+  ],
+  "replaced": [
+    "raster-attacker-img",
+    "raster-attacker-trigger",
+    "raster-user-img",
+    "raster-user-trigger"
+  ],
+  "provenance": {
+    "agent": "raster_integrator",
+    "backend": "openrouter_gemini37flash",
+    "model": "google-gemini-3.7-flash",
+    "prompt": null,
+    "style": "alpha_masking",
+    "target": "svg",
+    "config_fingerprint": "e41a2d04f1482fae",
+    "timestamp": "2026-08-28T20:30:57"
+  }
+}

@@ -1,0 +1,342 @@
+/* Failure cases: one window, a stage at a time. Owns .fw-* only. */
+
+failure-walk {
+  display: block;
+  --fw-maroon: #8A2F47; --fw-maroon-2: #6E2438;
+  --fw-out: #FDF0F4; --fw-out-line: #F4CBD7; --fw-out-ink: #8A3F55;
+  --fw-src: #F2F9FC; --fw-src-line: #BBD9E8;
+  --fw-warn: #B3564F;
+}
+
+.fw-empty {
+  margin: 0; padding: 12px 15px; border-radius: 10px;
+  background: #FFF8E1; border: 1px dashed #E3C97A; color: #6B5312; font-size: 12.5px;
+}
+
+.fw-window {
+  background: #fff; border: 2px solid var(--ink); border-radius: 20px;
+  box-shadow: var(--shadow-hard);
+}
+
+/* ─────────── the maroon console ─────────── */
+
+.fw-bar {
+  position: sticky; top: 56px; z-index: 6;
+  display: flex; align-items: flex-end; gap: 18px; flex-wrap: wrap;
+  padding: 14px 18px;
+  border-bottom: 2px solid var(--ink); border-radius: 18px 18px 0 0;
+  background: linear-gradient(135deg, var(--fw-maroon-2), var(--fw-maroon) 60%);
+}
+.fw-picks { display: flex; gap: 14px; flex-wrap: wrap; flex: 1 1 auto; }
+.fw-picks label { display: flex; flex-direction: column; gap: 5px; flex: 1 1 260px; }
+.fw-picks span {
+  font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .14em;
+  text-transform: uppercase; color: #F2D9E1;
+}
+.fw-picks select {
+  font: inherit; font-size: 13.5px; font-weight: 600; color: var(--ink);
+  padding: 9px 12px; border-radius: 10px; border: 2px solid var(--ink);
+  background: #fff; box-shadow: 2px 2px 0 rgba(26, 24, 21, .35); cursor: pointer;
+}
+.fw-picks select:disabled { opacity: .6; cursor: not-allowed; }
+
+.fw-body { padding: 18px; display: grid; gap: 16px; }
+
+/* ─────────── cards ─────────── */
+
+.fw-card {
+  border: 1.5px solid var(--line); border-radius: 16px; padding: 15px 17px; background: #FCFCFA;
+}
+.fw-shead { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.fw-shead h4 { margin: 0; font-size: 16px; font-weight: 600; font-family: var(--font-display); }
+.fw-sp { flex: 1 1 auto; }
+.fw-num {
+  display: grid; place-items: center; width: 22px; height: 22px; flex: none;
+  border-radius: 7px; background: var(--ink); color: #fff;
+  font-family: var(--font-mono); font-size: 11px; font-weight: 700;
+}
+.fw-chip {
+  font-family: var(--font-mono); font-size: 10.5px; font-weight: 700; letter-spacing: .04em;
+  padding: 5px 11px; border-radius: 999px;
+  background: var(--fw-out); border: 1.5px solid var(--fw-out-line); color: var(--fw-out-ink);
+}
+.fw-meta { font-family: var(--font-mono); font-size: 11px; color: var(--ink-faint); }
+.fw-blurb { margin: 12px 0 0; font-size: 13px; line-height: 1.6; color: var(--ink-soft); }
+.fw-loading, .fw-ph {
+  margin: 0; font-family: var(--font-mono); font-size: 11.5px; color: var(--ink-faint);
+  display: grid; place-items: center; min-height: 80px;
+}
+
+/* ─────────── the masked pipeline ─────────── */
+
+.fw-pipewrap {
+  border: 1.5px solid var(--line); border-radius: 12px; background: #fff;
+  padding: 10px; overflow: hidden;
+}
+.fw-pipe { display: block; width: 100%; height: auto; }
+/* alpha masking: the rest of the pipeline stays visible but recedes */
+.fw-dim { opacity: .13; transition: opacity .45s ease; }
+.fw-lit { opacity: 1; transition: opacity .45s ease; }
+.fw-lit { animation: fw-pulse 3.6s ease-in-out infinite; }
+@keyframes fw-pulse {
+  0%, 100% { filter: none; }
+  50% { filter: drop-shadow(0 0 7px rgba(138, 47, 71, .45)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fw-lit { animation: none; }
+  .fw-dim, .fw-lit { transition: none; }
+}
+
+/* ─────────── source vs output ─────────── */
+
+.fw-pair { display: grid; grid-template-columns: 1fr 1.6fr; gap: 16px; align-items: start; }
+@media (max-width: 900px) { .fw-pair { grid-template-columns: 1fr; } }
+.fw-panel { margin: 0; }
+.fw-panel figcaption {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--ink-soft); margin-bottom: 7px;
+}
+.fw-panel figcaption b { font-weight: 700; }
+.fw-panel.is-source figcaption b { color: #2F6B8A; }
+.fw-panel.is-out figcaption b { color: var(--fw-out-ink); }
+.fw-frame {
+  position: relative; aspect-ratio: 5 / 3; overflow: hidden; cursor: zoom-in;
+  border: 1.5px solid var(--line); border-radius: 12px; background: #fff;
+  display: grid; place-items: center;
+}
+.fw-panel.is-source .fw-frame { border-color: var(--fw-src-line); box-shadow: 0 0 0 3px var(--fw-src); }
+.fw-panel.is-out .fw-frame { border-color: var(--fw-out-line); box-shadow: 0 0 0 3px var(--fw-out); }
+.fw-frame img, .fw-frame object { width: 100%; height: 100%; object-fit: contain; }
+.fw-frame object { pointer-events: none; }
+.fw-frame .fw-ph { border: 0; background: transparent; }
+/* A clip fits the panel by its own shape rather than being letterboxed into a
+   fixed box, so a portrait diagram is not reduced to a sliver. Block, not the
+   centring grid the other frames use, so the video takes the full width; and a
+   px cap rather than vh, which resolves to nothing in an offscreen layout. */
+/* The clip is bounded by height, not stretched to the column: a landscape
+   diagram blown up to full width dwarfs the source beside it, while a portrait
+   one needs the height. Either way it keeps its own proportions and sits
+   centred in the frame. */
+.fw-frame.is-video {
+  display: grid; place-items: center; aspect-ratio: auto;
+  min-height: 240px; max-height: 470px; padding: 6px;
+}
+.fw-frame video {
+  display: block; width: auto; height: auto;
+  max-width: 100%; max-height: 458px;
+}
+
+/* ─────────── transport and caption ─────────── */
+
+.fw-transport { display: flex; align-items: center; gap: 10px; margin-top: 9px; }
+.fw-transport[hidden] { display: none; }
+.fw-pp {
+  width: 34px; height: 34px; flex: none; border-radius: 50%; cursor: pointer;
+  border: 2px solid var(--ink); background: var(--banana); box-shadow: 2px 2px 0 var(--ink);
+  display: grid; place-items: center;
+}
+.fw-pp svg { width: 13px; height: 13px; fill: var(--ink); }
+.fw-pp.is-paused svg { opacity: .55; }
+.fw-seek { flex: 1 1 auto; height: 8px; accent-color: var(--banana-deep, #F2B200); cursor: pointer; }
+.fw-transport select {
+  font: inherit; font-size: 11.5px; font-weight: 600; padding: 5px 8px;
+  border-radius: 8px; border: 1.5px solid var(--ink); background: #fff; cursor: pointer;
+}
+.fw-cap {
+  margin: 10px 0 0; padding: 12px 14px; border-radius: 12px; min-height: 74px;
+  font-size: 13px; line-height: 1.6;
+  background: #FFF8D6; border: 1.5px solid #E8D48A; color: #000;
+}
+.fw-cap.is-note { font-style: italic; color: #6B5312; }
+
+/* ─────────── scores ─────────── */
+
+.fw-scores { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 9px; }
+.fw-mrow {
+  display: grid; gap: 1px; padding: 10px 12px; border-radius: 11px;
+  border: 1.5px solid var(--line); background: #fff;
+}
+.fw-mrow b { font-family: var(--font-display); font-size: 17px; font-weight: 600; line-height: 1; }
+.fw-mrow i { font-style: normal; font-size: 10.5px; color: var(--ink-soft); }
+.fw-mval { margin-top: 5px; font-family: var(--font-mono); font-size: 14px; font-weight: 700; }
+/* a run that produced nothing at all scores zero: worth spotting immediately */
+.fw-mrow.is-dead { background: #FDF0F4; border-color: var(--fw-out-line); }
+.fw-mrow.is-dead .fw-mval { color: var(--fw-warn); }
+
+/* ─────────── what went wrong ─────────── */
+
+.fw-note {
+  display: flex; gap: 14px; align-items: flex-start;
+  background: linear-gradient(135deg, #FFF6F8 0%, #FFFBEA 100%);
+  border-color: var(--fw-out-line);
+}
+.fw-note.is-empty { background: #FCFCFA; border-color: var(--line); }
+.fw-warn svg {
+  width: 26px; height: 26px; fill: none; stroke: var(--fw-warn);
+  stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
+}
+.fw-note.is-empty .fw-warn svg { stroke: var(--ink-faint); }
+.fw-kicker {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--ink-soft); margin-bottom: 4px;
+}
+.fw-note p { margin: 0; font-size: 13.5px; line-height: 1.6; }
+.fw-todo { color: var(--ink-faint); font-size: 12.5px; }
+.fw-todo code {
+  font-family: var(--font-mono); font-size: 11.5px;
+  background: #F3F0E8; padding: 1px 5px; border-radius: 5px;
+}
+
+/* ─────────── zoom ─────────── */
+
+.fw-lightbox {
+  position: fixed; inset: 0; z-index: 70; display: grid; place-items: center;
+  background: rgba(26, 24, 21, .72); padding: 26px;
+}
+.fw-lightbox[hidden] { display: none; }
+.fw-lbstage {
+  width: min(1500px, 94vw); height: min(88vh, 900px); background: #fff;
+  border: 2px solid var(--ink); border-radius: 16px; overflow: auto; padding: 12px;
+}
+.fw-lbstage img, .fw-lbstage object { width: 100%; height: 100%; object-fit: contain; }
+.fw-lbclose {
+  position: absolute; top: 18px; right: 22px; width: 40px; height: 40px;
+  border-radius: 50%; border: 2px solid var(--ink); background: var(--banana);
+  font-size: 21px; line-height: 1; cursor: pointer; box-shadow: 3px 3px 0 var(--ink);
+}
+body.fw-noscroll { overflow: hidden; }
+
+/* ─────────── the evidence panel, outside the window ─────────── */
+
+.fw-evidence {
+  background: #fff; border: 2px solid var(--ink); border-radius: 20px;
+  box-shadow: var(--shadow-hard); padding: 20px 22px 22px; margin-top: 18px;
+}
+.fw-evtable { width: 100%; border-collapse: separate; border-spacing: 6px 7px; }
+.fw-evtable th {
+  font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--ink-soft); font-weight: 600;
+  text-align: right; padding: 0 8px 6px;
+}
+.fw-evtable th:first-child { text-align: left; }
+.fw-evtable td { padding: 11px 12px; border-radius: 11px; background: #FCFCFA;
+  border: 1.5px solid #EDE8DC; text-align: right; font-family: var(--font-mono); font-size: 14px; }
+.fw-evtable td:first-child {
+  text-align: left; font-family: var(--font-display); font-size: 15px; font-weight: 600;
+}
+.fw-evtable tr.is-base td { background: #FFFBEA; border-color: #E8C766; }
+.fw-evtable td.is-worst { background: #FDF0F4; border-color: var(--fw-out-line); color: var(--fw-warn); font-weight: 700; }
+.fw-evnote { margin: 14px 0 0; font-size: 13px; line-height: 1.65; color: var(--ink-soft); }
+
+/* ─────────── the shared observation ─────────── */
+
+.fw-obs {
+  display: flex; gap: 14px; align-items: flex-start; margin-top: 16px;
+  padding: 15px 17px; border-radius: 16px;
+  background: linear-gradient(135deg, #FFFBEA 0%, #FFF6F8 100%);
+  border: 1.5px solid #E8C766;
+}
+.fw-obs.is-empty { background: #FCFCFA; border-color: var(--line); }
+.fw-obs p { margin: 0; font-size: 13.5px; line-height: 1.65; }
+.fw-bulb { position: relative; flex: none; width: 34px; height: 34px; display: grid; place-items: center; }
+.fw-bulb svg {
+  width: 26px; height: 26px; fill: none; stroke: #8A6A12;
+  stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; position: relative; z-index: 1;
+}
+.fw-obs.is-empty .fw-bulb svg { stroke: var(--ink-faint); }
+/* the bulb gives off light while there is something to read */
+.fw-rays {
+  position: absolute; inset: -6px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(242, 178, 0, .45) 0%, rgba(242, 178, 0, 0) 68%);
+  animation: fw-glow 3.2s ease-in-out infinite;
+}
+.fw-obs.is-empty .fw-rays { display: none; }
+@keyframes fw-glow {
+  0%, 100% { transform: scale(.85); opacity: .55; }
+  50% { transform: scale(1.12); opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) { .fw-rays { animation: none; } }
+
+/* ─────────── the critic comparison ─────────── */
+
+.fw-runs { margin: 18px 0 20px; }
+.fw-runhead {
+  font-size: 13px; color: var(--ink-soft); margin-bottom: 10px;
+}
+.fw-runhead b { font-family: var(--font-mono); font-size: 12.5px; color: var(--ink); }
+.fw-runrow {
+  display: grid; grid-template-columns: repeat(5, minmax(210px, 1fr));
+  gap: 12px; overflow-x: auto; padding-bottom: 6px; align-items: start;
+}
+@media (max-width: 1200px) {
+  .fw-runrow { grid-template-columns: repeat(5, minmax(240px, 1fr)); }
+}
+.fw-col {
+  border: 1.5px solid var(--line); border-radius: 14px; padding: 11px; background: #fff;
+}
+.fw-col.is-base { border-color: #E8C766; background: #FFFDF5; }
+.fw-col.is-src { border-color: var(--fw-src-line); background: var(--fw-src); }
+.fw-colhead {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--ink-soft); font-weight: 700;
+  margin-bottom: 8px; min-height: 26px;
+}
+.fw-colframe {
+  border: 1.5px solid var(--line); border-radius: 10px; background: #fff;
+  min-height: 150px; display: grid; place-items: center; overflow: hidden; cursor: zoom-in;
+}
+.fw-colframe video, .fw-colframe img { display: block; width: 100%; height: auto; }
+.fw-colcap { min-height: 96px; font-size: 11.5px; }
+.fw-tuple {
+  display: flex; align-items: center; justify-content: center; gap: 2px;
+  margin-top: 10px; padding: 8px 10px; border-radius: 10px;
+  background: #FAFAF8; border: 1.5px solid var(--line);
+  font-family: var(--font-mono); font-size: 12.5px; font-weight: 700;
+}
+.fw-paren, .fw-comma { color: var(--ink-faint); font-weight: 400; }
+.fw-comma { margin-right: 3px; }
+.fw-tup { color: var(--ink); }
+/* anything that fell behind the full system is called out in red */
+.fw-tup.is-worse {
+  color: var(--fw-warn); background: #FDF0F4; border-radius: 6px;
+  padding: 1px 5px; box-shadow: inset 0 -2px 0 rgba(179, 86, 79, .45);
+}
+.fw-tuplabel {
+  font-family: var(--font-mono); font-size: 11px; color: var(--ink-faint); font-weight: 600;
+}
+
+/* the aggregate table keeps its observation, but it should not compete with the
+   insight above it */
+.fw-obs.is-quiet { background: #FCFCFA; border-color: var(--line); }
+.fw-obs.is-quiet .fw-rays { display: none; }
+.fw-obs.is-quiet .fw-bulb svg { stroke: var(--ink-soft); }
+
+/* the text block inside a flex panel has to be told to take the rest of the row,
+   otherwise it wraps at its own content width and leaves the panel half empty */
+.fw-note > div:last-child, .fw-obs > div:last-child { flex: 1 1 auto; min-width: 0; }
+
+/* One colour per run, so a column is recognisable before its label is read:
+   the full system in pink, then yellow, green and blue as each critic is
+   removed in turn. */
+.fw-col.is-full .fw-colcap { background: #FDF0F4; border-color: #F0C2D0; }
+.fw-col.is-minus_stage1_critic .fw-colcap { background: #FFF8D6; border-color: #E8D48A; }
+.fw-col.is-minus_stage2_critic .fw-colcap { background: #E9F6EE; border-color: #A9CDB7; }
+.fw-col.is-minus_stage3_critic .fw-colcap { background: #E9F1FA; border-color: #A8C4E0; }
+.fw-col .fw-colcap { color: #000; }
+.fw-col.is-full { border-color: #F0C2D0; background: #FFFAFC; }
+.fw-col.is-minus_stage1_critic { border-color: #E8D48A; background: #FFFDF5; }
+.fw-col.is-minus_stage2_critic { border-color: #A9CDB7; background: #FAFDFB; }
+.fw-col.is-minus_stage3_critic { border-color: #A8C4E0; background: #FAFCFE; }
+/* the original diagram is the input, not a run: no caption pane at all */
+.fw-col.is-src .fw-colcap { display: none; }
+
+/* a column's own transport, scaled down to sit under a narrow frame */
+.fw-coltransport { display: flex; align-items: center; gap: 7px; margin-top: 9px; }
+.fw-coltransport[hidden] { display: none; }
+.fw-pp.is-sm { width: 26px; height: 26px; box-shadow: 1.5px 1.5px 0 var(--ink); }
+.fw-pp.is-sm svg { width: 10px; height: 10px; }
+.fw-coltransport .fw-seek { height: 7px; min-width: 0; }
+.fw-coltransport select {
+  font: inherit; font-size: 10.5px; font-weight: 600; padding: 3px 5px;
+  border-radius: 7px; border: 1.5px solid var(--ink); background: #fff; cursor: pointer;
+}

@@ -1,0 +1,66 @@
+=== Progressive Reveal Sequence Mapping ===
+
+Frame Image : frame_00.png
+Timestamp   : 0.499s
+Narration   : The architecture builds upon a pre-trained, frozen CLIP model containing text and image encoders.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 0.999s
+Narration   : In standard CLIP, the text encoder processes natural language prompts such as 'photo of a cat'.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 1.499s
+Narration   : In parallel, the image encoder extracts visual features from corresponding images.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 1.999s
+Narration   : A contrastive loss trains both encoders to align text and image representations within a shared embedding space.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 2.499s
+Narration   : To train LidarCLIP, automotive camera frames are passed through the frozen CLIP image encoder without gradient updates.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 2.999s
+Narration   : Synchronized point clouds from image-lidar pairs are concurrently processed by a trainable lidar encoder.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 3.499s
+Narration   : A similarity loss maximizes the alignment between lidar and image embeddings, effectively connecting point clouds to text via the image domain.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 3.999s
+Narration   : For text-to-lidar retrieval, a natural language query is mapped into feature space using the frozen text encoder.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 4.499s
+Narration   : Candidate point cloud scans are embedded through the trained lidar encoder.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 4.999s
+Narration   : Optionally, camera images can also be encoded to support multi-modal retrieval under challenging scenarios.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 5.499s
+Narration   : A similarity ranking module then identifies and retrieves the point cloud matching the query.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Timestamp   : 5.999s
+Narration   : At inference, the trained lidar encoder embeds point cloud inputs into the unified feature space for downstream tasks.
+--------------------------------------------------------------------------------
+Frame Image : frame_12.png
+Timestamp   : 6.499s
+Narration   : For lidar-to-image generation, the lidar embedding directly conditions a diffusion model to synthesize realistic visual scenes.
+--------------------------------------------------------------------------------
+Frame Image : frame_13.png
+Timestamp   : 6.999s
+Narration   : For lidar-to-text generation, the embedding feeds into a captioning model to produce descriptive text of the driving scene.
+--------------------------------------------------------------------------------
+Frame Image : frame_14.png
+Timestamp   : 7.499s
+Narration   : For zero-shot classification, candidate category labels inserted into text prompt templates are encoded into text embeddings.
+--------------------------------------------------------------------------------
+Frame Image : frame_15.png
+Timestamp   : 7.999s
+Narration   : Measuring the similarity between the lidar embedding and text embeddings yields zero-shot classification scores across target categories.
+--------------------------------------------------------------------------------

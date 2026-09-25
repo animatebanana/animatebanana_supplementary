@@ -1,0 +1,42 @@
+[
+ {
+  "t": 0.0,
+  "text": "The framework begins with graph construction and depth confidence measurement to process the input stereo data."
+ },
+ {
+  "t": 2.2,
+  "text": "First, the input RGB image is abstracted into homogeneous superpixels using the Simple Linear Iterative Clustering algorithm."
+ },
+ {
+  "t": 4.4,
+  "text": "Concurrently, the depth distribution is analyzed using mean depth, variation, and frequency entropy to compute a depth confidence measure."
+ },
+ {
+  "t": 6.6,
+  "text": "The superpixel graph and depth confidence score are then routed into two complementary saliency stages."
+ },
+ {
+  "t": 8.8,
+  "text": "In Stage 1, compactness saliency is calculated by evaluating the spatial spread of color and depth cues alongside objectness scores."
+ },
+ {
+  "t": 11.0,
+  "text": "A depth-refined foreground seed selection mechanism filters preliminary seeds using compactness saliency and mean depth values."
+ },
+ {
+  "t": 13.2,
+  "text": "In Stage 2, foreground saliency is computed by measuring multi-cue contrast —including color, depth, texture, and position—against the selected seeds."
+ },
+ {
+  "t": 15.4,
+  "text": "The compactness and foreground saliency maps are integrated through a weighted summation to leverage their complementary strengths."
+ },
+ {
+  "t": 17.6,
+  "text": "The aggregated result is then normalized to generate the final prediction."
+ },
+ {
+  "t": 19.8,
+  "text": "The resulting saliency map accurately highlights the salient object, demonstrating close agreement with the ground truth annotation."
+ }
+]

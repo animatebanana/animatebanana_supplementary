@@ -1,0 +1,59 @@
+/* The overview page's route into the animated pipeline walkthrough.
+   Self-contained: owns only .pb-* and .pipe-band, so it can be added to or
+   removed from a page without touching another module's stylesheet. */
+
+.pipe-band {
+  position: relative;
+  padding: clamp(48px, 6vw, 88px) 0 clamp(16px, 2vw, 32px);
+  scroll-margin-top: var(--anchor-offset, 86px); /* the sticky nav must not sit on the heading */
+}
+.pipe-wrap {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 clamp(14px, 2vw, 40px);
+}
+
+.pb-figure {
+  position: relative;
+  display: block;
+  margin: 0 auto;
+  max-width: 1080px;
+  padding: clamp(14px, 2vw, 26px);
+  background: #fff;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-lg, 14px);
+  box-shadow: var(--shadow-hard);
+  transition: transform var(--dur) var(--ease-out), box-shadow var(--dur) var(--ease-out);
+}
+.pb-figure:hover,
+.pb-figure:focus-visible {
+  transform: translate(-4px, -4px);
+  box-shadow: var(--shadow-hard-lg);
+}
+.pb-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.pb-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: clamp(16px, 2vw, 26px);
+}
+.pb-cta svg { flex: 0 0 auto; }
+
+.pb-foot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin-top: clamp(18px, 2.4vw, 30px);
+}
+.pb-note {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 13.5px;
+}

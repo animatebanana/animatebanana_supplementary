@@ -1,0 +1,109 @@
+{
+  "detected": 5,
+  "placeholders": 5,
+  "omitted": {},
+  "rejected": {},
+  "image_size": [
+    1039,
+    652
+  ],
+  "regions": [
+    {
+      "xml_id": "node_input",
+      "box_2d": [
+        215,
+        17,
+        709,
+        274
+      ],
+      "bbox": [
+        17.663,
+        140.18,
+        284.68600000000004,
+        462.268
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "node_pncc",
+      "box_2d": [
+        21,
+        365,
+        434,
+        582
+      ],
+      "bbox": [
+        379.235,
+        13.692,
+        604.698,
+        282.968
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "node_offsets",
+      "box_2d": [
+        492,
+        363,
+        903,
+        581
+      ],
+      "bbox": [
+        377.157,
+        320.784,
+        603.659,
+        588.756
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "node_point_cloud",
+      "box_2d": [
+        20,
+        737,
+        375,
+        949
+      ],
+      "bbox": [
+        765.7429999999999,
+        13.040000000000001,
+        986.011,
+        244.5
+      ],
+      "label": ""
+    },
+    {
+      "xml_id": "node_3dmm",
+      "box_2d": [
+        466,
+        731,
+        912,
+        965
+      ],
+      "bbox": [
+        759.509,
+        303.832,
+        1002.635,
+        594.624
+      ],
+      "label": ""
+    }
+  ],
+  "replaced": [
+    "node_pncc",
+    "node_offsets",
+    "node_input",
+    "node_point_cloud",
+    "node_3dmm"
+  ],
+  "provenance": {
+    "agent": "raster_integrator",
+    "backend": "openrouter_gemini37flash",
+    "model": "google-gemini-3.7-flash",
+    "prompt": null,
+    "style": "sliding_bounding_box",
+    "target": "svg",
+    "config_fingerprint": "ba9853345fc34258",
+    "timestamp": "2026-08-28T21:26:03"
+  }
+}

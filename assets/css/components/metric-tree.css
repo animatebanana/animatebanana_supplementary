@@ -1,0 +1,54 @@
+metric-tree { display: block; }
+
+.mt-tree { display: flex; justify-content: center; gap: 10px; padding: 8px 0 34px; flex-wrap: wrap; }
+.mt-node {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  font-weight: 550;
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink-faint);
+  cursor: pointer;
+  box-shadow: var(--shadow-xs);
+  transition: transform var(--dur) var(--ease-spring),
+              background var(--dur) var(--ease-out),
+              color var(--dur) var(--ease-out),
+              border-color var(--dur) var(--ease-out),
+              box-shadow var(--dur) var(--ease-out);
+}
+.mt-node:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); color: var(--ink); }
+.mt-node-active { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.mt-node-active.mt-validity { background: var(--blue-soft); color: var(--blue-ink); border-color: var(--blue); }
+.mt-node-active.mt-quality { background: var(--mint-soft); color: var(--mint-ink); border-color: var(--mint); }
+
+.mt-detail { max-width: 820px; margin: 0 auto; }
+.mt-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+@media (max-width: 640px) { .mt-pair { grid-template-columns: 1fr; } }
+
+.mt-case {
+  border-radius: var(--radius-lg);
+  padding: 20px 22px;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
+}
+.mt-good { background: var(--mint-soft); border-color: var(--mint); }
+.mt-bad  { background: var(--pink-soft); border-color: var(--pink); }
+.mt-case-label {
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.mt-good .mt-case-label { color: var(--mint-ink); }
+.mt-bad .mt-case-label  { color: var(--pink-ink); }
+.mt-case-score {
+  font-family: var(--font-mono);
+  font-size: 1.75rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  margin: 10px 0;
+  letter-spacing: -0.02em;
+}
+.mt-case-note { font-size: var(--fs-xs); color: var(--ink-mid); line-height: 1.6; }

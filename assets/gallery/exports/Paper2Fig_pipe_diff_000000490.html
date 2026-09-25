@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AnimateBanana — Hopping Bbox — Paper2Fig_pipe_diff_000000490</title>
+<!--
+  AnimateBanana — Hopping Bbox — Paper2Fig_pipe_diff_000000490
+  An animated visual narrative produced by the AnimateBanana pipeline.
+
+  This file is self-contained: the animation, its images, its narration and its
+  controls are all inside it. Drop it on a server, open it from a disk, or put
+  it in an <iframe> - it needs nothing else and fetches nothing.
+
+  The animation is CSS. The controls drive it through the browser's animation
+  API - pause holds every keyframe at once, the bar scrubs them all to the same
+  moment, speed sets their rate together - and the caption is read from a clock
+  of the page's own that is driven alongside them. It has to be its own clock:
+  the drawing is made of hundreds of short animations that each stop when they
+  are done, so reading the time off any one of them gives a watch that stopped
+  half a second in.
+-->
+<style>
+  :root {
+    --ink: #1A1815;
+    --paper: #FFFEF9;
+    --banana: #FFD43B;
+    --banana-deep: #F2B200;
+    --banana-soft: #FFF2B8;
+    --mute: #6b6558;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--paper); color: var(--ink); }
+  body {
+    font-family: ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    padding: 16px;
+  }
+  .ab { margin: 0 auto; max-width: 1400px; }
+  .ab-stage {
+    background: #fff;
+    border: 2px solid var(--ink);
+    border-radius: 14px;
+    padding: 10px;
+    overflow: hidden;
+  }
+  .ab-stage svg { display: block; width: 100%; height: auto; }
+
+  /* ---- Transport ----
+     Every control is the same height and centred on the same line, so the bar
+     reads as one object rather than a row of parts that happen to be adjacent. */
+  .ab-bar {
+    --h: 40px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    border-radius: calc(var(--h) / 2 + 8px);
+  }
+  .ab-bar > * { flex: 0 0 auto; height: var(--h); }
+
+  .ab-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 16px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    line-height: 1;
+    color: var(--ink);
+    background: #fff;
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    cursor: pointer;
+  }
+  .ab-btn:hover { background: var(--banana-soft); }
+  .ab-btn:active { transform: translateY(1px); }
+
+  .ab-play { width: var(--h); padding: 0; border-radius: 50%; background: var(--ink); color: var(--paper); }
+  .ab-play:hover { background: var(--ink); }
+  .ab-play svg { width: 14px; height: 14px; fill: currentColor; display: block; }
+  .ab-play .ab-ic-play { display: none; margin-left: 2px; }
+  .ab.is-paused .ab-play .ab-ic-play { display: block; }
+  .ab.is-paused .ab-play .ab-ic-pause { display: none; }
+
+  /* the rail is drawn; the range input laid over it is what you actually grab */
+  .ab-scrub { position: relative; flex: 1 1 180px !important; min-width: 120px;
+              display: flex; align-items: center; }
+  .ab-rail {
+    position: absolute; inset-inline: 0; height: 9px;
+    background: #fff; border: 1.5px solid var(--ink); border-radius: 999px;
+    overflow: hidden; pointer-events: none;
+  }
+  .ab-rail i { display: block; width: 0; height: 100%; background: var(--banana); }
+  .ab-seek {
+    position: relative; width: 100%; height: var(--h); margin: 0;
+    background: none; -webkit-appearance: none; appearance: none; cursor: pointer;
+  }
+  .ab-seek::-webkit-slider-runnable-track { height: var(--h); background: transparent; }
+  .ab-seek::-moz-range-track { height: var(--h); background: transparent; }
+  .ab-seek::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none;
+    width: 18px; height: 18px; border-radius: 50%;
+    border: 2.5px solid var(--ink); background: var(--banana);
+  }
+  .ab-seek::-moz-range-thumb {
+    width: 16px; height: 16px; border-radius: 50%;
+    border: 2.5px solid var(--ink); background: var(--banana);
+  }
+  .ab-seek:focus-visible { outline: none; }
+  .ab-scrub:focus-within .ab-rail { box-shadow: 0 0 0 3px var(--banana); }
+
+  .ab-time {
+    display: inline-flex;
+    align-items: center;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.72rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--mute);
+    white-space: nowrap;
+  }
+  .ab-time b { color: var(--ink); }
+
+  .ab-speed {
+    display: inline-flex;
+    align-items: stretch;
+    background: #fff;
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .ab-speed button {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    padding: 0;
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--ink);
+    background: #fff;
+    border: 0;
+    cursor: pointer;
+  }
+  .ab-speed button:hover { background: var(--banana-soft); }
+  .ab-speed button[disabled] { opacity: 0.35; cursor: default; background: #fff; }
+  .ab-rate {
+    display: grid;
+    place-items: center;
+    min-width: 56px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.74rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    border-inline: 2px solid var(--ink);
+  }
+  .ab.is-fast .ab-rate { background: var(--banana); }
+
+  /* Captions on or off, said in words rather than left to be inferred */
+  .ab-toggle .ab-led {
+    width: 11px; height: 11px; border-radius: 50%;
+    border: 2px solid var(--ink); background: var(--banana);
+  }
+  .ab-toggle[aria-pressed="false"] { color: var(--mute); }
+  .ab-toggle[aria-pressed="false"] .ab-led { background: #fff; }
+
+  /* ---- The line being narrated ---- */
+  .ab-cap {
+    display: flex;
+    align-items: center;
+    min-height: 3.4em;
+    margin: 10px 0 0;
+    padding: 12px 16px;
+    font-size: clamp(0.95rem, 0.9rem + 0.3vw, 1.15rem);
+    font-weight: 600;
+    font-style: italic;
+    line-height: 1.5;
+    background: var(--banana-soft);
+    border: 1.5px solid var(--banana);
+    border-left: 5px solid var(--banana-deep);
+    border-radius: 10px;
+    transition: opacity .18s ease;
+  }
+  .ab-cap.is-swap { opacity: 0; }
+  .ab.is-off .ab-cap { display: none; }
+  @media (prefers-reduced-motion: reduce) { .ab-cap { transition: none; } }
+
+  /* Narrow: the bar wraps to two rows and squares off, rather than squeezing
+     the scrub bar down to nothing. */
+  @media (max-width: 720px) {
+    .ab-bar { flex-wrap: wrap; border-radius: 20px; }
+    .ab-scrub { order: 3; flex-basis: 100% !important; }
+    .ab-time { order: 2; margin-left: auto; }
+  }
+</style>
+</head>
+<body>
+<figure class="ab">
+  <div class="ab-stage">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1544 410">
+  <defs>
+    <!-- Arrowhead markers -->
+    <marker id="arrow-vert" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#555555" />
+    </marker>
+    <marker id="arrow-curve" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#555555" />
+    </marker>
+    <style>
+      #focus_box {
+        animation: hop 34s step-end infinite;
+      }
+
+      @keyframes hop {
+        0.00% { x: 6px; y: 1px; width: 338px; height: 303px; }
+        5.88% { x: 36px; y: 50px; width: 278px; height: 76px; }
+        11.76% { x: 36px; y: 141px; width: 278px; height: 60px; }
+        17.65% { x: 36px; y: 221px; width: 278px; height: 60px; }
+        23.53% { x: 398px; y: 1px; width: 338px; height: 303px; }
+        29.41% { x: 426px; y: 70px; width: 282px; height: 32px; }
+        35.29% { x: 426px; y: 122px; width: 282px; height: 56px; }
+        41.18% { x: 426px; y: 196px; width: 282px; height: 34px; }
+        47.06% { x: 426px; y: 246px; width: 282px; height: 34px; }
+        52.94% { x: 790px; y: 1px; width: 338px; height: 303px; }
+        58.82% { x: 820px; y: 60px; width: 278px; height: 58px; }
+        64.71% { x: 820px; y: 141px; width: 278px; height: 58px; }
+        70.59% { x: 820px; y: 221px; width: 278px; height: 60px; }
+        76.47% { x: 1182px; y: 1px; width: 346px; height: 303px; }
+        82.35% { x: 1206px; y: 65px; width: 298px; height: 44px; }
+        88.24% { x: 1206px; y: 138px; width: 298px; height: 44px; }
+        94.12% { x: 1206px; y: 211px; width: 298px; height: 44px; }
+        100.00% { x: 6px; y: 1px; width: 338px; height: 303px; }
+      }
+
+      .narrative-text {
+        opacity: 0;
+        animation: banner_seq 34s step-end infinite;
+      }
+
+      @keyframes show_ts1 { 0.00%, 5.87% { opacity: 1; } 5.88%, 100% { opacity: 0; } }
+      @keyframes show_ts2 { 0.00%, 5.87% { opacity: 0; } 5.88%, 11.75% { opacity: 1; } 11.76%, 100% { opacity: 0; } }
+      @keyframes show_ts3 { 0.00%, 11.75% { opacity: 0; } 11.76%, 17.64% { opacity: 1; } 17.65%, 100% { opacity: 0; } }
+      @keyframes show_ts4 { 0.00%, 17.64% { opacity: 0; } 17.65%, 23.52% { opacity: 1; } 23.53%, 100% { opacity: 0; } }
+      @keyframes show_ts5 { 0.00%, 23.52% { opacity: 0; } 23.53%, 29.40% { opacity: 1; } 29.41%, 100% { opacity: 0; } }
+      @keyframes show_ts6 { 0.00%, 29.40% { opacity: 0; } 29.41%, 35.28% { opacity: 1; } 35.29%, 100% { opacity: 0; } }
+      @keyframes show_ts7 { 0.00%, 35.28% { opacity: 0; } 35.29%, 41.17% { opacity: 1; } 41.18%, 100% { opacity: 0; } }
+      @keyframes show_ts8 { 0.00%, 41.17% { opacity: 0; } 41.18%, 47.05% { opacity: 1; } 47.06%, 100% { opacity: 0; } }
+      @keyframes show_ts9 { 0.00%, 47.05% { opacity: 0; } 47.06%, 52.93% { opacity: 1; } 52.94%, 100% { opacity: 0; } }
+      @keyframes show_ts10 { 0.00%, 52.93% { opacity: 0; } 52.94%, 58.81% { opacity: 1; } 58.82%, 100% { opacity: 0; } }
+      @keyframes show_ts11 { 0.00%, 58.81% { opacity: 0; } 58.82%, 64.70% { opacity: 1; } 64.71%, 100% { opacity: 0; } }
+      @keyframes show_ts12 { 0.00%, 64.70% { opacity: 0; } 64.71%, 70.58% { opacity: 1; } 70.59%, 100% { opacity: 0; } }
+      @keyframes show_ts13 { 0.00%, 70.58% { opacity: 0; } 70.59%, 76.46% { opacity: 1; } 76.47%, 100% { opacity: 0; } }
+      @keyframes show_ts14 { 0.00%, 76.46% { opacity: 0; } 76.47%, 82.34% { opacity: 1; } 82.35%, 100% { opacity: 0; } }
+      @keyframes show_ts15 { 0.00%, 82.34% { opacity: 0; } 82.35%, 88.23% { opacity: 1; } 88.24%, 100% { opacity: 0; } }
+      @keyframes show_ts16 { 0.00%, 88.23% { opacity: 0; } 88.24%, 94.11% { opacity: 1; } 94.12%, 100% { opacity: 0; } }
+      @keyframes show_ts17 { 0.00%, 94.11% { opacity: 0; } 94.12%, 100.00% { opacity: 1; } }
+    </style>
+  </defs>
+
+  <!-- ================= BLOCK 1: Filter & Clean Data ================= -->
+  <g id="block_filter_clean" data-id="block_filter_clean" data-class="block" data-parent="root">
+    <rect id="bg_filter_clean" data-id="bg_filter_clean" data-class="composite_part" data-parent="block_filter_clean" x="10" y="5" width="330" height="295" rx="30" ry="30" fill="#dce8d6" stroke="#555555" stroke-width="2" />
+    <text id="title_filter_clean" data-id="title_filter_clean" data-class="text_node" data-parent="block_filter_clean" x="175" y="38" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Filter &amp; Clean Data</text>
+
+    <!-- Node 1: All Tweets -->
+    <g id="node_all_tweets" data-id="node_all_tweets" data-class="child_node" data-parent="block_filter_clean">
+      <rect id="rect_all_tweets" data-id="rect_all_tweets" data-class="composite_part" data-parent="node_all_tweets" x="40" y="54" width="270" height="68" rx="10" ry="10" fill="#ffffff" stroke="#555555" stroke-width="1.5" />
+      <text id="text_all_tweets_1" data-id="text_all_tweets_1" data-class="composite_part" data-parent="node_all_tweets" x="175" y="74" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#000000" text-anchor="middle">All Tweets with Los</text>
+      <text id="text_all_tweets_2" data-id="text_all_tweets_2" data-class="composite_part" data-parent="node_all_tweets" x="175" y="93" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#000000" text-anchor="middle">Angeles</text>
+      <text id="text_all_tweets_3" data-id="text_all_tweets_3" data-class="composite_part" data-parent="node_all_tweets" x="175" y="112" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#000000" text-anchor="middle">Geography-Tag</text>
+    </g>
+
+    <!-- Node 2: Filter COVID -->
+    <g id="node_filter_covid" data-id="node_filter_covid" data-class="child_node" data-parent="block_filter_clean">
+      <rect id="rect_filter_covid" data-id="rect_filter_covid" data-class="composite_part" data-parent="node_filter_covid" x="40" y="145" width="270" height="52" rx="10" ry="10" fill="#ffffff" stroke="#555555" stroke-width="1.5" />
+      <text id="text_filter_covid_1" data-id="text_filter_covid_1" data-class="composite_part" data-parent="node_filter_covid" x="175" y="167" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#000000" text-anchor="middle">Filter for COVID-19</text>
+      <text id="text_filter_covid_2" data-id="text_filter_covid_2" data-class="composite_part" data-parent="node_filter_covid" x="175" y="186" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#000000" text-anchor="middle">Keywords</text>
+    </g>
+
+    <!-- Node 3: Pre-process Text -->
+    <g id="node_preprocess_text" data-id="node_preprocess_text" data-class="child_node" data-parent="block_filter_clean">
+      <rect id="rect_preprocess_text" data-id="rect_preprocess_text" data-class="composite_part" data-parent="node_preprocess_text" x="40" y="225" width="270" height="52" rx="10" ry="10" fill="#ffffff" stroke="#555555" stroke-width="1.5" />
+      <text id="text_preprocess_text" data-id="text_preprocess_text" data-class="composite_part" data-parent="node_preprocess_text" x="175" y="256" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#000000" text-anchor="middle">Pre-process Text</text>
+    </g>
+  </g>
+
+  <!-- ================= BLOCK 2: Entity & Relation Extraction ================= -->
+  <g id="block_entity_relation" data-id="block_entity_relation" data-class="block" data-parent="root">
+    <rect id="bg_entity_relation" data-id="bg_entity_relation" data-class="composite_part" data-parent="block_entity_relation" x="402" y="5" width="330" height="295" rx="30" ry="30" fill="#fae5cf" stroke="#555555" stroke-width="2" />
+    <text id="title_entity_relation_1" data-id="title_entity_relation_1" data-class="text_node" data-parent="block_entity_relation" x="567" y="28" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Entity &amp; Relation</text>
+    <text id="title_entity_relation_2" data-id="title_entity_relation_2" data-class="text_node" data-parent="block_entity_relation" x="567" y="52" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Extraction</text>
+
+    <!-- Node 4: Sentiment Analysis -->
+    <g id="node_sentiment_analysis" data-id="node_sentiment_analysis" data-class="child_node" data-parent="block_entity_relation">
+      <rect id="rect_sentiment_analysis" data-id="rect_sentiment_analysis" data-class="composite_part" data-parent="node_sentiment_analysis" x="430" y="74" width="274" height="24" rx="6" ry="6" fill="#ffffff" stroke="#555555" stroke-width="1.5" />
+      <text id="text_sentiment_analysis" data-id="text_sentiment_analysis" data-class="composite_part" data-parent="node_sentiment_analysis" x="567" y="91" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#000000" text-anchor="middle">Sentiment Analysis</text>
+    </g>
+
+    <!-- Node 5: Topic Modeling -->
+    <g id="node_topic_modeling" data-id="node_topic_modeling" data-class="child_node" data-parent="block_entity_relation">
+      <rect id="rect_topic_modeling" data-id="rect_topic_modeling" data-class="composite_part" data-parent="node_topic_modeling" x="430" y="126" width="274" height="48" rx="10" ry="10" fill="#ffffff" stroke="#555555" stroke-width="1.5" />
+      <text id="text_topic_modeling_1" data-id="text_topic_modeling_1" data-class="composite_part" data-parent="node_topic_modeling" x="567" y="146" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#000000" text-anchor="middle">NMF &amp; NCPD Topic</text>
+      <text id="text_topic_modeling_2" data-id="text_topic_modeling_2" data-class="composite_part" data-parent="node_topic_modeling" x="567" y="165" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#000000" text-anchor="middle">Modeling</text>
+    </g>
+
+    <!-- Node 6: Time Series Analysis -->
+    <g id="node_time_series" data-id="node_time_series" data-class="child_node" data-parent="block_entity_relation">
+      <rect id="rect_time_series" data-id="rect_time_series" data-class="composite_part" data-parent="node_time_series" x="430" y="200" width="274" height="26" rx="6" ry="6" fill="#ffffff" stroke="#555555" stroke-width="1.5" />
+      <text id="text_time_series" data-id="text_time_series" data-class="composite_part" data-parent="node_time_series" x="567" y="218" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#000000" text-anchor="middle">Time Series Analysis</text>
+    </g>
+
+    <!-- Node 7: Word Embedding -->
+    <g id="node_word_embedding" data-id="node_word_embedding" data-class="child_node" data-parent="block_entity_relation">
+      <rect id="rect_word_embedding" data-id="rect_word_embedding" data-class="composite_part" data-parent="node_word_embedding" x="430" y="250" width="274" height="26" rx="6" ry="6" fill="#ffffff" stroke="#555555" stroke-width="1.5" />
+      <text id="text_word_embedding" data-id="text_word_embedding" data-class="composite_part" data-parent="node_word_embedding" x="567" y="268" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#000000" text-anchor="middle">Word Embedding</text>
+    </g>
+  </g>
+
+  <!-- ================= BLOCK 3: Graph Construction ================= -->
+  <g id="block_graph_construction" data-id="block_graph_construction" data-class="block" data-parent="root">
+    <rect id="bg_graph_construction" data-id="bg_graph_construction" data-class="composite_part" data-parent="block_graph_construction" x="794" y="5" width="330" height="295" rx="30" ry="30" fill="#ded6ea" stroke="#555555" stroke-width="2" />
+    <text id="title_graph_construction_1" data-id="title_graph_construction_1" data-class="text_node" data-parent="block_graph_construction" x="959" y="28" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Graph</text>
+    <text id="title_graph_construction_2" data-id="title_graph_construction_2" data-class="text_node" data-parent="block_graph_construction" x="959" y="52" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Construction</text>
+
+    <!-- Node 8: Definite Entities & Relations -->
+    <g id="node_definite_entities" data-id="node_definite_entities" data-class="child_node" data-parent="block_graph_construction">
+      <rect id="rect_definite_entities" data-id="rect_definite_entities" data-class="composite_part" data-parent="node_definite_entities" x="824" y="64" width="270" height="50" rx="10" ry="10" fill="#ffffff" stroke="#555555" stroke-width="1.5" />
+      <text id="text_definite_entities_1" data-id="text_definite_entities_1" data-class="composite_part" data-parent="node_definite_entities" x="959" y="86" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#000000" text-anchor="middle">Definite Entities &amp;</text>
+      <text id="text_definite_entities_2" data-id="text_definite_entities_2" data-class="composite_part" data-parent="node_definite_entities" x="959" y="105" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#000000" text-anchor="middle">Relations</text>
+    </g>
+
+    <!-- Node 9: Graph Query & Visualization -->
+    <g id="node_graph_query" data-id="node_graph_query" data-class="child_node" data-parent="block_graph_construction">
+      <rect id="rect_graph_query" data-id="rect_graph_query" data-class="composite_part" data-parent="node_graph_query" x="824" y="145" width="270" height="50" rx="10" ry="10" fill="#ffffff" stroke="#555555" stroke-width="1.5" />
+      <text id="text_graph_query_1" data-id="text_graph_query_1" data-class="composite_part" data-parent="node_graph_query" x="959" y="167" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#000000" text-anchor="middle">Graph Query &amp;</text>
+      <text id="text_graph_query_2" data-id="text_graph_query_2" data-class="composite_part" data-parent="node_graph_query" x="959" y="186" font-family="Arial, Helvetica, font-size:15" fill="#000000" text-anchor="middle">Visualization</text>
+    </g>
+
+    <!-- Node 10: Embed Graph -->
+    <g id="node_embed_graph" data-id="node_embed_graph" data-class="child_node" data-parent="block_graph_construction">
+      <rect id="rect_embed_graph" data-id="rect_embed_graph" data-class="composite_part" data-parent="node_embed_graph" x="824" y="225" width="270" height="52" rx="10" ry="10" fill="#ffffff" stroke="#555555" stroke-width="1.5" />
+      <text id="text_embed_graph" data-id="text_embed_graph" data-class="composite_part" data-parent="node_embed_graph" x="959" y="256" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#000000" text-anchor="middle">Embed Graph</text>
+    </g>
+  </g>
+
+  <!-- ================= BLOCK 4: Graph Analysis ================= -->
+  <g id="block_graph_analysis" data-id="block_graph_analysis" data-class="block" data-parent="root">
+    <rect id="bg_graph_analysis" data-id="bg_graph_analysis" data-class="composite_part" data-parent="block_graph_analysis" x="1186" y="5" width="338" height="295" rx="30" ry="30" fill="#e8beaf" stroke="#555555" stroke-width="2" />
+    <text id="title_graph_analysis" data-id="title_graph_analysis" data-class="text_node" data-parent="block_graph_analysis" x="1355" y="38" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Graph Analysis</text>
+
+    <!-- Node 11: Community Detection -->
+    <g id="node_community_detection" data-id="node_community_detection" data-class="child_node" data-parent="block_graph_analysis">
+      <rect id="rect_community_detection" data-id="rect_community_detection" data-class="composite_part" data-parent="node_community_detection" x="1210" y="69" width="290" height="36" rx="8" ry="8" fill="#ffffff" stroke="#555555" stroke-width="1.5" />
+      <text id="text_community_detection" data-id="text_community_detection" data-class="composite_part" data-parent="node_community_detection" x="1355" y="92" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#000000" text-anchor="middle">Community Detection</text>
+    </g>
+
+    <!-- Node 12: Node Similarity -->
+    <g id="node_node_similarity" data-id="node_node_similarity" data-class="child_node" data-parent="block_graph_analysis">
+      <rect id="rect_node_similarity" data-id="rect_node_similarity" data-class="composite_part" data-parent="node_node_similarity" x="1210" y="142" width="290" height="36" rx="8" ry="8" fill="#ffffff" stroke="#555555" stroke-width="1.5" />
+      <text id="text_node_similarity" data-id="text_node_similarity" data-class="composite_part" data-parent="node_node_similarity" x="1355" y="165" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#000000" text-anchor="middle">Node Similarity</text>
+    </g>
+
+    <!-- Node 13: Link Prediction -->
+    <g id="node_link_prediction" data-id="node_link_prediction" data-class="child_node" data-parent="block_graph_analysis">
+      <rect id="rect_link_prediction" data-id="rect_link_prediction" data-class="composite_part" data-parent="node_link_prediction" x="1210" y="215" width="290" height="36" rx="8" ry="8" fill="#ffffff" stroke="#555555" stroke-width="1.5" />
+      <text id="text_link_prediction" data-id="text_link_prediction" data-class="composite_part" data-parent="node_link_prediction" x="1355" y="238" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#000000" text-anchor="middle">Link Prediction</text>
+    </g>
+  </g>
+
+  <!-- ================= EDGES (Straight Internal Arrows) ================= -->
+  <!-- Block 1 Internal -->
+  <path id="edge_all_to_filter" data-id="edge_all_to_filter" data-class="edge" data-source="node_all_tweets" data-target="node_filter_covid" d="M 175 122 L 175 143" stroke="#555555" stroke-width="2.5" fill="none" marker-end="url(#arrow-vert)" />
+  <path id="edge_filter_to_preprocess" data-id="edge_filter_to_preprocess" data-class="edge" data-source="node_filter_covid" data-target="node_preprocess_text" d="M 175 197 L 175 223" stroke="#555555" stroke-width="2.5" fill="none" marker-end="url(#arrow-vert)" />
+
+  <!-- Block 2 Internal -->
+  <path id="edge_sentiment_to_topic" data-id="edge_sentiment_to_topic" data-class="edge" data-source="node_sentiment_analysis" data-target="node_topic_modeling" d="M 567 98 L 567 124" stroke="#555555" stroke-width="2.5" fill="none" marker-end="url(#arrow-vert)" />
+  <path id="edge_topic_to_timeseries" data-id="edge_topic_to_timeseries" data-class="edge" data-source="node_topic_modeling" data-target="node_time_series" d="M 567 174 L 567 198" stroke="#555555" stroke-width="2.5" fill="none" marker-end="url(#arrow-vert)" />
+  <path id="edge_timeseries_to_wordemb" data-id="edge_timeseries_to_wordemb" data-class="edge" data-source="node_time_series" data-target="node_word_embedding" d="M 567 226 L 567 248" stroke="#555555" stroke-width="2.5" fill="none" marker-end="url(#arrow-vert)" />
+
+  <!-- Block 3 Internal -->
+  <path id="edge_definite_to_query" data-id="edge_definite_to_query" data-class="edge" data-source="node_definite_entities" data-target="node_graph_query" d="M 959 114 L 959 143" stroke="#555555" stroke-width="2.5" fill="none" marker-end="url(#arrow-vert)" />
+  <path id="edge_query_to_embed" data-id="edge_query_to_embed" data-class="edge" data-source="node_graph_query" data-target="node_embed_graph" d="M 959 195 L 959 223" stroke="#555555" stroke-width="2.5" fill="none" marker-end="url(#arrow-vert)" />
+
+  <!-- Block 4 Internal -->
+  <path id="edge_comm_to_similarity" data-id="edge_comm_to_similarity" data-class="edge" data-source="node_community_detection" data-target="node_node_similarity" d="M 1355 105 L 1355 140" stroke="#555555" stroke-width="2.5" fill="none" marker-end="url(#arrow-vert)" />
+  <path id="edge_similarity_to_link" data-id="edge_similarity_to_link" data-class="edge" data-source="node_node_similarity" data-target="node_link_prediction" d="M 1355 178 L 1355 213" stroke="#555555" stroke-width="2.5" fill="none" marker-end="url(#arrow-vert)" />
+
+  <!-- ================= EDGES (Curved Inter-block Connectors) ================= -->
+  <!-- Block 1 to Block 2 -->
+  <path id="edge_preprocess_to_sentiment" data-id="edge_preprocess_to_sentiment" data-class="edge" data-source="node_preprocess_text" data-target="node_sentiment_analysis" d="M 310 251 C 365 251, 370 86, 427 86" stroke="#555555" stroke-width="3.5" fill="none" marker-end="url(#arrow-curve)" />
+
+  <!-- Block 2 to Block 3 -->
+  <path id="edge_wordemb_to_definite" data-id="edge_wordemb_to_definite" data-class="edge" data-source="node_word_embedding" data-target="node_definite_entities" d="M 704 263 C 760 263, 765 89, 821 89" stroke="#555555" stroke-width="3.5" fill="none" marker-end="url(#arrow-curve)" />
+
+  <!-- Block 3 to Block 4 -->
+  <path id="edge_embed_to_comm" data-id="edge_embed_to_comm" data-class="edge" data-source="node_embed_graph" data-target="node_community_detection" d="M 1094 251 C 1150 251, 1150 87, 1207 87" stroke="#555555" stroke-width="3.5" fill="none" marker-end="url(#arrow-curve)" />
+
+  <!-- ================= NARRATION BANNER ================= -->
+
+  <!-- ================= FOCUS BOX ================= -->
+  <rect id="focus_box" fill="none" stroke="#FF0000" stroke-width="4" stroke-dasharray="8,4" rx="6" />
+</svg>
+  </div>
+
+  <div class="ab-bar">
+    <button type="button" class="ab-btn ab-play" aria-label="Pause">
+      <svg class="ab-ic-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 5.5l11 6.5-11 6.5z"/></svg>
+      <svg class="ab-ic-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 5.5h3.6v13H7.5zM12.9 5.5h3.6v13h-3.6z"/></svg>
+    </button>
+
+    <div class="ab-scrub">
+      <span class="ab-rail" aria-hidden="true"><i class="ab-played"></i></span>
+      <input type="range" class="ab-seek" min="0" max="1000" value="0" step="1"
+             aria-label="Scrub through the animation">
+    </div>
+
+    <span class="ab-time"><b>0:00</b>&nbsp;/&nbsp;<span class="ab-total">0:00</span></span>
+
+    <div class="ab-speed" role="group" aria-label="Playback speed">
+      <button type="button" class="ab-slower" aria-label="Slower">&#8722;</button>
+      <span class="ab-rate" aria-live="polite">1&#215;</span>
+      <button type="button" class="ab-faster" aria-label="Faster">+</button>
+    </div>
+
+    <button type="button" class="ab-btn ab-toggle" aria-pressed="true">
+      <span class="ab-led" aria-hidden="true"></span>
+      <span class="ab-word">Captions on</span>
+    </button>
+  </div>
+
+  <figcaption class="ab-cap" aria-live="polite"></figcaption>
+</figure>
+
+<script>
+(function () {
+  var CUES = [{"start": 0.0, "end": 2.0, "text": "The pipeline begins with the data filtering and cleaning stage."}, {"start": 2.0, "end": 3.99, "text": "First, tweets tagged within the Los Angeles geographic area are collected."}, {"start": 4.0, "end": 6.0, "text": "The collected tweets are then filtered specifically for COVID-19 keywords."}, {"start": 6.0, "end": 8.0, "text": "Next, text pre-processing prepares the tweet corpus for downstream extraction."}, {"start": 8.0, "end": 10.0, "text": "The cleaned text passes into the entity and relation extraction stage."}, {"start": 10.0, "end": 12.0, "text": "Sentiment analysis computes sentiment scores for tweets and specific keywords."}, {"start": 12.0, "end": 14.0, "text": "Topic modeling via matrix and tensor factorizations extracts latent topics and tracks their temporal evolution."}, {"start": 14.0, "end": 16.0, "text": "Time series analysis identifies tweet volume peaks and significant sentiment change points linked to real-world events."}, {"start": 16.0, "end": 18.0, "text": "Word embeddings evaluate semantic similarity to generate weighted edges between tweets and topic keywords."}, {"start": 18.0, "end": 20.0, "text": "These extracted entities and relations are integrated during graph construction."}, {"start": 20.0, "end": 22.0, "text": "Definite entities and relations are formalized across tweets, topics, and dates."}, {"start": 22.0, "end": 24.0, "text": "Graph queries and visual inspection allow validation of the interconnected structure."}, {"start": 24.0, "end": 26.0, "text": "Graph embedding techniques then project the network structure into dense vector spaces."}, {"start": 26.0, "end": 28.0, "text": "Finally, the constructed network undergoes in-depth graph analysis."}, {"start": 28.0, "end": 30.0, "text": "Community detection identifies tightly coupled clusters of topics and discussions."}, {"start": 30.0, "end": 32.0, "text": "Node similarity metrics assess topological and semantic closeness between entities."}, {"start": 32.0, "end": 34.0, "text": "Lastly, link prediction infers unobserved associations between events, dates, and topics."}];
+  var LOOP = 34.0;
+  var REPEATS = Infinity;
+  var RATES = [0.25, 0.5, 0.75, 1, 1.5, 2, 3];
+
+  var fig = document.querySelector('.ab');
+  var cap = document.querySelector('.ab-cap');
+  var play = document.querySelector('.ab-play');
+  var seek = document.querySelector('.ab-seek');
+  var played = document.querySelector('.ab-played');
+  var nowEl = document.querySelector('.ab-time b');
+  var totalEl = document.querySelector('.ab-total');
+  var rateEl = document.querySelector('.ab-rate');
+  var slower = document.querySelector('.ab-slower');
+  var faster = document.querySelector('.ab-faster');
+  var toggle = document.querySelector('.ab-toggle');
+  var word = toggle.querySelector('.ab-word');
+
+  var at = -1, swap = null, rate = 3, paused = false, scrubbing = false;
+
+  // THE CLOCK. The drawing is hundreds of short animations that each stop when
+  // they are done, so none of them can be asked what time it is. This one runs
+  // the length of the whole piece, does nothing visible, and is driven by the
+  // same controls - so the caption, the bar and the picture cannot disagree.
+  var master = null;
+  try {
+    master = document.documentElement.animate(
+      [{ opacity: 1 }, { opacity: 1 }],
+      { duration: (LOOP || 1) * 1000, iterations: REPEATS }
+    );
+  } catch (e) {}
+  var t0 = performance.now();
+
+  function others() {
+    try {
+      var runs = document.getAnimations ? document.getAnimations() : [];
+      return runs.filter(function (a) { return a !== master; });
+    } catch (e) { return []; }
+  }
+  function clock() {
+    var t;
+    if (master && master.currentTime != null) t = master.currentTime / 1000;
+    else t = (performance.now() - t0) / 1000;
+    return REPEATS === 1 ? Math.min(t, LOOP) : (t % (LOOP || 1));
+  }
+  function each(fn) {
+    if (master) { try { fn(master); } catch (e) {} }
+    others().forEach(function (a) { try { fn(a); } catch (e) {} });
+  }
+  function clip(t) {
+    t = Math.max(0, t || 0);
+    return Math.floor(t / 60) + ':' + ('0' + Math.floor(t % 60)).slice(-2);
+  }
+
+  play.addEventListener('click', function () {
+    paused = !paused;
+    // Restarting a finished piece rather than leaving Play doing nothing
+    if (!paused && REPEATS === 1 && clock() >= LOOP - 0.05) each(function (a) { a.currentTime = 0; });
+    each(function (a) { paused ? a.pause() : a.play(); });
+    if (!paused) t0 = performance.now() - clock() * 1000;
+    fig.classList.toggle('is-paused', paused);
+    play.setAttribute('aria-label', paused ? 'Play' : 'Pause');
+  });
+
+  function setRate(i) {
+    rate = Math.max(0, Math.min(RATES.length - 1, i));
+    var r = RATES[rate];
+    each(function (a) { a.playbackRate = r; });
+    rateEl.textContent = r + '×';
+    fig.classList.toggle('is-fast', r !== 1);
+    slower.disabled = rate === 0;
+    faster.disabled = rate === RATES.length - 1;
+  }
+  slower.addEventListener('click', function () { setRate(rate - 1); });
+  faster.addEventListener('click', function () { setRate(rate + 1); });
+
+  seek.addEventListener('pointerdown', function () { scrubbing = true; });
+  seek.addEventListener('input', function () {
+    var t = (Number(seek.value) / 1000) * LOOP;
+    each(function (a) { a.currentTime = t * 1000; });
+    t0 = performance.now() - t * 1000;
+    paint(true);
+  });
+  seek.addEventListener('change', function () { scrubbing = false; });
+
+  toggle.addEventListener('click', function () {
+    var on = toggle.getAttribute('aria-pressed') !== 'true';
+    toggle.setAttribute('aria-pressed', String(on));
+    word.textContent = on ? 'Captions on' : 'Captions off';
+    fig.classList.toggle('is-off', !on);
+  });
+
+  function paint(force) {
+    var t = clock();
+    nowEl.textContent = clip(t);
+    if (!scrubbing) seek.value = String(Math.round((t / (LOOP || 1)) * 1000));
+    played.style.width = ((t / (LOOP || 1)) * 100) + '%';
+
+    var k = -1;
+    for (var i = 0; i < CUES.length; i++) { if (t >= CUES[i].start - 0.05) k = i; }
+    if (k !== at || force === true) {
+      at = k;
+      var text = k >= 0 ? CUES[k].text : '';
+      if (text !== cap.textContent) {
+        cap.classList.add('is-swap');
+        clearTimeout(swap);
+        swap = setTimeout(function () {
+          cap.textContent = text;
+          cap.classList.remove('is-swap');
+        }, 150);
+      }
+    }
+  }
+
+  // Two ways round, on purpose. requestAnimationFrame gives a smooth bar while
+  // the page is on screen, and stops dead in a background tab or an embed the
+  // browser considers hidden - where the animation itself keeps running, so the
+  // caption would be left behind. The slow timer covers exactly that case.
+  function frame() { paint(); requestAnimationFrame(frame); }
+
+  totalEl.textContent = clip(LOOP);
+  setRate(3);
+  if (!CUES.length) { fig.classList.add('is-off'); toggle.style.display = 'none'; }
+  requestAnimationFrame(frame);
+  setInterval(paint, 250);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+[
+ {
+  "t": 0.0,
+  "text": "In the pre-training phase, the system trains a supervised classification model using labeled source domain data."
+ },
+ {
+  "t": 2.2,
+  "text": "Labeled speech samples from the source domain serve as the initial input features."
+ },
+ {
+  "t": 4.4,
+  "text": "The source encoder processes these acoustic inputs to extract discriminative speaker representations."
+ },
+ {
+  "t": 6.6,
+  "text": "These extracted features are passed into the classifier."
+ },
+ {
+  "t": 8.8,
+  "text": "The classifier outputs the predicted speaker class labels, optimized via classification loss."
+ },
+ {
+  "t": 11.0,
+  "text": "Next, the framework performs unsupervised adversarial discriminative domain adaptation."
+ },
+ {
+  "t": 13.2,
+  "text": "Source domain samples are routed into the adaptation branch."
+ },
+ {
+  "t": 15.4,
+  "text": "The pre-trained source encoder remains fixed, providing reference feature distributions."
+ },
+ {
+  "t": 17.6,
+  "text": "Simultaneously, unlabeled target domain speech samples are introduced."
+ },
+ {
+  "t": 19.8,
+  "text": "A dedicated target encoder learns an asymmetric mapping to adapt target representations into the source space."
+ },
+ {
+  "t": 22.0,
+  "text": "A domain discriminator processes the encoded features from both domains in an adversarial game."
+ },
+ {
+  "t": 24.2,
+  "text": "The discriminator outputs predicted domain labels, driving the target encoder to generate language-independent representations."
+ }
+]

@@ -1,0 +1,742 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AnimateBanana — Colour Pop — WACV_2022_set5_000015</title>
+<!--
+  AnimateBanana — Colour Pop — WACV_2022_set5_000015
+  An animated visual narrative produced by the AnimateBanana pipeline.
+
+  This file is self-contained: the animation, its images, its narration and its
+  controls are all inside it. Drop it on a server, open it from a disk, or put
+  it in an <iframe> - it needs nothing else and fetches nothing.
+
+  The animation is CSS. The controls drive it through the browser's animation
+  API - pause holds every keyframe at once, the bar scrubs them all to the same
+  moment, speed sets their rate together - and the caption is read from a clock
+  of the page's own that is driven alongside them. It has to be its own clock:
+  the drawing is made of hundreds of short animations that each stop when they
+  are done, so reading the time off any one of them gives a watch that stopped
+  half a second in.
+-->
+<style>
+  :root {
+    --ink: #1A1815;
+    --paper: #FFFEF9;
+    --banana: #FFD43B;
+    --banana-deep: #F2B200;
+    --banana-soft: #FFF2B8;
+    --mute: #6b6558;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--paper); color: var(--ink); }
+  body {
+    font-family: ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    padding: 16px;
+  }
+  .ab { margin: 0 auto; max-width: 1400px; }
+  .ab-stage {
+    background: #fff;
+    border: 2px solid var(--ink);
+    border-radius: 14px;
+    padding: 10px;
+    overflow: hidden;
+  }
+  .ab-stage svg { display: block; width: 100%; height: auto; }
+
+  /* ---- Transport ----
+     Every control is the same height and centred on the same line, so the bar
+     reads as one object rather than a row of parts that happen to be adjacent. */
+  .ab-bar {
+    --h: 40px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    border-radius: calc(var(--h) / 2 + 8px);
+  }
+  .ab-bar > * { flex: 0 0 auto; height: var(--h); }
+
+  .ab-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 16px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    line-height: 1;
+    color: var(--ink);
+    background: #fff;
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    cursor: pointer;
+  }
+  .ab-btn:hover { background: var(--banana-soft); }
+  .ab-btn:active { transform: translateY(1px); }
+
+  .ab-play { width: var(--h); padding: 0; border-radius: 50%; background: var(--ink); color: var(--paper); }
+  .ab-play:hover { background: var(--ink); }
+  .ab-play svg { width: 14px; height: 14px; fill: currentColor; display: block; }
+  .ab-play .ab-ic-play { display: none; margin-left: 2px; }
+  .ab.is-paused .ab-play .ab-ic-play { display: block; }
+  .ab.is-paused .ab-play .ab-ic-pause { display: none; }
+
+  /* the rail is drawn; the range input laid over it is what you actually grab */
+  .ab-scrub { position: relative; flex: 1 1 180px !important; min-width: 120px;
+              display: flex; align-items: center; }
+  .ab-rail {
+    position: absolute; inset-inline: 0; height: 9px;
+    background: #fff; border: 1.5px solid var(--ink); border-radius: 999px;
+    overflow: hidden; pointer-events: none;
+  }
+  .ab-rail i { display: block; width: 0; height: 100%; background: var(--banana); }
+  .ab-seek {
+    position: relative; width: 100%; height: var(--h); margin: 0;
+    background: none; -webkit-appearance: none; appearance: none; cursor: pointer;
+  }
+  .ab-seek::-webkit-slider-runnable-track { height: var(--h); background: transparent; }
+  .ab-seek::-moz-range-track { height: var(--h); background: transparent; }
+  .ab-seek::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none;
+    width: 18px; height: 18px; border-radius: 50%;
+    border: 2.5px solid var(--ink); background: var(--banana);
+  }
+  .ab-seek::-moz-range-thumb {
+    width: 16px; height: 16px; border-radius: 50%;
+    border: 2.5px solid var(--ink); background: var(--banana);
+  }
+  .ab-seek:focus-visible { outline: none; }
+  .ab-scrub:focus-within .ab-rail { box-shadow: 0 0 0 3px var(--banana); }
+
+  .ab-time {
+    display: inline-flex;
+    align-items: center;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.72rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--mute);
+    white-space: nowrap;
+  }
+  .ab-time b { color: var(--ink); }
+
+  .ab-speed {
+    display: inline-flex;
+    align-items: stretch;
+    background: #fff;
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .ab-speed button {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    padding: 0;
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--ink);
+    background: #fff;
+    border: 0;
+    cursor: pointer;
+  }
+  .ab-speed button:hover { background: var(--banana-soft); }
+  .ab-speed button[disabled] { opacity: 0.35; cursor: default; background: #fff; }
+  .ab-rate {
+    display: grid;
+    place-items: center;
+    min-width: 56px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.74rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    border-inline: 2px solid var(--ink);
+  }
+  .ab.is-fast .ab-rate { background: var(--banana); }
+
+  /* Captions on or off, said in words rather than left to be inferred */
+  .ab-toggle .ab-led {
+    width: 11px; height: 11px; border-radius: 50%;
+    border: 2px solid var(--ink); background: var(--banana);
+  }
+  .ab-toggle[aria-pressed="false"] { color: var(--mute); }
+  .ab-toggle[aria-pressed="false"] .ab-led { background: #fff; }
+
+  /* ---- The line being narrated ---- */
+  .ab-cap {
+    display: flex;
+    align-items: center;
+    min-height: 3.4em;
+    margin: 10px 0 0;
+    padding: 12px 16px;
+    font-size: clamp(0.95rem, 0.9rem + 0.3vw, 1.15rem);
+    font-weight: 600;
+    font-style: italic;
+    line-height: 1.5;
+    background: var(--banana-soft);
+    border: 1.5px solid var(--banana);
+    border-left: 5px solid var(--banana-deep);
+    border-radius: 10px;
+    transition: opacity .18s ease;
+  }
+  .ab-cap.is-swap { opacity: 0; }
+  .ab.is-off .ab-cap { display: none; }
+  @media (prefers-reduced-motion: reduce) { .ab-cap { transition: none; } }
+
+  /* Narrow: the bar wraps to two rows and squares off, rather than squeezing
+     the scrub bar down to nothing. */
+  @media (max-width: 720px) {
+    .ab-bar { flex-wrap: wrap; border-radius: 20px; }
+    .ab-scrub { order: 3; flex-basis: 100% !important; }
+    .ab-time { order: 2; margin-left: auto; }
+  }
+</style>
+</head>
+<body>
+<figure class="ab">
+  <div class="ab-stage">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 300">
+  <defs>
+    <!-- Standard Arrow Marker -->
+    <marker id="arrow" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#000000"/>
+    </marker>
+    <!-- Fat Arrow Marker -->
+    <marker id="fat-arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M 0 1 L 7 5 L 0 9 z" fill="#000000"/>
+    </marker>
+
+    <style>
+      text {
+        font-family: "DejaVu Serif", "DejaVu Sans", "STIXGeneral", "Times New Roman", "Nimbus Roman No9 L", "Liberation Serif", serif;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* ======================================================================= */
+      /* GLOBAL DORMANT STATE (DESATURATION)                                     */
+      /* ======================================================================= */
+      #block_dataset, #text_dataset_title,
+      #param_pill_1, #param_pill_2, #param_pill_3, #param_pill_4, #param_pill_5, #param_pill_6,
+      #text_sample_params_1, #text_sample_params_2,
+      #text_row_idx_1, #text_row_idx_2, #text_row_idx_3, #text_row_idx_4, #text_row_idx_5, #text_row_idx_6,
+      #text_dots_params,
+      #class_pill_1_1, #class_pill_1_2, #class_pill_2_1, #class_pill_2_2, #class_pill_3_1, #class_pill_3_2,
+      #text_create_classes_1, #text_create_classes_2,
+      #class_label_1, #class_label_2, #class_label_3,
+      #text_dots_classes, #edge_dataset_to_pretrain,
+      #block_pretraining, #node_image_generator, #text_pretraining_title,
+      #text_generate_batch_1, #text_generate_batch_2, #edge_generator_to_batch,
+      #node_image_batch, #edge_batch_to_model,
+      #node_model_pretrain, #edge_model_to_preds,
+      #node_predictions, #node_loss_calc, #text_model_output_formula, #edge_loss_to_grad,
+      #node_gradient, #edge_grad_to_model, #edge_pretrain_to_finetune_model,
+      #block_finetuning, #node_real_world_datasets, #text_finetuning_title, #edge_real_to_finetune_model,
+      #node_model_finetune {
+        filter: grayscale(100%) opacity(0.4);
+        animation-name: colorPop;
+        animation-duration: 0.5s;
+        animation-fill-mode: forwards;
+      }
+
+      @keyframes colorPop {
+        to {
+          filter: grayscale(0%) opacity(1);
+        }
+      }
+
+      /* ======================================================================= */
+      /* ANIMATION DELAYS PER TIMESTAMP                                          */
+      /* ======================================================================= */
+      /* Timestamp 1 (Delay = 0.5s) */
+      #block_dataset, #text_dataset_title {
+        animation-delay: 0s;
+      }
+
+      /* Timestamp 2 (Delay = 1.0s) */
+      #param_pill_1, #param_pill_2, #param_pill_3, #param_pill_4, #param_pill_5, #param_pill_6,
+      #text_sample_params_1, #text_sample_params_2,
+      #text_row_idx_1, #text_row_idx_2, #text_row_idx_3, #text_row_idx_4, #text_row_idx_5, #text_row_idx_6,
+      #text_dots_params {
+        animation-delay: 3.44s;
+      }
+
+      /* Timestamp 3 (Delay = 1.5s) */
+      #class_pill_1_1, #class_pill_1_2, #class_pill_2_1, #class_pill_2_2, #class_pill_3_1, #class_pill_3_2,
+      #text_create_classes_1, #text_create_classes_2,
+      #class_label_1, #class_label_2, #class_label_3,
+      #text_dots_classes, #edge_dataset_to_pretrain {
+        animation-delay: 7.88s;
+      }
+
+      /* Timestamp 4 (Delay = 2.0s) */
+      #block_pretraining, #node_image_generator, #text_pretraining_title,
+      #text_generate_batch_1, #text_generate_batch_2, #edge_generator_to_batch {
+        animation-delay: 12.52s;
+      }
+
+      /* Timestamp 5 (Delay = 2.5s) */
+      #node_image_batch, #edge_batch_to_model {
+        animation-delay: 17.96s;
+      }
+
+      /* Timestamp 6 (Delay = 3.0s) */
+      #node_model_pretrain, #edge_model_to_preds {
+        animation-delay: 21.56s;
+      }
+
+      /* Timestamp 7 (Delay = 3.5s) */
+      #node_predictions, #node_loss_calc, #text_model_output_formula, #edge_loss_to_grad {
+        animation-delay: 25.6s;
+      }
+
+      /* Timestamp 8 (Delay = 4.0s) */
+      #node_gradient, #edge_grad_to_model, #edge_pretrain_to_finetune_model {
+        animation-delay: 29.6s;
+      }
+
+      /* Timestamp 9 (Delay = 4.5s) */
+      #block_finetuning, #node_real_world_datasets, #text_finetuning_title, #edge_real_to_finetune_model {
+        animation-delay: 33.6s;
+      }
+
+      /* Timestamp 10 (Delay = 5.0s) */
+      #node_model_finetune {
+        animation-delay: 37.8s;
+      }
+
+      /* ======================================================================= */
+      /* DYNAMIC NARRATION BANNER STYLES                                         */
+      /* ======================================================================= */
+      .narrative-text {
+        opacity: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        font-size: 15px;
+        font-weight: 500;
+        fill: #1E293B;
+      }
+    </style>
+  </defs>
+
+  <!-- ======================================================================= -->
+  <!-- 1. PARENT CONTAINERS / BLOCKS                                           -->
+  <!-- ======================================================================= -->
+
+  <!-- Block: Dataset -->
+  <g data-id="block_dataset" id="block_dataset" data-class="block" data-parent="root">
+    <path d="M 5 23 L 5 15 A 7 7 0 0 1 12 8 L 88 8 A 7 7 0 0 1 95 15 L 95 23 L 270 23 A 5 5 0 0 1 275 28 L 275 230 A 5 5 0 0 1 270 235 L 10 235 A 5 5 0 0 1 5 230 Z"
+          fill="#EEF8F3" stroke="#000000" stroke-width="1.3"/>
+    <text data-id="text_dataset_title" id="text_dataset_title" data-class="text_node" data-parent="block_dataset"
+          x="50" y="20" font-size="14" text-anchor="middle" fill="#000000">Dataset</text>
+  </g>
+
+  <!-- Block: Pre-training -->
+  <g data-id="block_pretraining" id="block_pretraining" data-class="block" data-parent="root">
+    <path d="M 285 23 L 285 15 A 7 7 0 0 1 292 8 L 398 8 A 7 7 0 0 1 405 15 L 405 23 L 710 23 A 5 5 0 0 1 715 28 L 715 230 A 5 5 0 0 1 710 235 L 290 235 A 5 5 0 0 1 285 230 Z"
+          fill="#EFF2FA" stroke="#000000" stroke-width="1.3"/>
+    <text data-id="text_pretraining_title" id="text_pretraining_title" data-class="text_node" data-parent="block_pretraining"
+          x="348" y="20" font-size="14" text-anchor="middle" fill="#000000">Pre-training</text>
+  </g>
+
+  <!-- Block: Finetuning -->
+  <g data-id="block_finetuning" id="block_finetuning" data-class="block" data-parent="root">
+    <path d="M 725 23 L 725 15 A 7 7 0 0 1 732 8 L 828 8 A 7 7 0 0 1 835 15 L 835 23 L 990 23 A 5 5 0 0 1 995 28 L 995 230 A 5 5 0 0 1 990 235 L 730 235 A 5 5 0 0 1 725 230 Z"
+          fill="#F7EEFA" stroke="#000000" stroke-width="1.3"/>
+    <text data-id="text_finetuning_title" id="text_finetuning_title" data-class="text_node" data-parent="block_finetuning"
+          x="783" y="20" font-size="14" text-anchor="middle" fill="#000000">Finetuning</text>
+  </g>
+
+  <!-- ======================================================================= -->
+  <!-- 2. DATASET PANEL ELEMENTS                                               -->
+  <!-- ======================================================================= -->
+
+  <!-- Column 1 Header -->
+  <text data-id="text_sample_params_1" id="text_sample_params_1" data-class="text_node" data-parent="block_dataset"
+        x="72" y="44" font-size="13" text-anchor="middle" fill="#000000">Sample system</text>
+  <text data-id="text_sample_params_2" id="text_sample_params_2" data-class="text_node" data-parent="block_dataset"
+        x="72" y="58" font-size="13" text-anchor="middle" fill="#000000">parameters</text>
+
+  <!-- Column 2 Header -->
+  <text data-id="text_create_classes_1" id="text_create_classes_1" data-class="text_node" data-parent="block_dataset"
+        x="212" y="44" font-size="13" text-anchor="middle" fill="#000000">Create</text>
+  <text data-id="text_create_classes_2" id="text_create_classes_2" data-class="text_node" data-parent="block_dataset"
+        x="212" y="58" font-size="13" text-anchor="middle" fill="#000000">classes</text>
+
+  <!-- Row indices -->
+  <text data-id="text_row_idx_1" id="text_row_idx_1" data-class="text_node" data-parent="block_dataset" x="25" y="85" font-size="13" text-anchor="middle">1</text>
+  <text data-id="text_row_idx_2" id="text_row_idx_2" data-class="text_node" data-parent="block_dataset" x="25" y="108" font-size="13" text-anchor="middle">2</text>
+  <text data-id="text_row_idx_3" id="text_row_idx_3" data-class="text_node" data-parent="block_dataset" x="25" y="131" font-size="13" text-anchor="middle">3</text>
+  <text data-id="text_row_idx_4" id="text_row_idx_4" data-class="text_node" data-parent="block_dataset" x="25" y="154" font-size="13" text-anchor="middle">4</text>
+  <text data-id="text_row_idx_5" id="text_row_idx_5" data-class="text_node" data-parent="block_dataset" x="25" y="177" font-size="13" text-anchor="middle">5</text>
+  <text data-id="text_row_idx_6" id="text_row_idx_6" data-class="text_node" data-parent="block_dataset" x="25" y="200" font-size="13" text-anchor="middle">6</text>
+
+  <!-- Sample System Parameters Pills -->
+  <g data-id="param_pill_1" id="param_pill_1" data-class="child_node" data-parent="block_dataset">
+    <rect x="37" y="71" width="90" height="18" rx="8" ry="8" fill="#FFFFFF" stroke="#666666" stroke-width="1.2"/>
+    <text x="82" y="84" font-size="12" text-anchor="middle" font-style="italic">w<tspan font-size="0.7em" dy="3">1</tspan><tspan font-size="1em" dy="-3">, w</tspan><tspan font-size="0.7em" dy="3">2</tspan><tspan font-size="1em" dy="-3">, ...</tspan></text>
+  </g>
+  <g data-id="param_pill_2" id="param_pill_2" data-class="child_node" data-parent="block_dataset">
+    <rect x="37" y="94" width="90" height="18" rx="8" ry="8" fill="#FFFFFF" stroke="#666666" stroke-width="1.2"/>
+    <text x="82" y="107" font-size="12" text-anchor="middle" font-style="italic">w<tspan font-size="0.7em" dy="3">1</tspan><tspan font-size="1em" dy="-3">, w</tspan><tspan font-size="0.7em" dy="3">2</tspan><tspan font-size="1em" dy="-3">, ...</tspan></text>
+  </g>
+  <g data-id="param_pill_3" id="param_pill_3" data-class="child_node" data-parent="block_dataset">
+    <rect x="37" y="117" width="90" height="18" rx="8" ry="8" fill="#FFFFFF" stroke="#666666" stroke-width="1.2"/>
+    <text x="82" y="130" font-size="12" text-anchor="middle" font-style="italic">w<tspan font-size="0.7em" dy="3">1</tspan><tspan font-size="1em" dy="-3">, w</tspan><tspan font-size="0.7em" dy="3">2</tspan><tspan font-size="1em" dy="-3">, ...</tspan></text>
+  </g>
+  <g data-id="param_pill_4" id="param_pill_4" data-class="child_node" data-parent="block_dataset">
+    <rect x="37" y="140" width="90" height="18" rx="8" ry="8" fill="#FFFFFF" stroke="#666666" stroke-width="1.2"/>
+    <text x="82" y="153" font-size="12" text-anchor="middle" font-style="italic">w<tspan font-size="0.7em" dy="3">1</tspan><tspan font-size="1em" dy="-3">, w</tspan><tspan font-size="0.7em" dy="3">2</tspan><tspan font-size="1em" dy="-3">, ...</tspan></text>
+  </g>
+  <g data-id="param_pill_5" id="param_pill_5" data-class="child_node" data-parent="block_dataset">
+    <rect x="37" y="163" width="90" height="18" rx="8" ry="8" fill="#FFFFFF" stroke="#666666" stroke-width="1.2"/>
+    <text x="82" y="176" font-size="12" text-anchor="middle" font-style="italic">w<tspan font-size="0.7em" dy="3">1</tspan><tspan font-size="1em" dy="-3">, w</tspan><tspan font-size="0.7em" dy="3">2</tspan><tspan font-size="1em" dy="-3">, ...</tspan></text>
+  </g>
+  <g data-id="param_pill_6" id="param_pill_6" data-class="child_node" data-parent="block_dataset">
+    <rect x="37" y="186" width="90" height="18" rx="8" ry="8" fill="#FFFFFF" stroke="#666666" stroke-width="1.2"/>
+    <text x="82" y="199" font-size="12" text-anchor="middle" font-style="italic">w<tspan font-size="0.7em" dy="3">1</tspan><tspan font-size="1em" dy="-3">, w</tspan><tspan font-size="0.7em" dy="3">2</tspan><tspan font-size="1em" dy="-3">, ...</tspan></text>
+  </g>
+  <text data-id="text_dots_params" id="text_dots_params" data-class="text_node" data-parent="block_dataset" x="82" y="222" font-size="14" font-weight="bold" text-anchor="middle">&#x22EE;</text>
+
+  <!-- Class Labels -->
+  <text data-id="class_label_1" id="class_label_1" data-class="text_node" data-parent="block_dataset" x="156" y="96" font-size="14" fill="#7B2CBF" font-weight="bold" text-anchor="middle">1</text>
+  <text data-id="class_label_2" id="class_label_2" data-class="text_node" data-parent="block_dataset" x="156" y="142" font-size="14" fill="#2A9D8F" font-weight="bold" text-anchor="middle">2</text>
+  <text data-id="class_label_3" id="class_label_3" data-class="text_node" data-parent="block_dataset" x="156" y="188" font-size="14" fill="#D97706" font-weight="bold" text-anchor="middle">3</text>
+
+  <!-- Class Pills -->
+  <g data-id="class_pill_1_1" id="class_pill_1_1" data-class="child_node" data-parent="block_dataset">
+    <rect x="167" y="71" width="90" height="18" rx="8" ry="8" fill="#F7EEFA" stroke="#7B2CBF" stroke-width="1.2"/>
+    <text x="212" y="84" font-size="12" text-anchor="middle" fill="#7B2CBF" font-style="italic">w<tspan font-size="0.7em" dy="3">1</tspan><tspan font-size="1em" dy="-3">, w</tspan><tspan font-size="0.7em" dy="3">2</tspan><tspan font-size="1em" dy="-3">, ...</tspan></text>
+  </g>
+  <g data-id="class_pill_1_2" id="class_pill_1_2" data-class="child_node" data-parent="block_dataset">
+    <rect x="167" y="94" width="90" height="18" rx="8" ry="8" fill="#F7EEFA" stroke="#7B2CBF" stroke-width="1.2"/>
+    <text x="212" y="107" font-size="12" text-anchor="middle" fill="#7B2CBF" font-style="italic">w<tspan font-size="0.7em" dy="3">1</tspan><tspan font-size="1em" dy="-3">, w</tspan><tspan font-size="0.7em" dy="3">2</tspan><tspan font-size="1em" dy="-3">, ...</tspan></text>
+  </g>
+  <g data-id="class_pill_2_1" id="class_pill_2_1" data-class="child_node" data-parent="block_dataset">
+    <rect x="167" y="117" width="90" height="18" rx="8" ry="8" fill="#E8F8F5" stroke="#2A9D8F" stroke-width="1.2"/>
+    <text x="212" y="130" font-size="12" text-anchor="middle" fill="#2A9D8F" font-style="italic">w<tspan font-size="0.7em" dy="3">1</tspan><tspan font-size="1em" dy="-3">, w</tspan><tspan font-size="0.7em" dy="3">2</tspan><tspan font-size="1em" dy="-3">, ...</tspan></text>
+  </g>
+  <g data-id="class_pill_2_2" id="class_pill_2_2" data-class="child_node" data-parent="block_dataset">
+    <rect x="167" y="140" width="90" height="18" rx="8" ry="8" fill="#E8F8F5" stroke="#2A9D8F" stroke-width="1.2"/>
+    <text x="212" y="153" font-size="12" text-anchor="middle" fill="#2A9D8F" font-style="italic">w<tspan font-size="0.7em" dy="3">1</tspan><tspan font-size="1em" dy="-3">, w</tspan><tspan font-size="0.7em" dy="3">2</tspan><tspan font-size="1em" dy="-3">, ...</tspan></text>
+  </g>
+  <g data-id="class_pill_3_1" id="class_pill_3_1" data-class="child_node" data-parent="block_dataset">
+    <rect x="167" y="163" width="90" height="18" rx="8" ry="8" fill="#FEF3C7" stroke="#D97706" stroke-width="1.2"/>
+    <text x="212" y="176" font-size="12" text-anchor="middle" fill="#D97706" font-style="italic">w<tspan font-size="0.7em" dy="3">1</tspan><tspan font-size="1em" dy="-3">, w</tspan><tspan font-size="0.7em" dy="3">2</tspan><tspan font-size="1em" dy="-3">, ...</tspan></text>
+  </g>
+  <g data-id="class_pill_3_2" id="class_pill_3_2" data-class="child_node" data-parent="block_dataset">
+    <rect x="167" y="186" width="90" height="18" rx="8" ry="8" fill="#FEF3C7" stroke="#D97706" stroke-width="1.2"/>
+    <text x="212" y="199" font-size="12" text-anchor="middle" fill="#D97706" font-style="italic">w<tspan font-size="0.7em" dy="3">1</tspan><tspan font-size="1em" dy="-3">, w</tspan><tspan font-size="0.7em" dy="3">2</tspan><tspan font-size="1em" dy="-3">, ...</tspan></text>
+  </g>
+  <text data-id="text_dots_classes" id="text_dots_classes" data-class="text_node" data-parent="block_dataset" x="212" y="222" font-size="14" font-weight="bold" text-anchor="middle">&#x22EE;</text>
+
+  <!-- ======================================================================= -->
+  <!-- 3. PRE-TRAINING PANEL ELEMENTS                                          -->
+  <!-- ======================================================================= -->
+
+  <!-- Image Generator Box -->
+  <g data-id="node_image_generator" id="node_image_generator" data-class="child_node" data-parent="block_pretraining">
+    <path d="M 312 37 L 340 37 L 343 32 L 358 32 L 361 37 L 388 37 L 391 32 L 406 32 L 409 37 L 416 37 A 5 5 0 0 1 421 42 L 421 68 L 416 68 L 416 83 A 5 5 0 0 1 411 88 L 347 88 A 5 5 0 0 1 342 83 L 342 78 L 312 78 A 5 5 0 0 1 307 73 L 307 42 A 5 5 0 0 1 312 37 Z"
+          fill="#FDE8E8" stroke="#000000" stroke-width="1.2"/>
+    <text x="364" y="55" font-size="14" text-anchor="middle" fill="#000000">Image</text>
+    <text x="364" y="71" font-size="14" text-anchor="middle" fill="#000000">Generator</text>
+  </g>
+
+  <!-- Text: Generate batch -->
+  <text data-id="text_generate_batch_1" id="text_generate_batch_1" data-class="text_node" data-parent="block_pretraining"
+        x="330" y="102" font-size="11" text-anchor="middle" fill="#000000">Generate</text>
+  <text data-id="text_generate_batch_2" id="text_generate_batch_2" data-class="text_node" data-parent="block_pretraining"
+        x="330" y="115" font-size="11" text-anchor="middle" fill="#000000">batch</text>
+
+  <!-- Raster placeholder for Generated Images Batch -->
+  <g id="node_image_batch" data-id="node_image_batch" data-class="raster_node"><image href="data:image/png;base64,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" x="360" y="125" width="55" height="65" preserveAspectRatio="xMidYMid meet" /></g>
+
+  <!-- Model Trapezoid (Pre-training) -->
+  <g data-id="node_model_pretrain" id="node_model_pretrain" data-class="child_node" data-parent="block_pretraining">
+    <polygon points="445,80 550,110 550,190 445,220" fill="#FFFBEA" stroke="#000000" stroke-width="1.3"/>
+    <text x="495" y="154" font-size="15" text-anchor="middle" fill="#000000">Model <tspan font-style="italic">f</tspan><tspan font-size="0.7em" dy="3">&#x03B8;</tspan><tspan font-size="1em" dy="-3"></tspan></text>
+  </g>
+
+  <!-- Predictions / Bar Charts Group -->
+  <g data-id="node_predictions" id="node_predictions" data-class="child_node" data-parent="block_pretraining">
+    <!-- Set 1 -->
+    <rect x="585" y="108" width="10" height="6" fill="#7B2CBF"/>
+    <rect x="597" y="105" width="10" height="9" fill="#2A9D8F"/>
+    <rect x="609" y="110" width="10" height="4" fill="#D97706"/>
+    <text x="626" y="113" font-size="11">&#x22EF;</text>
+
+    <!-- Set 2 -->
+    <rect x="585" y="128" width="10" height="4" fill="#7B2CBF"/>
+    <rect x="597" y="123" width="10" height="9" fill="#2A9D8F"/>
+    <rect x="609" y="120" width="10" height="12" fill="#D97706"/>
+    <text x="626" y="129" font-size="11">&#x22EF;</text>
+
+    <!-- Set 3 -->
+    <rect x="585" y="142" width="10" height="12" fill="#7B2CBF"/>
+    <rect x="597" y="140" width="10" height="14" fill="#2A9D8F"/>
+    <rect x="609" y="145" width="10" height="9" fill="#D97706"/>
+    <text x="626" y="149" font-size="11">&#x22EF;</text>
+
+    <!-- Set 4 -->
+    <rect x="585" y="160" width="10" height="15" fill="#7B2CBF"/>
+    <rect x="597" y="170" width="10" height="5" fill="#2A9D8F"/>
+    <rect x="609" y="168" width="10" height="7" fill="#D97706"/>
+    <text x="626" y="171" font-size="11">&#x22EF;</text>
+  </g>
+
+  <!-- Model Output Formula -->
+  <text data-id="text_model_output_formula" id="text_model_output_formula" data-class="text_node" data-parent="block_pretraining"
+        x="610" y="200" font-size="13" text-anchor="middle">
+    <tspan font-style="italic">f</tspan><tspan font-size="0.7em" dy="3">&#x03B8;</tspan><tspan font-size="1em" dy="-3">(</tspan><tspan font-weight="bold">x</tspan>) = <tspan font-weight="bold">&#x0177;</tspan>
+  </text>
+
+  <!-- Loss Node -->
+  <g data-id="node_loss_calc" id="node_loss_calc" data-class="child_node" data-parent="block_pretraining">
+    <rect x="648" y="138" width="58" height="26" rx="4" ry="4" fill="#FFFFFF" stroke="#000000" stroke-width="1.2"/>
+    <text x="677" y="156" font-size="13" text-anchor="middle">&#x2112;(<tspan font-weight="bold">y</tspan>, <tspan font-weight="bold">&#x0177;</tspan>)</text>
+  </g>
+
+  <!-- Gradient Node -->
+  <g data-id="node_gradient" id="node_gradient" data-class="child_node" data-parent="block_pretraining">
+    <circle cx="605" cy="80" r="18" fill="#FFFFFF" stroke="#000000" stroke-width="1.2"/>
+    <text x="605" y="75" font-size="12" text-anchor="middle">&#x2202;&#x2112;</text>
+    <line x1="593" y1="79" x2="617" y2="79" stroke="#000000" stroke-width="1"/>
+    <text x="605" y="92" font-size="12" text-anchor="middle">&#x2202;&#x03B8;</text>
+  </g>
+
+  <!-- ======================================================================= -->
+  <!-- 4. FINETUNING PANEL ELEMENTS                                            -->
+  <!-- ======================================================================= -->
+
+  <!-- Real-world Dataset Node -->
+  <g data-id="node_real_world_datasets" id="node_real_world_datasets" data-class="child_node" data-parent="block_finetuning">
+    <rect x="745" y="90" width="90" height="78" rx="8" ry="8" fill="#EFF9F2" stroke="#4B8B3B" stroke-width="1.2"/>
+    <text x="790" y="112" font-size="13" text-anchor="middle" fill="#000000">Real-world</text>
+    <text x="790" y="128" font-size="13" text-anchor="middle" fill="#000000">image</text>
+    <text x="790" y="144" font-size="13" text-anchor="middle" fill="#000000">recognition</text>
+    <text x="790" y="160" font-size="13" text-anchor="middle" fill="#000000">datasets</text>
+  </g>
+
+  <!-- Model Trapezoid (Finetuning) -->
+  <g data-id="node_model_finetune" id="node_model_finetune" data-class="child_node" data-parent="block_finetuning">
+    <polygon points="860,58 975,98 975,162 860,202" fill="#FFFBEA" stroke="#000000" stroke-width="1.3"/>
+    <text x="917" y="135" font-size="15" text-anchor="middle" fill="#000000">Model <tspan font-style="italic">f</tspan><tspan font-size="0.7em" dy="3">&#x03B8;</tspan><tspan font-size="1em" dy="-3"></tspan></text>
+  </g>
+
+  <!-- ======================================================================= -->
+  <!-- 5. EDGES / CONNECTIONS                                                  -->
+  <!-- ======================================================================= -->
+
+  <!-- Dataset to Pre-training edge -->
+  <path data-id="edge_dataset_to_pretrain" id="edge_dataset_to_pretrain" data-class="edge"
+        data-source="block_dataset" data-target="node_image_generator"
+        d="M 276 58 L 305 58" fill="none" stroke="#000000" stroke-width="5" marker-end="url(#fat-arrow)"/>
+
+  <!-- Image Generator to Image Batch -->
+  <path data-id="edge_generator_to_batch" id="edge_generator_to_batch" data-class="edge"
+        data-source="node_image_generator" data-target="node_image_batch"
+        d="M 378 88 L 378 120" fill="none" stroke="#000000" stroke-width="4.5" marker-end="url(#fat-arrow)"/>
+
+  <!-- Image Batch to Pre-training Model -->
+  <path data-id="edge_batch_to_model" id="edge_batch_to_model" data-class="edge"
+        data-source="node_image_batch" data-target="node_model_pretrain"
+        d="M 418 150 L 442 150" fill="none" stroke="#000000" stroke-width="4.5" marker-end="url(#fat-arrow)"/>
+
+  <!-- Model to Predictions -->
+  <path data-id="edge_model_to_preds" id="edge_model_to_preds" data-class="edge"
+        data-source="node_model_pretrain" data-target="node_predictions"
+        d="M 552 150 L 578 150" fill="none" stroke="#000000" stroke-width="4.5" marker-end="url(#fat-arrow)"/>
+
+  <!-- Loss to Gradient -->
+  <path data-id="edge_loss_to_grad" id="edge_loss_to_grad" data-class="edge"
+        data-source="node_loss_calc" data-target="node_gradient"
+        d="M 677 136 C 677 98 655 78 625 78" fill="none" stroke="#000000" stroke-width="1.3" marker-end="url(#arrow)"/>
+
+  <!-- Gradient to Model Backprop -->
+  <path data-id="edge_grad_to_model" id="edge_grad_to_model" data-class="edge"
+        data-source="node_gradient" data-target="node_model_pretrain"
+        d="M 585 78 C 558 78 532 88 512 102" fill="none" stroke="#000000" stroke-width="1.3" marker-end="url(#arrow)"/>
+
+  <!-- Transfer Weights from Pre-training Model to Finetuning Model -->
+  <path data-id="edge_pretrain_to_finetune_model" id="edge_pretrain_to_finetune_model" data-class="edge"
+        data-source="node_model_pretrain" data-target="node_model_finetune"
+        d="M 515 210 C 560 238 780 238 858 185" fill="none" stroke="#000000" stroke-width="1.3" marker-end="url(#arrow)"/>
+
+  <!-- Real-world Datasets to Finetuning Model -->
+  <path data-id="edge_real_to_finetune_model" id="edge_real_to_finetune_model" data-class="edge"
+        data-source="node_real_world_datasets" data-target="node_model_finetune"
+        d="M 837 130 L 858 130" fill="none" stroke="#000000" stroke-width="4.5" marker-end="url(#fat-arrow)"/>
+
+  <!-- ======================================================================= -->
+  <!-- 6. DYNAMIC NARRATION BANNER CONTAINER                                   -->
+  <!-- ======================================================================= -->
+
+</svg>
+  </div>
+
+  <div class="ab-bar">
+    <button type="button" class="ab-btn ab-play" aria-label="Pause">
+      <svg class="ab-ic-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 5.5l11 6.5-11 6.5z"/></svg>
+      <svg class="ab-ic-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 5.5h3.6v13H7.5zM12.9 5.5h3.6v13h-3.6z"/></svg>
+    </button>
+
+    <div class="ab-scrub">
+      <span class="ab-rail" aria-hidden="true"><i class="ab-played"></i></span>
+      <input type="range" class="ab-seek" min="0" max="1000" value="0" step="1"
+             aria-label="Scrub through the animation">
+    </div>
+
+    <span class="ab-time"><b>0:00</b>&nbsp;/&nbsp;<span class="ab-total">0:00</span></span>
+
+    <div class="ab-speed" role="group" aria-label="Playback speed">
+      <button type="button" class="ab-slower" aria-label="Slower">&#8722;</button>
+      <span class="ab-rate" aria-live="polite">1&#215;</span>
+      <button type="button" class="ab-faster" aria-label="Faster">+</button>
+    </div>
+
+    <button type="button" class="ab-btn ab-toggle" aria-pressed="true">
+      <span class="ab-led" aria-hidden="true"></span>
+      <span class="ab-word">Captions on</span>
+    </button>
+  </div>
+
+  <figcaption class="ab-cap" aria-live="polite"></figcaption>
+</figure>
+
+<script>
+(function () {
+  var CUES = [{"start": 0.0, "end": 3.44, "text": "The pipeline begins with the synthetic dataset preparation stage."}, {"start": 3.44, "end": 7.88, "text": "Fractal system parameters are sampled to construct diverse mathematical configurations."}, {"start": 7.88, "end": 12.52, "text": "These sampled parameters are grouped together to define distinct synthetic classes for training."}, {"start": 12.52, "end": 17.96, "text": "During pre-training, an image generator renders fractal images on the fly from these parameter codes."}, {"start": 17.96, "end": 21.56, "text": "Generated batches of fractal patterns are fed directly into the vision model."}, {"start": 21.56, "end": 25.6, "text": "The neural network backbone processes the batch to produce category predictions."}, {"start": 25.6, "end": 29.6, "text": "A loss function evaluates the predictions against the synthetic target labels."}, {"start": 29.6, "end": 33.6, "text": "Gradients are backpropagated to update the backbone weights throughout pre-training."}, {"start": 33.6, "end": 37.8, "text": "For downstream evaluation, real-world image recognition datasets are introduced."}, {"start": 37.8, "end": 42.44, "text": "The pre-trained model is fine-tuned to achieve competitive performance across these real-world tasks."}];
+  var LOOP = 42.44;
+  var REPEATS = 1;
+  var RATES = [0.25, 0.5, 0.75, 1, 1.5, 2, 3];
+
+  var fig = document.querySelector('.ab');
+  var cap = document.querySelector('.ab-cap');
+  var play = document.querySelector('.ab-play');
+  var seek = document.querySelector('.ab-seek');
+  var played = document.querySelector('.ab-played');
+  var nowEl = document.querySelector('.ab-time b');
+  var totalEl = document.querySelector('.ab-total');
+  var rateEl = document.querySelector('.ab-rate');
+  var slower = document.querySelector('.ab-slower');
+  var faster = document.querySelector('.ab-faster');
+  var toggle = document.querySelector('.ab-toggle');
+  var word = toggle.querySelector('.ab-word');
+
+  var at = -1, swap = null, rate = 3, paused = false, scrubbing = false;
+
+  // THE CLOCK. The drawing is hundreds of short animations that each stop when
+  // they are done, so none of them can be asked what time it is. This one runs
+  // the length of the whole piece, does nothing visible, and is driven by the
+  // same controls - so the caption, the bar and the picture cannot disagree.
+  var master = null;
+  try {
+    master = document.documentElement.animate(
+      [{ opacity: 1 }, { opacity: 1 }],
+      { duration: (LOOP || 1) * 1000, iterations: REPEATS }
+    );
+  } catch (e) {}
+  var t0 = performance.now();
+
+  function others() {
+    try {
+      var runs = document.getAnimations ? document.getAnimations() : [];
+      return runs.filter(function (a) { return a !== master; });
+    } catch (e) { return []; }
+  }
+  function clock() {
+    var t;
+    if (master && master.currentTime != null) t = master.currentTime / 1000;
+    else t = (performance.now() - t0) / 1000;
+    return REPEATS === 1 ? Math.min(t, LOOP) : (t % (LOOP || 1));
+  }
+  function each(fn) {
+    if (master) { try { fn(master); } catch (e) {} }
+    others().forEach(function (a) { try { fn(a); } catch (e) {} });
+  }
+  function clip(t) {
+    t = Math.max(0, t || 0);
+    return Math.floor(t / 60) + ':' + ('0' + Math.floor(t % 60)).slice(-2);
+  }
+
+  play.addEventListener('click', function () {
+    paused = !paused;
+    // Restarting a finished piece rather than leaving Play doing nothing
+    if (!paused && REPEATS === 1 && clock() >= LOOP - 0.05) each(function (a) { a.currentTime = 0; });
+    each(function (a) { paused ? a.pause() : a.play(); });
+    if (!paused) t0 = performance.now() - clock() * 1000;
+    fig.classList.toggle('is-paused', paused);
+    play.setAttribute('aria-label', paused ? 'Play' : 'Pause');
+  });
+
+  function setRate(i) {
+    rate = Math.max(0, Math.min(RATES.length - 1, i));
+    var r = RATES[rate];
+    each(function (a) { a.playbackRate = r; });
+    rateEl.textContent = r + '×';
+    fig.classList.toggle('is-fast', r !== 1);
+    slower.disabled = rate === 0;
+    faster.disabled = rate === RATES.length - 1;
+  }
+  slower.addEventListener('click', function () { setRate(rate - 1); });
+  faster.addEventListener('click', function () { setRate(rate + 1); });
+
+  seek.addEventListener('pointerdown', function () { scrubbing = true; });
+  seek.addEventListener('input', function () {
+    var t = (Number(seek.value) / 1000) * LOOP;
+    each(function (a) { a.currentTime = t * 1000; });
+    t0 = performance.now() - t * 1000;
+    paint(true);
+  });
+  seek.addEventListener('change', function () { scrubbing = false; });
+
+  toggle.addEventListener('click', function () {
+    var on = toggle.getAttribute('aria-pressed') !== 'true';
+    toggle.setAttribute('aria-pressed', String(on));
+    word.textContent = on ? 'Captions on' : 'Captions off';
+    fig.classList.toggle('is-off', !on);
+  });
+
+  function paint(force) {
+    var t = clock();
+    nowEl.textContent = clip(t);
+    if (!scrubbing) seek.value = String(Math.round((t / (LOOP || 1)) * 1000));
+    played.style.width = ((t / (LOOP || 1)) * 100) + '%';
+
+    var k = -1;
+    for (var i = 0; i < CUES.length; i++) { if (t >= CUES[i].start - 0.05) k = i; }
+    if (k !== at || force === true) {
+      at = k;
+      var text = k >= 0 ? CUES[k].text : '';
+      if (text !== cap.textContent) {
+        cap.classList.add('is-swap');
+        clearTimeout(swap);
+        swap = setTimeout(function () {
+          cap.textContent = text;
+          cap.classList.remove('is-swap');
+        }, 150);
+      }
+    }
+  }
+
+  // Two ways round, on purpose. requestAnimationFrame gives a smooth bar while
+  // the page is on screen, and stops dead in a background tab or an embed the
+  // browser considers hidden - where the animation itself keeps running, so the
+  // caption would be left behind. The slow timer covers exactly that case.
+  function frame() { paint(); requestAnimationFrame(frame); }
+
+  totalEl.textContent = clip(LOOP);
+  setRate(3);
+  if (!CUES.length) { fig.classList.add('is-off'); toggle.style.display = 'none'; }
+  requestAnimationFrame(frame);
+  setInterval(paint, 250);
+})();
+</script>
+</body>
+</html>

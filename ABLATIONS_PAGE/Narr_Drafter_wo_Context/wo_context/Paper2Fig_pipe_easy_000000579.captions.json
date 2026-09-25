@@ -1,0 +1,38 @@
+[
+ {
+  "t": 0.0,
+  "text": "The pipeline begins with the natural language description of the application."
+ },
+ {
+  "t": 2.2,
+  "text": "The text is tokenized and pre-processed, extracting literal strings into token mappings."
+ },
+ {
+  "t": 4.4,
+  "text": "The pre-processed tokens are fed into the Encoder of the Seq2seq Neural Network."
+ },
+ {
+  "t": 6.6,
+  "text": "The representations then flow into the Decoder."
+ },
+ {
+  "t": 8.8,
+  "text": "The Decoder outputs a Simplified App Representation, or SAR, containing structural component tags."
+ },
+ {
+  "t": 11.0,
+  "text": "The SAR specification is then processed by the SAR Compiler."
+ },
+ {
+  "t": 13.2,
+  "text": "This generates MIT App Inventor Source files, including dot SCM and dot BKY files, along with the extracted strings."
+ },
+ {
+  "t": 15.4,
+  "text": "Next, the MIT App Inventor backend Compiler builds the source files."
+ },
+ {
+  "t": 17.6,
+  "text": "The compiler outputs the final APK, ready to use on a mobile device."
+ }
+]

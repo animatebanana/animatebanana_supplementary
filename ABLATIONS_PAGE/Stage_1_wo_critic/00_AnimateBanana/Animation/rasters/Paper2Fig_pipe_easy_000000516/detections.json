@@ -1,0 +1,41 @@
+{
+  "detected": 1,
+  "placeholders": 1,
+  "omitted": {},
+  "rejected": {},
+  "image_size": [
+    1485,
+    885
+  ],
+  "regions": [
+    {
+      "xml_id": "raster-face-image",
+      "box_2d": [
+        416,
+        774,
+        700,
+        947
+      ],
+      "bbox": [
+        1149.39,
+        368.15999999999997,
+        1406.2949999999998,
+        619.5
+      ],
+      "label": ""
+    }
+  ],
+  "replaced": [
+    "raster-face-image"
+  ],
+  "provenance": {
+    "agent": "raster_integrator",
+    "backend": "openrouter_gemini37flash",
+    "model": "google-gemini-3.7-flash",
+    "prompt": null,
+    "style": "colour_pop",
+    "target": "svg",
+    "config_fingerprint": "54d653973aa2c411",
+    "timestamp": "2026-08-28T20:48:20"
+  }
+}

@@ -1,0 +1,38 @@
+[
+ {
+  "t": 0.0,
+  "text": "The pipeline begins with two inputs: the user sequence and the environment context."
+ },
+ {
+  "t": 2.2,
+  "text": "Both inputs feed into the Causal-Invariant Preference Encoder for invariant representation learning."
+ },
+ {
+  "t": 4.4,
+  "text": "The representation learning process is guided by an invariant risk minimization loss."
+ },
+ {
+  "t": 6.6,
+  "text": "Next, the Causal-Guided Retriever accesses an evidence pool containing history, attributes, and knowledge graph data."
+ },
+ {
+  "t": 8.8,
+  "text": "The evidence pool combines with the invariant representation to perform debiased retrieval."
+ },
+ {
+  "t": 11.0,
+  "text": "This module outputs the top-k retrieved evidence items."
+ },
+ {
+  "t": 13.2,
+  "text": "The Ranker and Explainer then processes both the user sequence and the retrieved evidence through a transformer layer."
+ },
+ {
+  "t": 15.4,
+  "text": "The transformer produces two outputs: a recommendation score and a generated text explanation."
+ },
+ {
+  "t": 17.6,
+  "text": "Finally, the recommendation loss evaluates the score, while a consistency constraint couples the explanation with the retrieved evidence."
+ }
+]

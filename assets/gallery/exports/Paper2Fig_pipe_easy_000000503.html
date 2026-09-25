@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AnimateBanana — Hopping Bbox — Paper2Fig_pipe_easy_000000503</title>
+<!--
+  AnimateBanana — Hopping Bbox — Paper2Fig_pipe_easy_000000503
+  An animated visual narrative produced by the AnimateBanana pipeline.
+
+  This file is self-contained: the animation, its images, its narration and its
+  controls are all inside it. Drop it on a server, open it from a disk, or put
+  it in an <iframe> - it needs nothing else and fetches nothing.
+
+  The animation is CSS. The controls drive it through the browser's animation
+  API - pause holds every keyframe at once, the bar scrubs them all to the same
+  moment, speed sets their rate together - and the caption is read from a clock
+  of the page's own that is driven alongside them. It has to be its own clock:
+  the drawing is made of hundreds of short animations that each stop when they
+  are done, so reading the time off any one of them gives a watch that stopped
+  half a second in.
+-->
+<style>
+  :root {
+    --ink: #1A1815;
+    --paper: #FFFEF9;
+    --banana: #FFD43B;
+    --banana-deep: #F2B200;
+    --banana-soft: #FFF2B8;
+    --mute: #6b6558;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--paper); color: var(--ink); }
+  body {
+    font-family: ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    padding: 16px;
+  }
+  .ab { margin: 0 auto; max-width: 1400px; }
+  .ab-stage {
+    background: #fff;
+    border: 2px solid var(--ink);
+    border-radius: 14px;
+    padding: 10px;
+    overflow: hidden;
+  }
+  .ab-stage svg { display: block; width: 100%; height: auto; }
+
+  /* ---- Transport ----
+     Every control is the same height and centred on the same line, so the bar
+     reads as one object rather than a row of parts that happen to be adjacent. */
+  .ab-bar {
+    --h: 40px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    border-radius: calc(var(--h) / 2 + 8px);
+  }
+  .ab-bar > * { flex: 0 0 auto; height: var(--h); }
+
+  .ab-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 16px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    line-height: 1;
+    color: var(--ink);
+    background: #fff;
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    cursor: pointer;
+  }
+  .ab-btn:hover { background: var(--banana-soft); }
+  .ab-btn:active { transform: translateY(1px); }
+
+  .ab-play { width: var(--h); padding: 0; border-radius: 50%; background: var(--ink); color: var(--paper); }
+  .ab-play:hover { background: var(--ink); }
+  .ab-play svg { width: 14px; height: 14px; fill: currentColor; display: block; }
+  .ab-play .ab-ic-play { display: none; margin-left: 2px; }
+  .ab.is-paused .ab-play .ab-ic-play { display: block; }
+  .ab.is-paused .ab-play .ab-ic-pause { display: none; }
+
+  /* the rail is drawn; the range input laid over it is what you actually grab */
+  .ab-scrub { position: relative; flex: 1 1 180px !important; min-width: 120px;
+              display: flex; align-items: center; }
+  .ab-rail {
+    position: absolute; inset-inline: 0; height: 9px;
+    background: #fff; border: 1.5px solid var(--ink); border-radius: 999px;
+    overflow: hidden; pointer-events: none;
+  }
+  .ab-rail i { display: block; width: 0; height: 100%; background: var(--banana); }
+  .ab-seek {
+    position: relative; width: 100%; height: var(--h); margin: 0;
+    background: none; -webkit-appearance: none; appearance: none; cursor: pointer;
+  }
+  .ab-seek::-webkit-slider-runnable-track { height: var(--h); background: transparent; }
+  .ab-seek::-moz-range-track { height: var(--h); background: transparent; }
+  .ab-seek::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none;
+    width: 18px; height: 18px; border-radius: 50%;
+    border: 2.5px solid var(--ink); background: var(--banana);
+  }
+  .ab-seek::-moz-range-thumb {
+    width: 16px; height: 16px; border-radius: 50%;
+    border: 2.5px solid var(--ink); background: var(--banana);
+  }
+  .ab-seek:focus-visible { outline: none; }
+  .ab-scrub:focus-within .ab-rail { box-shadow: 0 0 0 3px var(--banana); }
+
+  .ab-time {
+    display: inline-flex;
+    align-items: center;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.72rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--mute);
+    white-space: nowrap;
+  }
+  .ab-time b { color: var(--ink); }
+
+  .ab-speed {
+    display: inline-flex;
+    align-items: stretch;
+    background: #fff;
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .ab-speed button {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    padding: 0;
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--ink);
+    background: #fff;
+    border: 0;
+    cursor: pointer;
+  }
+  .ab-speed button:hover { background: var(--banana-soft); }
+  .ab-speed button[disabled] { opacity: 0.35; cursor: default; background: #fff; }
+  .ab-rate {
+    display: grid;
+    place-items: center;
+    min-width: 56px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.74rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    border-inline: 2px solid var(--ink);
+  }
+  .ab.is-fast .ab-rate { background: var(--banana); }
+
+  /* Captions on or off, said in words rather than left to be inferred */
+  .ab-toggle .ab-led {
+    width: 11px; height: 11px; border-radius: 50%;
+    border: 2px solid var(--ink); background: var(--banana);
+  }
+  .ab-toggle[aria-pressed="false"] { color: var(--mute); }
+  .ab-toggle[aria-pressed="false"] .ab-led { background: #fff; }
+
+  /* ---- The line being narrated ---- */
+  .ab-cap {
+    display: flex;
+    align-items: center;
+    min-height: 3.4em;
+    margin: 10px 0 0;
+    padding: 12px 16px;
+    font-size: clamp(0.95rem, 0.9rem + 0.3vw, 1.15rem);
+    font-weight: 600;
+    font-style: italic;
+    line-height: 1.5;
+    background: var(--banana-soft);
+    border: 1.5px solid var(--banana);
+    border-left: 5px solid var(--banana-deep);
+    border-radius: 10px;
+    transition: opacity .18s ease;
+  }
+  .ab-cap.is-swap { opacity: 0; }
+  .ab.is-off .ab-cap { display: none; }
+  @media (prefers-reduced-motion: reduce) { .ab-cap { transition: none; } }
+
+  /* Narrow: the bar wraps to two rows and squares off, rather than squeezing
+     the scrub bar down to nothing. */
+  @media (max-width: 720px) {
+    .ab-bar { flex-wrap: wrap; border-radius: 20px; }
+    .ab-scrub { order: 3; flex-basis: 100% !important; }
+    .ab-time { order: 2; margin-left: auto; }
+  }
+</style>
+</head>
+<body>
+<figure class="ab">
+  <div class="ab-stage">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 808 426">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#000000"/>
+    </marker>
+    <style>
+      #focus_box {
+        animation: hop 21s step-end infinite;
+      }
+
+      @keyframes hop {
+        0% { x: 2px; y: 167px; width: 160px; height: 105px; }
+        14.286% { x: 322px; y: 2px; width: 164px; height: 124px; }
+        28.571% { x: 322px; y: 167px; width: 164px; height: 105px; }
+        42.857% { x: 640px; y: 167px; width: 164px; height: 105px; }
+        57.143% { x: 521px; y: 296px; width: 168px; height: 118px; }
+        71.429% { x: 322px; y: 302px; width: 164px; height: 105px; }
+        85.714% { x: 128px; y: 296px; width: 168px; height: 118px; }
+        100% { x: 2px; y: 167px; width: 160px; height: 105px; }
+      }
+
+      .narration-text {
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        fill: #1f2937;
+        text-anchor: middle;
+        opacity: 0;
+      }
+    </style>
+  </defs>
+
+  <!-- Edges / Flow lines -->
+  <g>
+    <!-- Top-Hexagon to Evaluate to D_test -->
+    <path id="edge-model-to-test" data-id="edge-model-to-test" data-class="edge" data-source="node-model" data-target="node-dtest" d="M 404 122 L 404 168" fill="none" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <!-- Top-Hexagon to D_pool -->
+    <path id="edge-model-to-pool" data-id="edge-model-to-pool" data-class="edge" data-source="node-model" data-target="node-dpool" d="M 482 62 L 720 62 Q 723 62 723 65 L 723 167" fill="none" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <!-- D_train to Fit Model to Top-Hexagon -->
+    <path id="edge-train-to-model" data-id="edge-train-to-model" data-class="edge" data-source="node-dtrain" data-target="node-model" d="M 80 170 L 80 65 Q 80 62 83 62 L 324 62" fill="none" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <!-- D_pool to Confounder Strategy -->
+    <path id="edge-pool-to-confounder" data-id="edge-pool-to-confounder" data-class="edge" data-source="node-dpool" data-target="node-confounder" d="M 723 270 L 723 352 Q 723 355 720 355 L 687 355" fill="none" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <!-- Confounder Strategy to D_query -->
+    <path id="edge-confounder-to-query" data-id="edge-confounder-to-query" data-class="edge" data-source="node-confounder" data-target="node-dquery" d="M 525 355 L 488 355" fill="none" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <!-- D_query to Feature Value Collector -->
+    <path id="edge-query-to-collector" data-id="edge-query-to-collector" data-class="edge" data-source="node-dquery" data-target="node-collector" d="M 326 355 L 294 355" fill="none" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <!-- Feature Value Collector to D_train -->
+    <path id="edge-collector-to-train" data-id="edge-collector-to-train" data-class="edge" data-source="node-collector" data-target="node-dtrain" d="M 132 355 L 83 355 Q 80 355 80 352 L 80 274" fill="none" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)"/>
+  </g>
+
+  <!-- Edge Labels -->
+  <g>
+    <!-- Fit Model label on train-to-model edge -->
+    <rect x="135" y="52" width="102" height="20" fill="#ffffff" stroke="none"/>
+    <text id="label-fit-model" data-id="label-fit-model" data-class="text_node" data-parent="root" x="186" y="68" font-family="Arial, sans-serif" font-size="16" font-weight="500" fill="#000000" text-anchor="middle">Fit Model</text>
+
+    <!-- Evaluate label on model-to-test edge -->
+    <rect x="365" y="137" width="78" height="20" fill="#ffffff" stroke="none"/>
+    <text id="label-evaluate" data-id="label-evaluate" data-class="text_node" data-parent="root" x="404" y="153" font-family="Arial, sans-serif" font-size="16" font-weight="500" fill="#000000" text-anchor="middle">Evaluate</text>
+  </g>
+
+  <!-- Nodes -->
+
+  <!-- Top Hexagon: Treatment Effect Estimation Model (Cl_y) -->
+  <g id="node-model" data-id="node-model" data-class="standalone_node" data-parent="root">
+    <polygon points="365,3 443,3 482,62 443,122 365,122 326,62" fill="#d2ebd0" stroke="#71aa68" stroke-width="1.5"/>
+    <text x="404" y="32" font-family="Arial, sans-serif" font-size="16" font-weight="500" fill="#000000" text-anchor="middle">Treatment</text>
+    <text x="404" y="54" font-family="Arial, sans-serif" font-size="16" font-weight="500" fill="#000000" text-anchor="middle">Effect</text>
+    <text x="404" y="76" font-family="Arial, sans-serif" font-size="16" font-weight="500" fill="#000000" text-anchor="middle">Estimation</text>
+    <text x="404" y="98" font-family="Arial, sans-serif" font-size="16" font-weight="500" fill="#000000" text-anchor="middle">Model (Cl<tspan font-size="0.65em" baseline-shift="sub">y</tspan>)</text>
+  </g>
+
+  <!-- D_train Box -->
+  <g id="node-dtrain" data-id="node-dtrain" data-class="standalone_node" data-parent="root">
+    <rect x="2" y="171" width="156" height="97" fill="#fef1cb" stroke="#dcb95e" stroke-width="1.5"/>
+    <text x="80" y="196" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#000000" text-anchor="middle">D<tspan font-size="0.65em" baseline-shift="sub">train</tspan></text>
+    <text x="80" y="221" font-family="Arial, sans-serif" font-size="15" fill="#000000" text-anchor="middle">(Samples with</text>
+    <text x="80" y="243" font-family="Arial, sans-serif" font-size="15" fill="#000000" text-anchor="middle">non-missing</text>
+    <text x="80" y="265" font-family="Arial, sans-serif" font-size="15" fill="#000000" text-anchor="middle">attributes)</text>
+  </g>
+
+  <!-- D_test Box -->
+  <g id="node-dtest" data-id="node-dtest" data-class="standalone_node" data-parent="root">
+    <rect x="326" y="171" width="156" height="97" fill="#fef1cb" stroke="#dcb95e" stroke-width="1.5"/>
+    <text x="404" y="202" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#000000" text-anchor="middle">D<tspan font-size="0.65em" baseline-shift="sub">test</tspan></text>
+    <text x="404" y="232" font-family="Arial, sans-serif" font-size="15" fill="#000000" text-anchor="middle">(Hold-out test</text>
+    <text x="404" y="254" font-family="Arial, sans-serif" font-size="15" fill="#000000" text-anchor="middle">set)</text>
+  </g>
+
+  <!-- D_pool Box -->
+  <g id="node-dpool" data-id="node-dpool" data-class="standalone_node" data-parent="root">
+    <rect x="644" y="171" width="156" height="97" fill="#fef1cb" stroke="#dcb95e" stroke-width="1.5"/>
+    <text x="722" y="196" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#000000" text-anchor="middle">D<tspan font-size="0.65em" baseline-shift="sub">pool</tspan></text>
+    <text x="722" y="221" font-family="Arial, sans-serif" font-size="15" fill="#000000" text-anchor="middle">(Samples with</text>
+    <text x="722" y="243" font-family="Arial, sans-serif" font-size="15" fill="#000000" text-anchor="middle">missing</text>
+    <text x="722" y="265" font-family="Arial, sans-serif" font-size="15" fill="#000000" text-anchor="middle">attributes)</text>
+  </g>
+
+  <!-- Bottom-Left Hexagon: Feature Value Collector -->
+  <g id="node-collector" data-id="node-collector" data-class="standalone_node" data-parent="root">
+    <polygon points="172,300 252,300 292,355 252,410 172,410 132,355" fill="#d2ebd0" stroke="#71aa68" stroke-width="1.5"/>
+    <text x="212" y="347" font-family="Arial, sans-serif" font-size="16" font-weight="500" fill="#000000" text-anchor="middle">Feature Value</text>
+    <text x="212" y="373" font-family="Arial, sans-serif" font-size="16" font-weight="500" fill="#000000" text-anchor="middle">Collector</text>
+  </g>
+
+  <!-- D_query Box -->
+  <g id="node-dquery" data-id="node-dquery" data-class="standalone_node" data-parent="root">
+    <rect x="326" y="306" width="156" height="97" fill="#fef1cb" stroke="#dcb95e" stroke-width="1.5"/>
+    <text x="404" y="337" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#000000" text-anchor="middle">D<tspan font-size="0.65em" baseline-shift="sub">query</tspan></text>
+    <text x="404" y="367" font-family="Arial, sans-serif" font-size="15" fill="#000000" text-anchor="middle">(Selected</text>
+    <text x="404" y="389" font-family="Arial, sans-serif" font-size="15" fill="#000000" text-anchor="middle">samples)</text>
+  </g>
+
+  <!-- Bottom-Right Hexagon: Confounder Acquisition Strategy -->
+  <g id="node-confounder" data-id="node-confounder" data-class="standalone_node" data-parent="root">
+    <polygon points="565,300 645,300 685,355 645,410 565,410 525,355" fill="#f8caca" stroke="#d26565" stroke-width="1.5"/>
+    <text x="605" y="337" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#000000" text-anchor="middle">Confounder</text>
+    <text x="605" y="361" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#000000" text-anchor="middle">Acquisition</text>
+    <text x="605" y="385" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#000000" text-anchor="middle">Strategy</text>
+  </g>
+
+  <!-- Dynamic Narration Banner -->
+
+  <!-- Focus Box -->
+  <rect id="focus_box" fill="none" stroke="#FF0000" stroke-width="4" stroke-dasharray="8,4" rx="6" />
+</svg>
+
+  </div>
+
+  <div class="ab-bar">
+    <button type="button" class="ab-btn ab-play" aria-label="Pause">
+      <svg class="ab-ic-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 5.5l11 6.5-11 6.5z"/></svg>
+      <svg class="ab-ic-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 5.5h3.6v13H7.5zM12.9 5.5h3.6v13h-3.6z"/></svg>
+    </button>
+
+    <div class="ab-scrub">
+      <span class="ab-rail" aria-hidden="true"><i class="ab-played"></i></span>
+      <input type="range" class="ab-seek" min="0" max="1000" value="0" step="1"
+             aria-label="Scrub through the animation">
+    </div>
+
+    <span class="ab-time"><b>0:00</b>&nbsp;/&nbsp;<span class="ab-total">0:00</span></span>
+
+    <div class="ab-speed" role="group" aria-label="Playback speed">
+      <button type="button" class="ab-slower" aria-label="Slower">&#8722;</button>
+      <span class="ab-rate" aria-live="polite">1&#215;</span>
+      <button type="button" class="ab-faster" aria-label="Faster">+</button>
+    </div>
+
+    <button type="button" class="ab-btn ab-toggle" aria-pressed="true">
+      <span class="ab-led" aria-hidden="true"></span>
+      <span class="ab-word">Captions on</span>
+    </button>
+  </div>
+
+  <figcaption class="ab-cap" aria-live="polite"></figcaption>
+</figure>
+
+<script>
+(function () {
+  var CUES = [{"start": 0.0, "end": 0.0, "text": "The pipeline begins with the training dataset, containing samples with fully observed, non-missing attributes."}, {"start": 3.0, "end": 3.0, "text": "These samples are used to train the treatment effect estimation model, fitting the outcome predictors."}, {"start": 6.0, "end": 6.0, "text": "The performance of the estimator is periodically evaluated on a hold-out test set."}, {"start": 9.0, "end": 9.0, "text": "Meanwhile, unlabeled candidate samples with missing confounding attributes are maintained in the data pool."}, {"start": 12.0, "end": 12.0, "text": "A confounder acquisition strategy evaluates the pool, selecting instances based on covariate balancing or outcome estimation error."}, {"start": 15.0, "end": 15.0, "text": "The chosen batch forms the query set of prioritized samples."}, {"start": 18.0, "end": 21.0, "text": "The feature value collector retrieves the missing confounding values, adding the newly completed samples back into the training set for the next iteration."}];
+  var LOOP = 21.0;
+  var REPEATS = Infinity;
+  var RATES = [0.25, 0.5, 0.75, 1, 1.5, 2, 3];
+
+  var fig = document.querySelector('.ab');
+  var cap = document.querySelector('.ab-cap');
+  var play = document.querySelector('.ab-play');
+  var seek = document.querySelector('.ab-seek');
+  var played = document.querySelector('.ab-played');
+  var nowEl = document.querySelector('.ab-time b');
+  var totalEl = document.querySelector('.ab-total');
+  var rateEl = document.querySelector('.ab-rate');
+  var slower = document.querySelector('.ab-slower');
+  var faster = document.querySelector('.ab-faster');
+  var toggle = document.querySelector('.ab-toggle');
+  var word = toggle.querySelector('.ab-word');
+
+  var at = -1, swap = null, rate = 3, paused = false, scrubbing = false;
+
+  // THE CLOCK. The drawing is hundreds of short animations that each stop when
+  // they are done, so none of them can be asked what time it is. This one runs
+  // the length of the whole piece, does nothing visible, and is driven by the
+  // same controls - so the caption, the bar and the picture cannot disagree.
+  var master = null;
+  try {
+    master = document.documentElement.animate(
+      [{ opacity: 1 }, { opacity: 1 }],
+      { duration: (LOOP || 1) * 1000, iterations: REPEATS }
+    );
+  } catch (e) {}
+  var t0 = performance.now();
+
+  function others() {
+    try {
+      var runs = document.getAnimations ? document.getAnimations() : [];
+      return runs.filter(function (a) { return a !== master; });
+    } catch (e) { return []; }
+  }
+  function clock() {
+    var t;
+    if (master && master.currentTime != null) t = master.currentTime / 1000;
+    else t = (performance.now() - t0) / 1000;
+    return REPEATS === 1 ? Math.min(t, LOOP) : (t % (LOOP || 1));
+  }
+  function each(fn) {
+    if (master) { try { fn(master); } catch (e) {} }
+    others().forEach(function (a) { try { fn(a); } catch (e) {} });
+  }
+  function clip(t) {
+    t = Math.max(0, t || 0);
+    return Math.floor(t / 60) + ':' + ('0' + Math.floor(t % 60)).slice(-2);
+  }
+
+  play.addEventListener('click', function () {
+    paused = !paused;
+    // Restarting a finished piece rather than leaving Play doing nothing
+    if (!paused && REPEATS === 1 && clock() >= LOOP - 0.05) each(function (a) { a.currentTime = 0; });
+    each(function (a) { paused ? a.pause() : a.play(); });
+    if (!paused) t0 = performance.now() - clock() * 1000;
+    fig.classList.toggle('is-paused', paused);
+    play.setAttribute('aria-label', paused ? 'Play' : 'Pause');
+  });
+
+  function setRate(i) {
+    rate = Math.max(0, Math.min(RATES.length - 1, i));
+    var r = RATES[rate];
+    each(function (a) { a.playbackRate = r; });
+    rateEl.textContent = r + '×';
+    fig.classList.toggle('is-fast', r !== 1);
+    slower.disabled = rate === 0;
+    faster.disabled = rate === RATES.length - 1;
+  }
+  slower.addEventListener('click', function () { setRate(rate - 1); });
+  faster.addEventListener('click', function () { setRate(rate + 1); });
+
+  seek.addEventListener('pointerdown', function () { scrubbing = true; });
+  seek.addEventListener('input', function () {
+    var t = (Number(seek.value) / 1000) * LOOP;
+    each(function (a) { a.currentTime = t * 1000; });
+    t0 = performance.now() - t * 1000;
+    paint(true);
+  });
+  seek.addEventListener('change', function () { scrubbing = false; });
+
+  toggle.addEventListener('click', function () {
+    var on = toggle.getAttribute('aria-pressed') !== 'true';
+    toggle.setAttribute('aria-pressed', String(on));
+    word.textContent = on ? 'Captions on' : 'Captions off';
+    fig.classList.toggle('is-off', !on);
+  });
+
+  function paint(force) {
+    var t = clock();
+    nowEl.textContent = clip(t);
+    if (!scrubbing) seek.value = String(Math.round((t / (LOOP || 1)) * 1000));
+    played.style.width = ((t / (LOOP || 1)) * 100) + '%';
+
+    var k = -1;
+    for (var i = 0; i < CUES.length; i++) { if (t >= CUES[i].start - 0.05) k = i; }
+    if (k !== at || force === true) {
+      at = k;
+      var text = k >= 0 ? CUES[k].text : '';
+      if (text !== cap.textContent) {
+        cap.classList.add('is-swap');
+        clearTimeout(swap);
+        swap = setTimeout(function () {
+          cap.textContent = text;
+          cap.classList.remove('is-swap');
+        }, 150);
+      }
+    }
+  }
+
+  // Two ways round, on purpose. requestAnimationFrame gives a smooth bar while
+  // the page is on screen, and stops dead in a background tab or an embed the
+  // browser considers hidden - where the animation itself keeps running, so the
+  // caption would be left behind. The slow timer covers exactly that case.
+  function frame() { paint(); requestAnimationFrame(frame); }
+
+  totalEl.textContent = clip(LOOP);
+  setRate(3);
+  if (!CUES.length) { fig.classList.add('is-off'); toggle.style.display = 'none'; }
+  requestAnimationFrame(frame);
+  setInterval(paint, 250);
+})();
+</script>
+</body>
+</html>

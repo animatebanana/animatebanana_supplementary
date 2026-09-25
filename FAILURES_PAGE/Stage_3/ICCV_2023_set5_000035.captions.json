@@ -1,0 +1,30 @@
+[
+ {
+  "t": 0.0,
+  "text": "Given an input image, an object detector generates candidate bounding box proposals and extracts their initial region features."
+ },
+ {
+  "t": 4.06,
+  "text": "Simultaneously, the input text expression describes the target visual scene along with specific entity relationships."
+ },
+ {
+  "t": 7.98,
+  "text": "A language parser converts the expression into a structured scene graph, representing entity phrases as nodes and relations as edges."
+ },
+ {
+  "t": 11.9,
+  "text": "In the message propagation module, initial local correspondence beliefs are computed between each entity phrase and all candidate visual objects."
+ },
+ {
+  "t": 15.82,
+  "text": "Two parallel passes perform bottom-up and top-down message propagation, using context-sensitive belief selecting and gating to aggregate neighboring evidence."
+ },
+ {
+  "t": 19.74,
+  "text": "The updated beliefs pass through an MLP to compute match probabilities, which are minimum-pooled across nodes for image-text matching prediction."
+ },
+ {
+  "t": 23.66,
+  "text": "Finally, computing confidence differences across graph edges detects relationship inconsistencies, producing the mismatched relation reasoning prediction."
+ }
+]

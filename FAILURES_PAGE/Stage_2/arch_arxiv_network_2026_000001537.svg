@@ -1,0 +1,606 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 485 545" width="485" height="545">
+  <defs>
+    <!-- Arrow markers -->
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#1b3bf5"/>
+    </marker>
+    <marker id="arrow-black" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#222"/>
+    </marker>
+    <marker id="arrow-yellow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#f3b836"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#ea6b66"/>
+    </marker>
+
+    <style>
+      /* Base ghosting style */
+      #block-mahimahi, #text-mahimahi-title,
+      #block-kernel, #text-kernel-title,
+      #node-link-traces,
+      #node-server-1, #node-server-2, #node-server-3, #node-server-4,
+      #node-ingress-1, #node-ingress-2, #node-ingress-3, #node-ingress-4, #text-dots-ingress,
+      #edge-row1-server, #edge-row2-server, #edge-row3-server, #edge-row4-server,
+      #node-shell-1, #node-shell-2, #node-shell-3, #node-shell-4,
+      #edge-link-traces,
+      #edge-row1-ingress, #edge-row2-ingress, #edge-row3-ingress, #edge-row4-ingress,
+      #edge-shell-down-1, #edge-shell-down-2, #edge-shell-down-3,
+      #edge-shell-up-1, #edge-shell-up-2, #edge-shell-up-3,
+      #node-kernel-row1, #node-kernel-row2, #node-kernel-row3, #node-socket-4, #text-dots-kernel,
+      #edge-row1-shell, #edge-row2-shell, #edge-row3-shell, #edge-row4-shell,
+      #edge-kernel-v1, #edge-kernel-v2, #edge-kernel-v3,
+      #node-egress-1, #node-egress-2, #node-egress-3, #node-egress-4,
+      #node-client-1, #node-client-2, #node-client-3, #node-client-4,
+      #text-dots-egress, #text-dots-client,
+      #edge-row1-tun, #edge-row2-tun, #edge-row3-tun, #edge-row4-tun,
+      #edge-row1-client, #edge-row2-client, #edge-row3-client, #edge-row4-client,
+      #node-sage, #text-trans-obs-1, #text-trans-obs-2,
+      #edge-socket-sage-down, #edge-sage-socket-up,
+      #node-control-block, #text-down-uplink, #edge-shell-up-control,
+      #node-reguard, #node-scenarios,
+      #text-telemetry-1, #text-telemetry-2, #text-policy-1, #text-policy-2,
+      #edge-socket-reguard, #edge-shells-reguard, #edge-reguard-scenarios {
+        opacity: 0.15;
+      }
+
+      /* Parent persistent blocks */
+      #block-mahimahi, #text-mahimahi-title {
+        animation: anim_mahimahi_parent 30s infinite;
+      }
+      #block-kernel, #text-kernel-title {
+        animation: anim_kernel_parent 30s infinite;
+      }
+
+      /* Timestamp specific element bindings */
+      #node-link-traces,
+      #node-server-1, #node-server-2, #node-server-3, #node-server-4 {
+        animation: anim_ts3 30s infinite;
+      }
+
+      #node-ingress-1, #node-ingress-2, #node-ingress-3, #node-ingress-4,
+      #text-dots-ingress,
+      #edge-row1-server, #edge-row2-server, #edge-row3-server, #edge-row4-server {
+        animation: anim_ts4 30s infinite;
+      }
+
+      #node-shell-1, #node-shell-2, #node-shell-3, #node-shell-4,
+      #edge-link-traces,
+      #edge-row1-ingress, #edge-row2-ingress, #edge-row3-ingress, #edge-row4-ingress,
+      #edge-shell-down-1, #edge-shell-down-2, #edge-shell-down-3,
+      #edge-shell-up-1, #edge-shell-up-2, #edge-shell-up-3 {
+        animation: anim_ts5 30s infinite;
+      }
+
+      #node-kernel-row1, #node-kernel-row2, #node-kernel-row3, #node-socket-4,
+      #text-dots-kernel,
+      #edge-row1-shell, #edge-row2-shell, #edge-row3-shell, #edge-row4-shell,
+      #edge-kernel-v1, #edge-kernel-v2, #edge-kernel-v3 {
+        animation: anim_ts6 30s infinite;
+      }
+
+      #node-egress-1, #node-egress-2, #node-egress-3, #node-egress-4,
+      #node-client-1, #node-client-2, #node-client-3, #node-client-4,
+      #text-dots-egress, #text-dots-client,
+      #edge-row1-tun, #edge-row2-tun, #edge-row3-tun, #edge-row4-tun,
+      #edge-row1-client, #edge-row2-client, #edge-row3-client, #edge-row4-client {
+        animation: anim_ts7 30s infinite;
+      }
+
+      #node-sage, #text-trans-obs-1, #text-trans-obs-2,
+      #edge-socket-sage-down, #edge-sage-socket-up {
+        animation: anim_ts8 30s infinite;
+      }
+
+      #node-control-block, #text-down-uplink, #edge-shell-up-control {
+        animation: anim_ts9 30s infinite;
+      }
+
+      #node-reguard, #node-scenarios,
+      #text-telemetry-1, #text-telemetry-2, #text-policy-1, #text-policy-2,
+      #edge-socket-reguard, #edge-shells-reguard, #edge-reguard-scenarios {
+        animation: anim_ts10 30s infinite;
+      }
+
+      /* Narration banner texts */
+      #narr_ts1 { animation: anim_banner_ts1 30s infinite; }
+      #narr_ts2 { animation: anim_banner_ts2 30s infinite; }
+      #narr_ts3 { animation: anim_banner_ts3 30s infinite; }
+      #narr_ts4 { animation: anim_banner_ts4 30s infinite; }
+      #narr_ts5 { animation: anim_banner_ts5 30s infinite; }
+      #narr_ts6 { animation: anim_banner_ts6 30s infinite; }
+      #narr_ts7 { animation: anim_banner_ts7 30s infinite; }
+      #narr_ts8 { animation: anim_banner_ts8 30s infinite; }
+      #narr_ts9 { animation: anim_banner_ts9 30s infinite; }
+      #narr_ts10 { animation: anim_banner_ts10 30s infinite; }
+
+      /* Keyframes for diagram elements */
+      /* Mahimahi persists across its own reveal (t1) and its internal elements (t2, t4, t5, t6, t7) */
+      @keyframes anim_mahimahi_parent {
+        0%       { opacity: 1.0; }
+        69.999%  { opacity: 1.0; }
+        70%      { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+
+      /* Kernel stack persists across its own reveal (t2) and its internal algorithms (t6) */
+      @keyframes anim_kernel_parent {
+        0%       { opacity: 0.15; }
+        9.999%   { opacity: 0.15; }
+        10%      { opacity: 1.0; }
+        59.999%  { opacity: 1.0; }
+        60%      { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+
+      @keyframes anim_ts3 {
+        0%       { opacity: 0.15; }
+        19.999%  { opacity: 0.15; }
+        20%      { opacity: 1.0; }
+        29.999%  { opacity: 1.0; }
+        30%      { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+
+      @keyframes anim_ts4 {
+        0%       { opacity: 0.15; }
+        29.999%  { opacity: 0.15; }
+        30%      { opacity: 1.0; }
+        39.999%  { opacity: 1.0; }
+        40%      { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+
+      @keyframes anim_ts5 {
+        0%       { opacity: 0.15; }
+        39.999%  { opacity: 0.15; }
+        40%      { opacity: 1.0; }
+        49.999%  { opacity: 1.0; }
+        50%      { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+
+      @keyframes anim_ts6 {
+        0%       { opacity: 0.15; }
+        49.999%  { opacity: 0.15; }
+        50%      { opacity: 1.0; }
+        59.999%  { opacity: 1.0; }
+        60%      { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+
+      @keyframes anim_ts7 {
+        0%       { opacity: 0.15; }
+        59.999%  { opacity: 0.15; }
+        60%      { opacity: 1.0; }
+        69.999%  { opacity: 1.0; }
+        70%      { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+
+      @keyframes anim_ts8 {
+        0%       { opacity: 0.15; }
+        69.999%  { opacity: 0.15; }
+        70%      { opacity: 1.0; }
+        79.999%  { opacity: 1.0; }
+        80%      { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+
+      @keyframes anim_ts9 {
+        0%       { opacity: 0.15; }
+        79.999%  { opacity: 0.15; }
+        80%      { opacity: 1.0; }
+        89.999%  { opacity: 1.0; }
+        90%      { opacity: 0.15; }
+        100%     { opacity: 0.15; }
+      }
+
+      @keyframes anim_ts10 {
+        0%       { opacity: 0.15; }
+        89.999%  { opacity: 0.15; }
+        90%      { opacity: 1.0; }
+        99.999%  { opacity: 1.0; }
+        100%     { opacity: 0.15; }
+      }
+
+      /* Narration banner keyframes */
+      @keyframes anim_banner_ts1 {
+        0%       { opacity: 1; }
+        9.999%   { opacity: 1; }
+        10%      { opacity: 0; }
+        100%     { opacity: 0; }
+      }
+      @keyframes anim_banner_ts2 {
+        0%       { opacity: 0; }
+        9.999%   { opacity: 0; }
+        10%      { opacity: 1; }
+        19.999%  { opacity: 1; }
+        20%      { opacity: 0; }
+        100%     { opacity: 0; }
+      }
+      @keyframes anim_banner_ts3 {
+        0%       { opacity: 0; }
+        19.999%  { opacity: 0; }
+        20%      { opacity: 1; }
+        29.999%  { opacity: 1; }
+        30%      { opacity: 0; }
+        100%     { opacity: 0; }
+      }
+      @keyframes anim_banner_ts4 {
+        0%       { opacity: 0; }
+        29.999%  { opacity: 0; }
+        30%      { opacity: 1; }
+        39.999%  { opacity: 1; }
+        40%      { opacity: 0; }
+        100%     { opacity: 0; }
+      }
+      @keyframes anim_banner_ts5 {
+        0%       { opacity: 0; }
+        39.999%  { opacity: 0; }
+        40%      { opacity: 1; }
+        49.999%  { opacity: 1; }
+        50%      { opacity: 0; }
+        100%     { opacity: 0; }
+      }
+      @keyframes anim_banner_ts6 {
+        0%       { opacity: 0; }
+        49.999%  { opacity: 0; }
+        50%      { opacity: 1; }
+        59.999%  { opacity: 1; }
+        60%      { opacity: 0; }
+        100%     { opacity: 0; }
+      }
+      @keyframes anim_banner_ts7 {
+        0%       { opacity: 0; }
+        59.999%  { opacity: 0; }
+        60%      { opacity: 1; }
+        69.999%  { opacity: 1; }
+        70%      { opacity: 0; }
+        100%     { opacity: 0; }
+      }
+      @keyframes anim_banner_ts8 {
+        0%       { opacity: 0; }
+        69.999%  { opacity: 0; }
+        70%      { opacity: 1; }
+        79.999%  { opacity: 1; }
+        80%      { opacity: 0; }
+        100%     { opacity: 0; }
+      }
+      @keyframes anim_banner_ts9 {
+        0%       { opacity: 0; }
+        79.999%  { opacity: 0; }
+        80%      { opacity: 1; }
+        89.999%  { opacity: 1; }
+        90%      { opacity: 0; }
+        100%     { opacity: 0; }
+      }
+      @keyframes anim_banner_ts10 {
+        0%       { opacity: 0; }
+        89.999%  { opacity: 0; }
+        90%      { opacity: 1; }
+        100%     { opacity: 1; }
+      }
+    </style>
+  </defs>
+
+  <!-- Background Blocks -->
+  <!-- Mahimahi Namespace Block -->
+  <g id="block-mahimahi" data-id="block-mahimahi" data-class="block" data-parent="root">
+    <rect x="8" y="24" width="414" height="320" fill="#dcebfa" stroke="#6894c7" stroke-width="1.2"/>
+    <text x="10" y="44" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#111" data-id="text-mahimahi-title" data-class="text_node" data-parent="block-mahimahi">Mahimahi Namespace</text>
+  </g>
+
+  <!-- Kernel TCP/IP Stack Block -->
+  <g id="block-kernel" data-id="block-kernel" data-class="block" data-parent="block-mahimahi">
+    <rect x="144" y="36" width="122" height="295" fill="#f4f4f4" stroke="#777" stroke-width="1.2"/>
+    <text x="151" y="55" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#222" data-id="text-kernel-title" data-class="text_node" data-parent="block-kernel">Kernel TCP/IP stack</text>
+  </g>
+
+  <!-- Connecting Lines / Edges -->
+  <g>
+    <!-- Row 1 Blue Edges -->
+    <path id="edge-row1-client" data-id="edge-row1-client" data-class="edge" data-source="node-egress-1" data-target="node-client-1" d="M 84 92 L 68 92" stroke="#1b3bf5" stroke-width="1.5" fill="none" marker-end="url(#arrow-blue)"/>
+    <path id="edge-row1-tun" data-id="edge-row1-tun" data-class="edge" data-source="node-kernel-row1" data-target="node-egress-1" d="M 154 92 L 132 92" stroke="#1b3bf5" stroke-width="1.5" fill="none"/>
+    <path id="edge-row1-shell" data-id="edge-row1-shell" data-class="edge" data-source="node-kernel-row1" data-target="node-shell-1" d="M 256 92 L 278 92" stroke="#1b3bf5" stroke-width="1.5" fill="none"/>
+    <path id="edge-row1-ingress" data-id="edge-row1-ingress" data-class="edge" data-source="node-shell-1" data-target="node-ingress-1" d="M 353 92 L 372 92" stroke="#1b3bf5" stroke-width="1.5" fill="none"/>
+    <path id="edge-row1-server" data-id="edge-row1-server" data-class="edge" data-source="node-ingress-1" data-target="node-server-1" d="M 416 92 L 430 92" stroke="#1b3bf5" stroke-width="1.5" fill="none" marker-end="url(#arrow-blue)"/>
+
+    <!-- Row 2 Blue Edges -->
+    <path id="edge-row2-client" data-id="edge-row2-client" data-class="edge" data-source="node-egress-2" data-target="node-client-2" d="M 84 152 L 68 152" stroke="#1b3bf5" stroke-width="1.5" fill="none" marker-end="url(#arrow-blue)"/>
+    <path id="edge-row2-tun" data-id="edge-row2-tun" data-class="edge" data-source="node-kernel-row2" data-target="node-egress-2" d="M 154 152 L 132 152" stroke="#1b3bf5" stroke-width="1.5" fill="none"/>
+    <path id="edge-row2-shell" data-id="edge-row2-shell" data-class="edge" data-source="node-kernel-row2" data-target="node-shell-2" d="M 256 152 L 278 152" stroke="#1b3bf5" stroke-width="1.5" fill="none"/>
+    <path id="edge-row2-ingress" data-id="edge-row2-ingress" data-class="edge" data-source="node-shell-2" data-target="node-ingress-2" d="M 353 152 L 372 152" stroke="#1b3bf5" stroke-width="1.5" fill="none"/>
+    <path id="edge-row2-server" data-id="edge-row2-server" data-class="edge" data-source="node-ingress-2" data-target="node-server-2" d="M 416 152 L 430 152" stroke="#1b3bf5" stroke-width="1.5" fill="none" marker-end="url(#arrow-blue)"/>
+
+    <!-- Row 3 Blue Edges -->
+    <path id="edge-row3-client" data-id="edge-row3-client" data-class="edge" data-source="node-egress-3" data-target="node-client-3" d="M 84 212 L 68 212" stroke="#1b3bf5" stroke-width="1.5" fill="none" marker-end="url(#arrow-blue)"/>
+    <path id="edge-row3-tun" data-id="edge-row3-tun" data-class="edge" data-source="node-kernel-row3" data-target="node-egress-3" d="M 154 212 L 132 212" stroke="#1b3bf5" stroke-width="1.5" fill="none"/>
+    <path id="edge-row3-shell" data-id="edge-row3-shell" data-class="edge" data-source="node-kernel-row3" data-target="node-shell-3" d="M 256 212 L 278 212" stroke="#1b3bf5" stroke-width="1.5" fill="none"/>
+    <path id="edge-row3-ingress" data-id="edge-row3-ingress" data-class="edge" data-source="node-shell-3" data-target="node-ingress-3" d="M 353 212 L 372 212" stroke="#1b3bf5" stroke-width="1.5" fill="none"/>
+    <path id="edge-row3-server" data-id="edge-row3-server" data-class="edge" data-source="node-ingress-3" data-target="node-server-3" d="M 416 212 L 430 212" stroke="#1b3bf5" stroke-width="1.5" fill="none" marker-end="url(#arrow-blue)"/>
+
+    <!-- Row 4 Blue Edges -->
+    <path id="edge-row4-client" data-id="edge-row4-client" data-class="edge" data-source="node-egress-4" data-target="node-client-4" d="M 84 290 L 68 290" stroke="#1b3bf5" stroke-width="1.5" fill="none" marker-end="url(#arrow-blue)"/>
+    <path id="edge-row4-tun" data-id="edge-row4-tun" data-class="edge" data-source="node-socket-4" data-target="node-egress-4" d="M 166 290 L 132 290" stroke="#1b3bf5" stroke-width="1.5" fill="none"/>
+    <path id="edge-row4-shell" data-id="edge-row4-shell" data-class="edge" data-source="node-socket-4" data-target="node-shell-4" d="M 226 290 L 278 290" stroke="#1b3bf5" stroke-width="1.5" fill="none"/>
+    <path id="edge-row4-ingress" data-id="edge-row4-ingress" data-class="edge" data-source="node-shell-4" data-target="node-ingress-4" d="M 353 290 L 372 290" stroke="#1b3bf5" stroke-width="1.5" fill="none"/>
+    <path id="edge-row4-server" data-id="edge-row4-server" data-class="edge" data-source="node-ingress-4" data-target="node-server-4" d="M 416 290 L 430 290" stroke="#1b3bf5" stroke-width="1.5" fill="none" marker-end="url(#arrow-blue)"/>
+
+    <!-- Inter-stack Vertical Edges in Kernel Block -->
+    <path id="edge-kernel-v1" data-id="edge-kernel-v1" data-class="edge" data-source="node-kernel-row1" data-target="node-kernel-row2" d="M 217 114 L 217 130" stroke="#666" stroke-width="1.2" fill="none"/>
+    <path id="edge-kernel-v2" data-id="edge-kernel-v2" data-class="edge" data-source="node-kernel-row2" data-target="node-kernel-row3" d="M 217 174 L 217 190" stroke="#666" stroke-width="1.2" fill="none"/>
+    <path id="edge-kernel-v3" data-id="edge-kernel-v3" data-class="edge" data-source="node-kernel-row3" data-target="node-socket-4" d="M 217 234 L 217 268" stroke="#666" stroke-width="1.2" fill="none"/>
+
+    <!-- Link Traces to User-space shell edge -->
+    <path id="edge-link-traces" data-id="edge-link-traces" data-class="edge" data-source="node-link-traces" data-target="node-shell-1" d="M 320 54 L 320 68" stroke="#222" stroke-width="1.5" fill="none" marker-end="url(#arrow-black)"/>
+
+    <!-- User-space shells vertical black arrows (downward) -->
+    <path id="edge-shell-down-1" data-id="edge-shell-down-1" data-class="edge" data-source="node-shell-1" data-target="node-shell-2" d="M 318 114 L 318 128" stroke="#222" stroke-width="1.5" fill="none" marker-end="url(#arrow-black)"/>
+    <path id="edge-shell-down-2" data-id="edge-shell-down-2" data-class="edge" data-source="node-shell-2" data-target="node-shell-3" d="M 318 174 L 318 188" stroke="#222" stroke-width="1.5" fill="none" marker-end="url(#arrow-black)"/>
+    <path id="edge-shell-down-3" data-id="edge-shell-down-3" data-class="edge" data-source="node-shell-3" data-target="node-shell-4" d="M 318 234 L 318 256" stroke="#222" stroke-width="1.5" fill="none" marker-end="url(#arrow-black)"/>
+
+    <!-- User-space shells vertical red arrows (upward) -->
+    <path id="edge-shell-up-1" data-id="edge-shell-up-1" data-class="edge" data-source="node-shell-2" data-target="node-shell-1" d="M 336 130 L 336 116" stroke="#ea6b66" stroke-width="1.5" fill="none" marker-end="url(#arrow-red)"/>
+    <path id="edge-shell-up-2" data-id="edge-shell-up-2" data-class="edge" data-source="node-shell-3" data-target="node-shell-2" d="M 336 190 L 336 176" stroke="#ea6b66" stroke-width="1.5" fill="none" marker-end="url(#arrow-red)"/>
+    <path id="edge-shell-up-3" data-id="edge-shell-up-3" data-class="edge" data-source="node-shell-4" data-target="node-shell-3" d="M 336 260 L 336 236" stroke="#ea6b66" stroke-width="1.5" fill="none" marker-end="url(#arrow-red)"/>
+    <path id="edge-shell-up-control" data-id="edge-shell-up-control" data-class="edge" data-source="node-control-block" data-target="node-shell-4" d="M 336 372 L 336 324" stroke="#ea6b66" stroke-width="1.5" fill="none" marker-end="url(#arrow-red)"/>
+
+    <!-- Bottom Flow Arrows -->
+    <!-- Socket to Sage (Black downward) -->
+    <path id="edge-socket-sage-down" data-id="edge-socket-sage-down" data-class="edge" data-source="node-socket-4" data-target="node-sage" d="M 182 312 L 182 376" stroke="#222" stroke-width="1.5" fill="none" marker-end="url(#arrow-black)"/>
+
+    <!-- Sage to Socket (Yellow upward) -->
+    <path id="edge-sage-socket-up" data-id="edge-sage-socket-up" data-class="edge" data-source="node-sage" data-target="node-socket-4" d="M 197 376 L 197 315" stroke="#f3b836" stroke-width="1.5" fill="none" marker-end="url(#arrow-yellow)"/>
+
+    <!-- Socket -> ReGuard (Curved/orthogonal black line) -->
+    <path id="edge-socket-reguard" data-id="edge-socket-reguard" data-class="edge" data-source="node-socket-4" data-target="node-reguard" d="M 217 312 L 217 400 Q 217 435 235 435 L 270 435" stroke="#222" stroke-width="1.5" fill="none" marker-end="url(#arrow-black)"/>
+
+    <!-- User-space shells to ReGuard (downward black) -->
+    <path id="edge-shells-reguard" data-id="edge-shells-reguard" data-class="edge" data-source="node-shell-4" data-target="node-reguard" d="M 317 320 L 317 410" stroke="#222" stroke-width="1.5" fill="none" marker-end="url(#arrow-black)"/>
+
+    <!-- ReGuard -> Scenarios (right black) -->
+    <path id="edge-reguard-scenarios" data-id="edge-reguard-scenarios" data-class="edge" data-source="node-reguard" data-target="node-scenarios" d="M 354 435 L 408 435" stroke="#222" stroke-width="1.5" fill="none" marker-end="url(#arrow-black)"/>
+  </g>
+
+  <!-- Left Column: Client Boxes -->
+  <g id="node-client-1" data-id="node-client-1" data-class="child_node" data-parent="block-mahimahi">
+    <rect x="11" y="70" width="54" height="44" fill="#fff" stroke="#444" stroke-width="1.2"/>
+    <text x="38" y="96" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#111">Client</text>
+  </g>
+  <g id="node-client-2" data-id="node-client-2" data-class="child_node" data-parent="block-mahimahi">
+    <rect x="11" y="130" width="54" height="44" fill="#fff" stroke="#444" stroke-width="1.2"/>
+    <text x="38" y="156" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#111">Client</text>
+  </g>
+  <g id="node-client-3" data-id="node-client-3" data-class="child_node" data-parent="block-mahimahi">
+    <rect x="11" y="190" width="54" height="44" fill="#fff" stroke="#444" stroke-width="1.2"/>
+    <text x="38" y="216" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#111">Client</text>
+  </g>
+  <text x="38" y="252" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#111" data-id="text-dots-client" data-class="text_node" data-parent="block-mahimahi">&#8942;</text>
+  <g id="node-client-4" data-id="node-client-4" data-class="child_node" data-parent="block-mahimahi">
+    <rect x="11" y="268" width="54" height="44" fill="#fff" stroke="#444" stroke-width="1.2"/>
+    <text x="38" y="286" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#111">Client</text>
+    <text x="38" y="301" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#111">(receiver)</text>
+  </g>
+
+  <!-- Egress TUN Column -->
+  <g id="node-egress-1" data-id="node-egress-1" data-class="child_node" data-parent="block-mahimahi">
+    <rect x="84" y="70" width="46" height="44" fill="#dcebfa" stroke="#444" stroke-width="1.2"/>
+    <text x="107" y="88" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#111">egress</text>
+    <text x="107" y="103" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#111">TUN</text>
+  </g>
+  <g id="node-egress-2" data-id="node-egress-2" data-class="child_node" data-parent="block-mahimahi">
+    <rect x="84" y="130" width="46" height="44" fill="#dcebfa" stroke="#444" stroke-width="1.2"/>
+    <text x="107" y="148" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#111">egress</text>
+    <text x="107" y="163" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#111">TUN</text>
+  </g>
+  <g id="node-egress-3" data-id="node-egress-3" data-class="child_node" data-parent="block-mahimahi">
+    <rect x="84" y="190" width="46" height="44" fill="#dcebfa" stroke="#444" stroke-width="1.2"/>
+    <text x="107" y="208" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#111">egress</text>
+    <text x="107" y="223" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#111">TUN</text>
+  </g>
+  <text x="107" y="252" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#111" data-id="text-dots-egress" data-class="text_node" data-parent="block-mahimahi">&#8942;</text>
+  <g id="node-egress-4" data-id="node-egress-4" data-class="child_node" data-parent="block-mahimahi">
+    <rect x="84" y="268" width="46" height="44" fill="#dcebfa" stroke="#444" stroke-width="1.2"/>
+    <text x="107" y="286" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#111">egress</text>
+    <text x="107" y="301" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#111">TUN</text>
+  </g>
+
+  <!-- Inside Kernel Stack Column -->
+  <!-- Row 1: Socket | NewReno -->
+  <g id="node-kernel-row1" data-id="node-kernel-row1" data-class="child_node" data-parent="block-kernel">
+    <rect x="154" y="70" width="102" height="44" fill="#fff" stroke="#666" stroke-width="1.2"/>
+    <line x1="203" y1="70" x2="203" y2="114" stroke="#666" stroke-width="1.2"/>
+    <text x="178" y="96" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#111">Socket</text>
+    <text x="230" y="96" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#111">NewReno</text>
+  </g>
+  <!-- Row 2: Socket | Cubic -->
+  <g id="node-kernel-row2" data-id="node-kernel-row2" data-class="child_node" data-parent="block-kernel">
+    <rect x="154" y="130" width="102" height="44" fill="#fff" stroke="#666" stroke-width="1.2"/>
+    <line x1="203" y1="130" x2="203" y2="174" stroke="#666" stroke-width="1.2"/>
+    <text x="178" y="156" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#111">Socket</text>
+    <text x="230" y="156" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#111">Cubic</text>
+  </g>
+  <!-- Row 3: Socket | BBR -->
+  <g id="node-kernel-row3" data-id="node-kernel-row3" data-class="child_node" data-parent="block-kernel">
+    <rect x="154" y="190" width="102" height="44" fill="#fff" stroke="#666" stroke-width="1.2"/>
+    <line x1="203" y1="190" x2="203" y2="234" stroke="#666" stroke-width="1.2"/>
+    <text x="178" y="216" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#111">Socket</text>
+    <text x="230" y="216" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#111">BBR</text>
+  </g>
+  <text x="203" y="252" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#111" data-id="text-dots-kernel" data-class="text_node" data-parent="block-kernel">&#8942;</text>
+  <!-- Row 4: Socket only -->
+  <g id="node-socket-4" data-id="node-socket-4" data-class="child_node" data-parent="block-kernel">
+    <rect x="166" y="268" width="60" height="44" fill="#fff" stroke="#666" stroke-width="1.2"/>
+    <text x="196" y="295" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#111">Socket</text>
+  </g>
+
+  <!-- Link Traces Composite Stack -->
+  <g id="node-link-traces" data-id="node-link-traces" data-class="composite_whole" data-parent="root">
+    <rect id="part-lt-3" data-id="part-lt-3" data-class="composite_part" data-parent="node-link-traces" x="295" y="8" width="52" height="46" rx="2" fill="#fff" stroke="#333" stroke-width="1.2"/>
+    <rect id="part-lt-2" data-id="part-lt-2" data-class="composite_part" data-parent="node-link-traces" x="298" y="12" width="52" height="46" rx="2" fill="#fff" stroke="#333" stroke-width="1.2"/>
+    <rect id="part-lt-1" data-id="part-lt-1" data-class="composite_part" data-parent="node-link-traces" x="303" y="16" width="52" height="44" rx="2" fill="#fff" stroke="#333" stroke-width="1.2"/>
+    <path d="M 303 23 L 311 16" stroke="#333" stroke-width="1"/>
+    <text x="329" y="34" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#111">Link</text>
+    <text x="329" y="47" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#111">Traces</text>
+  </g>
+
+  <!-- User-space shells Column -->
+  <g id="node-shell-1" data-id="node-shell-1" data-class="child_node" data-parent="block-mahimahi">
+    <rect x="278" y="70" width="75" height="44" fill="#dcebfa" stroke="#4a7bb0" stroke-width="1.2"/>
+    <text x="315" y="88" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#111">User-space</text>
+    <text x="315" y="103" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#111">shells</text>
+  </g>
+  <g id="node-shell-2" data-id="node-shell-2" data-class="child_node" data-parent="block-mahimahi">
+    <rect x="278" y="130" width="75" height="44" fill="#dcebfa" stroke="#4a7bb0" stroke-width="1.2"/>
+    <text x="315" y="148" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#111">User-space</text>
+    <text x="315" y="163" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#111">shells</text>
+  </g>
+  <g id="node-shell-3" data-id="node-shell-3" data-class="child_node" data-parent="block-mahimahi">
+    <rect x="278" y="190" width="75" height="44" fill="#dcebfa" stroke="#4a7bb0" stroke-width="1.2"/>
+    <text x="315" y="208" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#111">User-space</text>
+    <text x="315" y="223" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#111">shells</text>
+  </g>
+  <g id="node-shell-4" data-id="node-shell-4" data-class="child_node" data-parent="block-mahimahi">
+    <rect x="278" y="258" width="75" height="60" fill="#dcebfa" stroke="#4a7bb0" stroke-width="1.2"/>
+    <text x="315" y="276" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#111">User-space</text>
+    <text x="315" y="291" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#111">shells</text>
+    <text x="315" y="306" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#111">(loss, delay)</text>
+  </g>
+
+  <!-- Ingress TUN Column -->
+  <g id="node-ingress-1" data-id="node-ingress-1" data-class="child_node" data-parent="block-mahimahi">
+    <rect x="372" y="70" width="44" height="44" fill="#dcebfa" stroke="#444" stroke-width="1.2"/>
+    <text x="394" y="88" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#111">ingress</text>
+    <text x="394" y="103" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#111">TUN</text>
+  </g>
+  <g id="node-ingress-2" data-id="node-ingress-2" data-class="child_node" data-parent="block-mahimahi">
+    <rect x="372" y="130" width="44" height="44" fill="#dcebfa" stroke="#444" stroke-width="1.2"/>
+    <text x="394" y="148" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#111">ingress</text>
+    <text x="394" y="163" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#111">TUN</text>
+  </g>
+  <g id="node-ingress-3" data-id="node-ingress-3" data-class="child_node" data-parent="block-mahimahi">
+    <rect x="372" y="190" width="44" height="44" fill="#dcebfa" stroke="#444" stroke-width="1.2"/>
+    <text x="394" y="208" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#111">ingress</text>
+    <text x="394" y="223" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#111">TUN</text>
+  </g>
+  <text x="394" y="252" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#111" data-id="text-dots-ingress" data-class="text_node" data-parent="block-mahimahi">&#8942;</text>
+  <g id="node-ingress-4" data-id="node-ingress-4" data-class="child_node" data-parent="block-mahimahi">
+    <rect x="372" y="268" width="44" height="44" fill="#dcebfa" stroke="#444" stroke-width="1.2"/>
+    <text x="394" y="286" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#111">ingress</text>
+    <text x="394" y="301" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#111">TUN</text>
+  </g>
+
+  <!-- Server Column (Outside Mahimahi Namespace) -->
+  <g id="node-server-1" data-id="node-server-1" data-class="standalone_node" data-parent="root">
+    <rect x="430" y="70" width="48" height="44" fill="#fff" stroke="#444" stroke-width="1.2"/>
+    <text x="454" y="96" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#111">Server</text>
+  </g>
+  <g id="node-server-2" data-id="node-server-2" data-class="standalone_node" data-parent="root">
+    <rect x="430" y="130" width="48" height="44" fill="#fff" stroke="#444" stroke-width="1.2"/>
+    <text x="454" y="156" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#111">Server</text>
+  </g>
+  <g id="node-server-3" data-id="node-server-3" data-class="standalone_node" data-parent="root">
+    <rect x="430" y="190" width="48" height="44" fill="#fff" stroke="#444" stroke-width="1.2"/>
+    <text x="454" y="216" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#111">Server</text>
+  </g>
+  <g id="node-server-4" data-id="node-server-4" data-class="standalone_node" data-parent="root">
+    <rect x="430" y="268" width="48" height="44" fill="#fff" stroke="#444" stroke-width="1.2"/>
+    <text x="454" y="286" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#111">Server</text>
+    <text x="454" y="301" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#111">(sender)</text>
+  </g>
+
+  <!-- Bottom Section Nodes & Labels -->
+  <!-- Sage -->
+  <g id="node-sage" data-id="node-sage" data-class="standalone_node" data-parent="root">
+    <rect x="154" y="376" width="79" height="34" rx="17" fill="#fdeab8" stroke="#e0b852" stroke-width="1.2"/>
+    <text x="193" y="398" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#111">Sage</text>
+  </g>
+
+  <!-- Control Block -->
+  <g id="node-control-block" data-id="node-control-block" data-class="standalone_node" data-parent="root">
+    <rect x="323" y="372" width="75" height="28" fill="#fbc396" stroke="#b57342" stroke-width="1.2"/>
+    <text x="360" y="390" font-family="Arial, sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#111">Control Block</text>
+  </g>
+
+  <!-- ReGuard -->
+  <g id="node-reguard" data-id="node-reguard" data-class="standalone_node" data-parent="root">
+    <rect x="274" y="414" width="80" height="40" rx="10" fill="#fbc396" stroke="#222" stroke-width="1.8"/>
+    <text x="314" y="439" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#111">ReGuard</text>
+  </g>
+
+  <!-- Scenarios Composite Stack -->
+  <g id="node-scenarios" data-id="node-scenarios" data-class="composite_whole" data-parent="root">
+    <rect id="part-sc-3" data-id="part-sc-3" data-class="composite_part" data-parent="node-scenarios" x="430" y="403" width="50" height="48" rx="2" fill="#fff" stroke="#333" stroke-width="1.2"/>
+    <rect id="part-sc-2" data-id="part-sc-2" data-class="composite_part" data-parent="node-scenarios" x="424" y="408" width="50" height="48" rx="2" fill="#fff" stroke="#333" stroke-width="1.2"/>
+    <rect id="part-sc-1" data-id="part-sc-1" data-class="composite_part" data-parent="node-scenarios" x="410" y="413" width="50" height="45" rx="2" fill="#fff" stroke="#333" stroke-width="1.2"/>
+    <path d="M 410 420 L 417 413" stroke="#333" stroke-width="1"/>
+    <text x="435" y="439" font-family="Arial, sans-serif" font-size="9.5" font-weight="bold" text-anchor="middle" fill="#111">Scenarios</text>
+  </g>
+
+  <!-- Text Annotations -->
+  <text x="175" y="356" font-family="Arial, sans-serif" font-size="9" text-anchor="end" fill="#111" data-id="text-trans-obs-1" data-class="text_node" data-parent="root">transport</text>
+  <text x="175" y="367" font-family="Arial, sans-serif" font-size="9" text-anchor="end" fill="#111" data-id="text-trans-obs-2" data-class="text_node" data-parent="root">observations</text>
+
+  <text x="310" y="356" font-family="Arial, sans-serif" font-size="9" text-anchor="end" fill="#111" data-id="text-telemetry-1" data-class="text_node" data-parent="root">telemetry +</text>
+  <text x="310" y="367" font-family="Arial, sans-serif" font-size="9" text-anchor="end" fill="#111" data-id="text-telemetry-2" data-class="text_node" data-parent="root">action histories</text>
+
+  <text x="210" y="420" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#111" data-id="text-policy-1" data-class="text_node" data-parent="root">policy states and actions;</text>
+  <text x="210" y="432" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#111" data-id="text-policy-2" data-class="text_node" data-parent="root">rewards of Sage and heuristics</text>
+
+  <text x="342" y="356" font-family="Arial, sans-serif" font-size="9" text-anchor="start" fill="#111" data-id="text-down-uplink" data-class="text_node" data-parent="root">down/uplink bw, loss, delay</text>
+
+  <!-- Narration Subtitle Banner -->
+  <g id="narration_banner">
+    <rect x="8" y="475" width="470" height="60" rx="6" fill="#f8f9fa" stroke="#ccd0d5" stroke-width="1"/>
+    
+    <text id="narr_ts1" x="50%" y="496" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#111">
+      <tspan x="50%" dy="0">The evaluation framework operates within an isolated Mahimahi network</tspan>
+      <tspan x="50%" dy="1.3em">namespace to ensure synchronized, reproducible emulation.</tspan>
+    </text>
+
+    <text id="narr_ts2" x="50%" y="496" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#111">
+      <tspan x="50%" dy="0">Inside this namespace, a kernel TCP/IP stack manages multiple</tspan>
+      <tspan x="50%" dy="1.3em">congestion control algorithms alongside standard socket interfaces.</tspan>
+    </text>
+
+    <text id="narr_ts3" x="50%" y="501" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#111">
+      <tspan x="50%" dy="0">On the sender side, servers transmit network traffic guided by link traces.</tspan>
+    </text>
+
+    <text id="narr_ts4" x="50%" y="496" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#111">
+      <tspan x="50%" dy="0">Packets from each sender enter the Mahimahi namespace via</tspan>
+      <tspan x="50%" dy="1.3em">dedicated ingress TUN interfaces.</tspan>
+    </text>
+
+    <text id="narr_ts5" x="50%" y="496" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#111">
+      <tspan x="50%" dy="0">Chained user-space shells dynamically emulate path impairments,</tspan>
+      <tspan x="50%" dy="1.3em">including packet loss and variable delay.</tspan>
+    </text>
+
+    <text id="narr_ts6" x="50%" y="496" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#111">
+      <tspan x="50%" dy="0">Traffic is concurrently processed by the kernel stack across baseline</tspan>
+      <tspan x="50%" dy="1.3em">reference controllers, including NewReno, Cubic, and BBR.</tspan>
+    </text>
+
+    <text id="narr_ts7" x="50%" y="496" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#111">
+      <tspan x="50%" dy="0">Packets then exit through egress TUN interfaces</tspan>
+      <tspan x="50%" dy="1.3em">to reach the receiving clients.</tspan>
+    </text>
+
+    <text id="narr_ts8" x="50%" y="496" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#111">
+      <tspan x="50%" dy="0">Meanwhile, the learned Sage controller receives transport observations</tspan>
+      <tspan x="50%" dy="1.3em">from the socket and executes its policy actions in real time.</tspan>
+    </text>
+
+    <text id="narr_ts9" x="50%" y="496" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#111">
+      <tspan x="50%" dy="0">A Control Block coordinates the user-space shells by updating</tspan>
+      <tspan x="50%" dy="1.3em">downlink and uplink bandwidth, loss, and delay parameters.</tspan>
+    </text>
+
+    <text id="narr_ts10" x="50%" y="496" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#111">
+      <tspan x="50%" dy="0">Finally, ReGuard aggregates telemetry, action histories, and rewards</tspan>
+      <tspan x="50%" dy="1.3em">across Sage and heuristic baselines to uncover worst-case failure scenarios.</tspan>
+    </text>
+  </g>
+</svg>

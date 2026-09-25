@@ -1,0 +1,50 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.010
+The pipeline begins by taking a single RGB image of an indoor room as input.
+
+2
+00:00:06.010 --> 00:00:10.900
+A convolutional backbone network processes the image to extract shared feature representations.
+
+3
+00:00:10.900 --> 00:00:13.940
+The top convolutional branch targets surface structure.
+
+4
+00:00:13.940 --> 00:00:18.470
+It predicts the individual spatial planes that compose the room layout.
+
+5
+00:00:18.470 --> 00:00:21.510
+The middle convolutional branch processes structural boundaries.
+
+6
+00:00:21.510 --> 00:00:25.290
+It detects the vertical lines located between adjacent walls.
+
+7
+00:00:25.290 --> 00:00:28.710
+The bottom convolutional branch focuses on spatial orientation.
+
+8
+00:00:28.710 --> 00:00:32.490
+It estimates dense three-dimensional parameters for each identified plane.
+
+9
+00:00:32.490 --> 00:00:37.380
+A geometric reasoning module then integrates the predicted planes, lines, and parameters.
+
+10
+00:00:37.380 --> 00:00:40.430
+This module generates the final reconstruction results.
+
+11
+00:00:40.430 --> 00:00:44.210
+Producing a two-dimensional semantic segmentation of the room surfaces.
+
+12
+00:00:44.210 --> 00:00:47.620
+And a geometrically consistent three-dimensional room layout model.
+

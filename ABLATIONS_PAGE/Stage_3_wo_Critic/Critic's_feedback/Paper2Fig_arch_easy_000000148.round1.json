@@ -1,0 +1,201 @@
+{
+  "style": "alpha_masking",
+  "traversal_style": "OVERVIEW_FIRST",
+  "nodes": [
+    {
+      "id": "t1",
+      "parent": null,
+      "depth": 1,
+      "focus": [
+        "node_bots_response",
+        "edge_bot_to_container"
+      ],
+      "action": "reveal",
+      "narration": "The evaluation pipeline begins with the generated bot response entering the analysis framework.",
+      "duration": 3.5,
+      "narrative": null,
+      "element_classes": {},
+      "timestamp": null
+    },
+    {
+      "id": "t2",
+      "parent": null,
+      "depth": 1,
+      "focus": [
+        "block_main_container",
+        "rect_main_container",
+        "edge_fork_network",
+        "edge_fork_repetition",
+        "edge_fork_question",
+        "edge_fork_short_safe"
+      ],
+      "action": "reveal",
+      "narration": "The response is dispatched across four parallel evaluation components.",
+      "duration": 3.5,
+      "narrative": null,
+      "element_classes": {},
+      "timestamp": null
+    },
+    {
+      "id": "t3",
+      "parent": "t2",
+      "depth": 2,
+      "focus": [
+        "node_next_sentence"
+      ],
+      "action": "reveal",
+      "narration": "First, the Next Sentence Prediction module evaluates coherence and continuation.",
+      "duration": 3.0,
+      "narrative": null,
+      "element_classes": {},
+      "timestamp": null
+    },
+    {
+      "id": "t4",
+      "parent": "t2",
+      "depth": 2,
+      "focus": [
+        "block_repetition",
+        "rect_repetition_bg",
+        "text_repetition_title",
+        "rect_repetition_inner_dash",
+        "edge_repetition_spine"
+      ],
+      "action": "reveal",
+      "narration": "Second, the Repetition module analyzes redundancy across different dialogue scopes.",
+      "duration": 3.0,
+      "narrative": null,
+      "element_classes": {},
+      "timestamp": null
+    },
+    {
+      "id": "t5",
+      "parent": "t4",
+      "depth": 3,
+      "focus": [
+        "node_rep_internal",
+        "node_rep_external",
+        "node_rep_partner"
+      ],
+      "action": "reveal",
+      "narration": "Specifically, it checks for internal repetition, external repetition, and partner repetition.",
+      "duration": 3.5,
+      "narrative": null,
+      "element_classes": {},
+      "timestamp": null
+    },
+    {
+      "id": "t6",
+      "parent": "t2",
+      "depth": 2,
+      "focus": [
+        "node_question_asking"
+      ],
+      "action": "reveal",
+      "narration": "Third, the Question-Asking module assesses conversational engagement and inquiry.",
+      "duration": 3.0,
+      "narrative": null,
+      "element_classes": {},
+      "timestamp": null
+    },
+    {
+      "id": "t7",
+      "parent": "t2",
+      "depth": 2,
+      "focus": [
+        "node_short_safe"
+      ],
+      "action": "reveal",
+      "narration": "Fourth, the Short-safe Answers Detection module identifies generic or evasive responses.",
+      "duration": 3.0,
+      "narrative": null,
+      "element_classes": {},
+      "timestamp": null
+    },
+    {
+      "id": "t8",
+      "parent": "t2",
+      "depth": 2,
+      "focus": [
+        "edge_next_sentence_to_classifier",
+        "edge_repetition_to_classifier",
+        "edge_question_to_classifier",
+        "edge_short_safe_to_classifier"
+      ],
+      "action": "reveal",
+      "narration": "Signals from all four evaluators converge into the classifier.",
+      "duration": 3.0,
+      "narrative": null,
+      "element_classes": {},
+      "timestamp": null
+    },
+    {
+      "id": "t9",
+      "parent": "t2",
+      "depth": 2,
+      "focus": [
+        "node_classifier",
+        "edge_classifier_to_boundary"
+      ],
+      "action": "reveal",
+      "narration": "The classifier integrates the extracted features to determine overall response quality.",
+      "duration": 3.0,
+      "narrative": null,
+      "element_classes": {},
+      "timestamp": null
+    },
+    {
+      "id": "t10",
+      "parent": null,
+      "depth": 1,
+      "focus": [
+        "node_response_classification",
+        "edge_container_to_response_class"
+      ],
+      "action": "reveal",
+      "narration": "Finally, the system outputs the definitive response classification.",
+      "duration": 3.0,
+      "narrative": null,
+      "element_classes": {},
+      "timestamp": null
+    }
+  ],
+  "traversal": [
+    "t1",
+    "t2",
+    "t3",
+    "t4",
+    "t5",
+    "t6",
+    "t7",
+    "t8",
+    "t9",
+    "t10"
+  ],
+  "provenance": {
+    "agent": "sequencer",
+    "backend": "openrouter_gemini37flash",
+    "model": "google-gemini-3.7-flash",
+    "prompt": "animation_planner/svg_sequencer.yaml#new_prompt",
+    "style": "alpha_masking",
+    "target": "svg",
+    "config_fingerprint": "a60c9cf21a359534",
+    "timestamp": "2026-09-02T00:09:22",
+    "max_depth": 3,
+    "critic": {
+      "agent": "planner_critic",
+      "backend": "openrouter_gemini37flash",
+      "model": "google-gemini-3.7-flash",
+      "prompt": "animation_planner/critic.yaml#prompt",
+      "style": "alpha_masking",
+      "target": "svg",
+      "config_fingerprint": "a60c9cf21a359534",
+      "timestamp": "2026-09-02T00:09:53",
+      "round": 1,
+      "review": "Corrected traversal_style from 'TOP_DOWN' to 'OVERVIEW_FIRST' to comply with supported traversal styles.",
+      "findings_addressed": [
+        "unknown traversal_style 'TOP_DOWN'. Known: ['OVERVIEW_FIRST', 'DETAIL_FIRST']"
+      ]
+    }
+  }
+}

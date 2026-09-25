@@ -1,0 +1,360 @@
+{
+ "_readme": "The helper captions for the pipeline walkthrough, grouped by stage - shown in the yellow panel under the semantic class tags, and along the bottom of the screen while the lower row is expanded. Each cue appears at its `at` position and stays up until the next cue. Positions are phase:step. Stage 1: A the map reveals the stage, B the converter writes the code, C the Code Critic, D the Raster Integrator. Stage 2: E the Parser, F the Sequencer and its critic, G the Narration Drafter. Stage 3: H the Animation Designer, its critic, the Exporter and the Narration Integrator. A timeline label such as \"Code Critic\" also works as a position, with an optional \"offset\" in steps. `moment` says what is on screen at that point, for your reference only. The grouping is only for finding things: where a cue shows is set by its position, so a cue placed in the wrong group still shows at the right time. To find a position, open pipeline/walkthrough.html?author - the guide then shows the live position as it plays. The finished video's own transcript is in final_video.captions.json.",
+ "intro": {
+  "title": "How to watch",
+  "text": "This walkthrough follows one diagram through all three stages of AnimateBanana. The map in the middle shows where we are in the pipeline; the canvas and code show what the active agent is producing. Press play, or jump to any stage from the timeline."
+ },
+ "stages": [
+  {
+   "stage": 1,
+   "name": "Diagram Transmuter",
+   "phases": "A to D",
+   "cues": [
+    {
+     "at": "A:0",
+     "moment": "initialising",
+     "title": "",
+     "text": ""
+    },
+    {
+     "at": "A:1",
+     "moment": "stage 1",
+     "title": "Stage 1 : Diagram Transmuter",
+     "text": " Diagram Transmuter converts the input diagram D into animation-aware diagram SVG code C. It constructs C specifically for downstream narrative generation incorporating persistent markers and animation-related metadata that support subsequent presentation planning, narration, and animation."
+    },
+    {
+     "at": "A:2",
+     "moment": "input D",
+     "title": "",
+     "text": ""
+    },
+    {
+     "at": "A:3",
+     "moment": "input D",
+     "title": "",
+     "text": ""
+    },
+    {
+     "at": "A:4",
+     "moment": "input D",
+     "title": "",
+     "text": ""
+    },
+    {
+     "at": "A:5",
+     "moment": "input D",
+     "title": "",
+     "text": ""
+    },
+    {
+     "at": "A:6",
+     "moment": "converter",
+     "title": "Diagram to Animation Aware Diagram SVG code",
+     "text": "The converter agent reads the input diagram and generates an intial code representation, assigning persistent semantic identifiers to animatable elements such as nodes, connecting arrows, text labels and composite elements."
+    },
+    {
+     "at": "B:1",
+     "moment": "block",
+     "title": "",
+     "text": ""
+    },
+    {
+     "at": "B:4",
+     "moment": "raster_node",
+     "title": "",
+     "text": ""
+    },
+    {
+     "at": "B:5",
+     "moment": "edge",
+     "title": "",
+     "text": ""
+    },
+    {
+     "at": "B:6",
+     "moment": "composite_whole",
+     "title": "",
+     "text": ""
+    },
+    {
+     "at": "B:8",
+     "moment": "standalone_node",
+     "title": "",
+     "text": ""
+    },
+    {
+     "at": "B:10",
+     "moment": "child_node",
+     "title": "",
+     "text": ""
+    },
+    {
+     "at": "B:15",
+     "moment": "text_node",
+     "title": "",
+     "text": ""
+    },
+    {
+     "at": "C:7",
+     "moment": "converter",
+     "title": "Drafted Animation Aware SVG code",
+     "text": "The agent has finished converting the diagram into its corresponding animation aware SVG code. Note that the rasters in the original image are replaced by grey placeholders."
+    },
+    {
+     "at": "C:8",
+     "moment": "code draft",
+     "title": "",
+     "text": ""
+    },
+    {
+     "at": "C:9",
+     "moment": "code draft",
+     "title": "",
+     "text": ""
+    },
+    {
+     "at": "C:10",
+     "moment": "critic",
+     "title": "Diagram Transmuter Critic",
+     "text": "The Critic renders the draft and evaluates it against D using a visual fidelity rubric based on semantic content, containment, layout, style, and relative proportions."
+    },
+    {
+     "at": "C:11",
+     "moment": "critic loop",
+     "title": "The critic loop",
+     "text": " Its feedback goes back to the Diagram to Animation Aware Code converter. Refinement continues until rendering satisfies the visual fidelity threshold or a maximum number of rounds (3) is reached."
+    },
+    {
+     "at": "D:1",
+     "moment": "raster integration",
+     "title": "",
+     "text": ""
+    },
+    {
+     "at": "D:3",
+     "moment": "raster_node",
+     "title": "Finding the placeholder",
+     "text": "The Raster Integrator uses the source diagram and the list of placeholder identifiers to propose bounding boxes for each placeholder."
+    },
+    {
+     "at": "D:4",
+     "moment": "mapping",
+     "title": "Mapping back",
+     "text": "The bounding box is mapped straight back onto the original diagram image"
+    },
+    {
+     "at": "D:5",
+     "moment": "cutting",
+     "title": "Cutting",
+     "text": "The Raster Integrator then extracts the corresponding regions from diagram D."
+    },
+    {
+     "at": "D:6",
+     "moment": "inserting",
+     "title": "Inserting",
+     "text": "and inserts them into C, preserving their position and identity."
+    },
+    {
+     "at": "D:7",
+     "moment": "raster integrated",
+     "title": "Raster integrated",
+     "text": "The code now references rasters/crop_input_image_raster.png in place of the raster placeholder, reflected in the diagram."
+    },
+    {
+     "at": "D:9",
+     "moment": "stage 1 complete",
+     "title": "Stage 1 complete",
+     "text": "C is the completed animation-aware diagram code, with rasters and all."
+    }
+   ]
+  },
+  {
+   "stage": 2,
+   "name": "Animation Planner",
+   "phases": "E to G",
+   "cues": [
+    {
+     "at": "E:1",
+     "moment": "animation planner",
+     "title": "Stage 2 : Animation Planner",
+     "text": "Stage 2 decides how the diagram should unfold over time i.e. which diagram elements should appear together, their presentation order, granularity and accompanying narration."
+    },
+    {
+     "at": "E:8",
+     "moment": "parser",
+     "title": "The Parser",
+     "text": "The Parser converts the animation-aware diagram code C into a structured XML representation P , using the source diagram D for visual grounding and the semantic identifiers and grouping introduced by the preceding module."
+    },
+    {
+     "at": "E:10",
+     "moment": "parsed diagram XML",
+     "title": "",
+     "text": ""
+    },
+    {
+     "at": "E:28",
+     "moment": "parsed diagram XML",
+     "title": "",
+     "text": ""
+    },
+    {
+     "at": "E:47",
+     "moment": "parsed diagram XML",
+     "title": "",
+     "text": ""
+    },
+    {
+     "at": "F:1",
+     "moment": "sequencer",
+     "title": "The Sequencer",
+     "text": "Given the parsed XML representation P and Diagram D. The Sequencer agent constructs an initial presentation sequence, where each step contains one or more elements to be introduced at that step."
+    },
+    {
+     "at": "F:3",
+     "moment": "sequencer",
+     "title": "The Sequencer",
+     "text": "The Sequencer must choose among alternative groupings and traversal orders while accounting for structural dependencies and hierarchy."
+    },
+    {
+     "at": "F:11",
+     "moment": "draft sequence",
+     "title": "",
+     "text": ""
+    },
+    {
+     "at": "F:20",
+     "moment": "draft sequence",
+     "title": "",
+     "text": ""
+    },
+    {
+     "at": "F:29",
+     "moment": "draft sequence",
+     "title": "",
+     "text": ""
+    },
+    {
+     "at": "F:31",
+     "moment": "critic",
+     "title": "The Animation Planner Critic",
+     "text": "The Animation Planner Critic evaluates the sequence for coverage and presentation coherence to produce feedback."
+    },
+    {
+     "at": "F:32",
+     "moment": "critic loop",
+     "title": "The critic loop",
+     "text": "Sequencer revises its proposal until the sequence is validated or the refinement limit (2 rounds) is reached. "
+    },
+    {
+     "at": "G:1",
+     "moment": "narration drafter",
+     "title": "The Narration Drafter",
+     "text": "Finally, the Narration Drafter takes the generated animation sequence and produces narration text for every presentation step so that so that the narration is synchronized with the evolving visual state"
+    },
+    {
+     "at": "G:4",
+     "moment": "animation sequence",
+     "title": "",
+     "text": ""
+    },
+    {
+     "at": "G:5",
+     "moment": "narration drafter",
+     "title": "",
+     "text": ""
+    },
+    {
+     "at": "G:32",
+     "moment": "stage 2 complete",
+     "title": "Stage 2 complete",
+     "text": "Stage 2 produces the narration-infused animation sequence."
+    }
+   ]
+  },
+  {
+   "stage": 3,
+   "name": "Diagram Animator",
+   "phases": "H",
+   "cues": [
+    {
+     "at": "H:1",
+     "moment": "diagram animator",
+     "title": "Stage 3 : Diagram Animator",
+     "text": "The Diagram Animator converts the narration-infused sequence S into the final animated narrative Y ."
+    },
+    {
+     "at": "H:8",
+     "moment": "animation designer",
+     "title": "The Animation Designer",
+     "text": "Given the narration-infused sequence S, the source image D, the animation-aware code C, and a user-specified style u, Animation Designer agent generates an initial executable animation SVG code"
+    },
+    {
+     "at": "H:9",
+     "moment": "animation code",
+     "title": "",
+     "text": ""
+    },
+    {
+     "at": "H:10",
+     "moment": "animation attributes",
+     "title": "",
+     "text": ""
+    },
+    {
+     "at": "H:11",
+     "moment": "rendering",
+     "title": "",
+     "text": ""
+    },
+    {
+     "at": "H:37",
+     "moment": "critic",
+     "title": "The Animation Critic",
+     "text": "The generated code is rendered into frames, and each frame is evaluated by the Animation Critic against the animation sequence and source diagram."
+    },
+    {
+     "at": "H:40",
+     "moment": "critic loop",
+     "title": "The critic loop",
+     "text": "The Critic produces feedback identifying visual and temporal errors, including incorrect element visibility, violations of the prescribed animation style, and deviations from the planned presentation order. The Animation Designer uses the feedback to select a revised solution. Refinement continues until the animation is validated or the maximum number of rounds (3 rounds) is reached"
+    },
+    {
+     "at": "H:41",
+     "moment": "accepted code",
+     "title": "",
+     "text": ""
+    },
+    {
+     "at": "H:43",
+     "moment": "animation exporter",
+     "title": "The Exporter",
+     "text": "The Animation Exporter converts these states into the requested deployment format (PDF, SVG, GIF, MP4, or PPTX)."
+    },
+    {
+     "at": "H:46",
+     "moment": "narration integrator",
+     "title": "The Narration Integrator",
+     "text": "The Narration Integrator associates the step-level narration in S with the corresponding visual states, using speech synthesis if audio narration is requested."
+    },
+    {
+     "at": "H:47",
+     "moment": "narration-synced animation",
+     "title": "",
+     "text": ""
+    },
+    {
+     "at": "H:48",
+     "moment": "narration-synced animation",
+     "title": "",
+     "text": ""
+    },
+    {
+     "at": "H:50",
+     "moment": "styled visual narrative",
+     "title": "The final result",
+     "text": "The narrative Y retains the presentation and narration decisions encoded in S while adapting the decisions to the target style and output format."
+    }
+   ]
+  }
+ ]
+}

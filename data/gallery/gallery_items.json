@@ -1,0 +1,3608 @@
+{
+ "_note": "Feed for <gallery-browser> and <gallery-lightbox> (gallery.html). One entry per AnimateBench example: the published diagram as the card, the rendered narrative beside it, and the three export targets. Every path is inside the repo.",
+ "_beats": "beat `t` is the second the line is spoken, summed from the per-frame durations the clip was rendered with (_narration_audio/frames_concat.txt), so the caption track is the narration's own timing rather than an estimate. Do not substitute mapping_log.txt timestamps: those count renderer frames, not seconds.",
+ "mediaReady": true,
+ "exports": [
+  {
+   "id": "svg",
+   "label": "SVG"
+  },
+  {
+   "id": "pptx",
+   "label": "PPTX"
+  },
+  {
+   "id": "mp4",
+   "label": "MP4"
+  }
+ ],
+ "styles": [
+  {
+   "id": "progressive",
+   "label": "Progressive Reveal"
+  },
+  {
+   "id": "alpha",
+   "label": "Alpha Masking"
+  },
+  {
+   "id": "colorpop",
+   "label": "Colour Pop"
+  },
+  {
+   "id": "hopping",
+   "label": "Hopping Bbox"
+  },
+  {
+   "id": "sliding",
+   "label": "Sliding Bbox"
+  }
+ ],
+ "items": [
+  {
+   "id": "ICCV_2023_set5_000117",
+   "styleId": "progressive",
+   "style": "Progressive Reveal",
+   "thumb": "assets/gallery/media/ICCV_2023_set5_000117/source.png",
+   "source": "assets/gallery/media/ICCV_2023_set5_000117/source.png",
+   "sourceW": 992,
+   "sourceH": 253,
+   "narrative": {
+    "mp4": "assets/gallery/media/ICCV_2023_set5_000117/narrative.mp4",
+    "poster": "assets/gallery/media/ICCV_2023_set5_000117/poster.jpg",
+    "seconds": 106.68
+   },
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "The pipeline begins with the editing guidance generation stage to convert user edits into supervision signals that can later guide the model during training."
+    },
+    {
+     "t": 10.04,
+     "text": "A pretrained teacher model encapsulates the original neural radiance field of the reconstructed scene. It therefore provides a reliable reference that can be queried to determine what the edited scene should look like."
+    },
+    {
+     "t": 23.0,
+     "text": "When a user interactively edits a region, such as scaling an object, a spatial mapping function is established, which helps to understand the relationship between the edited space and the original scene."
+    },
+    {
+     "t": 35.88,
+     "text": "Sampled points and ray directions in the edited target space are mapped back to the source space, querying the teacher model to obtain color and density guidance."
+    },
+    {
+     "t": 46.28,
+     "text": "This generated guidance is then transferred to a two-stage student training framework designed for instant preview."
+    },
+    {
+     "t": 53.92,
+     "text": "A local loss focuses specifically on the edited object or region, ensuring that the requested modification is learned correctly. At the same time, a global loss considers the scene as a whole, helping the model maintain consistency with everything outside the edited region."
+    },
+    {
+     "t": 72.88,
+     "text": "During local pretraining, only local feature parameters are updated while decoder weights remain frozen, enabling instant preview within one second."
+    },
+    {
+     "t": 82.92,
+     "text": "In the second stage, global fine-tuning refines the entire scene network using full supervision from teacher inference, allowing the model to adjust both the edited region and the surrounding scene for a more consistent and fully converged result."
+    },
+    {
+     "t": 99.24,
+     "text": "The resulting student model delivers fully converged, high-fidelity rendering of the edited 3D scene."
+    }
+   ],
+   "downloads": {
+    "mp4": {
+     "href": "assets/gallery/media/ICCV_2023_set5_000117/narrative.mp4",
+     "name": "ICCV_2023_set5_000117_progressive.mp4",
+     "note": "The rendered narrative with its spoken narration."
+    },
+    "pptx": {
+     "href": "assets/gallery/exports/ICCV_2023_set5_000117.pptx",
+     "name": "ICCV_2023_set5_000117_progressive.pptx",
+     "note": "9 static frames, narration in the speaker notes."
+    },
+    "svg": {
+     "href": "assets/gallery/exports/ICCV_2023_set5_000117.html",
+     "name": "ICCV_2023_set5_000117_progressive.html",
+     "note": "The animation as one self-contained HTML file: rasters embedded, captions you can switch off."
+    }
+   }
+  },
+  {
+   "id": "Paper2Fig_pipe_diff_000000492",
+   "styleId": "progressive",
+   "style": "Progressive Reveal",
+   "thumb": "assets/gallery/media/Paper2Fig_pipe_diff_000000492/source.png",
+   "source": "assets/gallery/media/Paper2Fig_pipe_diff_000000492/source.png",
+   "sourceW": 793,
+   "sourceH": 1511,
+   "narrative": {
+    "mp4": "assets/gallery/media/Paper2Fig_pipe_diff_000000492/narrative.mp4",
+    "poster": "assets/gallery/media/Paper2Fig_pipe_diff_000000492/poster.jpg",
+    "seconds": 58.48
+   },
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "The training pipeline begins with the Breast Cancer Image Dataset, providing source data for segmentation and classification workflows."
+    },
+    {
+     "t": 6.44,
+     "text": "In the segmentation branch, raw ultrasonography images are extracted from the dataset."
+    },
+    {
+     "t": 11.08,
+     "text": "These images enter the preprocessing stage,"
+    },
+    {
+     "t": 13.76,
+     "text": "where they undergo dimension scaling to 128 by 128 pixels followed by pixel normalization."
+    },
+    {
+     "t": 19.32,
+     "text": "Simple Linear Iterative Clustering (SLIC) then clusters pixels into superpixels to mitigate noise."
+    },
+    {
+     "t": 24.28,
+     "text": "The clustered images are fed into a modified U-Net encoder-decoder network alongside ground truth masks."
+    },
+    {
+     "t": 30.2,
+     "text": "Completing this training yields the trained segmentation model."
+    },
+    {
+     "t": 33.44,
+     "text": "In parallel, masked images and corresponding class labels are retrieved for detection training."
+    },
+    {
+     "t": 38.36,
+     "text": "A pre-trained VGG 16 model extracts deep spatial features from these masked ultrasound images."
+    },
+    {
+     "t": 43.88,
+     "text": "Extracted features are processed through five fully connected dense layers with dropout and activations."
+    },
+    {
+     "t": 49.28,
+     "text": "This establishes the trained detection model for classifying tumor types."
+    },
+    {
+     "t": 53.2,
+     "text": "Finally, the trained components combine into the unified breast cancer detection pipelining framework."
+    }
+   ],
+   "downloads": {
+    "mp4": {
+     "href": "assets/gallery/media/Paper2Fig_pipe_diff_000000492/narrative.mp4",
+     "name": "Paper2Fig_pipe_diff_000000492_progressive.mp4",
+     "note": "The rendered narrative with its spoken narration."
+    },
+    "pptx": {
+     "href": "assets/gallery/exports/Paper2Fig_pipe_diff_000000492.pptx",
+     "name": "Paper2Fig_pipe_diff_000000492_progressive.pptx",
+     "note": "12 static frames, narration in the speaker notes."
+    },
+    "svg": {
+     "href": "assets/gallery/exports/Paper2Fig_pipe_diff_000000492.html",
+     "name": "Paper2Fig_pipe_diff_000000492_progressive.html",
+     "note": "The animation as one self-contained HTML file: rasters embedded, captions you can switch off."
+    }
+   }
+  },
+  {
+   "id": "WACV_2022_set5_000001",
+   "styleId": "progressive",
+   "style": "Progressive Reveal",
+   "thumb": "assets/gallery/media/WACV_2022_set5_000001/source.png",
+   "source": "assets/gallery/media/WACV_2022_set5_000001/source.png",
+   "sourceW": 973,
+   "sourceH": 230,
+   "narrative": {
+    "mp4": "assets/gallery/media/WACV_2022_set5_000001/narrative.mp4",
+    "poster": "assets/gallery/media/WACV_2022_set5_000001/poster.jpg",
+    "seconds": 85.84
+   },
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "The pipeline begins with a sequence of five hundred twelve dimensional input feature vectors."
+    },
+    {
+     "t": 6.24,
+     "text": "These vectors are organized into an input feature matrix labeled F sub w, with dimensions five hundred twelve by n."
+    },
+    {
+     "t": 15.76,
+     "text": "Inside the scaled dot product attention sub-block, the matrix branches through fully connected layers into key transpose, query, and value matrices."
+    },
+    {
+     "t": 26.92,
+     "text": "The key transpose and query representations are multiplied together and processed by a softmax function."
+    },
+    {
+     "t": 34.44,
+     "text": "This yields an n-by-n matrix of self-attention weights labeled W sub s a."
+    },
+    {
+     "t": 41.52,
+     "text": "The self-attention weights are then multiplied with the value matrix."
+    },
+    {
+     "t": 46.12,
+     "text": "The result feeds into the cross-walk attention sub-block as an intermediate matrix labeled H sub a."
+    },
+    {
+     "t": 52.76,
+     "text": "A per-row softmax operation is then applied across the matrix columns."
+    },
+    {
+     "t": 58.2,
+     "text": "Next, the softmax output is combined element-wise with a bypass connection from the original matrix F sub w."
+    },
+    {
+     "t": 66.48,
+     "text": "This creates the cross-walk attention matrix labeled G, with dimensions five hundred twelve by n."
+    },
+    {
+     "t": 73.68,
+     "text": "The column vectors are then aggregated through a summation operation."
+    },
+    {
+     "t": 78.32,
+     "text": "Finally, the system outputs the five hundred twelve dimensional feature vector labeled f sub a."
+    }
+   ],
+   "downloads": {
+    "mp4": {
+     "href": "assets/gallery/media/WACV_2022_set5_000001/narrative.mp4",
+     "name": "WACV_2022_set5_000001_progressive.mp4",
+     "note": "The rendered narrative with its spoken narration."
+    },
+    "pptx": {
+     "href": "assets/gallery/exports/WACV_2022_set5_000001.pptx",
+     "name": "WACV_2022_set5_000001_progressive.pptx",
+     "note": "12 static frames, narration in the speaker notes."
+    },
+    "svg": {
+     "href": "assets/gallery/exports/WACV_2022_set5_000001.html",
+     "name": "WACV_2022_set5_000001_progressive.html",
+     "note": "The animation as one self-contained HTML file: rasters embedded, captions you can switch off."
+    }
+   }
+  },
+  {
+   "id": "WACV_2022_set5_000002",
+   "styleId": "progressive",
+   "style": "Progressive Reveal",
+   "thumb": "assets/gallery/media/WACV_2022_set5_000002/source.png",
+   "source": "assets/gallery/media/WACV_2022_set5_000002/source.png",
+   "sourceW": 862,
+   "sourceH": 350,
+   "narrative": {
+    "mp4": "assets/gallery/media/WACV_2022_set5_000002/narrative.mp4",
+    "poster": "assets/gallery/media/WACV_2022_set5_000002/poster.jpg",
+    "seconds": 88.04
+   },
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "The legend outlines the core modules, including SSFT, SFT, residual blocks, and convolutional layers."
+    },
+    {
+     "t": 6.44,
+     "text": "The pipeline begins with a blurred face image as input."
+    },
+    {
+     "t": 9.44,
+     "text": "Within the deblurring stream, the input image enters the encoder through an initial convolution layer labeled E zero."
+    },
+    {
+     "t": 15.68,
+     "text": "The first encoder stage processes feature maps through residual blocks followed by a downsampling convolution."
+    },
+    {
+     "t": 21.4,
+     "text": "A second stage further extracts features and downsamples the spatial resolution."
+    },
+    {
+     "t": 25.76,
+     "text": "The encoder concludes at bottleneck stage E four to form compact feature representations."
+    },
+    {
+     "t": 30.68,
+     "text": "Features from each intermediate encoder stage branch into the prior estimation stream via SSFT modules and residual blocks."
+    },
+    {
+     "t": 37.04,
+     "text": "This stream outputs multi-scale estimated priors labeled P-hat one, P-hat two, and P-hat three."
+    },
+    {
+     "t": 42.2,
+     "text": "In the decoder, stage D three modulates bottleneck features with estimated prior P-hat three using an SFT module."
+    },
+    {
+     "t": 48.72,
+     "text": "Decoder stage D two incorporates estimated prior P-hat two and continues upsampling."
+    },
+    {
+     "t": 54.04,
+     "text": "Stage D one modulates with prior P-hat one, combining the decoded features with a skip connection from E zero."
+    },
+    {
+     "t": 59.92,
+     "text": "A final convolution block labeled D zero maps the merged representations."
+    },
+    {
+     "t": 64.32,
+     "text": "This generates the predicted deblurred image, presented alongside the target ground truth image."
+    },
+    {
+     "t": 68.96,
+     "text": "A fixed VGG Face model extracts multi-scale feature priors labeled P one, P two, and P three from the target image."
+    },
+    {
+     "t": 75.6,
+     "text": "Prior loss supervises the estimated priors against target features, while pixel loss compares the predicted image to the ground truth."
+    },
+    {
+     "t": 82.0,
+     "text": "Finally, a discriminator evaluates sets of estimated and real feature priors to compute the adversarial loss."
+    }
+   ],
+   "downloads": {
+    "mp4": {
+     "href": "assets/gallery/media/WACV_2022_set5_000002/narrative.mp4",
+     "name": "WACV_2022_set5_000002_progressive.mp4",
+     "note": "The rendered narrative with its spoken narration."
+    },
+    "pptx": {
+     "href": "assets/gallery/exports/WACV_2022_set5_000002.pptx",
+     "name": "WACV_2022_set5_000002_progressive.pptx",
+     "note": "16 static frames, narration in the speaker notes."
+    },
+    "svg": {
+     "href": "assets/gallery/exports/WACV_2022_set5_000002.html",
+     "name": "WACV_2022_set5_000002_progressive.html",
+     "note": "The animation as one self-contained HTML file: rasters embedded, captions you can switch off."
+    }
+   }
+  },
+  {
+   "id": "WACV_2022_set5_000008",
+   "styleId": "progressive",
+   "style": "Progressive Reveal",
+   "thumb": "assets/gallery/media/WACV_2022_set5_000008/source.png",
+   "source": "assets/gallery/media/WACV_2022_set5_000008/source.png",
+   "sourceW": 933,
+   "sourceH": 284,
+   "narrative": {
+    "mp4": "assets/gallery/media/WACV_2022_set5_000008/narrative.mp4",
+    "poster": "assets/gallery/media/WACV_2022_set5_000008/poster.jpg",
+    "seconds": 57.88
+   },
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "The pipeline takes K-shot support images and a query image as inputs, referencing the aggregation, tensor shape, and path notations shown in the legend."
+    },
+    {
+     "t": 10.56,
+     "text": "Both the support and query images are fed into parallel Backbone Networks for feature extraction."
+    },
+    {
+     "t": 17.32,
+     "text": "In the support stream, RoI pooling is performed using the support image ground truth boxes to extract pooled feature tensors."
+    },
+    {
+     "t": 25.56,
+     "text": "The query features then combine with the support branch at an aggregation operation labeled Q S A."
+    },
+    {
+     "t": 33.0,
+     "text": "The aggregated output flows into the R P N, followed by RoI pooling on the query feature stream."
+    },
+    {
+     "t": 40.44,
+     "text": "These pooled query representations merge with the upper support features at the aggregation module labeled Q R A."
+    },
+    {
+     "t": 48.88,
+     "text": "Finally, the combined features pass into the RoI Head, generating the final detection bounding boxes on the query image."
+    }
+   ],
+   "downloads": {
+    "mp4": {
+     "href": "assets/gallery/media/WACV_2022_set5_000008/narrative.mp4",
+     "name": "WACV_2022_set5_000008_progressive.mp4",
+     "note": "The rendered narrative with its spoken narration."
+    },
+    "pptx": {
+     "href": "assets/gallery/exports/WACV_2022_set5_000008.pptx",
+     "name": "WACV_2022_set5_000008_progressive.pptx",
+     "note": "7 static frames, narration in the speaker notes."
+    },
+    "svg": {
+     "href": "assets/gallery/exports/WACV_2022_set5_000008.html",
+     "name": "WACV_2022_set5_000008_progressive.html",
+     "note": "The animation as one self-contained HTML file: rasters embedded, captions you can switch off."
+    }
+   }
+  },
+  {
+   "id": "WACV_2024_set5_000006",
+   "styleId": "progressive",
+   "style": "Progressive Reveal",
+   "thumb": "assets/gallery/media/WACV_2024_set5_000006/source.png",
+   "source": "assets/gallery/media/WACV_2024_set5_000006/source.png",
+   "sourceW": 991,
+   "sourceH": 219,
+   "narrative": {
+    "mp4": "assets/gallery/media/WACV_2024_set5_000006/narrative.mp4",
+    "poster": "assets/gallery/media/WACV_2024_set5_000006/poster.jpg",
+    "seconds": 64.4
+   },
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "The framework begins with multi-view input images capturing the scene from multiple camera perspectives."
+    },
+    {
+     "t": 5.52,
+     "text": "A dilated ResNet-18 backbone processes each camera view to extract downsampled two-dimensional feature representations."
+    },
+    {
+     "t": 12.76,
+     "text": "A foreground selector module isolates meaningful semantic information, highlighting critical foreground regions."
+    },
+    {
+     "t": 19.52,
+     "text": "Through non-parametric three-dimensional feature pulling, projection and bilinear sampling map two-dimensional features into view-specific three-dimensional volumes."
+    },
+    {
+     "t": 27.72,
+     "text": "These view-specific feature volumes are then fed into the maximal fusion module."
+    },
+    {
+     "t": 32.96,
+     "text": "Max pooling aggregates features across all views, which are concatenated with coordinate volumes and convolved to produce an aggregated three-dimensional feature volume."
+    },
+    {
+     "t": 42.4,
+     "text": "Reducing the vertical dimension forms a coarse bird's-eye-view feature map, which is then refined by the large kernel refiner."
+    },
+    {
+     "t": 49.12,
+     "text": "The enhanced bird's-eye-view feature representation is subsequently passed through a final convolution layer."
+    },
+    {
+     "t": 54.36,
+     "text": "The network outputs the final predicted two-dimensional pedestrian occupancy map."
+    },
+    {
+     "t": 58.72,
+     "text": "Finally, the predicted occupancy map is compared against the ground truth using a mean squared error loss."
+    }
+   ],
+   "downloads": {
+    "mp4": {
+     "href": "assets/gallery/media/WACV_2024_set5_000006/narrative.mp4",
+     "name": "WACV_2024_set5_000006_progressive.mp4",
+     "note": "The rendered narrative with its spoken narration."
+    },
+    "pptx": {
+     "href": "assets/gallery/exports/WACV_2024_set5_000006.pptx",
+     "name": "WACV_2024_set5_000006_progressive.pptx",
+     "note": "10 static frames, narration in the speaker notes."
+    },
+    "svg": {
+     "href": "assets/gallery/exports/WACV_2024_set5_000006.html",
+     "name": "WACV_2024_set5_000006_progressive.html",
+     "note": "The animation as one self-contained HTML file: rasters embedded, captions you can switch off."
+    }
+   }
+  },
+  {
+   "id": "WACV_2024_set5_000035",
+   "styleId": "progressive",
+   "style": "Progressive Reveal",
+   "thumb": "assets/gallery/media/WACV_2024_set5_000035/source.png",
+   "source": "assets/gallery/media/WACV_2024_set5_000035/source.png",
+   "sourceW": 742,
+   "sourceH": 410,
+   "narrative": {
+    "mp4": "assets/gallery/media/WACV_2024_set5_000035/narrative.mp4",
+    "poster": "assets/gallery/media/WACV_2024_set5_000035/poster.jpg",
+    "seconds": 115.56
+   },
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "The architecture begins by taking a sequence of two-dimensional human poses spanning frames one through T as input."
+    },
+    {
+     "t": 8.48,
+     "text": "A fully connected layer linearly projects the joints into feature tokens, which are then enriched with spatial position embeddings."
+    },
+    {
+     "t": 16.6,
+     "text": "Inside the AGFormer block, features branch into parallel Spatial GCNFormer and Spatial Transformer streams to capture local and global joint relations."
+    },
+    {
+     "t": 28.92,
+     "text": "After feature reshaping, representations pass into Temporal GCNFormer and Temporal Transformer modules to model cross-frame temporal dynamics."
+    },
+    {
+     "t": 39.8,
+     "text": "The GCNFormer and Transformer feature streams are merged via adaptive fusion across N stacked AGFormer blocks."
+    },
+    {
+     "t": 49.0,
+     "text": "The fused representations proceed through an upper fully connected layer to the regression head."
+    },
+    {
+     "t": 55.16,
+     "text": "The regression head outputs the final estimated three-dimensional skeletal poses across all time frames."
+    },
+    {
+     "t": 62.52,
+     "text": "Panel B details the Spatial MetaFormer, treating individual body joints from one to J as distinct input tokens."
+    },
+    {
+     "t": 71.64,
+     "text": "The joint tokens pass through layer normalization and a spatial token mixer, combined with a residual skip connection."
+    },
+    {
+     "t": 79.68,
+     "text": "Features then undergo a second layer normalization, channel multilayer perceptron processing, and residual addition."
+    },
+    {
+     "t": 87.8,
+     "text": "Panel C outlines the Temporal MetaFormer, where entire pose frames across time steps one through T serve as tokens."
+    },
+    {
+     "t": 97.76,
+     "text": "Frame tokens undergo layer normalization, temporal token mixing, and residual addition to model temporal context."
+    },
+    {
+     "t": 106.84,
+     "text": "Finally, the temporal representations pass through layer normalization and a channel multilayer perceptron with a residual connection."
+    }
+   ],
+   "downloads": {
+    "mp4": {
+     "href": "assets/gallery/media/WACV_2024_set5_000035/narrative.mp4",
+     "name": "WACV_2024_set5_000035_progressive.mp4",
+     "note": "The rendered narrative with its spoken narration."
+    },
+    "pptx": {
+     "href": "assets/gallery/exports/WACV_2024_set5_000035.pptx",
+     "name": "WACV_2024_set5_000035_progressive.pptx",
+     "note": "13 static frames, narration in the speaker notes."
+    },
+    "svg": {
+     "href": "assets/gallery/exports/WACV_2024_set5_000035.html",
+     "name": "WACV_2024_set5_000035_progressive.html",
+     "note": "The animation as one self-contained HTML file: rasters embedded, captions you can switch off."
+    }
+   }
+  },
+  {
+   "id": "WACV_2024_set5_000054",
+   "styleId": "progressive",
+   "style": "Progressive Reveal",
+   "thumb": "assets/gallery/media/WACV_2024_set5_000054/source.png",
+   "source": "assets/gallery/media/WACV_2024_set5_000054/source.png",
+   "sourceW": 884,
+   "sourceH": 466,
+   "narrative": {
+    "mp4": "assets/gallery/media/WACV_2024_set5_000054/narrative.mp4",
+    "poster": "assets/gallery/media/WACV_2024_set5_000054/poster.jpg",
+    "seconds": 125.72
+   },
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "The architecture builds upon a pre-trained, frozen CLIP model containing text and image encoders."
+    },
+    {
+     "t": 7.28,
+     "text": "In standard CLIP, the text encoder processes natural language prompts such as 'photo of a cat'."
+    },
+    {
+     "t": 14.76,
+     "text": "In parallel, the image encoder extracts visual features from corresponding images."
+    },
+    {
+     "t": 20.68,
+     "text": "A contrastive loss trains both encoders to align text and image representations within a shared embedding space."
+    },
+    {
+     "t": 28.48,
+     "text": "To train LidarCLIP, automotive camera frames are passed through the frozen CLIP image encoder without gradient updates."
+    },
+    {
+     "t": 36.28,
+     "text": "Synchronized point clouds from image-lidar pairs are concurrently processed by a trainable lidar encoder."
+    },
+    {
+     "t": 43.76,
+     "text": "A similarity loss maximizes the alignment between lidar and image embeddings, effectively connecting point clouds to text via the image domain."
+    },
+    {
+     "t": 53.84,
+     "text": "For text-to-lidar retrieval, a natural language query is mapped into feature space using the frozen text encoder."
+    },
+    {
+     "t": 62.12,
+     "text": "Candidate point cloud scans are embedded through the trained lidar encoder."
+    },
+    {
+     "t": 67.0,
+     "text": "Optionally, camera images can also be encoded to support multi-modal retrieval under challenging scenarios."
+    },
+    {
+     "t": 74.52,
+     "text": "A similarity ranking module then identifies and retrieves the point cloud matching the query."
+    },
+    {
+     "t": 81.08,
+     "text": "At inference, the trained lidar encoder embeds point cloud inputs into the unified feature space for downstream tasks."
+    },
+    {
+     "t": 89.64,
+     "text": "For lidar-to-image generation, the lidar embedding directly conditions a diffusion model to synthesize realistic visual scenes."
+    },
+    {
+     "t": 99.44,
+     "text": "For lidar-to-text generation, the embedding feeds into a captioning model to produce descriptive text of the driving scene."
+    },
+    {
+     "t": 107.16,
+     "text": "For zero-shot classification, candidate category labels inserted into text prompt templates are encoded into text embeddings."
+    },
+    {
+     "t": 116.24,
+     "text": "Measuring the similarity between the lidar embedding and text embeddings yields zero-shot classification scores across target categories."
+    }
+   ],
+   "downloads": {
+    "mp4": {
+     "href": "assets/gallery/media/WACV_2024_set5_000054/narrative.mp4",
+     "name": "WACV_2024_set5_000054_progressive.mp4",
+     "note": "The rendered narrative with its spoken narration."
+    },
+    "pptx": {
+     "href": "assets/gallery/exports/WACV_2024_set5_000054.pptx",
+     "name": "WACV_2024_set5_000054_progressive.pptx",
+     "note": "16 static frames, narration in the speaker notes."
+    },
+    "svg": {
+     "href": "assets/gallery/exports/WACV_2024_set5_000054.html",
+     "name": "WACV_2024_set5_000054_progressive.html",
+     "note": "The animation as one self-contained HTML file: rasters embedded, captions you can switch off."
+    }
+   }
+  },
+  {
+   "id": "arch_arxiv_db_ir_2026_000000718",
+   "styleId": "progressive",
+   "style": "Progressive Reveal",
+   "thumb": "assets/gallery/media/arch_arxiv_db_ir_2026_000000718/source.png",
+   "source": "assets/gallery/media/arch_arxiv_db_ir_2026_000000718/source.png",
+   "sourceW": 456,
+   "sourceH": 369,
+   "narrative": {
+    "mp4": "assets/gallery/media/arch_arxiv_db_ir_2026_000000718/narrative.mp4",
+    "poster": "assets/gallery/media/arch_arxiv_db_ir_2026_000000718/poster.jpg",
+    "seconds": 34.72
+   },
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "The memory architecture is divided into User Space and Kernel Space."
+    },
+    {
+     "t": 4.04,
+     "text": "In User Space, execution begins at the Database Process."
+    },
+    {
+     "t": 7.56,
+     "text": "The process initiates an asynchronous write call."
+    },
+    {
+     "t": 10.48,
+     "text": "This is followed by a synchronous fsync operation."
+    },
+    {
+     "t": 13.36,
+     "text": "The write call routes into the Page Cache within Kernel Space and returns immediately, creating dirty pages."
+    },
+    {
+     "t": 19.0,
+     "text": "The Kernel Flusher Thread periodically handles writebacks from the Page Cache."
+    },
+    {
+     "t": 22.88,
+     "text": "Requests pass into the I/O Queue, while fsync waits for disk completion."
+    },
+    {
+     "t": 26.52,
+     "text": "At the bottom is Persistent Storage, containing the Block Device."
+    },
+    {
+     "t": 30.28,
+     "text": "Finally, enqueued operations are flushed from the I/O Queue down to the Block Device."
+    }
+   ],
+   "downloads": {
+    "mp4": {
+     "href": "assets/gallery/media/arch_arxiv_db_ir_2026_000000718/narrative.mp4",
+     "name": "arch_arxiv_db_ir_2026_000000718_progressive.mp4",
+     "note": "The rendered narrative with its spoken narration."
+    },
+    "pptx": {
+     "href": "assets/gallery/exports/arch_arxiv_db_ir_2026_000000718.pptx",
+     "name": "arch_arxiv_db_ir_2026_000000718_progressive.pptx",
+     "note": "9 static frames, narration in the speaker notes."
+    },
+    "svg": {
+     "href": "assets/gallery/exports/arch_arxiv_db_ir_2026_000000718.html",
+     "name": "arch_arxiv_db_ir_2026_000000718_progressive.html",
+     "note": "The animation as one self-contained HTML file: rasters embedded, captions you can switch off."
+    }
+   }
+  },
+  {
+   "id": "pipeline_animated",
+   "styleId": "progressive",
+   "style": "Progressive Reveal",
+   "thumb": "assets/gallery/media/pipeline_animated/thumb.png",
+   "source": "assets/gallery/media/pipeline_animated/source.png",
+   "sourceW": 1000,
+   "sourceH": 420,
+   "narrative": {
+    "mp4": "assets/gallery/media/pipeline_animated/narrative.mp4",
+    "poster": "assets/gallery/media/pipeline_animated/poster.jpg",
+    "seconds": 219.28
+   },
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "This is the high-level overview of the Animate Banana pipeline, which automatically transforms static process-oriented diagrams into animated narratives."
+    },
+    {
+     "t": 10.96,
+     "text": "Stage one is the Diagram Transmuter, which converts the input diagram into animation-aware diagram code."
+    },
+    {
+     "t": 19.28,
+     "text": "The process begins with a static input diagram."
+    },
+    {
+     "t": 23.16,
+     "text": "This input diagram is fed directly into the Diagram Transmuter."
+    },
+    {
+     "t": 28.4,
+     "text": "Inside, a specialized converter agent generates an initial code representation, assigning persistent semantic identifiers to all animatable elements."
+    },
+    {
+     "t": 39.52,
+     "text": "This produces an initial draft of the animation-aware diagram code."
+    },
+    {
+     "t": 44.48,
+     "text": "A critic agent then evaluates the rendered code against the original diagram, providing iterative feedback to the converter to refine the code's visual and structural fidelity."
+    },
+    {
+     "t": 55.52,
+     "text": "Simultaneously, a raster integrator extracts complex visual regions, such as photographs or plots, and inserts them directly into the code to preserve them without reconstruction."
+    },
+    {
+     "t": 68.36,
+     "text": "The final output of this stage is the refined animation-aware diagram code."
+    },
+    {
+     "t": 73.68,
+     "text": "Stage two is the Animation Planner, which designs a structured presentation and narration plan."
+    },
+    {
+     "t": 80.8,
+     "text": "This stage takes the diagram, optional auxiliary context, the user-specified animation style, and the generated diagram code as inputs."
+    },
+    {
+     "t": 91.92,
+     "text": "First, a parser processes the diagram code."
+    },
+    {
+     "t": 95.6,
+     "text": "It abstracts away rendering details to produce a structured XML representation of the diagram's entities and relationships."
+    },
+    {
+     "t": 104.28,
+     "text": "A sequencer agent then reasons over this XML to construct an initial presentation sequence, determining the grouping and traversal order of elements."
+    },
+    {
+     "t": 114.84,
+     "text": "A sequence critic evaluates this plan for coverage and coherence, guiding the sequencer through iterative refinement."
+    },
+    {
+     "t": 123.0,
+     "text": "This results in a validated animation sequence draft, tailored to the chosen animation style."
+    },
+    {
+     "t": 129.52,
+     "text": "Next, a narration drafter generates synchronized explanatory text for each step, utilizing any available auxiliary context to enrich the descriptions."
+    },
+    {
+     "t": 140.6,
+     "text": "This produces the narration-infused animation sequence, coupling visual steps with spoken explanations."
+    },
+    {
+     "t": 148.24,
+     "text": "Stage three is the Diagram Animator, which synthesizes the final animated narrative."
+    },
+    {
+     "t": 154.68,
+     "text": "It ingests the original diagram, the chosen animation style, the narration-infused sequence, and the diagram code."
+    },
+    {
+     "t": 163.68,
+     "text": "An animation designer agent generates an initial executable animation program based on these inputs."
+    },
+    {
+     "t": 170.84,
+     "text": "An animation critic evaluates the rendered frames against the source diagram, using a critic memory of past feedback to correct visual and temporal errors."
+    },
+    {
+     "t": 181.84,
+     "text": "This iterative process refines the executable animation code."
+    },
+    {
+     "t": 186.68,
+     "text": "Once validated, an animation exporter renders the frames into the target presentation format."
+    },
+    {
+     "t": 193.28,
+     "text": "In parallel, a narration integrator uses speech synthesis to align the step-level narration with the corresponding visual states."
+    },
+    {
+     "t": 202.36,
+     "text": "This ensures that the visual transitions and audio explanations are perfectly synchronized."
+    },
+    {
+     "t": 208.76,
+     "text": "The final output is a styled visual narrative, ready to be deployed across multiple formats such as MP4, PDF, or PowerPoint."
+    }
+   ],
+   "downloads": {
+    "mp4": {
+     "href": "assets/gallery/media/pipeline_animated/narrative.mp4",
+     "name": "pipeline_animated_progressive.mp4",
+     "note": "The rendered narrative with its spoken narration."
+    },
+    "pptx": {
+     "href": "assets/gallery/exports/pipeline_animated.pptx",
+     "name": "pipeline_animated_progressive.pptx",
+     "note": "27 static frames, narration in the speaker notes."
+    },
+    "svg": {
+     "href": "assets/gallery/exports/pipeline_animated.html",
+     "name": "pipeline_animated_progressive.html",
+     "note": "The animation as one self-contained HTML file: rasters embedded, captions you can switch off."
+    }
+   }
+  },
+  {
+   "id": "CVPR_2025_arch00932",
+   "styleId": "alpha",
+   "style": "Alpha Masking",
+   "thumb": "assets/gallery/media/CVPR_2025_arch00932/thumb.png",
+   "source": "assets/gallery/media/CVPR_2025_arch00932/source.png",
+   "sourceW": 991,
+   "sourceH": 414,
+   "narrative": {
+    "mp4": "assets/gallery/media/CVPR_2025_arch00932/narrative.mp4",
+    "poster": "assets/gallery/media/CVPR_2025_arch00932/poster.jpg",
+    "seconds": 138.44
+   },
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "First, the framework initiates the uncertainty-aware initial human motion estimation module to predict preliminary full-body motion along with joint uncertainty."
+    },
+    {
+     "t": 12.16,
+     "text": "Sparse tracking signals from the head and hand controllers are embedded into observation feature representations."
+    },
+    {
+     "t": 19.8,
+     "text": "Concurrently, historical human motion sequences are processed through a pose encoder to extract motion history embeddings."
+    },
+    {
+     "t": 28.44,
+     "text": "The observation and historical motion representations are concatenated into a shallow motion representation and combined with temporal position embeddings."
+    },
+    {
+     "t": 48.52,
+     "text": "A transformer encoder then models temporal dependencies across frames, extracting high-dimensional motion features."
+    },
+    {
+     "t": 57.2,
+     "text": "These features feed into a pose regression head to estimate initial poses, while an uncertainty estimation head quantifies joint-level uncertainty."
+    },
+    {
+     "t": 67.44,
+     "text": "In the environment point cloud embedding module, the 3D scene point cloud is cropped locally around the estimated human trajectory."
+    },
+    {
+     "t": 76.36,
+     "text": "The cropped points are sampled and encoded by a scene encoder to yield environment scene features."
+    },
+    {
+     "t": 90.28,
+     "text": "In the refinement stage, uncertainty-guided sampling generates motion hypotheses, while relative head height is computed against the local terrain."
+    },
+    {
+     "t": 99.88,
+     "text": "The sampled poses, head translation, and extended observations are concatenated to form unified motion embeddings."
+    },
+    {
+     "t": 108.16,
+     "text": "A motion-environment cross-attention module integrates environmental semantics with the motion tokens to produce refined motion representations."
+    },
+    {
+     "t": 128.08,
+     "text": "Finally, contact probabilities are estimated and combined with the refined representation to regress the physically plausible final full-body motion."
+    }
+   ],
+   "downloads": {
+    "mp4": {
+     "href": "assets/gallery/media/CVPR_2025_arch00932/narrative.mp4",
+     "name": "CVPR_2025_arch00932_alpha.mp4",
+     "note": "The rendered narrative with its spoken narration."
+    },
+    "pptx": {
+     "href": "assets/gallery/exports/CVPR_2025_arch00932.pptx",
+     "name": "CVPR_2025_arch00932_alpha.pptx",
+     "note": "12 static frames, narration in the speaker notes."
+    },
+    "svg": {
+     "href": "assets/gallery/exports/CVPR_2025_arch00932.html",
+     "name": "CVPR_2025_arch00932_alpha.html",
+     "note": "The animation as one self-contained HTML file: rasters embedded, captions you can switch off."
+    }
+   }
+  },
+  {
+   "id": "CVPR_2025_arch00938",
+   "styleId": "alpha",
+   "style": "Alpha Masking",
+   "thumb": "assets/gallery/media/CVPR_2025_arch00938/thumb.png",
+   "source": "assets/gallery/media/CVPR_2025_arch00938/source.png",
+   "sourceW": 937,
+   "sourceH": 382,
+   "narrative": {
+    "mp4": "assets/gallery/media/CVPR_2025_arch00938/narrative.mp4",
+    "poster": "assets/gallery/media/CVPR_2025_arch00938/poster.jpg",
+    "seconds": 104.0
+   },
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "During the blind time between active sensor frames where LiDAR and image data are unavailable, an asynchronous event camera captures continuous spatiotemporal measurements."
+    },
+    {
+     "t": 8.68,
+     "text": "These continuous event streams are converted into voxel grids and encoded into two-dimensional event feature representations."
+    },
+    {
+     "t": 17.12,
+     "text": "At the initial active timestamp, synchronized camera images and LiDAR point clouds are collected by the region proposal network."
+    },
+    {
+     "t": 25.88,
+     "text": "The network extracts two-dimensional image features and constructs three-dimensional voxel feature grids."
+    },
+    {
+     "t": 33.08,
+     "text": "Combining these multi-modal features generates initial three-dimensional bounding box proposals for the active timestamp."
+    },
+    {
+     "t": 41.0,
+     "text": "In the Virtual 3D Event Fusion module, event features are projected into virtual 3D space and aligned with the initial bounding boxes and shared voxel features."
+    },
+    {
+     "t": 53.12,
+     "text": "Region of interest pooling is applied separately to virtual event and voxel features within each proposal to form fused region features."
+    },
+    {
+     "t": 72.24,
+     "text": "During blind time motion prediction, an implicit motion field is generated to estimate explicit motion vectors and a motion confidence score for each object."
+    },
+    {
+     "t": 83.52,
+     "text": "Simultaneously, parallel proposal tracks derive their respective implicit motion fields and confidence metrics."
+    },
+    {
+     "t": 91.2,
+     "text": "Finally, the predicted spatial shifts and rotations update the bounding boxes, producing accurate 3D object detections at arbitrary inter-frame timestamps."
+    }
+   ],
+   "downloads": {
+    "mp4": {
+     "href": "assets/gallery/media/CVPR_2025_arch00938/narrative.mp4",
+     "name": "CVPR_2025_arch00938_alpha.mp4",
+     "note": "The rendered narrative with its spoken narration."
+    },
+    "pptx": {
+     "href": "assets/gallery/exports/CVPR_2025_arch00938.pptx",
+     "name": "CVPR_2025_arch00938_alpha.pptx",
+     "note": "10 static frames, narration in the speaker notes."
+    },
+    "svg": {
+     "href": "assets/gallery/exports/CVPR_2025_arch00938.html",
+     "name": "CVPR_2025_arch00938_alpha.html",
+     "note": "The animation as one self-contained HTML file: rasters embedded, captions you can switch off."
+    }
+   }
+  },
+  {
+   "id": "CVPR_2025_arch01051",
+   "styleId": "alpha",
+   "style": "Alpha Masking",
+   "thumb": "assets/gallery/media/CVPR_2025_arch01051/thumb.png",
+   "source": "assets/gallery/media/CVPR_2025_arch01051/source.png",
+   "sourceW": 476,
+   "sourceH": 356,
+   "narrative": {
+    "mp4": "assets/gallery/media/CVPR_2025_arch01051/narrative.mp4",
+    "poster": "assets/gallery/media/CVPR_2025_arch01051/poster.jpg",
+    "seconds": 84.4
+   },
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "Existing reconstruction-based detection methods split the pipeline into two disconnected stages."
+    },
+    {
+     "t": 5.12,
+     "text": "In the first stage, an input image is passed through a pre-trained diffusion model to produce a reconstructed image."
+    },
+    {
+     "t": 10.32,
+     "text": "A conceptual barrier isolates the two stages, passing frozen representations forward without joint optimization."
+    },
+    {
+     "t": 16.96,
+     "text": "The second stage computes the absolute reconstruction error and trains a backend classifier to predict whether the image is real or generated."
+    },
+    {
+     "t": 23.92,
+     "text": "Crucially, this existing architecture lacks direct interaction between the diffusion model and the downstream classifier."
+    },
+    {
+     "t": 29.76,
+     "text": "In contrast, the proposed framework unifies reconstruction and classification into an end-to-end training pipeline."
+    },
+    {
+     "t": 36.08,
+     "text": "The Frequency Mask Refinement module filters out difficult-to-reconstruct mid-band frequencies to produce a pseudo-generated image."
+    },
+    {
+     "t": 42.48,
+     "text": "Both the original and pseudo-generated images are passed to the diffusion autoencoder for parallel reconstruction."
+    },
+    {
+     "t": 50.16,
+     "text": "Absolute difference operations calculate distinct reconstruction error maps for both the original and pseudo-generated inputs."
+    },
+    {
+     "t": 67.64,
+     "text": "These dual reconstruction error maps are concatenated and fed into the classifier to make the final real or generated prediction."
+    },
+    {
+     "t": 76.32,
+     "text": "This integrated design ensures better alignment between artifact generation and artifact detection across the latent space."
+    }
+   ],
+   "downloads": {
+    "mp4": {
+     "href": "assets/gallery/media/CVPR_2025_arch01051/narrative.mp4",
+     "name": "CVPR_2025_arch01051_alpha.mp4",
+     "note": "The rendered narrative with its spoken narration."
+    },
+    "pptx": {
+     "href": "assets/gallery/exports/CVPR_2025_arch01051.pptx",
+     "name": "CVPR_2025_arch01051_alpha.pptx",
+     "note": "11 static frames, narration in the speaker notes."
+    },
+    "svg": {
+     "href": "assets/gallery/exports/CVPR_2025_arch01051.html",
+     "name": "CVPR_2025_arch01051_alpha.html",
+     "note": "The animation as one self-contained HTML file: rasters embedded, captions you can switch off."
+    }
+   }
+  },
+  {
+   "id": "CVPR_2025_arch01488",
+   "styleId": "alpha",
+   "style": "Alpha Masking",
+   "thumb": "assets/gallery/media/CVPR_2025_arch01488/thumb.png",
+   "source": "assets/gallery/media/CVPR_2025_arch01488/source.png",
+   "sourceW": 498,
+   "sourceH": 218,
+   "narrative": {
+    "mp4": "assets/gallery/media/CVPR_2025_arch01488/narrative.mp4",
+    "poster": "assets/gallery/media/CVPR_2025_arch01488/poster.jpg",
+    "seconds": 80.56
+   },
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "The training pipeline begins with three inputs: the input medical image, its corresponding ground truth mask, and generated interactive masks."
+    },
+    {
+     "t": 9.96,
+     "text": "A frozen image encoder extracts visual tokens from the input image, while initial interaction simulators derive point, bounding box, and text prompts from the masks."
+    },
+    {
+     "t": 22.0,
+     "text": "The system then enters an iterative interaction loop that simulates multiple consecutive refinement steps."
+    },
+    {
+     "t": 29.16,
+     "text": "The initial simulated interaction prompts are processed by a learnable prompt encoder."
+    },
+    {
+     "t": 34.92,
+     "text": "The extracted image tokens are combined with convolutional feedback features via element-wise addition."
+    },
+    {
+     "t": 42.4,
+     "text": "A learnable mask decoder integrates these fused image features with the encoded prompts and circulates intermediate features back through a convolution layer."
+    },
+    {
+     "t": 52.36,
+     "text": "Transposed convolution layers then upsample the decoded representations into predicted segmentation masks for both the ground truth and interactive targets."
+    },
+    {
+     "t": 63.36,
+     "text": "The framework computes error regions by identifying discrepancies between each predicted mask and its target."
+    },
+    {
+     "t": 70.76,
+     "text": "Interaction simulators place corrective prompts on these error regions and feed them back to the prompt encoder, completing the feedback loop across iterations."
+    }
+   ],
+   "downloads": {
+    "mp4": {
+     "href": "assets/gallery/media/CVPR_2025_arch01488/narrative.mp4",
+     "name": "CVPR_2025_arch01488_alpha.mp4",
+     "note": "The rendered narrative with its spoken narration."
+    },
+    "pptx": {
+     "href": "assets/gallery/exports/CVPR_2025_arch01488.pptx",
+     "name": "CVPR_2025_arch01488_alpha.pptx",
+     "note": "9 static frames, narration in the speaker notes."
+    },
+    "svg": {
+     "href": "assets/gallery/exports/CVPR_2025_arch01488.html",
+     "name": "CVPR_2025_arch01488_alpha.html",
+     "note": "The animation as one self-contained HTML file: rasters embedded, captions you can switch off."
+    }
+   }
+  },
+  {
+   "id": "CVPR_2025_arch03005",
+   "styleId": "alpha",
+   "style": "Alpha Masking",
+   "thumb": "assets/gallery/media/CVPR_2025_arch03005/thumb.png",
+   "source": "assets/gallery/media/CVPR_2025_arch03005/source.png",
+   "sourceW": 476,
+   "sourceH": 268,
+   "narrative": {
+    "mp4": "assets/gallery/media/CVPR_2025_arch03005/narrative.mp4",
+    "poster": "assets/gallery/media/CVPR_2025_arch03005/poster.jpg",
+    "seconds": 63.96
+   },
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "The uncertainty-aware attention module takes map queries as input, splitting them into two parallel processing branches."
+    },
+    {
+     "t": 8.36,
+     "text": "In the upper branch, the queries predict spatial coordinate offsets to be added to reference points."
+    },
+    {
+     "t": 14.96,
+     "text": "The summed positions define sampling locations across the bird's-eye-view grid."
+    },
+    {
+     "t": 20.52,
+     "text": "Features are sampled directly from the bird's-eye-view feature map at these locations."
+    },
+    {
+     "t": 25.96,
+     "text": "This extracts a focused set of sampled spatial features."
+    },
+    {
+     "t": 30.36,
+     "text": "Simultaneously, the lower branch feeds the map queries into a multilayer perceptron."
+    },
+    {
+     "t": 36.68,
+     "text": "The network outputs mean and variance parameters for dynamic resampling from a Gaussian distribution."
+    },
+    {
+     "t": 43.8,
+     "text": "Learned attention weights are formed by incorporating stochastic disturbance into the distribution parameters."
+    },
+    {
+     "t": 51.36,
+     "text": "The sampled features and dynamic attention weights are aggregated and projected through a linear layer."
+    },
+    {
+     "t": 58.04,
+     "text": "The resulting update terms refine the map queries for generalizable vectorization."
+    }
+   ],
+   "downloads": {
+    "mp4": {
+     "href": "assets/gallery/media/CVPR_2025_arch03005/narrative.mp4",
+     "name": "CVPR_2025_arch03005_alpha.mp4",
+     "note": "The rendered narrative with its spoken narration."
+    },
+    "pptx": {
+     "href": "assets/gallery/exports/CVPR_2025_arch03005.pptx",
+     "name": "CVPR_2025_arch03005_alpha.pptx",
+     "note": "10 static frames, narration in the speaker notes."
+    },
+    "svg": {
+     "href": "assets/gallery/exports/CVPR_2025_arch03005.html",
+     "name": "CVPR_2025_arch03005_alpha.html",
+     "note": "The animation as one self-contained HTML file: rasters embedded, captions you can switch off."
+    }
+   }
+  },
+  {
+   "id": "CVPR_2025_pipe00004",
+   "styleId": "alpha",
+   "style": "Alpha Masking",
+   "thumb": "assets/gallery/media/CVPR_2025_pipe00004/thumb.png",
+   "source": "assets/gallery/media/CVPR_2025_pipe00004/source.png",
+   "sourceW": 999,
+   "sourceH": 454,
+   "narrative": {
+    "mp4": "assets/gallery/media/CVPR_2025_pipe00004/narrative.mp4",
+    "poster": "assets/gallery/media/CVPR_2025_pipe00004/poster.jpg",
+    "seconds": 77.92
+   },
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "The pipeline begins in the first section with multiple camera views and their corresponding foreground object masks."
+    },
+    {
+     "t": 7.8,
+     "text": "These inputs are used to construct an initial set of three-dimensional Gaussians containing the statue."
+    },
+    {
+     "t": 14.6,
+     "text": "Depth maps are then rendered across the set of camera viewpoints."
+    },
+    {
+     "t": 18.96,
+     "text": "Entering the depth-guided mask inference stage, reference and secondary views are paired with their respective masks."
+    },
+    {
+     "t": 26.28,
+     "text": "Applying these masks isolates the visible background regions for both viewpoints."
+    },
+    {
+     "t": 31.84,
+     "text": "Using depth from the second view, background content is projected onto the reference view."
+    },
+    {
+     "t": 37.76,
+     "text": "This determines the final depth-guided inpainting mask for the reference view."
+    },
+    {
+     "t": 42.96,
+     "text": "The mask is transferred into the final inpainting-guided refinement stage."
+    },
+    {
+     "t": 48.04,
+     "text": "Inpainting is performed on the reference view to synthesize missing background color and depth."
+    },
+    {
+     "t": 54.12,
+     "text": "Depth-guided projection then lifts the inpainted reference view into a three-dimensional surface structure."
+    },
+    {
+     "t": 60.88,
+     "text": "This structure initializes the refined Gaussians while projecting background information onto the remaining viewpoints."
+    },
+    {
+     "t": 69.0,
+     "text": "Finally, render loss on the reference view and cross-view loss on other rendered views supervise the refined scene."
+    }
+   ],
+   "downloads": {
+    "mp4": {
+     "href": "assets/gallery/media/CVPR_2025_pipe00004/narrative.mp4",
+     "name": "CVPR_2025_pipe00004_alpha.mp4",
+     "note": "The rendered narrative with its spoken narration."
+    },
+    "pptx": {
+     "href": "assets/gallery/exports/CVPR_2025_pipe00004.pptx",
+     "name": "CVPR_2025_pipe00004_alpha.pptx",
+     "note": "12 static frames, narration in the speaker notes."
+    },
+    "svg": {
+     "href": "assets/gallery/exports/CVPR_2025_pipe00004.html",
+     "name": "CVPR_2025_pipe00004_alpha.html",
+     "note": "The animation as one self-contained HTML file: rasters embedded, captions you can switch off."
+    }
+   }
+  },
+  {
+   "id": "Pubmed_bio_00001",
+   "styleId": "alpha",
+   "style": "Alpha Masking",
+   "thumb": "assets/gallery/media/Pubmed_bio_00001/thumb.png",
+   "source": "assets/gallery/media/Pubmed_bio_00001/source.png",
+   "sourceW": 598,
+   "sourceH": 496,
+   "narrative": {
+    "mp4": "assets/gallery/media/Pubmed_bio_00001/narrative.mp4",
+    "poster": "assets/gallery/media/Pubmed_bio_00001/poster.jpg",
+    "seconds": 119.64
+   },
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "Under chronic hyperglycemic conditions, elevated levels of extracellular glucose accumulate outside the cell membrane."
+    },
+    {
+     "t": 8.44,
+     "text": "This excess glucose is transported across the membrane into the cytoplasm, significantly increasing intracellular glucose availability."
+    },
+    {
+     "t": 18.28,
+     "text": "Intracellular glucose enters the glycolytic pathway, where it is sequentially metabolized into glucose-6-phosphate and fructose-6-phosphate."
+    },
+    {
+     "t": 28.2,
+     "text": "Glycolysis progresses from fructose-6-phosphate to glyceraldehyde-3-phosphate, eventually yielding pyruvic acid to feed the citric acid cycle."
+    },
+    {
+     "t": 39.0,
+     "text": "Excess glyceraldehyde-3-phosphate diverts into synthesizing diacylglycerol via DHAP and phosphatidic acid, activating protein kinase C to drive endothelial dysfunction and inflammation."
+    },
+    {
+     "t": 53.32,
+     "text": "Concurrently, fructose-6-phosphate enters the hexosamine pathway via GFAT, producing UDP-GlcNAc to increase protein O-glycosylation, which induces oxidative stress and impairs angiogenesis."
+    },
+    {
+     "t": 69.12,
+     "text": "Excess intracellular glucose is also shunted into the polyol pathway, where aldose reductase converts it to sorbitol while consuming NADPH, triggering osmotic stress and cellular damage."
+    },
+    {
+     "t": 83.04,
+     "text": "Sorbitol dehydrogenase then metabolizes sorbitol into fructose, further fueling reactive oxygen species generation, advanced glycation end-product (AGE) formation, and chronic inflammation."
+    },
+    {
+     "t": 97.64,
+     "text": "These four interconnected pathological pathways collectively disrupt normal cellular defense and repair mechanisms in peripheral tissues."
+    },
+    {
+     "t": 107.52,
+     "text": "The cumulative burden of oxidative stress, inflammation, and vascular dysfunction ultimately compromises wound healing, resulting in diabetic foot ulcers."
+    }
+   ],
+   "downloads": {
+    "mp4": {
+     "href": "assets/gallery/media/Pubmed_bio_00001/narrative.mp4",
+     "name": "Pubmed_bio_00001_alpha.mp4",
+     "note": "The rendered narrative with its spoken narration."
+    },
+    "pptx": {
+     "href": "assets/gallery/exports/Pubmed_bio_00001.pptx",
+     "name": "Pubmed_bio_00001_alpha.pptx",
+     "note": "10 static frames, narration in the speaker notes."
+    },
+    "svg": null
+   }
+  },
+  {
+   "id": "SciMMIR_arch_diff_000000256",
+   "styleId": "alpha",
+   "style": "Alpha Masking",
+   "thumb": "assets/gallery/media/SciMMIR_arch_diff_000000256/thumb.png",
+   "source": "assets/gallery/media/SciMMIR_arch_diff_000000256/source.png",
+   "sourceW": 1000,
+   "sourceH": 322,
+   "narrative": {
+    "mp4": "assets/gallery/media/SciMMIR_arch_diff_000000256/narrative.mp4",
+    "poster": "assets/gallery/media/SciMMIR_arch_diff_000000256/poster.jpg",
+    "seconds": 134.96
+   },
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "The tracking framework begins by receiving historical bounding boxes along with consecutive template and search point clouds."
+    },
+    {
+     "t": 8.96,
+     "text": "In Stage One, the sequence of past bounding boxes is converted into a history motion vector representing prior trajectories."
+    },
+    {
+     "t": 18.2,
+     "text": "This history vector is processed by a box motion encoder to capture global temporal patterns and suppress noise."
+    },
+    {
+     "t": 26.48,
+     "text": "The box motion decoder then predicts the subsequent movement using learned temporal tokens."
+    },
+    {
+     "t": 39.44,
+     "text": "This yields a coarse estimate of the current motion vector for the target center."
+    },
+    {
+     "t": 44.28,
+     "text": "In Stage Two, weight-shared three-dimensional sparse convolution backbones extract geometric features from the template and search point clouds."
+    },
+    {
+     "t": 53.96,
+     "text": "Voxel features are transformed into bird's-eye-view representations and processed through top-down feature interaction to learn multi-scale spatial relations."
+    },
+    {
+     "t": 64.64,
+     "text": "A bottom-up interaction stream then aggregates and re-weights these multi-scale features using deformable attention."
+    },
+    {
+     "t": 72.64,
+     "text": "This produces refined motion-aware feature maps for both the search and template regions."
+    },
+    {
+     "t": 79.12,
+     "text": "In the iterative refinement module, the coarse motion vector initializes a motion map while motion-aware features undergo feature matching."
+    },
+    {
+     "t": 89.28,
+     "text": "A correlation volume is generated to iteratively sample geometric correspondences and refine the planar motion map."
+    },
+    {
+     "t": 105.24,
+     "text": "Concurrently, the regression head predicts the vertical position and heading angle from the search features."
+    },
+    {
+     "t": 112.04,
+     "text": "Finally, combining the refined horizontal offsets with the vertical coordinate and orientation outputs the predicted current three-dimensional bounding box."
+    }
+   ],
+   "downloads": {
+    "mp4": {
+     "href": "assets/gallery/media/SciMMIR_arch_diff_000000256/narrative.mp4",
+     "name": "SciMMIR_arch_diff_000000256_alpha.mp4",
+     "note": "The rendered narrative with its spoken narration."
+    },
+    "pptx": {
+     "href": "assets/gallery/exports/SciMMIR_arch_diff_000000256.pptx",
+     "name": "SciMMIR_arch_diff_000000256_alpha.pptx",
+     "note": "13 static frames, narration in the speaker notes."
+    },
+    "svg": {
+     "href": "assets/gallery/exports/SciMMIR_arch_diff_000000256.html",
+     "name": "SciMMIR_arch_diff_000000256_alpha.html",
+     "note": "The animation as one self-contained HTML file: rasters embedded, captions you can switch off."
+    }
+   }
+  },
+  {
+   "id": "arch_arxiv_ai_2025_000000112",
+   "styleId": "alpha",
+   "style": "Alpha Masking",
+   "thumb": "assets/gallery/media/arch_arxiv_ai_2025_000000112/thumb.png",
+   "source": "assets/gallery/media/arch_arxiv_ai_2025_000000112/source.png",
+   "sourceW": 936,
+   "sourceH": 496,
+   "narrative": {
+    "mp4": "assets/gallery/media/arch_arxiv_ai_2025_000000112/narrative.mp4",
+    "poster": "assets/gallery/media/arch_arxiv_ai_2025_000000112/poster.jpg",
+    "seconds": 126.68
+   },
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "The framework begins with the Sensing and Measuring Devices, which capture physical data from the building environment."
+    },
+    {
+     "t": 7.48,
+     "text": "These devices continuously feed real-time data into the central Smart Home hub, establishing the baseline environmental and energy states."
+    },
+    {
+     "t": 17.44,
+     "text": "The Perception module acts as the sensory interface, receiving raw multimodal information from the Smart Home."
+    },
+    {
+     "t": 25.24,
+     "text": "This information is processed and routed to the Brain module, which serves as the central computational and decision-making layer."
+    },
+    {
+     "t": 33.4,
+     "text": "Based on the Brain's decisions, the Actions module translates plans into physical device controls and user interactions."
+    },
+    {
+     "t": 41.92,
+     "text": "These actions are executed back in the Smart Home, completing the closed feedback loop."
+    },
+    {
+     "t": 47.8,
+     "text": "At the center of this loop is the BEM AI Agent, coordinating perception, reasoning, and action to optimize energy management."
+    },
+    {
+     "t": 58.12,
+     "text": "Looking closer at the sensing layer, it includes motion sensors, temperature and humidity sensors, and smart electricity meters."
+    },
+    {
+     "t": 67.56,
+     "text": "It also monitors high-load assets like electric vehicles and various smart home appliances."
+    },
+    {
+     "t": 74.32,
+     "text": "Additionally, the system tracks grid interactions and distributed energy resources, such as solar photovoltaic arrays."
+    },
+    {
+     "t": 82.56,
+     "text": "Within the perception module, raw environmental information is structured and refined through API calls to generate clean, processed data."
+    },
+    {
+     "t": 92.64,
+     "text": "The brain module stores this data across three key layers: system profiles, historical energy databases, and long- or short-term memory."
+    },
+    {
+     "t": 103.16,
+     "text": "A Large Language Model processes these inputs via an API, executing reasoning and planning before summarizing key insights back into long-term memory."
+    },
+    {
+     "t": 114.4,
+     "text": "Finally, the action module executes these plans by generating text and charts for the user, or calling APIs to issue direct device execution commands."
+    }
+   ],
+   "downloads": {
+    "mp4": {
+     "href": "assets/gallery/media/arch_arxiv_ai_2025_000000112/narrative.mp4",
+     "name": "arch_arxiv_ai_2025_000000112_alpha.mp4",
+     "note": "The rendered narrative with its spoken narration."
+    },
+    "pptx": {
+     "href": "assets/gallery/exports/arch_arxiv_ai_2025_000000112.pptx",
+     "name": "arch_arxiv_ai_2025_000000112_alpha.pptx",
+     "note": "14 static frames, narration in the speaker notes."
+    },
+    "svg": null
+   }
+  },
+  {
+   "id": "CVPR_2025_arch00389",
+   "styleId": "colorpop",
+   "style": "Colour Pop",
+   "thumb": "assets/gallery/media/CVPR_2025_arch00389/thumb.png",
+   "source": "assets/gallery/media/CVPR_2025_arch00389/source.png",
+   "sourceW": 879,
+   "sourceH": 456,
+   "narrative": {
+    "mp4": "assets/gallery/media/CVPR_2025_arch00389/narrative.mp4",
+    "poster": "assets/gallery/media/CVPR_2025_arch00389/poster.jpg",
+    "seconds": 120.8
+   },
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "The framework takes egocentric video inputs and derives local relative camera poses using visual odometry."
+    },
+    {
+     "t": 8.17,
+     "text": "Exclusively during training, future observation frames are retrieved from the video stream."
+    },
+    {
+     "t": 14.25,
+     "text": "A frozen image encoder processes these future frames."
+    },
+    {
+     "t": 18.34,
+     "text": "This extracts future frame tokens to serve as reference targets for feature hallucination supervision."
+    },
+    {
+     "t": 39.79,
+     "text": "In both training and inference, past visual observation frames are sampled from the video input."
+    },
+    {
+     "t": 46.35,
+     "text": "The frozen image encoder extracts past frame tokens from these observations."
+    },
+    {
+     "t": 52.32,
+     "text": "Simultaneously, relative poses from visual odometry supply past trajectories and target coordinates, which a multi-layer perceptron embeds into a coordinate token."
+    },
+    {
+     "t": 64.08,
+     "text": "The past frame tokens and the coordinate token combine to form the full input sequence."
+    },
+    {
+     "t": 70.77,
+     "text": "A transformer processes the combined sequence to model spatial and temporal dynamics."
+    },
+    {
+     "t": 77.22,
+     "text": "The transformer outputs contextual tokens directed to prediction heads and feature alignment."
+    },
+    {
+     "t": 98.94,
+     "text": "An auxiliary feature loss guides the transformer by aligning output tokens with the future frame representations."
+    },
+    {
+     "t": 106.55,
+     "text": "The action head decodes future action waypoints, optimized under the action loss function."
+    },
+    {
+     "t": 113.0,
+     "text": "Concurrently, the arrival head estimates sub-goal arrival status, supervised by the arrival loss."
+    }
+   ],
+   "downloads": {
+    "mp4": {
+     "href": "assets/gallery/media/CVPR_2025_arch00389/narrative.mp4",
+     "name": "CVPR_2025_arch00389_colorpop.mp4",
+     "note": "The rendered narrative with its spoken narration."
+    },
+    "pptx": {
+     "href": "assets/gallery/exports/CVPR_2025_arch00389.pptx",
+     "name": "CVPR_2025_arch00389_colorpop.pptx",
+     "note": "13 static frames, narration in the speaker notes."
+    },
+    "svg": {
+     "href": "assets/gallery/exports/CVPR_2025_arch00389.html",
+     "name": "CVPR_2025_arch00389_colorpop.html",
+     "note": "The animation as one self-contained HTML file: rasters embedded, captions you can switch off."
+    }
+   }
+  },
+  {
+   "id": "Paper2Fig_pipe_diff_000000486",
+   "styleId": "colorpop",
+   "style": "Colour Pop",
+   "thumb": "assets/gallery/media/Paper2Fig_pipe_diff_000000486/source.png",
+   "source": "assets/gallery/media/Paper2Fig_pipe_diff_000000486/source.png",
+   "sourceW": 1719,
+   "sourceH": 648,
+   "narrative": {
+    "mp4": "assets/gallery/media/Paper2Fig_pipe_diff_000000486/narrative.mp4",
+    "poster": "assets/gallery/media/Paper2Fig_pipe_diff_000000486/poster.jpg",
+    "seconds": 73.68
+   },
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "The pipeline begins with an input RGB image containing tabletop objects."
+    },
+    {
+     "t": 5.6,
+     "text": "An off-the-shelf instance segmentation module detects class labels, bounding boxes, and object masks."
+    },
+    {
+     "t": 12.4,
+     "text": "The detected bounding box isolates the specific target object in the scene."
+    },
+    {
+     "t": 17.76,
+     "text": "The cropped image patch is then fed simultaneously into two parallel estimation branches."
+    },
+    {
+     "t": 24.08,
+     "text": "The Metric Scale Object Shape branch estimates the 3D metric geometry in camera coordinates."
+    },
+    {
+     "t": 31.6,
+     "text": "This generates a metric scale mesh aligned with the camera coordinate system."
+    },
+    {
+     "t": 37.28,
+     "text": "The predicted metric mesh is then projected onto the image plane via depth rendering."
+    },
+    {
+     "t": 43.12,
+     "text": "This produces a dense rendered depth map of the target object."
+    },
+    {
+     "t": 47.8,
+     "text": "In parallel, the Normalized Object Coordinate Space branch processes the image patch."
+    },
+    {
+     "t": 53.84,
+     "text": "It predicts a canonical coordinate map defined directly in the object reference frame."
+    },
+    {
+     "t": 59.8,
+     "text": "A similarity transformation aligns the rendered depth map with the predicted normalized coordinate map."
+    },
+    {
+     "t": 67.24,
+     "text": "The final output accurately determines the six-dimensional object pose and bounding box size."
+    }
+   ],
+   "downloads": {
+    "mp4": {
+     "href": "assets/gallery/media/Paper2Fig_pipe_diff_000000486/narrative.mp4",
+     "name": "Paper2Fig_pipe_diff_000000486_colorpop.mp4",
+     "note": "The rendered narrative with its spoken narration."
+    },
+    "pptx": {
+     "href": "assets/gallery/exports/Paper2Fig_pipe_diff_000000486.pptx",
+     "name": "Paper2Fig_pipe_diff_000000486_colorpop.pptx",
+     "note": "12 static frames, narration in the speaker notes."
+    },
+    "svg": {
+     "href": "assets/gallery/exports/Paper2Fig_pipe_diff_000000486.html",
+     "name": "Paper2Fig_pipe_diff_000000486_colorpop.html",
+     "note": "The animation as one self-contained HTML file: rasters embedded, captions you can switch off."
+    }
+   }
+  },
+  {
+   "id": "Paper2Fig_pipe_easy_000000552",
+   "styleId": "colorpop",
+   "style": "Colour Pop",
+   "thumb": "assets/gallery/media/Paper2Fig_pipe_easy_000000552/source.png",
+   "source": "assets/gallery/media/Paper2Fig_pipe_easy_000000552/source.png",
+   "sourceW": 2093,
+   "sourceH": 593,
+   "narrative": {
+    "mp4": "assets/gallery/media/Paper2Fig_pipe_easy_000000552/narrative.mp4",
+    "poster": "assets/gallery/media/Paper2Fig_pipe_easy_000000552/poster.jpg",
+    "seconds": 74.36
+   },
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "The pipeline begins with the deepfake impersonation attack framework."
+    },
+    {
+     "t": 4.64,
+     "text": "The attack leverages diverse datasets encompassing facial replacement, reenactment, and synthesis."
+    },
+    {
+     "t": 11.6,
+     "text": "Deepfake video sequences are supplied from these datasets."
+    },
+    {
+     "t": 15.8,
+     "text": "An MTCNN model is applied to detect and crop face images from each video frame."
+    },
+    {
+     "t": 22.4,
+     "text": "The attacker prepares these cropped celebrity face images for transmission."
+    },
+    {
+     "t": 27.28,
+     "text": "Attacks are categorized into targeted impersonation against a specific victim and non-targeted impersonation across any celebrity class."
+    },
+    {
+     "t": 37.04,
+     "text": "The attack queries are dispatched to commercial celebrity recognition web APIs."
+    },
+    {
+     "t": 42.72,
+     "text": "Evaluation targets black-box platforms including Amazon Rekognition, Azure Cognitive Services, and Naver CFR."
+    },
+    {
+     "t": 51.56,
+     "text": "The evaluation module systematically analyzes the resulting responses."
+    },
+    {
+     "t": 57.08,
+     "text": "Success rates are measured for both targeted and non-targeted attack configurations."
+    },
+    {
+     "t": 62.64,
+     "text": "Detailed metrics further analyze API behavior, including lifelike quality, prediction confidence, face similarity, and overall successful impersonation."
+    }
+   ],
+   "downloads": {
+    "mp4": {
+     "href": "assets/gallery/media/Paper2Fig_pipe_easy_000000552/narrative.mp4",
+     "name": "Paper2Fig_pipe_easy_000000552_colorpop.mp4",
+     "note": "The rendered narrative with its spoken narration."
+    },
+    "pptx": {
+     "href": "assets/gallery/exports/Paper2Fig_pipe_easy_000000552.pptx",
+     "name": "Paper2Fig_pipe_easy_000000552_colorpop.pptx",
+     "note": "11 static frames, narration in the speaker notes."
+    },
+    "svg": {
+     "href": "assets/gallery/exports/Paper2Fig_pipe_easy_000000552.html",
+     "name": "Paper2Fig_pipe_easy_000000552_colorpop.html",
+     "note": "The animation as one self-contained HTML file: rasters embedded, captions you can switch off."
+    }
+   }
+  },
+  {
+   "id": "SciMMIR_arch_diff_000000124",
+   "styleId": "colorpop",
+   "style": "Colour Pop",
+   "thumb": "assets/gallery/media/SciMMIR_arch_diff_000000124/source.png",
+   "source": "assets/gallery/media/SciMMIR_arch_diff_000000124/source.png",
+   "sourceW": 497,
+   "sourceH": 293,
+   "narrative": {
+    "mp4": "assets/gallery/media/SciMMIR_arch_diff_000000124/narrative.mp4",
+    "poster": "assets/gallery/media/SciMMIR_arch_diff_000000124/poster.jpg",
+    "seconds": 31.68
+   },
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "Pairs of experience observations are sampled from the replay buffer."
+    },
+    {
+     "t": 3.36,
+     "text": "Each sampled instance pairs raw observation frames with corresponding context parameters across different environment shifts."
+    },
+    {
+     "t": 9.24,
+     "text": "The encoders map these contextual observations into a shared latent representation space."
+    },
+    {
+     "t": 13.96,
+     "text": "Conditioned on the policy's actions, probabilistic transition models predict the next-state distributions."
+    },
+    {
+     "t": 19.24,
+     "text": "Concurrently, reward models estimate expected scalar rewards for each latent state."
+    },
+    {
+     "t": 24.28,
+     "text": "Finally, bisimulation losses align latent representation distances with the combined reward differences and Wasserstein transition distances."
+    }
+   ],
+   "downloads": {
+    "mp4": {
+     "href": "assets/gallery/media/SciMMIR_arch_diff_000000124/narrative.mp4",
+     "name": "SciMMIR_arch_diff_000000124_colorpop.mp4",
+     "note": "The rendered narrative with its spoken narration."
+    },
+    "pptx": {
+     "href": "assets/gallery/exports/SciMMIR_arch_diff_000000124.pptx",
+     "name": "SciMMIR_arch_diff_000000124_colorpop.pptx",
+     "note": "6 static frames, narration in the speaker notes."
+    },
+    "svg": {
+     "href": "assets/gallery/exports/SciMMIR_arch_diff_000000124.html",
+     "name": "SciMMIR_arch_diff_000000124_colorpop.html",
+     "note": "The animation as one self-contained HTML file: rasters embedded, captions you can switch off."
+    }
+   }
+  },
+  {
+   "id": "WACV_2022_set5_000015",
+   "styleId": "colorpop",
+   "style": "Colour Pop",
+   "thumb": "assets/gallery/media/WACV_2022_set5_000015/source.png",
+   "source": "assets/gallery/media/WACV_2022_set5_000015/source.png",
+   "sourceW": 995,
+   "sourceH": 251,
+   "narrative": {
+    "mp4": "assets/gallery/media/WACV_2022_set5_000015/narrative.mp4",
+    "poster": "assets/gallery/media/WACV_2022_set5_000015/poster.jpg",
+    "seconds": 42.44
+   },
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "The pipeline begins with the synthetic dataset preparation stage."
+    },
+    {
+     "t": 3.44,
+     "text": "Fractal system parameters are sampled to construct diverse mathematical configurations."
+    },
+    {
+     "t": 7.88,
+     "text": "These sampled parameters are grouped together to define distinct synthetic classes for training."
+    },
+    {
+     "t": 12.52,
+     "text": "During pre-training, an image generator renders fractal images on the fly from these parameter codes."
+    },
+    {
+     "t": 17.96,
+     "text": "Generated batches of fractal patterns are fed directly into the vision model."
+    },
+    {
+     "t": 21.56,
+     "text": "The neural network backbone processes the batch to produce category predictions."
+    },
+    {
+     "t": 25.6,
+     "text": "A loss function evaluates the predictions against the synthetic target labels."
+    },
+    {
+     "t": 29.6,
+     "text": "Gradients are backpropagated to update the backbone weights throughout pre-training."
+    },
+    {
+     "t": 33.6,
+     "text": "For downstream evaluation, real-world image recognition datasets are introduced."
+    },
+    {
+     "t": 37.8,
+     "text": "The pre-trained model is fine-tuned to achieve competitive performance across these real-world tasks."
+    }
+   ],
+   "downloads": {
+    "mp4": {
+     "href": "assets/gallery/media/WACV_2022_set5_000015/narrative.mp4",
+     "name": "WACV_2022_set5_000015_colorpop.mp4",
+     "note": "The rendered narrative with its spoken narration."
+    },
+    "pptx": {
+     "href": "assets/gallery/exports/WACV_2022_set5_000015.pptx",
+     "name": "WACV_2022_set5_000015_colorpop.pptx",
+     "note": "10 static frames, narration in the speaker notes."
+    },
+    "svg": {
+     "href": "assets/gallery/exports/WACV_2022_set5_000015.html",
+     "name": "WACV_2022_set5_000015_colorpop.html",
+     "note": "The animation as one self-contained HTML file: rasters embedded, captions you can switch off."
+    }
+   }
+  },
+  {
+   "id": "CVPR_2025_arch01761",
+   "styleId": "hopping",
+   "style": "Hopping Bbox",
+   "thumb": "assets/gallery/media/CVPR_2025_arch01761/source.png",
+   "source": "assets/gallery/media/CVPR_2025_arch01761/source.png",
+   "sourceW": 992,
+   "sourceH": 422,
+   "narrative": {
+    "mp4": "assets/gallery/media/CVPR_2025_arch01761/narrative.mp4",
+    "poster": "assets/gallery/media/CVPR_2025_arch01761/poster.jpg",
+    "seconds": 159.92
+   },
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "The pipeline begins with an input image."
+    },
+    {
+     "t": 3.16,
+     "text": "The image is first partitioned into a sequence of regular visual patches."
+    },
+    {
+     "t": 8.72,
+     "text": "These patches are passed into the hybrid encoder network."
+    },
+    {
+     "t": 12.76,
+     "text": "A convolutional encoder extracts low-level local features."
+    },
+    {
+     "t": 17.76,
+     "text": "A dedicated class token is prepended alongside spatial position encodings."
+    },
+    {
+     "t": 23.44,
+     "text": "This forms the initial full-length sequence of continuous tokens."
+    },
+    {
+     "t": 28.48,
+     "text": "Self-attention layers with token merging progressively compress similar tokens."
+    },
+    {
+     "t": 34.12,
+     "text": "The global alignment module enriches the learned representations."
+    },
+    {
+     "t": 38.76,
+     "text": "The class token is extracted from the encoder output."
+    },
+    {
+     "t": 42.76,
+     "text": "It is projected through a multi-layer perceptron head."
+    },
+    {
+     "t": 46.56,
+     "text": "And aligned with target representations from a teacher model or ground truth labels."
+    },
+    {
+     "t": 52.04,
+     "text": "In parallel, the compressed visual tokens enter the token quantization module."
+    },
+    {
+     "t": 58.32,
+     "text": "Positional indices of the merged tokens are retained."
+    },
+    {
+     "t": 62.24,
+     "text": "The continuous embedding representations are extracted."
+    },
+    {
+     "t": 66.24,
+     "text": "Vector quantization discretizes each token into discrete codes."
+    },
+    {
+     "t": 71.2,
+     "text": "This yields a compact set of quantized semantic tokens."
+    },
+    {
+     "t": 75.92,
+     "text": "During the generative stage, these discrete tokens drive image generation."
+    },
+    {
+     "t": 81.56,
+     "text": "An autoregressive generation process starts with a start token."
+    },
+    {
+     "t": 86.24,
+     "text": "The causal decoder synthesizes tokens sequentially with key-value cache compression."
+    },
+    {
+     "t": 92.48,
+     "text": "Predicting the compact sequence of quantized tokens."
+    },
+    {
+     "t": 96.68,
+     "text": "Next, the source recovery module reconstructs full spatial context."
+    },
+    {
+     "t": 102.36,
+     "text": "The quantized tokens are supplied to the recovery cross-attention mechanism."
+    },
+    {
+     "t": 107.4,
+     "text": "A set of learnable recovery queries corresponds to all original spatial positions."
+    },
+    {
+     "t": 113.6,
+     "text": "Cross-attention models the relationships between original positions and merged tokens."
+    },
+    {
+     "t": 119.92,
+     "text": "This predicts the source matrix to establish token assignments."
+    },
+    {
+     "t": 124.44,
+     "text": "The token unmerge operation uses these assignments to uncompress the tokens."
+    },
+    {
+     "t": 130.24,
+     "text": "Restoring the full sequence length while preserving spatial fidelity."
+    },
+    {
+     "t": 135.48,
+     "text": "The restored sequence is then processed by the decoder."
+    },
+    {
+     "t": 139.6,
+     "text": "Attention layers perform token dequantization and feature refinement."
+    },
+    {
+     "t": 144.6,
+     "text": "Producing dense continuous feature representations."
+    },
+    {
+     "t": 148.64,
+     "text": "A convolutional decoder maps features back to image space."
+    },
+    {
+     "t": 153.76,
+     "text": "Finally, all patches are reconstructed, generating the final high-resolution image."
+    }
+   ],
+   "downloads": {
+    "mp4": {
+     "href": "assets/gallery/media/CVPR_2025_arch01761/narrative.mp4",
+     "name": "CVPR_2025_arch01761_hopping.mp4",
+     "note": "The rendered narrative with its spoken narration."
+    },
+    "pptx": {
+     "href": "assets/gallery/exports/CVPR_2025_arch01761.pptx",
+     "name": "CVPR_2025_arch01761_hopping.pptx",
+     "note": "32 static frames, narration in the speaker notes."
+    },
+    "svg": {
+     "href": "assets/gallery/exports/CVPR_2025_arch01761.html",
+     "name": "CVPR_2025_arch01761_hopping.html",
+     "note": "The animation as one self-contained HTML file: rasters embedded, captions you can switch off."
+    }
+   }
+  },
+  {
+   "id": "CVPR_2025_arch02361",
+   "styleId": "hopping",
+   "style": "Hopping Bbox",
+   "thumb": "assets/gallery/media/CVPR_2025_arch02361/thumb.png",
+   "source": "assets/gallery/media/CVPR_2025_arch02361/source.png",
+   "sourceW": 809,
+   "sourceH": 428,
+   "narrative": {
+    "mp4": "assets/gallery/media/CVPR_2025_arch02361/narrative.mp4",
+    "poster": "assets/gallery/media/CVPR_2025_arch02361/poster.jpg",
+    "seconds": 213.44
+   },
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "The ResCLIP pipeline integrates two core modules to achieve training-free dense vision-language inference."
+    },
+    {
+     "t": 8.04,
+     "text": "It builds upon the foundational vision-language architecture of CLIP."
+    },
+    {
+     "t": 13.08,
+     "text": "An input image is partitioned into patches and fed to the visual pipeline."
+    },
+    {
+     "t": 18.36,
+     "text": "Concurrently, text queries corresponding to target semantic categories are supplied."
+    },
+    {
+     "t": 24.44,
+     "text": "The CLIP Visual Encoder extracts visual feature representations across multi-head self-attention layers."
+    },
+    {
+     "t": 32.0,
+     "text": "The CLIP Text Encoder computes text embeddings to align with visual tokens."
+    },
+    {
+     "t": 37.8,
+     "text": "The Residual Cross-correlation Self-attention module extracts attention across intermediate encoder layers."
+    },
+    {
+     "t": 45.76,
+     "text": "In parallel, the Semantic Feedback Refinement module refines attention based on category regions."
+    },
+    {
+     "t": 52.6,
+     "text": "Both attention components are fused to remodel the attention in the final layer."
+    },
+    {
+     "t": 58.16,
+     "text": "Cosine similarity measures the alignment between dense visual tokens and text representations."
+    },
+    {
+     "t": 65.08,
+     "text": "An initial segmentation mask is derived and fed back to guide the semantic refinement module."
+    },
+    {
+     "t": 71.52,
+     "text": "After iterative refinement, the system generates the final dense semantic segmentation predictions."
+    },
+    {
+     "t": 78.24,
+     "text": "Looking into the Residual Cross-correlation Self-attention module in detail,"
+    },
+    {
+     "t": 83.84,
+     "text": "visual tokens pass through successive transformer layers."
+    },
+    {
+     "t": 88.04,
+     "text": "Cross-correlation self-attention is computed at early intermediate layers,"
+    },
+    {
+     "t": 93.72,
+     "text": "as well as mid-level layers,"
+    },
+    {
+     "t": 96.36,
+     "text": "and deeper non-final layers, capturing rich spatial and cross-feature correspondence."
+    },
+    {
+     "t": 103.16,
+     "text": "The final block utilizes self-correlation self-attention to preserve spatial covariance."
+    },
+    {
+     "t": 116.4,
+     "text": "The cross-correlation attention maps from these non-last layers are averaged,"
+    },
+    {
+     "t": 122.08,
+     "text": "forming a clear, localized spatial activation map."
+    },
+    {
+     "t": 126.56,
+     "text": "This aggregated attention matrix is output as the RCS attention representation."
+    },
+    {
+     "t": 132.84,
+     "text": "Next, the Semantic Feedback Refinement module optimizes the attention using category masks."
+    },
+    {
+     "t": 139.84,
+     "text": "It takes the initial continuous segmentation map,"
+    },
+    {
+     "t": 143.72,
+     "text": "and converts it into patch-level category assignments."
+    },
+    {
+     "t": 147.8,
+     "text": "An indicator function constructs a binary semantic co-occurrence matrix."
+    },
+    {
+     "t": 153.12,
+     "text": "For any given patch, matching categories across the image are highlighted."
+    },
+    {
+     "t": 158.56,
+     "text": "A spatial distance-based decay function is applied to prioritize connected local regions,"
+    },
+    {
+     "t": 165.08,
+     "text": "reducing the influence of disjoint regions of the same class."
+    },
+    {
+     "t": 169.96,
+     "text": "A Gaussian smoothing kernel is then applied across the rows,"
+    },
+    {
+     "t": 174.12,
+     "text": "yielding a smoothly distributed attention map for each patch."
+    },
+    {
+     "t": 178.72,
+     "text": "This yields the final refined SFR attention scores."
+    },
+    {
+     "t": 183.4,
+     "text": "Finally, the fusion stage combines the attention components."
+    },
+    {
+     "t": 188.08,
+     "text": "The RCS attention weights provide cross-feature spatial context."
+    },
+    {
+     "t": 193.56,
+     "text": "The SFR attention scores reinforce local semantic consistency."
+    },
+    {
+     "t": 198.96,
+     "text": "The noisy, diffuse attention of standard CLIP,"
+    },
+    {
+     "t": 202.92,
+     "text": "is transformed through weighted attention fusion,"
+    },
+    {
+     "t": 206.64,
+     "text": "producing a sharp, object-centric attention map for accurate training-free dense inference."
+    }
+   ],
+   "downloads": {
+    "mp4": {
+     "href": "assets/gallery/media/CVPR_2025_arch02361/narrative.mp4",
+     "name": "CVPR_2025_arch02361_hopping.mp4",
+     "note": "The rendered narrative with its spoken narration."
+    },
+    "pptx": {
+     "href": "assets/gallery/exports/CVPR_2025_arch02361.pptx",
+     "name": "CVPR_2025_arch02361_hopping.pptx",
+     "note": "37 static frames, narration in the speaker notes."
+    },
+    "svg": {
+     "href": "assets/gallery/exports/CVPR_2025_arch02361.html",
+     "name": "CVPR_2025_arch02361_hopping.html",
+     "note": "The animation as one self-contained HTML file: rasters embedded, captions you can switch off."
+    }
+   }
+  },
+  {
+   "id": "CVPR_2025_pipe00011",
+   "styleId": "hopping",
+   "style": "Hopping Bbox",
+   "thumb": "assets/gallery/media/CVPR_2025_pipe00011/source.png",
+   "source": "assets/gallery/media/CVPR_2025_pipe00011/source.png",
+   "sourceW": 990,
+   "sourceH": 464,
+   "narrative": {
+    "mp4": "assets/gallery/media/CVPR_2025_pipe00011/narrative.mp4",
+    "poster": "assets/gallery/media/CVPR_2025_pipe00011/poster.jpg",
+    "seconds": 164.36
+   },
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "The initializing process begins with a pre-trained 3D Gaussian Splatting model with frozen parameters."
+    },
+    {
+     "t": 7.28,
+     "text": "The model is passed into the Frequency Guided Densification module."
+    },
+    {
+     "t": 11.88,
+     "text": "Frequency Guided Densification is structured into two main phases shown below."
+    },
+    {
+     "t": 17.52,
+     "text": "In Phase 1, the contribution of each 3D Gaussian to rendering quality is evaluated."
+    },
+    {
+     "t": 24.2,
+     "text": "Low-contribution 3D Gaussians are removed."
+    },
+    {
+     "t": 27.88,
+     "text": "In Phase 2, views are rendered from multiple perspectives."
+    },
+    {
+     "t": 31.96,
+     "text": "Each rendered image is split into a grid of patches."
+    },
+    {
+     "t": 36.0,
+     "text": "A Discrete Fourier Transform is applied to the patches."
+    },
+    {
+     "t": 39.88,
+     "text": "This converts the image patches into transformed frequency representations."
+    },
+    {
+     "t": 45.0,
+     "text": "Transformed patches enter the high frequency detection stage."
+    },
+    {
+     "t": 49.56,
+     "text": "Each transformed patch is combined via Hadamard product with a quadratic mask."
+    },
+    {
+     "t": 55.32,
+     "text": "The quadratic mask highlights high frequency regions."
+    },
+    {
+     "t": 59.32,
+     "text": "Patches exhibiting high frequency components are selected."
+    },
+    {
+     "t": 63.44,
+     "text": "The 3D Gaussians within these high frequency areas are split into denser elements."
+    },
+    {
+     "t": 69.28,
+     "text": "This yields the updated 3D Gaussian Splatting representation after densification."
+    },
+    {
+     "t": 75.28,
+     "text": "A gradient mask is constructed across the Gaussian parameter set."
+    },
+    {
+     "t": 80.56,
+     "text": "In the fine-tuning process, parameters are unfrozen for model optimization."
+    },
+    {
+     "t": 86.24,
+     "text": "Rendering is performed using the fine-tuned 3D Gaussians."
+    },
+    {
+     "t": 90.92,
+     "text": "A Discrete Wavelet Transform decomposes the rendered image into frequency sub-bands."
+    },
+    {
+     "t": 96.76,
+     "text": "The low frequency component is routed forward."
+    },
+    {
+     "t": 100.4,
+     "text": "A pre-trained decoder with frozen parameters processes the low frequency signal."
+    },
+    {
+     "t": 105.96,
+     "text": "The decoder outputs the recovered decoded message."
+    },
+    {
+     "t": 110.04,
+     "text": "Meanwhile, the high frequency components from the rendered image are extracted."
+    },
+    {
+     "t": 115.36,
+     "text": "The ground truth image is introduced for supervision."
+    },
+    {
+     "t": 119.2,
+     "text": "A Discrete Wavelet Transform is applied to the ground truth image."
+    },
+    {
+     "t": 123.92,
+     "text": "This isolates the high frequency components of the ground truth."
+    },
+    {
+     "t": 128.24,
+     "text": "Reconstruction and perceptual loss functions compare rendered views with ground truth."
+    },
+    {
+     "t": 134.52,
+     "text": "A wavelet loss is computed between rendered and ground truth high frequencies."
+    },
+    {
+     "t": 140.24,
+     "text": "A fixed message serves as target supervision."
+    },
+    {
+     "t": 144.08,
+     "text": "Message loss compares the decoded message with the fixed message."
+    },
+    {
+     "t": 148.84,
+     "text": "All objectives combine into a single total loss function."
+    },
+    {
+     "t": 152.84,
+     "text": "The total loss guides the optimizer."
+    },
+    {
+     "t": 156.0,
+     "text": "Finally, the optimizer applies the gradient mask via Hadamard product to update the fine-tuned 3D Gaussians."
+    }
+   ],
+   "downloads": {
+    "mp4": {
+     "href": "assets/gallery/media/CVPR_2025_pipe00011/narrative.mp4",
+     "name": "CVPR_2025_pipe00011_hopping.mp4",
+     "note": "The rendered narrative with its spoken narration."
+    },
+    "pptx": {
+     "href": "assets/gallery/exports/CVPR_2025_pipe00011.pptx",
+     "name": "CVPR_2025_pipe00011_hopping.pptx",
+     "note": "33 static frames, narration in the speaker notes."
+    },
+    "svg": {
+     "href": "assets/gallery/exports/CVPR_2025_pipe00011.html",
+     "name": "CVPR_2025_pipe00011_hopping.html",
+     "note": "The animation as one self-contained HTML file: rasters embedded, captions you can switch off."
+    }
+   }
+  },
+  {
+   "id": "ICCV_2023_set5_000059",
+   "styleId": "hopping",
+   "style": "Hopping Bbox",
+   "thumb": "assets/gallery/media/ICCV_2023_set5_000059/thumb.png",
+   "source": "assets/gallery/media/ICCV_2023_set5_000059/source.png",
+   "sourceW": 975,
+   "sourceH": 496,
+   "narrative": {
+    "mp4": "assets/gallery/media/ICCV_2023_set5_000059/narrative.mp4",
+    "poster": "assets/gallery/media/ICCV_2023_set5_000059/poster.jpg",
+    "seconds": 159.32
+   },
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "The pipeline begins with the multi-resolution feature grid module."
+    },
+    {
+     "t": 5.08,
+     "text": "A 3D indoor scene is modeled compositionally from multi-view inputs."
+    },
+    {
+     "t": 10.4,
+     "text": "A camera casts viewing rays into the 3D space."
+    },
+    {
+     "t": 14.4,
+     "text": "Along each ray, multiple 3D spatial points are sampled."
+    },
+    {
+     "t": 19.2,
+     "text": "For each queried point coordinate,"
+    },
+    {
+     "t": 22.12,
+     "text": "features are queried across multiple grid resolutions, from coarse levels,"
+    },
+    {
+     "t": 27.36,
+     "text": "down to finer levels using spatial hash tables."
+    },
+    {
+     "t": 31.88,
+     "text": "These interpolated features are concatenated and fed into a lightweight neural network."
+    },
+    {
+     "t": 38.16,
+     "text": "The network outputs a vector containing signed distance function values for each individual object."
+    },
+    {
+     "t": 44.96,
+     "text": "These encompass specific instance geometries, such as pillows,"
+    },
+    {
+     "t": 50.04,
+     "text": "lamps,"
+    },
+    {
+     "t": 51.36,
+     "text": "and other segmented items in the scene."
+    },
+    {
+     "t": 54.36,
+     "text": "A minimum operation is applied across all object distance predictions,"
+    },
+    {
+     "t": 59.48,
+     "text": "extracting the global scene signed distance value,"
+    },
+    {
+     "t": 63.32,
+     "text": "denoted as the overall scene SDF."
+    },
+    {
+     "t": 66.96,
+     "text": "Next, the occlusion-aware object opacity module calculates individual object opacities."
+    },
+    {
+     "t": 73.68,
+     "text": "Object SDFs are first converted into individual object density distributions."
+    },
+    {
+     "t": 79.56,
+     "text": "Concurrently, the global scene transmittance is computed along the ray,"
+    },
+    {
+     "t": 84.8,
+     "text": "and multiplied by each object's density."
+    },
+    {
+     "t": 88.24,
+     "text": "This produces occlusion-aware object opacities that account for frontal blocking."
+    },
+    {
+     "t": 93.96,
+     "text": "The composite weight function governs the overall volume rendering contribution."
+    },
+    {
+     "t": 99.28,
+     "text": "An object opacity loss is evaluated,"
+    },
+    {
+     "t": 102.52,
+     "text": "supervising the rendered object opacities directly against 2D instance segmentation masks."
+    },
+    {
+     "t": 109.6,
+     "text": "Finally, several regularization and multi-modal rendering losses are optimized."
+    },
+    {
+     "t": 115.44,
+     "text": "An Eikonal loss enforces valid distance field gradients across the scene."
+    },
+    {
+     "t": 121.16,
+     "text": "An object distinction regularization loss prevents internal collision and overlap between separate instances."
+    },
+    {
+     "t": 128.76,
+     "text": "Volume rendering synthesizes geometric cues and appearance."
+    },
+    {
+     "t": 133.32,
+     "text": "A scale-invariant depth loss,"
+    },
+    {
+     "t": 136.08,
+     "text": "supervises rendered depth maps."
+    },
+    {
+     "t": 139.08,
+     "text": "A surface normal loss,"
+    },
+    {
+     "t": 141.48,
+     "text": "aligns predicted surface normals with pseudo-ground-truth,"
+    },
+    {
+     "t": 145.68,
+     "text": "derived from a pre-trained monocular estimation network."
+    },
+    {
+     "t": 150.0,
+     "text": "Lastly, an RGB reconstruction loss,"
+    },
+    {
+     "t": 153.96,
+     "text": "ensures photorealistic rendering against ground truth captured images."
+    }
+   ],
+   "downloads": {
+    "mp4": {
+     "href": "assets/gallery/media/ICCV_2023_set5_000059/narrative.mp4",
+     "name": "ICCV_2023_set5_000059_hopping.mp4",
+     "note": "The rendered narrative with its spoken narration."
+    },
+    "pptx": {
+     "href": "assets/gallery/exports/ICCV_2023_set5_000059.pptx",
+     "name": "ICCV_2023_set5_000059_hopping.pptx",
+     "note": "34 static frames, narration in the speaker notes."
+    },
+    "svg": {
+     "href": "assets/gallery/exports/ICCV_2023_set5_000059.html",
+     "name": "ICCV_2023_set5_000059_hopping.html",
+     "note": "The animation as one self-contained HTML file: rasters embedded, captions you can switch off."
+    }
+   }
+  },
+  {
+   "id": "Paper2Fig_pipe_diff_000000490",
+   "styleId": "hopping",
+   "style": "Hopping Bbox",
+   "thumb": "assets/gallery/media/Paper2Fig_pipe_diff_000000490/source.png",
+   "source": "assets/gallery/media/Paper2Fig_pipe_diff_000000490/source.png",
+   "sourceW": 1719,
+   "sourceH": 518,
+   "narrative": {
+    "mp4": "assets/gallery/media/Paper2Fig_pipe_diff_000000490/narrative.mp4",
+    "poster": "assets/gallery/media/Paper2Fig_pipe_diff_000000490/poster.jpg",
+    "seconds": 106.16
+   },
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "The pipeline begins with the data filtering and cleaning stage."
+    },
+    {
+     "t": 4.12,
+     "text": "First, tweets tagged within the Los Angeles geographic area are collected."
+    },
+    {
+     "t": 9.68,
+     "text": "The collected tweets are then filtered specifically for COVID-19 keywords."
+    },
+    {
+     "t": 15.28,
+     "text": "Next, text pre-processing prepares the tweet corpus for downstream extraction."
+    },
+    {
+     "t": 21.04,
+     "text": "The cleaned text passes into the entity and relation extraction stage."
+    },
+    {
+     "t": 26.32,
+     "text": "Sentiment analysis computes sentiment scores for tweets and specific keywords."
+    },
+    {
+     "t": 32.08,
+     "text": "Topic modeling via matrix and tensor factorizations extracts latent topics and tracks their temporal evolution."
+    },
+    {
+     "t": 40.4,
+     "text": "Time series analysis identifies tweet volume peaks and significant sentiment change points linked to real-world events."
+    },
+    {
+     "t": 48.96,
+     "text": "Word embeddings evaluate semantic similarity to generate weighted edges between tweets and topic keywords."
+    },
+    {
+     "t": 56.56,
+     "text": "These extracted entities and relations are integrated during graph construction."
+    },
+    {
+     "t": 62.16,
+     "text": "Definite entities and relations are formalized across tweets, topics, and dates."
+    },
+    {
+     "t": 68.8,
+     "text": "Graph queries and visual inspection allow validation of the interconnected structure."
+    },
+    {
+     "t": 74.96,
+     "text": "Graph embedding techniques then project the network structure into dense vector spaces."
+    },
+    {
+     "t": 81.0,
+     "text": "Finally, the constructed network undergoes in-depth graph analysis."
+    },
+    {
+     "t": 86.16,
+     "text": "Community detection identifies tightly coupled clusters of topics and discussions."
+    },
+    {
+     "t": 91.92,
+     "text": "Node similarity metrics assess topological and semantic closeness between entities."
+    },
+    {
+     "t": 98.04,
+     "text": "Lastly, link prediction infers unobserved associations between events, dates, and topics."
+    }
+   ],
+   "downloads": {
+    "mp4": {
+     "href": "assets/gallery/media/Paper2Fig_pipe_diff_000000490/narrative.mp4",
+     "name": "Paper2Fig_pipe_diff_000000490_hopping.mp4",
+     "note": "The rendered narrative with its spoken narration."
+    },
+    "pptx": {
+     "href": "assets/gallery/exports/Paper2Fig_pipe_diff_000000490.pptx",
+     "name": "Paper2Fig_pipe_diff_000000490_hopping.pptx",
+     "note": "17 static frames, narration in the speaker notes."
+    },
+    "svg": {
+     "href": "assets/gallery/exports/Paper2Fig_pipe_diff_000000490.html",
+     "name": "Paper2Fig_pipe_diff_000000490_hopping.html",
+     "note": "The animation as one self-contained HTML file: rasters embedded, captions you can switch off."
+    }
+   }
+  },
+  {
+   "id": "Paper2Fig_pipe_easy_000000503",
+   "styleId": "hopping",
+   "style": "Hopping Bbox",
+   "thumb": "assets/gallery/media/Paper2Fig_pipe_easy_000000503/thumb.png",
+   "source": "assets/gallery/media/Paper2Fig_pipe_easy_000000503/source.png",
+   "sourceW": 885,
+   "sourceH": 490,
+   "narrative": {
+    "mp4": "assets/gallery/media/Paper2Fig_pipe_easy_000000503/narrative.mp4",
+    "poster": "assets/gallery/media/Paper2Fig_pipe_easy_000000503/poster.jpg",
+    "seconds": 51.08
+   },
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "The pipeline begins with the training dataset, containing samples with fully observed, non-missing attributes."
+    },
+    {
+     "t": 7.64,
+     "text": "These samples are used to train the treatment effect estimation model, fitting the outcome predictors."
+    },
+    {
+     "t": 14.28,
+     "text": "The performance of the estimator is periodically evaluated on a hold-out test set."
+    },
+    {
+     "t": 20.04,
+     "text": "Meanwhile, unlabeled candidate samples with missing confounding attributes are maintained in the data pool."
+    },
+    {
+     "t": 27.2,
+     "text": "A confounder acquisition strategy evaluates the pool, selecting instances based on covariate balancing or outcome estimation error."
+    },
+    {
+     "t": 36.4,
+     "text": "The chosen batch forms the query set of prioritized samples."
+    },
+    {
+     "t": 41.16,
+     "text": "The feature value collector retrieves the missing confounding values, adding the newly completed samples back into the training set for the next iteration."
+    }
+   ],
+   "downloads": {
+    "mp4": {
+     "href": "assets/gallery/media/Paper2Fig_pipe_easy_000000503/narrative.mp4",
+     "name": "Paper2Fig_pipe_easy_000000503_hopping.mp4",
+     "note": "The rendered narrative with its spoken narration."
+    },
+    "pptx": {
+     "href": "assets/gallery/exports/Paper2Fig_pipe_easy_000000503.pptx",
+     "name": "Paper2Fig_pipe_easy_000000503_hopping.pptx",
+     "note": "7 static frames, narration in the speaker notes."
+    },
+    "svg": {
+     "href": "assets/gallery/exports/Paper2Fig_pipe_easy_000000503.html",
+     "name": "Paper2Fig_pipe_easy_000000503_hopping.html",
+     "note": "The animation as one self-contained HTML file: rasters embedded, captions you can switch off."
+    }
+   }
+  },
+  {
+   "id": "WACV_2022_set5_000006",
+   "styleId": "hopping",
+   "style": "Hopping Bbox",
+   "thumb": "assets/gallery/media/WACV_2022_set5_000006/source.png",
+   "source": "assets/gallery/media/WACV_2022_set5_000006/source.png",
+   "sourceW": 989,
+   "sourceH": 500,
+   "narrative": {
+    "mp4": "assets/gallery/media/WACV_2022_set5_000006/narrative.mp4",
+    "poster": "assets/gallery/media/WACV_2022_set5_000006/poster.jpg",
+    "seconds": 127.84
+   },
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "We begin with the support branch, containing class labels, an input image, and a ground truth mask."
+    },
+    {
+     "t": 7.2,
+     "text": "The class labels and support image feed into Pseudo Label Generation."
+    },
+    {
+     "t": 12.48,
+     "text": "In parallel, the support image is processed through DeepLabv3+."
+    },
+    {
+     "t": 17.84,
+     "text": "This produces a pseudo label mask covering horse, person, background, and uncertain regions."
+    },
+    {
+     "t": 25.72,
+     "text": "Meanwhile, DeepLabv3+ outputs a support feature map."
+    },
+    {
+     "t": 30.68,
+     "text": "The fully supervised support mask pathway is crossed out and bypassed."
+    },
+    {
+     "t": 36.12,
+     "text": "The pseudo mask is combined with the support feature map via pixel-wise multiplication."
+    },
+    {
+     "t": 42.12,
+     "text": "This generates a set of categorized support pixels."
+    },
+    {
+     "t": 46.16,
+     "text": "The support pixels are passed into an encoder module, labeled E."
+    },
+    {
+     "t": 51.04,
+     "text": "Following a similar setup, the query branch receives query class labels, an input image, and a ground truth mask."
+    },
+    {
+     "t": 59.56,
+     "text": "The query inputs enter the Pseudo Label Generation module."
+    },
+    {
+     "t": 64.32,
+     "text": "The query image is simultaneously processed by DeepLabv3+."
+    },
+    {
+     "t": 69.88,
+     "text": "This creates the query pseudo label mask."
+    },
+    {
+     "t": 73.24,
+     "text": "Along with a dense query feature representation."
+    },
+    {
+     "t": 76.84,
+     "text": "As before, fully supervised ground truth masks are crossed out."
+    },
+    {
+     "t": 82.16,
+     "text": "The query feature map is multiplied by the query pseudo mask during training."
+    },
+    {
+     "t": 87.44,
+     "text": "During inference, query pixels flow directly from the feature map."
+    },
+    {
+     "t": 92.52,
+     "text": "During training, the masked query pixels are generated instead."
+    },
+    {
+     "t": 97.4,
+     "text": "These query pixels pass through the shared encoder E."
+    },
+    {
+     "t": 101.56,
+     "text": "In the upper pixel feature latent space, support pixel features form support prototypes."
+    },
+    {
+     "t": 108.44,
+     "text": "Query pixel features are embedded into the corresponding latent space relative to the prototypes."
+    },
+    {
+     "t": 115.04,
+     "text": "For inference, k-nearest neighbors classification is applied to produce the predicted query mask."
+    },
+    {
+     "t": 121.88,
+     "text": "For training, the latent embeddings are optimized using the meta loss function."
+    }
+   ],
+   "downloads": {
+    "mp4": {
+     "href": "assets/gallery/media/WACV_2022_set5_000006/narrative.mp4",
+     "name": "WACV_2022_set5_000006_hopping.mp4",
+     "note": "The rendered narrative with its spoken narration."
+    },
+    "pptx": {
+     "href": "assets/gallery/exports/WACV_2022_set5_000006.pptx",
+     "name": "WACV_2022_set5_000006_hopping.pptx",
+     "note": "23 static frames, narration in the speaker notes."
+    },
+    "svg": {
+     "href": "assets/gallery/exports/WACV_2022_set5_000006.html",
+     "name": "WACV_2022_set5_000006_hopping.html",
+     "note": "The animation as one self-contained HTML file: rasters embedded, captions you can switch off."
+    }
+   }
+  },
+  {
+   "id": "WACV_2022_set5_000009",
+   "styleId": "hopping",
+   "style": "Hopping Bbox",
+   "thumb": "assets/gallery/media/WACV_2022_set5_000009/source.png",
+   "source": "assets/gallery/media/WACV_2022_set5_000009/source.png",
+   "sourceW": 986,
+   "sourceH": 359,
+   "narrative": {
+    "mp4": "assets/gallery/media/WACV_2022_set5_000009/narrative.mp4",
+    "poster": "assets/gallery/media/WACV_2022_set5_000009/poster.jpg",
+    "seconds": 74.44
+   },
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "The input video sequence is fed into the system."
+    },
+    {
+     "t": 3.081,
+     "text": "It passes into the Video Network."
+    },
+    {
+     "t": 5.2,
+     "text": "Simultaneously, the audio waveform is captured."
+    },
+    {
+     "t": 9.08,
+     "text": "The waveform converts into spectrogram A."
+    },
+    {
+     "t": 12.84,
+     "text": "Spectrogram A enters the Audio Network."
+    },
+    {
+     "t": 16.2,
+     "text": "The Video Network yields visual feature embeddings."
+    },
+    {
+     "t": 20.16,
+     "text": "The Audio Network yields audio feature embeddings."
+    },
+    {
+     "t": 24.4,
+     "text": "In training, visual features route to the Vision modality head."
+    },
+    {
+     "t": 29.16,
+     "text": "A fully connected layer generates the vision output."
+    },
+    {
+     "t": 32.8,
+     "text": "Both feature streams merge into the Audio-Visual modality head."
+    },
+    {
+     "t": 37.4,
+     "text": "Producing the audio-visual output."
+    },
+    {
+     "t": 40.24,
+     "text": "Audio features also enter the Audio modality head."
+    },
+    {
+     "t": 44.44,
+     "text": "Yielding the audio output."
+    },
+    {
+     "t": 46.76,
+     "text": "During inference, visual feature maps are extracted."
+    },
+    {
+     "t": 50.72,
+     "text": "Along with the corresponding audio embeddings."
+    },
+    {
+     "t": 54.28,
+     "text": "Both streams combine via a dot product operation."
+    },
+    {
+     "t": 58.44,
+     "text": "This generates a localization heatmap for frame one."
+    },
+    {
+     "t": 62.6,
+     "text": "As well as for frame t."
+    },
+    {
+     "t": 65.08,
+     "text": "Through to frame N."
+    },
+    {
+     "t": 67.2,
+     "text": "All frame heatmaps enter Time Average."
+    },
+    {
+     "t": 70.72,
+     "text": "Producing the final averaged output heatmap."
+    }
+   ],
+   "downloads": {
+    "mp4": {
+     "href": "assets/gallery/media/WACV_2022_set5_000009/narrative.mp4",
+     "name": "WACV_2022_set5_000009_hopping.mp4",
+     "note": "The rendered narrative with its spoken narration."
+    },
+    "pptx": {
+     "href": "assets/gallery/exports/WACV_2022_set5_000009.pptx",
+     "name": "WACV_2022_set5_000009_hopping.pptx",
+     "note": "21 static frames, narration in the speaker notes."
+    },
+    "svg": {
+     "href": "assets/gallery/exports/WACV_2022_set5_000009.html",
+     "name": "WACV_2022_set5_000009_hopping.html",
+     "note": "The animation as one self-contained HTML file: rasters embedded, captions you can switch off."
+    }
+   }
+  },
+  {
+   "id": "arch_arxiv_ai_2025_000000151",
+   "styleId": "hopping",
+   "style": "Hopping Bbox",
+   "thumb": "assets/gallery/media/arch_arxiv_ai_2025_000000151/source.png",
+   "source": "assets/gallery/media/arch_arxiv_ai_2025_000000151/source.png",
+   "sourceW": 990,
+   "sourceH": 391,
+   "narrative": {
+    "mp4": "assets/gallery/media/arch_arxiv_ai_2025_000000151/narrative.mp4",
+    "poster": "assets/gallery/media/arch_arxiv_ai_2025_000000151/poster.jpg",
+    "seconds": 229.88
+   },
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "Panel A illustrates the training pipeline for the text-to-image diffusion foundation model."
+    },
+    {
+     "t": 6.32,
+     "text": "High-resolution smartphone image patches serve as the training input."
+    },
+    {
+     "t": 11.04,
+     "text": "The Florence caption generator extracts descriptive text from each patch."
+    },
+    {
+     "t": 16.4,
+     "text": "This produces a text caption describing the patch content."
+    },
+    {
+     "t": 20.84,
+     "text": "A pretrained text encoder embeds the caption to provide semantic conditioning."
+    },
+    {
+     "t": 26.2,
+     "text": "In parallel, a pretrained image encoder maps the high-resolution patch into latent space."
+    },
+    {
+     "t": 32.76,
+     "text": "Gaussian noise is introduced during the forward diffusion process."
+    },
+    {
+     "t": 37.64,
+     "text": "These are added and carried forward."
+    },
+    {
+     "t": 40.68,
+     "text": "This creates the noised latent representation."
+    },
+    {
+     "t": 44.4,
+     "text": "A diffusion U-Net is trained from scratch on 38,000 images conditioned on the text embeddings."
+    },
+    {
+     "t": 51.24,
+     "text": "The network outputs the predicted noise to optimize diffusion training."
+    },
+    {
+     "t": 56.56,
+     "text": "Panel B presents the proposed feature-to-image foundation model training framework."
+    },
+    {
+     "t": 62.28,
+     "text": "The same high-resolution smartphone dataset provides the input patches."
+    },
+    {
+     "t": 67.6,
+     "text": "A pretrained DINOv2 vision transformer extracts dense visual representations on the fly."
+    },
+    {
+     "t": 74.32,
+     "text": "These low-level DINOv2 features provide rich, hallucination-resistant spatial conditioning."
+    },
+    {
+     "t": 81.2,
+     "text": "The image is encoded into latent space by the pretrained encoder."
+    },
+    {
+     "t": 85.88,
+     "text": "Gaussian noise is added to the latent representation."
+    },
+    {
+     "t": 89.96,
+     "text": "These are added and carried forward."
+    },
+    {
+     "t": 93.16,
+     "text": "This yields the noised latent vector."
+    },
+    {
+     "t": 96.36,
+     "text": "The diffusion U-Net is trained from scratch with DINOv2 feature conditioning."
+    },
+    {
+     "t": 102.12,
+     "text": "It predicts the added noise, learning fine structural priors."
+    },
+    {
+     "t": 107.0,
+     "text": "Panel C shows single-image super-resolution adaptation using the text-to-image foundation model."
+    },
+    {
+     "t": 114.4,
+     "text": "A low-resolution input image is fed into the system."
+    },
+    {
+     "t": 118.36,
+     "text": "The RAM captioning module generates descriptive text tags for the image."
+    },
+    {
+     "t": 123.88,
+     "text": "The descriptive caption is fed to the text encoder."
+    },
+    {
+     "t": 127.68,
+     "text": "The text encoder converts the caption into conditioning vectors."
+    },
+    {
+     "t": 132.08,
+     "text": "The image encoder maps the low-resolution input into latent space."
+    },
+    {
+     "t": 137.6,
+     "text": "Low-rank adaptation fine-tunes the encoder for super-resolution."
+    },
+    {
+     "t": 142.56,
+     "text": "The resulting latent feature is passed to the diffusion backbone."
+    },
+    {
+     "t": 147.0,
+     "text": "The previously trained diffusion U-Net is frozen."
+    },
+    {
+     "t": 150.92,
+     "text": "LoRA layers adapt the U-Net for single-step restoration."
+    },
+    {
+     "t": 155.4,
+     "text": "A denoised latent feature is reconstructed."
+    },
+    {
+     "t": 159.12,
+     "text": "The pretrained decoder maps the latent feature back to pixel space."
+    },
+    {
+     "t": 164.52,
+     "text": "This generates the super-resolved high-resolution output image."
+    },
+    {
+     "t": 169.32,
+     "text": "Panel D demonstrates super-resolution leveraging the feature-to-image foundation model."
+    },
+    {
+     "t": 175.32,
+     "text": "The low-resolution input image is provided to the pipeline."
+    },
+    {
+     "t": 179.52,
+     "text": "The frozen DINOv2 model processes the low-resolution image directly."
+    },
+    {
+     "t": 184.84,
+     "text": "It produces detailed visual features that closely match high-resolution references."
+    },
+    {
+     "t": 190.68,
+     "text": "The low-resolution image is concurrently passed to the latent encoder."
+    },
+    {
+     "t": 195.56,
+     "text": "Encoder LoRA parameters are optimized during fine-tuning."
+    },
+    {
+     "t": 199.96,
+     "text": "The latent representation is fed to the diffusion backbone."
+    },
+    {
+     "t": 204.24,
+     "text": "The frozen U-Net guides generative synthesis based on DINOv2 conditioning."
+    },
+    {
+     "t": 210.4,
+     "text": "LoRA weights adapt the U-Net for single-step restoration."
+    },
+    {
+     "t": 215.28,
+     "text": "A high-fidelity denoised latent is predicted."
+    },
+    {
+     "t": 219.08,
+     "text": "The pretrained decoder converts the latent back into image space."
+    },
+    {
+     "t": 224.16,
+     "text": "Producing a super-resolved image with natural textures and minimal artifacts."
+    }
+   ],
+   "downloads": {
+    "mp4": {
+     "href": "assets/gallery/media/arch_arxiv_ai_2025_000000151/narrative.mp4",
+     "name": "arch_arxiv_ai_2025_000000151_hopping.mp4",
+     "note": "The rendered narrative with its spoken narration."
+    },
+    "pptx": {
+     "href": "assets/gallery/exports/arch_arxiv_ai_2025_000000151.pptx",
+     "name": "arch_arxiv_ai_2025_000000151_hopping.pptx",
+     "note": "46 static frames, narration in the speaker notes."
+    },
+    "svg": {
+     "href": "assets/gallery/exports/arch_arxiv_ai_2025_000000151.html",
+     "name": "arch_arxiv_ai_2025_000000151_hopping.html",
+     "note": "The animation as one self-contained HTML file: rasters embedded, captions you can switch off."
+    }
+   }
+  },
+  {
+   "id": "CVPR_2025_arch01224",
+   "styleId": "sliding",
+   "style": "Sliding Bbox",
+   "thumb": "assets/gallery/media/CVPR_2025_arch01224/thumb.png",
+   "source": "assets/gallery/media/CVPR_2025_arch01224/source.png",
+   "sourceW": 986,
+   "sourceH": 282,
+   "narrative": {
+    "mp4": "assets/gallery/media/CVPR_2025_arch01224/narrative.mp4",
+    "poster": "assets/gallery/media/CVPR_2025_arch01224/poster.jpg",
+    "seconds": 93.72
+   },
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "The pipeline begins with the front-view feature representation."
+    },
+    {
+     "t": 4.36,
+     "text": "The input features pass through the IPM module."
+    },
+    {
+     "t": 8.4,
+     "text": "This maps the representation into bird's-eye view space."
+    },
+    {
+     "t": 12.64,
+     "text": "Here, anchor positions are established across the spatial grid."
+    },
+    {
+     "t": 17.44,
+     "text": "Alongside the anchors, corresponding bird's-eye view feature maps are generated."
+    },
+    {
+     "t": 23.0,
+     "text": "The BEV features are routed down to the Proposal Detection module."
+    },
+    {
+     "t": 28.12,
+     "text": "Proposal Detection produces a keypoint segmentation map."
+    },
+    {
+     "t": 32.24,
+     "text": "The segmentation map, anchor positions, and BEV features feed into the Multiple Keypoint Proposal module."
+    },
+    {
+     "t": 40.04,
+     "text": "This module outputs initial query positions and query features."
+    },
+    {
+     "t": 45.2,
+     "text": "These positions and features enter a series of stacked Transformer Layers."
+    },
+    {
+     "t": 50.88,
+     "text": "Intermediate outputs from these layers branch off into Auxiliary Heads."
+    },
+    {
+     "t": 55.96,
+     "text": "The representation continues into a final Transformer Layer."
+    },
+    {
+     "t": 60.36,
+     "text": "The final Transformer Layer drives prediction heads for X-Offset, Z, Classification, and Connectivity."
+    },
+    {
+     "t": 68.56,
+     "text": "Panel B illustrates point refinement, starting with raw proposals without offset."
+    },
+    {
+     "t": 74.56,
+     "text": "Next, offsets are applied to align the points."
+    },
+    {
+     "t": 78.36,
+     "text": "Point Non-Maximum Suppression is then executed to eliminate duplicates."
+    },
+    {
+     "t": 83.84,
+     "text": "Panel C outlines the Adjacency Matrix structure."
+    },
+    {
+     "t": 87.76,
+     "text": "It maps connectivity scores between origin features and destination features."
+    }
+   ],
+   "downloads": {
+    "mp4": {
+     "href": "assets/gallery/media/CVPR_2025_arch01224/narrative.mp4",
+     "name": "CVPR_2025_arch01224_sliding.mp4",
+     "note": "The rendered narrative with its spoken narration."
+    },
+    "pptx": {
+     "href": "assets/gallery/exports/CVPR_2025_arch01224.pptx",
+     "name": "CVPR_2025_arch01224_sliding.pptx",
+     "note": "18 static frames, narration in the speaker notes."
+    },
+    "svg": {
+     "href": "assets/gallery/exports/CVPR_2025_arch01224.html",
+     "name": "CVPR_2025_arch01224_sliding.html",
+     "note": "The animation as one self-contained HTML file: rasters embedded, captions you can switch off."
+    }
+   }
+  },
+  {
+   "id": "Paper2Fig_pipe_easy_000000521",
+   "styleId": "sliding",
+   "style": "Sliding Bbox",
+   "thumb": "assets/gallery/media/Paper2Fig_pipe_easy_000000521/thumb.png",
+   "source": "assets/gallery/media/Paper2Fig_pipe_easy_000000521/source.png",
+   "sourceW": 961,
+   "sourceH": 778,
+   "narrative": {
+    "mp4": "assets/gallery/media/Paper2Fig_pipe_easy_000000521/narrative.mp4",
+    "poster": "assets/gallery/media/Paper2Fig_pipe_easy_000000521/poster.jpg",
+    "seconds": 63.52
+   },
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "The pipeline begins by retrieving clinical notes for Alzheimer's disease patients from the Clinical Data Repository."
+    },
+    {
+     "t": 7.08,
+     "text": "The records are filtered using the rule-based NLP-PIER information extraction system."
+    },
+    {
+     "t": 13.44,
+     "text": "This filtering generates a dataset of lifestyle-related sentences with automatically assigned weak labels."
+    },
+    {
+     "t": 20.92,
+     "text": "The weakly labeled corpus is then used to fine-tune a suite of BERT-based sentence classifiers."
+    },
+    {
+     "t": 28.16,
+     "text": "The models include Bio-Clinical BERT,"
+    },
+    {
+     "t": 31.52,
+     "text": "UMLS BERT,"
+    },
+    {
+     "t": 34.4,
+     "text": "PubMedBERT trained solely on abstracts,"
+    },
+    {
+     "t": 37.88,
+     "text": "PubMedBERT trained on abstracts and full text,"
+    },
+    {
+     "t": 41.88,
+     "text": "BioBERT,"
+    },
+    {
+     "t": 43.48,
+     "text": "and the standard uncased BERT base model."
+    },
+    {
+     "t": 46.76,
+     "text": "The classifiers predict risk factors across two case studies, identifying excessive diet..."
+    },
+    {
+     "t": 53.72,
+     "text": "...and physical activity levels."
+    },
+    {
+     "t": 56.08,
+     "text": "Finally, all models are tested and evaluated against a manually annotated Gold Standard Corpus."
+    }
+   ],
+   "downloads": {
+    "mp4": {
+     "href": "assets/gallery/media/Paper2Fig_pipe_easy_000000521/narrative.mp4",
+     "name": "Paper2Fig_pipe_easy_000000521_sliding.mp4",
+     "note": "The rendered narrative with its spoken narration."
+    },
+    "pptx": {
+     "href": "assets/gallery/exports/Paper2Fig_pipe_easy_000000521.pptx",
+     "name": "Paper2Fig_pipe_easy_000000521_sliding.pptx",
+     "note": "13 static frames, narration in the speaker notes."
+    },
+    "svg": {
+     "href": "assets/gallery/exports/Paper2Fig_pipe_easy_000000521.html",
+     "name": "Paper2Fig_pipe_easy_000000521_sliding.html",
+     "note": "The animation as one self-contained HTML file: rasters embedded, captions you can switch off."
+    }
+   }
+  },
+  {
+   "id": "Pubmed_bio_00007",
+   "styleId": "sliding",
+   "style": "Sliding Bbox",
+   "thumb": "assets/gallery/media/Pubmed_bio_00007/thumb.png",
+   "source": "assets/gallery/media/Pubmed_bio_00007/source.png",
+   "sourceW": 849,
+   "sourceH": 608,
+   "narrative": {
+    "mp4": "assets/gallery/media/Pubmed_bio_00007/narrative.mp4",
+    "poster": "assets/gallery/media/Pubmed_bio_00007/poster.jpg",
+    "seconds": 78.72
+   },
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "The phantom preparation begins at room temperature by measuring the water required for the lipid emulsion."
+    },
+    {
+     "t": 7.16,
+     "text": "Next, the required quantity of soy lecithin is measured."
+    },
+    {
+     "t": 11.36,
+     "text": "The lecithin is added to the water and stirred for approximately thirty minutes until the solution becomes homogeneous."
+    },
+    {
+     "t": 19.56,
+     "text": "Separately, rapeseed oil representing the fatty tissue component is measured."
+    },
+    {
+     "t": 25.68,
+     "text": "The oil is combined with the lecithin solution and mixed thoroughly until fully homogeneous."
+    },
+    {
+     "t": 32.16,
+     "text": "In parallel, a separate volume of water is measured to prepare the agar solution."
+    },
+    {
+     "t": 37.68,
+     "text": "Agar powder representing the fibroglandular tissue component is then measured."
+    },
+    {
+     "t": 43.36,
+     "text": "The agar is dissolved into the water heated to ninety-five degrees Celsius to create a uniform solution."
+    },
+    {
+     "t": 51.64,
+     "text": "The oil and lecithin mixture is slowly added to warm agar while maintaining temperature >50°C with continuous mixing."
+    },
+    {
+     "t": 62.36,
+     "text": "The final mixture is cooled to approximately fifty degrees Celsius and poured directly into the 3D printed phantom molds."
+    },
+    {
+     "t": 70.68,
+     "text": "Finally, the filled phantoms are cured overnight at four degrees Celsius to solidify before imaging experiments."
+    }
+   ],
+   "downloads": {
+    "mp4": {
+     "href": "assets/gallery/media/Pubmed_bio_00007/narrative.mp4",
+     "name": "Pubmed_bio_00007_sliding.mp4",
+     "note": "The rendered narrative with its spoken narration."
+    },
+    "pptx": {
+     "href": "assets/gallery/exports/Pubmed_bio_00007.pptx",
+     "name": "Pubmed_bio_00007_sliding.pptx",
+     "note": "11 static frames, narration in the speaker notes."
+    },
+    "svg": null
+   }
+  },
+  {
+   "id": "SciMMIR_arch_diff_000000348",
+   "styleId": "sliding",
+   "style": "Sliding Bbox",
+   "thumb": "assets/gallery/media/SciMMIR_arch_diff_000000348/thumb.png",
+   "source": "assets/gallery/media/SciMMIR_arch_diff_000000348/source.png",
+   "sourceW": 920,
+   "sourceH": 304,
+   "narrative": {
+    "mp4": "assets/gallery/media/SciMMIR_arch_diff_000000348/narrative.mp4",
+    "poster": "assets/gallery/media/SciMMIR_arch_diff_000000348/poster.jpg",
+    "seconds": 411.32
+   },
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "A fully-actuated unmanned aerial vehicle serves as the experimental platform to execute physical interaction tasks."
+    },
+    {
+     "t": 33.52,
+     "text": "The onboard force-torque sensor at the manipulator base provides direct force measurements at sixty hertz."
+    },
+    {
+     "t": 63.64,
+     "text": "At the end-effector tip, a GelSight vision-based tactile sensor captures optical tactile images at thirty hertz."
+    },
+    {
+     "t": 98.08,
+     "text": "Optical flow tracks the motion of printed markers to capture the deformation of the elastomer gel pad."
+    },
+    {
+     "t": 126.76,
+     "text": "A k-nearest neighbors model then estimates the contact force directly from these marker displacement features."
+    },
+    {
+     "t": 155.44,
+     "text": "A Kalman filter fuses the force-torque sensor measurements and tactile estimates to obtain the measured contact force."
+    },
+    {
+     "t": 187.28,
+     "text": "In parallel, a ResNet-18 neural network processes the full tactile image to determine contact and recognize surface textures."
+    },
+    {
+     "t": 226.56,
+     "text": "The classification output identifies the contact texture and generates a discrete contact detection switching signal."
+    },
+    {
+     "t": 257.96,
+     "text": "A motion capture system provides high-rate position measurements at one hundred eighty hertz."
+    },
+    {
+     "t": 282.56,
+     "text": "The force controller computes the force tracking control effort using the fused contact force and reference force."
+    },
+    {
+     "t": 312.44,
+     "text": "Simultaneously, a position controller calculates the motion control command based on reference and measured positions."
+    },
+    {
+     "t": 344.44,
+     "text": "A selection matrix dynamically blends the motion and force control commands based on the contact detection state."
+    },
+    {
+     "t": 375.04,
+     "text": "Finally, the control allocation module maps the combined wrench command into individual rotor speeds for the fully-actuated vehicle."
+    }
+   ],
+   "downloads": {
+    "mp4": {
+     "href": "assets/gallery/media/SciMMIR_arch_diff_000000348/narrative.mp4",
+     "name": "SciMMIR_arch_diff_000000348_sliding.mp4",
+     "note": "The rendered narrative with its spoken narration."
+    },
+    "pptx": {
+     "href": "assets/gallery/exports/SciMMIR_arch_diff_000000348.pptx",
+     "name": "SciMMIR_arch_diff_000000348_sliding.pptx",
+     "note": "13 static frames, narration in the speaker notes."
+    },
+    "svg": {
+     "href": "assets/gallery/exports/SciMMIR_arch_diff_000000348.html",
+     "name": "SciMMIR_arch_diff_000000348_sliding.html",
+     "note": "The animation as one self-contained HTML file: rasters embedded, captions you can switch off."
+    }
+   }
+  }
+ ]
+}

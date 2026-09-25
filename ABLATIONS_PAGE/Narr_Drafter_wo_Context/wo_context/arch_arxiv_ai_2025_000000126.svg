@@ -1,0 +1,332 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 716 415" width="716" height="415">
+    <defs>
+        <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#111827" />
+        </marker>
+        <style>
+            #focus_box {
+                animation: slide 34s ease-in-out infinite;
+                pointer-events: none;
+            }
+
+            @keyframes slide {
+                /* t1: node_correct_tools */
+                0%, 4.70% { x: 18px; y: 76px; width: 71px; height: 57px; }
+                /* t2: node_distractor_tools */
+                5.88%, 10.58% { x: 18px; y: 136px; width: 75px; height: 57px; }
+                /* t3: node_candidate_tool_list */
+                11.76%, 16.47% { x: 97px; y: 82px; width: 83px; height: 86px; }
+                /* t4: node_real_world_tasks */
+                17.65%, 22.35% { x: 19px; y: 279px; width: 157px; height: 50px; }
+                /* t5: composite_sandbox_icon */
+                23.53%, 28.23% { x: 243px; y: 68px; width: 68px; height: 64px; }
+                /* t6: node_dynamic_loading */
+                29.41%, 34.11% { x: 224px; y: 142px; width: 120px; height: 57px; }
+                /* t7: node_local_servers */
+                35.29%, 40.00% { x: 224px; y: 202px; width: 120px; height: 57px; }
+                /* t8: node_stable_execution */
+                41.18%, 45.88% { x: 224px; y: 262px; width: 120px; height: 66px; }
+                /* t9: composite_agent_icon */
+                47.06%, 51.76% { x: 454px; y: 68px; width: 63px; height: 60px; }
+                /* t10: node_task_understanding */
+                52.94%, 57.64% { x: 424px; y: 142px; width: 120px; height: 57px; }
+                /* t11: node_tool_selection */
+                58.82%, 63.53% { x: 424px; y: 202px; width: 120px; height: 57px; }
+                /* t12: node_parameter_generation */
+                64.71%, 69.41% { x: 424px; y: 262px; width: 120px; height: 66px; }
+                /* t13: composite_eval_icon */
+                70.59%, 75.29% { x: 617px; y: 70px; width: 56px; height: 50px; }
+                /* t14: node_eval_correct_tool */
+                76.47%, 81.17% { x: 585px; y: 129px; width: 120px; height: 57px; }
+                /* t15: node_eval_robustness */
+                82.35%, 87.06% { x: 585px; y: 186px; width: 120px; height: 57px; }
+                /* t16: node_eval_task_completion */
+                88.24%, 92.94% { x: 585px; y: 243px; width: 120px; height: 39px; }
+                /* t17: node_eval_efficiency */
+                94.12%, 98.82% { x: 585px; y: 282px; width: 120px; height: 39px; }
+                /* loop back to t1 */
+                100% { x: 18px; y: 76px; width: 71px; height: 57px; }
+            }
+
+            .narr_text {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+                font-size: 13px;
+                font-weight: 600;
+                fill: #1f2937;
+                opacity: 0;
+            }
+
+            #narr_ts1 { animation: narr_anim1 34s infinite; }
+            #narr_ts2 { animation: narr_anim2 34s infinite; }
+            #narr_ts3 { animation: narr_anim3 34s infinite; }
+            #narr_ts4 { animation: narr_anim4 34s infinite; }
+            #narr_ts5 { animation: narr_anim5 34s infinite; }
+            #narr_ts6 { animation: narr_anim6 34s infinite; }
+            #narr_ts7 { animation: narr_anim7 34s infinite; }
+            #narr_ts8 { animation: narr_anim8 34s infinite; }
+            #narr_ts9 { animation: narr_anim9 34s infinite; }
+            #narr_ts10 { animation: narr_anim10 34s infinite; }
+            #narr_ts11 { animation: narr_anim11 34s infinite; }
+            #narr_ts12 { animation: narr_anim12 34s infinite; }
+            #narr_ts13 { animation: narr_anim13 34s infinite; }
+            #narr_ts14 { animation: narr_anim14 34s infinite; }
+            #narr_ts15 { animation: narr_anim15 34s infinite; }
+            #narr_ts16 { animation: narr_anim16 34s infinite; }
+            #narr_ts17 { animation: narr_anim17 34s infinite; }
+
+            @keyframes narr_anim1 { 0%, 5.5% { opacity: 1; } 5.88%, 100% { opacity: 0; } }
+            @keyframes narr_anim2 { 0%, 5.5% { opacity: 0; } 5.88%, 11.4% { opacity: 1; } 11.76%, 100% { opacity: 0; } }
+            @keyframes narr_anim3 { 0%, 11.4% { opacity: 0; } 11.76%, 17.3% { opacity: 1; } 17.65%, 100% { opacity: 0; } }
+            @keyframes narr_anim4 { 0%, 17.3% { opacity: 0; } 17.65%, 23.2% { opacity: 1; } 23.53%, 100% { opacity: 0; } }
+            @keyframes narr_anim5 { 0%, 23.2% { opacity: 0; } 23.53%, 29.0% { opacity: 1; } 29.41%, 100% { opacity: 0; } }
+            @keyframes narr_anim6 { 0%, 29.0% { opacity: 0; } 29.41%, 34.9% { opacity: 1; } 35.29%, 100% { opacity: 0; } }
+            @keyframes narr_anim7 { 0%, 34.9% { opacity: 0; } 35.29%, 40.8% { opacity: 1; } 41.18%, 100% { opacity: 0; } }
+            @keyframes narr_anim8 { 0%, 40.8% { opacity: 0; } 41.18%, 46.7% { opacity: 1; } 47.06%, 100% { opacity: 0; } }
+            @keyframes narr_anim9 { 0%, 46.7% { opacity: 0; } 47.06%, 52.5% { opacity: 1; } 52.94%, 100% { opacity: 0; } }
+            @keyframes narr_anim10 { 0%, 52.5% { opacity: 0; } 52.94%, 58.4% { opacity: 1; } 58.82%, 100% { opacity: 0; } }
+            @keyframes narr_anim11 { 0%, 58.4% { opacity: 0; } 58.82%, 64.3% { opacity: 1; } 64.71%, 100% { opacity: 0; } }
+            @keyframes narr_anim12 { 0%, 64.3% { opacity: 0; } 64.71%, 70.2% { opacity: 1; } 70.59%, 100% { opacity: 0; } }
+            @keyframes narr_anim13 { 0%, 70.2% { opacity: 0; } 70.59%, 76.1% { opacity: 1; } 76.47%, 100% { opacity: 0; } }
+            @keyframes narr_anim14 { 0%, 76.1% { opacity: 0; } 76.47%, 82.0% { opacity: 1; } 82.35%, 100% { opacity: 0; } }
+            @keyframes narr_anim15 { 0%, 82.0% { opacity: 0; } 82.35%, 87.8% { opacity: 1; } 88.24%, 100% { opacity: 0; } }
+            @keyframes narr_anim16 { 0%, 87.8% { opacity: 0; } 88.24%, 93.7% { opacity: 1; } 94.12%, 100% { opacity: 0; } }
+            @keyframes narr_anim17 { 0%, 93.7% { opacity: 0; } 94.12%, 100% { opacity: 1; } }
+        </style>
+    </defs>
+
+    <!-- MCP Tool Collection Block -->
+    <g data-id="block_mcp_tool_collection" id="block_mcp_tool_collection" data-class="block" data-parent="root">
+        <rect x="3" y="6" width="190" height="204" rx="20" fill="#dceaff" stroke="#8cbbf1" stroke-width="2" />
+        <text data-id="text_mcp_title" id="text_mcp_title" data-class="text_node" data-parent="block_mcp_tool_collection" x="98" y="44" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000" text-anchor="middle">MCP Tool Collection</text>
+        
+        <!-- Correct Tools (G) -->
+        <g data-id="node_correct_tools" id="node_correct_tools" data-class="child_node" data-parent="block_mcp_tool_collection">
+            <rect x="22" y="80" width="63" height="49" rx="10" fill="#bad8ff" stroke="#4878a4" stroke-width="1.5" />
+            <text x="53.5" y="99" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="500" fill="#000000" text-anchor="middle">Correct</text>
+            <text x="53.5" y="115" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="500" fill="#000000" text-anchor="middle">Tools(G)</text>
+        </g>
+
+        <!-- Distractor Tools (F) -->
+        <g data-id="node_distractor_tools" id="node_distractor_tools" data-class="child_node" data-parent="block_mcp_tool_collection">
+            <rect x="22" y="140" width="67" height="49" rx="10" fill="#bad8ff" stroke="#4878a4" stroke-width="1.5" />
+            <text x="55.5" y="159" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="500" fill="#000000" text-anchor="middle">Distractor</text>
+            <text x="55.5" y="175" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="500" fill="#000000" text-anchor="middle">Tools(F)</text>
+        </g>
+
+        <!-- Candidate Tool List L (K tools) -->
+        <g data-id="node_candidate_tool_list" id="node_candidate_tool_list" data-class="child_node" data-parent="block_mcp_tool_collection">
+            <rect x="101" y="86" width="75" height="78" rx="12" fill="#bad8ff" stroke="#4f5d73" stroke-width="2" />
+            <text x="138.5" y="112" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10.5" font-weight="500" fill="#000000" text-anchor="middle">Candidate</text>
+            <text x="138.5" y="127" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10.5" font-weight="500" fill="#000000" text-anchor="middle">Tool List L</text>
+            <text x="138.5" y="143" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10.5" font-weight="500" fill="#000000" text-anchor="middle">(K tools)</text>
+        </g>
+    </g>
+
+    <!-- Task Set Block -->
+    <g data-id="block_task_set" id="block_task_set" data-class="block" data-parent="root">
+        <rect x="3" y="222" width="190" height="125" rx="20" fill="#ffeacc" stroke="#f6b866" stroke-width="2" />
+        <text data-id="text_task_title" id="text_task_title" data-class="text_node" data-parent="block_task_set" x="98" y="256" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000" text-anchor="middle">Task Set</text>
+        
+        <!-- Real-world Tasks -->
+        <g data-id="node_real_world_tasks" id="node_real_world_tasks" data-class="child_node" data-parent="block_task_set">
+            <rect x="23" y="283" width="149" height="42" rx="10" fill="#fff5dc" stroke="#e0aa53" stroke-width="1.5" />
+            <text x="97.5" y="302" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" font-weight="500" fill="#000000" text-anchor="middle">Real-world</text>
+            <text x="97.5" y="316" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" font-weight="500" fill="#000000" text-anchor="middle">Tasks</text>
+        </g>
+    </g>
+
+    <!-- AutoGen-based Sandbox Block -->
+    <g data-id="block_autogen_sandbox" id="block_autogen_sandbox" data-class="block" data-parent="root">
+        <rect x="215" y="6" width="138" height="341" rx="20" fill="#d5edd2" stroke="#8ec986" stroke-width="2" />
+        <text data-id="text_sandbox_title_1" id="text_sandbox_title_1" data-class="text_node" data-parent="block_autogen_sandbox" x="284" y="36" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="13.5" font-weight="bold" fill="#000000" text-anchor="middle">AutoGen-based</text>
+        <text data-id="text_sandbox_title_2" id="text_sandbox_title_2" data-class="text_node" data-parent="block_autogen_sandbox" x="284" y="55" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="13.5" font-weight="bold" fill="#000000" text-anchor="middle">Sandbox</text>
+
+        <!-- Sandbox Icon (composite_whole) -->
+        <g data-id="composite_sandbox_icon" id="composite_sandbox_icon" data-class="composite_whole" data-parent="block_autogen_sandbox">
+            <!-- Window frame -->
+            <rect data-id="part_sb_win" id="part_sb_win" data-class="composite_part" data-parent="composite_sandbox_icon" x="247" y="72" width="60" height="46" rx="2" fill="none" stroke="#009688" stroke-width="2.5" />
+            <line data-id="part_sb_win_bar" id="part_sb_win_bar" data-class="composite_part" data-parent="composite_sandbox_icon" x1="247" y1="81" x2="307" y2="81" stroke="#009688" stroke-width="2" />
+            <circle data-id="part_sb_win_c1" id="part_sb_win_c1" data-class="composite_part" data-parent="composite_sandbox_icon" cx="253" cy="76.5" r="1.5" fill="#009688" />
+            <circle data-id="part_sb_win_c2" id="part_sb_win_c2" data-class="composite_part" data-parent="composite_sandbox_icon" cx="258" cy="76.5" r="1.5" fill="#009688" />
+            <circle data-id="part_sb_win_c3" id="part_sb_win_c3" data-class="composite_part" data-parent="composite_sandbox_icon" cx="263" cy="76.5" r="1.5" fill="#009688" />
+            
+            <!-- Isometric Box -->
+            <!-- Top Face -->
+            <polygon data-id="part_sb_box_top" id="part_sb_box_top" data-class="composite_part" data-parent="composite_sandbox_icon" points="277,88 295,97 277,106 259,97" fill="#eaf6ea" stroke="#009688" stroke-width="2.5" stroke-linejoin="round" />
+            <!-- Left Face -->
+            <polygon data-id="part_sb_box_left" id="part_sb_box_left" data-class="composite_part" data-parent="composite_sandbox_icon" points="259,97 277,106 277,128 259,119" fill="#eaf6ea" stroke="#009688" stroke-width="2.5" stroke-linejoin="round" />
+            <!-- Right Face -->
+            <polygon data-id="part_sb_box_right" id="part_sb_box_right" data-class="composite_part" data-parent="composite_sandbox_icon" points="277,106 295,97 295,119 277,128" fill="#eaf6ea" stroke="#009688" stroke-width="2.5" stroke-linejoin="round" />
+        </g>
+
+        <!-- Dynamic MCP Tool Loading -->
+        <g data-id="node_dynamic_loading" id="node_dynamic_loading" data-class="child_node" data-parent="block_autogen_sandbox">
+            <rect x="228" y="146" width="112" height="49" rx="10" fill="#e2f5df" stroke="#689f63" stroke-width="1.5" />
+            <text x="284" y="166" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" font-weight="500" fill="#000000" text-anchor="middle">Dynamic MCP</text>
+            <text x="284" y="183" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" font-weight="500" fill="#000000" text-anchor="middle">Tool Loading</text>
+        </g>
+
+        <!-- Local MCP Servers -->
+        <g data-id="node_local_servers" id="node_local_servers" data-class="child_node" data-parent="block_autogen_sandbox">
+            <rect x="228" y="206" width="112" height="49" rx="10" fill="#e2f5df" stroke="#689f63" stroke-width="1.5" />
+            <text x="284" y="226" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" font-weight="500" fill="#000000" text-anchor="middle">Local MCP</text>
+            <text x="284" y="243" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" font-weight="500" fill="#000000" text-anchor="middle">Servers</text>
+        </g>
+
+        <!-- Stable & Reproducible Execution -->
+        <g data-id="node_stable_execution" id="node_stable_execution" data-class="child_node" data-parent="block_autogen_sandbox">
+            <rect x="228" y="266" width="112" height="58" rx="10" fill="#e2f5df" stroke="#689f63" stroke-width="1.5" />
+            <text x="284" y="285" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="500" fill="#000000" text-anchor="middle">Stable &amp;</text>
+            <text x="284" y="300" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="500" fill="#000000" text-anchor="middle">Reproducible</text>
+            <text x="284" y="315" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="500" fill="#000000" text-anchor="middle">Execution</text>
+        </g>
+    </g>
+
+    <!-- LLM-based Agent Block -->
+    <g data-id="block_llm_agent" id="block_llm_agent" data-class="block" data-parent="root">
+        <rect x="415" y="6" width="138" height="341" rx="20" fill="#d5edd2" stroke="#8ec986" stroke-width="2" />
+        <text data-id="text_agent_title_1" id="text_agent_title_1" data-class="text_node" data-parent="block_llm_agent" x="484" y="36" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="13.5" font-weight="bold" fill="#000000" text-anchor="middle">LLM-based</text>
+        <text data-id="text_agent_title_2" id="text_agent_title_2" data-class="text_node" data-parent="block_llm_agent" x="484" y="55" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="13.5" font-weight="bold" fill="#000000" text-anchor="middle">Agent</text>
+
+        <!-- LLM Agent Icon (composite_whole) -->
+        <g data-id="composite_agent_icon" id="composite_agent_icon" data-class="composite_whole" data-parent="block_llm_agent">
+            <!-- Gear profile on right -->
+            <path data-id="part_ag_gear" id="part_ag_gear" data-class="composite_part" data-parent="composite_agent_icon" d="M 483 72 C 493 72 501 76 505 82 L 509 81 L 510 85 L 507 88 C 508 90 509 93 509 96 L 513 97 L 512 102 L 508 103 C 507 105 506 108 504 110 L 507 113 L 504 116 L 500 114 C 497 117 493 119 489 120 L 489 124 L 484 124" fill="none" stroke="#009688" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            <!-- Brain circuits on left -->
+            <path data-id="part_ag_brain" id="part_ag_brain" data-class="composite_part" data-parent="composite_agent_icon" d="M 483 72 C 472 72 463 78 463 87 C 460 90 458 94 458 99 C 458 105 461 109 464 112 C 463 116 466 120 470 121 C 474 122 478 123 483 124" fill="none" stroke="#009688" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            <!-- Inner nodes and connections -->
+            <path data-id="part_ag_inner" id="part_ag_inner" data-class="composite_part" data-parent="composite_agent_icon" d="M 473 80 L 477 84 M 468 94 L 476 94 M 471 106 L 478 102 M 483 80 L 483 114" fill="none" stroke="#009688" stroke-width="1.8" />
+            <circle data-id="part_ag_c1" id="part_ag_c1" data-class="composite_part" data-parent="composite_agent_icon" cx="473" cy="80" r="1.5" fill="#009688" />
+            <circle data-id="part_ag_c2" id="part_ag_c2" data-class="composite_part" data-parent="composite_agent_icon" cx="477" cy="84" r="1.5" fill="#009688" />
+            <circle data-id="part_ag_c3" id="part_ag_c3" data-class="composite_part" data-parent="composite_agent_icon" cx="468" cy="94" r="1.5" fill="#009688" />
+            <circle data-id="part_ag_c4" id="part_ag_c4" data-class="composite_part" data-parent="composite_agent_icon" cx="476" cy="94" r="1.5" fill="#009688" />
+            <!-- Person icon at bottom -->
+            <circle data-id="part_ag_head" id="part_ag_head" data-class="composite_part" data-parent="composite_agent_icon" cx="484" cy="100" r="4.5" fill="none" stroke="#009688" stroke-width="2" />
+            <path data-id="part_ag_body" id="part_ag_body" data-class="composite_part" data-parent="composite_agent_icon" d="M 473 117 C 473 111 478 108 484 108 C 490 108 495 111 495 117" fill="none" stroke="#009688" stroke-width="2" />
+        </g>
+
+        <!-- Task Understanding -->
+        <g data-id="node_task_understanding" id="node_task_understanding" data-class="child_node" data-parent="block_llm_agent">
+            <rect x="428" y="146" width="112" height="49" rx="10" fill="#e2f5df" stroke="#689f63" stroke-width="1.5" />
+            <text x="484" y="166" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" font-weight="500" fill="#000000" text-anchor="middle">Task</text>
+            <text x="484" y="183" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" font-weight="500" fill="#000000" text-anchor="middle">Understanding</text>
+        </g>
+
+        <!-- Tool Selection -->
+        <g data-id="node_tool_selection" id="node_tool_selection" data-class="child_node" data-parent="block_llm_agent">
+            <rect x="428" y="206" width="112" height="49" rx="10" fill="#e2f5df" stroke="#689f63" stroke-width="1.5" />
+            <text x="484" y="235" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" font-weight="500" fill="#000000" text-anchor="middle">Tool Selection</text>
+        </g>
+
+        <!-- Parameter Generation -->
+        <g data-id="node_parameter_generation" id="node_parameter_generation" data-class="child_node" data-parent="block_llm_agent">
+            <rect x="428" y="266" width="112" height="58" rx="10" fill="#e2f5df" stroke="#689f63" stroke-width="1.5" />
+            <text x="484" y="291" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" font-weight="500" fill="#000000" text-anchor="middle">Parameter</text>
+            <text x="484" y="309" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" font-weight="500" fill="#000000" text-anchor="middle">Generation</text>
+        </g>
+    </g>
+
+    <!-- Evaluation & Scoring Block -->
+    <g data-id="block_eval_scoring" id="block_eval_scoring" data-class="block" data-parent="root">
+        <rect x="576" y="6" width="138" height="341" rx="20" fill="#dceaff" stroke="#8cbbf1" stroke-width="2" />
+        <text data-id="text_eval_title_1" id="text_eval_title_1" data-class="text_node" data-parent="block_eval_scoring" x="645" y="36" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="13.5" font-weight="bold" fill="#000000" text-anchor="middle">Evaluation</text>
+        <text data-id="text_eval_title_2" id="text_eval_title_2" data-class="text_node" data-parent="block_eval_scoring" x="645" y="55" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="13.5" font-weight="bold" fill="#000000" text-anchor="middle">&amp; Scoring</text>
+
+        <!-- Evaluation Icon (composite_whole) -->
+        <g data-id="composite_eval_icon" id="composite_eval_icon" data-class="composite_whole" data-parent="block_eval_scoring">
+            <!-- Screen Outline -->
+            <rect data-id="part_ev_screen" id="part_ev_screen" data-class="composite_part" data-parent="composite_eval_icon" x="621" y="74" width="48" height="34" rx="3" fill="none" stroke="#4a5568" stroke-width="2.2" />
+            <!-- Base / Stand -->
+            <line data-id="part_ev_stand1" id="part_ev_stand1" data-class="composite_part" data-parent="composite_eval_icon" x1="645" y1="108" x2="645" y2="114" stroke="#4a5568" stroke-width="2.2" />
+            <line data-id="part_ev_stand2" id="part_ev_stand2" data-class="composite_part" data-parent="composite_eval_icon" x1="635" y1="114" x2="655" y2="114" stroke="#4a5568" stroke-width="2.2" />
+            <!-- Database cylinder inside -->
+            <path data-id="part_ev_db" id="part_ev_db" data-class="composite_part" data-parent="composite_eval_icon" d="M 627 88 C 627 86.5 630 85.5 634 85.5 C 638 85.5 641 86.5 641 88 L 641 98 C 641 99.5 638 100.5 634 100.5 C 630 100.5 627 99.5 627 98 Z" fill="none" stroke="#4a5568" stroke-width="1.8" />
+            <path data-id="part_ev_db_line" id="part_ev_db_line" data-class="composite_part" data-parent="composite_eval_icon" d="M 627 92 C 627 93.5 630 94.5 634 94.5 C 638 94.5 641 93.5 641 92" fill="none" stroke="#4a5568" stroke-width="1.8" />
+            <!-- Graph with nodes -->
+            <polyline data-id="part_ev_graph_line" id="part_ev_graph_line" data-class="composite_part" data-parent="composite_eval_icon" points="633,78 642,88 650,81 661,96" fill="none" stroke="#4a5568" stroke-width="2" />
+            <circle data-id="part_ev_gc1" id="part_ev_gc1" data-class="composite_part" data-parent="composite_eval_icon" cx="633" cy="78" r="2.5" fill="#dceaff" stroke="#4a5568" stroke-width="2" />
+            <circle data-id="part_ev_gc2" id="part_ev_gc2" data-class="composite_part" data-parent="composite_eval_icon" cx="642" cy="88" r="2.5" fill="#dceaff" stroke="#4a5568" stroke-width="2" />
+            <circle data-id="part_ev_gc3" id="part_ev_gc3" data-class="composite_part" data-parent="composite_eval_icon" cx="650" cy="81" r="2.5" fill="#dceaff" stroke="#4a5568" stroke-width="2" />
+            <circle data-id="part_ev_gc4" id="part_ev_gc4" data-class="composite_part" data-parent="composite_eval_icon" cx="661" cy="96" r="2.5" fill="#dceaff" stroke="#4a5568" stroke-width="2" />
+        </g>
+
+        <!-- Correct Tool Selection -->
+        <g data-id="node_eval_correct_tool" id="node_eval_correct_tool" data-class="child_node" data-parent="block_eval_scoring">
+            <rect x="589" y="133" width="112" height="49" rx="10" fill="#bad8ff" stroke="#4878a4" stroke-width="1.5" />
+            <text x="645" y="153" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" font-weight="500" fill="#000000" text-anchor="middle">Correct Tool</text>
+            <text x="645" y="170" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" font-weight="500" fill="#000000" text-anchor="middle">Selection</text>
+        </g>
+
+        <!-- Anti-interference Robustness -->
+        <g data-id="node_eval_robustness" id="node_eval_robustness" data-class="child_node" data-parent="block_eval_scoring">
+            <rect x="589" y="190" width="112" height="49" rx="10" fill="#bad8ff" stroke="#4878a4" stroke-width="1.5" />
+            <text x="645" y="210" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="500" fill="#000000" text-anchor="middle">Anti-interference</text>
+            <text x="645" y="227" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="500" fill="#000000" text-anchor="middle">Robustness</text>
+        </g>
+
+        <!-- Task Completion -->
+        <g data-id="node_eval_task_completion" id="node_eval_task_completion" data-class="child_node" data-parent="block_eval_scoring">
+            <rect x="589" y="247" width="112" height="31" rx="8" fill="#bad8ff" stroke="#4878a4" stroke-width="1.5" />
+            <text x="645" y="267" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="500" fill="#000000" text-anchor="middle">Task Completion</text>
+        </g>
+
+        <!-- Efficiency Metrics -->
+        <g data-id="node_eval_efficiency" id="node_eval_efficiency" data-class="child_node" data-parent="block_eval_scoring">
+            <rect x="589" y="286" width="112" height="31" rx="8" fill="#bad8ff" stroke="#4878a4" stroke-width="1.5" />
+            <text x="645" y="306" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="500" fill="#000000" text-anchor="middle">Efficiency Metrics</text>
+        </g>
+    </g>
+
+    <!-- Edge Connections -->
+    <!-- Correct Tools & Distractor Tools to Candidate Tool List -->
+    <path data-id="edge_tools_to_candidate" id="edge_tools_to_candidate" data-class="edge" data-source="node_correct_tools" data-target="node_candidate_tool_list" d="M 85 104.5 C 93 104.5, 90 125, 95 125 M 89 164.5 C 97 164.5, 90 125, 95 125 L 99 125" fill="none" stroke="#111827" stroke-width="1.5" marker-end="url(#arrow)" />
+
+    <!-- Candidate Tool List to AutoGen Sandbox -->
+    <path data-id="edge_mcp_to_sandbox" id="edge_mcp_to_sandbox" data-class="edge" data-source="node_candidate_tool_list" data-target="block_autogen_sandbox" d="M 176 137 L 213 137" fill="none" stroke="#111827" stroke-width="1.5" marker-end="url(#arrow)" />
+
+    <!-- Task Set to AutoGen Sandbox -->
+    <path data-id="edge_task_to_sandbox" id="edge_task_to_sandbox" data-class="edge" data-source="node_real_world_tasks" data-target="block_autogen_sandbox" d="M 172 284.5 L 213 284.5" fill="none" stroke="#111827" stroke-width="1.5" marker-end="url(#arrow)" />
+
+    <!-- Sandbox to LLM Agent (Tool Calls) -->
+    <g>
+        <path data-id="edge_sandbox_to_agent" id="edge_sandbox_to_agent" data-class="edge" data-source="block_autogen_sandbox" data-target="block_llm_agent" d="M 353 146 L 413 146" fill="none" stroke="#111827" stroke-width="1.5" marker-end="url(#arrow)" />
+        <text data-id="text_tool_calls" id="text_tool_calls" data-class="text_node" data-parent="root" x="384" y="139" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10.5" fill="#000000" text-anchor="middle">Tool Calls</text>
+    </g>
+
+    <!-- LLM Agent to Sandbox (Execution Feedback) -->
+    <g>
+        <path data-id="edge_agent_to_sandbox" id="edge_agent_to_sandbox" data-class="edge" data-source="block_llm_agent" data-target="block_autogen_sandbox" d="M 415 206 L 355 206" fill="none" stroke="#111827" stroke-width="1.5" marker-end="url(#arrow)" />
+        <text data-id="text_exec_feedback_1" id="text_exec_feedback_1" data-class="text_node" data-parent="root" x="384" y="221" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#000000" text-anchor="middle">Execution</text>
+        <text data-id="text_exec_feedback_2" id="text_exec_feedback_2" data-class="text_node" data-parent="root" x="384" y="233" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#000000" text-anchor="middle">Feedback</text>
+    </g>
+
+    <!-- LLM Agent to Evaluation & Scoring -->
+    <path data-id="edge_agent_to_eval" id="edge_agent_to_eval" data-class="edge" data-source="block_llm_agent" data-target="block_eval_scoring" d="M 553 177 L 574 177" fill="none" stroke="#111827" stroke-width="1.5" marker-end="url(#arrow)" />
+
+    <!-- Narration Subtitle Banner -->
+    <g id="narration_banner">
+        <text id="narr_ts1" class="narr_text" x="50%" y="385" text-anchor="middle">Within the MCP Tool Collection, the pipeline starts with the designated correct tools.</text>
+        <text id="narr_ts2" class="narr_text" x="50%" y="385" text-anchor="middle">These are combined with a set of distractor tools.</text>
+        <text id="narr_ts3" class="narr_text" x="50%" y="385" text-anchor="middle">Both streams merge into the candidate tool list.</text>
+        <text id="narr_ts4" class="narr_text" x="50%" y="385" text-anchor="middle">In parallel, the task set provides a suite of real-world tasks.</text>
+        <text id="narr_ts5" class="narr_text" x="50%" y="385" text-anchor="middle">Both candidate tools and tasks feed directly into the AutoGen-based Sandbox.</text>
+        <text id="narr_ts6" class="narr_text" x="50%" y="385" text-anchor="middle">Inside the sandbox, dynamic MCP tool loading is initiated.</text>
+        <text id="narr_ts7" class="narr_text" x="50%" y="385" text-anchor="middle">The sandbox runs local MCP servers.</text>
+        <text id="narr_ts8" class="narr_text" x="50%" y="385" text-anchor="middle">This architecture enables stable and reproducible execution.</text>
+        <text id="narr_ts9" class="narr_text" x="50%" y="377" text-anchor="middle">
+            <tspan x="50%" dy="0">The sandbox communicates bidirectionally with the LLM-based Agent</tspan>
+            <tspan x="50%" dy="1.25em">via tool calls and execution feedback.</tspan>
+        </text>
+        <text id="narr_ts10" class="narr_text" x="50%" y="385" text-anchor="middle">The agent first processes task understanding.</text>
+        <text id="narr_ts11" class="narr_text" x="50%" y="385" text-anchor="middle">It then proceeds to tool selection.</text>
+        <text id="narr_ts12" class="narr_text" x="50%" y="385" text-anchor="middle">Next, the agent completes parameter generation.</text>
+        <text id="narr_ts13" class="narr_text" x="50%" y="385" text-anchor="middle">Outputs from the agent flow into the Evaluation and Scoring module.</text>
+        <text id="narr_ts14" class="narr_text" x="50%" y="385" text-anchor="middle">The system evaluates correct tool selection,</text>
+        <text id="narr_ts15" class="narr_text" x="50%" y="385" text-anchor="middle">assesses anti-interference robustness,</text>
+        <text id="narr_ts16" class="narr_text" x="50%" y="385" text-anchor="middle">tracks overall task completion,</text>
+        <text id="narr_ts17" class="narr_text" x="50%" y="385" text-anchor="middle">and measures final efficiency metrics.</text>
+    </g>
+
+    <!-- Animated Focus Box -->
+    <rect id="focus_box" fill="none" stroke="#FF0000" stroke-width="4" stroke-dasharray="8,4" rx="6" />
+</svg>

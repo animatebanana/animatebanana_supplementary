@@ -1,0 +1,226 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 620" width="500" height="620">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#4281b9" />
+    </marker>
+    <style>
+      /* Global dormant state for all animated elements */
+      #node_example, #node_turn_on, #edge_ex_to_turn, #node_any_report, #label_yes_1, #edge_turn_to_report, 
+      #node_search_error, #label_yes_2, #edge_report_to_search, #node_computer_okay, #label_no_2, #edge_report_to_okay, 
+      #node_power_light, #label_no_1, #edge_turn_to_light, #node_pc_on, #label_yes_3, #edge_light_to_pcon, 
+      #node_check_cord, #label_no_3, #edge_light_to_cord {
+        filter: grayscale(100%) opacity(0.4);
+        animation-name: colorPop;
+        animation-duration: 0.5s;
+        animation-fill-mode: forwards;
+      }
+
+      /* Single color pop keyframe */
+      @keyframes colorPop {
+        to {
+          filter: grayscale(0%) opacity(1);
+        }
+      }
+
+      /* Grouped animation delays (Delay = Timestamp * 0.5s) */
+      #node_example { animation-delay: 0.5s; }
+      #node_turn_on, #edge_ex_to_turn { animation-delay: 1.0s; }
+      #node_any_report, #label_yes_1, #edge_turn_to_report { animation-delay: 1.5s; }
+      #node_search_error, #label_yes_2, #edge_report_to_search { animation-delay: 2.0s; }
+      #node_computer_okay, #label_no_2, #edge_report_to_okay { animation-delay: 2.5s; }
+      #node_power_light, #label_no_1, #edge_turn_to_light { animation-delay: 3.0s; }
+      #node_pc_on, #label_yes_3, #edge_light_to_pcon { animation-delay: 3.5s; }
+      #node_check_cord, #label_no_3, #edge_light_to_cord { animation-delay: 4.0s; }
+
+      /* Narration Banner Animations */
+      @keyframes narrativeActive {
+        0% { opacity: 0; }
+        2% { opacity: 1; }
+        98% { opacity: 1; }
+        100% { opacity: 0; }
+      }
+
+      @keyframes narrativeActiveLast {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+      }
+
+      #narr_ts1 { animation: narrativeActive 0.5s linear 0.5s forwards; opacity: 0; }
+      #narr_ts2 { animation: narrativeActive 0.5s linear 1.0s forwards; opacity: 0; }
+      #narr_ts3 { animation: narrativeActive 0.5s linear 1.5s forwards; opacity: 0; }
+      #narr_ts4 { animation: narrativeActive 0.5s linear 2.0s forwards; opacity: 0; }
+      #narr_ts5 { animation: narrativeActive 0.5s linear 2.5s forwards; opacity: 0; }
+      #narr_ts6 { animation: narrativeActive 0.5s linear 3.0s forwards; opacity: 0; }
+      #narr_ts7 { animation: narrativeActive 0.5s linear 3.5s forwards; opacity: 0; }
+      #narr_ts8 { animation: narrativeActiveLast 0.5s linear 4.0s forwards; opacity: 0; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="500" height="620" fill="#ffffff" />
+
+  <!-- ==================== EDGES ==================== -->
+  <path id="edge_ex_to_turn" data-id="edge_ex_to_turn" data-class="edge" data-source="node_example" data-target="node_turn_on" d="M 272 58 L 272 91" fill="none" stroke="#4281b9" stroke-width="2" marker-end="url(#arrow)" />
+  
+  <path id="edge_turn_to_report" data-id="edge_turn_to_report" data-class="edge" data-source="node_turn_on" data-target="node_any_report" d="M 197 145 L 160 145 L 160 184" fill="none" stroke="#4281b9" stroke-width="2" marker-end="url(#arrow)" />
+  
+  <path id="edge_turn_to_light" data-id="edge_turn_to_light" data-class="edge" data-source="node_turn_on" data-target="node_power_light" d="M 347 145 L 418 145 L 418 184" fill="none" stroke="#4281b9" stroke-width="2" marker-end="url(#arrow)" />
+  
+  <path id="edge_report_to_search" data-id="edge_report_to_search" data-class="edge" data-source="node_any_report" data-target="node_search_error" d="M 82 243 L 54 243 L 54 359" fill="none" stroke="#4281b9" stroke-width="2" marker-end="url(#arrow)" />
+  
+  <path id="edge_report_to_okay" data-id="edge_report_to_okay" data-class="edge" data-source="node_any_report" data-target="node_computer_okay" d="M 160 298 L 160 338 L 184 338 L 184 398" fill="none" stroke="#4281b9" stroke-width="2" marker-end="url(#arrow)" />
+  
+  <path id="edge_light_to_pcon" data-id="edge_light_to_pcon" data-class="edge" data-source="node_power_light" data-target="node_pc_on" d="M 338 243 L 302 243 L 302 333" fill="none" stroke="#4281b9" stroke-width="2" marker-end="url(#arrow)" />
+  
+  <path id="edge_light_to_cord" data-id="edge_light_to_cord" data-class="edge" data-source="node_power_light" data-target="node_check_cord" d="M 418 298 L 418 386" fill="none" stroke="#4281b9" stroke-width="2" marker-end="url(#arrow)" />
+
+  <!-- ==================== NODES ==================== -->
+  <!-- Example Node -->
+  <g id="node_example" data-id="node_example" data-class="standalone_node" data-parent="root">
+    <rect x="185" y="14" width="174" height="44" rx="22" ry="22" fill="#4281b9" stroke="#356a99" stroke-width="1" />
+    <text x="272" y="41" fill="#ffffff" font-family="Arial, sans-serif" font-size="16" text-anchor="middle">Example</text>
+  </g>
+
+  <!-- Does the computer turn on? -->
+  <g id="node_turn_on" data-id="node_turn_on" data-class="standalone_node" data-parent="root">
+    <polygon points="272,95 347,145 272,195 197,145" fill="#4281b9" stroke="#356a99" stroke-width="1" />
+    <text x="272" y="132" fill="#ffffff" font-family="Arial, sans-serif" font-size="13" text-anchor="middle">
+      <tspan x="272" dy="0">Does the</tspan>
+      <tspan x="272" dy="16">computer turn</tspan>
+      <tspan x="272" dy="16">on?</tspan>
+    </text>
+  </g>
+
+  <!-- Any Report -->
+  <g id="node_any_report" data-id="node_any_report" data-class="standalone_node" data-parent="root">
+    <polygon points="160,188 238,243 160,298 82,243" fill="#4281b9" stroke="#356a99" stroke-width="1" />
+    <text x="160" y="248" fill="#ffffff" font-family="Arial, sans-serif" font-size="15" text-anchor="middle">Any Report</text>
+  </g>
+
+  <!-- Is the computer power light on? -->
+  <g id="node_power_light" data-id="node_power_light" data-class="standalone_node" data-parent="root">
+    <polygon points="418,188 498,243 418,298 338,243" fill="#4281b9" stroke="#356a99" stroke-width="1" />
+    <text x="418" y="238" fill="#ffffff" font-family="Arial, sans-serif" font-size="13" text-anchor="middle">
+      <tspan x="418" dy="0">Is the computer</tspan>
+      <tspan x="418" dy="16">power light on?</tspan>
+    </text>
+  </g>
+
+  <!-- Perform a search for the error message -->
+  <g id="node_search_error" data-id="node_search_error" data-class="standalone_node" data-parent="root">
+    <rect x="1" y="363" width="107" height="107" fill="#4281b9" stroke="#356a99" stroke-width="1" />
+    <text x="54" y="393" fill="#ffffff" font-family="Arial, sans-serif" font-size="13" text-anchor="middle">
+      <tspan x="54" dy="0">Perform a</tspan>
+      <tspan x="54" dy="16">search for the</tspan>
+      <tspan x="54" dy="16">error</tspan>
+      <tspan x="54" dy="16">message</tspan>
+    </text>
+  </g>
+
+  <!-- Computer Okay -->
+  <g id="node_computer_okay" data-id="node_computer_okay" data-class="standalone_node" data-parent="root">
+    <rect x="132" y="402" width="105" height="58" rx="29" ry="29" fill="#4281b9" stroke="#356a99" stroke-width="1" />
+    <text x="184" y="431" fill="#ffffff" font-family="Arial, sans-serif" font-size="13" text-anchor="middle">
+      <tspan x="184" dy="0">Computer</tspan>
+      <tspan x="184" dy="16">Okay</tspan>
+    </text>
+  </g>
+
+  <!-- PC ON -->
+  <g id="node_pc_on" data-id="node_pc_on" data-class="standalone_node" data-parent="root">
+    <rect x="250" y="337" width="104" height="80" fill="#4281b9" stroke="#356a99" stroke-width="1" />
+    <text x="302" y="382" fill="#ffffff" font-family="Arial, sans-serif" font-size="15" text-anchor="middle">PC ON</text>
+  </g>
+
+  <!-- Check the computer power cord -->
+  <g id="node_check_cord" data-id="node_check_cord" data-class="standalone_node" data-parent="root">
+    <rect x="366" y="390" width="105" height="80" fill="#4281b9" stroke="#356a99" stroke-width="1" />
+    <text x="418" y="415" fill="#ffffff" font-family="Arial, sans-serif" font-size="13" text-anchor="middle">
+      <tspan x="418" dy="0">Check the</tspan>
+      <tspan x="418" dy="16">computer</tspan>
+      <tspan x="418" dy="16">power cord</tspan>
+    </text>
+  </g>
+
+  <!-- ==================== LABELS ==================== -->
+  <!-- Yes (Turn on -> Report) -->
+  <text id="label_yes_1" data-id="label_yes_1" data-class="text_node" data-parent="root" x="175" y="140" fill="#4281b9" font-family="Arial, sans-serif" font-size="14" text-anchor="end">Yes</text>
+
+  <!-- No (Turn on -> Light) -->
+  <text id="label_no_1" data-id="label_no_1" data-class="text_node" data-parent="root" x="395" y="140" fill="#4281b9" font-family="Arial, sans-serif" font-size="14" text-anchor="start">No</text>
+
+  <!-- Yes (Report -> Search) -->
+  <text id="label_yes_2" data-id="label_yes_2" data-class="text_node" data-parent="root" x="50" y="295" fill="#4281b9" font-family="Arial, sans-serif" font-size="14" text-anchor="end">Yes</text>
+
+  <!-- No (Report -> Okay) -->
+  <text id="label_no_2" data-id="label_no_2" data-class="text_node" data-parent="root" x="180" y="345" fill="#4281b9" font-family="Arial, sans-serif" font-size="14" text-anchor="start">No</text>
+
+  <!-- Yes (Light -> PC ON) -->
+  <text id="label_yes_3" data-id="label_yes_3" data-class="text_node" data-parent="root" x="298" y="275" fill="#4281b9" font-family="Arial, sans-serif" font-size="14" text-anchor="end">Yes</text>
+
+  <!-- No (Light -> Cord) -->
+  <text id="label_no_3" data-id="label_no_3" data-class="text_node" data-parent="root" x="422" y="350" fill="#4281b9" font-family="Arial, sans-serif" font-size="14" text-anchor="start">No</text>
+
+  <!-- ==================== NARRATION BANNER ==================== -->
+  <g id="narration_banner">
+    <!-- Banner Background Card -->
+    <rect x="15" y="495" width="470" height="110" rx="8" fill="#f8f9fa" stroke="#e9ecef" stroke-width="1.5" />
+    
+    <!-- TS 1 Narrative -->
+    <text id="narr_ts1" x="50%" y="540" fill="#2c3e50" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle">
+      <tspan x="50%" dy="0">The diagnostic workflow begins with</tspan>
+      <tspan x="50%" dy="18">an initial evaluation of the system's state.</tspan>
+    </text>
+
+    <!-- TS 2 Narrative -->
+    <text id="narr_ts2" x="50%" y="531" fill="#2c3e50" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle">
+      <tspan x="50%" dy="0">First, the protocol checks whether the computer</tspan>
+      <tspan x="50%" dy="18">successfully turns on, dividing the evaluation</tspan>
+      <tspan x="50%" dy="18">into two primary diagnostic branches.</tspan>
+    </text>
+
+    <!-- TS 3 Narrative -->
+    <text id="narr_ts3" x="50%" y="531" fill="#2c3e50" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle">
+      <tspan x="50%" dy="0">In the system initialization branch, if the computer</tspan>
+      <tspan x="50%" dy="18">successfully turns on, the workflow evaluates whether</tspan>
+      <tspan x="50%" dy="18">any error reports have been generated.</tspan>
+    </text>
+
+    <!-- TS 4 Narrative -->
+    <text id="narr_ts4" x="50%" y="531" fill="#2c3e50" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle">
+      <tspan x="50%" dy="0">If an error report is present, the workflow requires</tspan>
+      <tspan x="50%" dy="18">performing a specific search for the provided</tspan>
+      <tspan x="50%" dy="18">error message to resolve the conflict.</tspan>
+    </text>
+
+    <!-- TS 5 Narrative -->
+    <text id="narr_ts5" x="50%" y="531" fill="#2c3e50" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle">
+      <tspan x="50%" dy="0">Alternatively, if no error reports are detected,</tspan>
+      <tspan x="50%" dy="18">the device is verified as fully functional, terminating</tspan>
+      <tspan x="50%" dy="18">the process with a 'Computer Okay' state.</tspan>
+    </text>
+
+    <!-- TS 6 Narrative -->
+    <text id="narr_ts6" x="50%" y="522" fill="#2c3e50" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle">
+      <tspan x="50%" dy="0">In the power failure branch, if the computer fails</tspan>
+      <tspan x="50%" dy="18">to turn on, the protocol investigates the physical power</tspan>
+      <tspan x="50%" dy="18">delivery mechanism by checking the status of the</tspan>
+      <tspan x="50%" dy="18">computer's power indicator light.</tspan>
+    </text>
+
+    <!-- TS 7 Narrative -->
+    <text id="narr_ts7" x="50%" y="531" fill="#2c3e50" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle">
+      <tspan x="50%" dy="0">If the power light is illuminated, the system state</tspan>
+      <tspan x="50%" dy="18">is classified as 'PC ON', indicating that power is</tspan>
+      <tspan x="50%" dy="18">reaching the unit despite the boot failure.</tspan>
+    </text>
+
+    <!-- TS 8 Narrative -->
+    <text id="narr_ts8" x="50%" y="522" fill="#2c3e50" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle">
+      <tspan x="50%" dy="0">Conversely, if the power light is not on, indicating</tspan>
+      <tspan x="50%" dy="18">a total lack of power delivery, the workflow directs the</tspan>
+      <tspan x="50%" dy="18">user to physically check the computer power cord</tspan>
+      <tspan x="50%" dy="18">to resolve the disconnection.</tspan>
+    </text>
+  </g>
+</svg>

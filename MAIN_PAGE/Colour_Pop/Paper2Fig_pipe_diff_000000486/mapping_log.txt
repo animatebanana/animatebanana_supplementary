@@ -1,0 +1,50 @@
+=== Colour Pop Sequence Mapping ===
+
+Frame Image : frame_00.png
+Event Delay : 0.5s
+Narration   : The pipeline begins with an input RGB image containing tabletop objects.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Event Delay : 1.0s
+Narration   : An off-the-shelf instance segmentation module detects class labels, bounding boxes, and object masks.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Event Delay : 1.5s
+Narration   : The detected bounding box isolates the specific target object in the scene.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Event Delay : 2.0s
+Narration   : The cropped image patch is then fed simultaneously into two parallel estimation branches.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Event Delay : 2.5s
+Narration   : The Metric Scale Object Shape branch estimates the 3D metric geometry in camera coordinates.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Event Delay : 3.0s
+Narration   : This generates a metric scale mesh aligned with the camera coordinate system.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Event Delay : 3.5s
+Narration   : The predicted metric mesh is then projected onto the image plane via depth rendering.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Event Delay : 4.0s
+Narration   : This produces a dense rendered depth map of the target object.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Event Delay : 4.5s
+Narration   : In parallel, the Normalized Object Coordinate Space branch processes the image patch.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Event Delay : 5.0s
+Narration   : It predicts a canonical coordinate map defined directly in the object reference frame.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Event Delay : 5.5s
+Narration   : A similarity transformation aligns the rendered depth map with the predicted normalized coordinate map.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Event Delay : 6.0s
+Narration   : The final output accurately determines the six-dimensional object pose and bounding box size.
+--------------------------------------------------------------------------------
