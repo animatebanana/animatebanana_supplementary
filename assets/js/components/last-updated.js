@@ -1,5 +1,5 @@
 /**
- * The footer's "Last updated" date, read from the files rather than typed.
+ * The footer's "Last updated" date and time, read from the files rather than typed.
  *
  * It used to be nine copies of one hand-written string, and nine copies of a
  * string is a string that goes stale: it sat on 24 September through a day of
@@ -58,10 +58,13 @@ const MAX_PROBES = 24;
 /** A timestamp this close to now is the server declining to answer, not an edit. */
 const SUSPICIOUSLY_NOW_MS = 60 * 1000;
 
-/** `25 September 2026`, in AOE. No padding, matching the hand-written original. */
+const pad2 = (n) => String(n).padStart(2, '0');
+
+/** `25 September 2026, 03:06`, in AOE: the date unpadded, the 24-hour time padded. */
 function formatAOE(ms) {
   const d = new Date(ms - AOE_OFFSET_MS);
-  return `${d.getUTCDate()} ${MONTHS[d.getUTCMonth()]} ${d.getUTCFullYear()}`;
+  return `${d.getUTCDate()} ${MONTHS[d.getUTCMonth()]} ${d.getUTCFullYear()}, ` +
+    `${pad2(d.getUTCHours())}:${pad2(d.getUTCMinutes())}`;
 }
 
 /** The document's own timestamp, or null if the browser had nothing real to give. */
@@ -82,16 +85,19 @@ function documentTime() {
 async function subresourceTime() {
   if (!/^https?:$/.test(location.protocol) || typeof fetch !== 'function') return null;
 
-  const urls = [];
+  const found = [];
   const seen = new Set();
   for (const entry of performance.getEntriesByType?.('resource') || []) {
     const url = entry.name;
     if (seen.has(url) || !WATCHED.test(url)) continue;
     if (new URL(url, location.href).origin !== location.origin) continue;
     seen.add(url);
-    urls.push(url);
-    if (urls.length >= MAX_PROBES) break;
+    found.push(url);
   }
+  // Content first: the data files are what an edit usually touches, and they
+  // load after the stylesheets and scripts, so a plain first-N cut missed them.
+  const isData = (u) => new URL(u, location.href).pathname.includes('/data/');
+  const urls = [...found.filter(isData), ...found.filter((u) => !isData(u))].slice(0, MAX_PROBES);
   if (!urls.length) return null;
 
   const results = await Promise.allSettled(

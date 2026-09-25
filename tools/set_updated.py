@@ -1,16 +1,17 @@
 #!/usr/bin/env python3
 """
-Refresh the "Last updated ..." date written into the site footer.
+Refresh the "Last updated ..." date and time written into the site footer.
 
-The date shown to a reader is normally worked out in the browser, by
+The stamp shown to a reader is normally worked out in the browser, by
 `assets/js/components/last-updated.js`, from the modification times of the files
 the page actually loaded. What is in the markup is its fallback: the answer for
 a reader with no JavaScript, and the starting point the component only ever
 replaces with something newer. This keeps that fallback honest.
 
-    python tools/set_updated.py              # today, in AOE
-    python tools/set_updated.py 2026-09-24   # a specific day, as given
-    python tools/set_updated.py --check      # report, change nothing
+    python tools/set_updated.py                    # now, in AOE
+    python tools/set_updated.py 2026-09-24T18:30   # a specific AOE time, as given
+    python tools/set_updated.py 2026-09-24         # a specific day (00:00 AOE)
+    python tools/set_updated.py --check            # report, change nothing
 
 AOE is UTC-12, so "today in AOE" is not today in the local zone for the first
 half of the day: at 09:00 UTC on the 25th it is still the 24th anywhere on
@@ -31,13 +32,13 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 AOE_OFFSET = datetime.timedelta(hours=12)
 
 
-def today_aoe():
-    return (datetime.datetime.now(datetime.timezone.utc) - AOE_OFFSET).date()
+def now_aoe():
+    return datetime.datetime.now(datetime.timezone.utc) - AOE_OFFSET
 
 
 def format_date(d):
-    """'25 September 2026' -- no zero padding, which %-d cannot do portably."""
-    return '%d %s %d' % (d.day, d.strftime('%B'), d.year)
+    """'25 September 2026, 03:06' -- day unpadded (which %-d cannot do portably), time 24-hour."""
+    return '%d %s %d, %02d:%02d' % (d.day, d.strftime('%B'), d.year, d.hour, d.minute)
 
 
 def main(argv):
@@ -46,11 +47,11 @@ def main(argv):
 
     if args:
         try:
-            stamp = format_date(datetime.date.fromisoformat(args[0]))
+            stamp = format_date(datetime.datetime.fromisoformat(args[0]))
         except ValueError:
-            sys.exit('not a date (expected YYYY-MM-DD): %s' % args[0])
+            sys.exit('not a date (expected YYYY-MM-DD or YYYY-MM-DDTHH:MM): %s' % args[0])
     else:
-        stamp = format_date(today_aoe())
+        stamp = format_date(now_aoe())
 
     pages = sorted(ROOT.glob('*.html'))
     hits = changed = 0

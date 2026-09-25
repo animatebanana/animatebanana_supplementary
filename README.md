@@ -130,7 +130,7 @@ Every page is reachable from the **Menu** button (top right).
 │
 └── tools/                   ← maintenance scripts (not needed to view the site)
     ├── serve.py             ·  local server with video seeking support (see Quick start)
-    ├── set_updated.py       ·  refreshes the footer date's no-JavaScript fallback
+    ├── set_updated.py       ·  refreshes the footer stamp's no-JavaScript fallback
     └── *.py                 ·  scripts used to build previews, exports, and captions
 ```
 
@@ -154,14 +154,14 @@ Every page is reachable from the **Menu** button (top right).
   shared with the distribution build carry its compressed media (H.264 at CRF 30
   tuned for animation, palette-quantised PNGs, original dimensions and frame
   rates throughout); the rest are still at full quality.
-- **The footer date:** "Last updated" is not typed into the pages. Each one
+- **The footer date and time:** "Last updated" is not typed into the pages. Each one
   reports when it was really last changed, worked out in the browser by
   `assets/js/components/last-updated.js` from the modification times of the
   document and of the code and content it loaded — so editing a data file or a
-  component moves the date, not just editing the HTML. Media is deliberately
-  ignored: a re-encoded clip is the same example, not an update. The date is
-  given in AOE (UTC−12), which for the first half of a UTC day is still
-  yesterday's date. A real date ships in the markup as the fallback for a reader
+  component moves the stamp, not just editing the HTML. Media is deliberately
+  ignored: a re-encoded clip is the same example, not an update. The date and time are
+  given in AOE (UTC−12), e.g. `25 September 2026, 03:06 (AOE)`, which for the first half of a UTC day is still
+  yesterday's date. A real date and time ship in the markup as the fallback for a reader
   with no JavaScript, and `tools/set_updated.py` refreshes it; the component
   only ever replaces it with something newer. The two pipeline pages carry no
   footer line.
