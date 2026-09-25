@@ -185,5 +185,5 @@ Every page is reachable from the **Menu** button (top right).
   so before it hands the file over, and points at
   <https://get.adobe.com/reader/> and <https://www.foxit.com/pdf-reader/>.
   Playback is driven by the control bar drawn on the page itself: play/pause,
-  a minus and plus pair for speed, and single-frame steps. Seven examples have
+  a minus and plus pair for speed, and single-frame steps. Eight examples have
   one so far; the rest show the PDF target as "coming soon".
