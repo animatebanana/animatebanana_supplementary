@@ -67,6 +67,22 @@
  * it shows the beats as a list and says plainly that the clip is missing rather
  * than faking a player over a still.
  *
+ * THE PDF EXPORT IS GATED, and deliberately. It is the one export that is not
+ * simply a file: the motion is drawn by the PDF itself — page-level scripting
+ * driving the frames — so Acrobat Reader and Foxit Reader play it and every
+ * other viewer, the browser's own included, shows one still frame and a control
+ * bar that does nothing. Handing that over as a bare download produces a
+ * visitor who believes the export is broken. So the PDF pill opens a short
+ * notice first: what plays it, where to get those two readers, and the fact
+ * that the play/pause and speed controls are the ones drawn on the page rather
+ * than the reader's own toolbar. The notice owns the download, so nobody
+ * reaches the file without passing the paragraph that makes it work.
+ *
+ * A format an example does not have yet keeps its place in the row and flashes
+ * "coming soon" when pressed. The row is a statement about what the pipeline
+ * exports, which is the same on every example; a row that lost a pill per
+ * example would read as a bug rather than as an inventory.
+ *
  * Part of the self-contained gallery module (assets/{css,js}/gallery/,
  * data/gallery/); it owns `.gl-*` and nothing else.
  */
@@ -74,6 +90,28 @@ import { formatTime, escapeHtml } from '../lib/format.js';
 
 const reducedMotion = () =>
   window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
+
+/**
+ * The two readers that can actually play the PDF exports, and where they come
+ * from. Both are the vendors' own download pages rather than a mirror, and both
+ * are free — which is the thing someone being asked to install something wants
+ * to know first.
+ */
+const PDF_READERS = [
+  {
+    name: 'Adobe Acrobat Reader',
+    href: 'https://get.adobe.com/reader/',
+    note: 'Free \u00B7 Windows, macOS, Android, iOS',
+  },
+  {
+    name: 'Foxit PDF Reader',
+    href: 'https://www.foxit.com/pdf-reader/',
+    note: 'Free \u00B7 Windows, macOS, Linux',
+  },
+];
+
+/** How long "Coming soon" stays up after a pill with no file behind it is pressed. */
+const SOON_MS = 1900;
 
 // Whether this viewer has muted the gallery. A per-browser convenience, so
 // localStorage is the right home for it; every access is guarded because a
@@ -150,6 +188,8 @@ export function beatTrack(beats, duration, nominal) {
 class GalleryLightbox {
   constructor() {
     this.el = null;
+    /** The PDF reader notice while one is open; null means "no dialog on top". */
+    this.notice = null;
   }
 
   /**
@@ -181,19 +221,68 @@ class GalleryLightbox {
     this.sheet = el.querySelector('.gl-sheet');
 
     el.addEventListener('click', (e) => {
+      // The reader notice is asked first and answers on its own. While it is up
+      // it is the dialog, so nothing behind it may act on a click — a stray
+      // Next or Back underneath would tear the notice down mid-sentence.
+      if (this.notice) {
+        // The download is a real <a download>: let the browser have the click
+        // and dismiss afterwards, so the anchor is still in the document when
+        // the default action runs.
+        if (e.target.closest('[data-notice-go]')) {
+          setTimeout(() => this._closeNotice(), 120);
+          return;
+        }
+        // A reader link opens in its own tab and leaves the notice standing:
+        // the visitor is being sent to install something and will come back to
+        // the download.
+        if (e.target.closest('[data-notice-keep]')) return;
+        // Dismissed by the cross, by "Not now", or by the backdrop around the
+        // box. A click on the notice's own prose is someone reading it — very
+        // likely selecting a URL — and must not take the notice away.
+        if (
+          e.target.closest('.gl-notice-x, .gl-notice-cancel') ||
+          !e.target.closest('.gl-notice-box')
+        ) {
+          e.preventDefault();
+          return this._closeNotice();
+        }
+        return;
+      }
       if (e.target.closest('[data-close]')) return this.close();
       if (e.target.closest('.gl-prev')) return this.step(-1);
       if (e.target.closest('.gl-next')) return this.step(1);
       if (e.target.closest('.gl-play, .gl-bigplay')) return this._toggle();
       if (e.target.closest('.gl-mute')) return this._setMuted(!this.video?.muted);
       if (e.target.closest('.gl-rate')) return this._cycleRate();
-      // An available export is an <a download> and needs no handler; only the
-      // disabled placeholder has to be stopped from doing anything.
+      // The PDF needs a word before it is handed over (see the note at the
+      // top), so its pill opens the notice rather than downloading.
+      const gated = e.target.closest('[data-notice]');
+      if (gated) {
+        e.preventDefault();
+        return this._openNotice(gated);
+      }
+      // Every other available export is a plain <a download> and needs no
+      // handler. A format this example does not have is a button, and pressing
+      // it flashes what it is waiting for rather than doing nothing.
       const off = e.target.closest('.gl-export--off');
-      if (off) return e.preventDefault();
+      if (off) {
+        e.preventDefault();
+        return this._flashSoon(off);
+      }
     });
 
     this._keys = (e) => {
+      // Same precedence as the click handler: while the notice is open it is
+      // the dialog, so Escape dismisses it rather than the example behind it,
+      // and none of the view's own shortcuts are listening.
+      if (this.notice) {
+        if (e.key === 'Escape') {
+          e.preventDefault();
+          return this._closeNotice();
+        }
+        if (e.key === 'Tab') return this._trap(e);
+        return;
+      }
       if (e.key === 'Escape') return this.close();
       if (e.key === 'Tab') return this._trap(e);
       // The seek bar owns Left/Right while it has focus — scrubbing a clip is
@@ -235,6 +324,9 @@ class GalleryLightbox {
    * opposite of what paging through one list should feel like.
    */
   go(k) {
+    // A notice belongs to the example it was opened from, and the repaint below
+    // replaces that pill, so the notice goes with it.
+    this._closeNotice({ focus: false });
     this.i = k;
     this._teardownPlayer();
     this._paint();
@@ -400,23 +492,166 @@ class GalleryLightbox {
    * the pipeline produced and keeps the page free of a zip library it would
    * otherwise need for one click.
    *
-   * A target the example does not have is rendered disabled and says why. The
-   * row keeps all three either way: which formats exist is a fact about the
-   * gallery, and a row that changed width per example would read as a bug.
+   * The PDF is the exception, and only in that its click is intercepted: the
+   * element is still an href/download pair, but the notice is what activates
+   * it, because a PDF whose animation the document draws itself reads as a
+   * broken export in every viewer but two.
+   *
+   * A target the example does not have is a button rather than a link and says
+   * "coming soon" when pressed. The row keeps every format either way: which
+   * formats exist is a fact about the gallery, and a row that changed width per
+   * example would read as a bug.
    */
   exportHTML(item, target) {
     const file = item.downloads?.[target.id];
     if (!file?.href) {
-      return `<span class="gl-export gl-export--off" aria-disabled="true"
-                    title="No ${escapeHtml(target.label)} export exists for this example.">${escapeHtml(
-        target.label
-      )}</span>`;
+      return `<button type="button" class="gl-export gl-export--off"
+                      title="The ${escapeHtml(target.label)} export for this example is still being produced.">
+                <span class="gl-export-face">${escapeHtml(target.label)}</span>
+                <span class="gl-soon" aria-hidden="true">Coming soon</span>
+                <span class="sr-only">— coming soon</span>
+              </button>`;
     }
-    return `<a class="gl-export" href="${escapeHtml(file.href)}"
-               download="${escapeHtml(file.name || '')}"
+    // `data-notice` is what the click handler looks for. The href and the
+    // download name sit on the element either way, so the notice has
+    // everything it needs and the pill is still a working download link if the
+    // handler never runs.
+    const gate = target.id === 'pdf' ? ' data-notice' : '';
+    return `<a class="gl-export gl-export--${escapeHtml(target.id)}" href="${escapeHtml(file.href)}"
+               download="${escapeHtml(file.name || '')}"${gate}
                title="${escapeHtml(file.note || `Download the ${target.label} export.`)}">${escapeHtml(
       target.label
     )}</a>`;
+  }
+
+  /* ---------- the PDF reader notice ---------- */
+
+  /**
+   * Flash "coming soon" on an export that has no file behind it yet.
+   *
+   * The bubble is on `:hover` and `:focus-visible` in CSS as well; this is the
+   * press, which is the only one a touch screen has. One timer for the view, so
+   * pressing two pills in turn does not leave the first one lit.
+   */
+  _flashSoon(pill) {
+    clearTimeout(this._soon);
+    for (const lit of this.sheet?.querySelectorAll('.gl-export.is-soon') || []) {
+      lit.classList.remove('is-soon');
+    }
+    pill.classList.add('is-soon');
+    this._soon = setTimeout(() => pill.classList.remove('is-soon'), SOON_MS);
+  }
+
+  /**
+   * The notice that stands between the PDF pill and the file.
+   *
+   * It says three things, in the order someone needs them: which two readers
+   * play the animation, where to get them, and that the play/pause and speed
+   * controls are the ones drawn on the page rather than the reader's toolbar.
+   * The download is the notice's primary action, so the paragraph is
+   * unavoidable exactly once per click and never twice.
+   *
+   * The clip behind it is paused: the notice is something to read, and reading
+   * it over a narration talking about something else is not reading it.
+   *
+   * @param {HTMLAnchorElement} pill  the PDF export link that was clicked
+   */
+  _openNotice(pill) {
+    if (this.notice || !this.el) return;
+    const href = pill.getAttribute('href');
+    if (!href) return;
+    // What the file saves as. It is set on the anchor and never printed — the
+    // pipeline's internal id is not something a visitor needs to read.
+    const name = pill.getAttribute('download') || '';
+
+    this._noticeFrom = pill;
+    this.video?.pause();
+
+    const notice = document.createElement('div');
+    notice.className = 'gl-notice';
+    notice.innerHTML = `
+      <div class="gl-notice-box" role="dialog" aria-modal="true" aria-labelledby="gl-notice-title">
+        <button type="button" class="gl-notice-x" aria-label="Close this notice">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+               stroke-linecap="round" aria-hidden="true">
+            <path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/>
+          </svg>
+        </button>
+
+        <p class="gl-notice-kicker">Before you open it</p>
+        <h2 class="gl-notice-title" id="gl-notice-title">Do you have the required PDF viewer?</h2>
+        <p class="gl-notice-lede">The downloaded PDF must be opened in <b>Adobe Acrobat Reader</b>
+          or <b>Foxit PDF Reader</b> to render and play the animation natively in the PDF and use the
+          controls. In a browser's built-in viewer, Chrome, Edge, Firefox, Safari, or in macOS
+          Preview the file still opens, but you will get one still frame and controls will not work.
+          You can download the viewer from the links given below.</p>
+
+        <section class="gl-notice-sec">
+          <h3 class="gl-notice-h">Don't have either? Both are free</h3>
+          <ul class="gl-notice-readers">
+            ${PDF_READERS.map(
+              (r) => `<li>
+                <a href="${escapeHtml(r.href)}" target="_blank" rel="noopener noreferrer"
+                   data-notice-keep>
+                  <span class="gl-notice-reader">${escapeHtml(r.name)}</span>
+                  <span class="gl-notice-note">${escapeHtml(r.note)}</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                       stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M14 4.5h5.5V10M19 5l-8.5 8.5"/>
+                    <path d="M18 14.5v4A1.5 1.5 0 0 1 16.5 20h-11A1.5 1.5 0 0 1 4 18.5v-11A1.5 1.5 0 0 1 5.5 6h4"/>
+                  </svg>
+                </a>
+              </li>`
+            ).join('')}
+          </ul>
+        </section>
+
+        <section class="gl-notice-sec">
+          <h3 class="gl-notice-h">How to use the controls</h3>
+          <p class="gl-notice-p">Use the small control bar embedded in the page, just under the
+            figure, not the reader's own toolbar.</p>
+          <ul class="gl-notice-keys">
+            <li><span class="gl-notice-key" aria-hidden="true">&#9654; &#10073;&#10073;</span>
+              <span>Play the animation, and press again to pause it.</span></li>
+            <li><span class="gl-notice-key" aria-hidden="true">&#8722; &nbsp;&#43;</span>
+              <span>Slow the playback down or speed it up, a step per press.</span></li>
+            <li><span class="gl-notice-key" aria-hidden="true">&#9664;&#10073; &#10073;&#9654;</span>
+              <span>Step one frame back or forward while it is paused.</span></li>
+          </ul>
+        </section>
+
+        <div class="gl-notice-foot">
+          <a class="gl-notice-go" href="${escapeHtml(href)}" download="${escapeHtml(name)}"
+             data-notice-go>Download the PDF</a>
+          <button type="button" class="gl-notice-cancel">Not now</button>
+        </div>
+      </div>`;
+
+    this.el.appendChild(notice);
+    this.notice = notice;
+    requestAnimationFrame(() => notice.classList.add('is-in'));
+    notice.querySelector('.gl-notice-go')?.focus();
+  }
+
+  /**
+   * Take the notice down.
+   *
+   * Focus goes back to the pill it came from, which is where the visitor was.
+   * `focus: false` is for the case where that pill is about to be repainted out
+   * of existence by a step, and the `document.contains` check covers the same
+   * thing happening for any other reason.
+   */
+  _closeNotice({ focus = true } = {}) {
+    const notice = this.notice;
+    if (!notice) return;
+    this.notice = null;
+    notice.classList.remove('is-in');
+    const done = () => notice.remove();
+    if (reducedMotion()) done();
+    else setTimeout(done, 160);
+    const from = this._noticeFrom;
+    this._noticeFrom = null;
+    if (focus && from && document.contains(from)) from.focus();
   }
 
   /* ---------- the player ---------- */
@@ -581,9 +816,15 @@ class GalleryLightbox {
   }
 
 
+  /**
+   * Keep Tab inside the view — or, while the reader notice is up, inside the
+   * notice. Trapping into the whole view there would tab the visitor onto
+   * buttons behind a dialog they cannot see past.
+   */
   _trap(e) {
+    const root = this.notice || this.el;
     const f = [
-      ...this.el.querySelectorAll(
+      ...root.querySelectorAll(
         'button:not([disabled]), input, [href], [tabindex]:not([tabindex="-1"])'
       ),
     ].filter((n) => n.offsetParent !== null);
@@ -603,6 +844,12 @@ class GalleryLightbox {
     document.removeEventListener('keydown', this._keys || (() => {}));
     const el = this.el;
     if (!el) return;
+    // The notice is a child of the view, so removing the view removes it — but
+    // the handles have to be dropped too, or the next open starts out believing
+    // a dialog is already on screen.
+    this.notice = null;
+    this._noticeFrom = null;
+    clearTimeout(this._soon);
     this.el = null;
     this._teardownPlayer();
     document.body.classList.remove('gl-locked');

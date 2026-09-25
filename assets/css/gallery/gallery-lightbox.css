@@ -9,6 +9,11 @@
   the transport, and the narration with the export row under it. There is no
   title bar and no metadata footer — the gallery knows an example's style and
   nothing else, so both would be empty chrome.
+
+  One thing sits on top of all of it: `.gl-notice`, the card that stands between
+  the PDF pill and the file. It is absolutely positioned inside `.gl` rather
+  than fixed to the window so it inherits the view's stacking and its own
+  children keep a real `offsetParent`, which is what the focus trap tests.
 */
 
 body.gl-locked { overflow: hidden; }
@@ -481,17 +486,277 @@ a.gl-export:hover {
 }
 a.gl-export:active { transform: translate(1px, 1px); box-shadow: 1px 1px 0 var(--ink); }
 a.gl-export:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
-/* Not every example has every format — the SVG package exists only where the
-   pipeline produced one. The target keeps its place in the row and says so on
-   hover rather than disappearing, so the row means the same thing on every
-   example. */
+/* Not every example has every format yet — the PDF exists only where the
+   pipeline has produced one. The target keeps its place in the row and answers
+   with "coming soon" rather than disappearing, so the row means the same thing
+   on every example and reads as the inventory it is.
+
+   It is a real <button>, not a disabled span: the message is only useful if you
+   can reach it, and a keyboard or a touch screen has no hover. */
 .gl-export--off {
+  position: relative;
+  margin: 0;
   color: var(--ink-faint);
+  background: var(--surface);
   border-style: dashed;
-  cursor: not-allowed;
+  box-shadow: none;
+  cursor: help;
+  line-height: 1.2;
 }
-.gl-export--off::after { content: ' — n/a'; font-weight: 400; letter-spacing: 0; }
+.gl-export--off:hover,
+.gl-export--off:focus-visible,
+.gl-export--off.is-soon { color: var(--ink-mid); border-color: var(--ink-mid); }
+.gl-export--off:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+/* The bubble. Hidden rather than absent so it can be announced by the sibling
+   .sr-only text once and not twice, and so showing it costs no layout. */
+.gl-soon {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 9px);
+  transform: translate(-50%, 4px);
+  padding: 4px 10px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+  color: var(--banana-ink);
+  background: var(--banana-soft);
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  box-shadow: 2px 2px 0 var(--ink);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+}
+/* The little tail, so the bubble points at the pill it belongs to. */
+.gl-soon::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  margin: -4px 0 0 -4px;
+  background: var(--banana-soft);
+  border-right: 1.5px solid var(--ink);
+  border-bottom: 1.5px solid var(--ink);
+  transform: rotate(45deg);
+}
+.gl-export--off:hover .gl-soon,
+.gl-export--off:focus-visible .gl-soon,
+.gl-export--off.is-soon .gl-soon { opacity: 1; transform: translate(-50%, 0); }
+
+/* ---- The PDF reader notice ----
+   The PDF exports animate under Acrobat Reader and Foxit and nowhere else, so
+   the pill opens this before handing the file over. It is a card on the view
+   rather than a browser dialog because it has three things to say and a
+   confirm() has room for none of them. */
+.gl-notice {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  padding: clamp(12px, 3vh, 34px) clamp(12px, 3vw, 34px);
+  background: rgba(26, 24, 21, 0.5);
+  border-radius: var(--radius-lg);
+  opacity: 0;
+  transition: opacity var(--dur-fast) var(--ease-out);
+}
+.gl-notice.is-in { opacity: 1; }
+
+.gl-notice-box {
+  position: relative;
+  width: min(560px, 100%);
+  max-height: 100%;
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: clamp(20px, 2.4vw, 30px);
+  text-align: left;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-hard-lg);
+  transform: translateY(8px) scale(0.985);
+  transition: transform var(--dur) var(--ease-spring);
+}
+.gl-notice.is-in .gl-notice-box { transform: none; }
+
+.gl-notice-x {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  color: var(--ink);
+  background: var(--surface);
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  cursor: pointer;
+}
+.gl-notice-x svg { width: 15px; height: 15px; }
+.gl-notice-x:hover { background: var(--banana); }
+.gl-notice-x:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+.gl-notice-kicker {
+  margin: 0 0 4px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.gl-notice-title {
+  margin: 0 0 10px;
+  padding-right: 34px;
+  font-size: clamp(1.1rem, 2.2vw, 1.35rem);
+  line-height: 1.22;
+}
+.gl-notice-lede {
+  margin: 0;
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+  color: var(--ink-mid);
+}
+.gl-notice-lede b { color: var(--ink); }
+
+.gl-notice-sec {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1.5px dashed var(--line-strong);
+}
+.gl-notice-h {
+  margin: 0 0 9px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.gl-notice-p {
+  margin: 0 0 10px;
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+  color: var(--ink-mid);
+}
+
+/* The two readers, as the two links they are: a name, what it costs and runs
+   on, and the mark that says this one leaves the site. */
+.gl-notice-readers { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.gl-notice-readers a {
+  display: grid;
+  /* Name over note on the left, the leaves-the-site mark held against the
+     right edge. Both tracks are placed by hand: left to auto-placement the
+     row-spanning mark would claim the first column and push the text over. */
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto;
+  align-items: center;
+  gap: 2px 12px;
+  padding: 10px 14px;
+  text-decoration: none;
+  background: var(--surface);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-md);
+  box-shadow: 2px 2px 0 var(--ink);
+  transition: transform var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out),
+              background var(--dur-fast) var(--ease-out);
+}
+.gl-notice-readers a:hover {
+  background: var(--banana-soft);
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.gl-notice-readers a:active { transform: translate(1px, 1px); box-shadow: 1px 1px 0 var(--ink); }
+.gl-notice-readers a:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.gl-notice-reader { grid-area: 1 / 1 / 2 / 2; }
+.gl-notice-note { grid-area: 2 / 1 / 3 / 2; }
+.gl-notice-readers svg { grid-area: 1 / 2 / 3 / 3; width: 17px; height: 17px; color: var(--ink-soft); }
+.gl-notice-reader { font-size: var(--fs-sm); font-weight: 700; color: var(--ink); }
+.gl-notice-readers a:hover svg { color: var(--ink); }
+.gl-notice-note {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  color: var(--ink-soft);
+}
+
+/* What the control bar on the page does. The glyphs are the shapes printed on
+   it, so the list can be matched against the document by eye. */
+.gl-notice-keys { display: grid; gap: 7px; margin: 0; padding: 0; list-style: none; }
+.gl-notice-keys li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: baseline;
+  gap: 10px;
+  font-size: var(--fs-sm);
+  line-height: 1.5;
+  color: var(--ink-mid);
+}
+.gl-notice-key {
+  min-width: 4.4em;
+  padding: 3px 8px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  text-align: center;
+  color: var(--ink);
+  background: var(--banana-soft);
+  border: 1.5px solid var(--banana);
+  border-radius: var(--radius-sm);
+}
+
+.gl-notice-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+.gl-notice-go {
+  padding: 10px 20px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+  text-decoration: none;
+  background: var(--banana);
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  box-shadow: 3px 3px 0 var(--ink);
+  transition: transform var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out);
+}
+.gl-notice-go:hover { transform: translate(-1px, -1px); box-shadow: 5px 5px 0 var(--ink); }
+.gl-notice-go:active { transform: translate(1px, 1px); box-shadow: 1px 1px 0 var(--ink); }
+.gl-notice-go:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.gl-notice-cancel {
+  padding: 10px 16px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+  background: none;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.gl-notice-cancel:hover { color: var(--ink); border-color: var(--ink); }
+.gl-notice-cancel:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+@media (max-width: 520px) {
+  .gl-notice { padding: 10px; }
+  .gl-notice-box { padding: 18px 16px; }
+  .gl-notice-foot > * { flex: 1 1 100%; text-align: center; }
+}
 
 @media (prefers-reduced-motion: reduce) {
-  .gl, .gl-sheet, .gl-back, .gl-bigplay, .gl-export, .gl-step, .gl-mute { transition: none; }
+  .gl, .gl-sheet, .gl-back, .gl-bigplay, .gl-export, .gl-step, .gl-mute,
+  .gl-soon, .gl-notice, .gl-notice-box, .gl-notice-readers a, .gl-notice-go { transition: none; }
+  .gl-soon { transform: translate(-50%, 0); }
 }

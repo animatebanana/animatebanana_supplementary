@@ -1,5 +1,5 @@
 {
- "_note": "Feed for <gallery-browser> and <gallery-lightbox> (gallery.html). One entry per AnimateBench example: the published diagram as the card, the rendered narrative beside it, and the three export targets. Every path is inside the repo.",
+ "_note": "Feed for <gallery-browser> and <gallery-lightbox> (gallery.html). One entry per AnimateBench example: the published diagram as the card, the rendered narrative beside it, and the four export targets. Every path is inside the repo.",
  "_beats": "beat `t` is the second the line is spoken, summed from the per-frame durations the clip was rendered with (_narration_audio/frames_concat.txt), so the caption track is the narration's own timing rather than an estimate. Do not substitute mapping_log.txt timestamps: those count renderer frames, not seconds.",
  "mediaReady": true,
  "exports": [
@@ -14,6 +14,10 @@
   {
    "id": "mp4",
    "label": "MP4"
+  },
+  {
+   "id": "pdf",
+   "label": "PDF"
   }
  ],
  "styles": [
@@ -176,6 +180,11 @@
      "href": "assets/gallery/media/Paper2Fig_pipe_diff_000000492/narrative.mp4",
      "name": "Paper2Fig_pipe_diff_000000492_progressive.mp4",
      "note": "The rendered narrative with its spoken narration."
+    },
+    "pdf": {
+     "href": "assets/gallery/exports/Paper2Fig_pipe_diff_000000492.pdf",
+     "name": "Paper2Fig_pipe_diff_000000492_progressive.pdf",
+     "note": "The animation as a single PDF, played natively by Adobe Acrobat or Foxit Reader using the control bar on the page."
     },
     "pptx": {
      "href": "assets/gallery/exports/Paper2Fig_pipe_diff_000000492.pptx",
@@ -415,6 +424,11 @@
      "href": "assets/gallery/media/WACV_2022_set5_000008/narrative.mp4",
      "name": "WACV_2022_set5_000008_progressive.mp4",
      "note": "The rendered narrative with its spoken narration."
+    },
+    "pdf": {
+     "href": "assets/gallery/exports/WACV_2022_set5_000008.pdf",
+     "name": "WACV_2022_set5_000008_progressive.pdf",
+     "note": "The animation as a single PDF, played natively by Adobe Acrobat or Foxit Reader using the control bar on the page."
     },
     "pptx": {
      "href": "assets/gallery/exports/WACV_2022_set5_000008.pptx",
@@ -1254,6 +1268,11 @@
      "name": "CVPR_2025_arch03005_alpha.mp4",
      "note": "The rendered narrative with its spoken narration."
     },
+    "pdf": {
+     "href": "assets/gallery/exports/CVPR_2025_arch03005.pdf",
+     "name": "CVPR_2025_arch03005_alpha.pdf",
+     "note": "The animation as a single PDF, played natively by Adobe Acrobat or Foxit Reader using the control bar on the page."
+    },
     "pptx": {
      "href": "assets/gallery/exports/CVPR_2025_arch03005.pptx",
      "name": "CVPR_2025_arch03005_alpha.pptx",
@@ -1874,6 +1893,11 @@
      "name": "SciMMIR_arch_diff_000000124_colorpop.mp4",
      "note": "The rendered narrative with its spoken narration."
     },
+    "pdf": {
+     "href": "assets/gallery/exports/SciMMIR_arch_diff_000000124.pdf",
+     "name": "SciMMIR_arch_diff_000000124_colorpop.pdf",
+     "note": "The animation as a single PDF, played natively by Adobe Acrobat or Foxit Reader using the control bar on the page."
+    },
     "pptx": {
      "href": "assets/gallery/exports/SciMMIR_arch_diff_000000124.pptx",
      "name": "SciMMIR_arch_diff_000000124_colorpop.pptx",
@@ -1946,6 +1970,11 @@
      "href": "assets/gallery/media/WACV_2022_set5_000015/narrative.mp4",
      "name": "WACV_2022_set5_000015_colorpop.mp4",
      "note": "The rendered narrative with its spoken narration."
+    },
+    "pdf": {
+     "href": "assets/gallery/exports/WACV_2022_set5_000015.pdf",
+     "name": "WACV_2022_set5_000015_colorpop.pdf",
+     "note": "The animation as a single PDF, played natively by Adobe Acrobat or Foxit Reader using the control bar on the page."
     },
     "pptx": {
      "href": "assets/gallery/exports/WACV_2022_set5_000015.pptx",
@@ -2785,6 +2814,11 @@
      "name": "Paper2Fig_pipe_easy_000000503_hopping.mp4",
      "note": "The rendered narrative with its spoken narration."
     },
+    "pdf": {
+     "href": "assets/gallery/exports/Paper2Fig_pipe_easy_000000503.pdf",
+     "name": "Paper2Fig_pipe_easy_000000503_hopping.pdf",
+     "note": "The animation as a single PDF, played natively by Adobe Acrobat or Foxit Reader using the control bar on the page."
+    },
     "pptx": {
      "href": "assets/gallery/exports/Paper2Fig_pipe_easy_000000503.pptx",
      "name": "Paper2Fig_pipe_easy_000000503_hopping.pptx",
@@ -3433,6 +3467,11 @@
      "href": "assets/gallery/media/Paper2Fig_pipe_easy_000000521/narrative.mp4",
      "name": "Paper2Fig_pipe_easy_000000521_sliding.mp4",
      "note": "The rendered narrative with its spoken narration."
+    },
+    "pdf": {
+     "href": "assets/gallery/exports/Paper2Fig_pipe_easy_000000521.pdf",
+     "name": "Paper2Fig_pipe_easy_000000521_sliding.pdf",
+     "note": "The animation as a single PDF, played natively by Adobe Acrobat or Foxit Reader using the control bar on the page."
     },
     "pptx": {
      "href": "assets/gallery/exports/Paper2Fig_pipe_easy_000000521.pptx",

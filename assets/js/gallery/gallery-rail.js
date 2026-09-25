@@ -19,12 +19,22 @@
  * performs themselves commits it too. A scroll nobody asked for only repaints
  * the proximity shading and is otherwise ignored.
  *
- * IT PLAYS ONCE AND WAITS. The band used to loop every preview for ever,
- * which turns a demo into wallpaper and makes it impossible to tell whether
- * the thing on screen is still going or has been going for five minutes. A
- * preview now runs through and holds on its last frame; Replay plays it again,
- * and nothing moves to another example unless the visitor asks for it with the
- * arrows, the keyboard or a click on a neighbouring slide.
+ * IT PLAYS THROUGH AND HANDS OVER. A preview runs once and then gives the
+ * band to the next example, so a visitor who does nothing still sees the range
+ * of what the pipeline produces rather than one clip looping into wallpaper.
+ * The last slide wraps to the first: this is a round, not a queue with an end.
+ *
+ * AND THE ROUND IS DEALT BY STYLE. The feed arrives grouped — every Progressive
+ * Reveal, then every Alpha Masking, and so on — which is the right shape for a
+ * file and the wrong one for a band that advances on its own: left in feed
+ * order the first six previews are all the same style, and someone watching
+ * would reasonably conclude that is all there is. `roundRobinByStyle` deals one
+ * example from each style in turn, so every style is on screen within the first
+ * five slides and the run stays varied to the end.
+ *
+ * The caption carries the style and nothing else. A run time and an "01 / 19"
+ * counter were there to tell you how long to wait and how far along you were,
+ * which is a question a band that stops asks and a band that cycles does not.
  *
  * IT CARRIES PREVIEWS, NOT THE CLIPS THEMSELVES. Every example in the gallery
  * appears here, but as a silent preview at four times the pace - a hundred
@@ -62,7 +72,27 @@ const prefersReducedMotion = () =>
 const escapeHTML = (value) =>
   String(value).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
-const pad = (n) => String(n).padStart(2, '0');
+/**
+ * Deal the feed out one example per style at a time.
+ *
+ * Order within a style is the feed's own, so the pipeline still chooses which
+ * Progressive Reveal leads; only the interleaving is ours. A style that runs
+ * out drops out of the deal, so the longest group tails the rail rather than
+ * leaving holes in it, and every item is placed exactly once.
+ */
+function roundRobinByStyle(items) {
+  const decks = new Map();
+  for (const item of items) {
+    const key = item.styleId || item.style || '';
+    if (!decks.has(key)) decks.set(key, []);
+    decks.get(key).push(item);
+  }
+  const out = [];
+  for (let round = 0; out.length < items.length; round += 1) {
+    for (const deck of decks.values()) if (round < deck.length) out.push(deck[round]);
+  }
+  return out;
+}
 
 class GalleryRail extends HTMLElement {
   constructor() {
@@ -89,15 +119,20 @@ class GalleryRail extends HTMLElement {
     }
     if (!this.isConnected) return;
 
-    this._items = Array.isArray(data.items) ? data.items : [];
-    if (!this._items.length) {
+    const feed = Array.isArray(data.items) ? data.items : [];
+    if (!feed.length) {
       this.hidden = true;
       return;
     }
+    // `defaultIndex` names the lead example by its place in the feed's own
+    // order, so it is picked up before the deal and found again after it.
+    const lead = feed[Math.min(Math.max(Number(data.defaultIndex) || 0, 0), feed.length - 1)];
+    this._items = roundRobinByStyle(feed);
+    this._lead = Math.max(0, this._items.indexOf(lead));
     this._data = data;
     this._mediaReady = data.mediaReady === true;
     this._href = this.getAttribute('href') || data.href || 'gallery.html';
-    this._active = Math.min(Math.max(Number(data.defaultIndex) || 0, 0), this._items.length - 1);
+    this._active = this._lead;
 
     this.render();
     this._wireIntent();
@@ -135,18 +170,6 @@ class GalleryRail extends HTMLElement {
 
       <div class="gr-caption" aria-live="polite">
         <p class="gr-caption-style"></p>
-        <p class="gr-caption-sub">
-          <span class="gr-caption-dur"></span>
-          <span class="gr-caption-sep" hidden aria-hidden="true">·</span>
-          <span class="gr-counter-now">01</span><span class="gr-counter-of"></span>
-        </p>
-        <button type="button" class="gr-replay" aria-label="Play this example again">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
-               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M20 12a8 8 0 1 1-2.6-5.9M20 4.2V9h-4.8"/>
-          </svg>
-          <span>Replay</span>
-        </button>
       </div>
 
       <div class="gr-cta-wrap">
@@ -164,10 +187,6 @@ class GalleryRail extends HTMLElement {
     this._track = this.querySelector('.gr-track');
     this._slides = [...this.querySelectorAll('.gr-slide')];
     this._captionStyle = this.querySelector('.gr-caption-style');
-    this._captionDur = this.querySelector('.gr-caption-dur');
-    this._captionSep = this.querySelector('.gr-caption-sep');
-    this._counterNow = this.querySelector('.gr-counter-now');
-    this.querySelector('.gr-counter-of').textContent = ` / ${pad(this._items.length)}`;
 
     this._registerMedia();
     this._wireEvents();
@@ -226,25 +245,19 @@ class GalleryRail extends HTMLElement {
   }
 
   /**
-   * Play the example on screen from the top.
+   * Hand the band to the next example.
    *
-   * The preview runs once and holds its last frame, so this is how an example
-   * is watched a second time - and the only thing on the band that restarts
-   * anything. It never changes which example is showing.
+   * Called when a preview runs out. The feed was dealt by style, so the next
+   * example is a different style, and the last one wraps to the first — the
+   * band is a round through what the pipeline does, not a queue with an end.
+   *
+   * Clicking a centred slide still pauses it, and a paused preview never
+   * reaches `ended`, so nothing moves under a visitor who stopped it.
    */
-  _replay() {
-    const video = this.querySelector('.gr-slide.is-active .gr-video');
-    if (!video) return;
-    this._media.arm();
-    this._media.setActive(this._active);
-    try {
-      video.currentTime = 0;
-    } catch {
-      /* metadata not in yet; play() below still starts it from the top */
-    }
-    const attempt = video.play();
-    if (attempt && typeof attempt.catch === 'function') attempt.catch(() => {});
-    this.classList.remove('is-ended');
+  _advance() {
+    if (this._items.length < 2) return;
+    if (!this._onScreen || document.hidden || prefersReducedMotion()) return;
+    this.step(1);
   }
 
   /** Whether this item has video the rail is actually allowed to load. */
@@ -292,12 +305,9 @@ class GalleryRail extends HTMLElement {
       arrow.addEventListener('click', () => this.step(Number(arrow.dataset.step)));
     }
 
-    this.querySelector('.gr-replay')?.addEventListener('click', () => this._replay());
-
-    // A preview that has run out says so, so Replay reads as the way on
-    // rather than as a control that happens to be there.
+    // `ended` does not bubble, hence the capture pass over the band.
     this.addEventListener('ended', (event) => {
-      if (event.target.classList?.contains('gr-video')) this.classList.add('is-ended');
+      if (event.target.classList?.contains('gr-video')) this._advance();
     }, true);
 
     // Off-centre slide: centre it. Centred slide: play or pause it in
@@ -322,8 +332,7 @@ class GalleryRail extends HTMLElement {
       this._media.arm();
       if (this._landed) return;
       this._landed = true;
-      const lead = Math.min(Math.max(Number(this._data?.defaultIndex) || 0, 0),
-                            this._items.length - 1);
+      const lead = Math.min(Math.max(this._lead || 0, 0), this._items.length - 1);
       this.scrollToIndex(lead, 'auto');
       this._syncCaption();
       this._media.setActive(lead);
@@ -402,8 +411,23 @@ class GalleryRail extends HTMLElement {
 
   // ---- carousel mechanics -------------------------------------------
 
+  /**
+   * Move by one, wrapping at either end.
+   *
+   * The band is a round: a preview that runs out hands over, and the last
+   * slide hands back to the first. The arrows do the same rather than greying
+   * out at an edge the rail itself crosses a moment later — a disabled Next
+   * on a carousel that then advances anyway reads as a bug.
+   *
+   * A wrap crosses the whole track, and scrolling that smoothly would pass
+   * through every slide in between, attaching and detaching a video at each.
+   * The wrap is a cut; an ordinary step is a glide.
+   */
   step(delta) {
-    this.scrollToIndex(this._active + delta);
+    const n = this._items.length;
+    if (!n) return;
+    const next = (((this._active + delta) % n) + n) % n;
+    this.scrollToIndex(next, Math.abs(next - this._active) > 1 ? 'auto' : undefined);
   }
 
   scrollToIndex(index, behavior) {
@@ -421,7 +445,6 @@ class GalleryRail extends HTMLElement {
       behavior: behavior || (prefersReducedMotion() ? 'auto' : 'smooth'),
     });
     if (moved) {
-      this.classList.remove('is-ended');
       this._syncCaption();
       this._media.setActive(clamped);
       this._syncPlayback();
@@ -455,7 +478,6 @@ class GalleryRail extends HTMLElement {
     // those move the track without anyone asking, and must not move the demo.
     if (best !== this._active && this._userScrolling) {
       this._active = best;
-      this.classList.remove('is-ended');
       this._syncCaption();
       this._media.setActive(best);
       this._syncPlayback();
@@ -463,9 +485,10 @@ class GalleryRail extends HTMLElement {
     this._syncArrows();
   }
 
+  /** Neither end is an end any more, so neither arrow is ever dead. */
   _syncArrows() {
-    this.querySelector('.gr-arrow-prev').disabled = this._active === 0;
-    this.querySelector('.gr-arrow-next').disabled = this._active === this._items.length - 1;
+    this.querySelector('.gr-arrow-prev').disabled = false;
+    this.querySelector('.gr-arrow-next').disabled = false;
   }
 
   _syncCaption() {
@@ -475,10 +498,6 @@ class GalleryRail extends HTMLElement {
       slide.classList.toggle('is-active', Number(slide.dataset.index) === this._active);
     }
     this._captionStyle.textContent = item.style;
-    // Styles with no rendered video yet have no run time to show.
-    this._captionDur.textContent = item.duration || '';
-    this._captionSep.hidden = !item.duration;
-    this._counterNow.textContent = pad(this._active + 1);
   }
 
   _syncPlayback() {

@@ -76,7 +76,7 @@ Every page is reachable from the **Menu** button (top right).
 | Overview | `index.html` | Landing page: live animation showcase, pipeline preview, an editability example, gallery rail, and AnimateBench summary. |
 | Pipeline Walkthrough | `pipeline.html` | Animated, narrated walkthrough of the three-stage pipeline (Diagram Transmuter → Animation Planner → Diagram Animator), including agents, critics, and intermediate artifacts. |
 | Editability and Controllability | `editability.html` | Before/after edits to the intermediate representations (diagram code and animation sequence) and their effect on the final animation. |
-| Example Gallery | `gallery.html` | Curated animations in all five styles (Progressive Reveal, Alpha Masking, Colour Pop, Hopping and Sliding Bounding Box), with downloadable PPTX and standalone HTML exports. |
+| Example Gallery | `gallery.html` | Curated animations in all five styles (Progressive Reveal, Alpha Masking, Colour Pop, Hopping and Sliding Bounding Box), with downloadable PPTX, standalone HTML, and animated PDF exports. |
 | AnimateBench | `animatebench.html` | The benchmark: figure sources, diversity, complexity strata, annotations, pan-and-zoom examples, and a human-presented reference talk. |
 | Evaluation | `evaluation.html` | The evaluation scheme replayed step by step on individual samples, for AnimateBanana and each baseline. |
 | Ablations | `ablations.html` | Component ablations (critics, context, XML, image input) and results stratified by diagram complexity. |
@@ -109,7 +109,7 @@ Every page is reachable from the **Menu** button (top right).
 │   ├── fonts/               ·  bundled typefaces (fonts.css + WOFF2 files, SIL OFL 1.1 licences)
 │   ├── img/, icons/         ·  logo, pipeline overview figure, favicon
 │   ├── bench/               ·  AnimateBench media (strata samples, annotations, reference talk)
-│   ├── gallery/             ·  gallery media, previews, and PPTX / HTML exports
+│   ├── gallery/             ·  gallery media, previews, PPTX / HTML / PDF exports
 │   ├── editability/         ·  before/after animations for the editability page
 │   ├── ablations/           ·  pipeline diagram used by the ablation walkthroughs
 │   └── evaluation/          ·  evaluation-scheme figure
@@ -130,6 +130,7 @@ Every page is reachable from the **Menu** button (top right).
 │
 └── tools/                   ← maintenance scripts (not needed to view the site)
     ├── serve.py             ·  local server with video seeking support (see Quick start)
+    ├── set_updated.py       ·  refreshes the footer date's no-JavaScript fallback
     └── *.py                 ·  scripts used to build previews, exports, and captions
 ```
 
@@ -149,7 +150,27 @@ Every page is reachable from the **Menu** button (top right).
 
 ## 4. Notes
 
-- **Size:** about 600 MB and roughly 3,000 files, mostly MP4 and PNG media.
+- **Size:** about 458 MB (3,036 files), mostly MP4 and PNG media. The examples
+  shared with the distribution build carry its compressed media (H.264 at CRF 30
+  tuned for animation, palette-quantised PNGs, original dimensions and frame
+  rates throughout); the rest are still at full quality.
+- **The footer date:** "Last updated" is not typed into the pages. Each one
+  reports when it was really last changed, worked out in the browser by
+  `assets/js/components/last-updated.js` from the modification times of the
+  document and of the code and content it loaded — so editing a data file or a
+  component moves the date, not just editing the HTML. Media is deliberately
+  ignored: a re-encoded clip is the same example, not an update. The date is
+  given in AOE (UTC−12), which for the first half of a UTC day is still
+  yesterday's date. A real date ships in the markup as the fallback for a reader
+  with no JavaScript, and `tools/set_updated.py` refreshes it; the component
+  only ever replaces it with something newer. The two pipeline pages carry no
+  footer line.
+- **Anonymity:** the site carries no author, affiliation, contact or repository
+  identity. Document metadata is normalised rather than merely absent: every
+  PPTX reports `AnimateBanana` as creator, last-modified-by and application, and
+  every PDF reports `TeX` as creator and producer with a fixed date, so neither
+  the build machines nor their time zones are inferable. Images carry no EXIF or
+  XMP; the MP4s carry only the generic FFmpeg/x264 encoder strings.
 - **Source figures:** the input diagrams come from publicly available papers
   and datasets (CVPR, ICCV, WACV, arXiv, Paper2Fig, SciMMIR, FigureBench, and
   others). They are reproduced only to show the method's inputs and outputs.
@@ -157,3 +178,12 @@ Every page is reachable from the **Menu** button (top right).
   single self-contained file that can be opened directly, even without the
   server. The matching `.pptx` files open in PowerPoint, Keynote, or
   LibreOffice Impress.
+- **PDF exports:** `assets/gallery/exports/*.pdf` carry the animation inside the
+  document rather than as a video track, so they play only in **Adobe Acrobat
+  Reader** and **Foxit PDF Reader** — every other viewer, a browser's built-in
+  one included, shows the first frame and an inert control bar. The gallery says
+  so before it hands the file over, and points at
+  <https://get.adobe.com/reader/> and <https://www.foxit.com/pdf-reader/>.
+  Playback is driven by the control bar drawn on the page itself: play/pause,
+  a minus and plus pair for speed, and single-frame steps. Seven examples have
+  one so far; the rest show the PDF target as "coming soon".

@@ -162,8 +162,13 @@ gallery-rail { display: block; }
   opacity: 0;
   transition: opacity var(--dur) var(--ease-out);
 }
-.gr-slide[data-media='poster'] .gr-poster,
-.gr-slide[data-media='video'] .gr-poster { opacity: 1; }
+.gr-slide[data-media='poster'] .gr-poster { opacity: 1; }
+/* Once the video is up the poster goes. Leaving both at opacity 1 stacked a
+   still of the whole figure behind a clip that letterboxes differently, and
+   the two showed through each other as a doubled, offset diagram. The video
+   element carries the same image in its own poster attribute, so there is
+   still nothing to flash through. */
+.gr-slide[data-media='video'] .gr-poster { opacity: 0; }
 .gr-slide[data-media='video'] .gr-video { opacity: 1; }
 
 /* ---- Overlays ---- */
@@ -208,9 +213,11 @@ gallery-rail { display: block; }
 }
 
 /* ================= CAPTION =================
-   Deliberately spare: the animation style is the headline, with the
-   run time and the position in the rail as quiet mono support. Title
-   and scientific field live on the card in the full gallery. */
+   One line: the animation style, and nothing else. The run time and the
+   "01 / 19" position that used to sit under it answered "how long do I wait"
+   and "how far along am I", which are the questions a band that stops and
+   waits provokes. This one plays through and hands over, so neither is asked.
+   Title and scientific field live on the card in the full gallery. */
 .gr-caption { text-align: center; margin-top: clamp(6px, 1.2vw, 16px); }
 .gr-caption-style {
   position: relative;
@@ -236,18 +243,6 @@ gallery-rail { display: block; }
   border-radius: 0.2em 0.35em 0.25em 0.4em;
   transform: rotate(-0.8deg);
 }
-.gr-caption-sub {
-  margin: 8px 0 0;
-  font-family: var(--font-mono);
-  font-size: var(--fs-micro);
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  color: var(--ink-faint);
-}
-.gr-caption-sep { margin: 0 8px; opacity: 0.55; }
-.gr-caption-dur, .gr-counter-now { color: var(--ink-soft); }
-.gr-counter-now { color: var(--ink); font-weight: 700; }
-
 /* ================= CALL TO ACTION ================= */
 .gr-cta-wrap {
   position: relative;
@@ -354,7 +349,6 @@ gallery-rail { display: block; }
   .gr-arrow-next { right: 0; }
   .gr-arrow:hover:not(:disabled) { transform: translateY(-50%); box-shadow: 3px 3px 0 var(--ink); }
   .gr-arrow:active:not(:disabled) { transform: translateY(-50%) scale(0.94); box-shadow: 0 0 0 var(--ink); }
-  .gr-caption-sep { margin: 0 5px; }
 }
 
 /* ================= REDUCED MOTION ================= */
@@ -365,57 +359,4 @@ gallery-rail { display: block; }
   .gr-skeleton-mark, .gr-cta, .gr-cta-spark { animation: none; }
   .gr-cta-shine { display: none; }
   .gr-cta:hover { transform: none; }
-}
-
-/* ---- Replay ----
-   A preview runs once and holds its last frame, so this is how an example is
-   watched again. It sits with the caption rather than over the picture: the
-   frame is the example, and a control parked on top of it would be one more
-   thing between the viewer and the thing they came to see. */
-.gr-replay {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  margin-top: 12px;
-  padding: 8px 16px;
-  font-family: var(--font-mono);
-  font-size: var(--fs-micro);
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--ink);
-  background: var(--surface);
-  border: 2px solid var(--ink);
-  border-radius: 999px;
-  cursor: pointer;
-  transition: transform var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out),
-              background var(--dur-fast) var(--ease-out);
-}
-.gr-replay svg { width: 15px; height: 15px; }
-.gr-replay:hover { background: var(--banana-soft); transform: translate(-1px, -1px); box-shadow: 3px 3px 0 var(--ink); }
-.gr-replay:active { transform: translate(1px, 1px); box-shadow: none; }
-.gr-replay:focus-visible { outline: none; box-shadow: var(--ring); }
-/* once the preview has run out, Replay is the obvious next move */
-gallery-rail.is-ended .gr-replay {
-  background: var(--banana);
-  box-shadow: 3px 3px 0 var(--ink);
-}
-@media (prefers-reduced-motion: reduce) { .gr-replay { transition: none; } }
-
-/* ---- When a preview has run out ----
-   The demo stops rather than rolling on, so the two things worth doing next
-   are the two things that light up: watch it again, or move to the next
-   example. Nothing advances on its own; this is an invitation, not a timer. */
-gallery-rail.is-ended .gr-arrow-next:not(:disabled) {
-  background: var(--banana);
-  box-shadow: 3px 3px 0 var(--ink);
-  animation: gr-nudge 2.4s var(--ease-io) infinite;
-}
-@keyframes gr-nudge {
-  0%, 62%, 100% { transform: none; }
-  72% { transform: translateX(3px); }
-  82% { transform: none; }
-}
-@media (prefers-reduced-motion: reduce) {
-  gallery-rail.is-ended .gr-arrow-next:not(:disabled) { animation: none; }
 }

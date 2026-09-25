@@ -18,7 +18,7 @@
  * through five examples leaves five history entries and Back retraces them.
  */
 import { loadJSON } from '../../lib/data-loader.js';
-import { galleryLightbox } from '../gallery-lightbox.js';
+import { galleryLightbox } from '../gallery-lightbox.js?v=2';
 
 const browser = document.querySelector('gallery-browser');
 const SRC = browser?.getAttribute('src') || 'data/gallery/gallery_items.json';
