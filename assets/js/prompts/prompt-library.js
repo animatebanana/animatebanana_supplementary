@@ -32,8 +32,7 @@ class PromptLibrary extends HTMLElement {
             <span>${esc(it.title)}</span></button></li>`).join('')}</ol>
         </nav>
         <article class="pl-panel">
-          <header class="pl-head"><div><span class="pl-kicker">Generation prompt</span><h3 data-title></h3></div>
-            <span class="pl-note">Read only</span></header>
+          <header class="pl-head"><div><span class="pl-kicker">Generation prompt</span><h3 data-title></h3></div></header>
           <div class="pl-body pt" data-body tabindex="0"></div>
         </article>
       </div>`;

@@ -6,7 +6,7 @@
 .pp-lede { max-width: 64ch; font-size: var(--fs-lede); color: var(--ink-soft); margin-top: 10px; }
 .pp-section { margin-top: clamp(30px, 4.5vw, 56px); scroll-margin-top: 150px; }
 .pp-section h2 { margin: 6px 0 6px; }
-.pp-sub { max-width: 72ch; margin: 0 0 18px; color: var(--ink-soft); }
+.pp-sub { max-width: none; margin: 0 0 18px; color: var(--ink-soft); }
 
 prompt-library { display: block; scroll-margin-top: 150px; }
 .pl {
@@ -59,7 +59,6 @@ prompt-library { display: block; scroll-margin-top: 150px; }
 }
 .pl-kicker { font-family: var(--font-mono); font-size: var(--fs-micro); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); }
 .pl-head h3 { margin: 4px 0 0; font-size: 1.2rem; }
-.pl-note { flex: none; margin-top: 2px; padding: 3px 10px; font-family: var(--font-mono); font-size: 10px; font-weight: 700; color: var(--ink-soft); background: var(--surface); border: 1.5px solid var(--line-strong); border-radius: 999px; }
 .pl-body {
   max-height: min(72vh, 780px);
   overflow-y: auto;
