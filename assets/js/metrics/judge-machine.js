@@ -19,7 +19,7 @@
 import { loadJSON } from '../lib/data-loader.js';
 import { escapeHtml as esc } from '../lib/format.js';
 
-const DEMO_URL = 'data/metrics/judge_demo.json?v=2';
+const DEMO_URL = 'data/metrics/judge_demo.json?v=3';
 let demoP;
 const getDemo = () => (demoP ||= loadJSON(DEMO_URL));
 
@@ -148,7 +148,7 @@ const illustrativeNote = `<p class="jm-illus"><b>Illustrative outputs.</b> The i
    ====================================================================== */
 const reel = (d) => `
   <div class="jm-reel" data-reel>
-    <video src="${esc(d.video)}" poster="${esc(d.steps.at(-1).frame)}" playsinline preload="metadata"></video>
+    <video src="${esc(d.video)}" poster="${esc(d.steps.at(-1).frame)}" muted playsinline preload="metadata"></video>
     <button type="button" class="jm-play" data-play aria-label="Play the generated narrative">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>
     </button>
