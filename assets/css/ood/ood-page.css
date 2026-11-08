@@ -123,7 +123,10 @@
 }
 .ood-play svg { width: 15px; height: 15px; fill: var(--ink); margin-left: 2px; }
 .ood-card:hover .ood-play, .ood-card:focus-visible .ood-play { opacity: 1; }
-.ood-cardfoot { display: flex; align-items: center; padding: 8px 12px; }
+.ood-cardfoot {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 6px;
+  padding: 8px 12px 10px;
+}
 .ood-cardtitle {
   font-weight: 700;
   font-size: var(--fs-sm);
@@ -137,6 +140,15 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+/* The animation style. Outlined rather than banana-filled, so it never reads as
+   the subject chip it sits beside in the viewer. */
+.ood-style,
+.ood-vpill.ood-vpill--style {
+  font-family: var(--font-mono); font-size: var(--fs-micro); font-weight: 700;
+  color: var(--ink-soft); background: var(--surface);
+  border: 1.5px solid var(--ink-faint); border-radius: 999px;
+}
+.ood-style { padding: 2px 9px; line-height: 1.5; }
 .ood-empty { padding: 28px; text-align: center; color: var(--ink-soft); font-size: var(--fs-sm); }
 
 /* ================= VIEWER ================= */
@@ -209,13 +221,11 @@ body.ood-locked { overflow: hidden; }
    against — inside an auto-height box the same declaration is circular and
    constrains nothing, which is what let a tall figure spill across the page.
    Only the stacked layout below, where the sheet scrolls and rows go auto,
-   still needs an explicit cap. */
+   needs an explicit height. */
 .ood-stage {
   position: relative;
-  display: grid; place-items: center;
   min-height: 0;
   height: 100%;
-  padding: 10px;
   background: var(--surface);
   border: 2px solid var(--ink);
   border-radius: var(--radius-md);
@@ -223,13 +233,22 @@ body.ood-locked { overflow: hidden; }
   cursor: zoom-in;
 }
 .ood-stage:focus-visible { outline: none; box-shadow: var(--ring); }
-/* Both frame layers occupy the same grid cell, so they stack and stay centred
-   without being taken out of flow. */
+/* The whole figure is always in view: it is scaled down until BOTH its width and
+   its height fit, and never scaled up past its own pixels.
+   Absolute positioning is what makes the height limit real. As a grid item the
+   image sat in an auto-sized row that grew to the image itself, so
+   `max-height: 100%` resolved against its own height and limited nothing —
+   only the width was enforced, and a tall figure (the physics diagrams, the
+   infographics) overflowed the frame and was cropped, which read as zoomed in.
+   Against the stage's own box both limits hold. `inset` + `margin: auto`
+   centres it, and both frame layers stack in the same place. */
 .ood-stage img {
-  grid-area: 1 / 1;
-  max-width: 100%; max-height: 100%;
+  position: absolute;
+  inset: 10px;
+  margin: auto;
+  max-width: calc(100% - 20px);
+  max-height: calc(100% - 20px);
   width: auto; height: auto;
-  object-fit: contain;
 }
 
 /* ---- frame-to-frame cross-fade ----
@@ -273,6 +292,7 @@ body.ood-locked { overflow: hidden; }
   border-radius: 999px;
   opacity: 0;
   pointer-events: none;
+  z-index: 3;               /* above both frame layers */
   transition: opacity var(--dur-fast) var(--ease-out);
 }
 .ood-stage:hover .ood-zoomhint, .ood-stage:focus-visible .ood-zoomhint { opacity: 1; }
@@ -388,11 +408,11 @@ body.ood-locked { overflow: hidden; }
 /* ================= NARROW ================= */
 @media (max-width: 860px) {
   .ood-panes { grid-template-columns: 1fr; }
-  /* Stacked, the sheet scrolls and its rows are auto-sized, so the stage cap is
-     the only thing keeping a tall figure inside its frame. */
+  /* Stacked, the sheet scrolls and its rows are auto-sized, so the stage is
+     given its height outright (the figure inside is out of flow). */
   .ood-sheet { grid-template-rows: auto auto auto auto; overflow-y: auto; }
-  .ood-stage { max-height: min(38vh, 420px); }
-  .ood-viewer.is-zoomed .ood-stage { max-height: min(66vh, 720px); }
+  .ood-stage { height: min(38vh, 420px); }
+  .ood-viewer.is-zoomed .ood-stage { height: min(66vh, 720px); }
 }
 @media (prefers-reduced-motion: reduce) {
   .ood-viewer, .ood-sheet, .ood-card, .ood-chip, .ood-play, .ood-frame { transition: none; }

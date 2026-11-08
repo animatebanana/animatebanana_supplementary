@@ -125,6 +125,7 @@ class OodGallery extends HTMLElement {
         </div>
         <div class="ood-cardfoot">
           <span class="ood-cardtitle">${escapeHtml(it.title)}</span>
+          ${it.style ? `<span class="ood-style">${escapeHtml(it.style)}</span>` : ''}
         </div>
       </article>`
       )
@@ -165,6 +166,7 @@ class OodGallery extends HTMLElement {
           </button>
           <span class="ood-vtitle">${escapeHtml(item.title)}</span>
           <span class="ood-vpill">${escapeHtml(item.category)}</span>
+          ${item.style ? `<span class="ood-vpill ood-vpill--style">${escapeHtml(item.style)}</span>` : ''}
         </div>
 
         <div class="ood-panes">
