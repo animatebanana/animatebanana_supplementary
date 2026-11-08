@@ -20,7 +20,7 @@ const ORDER = ['A', 'B', 'C', 'D'];
 
 const BAND_WORD = {
   VF:  { A: 'Excellent', B: 'Good', C: 'Poor', D: 'Severe failure' },
-  ASC: { A: 'Fully compliant', B: 'Mostly compliant', C: 'Non-compliant', D: 'Severe non-compliance' },
+  ASC: { A: 'Fully compliant', B: 'Mostly compliant', C: 'Non-compliant', D: 'Extreme non-compliant' },
   SSS: { A: 'Fully sensible', B: 'Minor violations', C: 'Major violation', D: 'Severe violation' },
   GPS: { A: 'Well paced', B: 'Minor overload', C: 'Major overload', D: 'Severe overload' },
   NAS: { A: 'Well aligned', B: 'Minor flaws', C: 'Major flaws', D: 'Severe flaws' },
