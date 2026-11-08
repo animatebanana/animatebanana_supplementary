@@ -1,0 +1,540 @@
+{
+ "_note": "Per-diagram scores for the Generalization page, from the judge run over the out-of-domain set. VF and ASC are gates and carry the band the judge gave (A and B pass, C and D reject); the summary turns them into a pass fraction. SS, GP, NA and AN are scores in [0,1] and the summary averages them over whatever the table is filtered to.",
+ "metrics": [
+  {
+   "id": "VF",
+   "label": "VF",
+   "title": "Visual fidelity",
+   "kind": "gate"
+  },
+  {
+   "id": "ASC",
+   "label": "ASC",
+   "title": "Animation style compliance",
+   "kind": "gate"
+  },
+  {
+   "id": "SS",
+   "label": "SS",
+   "title": "Selection sensibility",
+   "kind": "score"
+  },
+  {
+   "id": "GP",
+   "label": "GP",
+   "title": "Granularity and pacing",
+   "kind": "score"
+  },
+  {
+   "id": "NA",
+   "label": "NA",
+   "title": "Narration alignment",
+   "kind": "score"
+  },
+  {
+   "id": "AN",
+   "label": "AN",
+   "title": "Animation quality",
+   "kind": "score"
+  }
+ ],
+ "reference": {
+  "label": "AnimateBanana",
+  "sub": "On AnimateBench",
+  "scores": {
+   "VF": 0.967,
+   "ASC": 0.934,
+   "SS": 0.856,
+   "GP": 0.894,
+   "NA": 0.88,
+   "AN": 0.877
+  }
+ },
+ "categories": [
+  {
+   "id": "school",
+   "label": "School Science",
+   "provenance": "AI2D (Allen Institute for AI)",
+   "count": 4
+  },
+  {
+   "id": "chemistry",
+   "label": "Chemistry",
+   "provenance": "Published figures and textbook schemes",
+   "count": 4
+  },
+  {
+   "id": "infographics",
+   "label": "Infographics",
+   "provenance": "Public information graphics",
+   "count": 5
+  },
+  {
+   "id": "physics",
+   "label": "Physics",
+   "provenance": "Textbook and reference diagrams",
+   "count": 14
+  }
+ ],
+ "rows": [
+  {
+   "id": "AI2D_1",
+   "title": "Frog life cycle",
+   "categoryId": "school",
+   "category": "School Science",
+   "steps": 5,
+   "seconds": 18.721,
+   "scores": {
+    "VF": "A",
+    "ASC": "A",
+    "SS": 1,
+    "GP": 1,
+    "NA": 1,
+    "AN": 1
+   },
+   "style": "progressive_reveal"
+  },
+  {
+   "id": "AI2D_2",
+   "title": "Phases of the Moon",
+   "categoryId": "school",
+   "category": "School Science",
+   "steps": 9,
+   "seconds": 29.111,
+   "scores": {
+    "VF": "A",
+    "ASC": "A",
+    "SS": 1,
+    "GP": 1,
+    "NA": 1,
+    "AN": 1
+   },
+   "style": "progressive_reveal"
+  },
+  {
+   "id": "AI2D_3",
+   "title": "Food web",
+   "categoryId": "school",
+   "category": "School Science",
+   "steps": 7,
+   "seconds": 21.778,
+   "scores": {
+    "VF": "A",
+    "ASC": "A",
+    "SS": 0.9524,
+    "GP": 1,
+    "NA": 0.8571,
+    "AN": 0.9365
+   },
+   "style": "progressive_reveal"
+  },
+  {
+   "id": "AI2D_4",
+   "title": "Monarch butterfly life cycle",
+   "categoryId": "school",
+   "category": "School Science",
+   "steps": 6,
+   "seconds": 22.0,
+   "scores": {
+    "VF": "A",
+    "ASC": "A",
+    "SS": 0.8333,
+    "GP": 1,
+    "NA": 0.9444,
+    "AN": 0.9259
+   },
+   "style": "progressive_reveal"
+  },
+  {
+   "id": "ChemEngineering-10-00138-g001",
+   "title": "Chemical engineering process diagram",
+   "categoryId": "chemistry",
+   "category": "Chemistry",
+   "steps": 11,
+   "seconds": 39.333,
+   "scores": {
+    "VF": "B",
+    "ASC": "A",
+    "SS": 0.9697,
+    "GP": 1,
+    "NA": 1,
+    "AN": 0.9899
+   },
+   "style": "progressive_reveal"
+  },
+  {
+   "id": "Chem_organic",
+   "title": "Organic reaction mechanism",
+   "categoryId": "chemistry",
+   "category": "Chemistry",
+   "steps": 6,
+   "seconds": 19.778,
+   "scores": {
+    "VF": "A",
+    "ASC": "A",
+    "SS": 0.9444,
+    "GP": 0.9444,
+    "NA": 0.8889,
+    "AN": 0.9259000000000001
+   },
+   "style": "progressive_reveal"
+  },
+  {
+   "id": "Micheal_addition_with_NH3",
+   "title": "Michael addition with ammonia",
+   "categoryId": "chemistry",
+   "category": "Chemistry",
+   "steps": 11,
+   "seconds": 36.889,
+   "scores": {
+    "VF": "A",
+    "ASC": "A",
+    "SS": 1,
+    "GP": 1,
+    "NA": 0.8485,
+    "AN": 0.9495
+   },
+   "style": "progressive_reveal"
+  },
+  {
+   "id": "chem_thermo",
+   "title": "Thermodynamic cycle",
+   "categoryId": "chemistry",
+   "category": "Chemistry",
+   "steps": 10,
+   "seconds": 46.777,
+   "scores": {
+    "VF": "B",
+    "ASC": "A",
+    "SS": 1,
+    "GP": 1,
+    "NA": 0.9333,
+    "AN": 0.9777666666666667
+   },
+   "style": "progressive_reveal"
+  },
+  {
+   "id": "info_2",
+   "title": "Benefits of arts and culture",
+   "categoryId": "infographics",
+   "category": "Infographics",
+   "steps": 30,
+   "seconds": 102.222,
+   "scores": {
+    "VF": "A",
+    "ASC": "A",
+    "SS": 0.9111,
+    "GP": 1,
+    "NA": 0.9111,
+    "AN": 0.9407333333333333
+   },
+   "style": "alpha_masking"
+  },
+  {
+   "id": "info_3",
+   "title": "Six snacks for stress",
+   "categoryId": "infographics",
+   "category": "Infographics",
+   "steps": 10,
+   "seconds": 52.867,
+   "scores": {
+    "VF": "A",
+    "ASC": "A",
+    "SS": 1,
+    "GP": 1,
+    "NA": 0.9333,
+    "AN": 0.9777666666666667
+   },
+   "style": "alpha_masking"
+  },
+  {
+   "id": "info_5",
+   "title": "Machine-learning distance metrics",
+   "categoryId": "infographics",
+   "category": "Infographics",
+   "steps": 29,
+   "seconds": 121.821,
+   "scores": {
+    "VF": "A",
+    "ASC": "A",
+    "SS": 0.977,
+    "GP": 0.954,
+    "NA": 0.977,
+    "AN": 0.9693333333333333
+   },
+   "style": "alpha_masking"
+  },
+  {
+   "id": "info_6",
+   "title": "SQL injection types",
+   "categoryId": "infographics",
+   "category": "Infographics",
+   "steps": 37,
+   "seconds": 141.556,
+   "scores": {
+    "VF": "A",
+    "ASC": "A",
+    "SS": 0.964,
+    "GP": 0.8829,
+    "NA": 0.991,
+    "AN": 0.9459666666666666
+   },
+   "style": "alpha_masking"
+  },
+  {
+   "id": "info_7",
+   "title": "Prompt-injection attack and defence paths",
+   "categoryId": "infographics",
+   "category": "Infographics",
+   "steps": 14,
+   "seconds": 42.111,
+   "scores": {
+    "VF": "A",
+    "ASC": "A",
+    "SS": 1,
+    "GP": 0.9762,
+    "NA": 1,
+    "AN": 0.9920666666666667
+   },
+   "style": "alpha_masking"
+  },
+  {
+   "id": "Physics_Bohr_atom_photon_emission",
+   "title": "Photon emission in the Bohr atom",
+   "categoryId": "physics",
+   "category": "Physics",
+   "steps": 7,
+   "seconds": 23.889,
+   "scores": {
+    "VF": "A",
+    "ASC": "A",
+    "SS": 0.9524,
+    "GP": 1,
+    "NA": 1,
+    "AN": 0.9841333333333333
+   },
+   "style": "progressive_reveal"
+  },
+  {
+   "id": "Physics_CNO_cycle",
+   "title": "CNO cycle",
+   "categoryId": "physics",
+   "category": "Physics",
+   "steps": 7,
+   "seconds": 35.999,
+   "scores": {
+    "VF": "A",
+    "ASC": "A",
+    "SS": 1,
+    "GP": 1,
+    "NA": 1,
+    "AN": 1
+   },
+   "style": "progressive_reveal"
+  },
+  {
+   "id": "Physics_Carnot_cycle_pV",
+   "title": "Carnot cycle (p–V diagram)",
+   "categoryId": "physics",
+   "category": "Physics",
+   "steps": 6,
+   "seconds": 31.722,
+   "scores": {
+    "VF": "A",
+    "ASC": "A",
+    "SS": 1,
+    "GP": 1,
+    "NA": 1,
+    "AN": 1
+   },
+   "style": "progressive_reveal"
+  },
+  {
+   "id": "Physics_Compton_scattering",
+   "title": "Compton scattering",
+   "categoryId": "physics",
+   "category": "Physics",
+   "steps": 5,
+   "seconds": 14.667,
+   "scores": {
+    "VF": "A",
+    "ASC": "A",
+    "SS": 1,
+    "GP": 1,
+    "NA": 0.9333,
+    "AN": 0.9777666666666667
+   },
+   "style": "progressive_reveal"
+  },
+  {
+   "id": "Physics_Higgs_ttH_Feynman",
+   "title": "Associated Higgs production (ttH)",
+   "categoryId": "physics",
+   "category": "Physics",
+   "steps": 9,
+   "seconds": 35.277,
+   "scores": {
+    "VF": "A",
+    "ASC": "A",
+    "SS": 0.8889,
+    "GP": 1,
+    "NA": 0.9259,
+    "AN": 0.9382666666666667
+   },
+   "style": "progressive_reveal"
+  },
+  {
+   "id": "Physics_beta_decay_Feynman",
+   "title": "Beta decay via W boson exchange",
+   "categoryId": "physics",
+   "category": "Physics",
+   "steps": 7,
+   "seconds": 26.999,
+   "scores": {
+    "VF": "A",
+    "ASC": "A",
+    "SS": 1,
+    "GP": 1,
+    "NA": 0.7619,
+    "AN": 0.9206333333333333
+   },
+   "style": "progressive_reveal"
+  },
+  {
+   "id": "Physics_double_slit_interference",
+   "title": "Double-slit interference",
+   "categoryId": "physics",
+   "category": "Physics",
+   "steps": 10,
+   "seconds": 68.499,
+   "scores": {
+    "VF": "B",
+    "ASC": "A",
+    "SS": 1,
+    "GP": 1,
+    "NA": 0.6667,
+    "AN": 0.8889
+   },
+   "style": "progressive_reveal"
+  },
+  {
+   "id": "Physics_ee_to_mumu_Feynman",
+   "title": "Electron–positron annihilation to muons",
+   "categoryId": "physics",
+   "category": "Physics",
+   "steps": 3,
+   "seconds": 18.0,
+   "scores": {
+    "VF": "A",
+    "ASC": "A",
+    "SS": 1,
+    "GP": 1,
+    "NA": 0.3333,
+    "AN": 0.7777666666666666
+   },
+   "style": "progressive_reveal"
+  },
+  {
+   "id": "Physics_fission_chain_reaction_branching",
+   "title": "Branching fission chain reaction",
+   "categoryId": "physics",
+   "category": "Physics",
+   "steps": 16,
+   "seconds": 103.999,
+   "scores": {
+    "VF": "B",
+    "ASC": "A",
+    "SS": 0.9583,
+    "GP": 0.9583,
+    "NA": 0.5208,
+    "AN": 0.8124666666666668
+   },
+   "style": "progressive_reveal"
+  },
+  {
+   "id": "Physics_fission_chain_reaction_simple",
+   "title": "Fission chain reaction",
+   "categoryId": "physics",
+   "category": "Physics",
+   "steps": 11,
+   "seconds": 35.111,
+   "scores": {
+    "VF": "A",
+    "ASC": "A",
+    "SS": 1,
+    "GP": 1,
+    "NA": 1,
+    "AN": 1
+   },
+   "style": "progressive_reveal"
+  },
+  {
+   "id": "Physics_optics_converging_lens_virtual_image",
+   "title": "Converging lens: virtual image",
+   "categoryId": "physics",
+   "category": "Physics",
+   "steps": 7,
+   "seconds": 26.0,
+   "scores": {
+    "VF": "A",
+    "ASC": "A",
+    "SS": 1,
+    "GP": 1,
+    "NA": 1,
+    "AN": 1
+   },
+   "style": "progressive_reveal"
+  },
+  {
+   "id": "Physics_photoelectric_effect",
+   "title": "Photoelectric effect",
+   "categoryId": "physics",
+   "category": "Physics",
+   "steps": 6,
+   "seconds": 25.999,
+   "scores": {
+    "VF": "A",
+    "ASC": "A",
+    "SS": 1,
+    "GP": 1,
+    "NA": 1,
+    "AN": 1
+   },
+   "style": "progressive_reveal"
+  },
+  {
+   "id": "Physics_proton_proton_chain_fusion",
+   "title": "Proton–proton chain fusion",
+   "categoryId": "physics",
+   "category": "Physics",
+   "steps": 6,
+   "seconds": 29.944,
+   "scores": {
+    "VF": "A",
+    "ASC": "A",
+    "SS": 1,
+    "GP": 1,
+    "NA": 0.8889,
+    "AN": 0.9629666666666666
+   },
+   "style": "progressive_reveal"
+  },
+  {
+   "id": "Physics_vapor_compression_refrigeration_cycle",
+   "title": "Vapour-compression refrigeration cycle",
+   "categoryId": "physics",
+   "category": "Physics",
+   "steps": 9,
+   "seconds": 30.889,
+   "scores": {
+    "VF": "A",
+    "ASC": "A",
+    "SS": 0.963,
+    "GP": 1,
+    "NA": 0.8889,
+    "AN": 0.9506333333333333
+   },
+   "style": "progressive_reveal"
+  }
+ ]
+}

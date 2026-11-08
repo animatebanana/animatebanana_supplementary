@@ -1,0 +1,2200 @@
+{
+ "_note": "Feed for the Generalization page. One entry per out-of-domain diagram: the published figure, the frame sequence the pipeline produced for it, and the narration written against those frames. `timing` says whether a step's hold comes from narration.json (\"stated\") or was re-paced from the caption text because the file's times were placeholder half-second ticks (\"paced\").",
+ "categories": [
+  {
+   "id": "school",
+   "label": "School Science",
+   "provenance": "AI2D (Allen Institute for AI)",
+   "count": 4
+  },
+  {
+   "id": "chemistry",
+   "label": "Chemistry",
+   "provenance": "Published figures and textbook schemes",
+   "count": 4
+  },
+  {
+   "id": "infographics",
+   "label": "Infographics",
+   "provenance": "Public information graphics",
+   "count": 5
+  },
+  {
+   "id": "physics",
+   "label": "Physics",
+   "provenance": "Textbook and reference diagrams",
+   "count": 14
+  }
+ ],
+ "items": [
+  {
+   "id": "AI2D_1",
+   "title": "Frog life cycle",
+   "categoryId": "school",
+   "category": "School Science",
+   "source": "assets/ood/school/AI2D_1/source.webp",
+   "thumb": "assets/ood/school/AI2D_1/source.webp",
+   "frames": [
+    "assets/ood/school/AI2D_1/frame_000.webp",
+    "assets/ood/school/AI2D_1/frame_001.webp",
+    "assets/ood/school/AI2D_1/frame_002.webp",
+    "assets/ood/school/AI2D_1/frame_003.webp",
+    "assets/ood/school/AI2D_1/frame_004.webp"
+   ],
+   "beats": [
+    {
+     "t": 0.0,
+     "hold": 3.499,
+     "text": "The life cycle begins with a cluster of fertilized frog eggs floating in the water."
+    },
+    {
+     "t": 3.499,
+     "hold": 3.5,
+     "text": "These eggs hatch into swimming tadpoles equipped with tails and gills for aquatic life."
+    },
+    {
+     "t": 6.999,
+     "hold": 3.5,
+     "text": "As development progresses, the tadpole begins to grow hind legs, starting its physical transformation."
+    },
+    {
+     "t": 10.499,
+     "hold": 3.556,
+     "text": "Next, the tadpole grows front limbs and starts resorbing its tail, transitioning into a young froglet."
+    },
+    {
+     "t": 14.055,
+     "hold": 4.667,
+     "text": "Finally, the tail disappears completely as it becomes a fully grown adult frog capable of laying eggs, completing the life cycle."
+    }
+   ],
+   "seconds": 18.721,
+   "timing": "stated",
+   "statedSeconds": 17.999
+  },
+  {
+   "id": "AI2D_2",
+   "title": "Phases of the Moon",
+   "categoryId": "school",
+   "category": "School Science",
+   "source": "assets/ood/school/AI2D_2/source.webp",
+   "thumb": "assets/ood/school/AI2D_2/source.webp",
+   "frames": [
+    "assets/ood/school/AI2D_2/frame_000.webp",
+    "assets/ood/school/AI2D_2/frame_001.webp",
+    "assets/ood/school/AI2D_2/frame_002.webp",
+    "assets/ood/school/AI2D_2/frame_003.webp",
+    "assets/ood/school/AI2D_2/frame_004.webp",
+    "assets/ood/school/AI2D_2/frame_005.webp",
+    "assets/ood/school/AI2D_2/frame_006.webp",
+    "assets/ood/school/AI2D_2/frame_007.webp",
+    "assets/ood/school/AI2D_2/frame_008.webp"
+   ],
+   "beats": [
+    {
+     "t": 0.0,
+     "hold": 3.333,
+     "text": "The diagram establishes the Earth at the center, with the Sun positioned on the right."
+    },
+    {
+     "t": 3.333,
+     "hold": 3.556,
+     "text": "Starting at position B between the Earth and the Sun, the Moon is shown completely darkened."
+    },
+    {
+     "t": 6.889,
+     "hold": 2.889,
+     "text": "An arrow leads counterclockwise to position F, where a crescent shape appears illuminated."
+    },
+    {
+     "t": 9.778,
+     "hold": 4.0,
+     "text": "Continuing along the orbital path to position D at the top, half of the lunar disk is illuminated."
+    },
+    {
+     "t": 13.778,
+     "hold": 2.667,
+     "text": "At position G, more than half of the visible disk is illuminated."
+    },
+    {
+     "t": 16.444,
+     "hold": 2.667,
+     "text": "Reaching position E directly opposite the Sun, the Moon is fully illuminated."
+    },
+    {
+     "t": 19.111,
+     "hold": 3.778,
+     "text": "Moving downward along the orbit to position H, shadow begins to cover a portion of the disk."
+    },
+    {
+     "t": 22.889,
+     "hold": 2.889,
+     "text": "At position A at the bottom, exactly half of the surface remains illuminated."
+    },
+    {
+     "t": 25.778,
+     "hold": 3.333,
+     "text": "The trajectory advances through crescent position C, before returning along the arrow to position B."
+    }
+   ],
+   "seconds": 29.111,
+   "timing": "repaced",
+   "statedSeconds": 4.499
+  },
+  {
+   "id": "AI2D_3",
+   "title": "Food web",
+   "categoryId": "school",
+   "category": "School Science",
+   "source": "assets/ood/school/AI2D_3/source.webp",
+   "thumb": "assets/ood/school/AI2D_3/source.webp",
+   "frames": [
+    "assets/ood/school/AI2D_3/frame_000.webp",
+    "assets/ood/school/AI2D_3/frame_001.webp",
+    "assets/ood/school/AI2D_3/frame_002.webp",
+    "assets/ood/school/AI2D_3/frame_003.webp",
+    "assets/ood/school/AI2D_3/frame_004.webp",
+    "assets/ood/school/AI2D_3/frame_005.webp",
+    "assets/ood/school/AI2D_3/frame_006.webp"
+   ],
+   "beats": [
+    {
+     "t": 0.0,
+     "hold": 3.556,
+     "text": "At the top of the diagram, the Brown Bear is labeled with a secondary consumer tag."
+    },
+    {
+     "t": 3.556,
+     "hold": 3.111,
+     "text": "To the left, an arrow points downward from the Brown Bear to the Deer."
+    },
+    {
+     "t": 6.667,
+     "hold": 2.444,
+     "text": "Continuing down from the Deer, an arrow leads directly to berries."
+    },
+    {
+     "t": 9.111,
+     "hold": 2.889,
+     "text": "In the center, an arrow extends downward from the Brown Bear to Salmon."
+    },
+    {
+     "t": 12.0,
+     "hold": 3.333,
+     "text": "From Salmon, a downward arrow connects to the item labeled Flower, Grass, or water plant."
+    },
+    {
+     "t": 15.333,
+     "hold": 3.556,
+     "text": "On the right, an arrow descends from Brown Bear to Moose, designated as a primary consumer."
+    },
+    {
+     "t": 18.889,
+     "hold": 2.889,
+     "text": "Finally, an arrow from Moose points downward to branches, tagged as a producer."
+    }
+   ],
+   "seconds": 21.778,
+   "timing": "repaced",
+   "statedSeconds": 6.999
+  },
+  {
+   "id": "AI2D_4",
+   "title": "Monarch butterfly life cycle",
+   "categoryId": "school",
+   "category": "School Science",
+   "source": "assets/ood/school/AI2D_4/source.webp",
+   "thumb": "assets/ood/school/AI2D_4/source.webp",
+   "frames": [
+    "assets/ood/school/AI2D_4/frame_000.webp",
+    "assets/ood/school/AI2D_4/frame_001.webp",
+    "assets/ood/school/AI2D_4/frame_002.webp",
+    "assets/ood/school/AI2D_4/frame_003.webp",
+    "assets/ood/school/AI2D_4/frame_004.webp",
+    "assets/ood/school/AI2D_4/frame_005.webp"
+   ],
+   "beats": [
+    {
+     "t": 0.0,
+     "hold": 2.889,
+     "text": "The diagram presents the circular life cycle sequence, marked overall by label A."
+    },
+    {
+     "t": 2.889,
+     "hold": 3.778,
+     "text": "At position D, the adult monarch butterfly is displayed, with a directional arrow pointing toward stage F."
+    },
+    {
+     "t": 6.667,
+     "hold": 3.111,
+     "text": "Stage F shows an egg attached to a leaf, leading down to stage B."
+    },
+    {
+     "t": 9.778,
+     "hold": 4.0,
+     "text": "At stage B, a striped caterpillar is seen on foliage, with an arrow leading leftward to stage C."
+    },
+    {
+     "t": 13.778,
+     "hold": 3.778,
+     "text": "In stage C, the larger caterpillar is shown perched on a branch, directing upward toward stage E."
+    },
+    {
+     "t": 17.556,
+     "hold": 4.444,
+     "text": "Stage E displays the chrysalis pupa, which completes the cycle by pointing back up to the adult butterfly at D."
+    }
+   ],
+   "seconds": 22.0,
+   "timing": "repaced",
+   "statedSeconds": 2.999
+  },
+  {
+   "id": "ChemEngineering-10-00138-g001",
+   "title": "Chemical engineering process diagram",
+   "categoryId": "chemistry",
+   "category": "Chemistry",
+   "source": "assets/ood/chemistry/ChemEngineering-10-00138-g001/source.webp",
+   "thumb": "assets/ood/chemistry/ChemEngineering-10-00138-g001/source.webp",
+   "frames": [
+    "assets/ood/chemistry/ChemEngineering-10-00138-g001/frame_000.webp",
+    "assets/ood/chemistry/ChemEngineering-10-00138-g001/frame_001.webp",
+    "assets/ood/chemistry/ChemEngineering-10-00138-g001/frame_002.webp",
+    "assets/ood/chemistry/ChemEngineering-10-00138-g001/frame_003.webp",
+    "assets/ood/chemistry/ChemEngineering-10-00138-g001/frame_004.webp",
+    "assets/ood/chemistry/ChemEngineering-10-00138-g001/frame_005.webp",
+    "assets/ood/chemistry/ChemEngineering-10-00138-g001/frame_006.webp",
+    "assets/ood/chemistry/ChemEngineering-10-00138-g001/frame_007.webp",
+    "assets/ood/chemistry/ChemEngineering-10-00138-g001/frame_008.webp",
+    "assets/ood/chemistry/ChemEngineering-10-00138-g001/frame_009.webp",
+    "assets/ood/chemistry/ChemEngineering-10-00138-g001/frame_010.webp"
+   ],
+   "beats": [
+    {
+     "t": 0.0,
+     "hold": 2.889,
+     "text": "An overarching analytical quality control system oversees the entire refining and separation operation."
+    },
+    {
+     "t": 2.889,
+     "hold": 4.222,
+     "text": "A distributed network of sampling points connects directly to this control framework to evaluate material at critical process stages."
+    },
+    {
+     "t": 7.111,
+     "hold": 4.222,
+     "text": "The process begins at the feedstock tanks, where raw material and initial flue gases are sampled at point SP1."
+    },
+    {
+     "t": 11.333,
+     "hold": 3.111,
+     "text": "Feedstock is pumped forward into a preheating stage, monitored closely by sampling point SP2."
+    },
+    {
+     "t": 14.444,
+     "hold": 3.333,
+     "text": "The corresponding high-pressure feedstock pump and preheater unit is introduced into the physical equipment line."
+    },
+    {
+     "t": 17.778,
+     "hold": 3.333,
+     "text": "Next in line is the heating furnace block, tracked by another dedicated sampling point SP2."
+    },
+    {
+     "t": 21.111,
+     "hold": 3.556,
+     "text": "The physical heating furnace is added, raising the feedstock temperature to vaporization while discharging flue gas."
+    },
+    {
+     "t": 24.667,
+     "hold": 3.333,
+     "text": "The vaporized feed enters the distillation column, continuously monitored across sampling points SP3 and SP4."
+    },
+    {
+     "t": 28.0,
+     "hold": 3.556,
+     "text": "A physical distillation column and overhead condenser are installed to separate volatile components from heavier fractions."
+    },
+    {
+     "t": 31.556,
+     "hold": 4.222,
+     "text": "The process flow adds a condensation and cooling block using circulating cooling water, monitored by points SP5 and SP8."
+    },
+    {
+     "t": 35.778,
+     "hold": 3.556,
+     "text": "Finally, purified fractions accumulate in intermediate storage tanks, completing a fully instrumented and quality-controlled distillation workflow."
+    }
+   ],
+   "seconds": 39.333,
+   "timing": "repaced",
+   "statedSeconds": 5.749
+  },
+  {
+   "id": "Chem_organic",
+   "title": "Organic reaction mechanism",
+   "categoryId": "chemistry",
+   "category": "Chemistry",
+   "source": "assets/ood/chemistry/Chem_organic/source.webp",
+   "thumb": "assets/ood/chemistry/Chem_organic/source.webp",
+   "frames": [
+    "assets/ood/chemistry/Chem_organic/frame_000.webp",
+    "assets/ood/chemistry/Chem_organic/frame_001.webp",
+    "assets/ood/chemistry/Chem_organic/frame_002.webp",
+    "assets/ood/chemistry/Chem_organic/frame_003.webp",
+    "assets/ood/chemistry/Chem_organic/frame_004.webp",
+    "assets/ood/chemistry/Chem_organic/frame_005.webp"
+   ],
+   "beats": [
+    {
+     "t": 0.0,
+     "hold": 4.222,
+     "text": "The process begins with the molecule labeled Phenol, where a hydroxide ion abstracts a proton from the oxygen atom."
+    },
+    {
+     "t": 4.222,
+     "hold": 2.667,
+     "text": "This generates a phenoxide intermediate, with electron flow shifting into the ring."
+    },
+    {
+     "t": 6.889,
+     "hold": 4.222,
+     "text": "Through resonance, coordination occurs with a sodium cation and carbon dioxide, as the ring attacks the carbon dioxide molecule."
+    },
+    {
+     "t": 11.111,
+     "hold": 3.778,
+     "text": "The reaction proceeds to an intermediate where internal electron shifts and proton transfer restore the aromatic ring."
+    },
+    {
+     "t": 14.889,
+     "hold": 2.667,
+     "text": "The resulting carboxylate species then accepts a proton from a hydronium ion."
+    },
+    {
+     "t": 17.556,
+     "hold": 2.222,
+     "text": "This final protonation yields the target compound, labeled Salicylic acid."
+    }
+   ],
+   "seconds": 19.778,
+   "timing": "repaced",
+   "statedSeconds": 3.399
+  },
+  {
+   "id": "Micheal_addition_with_NH3",
+   "title": "Michael addition with ammonia",
+   "categoryId": "chemistry",
+   "category": "Chemistry",
+   "source": "assets/ood/chemistry/Micheal_addition_with_NH3/source.webp",
+   "thumb": "assets/ood/chemistry/Micheal_addition_with_NH3/source.webp",
+   "frames": [
+    "assets/ood/chemistry/Micheal_addition_with_NH3/frame_000.webp",
+    "assets/ood/chemistry/Micheal_addition_with_NH3/frame_001.webp",
+    "assets/ood/chemistry/Micheal_addition_with_NH3/frame_002.webp",
+    "assets/ood/chemistry/Micheal_addition_with_NH3/frame_003.webp",
+    "assets/ood/chemistry/Micheal_addition_with_NH3/frame_004.webp",
+    "assets/ood/chemistry/Micheal_addition_with_NH3/frame_005.webp",
+    "assets/ood/chemistry/Micheal_addition_with_NH3/frame_006.webp",
+    "assets/ood/chemistry/Micheal_addition_with_NH3/frame_007.webp",
+    "assets/ood/chemistry/Micheal_addition_with_NH3/frame_008.webp",
+    "assets/ood/chemistry/Micheal_addition_with_NH3/frame_009.webp",
+    "assets/ood/chemistry/Micheal_addition_with_NH3/frame_010.webp"
+   ],
+   "beats": [
+    {
+     "t": 0.0,
+     "hold": 3.333,
+     "text": "The reaction begins with the divinyl ketone starting material alongside an incoming molecule of ammonia."
+    },
+    {
+     "t": 3.333,
+     "hold": 4.0,
+     "text": "Ammonia attacks the terminal alkene carbon, shifting the double bond and pushing electron density onto the carbonyl oxygen."
+    },
+    {
+     "t": 7.333,
+     "hold": 4.222,
+     "text": "This conjugate addition generates a zwitterionic enolate intermediate with a positively charged ammonium group and a negatively charged oxygen."
+    },
+    {
+     "t": 11.556,
+     "hold": 3.556,
+     "text": "Curved arrows show electron movement as the enolate oxygen abstracts a proton from the ammonium nitrogen."
+    },
+    {
+     "t": 15.111,
+     "hold": 3.333,
+     "text": "This proton transfer establishes equilibrium with the neutral enol intermediate bearing a primary amino chain."
+    },
+    {
+     "t": 18.444,
+     "hold": 3.556,
+     "text": "Tautomerization of the enol reforms the carbonyl group, orienting the amine toward the remaining double bond."
+    },
+    {
+     "t": 22.0,
+     "hold": 3.778,
+     "text": "The primary amine initiates intramolecular conjugate addition, attacking the alkene and pushing electrons onto the carbonyl oxygen."
+    },
+    {
+     "t": 25.778,
+     "hold": 2.667,
+     "text": "Cyclization closes the six-membered piperidine core, yielding a cyclic zwitterionic enolate intermediate."
+    },
+    {
+     "t": 28.444,
+     "hold": 3.778,
+     "text": "A subsequent proton transfer shifts a proton from the secondary ammonium center to the negatively charged oxygen."
+    },
+    {
+     "t": 32.222,
+     "hold": 2.0,
+     "text": "This step forms the neutral cyclic enol intermediate, four-hydroxytetrahydropyridine."
+    },
+    {
+     "t": 34.222,
+     "hold": 2.667,
+     "text": "Finally, keto-enol tautomerization converts the cyclic enol into the final four-piperidone product."
+    }
+   ],
+   "seconds": 36.889,
+   "timing": "repaced",
+   "statedSeconds": 5.499
+  },
+  {
+   "id": "chem_thermo",
+   "title": "Thermodynamic cycle",
+   "categoryId": "chemistry",
+   "category": "Chemistry",
+   "source": "assets/ood/chemistry/chem_thermo/source.webp",
+   "thumb": "assets/ood/chemistry/chem_thermo/source.webp",
+   "frames": [
+    "assets/ood/chemistry/chem_thermo/frame_000.webp",
+    "assets/ood/chemistry/chem_thermo/frame_001.webp",
+    "assets/ood/chemistry/chem_thermo/frame_002.webp",
+    "assets/ood/chemistry/chem_thermo/frame_003.webp",
+    "assets/ood/chemistry/chem_thermo/frame_004.webp",
+    "assets/ood/chemistry/chem_thermo/frame_005.webp",
+    "assets/ood/chemistry/chem_thermo/frame_006.webp",
+    "assets/ood/chemistry/chem_thermo/frame_007.webp",
+    "assets/ood/chemistry/chem_thermo/frame_008.webp",
+    "assets/ood/chemistry/chem_thermo/frame_009.webp"
+   ],
+   "beats": [
+    {
+     "t": 0.0,
+     "hold": 4.999,
+     "text": "This diagram illustrates the overall layout of the AC Refrigerant Cycle."
+    },
+    {
+     "t": 4.999,
+     "hold": 4.5,
+     "text": "At the top of the system is the Compressor."
+    },
+    {
+     "t": 9.499,
+     "hold": 4.222,
+     "text": "Exiting the compressor, the refrigerant flows as a gas at high pressure and high temperature past a measurement position."
+    },
+    {
+     "t": 13.721,
+     "hold": 5.0,
+     "text": "The line feeds into the Condenser, which contains high-pressure saturated vapour, internal coils, and a fan releasing heat outward."
+    },
+    {
+     "t": 18.721,
+     "hold": 4.222,
+     "text": "Leaving the condenser, the refrigerant transitions to liquid at high pressure and low temperature, routed past another measurement position."
+    },
+    {
+     "t": 22.943,
+     "hold": 4.5,
+     "text": "The line connects to the Expansion Valve positioned at the bottom of the loop."
+    },
+    {
+     "t": 27.443,
+     "hold": 4.0,
+     "text": "From the expansion valve, it continues as liquid at low pressure and low temperature past a measurement position."
+    },
+    {
+     "t": 31.443,
+     "hold": 5.0,
+     "text": "It flows into the Evaporator on the left, identified with low pressure saturated vapour and an internal fan."
+    },
+    {
+     "t": 36.443,
+     "hold": 5.333,
+     "text": "Exiting the evaporator, the refrigerant returns as a gas at low pressure and high temperature through a final measurement position back to the compressor."
+    },
+    {
+     "t": 41.777,
+     "hold": 5.0,
+     "text": "The central circular arrows demonstrate the continuous clockwise flow across all four stages of the cycle."
+    }
+   ],
+   "seconds": 46.777,
+   "timing": "stated",
+   "statedSeconds": 44.999
+  },
+  {
+   "id": "info_2",
+   "title": "Benefits of arts and culture",
+   "categoryId": "infographics",
+   "category": "Infographics",
+   "source": "assets/ood/infographics/info_2/source.webp",
+   "thumb": "assets/ood/infographics/info_2/source.webp",
+   "frames": [
+    "assets/ood/infographics/info_2/frame_000.webp",
+    "assets/ood/infographics/info_2/frame_001.webp",
+    "assets/ood/infographics/info_2/frame_002.webp",
+    "assets/ood/infographics/info_2/frame_003.webp",
+    "assets/ood/infographics/info_2/frame_004.webp",
+    "assets/ood/infographics/info_2/frame_005.webp",
+    "assets/ood/infographics/info_2/frame_006.webp",
+    "assets/ood/infographics/info_2/frame_007.webp",
+    "assets/ood/infographics/info_2/frame_008.webp",
+    "assets/ood/infographics/info_2/frame_009.webp",
+    "assets/ood/infographics/info_2/frame_010.webp",
+    "assets/ood/infographics/info_2/frame_011.webp",
+    "assets/ood/infographics/info_2/frame_012.webp",
+    "assets/ood/infographics/info_2/frame_013.webp",
+    "assets/ood/infographics/info_2/frame_014.webp",
+    "assets/ood/infographics/info_2/frame_015.webp",
+    "assets/ood/infographics/info_2/frame_016.webp",
+    "assets/ood/infographics/info_2/frame_017.webp",
+    "assets/ood/infographics/info_2/frame_018.webp",
+    "assets/ood/infographics/info_2/frame_019.webp",
+    "assets/ood/infographics/info_2/frame_020.webp",
+    "assets/ood/infographics/info_2/frame_021.webp",
+    "assets/ood/infographics/info_2/frame_022.webp",
+    "assets/ood/infographics/info_2/frame_023.webp",
+    "assets/ood/infographics/info_2/frame_024.webp",
+    "assets/ood/infographics/info_2/frame_025.webp",
+    "assets/ood/infographics/info_2/frame_026.webp",
+    "assets/ood/infographics/info_2/frame_027.webp",
+    "assets/ood/infographics/info_2/frame_028.webp",
+    "assets/ood/infographics/info_2/frame_029.webp"
+   ],
+   "beats": [
+    {
+     "t": 0.0,
+     "hold": 5.333,
+     "text": "The infographic titled 'Good for brain and body' outlines seven fascinating benefits of taking part in arts and culture for mental and physical wellbeing."
+    },
+    {
+     "t": 5.333,
+     "hold": 3.0,
+     "text": "The first benefit appears on the upper left."
+    },
+    {
+     "t": 8.333,
+     "hold": 2.889,
+     "text": "People who engage in culture and the arts live longer and healthier lives."
+    },
+    {
+     "t": 11.222,
+     "hold": 2.889,
+     "text": "People who engage in culture and the arts live longer and healthier lives."
+    },
+    {
+     "t": 14.111,
+     "hold": 3.0,
+     "text": "Below it, the second benefit is highlighted."
+    },
+    {
+     "t": 17.111,
+     "hold": 3.333,
+     "text": "There are few to none known harmful side effects found in studies of arts interventions."
+    },
+    {
+     "t": 20.444,
+     "hold": 3.333,
+     "text": "There are few to none known harmful side effects found in studies of arts interventions."
+    },
+    {
+     "t": 23.778,
+     "hold": 3.333,
+     "text": "There are few to none known harmful side effects found in studies of arts interventions."
+    },
+    {
+     "t": 27.111,
+     "hold": 2.25,
+     "text": "Continuing downward, the third benefit appears."
+    },
+    {
+     "t": 29.361,
+     "hold": 1.333,
+     "text": "Continuing downward, the third benefit appears."
+    },
+    {
+     "t": 30.694,
+     "hold": 3.778,
+     "text": "Mental health benefits are found after taking part in as little as two creative hours per week."
+    },
+    {
+     "t": 34.472,
+     "hold": 3.778,
+     "text": "Mental health benefits are found after taking part in as little as two creative hours per week."
+    },
+    {
+     "t": 38.25,
+     "hold": 3.778,
+     "text": "Mental health benefits are found after taking part in as little as two creative hours per week."
+    },
+    {
+     "t": 42.028,
+     "hold": 2.25,
+     "text": "The fourth benefit is shown at the bottom left."
+    },
+    {
+     "t": 44.278,
+     "hold": 2.0,
+     "text": "The fourth benefit is shown at the bottom left."
+    },
+    {
+     "t": 46.278,
+     "hold": 4.0,
+     "text": "Benefits can be found in creativity and the arts, whether you take part or are an audience member."
+    },
+    {
+     "t": 50.278,
+     "hold": 4.0,
+     "text": "Benefits can be found in creativity and the arts, whether you take part or are an audience member."
+    },
+    {
+     "t": 54.278,
+     "hold": 4.0,
+     "text": "Benefits can be found in creativity and the arts, whether you take part or are an audience member."
+    },
+    {
+     "t": 58.278,
+     "hold": 2.25,
+     "text": "Moving to the top right, the fifth benefit is presented."
+    },
+    {
+     "t": 60.528,
+     "hold": 2.222,
+     "text": "Moving to the top right, the fifth benefit is presented."
+    },
+    {
+     "t": 62.75,
+     "hold": 4.0,
+     "text": "Singing groups for new mums have been shown to be more effective than anti-depressants in managing post-natal depression."
+    },
+    {
+     "t": 66.75,
+     "hold": 4.0,
+     "text": "Singing groups for new mums have been shown to be more effective than anti-depressants in managing post-natal depression."
+    },
+    {
+     "t": 70.75,
+     "hold": 4.0,
+     "text": "Singing groups for new mums have been shown to be more effective than anti-depressants in managing post-natal depression."
+    },
+    {
+     "t": 74.75,
+     "hold": 2.25,
+     "text": "Below that, the sixth benefit focuses on education and development."
+    },
+    {
+     "t": 77.0,
+     "hold": 3.556,
+     "text": "Music supports brain development, and taking a music qualification is linked with higher academic achievement overall."
+    },
+    {
+     "t": 80.556,
+     "hold": 3.556,
+     "text": "Music supports brain development, and taking a music qualification is linked with higher academic achievement overall."
+    },
+    {
+     "t": 84.111,
+     "hold": 3.0,
+     "text": "The seventh benefit is located on the lower right."
+    },
+    {
+     "t": 87.111,
+     "hold": 5.111,
+     "text": "Studies show that live music on neonatal wards improves health outcomes such as better sleep, feeding and heart rates, and shorter hospital stays."
+    },
+    {
+     "t": 92.222,
+     "hold": 5.111,
+     "text": "Studies show that live music on neonatal wards improves health outcomes such as better sleep, feeding and heart rates, and shorter hospital stays."
+    },
+    {
+     "t": 97.333,
+     "hold": 4.889,
+     "text": "At the bottom, cited sources reference research from BMC Public Health and the Bulletin of the Council for Research in Music Education."
+    }
+   ],
+   "seconds": 102.222,
+   "timing": "repaced",
+   "statedSeconds": 46.5
+  },
+  {
+   "id": "info_3",
+   "title": "Six snacks for stress",
+   "categoryId": "infographics",
+   "category": "Infographics",
+   "source": "assets/ood/infographics/info_3/source.webp",
+   "thumb": "assets/ood/infographics/info_3/source.webp",
+   "frames": [
+    "assets/ood/infographics/info_3/frame_000.webp",
+    "assets/ood/infographics/info_3/frame_001.webp",
+    "assets/ood/infographics/info_3/frame_002.webp",
+    "assets/ood/infographics/info_3/frame_003.webp",
+    "assets/ood/infographics/info_3/frame_004.webp",
+    "assets/ood/infographics/info_3/frame_005.webp",
+    "assets/ood/infographics/info_3/frame_006.webp",
+    "assets/ood/infographics/info_3/frame_007.webp",
+    "assets/ood/infographics/info_3/frame_008.webp",
+    "assets/ood/infographics/info_3/frame_009.webp"
+   ],
+   "beats": [
+    {
+     "t": 0.0,
+     "hold": 6.444,
+     "text": "The infographic opens with the header '6 Snacks for STRESS', under the categories of science, nutrition, and better living, emphasizing real food for a better mood and sharper mind."
+    },
+    {
+     "t": 6.444,
+     "hold": 6.0,
+     "text": "To the right, an overview panel titled 'Small snacks. Big impact.' notes that these six nutrient-packed snacks help reduce stress, balance mood, and naturally support brain health."
+    },
+    {
+     "t": 12.444,
+     "hold": 6.222,
+     "text": "Card zero-one features Brazil nuts for selenium, linked to mood and thyroid regulation, listing key benefits of supporting thyroid function, reducing oxidative stress, and improving mood and immunity."
+    },
+    {
+     "t": 18.667,
+     "hold": 4.2,
+     "text": "A circular central graphic highlights 'Nature's Stress Relief', emphasizing the connection between better food and better mood."
+    },
+    {
+     "t": 22.867,
+     "hold": 4.444,
+     "text": "Card zero-two showcases blueberries for brain-active anthocyanins, detailing benefits that improve memory and focus, reduce inflammation, and help regulate mood."
+    },
+    {
+     "t": 27.311,
+     "hold": 4.889,
+     "text": "Card zero-three introduces saffron lassi to regulate cortisol spikes, providing saffron extract to lower cortisol levels, promote better sleep, and reduce anxiety."
+    },
+    {
+     "t": 32.2,
+     "hold": 5.778,
+     "text": "Card zero-four displays kefir, delivering probiotics to signal calm via the gut-vagus axis by supporting gut health, activating the vagus nerve, and improving mood and calm."
+    },
+    {
+     "t": 37.978,
+     "hold": 5.333,
+     "text": "Card zero-five details wok-fried greens for magnesium and GABA, indicating key benefits that calm the nervous system, improve sleep quality, and reduce stress hormones."
+    },
+    {
+     "t": 43.311,
+     "hold": 4.889,
+     "text": "Card zero-six presents matcha latte containing L-theanine for calming alpha waves, enhancing focus, promoting alpha brain waves, and reducing stress and anxiety."
+    },
+    {
+     "t": 48.2,
+     "hold": 4.667,
+     "text": "The bottom footer summarizes the overall benefits across five icons: less stress, better mood, sharper focus, improved sleep, and long-term health."
+    }
+   ],
+   "seconds": 52.867,
+   "timing": "repaced",
+   "statedSeconds": 39.9
+  },
+  {
+   "id": "info_5",
+   "title": "Machine-learning distance metrics",
+   "categoryId": "infographics",
+   "category": "Infographics",
+   "source": "assets/ood/infographics/info_5/source.webp",
+   "thumb": "assets/ood/infographics/info_5/source.webp",
+   "frames": [
+    "assets/ood/infographics/info_5/frame_000.webp",
+    "assets/ood/infographics/info_5/frame_001.webp",
+    "assets/ood/infographics/info_5/frame_002.webp",
+    "assets/ood/infographics/info_5/frame_003.webp",
+    "assets/ood/infographics/info_5/frame_004.webp",
+    "assets/ood/infographics/info_5/frame_005.webp",
+    "assets/ood/infographics/info_5/frame_006.webp",
+    "assets/ood/infographics/info_5/frame_007.webp",
+    "assets/ood/infographics/info_5/frame_008.webp",
+    "assets/ood/infographics/info_5/frame_009.webp",
+    "assets/ood/infographics/info_5/frame_010.webp",
+    "assets/ood/infographics/info_5/frame_011.webp",
+    "assets/ood/infographics/info_5/frame_012.webp",
+    "assets/ood/infographics/info_5/frame_013.webp",
+    "assets/ood/infographics/info_5/frame_014.webp",
+    "assets/ood/infographics/info_5/frame_015.webp",
+    "assets/ood/infographics/info_5/frame_016.webp",
+    "assets/ood/infographics/info_5/frame_017.webp",
+    "assets/ood/infographics/info_5/frame_018.webp",
+    "assets/ood/infographics/info_5/frame_019.webp",
+    "assets/ood/infographics/info_5/frame_020.webp",
+    "assets/ood/infographics/info_5/frame_021.webp",
+    "assets/ood/infographics/info_5/frame_022.webp",
+    "assets/ood/infographics/info_5/frame_023.webp",
+    "assets/ood/infographics/info_5/frame_024.webp",
+    "assets/ood/infographics/info_5/frame_025.webp",
+    "assets/ood/infographics/info_5/frame_026.webp",
+    "assets/ood/infographics/info_5/frame_027.webp",
+    "assets/ood/infographics/info_5/frame_028.webp"
+   ],
+   "beats": [
+    {
+     "t": 0.0,
+     "hold": 4.0,
+     "text": "The guide presents key machine learning algorithms, highlighting fundamental concepts across distance metrics, similarity measures, and optimization techniques."
+    },
+    {
+     "t": 4.0,
+     "hold": 3.111,
+     "text": "Section one introduces Euclidean Distance, representing the straight-line geometric distance between two coordinate points."
+    },
+    {
+     "t": 7.111,
+     "hold": 4.222,
+     "text": "The distance formula measures the geometric length separating coordinates, finding widespread application in K-Nearest Neighbors, clustering, and similarity search."
+    },
+    {
+     "t": 11.333,
+     "hold": 4.222,
+     "text": "The distance formula measures the geometric length separating coordinates, finding widespread application in K-Nearest Neighbors, clustering, and similarity search."
+    },
+    {
+     "t": 15.556,
+     "hold": 2.71,
+     "text": "Section two presents Manhattan Distance, which tracks grid-aligned movement."
+    },
+    {
+     "t": 18.266,
+     "hold": 4.444,
+     "text": "The path follows horizontal and vertical axes by summing absolute coordinate differences, making it ideal for grid-based models and clustering."
+    },
+    {
+     "t": 22.71,
+     "hold": 4.444,
+     "text": "The path follows horizontal and vertical axes by summing absolute coordinate differences, making it ideal for grid-based models and clustering."
+    },
+    {
+     "t": 27.154,
+     "hold": 3.556,
+     "text": "Section three covers Chebyshev Distance, defining separation by the greatest difference along any single coordinate dimension."
+    },
+    {
+     "t": 30.71,
+     "hold": 3.556,
+     "text": "Section three covers Chebyshev Distance, defining separation by the greatest difference along any single coordinate dimension."
+    },
+    {
+     "t": 34.266,
+     "hold": 4.667,
+     "text": "Reflecting movement patterns like a king on a chessboard, it identifies the maximum coordinate span, commonly used in game artificial intelligence."
+    },
+    {
+     "t": 38.932,
+     "hold": 4.667,
+     "text": "Reflecting movement patterns like a king on a chessboard, it identifies the maximum coordinate span, commonly used in game artificial intelligence."
+    },
+    {
+     "t": 43.599,
+     "hold": 4.667,
+     "text": "Reflecting movement patterns like a king on a chessboard, it identifies the maximum coordinate span, commonly used in game artificial intelligence."
+    },
+    {
+     "t": 48.266,
+     "hold": 4.222,
+     "text": "Section four displays Minkowski Distance, a generalized metric that unifies Manhattan, Euclidean, and Chebyshev distances under a single formulation."
+    },
+    {
+     "t": 52.488,
+     "hold": 4.222,
+     "text": "Section four displays Minkowski Distance, a generalized metric that unifies Manhattan, Euclidean, and Chebyshev distances under a single formulation."
+    },
+    {
+     "t": 56.71,
+     "hold": 2.889,
+     "text": "Section five introduces Cosine Similarity, measuring the angular orientation between two directional vectors."
+    },
+    {
+     "t": 59.599,
+     "hold": 5.111,
+     "text": "By evaluating the cosine of angle theta independently of vector length, it serves as a core method for text analysis and recommendation systems."
+    },
+    {
+     "t": 64.71,
+     "hold": 5.111,
+     "text": "By evaluating the cosine of angle theta independently of vector length, it serves as a core method for text analysis and recommendation systems."
+    },
+    {
+     "t": 69.821,
+     "hold": 5.111,
+     "text": "By evaluating the cosine of angle theta independently of vector length, it serves as a core method for text analysis and recommendation systems."
+    },
+    {
+     "t": 74.932,
+     "hold": 4.444,
+     "text": "Section six outlines Pearson Correlation, evaluating the linear relationship between variables on a scale from negative one to positive one."
+    },
+    {
+     "t": 79.377,
+     "hold": 4.222,
+     "text": "Section seven highlights Mahalanobis Distance, which accounts for covariance across multivariate distributions and is widely applied in anomaly detection."
+    },
+    {
+     "t": 83.599,
+     "hold": 4.222,
+     "text": "Section eight demonstrates Stochastic Gradient Descent, iteratively minimizing loss to update parameters across neural networks and deep learning models."
+    },
+    {
+     "t": 87.821,
+     "hold": 4.667,
+     "text": "Section nine shows Jaccard Similarity, which computes the ratio of intersection to union between sets for text mining and image retrieval."
+    },
+    {
+     "t": 92.488,
+     "hold": 4.667,
+     "text": "Section ten illustrates Levenshtein Distance, quantifying the edit operations needed to transform strings, commonly applied in spell correction and fuzzy matching."
+    },
+    {
+     "t": 97.154,
+     "hold": 4.0,
+     "text": "Section eleven details the Sørensen-Dice Coefficient, measuring overlapping set volume for tasks such as image segmentation and bioinformatics."
+    },
+    {
+     "t": 101.154,
+     "hold": 4.0,
+     "text": "Section twelve displays Jensen-Shannon Divergence, providing a smoothed, symmetric comparison between probability distributions in topic modeling and clustering."
+    },
+    {
+     "t": 105.154,
+     "hold": 4.889,
+     "text": "Section thirteen presents Canberra Distance, a weighted difference metric sensitive to values near zero, used in outlier detection and time series analysis."
+    },
+    {
+     "t": 110.043,
+     "hold": 3.556,
+     "text": "Section fourteen examines Hamming Distance, counting bit-level differences between sequences for error detection and digital communication."
+    },
+    {
+     "t": 113.599,
+     "hold": 4.0,
+     "text": "Section fifteen outlines Spearman Rank Correlation, measuring monotonic relationships between ranked variables across positive, negative, and non-linear patterns."
+    },
+    {
+     "t": 117.599,
+     "hold": 4.222,
+     "text": "Finally, section sixteen displays the Chi-Square Test, evaluating independence and goodness of fit between observed and expected categorical distributions."
+    }
+   ],
+   "seconds": 121.821,
+   "timing": "repaced",
+   "statedSeconds": 55.64
+  },
+  {
+   "id": "info_6",
+   "title": "SQL injection types",
+   "categoryId": "infographics",
+   "category": "Infographics",
+   "source": "assets/ood/infographics/info_6/source.webp",
+   "thumb": "assets/ood/infographics/info_6/source.webp",
+   "frames": [
+    "assets/ood/infographics/info_6/frame_000.webp",
+    "assets/ood/infographics/info_6/frame_001.webp",
+    "assets/ood/infographics/info_6/frame_002.webp",
+    "assets/ood/infographics/info_6/frame_003.webp",
+    "assets/ood/infographics/info_6/frame_004.webp",
+    "assets/ood/infographics/info_6/frame_005.webp",
+    "assets/ood/infographics/info_6/frame_006.webp",
+    "assets/ood/infographics/info_6/frame_007.webp",
+    "assets/ood/infographics/info_6/frame_008.webp",
+    "assets/ood/infographics/info_6/frame_009.webp",
+    "assets/ood/infographics/info_6/frame_010.webp",
+    "assets/ood/infographics/info_6/frame_011.webp",
+    "assets/ood/infographics/info_6/frame_012.webp",
+    "assets/ood/infographics/info_6/frame_013.webp",
+    "assets/ood/infographics/info_6/frame_014.webp",
+    "assets/ood/infographics/info_6/frame_015.webp",
+    "assets/ood/infographics/info_6/frame_016.webp",
+    "assets/ood/infographics/info_6/frame_017.webp",
+    "assets/ood/infographics/info_6/frame_018.webp",
+    "assets/ood/infographics/info_6/frame_019.webp",
+    "assets/ood/infographics/info_6/frame_020.webp",
+    "assets/ood/infographics/info_6/frame_021.webp",
+    "assets/ood/infographics/info_6/frame_022.webp",
+    "assets/ood/infographics/info_6/frame_023.webp",
+    "assets/ood/infographics/info_6/frame_024.webp",
+    "assets/ood/infographics/info_6/frame_025.webp",
+    "assets/ood/infographics/info_6/frame_026.webp",
+    "assets/ood/infographics/info_6/frame_027.webp",
+    "assets/ood/infographics/info_6/frame_028.webp",
+    "assets/ood/infographics/info_6/frame_029.webp",
+    "assets/ood/infographics/info_6/frame_030.webp",
+    "assets/ood/infographics/info_6/frame_031.webp",
+    "assets/ood/infographics/info_6/frame_032.webp",
+    "assets/ood/infographics/info_6/frame_033.webp",
+    "assets/ood/infographics/info_6/frame_034.webp",
+    "assets/ood/infographics/info_6/frame_035.webp",
+    "assets/ood/infographics/info_6/frame_036.webp"
+   ],
+   "beats": [
+    {
+     "t": 0.0,
+     "hold": 3.111,
+     "text": "The infographic outlines SQL Injection Types, illustrating the different ways attackers exploit database vulnerabilities."
+    },
+    {
+     "t": 3.111,
+     "hold": 5.333,
+     "text": "On the left, SQL Injection is defined as a code injection technique occurring when unsanitized user input allows attackers to interfere with backend queries."
+    },
+    {
+     "t": 8.444,
+     "hold": 4.667,
+     "text": "The top center section presents an example of how it works across a vulnerable login form, an application, and a database."
+    },
+    {
+     "t": 13.111,
+     "hold": 4.0,
+     "text": "Credentials entered into the username and password fields are submitted through the login interface to the application."
+    },
+    {
+     "t": 17.111,
+     "hold": 4.0,
+     "text": "The application dynamically incorporates these user values into an unfiltered SQL select statement."
+    },
+    {
+     "t": 21.111,
+     "hold": 4.0,
+     "text": "The constructed query is then forwarded directly to the database for execution."
+    },
+    {
+     "t": 25.111,
+     "hold": 4.0,
+     "text": "An attacker supplies an input payload containing an OR condition designed to alter query logic."
+    },
+    {
+     "t": 29.111,
+     "hold": 3.333,
+     "text": "An attacker supplies an input payload containing an OR condition designed to alter query logic."
+    },
+    {
+     "t": 32.444,
+     "hold": 3.333,
+     "text": "An attacker supplies an input payload containing an OR condition designed to alter query logic."
+    },
+    {
+     "t": 35.778,
+     "hold": 3.778,
+     "text": "As a result, the query evaluates the injected condition, causing the filter to evaluate as universally true."
+    },
+    {
+     "t": 39.556,
+     "hold": 3.778,
+     "text": "As a result, the query evaluates the injected condition, causing the filter to evaluate as universally true."
+    },
+    {
+     "t": 43.333,
+     "hold": 3.778,
+     "text": "As a result, the query evaluates the injected condition, causing the filter to evaluate as universally true."
+    },
+    {
+     "t": 47.111,
+     "hold": 3.778,
+     "text": "As a result, the query evaluates the injected condition, causing the filter to evaluate as universally true."
+    },
+    {
+     "t": 50.889,
+     "hold": 2.667,
+     "text": "The query successfully executes, bypassing login authentication and returning all table records."
+    },
+    {
+     "t": 53.556,
+     "hold": 2.667,
+     "text": "The query successfully executes, bypassing login authentication and returning all table records."
+    },
+    {
+     "t": 56.222,
+     "hold": 5.333,
+     "text": "To the right, common impacts include bypassing authentication, accessing sensitive data, modifying or deleting data, executing admin operations, and taking control of the server."
+    },
+    {
+     "t": 61.556,
+     "hold": 4.0,
+     "text": "The central section categorizes the five primary types of SQL injection."
+    },
+    {
+     "t": 65.556,
+     "hold": 4.444,
+     "text": "Column 1 shows in-band union-based injection, which joins statements using the UNION operator to pull data directly from database tables."
+    },
+    {
+     "t": 70.0,
+     "hold": 4.0,
+     "text": "Column 2 shows in-band error-based injection, which deliberately forces database errors like division by zero to leak information."
+    },
+    {
+     "t": 74.0,
+     "hold": 4.0,
+     "text": "Column 2 shows in-band error-based injection, which deliberately forces database errors like division by zero to leak information."
+    },
+    {
+     "t": 78.0,
+     "hold": 4.222,
+     "text": "Column 3 shows in-band boolean-based injection, inferring data bit-by-bit by observing differing application responses between true and false states."
+    },
+    {
+     "t": 82.222,
+     "hold": 4.222,
+     "text": "Column 3 shows in-band boolean-based injection, inferring data bit-by-bit by observing differing application responses between true and false states."
+    },
+    {
+     "t": 86.444,
+     "hold": 4.0,
+     "text": "Column 4 shows inferential time-based injection, which injects sleep functions to infer data from observable database response delays."
+    },
+    {
+     "t": 90.444,
+     "hold": 4.444,
+     "text": "Column 5 displays out-of-band injection, forcing the database to make external network requests to exfiltrate data to an attacker server."
+    },
+    {
+     "t": 94.889,
+     "hold": 4.0,
+     "text": "On the bottom left, other variations include stacked queries, second-order SQL injection, and NoSQL injection targeting non-relational databases."
+    },
+    {
+     "t": 98.889,
+     "hold": 4.0,
+     "text": "On the bottom left, other variations include stacked queries, second-order SQL injection, and NoSQL injection targeting non-relational databases."
+    },
+    {
+     "t": 102.889,
+     "hold": 4.0,
+     "text": "On the bottom left, other variations include stacked queries, second-order SQL injection, and NoSQL injection targeting non-relational databases."
+    },
+    {
+     "t": 106.889,
+     "hold": 2.889,
+     "text": "In the lower middle panel, an example workflow demonstrates the union-based attack sequence."
+    },
+    {
+     "t": 109.778,
+     "hold": 2.889,
+     "text": "In the lower middle panel, an example workflow demonstrates the union-based attack sequence."
+    },
+    {
+     "t": 112.667,
+     "hold": 4.0,
+     "text": "Step 1 determines the number of columns using sequential ORDER BY clauses."
+    },
+    {
+     "t": 116.667,
+     "hold": 2.667,
+     "text": "Step 1 determines the number of columns using sequential ORDER BY clauses."
+    },
+    {
+     "t": 119.333,
+     "hold": 3.111,
+     "text": "Step 2 checks data types across the columns using UNION SELECT with NULL values."
+    },
+    {
+     "t": 122.444,
+     "hold": 3.111,
+     "text": "Step 2 checks data types across the columns using UNION SELECT with NULL values."
+    },
+    {
+     "t": 125.556,
+     "hold": 3.111,
+     "text": "Step 2 checks data types across the columns using UNION SELECT with NULL values."
+    },
+    {
+     "t": 128.667,
+     "hold": 4.0,
+     "text": "Step 3 extracts the targeted table data by projecting specific columns into the result set."
+    },
+    {
+     "t": 132.667,
+     "hold": 4.0,
+     "text": "Prevention tips recommend prepared statements, input sanitization, least privilege permissions, avoiding detailed error messages, and using ORMs."
+    },
+    {
+     "t": 136.667,
+     "hold": 4.889,
+     "text": "On the bottom right, the payload cheat sheet summarizes syntax patterns for comments, boolean tests, union queries, sleep delays, and metadata extraction."
+    }
+   ],
+   "seconds": 141.556,
+   "timing": "repaced",
+   "statedSeconds": 90.0
+  },
+  {
+   "id": "info_7",
+   "title": "Prompt-injection attack and defence paths",
+   "categoryId": "infographics",
+   "category": "Infographics",
+   "source": "assets/ood/infographics/info_7/source.webp",
+   "thumb": "assets/ood/infographics/info_7/source.webp",
+   "frames": [
+    "assets/ood/infographics/info_7/frame_000.webp",
+    "assets/ood/infographics/info_7/frame_001.webp",
+    "assets/ood/infographics/info_7/frame_002.webp",
+    "assets/ood/infographics/info_7/frame_003.webp",
+    "assets/ood/infographics/info_7/frame_004.webp",
+    "assets/ood/infographics/info_7/frame_005.webp",
+    "assets/ood/infographics/info_7/frame_006.webp",
+    "assets/ood/infographics/info_7/frame_007.webp",
+    "assets/ood/infographics/info_7/frame_008.webp",
+    "assets/ood/infographics/info_7/frame_009.webp",
+    "assets/ood/infographics/info_7/frame_010.webp",
+    "assets/ood/infographics/info_7/frame_011.webp",
+    "assets/ood/infographics/info_7/frame_012.webp",
+    "assets/ood/infographics/info_7/frame_013.webp"
+   ],
+   "beats": [
+    {
+     "t": 0.0,
+     "hold": 2.889,
+     "text": "The diagram opens with the Attack Path, highlighted in red along the top."
+    },
+    {
+     "t": 2.889,
+     "hold": 3.0,
+     "text": "It begins with a malicious repository, where the attacker controls the source."
+    },
+    {
+     "t": 5.889,
+     "hold": 3.111,
+     "text": "This repository contains a poisoned AGENTS.md file, where hidden instructions live in plain sight."
+    },
+    {
+     "t": 9.0,
+     "hold": 3.0,
+     "text": "Moving forward, the agent reads it, loading the poisoned file."
+    },
+    {
+     "t": 12.0,
+     "hold": 3.0,
+     "text": "The agent trusts it, treating the attacker instructions as valid."
+    },
+    {
+     "t": 15.0,
+     "hold": 3.0,
+     "text": "Consequently, the agent sends secrets to the attacker as data exfiltration happens."
+    },
+    {
+     "t": 18.0,
+     "hold": 3.0,
+     "text": "Across the central dividing line, the Defense Path is introduced in green."
+    },
+    {
+     "t": 21.0,
+     "hold": 3.0,
+     "text": "Here, external input is treated as untrusted by default."
+    },
+    {
+     "t": 24.0,
+     "hold": 3.0,
+     "text": "A hook validates the input, scanning for patterns, risks, and injections."
+    },
+    {
+     "t": 27.0,
+     "hold": 3.0,
+     "text": "Next, allowlist checks ensure that only approved files and sources pass."
+    },
+    {
+     "t": 30.0,
+     "hold": 3.0,
+     "text": "Sandbox limits then restrict available tools, files, network access, and permissions."
+    },
+    {
+     "t": 33.0,
+     "hold": 3.111,
+     "text": "Finally, only safe actions run, ensuring the agent cannot hurt what it cannot reach."
+    },
+    {
+     "t": 36.111,
+     "hold": 3.0,
+     "text": "At the bottom left, the core attack takeaway states: trust everything equals dangerous."
+    },
+    {
+     "t": 39.111,
+     "hold": 3.0,
+     "text": "At the bottom right, the defense takeaway concludes: review config files like code."
+    }
+   ],
+   "seconds": 42.111,
+   "timing": "stated",
+   "statedSeconds": 40.5
+  },
+  {
+   "id": "Physics_Bohr_atom_photon_emission",
+   "title": "Photon emission in the Bohr atom",
+   "categoryId": "physics",
+   "category": "Physics",
+   "source": "assets/ood/physics/Physics_Bohr_atom_photon_emission/source.webp",
+   "thumb": "assets/ood/physics/Physics_Bohr_atom_photon_emission/source.webp",
+   "frames": [
+    "assets/ood/physics/Physics_Bohr_atom_photon_emission/frame_000.webp",
+    "assets/ood/physics/Physics_Bohr_atom_photon_emission/frame_001.webp",
+    "assets/ood/physics/Physics_Bohr_atom_photon_emission/frame_002.webp",
+    "assets/ood/physics/Physics_Bohr_atom_photon_emission/frame_003.webp",
+    "assets/ood/physics/Physics_Bohr_atom_photon_emission/frame_004.webp",
+    "assets/ood/physics/Physics_Bohr_atom_photon_emission/frame_005.webp",
+    "assets/ood/physics/Physics_Bohr_atom_photon_emission/frame_006.webp"
+   ],
+   "beats": [
+    {
+     "t": 0.0,
+     "hold": 2.667,
+     "text": "At the center of the atom sits the dense, positively charged nucleus."
+    },
+    {
+     "t": 2.667,
+     "hold": 3.111,
+     "text": "Surrounding the nucleus is the first quantized energy level, designated as n equals one."
+    },
+    {
+     "t": 5.778,
+     "hold": 3.556,
+     "text": "A second circular orbit appears further out, corresponding to the principal quantum number n equals two."
+    },
+    {
+     "t": 9.333,
+     "hold": 3.333,
+     "text": "The third orbit, n equals three, establishes a higher excited energy level for the electron."
+    },
+    {
+     "t": 12.667,
+     "hold": 3.0,
+     "text": "An electron occupies this outer orbit, placing the atom in an excited state."
+    },
+    {
+     "t": 15.667,
+     "hold": 3.778,
+     "text": "The electron drops from the third energy level down to the second level via a quantum jump."
+    },
+    {
+     "t": 19.444,
+     "hold": 4.444,
+     "text": "This transition releases the excess energy as an emitted photon, illustrating light emission in the Bohr model of the atom."
+    }
+   ],
+   "seconds": 23.889,
+   "timing": "repaced",
+   "statedSeconds": 18.499
+  },
+  {
+   "id": "Physics_CNO_cycle",
+   "title": "CNO cycle",
+   "categoryId": "physics",
+   "category": "Physics",
+   "source": "assets/ood/physics/Physics_CNO_cycle/source.webp",
+   "thumb": "assets/ood/physics/Physics_CNO_cycle/source.webp",
+   "frames": [
+    "assets/ood/physics/Physics_CNO_cycle/frame_000.webp",
+    "assets/ood/physics/Physics_CNO_cycle/frame_001.webp",
+    "assets/ood/physics/Physics_CNO_cycle/frame_002.webp",
+    "assets/ood/physics/Physics_CNO_cycle/frame_003.webp",
+    "assets/ood/physics/Physics_CNO_cycle/frame_004.webp",
+    "assets/ood/physics/Physics_CNO_cycle/frame_005.webp",
+    "assets/ood/physics/Physics_CNO_cycle/frame_006.webp"
+   ],
+   "beats": [
+    {
+     "t": 0.0,
+     "hold": 4.999,
+     "text": "The legend identifies the particle types: proton, neutron, positron, gamma ray, and neutrino. The circular reaction sequence begins at carbon-12."
+    },
+    {
+     "t": 4.999,
+     "hold": 5.0,
+     "text": "A proton labeled 1H interacts with carbon-12, releasing a gamma ray photon and producing nitrogen-13."
+    },
+    {
+     "t": 9.999,
+     "hold": 5.0,
+     "text": "Nitrogen-13 decays by releasing a positron and a neutrino, transforming into carbon-13."
+    },
+    {
+     "t": 14.999,
+     "hold": 5.0,
+     "text": "A second proton interacts with carbon-13, emitting a gamma ray and forming nitrogen-14."
+    },
+    {
+     "t": 19.999,
+     "hold": 5.0,
+     "text": "Another proton joins nitrogen-14, releasing a gamma ray to yield oxygen-15."
+    },
+    {
+     "t": 24.999,
+     "hold": 5.0,
+     "text": "Oxygen-15 then decays, releasing a positron and a neutrino to become nitrogen-15."
+    },
+    {
+     "t": 29.999,
+     "hold": 6.0,
+     "text": "Finally, a fourth proton interacts with nitrogen-15, releasing helium-4 and regenerating carbon-12 to complete the cycle."
+    }
+   ],
+   "seconds": 35.999,
+   "timing": "stated",
+   "statedSeconds": 35.999
+  },
+  {
+   "id": "Physics_Carnot_cycle_pV",
+   "title": "Carnot cycle (p–V diagram)",
+   "categoryId": "physics",
+   "category": "Physics",
+   "source": "assets/ood/physics/Physics_Carnot_cycle_pV/source.webp",
+   "thumb": "assets/ood/physics/Physics_Carnot_cycle_pV/source.webp",
+   "frames": [
+    "assets/ood/physics/Physics_Carnot_cycle_pV/frame_000.webp",
+    "assets/ood/physics/Physics_Carnot_cycle_pV/frame_001.webp",
+    "assets/ood/physics/Physics_Carnot_cycle_pV/frame_002.webp",
+    "assets/ood/physics/Physics_Carnot_cycle_pV/frame_003.webp",
+    "assets/ood/physics/Physics_Carnot_cycle_pV/frame_004.webp",
+    "assets/ood/physics/Physics_Carnot_cycle_pV/frame_005.webp"
+   ],
+   "beats": [
+    {
+     "t": 0.0,
+     "hold": 4.889,
+     "text": "The diagram presents a coordinate frame with pressure, labeled P, along the vertical axis and volume, labeled V, along the horizontal axis."
+    },
+    {
+     "t": 4.889,
+     "hold": 5.333,
+     "text": "Two downward-sloping curves represent isotherms at temperatures T one and T two, accompanied by the condition that T one is greater than T two."
+    },
+    {
+     "t": 10.222,
+     "hold": 5.5,
+     "text": "From point one, the path proceeds along the upper isotherm to point two, with an inward arrow indicating heat input Q one."
+    },
+    {
+     "t": 15.722,
+     "hold": 5.0,
+     "text": "The path then descends steeply from point two on the upper isotherm down to point three on the lower isotherm."
+    },
+    {
+     "t": 20.722,
+     "hold": 5.5,
+     "text": "Next, the trajectory moves leftward along the lower isotherm from point three to point four, accompanied by an outward arrow labeled Q two."
+    },
+    {
+     "t": 26.222,
+     "hold": 5.5,
+     "text": "Finally, the path ascends from point four back to point one, completing the closed loop of the cycle."
+    }
+   ],
+   "seconds": 31.722,
+   "timing": "stated",
+   "statedSeconds": 30.999
+  },
+  {
+   "id": "Physics_Compton_scattering",
+   "title": "Compton scattering",
+   "categoryId": "physics",
+   "category": "Physics",
+   "source": "assets/ood/physics/Physics_Compton_scattering/source.webp",
+   "thumb": "assets/ood/physics/Physics_Compton_scattering/source.webp",
+   "frames": [
+    "assets/ood/physics/Physics_Compton_scattering/frame_000.webp",
+    "assets/ood/physics/Physics_Compton_scattering/frame_001.webp",
+    "assets/ood/physics/Physics_Compton_scattering/frame_002.webp",
+    "assets/ood/physics/Physics_Compton_scattering/frame_003.webp",
+    "assets/ood/physics/Physics_Compton_scattering/frame_004.webp"
+   ],
+   "beats": [
+    {
+     "t": 0.0,
+     "hold": 2.222,
+     "text": "An incoming wave labeled lambda propagates horizontally from the left."
+    },
+    {
+     "t": 2.222,
+     "hold": 2.444,
+     "text": "The wave reaches a central spherical particle positioned along its path."
+    },
+    {
+     "t": 4.667,
+     "hold": 2.889,
+     "text": "A scattered wave labeled lambda prime emerges, traveling upward and to the right."
+    },
+    {
+     "t": 7.556,
+     "hold": 4.0,
+     "text": "An angle labeled theta is measured between the path of the scattered wave and the horizontal dashed baseline."
+    },
+    {
+     "t": 11.556,
+     "hold": 3.111,
+     "text": "Originating from the central particle, a solid arrow extends downward and to the right."
+    }
+   ],
+   "seconds": 14.667,
+   "timing": "repaced",
+   "statedSeconds": 2.499
+  },
+  {
+   "id": "Physics_Higgs_ttH_Feynman",
+   "title": "Associated Higgs production (ttH)",
+   "categoryId": "physics",
+   "category": "Physics",
+   "source": "assets/ood/physics/Physics_Higgs_ttH_Feynman/source.webp",
+   "thumb": "assets/ood/physics/Physics_Higgs_ttH_Feynman/source.webp",
+   "frames": [
+    "assets/ood/physics/Physics_Higgs_ttH_Feynman/frame_000.webp",
+    "assets/ood/physics/Physics_Higgs_ttH_Feynman/frame_001.webp",
+    "assets/ood/physics/Physics_Higgs_ttH_Feynman/frame_002.webp",
+    "assets/ood/physics/Physics_Higgs_ttH_Feynman/frame_003.webp",
+    "assets/ood/physics/Physics_Higgs_ttH_Feynman/frame_004.webp",
+    "assets/ood/physics/Physics_Higgs_ttH_Feynman/frame_005.webp",
+    "assets/ood/physics/Physics_Higgs_ttH_Feynman/frame_006.webp",
+    "assets/ood/physics/Physics_Higgs_ttH_Feynman/frame_007.webp",
+    "assets/ood/physics/Physics_Higgs_ttH_Feynman/frame_008.webp"
+   ],
+   "beats": [
+    {
+     "t": 0.0,
+     "hold": 3.999,
+     "text": "The process begins with two incoming gluons from colliding protons, initiating gluon-gluon fusion."
+    },
+    {
+     "t": 3.999,
+     "hold": 4.0,
+     "text": "Internal top-quark lines mediate the interaction, meeting at a central Yukawa interaction vertex."
+    },
+    {
+     "t": 7.999,
+     "hold": 3.5,
+     "text": "A Higgs boson is radiated from the top-quark vertex, propagating outward."
+    },
+    {
+     "t": 11.499,
+     "hold": 4.0,
+     "text": "The Higgs boson promptly decays into a bottom and anti-bottom quark pair."
+    },
+    {
+     "t": 15.499,
+     "hold": 4.0,
+     "text": "Meanwhile, the accompanying top and anti-top quarks propagate outward in associated production."
+    },
+    {
+     "t": 19.499,
+     "hold": 4.0,
+     "text": "Each top quark undergoes weak decay, emitting a charged W-plus and W-minus boson, respectively."
+    },
+    {
+     "t": 23.499,
+     "hold": 4.0,
+     "text": "The top decays leave behind energetic bottom and anti-bottom spectator quarks."
+    },
+    {
+     "t": 27.499,
+     "hold": 4.0,
+     "text": "The W-plus boson decays hadronically into a quark and anti-quark pair."
+    },
+    {
+     "t": 31.499,
+     "hold": 3.778,
+     "text": "The W-minus boson decays leptonically into a charged lepton and an anti-neutrino, completing the semileptonic ttH signature."
+    }
+   ],
+   "seconds": 35.277,
+   "timing": "stated",
+   "statedSeconds": 31.999
+  },
+  {
+   "id": "Physics_beta_decay_Feynman",
+   "title": "Beta decay via W boson exchange",
+   "categoryId": "physics",
+   "category": "Physics",
+   "source": "assets/ood/physics/Physics_beta_decay_Feynman/source.webp",
+   "thumb": "assets/ood/physics/Physics_beta_decay_Feynman/source.webp",
+   "frames": [
+    "assets/ood/physics/Physics_beta_decay_Feynman/frame_000.webp",
+    "assets/ood/physics/Physics_beta_decay_Feynman/frame_001.webp",
+    "assets/ood/physics/Physics_beta_decay_Feynman/frame_002.webp",
+    "assets/ood/physics/Physics_beta_decay_Feynman/frame_003.webp",
+    "assets/ood/physics/Physics_beta_decay_Feynman/frame_004.webp",
+    "assets/ood/physics/Physics_beta_decay_Feynman/frame_005.webp",
+    "assets/ood/physics/Physics_beta_decay_Feynman/frame_006.webp"
+   ],
+   "beats": [
+    {
+     "t": 0.0,
+     "hold": 3.499,
+     "text": "The diagram begins on the left with a circular region labeled n."
+    },
+    {
+     "t": 3.499,
+     "hold": 4.0,
+     "text": "Inside this circle are three smaller nodes labeled u, d, and d."
+    },
+    {
+     "t": 7.499,
+     "hold": 3.5,
+     "text": "Three horizontal directed paths extend across to another circular boundary labeled p plus."
+    },
+    {
+     "t": 10.999,
+     "hold": 4.0,
+     "text": "Within this second region, the paths terminate at three nodes labeled u, d, and u."
+    },
+    {
+     "t": 14.999,
+     "hold": 4.0,
+     "text": "From the lowest horizontal line, a wavy path branches downward, labeled W minus."
+    },
+    {
+     "t": 18.999,
+     "hold": 4.0,
+     "text": "At the vertex of the wavy line, an outgoing path extends downward and to the right, labeled e."
+    },
+    {
+     "t": 22.999,
+     "hold": 4.0,
+     "text": "Another line labeled nu e branches upward, with an arrow oriented back toward the vertex."
+    }
+   ],
+   "seconds": 26.999,
+   "timing": "stated",
+   "statedSeconds": 26.499
+  },
+  {
+   "id": "Physics_double_slit_interference",
+   "title": "Double-slit interference",
+   "categoryId": "physics",
+   "category": "Physics",
+   "source": "assets/ood/physics/Physics_double_slit_interference/source.webp",
+   "thumb": "assets/ood/physics/Physics_double_slit_interference/source.webp",
+   "frames": [
+    "assets/ood/physics/Physics_double_slit_interference/frame_000.webp",
+    "assets/ood/physics/Physics_double_slit_interference/frame_001.webp",
+    "assets/ood/physics/Physics_double_slit_interference/frame_002.webp",
+    "assets/ood/physics/Physics_double_slit_interference/frame_003.webp",
+    "assets/ood/physics/Physics_double_slit_interference/frame_004.webp",
+    "assets/ood/physics/Physics_double_slit_interference/frame_005.webp",
+    "assets/ood/physics/Physics_double_slit_interference/frame_006.webp",
+    "assets/ood/physics/Physics_double_slit_interference/frame_007.webp",
+    "assets/ood/physics/Physics_double_slit_interference/frame_008.webp",
+    "assets/ood/physics/Physics_double_slit_interference/frame_009.webp"
+   ],
+   "beats": [
+    {
+     "t": 0.0,
+     "hold": 3.499,
+     "text": "Matching rays directed downward complete the symmetric fringe pattern across the screen."
+    },
+    {
+     "t": 3.499,
+     "hold": 3.0,
+     "text": "Matching rays directed downward complete the symmetric fringe pattern across the screen."
+    },
+    {
+     "t": 6.499,
+     "hold": 4.0,
+     "text": "Matching rays directed downward complete the symmetric fringe pattern across the screen."
+    },
+    {
+     "t": 10.499,
+     "hold": 3.0,
+     "text": "Matching rays directed downward complete the symmetric fringe pattern across the screen."
+    },
+    {
+     "t": 13.499,
+     "hold": 3.5,
+     "text": "Matching rays directed downward complete the symmetric fringe pattern across the screen."
+    },
+    {
+     "t": 16.999,
+     "hold": 4.0,
+     "text": "Matching rays directed downward complete the symmetric fringe pattern across the screen."
+    },
+    {
+     "t": 20.999,
+     "hold": 4.0,
+     "text": "Matching rays directed downward complete the symmetric fringe pattern across the screen."
+    },
+    {
+     "t": 24.999,
+     "hold": 3.5,
+     "text": "Matching rays directed downward complete the symmetric fringe pattern across the screen."
+    },
+    {
+     "t": 28.499,
+     "hold": 4.0,
+     "text": "Matching rays directed downward complete the symmetric fringe pattern across the screen."
+    },
+    {
+     "t": 32.499,
+     "hold": 36.0,
+     "text": "Matching rays directed downward complete the symmetric fringe pattern across the screen."
+    }
+   ],
+   "seconds": 68.499,
+   "timing": "stated",
+   "statedSeconds": 68.499
+  },
+  {
+   "id": "Physics_ee_to_mumu_Feynman",
+   "title": "Electron–positron annihilation to muons",
+   "categoryId": "physics",
+   "category": "Physics",
+   "source": "assets/ood/physics/Physics_ee_to_mumu_Feynman/source.webp",
+   "thumb": "assets/ood/physics/Physics_ee_to_mumu_Feynman/source.webp",
+   "frames": [
+    "assets/ood/physics/Physics_ee_to_mumu_Feynman/frame_000.webp",
+    "assets/ood/physics/Physics_ee_to_mumu_Feynman/frame_001.webp",
+    "assets/ood/physics/Physics_ee_to_mumu_Feynman/frame_002.webp"
+   ],
+   "beats": [
+    {
+     "t": 0.0,
+     "hold": 6.0,
+     "text": "From the right vertex, the lines branch outward to a muon labeled mu minus with momentum k and an antimuon labeled mu plus with momentum k prime."
+    },
+    {
+     "t": 6.0,
+     "hold": 6.0,
+     "text": "From the right vertex, the lines branch outward to a muon labeled mu minus with momentum k and an antimuon labeled mu plus with momentum k prime."
+    },
+    {
+     "t": 12.0,
+     "hold": 6.0,
+     "text": "From the right vertex, the lines branch outward to a muon labeled mu minus with momentum k and an antimuon labeled mu plus with momentum k prime."
+    }
+   ],
+   "seconds": 18.0,
+   "timing": "repaced",
+   "statedSeconds": 2.499
+  },
+  {
+   "id": "Physics_fission_chain_reaction_branching",
+   "title": "Branching fission chain reaction",
+   "categoryId": "physics",
+   "category": "Physics",
+   "source": "assets/ood/physics/Physics_fission_chain_reaction_branching/source.webp",
+   "thumb": "assets/ood/physics/Physics_fission_chain_reaction_branching/source.webp",
+   "frames": [
+    "assets/ood/physics/Physics_fission_chain_reaction_branching/frame_000.webp",
+    "assets/ood/physics/Physics_fission_chain_reaction_branching/frame_001.webp",
+    "assets/ood/physics/Physics_fission_chain_reaction_branching/frame_002.webp",
+    "assets/ood/physics/Physics_fission_chain_reaction_branching/frame_003.webp",
+    "assets/ood/physics/Physics_fission_chain_reaction_branching/frame_004.webp",
+    "assets/ood/physics/Physics_fission_chain_reaction_branching/frame_005.webp",
+    "assets/ood/physics/Physics_fission_chain_reaction_branching/frame_006.webp",
+    "assets/ood/physics/Physics_fission_chain_reaction_branching/frame_007.webp",
+    "assets/ood/physics/Physics_fission_chain_reaction_branching/frame_008.webp",
+    "assets/ood/physics/Physics_fission_chain_reaction_branching/frame_009.webp",
+    "assets/ood/physics/Physics_fission_chain_reaction_branching/frame_010.webp",
+    "assets/ood/physics/Physics_fission_chain_reaction_branching/frame_011.webp",
+    "assets/ood/physics/Physics_fission_chain_reaction_branching/frame_012.webp",
+    "assets/ood/physics/Physics_fission_chain_reaction_branching/frame_013.webp",
+    "assets/ood/physics/Physics_fission_chain_reaction_branching/frame_014.webp",
+    "assets/ood/physics/Physics_fission_chain_reaction_branching/frame_015.webp"
+   ],
+   "beats": [
+    {
+     "t": 0.0,
+     "hold": 2.999,
+     "text": "Finally, the bottom nucleus produces Yttrium-102 and Iodine-131, together with three outgoing particles."
+    },
+    {
+     "t": 2.999,
+     "hold": 3.5,
+     "text": "Finally, the bottom nucleus produces Yttrium-102 and Iodine-131, together with three outgoing particles."
+    },
+    {
+     "t": 6.499,
+     "hold": 3.5,
+     "text": "Finally, the bottom nucleus produces Yttrium-102 and Iodine-131, together with three outgoing particles."
+    },
+    {
+     "t": 9.999,
+     "hold": 3.0,
+     "text": "Finally, the bottom nucleus produces Yttrium-102 and Iodine-131, together with three outgoing particles."
+    },
+    {
+     "t": 12.999,
+     "hold": 3.0,
+     "text": "Finally, the bottom nucleus produces Yttrium-102 and Iodine-131, together with three outgoing particles."
+    },
+    {
+     "t": 15.999,
+     "hold": 3.5,
+     "text": "Finally, the bottom nucleus produces Yttrium-102 and Iodine-131, together with three outgoing particles."
+    },
+    {
+     "t": 19.499,
+     "hold": 3.5,
+     "text": "Finally, the bottom nucleus produces Yttrium-102 and Iodine-131, together with three outgoing particles."
+    },
+    {
+     "t": 22.999,
+     "hold": 3.0,
+     "text": "Finally, the bottom nucleus produces Yttrium-102 and Iodine-131, together with three outgoing particles."
+    },
+    {
+     "t": 25.999,
+     "hold": 3.5,
+     "text": "Finally, the bottom nucleus produces Yttrium-102 and Iodine-131, together with three outgoing particles."
+    },
+    {
+     "t": 29.499,
+     "hold": 3.0,
+     "text": "Finally, the bottom nucleus produces Yttrium-102 and Iodine-131, together with three outgoing particles."
+    },
+    {
+     "t": 32.499,
+     "hold": 3.5,
+     "text": "Finally, the bottom nucleus produces Yttrium-102 and Iodine-131, together with three outgoing particles."
+    },
+    {
+     "t": 35.999,
+     "hold": 3.5,
+     "text": "Finally, the bottom nucleus produces Yttrium-102 and Iodine-131, together with three outgoing particles."
+    },
+    {
+     "t": 39.499,
+     "hold": 3.5,
+     "text": "Finally, the bottom nucleus produces Yttrium-102 and Iodine-131, together with three outgoing particles."
+    },
+    {
+     "t": 42.999,
+     "hold": 3.5,
+     "text": "Finally, the bottom nucleus produces Yttrium-102 and Iodine-131, together with three outgoing particles."
+    },
+    {
+     "t": 46.499,
+     "hold": 3.5,
+     "text": "Finally, the bottom nucleus produces Yttrium-102 and Iodine-131, together with three outgoing particles."
+    },
+    {
+     "t": 49.999,
+     "hold": 54.0,
+     "text": "Finally, the bottom nucleus produces Yttrium-102 and Iodine-131, together with three outgoing particles."
+    }
+   ],
+   "seconds": 103.999,
+   "timing": "stated",
+   "statedSeconds": 103.999
+  },
+  {
+   "id": "Physics_fission_chain_reaction_simple",
+   "title": "Fission chain reaction",
+   "categoryId": "physics",
+   "category": "Physics",
+   "source": "assets/ood/physics/Physics_fission_chain_reaction_simple/source.webp",
+   "thumb": "assets/ood/physics/Physics_fission_chain_reaction_simple/source.webp",
+   "frames": [
+    "assets/ood/physics/Physics_fission_chain_reaction_simple/frame_000.webp",
+    "assets/ood/physics/Physics_fission_chain_reaction_simple/frame_001.webp",
+    "assets/ood/physics/Physics_fission_chain_reaction_simple/frame_002.webp",
+    "assets/ood/physics/Physics_fission_chain_reaction_simple/frame_003.webp",
+    "assets/ood/physics/Physics_fission_chain_reaction_simple/frame_004.webp",
+    "assets/ood/physics/Physics_fission_chain_reaction_simple/frame_005.webp",
+    "assets/ood/physics/Physics_fission_chain_reaction_simple/frame_006.webp",
+    "assets/ood/physics/Physics_fission_chain_reaction_simple/frame_007.webp",
+    "assets/ood/physics/Physics_fission_chain_reaction_simple/frame_008.webp",
+    "assets/ood/physics/Physics_fission_chain_reaction_simple/frame_009.webp",
+    "assets/ood/physics/Physics_fission_chain_reaction_simple/frame_010.webp"
+   ],
+   "beats": [
+    {
+     "t": 0.0,
+     "hold": 2.889,
+     "text": "A free neutron travels downward to initiate the first generation of nuclear fission."
+    },
+    {
+     "t": 2.889,
+     "hold": 2.667,
+     "text": "The incident neutron strikes a fissile uranium-235 nucleus, triggering an unstable state."
+    },
+    {
+     "t": 5.556,
+     "hold": 3.333,
+     "text": "The nucleus undergoes fission, splitting into two lighter fission fragments and releasing an energetic burst."
+    },
+    {
+     "t": 8.889,
+     "hold": 3.778,
+     "text": "One emitted neutron is captured by a non-fissile uranium-238 nucleus, ending that branch with no further fission."
+    },
+    {
+     "t": 12.667,
+     "hold": 2.444,
+     "text": "A second neutron escapes the system entirely without inducing another reaction."
+    },
+    {
+     "t": 15.111,
+     "hold": 3.333,
+     "text": "The third neutron strikes another uranium-235 nucleus to carry the reaction into the second generation."
+    },
+    {
+     "t": 18.444,
+     "hold": 3.111,
+     "text": "This second uranium-235 nucleus fissions, releasing another burst of energy and two new fragments."
+    },
+    {
+     "t": 21.556,
+     "hold": 3.333,
+     "text": "One of the newly released neutrons moves toward a uranium-235 nucleus in the third generation."
+    },
+    {
+     "t": 24.889,
+     "hold": 2.222,
+     "text": "That nucleus fissions into fragments and releases three additional neutrons."
+    },
+    {
+     "t": 27.111,
+     "hold": 3.111,
+     "text": "Meanwhile, the second neutron from generation two strikes another uranium-235 nucleus in generation three."
+    },
+    {
+     "t": 30.222,
+     "hold": 4.889,
+     "text": "It splits into fragments and emits three more neutrons, completing a model of a sustaining uranium-235 fission chain reaction across three generations."
+    }
+   ],
+   "seconds": 35.111,
+   "timing": "repaced",
+   "statedSeconds": 6.499
+  },
+  {
+   "id": "Physics_optics_converging_lens_virtual_image",
+   "title": "Converging lens: virtual image",
+   "categoryId": "physics",
+   "category": "Physics",
+   "source": "assets/ood/physics/Physics_optics_converging_lens_virtual_image/source.webp",
+   "thumb": "assets/ood/physics/Physics_optics_converging_lens_virtual_image/source.webp",
+   "frames": [
+    "assets/ood/physics/Physics_optics_converging_lens_virtual_image/frame_000.webp",
+    "assets/ood/physics/Physics_optics_converging_lens_virtual_image/frame_001.webp",
+    "assets/ood/physics/Physics_optics_converging_lens_virtual_image/frame_002.webp",
+    "assets/ood/physics/Physics_optics_converging_lens_virtual_image/frame_003.webp",
+    "assets/ood/physics/Physics_optics_converging_lens_virtual_image/frame_004.webp",
+    "assets/ood/physics/Physics_optics_converging_lens_virtual_image/frame_005.webp",
+    "assets/ood/physics/Physics_optics_converging_lens_virtual_image/frame_006.webp"
+   ],
+   "beats": [
+    {
+     "t": 0.0,
+     "hold": 2.667,
+     "text": "A horizontal dashed line defines the central optical axis of the setup."
+    },
+    {
+     "t": 2.667,
+     "hold": 2.444,
+     "text": "A vertical converging lens is positioned centrally across the optical axis."
+    },
+    {
+     "t": 5.111,
+     "hold": 3.333,
+     "text": "The focal length f is indicated on both sides of the lens with reference markers."
+    },
+    {
+     "t": 8.444,
+     "hold": 4.667,
+     "text": "An upright green arrow representing the object is placed inside the focal length at a distance S one from the lens."
+    },
+    {
+     "t": 13.111,
+     "hold": 5.778,
+     "text": "Two red rays project from the object: one travels horizontally and refracts through the opposite focal point, while the other passes undeflected straight through the center."
+    },
+    {
+     "t": 18.889,
+     "hold": 3.111,
+     "text": "Dashed red lines trace both diverging rays backward to determine their point of intersection."
+    },
+    {
+     "t": 22.0,
+     "hold": 4.0,
+     "text": "At their apparent intersection, an enlarged upright green arrow denotes the virtual image, located at distance S two."
+    }
+   ],
+   "seconds": 26.0,
+   "timing": "repaced",
+   "statedSeconds": 3.499
+  },
+  {
+   "id": "Physics_photoelectric_effect",
+   "title": "Photoelectric effect",
+   "categoryId": "physics",
+   "category": "Physics",
+   "source": "assets/ood/physics/Physics_photoelectric_effect/source.webp",
+   "thumb": "assets/ood/physics/Physics_photoelectric_effect/source.webp",
+   "frames": [
+    "assets/ood/physics/Physics_photoelectric_effect/frame_000.webp",
+    "assets/ood/physics/Physics_photoelectric_effect/frame_001.webp",
+    "assets/ood/physics/Physics_photoelectric_effect/frame_002.webp",
+    "assets/ood/physics/Physics_photoelectric_effect/frame_003.webp",
+    "assets/ood/physics/Physics_photoelectric_effect/frame_004.webp",
+    "assets/ood/physics/Physics_photoelectric_effect/frame_005.webp"
+   ],
+   "beats": [
+    {
+     "t": 0.0,
+     "hold": 3.499,
+     "text": "We begin with a clean metal target ready to be illuminated by incident light."
+    },
+    {
+     "t": 3.499,
+     "hold": 5.0,
+     "text": "Red light with a wavelength of 700 nanometers hits the surface, but its photon energy is too low to liberate any electrons."
+    },
+    {
+     "t": 8.499,
+     "hold": 4.0,
+     "text": "Next, a green photon with a shorter wavelength of 550 nanometers strikes the plate with higher energy."
+    },
+    {
+     "t": 12.499,
+     "hold": 4.5,
+     "text": "This photon exceeds the work function, ejecting a photoelectron that escapes at a moderate velocity."
+    },
+    {
+     "t": 16.999,
+     "hold": 4.0,
+     "text": "Shorter-wavelength blue light delivers an even greater photon energy of 3.1 electron volts to the surface."
+    },
+    {
+     "t": 20.999,
+     "hold": 5.0,
+     "text": "The blue photon ejects an electron with significantly higher speed, demonstrating how photon energy dictates electron kinetic energy in the photoelectric effect."
+    }
+   ],
+   "seconds": 25.999,
+   "timing": "stated",
+   "statedSeconds": 25.999
+  },
+  {
+   "id": "Physics_proton_proton_chain_fusion",
+   "title": "Proton–proton chain fusion",
+   "categoryId": "physics",
+   "category": "Physics",
+   "source": "assets/ood/physics/Physics_proton_proton_chain_fusion/source.webp",
+   "thumb": "assets/ood/physics/Physics_proton_proton_chain_fusion/source.webp",
+   "frames": [
+    "assets/ood/physics/Physics_proton_proton_chain_fusion/frame_000.webp",
+    "assets/ood/physics/Physics_proton_proton_chain_fusion/frame_001.webp",
+    "assets/ood/physics/Physics_proton_proton_chain_fusion/frame_002.webp",
+    "assets/ood/physics/Physics_proton_proton_chain_fusion/frame_003.webp",
+    "assets/ood/physics/Physics_proton_proton_chain_fusion/frame_004.webp",
+    "assets/ood/physics/Physics_proton_proton_chain_fusion/frame_005.webp"
+   ],
+   "beats": [
+    {
+     "t": 0.0,
+     "hold": 6.222,
+     "text": "The legend at the bottom defines the particles: red spheres represent protons, gray spheres represent neutrons, and white spheres represent positrons, alongside symbols for gamma rays and neutrinos."
+    },
+    {
+     "t": 6.222,
+     "hold": 5.333,
+     "text": "At the top left, two hydrogen-one protons interact, emitting a positron and a neutrino to produce hydrogen-two, consisting of one proton and one neutron."
+    },
+    {
+     "t": 11.556,
+     "hold": 4.5,
+     "text": "Down the left branch, the hydrogen-two nucleus combines with another hydrogen-one proton, emitting a gamma ray and forming helium-three."
+    },
+    {
+     "t": 16.056,
+     "hold": 4.667,
+     "text": "In a parallel sequence on the top right, two hydrogen-one protons interact, releasing a positron and a neutrino to yield hydrogen-two."
+    },
+    {
+     "t": 20.722,
+     "hold": 4.222,
+     "text": "That hydrogen-two nucleus merges with an incoming hydrogen-one proton, releasing a gamma ray to produce a second helium-three nucleus."
+    },
+    {
+     "t": 24.944,
+     "hold": 5.0,
+     "text": "Finally, both helium-three nuclei converge, releasing two hydrogen-one protons and forming a single helium-four nucleus at the bottom."
+    }
+   ],
+   "seconds": 29.944,
+   "timing": "stated",
+   "statedSeconds": 27.499
+  },
+  {
+   "id": "Physics_vapor_compression_refrigeration_cycle",
+   "title": "Vapour-compression refrigeration cycle",
+   "categoryId": "physics",
+   "category": "Physics",
+   "source": "assets/ood/physics/Physics_vapor_compression_refrigeration_cycle/source.webp",
+   "thumb": "assets/ood/physics/Physics_vapor_compression_refrigeration_cycle/source.webp",
+   "frames": [
+    "assets/ood/physics/Physics_vapor_compression_refrigeration_cycle/frame_000.webp",
+    "assets/ood/physics/Physics_vapor_compression_refrigeration_cycle/frame_001.webp",
+    "assets/ood/physics/Physics_vapor_compression_refrigeration_cycle/frame_002.webp",
+    "assets/ood/physics/Physics_vapor_compression_refrigeration_cycle/frame_003.webp",
+    "assets/ood/physics/Physics_vapor_compression_refrigeration_cycle/frame_004.webp",
+    "assets/ood/physics/Physics_vapor_compression_refrigeration_cycle/frame_005.webp",
+    "assets/ood/physics/Physics_vapor_compression_refrigeration_cycle/frame_006.webp",
+    "assets/ood/physics/Physics_vapor_compression_refrigeration_cycle/frame_007.webp",
+    "assets/ood/physics/Physics_vapor_compression_refrigeration_cycle/frame_008.webp"
+   ],
+   "beats": [
+    {
+     "t": 0.0,
+     "hold": 4.889,
+     "text": "A vertical dashed line divides the diagram into two distinct zones: Low pressure on the left and High pressure on the right."
+    },
+    {
+     "t": 4.889,
+     "hold": 2.667,
+     "text": "At the top, centered across the pressure boundary, is the Compressor block."
+    },
+    {
+     "t": 7.556,
+     "hold": 4.222,
+     "text": "Exiting the Compressor to the right, a path labeled Superheated vapor directs the flow downward into the high-pressure zone."
+    },
+    {
+     "t": 11.778,
+     "hold": 2.444,
+     "text": "This path leads directly into the Condenser block on the right."
+    },
+    {
+     "t": 14.222,
+     "hold": 3.333,
+     "text": "From the Condenser, an arrow labeled Saturated slash subcooled liquid routes downward toward the bottom."
+    },
+    {
+     "t": 17.556,
+     "hold": 3.111,
+     "text": "The stream enters the Expansion device, positioned across the central divide at the bottom."
+    },
+    {
+     "t": 20.667,
+     "hold": 3.778,
+     "text": "From the Expansion device, an upward arrow labeled Liquid slash vapor mixture transitions into the low-pressure region."
+    },
+    {
+     "t": 24.444,
+     "hold": 2.222,
+     "text": "The mixture flows into the Evaporator module on the left."
+    },
+    {
+     "t": 26.667,
+     "hold": 4.222,
+     "text": "Finally, an arrow labeled Saturated slash subcooled vapor leads from the Evaporator back into the Compressor, closing the loop."
+    }
+   ],
+   "seconds": 30.889,
+   "timing": "repaced",
+   "statedSeconds": 4.499
+  }
+ ]
+}

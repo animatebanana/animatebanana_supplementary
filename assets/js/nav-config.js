@@ -14,6 +14,7 @@ export const NAV_SECTIONS = [
   { id: 'pipeline',     label: 'Pipeline Walkthrough', href: 'pipeline.html' },
   { id: 'editability',  label: 'Editability and Controllability', href: 'editability.html' },
   { id: 'examples',     label: 'Example Gallery', href: 'gallery.html' },     // the gallery module owns this page
+  { id: 'generalization', label: 'Generalization to Unseen Domains', href: 'generalization.html' }, // the OOD module owns this page
   { id: 'animatebench', label: 'AnimateBench', href: 'animatebench.html' }, // the benchmark module owns this page
   { id: 'evaluation',   label: 'Evaluation',   href: 'evaluation.html' },
   { id: 'ablations',    label: 'Ablations',    href: 'ablations.html' },

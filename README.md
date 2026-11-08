@@ -77,6 +77,7 @@ Every page is reachable from the **Menu** button (top right).
 | Pipeline Walkthrough | `pipeline.html` | Animated, narrated walkthrough of the three-stage pipeline (Diagram Transmuter → Animation Planner → Diagram Animator), including agents, critics, and intermediate artifacts. |
 | Editability and Controllability | `editability.html` | Before/after edits to the intermediate representations (diagram code and animation sequence) and their effect on the final animation. |
 | Example Gallery | `gallery.html` | Curated animations in all five styles (Progressive Reveal, Alpha Masking, Colour Pop, Hopping and Sliding Bounding Box), with downloadable PPTX, standalone HTML, and animated PDF exports. |
+| Generalization to Unseen Domains | `generalization.html` | AnimateBanana on diagrams from outside AnimateBench (chemistry, physics, school science, infographics): a domain-filtered gallery of the animations and per-diagram scores on every metric. |
 | AnimateBench | `animatebench.html` | The benchmark: figure sources, diversity, complexity strata, annotations, pan-and-zoom examples, and a human-presented reference talk. |
 | Evaluation | `evaluation.html` | The evaluation scheme replayed step by step on individual samples, for AnimateBanana and each baseline. |
 | Ablations | `ablations.html` | Component ablations (critics, context, XML, image input) and results stratified by diagram complexity. |
@@ -95,6 +96,7 @@ Every page is reachable from the **Menu** button (top right).
 ├── pipeline.html            ┐
 ├── editability.html         │
 ├── gallery.html             │
+├── generalization.html      │
 ├── animatebench.html        │  one HTML file per page listed above
 ├── evaluation.html          │
 ├── ablations.html           │
@@ -110,6 +112,7 @@ Every page is reachable from the **Menu** button (top right).
 │   ├── img/, icons/         ·  logo, pipeline overview figure, favicon
 │   ├── bench/               ·  AnimateBench media (strata samples, annotations, reference talk)
 │   ├── gallery/             ·  gallery media, previews, PPTX / HTML / PDF exports
+│   ├── ood/                 ·  frames and source figures for the Generalization page, by domain
 │   ├── editability/         ·  before/after animations for the editability page
 │   ├── ablations/           ·  pipeline diagram used by the ablation walkthroughs
 │   └── evaluation/          ·  evaluation-scheme figure
@@ -117,6 +120,7 @@ Every page is reachable from the **Menu** button (top right).
 ├── data/                    ← JSON content that drives every page (text, results, media manifests)
 │   ├── benchmark/           ·  AnimateBench page data
 │   ├── gallery/             ·  gallery and rail manifests
+│   ├── ood/                 ·  Generalization page gallery manifest and per-diagram scores
 │   └── stratified/          ·  stratified-results data (Ablations page)
 │
 ├── MAIN_PAGE/               ← raw pipeline outputs for the Overview showcase, by animation style
@@ -150,7 +154,7 @@ Every page is reachable from the **Menu** button (top right).
 
 ## 4. Notes
 
-- **Size:** about 458 MB (3,036 files), mostly MP4 and PNG media. The examples
+- **Size:** about 464 MB (3,340 files), mostly MP4 and PNG media. The examples
   shared with the distribution build carry its compressed media (H.264 at CRF 30
   tuned for animation, palette-quantised PNGs, original dimensions and frame
   rates throughout); the rest are still at full quality.
