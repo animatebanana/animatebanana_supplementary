@@ -1,4 +1,4 @@
-/* Sticky contents bar (same design as costs.html) for Ablations. */
+/* Sticky contents bar (same design as costs.html), shared by Ablations and Evaluation. */
 /* ---- The contents bar ---- */
 .pg-toc-sentinel { height: 1px; }
 .pg-toc {
@@ -73,7 +73,7 @@
   .pg-toc-list a { flex: 0 0 150px; }
 }
 
-/* Ablations: keep the bar slim, tucked up under the heading, and clear of the
+/* Keep the bar slim, tucked up under the heading, and clear of the
    table below it. */
 .pg-toc { margin: -18px 0 22px; }
 .pg-toc-title { padding: 6px 16px; }

@@ -1,13 +1,17 @@
 /**
  * The contents bar: it sticks under the site nav, marks the section in
  * view, and fills a thin bar with how far through the page the reader is.
+ *
+ * Used by Ablations and Evaluation. A link's target may be drawn by a
+ * component after load (the evaluation walkthrough renders its stages from
+ * JSON), so targets are looked up on every update rather than once.
  */
 function wireToc() {
   const toc = document.querySelector('#pg-toc');
+  if (!toc) return;
   const links = [...toc.querySelectorAll('[data-toc]')];
-  const sections = links.map((a) => document.getElementById(a.dataset.toc));
   const fill = toc.querySelector('.pg-toc-bar i');
-  const wrap = document.querySelector('.abl-widepage');
+  const wrap = toc.closest('.page') || document.body;
   const list = toc.querySelector('.pg-toc-list');
   let lastActive = -1;
   let ticking = false;
@@ -17,6 +21,7 @@ function wireToc() {
     const total = r.height - window.innerHeight;
     const done = Math.min(1, Math.max(0, -r.top / Math.max(1, total)));
     fill.style.transform = `scaleX(${done})`;
+    const sections = links.map((a) => document.getElementById(a.dataset.toc));
     let active = 0;
     sections.forEach((sec, k) => {
       if (sec && sec.getBoundingClientRect().top < window.innerHeight * 0.35) active = k;
@@ -40,5 +45,33 @@ function wireToc() {
   update();
 }
 
+/* A shared link such as evaluation.html#evaluation-walkthrough has to land on
+   its section even though the page keeps growing after the browser's own
+   jump: figures load, and components draw their content from JSON. So for a
+   few seconds the target is held in place, until it stops moving or the
+   reader takes over by scrolling, clicking or pressing a key. */
+function settleHash() {
+  const id = decodeURIComponent(location.hash.slice(1));
+  if (!id) return;
+  let stopped = false;
+  const stop = () => { stopped = true; };
+  for (const ev of ['wheel', 'touchstart', 'keydown', 'pointerdown']) {
+    window.addEventListener(ev, stop, { once: true, passive: true });
+  }
+  const t0 = performance.now();
+  const tick = () => {
+    if (stopped || performance.now() - t0 > 6000) return;
+    const el = document.getElementById(id);
+    if (el) {
+      const want = parseFloat(getComputedStyle(el).scrollMarginTop) || 0;
+      if (Math.abs(el.getBoundingClientRect().top - want) > 2) el.scrollIntoView({ block: 'start' });
+    }
+    // a timer rather than requestAnimationFrame, which a background tab pauses
+    setTimeout(tick, 120);
+  };
+  tick();
+}
 
 wireToc();
+settleHash();
+window.addEventListener('hashchange', settleHash);
