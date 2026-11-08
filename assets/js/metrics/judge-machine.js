@@ -152,16 +152,27 @@ const reel = (d) => `
     <button type="button" class="jm-play" data-play aria-label="Play the generated narrative">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>
     </button>
-  </div>`;
+  </div>
+  <p class="jm-reelcap" data-reelcap aria-live="polite"></p>`;
 
-function wireReel(root, start) {
+/* The caption under the reel follows playback: each step's narration shows
+   from the moment it is spoken until the next one starts. Nothing shows
+   before the first evaluated step (the blank opening frame is left out). */
+function wireReel(root, start, steps) {
   const box = root.querySelector('[data-reel]');
   const v = box.querySelector('video');
+  const cap = root.querySelector('[data-reelcap]');
   const play = () => { if (v.currentTime < start) v.currentTime = start; return v.play().catch(() => {}); };
+  const caption = () => {
+    let line = '';
+    for (const s of steps) { if (v.currentTime + 0.05 >= s.time) line = s.narration; else break; }
+    if (cap.textContent !== line) cap.textContent = line;
+  };
   box.addEventListener('click', () => (v.paused ? play() : v.pause()));
   v.addEventListener('play', () => box.classList.add('is-playing'));
   v.addEventListener('pause', () => box.classList.remove('is-playing'));
   v.addEventListener('ended', () => box.classList.remove('is-playing'));
+  for (const ev of ['timeupdate', 'seeked', 'play']) v.addEventListener(ev, caption);
   return { restart: () => { v.currentTime = start; return play(); } };
 }
 
@@ -214,7 +225,7 @@ class JudgeValidity extends HTMLElement {
       { id: 'out-VF', el: q('[data-out="VF"]'), dir: 'out' },
       { id: 'out-ASC', el: q('[data-out="ASC"]'), dir: 'out' },
     ]);
-    this.reel = wireReel(this, d.steps[0].time);
+    this.reel = wireReel(this, d.steps[0].time, d.steps);
     this.querySelector('[data-start]').addEventListener('click', () => this.run());
   }
 
@@ -340,8 +351,10 @@ class JudgeNarrative extends HTMLElement {
           <figure class="jm-input" data-in="frames">
             <figcaption><b>Frames</b><i>step <span data-tlabel>t</span> of ${n}</i></figcaption>
             <div class="jm-frames">
-              <div class="jm-frame"><span>previous &middot; <i>t</i>&minus;1</span><div class="jm-media"><img data-prev alt="" decoding="async"></div></div>
-              <div class="jm-frame is-now"><span>current &middot; <i>t</i></span><div class="jm-media"><img data-cur alt="" decoding="async"></div></div>
+              <div class="jm-frame"><span>previous &middot; <i>t</i>&minus;1</span><div class="jm-media"><img data-prev alt="" decoding="async"></div>
+                <p class="jm-fcap" data-capprev></p></div>
+              <div class="jm-frame is-now"><span>current &middot; <i>t</i></span><div class="jm-media"><img data-cur alt="" decoding="async"></div>
+                <p class="jm-fcap" data-capcur></p></div>
             </div>
           </figure>
           <div class="jm-input jm-stylein" data-in="style">
@@ -429,6 +442,9 @@ class JudgeNarrative extends HTMLElement {
     const s = this.d.steps[i];
     const prev = this.d.steps[i - 1];
     this.m.querySelector('[data-cur]').src = s.frame;
+    // each frame carries its own step's narration underneath it
+    this.m.querySelector('[data-capcur]').textContent = s.narration;
+    this.m.querySelector('[data-capprev]').textContent = prev ? prev.narration : '';
     const pv = this.m.querySelector('[data-prev]');
     if (prev) { pv.src = prev.frame; pv.parentElement.classList.remove('is-empty'); }
     else { pv.removeAttribute('src'); pv.parentElement.classList.add('is-empty'); }

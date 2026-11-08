@@ -447,3 +447,26 @@
 .jm-an.is-ready b { color: var(--ink); }
 .mx-subhead { margin: -18px 0 18px; font-size: var(--fs-h3); font-weight: 700; color: var(--ink-soft); }
 .mx-insight p + p { margin-top: 10px; }
+
+/* captions: a yellow strip attached to the bottom edge of the playing narrative
+   and of each iterating frame, sharing its border so the two read as one piece */
+.jm-reel { border-radius: 8px 8px 0 0; }
+.jm-reelcap {
+  min-height: 3.2em; margin: 0; padding: 6px 10px 7px;
+  font-size: 0.76rem; line-height: 1.45; font-style: italic; color: var(--ink);
+  background: var(--banana-soft); border: 2px solid #1F1C18; border-top: 0;
+  border-radius: 0 0 8px 8px;
+}
+.jm-frame .jm-media { border-radius: 8px 8px 0 0; border-bottom: 0; }
+.jm-fcap {
+  height: 4.9em; margin: 0; padding: 5px 8px 6px; overflow: hidden;
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;
+  font-size: 0.7rem; line-height: 1.45; font-style: italic; color: var(--ink-soft);
+  background: var(--banana-soft); border: 1.5px solid var(--line-strong); border-top: 1px dashed var(--banana-deep);
+  border-radius: 0 0 8px 8px;
+}
+.jm-frame.is-now .jm-media { border-bottom: 0; }
+.jm-frame.is-now .jm-fcap { color: var(--ink); background: #FFF1B8; border: 2px solid var(--banana-deep); border-top: 1px dashed var(--banana-deep); }
+/* no caption yet (step 1 has no previous frame; the video before it starts):
+   keep the space so nothing jumps, but no empty yellow strip */
+.jm-fcap:empty, .jm-reelcap:empty { background: transparent; border-color: transparent; }
