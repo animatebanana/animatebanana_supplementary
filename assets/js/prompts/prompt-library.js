@@ -1,45 +1,77 @@
 /**
- * <prompt-library src="#element-id">
+ * <prompt-library src="#element-id" [kind="judge"]>
  *
  * A shelf of prompts: a list on the left, the chosen prompt on the right in a
  * scrollable reading panel. The prompt text is embedded in the page itself (a
  * <script type="application/json"> element named by `src`); there is no
- * separate prompt file. It holds one instruction per animation style plus the
- * rules every style's prompt ends with, and is laid out by
- * lib/prompt-format.js (headings and lists, without Markdown marks). The
- * wording is exactly what is embedded.
+ * separate prompt file. Prompts are laid out by lib/prompt-format.js (headings
+ * and lists, without Markdown marks); the wording is exactly what is embedded.
  *
- * The chosen style is mirrored into the hash (#prompt-alpha-masking) so a
- * single prompt can be linked to. Copying from the panel is refused (a
- * deterrent only).
+ *   generation (default)  one instruction per animation style, plus the rules
+ *                         every style's prompt ends with.
+ *   judge                 one prompt per metric; a style-adapter toggle beside
+ *                         it shows the complete prompt for the chosen style.
+ *
+ * The chosen item is mirrored into the hash (#prompt-alpha-masking,
+ * #prompt-VF) so a single prompt can be linked to. Copying from the panel is
+ * refused (a deterrent only).
  */
 import { escapeHtml as esc } from '../lib/format.js';
-import { formatPrompt } from '../lib/prompt-format.js';
+import { formatPrompt, inPlacePromptHTML } from '../lib/prompt-format.js';
 
 const slug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const GROUPS = [
+  { label: 'Validity gates', keys: ['VF', 'ASC'] },
+  { label: 'Sequence level', keys: ['SS', 'GP', 'NA'] },
+];
 
 class PromptLibrary extends HTMLElement {
   connectedCallback() {
     const src = this.getAttribute('src') || '';
+    this.kind = this.getAttribute('kind') || 'generation';
     try { this.data = JSON.parse(document.querySelector(src).textContent); }
     catch { this.innerHTML = '<p class="pl-empty">The prompts could not be shown.</p>'; return; }
 
-    this.items = this.data.styles.map((s, i) => ({ id: `prompt-${slug(s.style)}`, index: i, title: s.style }));
+    this.items = this.kind === 'judge'
+      ? GROUPS.flatMap((g) => g.keys.map((k) => ({ id: `prompt-${k}`, key: k, group: g.label, title: this.data[k].name, tag: k })))
+      : this.data.styles.map((s, i) => ({ id: `prompt-${slug(s.style)}`, index: i, title: s.style }));
+    this.promptStyle = this.kind === 'judge' ? this.data.styles[0] : null;
+
+    let lastGroup = null;
+    const rail = this.items.map((it) => {
+      const head = it.group && it.group !== lastGroup ? `<li class="pl-group">${esc((lastGroup = it.group))}</li>` : '';
+      return `${head}<li><button type="button" class="pl-item" data-item="${it.id}">
+        <span>${esc(it.title)}</span>${it.tag ? `<b>${esc(it.tag)}</b>` : ''}</button></li>`;
+    }).join('');
     this.innerHTML = `
       <div class="pl">
-        <nav class="pl-rail" aria-label="Prompts by animation style">
-          <ol>${this.items.map((it) => `<li><button type="button" class="pl-item" data-item="${it.id}">
-            <span>${esc(it.title)}</span></button></li>`).join('')}</ol>
+        <nav class="pl-rail" aria-label="${this.kind === 'judge' ? 'Judge prompts by metric' : 'Prompts by animation style'}">
+          <ol>${rail}</ol>
         </nav>
         <article class="pl-panel">
-          <header class="pl-head"><div><span class="pl-kicker">Generation prompt</span><h3 data-title></h3></div></header>
-          <div class="pl-body pt" data-body tabindex="0"></div>
+          <header class="pl-head"><div><span class="pl-kicker" data-kicker></span><h3 data-title></h3></div></header>
+          <div class="pl-main">
+            <div class="pl-body pt" data-body tabindex="0"></div>
+            ${this.kind === 'judge' ? `<aside class="pl-styles" aria-label="Style adapter">
+              <span class="pl-styleshead">Style adapter</span>
+              ${this.data.styles.map((s) => `<button type="button" class="pl-style" data-style="${esc(s)}">${esc(s)}</button>`).join('')}
+            </aside>` : ''}
+          </div>
         </article>
       </div>`;
     this.body = this.querySelector('[data-body]');
     this.addEventListener('click', (e) => {
       const it = e.target.closest('[data-item]');
-      if (it) this.show(it.dataset.item, true);
+      if (it) { this.show(it.dataset.item, true); return; }
+      const st = e.target.closest('[data-style]');
+      if (st) {
+        // the style-specific parts change in place: same prompt, same scroll position
+        this.promptStyle = st.dataset.style;
+        const y = this.body.scrollTop;
+        this.render();
+        this.body.scrollTop = y;
+        for (const el of this.body.querySelectorAll('.pd-filled.is-quiet, .pd-srow.is-adapted, .pd-stylename')) el.classList.add('is-swapped');
+      }
     });
     for (const ev of ['copy', 'cut', 'contextmenu', 'dragstart', 'selectstart']) {
       this.body.addEventListener(ev, (e) => e.preventDefault());
@@ -61,14 +93,34 @@ class PromptLibrary extends HTMLElement {
       b.setAttribute('aria-current', on ? 'true' : 'false');
     }
     if (user) history.replaceState(null, '', `#${id}`);
-    const s = this.data.styles[this.cur.index];
-    this.querySelector('[data-title]').textContent = s.style;
+    this.render();
+    this.body.scrollTop = 0;
+  }
+
+  render() {
+    const it = this.cur;
+    const kicker = this.querySelector('[data-kicker]');
+    const title = this.querySelector('[data-title]');
+    if (this.kind === 'judge') {
+      const p = this.data[it.key];
+      kicker.textContent = `Judge prompt · ${it.group}`;
+      title.textContent = `${p.name} (${p.abbr})`;
+      for (const b of this.querySelectorAll('[data-style]')) {
+        const on = b.dataset.style === this.promptStyle;
+        b.classList.toggle('is-on', on);
+        b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      }
+      this.body.innerHTML = inPlacePromptHTML(p, this.promptStyle);
+      return;
+    }
+    const s = this.data.styles[it.index];
+    kicker.textContent = 'Generation prompt';
+    title.textContent = s.style;
     // The rules' own first line ("CRITICAL SYNCHRONIZATION RULES:") is shown as their heading.
     const rules = this.data.rules.replace(/^CRITICAL SYNCHRONIZATION RULES:/, '*** CRITICAL SYNCHRONIZATION RULES ***');
     this.body.innerHTML = `
       <section class="pl-instr">${formatPrompt(s.instruction)}</section>
       <section class="pl-rules">${formatPrompt(rules)}</section>`;
-    this.body.scrollTop = 0;
   }
 }
 

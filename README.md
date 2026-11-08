@@ -132,10 +132,8 @@ Every page is reachable from the **Menu** button (top right).
 ├── pipeline/                ← the Pipeline Walkthrough (walkthrough.html, video, captions, crops)
 ├── rasters/                 ← raster crops for pipeline_animated.html and the ablation / failure walkthroughs
 │
-└── tools/                   ← maintenance scripts (not needed to view the site)
-    ├── serve.py             ·  local server with video seeking support (see Quick start)
-    ├── set_updated.py       ·  refreshes the footer stamp's no-JavaScript fallback
-    └── *.py                 ·  scripts used to build previews, exports, and captions
+└── tools/
+    └── serve.py             ·  local server with video seeking support (see Quick start)
 ```
 
 ### How the pieces fit together
@@ -154,7 +152,7 @@ Every page is reachable from the **Menu** button (top right).
 
 ## 4. Notes
 
-- **Size:** about 464 MB (3,340 files), mostly MP4 and PNG media. The examples
+- **Size:** about 482 MB (3,273 files), mostly MP4 and PNG media. The examples
   shared with the distribution build carry its compressed media (H.264 at CRF 30
   tuned for animation, palette-quantised PNGs, original dimensions and frame
   rates throughout); the rest are still at full quality.
@@ -166,8 +164,7 @@ Every page is reachable from the **Menu** button (top right).
   ignored: a re-encoded clip is the same example, not an update. The date and time are
   given in AOE (UTC−12), e.g. `25 September 2026, 03:06 (AOE)`, which for the first half of a UTC day is still
   yesterday's date. A real date and time ship in the markup as the fallback for a reader
-  with no JavaScript, and `tools/set_updated.py` refreshes it; the component
-  only ever replaces it with something newer. The two pipeline pages carry no
+  with no JavaScript; the component only ever replaces it with something newer. The two pipeline pages carry no
   footer line.
 - **Anonymity:** the site carries no author, affiliation, contact or repository
   identity. Document metadata is normalised rather than merely absent: every

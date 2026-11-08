@@ -1,5 +1,4 @@
 {
- "_comment": "EXTERNAL REFERENCE pane, wired to a real recorded talk. `talk.mp4` is the excerpt kept from it, with the burned-in caption strip cropped off. The extracted frames are the figure region as captured, each also de-captioned; they carry no in-video timestamp: the slide barely changes across the excerpt, so there is nothing honest to match them against, and they are numbered in capture order instead. The transcript is the talk's own, split into sentences and trimmed to the six that describe the figure, one per extracted frame, in the same order. It has no per-line timings in the source, so the lines are numbered rather than timed.",
  "accent": "reference",
  "talk": {
   "label": "Conference Oral Presentation",
@@ -91,8 +90,7 @@
     "t": null,
     "text": "The first of the two objective functions used is the spectrogram prediction loss, which is calculated between the ground truth and the estimated spectrograms the acoustic token matching loss is calculated between the latent representation of the clean speech which is obtained through a pre-trained hubert model and the predicted pseudo levels of the estimate"
    }
-  ],
-  "_note": "Six lines for six frames. The excerpt's first three sentences are the speaker introducing the talk before the figure is on screen ('overview of our proposed approach', 'we discussed the individual components in the following slides', 'highlighted part is the audio processing module'); the extracted sequence begins at the sentence where the figure itself starts being explained. Keeping them would have made the transcript nine lines against six frames and implied a pairing that does not hold."
+  ]
  },
  "stages": [
   {

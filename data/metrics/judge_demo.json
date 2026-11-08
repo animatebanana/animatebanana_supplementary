@@ -1,0 +1,517 @@
+{
+ "judge": "Kimi 2.6",
+ "style": "Progressive Reveal",
+ "source": "assets/gallery/media/pipeline_animated/source.png",
+ "video": "assets/gallery/media/pipeline_animated/narrative.mp4",
+ "poster": "assets/gallery/media/pipeline_animated/poster.jpg",
+ "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Diagram depth=\"1\">\n  <block id=\"canvas_bg\" depth=\"1\" />\n  <block id=\"block_stage1\" depth=\"1\" />\n  <block id=\"block_stage2\" depth=\"1\" />\n  <block id=\"block_stage3\" depth=\"1\" />\n\n  <raster_node id=\"node_s1_diagram\" depth=\"1\" />\n  <raster_node id=\"node_s1_d2c\" depth=\"1\" />\n  <raster_node id=\"node_s1_code\" depth=\"1\" />\n  <raster_node id=\"node_s1_critic\" depth=\"1\" />\n  <raster_node id=\"node_s1_raster\" depth=\"1\" />\n  <raster_node id=\"node_s1_feedback\" depth=\"1\" />\n\n  <raster_node id=\"node_s2_seq\" depth=\"1\" />\n  <raster_node id=\"node_s2_critic\" depth=\"1\" />\n  <raster_node id=\"node_s2_feedback\" depth=\"1\" />\n  <raster_node id=\"node_s2_q_draft\" depth=\"1\" />\n  <raster_node id=\"node_s2_parser\" depth=\"1\" />\n  <raster_node id=\"node_s2_xml\" depth=\"1\" />\n  <raster_node id=\"node_s2_seq_final\" depth=\"1\" />\n  <raster_node id=\"node_s2_drafter\" depth=\"1\" />\n\n  <raster_node id=\"node_s3_critic\" depth=\"1\" />\n  <raster_node id=\"node_s3_feedback\" depth=\"1\" />\n  <raster_node id=\"node_s3_anim_draft\" depth=\"1\" />\n  <raster_node id=\"node_s3_designer\" depth=\"1\" />\n  <raster_node id=\"node_s3_anim_final\" depth=\"1\" />\n  <raster_node id=\"node_s3_frames\" depth=\"1\" />\n  <raster_node id=\"node_s3_narr_int\" depth=\"1\" />\n  <raster_node id=\"node_s3_exporter\" depth=\"1\" />\n  <raster_node id=\"node_s3_y_card\" depth=\"1\" />\n\n  <raster_node id=\"node_in_d\" depth=\"1\" />\n  <raster_node id=\"node_out_c\" depth=\"1\" />\n  <raster_node id=\"node_s2_in_d\" depth=\"1\" />\n  <raster_node id=\"node_s2_in_k\" depth=\"1\" />\n  <raster_node id=\"node_s2_in_u\" depth=\"1\" />\n  <raster_node id=\"node_s2_in_c\" depth=\"1\" />\n  <raster_node id=\"node_s2_out_s\" depth=\"1\" />\n  <raster_node id=\"node_s3_in_d\" depth=\"1\" />\n  <raster_node id=\"node_s3_in_u\" depth=\"1\" />\n  <raster_node id=\"node_s3_in_s\" depth=\"1\" />\n  <raster_node id=\"node_s3_in_c\" depth=\"1\" />\n  <raster_node id=\"node_s3_out_y\" depth=\"1\" />\n\n  <edge id=\"edge_s1_1\" source=\"node_s1_diagram\" target=\"node_s1_d2c\" depth=\"1\" />\n  <edge id=\"edge_s1_2\" source=\"node_s1_d2c\" target=\"node_s1_code\" depth=\"1\" />\n  <edge id=\"edge_s1_3\" source=\"node_s1_code\" target=\"node_s1_critic\" depth=\"1\" />\n  <edge id=\"edge_s1_4\" source=\"node_s1_critic\" target=\"node_s1_code\" depth=\"1\" />\n  <edge id=\"edge_s1_5\" source=\"node_s1_code\" target=\"node_s1_raster\" depth=\"1\" />\n\n  <edge id=\"edge_s2_1\" source=\"node_s2_critic\" target=\"node_s2_seq\" depth=\"1\" />\n  <edge id=\"edge_s2_2\" source=\"node_s2_seq\" target=\"node_s2_critic\" depth=\"1\" />\n  <edge id=\"edge_s2_3\" source=\"node_s2_parser\" target=\"node_s2_xml\" depth=\"1\" />\n  <edge id=\"edge_s2_4\" source=\"node_s2_xml\" target=\"node_s2_seq\" depth=\"1\" />\n  <edge id=\"edge_s2_5\" source=\"node_s2_seq\" target=\"node_s2_drafter\" depth=\"1\" />\n\n  <edge id=\"edge_s3_1\" source=\"node_s3_critic\" target=\"node_s3_designer\" depth=\"1\" />\n  <edge id=\"edge_s3_2\" source=\"node_s3_designer\" target=\"node_s3_critic\" depth=\"1\" />\n  <edge id=\"edge_s3_3\" source=\"node_s3_designer\" target=\"node_s3_exporter\" depth=\"1\" />\n  <edge id=\"edge_s3_4\" source=\"node_s3_exporter\" target=\"node_s3_narr_int\" depth=\"1\" />\n  <edge id=\"edge_s3_5\" source=\"node_s3_narr_int\" target=\"node_s3_exporter\" depth=\"1\" />\n\n  <edge id=\"edge_io_1\" source=\"node_in_d\" target=\"node_s1_diagram\" depth=\"1\" />\n  <edge id=\"edge_io_2\" source=\"node_s1_code\" target=\"node_out_c\" depth=\"1\" />\n  <edge id=\"edge_io_3\" source=\"node_s2_in_d\" target=\"node_s2_parser\" depth=\"1\" />\n  <edge id=\"edge_io_4\" source=\"node_s2_drafter\" target=\"node_s2_out_s\" depth=\"1\" />\n  <edge id=\"edge_io_5\" source=\"node_s3_in_d\" target=\"node_s3_designer\" depth=\"1\" />\n  <edge id=\"edge_io_6\" source=\"node_s3_y_card\" target=\"node_s3_out_y\" depth=\"1\" />\n</Diagram>",
+ "context": [
+  {
+   "id": "caption",
+   "label": "Caption",
+   "text": "A High-Level Overview of the AnimateBanana pipeline"
+  },
+  {
+   "id": "abstract",
+   "label": "Abstract",
+   "text": "Diagrams are often used to communicate scientific processes visually. However, conveying process dynamics and explanatory flow from a static diagram remains challenging. Although animated narratives improve comprehension and engagement, creating them is a manual and time-consuming process. We present AnimateBanana, a framework for automatically transforming process-oriented scientific diagrams into animated narratives. …"
+  },
+  {
+   "id": "method",
+   "label": "Method",
+   "text": "Given a static process-oriented diagram D, a user-specified animation style u, and optional auxiliary context K, our goal is to generate an animated narrative Y = F(D, u; K). By default, K = ∅. When available, K may include the figure caption or relevant source document text. …"
+  }
+ ],
+ "validity": {
+  "VF": {
+   "band": "A"
+  },
+  "ASC": {
+   "band": "A"
+  }
+ },
+ "steps": [
+  {
+   "t": 1,
+   "frame": "assets/metrics/pipeline/frame_01.webp",
+   "time": 10.96,
+   "narration": "Stage one is the Diagram Transmuter, which converts the input diagram into animation-aware diagram code.",
+   "elements": [
+    "block_stage1",
+    "text_s1_title"
+   ],
+   "bands": {
+    "SS": "A",
+    "GP": "A",
+    "NA": "A"
+   }
+  },
+  {
+   "t": 2,
+   "frame": "assets/metrics/pipeline/frame_02.webp",
+   "time": 19.28,
+   "narration": "The process begins with a static input diagram.",
+   "elements": [
+    "node_in_d",
+    "text_io_in1",
+    "text_io_in2",
+    "text_io_in_d"
+   ],
+   "bands": {
+    "SS": "A",
+    "GP": "A",
+    "NA": "A"
+   }
+  },
+  {
+   "t": 3,
+   "frame": "assets/metrics/pipeline/frame_03.webp",
+   "time": 23.16,
+   "narration": "This input diagram is fed directly into the Diagram Transmuter.",
+   "elements": [
+    "node_s1_diagram",
+    "edge_io_1"
+   ],
+   "bands": {
+    "SS": "A",
+    "GP": "A",
+    "NA": "A"
+   }
+  },
+  {
+   "t": 4,
+   "frame": "assets/metrics/pipeline/frame_04.webp",
+   "time": 28.4,
+   "narration": "Inside, a specialized converter agent generates an initial code representation, assigning persistent semantic identifiers to all animatable elements.",
+   "elements": [
+    "node_s1_d2c",
+    "text_s1_agent1",
+    "text_s1_agent2",
+    "text_math_aconv",
+    "edge_s1_1"
+   ],
+   "bands": {
+    "SS": "A",
+    "GP": "A",
+    "NA": "A"
+   }
+  },
+  {
+   "t": 5,
+   "frame": "assets/metrics/pipeline/frame_05.webp",
+   "time": 39.52,
+   "narration": "This produces an initial draft of the animation-aware diagram code.",
+   "elements": [
+    "node_s1_code",
+    "text_math_cr1",
+    "edge_s1_2"
+   ],
+   "bands": {
+    "SS": "A",
+    "GP": "A",
+    "NA": "B"
+   }
+  },
+  {
+   "t": 6,
+   "frame": "assets/metrics/pipeline/frame_06.webp",
+   "time": 44.48,
+   "narration": "A critic agent then evaluates the rendered code against the original diagram, providing iterative feedback to the converter to refine the code's visual and structural fidelity.",
+   "elements": [
+    "node_s1_critic",
+    "node_s1_feedback",
+    "text_s1_critic",
+    "text_math_acrit1",
+    "text_math_fc",
+    "edge_s1_3",
+    "edge_s1_4"
+   ],
+   "bands": {
+    "SS": "A",
+    "GP": "A",
+    "NA": "A"
+   }
+  },
+  {
+   "t": 7,
+   "frame": "assets/metrics/pipeline/frame_07.webp",
+   "time": 55.52,
+   "narration": "Simultaneously, a raster integrator extracts complex visual regions, such as photographs or plots, and inserts them directly into the code to preserve them without reconstruction.",
+   "elements": [
+    "node_s1_raster",
+    "text_s1_raster",
+    "edge_s1_5"
+   ],
+   "bands": {
+    "SS": "A",
+    "GP": "A",
+    "NA": "A"
+   }
+  },
+  {
+   "t": 8,
+   "frame": "assets/metrics/pipeline/frame_08.webp",
+   "time": 68.36,
+   "narration": "The final output of this stage is the refined animation-aware diagram code.",
+   "elements": [
+    "node_out_c",
+    "text_io_out1",
+    "text_io_out2",
+    "text_io_out_c",
+    "edge_io_2"
+   ],
+   "bands": {
+    "SS": "B",
+    "GP": "A",
+    "NA": "A"
+   }
+  },
+  {
+   "t": 9,
+   "frame": "assets/metrics/pipeline/frame_09.webp",
+   "time": 73.68,
+   "narration": "Stage two is the Animation Planner, which designs a structured presentation and narration plan.",
+   "elements": [
+    "block_stage2",
+    "text_s2_title"
+   ],
+   "bands": {
+    "SS": "A",
+    "GP": "A",
+    "NA": "A"
+   }
+  },
+  {
+   "t": 10,
+   "frame": "assets/metrics/pipeline/frame_10.webp",
+   "time": 80.8,
+   "narration": "This stage takes the diagram, optional auxiliary context, the user-specified animation style, and the generated diagram code as inputs.",
+   "elements": [
+    "node_s2_in_d",
+    "node_s2_in_k",
+    "node_s2_in_u",
+    "node_s2_in_c",
+    "text_io_d1",
+    "text_io_d_math",
+    "text_io_ctx1",
+    "text_io_k_math",
+    "text_io_u_math",
+    "text_io_u_anim",
+    "text_io_u_style",
+    "text_io_c2_math",
+    "text_io_c2_lbl1",
+    "text_io_c2_lbl2"
+   ],
+   "bands": {
+    "SS": "A",
+    "GP": "B",
+    "NA": "A"
+   }
+  },
+  {
+   "t": 11,
+   "frame": "assets/metrics/pipeline/frame_11.webp",
+   "time": 91.92,
+   "narration": "First, a parser processes the diagram code.",
+   "elements": [
+    "node_s2_parser",
+    "text_s2_parser",
+    "edge_io_3"
+   ],
+   "bands": {
+    "SS": "A",
+    "GP": "A",
+    "NA": "A"
+   }
+  },
+  {
+   "t": 12,
+   "frame": "assets/metrics/pipeline/frame_12.webp",
+   "time": 95.6,
+   "narration": "It abstracts away rendering details to produce a structured XML representation of the diagram's entities and relationships.",
+   "elements": [
+    "node_s2_xml",
+    "text_math_p",
+    "text_s2_parsed",
+    "text_s2_parsed_xml",
+    "edge_s2_3"
+   ],
+   "bands": {
+    "SS": "A",
+    "GP": "A",
+    "NA": "A"
+   }
+  },
+  {
+   "t": 13,
+   "frame": "assets/metrics/pipeline/frame_13.webp",
+   "time": 104.28,
+   "narration": "A sequencer agent then reasons over this XML to construct an initial presentation sequence, determining the grouping and traversal order of elements.",
+   "elements": [
+    "node_s2_seq",
+    "text_s2_seq",
+    "text_math_aseq",
+    "edge_s2_4"
+   ],
+   "bands": {
+    "SS": "A",
+    "GP": "A",
+    "NA": "A"
+   }
+  },
+  {
+   "t": 14,
+   "frame": "assets/metrics/pipeline/frame_14.webp",
+   "time": 114.84,
+   "narration": "A sequence critic evaluates this plan for coverage and coherence, guiding the sequencer through iterative refinement.",
+   "elements": [
+    "node_s2_critic",
+    "node_s2_feedback",
+    "text_s2_critic",
+    "text_math_acrit2",
+    "text_math_fq",
+    "edge_s2_1",
+    "edge_s2_2"
+   ],
+   "bands": {
+    "SS": "A",
+    "GP": "A",
+    "NA": "B"
+   }
+  },
+  {
+   "t": 15,
+   "frame": "assets/metrics/pipeline/frame_15.webp",
+   "time": 123.0,
+   "narration": "This results in a validated animation sequence draft, tailored to the chosen animation style.",
+   "elements": [
+    "node_s2_q_draft",
+    "node_s2_seq_final",
+    "text_math_qr",
+    "text_s2_anim_seq",
+    "text_s2_anim_seq_draft",
+    "text_s2_anim",
+    "text_s2_sequence",
+    "text_math_qr1"
+   ],
+   "bands": {
+    "SS": "A",
+    "GP": "B",
+    "NA": "A"
+   }
+  },
+  {
+   "t": 16,
+   "frame": "assets/metrics/pipeline/frame_16.webp",
+   "time": 129.52,
+   "narration": "Next, a narration drafter generates synchronized explanatory text for each step, utilizing any available auxiliary context to enrich the descriptions.",
+   "elements": [
+    "node_s2_drafter",
+    "text_s2_narr",
+    "text_s2_drafter",
+    "text_math_anarr",
+    "edge_s2_5"
+   ],
+   "bands": {
+    "SS": "A",
+    "GP": "A",
+    "NA": "A"
+   }
+  },
+  {
+   "t": 17,
+   "frame": "assets/metrics/pipeline/frame_17.webp",
+   "time": 140.6,
+   "narration": "This produces the narration-infused animation sequence, coupling visual steps with spoken explanations.",
+   "elements": [
+    "node_s2_out_s",
+    "text_io_s1_lbl1",
+    "text_io_s1_lbl2",
+    "text_io_s_math",
+    "edge_io_4"
+   ],
+   "bands": {
+    "SS": "A",
+    "GP": "A",
+    "NA": "A"
+   }
+  },
+  {
+   "t": 18,
+   "frame": "assets/metrics/pipeline/frame_18.webp",
+   "time": 148.24,
+   "narration": "Stage three is the Diagram Animator, which synthesizes the final animated narrative.",
+   "elements": [
+    "block_stage3",
+    "text_s3_title"
+   ],
+   "bands": {
+    "SS": "B",
+    "GP": "A",
+    "NA": "A"
+   }
+  },
+  {
+   "t": 19,
+   "frame": "assets/metrics/pipeline/frame_19.webp",
+   "time": 154.68,
+   "narration": "It ingests the original diagram, the chosen animation style, the narration-infused sequence, and the diagram code.",
+   "elements": [
+    "node_s3_in_d",
+    "node_s3_in_u",
+    "node_s3_in_s",
+    "node_s3_in_c",
+    "text_io_s3_d",
+    "text_io_s3_d_math",
+    "text_io_s3_u",
+    "text_io_s3_u_math",
+    "text_io_s3_s_math",
+    "text_io_s3_s_lbl1",
+    "text_io_s3_s_lbl2",
+    "text_io_s3_s_lbl3",
+    "text_io_s3_c_math",
+    "text_io_s3_c_lbl1",
+    "text_io_s3_c_lbl2"
+   ],
+   "bands": {
+    "SS": "A",
+    "GP": "B",
+    "NA": "A"
+   }
+  },
+  {
+   "t": 20,
+   "frame": "assets/metrics/pipeline/frame_20.webp",
+   "time": 163.68,
+   "narration": "An animation designer agent generates an initial executable animation program based on these inputs.",
+   "elements": [
+    "node_s3_designer",
+    "text_s3_anim_designer",
+    "text_math_aanim",
+    "edge_io_5"
+   ],
+   "bands": {
+    "SS": "A",
+    "GP": "A",
+    "NA": "A"
+   }
+  },
+  {
+   "t": 21,
+   "frame": "assets/metrics/pipeline/frame_21.webp",
+   "time": 170.84,
+   "narration": "An animation critic evaluates the rendered frames against the source diagram, using a critic memory of past feedback to correct visual and temporal errors.",
+   "elements": [
+    "node_s3_critic",
+    "node_s3_feedback",
+    "text_s3_critic",
+    "text_math_acrit3",
+    "text_math_fa",
+    "edge_s3_1",
+    "edge_s3_2"
+   ],
+   "bands": {
+    "SS": "A",
+    "GP": "A",
+    "NA": "A"
+   }
+  },
+  {
+   "t": 22,
+   "frame": "assets/metrics/pipeline/frame_22.webp",
+   "time": 181.84,
+   "narration": "This iterative process refines the executable animation code.",
+   "elements": [
+    "node_s3_anim_draft",
+    "node_s3_anim_final",
+    "text_math_ar",
+    "text_s3_anim_code",
+    "text_s3_anim_draft_cap",
+    "text_s3_anim_code2",
+    "text_math_ar1"
+   ],
+   "bands": {
+    "SS": "A",
+    "GP": "A",
+    "NA": "B"
+   }
+  },
+  {
+   "t": 23,
+   "frame": "assets/metrics/pipeline/frame_23.webp",
+   "time": 186.68,
+   "narration": "Once validated, an animation exporter renders the frames into the target presentation format.",
+   "elements": [
+    "node_s3_exporter",
+    "text_s3_anim_exporter",
+    "edge_s3_3"
+   ],
+   "bands": {
+    "SS": "A",
+    "GP": "A",
+    "NA": "A"
+   }
+  },
+  {
+   "t": 24,
+   "frame": "assets/metrics/pipeline/frame_24.webp",
+   "time": 193.28,
+   "narration": "In parallel, a narration integrator uses speech synthesis to align the step-level narration with the corresponding visual states.",
+   "elements": [
+    "node_s3_narr_int",
+    "node_s3_frames",
+    "text_s3_narr_integrator1",
+    "text_s3_narr_integrator2",
+    "text_s3_anim_frames1",
+    "text_s3_anim_frames2",
+    "edge_s3_4",
+    "edge_s3_5"
+   ],
+   "bands": {
+    "SS": "A",
+    "GP": "B",
+    "NA": "A"
+   }
+  },
+  {
+   "t": 25,
+   "frame": "assets/metrics/pipeline/frame_25.webp",
+   "time": 202.36,
+   "narration": "This ensures that the visual transitions and audio explanations are perfectly synchronized.",
+   "elements": [
+    "node_s3_y_card",
+    "text_math_y",
+    "text_s3_sync1",
+    "text_s3_sync2"
+   ],
+   "bands": {
+    "SS": "A",
+    "GP": "A",
+    "NA": "A"
+   }
+  },
+  {
+   "t": 26,
+   "frame": "assets/metrics/pipeline/frame_26.webp",
+   "time": 208.76,
+   "narration": "The final output is a styled visual narrative, ready to be deployed across multiple formats such as MP4, PDF, or PowerPoint.",
+   "elements": [
+    "node_s3_out_y",
+    "text_io_y_lbl1",
+    "text_io_y_lbl2",
+    "text_io_y_math",
+    "edge_io_6"
+   ],
+   "bands": {
+    "SS": "A",
+    "GP": "A",
+    "NA": "A"
+   }
+  }
+ ],
+ "sequence": {
+  "SS": 0.9744,
+  "GP": 0.9487,
+  "NA": 0.9615
+ }
+}

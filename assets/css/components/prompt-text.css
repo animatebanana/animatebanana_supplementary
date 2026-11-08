@@ -42,3 +42,10 @@
 .pd-apart { margin-bottom: 12px; }
 .pd-alabel { margin-bottom: 4px; font-family: var(--font-mono); font-size: 10px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--banana-ink); }
 .pd-pending { color: var(--ink-soft); }
+/* a prompt shown whole for one style: its style-specific parts, in place */
+.pd-filled.is-quiet { margin: 0 0 10px; padding: 2px 0 2px 12px; background: none; border-left: 3px solid var(--banana); border-radius: 0; }
+.pd-stylename { padding: 0 3px; background: var(--banana-soft); border-radius: 4px; }
+.pd-filled.is-swapped, .pd-srow.is-swapped, .pd-stylename.is-swapped { animation: pd-swap 0.9s ease-out; }
+@keyframes pd-swap { 0% { background-color: #FFE88A; } 100% { background-color: transparent; } }
+.pd-stylename.is-swapped { animation-name: pd-swap-name; }
+@keyframes pd-swap-name { 0% { background-color: #FFD43B; } 100% { background-color: var(--banana-soft); } }

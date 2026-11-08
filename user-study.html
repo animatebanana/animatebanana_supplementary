@@ -15,14 +15,6 @@
 <body>
   <site-nav current="user-study" back="index.html" back-label="Overview"></site-nav>
 
-  <!--
-    ✎ EDITING THIS PAGE
-    Prose lives here in the markup: write straight into the <p> tags.
-    Every step below is one <article class="us-step">: a number, a title
-    you can rename, your writing, and a screenshot window beside it.
-    Screenshot files and their captions live in data/user_study.json
-    under "screens"; a slot whose file is missing says so on the page.
-  -->
   <div class="page us-widepage">
     <div class="page-head">
       <doodle-field density="sparse"></doodle-field>
@@ -60,7 +52,6 @@
       <article class="us-step">
         <div class="us-step-grid">
           <div class="us-step-copy">
-            <!-- ✎ your words -->
             <p>Before receiving study trials, participants complete a short guided
               preparation module explaining how to evaluate animated narratives, to help
               their understanding of the evaluation criteria.</p>
@@ -89,7 +80,6 @@
         </header>
         <div class="us-step-grid">
           <div class="us-step-copy">
-            <!-- ✎ your words -->
             <p>The aim of this experiment is to evaluate the animation quality of the
               outputs produced by AnimateBanana, by the second-best open-source model (the one
               used as the backbone in our pipeline), and by the best closed-source model
@@ -116,7 +106,6 @@
           <h4 class="us-sub-title">Nothing is rated before it has been watched</h4>
           <div class="us-step-grid">
             <div class="us-step-copy">
-              <!-- ✎ your words -->
               <p>A participant cannot answer anything until the animation has been played
                 or stepped through to its very end. Until then the questions stay sealed
                 behind a banner, the progress read-out shows how far through they are, and
@@ -133,7 +122,6 @@
           <h4 class="us-sub-title">Gate 1 &middot; Visual fidelity</h4>
           <div class="us-step-grid">
             <div class="us-step-copy">
-              <!-- ✎ your words -->
               <p>This is in close compliance with our Visual Fidelity metric, which asks
                 how faithful the animation is to the source figure. And as with the accept
                 and reject bands of the automated evaluation, the participant is given a
@@ -163,7 +151,6 @@
           <h4 class="us-sub-title">Gate 2 &middot; Animation style compliance</h4>
           <div class="us-step-grid">
             <div class="us-step-copy">
-              <!-- ✎ your words -->
               <p>The expected animation style is stated at the top of the page, above the
                 animation, and its exact rules open underneath it. This is assistive, so
                 that a participant is gauging compliance against a written standard rather
@@ -195,7 +182,6 @@
           <h4 class="us-sub-title">Both gates passed &middot; Selection sensibility</h4>
           <div class="us-step-grid">
             <div class="us-step-copy">
-              <!-- ✎ your words -->
               <p>With both gates cleared, we ask the participant to rate whether the
                 choice of which element to animate next was a sensible one.</p>
               <div class="us-q">
@@ -224,7 +210,6 @@
           <h4 class="us-sub-title">Both gates passed &middot; Narration alignment</h4>
           <div class="us-step-grid">
             <div class="us-step-copy">
-              <!-- ✎ your words -->
               <p>The same thing is implemented for evaluating narration alignment. The participant reads the caption displayed
                 at each step of the narration as it plays, and then gives a single overall
                 score for how well it aligns with the animation.</p>
@@ -248,7 +233,6 @@
         </section>
 
         <div class="us-step-copy us-step-copy-wide">
-          <!-- ✎ your words -->
           <p class="us-caption">Scores are normalised to [0,&nbsp;1]; an animation that
             fails either gate scores 0. Granularity and pacing (GP) is not evaluated at
             all: the setup allows a self-paced traversal of the animation, with back and
@@ -265,7 +249,6 @@
         </header>
         <div class="us-step-grid">
           <div class="us-step-copy">
-            <!-- ✎ your words -->
             <p>The second experiment is run as a tournament. The candidates are the
               AnimateBanana outputs, the second-best performing model overall, in
               our case Qwen&nbsp;3.8, and the original human-authored presentations from our
@@ -294,7 +277,6 @@
         <section class="us-sub">
           <h4 class="us-sub-title">One question, and it is about personal utility</h4>
           <div class="us-step-copy us-step-copy-wide">
-            <!-- ✎ your words -->
             <div class="us-q">
               <div class="us-q-key">Ask</div>
               <div>
@@ -317,7 +299,6 @@
         <section class="us-sub">
           <h4 class="us-sub-title">How a tournament plays out</h4>
           <div class="us-step-copy us-step-copy-wide">
-            <!-- ✎ your words -->
             <p>Both animations must be watched or stepped to the end before the choice
               unlocks. The picked animation stays; the one passed over fades and is
               replaced by the third candidate for round two. The final pick takes
@@ -348,7 +329,6 @@
         </header>
         <div class="us-step-grid">
           <div class="us-step-copy">
-            <!-- ✎ your words -->
             <p>The first experiment of the selective cohort assesses the usefulness of
               context in producing the narration captions: are captions derived with
               context more useful than narration derived from the figure alone?</p>
@@ -385,7 +365,6 @@
         </header>
         <div class="us-step-grid">
           <div class="us-step-copy">
-            <!-- ✎ your words -->
             <p>The last experiment in the selective cohort is bench verification, a
               quality-assurance pass of our own: it validates whether the corrections made
               in the bench are meaningful, by asking whether they introduce an improvement

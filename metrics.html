@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+  <title>Metrics and Evaluation Strategy — AnimateBanana</title>
+  <link rel="stylesheet" href="assets/fonts/fonts.css">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css?v=3">
+  <link rel="stylesheet" href="assets/css/components/site-nav.css?v=5">
+  <link rel="stylesheet" href="assets/css/components/doodle-field.css">
+  <link rel="stylesheet" href="assets/css/components/page-toc.css?v=4">
+  <link rel="stylesheet" href="assets/css/metrics/metrics-page.css?v=14">
+</head>
+<body>
+  <site-nav current="metrics" back="index.html" back-label="Overview"></site-nav>
+
+  <div class="page mx-page">
+    <div class="page-head">
+      <doodle-field density="sparse"></doodle-field>
+      <div class="kicker">Appendix &middot; 12</div>
+      <h1>Metrics and Evaluation Strategy</h1>
+    </div>
+
+    <nav class="pg-toc" id="pg-toc" aria-label="Contents">
+      <div class="pg-toc-inner">
+        <span class="pg-toc-title">Contents<small>Jump to a section</small></span>
+        <div class="pg-toc-list">
+          <a href="#metrics-validity" data-toc="metrics-validity"><b>1</b><span>Validity Gates</span></a>
+          <a href="#metrics-narrative" data-toc="metrics-narrative"><b>2</b><span>Sequence level assessment of the visual narratives</span></a>
+          <a href="#metrics-reference-free" data-toc="metrics-reference-free"><b>3</b><span>Rationale for a reference-free evaluation design</span></a>
+        </div>
+      </div>
+      <i class="pg-toc-bar"><i></i></i>
+    </nav>
+
+    <section class="mx-section pg-target" id="metrics-validity">
+      <div class="kicker">Stage 1</div>
+      <h2>Validity Gates</h2>
+      <judge-validity></judge-validity>
+    </section>
+
+    <section class="mx-section mx-section--far pg-target" id="metrics-narrative">
+      <div class="kicker">Stage 2</div>
+      <h2>Sequence level assessment of the visual narratives</h2>
+      <judge-narrative></judge-narrative>
+    </section>
+
+
+    <section class="mx-section mx-section--far pg-target" id="metrics-reference-free">
+      <h2>Rationale for a reference-free evaluation design</h2>
+      <h3 class="mx-subhead">A diagram can be animated in multiple valid ways</h3>
+      <figure class="mx-figure">
+        <img src="assets/metrics/branching-figure.webp" alt="A classifier whose feature-learning sub-network feeds two parallel branches: bilinear pooling then a neural network, and a spectral averaging layer then an auxiliary classifier, both leading to the predictions." loading="lazy">
+        <figcaption>Example figure</figcaption>
+      </figure>
+      <ref-free-tracks></ref-free-tracks>
+      <aside class="mx-insight">
+        <span class="mx-bulb" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#A87A00" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.6 1.1 1.4 1.1 2.2V17h5v-1c0-.8.4-1.6 1.1-2.2A6 6 0 0 0 12 3z"/></svg></span>
+        <div><span class="mx-insight-k">Insight</span>
+          <p>The Feature Learning Sub-network branches into two parallel paths: Bilinear Pooling and the Spectral Averaging Layer. Since either branch can be explored first, multiple animation sequences are valid. For instance, AnimateBench presents Bilinear Pooling first, whereas a baseline may explore the Spectral Averaging Layer first. Although both sequences are valid, direct comparison against the reference would penalize the latter for a difference in ordering alone. Therefore, our evaluation metrics do not use the reference narration as ground truth; instead, they assess the intrinsic quality of each generated narrative.</p>
+        </div>
+      </aside>
+    </section>
+
+    <footer class="site-footer">
+      <span data-updated>Last updated 25 September 2026, 06:20 (AOE)</span>
+    </footer>
+  </div>
+
+  <script type="module" src="assets/js/components/site-nav.js?v=5"></script>
+  <script type="module" src="assets/js/components/doodle-field.js"></script>
+  <script type="module" src="assets/js/metrics/judge-machine.js?v=13"></script>
+  <script type="module" src="assets/js/components/page-toc.js?v=3"></script>
+  <script type="module" src="assets/js/lib/reveal.js"></script>
+  <script type="module" src="assets/js/components/last-updated.js?v=1"></script>
+</body>
+</html>

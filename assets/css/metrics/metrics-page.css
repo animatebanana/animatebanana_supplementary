@@ -1,0 +1,449 @@
+/* Metrics and Evaluation Strategy — the judge as a machine.
+   Module: assets/css/metrics/, assets/js/metrics/judge-machine.js, data/metrics/. */
+
+.mx-page {
+  max-width: 1480px;
+  --go: #2F6B4E;  --go-soft: #E3F1E8;  --go-line: #9CCBB0;
+  --stop: #A8384A; --stop-soft: #F7E1E4; --stop-line: #E1A3AE;
+
+  --wire: #B9B3A6;
+}
+.mx-lede { max-width: 62ch; font-size: var(--fs-lede); color: var(--ink-soft); margin-top: 10px; }
+.mx-section { margin-top: clamp(36px, 5vw, 64px); }
+.mx-section--far { margin-top: clamp(80px, 11vw, 150px); }
+.mx-section h2 { margin: 6px 0 30px; }
+.mx-sub { color: var(--ink-soft); margin: 0 0 18px; max-width: 70ch; }
+
+/* ======================= the machine ======================= */
+.jm {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(250px, 300px) minmax(0, 0.8fr);
+  gap: clamp(36px, 5vw, 80px);
+  align-items: center;
+  padding: clamp(16px, 2vw, 26px);
+  background: var(--surface);
+  background-image: radial-gradient(var(--dot) 1px, transparent 1.2px);
+  background-size: 22px 22px;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-hard);
+}
+.jm-col { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+
+/* wires */
+.jm-wires { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; overflow: visible; }
+.jm-wires path { fill: none; stroke: var(--wire); stroke-width: 2; stroke-dasharray: 2 6; stroke-linecap: round; transition: stroke 0.25s; }
+.jm-wires marker.is-idle path { fill: var(--wire); }
+.jm-wires marker.is-live path { fill: var(--banana-deep); }
+.jm-wires marker.is-past path { fill: var(--ink-faint); }
+.jm-wires path.is-done { stroke: var(--ink-faint); stroke-dasharray: none; }
+.jm-wires path.is-on {
+  stroke: var(--banana-deep); stroke-width: 3; stroke-dasharray: 10 8;
+  animation: jm-flow 0.55s linear infinite;
+}
+@keyframes jm-flow { to { stroke-dashoffset: -18; } }
+
+/* inputs */
+.jm-input {
+  margin: 0;
+  padding: 10px 12px 12px;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-md);
+  box-shadow: 3px 3px 0 var(--ink);
+  transition: box-shadow 0.25s, transform 0.25s, background 0.25s;
+}
+.jm-input figcaption { display: flex; align-items: baseline; gap: 8px; margin-bottom: 8px; font-size: var(--fs-xs); }
+.jm-input figcaption b { font-weight: 800; }
+.jm-input figcaption i { font-family: var(--font-mono); font-size: var(--fs-micro); color: var(--ink-soft); }
+.jm-input.is-lit { background: var(--banana-soft); box-shadow: 5px 5px 0 var(--banana-deep); transform: translateX(4px); }
+.jm-media { position: relative; display: grid; place-items: center; background: #fff; border: 1.5px solid var(--line-strong); border-radius: 8px; overflow: hidden; }
+.jm-media img, .jm-media video { display: block; max-width: 100%; max-height: 210px; width: auto; height: auto; }
+.jm-stylein { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.jm-stylein figcaption { margin: 0; }
+.jm-stylechip {
+  padding: 4px 12px; font-family: var(--font-mono); font-size: var(--fs-xs); font-weight: 700;
+  background: var(--surface); border: 1.5px solid var(--ink); border-radius: 999px;
+}
+
+/* the judge: light, with the model's logo and a card for what it is evaluating */
+.jm-core { align-items: stretch; }
+.jm-judge {
+  position: relative;
+  display: flex; flex-direction: column; gap: 12px;
+  padding: 16px;
+  background: #FFFFFF;
+  background-image: linear-gradient(180deg, #F5F7FF 0%, #FFFFFF 70%);
+  border: 2px solid var(--ink);
+  border-radius: 22px;
+  box-shadow: 6px 6px 0 var(--ink);
+}
+.jm-judge.is-thinking .jm-led { background: #3E7BFA; box-shadow: 0 0 0 1.5px var(--ink), 0 0 10px #3E7BFA; animation: jm-blink 0.5s steps(2) infinite; }
+@keyframes jm-blink { 50% { opacity: 0.35; } }
+
+.jm-evalcard {
+  display: grid; justify-items: center; gap: 4px;
+  padding: 12px 12px 12px;
+  text-align: center;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  border-radius: 14px;
+}
+.jm-evalcard.is-flip { animation: jm-flip 0.45s var(--ease-out); }
+@keyframes jm-flip { from { transform: rotateX(70deg); opacity: 0; } }
+.jm-evalk { font-family: var(--font-mono); font-size: var(--fs-micro); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); }
+.jm-evalname { font-size: var(--fs-sm); font-weight: 800; line-height: 1.25; min-height: 2.5em; display: grid; place-items: center; }
+.jm-evalstep { font-family: var(--font-mono); font-size: var(--fs-micro); color: var(--ink-soft); min-height: 1.2em; }
+.jm-work { display: flex; gap: 6px; height: 10px; }
+.jm-work i { width: 8px; height: 8px; border-radius: 50%; background: var(--line-strong); }
+.jm-judge.is-thinking .jm-work i { background: #3E7BFA; animation: jm-bounce 0.6s ease-in-out infinite; }
+.jm-judge.is-thinking .jm-work i:nth-child(2) { animation-delay: 0.1s; }
+.jm-judge.is-thinking .jm-work i:nth-child(3) { animation-delay: 0.2s; }
+@keyframes jm-bounce { 50% { transform: translateY(-5px); } }
+.jm-promptbtn {
+  width: 100%; margin-top: 6px; padding: 9px 12px;
+  font-family: var(--font-body); font-size: var(--fs-xs); font-weight: 800; color: var(--ink);
+  background: var(--banana); border: 2px solid var(--ink); border-radius: 12px; box-shadow: 0 3px 0 var(--ink);
+  cursor: pointer; transition: transform var(--dur-fast), box-shadow var(--dur-fast);
+}
+.jm-promptbtn:hover { transform: translateY(-1px); box-shadow: 0 4px 0 var(--ink); }
+.jm-promptbtn:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--ink); }
+.jm-promptbtn:focus-visible { outline: none; box-shadow: var(--ring); }
+
+/* Start, below the judge, with a hand-written note and arrow (as on the Overview) */
+.jm-startwrap { position: relative; display: flex; justify-content: center; padding-top: 34px; }
+.jm-start {
+  padding: 10px 30px; font-family: var(--font-mono); font-size: var(--fs-sm); font-weight: 700;
+  color: var(--paper); background: var(--ink); border: 2px solid var(--ink); border-radius: 999px;
+  box-shadow: 0 3px 0 var(--banana-deep); cursor: pointer;
+}
+.jm-start:hover { background: #3a352e; }
+.jm-start:focus-visible { outline: none; box-shadow: var(--ring); }
+.jm-hint {
+  position: absolute; top: 0; left: calc(50% + 14px);
+  font-family: var(--font-hand); font-size: 1.4rem; font-weight: 600; line-height: 1; white-space: nowrap;
+  color: var(--ink-mid); transform: rotate(-4deg);
+}
+.jm-hintarrow { position: absolute; top: 0; left: calc(50% - 40px); width: 54px; height: 36px; overflow: visible; }
+.jm-hintarrow path { fill: none; stroke: var(--ink-mid); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.jm-startwrap.is-used .jm-hint, .jm-startwrap.is-used .jm-hintarrow { opacity: 0; transition: opacity 0.4s; }
+
+/* the generated narrative in a film reel; click to play */
+.jm-reel {
+  position: relative; cursor: pointer;
+  padding: 14px 10px;
+  background: #1F1C18;
+  border-radius: 8px;
+}
+.jm-reel::before, .jm-reel::after {
+  content: ''; position: absolute; left: 6px; right: 6px; height: 10px;
+  background: repeating-linear-gradient(90deg, #F4EFE4 0 9px, transparent 9px 18px);
+  border-radius: 2px; opacity: 0.95;
+}
+.jm-reel::before { top: 2px; } .jm-reel::after { bottom: 2px; }
+.jm-reel video { display: block; width: 100%; max-height: 200px; object-fit: contain; background: #fff; border-radius: 3px; }
+.jm-play {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  display: grid; place-items: center; width: 62px; height: 62px;
+  background: var(--banana); border: 3px solid var(--ink); border-radius: 50%;
+  box-shadow: 0 3px 0 var(--ink); cursor: pointer; transition: transform var(--dur-fast), opacity 0.25s;
+}
+.jm-play svg { width: 28px; height: 28px; margin-left: 4px; fill: var(--ink); }
+.jm-reel:hover .jm-play { transform: translate(-50%, -50%) scale(1.06); }
+.jm-reel.is-playing .jm-play { opacity: 0; pointer-events: none; }
+
+/* outputs */
+.jm-outhead { font-family: var(--font-mono); font-size: var(--fs-micro); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-faint); }
+.jm-verdict, .jm-seq {
+  padding: 10px 12px 12px;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-md);
+  box-shadow: 3px 3px 0 var(--ink);
+  opacity: 0.55;
+  transition: opacity 0.3s, transform 0.3s, background 0.3s, box-shadow 0.3s;
+}
+.jm-verdict header, .jm-seq header { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; font-size: var(--fs-xs); }
+.jm-verdict header span, .jm-seq header span { font-family: var(--font-mono); font-size: var(--fs-micro); color: var(--ink-soft); }
+.jm-verdict.is-shown, .jm-seq.is-shown { opacity: 1; transform: translateX(-4px); }
+.jm-vbody { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
+.jm-band {
+  min-width: 74px; padding: 5px 10px; text-align: center;
+  font-family: var(--font-mono); font-size: var(--fs-sm); font-weight: 800;
+  background: var(--bg-sunk); border: 1.5px solid var(--line-strong); border-radius: 8px;
+}
+.jm-gate { font-family: var(--font-mono); font-size: var(--fs-micro); color: var(--ink-faint); }
+.jm-verdict.is-pass { background: var(--go-soft); box-shadow: 4px 4px 0 var(--go); }
+.jm-verdict.is-pass .jm-band { color: #fff; background: var(--go); border-color: var(--go); }
+.jm-verdict.is-pass .jm-gate { color: var(--go); font-weight: 700; }
+.jm-verdict.is-fail { background: var(--stop-soft); box-shadow: 4px 4px 0 var(--stop); }
+.jm-verdict.is-fail .jm-band { color: #fff; background: var(--stop); border-color: var(--stop); }
+.jm-verdict.is-fail .jm-gate { color: var(--stop); font-weight: 700; }
+.jm-gatebar {
+  padding: 8px 12px; font-size: var(--fs-xs); color: var(--ink-soft);
+  border: 1.5px dashed var(--line-strong); border-radius: 10px;
+}
+.jm-gatebar.is-open { color: var(--go); font-weight: 700; border: 2px solid var(--go); background: var(--go-soft); }
+
+.jm-illus { margin: 10px 2px 0; font-size: var(--fs-xs); color: var(--ink-soft); }
+.jm-illus b { color: var(--ink); }
+
+/* ======================= narrative machine ======================= */
+.jm--narr { grid-template-columns: minmax(0, 1.2fr) minmax(250px, 290px) minmax(0, 0.7fr); align-items: center; }
+.jm-in-src .jm-media img { max-height: 150px; }
+.jm-xml {
+  height: 150px; margin: 0; padding: 8px 10px; overflow: auto;
+  font-family: var(--font-mono); font-size: 11px; line-height: 1.5; color: var(--ink-soft);
+  background: #fff; border: 1.5px solid var(--line-strong); border-radius: 8px;
+  white-space: pre;
+}
+.jm-guard, .jm-guard * { user-select: none; -webkit-user-select: none; }
+.jm-xl { display: inline-block; min-width: 100%; padding: 0 4px; border-radius: 4px; transition: background 0.2s, color 0.2s; }
+.jm-xl.is-hit { color: var(--ink); font-weight: 700; background: var(--banana-soft); box-shadow: inset 3px 0 0 var(--banana-deep); }
+.jm-xml .x-t { color: #1D5FBF; font-style: normal; }
+.jm-xml .x-a { color: #9A5B13; font-style: normal; }
+.jm-xml .x-v { color: #2F6B4E; font-style: normal; }
+.jm-xml .x-p { color: #8C867B; font-style: normal; }
+.jm-frames { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.jm-frame > span { display: block; margin-bottom: 4px; font-family: var(--font-mono); font-size: var(--fs-micro); color: var(--ink-soft); }
+.jm-frame.is-now > span { color: var(--ink); font-weight: 700; }
+.jm-frame.is-now .jm-media { border: 2px solid var(--banana-deep); }
+.jm-frame .jm-media { aspect-ratio: 1840 / 900; }
+.jm-frame .jm-media img { max-height: none; width: 100%; }
+.jm-frame .jm-media.is-empty::after { content: 'none at t = 1'; font-family: var(--font-mono); font-size: var(--fs-micro); color: var(--ink-faint); }
+.jm-narration { margin: 10px 0 0; min-height: 2.9em; font-family: var(--font-display); font-style: italic; font-size: var(--fs-sm); line-height: 1.4; color: var(--ink); }
+.jm-context .jm-pieces { display: grid; gap: 6px; }
+.jm-piece {
+  display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 9px; align-items: start; padding: 7px 9px;
+  font-size: 11px; line-height: 1.4; color: var(--ink-soft);
+  background: #fff; border: 1.5px solid var(--line-strong); border-radius: 8px;
+}
+.jm-picon { display: grid; place-items: center; width: 30px; height: 30px; background: var(--banana-soft); border: 1.5px solid var(--ink); border-radius: 8px; }
+.jm-picon svg { width: 17px; height: 17px; fill: none; stroke: var(--ink); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.jm-piece b { display: block; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink); }
+.jm-piece span { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+.jm-lanes { display: flex; justify-content: center; gap: 8px; }
+.jm-lanes span {
+  display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px;
+  font-family: var(--font-mono); font-size: var(--fs-micro); font-weight: 700;
+  background: var(--surface); border: 1.5px solid var(--ink); border-radius: 999px;
+}
+.jm-lanes b { min-width: 1ch; }
+.jm-lanes [data-band="A"] b, .jm-lanes [data-band="B"] b { color: var(--go); }
+.jm-lanes [data-band="C"] b, .jm-lanes [data-band="D"] b { color: var(--stop); }
+
+.jm-accum {
+  display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.6fr); gap: 22px; align-items: center;
+  margin-top: 16px; padding: 14px 18px;
+  background: var(--surface); border: 2px solid var(--ink); border-radius: var(--radius-lg); box-shadow: 4px 4px 0 var(--ink);
+}
+.jm-range { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.jm-rangehead { width: 100%; font-family: var(--font-mono); font-size: var(--fs-micro); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint); }
+.jm-rb { display: inline-grid; place-items: center; min-width: 44px; padding: 5px 12px; border: 2px solid; border-radius: 10px; }
+.jm-rb b { font-family: var(--font-display); font-size: 1.15rem; }
+.jm-rb.is-a, .jm-rb.is-b { color: var(--go); background: var(--go-soft); border-color: var(--go-line); }
+.jm-rb.is-c, .jm-rb.is-d { color: var(--stop); background: var(--stop-soft); border-color: var(--stop-line); }
+.jm-meters { display: grid; gap: 8px; }
+.jm-mk { font-family: var(--font-mono); font-size: var(--fs-xs); font-weight: 800; }
+.jm-mbar { height: 12px; background: var(--bg-sunk); border: 1.5px solid var(--ink); border-radius: 999px; overflow: hidden; }
+.jm-mbar i { display: block; height: 100%; width: 0; background: var(--go); transition: width 0.3s var(--ease-out); }
+.jm-mv { font-family: var(--font-mono); font-size: var(--fs-xs); font-weight: 700; text-align: right; }
+.jm-progress { position: relative; height: 18px; margin-top: 4px; background: var(--bg-sunk); border-radius: 999px; overflow: hidden; }
+.jm-progress i { position: absolute; inset: 0 auto 0 0; width: 0; background: var(--banana); transition: width 0.3s var(--ease-out); }
+.jm-progress span { position: relative; display: block; text-align: center; font-family: var(--font-mono); font-size: 10px; line-height: 18px; font-weight: 700; }
+
+/* ======================= reference-free ======================= */
+.mx-figure { max-width: 560px; margin: 8px auto 22px; }
+.mx-figure img { display: block; width: 100%; height: auto; border: 2px solid var(--ink); border-radius: var(--radius-md); background: #fff; box-shadow: 4px 4px 0 var(--ink); }
+.mx-figure figcaption { margin-top: 8px; text-align: center; font-size: var(--fs-xs); color: var(--ink-soft); }
+.rf { padding: 16px 18px; background: var(--surface); border: 2px solid var(--ink); border-radius: var(--radius-lg); box-shadow: 4px 4px 0 var(--ink); }
+.rf-head { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 12px; }
+.rf-play { padding: 7px 18px; font-family: var(--font-mono); font-size: var(--fs-xs); font-weight: 700; color: var(--paper); background: var(--ink); border: 2px solid var(--ink); border-radius: 999px; cursor: pointer; }
+.rf-key { display: inline-flex; align-items: center; gap: 6px; font-size: var(--fs-xs); color: var(--ink-soft); }
+.rf-key i { display: inline-block; width: 14px; height: 14px; border-radius: 4px; border: 1.5px solid var(--ink); margin-left: 8px; }
+.rf-key i.is-b1, .rf-step.is-b1 { --c: #E4DDF5; --cl: #8E7CC3; }
+.rf-key i.is-b2, .rf-step.is-b2 { --c: #FBE3C8; --cl: #D99447; }
+.rf-key i { background: var(--c); }
+.rf-rows { position: relative; display: grid; gap: 18px; }
+.rf-label { margin-bottom: 6px; font-weight: 800; font-size: var(--fs-xs); }
+.rf-steps { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 8px; margin: 0; padding: 0; list-style: none; }
+.rf-step {
+  --c: var(--paper); --cl: var(--line-strong);
+  display: grid; gap: 4px; align-content: start; padding: 8px 8px 10px;
+  background: var(--c); border: 2px solid var(--cl); border-radius: 10px;
+  opacity: 0.35; transform: translateY(6px);
+  transition: opacity 0.35s, transform 0.35s var(--ease-spring), box-shadow 0.35s;
+}
+.rf-step b { font-size: var(--fs-xs); line-height: 1.25; }
+.rf-t { font-family: var(--font-mono); font-size: 10px; color: var(--ink-soft); }
+.rf-step.is-on { opacity: 1; transform: none; }
+.rf-playhead { position: absolute; top: -6px; bottom: -6px; left: 0; width: 2px; background: var(--banana-deep); opacity: 0; transition: transform 0.6s var(--ease-out), opacity 0.3s; }
+.rf-playhead.is-on { opacity: 1; }
+.rf-tally { margin: 14px 0 0; font-size: var(--fs-xs); color: var(--ink-soft); }
+.mx-insight {
+  display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 16px; align-items: start;
+  margin: 22px 0 0; padding: 16px 20px;
+  background: linear-gradient(100deg, #FFFCEF 0%, #FFF9F4 60%, #FDF4F4 100%);
+  border: 1.5px solid #E9CD6B; border-radius: 16px;
+}
+.mx-bulb { display: grid; place-items: center; width: 34px; height: 34px; }
+.mx-bulb svg { width: 24px; height: 24px; fill: none; stroke: #A87A00; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.mx-insight-k { display: block; margin-bottom: 4px; font-family: var(--font-mono); font-size: var(--fs-micro); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); }
+.mx-insight p { margin: 0; font-size: 1.08rem; line-height: 1.7; color: var(--ink); }
+
+/* ======================= narrow ======================= */
+@media (max-width: 1100px) {
+  .jm, .jm--narr { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+  .jm-wires { display: none; }
+  .jm-core { max-width: 360px; margin: 0 auto; width: 100%; }
+  .jm-input.is-lit, .jm-verdict.is-shown, .jm-seq.is-shown { transform: none; }
+  .jm-accum { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 640px) {
+  .rf-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .rf-playhead { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .jm-wires path.is-on, .jm-judge.is-thinking *, .jm-evalcard, .jm-context.is-pop, .jm-rb.is-flash { animation: none !important; }
+  .rf-step, .jm-piece, .jm-input { transition: none; }
+}
+
+
+/* ---- validity verdicts: the band scale, with the verdict marked ---- */
+.jm-mini { display: flex; flex-wrap: wrap; align-items: center; gap: 5px; margin-top: 8px; }
+.jm-mini span {
+  display: grid; place-items: center; width: 28px; height: 28px;
+  font-family: var(--font-display); font-weight: 800; border: 2px solid; border-radius: 8px;
+  transition: transform 0.25s var(--ease-spring), box-shadow 0.25s;
+}
+.jm-mini .is-acc { color: var(--go); background: var(--go-soft); border-color: var(--go-line); }
+.jm-mini .is-rej { color: var(--stop); background: var(--stop-soft); border-color: var(--stop-line); }
+.jm-mini .is-hit { transform: translateY(-3px); box-shadow: 0 0 0 2px var(--ink), 2px 4px 0 2px var(--banana-deep); }
+.jm-mini em { margin-left: 4px; font-style: normal; font-family: var(--font-mono); font-size: var(--fs-micro); color: var(--ink-soft); }
+.jm-verdict.is-pass .jm-mini em { color: var(--go); font-weight: 700; }
+.jm-verdict.is-fail .jm-mini em { color: var(--stop); font-weight: 700; }
+
+/* ---- sequence-level assessment ---- */
+.jm-context[hidden], .jm-narration[hidden] { display: none; }
+.jm-context.is-pop { animation: jm-pop 0.5s var(--ease-spring); }
+@keyframes jm-pop { from { opacity: 0; transform: translateY(-8px) scale(0.97); } }
+.jm-meter { opacity: 0.55; transition: opacity 0.3s; }
+.jm-meter.is-active, .jm-meter:has([data-val]:not(:empty)) { opacity: 1; }
+.jm-meter.is-active .jm-mk { color: var(--banana-ink); }
+.jm-rb.is-flash { animation: jm-flash 0.35s ease-out; }
+@keyframes jm-flash { 40% { transform: scale(1.12); box-shadow: 0 0 0 3px var(--banana); } }
+
+/* ---- reference-free: match / mismatch, step by step ---- */
+.rf-verdicts { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 8px; margin: -8px 0; padding: 0; list-style: none; }
+.rf-v {
+  justify-self: center; padding: 2px 10px;
+  font-family: var(--font-mono); font-size: 10px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase;
+  border: 1.5px solid; border-radius: 999px;
+  opacity: 0; transform: scale(0.8); transition: opacity 0.3s, transform 0.3s var(--ease-spring);
+}
+.rf-v.is-match { color: var(--go); background: var(--go-soft); border-color: var(--go-line); }
+.rf-v.is-mismatch { color: var(--stop); background: var(--stop-soft); border-color: var(--stop-line); }
+.rf-v.is-on { opacity: 1; transform: none; }
+.rf-step.is-diff.is-on { box-shadow: 0 0 0 2px var(--stop); }
+@media (max-width: 640px) { .rf-verdicts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* Centre the judge itself on the inputs and outputs: the controls under it
+   (Start, and the metric switch) would otherwise pull it upwards. */
+.jm--validity .jm-core { padding-top: 92px; }
+.jm--narr .jm-core { padding-top: 92px; }
+@media (max-width: 1100px) { .jm--validity .jm-core, .jm--narr .jm-core { padding-top: 0; } }
+
+/* ======================= judge: colour and a bigger mark ======================= */
+.jm-judge {
+  background: linear-gradient(165deg, #EAF2FF 0%, #F7FAFF 42%, #FFFFFF 100%);
+  border-color: var(--ink);
+  box-shadow: 6px 6px 0 #1E6BE6;
+}
+.jm-brand { display: grid; gap: 10px; }
+.jm-brandtop { display: flex; align-items: center; justify-content: space-between; }
+.jm-role {
+  padding: 3px 10px; font-family: var(--font-mono); font-size: var(--fs-micro); font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase;
+  color: #fff; background: #1E6BE6; border: 2px solid var(--ink); border-radius: 999px;
+}
+.jm-led { width: 12px; height: 12px; border-radius: 50%; background: #CFD8E8; box-shadow: 0 0 0 2px var(--ink); }
+.jm-brandmark {
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+  padding: 12px 10px; background: #fff; border: 2px solid var(--ink); border-radius: 14px;
+}
+.jm-logo { height: 56px; width: auto; display: block; }
+.jm-ver {
+  padding: 4px 11px; font-family: var(--font-mono); font-size: 1.15rem; font-weight: 800;
+  color: #fff; background: #1E6BE6; border: 2px solid var(--ink); border-radius: 10px; box-shadow: 0 3px 0 var(--ink);
+}
+.jm-evalcard { background: #fff; border-color: var(--ink); box-shadow: inset 0 4px 0 #CFE0FF; }
+.jm-evalk { color: #1E6BE6; }
+
+/* ======================= choose the metric (sequence level) ======================= */
+.jm-tabs {
+  display: grid; grid-template-columns: auto repeat(3, minmax(0, 1fr)); gap: 12px; align-items: stretch;
+  margin-bottom: 18px; padding: 12px; background: var(--surface);
+  border: 2px solid var(--ink); border-radius: var(--radius-lg); box-shadow: 4px 4px 0 var(--ink);
+}
+.jm-tabsk {
+  display: grid; align-content: center; padding: 0 10px 0 6px;
+  font-family: var(--font-display); font-size: 1.15rem; font-weight: 800; line-height: 1.1;
+}
+.jm-tabsk small { font-family: var(--font-hand); font-size: 1.1rem; font-weight: 600; color: var(--ink-mid); }
+.jm-tab {
+  --tc: var(--banana-soft); --tk: var(--banana);
+  display: flex; align-items: center; gap: 12px; padding: 12px 16px; text-align: left;
+  font-family: var(--font-body); color: var(--ink);
+  background: var(--paper); border: 2px solid var(--ink); border-radius: 14px; cursor: pointer;
+  box-shadow: 0 4px 0 var(--ink);
+  transition: transform var(--dur-fast), box-shadow var(--dur-fast), background var(--dur-fast);
+}
+.jm-tab.is-gp { --tc: #E3F1E8; --tk: #8FD0A8; }
+.jm-tab.is-na { --tc: #E6EFFF; --tk: #9EC1FF; }
+.jm-tab b {
+  display: grid; place-items: center; min-width: 52px; height: 42px; padding: 0 8px;
+  font-family: var(--font-mono); font-size: 1.15rem; font-weight: 800;
+  background: var(--tk); border: 2px solid var(--ink); border-radius: 10px;
+}
+.jm-tab span { font-size: var(--fs-sm); font-weight: 700; line-height: 1.25; }
+.jm-tab:hover { background: var(--tc); transform: translateY(-2px); box-shadow: 0 6px 0 var(--ink); }
+.jm-tab.is-on { background: var(--tc); transform: translateY(-3px); box-shadow: 0 7px 0 var(--ink), 0 0 0 3px var(--tk); }
+.jm-tab:focus-visible { outline: none; box-shadow: var(--ring); }
+
+/* ======================= per-step band sequences ======================= */
+.jm-seqchips, .jm-mchips { display: flex; flex-wrap: wrap; gap: 3px; }
+.jm-seqchips { margin-top: 8px; }
+.jm-seqchips i, .jm-mchips i {
+  display: grid; place-items: center; width: 15px; height: 18px;
+  font-style: normal; font-family: var(--font-mono); font-size: 9px; font-weight: 800;
+  background: var(--bg-sunk); border: 1px dashed var(--line-strong); border-radius: 4px;
+}
+.jm-seqchips i.is-a, .jm-mchips i.is-a { color: #fff; background: var(--go); border: 1px solid var(--go); }
+.jm-seqchips i.is-b, .jm-mchips i.is-b { color: var(--go); background: var(--go-soft); border: 1px solid var(--go-line); }
+.jm-seqchips i.is-c, .jm-mchips i.is-c { color: var(--stop); background: var(--stop-soft); border: 1px solid var(--stop-line); }
+.jm-seqchips i.is-d, .jm-mchips i.is-d { color: #fff; background: var(--stop); border: 1px solid var(--stop); }
+.jm-seqval { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-top: 10px; padding-top: 8px; border-top: 1.5px dashed var(--line-strong); }
+.jm-seqval span { font-family: var(--font-mono); font-size: var(--fs-micro); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); }
+.jm-seqval b { font-family: var(--font-mono); font-size: 1.5rem; font-weight: 800; }
+.jm-meter { display: grid; grid-template-columns: 34px minmax(0, 1fr) minmax(90px, 160px) 56px; align-items: center; gap: 12px; }
+@media (max-width: 1100px) {
+  .jm-tabs { grid-template-columns: minmax(0, 1fr); }
+  .jm-meter { grid-template-columns: 34px minmax(0, 1fr) 56px; }
+  .jm-meter .jm-mbar { display: none; }
+}
+
+/* the AN score, under the three meters */
+.jm-an {
+  display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 12px;
+  margin-top: 6px; padding: 10px 14px;
+  background: var(--bg-sunk); border: 2px dashed var(--line-strong); border-radius: 12px;
+  transition: background 0.3s, border-color 0.3s;
+}
+.jm-ank { font-family: var(--font-mono); font-size: var(--fs-xs); font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
+.jm-an em { font-style: normal; font-size: var(--fs-xs); color: var(--ink-soft); }
+.jm-an b { font-family: var(--font-mono); font-size: 1.5rem; font-weight: 800; color: var(--ink-faint); }
+.jm-an.is-ready { background: var(--banana-soft); border: 2px solid var(--ink); box-shadow: 3px 3px 0 var(--ink); }
+.jm-an.is-ready b { color: var(--ink); }
+.mx-subhead { margin: -18px 0 18px; font-size: var(--fs-h3); font-weight: 700; color: var(--ink-soft); }
+.mx-insight p + p { margin-top: 10px; }

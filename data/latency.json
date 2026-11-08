@@ -1,7 +1,6 @@
 {
  "n": 91,
  "model": "Gemini 3.7 Flash",
- "source": "COST_LATENCY/latency_per_sample.xlsx (built by COST_LATENCY/build_latency.py)",
  "notes": {
   "latency": "Summed model latency of every call an agent made for a diagram, in seconds; stages run 4-way concurrent across diagrams, so wall-clock per diagram is lower.",
   "3b": "The Diagram Animator Critic's latency is its call count x 31.9 s, the measured mean per call.",

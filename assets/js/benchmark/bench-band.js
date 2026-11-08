@@ -12,13 +12,8 @@ import { GLYPH } from './bench-glyphs.js';
  * equation row reads, so the two can never disagree — correcting a
  * count is one edit in one file.
  *
- * The count-up deliberately matches the site's existing stats band
- * (1400ms, ease-out-quart, fires at 40% visibility, `toLocaleString`
- * grouping) rather than inventing a second easing, so the two read as
- * the same gesture. It is reimplemented here rather than shared because
- * `pages/index.js` keys off `dataset_stats.json`, and pointing this
- * band at that file would mean editing a data file the rest of the site
- * owns.
+ * The count-up runs for 1400ms with an ease-out-quart curve, starts at 40%
+ * visibility and groups digits with `toLocaleString`.
  */
 
 const DURATION = 1400;

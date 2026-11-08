@@ -17,6 +17,7 @@ export const NAV_SECTIONS = [
   { id: 'generalization', label: 'Generalization to Unseen Domains', href: 'generalization.html' }, // the OOD module owns this page
   { id: 'animatebench', label: 'AnimateBench', href: 'animatebench.html' }, // the benchmark module owns this page
   { id: 'evaluation',   label: 'Evaluation',   href: 'evaluation.html' },
+  { id: 'metrics',      label: 'Metrics and Evaluation Strategy', href: 'metrics.html' },
   { id: 'prompts',      label: 'Prompts',      href: 'prompts.html' },
   { id: 'ablations',    label: 'Ablations',    href: 'ablations.html' },
   { id: 'failures',     label: 'Failure cases', href: 'failures.html' },

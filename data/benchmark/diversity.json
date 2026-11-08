@@ -1,5 +1,4 @@
 {
- "_comment": "NARRATIVE DIVERSITY pane. No numbers or statistics are shown here by design. All three axes are wired to real clips. Animation Style plays one diagram (CVPR_2025_pipe00041) rendered in all five Layer 1 styles, so the styles are compared on identical content. Pan and Zoom is Layer 2: it is a toggle rather than a sixth style, it composes on whichever Layer 1 style is selected, and it plays the animation itself (an SVG under assets/bench/pan_and_zoom/) rather than a clip - see data/benchmark/pan-and-zoom.json, which tools/build_pan_and_zoom.py generates. The other two axes play one example per variant, assembled from that variant's own rendered frames and its own narration.",
  "accent": "diversity",
  "categories": [
   {
@@ -120,8 +119,7 @@
      "caption": "Every element gets its own step, so nothing arrives unannounced.",
      "speed": 4
     }
-   ],
-   "_note": "The clips run at 4x. Their pacing was the narration’s, and this axis carries no narration on the page, so at 1x the stage was holding a still for seconds at a time with nothing to read."
+   ]
   },
   {
    "id": "narration-length",
@@ -316,8 +314,7 @@
       }
      ]
     }
-   ],
-   "_note": "Each variant carries its own narration, timed to its clip, and the pane shows the line being spoken under the stage. That is the axis: a side label saying \"a sentence per step\" describes the difference, the narration itself IS the difference. These clips play at 1x for the same reason."
+   ]
   }
  ]
 }

@@ -1,13 +1,34 @@
 {
-  "_comment": "Numbers behind user-study.html. Absolute ratings and agreement statistics come from the paper's user-study subsection; the four preference charts come from USER_STUDY_PAGE/userstudy_ranking.pdf. Results are not shown on the page; they live in the paper. The numbers are kept here in case a chart is ever wanted back.",
-
   "headline": [
-    { "value": "38", "label": "participants", "sub": "aged 21–45", "accent": "pink", "icon": "people" },
-    { "value": "93", "label": "source diagrams", "accent": "blue", "icon": "diagram" },
-    { "value": "~1", "unit": "hr", "label": "total duration", "sub": "self-paced, one sitting", "accent": "mint", "icon": "clock" },
-    { "value": "2+2", "label": "experiments", "sub": "two main · two selective cohort", "accent": "tan", "icon": "flask" }
+    {
+      "value": "38",
+      "label": "participants",
+      "sub": "aged 21–45",
+      "accent": "pink",
+      "icon": "people"
+    },
+    {
+      "value": "93",
+      "label": "source diagrams",
+      "accent": "blue",
+      "icon": "diagram"
+    },
+    {
+      "value": "~1",
+      "unit": "hr",
+      "label": "total duration",
+      "sub": "self-paced, one sitting",
+      "accent": "mint",
+      "icon": "clock"
+    },
+    {
+      "value": "2+2",
+      "label": "experiments",
+      "sub": "two main · two selective cohort",
+      "accent": "tan",
+      "icon": "flask"
+    }
   ],
-
   "cohort": {
     "title": "Participant Statistics",
     "note": "Stats of the 38 participants, with counts",
@@ -15,19 +36,67 @@
       {
         "title": "Background",
         "stats": [
-          { "value": 50.0, "count": 19, "label": "Master's students", "accent": "pink", "icon": "cap" },
-          { "value": 23.7, "count": 9, "label": "PhD students", "accent": "blue", "icon": "cap-phd" },
-          { "value": 18.4, "count": 7, "label": "Undergraduates", "accent": "mint", "icon": "cap-dual" },
-          { "value": 5.3, "count": 2, "label": "Professors and Researchers", "accent": "tan", "icon": "book" },
-          { "value": 2.6, "count": 1, "label": "Industry professionals", "accent": "banana", "icon": "briefcase" }
+          {
+            "value": 50.0,
+            "count": 19,
+            "label": "Master's students",
+            "accent": "pink",
+            "icon": "cap"
+          },
+          {
+            "value": 23.7,
+            "count": 9,
+            "label": "PhD students",
+            "accent": "blue",
+            "icon": "cap-phd"
+          },
+          {
+            "value": 18.4,
+            "count": 7,
+            "label": "Undergraduates",
+            "accent": "mint",
+            "icon": "cap-dual"
+          },
+          {
+            "value": 5.3,
+            "count": 2,
+            "label": "Professors and Researchers",
+            "accent": "tan",
+            "icon": "book"
+          },
+          {
+            "value": 2.6,
+            "count": 1,
+            "label": "Industry professionals",
+            "accent": "banana",
+            "icon": "briefcase"
+          }
         ]
       },
       {
         "title": "Gender",
         "stats": [
-          { "value": 65.8, "count": 25, "label": "Male", "accent": "blue", "icon": "mars" },
-          { "value": 34.2, "count": 13, "label": "Female", "accent": "pink", "icon": "venus" },
-          { "value": 0, "count": 0, "label": "Others", "accent": "mint", "icon": "others" }
+          {
+            "value": 65.8,
+            "count": 25,
+            "label": "Male",
+            "accent": "blue",
+            "icon": "mars"
+          },
+          {
+            "value": 34.2,
+            "count": 13,
+            "label": "Female",
+            "accent": "pink",
+            "icon": "venus"
+          },
+          {
+            "value": 0,
+            "count": 0,
+            "label": "Others",
+            "accent": "mint",
+            "icon": "others"
+          }
         ]
       }
     ],
@@ -50,47 +119,101 @@
       }
     ]
   },
-
   "absolute": {
     "caption": "Mean ± standard deviation over 25 evaluated diagrams per system. Each diagram is first averaged over its participant ratings. All scores normalised to [0, 1]; an animation that fails either validity gate scores 0.",
-    "columns": ["VF", "ASC", "SS", "NA", "AN"],
+    "columns": [
+      "VF",
+      "ASC",
+      "SS",
+      "NA",
+      "AN"
+    ],
     "rows": [
       {
         "system": "AnimateBanana",
         "best": true,
-        "cells": [".860 ± .14", ".838 ± .13", ".756 ± .16", ".775 ± .15", ".765 ± .15"]
+        "cells": [
+          ".860 ± .14",
+          ".838 ± .13",
+          ".756 ± .16",
+          ".775 ± .15",
+          ".765 ± .15"
+        ]
       },
       {
         "system": "AnimateBanana (Qwen3.8-27B)",
-        "cells": [".518 ± .28", ".500 ± .30", ".443 ± .26", ".463 ± .26", ".453 ± .26"]
+        "cells": [
+          ".518 ± .28",
+          ".500 ± .30",
+          ".443 ± .26",
+          ".463 ± .26",
+          ".453 ± .26"
+        ]
       },
       {
         "system": "Gemini 3.1 Pro",
-        "cells": [".404 ± .32", ".349 ± .30", ".294 ± .27", ".306 ± .27", ".300 ± .27"]
+        "cells": [
+          ".404 ± .32",
+          ".349 ± .30",
+          ".294 ± .27",
+          ".306 ± .27",
+          ".300 ± .27"
+        ]
       }
     ]
   },
-
   "agreement": [
-    { "stat": "α = 0.62", "label": "Krippendorff's α, AN" },
-    { "stat": "α = 0.62", "label": "Krippendorff's α, VF" },
-    { "stat": "α = 0.65", "label": "Krippendorff's α, ASC" },
-    { "stat": "ρ = 0.68", "label": "mean pairwise Spearman between raters" },
-    { "stat": "ρ = 0.65", "label": "human vs. Kimi-K2.6 judge on AN (p < 10⁻⁵)" },
-    { "stat": "71%", "label": "same tournament winner when two raters saw one diagram" }
+    {
+      "stat": "α = 0.62",
+      "label": "Krippendorff's α, AN"
+    },
+    {
+      "stat": "α = 0.62",
+      "label": "Krippendorff's α, VF"
+    },
+    {
+      "stat": "α = 0.65",
+      "label": "Krippendorff's α, ASC"
+    },
+    {
+      "stat": "ρ = 0.68",
+      "label": "mean pairwise Spearman between raters"
+    },
+    {
+      "stat": "ρ = 0.65",
+      "label": "human vs. Kimi-K2.6 judge on AN (p < 10⁻⁵)"
+    },
+    {
+      "stat": "71%",
+      "label": "same tournament winner when two raters saw one diagram"
+    }
   ],
-
   "charts": [
     {
       "id": "tournament",
       "title": "Tournament win rate",
       "note": "n = 211 tournaments",
       "unit": "rank-1 share",
-      "chance": { "value": 33.3, "label": "chance (1/3)" },
+      "chance": {
+        "value": 33.3,
+        "label": "chance (1/3)"
+      },
       "rows": [
-        { "label": "AnimateBanana", "value": 61.6, "accent": "pink" },
-        { "label": "Qwen3.8-27B backbone", "value": 11.8, "accent": "blue" },
-        { "label": "Human-authored presentations", "value": 26.5, "accent": "tan" }
+        {
+          "label": "AnimateBanana",
+          "value": 61.6,
+          "accent": "pink"
+        },
+        {
+          "label": "Qwen3.8-27B backbone",
+          "value": 11.8,
+          "accent": "blue"
+        },
+        {
+          "label": "Human-authored presentations",
+          "value": 26.5,
+          "accent": "tan"
+        }
       ]
     },
     {
@@ -98,10 +221,21 @@
       "title": "Head-to-head rounds won by AnimateBanana",
       "note": "every round in which AnimateBanana appeared",
       "unit": "AnimateBanana preferred",
-      "chance": { "value": 50, "label": "even split" },
+      "chance": {
+        "value": 50,
+        "label": "even split"
+      },
       "rows": [
-        { "label": "vs Qwen3.8-27B backbone", "value": 79.1, "accent": "pink" },
-        { "label": "vs Human-authored presentations", "value": 77.8, "accent": "pink" }
+        {
+          "label": "vs Qwen3.8-27B backbone",
+          "value": 79.1,
+          "accent": "pink"
+        },
+        {
+          "label": "vs Human-authored presentations",
+          "value": 77.8,
+          "accent": "pink"
+        }
       ]
     },
     {
@@ -110,9 +244,21 @@
       "note": "n = 71 trials, 10 participants",
       "unit": "preference",
       "rows": [
-        { "label": "With context", "value": 67.6, "accent": "pink" },
-        { "label": "Without context", "value": 15.5, "accent": "blue" },
-        { "label": "Both equally useful", "value": 16.9, "accent": "tan" }
+        {
+          "label": "With context",
+          "value": 67.6,
+          "accent": "pink"
+        },
+        {
+          "label": "Without context",
+          "value": 15.5,
+          "accent": "blue"
+        },
+        {
+          "label": "Both equally useful",
+          "value": 16.9,
+          "accent": "tan"
+        }
       ]
     },
     {
@@ -121,12 +267,19 @@
       "note": "n = 76 trials, 10 participants",
       "unit": "judgements",
       "rows": [
-        { "label": "Noticeable improvement", "value": 88.2, "accent": "mint" },
-        { "label": "No improvement", "value": 11.8, "accent": "blue" }
+        {
+          "label": "Noticeable improvement",
+          "value": 88.2,
+          "accent": "mint"
+        },
+        {
+          "label": "No improvement",
+          "value": 11.8,
+          "accent": "blue"
+        }
       ]
     }
   ],
-
   "screens": [
     {
       "id": "task-explanation",

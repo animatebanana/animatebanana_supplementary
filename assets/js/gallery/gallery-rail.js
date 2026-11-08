@@ -64,7 +64,7 @@ import { loadJSON } from '../lib/data-loader.js';
 import { onVisible } from '../lib/lazy-load.js';
 import { PreviewMedia } from './preview-media.js';
 
-const DEFAULT_SRC = 'data/gallery/rail_previews.json?v=3';   /* previews, not the gallery's full clips - see tools/build_rail_feed.py */
+const DEFAULT_SRC = 'data/gallery/rail_previews.json?v=3';   /* previews, not the gallery's full clips */
 
 const prefersReducedMotion = () =>
   window.matchMedia('(prefers-reduced-motion: reduce)').matches;

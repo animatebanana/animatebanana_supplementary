@@ -26,9 +26,8 @@
  *     current time from `document.lastModified`, which would re-date the page
  *     on every visit, so a timestamp inside the last minute is not trusted and
  *     the markup's own text is left standing.
- *   - No JavaScript at all. The markup ships with a real date in it, kept
- *     current by `tools/set_updated.py`, and this script only ever replaces it
- *     with something newer.
+ *   - No JavaScript at all. The markup ships with a real date in it, and this
+ *     script only ever replaces it with something newer.
  *
  * AOE, because that is what a submission deadline is quoted in. Anywhere on
  * Earth is UTC-12: the date is still "today" somewhere until it is over

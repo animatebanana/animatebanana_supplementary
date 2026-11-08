@@ -1,5 +1,4 @@
 {
- "_generated": "scripts/build_failures.py — do not hand-edit",
  "pipeline": "assets/ablations/pipeline-diagram.svg?v=64a37438",
  "critic_table": {
   "sample": "CVPR_2025_arch00968",
@@ -111,10 +110,6 @@
   ]
  },
  "critic_insight": "The first critic is absolutely essential to the structural fidelity. When we remove the second critic, we suffer less hit to the score because the first critic has already rendered a solid structure that allows for ease of parsing, thereby giving the second critic less to do. Similarly, when we remove the third critic, the hit suffered to the score is the least, because the second stage has produced a solid plan leaving little room for error.",
- "warnings": [
-  "Stage_3: \"ICCV_2023_set5_000035\" has no row in 00_AnimateBanana",
-  "data\\failure_notes.csv is open in another program (PermissionError) — close it and rerun"
- ],
  "stages": [
   {
    "key": "stage1",

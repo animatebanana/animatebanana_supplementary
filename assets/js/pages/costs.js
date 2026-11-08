@@ -3,8 +3,7 @@ import { loadJSON } from '../lib/data-loader.js';
 /**
  * costs.html — calls and latency of the AnimateBanana pipeline,
  * measured on a sample set of 91 diagrams. Everything drawn or quoted
- * here comes from data/latency.json, which COST_LATENCY/build_latency.py
- * builds from COST_LATENCY/latency_per_sample.xlsx.
+ * here comes from data/latency.json.
  *
  * The charts are SVG sized to their container (re-drawn when it
  * resizes, so text stays legible on a phone) or plain HTML. Each:

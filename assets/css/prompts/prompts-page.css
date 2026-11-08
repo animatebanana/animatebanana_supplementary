@@ -84,3 +84,25 @@ prompt-library { display: block; scroll-margin-top: 150px; }
   .pl-item { white-space: nowrap; }
   .pl-body { max-height: 70vh; padding: 14px 16px 20px; }
 }
+
+/* judge prompts: the prompt, with the style-adapter toggle beside it */
+.pl-main { display: grid; grid-template-columns: minmax(0, 1fr); min-height: 0; }
+.pl-main:has(.pl-styles) { grid-template-columns: minmax(0, 1fr) 200px; }
+.pl-styles {
+  display: flex; flex-direction: column; gap: 6px; padding: 16px 14px;
+  background: var(--surface); border-left: 2px solid var(--ink);
+}
+.pl-styleshead { margin-bottom: 4px; font-family: var(--font-mono); font-size: var(--fs-micro); font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft); }
+.pl-style {
+  padding: 9px 12px; text-align: left; font-family: var(--font-body); font-size: var(--fs-xs); font-weight: 700; color: var(--ink-soft);
+  background: var(--paper); border: 1.5px solid var(--line-strong); border-radius: 10px; cursor: pointer;
+  transition: background var(--dur-fast), color var(--dur-fast), border-color var(--dur-fast);
+}
+.pl-style:hover { color: var(--ink); background: var(--bg-alt); }
+.pl-style.is-on { color: var(--ink); background: var(--banana); border: 2px solid var(--ink); box-shadow: 2px 2px 0 var(--ink); }
+.pl-style:focus-visible { outline: none; box-shadow: var(--ring); }
+@media (max-width: 900px) {
+  .pl-main:has(.pl-styles) { grid-template-columns: minmax(0, 1fr); }
+  .pl-styles { flex-direction: row; flex-wrap: wrap; border-left: 0; border-top: 2px solid var(--ink); order: -1; }
+  .pl-styleshead { width: 100%; }
+}

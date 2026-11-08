@@ -7,9 +7,18 @@
  */
 import { escapeHtml as esc } from './format.js';
 
+/* While a prompt is laid out for one particular style, its name stands in for
+   {STYLE} / {A_STYLE}, marked so it can be seen to change with the style. */
+let STYLE_NAME = null;
+
 /** Inline formatting: bold, italics and code spans lose their marks. */
 function inline(raw) {
   let h = esc(raw);
+  if (STYLE_NAME) {
+    const name = `<span class="pd-stylename">${esc(STYLE_NAME)}</span>`;
+    const art = /^[AEIOU]/.test(STYLE_NAME) ? 'an' : 'a';
+    h = h.replace(/\{A_STYLE\}/g, `${art} ${name}`).replace(/\{STYLE\}/g, name);
+  }
   h = h.replace(/\{A_STYLE\}/g, '<span class="pd-var">a / an + style name</span>')
        .replace(/\{STYLE\}/g, '<span class="pd-var">style name</span>')
        .replace(/\{STYLE_ADAPTER\}/g, '<span class="pd-var">style adapter</span>');
@@ -66,7 +75,7 @@ function renderSchema(lines, fills = {}) {
         <code>${esc(m[1])}</code><span>${inline(val)}</span></div>`);
     }
   }
-  return `<div class="pd-schema"><div class="pd-schema-head">Response format</div>${rows.join('')}</div>`;
+  return `<div class="pd-schema">${rows.join('')}</div>`;
 }
 
 /** The prompt text, laid out: headings, paragraphs, lists, response format.
@@ -74,7 +83,14 @@ function renderSchema(lines, fills = {}) {
  *  mode every slot is shown with its text (highlighted); otherwise a slot
  *  outside the response format is shown as a marker pointing to the list
  *  of adapters at the bottom. */
-export function formatPrompt(text, slots = {}, fills = {}, filled = false) {
+export function formatPrompt(text, slots = {}, fills = {}, filled = false, opts = {}) {
+  const prevStyle = STYLE_NAME;
+  if (opts.style) STYLE_NAME = opts.style;
+  try { return layOut(text, slots, fills, filled, opts); }
+  finally { STYLE_NAME = prevStyle; }
+}
+
+function layOut(text, slots, fills, filled, opts) {
   // Slots and *** section headings may sit side by side on one line in an
   // arranged template; give each its own line before laying out.
   const lines = text.replace(/\r/g, '')
@@ -96,7 +112,10 @@ export function formatPrompt(text, slots = {}, fills = {}, filled = false) {
     if ((m = t.match(/^\{\{(\w+)\}\}$/)) || t === '{STYLE_ADAPTER}') {
       flush();
       const id = m ? m[1] : 'STYLE_ADAPTER';
-      if (filled && fills[id] != null) {
+      if (filled && fills[id] != null && opts.quiet) {
+        // shown in place, exactly as written: no label, only a quiet mark
+        out.push(`<div class="pd-filled is-quiet">${layOut(fills[id], {}, {}, false, opts)}</div>`);
+      } else if (filled && fills[id] != null) {
         out.push(`<div class="pd-filled"><span class="pd-slot-tag">Style adapter &middot; ${esc(slots[id] || '')}</span>
           ${formatPrompt(fills[id])}</div>`);
       } else {
@@ -169,4 +188,23 @@ export function judgePromptHTML(p, style, styles, example) {
         `<button type="button" data-style="${esc(s)}"${s === style ? ' class="is-on"' : ''}>${esc(s)}</button>`).join('')}</div>
       <div class="pd-adapter">${adapters}</div>
     </section>`;
+}
+
+/** The complete prompt for one style, exactly as it is given to the judge:
+ *  the shared text with that style's parts and name filled in. */
+export function fullPromptText(p, style) {
+  let t = p.template;
+  for (const [id, txt] of Object.entries(p.adapters[style])) {
+    t = t.split(id === 'STYLE_ADAPTER' ? '{STYLE_ADAPTER}' : `{{${id}}}`).join(txt);
+  }
+  const art = /^[AEIOU]/.test(style) ? 'an' : 'a';
+  return t.replace(/\{A_STYLE\}/g, `${art} ${style}`).replace(/\{STYLE\}/g, style);
+}
+
+/** The complete prompt for one style, laid out with its style-specific parts
+ *  in place and quietly marked, so switching styles visibly swaps just those
+ *  parts. The words are exactly the prompt's own. */
+export function inPlacePromptHTML(p, style) {
+  const slots = Object.fromEntries(p.slots.map((s) => [s.id, s.label]));
+  return formatPrompt(p.template, slots, p.adapters[style], true, { quiet: true, style });
 }
