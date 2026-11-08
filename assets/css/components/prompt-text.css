@@ -1,0 +1,44 @@
+/* Prompt text, laid out for reading (assets/js/lib/prompt-format.js).
+   Shared by every page that shows a prompt; wrap the formatted text in .pt. Uses only the base design tokens. */
+.pt p { margin: 0 0 10px; }
+.pd-h { margin: 20px 0 8px; padding-bottom: 4px; font-family: var(--font-mono); font-size: 0.74rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); border-bottom: 1.5px solid var(--line); }
+.pt > section:first-child .pd-h:first-child, .pt > .pd-h:first-child { margin-top: 0; }
+.pd-h5 { margin: 14px 0 6px; font-size: 0.95rem; font-weight: 800; }
+.pt strong { font-weight: 800; }
+.pt code { padding: 0 5px; font-family: var(--font-mono); font-size: 0.85em; background: var(--bg-sunk); border-radius: 4px; }
+.pd-ul, .pd-ol { margin: 0 0 10px; padding: 0; list-style: none; display: grid; gap: 6px; }
+.pd-ul > li { position: relative; padding-left: 18px; }
+.pd-ul > li::before { content: ''; position: absolute; left: 4px; top: 0.62em; width: 6px; height: 6px; border-radius: 50%; background: var(--banana-deep); }
+.pd-ol > li { display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 6px; }
+.pd-num { display: grid; place-items: center; width: 22px; height: 22px; margin-top: 1px; font-family: var(--font-mono); font-size: 11px; font-weight: 800; background: var(--surface); border: 1.5px solid var(--ink); border-radius: 50%; }
+.pd-li .pd-ul, .pd-li .pd-ol { margin: 6px 0 0; }
+.pd-var { padding: 1px 7px; font-family: var(--font-mono); font-size: 0.8em; font-weight: 700; color: var(--banana-ink); background: var(--banana-soft); border: 1px dashed var(--banana-deep); border-radius: 6px; white-space: nowrap; }
+.pd-slot { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; margin: 6px 0 12px; padding: 9px 12px; background: var(--banana-soft); border: 2px dashed var(--banana-deep); border-radius: 10px; }
+.pd-slot-tag { font-family: var(--font-mono); font-size: 10px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--banana-ink); }
+.pd-slot-note { font-size: 0.8rem; color: var(--ink-soft); }
+.pd-schema { margin: 6px 0 12px; border: 1.5px solid var(--ink); border-radius: 10px; overflow: hidden; }
+.pd-schema-head { padding: 6px 12px; font-family: var(--font-mono); font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; background: var(--surface); border-bottom: 1.5px solid var(--line-strong); }
+.pd-srow { display: grid; grid-template-columns: minmax(150px, 0.8fr) minmax(0, 2fr); gap: 12px; padding: 7px 12px; border-top: 1px solid var(--line); font-size: 0.85rem; }
+.pd-srow:first-of-type { border-top: 0; }
+.pd-srow.is-nested { padding-left: 28px; }
+.pd-srow code { align-self: start; background: none; padding: 0; font-weight: 700; overflow-wrap: anywhere; }
+.pd-sgroup { padding: 7px 12px 2px; border-top: 1px solid var(--line); }
+.pd-sgroup code { background: none; padding: 0; font-weight: 800; }
+.pd-chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 6px; padding: 0; list-style: none; counter-reset: c; }
+.pd-chips li { counter-increment: c; padding: 4px 10px; font-size: 0.82rem; background: var(--surface); border: 1.5px solid var(--line-strong); border-radius: 999px; }
+.pd-chips li::before { content: counter(c) '. '; font-family: var(--font-mono); font-weight: 800; }
+/* a style-specific part shown in place */
+.pd-filled { margin: 6px 0 14px; padding: 8px 14px 4px; background: #FFFCF0; border-left: 4px solid var(--banana-deep); border-radius: 0 10px 10px 0; }
+.pd-filled > .pd-slot-tag { display: block; margin-bottom: 4px; }
+.pd-filled .pd-h:first-of-type { margin-top: 6px; }
+.pd-srow.is-adapted { background: #FFFCF0; box-shadow: inset 3px 0 0 var(--banana-deep); }
+/* a style switch and a list of per-style parts under a prompt */
+.pd-adapters { margin-top: 26px; padding: 14px 16px 6px; background: var(--surface); border: 2px solid var(--ink); border-radius: 12px; }
+.pd-adapters .pd-h { margin-top: 0; }
+.pd-note { font-size: 0.85rem; color: var(--ink-soft); }
+.pd-styles { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 12px; }
+.pd-styles button { padding: 5px 11px; font-size: 0.8rem; font-weight: 700; background: var(--paper); border: 1.5px solid var(--ink); border-radius: 999px; cursor: pointer; }
+.pd-styles button.is-on { background: var(--banana); }
+.pd-apart { margin-bottom: 12px; }
+.pd-alabel { margin-bottom: 4px; font-family: var(--font-mono); font-size: 10px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--banana-ink); }
+.pd-pending { color: var(--ink-soft); }

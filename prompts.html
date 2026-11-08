@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+  <title>Prompts — AnimateBanana</title>
+  <link rel="stylesheet" href="assets/fonts/fonts.css">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css?v=3">
+  <link rel="stylesheet" href="assets/css/components/site-nav.css?v=5">
+  <link rel="stylesheet" href="assets/css/components/doodle-field.css">
+  <link rel="stylesheet" href="assets/css/components/prompt-text.css?v=1">
+  <!-- prompts module (assets/{css,js}/prompts/); the prompt text is embedded below -->
+  <link rel="stylesheet" href="assets/css/prompts/prompts-page.css?v=2">
+</head>
+<body>
+  <site-nav current="prompts" back="index.html" back-label="Overview"></site-nav>
+
+  <div class="page pp-page">
+    <div class="page-head">
+      <doodle-field density="sparse"></doodle-field>
+      <div class="kicker">Appendix &middot; 13</div>
+      <h1>Prompts</h1>
+    </div>
+
+    <section class="pp-section" id="generation-prompts">
+      <h2>Generation Prompts for the Closed Source Baseline</h2>
+      <p class="pp-sub">All the closed-source baselines were given this generation prompt for the zero-shot
+        diagram-to-animation task.</p>
+      <prompt-library src="#generation-prompts-data"></prompt-library>
+      <script type="application/json" id="generation-prompts-data">{"styles": [{"style": "Progressive Reveal", "instruction": "Animate the given diagram image using the style of progressive reveal, such that the diagram starts out with a blank canvas and then elements of the diagram are animated into the frame incrementally.  Return the output as an animated SVG. Also return a timestamped narrative for the animation"}, {"style": "Alpha Masking", "instruction": "Animate the given diagram image using the style of alpha masking such that the diagram starts out with a thin transparent layer covering all the diagram components. At each step of the animation, elements in the diagram are sequentially unmasked and made fully visible, while inactive elements remain covered by the thin transparent mask layer. The diagram is visible at every step through the transparent layer. Return the output as an animated SVG. Do not use the image as the background.Also return a timestamped narrative for the animation"}, {"style": "Colour Pop", "instruction": "Animate the given diagram image using the style of colour pop such that the diagram starts out in greyscale and then elements in the diagram are progressively restored to their original colour. The effect is incremental and cumulative. Return the output as an animated SVG code. Do not use the image as a background.  Also return a timestamped narrative for the animation."}, {"style": "Hopping Bounding Box", "instruction": "Animate the given diagram image using the style of a hopping bounding box such that a red bounding hops/jumps from one active element to the other across the diagram sequentially. Return the output as an animated SVG code. Do not use the image as a background.  Also return a timestamped narrative for the animation."}, {"style": "Sliding Bounding Box", "instruction": "Animate the given diagram image using the style of a sliding bounding box such that a red bounding slides from one active element to the other across the diagram sequentially. Return the output as an animated SVG code. Do not use the image as a background.  Also return a timestamped narrative for the animation."}], "rules": "CRITICAL SYNCHRONIZATION RULES:\n1. Organize the animation into discrete, sequential \"frames.\"\n2. Wrap the SVG elements revealed in each frame inside a distinct group (`<g>`) tag.\n3. Assign each `<g>` tag a sequential ID (e.g., `id=\"frame_1\"`, `id=\"frame_2\"`).\n4. Inject custom data attributes into every frame's `<g>` tag:\n   - `data-time-start=\"[exact time in seconds]\"`\n   - `data-narration=\"[The exact narration string intended for this frame]\"`\n5. Ensure the `begin` attribute of the actual SVG animation tags (e.g., `<animate>`, `<set>`) exactly matches the `data-time-start` value of its parent group.\n6. After the SVG code block, output a strictly formatted JSON array that maps each `frame_id` to its `data-time-start` and `data-narration`."}</script>
+    </section>
+
+    <footer class="site-footer">
+      <span data-updated>Last updated 25 September 2026, 06:20 (AOE)</span>
+    </footer>
+  </div>
+
+  <script type="module" src="assets/js/components/site-nav.js?v=5"></script>
+  <script type="module" src="assets/js/components/doodle-field.js"></script>
+  <script type="module" src="assets/js/prompts/prompt-library.js?v=3"></script>
+  <script type="module" src="assets/js/lib/reveal.js"></script>
+  <script type="module" src="assets/js/components/last-updated.js?v=1"></script>
+</body>
+</html>

@@ -17,3 +17,9 @@ source_diagrams/
 # self-contained files under assets/gallery/exports/ by
 # tools/build_svg_exports.py. The wrappers are what the site serves.
 assets/EXPORTS/
+
+# Prompt files. The prompts are shown on the site only: their text is embedded
+# in the page that displays them, so no standalone prompt file is published.
+data/prompts/
+*judge_prompt*
+*_prompts.json
