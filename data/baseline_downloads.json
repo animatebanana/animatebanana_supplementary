@@ -1,197 +1,312 @@
 {
  "base": "",
- "folder": "BASELINE_OUTPUTS",
- "models": [
+ "groups": [
   {
-   "id": "gemini-3-7-flash",
-   "dir": "Gemini-3.7-Flash",
-   "name": "Gemini-3.7 Flash",
-   "params": "",
-   "main": true
+   "id": "closed",
+   "label": "Closed-Source Baselines",
+   "sub": "Direct diagram-to-animation generation",
+   "folder": "CLOSED_SOURCE_OUTPUTS",
+   "models": [
+    {
+     "id": "gemini-3-1-pro",
+     "dir": "Gemini_3.1_Pro",
+     "name": "Gemini 3.1 Pro"
+    },
+    {
+     "id": "opus-5-claude-code",
+     "dir": "Opus_5_Claude_Code",
+     "name": "Opus 5 on Claude Code"
+    },
+    {
+     "id": "gpt-5-6-sol",
+     "dir": "GPT_5.6_Sol",
+     "name": "GPT-5.6 Sol"
+    }
+   ],
+   "samples": [
+    {
+     "id": "CVPR_2025_arch01541",
+     "style": "Progressive Reveal",
+     "image": "assets/downloads/closed/CVPR_2025_arch01541.webp",
+     "files": {
+      "Gemini_3.1_Pro": 167473,
+      "Opus_5_Claude_Code": 167879,
+      "GPT_5.6_Sol": 166970
+     }
+    },
+    {
+     "id": "CVPR_2025_pipe00041",
+     "style": "Progressive Reveal",
+     "image": "assets/downloads/closed/CVPR_2025_pipe00041.webp",
+     "files": {
+      "Gemini_3.1_Pro": 322368,
+      "Opus_5_Claude_Code": 323912,
+      "GPT_5.6_Sol": 323189
+     }
+    },
+    {
+     "id": "ICCV_2023_set5_000003",
+     "style": "Alpha Masking",
+     "image": "assets/downloads/closed/ICCV_2023_set5_000003.webp",
+     "files": {
+      "Gemini_3.1_Pro": 114706,
+      "Opus_5_Claude_Code": 115063,
+      "GPT_5.6_Sol": 114737
+     }
+    },
+    {
+     "id": "WACV_2022_set5_000005",
+     "style": "Alpha Masking",
+     "image": "assets/downloads/closed/WACV_2022_set5_000005.webp",
+     "files": {
+      "Gemini_3.1_Pro": 133491,
+      "Opus_5_Claude_Code": 132275,
+      "GPT_5.6_Sol": 132915
+     }
+    },
+    {
+     "id": "arch_arxiv_ai_2025_000000112",
+     "style": "Alpha Masking",
+     "image": "assets/downloads/closed/arch_arxiv_ai_2025_000000112.webp",
+     "files": {
+      "Gemini_3.1_Pro": 202785,
+      "Opus_5_Claude_Code": 204071,
+      "GPT_5.6_Sol": 203569
+     }
+    },
+    {
+     "id": "CVPR_2025_arch01051",
+     "style": "Colour Pop",
+     "image": "assets/downloads/closed/CVPR_2025_arch01051.webp",
+     "files": {
+      "Gemini_3.1_Pro": 123752,
+      "Opus_5_Claude_Code": 123209,
+      "GPT_5.6_Sol": 124571
+     }
+    },
+    {
+     "id": "arch_arxiv_ai_2025_000000151",
+     "style": "Hopping Bounding Box",
+     "image": "assets/downloads/closed/arch_arxiv_ai_2025_000000151.webp",
+     "files": {
+      "Gemini_3.1_Pro": 282044,
+      "Opus_5_Claude_Code": 286026,
+      "GPT_5.6_Sol": 284328
+     }
+    }
+   ],
+   "contents": [
+    {
+     "file": "animation_code.svg",
+     "label": "Animated SVG generated from the diagram"
+    },
+    {
+     "file": "narration_mapping.json",
+     "label": "Frame-wise timestamps and narration"
+    },
+    {
+     "file": "source_diagram.png",
+     "label": "Input diagram"
+    }
+   ]
   },
   {
-   "id": "qwen3-8-27b",
-   "dir": "Qwen3.8-27B",
-   "name": "Qwen3.8-27B",
-   "params": "27B"
-  },
-  {
-   "id": "qwen3-vl-32b",
-   "dir": "Qwen3-VL-32B",
-   "name": "Qwen3-VL-32B-Instruct",
-   "params": "32B"
-  },
-  {
-   "id": "gemma-4",
-   "dir": "Gemma-4-31B",
-   "name": "Gemma 4",
-   "params": "31B"
-  },
-  {
-   "id": "glm-4-6v",
-   "dir": "GLM-4.6V",
-   "name": "GLM-4.6V",
-   "params": "106B"
-  },
-  {
-   "id": "qwen3-vl-235b",
-   "dir": "Qwen3-VL-235B",
-   "name": "Qwen3-VL-235B-A22B",
-   "params": "235B"
-  },
-  {
-   "id": "deepseek-v4",
-   "dir": "DeepSeek-V4",
-   "name": "DeepSeek V4",
-   "params": "1.6T"
-  },
-  {
-   "id": "kimi-k3",
-   "dir": "Kimi-K3",
-   "name": "Kimi K3",
-   "params": "2.8T"
-  }
- ],
- "samples": [
-  {
-   "id": "arch_arxiv_db_ir_2025_000000587",
-   "style": "Progressive Reveal",
-   "image": "assets/downloads/arch_arxiv_db_ir_2025_000000587.webp",
-   "files": {
-    "DeepSeek-V4": 8521,
-    "GLM-4.6V": 8836,
-    "Gemini-3.7-Flash": 10970,
-    "Gemma-4-31B": 9028,
-    "Kimi-K3": 11699,
-    "Qwen3-VL-235B": 9502,
-    "Qwen3-VL-32B": 8615,
-    "Qwen3.8-27B": 9888
-   }
-  },
-  {
-   "id": "CVPR_2025_arch01051",
-   "style": "Alpha Masking",
-   "image": "assets/downloads/CVPR_2025_arch01051.webp",
-   "files": {
-    "DeepSeek-V4": 11925,
-    "GLM-4.6V": 183000,
-    "Gemini-3.7-Flash": 186042,
-    "Gemma-4-31B": 180904,
-    "Kimi-K3": 171596,
-    "Qwen3-VL-235B": 181099,
-    "Qwen3-VL-32B": 262201,
-    "Qwen3.8-27B": 199115
-   }
-  },
-  {
-   "id": "FigureBench_pipe_000000057",
-   "style": "Alpha Masking",
-   "image": "assets/downloads/FigureBench_pipe_000000057.webp",
-   "files": {
-    "GLM-4.6V": 6992,
-    "Gemini-3.7-Flash": 7273,
-    "Gemma-4-31B": 6720,
-    "Kimi-K3": 7829,
-    "Qwen3-VL-235B": 5466,
-    "Qwen3-VL-32B": 6524,
-    "Qwen3.8-27B": 8148
-   }
-  },
-  {
-   "id": "Paper2Fig_pipe_diff_000000130",
-   "style": "Alpha Masking",
-   "image": "assets/downloads/Paper2Fig_pipe_diff_000000130.webp",
-   "files": {
-    "DeepSeek-V4": 7006,
-    "GLM-4.6V": 7350,
-    "Gemini-3.7-Flash": 968377,
-    "Gemma-4-31B": 951133,
-    "Kimi-K3": 708703,
-    "Qwen3-VL-235B": 8734,
-    "Qwen3.8-27B": 897670
-   }
-  },
-  {
-   "id": "SciMMIR_pipe_easy_000000307",
-   "style": "Alpha Masking",
-   "image": "assets/downloads/SciMMIR_pipe_easy_000000307.webp",
-   "files": {
-    "DeepSeek-V4": 9021,
-    "GLM-4.6V": 10082,
-    "Gemini-3.7-Flash": 105034,
-    "Gemma-4-31B": 101721,
-    "Kimi-K3": 101305,
-    "Qwen3-VL-235B": 8230,
-    "Qwen3-VL-32B": 9794,
-    "Qwen3.8-27B": 106441
-   }
-  },
-  {
-   "id": "CVPR_2025_arch01398",
-   "style": "Hopping Bounding Box",
-   "image": "assets/downloads/CVPR_2025_arch01398.webp",
-   "files": {
-    "DeepSeek-V4": 525007,
-    "GLM-4.6V": 248273,
-    "Gemini-3.7-Flash": 234344,
-    "Gemma-4-31B": 499863,
-    "Kimi-K3": 231404,
-    "Qwen3-VL-235B": 12665,
-    "Qwen3.8-27B": 230158
-   }
-  },
-  {
-   "id": "Paper2Fig_pipe_diff_000000488",
-   "style": "Hopping Bounding Box",
-   "image": "assets/downloads/Paper2Fig_pipe_diff_000000488.webp",
-   "files": {
-    "DeepSeek-V4": 4075,
-    "GLM-4.6V": 4970,
-    "Gemini-3.7-Flash": 6142,
-    "Gemma-4-31B": 5662,
-    "Kimi-K3": 5190,
-    "Qwen3-VL-235B": 5191,
-    "Qwen3-VL-32B": 5605,
-    "Qwen3.8-27B": 5612
-   }
-  }
- ],
- "contents": [
-  {
-   "file": "SVG_diagram_code.svg",
-   "label": "Final animation-aware diagram code",
-   "stage": 1
-  },
-  {
-   "file": "rasters/",
-   "label": "Raster regions inserted into the diagram code",
-   "stage": 1,
-   "optional": true
-  },
-  {
-   "file": "diagram_schema.xml",
-   "label": "Parsed hierarchy-aware diagram schema",
-   "stage": 2
-  },
-  {
-   "file": "animation_sequence.json",
-   "label": "Final animation sequence",
-   "stage": 2
-  },
-  {
-   "file": "narration_sequence.json",
-   "label": "Narration-infused animation sequence",
-   "stage": 2
-  },
-  {
-   "file": "SVG_animation_code.svg",
-   "label": "Final executable animation code",
-   "stage": 3
-  },
-  {
-   "file": "style.txt",
-   "label": "Animation style the narrative was generated in",
-   "stage": 3
+   "id": "open",
+   "label": "Open Source Backbones on AnimateBanana",
+   "sub": "AnimateBanana pipeline with open-weight backbones",
+   "folder": "BASELINE_OUTPUTS",
+   "models": [
+    {
+     "id": "gemini-3-7-flash",
+     "dir": "Gemini-3.7-Flash",
+     "name": "Gemini-3.7 Flash",
+     "params": "",
+     "main": true
+    },
+    {
+     "id": "qwen3-8-27b",
+     "dir": "Qwen3.8-27B",
+     "name": "Qwen3.8-27B",
+     "params": "27B"
+    },
+    {
+     "id": "qwen3-vl-32b",
+     "dir": "Qwen3-VL-32B",
+     "name": "Qwen3-VL-32B-Instruct",
+     "params": "32B"
+    },
+    {
+     "id": "gemma-4",
+     "dir": "Gemma-4-31B",
+     "name": "Gemma 4",
+     "params": "31B"
+    },
+    {
+     "id": "glm-4-6v",
+     "dir": "GLM-4.6V",
+     "name": "GLM-4.6V",
+     "params": "106B"
+    },
+    {
+     "id": "qwen3-vl-235b",
+     "dir": "Qwen3-VL-235B",
+     "name": "Qwen3-VL-235B-A22B",
+     "params": "235B"
+    },
+    {
+     "id": "deepseek-v4",
+     "dir": "DeepSeek-V4",
+     "name": "DeepSeek V4",
+     "params": "1.6T"
+    },
+    {
+     "id": "kimi-k3",
+     "dir": "Kimi-K3",
+     "name": "Kimi K3",
+     "params": "2.8T"
+    }
+   ],
+   "samples": [
+    {
+     "id": "arch_arxiv_db_ir_2025_000000587",
+     "style": "Progressive Reveal",
+     "image": "assets/downloads/arch_arxiv_db_ir_2025_000000587.webp",
+     "files": {
+      "DeepSeek-V4": 8521,
+      "GLM-4.6V": 8844,
+      "Gemini-3.7-Flash": 10970,
+      "Gemma-4-31B": 9028,
+      "Kimi-K3": 11699,
+      "Qwen3-VL-235B": 9502,
+      "Qwen3-VL-32B": 8622,
+      "Qwen3.8-27B": 9888
+     }
+    },
+    {
+     "id": "CVPR_2025_arch01051",
+     "style": "Alpha Masking",
+     "image": "assets/downloads/CVPR_2025_arch01051.webp",
+     "files": {
+      "DeepSeek-V4": 11925,
+      "GLM-4.6V": 183000,
+      "Gemini-3.7-Flash": 186042,
+      "Gemma-4-31B": 180904,
+      "Kimi-K3": 171596,
+      "Qwen3-VL-235B": 181099,
+      "Qwen3-VL-32B": 262201,
+      "Qwen3.8-27B": 199115
+     }
+    },
+    {
+     "id": "FigureBench_pipe_000000057",
+     "style": "Alpha Masking",
+     "image": "assets/downloads/FigureBench_pipe_000000057.webp",
+     "files": {
+      "GLM-4.6V": 6992,
+      "Gemini-3.7-Flash": 7273,
+      "Gemma-4-31B": 6720,
+      "Kimi-K3": 7829,
+      "Qwen3-VL-235B": 5466,
+      "Qwen3-VL-32B": 6524,
+      "Qwen3.8-27B": 8148
+     }
+    },
+    {
+     "id": "Paper2Fig_pipe_diff_000000130",
+     "style": "Alpha Masking",
+     "image": "assets/downloads/Paper2Fig_pipe_diff_000000130.webp",
+     "files": {
+      "DeepSeek-V4": 7006,
+      "GLM-4.6V": 7350,
+      "Gemini-3.7-Flash": 968377,
+      "Gemma-4-31B": 951133,
+      "Kimi-K3": 708703,
+      "Qwen3-VL-235B": 8734,
+      "Qwen3-VL-32B": 2088692,
+      "Qwen3.8-27B": 897670
+     }
+    },
+    {
+     "id": "SciMMIR_pipe_easy_000000307",
+     "style": "Alpha Masking",
+     "image": "assets/downloads/SciMMIR_pipe_easy_000000307.webp",
+     "files": {
+      "DeepSeek-V4": 9021,
+      "GLM-4.6V": 10082,
+      "Gemini-3.7-Flash": 105037,
+      "Gemma-4-31B": 101721,
+      "Kimi-K3": 101305,
+      "Qwen3-VL-235B": 8230,
+      "Qwen3-VL-32B": 9794,
+      "Qwen3.8-27B": 106441
+     }
+    },
+    {
+     "id": "CVPR_2025_arch01398",
+     "style": "Hopping Bounding Box",
+     "image": "assets/downloads/CVPR_2025_arch01398.webp",
+     "files": {
+      "DeepSeek-V4": 533159,
+      "Gemini-3.7-Flash": 234344,
+      "Gemma-4-31B": 499863,
+      "Kimi-K3": 231404,
+      "Qwen3-VL-235B": 12665,
+      "Qwen3.8-27B": 230158
+     }
+    },
+    {
+     "id": "Paper2Fig_pipe_diff_000000488",
+     "style": "Hopping Bounding Box",
+     "image": "assets/downloads/Paper2Fig_pipe_diff_000000488.webp",
+     "files": {
+      "GLM-4.6V": 4970,
+      "Gemini-3.7-Flash": 6142,
+      "Gemma-4-31B": 5662,
+      "Kimi-K3": 5190,
+      "Qwen3-VL-235B": 5191,
+      "Qwen3-VL-32B": 5605,
+      "Qwen3.8-27B": 5612
+     }
+    }
+   ],
+   "contents": [
+    {
+     "file": "SVG_diagram_code.svg",
+     "label": "Final animation-aware diagram code",
+     "stage": 1
+    },
+    {
+     "file": "rasters/",
+     "label": "Raster regions inserted into the diagram code",
+     "stage": 1,
+     "optional": true
+    },
+    {
+     "file": "diagram_schema.xml",
+     "label": "Parsed hierarchy-aware diagram schema",
+     "stage": 2
+    },
+    {
+     "file": "animation_sequence.json",
+     "label": "Final animation sequence",
+     "stage": 2
+    },
+    {
+     "file": "narration_sequence.json",
+     "label": "Narration-infused animation sequence",
+     "stage": 2
+    },
+    {
+     "file": "SVG_animation_code.svg",
+     "label": "Final executable animation code",
+     "stage": 3
+    },
+    {
+     "file": "style.txt",
+     "label": "Animation style the narrative was generated in",
+     "stage": 3
+    }
+   ]
   }
  ]
 }

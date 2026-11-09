@@ -124,11 +124,7 @@ class FailureWalk extends HTMLElement {
           ${s.note ? `<p>${esc(s.note)}</p>`
                    : ''}
         </div>
-      </section>` : `
-      <section class="fw-card">
-        <p class="fw-todo">No failure examples in <code>FAILURES_PAGE/${esc(g.key === 'stage1' ? 'Stage_1' : g.key === 'stage2' ? 'Stage_2' : 'Stage_3')}/</code> yet.
-           Drop the animation files in and rerun <code>scripts/build_failures.py</code>.</p>
-      </section>`}`;
+      </section>` : ``}`;
 
     await this.mountPipeline();
     if (s) this.mountFailure();

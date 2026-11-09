@@ -80,6 +80,9 @@ Every page is reachable from the **Menu** button (top right).
 | Generalization to Unseen Domains | `generalization.html` | AnimateBanana on diagrams from outside AnimateBench (chemistry, physics, school science, infographics): a domain-filtered gallery of the animations and per-diagram scores on every metric. |
 | AnimateBench | `animatebench.html` | The benchmark: figure sources, diversity, complexity strata, annotations, pan-and-zoom examples, and a human-presented reference talk. |
 | Evaluation | `evaluation.html` | The evaluation scheme replayed step by step on individual samples, for AnimateBanana and each baseline. |
+| Downloadable Baseline Outputs | `baseline-outputs.html` | Complete outputs of the closed-source baselines and of the open-source backbones on AnimateBanana for representative examples, one archive per example and model. |
+| Metrics and Evaluation Strategy | `metrics.html` | The validity gates, the sequence-level assessment of the visual narratives, and the rationale for a reference-free evaluation design. |
+| Prompts | `prompts.html` | The generation prompts given to the closed-source baselines and the evaluation prompts for the judge. |
 | Ablations | `ablations.html` | Component ablations (critics, context, XML, image input) and results stratified by diagram complexity. |
 | Failure cases | `failures.html` | Representative failures at each pipeline stage, with analysis. |
 | User study | `user-study.html` | Study design, participant pool, interface screenshots, and results. |
@@ -99,6 +102,9 @@ Every page is reachable from the **Menu** button (top right).
 ├── generalization.html      │
 ├── animatebench.html        │  one HTML file per page listed above
 ├── evaluation.html          │
+├── baseline-outputs.html    │
+├── metrics.html             │
+├── prompts.html             │
 ├── ablations.html           │
 ├── failures.html            │
 ├── user-study.html          │
@@ -126,6 +132,8 @@ Every page is reachable from the **Menu** button (top right).
 ├── MAIN_PAGE/               ← raw pipeline outputs for the Overview showcase, by animation style
 ├── ABLATIONS_PAGE/          ← raw outputs per ablation (full pipeline vs. ablated variant)
 ├── EVALUATIONS_PAGE/        ← frames and judge results per system (AnimateBanana and baselines)
+├── BASELINE_OUTPUTS/        ← output archives of the open-source backbones on AnimateBanana
+├── CLOSED_SOURCE_OUTPUTS/   ← output archives of the closed-source baselines
 ├── FAILURES_PAGE/           ← raw outputs for the failure-case walkthroughs, by stage
 ├── USER_STUDY_PAGE/         ← user-study interface screenshots
 │
@@ -152,26 +160,11 @@ Every page is reachable from the **Menu** button (top right).
 
 ## 4. Notes
 
-- **Size:** about 482 MB (3,273 files), mostly MP4 and PNG media. The examples
-  shared with the distribution build carry its compressed media (H.264 at CRF 30
-  tuned for animation, palette-quantised PNGs, original dimensions and frame
-  rates throughout); the rest are still at full quality.
-- **The footer date and time:** "Last updated" is not typed into the pages. Each one
-  reports when it was really last changed, worked out in the browser by
-  `assets/js/components/last-updated.js` from the modification times of the
-  document and of the code and content it loaded — so editing a data file or a
-  component moves the stamp, not just editing the HTML. Media is deliberately
-  ignored: a re-encoded clip is the same example, not an update. The date and time are
-  given in AOE (UTC−12), e.g. `25 September 2026, 03:06 (AOE)`, which for the first half of a UTC day is still
-  yesterday's date. A real date and time ship in the markup as the fallback for a reader
-  with no JavaScript; the component only ever replaces it with something newer. The two pipeline pages carry no
-  footer line.
+- **Size:** about 497 MB (3,397 files), mostly MP4 and PNG media.
+- **Last updated:** the footer of each page shows when that page or the data it
+  loads last changed, in AOE (UTC−12).
 - **Anonymity:** the site carries no author, affiliation, contact or repository
-  identity. Document metadata is normalised rather than merely absent: every
-  PPTX reports `AnimateBanana` as creator, last-modified-by and application, and
-  every PDF reports `TeX` as creator and producer with a fixed date, so neither
-  the build machines nor their time zones are inferable. Images carry no EXIF or
-  XMP; the MP4s carry only the generic FFmpeg/x264 encoder strings.
+  identity.
 - **Source figures:** the input diagrams come from publicly available papers
   and datasets (CVPR, ICCV, WACV, arXiv, Paper2Fig, SciMMIR, FigureBench, and
   others). They are reproduced only to show the method's inputs and outputs.
@@ -186,5 +179,4 @@ Every page is reachable from the **Menu** button (top right).
   so before it hands the file over, and points at
   <https://get.adobe.com/reader/> and <https://www.foxit.com/pdf-reader/>.
   Playback is driven by the control bar drawn on the page itself: play/pause,
-  a minus and plus pair for speed, and single-frame steps. Eight examples have
-  one so far; the rest show the PDF target as "coming soon".
+  a minus and plus pair for speed, and single-frame steps.
