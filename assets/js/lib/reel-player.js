@@ -1,4 +1,4 @@
-export function mountReel(img, frames, { fps = 4 } = {}) {
+export function mountReel(img, frames, { stepMs = 250 } = {}) {
   if (!img || !frames || !frames.length) return () => {};
   let i = 0;
   img.src = frames[0];
@@ -7,6 +7,6 @@ export function mountReel(img, frames, { fps = 4 } = {}) {
   const id = setInterval(() => {
     i = (i + 1) % frames.length;
     img.src = frames[i];
-  }, Math.round(1000 / fps));
+  }, stepMs);
   return () => clearInterval(id);
 }

@@ -1,5 +1,5 @@
 import { loadJSON } from '../lib/data-loader.js';
-import { mountReel } from '../lib/reel-player.js';
+import { mountReel } from '../lib/reel-player.js?v=2';
 
 
 const NUM = { A: 4, B: 3, C: 2, D: 1 };
@@ -153,7 +153,7 @@ class EvalLab extends HTMLElement {
 
     const reel = this.querySelector('[data-reel]');
     const fr = this.frames();
-    if (reel && fr.length) this.stopReel = mountReel(reel, fr, { fps: 5 });
+    if (reel && fr.length) this.stopReel = mountReel(reel, fr, { stepMs: 200 });
     this.focusStep(0);
   }
 
