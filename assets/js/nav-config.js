@@ -6,6 +6,7 @@ export const NAV_SECTIONS = [
   { id: 'generalization', label: 'Generalization to Unseen Domains', href: 'generalization.html' },
   { id: 'animatebench', label: 'AnimateBench', href: 'animatebench.html' },
   { id: 'evaluation',   label: 'Evaluation',   href: 'evaluation.html' },
+  { id: 'baseline-outputs', label: 'Downloadable Baseline Outputs', href: 'baseline-outputs.html' },
   { id: 'metrics',      label: 'Metrics and Evaluation Strategy', href: 'metrics.html' },
   { id: 'prompts',      label: 'Prompts',      href: 'prompts.html' },
   { id: 'ablations',    label: 'Ablations',    href: 'ablations.html' },

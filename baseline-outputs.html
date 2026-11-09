@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+  <title>Downloadable Baseline Outputs — AnimateBanana</title>
+  <link rel="stylesheet" href="assets/fonts/fonts.css">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css?v=3">
+  <link rel="stylesheet" href="assets/css/components/site-nav.css?v=5">
+  <link rel="stylesheet" href="assets/css/components/doodle-field.css">
+  <link rel="stylesheet" href="assets/css/downloads/baseline-outputs.css?v=3">
+</head>
+<body>
+  <site-nav current="baseline-outputs" back="index.html" back-label="Overview"></site-nav>
+
+  <div class="page bo-page">
+    <div class="page-head">
+      <doodle-field density="sparse"></doodle-field>
+      <div class="kicker">Appendix &middot; 14</div>
+      <h1>Downloadable Baseline Outputs</h1>
+      <p>Download the complete output folder for each baseline, containing all generated artifacts for the
+        representative examples presented here.</p>
+    </div>
+
+    <section class="bo-section" id="baseline-outputs">
+      <baseline-downloads src="data/baseline_downloads.json?v=3"></baseline-downloads>
+    </section>
+
+    <footer class="site-footer">
+      <span data-updated>Last updated 9 November 2026, 12:00 (AOE)</span>
+    </footer>
+  </div>
+
+  <script type="module" src="assets/js/components/site-nav.js?v=6"></script>
+  <script type="module" src="assets/js/components/doodle-field.js"></script>
+  <script type="module" src="assets/js/downloads/baseline-downloads.js?v=3"></script>
+  <script type="module" src="assets/js/components/last-updated.js?v=1"></script>
+</body>
+</html>
