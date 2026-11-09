@@ -201,8 +201,7 @@ class EvalLab extends HTMLElement {
     const ran = !!band;
     const pass = isVF ? s.derived.vf_pass : s.derived.asc_pass;
     const title = isVF ? 'Visual Fidelity' : 'Animation Style Compliance';
-    const abbr = isVF ? 'VFS' : 'ASCS';
-    const fps = isVF ? 2 : 4;
+    const abbr = isVF ? 'VF' : 'ASC';
 
     const rows = isVF
       ? VFS_CRITERIA.map(([k, name, q], i) => this.critRow(i, name, q, rat.criteria?.[k]))
@@ -218,7 +217,7 @@ class EvalLab extends HTMLElement {
           <span class="el-num">${isVF ? 1 : 2}</span>
           <h3>${title} <span class="el-abbr">${abbr}</span></h3>
           <span class="el-sp"></span>
-          <span class="el-meta">gate · ${fps} FPS</span>
+          <span class="el-meta">gate</span>
         </header>
 
         <div class="el-gatebody">
