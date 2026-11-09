@@ -263,22 +263,22 @@
      "id": "CVPR_2025_pipe00004",
      "style": "Alpha Masking",
      "outcome": "pass_high",
-     "source": "EVALUATIONS_PAGE/Original_Image/CVPR_2025_pipe00004.png",
+     "source": "assets/shared/CVPR_2025_pipe00004.png",
      "video": null,
      "frames_dir": true,
      "raw_frames": [
-      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_00.png",
-      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_01.png",
-      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_02.png",
-      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_03.png",
-      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_04.png",
-      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_05.png",
-      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_06.png",
-      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_07.png",
-      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_08.png",
-      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_09.png",
-      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_10.png",
-      "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_11.png"
+      "assets/shared/frame_00-1.png",
+      "assets/shared/frame_01.png",
+      "assets/shared/frame_02.png",
+      "assets/shared/frame_03.png",
+      "assets/shared/frame_04.png",
+      "assets/shared/frame_05.png",
+      "assets/shared/frame_06.png",
+      "assets/shared/frame_07.png",
+      "assets/shared/frame_08.png",
+      "assets/shared/frame_09.png",
+      "assets/shared/frame_10.png",
+      "assets/shared/frame_11.png"
      ],
      "bands": {
       "VF": "A",
@@ -308,7 +308,7 @@
      "steps": [
       {
        "t": 1,
-       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_00.png",
+       "frame": "assets/shared/frame_00-1.png",
        "time": 1.0,
        "narration": "The pipeline begins in the first section with multiple camera views and their corresponding foreground object masks.",
        "sss": "A",
@@ -317,7 +317,7 @@
       },
       {
        "t": 2,
-       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_01.png",
+       "frame": "assets/shared/frame_01.png",
        "time": 3.0,
        "narration": "These inputs are used to construct an initial set of three-dimensional Gaussians containing the statue.",
        "sss": "A",
@@ -326,7 +326,7 @@
       },
       {
        "t": 3,
-       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_02.png",
+       "frame": "assets/shared/frame_02.png",
        "time": 5.0,
        "narration": "Depth maps are then rendered across the set of camera viewpoints.",
        "sss": "A",
@@ -335,7 +335,7 @@
       },
       {
        "t": 4,
-       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_03.png",
+       "frame": "assets/shared/frame_03.png",
        "time": 7.0,
        "narration": "Entering the depth-guided mask inference stage, reference and secondary views are paired with their respective masks.",
        "sss": "A",
@@ -344,7 +344,7 @@
       },
       {
        "t": 5,
-       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_04.png",
+       "frame": "assets/shared/frame_04.png",
        "time": 9.0,
        "narration": "Applying these masks isolates the visible background regions for both viewpoints.",
        "sss": "A",
@@ -353,7 +353,7 @@
       },
       {
        "t": 6,
-       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_05.png",
+       "frame": "assets/shared/frame_05.png",
        "time": 11.0,
        "narration": "Using depth from the second view, background content is projected onto the reference view.",
        "sss": "A",
@@ -362,7 +362,7 @@
       },
       {
        "t": 7,
-       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_06.png",
+       "frame": "assets/shared/frame_06.png",
        "time": 13.0,
        "narration": "This determines the final depth-guided inpainting mask for the reference view.",
        "sss": "A",
@@ -371,7 +371,7 @@
       },
       {
        "t": 8,
-       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_07.png",
+       "frame": "assets/shared/frame_07.png",
        "time": 15.0,
        "narration": "The mask is transferred into the final inpainting-guided refinement stage.",
        "sss": "A",
@@ -380,7 +380,7 @@
       },
       {
        "t": 9,
-       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_08.png",
+       "frame": "assets/shared/frame_08.png",
        "time": 17.0,
        "narration": "Inpainting is performed on the reference view to synthesize missing background color and depth.",
        "sss": "A",
@@ -389,7 +389,7 @@
       },
       {
        "t": 10,
-       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_09.png",
+       "frame": "assets/shared/frame_09.png",
        "time": 19.0,
        "narration": "Depth-guided projection then lifts the inpainted reference view into a three-dimensional surface structure.",
        "sss": "A",
@@ -398,7 +398,7 @@
       },
       {
        "t": 11,
-       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_10.png",
+       "frame": "assets/shared/frame_10.png",
        "time": 21.0,
        "narration": "This structure initializes the refined Gaussians while projecting background information onto the remaining viewpoints.",
        "sss": "A",
@@ -407,7 +407,7 @@
       },
       {
        "t": 12,
-       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/CVPR_2025_pipe00004/frame_11.png",
+       "frame": "assets/shared/frame_11.png",
        "time": 23.0,
        "narration": "Finally, render loss on the reference view and cross-view loss on other rendered views supervise the refined scene.",
        "sss": "A",
@@ -485,27 +485,27 @@
      "id": "Paper2Fig_pipe_diff_000000490",
      "style": "Hopping Bounding Box",
      "outcome": "pass_high",
-     "source": "EVALUATIONS_PAGE/Original_Image/Paper2Fig_pipe_diff_000000490.png",
+     "source": "assets/shared/Paper2Fig_pipe_diff_000000490.png",
      "video": null,
      "frames_dir": true,
      "raw_frames": [
-      "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_00.png",
-      "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_01.png",
-      "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_02.png",
-      "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_03.png",
-      "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_04.png",
-      "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_05.png",
-      "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_06.png",
-      "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_07.png",
-      "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_08.png",
-      "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_09.png",
-      "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_10.png",
-      "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_11.png",
-      "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_12.png",
-      "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_13.png",
-      "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_14.png",
-      "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_15.png",
-      "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_16.png"
+      "assets/shared/frame_00-2.png",
+      "assets/shared/frame_01-1.png",
+      "assets/shared/frame_02-2.png",
+      "assets/shared/frame_03-1.png",
+      "assets/shared/frame_04-1.png",
+      "assets/shared/frame_05-1.png",
+      "assets/shared/frame_06-2.png",
+      "assets/shared/frame_07-1.png",
+      "assets/shared/frame_08-2.png",
+      "assets/shared/frame_09-1.png",
+      "assets/shared/frame_10-1.png",
+      "assets/shared/frame_11-2.png",
+      "assets/shared/frame_12.png",
+      "assets/shared/frame_13.png",
+      "assets/shared/frame_14.png",
+      "assets/shared/frame_15.png",
+      "assets/shared/frame_16.png"
      ],
      "bands": {
       "VF": "A",
@@ -535,7 +535,7 @@
      "steps": [
       {
        "t": 1,
-       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_00.png",
+       "frame": "assets/shared/frame_00-2.png",
        "time": 1.0,
        "narration": "The pipeline begins with the data filtering and cleaning stage.",
        "sss": "A",
@@ -544,7 +544,7 @@
       },
       {
        "t": 2,
-       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_01.png",
+       "frame": "assets/shared/frame_01-1.png",
        "time": 3.0,
        "narration": "First, tweets tagged within the Los Angeles geographic area are collected.",
        "sss": "A",
@@ -553,7 +553,7 @@
       },
       {
        "t": 3,
-       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_02.png",
+       "frame": "assets/shared/frame_02-2.png",
        "time": 5.0,
        "narration": "The collected tweets are then filtered specifically for COVID-19 keywords.",
        "sss": "A",
@@ -562,7 +562,7 @@
       },
       {
        "t": 4,
-       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_03.png",
+       "frame": "assets/shared/frame_03-1.png",
        "time": 7.0,
        "narration": "Next, text pre-processing prepares the tweet corpus for downstream extraction.",
        "sss": "A",
@@ -571,7 +571,7 @@
       },
       {
        "t": 5,
-       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_04.png",
+       "frame": "assets/shared/frame_04-1.png",
        "time": 9.0,
        "narration": "The cleaned text passes into the entity and relation extraction stage.",
        "sss": "A",
@@ -580,7 +580,7 @@
       },
       {
        "t": 6,
-       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_05.png",
+       "frame": "assets/shared/frame_05-1.png",
        "time": 11.0,
        "narration": "Sentiment analysis computes sentiment scores for tweets and specific keywords.",
        "sss": "A",
@@ -589,7 +589,7 @@
       },
       {
        "t": 7,
-       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_06.png",
+       "frame": "assets/shared/frame_06-2.png",
        "time": 13.0,
        "narration": "Topic modeling via matrix and tensor factorizations extracts latent topics and tracks their temporal evolution.",
        "sss": "A",
@@ -598,7 +598,7 @@
       },
       {
        "t": 8,
-       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_07.png",
+       "frame": "assets/shared/frame_07-1.png",
        "time": 15.0,
        "narration": "Time series analysis identifies tweet volume peaks and significant sentiment change points linked to real-world events.",
        "sss": "A",
@@ -607,7 +607,7 @@
       },
       {
        "t": 9,
-       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_08.png",
+       "frame": "assets/shared/frame_08-2.png",
        "time": 17.0,
        "narration": "Word embeddings evaluate semantic similarity to generate weighted edges between tweets and topic keywords.",
        "sss": "A",
@@ -616,7 +616,7 @@
       },
       {
        "t": 10,
-       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_09.png",
+       "frame": "assets/shared/frame_09-1.png",
        "time": 19.0,
        "narration": "These extracted entities and relations are integrated during graph construction.",
        "sss": "A",
@@ -625,7 +625,7 @@
       },
       {
        "t": 11,
-       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_10.png",
+       "frame": "assets/shared/frame_10-1.png",
        "time": 21.0,
        "narration": "Definite entities and relations are formalized across tweets, topics, and dates.",
        "sss": "A",
@@ -634,7 +634,7 @@
       },
       {
        "t": 12,
-       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_11.png",
+       "frame": "assets/shared/frame_11-2.png",
        "time": 23.0,
        "narration": "Graph queries and visual inspection allow validation of the interconnected structure.",
        "sss": "A",
@@ -643,7 +643,7 @@
       },
       {
        "t": 13,
-       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_12.png",
+       "frame": "assets/shared/frame_12.png",
        "time": 25.0,
        "narration": "Graph embedding techniques then project the network structure into dense vector spaces.",
        "sss": "A",
@@ -652,7 +652,7 @@
       },
       {
        "t": 14,
-       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_13.png",
+       "frame": "assets/shared/frame_13.png",
        "time": 27.0,
        "narration": "Finally, the constructed network undergoes in-depth graph analysis.",
        "sss": "A",
@@ -661,7 +661,7 @@
       },
       {
        "t": 15,
-       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_14.png",
+       "frame": "assets/shared/frame_14.png",
        "time": 29.0,
        "narration": "Community detection identifies tightly coupled clusters of topics and discussions.",
        "sss": "A",
@@ -670,7 +670,7 @@
       },
       {
        "t": 16,
-       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_15.png",
+       "frame": "assets/shared/frame_15.png",
        "time": 31.0,
        "narration": "Node similarity metrics assess topological and semantic closeness between entities.",
        "sss": "A",
@@ -679,7 +679,7 @@
       },
       {
        "t": 17,
-       "frame": "EVALUATIONS_PAGE/AnimateBanana/Frames/Paper2Fig_pipe_diff_000000490/frame_16.png",
+       "frame": "assets/shared/frame_16.png",
        "time": 33.0,
        "narration": "Lastly, link prediction infers unobserved associations between events, dates, and topics.",
        "sss": "A",
@@ -1154,7 +1154,7 @@
      "id": "CVPR_2025_pipe00004",
      "style": null,
      "outcome": "vf_fail",
-     "source": "EVALUATIONS_PAGE/Original_Image/CVPR_2025_pipe00004.png",
+     "source": "assets/shared/CVPR_2025_pipe00004.png",
      "video": null,
      "frames_dir": true,
      "raw_frames": [
@@ -1217,7 +1217,7 @@
      "id": "Paper2Fig_pipe_diff_000000104",
      "style": null,
      "outcome": "vf_fail",
-     "source": "EVALUATIONS_PAGE/Original_Image/Paper2Fig_pipe_diff_000000104.png",
+     "source": "assets/shared/Paper2Fig_pipe_diff_000000104.png",
      "video": null,
      "frames_dir": true,
      "raw_frames": [
@@ -1274,7 +1274,7 @@
      "id": "arch_arxiv_db_ir_2026_000000718",
      "style": null,
      "outcome": "vf_fail",
-     "source": "EVALUATIONS_PAGE/Original_Image/arch_arxiv_db_ir_2026_000000718.png",
+     "source": "assets/shared/arch_arxiv_db_ir_2026_000000718.png",
      "video": null,
      "frames_dir": true,
      "raw_frames": [
@@ -1388,7 +1388,7 @@
      "id": "CVPR_2025_pipe00004",
      "style": null,
      "outcome": "vf_fail",
-     "source": "EVALUATIONS_PAGE/Original_Image/CVPR_2025_pipe00004.png",
+     "source": "assets/shared/CVPR_2025_pipe00004.png",
      "video": "EVALUATIONS_PAGE/GLM-4.6V/Frames/CVPR_2025_pipe00004.mp4",
      "frames_dir": false,
      "raw_frames": [],
@@ -1633,22 +1633,22 @@
      "id": "CVPR_2025_arch02465",
      "style": null,
      "outcome": "vf_fail",
-     "source": "EVALUATIONS_PAGE/Original_Image/CVPR_2025_arch02465.png",
+     "source": "assets/shared/CVPR_2025_arch02465.png",
      "video": null,
      "frames_dir": true,
      "raw_frames": [
-      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch02465/frame_000_t00.00s.png",
-      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch02465/frame_001_t01.80s.png",
+      "assets/shared/frame_000_t00.00s-1.png",
+      "assets/shared/frame_000_t00.00s-1.png",
       "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch02465/frame_002_t03.60s.png",
-      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch02465/frame_003_t05.40s.png",
-      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch02465/frame_004_t07.20s.png",
+      "assets/shared/frame_003_t05.40s.png",
+      "assets/shared/frame_003_t05.40s.png",
       "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch02465/frame_005_t09.00s.png",
       "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch02465/frame_006_t10.80s.png",
-      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch02465/frame_007_t12.60s.png",
-      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch02465/frame_008_t14.40s.png",
+      "assets/shared/frame_007_t12.60s.png",
+      "assets/shared/frame_007_t12.60s.png",
       "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch02465/frame_009_t16.20s.png",
-      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch02465/frame_010_t18.00s.png",
-      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch02465/frame_011_t19.80s.png",
+      "assets/shared/frame_010_t18.00s.png",
+      "assets/shared/frame_010_t18.00s.png",
       "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/CVPR_2025_arch02465/frame_012_t21.60s.png"
      ],
      "bands": {
@@ -1692,7 +1692,7 @@
      "id": "CVPR_2025_pipe00004",
      "style": null,
      "outcome": "vf_fail",
-     "source": "EVALUATIONS_PAGE/Original_Image/CVPR_2025_pipe00004.png",
+     "source": "assets/shared/CVPR_2025_pipe00004.png",
      "video": null,
      "frames_dir": true,
      "raw_frames": [
@@ -1750,7 +1750,7 @@
      "id": "Paper2Fig_pipe_diff_000000104",
      "style": null,
      "outcome": "vf_fail",
-     "source": "EVALUATIONS_PAGE/Original_Image/Paper2Fig_pipe_diff_000000104.png",
+     "source": "assets/shared/Paper2Fig_pipe_diff_000000104.png",
      "video": null,
      "frames_dir": true,
      "raw_frames": [
@@ -1813,8 +1813,8 @@
       "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/WACV_2023_set5_000044/frame_003_t05.50s.png",
       "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/WACV_2023_set5_000044/frame_004_t07.30s.png",
       "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/WACV_2023_set5_000044/frame_005_t09.10s.png",
-      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/WACV_2023_set5_000044/frame_006_t10.90s.png",
-      "EVALUATIONS_PAGE/GPT-5.6-Sol/Frames/WACV_2023_set5_000044/frame_007_t11.30s.png"
+      "assets/shared/frame_006_t10.90s.png",
+      "assets/shared/frame_006_t10.90s.png"
      ],
      "bands": {
       "VF": "A",
@@ -1873,8 +1873,8 @@
       "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/CVPR_2025_arch00855/frame_003_t08.75s.png",
       "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/CVPR_2025_arch00855/frame_004_t11.25s.png",
       "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/CVPR_2025_arch00855/frame_005_t13.75s.png",
-      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/CVPR_2025_arch00855/frame_006_t16.25s.png",
-      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/CVPR_2025_arch00855/frame_007_t17.60s.png"
+      "assets/shared/frame_006_t16.25s.png",
+      "assets/shared/frame_006_t16.25s.png"
      ],
      "bands": {
       "VF": "C",
@@ -1917,7 +1917,7 @@
      "id": "CVPR_2025_pipe00004",
      "style": null,
      "outcome": "vf_fail",
-     "source": "EVALUATIONS_PAGE/Original_Image/CVPR_2025_pipe00004.png",
+     "source": "assets/shared/CVPR_2025_pipe00004.png",
      "video": null,
      "frames_dir": true,
      "raw_frames": [
@@ -1926,8 +1926,8 @@
       "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/CVPR_2025_pipe00004/frame_002_t06.10s.png",
       "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/CVPR_2025_pipe00004/frame_003_t09.10s.png",
       "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/CVPR_2025_pipe00004/frame_004_t12.10s.png",
-      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/CVPR_2025_pipe00004/frame_005_t15.10s.png",
-      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/CVPR_2025_pipe00004/frame_006_t18.10s.png",
+      "assets/shared/frame_005_t15.10s.png",
+      "assets/shared/frame_005_t15.10s.png",
       "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/CVPR_2025_pipe00004/frame_007_t21.10s.png"
      ],
      "bands": {
@@ -1971,7 +1971,7 @@
      "id": "ICCV_2023_set5_000035",
      "style": null,
      "outcome": "vf_fail",
-     "source": "EVALUATIONS_PAGE/Original_Image/ICCV_2023_set5_000035.png",
+     "source": "assets/shared/ICCV_2023_set5_000035.png",
      "video": null,
      "frames_dir": true,
      "raw_frames": [
@@ -2034,21 +2034,21 @@
      "id": "Paper2Fig_pipe_diff_000000104",
      "style": null,
      "outcome": "vf_fail",
-     "source": "EVALUATIONS_PAGE/Original_Image/Paper2Fig_pipe_diff_000000104.png",
+     "source": "assets/shared/Paper2Fig_pipe_diff_000000104.png",
      "video": null,
      "frames_dir": true,
      "raw_frames": [
-      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/Paper2Fig_pipe_diff_000000104/frame_000_t00.00s.png",
-      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/Paper2Fig_pipe_diff_000000104/frame_001_t02.20s.png",
-      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/Paper2Fig_pipe_diff_000000104/frame_002_t04.40s.png",
-      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/Paper2Fig_pipe_diff_000000104/frame_003_t06.60s.png",
-      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/Paper2Fig_pipe_diff_000000104/frame_004_t08.80s.png",
-      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/Paper2Fig_pipe_diff_000000104/frame_005_t11.00s.png",
-      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/Paper2Fig_pipe_diff_000000104/frame_006_t13.20s.png",
-      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/Paper2Fig_pipe_diff_000000104/frame_007_t15.40s.png",
-      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/Paper2Fig_pipe_diff_000000104/frame_008_t17.60s.png",
-      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/Paper2Fig_pipe_diff_000000104/frame_009_t19.80s.png",
-      "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/Paper2Fig_pipe_diff_000000104/frame_010_t20.20s.png"
+      "assets/shared/frame_000_t00.00s.png",
+      "assets/shared/frame_001_t02.20s.png",
+      "assets/shared/frame_002_t04.40s.png",
+      "assets/shared/frame_003_t06.60s.png",
+      "assets/shared/frame_004_t08.80s.png",
+      "assets/shared/frame_005_t11.00s.png",
+      "assets/shared/frame_006_t13.20s.png",
+      "assets/shared/frame_007_t15.40s.png",
+      "assets/shared/frame_008_t17.60s.png",
+      "assets/shared/frame_009_t19.80s.png",
+      "assets/shared/frame_010_t20.20s.png"
      ],
      "bands": {
       "VF": "C",
@@ -2089,8 +2089,8 @@
     },
     {
      "id": "SciMMIR_arch_diff_000000152",
-     "style": null,
-     "outcome": "pass_low",
+     "style": "Alpha Masking",
+     "outcome": "asc_fail",
      "source": "EVALUATIONS_PAGE/Original_Image/SciMMIR_arch_diff_000000152.png",
      "video": null,
      "frames_dir": true,
@@ -2113,7 +2113,7 @@
      ],
      "bands": {
       "VF": "A",
-      "ASC": "A"
+      "ASC": "C"
      },
      "rationale": {
       "VF": {
@@ -2125,263 +2125,27 @@
         "VFS_text_typographic_integrity": "Labels and mathematical notations remain legible and intact in both masked and unmasked states.",
         "VFS_visual_quality_and_style_matching": "Colors and aesthetic styling match the reference with clean alpha masking transitions."
        },
-       "summary": "The animation accurately executes the alpha masking sequence while maintaining high visual stability, layout accuracy, and textual integrity."
+       "summary": "The animation maintains high visual fidelity, layout accuracy, and textual integrity with the source diagram."
       },
       "ASC": {
-       "summary": "The video is fully style compliant."
+       "summary": "Incorrect implementation of the Alpha Masking animation style. Parts of the diagram are supposed to be unmasked and then masked as the next element appears in sequence, not be progressively unmasked."
       }
      },
      "scores": {
-      "SSS": "0.7222",
-      "GPS": "0.8889",
-      "NAS": "0.7407"
+      "SSS": "NA",
+      "GPS": "NA",
+      "NAS": "NA"
      },
-     "steps": [
-      {
-       "t": 1,
-       "frame": "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_000_t00.40s.png",
-       "time": null,
-       "narration": "",
-       "sss": "C",
-       "gps": "A",
-       "nas": "A"
-      },
-      {
-       "t": 2,
-       "frame": "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_001_t02.40s.png",
-       "time": null,
-       "narration": "",
-       "sss": "A",
-       "gps": "A",
-       "nas": "B"
-      },
-      {
-       "t": 3,
-       "frame": "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_002_t04.40s.png",
-       "time": null,
-       "narration": "",
-       "sss": "B",
-       "gps": "A",
-       "nas": "A"
-      },
-      {
-       "t": 4,
-       "frame": "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_003_t06.40s.png",
-       "time": null,
-       "narration": "",
-       "sss": "A",
-       "gps": "A",
-       "nas": "A"
-      },
-      {
-       "t": 5,
-       "frame": "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_004_t08.40s.png",
-       "time": null,
-       "narration": "",
-       "sss": "A",
-       "gps": "A",
-       "nas": "C"
-      },
-      {
-       "t": 6,
-       "frame": "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_005_t10.40s.png",
-       "time": null,
-       "narration": "",
-       "sss": "B",
-       "gps": "B",
-       "nas": "A"
-      },
-      {
-       "t": 7,
-       "frame": "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_006_t12.40s.png",
-       "time": null,
-       "narration": "",
-       "sss": "B",
-       "gps": "A",
-       "nas": "C"
-      },
-      {
-       "t": 8,
-       "frame": "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_007_t14.40s.png",
-       "time": null,
-       "narration": "",
-       "sss": "A",
-       "gps": "A",
-       "nas": "C"
-      },
-      {
-       "t": 9,
-       "frame": "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_008_t16.40s.png",
-       "time": null,
-       "narration": "",
-       "sss": "A",
-       "gps": "B",
-       "nas": "C"
-      },
-      {
-       "t": 10,
-       "frame": "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_009_t18.40s.png",
-       "time": null,
-       "narration": "",
-       "sss": "A",
-       "gps": "B",
-       "nas": "A"
-      },
-      {
-       "t": 11,
-       "frame": "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_010_t20.40s.png",
-       "time": null,
-       "narration": "",
-       "sss": "C",
-       "gps": "B",
-       "nas": "C"
-      },
-      {
-       "t": 12,
-       "frame": "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_011_t22.40s.png",
-       "time": null,
-       "narration": "",
-       "sss": "A",
-       "gps": "A",
-       "nas": "A"
-      },
-      {
-       "t": 13,
-       "frame": "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_012_t24.40s.png",
-       "time": null,
-       "narration": "",
-       "sss": "A",
-       "gps": "A",
-       "nas": "A"
-      },
-      {
-       "t": 14,
-       "frame": "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_013_t26.40s.png",
-       "time": null,
-       "narration": "",
-       "sss": "B",
-       "gps": "A",
-       "nas": "A"
-      },
-      {
-       "t": 15,
-       "frame": "EVALUATIONS_PAGE/Gemini-3.1-Pro/Frames/SciMMIR_arch_diff_000000152/frame_014_t26.90s.png",
-       "time": null,
-       "narration": "",
-       "sss": "A",
-       "gps": "C",
-       "nas": "B"
-      },
-      {
-       "t": 16,
-       "frame": null,
-       "time": null,
-       "narration": "",
-       "sss": "D",
-       "gps": "A",
-       "nas": "C"
-      },
-      {
-       "t": 17,
-       "frame": null,
-       "time": null,
-       "narration": "",
-       "sss": "C",
-       "gps": "A",
-       "nas": "A"
-      },
-      {
-       "t": 18,
-       "frame": null,
-       "time": null,
-       "narration": "",
-       "sss": "C",
-       "gps": "A",
-       "nas": "A"
-      }
-     ],
+     "steps": [],
      "derived": {
-      "G": 1,
+      "G": 0,
       "vf_pass": true,
-      "asc_pass": true,
-      "N": 18,
-      "gated_at": null,
-      "metrics": {
-       "SSS": {
-        "dists": [
-         2,
-         0,
-         1,
-         0,
-         0,
-         1,
-         1,
-         0,
-         0,
-         0,
-         2,
-         0,
-         0,
-         1,
-         0,
-         3,
-         2,
-         2
-        ],
-        "d_o": 0.2778,
-        "Q": 0.7222
-       },
-       "GPS": {
-        "dists": [
-         0,
-         0,
-         0,
-         0,
-         0,
-         1,
-         0,
-         0,
-         1,
-         1,
-         1,
-         0,
-         0,
-         0,
-         2,
-         0,
-         0,
-         0
-        ],
-        "d_o": 0.1111,
-        "Q": 0.8889
-       },
-       "NAS": {
-        "dists": [
-         0,
-         1,
-         0,
-         0,
-         2,
-         0,
-         2,
-         2,
-         2,
-         0,
-         2,
-         0,
-         0,
-         0,
-         1,
-         2,
-         0,
-         0
-        ],
-        "d_o": 0.2593,
-        "Q": 0.7407
-       }
-      },
-      "Qn": 0.7839,
-      "AANS": 0.7839
+      "asc_pass": false,
+      "N": 0,
+      "gated_at": "ASC",
+      "metrics": null,
+      "Qn": null,
+      "AANS": 0.0
      }
     }
    ]
@@ -2407,24 +2171,24 @@
       "EVALUATIONS_PAGE/Qwen3.8_27B/Frames/CVPR_2025_arch00855/frame_06.png",
       "EVALUATIONS_PAGE/Qwen3.8_27B/Frames/CVPR_2025_arch00855/frame_07.png",
       "EVALUATIONS_PAGE/Qwen3.8_27B/Frames/CVPR_2025_arch00855/frame_08.png",
-      "EVALUATIONS_PAGE/Qwen3.8_27B/Frames/CVPR_2025_arch00855/frame_09.png",
-      "EVALUATIONS_PAGE/Qwen3.8_27B/Frames/CVPR_2025_arch00855/frame_10.png",
-      "EVALUATIONS_PAGE/Qwen3.8_27B/Frames/CVPR_2025_arch00855/frame_11.png",
-      "EVALUATIONS_PAGE/Qwen3.8_27B/Frames/CVPR_2025_arch00855/frame_12.png",
-      "EVALUATIONS_PAGE/Qwen3.8_27B/Frames/CVPR_2025_arch00855/frame_13.png",
-      "EVALUATIONS_PAGE/Qwen3.8_27B/Frames/CVPR_2025_arch00855/frame_14.png",
-      "EVALUATIONS_PAGE/Qwen3.8_27B/Frames/CVPR_2025_arch00855/frame_15.png",
-      "EVALUATIONS_PAGE/Qwen3.8_27B/Frames/CVPR_2025_arch00855/frame_16.png",
-      "EVALUATIONS_PAGE/Qwen3.8_27B/Frames/CVPR_2025_arch00855/frame_17.png",
+      "assets/shared/frame_09-2.png",
+      "assets/shared/frame_09-2.png",
+      "assets/shared/frame_09-2.png",
+      "assets/shared/frame_12-1.png",
+      "assets/shared/frame_12-1.png",
+      "assets/shared/frame_14-1.png",
+      "assets/shared/frame_14-1.png",
+      "assets/shared/frame_16-1.png",
+      "assets/shared/frame_16-1.png",
       "EVALUATIONS_PAGE/Qwen3.8_27B/Frames/CVPR_2025_arch00855/frame_18.png",
-      "EVALUATIONS_PAGE/Qwen3.8_27B/Frames/CVPR_2025_arch00855/frame_19.png",
-      "EVALUATIONS_PAGE/Qwen3.8_27B/Frames/CVPR_2025_arch00855/frame_20.png",
-      "EVALUATIONS_PAGE/Qwen3.8_27B/Frames/CVPR_2025_arch00855/frame_21.png",
-      "EVALUATIONS_PAGE/Qwen3.8_27B/Frames/CVPR_2025_arch00855/frame_22.png",
-      "EVALUATIONS_PAGE/Qwen3.8_27B/Frames/CVPR_2025_arch00855/frame_23.png",
-      "EVALUATIONS_PAGE/Qwen3.8_27B/Frames/CVPR_2025_arch00855/frame_24.png",
-      "EVALUATIONS_PAGE/Qwen3.8_27B/Frames/CVPR_2025_arch00855/frame_25.png",
-      "EVALUATIONS_PAGE/Qwen3.8_27B/Frames/CVPR_2025_arch00855/frame_26.png"
+      "assets/shared/frame_19.png",
+      "assets/shared/frame_19.png",
+      "assets/shared/frame_21.png",
+      "assets/shared/frame_21.png",
+      "assets/shared/frame_23.png",
+      "assets/shared/frame_23.png",
+      "assets/shared/frame_25.png",
+      "assets/shared/frame_25.png"
      ],
      "bands": {
       "VF": "B",
@@ -2535,7 +2299,7 @@
       },
       {
        "t": 10,
-       "frame": "EVALUATIONS_PAGE/Qwen3.8_27B/Frames/CVPR_2025_arch00855/frame_09.png",
+       "frame": "assets/shared/frame_09-2.png",
        "time": 10.0,
        "narration": "[No narration]",
        "sss": "A",
@@ -2544,7 +2308,7 @@
       },
       {
        "t": 11,
-       "frame": "EVALUATIONS_PAGE/Qwen3.8_27B/Frames/CVPR_2025_arch00855/frame_10.png",
+       "frame": "assets/shared/frame_09-2.png",
        "time": 10.56,
        "narration": "[No narration]",
        "sss": "A",
@@ -2553,7 +2317,7 @@
       },
       {
        "t": 12,
-       "frame": "EVALUATIONS_PAGE/Qwen3.8_27B/Frames/CVPR_2025_arch00855/frame_11.png",
+       "frame": "assets/shared/frame_09-2.png",
        "time": 11.11,
        "narration": "[No narration]",
        "sss": "A",
@@ -2562,7 +2326,7 @@
       },
       {
        "t": 13,
-       "frame": "EVALUATIONS_PAGE/Qwen3.8_27B/Frames/CVPR_2025_arch00855/frame_12.png",
+       "frame": "assets/shared/frame_12-1.png",
        "time": 11.67,
        "narration": "[No narration]",
        "sss": "A",
@@ -2571,7 +2335,7 @@
       },
       {
        "t": 14,
-       "frame": "EVALUATIONS_PAGE/Qwen3.8_27B/Frames/CVPR_2025_arch00855/frame_13.png",
+       "frame": "assets/shared/frame_12-1.png",
        "time": 12.22,
        "narration": "[No narration]",
        "sss": "A",
@@ -2580,7 +2344,7 @@
       },
       {
        "t": 15,
-       "frame": "EVALUATIONS_PAGE/Qwen3.8_27B/Frames/CVPR_2025_arch00855/frame_14.png",
+       "frame": "assets/shared/frame_14-1.png",
        "time": 12.78,
        "narration": "[No narration]",
        "sss": "A",
@@ -2589,7 +2353,7 @@
       },
       {
        "t": 16,
-       "frame": "EVALUATIONS_PAGE/Qwen3.8_27B/Frames/CVPR_2025_arch00855/frame_15.png",
+       "frame": "assets/shared/frame_14-1.png",
        "time": 13.33,
        "narration": "[No narration]",
        "sss": "A",
@@ -2598,7 +2362,7 @@
       },
       {
        "t": 17,
-       "frame": "EVALUATIONS_PAGE/Qwen3.8_27B/Frames/CVPR_2025_arch00855/frame_16.png",
+       "frame": "assets/shared/frame_16-1.png",
        "time": 13.89,
        "narration": "[No narration]",
        "sss": "B",
@@ -2607,7 +2371,7 @@
       },
       {
        "t": 18,
-       "frame": "EVALUATIONS_PAGE/Qwen3.8_27B/Frames/CVPR_2025_arch00855/frame_17.png",
+       "frame": "assets/shared/frame_16-1.png",
        "time": 14.44,
        "narration": "[No narration]",
        "sss": "A",
@@ -2703,7 +2467,7 @@
      "id": "CVPR_2025_pipe00004",
      "style": null,
      "outcome": "vf_fail",
-     "source": "EVALUATIONS_PAGE/Original_Image/CVPR_2025_pipe00004.png",
+     "source": "assets/shared/CVPR_2025_pipe00004.png",
      "video": "EVALUATIONS_PAGE/Qwen3.8_27B/Frames/CVPR_2025_pipe00004.mp4",
      "frames_dir": false,
      "raw_frames": [],
@@ -3050,7 +2814,7 @@
      "id": "WACV_2022_set5_000002",
      "style": "Progressive Reveal",
      "outcome": "vf_fail",
-     "source": "EVALUATIONS_PAGE/Original_Image/WACV_2022_set5_000002.png",
+     "source": "assets/shared/WACV_2022_set5_000002.png",
      "video": null,
      "frames_dir": true,
      "raw_frames": [

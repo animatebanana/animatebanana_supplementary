@@ -1,0 +1,50 @@
+=== Alpha Masking Sequence ===
+
+Frame Image : frame_00.png
+Timestamp   : 1.00s
+Narration   : The pipeline begins in the first section with multiple camera views and their corresponding foreground object masks.
+--------------------------------------------------------------------------------
+Frame Image : frame_01.png
+Timestamp   : 3.00s
+Narration   : These inputs are used to construct an initial set of three-dimensional Gaussians containing the statue.
+--------------------------------------------------------------------------------
+Frame Image : frame_02.png
+Timestamp   : 5.00s
+Narration   : Depth maps are then rendered across the set of camera viewpoints.
+--------------------------------------------------------------------------------
+Frame Image : frame_03.png
+Timestamp   : 7.00s
+Narration   : Entering the depth-guided mask inference stage, reference and secondary views are paired with their respective masks.
+--------------------------------------------------------------------------------
+Frame Image : frame_04.png
+Timestamp   : 9.00s
+Narration   : Applying these masks isolates the visible background regions for both viewpoints.
+--------------------------------------------------------------------------------
+Frame Image : frame_05.png
+Timestamp   : 11.00s
+Narration   : Using depth from the second view, background content is projected onto the reference view.
+--------------------------------------------------------------------------------
+Frame Image : frame_06.png
+Timestamp   : 13.00s
+Narration   : This determines the final depth-guided inpainting mask for the reference view.
+--------------------------------------------------------------------------------
+Frame Image : frame_07.png
+Timestamp   : 15.00s
+Narration   : The mask is transferred into the final inpainting-guided refinement stage.
+--------------------------------------------------------------------------------
+Frame Image : frame_08.png
+Timestamp   : 17.00s
+Narration   : Inpainting is performed on the reference view to synthesize missing background color and depth.
+--------------------------------------------------------------------------------
+Frame Image : frame_09.png
+Timestamp   : 19.00s
+Narration   : Depth-guided projection then lifts the inpainted reference view into a three-dimensional surface structure.
+--------------------------------------------------------------------------------
+Frame Image : frame_10.png
+Timestamp   : 21.00s
+Narration   : This structure initializes the refined Gaussians while projecting background information onto the remaining viewpoints.
+--------------------------------------------------------------------------------
+Frame Image : frame_11.png
+Timestamp   : 23.00s
+Narration   : Finally, render loss on the reference view and cross-view loss on other rendered views supervise the refined scene.
+--------------------------------------------------------------------------------

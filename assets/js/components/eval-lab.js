@@ -206,7 +206,7 @@ class EvalLab extends HTMLElement {
     const rows = isVF
       ? VFS_CRITERIA.map(([k, name, q], i) => this.critRow(i, name, q, rat.criteria?.[k]))
       : (ASC_CHECKS[styleKey(s.style)] || ASC_GENERIC)
-          .map((c, i) => this.critRow(i, c, '', i === 0 ? rat.summary : null));
+          .map((c, i) => this.critRow(i, c, '', null));
 
     if (!ran) return '';
 
@@ -231,8 +231,8 @@ class EvalLab extends HTMLElement {
                 <em>${ACCEPT.includes(x) ? 'pass' : 'discard'}</em></span>`).join('')}</div>
           </aside>
         </div>
-        ${rat.summary && isVF ? `<p class="el-summary" data-summary>
-          <span>summary</span>${esc(rat.summary)}</p>` : ''}
+        ${rat.summary ? `<p class="el-summary" data-summary>
+          <span>${isVF ? 'summary' : 'verdict'}</span>${esc(rat.summary)}</p>` : ''}
         <p class="el-outcome" data-outcome></p>
       </section>`;
   }
@@ -382,7 +382,7 @@ class EvalLab extends HTMLElement {
     flow.querySelectorAll('.el-chip').forEach(n => n.classList.remove('is-in'));
     flow.querySelectorAll('.el-frame').forEach(n => n.classList.remove('is-in'));
     flow.querySelectorAll('[data-outcome]').forEach(n => { n.textContent = ''; n.className = 'el-outcome'; });
-    flow.querySelector('[data-summary]')?.classList.remove('is-in');
+    flow.querySelectorAll('[data-summary]').forEach(n => n.classList.remove('is-in'));
 
     const see = (el) => el?.scrollIntoView({ block: 'center', behavior: 'smooth' });
     const live = async (sel, ms = 420) => {

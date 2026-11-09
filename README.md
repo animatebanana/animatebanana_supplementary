@@ -3,8 +3,11 @@
 This folder is a self-contained, offline copy of the AnimateBanana companion
 website. It is anonymized for double-blind review. Everything the pages show
 (animations, videos, intermediate pipeline outputs, benchmark samples,
-evaluation results, and user-study material) is included locally. Nothing is
-fetched from a server we control.
+evaluation results, and user-study material) is included locally. The only
+exception is the download buttons on the Downloadable Baseline Outputs page:
+the output archives are not bundled in this folder, so they are fetched from
+the anonymous companion website when clicked, which **requires an internet
+connection**.
 
 ---
 
@@ -60,8 +63,9 @@ scrub bar past what has already loaded may do nothing.
 
 ### Privacy note
 
-The site makes **no external network requests**. All code, data, media, and
-fonts are bundled, so it works fully offline. There are no analytics, tracking
+The site makes **no external network requests** apart from the optional
+archive downloads described above. All code, data, media, and fonts are
+bundled, so it works fully offline. There are no analytics, tracking
 scripts, cookies, or beacons. The only browser storage used is `localStorage`,
 which remembers your video playback speed and mute preference in the gallery.
 
@@ -121,7 +125,8 @@ Every page is reachable from the **Menu** button (top right).
 │   ├── ood/                 ·  frames and source figures for the Generalization page, by domain
 │   ├── editability/         ·  before/after animations for the editability page
 │   ├── ablations/           ·  pipeline diagram used by the ablation walkthroughs
-│   └── evaluation/          ·  evaluation-scheme figure
+│   ├── evaluation/          ·  evaluation-scheme figure
+│   └── shared/              ·  source figures, frames, and clips reused across pages
 │
 ├── data/                    ← JSON content that drives every page (text, results, media manifests)
 │   ├── benchmark/           ·  AnimateBench page data
@@ -132,8 +137,6 @@ Every page is reachable from the **Menu** button (top right).
 ├── MAIN_PAGE/               ← raw pipeline outputs for the Overview showcase, by animation style
 ├── ABLATIONS_PAGE/          ← raw outputs per ablation (full pipeline vs. ablated variant)
 ├── EVALUATIONS_PAGE/        ← frames and judge results per system (AnimateBanana and baselines)
-├── BASELINE_OUTPUTS/        ← output archives of the open-source backbones on AnimateBanana
-├── CLOSED_SOURCE_OUTPUTS/   ← output archives of the closed-source baselines
 ├── FAILURES_PAGE/           ← raw outputs for the failure-case walkthroughs, by stage
 ├── USER_STUDY_PAGE/         ← user-study interface screenshots
 │
@@ -160,7 +163,7 @@ Every page is reachable from the **Menu** button (top right).
 
 ## 4. Notes
 
-- **Size:** about 497 MB (3,397 files), mostly MP4 and PNG media.
+- **Size:** about 120 MB (1,937 files), mostly MP4 and PNG media.
 - **Last updated:** the footer of each page shows when that page or the data it
   loads last changed, in AOE (UTC−12).
 - **Anonymity:** the site carries no author, affiliation, contact or repository

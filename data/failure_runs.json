@@ -2,13 +2,13 @@
  "pipeline": "assets/ablations/pipeline-diagram.svg?v=64a37438",
  "critic_table": {
   "sample": "CVPR_2025_arch00968",
-  "source": "ABLATIONS_PAGE/Original_Images/CVPR_2025_arch00968.png?v=9b7672df",
+  "source": "assets/shared/CVPR_2025_arch00968.png?v=9b7672df",
   "runs": [
    {
     "key": "full",
     "label": "AnimateBanana (full system)",
     "media": {
-     "src": "FAILURES_PAGE/Additional_insights/Full/CVPR_2025_arch00968.mp4?v=ea4ca726",
+     "src": "assets/shared/CVPR_2025_arch00968.mp4?v=ea4ca726",
      "kind": "video",
      "captions": "FAILURES_PAGE/Additional_insights/Full/CVPR_2025_arch00968.captions.json?v=f19512ca"
     },
@@ -34,7 +34,7 @@
     "key": "minus_stage1_critic",
     "label": "without the Stage 1 critic",
     "media": {
-     "src": "FAILURES_PAGE/Additional_insights/Minus_Stage1_critic/CVPR_2025_arch00968.mp4?v=b4bf7d59",
+     "src": "assets/shared/CVPR_2025_arch00968-1.mp4?v=b4bf7d59",
      "kind": "video",
      "captions": "FAILURES_PAGE/Additional_insights/Minus_Stage1_critic/CVPR_2025_arch00968.captions.json?v=328eb295"
     },
@@ -126,7 +126,7 @@
       "kind": "video",
       "captions": "FAILURES_PAGE/Stage_1/CVPR_2025_arch02465.captions.json?v=15320cea"
      },
-     "source": "ABLATIONS_PAGE/Original_Images/CVPR_2025_arch02465.png?v=93a18948",
+     "source": "assets/shared/CVPR_2025_arch02465.png?v=93a18948",
      "scores": {
       "VF": {
        "kind": "band",
@@ -213,7 +213,7 @@
       "kind": "video",
       "captions": "FAILURES_PAGE/Stage_1/Paper2Fig_pipe_easy_000000361.captions.json?v=603bd80d"
      },
-     "source": "ABLATIONS_PAGE/Original_Images/Paper2Fig_pipe_easy_000000361.png?v=64ddc43c",
+     "source": "assets/shared/Paper2Fig_pipe_easy_000000361.png?v=64ddc43c",
      "scores": {
       "VF": {
        "kind": "band",
@@ -538,7 +538,7 @@
       "kind": "video",
       "captions": "FAILURES_PAGE/Stage_3/ICCV_2023_set5_000035.captions.json?v=c7da4633"
      },
-     "source": "ABLATIONS_PAGE/Original_Images/ICCV_2023_set5_000035.png?v=bf17dea2",
+     "source": "assets/shared/ICCV_2023_set5_000035.png?v=bf17dea2",
      "scores": {
       "VF": null,
       "ASC": null,
