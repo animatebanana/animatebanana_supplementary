@@ -114,50 +114,50 @@
         "text": "No trial was timed. A full sitting took roughly an hour, and an animation could be replayed as often as a participant wanted."
       },
       {
-        "title": "25 samples per set, shuffled",
-        "text": "Each participant evaluated 25 samples per set, in shuffled order, so that every figure is scored by a generous number of people."
+        "title": "25 diagrams per system",
+        "text": "The quality evaluation uses 25 diagrams per system, shown in shuffled order; each diagram–system pair received about five human ratings on average."
       }
     ]
   },
   "absolute": {
-    "caption": "Mean ± standard deviation over 25 evaluated diagrams per system. Each diagram is first averaged over its participant ratings. All scores normalised to [0, 1]; an animation that fails either validity gate scores 0.",
+    "caption": "Mean ± standard deviation over 25 evaluated diagrams per system, with each diagram first averaged over its participant ratings. All scores are normalised to [0, 1]; an animation that fails either VF or ASC is scored 0. GP is not human-rated and is fixed to 1 for valid animations when computing AN_human.",
     "columns": [
       "VF",
       "ASC",
       "SS",
       "NA",
-      "AN"
+      "AN_human"
     ],
     "rows": [
       {
         "system": "AnimateBanana",
         "best": true,
         "cells": [
-          ".860 ± .14",
-          ".838 ± .13",
-          ".756 ± .16",
-          ".775 ± .15",
-          ".765 ± .15"
+          ".929 ± .22",
+          ".909 ± .24",
+          ".837 ± .25",
+          ".820 ± .24",
+          ".855 ± .24"
         ]
       },
       {
         "system": "AnimateBanana (Qwen3.8-27B)",
         "cells": [
-          ".518 ± .28",
-          ".500 ± .30",
-          ".443 ± .26",
-          ".463 ± .26",
-          ".453 ± .26"
+          ".431 ± .46",
+          ".421 ± .46",
+          ".340 ± .40",
+          ".368 ± .43",
+          ".376 ± .42"
         ]
       },
       {
         "system": "Gemini 3.1 Pro",
         "cells": [
-          ".404 ± .32",
-          ".349 ± .30",
-          ".294 ± .27",
-          ".306 ± .27",
-          ".300 ± .27"
+          ".305 ± .42",
+          ".275 ± .41",
+          ".238 ± .36",
+          ".234 ± .35",
+          ".249 ± .37"
         ]
       }
     ]
@@ -165,27 +165,19 @@
   "agreement": [
     {
       "stat": "α = 0.62",
-      "label": "Krippendorff's α, AN"
+      "label": "Krippendorff's α (inter-rater) for AN_human"
     },
     {
-      "stat": "α = 0.62",
-      "label": "Krippendorff's α, VF"
+      "stat": "ρ = 0.66",
+      "label": "Spearman, human vs. automatic AN on 75 matched diagram–system outputs"
     },
     {
-      "stat": "α = 0.65",
-      "label": "Krippendorff's α, ASC"
-    },
-    {
-      "stat": "ρ = 0.68",
-      "label": "mean pairwise Spearman between raters"
-    },
-    {
-      "stat": "ρ = 0.65",
-      "label": "human vs. Kimi-K2.6 judge on AN (p < 10⁻⁵)"
+      "stat": "78.4%",
+      "label": "human and automatic judgments agree on joint animation validity G (κ = 0.57)"
     },
     {
       "stat": "71%",
-      "label": "same tournament winner when two raters saw one diagram"
+      "label": "same tournament winner when two participants evaluated the same diagram"
     }
   ],
   "charts": [
