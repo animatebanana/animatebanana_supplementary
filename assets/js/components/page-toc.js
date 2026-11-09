@@ -1,11 +1,3 @@
-/**
- * The contents bar: it sticks under the site nav, marks the section in
- * view, and fills a thin bar with how far through the page the reader is.
- *
- * Used by Ablations and Evaluation. A link's target may be drawn by a
- * component after load (the evaluation walkthrough renders its stages from
- * JSON), so targets are looked up on every update rather than once.
- */
 function wireToc() {
   const toc = document.querySelector('#pg-toc');
   if (!toc) return;
@@ -37,7 +29,6 @@ function wireToc() {
   window.addEventListener('scroll', () => {
     if (!ticking) (ticking = true), requestAnimationFrame(update);
   }, { passive: true });
-  // A sentinel just above the bar tells us when it has stuck.
   const sentinel = document.createElement('div');
   sentinel.className = 'pg-toc-sentinel';
   toc.before(sentinel);
@@ -45,11 +36,6 @@ function wireToc() {
   update();
 }
 
-/* A shared link such as evaluation.html#evaluation-walkthrough has to land on
-   its section even though the page keeps growing after the browser's own
-   jump: figures load, and components draw their content from JSON. So for a
-   few seconds the target is held in place, until it stops moving or the
-   reader takes over by scrolling, clicking or pressing a key. */
 function settleHash() {
   const id = decodeURIComponent(location.hash.slice(1));
   if (!id) return;
@@ -66,7 +52,6 @@ function settleHash() {
       const want = parseFloat(getComputedStyle(el).scrollMarginTop) || 0;
       if (Math.abs(el.getBoundingClientRect().top - want) > 2) el.scrollIntoView({ block: 'start' });
     }
-    // a timer rather than requestAnimationFrame, which a background tab pauses
     setTimeout(tick, 120);
   };
   tick();

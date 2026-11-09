@@ -1,36 +1,6 @@
 import { loadJSON, onVisible, esc, icon, panelHead, reducedMotion } from './bench-core.js';
 import { lightbox, zoomBadge } from './bench-lightbox.js';
 
-/**
- * <bench-reference src="data/benchmark/reference.json"></bench-reference>
- *
- * EXTERNAL REFERENCE — the figure's purple pane.
- *
- * The figure's bottom-right strip, animated as the four-step procedure
- * it actually describes:
- *
- *   1  the recorded conference talk, with a playhead running the bar
- *   2  scissors travel to the in-point, snip, travel to the out-point,
- *      snip again — and the discarded thirds fall away, leaving the window
- *      the figure is on screen
- *   3  the figure region is lifted out of that window: frames fly up
- *      out of the clip and flip over like the leaves of a book
- *   4  the narration is pulled off the audio track and scribed, one
- *      transcript line at a time
- *
- * The whole run is one CSS state machine keyed off `[data-step]`, so
- * scrubbing back to an earlier step re-winds the visuals exactly rather
- * than leaving half-finished transforms behind. Under reduced motion it
- * jumps to the end state with no travel at all.
- *
- * Every asset is real: the talk excerpt, the figure-region frames extracted
- * from it, and the speaker's own transcript. The frames carried their own
- * burned-in caption when captured; that strip is cropped off before they reach
- * the page, because the narration belongs to the animation, not to a still.
- * They also carry no in-video timestamp — the slide barely changes across the
- * excerpt, so there is nothing honest to match them against — and are numbered
- * in capture order instead of being given invented times.
- */
 
 const STEP_MS = [1500, 2600, 2200, 2600];
 
@@ -51,9 +21,6 @@ class BenchReference extends HTMLElement {
     this._timers = [];
     this._render();
 
-    // The pane autoplays once, the first time it is seen — it is an
-    // explanation, not a decoration, and a viewer who scrolls past
-    // should not have to hunt for a button to understand it.
     onVisible(this, () => this._run(), { rootMargin: '160px' });
   }
 
@@ -214,17 +181,6 @@ class BenchReference extends HTMLElement {
     });
   }
 
-  /**
-   * Schedule the four beats rather than awaiting them in sequence.
-   *
-   * An `await`-chain across ~9 seconds has to carry its own cancel flag,
-   * and two overlapping runs (the autoplay landing at the same moment as
-   * a Replay press) can then leave the flag set for the run that is
-   * still going — which strands the pane on whatever step it had
-   * reached. A monotonic token fixes that by construction: every timer
-   * checks the token it was issued under, so a newer run silently
-   * invalidates an older one and there is no shared flag to get wrong.
-   */
   _run() {
     this._armed = true;
     const token = ++this._token;
@@ -252,15 +208,7 @@ class BenchReference extends HTMLElement {
     this._timers = [];
   }
 
-  /* ---------- the viewer, one compartment per thing ---------- */
 
-  /**
-   * Three things, three openings. The talk plays; the extracted frames page
-   * through each other and carry no narration; the transcript opens as a page
-   * of lines. Nothing walks from one into another — a viewer that steps from a
-   * figure frame into a transcript would be presenting them as one sequence,
-   * and they are not one.
-   */
   _openTalk() {
     const t = this.data.talk;
     lightbox.open({
@@ -281,7 +229,6 @@ class BenchReference extends HTMLElement {
     });
   }
 
-  /** The extracted figure region, frame by frame — no narration underneath. */
   _openFrames(index = 0) {
     const f = this.data.extract.frames;
     lightbox.open({

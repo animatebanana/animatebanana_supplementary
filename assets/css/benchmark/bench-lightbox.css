@@ -1,15 +1,4 @@
-/*
-  The benchmark module's fullscreen viewer.
 
-  Appended to <body>, so every rule is scoped by `.bl` rather than by a
-  pane; the pane's accent comes in on `[data-accent]`, the same four
-  values the panes themselves use, so an opened asset still reads as
-  belonging to the panel it came from.
-
-  Owns `.bl-*` and `.bx-expand` only.
-*/
-
-/* The header-bar button that opens it, on both panes. */
 .bx-expand {
   display: inline-flex;
   align-items: center;
@@ -30,11 +19,6 @@
 .bx-expand:hover { background: rgba(255, 255, 255, 0.28); }
 .bx-expand svg { width: 13px; height: 13px; }
 
-/* ---- Click to zoom, on every asset in every pane ----
-   The affordance has to be visible before the click, so anything that
-   opens in the viewer carries a magnifier that fades in on hover and a
-   `zoom-in` cursor. One class does both; a pane adds it and nothing
-   else. */
 .bx-zoomable { position: relative; cursor: zoom-in; }
 .bx-zoom {
   position: absolute;
@@ -61,7 +45,6 @@
 
 body.bl-locked { overflow: hidden; }
 
-/* ---- Shell ---- */
 .bl { position: fixed; inset: 0; z-index: 120; }
 .bl[data-accent='annotations'] { --a: #1E6B41; --a-soft: #ECF7F0; --a-line: #C3E2CF; }
 .bl[data-accent='reference']   { --a: #5A2D83; --a-soft: #F3EDF9; --a-line: #D8C9E8; }
@@ -97,7 +80,6 @@ body.bl-locked { overflow: hidden; }
 }
 .bl.is-in .bl-panel { opacity: 1; transform: none; }
 
-/* ---- Head ---- */
 .bl-head { display: flex; align-items: center; gap: 14px; }
 .bl-title {
   font-family: var(--font-mono);
@@ -133,14 +115,6 @@ body.bl-locked { overflow: hidden; }
 .bl-close:hover { transform: translate(-1px, -1px); box-shadow: 3px 3px 0 var(--ink); }
 .bl-close svg { width: 14px; height: 14px; }
 
-/* ---- Stage ---- */
-/* The row the stage lives in has to be a DEFINITE height, not one
-   centred inside an auto track. With `align-items: center` the track
-   sizes to the stage, the stage's `height: 100%` resolves against that
-   same track, and the whole chain collapses to the picture's intrinsic
-   height — which is how a full-size diagram opened here with its edges
-   cut off by the panel. Pinning the row to the space the panel gave it
-   is what makes every `object-fit: contain` below actually contain. */
 .bl-body {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
@@ -183,14 +157,8 @@ body.bl-locked { overflow: hidden; }
 .bl-stage[data-zoom='in'] { cursor: zoom-out; }
 .bl-stage[data-grab='on'] { cursor: grabbing; }
 
-/* The zoom layer. The stage is the window; this is what moves inside it,
-   so a scaled image is clipped by the frame rather than overflowing the
-   dialog, and the transform origin can follow the pointer. */
 .bl-zoomer {
   display: grid;
-  /* Same rule as the body above: one cell pinned to the stage, so the
-     asset inside it is measured against the window and not against
-     itself. */
   grid-template: minmax(0, 1fr) / minmax(0, 1fr);
   place-items: stretch;
   width: 100%;
@@ -202,7 +170,6 @@ body.bl-locked { overflow: hidden; }
 .bl-stage[data-grab='on'] .bl-zoomer { transition: none; }
 @media (prefers-reduced-motion: reduce) { .bl-zoomer { transition: none; } }
 
-/* ---- Zoom bar ---- */
 .bl-zoombar {
   display: flex;
   align-items: center;
@@ -239,12 +206,6 @@ body.bl-locked { overflow: hidden; }
 .bl-zoombar em { font-style: normal; letter-spacing: 0.04em; }
 @media (max-width: 760px) { .bl-zoombar em { display: none; } }
 
-/* Fill the stage and letterbox, rather than sitting at intrinsic size:
-   the whole point of opening an asset here is to see it larger than the
-   pane showed it, and a 1100x260 clip at intrinsic size in a 1300px
-   stage is barely bigger than it was. */
-/* Letterboxed against the white stage: the whole asset, always, with
-   white paper filling whatever its aspect ratio leaves over. */
 .bl-img, .bl-video {
   width: 100%;
   height: 100%;
@@ -254,7 +215,6 @@ body.bl-locked { overflow: hidden; }
   object-position: center;
 }
 
-/* SVG artifacts: the thing itself on the left, its source on the right. */
 .bl-split {
   display: grid;
   grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
@@ -288,8 +248,6 @@ body.bl-locked { overflow: hidden; }
   tab-size: 2;
   white-space: pre;
   color: var(--ink-mid);
-  /* White, like a page of code: the tinted paper the rest of the site is
-     printed on fights with syntax colour and greys the whole listing. */
   background: #fff;
   border: 1.5px solid var(--line-strong);
   border-radius: var(--radius-sm);
@@ -298,7 +256,6 @@ body.bl-locked { overflow: hidden; }
 
 .bl-art { display: grid; place-items: center; width: 100%; height: 100%; padding: 20px; }
 
-/* ---- Caption: the narration lives here ---- */
 .bl-cap {
   max-height: 28vh;
   overflow-y: auto;
@@ -332,8 +289,6 @@ body.bl-locked { overflow: hidden; }
   max-width: 92ch;
 }
 
-/* A multi-line narration: each beat its own row, the live one lit when
-   the caption is following a playhead. */
 .bl-script { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 4px; }
 .bl-script li { display: flex; gap: 10px; padding: 3px 6px; border-radius: 5px; }
 .bl-script li span {
@@ -349,7 +304,6 @@ body.bl-locked { overflow: hidden; }
 .bl-script.is-timed li { opacity: 0.45; transition: opacity var(--dur) var(--ease-out), background var(--dur) var(--ease-out); }
 .bl-script.is-timed li.is-now { opacity: 1; background: #fff; box-shadow: inset 2px 0 0 var(--a); }
 
-/* ---- Thumbnail rail ---- */
 .bl-rail {
   display: flex;
   gap: 6px;
@@ -401,8 +355,6 @@ body.bl-locked { overflow: hidden; }
 }
 
 
-/* A stratum or a style with no asset yet keeps its labelled stand-in at
-   viewer scale, rather than opening on an empty white stage. */
 .bl .bd-skel-big, .bl .bv-skel-big {
   width: min(100%, 720px);
   aspect-ratio: 16 / 9;
@@ -412,28 +364,16 @@ body.bl-locked { overflow: hidden; }
 }
 .bl .bd-skel-big .bx-skel-tag, .bl .bv-skel-big .bx-skel-tag { border-color: var(--a-line); color: var(--a); }
 
-/* ============ One compartment at a time ============
-   The viewer opens the set it was opened from and nothing else. When that
-   set is a single asset there is nothing to page to, so the nav buttons and
-   the thumbnail rail are not rendered at all — `[data-paging]` is here so the
-   grid still lays out correctly with those cells absent, and so a stray rule
-   can never leave a dead arrow on screen. */
 .bl[data-paging='off'] .bl-body { grid-template-columns: minmax(0, 1fr); }
 .bl[data-paging='off'] .bl-nav,
 .bl[data-paging='off'] .bl-rail { display: none; }
 
-/* With no counter to show, the head slot carries the asset's own meta line
-   instead — the thing you would otherwise have read off the caption. */
 .bl[data-paging='off'] .bl-count {
   letter-spacing: 0.07em;
   text-transform: none;
   color: var(--ink-soft);
 }
 
-/* ---- A code artifact read against the figure it describes ----
-   Hierarchy-aware XML names nodes in a diagram; read on its own it is a list
-   of ids. So it opens beside the figure, on the same terms the SVG artifact
-   already uses: the thing on the left, its source on the right. */
 .bl-render--img {
   position: relative;
   margin: 0;
@@ -458,30 +398,13 @@ body.bl-locked { overflow: hidden; }
   color: var(--ink-faint);
 }
 
-/* ---- A MEDIA FRAME IS WHITE PAPER, NOT DOTTED PAPER ----
-   `.frame-paper` gives every framed slot the site's dotted ground, which is
-   right for an empty slot: it reads as paper waiting for something. Once a
-   figure is in it the dots are the only thing behind a letterboxed image, and
-   a diagram sitting in a field of dots looks like it failed to load rather
-   than like it is being shown whole. Each pane used to switch the dots off
-   per state, which meant every new state had to remember to. These slots are
-   simply white, always. The empty state keeps its own labelled skeleton on
-   top, so nothing is lost by it. */
 .bl-stage, .bl-render, .bl-render--img {
   background-image: none;
   background-color: #fff;
 }
 
-/* ---- The animation (Diagram Diversity) ----
-   The clips are silent, so the bar carries no sound control: play, a seek
-   track and the clock, and nothing else. Nothing is written over the picture
-   and there is no transcript beside it — the line being narrated right now
-   sits in one panel under the animation, and that panel holds its height
-   between lines so the picture never moves. */
 .bl-nv-video { cursor: pointer; background: #fff; }
 
-/* An animation that is its own document: it fills the stage, and zooms with
-   it, because the zoom layer scales whatever is inside it. */
 .bl-embed {
   display: block;
   width: min(100%, 1400px);
@@ -545,9 +468,6 @@ body.bl-locked { overflow: hidden; }
 .bl-nv-bar:not(.is-running) .bl-nv-play .bl-nv-ic-play { display: block; }
 .bl-nv-bar:not(.is-running) .bl-nv-play .bl-nv-ic-pause { display: none; }
 
-/* The seek track: a drawn rail with the played part filled in the pane's
-   accent, and a real range input laid over it so dragging, arrow keys and
-   screen readers all work without re-implementing any of it. */
 .bl-nv-seek {
   position: relative;
   flex: 1 1 180px;
@@ -621,7 +541,6 @@ body.bl-locked { overflow: hidden; }
 }
 .bl-nv-bar[data-mode='none'] .bl-nv-status { color: var(--a); font-weight: 700; }
 
-/* Narrative Diversity: the narration is the focus there too. */
 .bl[data-accent='diversity'] .bl-script li p { font-size: var(--fs-sm); line-height: 1.5; }
 .bl[data-accent='diversity'] .bl-script.is-timed li.is-now p {
   font-family: var(--font-display);
@@ -634,15 +553,9 @@ body.bl-locked { overflow: hidden; }
   .bl-nv-caption { transition: none; }
 }
 
-/* ---- Markup, coloured ----
-   Tag, attribute, value, comment: four colours is all these files need to
-   read as structure rather than as a wall. Set against white, at contrasts
-   that hold up when the viewer is projected. */
 .bl-code .tk-tag { color: #1D4E79; font-weight: 700; font-style: normal; }
 .bl-code .tk-attr { color: #1E6B41; font-style: normal; }
 .bl-code .tk-val { color: #A4232F; font-style: normal; }
 .bl-code .tk-punc { color: var(--ink-faint); font-style: normal; }
 .bl-code .tk-com { color: var(--ink-faint); font-style: italic; }
-/* A pipeline intermediate: shown to explain the method, not to be lifted
-   from the page. See assets/js/lib/no-copy.js. */
 .bl-code { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }

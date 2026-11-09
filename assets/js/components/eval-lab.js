@@ -1,18 +1,6 @@
 import { loadJSON } from '../lib/data-loader.js';
 import { mountReel } from '../lib/reel-player.js';
 
-/**
- * <eval-lab src="data/evaluation_runs.json">
- *
- * One animation, carried through the whole scheme as it actually ran: the two
- * gates in series, and — only if both open — the clip broken into frames and
- * the three quality judges working down them in parallel, then aggregation.
- *
- * Every band, every rationale and every score here is the judge's own output,
- * read out of EVALUATIONS_PAGE/<baseline>/Judge_Results/<sample>.json by
- * scripts/build_eval_runs.py. Nothing on this page is invented: a metric that
- * never ran shows as "not run", never as a guess.
- */
 
 const NUM = { A: 4, B: 3, C: 2, D: 1 };
 const ACCEPT = 'AB';
@@ -26,7 +14,6 @@ const BAND_WORD = {
   NAS: { A: 'Well aligned', B: 'Minor flaws', C: 'Major flaws', D: 'Severe flaws' },
 };
 
-/** the six things the fidelity judge answers separately, in its own key order */
 const VFS_CRITERIA = [
   ['VFS_element_alteration', 'Element alteration',
    'Do elements distort or morph mid-video until they are unrecognisable or wrong?'],
@@ -42,7 +29,6 @@ const VFS_CRITERIA = [
    'Do the colours and treatment reflect the original diagram?'],
 ];
 
-/** each animation style is compliant against its own rules */
 const ASC_CHECKS = {
   'progressive reveal': [
     'Starts from a blank canvas',
@@ -131,7 +117,6 @@ class EvalLab extends HTMLElement {
   get baseline() { return this.data.baselines[this.bi]; }
   get sample() { return this.baseline.samples[this.si]; }
 
-  /** the source diagram is the same file whichever baseline animated it */
   sourceImage() {
     const id = this.sample.id;
     if (this.sample.source) return this.sample.source;
@@ -145,7 +130,6 @@ class EvalLab extends HTMLElement {
     return s.raw_frames?.length ? s.raw_frames : s.steps.map(x => x.frame).filter(Boolean);
   }
 
-  /* ───────────────────────── render ───────────────────────── */
 
   render() {
     this.stopReel?.();
@@ -210,7 +194,6 @@ class EvalLab extends HTMLElement {
       </section>`;
   }
 
-  /** a gate: its checklist, the judge's own words per item, then the band */
   stageGate(key, s) {
     const isVF = key === 'VF';
     const band = s.bands[key];
@@ -226,7 +209,7 @@ class EvalLab extends HTMLElement {
       : (ASC_CHECKS[styleKey(s.style)] || ASC_GENERIC)
           .map((c, i) => this.critRow(i, c, '', i === 0 ? rat.summary : null));
 
-    if (!ran) return '';            // never asked: the stage does not exist at all
+    if (!ran) return '';
 
     return `
       <section class="el-stage el-gate is-${key.toLowerCase()}"
@@ -292,7 +275,6 @@ class EvalLab extends HTMLElement {
       </section>`;
   }
 
-  /** the three judges, working down the same frames at the same time */
   stageLanes(s) {
     const steps = s.steps;
     return `
@@ -354,7 +336,6 @@ class EvalLab extends HTMLElement {
       </section>`;
   }
 
-  /* ───────────────────────── interaction ───────────────────────── */
 
   focusStep(i) {
     const s = this.sample, steps = s.steps;
@@ -382,7 +363,6 @@ class EvalLab extends HTMLElement {
       n.classList.toggle('is-on', +n.dataset.step === k));
   }
 
-  /* ───────────────────────── the run ───────────────────────── */
 
   async run() {
     if (this.busy) return;
@@ -393,7 +373,6 @@ class EvalLab extends HTMLElement {
     btn.disabled = true;
     btn.classList.add('is-running');
 
-    // back to the resting state the svg uses: everything dimmed, every value a dash
     flow.classList.add('is-armed');
     flow.querySelectorAll('.el-stage').forEach(n => n.classList.remove('is-live', 'is-done'));
     flow.querySelector('[data-stage="inputs"]').classList.add('is-live');
@@ -426,13 +405,11 @@ class EvalLab extends HTMLElement {
 
     await live('[data-wire="to-split"]', 650);
 
-    // the clip deals itself out into frames
     const split = await live('[data-stage="split"]', 260);
     const frames = [...flow.querySelectorAll('.el-frame')];
     for (const f of frames) { f.classList.add('is-in'); await wait(45); }
     await wait(320);
 
-    // three lanes filling at once, left to right
     const lanes = await live('[data-stage="lanes"]', 240);
     const N = s.steps.length;
     for (let t = 0; t < N; t++) {
@@ -442,7 +419,6 @@ class EvalLab extends HTMLElement {
     }
     await wait(300);
 
-    // aggregation, one number at a time
     await live('[data-stage="agg"]', 260);
     for (const [k] of QMETRICS) {
       const box = flow.querySelector(`[data-q="${k}"]`);
@@ -467,12 +443,11 @@ class EvalLab extends HTMLElement {
     this.finishRun(s, flow, btn, true);
   }
 
-  /** one gate: checklist items think, then resolve, then the band lands */
   async runGate(key, flow, see) {
     const s = this.sample;
     const band = s.bands[key];
     const stage = flow.querySelector(`[data-stage="${key}"]`);
-    if (!band || !stage) return false;  // never asked: nothing to show, nothing to open
+    if (!band || !stage) return false;
 
     stage.classList.add('is-live'); see(stage);
     await wait(360);
@@ -506,7 +481,6 @@ class EvalLab extends HTMLElement {
     return pass;
   }
 
-  /** the gate closed: push the zeros through so the ending is still explicit */
   finishRun(s, flow, btn, passed) {
     if (!passed) {
       flow.querySelector('[data-stage="agg"]')?.classList.add('is-live');
@@ -528,8 +502,6 @@ class EvalLab extends HTMLElement {
     this.busy = false;
   }
 
-  /** Stepped on a timer rather than rAF: a backgrounded tab pauses animation
-   *  frames entirely, which would strand the run mid-count with Run disabled. */
   async countTo(el, value, ms) {
     if (!el) return;
     if (value == null) { el.textContent = '—'; return; }

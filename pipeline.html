@@ -10,16 +10,12 @@
   <link rel="stylesheet" href="assets/css/base.css?v=3">
   <link rel="stylesheet" href="assets/css/components/site-nav.css?v=5">
   <style>
-    /* The pipeline page is the walkthrough and nothing else: the site bar
-       stays on top, the walkthrough takes every remaining pixel. */
     html, body { height: 100%; }
     body {
       margin: 0;
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      /* plain white, not the paper tint the rest of the site uses — the
-         walkthrough brings its own ground and the warm cast fought it */
       background: #FFFFFF;
       background-image: none;
     }
@@ -32,7 +28,6 @@
       border-bottom: 1px solid #E6E9EF;
     }
     site-nav.is-stuck { border-bottom-color: #E6E9EF; }
-    /* the slide-in menu too: this page is white throughout, dots and all */
     .nav-drawer .nd-panel {
       background-color: #FFFFFF;
       background-image: none;
@@ -54,8 +49,6 @@
       display: block;
     }
 
-    /* Below tablet width the walkthrough needs more height than a phone
-       viewport gives it, so let the page scroll and pin a workable height. */
     @media (max-width: 860px) {
       body { overflow: auto; }
       .walk-stage { flex: 0 0 auto; height: 82vh; min-height: 560px; }

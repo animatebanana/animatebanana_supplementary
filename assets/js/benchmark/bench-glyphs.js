@@ -1,17 +1,3 @@
-/**
- * The benchmark's four headline figures, as drawings.
- *
- * Taken from the figure's own top row rather than from an icon set: a stack of
- * diagram thumbnails, the five style swatches (each showing its own signature),
- * a narrative frame with its play head, and the verification badge. Ink
- * outline, pastel fills, banana reserved for the accent — the site's register
- * throughout.
- *
- * They live in their own file because two places draw them: the counted-up band
- * on the overview page (<bench-band>) and the scale row at the top of the
- * benchmark page (<bench-hero>). One copy means the two cannot drift apart, and
- * neither owns the other's file.
- */
 export const GLYPH = {
   diagrams: `
     <svg viewBox="0 0 64 48" fill="none" aria-hidden="true">

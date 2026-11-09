@@ -81,9 +81,9 @@
         <div class="us-step-grid">
           <div class="us-step-copy">
             <p>The aim of this experiment is to evaluate the animation quality of the
-              outputs produced by AnimateBanana, by the second-best open-source model (the one
-              used as the backbone in our pipeline), and by the best closed-source model
-              among those evaluated on the direct diagram-to-animation task.</p>
+              outputs produced by AnimateBanana, by AnimateBanana with the best open-source backbone (Qwen3.8-27B), and by the
+              best-performing closed-source model (Gemini 3.1 Pro) on the direct
+              diagram-to-animation task.</p>
             <p>Each of these baselines is judged <b>in isolation</b>: a participant rates
               one animation at a time and is never asked to compare. Closely following the
               cascading design of our automated metrics, we apply the same conditional
@@ -91,10 +91,9 @@
               question behind each automated metric.</p>
             <div class="us-meta">
               <span class="tag tag-blue">AnimateBanana (Gemini 3.7 Flash)</span>
-              <span class="tag tag-blue">Qwen3.8-27B backbone</span>
+              <span class="tag tag-blue">AnimateBanana (Qwen3.8-27B)</span>
               <span class="tag tag-blue">Gemini 3.1 Pro</span>
-              <span class="tag tag-tan">15 trials per set</span>
-              <span class="tag tag-tan">one per animation style</span>
+              <span class="tag tag-tan">25 diagrams per system</span>
             </div>
           </div>
           <div class="us-shots">
@@ -237,8 +236,9 @@
             fails either gate scores 0. Granularity and pacing (GP) is not evaluated at
             all: the setup allows a self-paced traversal of the animation, with back and
             forth as often as the participant likes, so the pacing they experienced is
-            their own rather than the system's. Each user-study set carries <b>15</b>
-            animation quality assessment trials.</p>
+            their own rather than the system's. The quality evaluation uses <b>25</b>
+            diagrams per system, and each diagram&ndash;system pair received about five
+            human ratings on average.</p>
         </div>
       </article>
 
@@ -250,8 +250,8 @@
         <div class="us-step-grid">
           <div class="us-step-copy">
             <p>The second experiment is run as a tournament. The candidates are the
-              AnimateBanana outputs, the second-best performing model overall, in
-              our case Qwen&nbsp;3.8, and the original human-authored presentations from our
+              AnimateBanana outputs, AnimateBanana with the best open-source
+              backbone, Qwen3.8-27B, and the original human-authored presentations from our
               bench.</p>
             <p>Those human authored presentations are preprocessed and trimmed, in both time and space, to
               remove every clue that they are the human-authored ones. The whole
@@ -260,7 +260,7 @@
             <div class="us-bracket">
               <span class="us-seat">AnimateBanana</span>
               <span class="us-arrow">vs</span>
-              <span class="us-seat">Qwen 3.8</span>
+              <span class="us-seat">Qwen3.8-27B</span>
               <span class="us-arrow">&rarr;</span>
               <span class="us-seat us-seat-win">Winner</span>
               <span class="us-arrow">vs</span>
@@ -319,8 +319,8 @@
     <section class="us-section">
       <div class="kicker">Protocol</div>
       <h2>Selective Cohort Experiments</h2>
-      <p class="us-lede">Ten participants returned for two further preference tests, each
-        over 15 samples. Both ask about a design decision rather than about a system.</p>
+      <p class="us-lede">A selective cohort of participants took part in two further
+        targeted evaluations. Both ask about a design decision rather than about a system.</p>
 
       <article class="us-step" id="us-context">
         <header class="us-step-head">

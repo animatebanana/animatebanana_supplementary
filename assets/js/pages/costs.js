@@ -1,26 +1,6 @@
 import { loadJSON } from '../lib/data-loader.js';
 
-/**
- * costs.html — calls and latency of the AnimateBanana pipeline,
- * measured on a sample set of 91 diagrams. Everything drawn or quoted
- * here comes from data/latency.json.
- *
- * The charts are SVG sized to their container (re-drawn when it
- * resizes, so text stays legible on a phone) or plain HTML. Each:
- *   - animates in when first scrolled into view, and on every change of
- *     view (points glide rather than jump);
- *   - carries a hover/focus tooltip on every mark;
- *   - offers a "Show as a table" view of the same numbers;
- *   - is followed by insight cards whose numbers are computed, not typed.
- *
- * Stage colours are fixed across the site: Diagram Transmuter yellow,
- * Animation Planner green, Diagram Animator light blue. Generators are
- * drawn as circles or solid fills, critics as diamonds or hatched fills.
- */
 
-/* ================================================================ *
- * Utilities
- * ================================================================ */
 
 const fmt = (n, d = 0) => Number(n).toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d });
 const pct = (part, whole) => (part / whole) * 100;
@@ -38,7 +18,6 @@ function svgEl(tag, attrs = {}, parent) {
   return e;
 }
 
-/** Run `step(t)` with eased t from 0 to 1 over `dur` ms (instantly if motion is unwelcome). */
 function tween(dur, step) {
   if (reduced) return step(1);
   const t0 = performance.now();
@@ -50,7 +29,6 @@ function tween(dur, step) {
   requestAnimationFrame(frame);
 }
 
-/** A round step for an axis that will hold values up to `max`. */
 function niceStep(max, count = 5) {
   const raw = max / count;
   const p = 10 ** Math.floor(Math.log10(raw));
@@ -65,14 +43,12 @@ function axisFor(max, count = 5) {
   return { top, ticks };
 }
 
-/** Deterministic jitter in [-1, 1] from a string, so dots never reshuffle between draws. */
 function jitter(s) {
   let h = 2166136261;
   for (const ch of s) h = Math.imul(h ^ ch.charCodeAt(0), 16777619);
   return ((h >>> 0) % 2001) / 1000 - 1;
 }
 
-/** Call `fn(width)` now and whenever the element's width changes. */
 function onWidth(el, fn) {
   let last = 0;
   const run = () => {
@@ -87,7 +63,6 @@ function onWidth(el, fn) {
   run();
 }
 
-/** An axis title; on a narrow chart it breaks onto two lines at " · ". */
 function axisTitle(svg, text, W) {
   const t = svgEl('text', { x: 0, y: 14, class: 'fl-axis-title' }, svg);
   const parts = W < 560 ? text.split(' · ') : [text];
@@ -149,13 +124,11 @@ function pressToggle(root, group, value) {
 
 const stageChip = (s) => `<span class="cl-stage-chip cl-st-${s.id}">${s.label.replace('Stage ', '')}</span>`;
 
-/** One figure per stage, each in its stage's chip: reads as three values, not one number. */
 const trio = (d, vals, f) =>
   `<span class="cl-trio">${d.stages
     .map((s, i) => `<span class="cl-trio-i cl-st-${s.id}"><i>${s.label.replace('Stage ', 'S')}</i>${f(vals[i])}</span>`)
     .join('')}</span>`;
 
-/** Insight cards under a chart: a big figure, a label, a sentence. */
 function insights(cards) {
   return `<div class="cl-insights">${cards
     .map(
@@ -169,9 +142,6 @@ function insights(cards) {
     .join('')}</div>`;
 }
 
-/* ================================================================ *
- * Section symbols
- * ================================================================ */
 
 const GLYPHS = {
   layers: `
@@ -215,19 +185,7 @@ function mountGlyphs() {
   }
 }
 
-/* ================================================================ *
- * The flow chart: a line through the pipeline, by stage or by agent
- * ================================================================ */
 
-/**
- * One line across the pipeline. "By stage" plots each stage's total (the
- * sum over its agents); "By agent" opens every stage into its agents, and
- * the points glide apart. A dashed second line traces the three critics,
- * one per stage, so their trend across the pipeline reads on its own.
- *
- * `metric(kind, entity, stat)` returns the value to plot, where kind is
- * 'stage' or 'agent'.
- */
 function flowChart(host, d, o) {
   const state = { mode: 'stages', stat: o.stats[0][0], crit: 'on' };
   const stageIdx = Object.fromEntries(d.stages.map((s, i) => [s.id, i]));
@@ -249,9 +207,6 @@ function flowChart(host, d, o) {
     ${o.table}`;
   const box = host.querySelector('.cl-flow');
 
-  // The axis holds every value any view can show, so it never jumps; when
-  // the views are in different units (tokens vs dollars), each gets its own.
-  // ± 1 SD whiskers, when the chart has spreads to show (the token chart does not).
   const sdOf = (kind, e, stat) => (o.sd ? o.sd(kind, e, stat) || 0 : 0);
   const axisOf = (stat) => {
     const all = [];
@@ -269,12 +224,10 @@ function flowChart(host, d, o) {
   let M = null;
   let els = null;
   let geo = null;
-  // Too narrow for nine labels side by side: angle them, and leave the numbers to the tooltips.
   let narrow = false;
 
   const y = (v) => M.t + (H - M.t - M.b) * (1 - v / yAxis.top);
 
-  /** A point, with the pixel ends of its ± 1 SD whisker. */
   const pt = (x, kind, e, stat) => {
     const v = o.metric(kind, e, stat);
     const sd = sdOf(kind, e, stat);
@@ -317,7 +270,6 @@ function flowChart(host, d, o) {
 
   const line = (pts) => pts.map((p, i) => `${i ? 'L' : 'M'}${p.x.toFixed(1)},${p.y.toFixed(1)}`).join('');
 
-  // First agent of each stage stands for the stage when the view is closed.
   const lead = new Set(d.stages.map((s) => agents.findIndex((a) => a.stage === s.id)));
 
   const whisker = (p) =>
@@ -328,8 +280,6 @@ function flowChart(host, d, o) {
     g.pts.forEach((p, i) => els.err[i].setAttribute('d', whisker(p)));
     g.crit.forEach((p, i) => {
       els.critErr[i].setAttribute('d', whisker({ ...p, x: p.x }));
-      // The critic's own value, beside its diamond; in the opened view the
-      // agent's point already carries it.
       els.critVals[i].setAttribute('x', p.x + 15);
       els.critVals[i].setAttribute('y', p.y + 4);
       els.critVals[i].setAttribute('opacity', 1 - g.mix);
@@ -352,7 +302,6 @@ function flowChart(host, d, o) {
       els.pts[i].setAttribute('transform', `translate(${p.x},${p.y})`);
       const show = lead.has(i) ? (narrow ? 1 - g.mix : 1) : narrow ? 0 : g.mix;
       els.vals[i].setAttribute('x', p.x);
-      // Above the whisker's top, so the SD bar never runs through the label.
       els.vals[i].setAttribute('y', Math.min(p.y - 14, p.hi - 7));
       els.vals[i].setAttribute('opacity', show);
       els.xl[i].setAttribute('opacity', g.mix);
@@ -438,20 +387,17 @@ function flowChart(host, d, o) {
       svgEl('path', { d: 'M0,-10.5L10.5,0L0,10.5L-10.5,0Z', class: `fl-crit cl-st-${c.stage}`, style: `--i:${i + 9}` }, g);
       els.crit.push(g);
     });
-    // Band hit areas last, so a click anywhere in a closed stage opens it.
     d.stages.forEach(() => {
       const hit = svgEl('rect', { y: M.t - 30, height: H - M.t - M.b + 30, class: 'fl-hit' }, svg);
       hit.addEventListener('click', () => setMode('agents'));
       els.bandHits.push(hit);
     });
-    // Points above the hit areas, so their tooltips still work.
     els.pts.forEach((p) => svg.appendChild(p));
     els.crit.forEach((p) => svg.appendChild(p));
     els.pts.forEach((p) => p.addEventListener('click', () => state.mode === 'stages' && setMode('agents')));
 
     geo = geometry(state.mode, state.stat);
     paint(geo);
-    // Place the agent labels once; only their opacity changes.
     const g1 = geometry('agents', state.stat);
     els.xl.forEach((xl, i) => {
       xl.setAttribute('transform', narrow ? `translate(${g1.pts[i].x + 4},${H - M.b + 14}) rotate(-50)` : `translate(${g1.pts[i].x},${H - M.b + 22})`);
@@ -484,7 +430,6 @@ function flowChart(host, d, o) {
     if (group === 'stat') {
       state.stat = v;
       if (o.axisPerStat) {
-        // A new unit needs a new axis: redraw, then replay the entrance.
         yAxis = axisOf(v);
         build(W);
         replay(host);
@@ -498,9 +443,6 @@ function flowChart(host, d, o) {
   onWidth(box, build);
 }
 
-/* ================================================================ *
- * Section 1 · Calls
- * ================================================================ */
 
 function callsFlow(host, d) {
   flowChart(host, d, {
@@ -559,7 +501,6 @@ function callsInsights(d) {
   ]);
 }
 
-/** A red-orange ramp: pale peach at the low end, deep red at the high end. */
 const HEAT = ['#FFF1E3', '#FDD3A8', '#F7A35C', '#E8672F', '#C23A1E', '#8E1D14'];
 function heatColour(f) {
   const x = Math.min(1, Math.max(0, f)) * (HEAT.length - 1);
@@ -570,11 +511,6 @@ function heatColour(f) {
   return `rgb(${a.map((v, i) => Math.round(v + (b[i] - v) * t)).join(',')})`;
 }
 
-/**
- * Styles × the two critics that see the animation style (the Planner
- * and Animator critics; Stage 1 runs before any style is chosen). One
- * shared scale, drawn as a key beside the grid.
- */
 function styleHeat(d) {
   const crit = d.agents.filter((a) => a.role === 'critic' && a.stage !== 's1');
   const rows = [...d.styles].sort((a, b) => crit.reduce((t, c) => t + b.calls[c.code], 0) - crit.reduce((t, c) => t + a.calls[c.code], 0));
@@ -637,9 +573,6 @@ function styleHeatInsights(d) {
   ]);
 }
 
-/* ================================================================ *
- * Section 2 · Time
- * ================================================================ */
 
 function timeFlow(host, d) {
   flowChart(host, d, {
@@ -699,11 +632,6 @@ function timeInsights(d) {
   ]);
 }
 
-/**
- * Share of calls (left) against share of time (right), per agent, as a
- * butterfly: two bars back to back from the agent's name, so each agent's
- * lean towards calls or towards time reads at a glance.
- */
 function shareButterfly(d) {
   const max = Math.ceil(Math.max(...d.agents.flatMap((a) => [a.share.calls, a.share.latency])) / 5) * 5;
   const rows = d.agents
@@ -729,11 +657,6 @@ function shareButterfly(d) {
     )}`;
 }
 
-/**
- * Style explorer: every diagram as a dot, one row per style, for a chosen
- * agent. "Size-adjusted" removes what each diagram's element count
- * predicts, so a style is not blamed for drawing bigger diagrams.
- */
 function styleStrip(host, d) {
   const choices = [
     ['3a', 'Animation Designer'],
@@ -742,8 +665,6 @@ function styleStrip(host, d) {
     ['total', 'Across all stages'],
   ];
   const state = { agent: '3a', adj: 'adj' };
-  // One colour per style (none is a stage hue); the rows already separate
-  // the styles, so colour is a second cue, not the only one.
   const STYLE_COLOURS = ['#6a4fc4', '#d9481f', '#e87ba4', '#9b2c6a', '#1f4e8c'];
   const colourOf = (id) => STYLE_COLOURS[d.styles.findIndex((x) => x.id === id) % STYLE_COLOURS.length];
   host.innerHTML = `
@@ -756,7 +677,6 @@ function styleStrip(host, d) {
   const codes = d.agents.map((a) => a.code);
   const styles = [...d.styles];
 
-  // Linear fit of a measure on element count, over all diagrams.
   const fitOf = (vals) => {
     const xs = d.samples.map((s) => s.el);
     const mx = xs.reduce((a, b) => a + b) / xs.length;
@@ -862,9 +782,6 @@ function styleStrip(host, d) {
   onWidth(box, (w) => build(w, false));
 }
 
-/* ================================================================ *
- * Section 3 · Tokens
- * ================================================================ */
 
 function tokensFlow(host, d) {
   const cost = (v) => `$${fmt(v, 3)}`;
@@ -930,9 +847,6 @@ function tokensInsights(d) {
   ]);
 }
 
-/* ================================================================ *
- * Section 3 · What drives the time
- * ================================================================ */
 
 function sizeScatter(host, d) {
   const state = { y: 'latency' };
@@ -1039,7 +953,6 @@ function tertileTable(d) {
     )}`;
 }
 
-/** Which agents' time grows with diagram size: Pearson r per agent. */
 function agentScaling(d) {
   const rows = [...d.agents].sort((a, b) => b.vsElements.latencyR - a.vsElements.latencyR);
   return `
@@ -1087,13 +1000,7 @@ function sizeInsights(d) {
   ]);
 }
 
-/* ================================================================ *
- * Section 5 · Stratified: one line per class of diagram
- * ================================================================ */
 
-// Series colours for classes: none is a stage hue (those stay on the
-// stage bands). Checked with the dataviz validator; each class also has
-// its own marker shape, so colour never carries identity alone.
 const CLASS_COLOURS = ['#6a4fc4', '#d9481f', '#e87ba4', '#9b2c6a'];
 const CLASS_SHAPES = ['circle', 'square', 'triangle', 'diamond', 'hexagon', 'star', 'cross'];
 const SMALL_COLOUR = '#958E7F';
@@ -1122,14 +1029,6 @@ function markerPath(shape, r = 6.5) {
   return `M${-r},0a${r},${r} 0 1,0 ${2 * r},0a${r},${r} 0 1,0 ${-2 * r},0`;
 }
 
-/**
- * The pipeline again, one line per class of a chosen property of the
- * diagram (density, connectivity, layout, depth, rasters). Switch between
- * time and calls, open the stages into agents, and click a class in the
- * legend to hide it. Classes with too few diagrams are drawn faded and
- * dashed, and are left out of every insight.
- */
-/** How the per-class cost is estimated; tokens are only known as per-agent averages. */
 const COST_NOTE = (d) =>
   `Estimated: tokens are only known as a per-agent average over all diagrams, so each agent's average cost is scaled by how long it ran on each diagram relative to its average (time tracks both extra calls and longer calls). At ${d.model} rates of $${d.tokens.rates.prompt} / $${d.tokens.rates.completion} per million prompt / completion tokens, as in section 3.`;
 
@@ -1167,8 +1066,6 @@ function strataChart(host, d) {
   let geo = null;
   let yAx = null;
 
-  // Colour and shape follow a class's rank among the classes that are big
-  // enough to read, so every dimension uses the same four series slots.
   function styleOf(dim) {
     let k = 0;
     return dim.classes.map((c, ci) => ({
@@ -1185,7 +1082,7 @@ function strataChart(host, d) {
   function axisFor_(dim, metric) {
     const all = [];
     for (const c of dim.classes) {
-      if (c.small) continue; // a two-diagram class's spread should not set the scale
+      if (c.small) continue;
       d.stages.forEach((s) => all.push(val(c, 'stage', s.id, metric, 'mean') + sdv(c, 'stage', s.id, metric)));
       agents.forEach((a) => all.push(val(c, 'agent', a.code, metric, 'mean') + sdv(c, 'agent', a.code, metric)));
     }
@@ -1229,7 +1126,6 @@ function strataChart(host, d) {
     placeEndLabels(g);
   }
 
-  /** End-of-line labels, nudged apart so they never overlap. */
   function placeEndLabels(g) {
     if (!els.ends.length) return;
     const dim = dimOf();
@@ -1263,7 +1159,6 @@ function strataChart(host, d) {
     box.innerHTML = '';
     const svg = svgEl('svg', { viewBox: `0 0 ${W} ${H}`, width: W, height: H, class: 'cl-svg', role: 'img', 'aria-label': `${dim.label}: ${U().title.toLowerCase()} through the pipeline, one line per class` }, box);
     const pw = W - M.l - M.r;
-    // Stage bands: the stages keep their own colours underneath the class lines.
     const stageBands = state.mode === 'agents'
       ? d.stages.map((s) => {
           const idx = agents.map((a, i) => (a.stage === s.id ? i : -1)).filter((i) => i >= 0);
@@ -1281,7 +1176,6 @@ function strataChart(host, d) {
     }
     svgEl('line', { x1: M.l, x2: W - M.r, y1: y(0), y2: y(0), class: 'fl-base' }, svg);
     axisTitle(svg, `${U().title} per diagram · class mean ± 1 SD`, W);
-    // Agent labels in the opened view.
     if (state.mode === 'agents') {
       const X = xs('agents');
       agents.forEach((a, i) => {
@@ -1323,7 +1217,6 @@ function strataChart(host, d) {
         t.innerHTML = `<tspan class="sx-end-dot" style="fill:${st.colour}">●</tspan> ${c.name} <tspan class="sx-end-n">n=${c.n}</tspan>`;
         els.ends.push(t);
       }
-      // Hovering a class lifts its line and quiets the others.
       g.addEventListener('pointerenter', () => svg.classList.add('has-focus') || g.classList.add('is-focus'));
       g.addEventListener('pointerleave', () => svg.classList.remove('has-focus') || g.classList.remove('is-focus'));
     });
@@ -1358,7 +1251,6 @@ function strataChart(host, d) {
     );
   }
 
-  /** The whole diagram per class: total time or calls, with each class's size beside it. */
   function totals(dim, styles) {
     const vals = dim.classes.map((c) => c.total[state.metric].mean);
     const sds = dim.classes.map((c) => c.total[state.metric].sd || 0);
@@ -1447,26 +1339,12 @@ function strataChart(host, d) {
       replay(host);
       return;
     }
-    // Same classes, new positions: redraw the frame, then glide the lines there.
     retarget(true);
   });
   onWidth(box, build);
 }
 
-/* ================================================================ *
- * Section 6 · What AnimateBanana would cost on each model
- * ================================================================ */
 
-/**
- * One row per model: the cost of animating a diagram with AnimateBanana
- * if that model were its backbone, split by stage or by token type. A
- * second view shows the raw prices behind it. No scores: the closed
- * models were only ever scored zero-shot, never inside the pipeline.
- */
-/**
- * The closed-source models we did not run, as bars, with our own backbone
- * below a horizontal rule so the gap between them is the point of the block.
- */
 function extraRows(B) {
   const ours = B.models.find((m) => m.isOurs);
   const rows = [...(B.notEvaluated || [])].sort((a, b) => b.cost - a.cost);
@@ -1488,7 +1366,6 @@ function extraRows(B) {
     .join('');
 }
 
-/** The same models as a table, with our backbone below the same rule. */
 function extraTable(B) {
   const ours = B.models.find((m) => m.isOurs);
   const usd = (v) => `$${fmt(v, v < 0.1 ? 3 : 2)}`;
@@ -1550,9 +1427,6 @@ function baselineCosts(host, d) {
       html = rows
         .map((m, i) => {
           const segs = segsOf(m);
-          // A segment too narrow for a horizontal figure moves the whole row's
-          // figures just past the end of its bar, as tags in segment order, so
-          // the bar itself stays to scale and every label stays horizontal.
           const outside = segs.some((sg) => pct(sg.v, max) < 5.5);
           const segTip = (sg) => tip(`<b>${m.name}</b><br>${sg.label}<br>${usd(sg.v)} · ${fmt(pct(sg.v, m.cost))}% of ${usd(m.cost)}`);
           return `
@@ -1650,16 +1524,12 @@ function baselineCostInsights(d) {
   ]);
 }
 const usd2 = (v) => `$${fmt(v, 2)}`;
-/** "a–b", or just "a" when both round to the same figure. */
 const span = (vals, dec = 0) => {
   const lo = fmt(Math.min(...vals), dec);
   const hi = fmt(Math.max(...vals), dec);
   return lo === hi ? lo : `${lo}–${hi}`;
 };
 
-/* ================================================================ *
- * Motion, tooltips, wiring
- * ================================================================ */
 
 function playOnView(els) {
   if (reduced || !('IntersectionObserver' in window)) {
@@ -1674,7 +1544,6 @@ function playOnView(els) {
         io.unobserve(e.target);
       }
     },
-    // A low threshold with a bottom inset: tall charts on a phone could never reach a proportional one.
     { threshold: 0.01, rootMargin: '0px 0px -12% 0px' }
   );
   els.forEach((el) => io.observe(el));
@@ -1726,7 +1595,6 @@ function wireTooltip() {
   window.addEventListener('scroll', () => current && hide(), { passive: true });
 }
 
-/** Charts that build themselves (`host`) and plain-HTML charts (`html`), with the insight cards that follow each. */
 const CHARTS = {
   'calls-flow': { host: callsFlow, after: callsInsights },
   'style-heat': { html: styleHeat, after: styleHeatInsights },
@@ -1741,11 +1609,6 @@ const CHARTS = {
   'baseline-costs': { host: baselineCosts, after: baselineCostInsights },
 };
 
-/**
- * The page's writing comes from data/costs_copy.json: the head, the
- * contents bar, and every section with its cards. Only the numbers are
- * computed; all prose is editable there.
- */
 function buildPage(copy) {
   const head = document.querySelector('#cl-head');
   head.querySelector('.kicker').innerHTML = copy.page.kicker;
@@ -1794,10 +1657,6 @@ function buildPage(copy) {
     .join('');
 }
 
-/**
- * The contents bar: it sticks under the site nav, marks the section in
- * view, and fills a thin bar with how far through the page the reader is.
- */
 function wireToc() {
   const toc = document.querySelector('#cl-toc');
   const links = [...toc.querySelectorAll('[data-toc]')];
@@ -1827,7 +1686,6 @@ function wireToc() {
   window.addEventListener('scroll', () => {
     if (!ticking) (ticking = true), requestAnimationFrame(update);
   }, { passive: true });
-  // A sentinel just above the bar tells us when it has stuck.
   const sentinel = document.createElement('div');
   sentinel.className = 'cl-toc-sentinel';
   toc.before(sentinel);
@@ -1866,7 +1724,6 @@ async function render() {
   window.addEventListener('beforeprint', () => document.querySelectorAll('.cl-chart, .cl-insights').forEach((el) => el.classList.add('is-in')));
   wireTooltip();
   wireToc();
-  // A link straight to a section should still land on it once the page is built.
   if (location.hash) document.getElementById(location.hash.slice(1))?.scrollIntoView();
 }
 

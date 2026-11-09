@@ -1,20 +1,3 @@
-/*
-  The gallery's fullscreen example view — `.gl-*`.
-
-  Appended to <body>, so every rule is scoped by `.gl` and nothing here can
-  reach the grid behind it. Owns `.gl-*` only; it borrows `tokens.css` and
-  nothing from another module's stylesheet.
-
-  The layout is four stacked rows in one sheet: the way back, the two panes,
-  the transport, and the narration with the export row under it. There is no
-  title bar and no metadata footer — the gallery knows an example's style and
-  nothing else, so both would be empty chrome.
-
-  One thing sits on top of all of it: `.gl-notice`, the card that stands between
-  the PDF pill and the file. It is absolutely positioned inside `.gl` rather
-  than fixed to the window so it inherits the view's stacking and its own
-  children keep a real `offsetParent`, which is what the focus trap tests.
-*/
 
 body.gl-locked { overflow: hidden; }
 
@@ -34,9 +17,6 @@ body.gl-locked { overflow: hidden; }
 
 .gl-sheet {
   display: grid;
-  /* back · panes · transport · narration · meta — the panes take every row
-     the others do not need, so a tall window gives the figures the space
-     rather than padding the chrome. */
   grid-template-rows: auto minmax(0, 1fr) auto auto auto;
   gap: clamp(10px, 1.4vh, 16px);
   min-height: 0;
@@ -52,12 +32,6 @@ body.gl-locked { overflow: hidden; }
 }
 .gl.is-in .gl-sheet { transform: none; }
 
-/* ---- The top bar: the way out, and the way along ----
-   The gallery is a list, and opening one example should not mean
-   closing it to reach the next. So the open view carries the same
-   prev/next the grid implies, stepping through whatever the grid was
-   showing — the filtered set, in the order it is on screen — with the
-   position spelled out between them. */
 .gl-bar {
   display: flex;
   align-items: center;
@@ -94,23 +68,18 @@ body.gl-locked { overflow: hidden; }
   font-weight: 700;
   letter-spacing: 0.08em;
   color: var(--ink-faint);
-  /* Tabular figures and a reserved width: the counter must not shuffle
-     the two arrows sideways as it walks 09 → 10. */
   font-variant-numeric: tabular-nums;
   min-width: 6.5ch;
   text-align: center;
   white-space: nowrap;
 }
 .gl-pos b { color: var(--ink); }
-/* One example in the set is not a sequence; the controls would be two
-   permanently dead buttons. */
 .gl[data-paging='off'] .gl-paging { display: none; }
 
 @media (max-width: 560px) {
   .gl-paging { margin-left: 0; width: 100%; justify-content: center; }
 }
 
-/* ---- The one way out ---- */
 .gl-back {
   justify-self: start;
   display: inline-flex;
@@ -134,7 +103,6 @@ body.gl-locked { overflow: hidden; }
 .gl-back:active { transform: translate(2px, 2px); box-shadow: 0 0 0 var(--banana); }
 .gl-back svg { width: 16px; height: 16px; }
 
-/* ---- The two panes ---- */
 .gl-panes {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -163,10 +131,6 @@ body.gl-locked { overflow: hidden; }
 .gl-stage {
   position: relative;
   display: grid;
-  /* ONE cell, pinned to the pane. A centred auto track sizes itself to
-     the picture, and `max-height: 100%` measured against that track is
-     no limit at all — which is why a tall diagram used to hang past the
-     frame and lose its bottom to `overflow: hidden`. */
   grid-template: minmax(0, 1fr) / minmax(0, 1fr);
   place-items: stretch;
   min-height: 0;
@@ -176,9 +140,6 @@ body.gl-locked { overflow: hidden; }
   border: 2px solid var(--ink);
   border-radius: var(--radius-md);
 }
-/* Fill the cell and letterbox inside it. Whatever the figure's aspect
-   ratio, the whole of it is on screen and the leftover is white paper —
-   never a crop. */
 .gl-source, .gl-video {
   width: 100%;
   height: 100%;
@@ -188,8 +149,6 @@ body.gl-locked { overflow: hidden; }
   object-position: center;
 }
 
-/* The overlay play button: only before the clip has been started, so it
-   never covers the picture while it is running. */
 .gl-bigplay {
   position: absolute;
   display: grid;
@@ -226,11 +185,6 @@ body.gl-locked { overflow: hidden; }
 }
 .gl-missing p { margin: 0; font-size: var(--fs-sm); line-height: 1.55; }
 
-/* ---- Transport ---- */
-/* ---- Transport ----
-   A panel rather than a row of loose controls: the clip above it is a picture
-   in a frame, and a bar floating under the frame read as part of the page
-   rather than part of the player. */
 .gl-transport {
   display: flex;
   align-items: center;
@@ -260,10 +214,6 @@ body.gl-locked { overflow: hidden; }
 .gl-play .gl-ic-pause, .gl.is-playing .gl-play .gl-ic-play { display: none; }
 .gl.is-playing .gl-play .gl-ic-pause { display: block; }
 
-/* The rail is drawn; the input over it is what you actually grab. Giving the
-   input the rail's full height means a click lands anywhere along the track,
-   a drag scrubs from wherever it started, and the arrow keys still work -
-   none of which has to be written by hand. */
 .gl-scrub {
   position: relative;
   flex: 1 1 auto;
@@ -289,7 +239,6 @@ body.gl-locked { overflow: hidden; }
   width: 0;
   display: block;
 }
-/* what the browser is holding, behind what has played */
 .gl-buffered { background: var(--banana-soft); }
 .gl-played { background: var(--banana); }
 
@@ -325,10 +274,6 @@ body.gl-locked { overflow: hidden; }
 .gl-seek:focus-visible { outline: none; }
 .gl-scrub:focus-within .gl-rail { box-shadow: var(--ring); }
 
-/* ---- Speed ----
-   One button through the useful range. It shows the rate it is at, and goes
-   banana once that is not 1x, so a clip running fast can never be mistaken
-   for the pace the pipeline actually produced. */
 .gl-rate {
   flex: 0 0 auto;
   min-width: 46px;
@@ -359,10 +304,6 @@ body.gl-locked { overflow: hidden; }
 .gl-time b { color: var(--ink); font-weight: 700; }
 .gl-time em { font-style: normal; }
 
-/* ---- Sound ----
-   The clips carry the pipeline's spoken narration and play with it, so this is
-   a mute button rather than an unmute one. It shows the state it is in, not
-   the action it performs, which is the way a speaker icon is read. */
 .gl-mute {
   display: grid;
   place-items: center;
@@ -389,7 +330,6 @@ body.gl-locked { overflow: hidden; }
 .gl.is-muted .gl-mute { color: var(--ink-faint); border-color: var(--line-strong); }
 .gl-mute:focus-visible { outline: none; box-shadow: var(--ring); }
 
-/* ---- Narration ---- */
 .gl-narration { min-height: 0; }
 .gl-line {
   margin: 0;
@@ -410,8 +350,6 @@ body.gl-locked { overflow: hidden; }
 }
 .gl-line--empty { font-style: normal; color: var(--ink-faint); }
 
-/* With no clip there is no playhead to follow, so the beats are a list
-   rather than one live line — the narration is still real. */
 .gl-beats {
   list-style: none;
   margin: 0;
@@ -434,7 +372,6 @@ body.gl-locked { overflow: hidden; }
 }
 .gl-beats p { margin: 0; font-size: var(--fs-xs); line-height: 1.55; color: var(--ink-mid); }
 
-/* ---- Style + export ---- */
 .gl-meta {
   display: flex;
   flex-wrap: wrap;
@@ -486,13 +423,6 @@ a.gl-export:hover {
 }
 a.gl-export:active { transform: translate(1px, 1px); box-shadow: 1px 1px 0 var(--ink); }
 a.gl-export:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
-/* Not every example has every format yet — the PDF exists only where the
-   pipeline has produced one. The target keeps its place in the row and answers
-   with "coming soon" rather than disappearing, so the row means the same thing
-   on every example and reads as the inventory it is.
-
-   It is a real <button>, not a disabled span: the message is only useful if you
-   can reach it, and a keyboard or a touch screen has no hover. */
 .gl-export--off {
   position: relative;
   margin: 0;
@@ -508,8 +438,6 @@ a.gl-export:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; 
 .gl-export--off.is-soon { color: var(--ink-mid); border-color: var(--ink-mid); }
 .gl-export--off:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 
-/* The bubble. Hidden rather than absent so it can be announced by the sibling
-   .sr-only text once and not twice, and so showing it costs no layout. */
 .gl-soon {
   position: absolute;
   left: 50%;
@@ -530,7 +458,6 @@ a.gl-export:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; 
   pointer-events: none;
   transition: opacity var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
 }
-/* The little tail, so the bubble points at the pill it belongs to. */
 .gl-soon::after {
   content: '';
   position: absolute;
@@ -548,11 +475,6 @@ a.gl-export:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; 
 .gl-export--off:focus-visible .gl-soon,
 .gl-export--off.is-soon .gl-soon { opacity: 1; transform: translate(-50%, 0); }
 
-/* ---- The PDF reader notice ----
-   The PDF exports animate under Acrobat Reader and Foxit and nowhere else, so
-   the pill opens this before handing the file over. It is a card on the view
-   rather than a browser dialog because it has three things to say and a
-   confirm() has room for none of them. */
 .gl-notice {
   position: absolute;
   inset: 0;
@@ -647,14 +569,9 @@ a.gl-export:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; 
   color: var(--ink-mid);
 }
 
-/* The two readers, as the two links they are: a name, what it costs and runs
-   on, and the mark that says this one leaves the site. */
 .gl-notice-readers { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
 .gl-notice-readers a {
   display: grid;
-  /* Name over note on the left, the leaves-the-site mark held against the
-     right edge. Both tracks are placed by hand: left to auto-placement the
-     row-spanning mark would claim the first column and push the text over. */
   grid-template-columns: 1fr auto;
   grid-template-rows: auto auto;
   align-items: center;
@@ -686,8 +603,6 @@ a.gl-export:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; 
   color: var(--ink-soft);
 }
 
-/* What the control bar on the page does. The glyphs are the shapes printed on
-   it, so the list can be matched against the document by eye. */
 .gl-notice-keys { display: grid; gap: 7px; margin: 0; padding: 0; list-style: none; }
 .gl-notice-keys li {
   display: grid;

@@ -1,21 +1,3 @@
-/**
- * Metrics page: the judge as a machine.
- *
- *   <judge-validity>   VF then ASC (ASC is only asked once VF passes): the
- *                      source diagram, the generated narrative and the
- *                      requested style go into the judge and a verdict comes out.
- *   <judge-narrative>  SS, GP or NA, chosen with a switch and run on its own,
- *                      step by step: source diagram, diagram XML, previous and
- *                      current frame and style go in (plus the narration and
- *                      the scientific context for NA); the judge's band for
- *                      each step builds a running score, and the
- *                      sequence-level prediction comes out at the end.
- *   <ref-free-tracks>  two orderings of the same diagram, compared step by step.
- *
- * The inputs are the real pipeline example, without its blank first frame and
- * that frame's narration. Its judge outputs are illustrative, and the page
- * says so.
- */
 import { loadJSON } from '../lib/data-loader.js';
 import { escapeHtml as esc } from '../lib/format.js';
 
@@ -32,11 +14,6 @@ const NAMES = {
 };
 const BANDS = { VF: ['A', 'B', 'C', 'D'], ASC: ['A', 'B', 'C', 'D'] };
 
-/* ======================================================================
-   Wires: curved connectors from the inputs into the judge and on to the
-   outputs. An active wire is drawn bold with a flowing dash and its own
-   arrowhead, so you can see which inputs are going in right now.
-   ====================================================================== */
 class Wires {
   constructor(host) {
     this.host = host;
@@ -49,7 +26,7 @@ class Wires {
     host.prepend(this.svg);
     this.g = this.svg.querySelector('g');
     this.spec = [];
-    this.st = new Map();   // id -> 'on' | 'done'
+    this.st = new Map();
     new ResizeObserver(() => this.draw()).observe(host);
   }
   set(spec) { this.spec = spec; this.draw(); }
@@ -95,7 +72,6 @@ class Wires {
   reset() { this.st.clear(); this.draw(); }
 }
 
-/* A run can be cancelled (Replay, or a new run) at any await. */
 class Runner {
   constructor() { this.gen = 0; }
   next() { return ++this.gen; }
@@ -105,9 +81,6 @@ class Runner {
   }
 }
 
-/* The judge: light, with the model's logo, and a card naming what it is
-   evaluating right now. `extra` goes between the judge and Start (the metric
-   switch, on the sequence-level machine). */
 const judgeBlock = (extra = '') => `
   <div class="jm-judge" data-judge-block>
     <div class="jm-brand">
@@ -141,11 +114,6 @@ function setEval(judge, { k, name, step = '' }) {
 const illustrativeNote = `<p class="jm-illus"><b>Illustrative outputs.</b> The inputs are the real pipeline
   example; the judge outputs shown are an example, not a recorded judge run.</p>`;
 
-/* ======================================================================
-   The generated narrative, in a film reel: click to play or pause. It
-   starts at the example's first evaluated step, past the blank opening
-   frame and its narration.
-   ====================================================================== */
 const reel = (d) => `
   <div class="jm-reel" data-reel>
     <video src="${esc(d.video)}" poster="${esc(d.steps.at(-1).frame)}" muted playsinline preload="metadata"></video>
@@ -155,9 +123,6 @@ const reel = (d) => `
   </div>
   <p class="jm-reelcap" data-reelcap aria-live="polite"></p>`;
 
-/* The caption under the reel follows playback: each step's narration shows
-   from the moment it is spoken until the next one starts. Nothing shows
-   before the first evaluated step (the blank opening frame is left out). */
 function wireReel(root, start, steps) {
   const box = root.querySelector('[data-reel]');
   const v = box.querySelector('video');
@@ -176,9 +141,6 @@ function wireReel(root, start, steps) {
   return { restart: () => { v.currentTime = start; return play(); } };
 }
 
-/* ======================================================================
-   <judge-validity>: VF, then ASC once VF passes
-   ====================================================================== */
 class JudgeValidity extends HTMLElement {
   async connectedCallback() {
     const d = await getDemo();
@@ -250,7 +212,7 @@ class JudgeValidity extends HTMLElement {
     btn.textContent = 'Running…';
     this.querySelector('.jm-startwrap').classList.add('is-used');
     this.reset();
-    this.reel.restart();          // the narrative plays while it is being judged
+    this.reel.restart();
     const judge = this.m.querySelector('[data-judge-block]');
     try {
       for (const key of ['VF', 'ASC']) {
@@ -284,13 +246,10 @@ class JudgeValidity extends HTMLElement {
                          : 'A gate failed (<i>G</i> = 0) &rarr; the animation scores 0.';
       setEval(judge, { k: 'Done', name: ok ? 'Both gates passed' : 'A gate failed' });
       btn.textContent = 'Replay';
-    } catch { /* cancelled by a newer run */ }
+    } catch {  }
   }
 }
 
-/* ======================================================================
-   Diagram XML, coloured the way an editor colours it
-   ====================================================================== */
 function xmlLine(line) {
   const id = (line.match(/\bid="([^"]+)"/) || [])[1] || '';
   let h = esc(line);
@@ -301,7 +260,6 @@ function xmlLine(line) {
   return `<span class="jm-xl" data-id="${esc(id)}">${h || ' '}</span>`;
 }
 
-/* A sequence of per-step bands as a row of chips; empty slots until filled. */
 const chips = (n) => Array.from({ length: n }, () => '<i></i>').join('');
 function setChip(row, i, band) {
   const c = row.children[i];
@@ -316,9 +274,6 @@ const ICONS = {
   method: '<svg viewBox="0 0 24 24"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.8 3h10.4A2 2 0 0 0 19 18l-5-9V3"/><path d="M7.5 15h9"/></svg>',
 };
 
-/* ======================================================================
-   <judge-narrative>: one of SS, GP, NA at a time, over every step
-   ====================================================================== */
 const SEQ = ['SS', 'GP', 'NA'];
 
 class JudgeNarrative extends HTMLElement {
@@ -417,10 +372,8 @@ class JudgeNarrative extends HTMLElement {
     for (const s of d.steps) { const im = new Image(); im.src = s.frame; }
   }
 
-  /* Choose the metric to run. The scientific context is an input to NA only,
-     so it is shown only while NA is chosen. */
   pick(m) {
-    this.runner.next();                       // stop a run in progress
+    this.runner.next();
     this.metric = m;
     for (const b of this.querySelectorAll('[data-metricpick]')) {
       const on = b.dataset.metricpick === m;
@@ -437,12 +390,10 @@ class JudgeNarrative extends HTMLElement {
     this.querySelector('.jm-startwrap').classList.remove('is-used');
   }
 
-  /* Show step i: its frame and the previous one, and its elements in the XML. */
   showStep(i, metric) {
     const s = this.d.steps[i];
     const prev = this.d.steps[i - 1];
     this.m.querySelector('[data-cur]').src = s.frame;
-    // each frame carries its own step's narration underneath it
     this.m.querySelector('[data-capcur]').textContent = s.narration;
     this.m.querySelector('[data-capprev]').textContent = prev ? prev.narration : '';
     const pv = this.m.querySelector('[data-prev]');
@@ -469,14 +420,12 @@ class JudgeNarrative extends HTMLElement {
   }
 
   paint(m, k, sum) {
-    const v = 1 - sum / (3 * k);   // running sequence-level score after k steps
+    const v = 1 - sum / (3 * k);
     const meter = this.querySelector(`[data-meter="${m}"]`);
     meter.querySelector('[data-fill]').style.width = `${(v * 100).toFixed(1)}%`;
     meter.querySelector('[data-val]').textContent = fmt(v);
   }
 
-  /* AN = G x the mean of the three sequence-level scores, where G is 1 when
-     both validity gates pass (VF and ASC in band A or B) and 0 otherwise. */
   paintAN() {
     const left = SEQ.filter((k) => !this.ran.has(k));
     const box = this.querySelector('[data-an]');
@@ -552,13 +501,10 @@ class JudgeNarrative extends HTMLElement {
       this.ran.add(m);
       this.paintAN();
       btn.textContent = 'Replay';
-    } catch { /* cancelled */ }
+    } catch {  }
   }
 }
 
-/* ======================================================================
-   <ref-free-tracks>: two orderings of the same diagram, compared step by step
-   ====================================================================== */
 const TRACKS = {
   bench: { label: 'Animation sequence of verified animated narrative from AnimateBench',
     steps: ['Input image', 'Feature learning sub-network', 'Bilinear pooling', 'Neural network',

@@ -1,17 +1,7 @@
-/**
- * Lays out a prompt for reading: headings, paragraphs, (nested) lists and the
- * response format as a field list, with Markdown marks, *** banners and JSON
- * punctuation removed. The words themselves are never changed.
- *
- * Shared by every page that shows a prompt.
- */
 import { escapeHtml as esc } from './format.js';
 
-/* While a prompt is laid out for one particular style, its name stands in for
-   {STYLE} / {A_STYLE}, marked so it can be seen to change with the style. */
 let STYLE_NAME = null;
 
-/** Inline formatting: bold, italics and code spans lose their marks. */
 function inline(raw) {
   let h = esc(raw);
   if (STYLE_NAME) {
@@ -22,8 +12,6 @@ function inline(raw) {
   h = h.replace(/\{A_STYLE\}/g, '<span class="pd-var">a / an + style name</span>')
        .replace(/\{STYLE\}/g, '<span class="pd-var">style name</span>')
        .replace(/\{STYLE_ADAPTER\}/g, '<span class="pd-var">style adapter</span>');
-  // the prompts themselves mention ```json (telling the model not to use it):
-  // that is content, shown as a literal
   h = h.replace(/```(\w*)/g, '<code>&#96;&#96;&#96;$1</code>');
   h = h.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
   h = h.replace(/(^|[\s(])\*([^*\s][^*]*?)\*(?=[\s).,:;]|$)/g, '$1<em>$2</em>');
@@ -33,8 +21,6 @@ function inline(raw) {
 const stripMarks = (s) => s.replace(/^\*+|\*+$/g, '').replace(/:$/, '').trim();
 
 function renderList(items) {
-  // items: [{level, ordered, num, html}] -> nested lists; a deeper item nests
-  // inside the item before it.
   let i = 0;
   const build = (level) => {
     const ordered = items[i].ordered;
@@ -53,8 +39,6 @@ function renderList(items) {
   return html;
 }
 
-/** The response format as a field list. A style slot inside it ({{sN}}) is
- *  expanded with the chosen style's wording for those fields, marked. */
 function renderSchema(lines, fills = {}) {
   const rows = [];
   let inGroup = false;
@@ -78,11 +62,6 @@ function renderSchema(lines, fills = {}) {
   return `<div class="pd-schema">${rows.join('')}</div>`;
 }
 
-/** The prompt text, laid out: headings, paragraphs, lists, response format.
- *  slots: {id: label}. fills: {id: text} for the chosen style. In `filled`
- *  mode every slot is shown with its text (highlighted); otherwise a slot
- *  outside the response format is shown as a marker pointing to the list
- *  of adapters at the bottom. */
 export function formatPrompt(text, slots = {}, fills = {}, filled = false, opts = {}) {
   const prevStyle = STYLE_NAME;
   if (opts.style) STYLE_NAME = opts.style;
@@ -91,8 +70,6 @@ export function formatPrompt(text, slots = {}, fills = {}, filled = false, opts 
 }
 
 function layOut(text, slots, fills, filled, opts) {
-  // Slots and *** section headings may sit side by side on one line in an
-  // arranged template; give each its own line before laying out.
   const lines = text.replace(/\r/g, '')
     .replace(/(\{\{\w+\}\})/g, '\n$1\n')
     .replace(/(\*\*\*[^*\n]+\*\*\*)/g, '\n$1\n')
@@ -113,7 +90,6 @@ function layOut(text, slots, fills, filled, opts) {
       flush();
       const id = m ? m[1] : 'STYLE_ADAPTER';
       if (filled && fills[id] != null && opts.quiet) {
-        // shown in place, exactly as written: no label, only a quiet mark
         out.push(`<div class="pd-filled is-quiet">${layOut(fills[id], {}, {}, false, opts)}</div>`);
       } else if (filled && fills[id] != null) {
         out.push(`<div class="pd-filled"><span class="pd-slot-tag">Style adapter &middot; ${esc(slots[id] || '')}</span>
@@ -155,18 +131,7 @@ function layOut(text, slots, fills, filled, opts) {
 }
 
 
-/**
- * A prompt shared across styles, for one style: its inputs, the prompt, then
- * the style switch and the per-style parts.
- *
- * A prompt that is almost entirely style-specific reads as empty when
- * shown as slots, so it is shown whole for the chosen style instead, with the
- * style-specific parts highlighted. Slots inside the response format are always
- * shown in place in the chosen style's wording (marked), so the adapter list
- * leaves them out.
- */
 export function judgePromptHTML(p, style, styles, example) {
-  if (p.pending) return '<p class="pd-pending">This prompt will be added shortly.</p>';
   const slots = Object.fromEntries(p.slots.map((s) => [s.id, s.label]));
   const filled = p.template.replace(/\{\{\w+\}\}/g, '').replace(/\*\*\*[^*]+\*\*\*/g, '').trim().length < 400;
   const at = p.template.search(/^\{\s*$/m);
@@ -190,8 +155,6 @@ export function judgePromptHTML(p, style, styles, example) {
     </section>`;
 }
 
-/** The complete prompt for one style, exactly as it is given to the judge:
- *  the shared text with that style's parts and name filled in. */
 export function fullPromptText(p, style) {
   let t = p.template;
   for (const [id, txt] of Object.entries(p.adapters[style])) {
@@ -201,9 +164,6 @@ export function fullPromptText(p, style) {
   return t.replace(/\{A_STYLE\}/g, `${art} ${style}`).replace(/\{STYLE\}/g, style);
 }
 
-/** The complete prompt for one style, laid out with its style-specific parts
- *  in place and quietly marked, so switching styles visibly swaps just those
- *  parts. The words are exactly the prompt's own. */
 export function inPlacePromptHTML(p, style) {
   const slots = Object.fromEntries(p.slots.map((s) => [s.id, s.label]));
   return formatPrompt(p.template, slots, p.adapters[style], true, { quiet: true, style });

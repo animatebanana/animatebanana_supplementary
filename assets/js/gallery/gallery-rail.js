@@ -1,70 +1,8 @@
-/**
- * <gallery-rail src="data/gallery/rail_previews.json"></gallery-rail>
- *
- * The overview page's "Explore More Examples" band: a horizontally
- * scrollable, snap-centred carousel of the gallery's own examples, an arrow
- * on each side, and the call-through to the full gallery.
- *
- * WHICH EXAMPLE IS SHOWING CHANGES ONLY WHEN ASKED.
- * The band is a scroll container with mandatory snapping, and the media
- * budget is constantly attaching and detaching videos on the slides either
- * side of the middle. Every one of those attachments is a content change
- * inside the snap container, and a browser answers a content change by
- * re-snapping - which can land a pixel into the neighbour, whose video then
- * attaches, which re-snaps again. Left to read the scroll position, the rail
- * walks itself through the gallery with nobody touching it.
- *
- * So the active slide is owned by navigation, not by measurement. Arrows,
- * arrow keys and clicking a neighbour set it outright; a scroll the visitor
- * performs themselves commits it too. A scroll nobody asked for only repaints
- * the proximity shading and is otherwise ignored.
- *
- * IT PLAYS THROUGH AND HANDS OVER. A preview runs once and then gives the
- * band to the next example, so a visitor who does nothing still sees the range
- * of what the pipeline produces rather than one clip looping into wallpaper.
- * The last slide wraps to the first: this is a round, not a queue with an end.
- *
- * AND THE ROUND IS DEALT BY STYLE. The feed arrives grouped — every Progressive
- * Reveal, then every Alpha Masking, and so on — which is the right shape for a
- * file and the wrong one for a band that advances on its own: left in feed
- * order the first six previews are all the same style, and someone watching
- * would reasonably conclude that is all there is. `roundRobinByStyle` deals one
- * example from each style in turn, so every style is on screen within the first
- * five slides and the run stays varied to the end.
- *
- * The caption carries the style and nothing else. A run time and an "01 / 19"
- * counter were there to tell you how long to wait and how far along you were,
- * which is a question a band that stops asks and a band that cycles does not.
- *
- * IT CARRIES PREVIEWS, NOT THE CLIPS THEMSELVES. Every example in the gallery
- * appears here, but as a silent preview at four times the pace - a hundred
- * kilobytes or so against fifteen megabytes for the first narrated clip alone.
- * Pointing the rail at the real files left the band blank while a narration
- * nobody had asked for downloaded. The demo is a glance; the gallery is where
- * an example is watched and heard.
- *
- * Design notes
- * ------------
- * • It is a real scroll container, not a transform-driven slider — the
- *   arrows just call scrollTo(), so trackpads, touch, shift-wheel and
- *   scrollbars all work for free and nothing has to be re-implemented.
- * • Slide emphasis is continuous: a scroll listener writes a 0→1
- *   proximity-to-centre value onto each slide as `--p`, and the
- *   stylesheet interpolates scale/opacity/shadow from it. Measurement
- *   is rAF-coalesced, so a fling costs one layout read per frame.
- * • All media loading is deferred and budgeted — see preview-media.js.
- *   Nothing is fetched until the band is on screen, only the active
- *   slide ± 1 ever holds a video, and only the active one plays.
- *
- * Part of the self-contained gallery module (assets/{css,js}/gallery/,
- * data/gallery/). It reads the shared lib/ helpers but owns no other
- * component's files.
- */
 import { loadJSON } from '../lib/data-loader.js';
 import { onVisible } from '../lib/lazy-load.js';
 import { PreviewMedia } from './preview-media.js';
 
-const DEFAULT_SRC = 'data/gallery/rail_previews.json?v=3';   /* previews, not the gallery's full clips */
+const DEFAULT_SRC = 'data/gallery/rail_previews.json?v=3';
 
 const prefersReducedMotion = () =>
   window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -72,14 +10,6 @@ const prefersReducedMotion = () =>
 const escapeHTML = (value) =>
   String(value).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
-/**
- * Deal the feed out one example per style at a time.
- *
- * Order within a style is the feed's own, so the pipeline still chooses which
- * Progressive Reveal leads; only the interleaving is ours. A style that runs
- * out drops out of the deal, so the longest group tails the rail rather than
- * leaving holes in it, and every item is placed exactly once.
- */
 function roundRobinByStyle(items) {
   const decks = new Map();
   for (const item of items) {
@@ -114,7 +44,7 @@ class GalleryRail extends HTMLElement {
     try {
       data = await loadJSON(this.getAttribute('src') || DEFAULT_SRC);
     } catch {
-      this.hidden = true; // no feed, no band — never a broken shell
+      this.hidden = true;
       return;
     }
     if (!this.isConnected) return;
@@ -124,8 +54,6 @@ class GalleryRail extends HTMLElement {
       this.hidden = true;
       return;
     }
-    // `defaultIndex` names the lead example by its place in the feed's own
-    // order, so it is picked up before the deal and found again after it.
     const lead = feed[Math.min(Math.max(Number(data.defaultIndex) || 0, 0), feed.length - 1)];
     this._items = roundRobinByStyle(feed);
     this._lead = Math.max(0, this._items.indexOf(lead));
@@ -149,7 +77,6 @@ class GalleryRail extends HTMLElement {
     this._media.releaseAll();
   }
 
-  // ---- rendering ----------------------------------------------------
 
   render() {
     this.innerHTML = `
@@ -191,29 +118,18 @@ class GalleryRail extends HTMLElement {
     this._registerMedia();
     this._wireEvents();
 
-    // Centre the opening slide synchronously — deferring this to rAF
-    // would leave the rail uninitialised until first paint, which never
-    // comes if the page opened in a background tab.
     this._recentre();
-    // Web fonts land after first layout and shift the caption's height,
-    // so take one more pass once they are in.
     document.fonts?.ready.then(() => {
       if (this.isConnected) this._recentre();
     });
   }
 
-  /** Re-centre on the active slide and resync everything derived from it. */
   _recentre() {
     this.scrollToIndex(this._active, 'auto');
     this._measure();
     this._syncCaption();
   }
 
-  /**
-   * A slide carries its animation style and nothing else, and its frame
-   * is a play control rather than a link — clicking a preview plays it
-   * where it is. The band's CTA is the one route into the gallery.
-   */
   slideHTML(item, i) {
     const playable = this.hasVideo(item);
     const label = playable
@@ -244,23 +160,12 @@ class GalleryRail extends HTMLElement {
       </li>`;
   }
 
-  /**
-   * Hand the band to the next example.
-   *
-   * Called when a preview runs out. The feed was dealt by style, so the next
-   * example is a different style, and the last one wraps to the first — the
-   * band is a round through what the pipeline does, not a queue with an end.
-   *
-   * Clicking a centred slide still pauses it, and a paused preview never
-   * reaches `ended`, so nothing moves under a visitor who stopped it.
-   */
   _advance() {
     if (this._items.length < 2) return;
     if (!this._onScreen || document.hidden || prefersReducedMotion()) return;
     this.step(1);
   }
 
-  /** Whether this item has video the rail is actually allowed to load. */
   hasVideo(item) {
     return Boolean((this._mediaReady || item.ready === true) && item.sources?.length);
   }
@@ -280,7 +185,6 @@ class GalleryRail extends HTMLElement {
     });
   }
 
-  // ---- events -------------------------------------------------------
 
   _wireEvents() {
     this._track.addEventListener('scroll', this._onScroll, { passive: true });
@@ -291,10 +195,6 @@ class GalleryRail extends HTMLElement {
     this._motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     this._motionQuery.addEventListener('change', this._onResize);
 
-    // Catches container-driven size changes the window resize event
-    // never sees — a sidebar opening, or the band being revealed after
-    // starting out hidden. Re-centring does not alter the track's box,
-    // so this cannot feed itself.
     if ('ResizeObserver' in window) {
       const ro = new ResizeObserver(() => this._onResize());
       ro.observe(this._track);
@@ -305,13 +205,10 @@ class GalleryRail extends HTMLElement {
       arrow.addEventListener('click', () => this.step(Number(arrow.dataset.step)));
     }
 
-    // `ended` does not bubble, hence the capture pass over the band.
     this.addEventListener('ended', (event) => {
       if (event.target.classList?.contains('gr-video')) this._advance();
     }, true);
 
-    // Off-centre slide: centre it. Centred slide: play or pause it in
-    // place. Neither navigates — the band's CTA owns that.
     this._track.addEventListener('click', (event) => {
       const slide = event.target.closest('.gr-slide');
       if (!slide) return;
@@ -320,14 +217,6 @@ class GalleryRail extends HTMLElement {
       else this.scrollToIndex(index);
     });
 
-    // Arm on first view: before the band is on screen it costs 0 bytes.
-    //
-    // And land on the lead example. The rail is a scroll container, so a
-    // page restored mid-scroll, a deep link, or simply a browser keeping its
-    // last position can leave the band opened on whichever slide happened to
-    // be centred. Arriving at the demo should always begin where the feed
-    // begins - the pipeline's own figure - and only the FIRST arrival, so a
-    // visitor who scrolls the rail and comes back is left where they were.
     this._observers.push(onVisible(this, () => {
       this._media.arm();
       if (this._landed) return;
@@ -339,8 +228,6 @@ class GalleryRail extends HTMLElement {
       this._syncPlayback();
     }, { rootMargin: '200px 0px' }));
 
-    // Playback follows visibility — scrolled away means paused, not
-    // decoding frames behind the fold.
     if ('IntersectionObserver' in window) {
       const io = new IntersectionObserver(
         ([entry]) => {
@@ -358,10 +245,6 @@ class GalleryRail extends HTMLElement {
   }
 
   _onScroll() {
-    // A gesture's momentum keeps the track moving after the finger or the
-    // wheel has stopped, so the window stays open a moment past the last
-    // event. This is set before the frame gate below, or a coalesced frame
-    // swallows the end of the gesture and the slide is never committed.
     if (this._userScrolling) {
       clearTimeout(this._intentT);
       this._intentT = setTimeout(() => this._settle(), 160);
@@ -373,13 +256,11 @@ class GalleryRail extends HTMLElement {
     });
   }
 
-  /** The gesture has come to rest: take whatever is centred now. */
   _settle() {
     this._measure();
     this._userScrolling = false;
   }
 
-  /** The gestures that mean "I am moving this", and nothing else. */
   _wireIntent() {
     const open = () => {
       this._userScrolling = true;
@@ -409,20 +290,7 @@ class GalleryRail extends HTMLElement {
     }
   }
 
-  // ---- carousel mechanics -------------------------------------------
 
-  /**
-   * Move by one, wrapping at either end.
-   *
-   * The band is a round: a preview that runs out hands over, and the last
-   * slide hands back to the first. The arrows do the same rather than greying
-   * out at an edge the rail itself crosses a moment later — a disabled Next
-   * on a carousel that then advances anyway reads as a bug.
-   *
-   * A wrap crosses the whole track, and scrolling that smoothly would pass
-   * through every slide in between, attaching and detaching a video at each.
-   * The wrap is a cut; an ordinary step is a glide.
-   */
   step(delta) {
     const n = this._items.length;
     if (!n) return;
@@ -434,9 +302,6 @@ class GalleryRail extends HTMLElement {
     const clamped = Math.min(Math.max(index, 0), this._slides.length - 1);
     const slide = this._slides[clamped];
     if (!slide) return;
-    // Asking for a slide IS the decision; the scroll that follows is how it
-    // is shown, not how it is decided. Reading it back from the scroll
-    // position is what let a re-snap move the rail on its own.
     const moved = clamped !== this._active;
     this._active = clamped;
     const left = slide.offsetLeft - (this._track.clientWidth - slide.offsetWidth) / 2;
@@ -452,10 +317,6 @@ class GalleryRail extends HTMLElement {
     this._syncArrows();
   }
 
-  /**
-   * One layout read per animation frame: write each slide's 0→1
-   * closeness to the track centre into `--p` and pick the winner.
-   */
   _measure() {
     if (!this._slides.length) return;
     const centre = this._track.scrollLeft + this._track.clientWidth / 2;
@@ -473,9 +334,6 @@ class GalleryRail extends HTMLElement {
       }
     }
 
-    // Only a scroll the visitor is performing commits a new slide. A
-    // re-snap after a video attached, a resize, a restored scroll position:
-    // those move the track without anyone asking, and must not move the demo.
     if (best !== this._active && this._userScrolling) {
       this._active = best;
       this._syncCaption();
@@ -485,7 +343,6 @@ class GalleryRail extends HTMLElement {
     this._syncArrows();
   }
 
-  /** Neither end is an end any more, so neither arrow is ever dead. */
   _syncArrows() {
     this.querySelector('.gr-arrow-prev').disabled = false;
     this.querySelector('.gr-arrow-next').disabled = false;

@@ -1,50 +1,20 @@
 import { loadJSON } from '../lib/data-loader.js';
 import { onVisible } from '../lib/lazy-load.js';
 
-/**
- * <edit-diff src="data/editability.json">
- *
- * One window per edit: the animation as it was, the suggestion a person made,
- * and the animation that came back. Each animation is independent — its own
- * transport, its own speed, its own narration slate — so you can park one and
- * study the other.
- *
- * The animations are the files the pipeline emitted, played through their own
- * CSS: paused, then seeked with the Web Animations API, so every example keeps
- * its real animation style. An inline SVG's <style> is NOT scoped, so each one
- * gets its own shadow root; without that, eighteen stylesheets (and eighteen
- * url(#arrow) markers) would fight across the page.
- *
- * Observations come from data/editability_notes.json, and each panel's title -
- * what is special about that particular claim - from
- * data/editability_titles.json. Both are hand-written and only ever have slots
- * added to them by their build scripts.
- *
- * Every panel carries a stable anchor (`ed-<group>-<sample>`), so a single claim
- * can be linked to directly rather than pointing someone at the whole page; the
- * header has a button that copies that link, and arriving with the fragment in
- * the URL scrolls to the panel and marks it.
- *
- * `only="ed-<group>-<sample>"` shows that one example and nothing else - no
- * section banner, no section note - for a page that wants a single edit as a
- * preview. Its link button then goes to the example's home on the editability
- * page, since that is the address worth sharing.
- */
 
-const SEEK_PAD = 350;        // ms past a caption's cue, so its fade has finished
-const STEP_MS  = 2400;       // dwell per beat at 1x
+const SEEK_PAD = 350;
+const STEP_MS  = 2400;
 const SPEEDS   = [0.5, 1, 1.5, 2];
 const SHADOW_CSS = ':host{display:block}svg{display:block;width:100%;height:auto}';
 
 const esc = (s) => String(s).replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
 
 function svgFrom(markup) {
-  /* these files are authored as loose SVG; the HTML parser is the forgiving one */
   const doc = new DOMParser().parseFromString(markup, 'text/html');
   const svg = doc.querySelector('svg');
   if (!svg) return null;
   const banner = svg.querySelector('#narration_banner');
-  if (banner) banner.remove();          // the narration moves out to the slate
+  if (banner) banner.remove();
   svg.removeAttribute('width');
   svg.removeAttribute('height');
   svg.setAttribute('width', '100%');
@@ -53,7 +23,6 @@ function svgFrom(markup) {
   return svg;
 }
 
-/** One animation with its own controls. Knows nothing about the other side. */
 class Side {
   constructor(root, which, src, beats) {
     this.src = src; this.beats = beats;
@@ -98,12 +67,9 @@ class Side {
     this.root.innerHTML = '<style>' + SHADOW_CSS + '</style>';
     this.root.appendChild(document.importNode(svg, true));
     this.svg = this.root.querySelector('svg');
-    /* SMIL (<animate>) is NOT part of getAnimations(), so pausing the WAAPI
-       set alone left the focus box hopping on its own before Play was ever
-       pressed. Freeze the document clock first thing, before a frame paints. */
     this.freeze();
     await new Promise(r => requestAnimationFrame(r));
-    this.freeze();                       // anything that only started on paint
+    this.freeze();
     this.crop(vb);
     this.ready = true;
     this.show(this.i);
@@ -111,8 +77,6 @@ class Side {
   fail(msg) {
     this.host.innerHTML = '<div class="ed-load">' + msg + '</div>';
   }
-  /** Hold every clock in the SVG still: the CSS/WAAPI animations and the
-      SMIL timeline, which runs on the <svg> element's own clock. */
   freeze() {
     if (this.svg && this.svg.pauseAnimations) {
       try { this.svg.pauseAnimations(); } catch (e) {}
@@ -123,8 +87,6 @@ class Side {
     });
     this.anims.forEach(a => { try { a.pause(); } catch (e) {} });
   }
-  /** Shrink-wrap the viewBox around the diagram, so the panel is not mostly
-      empty where the narration banner used to sit. */
   crop(vb) {
     const svg = this.root.querySelector('svg');
     if (!svg || !svg.getBBox) return;
@@ -134,10 +96,6 @@ class Side {
     const pad = Math.max(bb.width, bb.height) * 0.02;
     let x = bb.x - pad, y = bb.y - pad, w = bb.width + pad * 2, h = bb.height + pad * 2;
     if (vb[2] && vb[3]) {
-      /* The declared box is a guide, not a hard clip. Some focus boxes are
-         authored a couple of units outside it (x = -2, y = -2), and clamping
-         cut their stroke clean off the edge of the panel. Allow a little
-         overhang either side instead. */
       const slack = Math.max(vb[2], vb[3]) * 0.04;
       const x0 = Math.max(x, vb[0] - slack), y0 = Math.max(y, vb[1] - slack);
       w = Math.min(x + w, vb[0] + vb[2] + slack) - x0;
@@ -190,10 +148,10 @@ class EditDiff extends HTMLElement {
     }
     try {
       notes = await loadJSON(this.getAttribute('notes') || 'data/editability_notes.json');
-    } catch (e) { /* notes are optional */ }
+    } catch (e) {  }
     try {
       titles = await loadJSON(this.getAttribute('titles') || 'data/editability_titles.json');
-    } catch (e) { /* titles are optional */ }
+    } catch (e) {  }
     this.titles = titles.titles || {};
 
     const only = this.getAttribute('only');
@@ -208,15 +166,13 @@ class EditDiff extends HTMLElement {
       return;
     }
 
-    this._count = 0;        /* panels are numbered as they are rendered */
+    this._count = 0;
     this.innerHTML = groups.map(g => this.group(g, notes)).join('') + this.modal();
 
     this.addEventListener('click', (e) => {
       const b = e.target.closest('[data-link]');
       if (b) this.copyLink(b);
     });
-    // arriving with #ed-… in the URL: the panels are tall, so scroll to it and
-    // mark it rather than leaving the reader to find which one was meant
     this.markTarget();
     window.addEventListener('hashchange', () => this.markTarget());
     this.dlg = this.querySelector('.ed-modal');
@@ -229,9 +185,7 @@ class EditDiff extends HTMLElement {
     }));
   }
 
-  /* ---------------- markup ---------------- */
 
-  /** the anchor for one panel; also the key its title is stored under */
   anchorFor(g, ex) { return `ed-${g.key}-${ex.id}`; }
 
   markTarget() {
@@ -244,16 +198,6 @@ class EditDiff extends HTMLElement {
     this.settleTo(el);
   }
 
-  /**
-   * Scroll to a panel and stay there.
-   *
-   * The panels load their SVGs only when they come near the viewport, and each
-   * one sets its own aspect-ratio once it has, so the page grows underneath a
-   * scroll that is still running and the reader lands somewhere else entirely.
-   * So: scroll, then keep re-measuring for a couple of seconds and correct the
-   * position whenever the layout moves — unless the reader takes over, in which
-   * case leave them alone.
-   */
   settleTo(el) {
     clearTimeout(this._settle);
     const offset = () => {
@@ -295,23 +239,13 @@ class EditDiff extends HTMLElement {
     history.replaceState(null, '', url);
     let ok = true;
     try { await navigator.clipboard.writeText(url.href); }
-    catch { ok = false; }                       // denied clipboard, or no https
+    catch { ok = false; }
     btn.classList.add('is-copied');
     btn.setAttribute('aria-label', ok ? 'Link copied' : 'Link is in the address bar');
     setTimeout(() => { btn.classList.remove('is-copied'); }, 1400);
     this.markTarget();
   }
 
-  /**
-   * NUMBERING IS THE PAGE'S, NOT THE DATA'S.
-   *
-   * An example whose before and after narrate identically is not shown -
-   * there is nothing to compare - and while the numbers were kept by hand in
-   * the feed, that hidden example still consumed one: the page ran Example 6,
-   * then Example 8. Panels are counted as they are rendered instead, across
-   * the whole page and in the order the sections appear, so a hidden example,
-   * a reordering or a new one cannot leave a hole.
-   */
   group(g, notes) {
     const shown = g.examples.filter(e => !e.identical);
     if (this.bare) return shown.map(e => this.example(e, g, notes)).join('');
@@ -424,7 +358,6 @@ class EditDiff extends HTMLElement {
       </dialog>`;
   }
 
-  /* ---------------- behaviour ---------------- */
 
   wire(ex) {
     const root = this.querySelector('[data-ex="' + CSS.escape(ex.id) + '"]');

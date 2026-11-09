@@ -1,11 +1,8 @@
-/* The overview page's route into the animated pipeline walkthrough.
-   Self-contained: owns only .pb-* and .pipe-band, so it can be added to or
-   removed from a page without touching another module's stylesheet. */
 
 .pipe-band {
   position: relative;
   padding: clamp(48px, 6vw, 88px) 0 clamp(16px, 2vw, 32px);
-  scroll-margin-top: var(--anchor-offset, 86px); /* the sticky nav must not sit on the heading */
+  scroll-margin-top: var(--anchor-offset, 86px);
 }
 .pipe-wrap {
   max-width: 1240px;

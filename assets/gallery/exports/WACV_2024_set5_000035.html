@@ -4,22 +4,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AnimateBanana — Progressive Reveal — WACV_2024_set5_000035</title>
-<!--
-  AnimateBanana — Progressive Reveal — WACV_2024_set5_000035
-  An animated visual narrative produced by the AnimateBanana pipeline.
-
-  This file is self-contained: the animation, its images, its narration and its
-  controls are all inside it. Drop it on a server, open it from a disk, or put
-  it in an <iframe> - it needs nothing else and fetches nothing.
-
-  The animation is CSS. The controls drive it through the browser's animation
-  API - pause holds every keyframe at once, the bar scrubs them all to the same
-  moment, speed sets their rate together - and the caption is read from a clock
-  of the page's own that is driven alongside them. It has to be its own clock:
-  the drawing is made of hundreds of short animations that each stop when they
-  are done, so reading the time off any one of them gives a watch that stopped
-  half a second in.
--->
 <style>
   :root {
     --ink: #1A1815;
@@ -45,9 +29,6 @@
   }
   .ab-stage svg { display: block; width: 100%; height: auto; }
 
-  /* ---- Transport ----
-     Every control is the same height and centred on the same line, so the bar
-     reads as one object rather than a row of parts that happen to be adjacent. */
   .ab-bar {
     --h: 40px;
     display: flex;
@@ -89,7 +70,6 @@
   .ab.is-paused .ab-play .ab-ic-play { display: block; }
   .ab.is-paused .ab-play .ab-ic-pause { display: none; }
 
-  /* the rail is drawn; the range input laid over it is what you actually grab */
   .ab-scrub { position: relative; flex: 1 1 180px !important; min-width: 120px;
               display: flex; align-items: center; }
   .ab-rail {
@@ -162,7 +142,6 @@
   }
   .ab.is-fast .ab-rate { background: var(--banana); }
 
-  /* Captions on or off, said in words rather than left to be inferred */
   .ab-toggle .ab-led {
     width: 11px; height: 11px; border-radius: 50%;
     border: 2px solid var(--ink); background: var(--banana);
@@ -170,7 +149,6 @@
   .ab-toggle[aria-pressed="false"] { color: var(--mute); }
   .ab-toggle[aria-pressed="false"] .ab-led { background: #fff; }
 
-  /* ---- The line being narrated ---- */
   .ab-cap {
     display: flex;
     align-items: center;
@@ -191,8 +169,6 @@
   .ab.is-off .ab-cap { display: none; }
   @media (prefers-reduced-motion: reduce) { .ab-cap { transition: none; } }
 
-  /* Narrow: the bar wraps to two rows and squares off, rather than squeezing
-     the scrub bar down to nothing. */
   @media (max-width: 720px) {
     .ab-bar { flex-wrap: wrap; border-radius: 20px; }
     .ab-scrub { order: 3; flex-basis: 100% !important; }
@@ -205,7 +181,6 @@
   <div class="ab-stage">
 <svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 409">
   <defs>
-    <!-- Arrowhead markers -->
     <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
       <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#000000" />
     </marker>
@@ -335,14 +310,10 @@
     }
   </style>
 
-  <!-- ========================================================================= -->
-  <!-- PANEL (a) MAIN BLOCK                                                      -->
-  <!-- ========================================================================= -->
   <g data-id="panel_a" id="panel_a" data-class="block" data-parent="root">
     <rect x="5" y="5" width="480" height="390" rx="3" fill="#ffffff" stroke="#2b3a4a" stroke-width="1.5" stroke-dasharray="4,3" />
     <text data-id="text_panel_a" id="text_panel_a" data-class="text_node" data-parent="panel_a" x="12" y="24" class="label-panel" fill="#000000">(a)</text>
 
-    <!-- 3D Poses at top (Placeholders) -->
     <g id="pose_3d_1" data-id="pose_3d_1" data-class="raster_node"><image href="data:image/png;base64,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" x="42" y="12" width="42" height="36" preserveAspectRatio="xMidYMid meet" /></g>
     <g id="pose_3d_2" data-id="pose_3d_2" data-class="raster_node"><image href="data:image/png;base64,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" x="110" y="12" width="42" height="36" preserveAspectRatio="xMidYMid meet" /></g>
     <g id="pose_3d_3" data-id="pose_3d_3" data-class="raster_node"><image href="data:image/png;base64,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" x="180" y="12" width="42" height="36" preserveAspectRatio="xMidYMid meet" /></g>
@@ -351,25 +322,21 @@
     <g id="pose_3d_t1" data-id="pose_3d_t1" data-class="raster_node"><image href="data:image/png;base64,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" x="360" y="12" width="42" height="36" preserveAspectRatio="xMidYMid meet" /></g>
     <g id="pose_3d_t" data-id="pose_3d_t" data-class="raster_node"><image href="data:image/png;base64,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" x="428" y="12" width="42" height="36" preserveAspectRatio="xMidYMid meet" /></g>
 
-    <!-- Regression Head -->
     <g data-id="regression_head" id="regression_head" data-class="child_node" data-parent="panel_a">
       <rect x="25" y="66" width="445" height="18" fill="#ece5a5" stroke="#999999" stroke-width="0.6" />
       <text x="247" y="79" class="label-reg" text-anchor="middle" fill="#000000">Regression Head</text>
     </g>
 
-    <!-- Top FC Layer -->
     <g data-id="fc_layer_top" id="fc_layer_top" data-class="child_node" data-parent="panel_a">
       <rect x="25" y="93" width="445" height="18" fill="#94a7b0" stroke="#758891" stroke-width="0.6" />
       <text x="247" y="106" class="label-reg" text-anchor="middle" fill="#000000">Fully Connected Layer</text>
     </g>
 
-    <!-- AGFormer Nested Block -->
     <g data-id="agformer_block" id="agformer_block" data-class="block" data-parent="panel_a">
       <rect x="25" y="117" width="445" height="135" fill="#dfe6eb" stroke="#000000" stroke-width="1.2" stroke-dasharray="3,2" />
       <text data-id="text_agformer" id="text_agformer" data-class="text_node" data-parent="agformer_block" x="32" y="138" class="label-sub" fill="#000000">AGFormer</text>
       <text data-id="text_agformer_n" id="text_agformer_n" data-class="text_node" data-parent="agformer_block" x="450" y="137" class="label-reg" text-anchor="end" fill="#000000">&#xd7; N</text>
 
-      <!-- F_GF and F_TF labels -->
       <g data-id="label_fgf" id="label_fgf" data-class="child_node" data-parent="agformer_block">
         <text x="145" y="138" class="label-sub" text-anchor="middle" fill="#000000">F<tspan font-size="0.65em" baseline-shift="sub">GF</tspan></text>
       </g>
@@ -377,13 +344,11 @@
         <text x="345" y="138" class="label-sub" text-anchor="middle" fill="#000000">F<tspan font-size="0.65em" baseline-shift="sub">TF</tspan></text>
       </g>
 
-      <!-- Adaptive Fusion Add Circle in AGFormer -->
       <g data-id="af_fusion_agformer" id="af_fusion_agformer" data-class="composite_whole" data-parent="agformer_block">
         <circle data-id="af_circ_ag" id="af_circ_ag" data-class="composite_part" data-parent="af_fusion_agformer" cx="245" cy="130" r="6" fill="#000000" />
         <path data-id="af_plus_ag" id="af_plus_ag" data-class="composite_part" data-parent="af_fusion_agformer" d="M 242 130 L 248 130 M 245 127 L 245 133" stroke="#ffffff" stroke-width="1.2" />
       </g>
 
-      <!-- Branch 1 (Left): Temporal GCNFormer + Reshape + Spatial GCNFormer -->
       <g data-id="temporal_gcnformer" id="temporal_gcnformer" data-class="child_node" data-parent="agformer_block">
         <rect x="55" y="152" width="170" height="26" rx="2" fill="#48c998" stroke="#36a378" stroke-width="0.6" />
         <text x="140" y="169" class="label-reg" text-anchor="middle" fill="#000000">Temporal <tspan font-weight="bold">GCN</tspan>Former</text>
@@ -391,7 +356,6 @@
       
       <g data-id="reshape_icon_left" id="reshape_icon_left" data-class="composite_whole" data-parent="agformer_block">
         <circle data-id="res_circ_l" id="res_circ_l" data-class="composite_part" data-parent="reshape_icon_left" cx="140" cy="192" r="7" fill="#000000" />
-        <!-- 3x3 grid icon inside reshape -->
         <path data-id="res_grid_l" id="res_grid_l" data-class="composite_part" data-parent="reshape_icon_left" d="M 136.5 188.5 h 7 v 7 h -7 z M 136.5 191 h 7 M 136.5 193.5 h 7 M 139 188.5 v 7 M 141.5 188.5 v 7" stroke="#ffffff" stroke-width="0.6" fill="none" />
       </g>
 
@@ -400,7 +364,6 @@
         <text x="140" y="225" class="label-reg" text-anchor="middle" fill="#000000">Spatial <tspan font-weight="bold">GCN</tspan>Former</text>
       </g>
 
-      <!-- Branch 2 (Right): Temporal Transformer + Reshape + Spatial Transformer -->
       <g data-id="temporal_transformer" id="temporal_transformer" data-class="child_node" data-parent="agformer_block">
         <rect x="268" y="152" width="165" height="26" rx="2" fill="#48c998" stroke="#36a378" stroke-width="0.6" />
         <text x="350" y="169" class="label-reg" text-anchor="middle" fill="#000000">Temporal <tspan font-weight="bold">Trans</tspan>former</text>
@@ -417,19 +380,16 @@
       </g>
     </g>
 
-    <!-- SPE (Spatial Position Embedding) -->
     <g data-id="spe_node" id="spe_node" data-class="child_node" data-parent="panel_a">
       <rect x="195" y="259" width="30" height="15" fill="#678d96" rx="1" />
       <text x="210" y="270" class="label-xs" text-anchor="middle" fill="#ffffff" font-weight="bold">SPE</text>
     </g>
 
-    <!-- Bottom FC Layer -->
     <g data-id="fc_layer_bottom" id="fc_layer_bottom" data-class="child_node" data-parent="panel_a">
       <rect x="25" y="278" width="445" height="18" fill="#94a7b0" stroke="#758891" stroke-width="0.6" />
       <text x="247" y="291" class="label-reg" text-anchor="middle" fill="#000000">Fully Connected Layer</text>
     </g>
 
-    <!-- 2D Poses at bottom (Placeholders) -->
     <g id="pose_2d_1" data-id="pose_2d_1" data-class="raster_node"><image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACMAAAAyCAIAAABZMfUwAAAFUUlEQVR4nO2YX0hTbxjH37kDLkeo0zbHNnUzzN2o2y605tAQE5TUQWyMKBCFGh6DRgVeiUg1JOjCvJIN0bwQDS01yz/ghJW4VJpgKnmY+KfMpjuUazvu7HRxQvbbn7Od/eh39Xuuxnu+z/M5z/M+e9+HAwg61t/fn5eX5/V6aXmRlgBoGkEQdF1Io01KSKDt8sdoVcDhcIyPj+M4Hkf1GHFXg67FW4r/huT3+/86yeVy3b17V6PRrK+v00bR2tWpqSnS6+HDh3Q7gl5OUqn02rVrIpFoZmYGw7C/mBNBEMfHx5OTkyKRyGKx/MWcAABnzpx58+bN3t7eq1ev6LUG3ZzcbrdYLAYAqFSqX79+xe5Im0QQxL1797hc7tu3b2l50SadnJwoFAqj0UgtwzDsX5H29/cbGhq4XO7q6iqFzGKxqFSq1tbWQB4NEoIgV69eBQAkJSVduXLFZDI5nc6NjY2lpaUgpVarBQAwmczd3d1YST6fb2VlxWKxNDY28vn8oqKic+fOZWVl1dfXFxYWCgSClJQUNps9Ojoa6PX48WMIghobGwPvzCgko9EoFAo5HI5arR4dHUVRFIbh6upqgiB2d3c7OjrIBtbr9acuOI5rNJq6ujq32x0YKgqpuroaAMDj8Y6Pj8mV+/fv19TUnAp6enoMBkNmZqbBYCCbfmZmhsfjLS8vB4WiIlmtVrFYLJVKh4aGThdhGFar1UHKyclJsqTb29u1tbXXr18PjRaGhKLo1NRUV1cXl8vV6/UulyvwqV6v12q1oV52uz05OTklJYXH4y0uLkYn+f1+GIYhCIIg6NmzZz6fL/Cpz+dTq9VhX9nr9WZkZAAASktLw54dwSQMw8hWzs/PD5oX/H5/W1tbQkLCpUuXnE5n6Cs+ffpUpVINDg6GYsKQCILo7OwUiUSzs7OhsW7evAkAyM3N3dzcDBvu58+fYdfDk5qbm+vq6sKqHQ5HYWGhTqfz+/2RIkay4FsDw7DV1VWZTBb24M/KypLJZCwWi8Fg0LtsQueIvb29nZ2d0tLSSA7k5tHFBJNQFG1vb8cwLD8/n8onvjE2sJSPHj0CADCZzNB2IO3du3cSiaSqquro6Ojw8LC7u3t4ePjk5CSWffoHaWxs7OzZs+fPn//8+TNBENPT0zU1Nc+fP0cQpLe3F4Zh8h/DYrFKSkoUCgX5e2FhIRZS8LS8sbHBZrMFAoHP5ysrK7NarQwGQygU8vl8oVCYlJS0uLhYUFBw+fLlDx8+9Pf3u91us9lcX19Pr3qBhuO40WiEIKiysnJ+fv7g4IBcdzgcp0fA3NzcrVu35HJ56A0bpXqh1tzcHHqeBhqCINnZ2S9evIhKitJFeXl5TqfT7XZHEojF4oqKCpPJhOM4dagoJIlEgqLowcEBhebOnTsfP348HaTjJHG5XBRFURSl0IhEIgBAU1OTzWaLk7S9vX379u2vX79ubW1RyD59+vTt2zcEQQYGBuIkra+v22w2j8djt9spZFKpNDs7Oycn58aNGxQyqt7zeDwtLS0sFmtiYoJC9uXLF4FAMDY2Fn/vJSYmlpeXSySSCxcuUMiGh4czMjKKi4upEoraESMjIzk5OeTIH6kkL1++VCqVaWlp8ZMwDLPb7UqlMpIAQZAnT56sra3pdDpqzJ+XirRJHR0d6enpocMwafv7+xcvXgQAFBcXx3KcR8zp9evXDx48+P79++bmZlgBjuMejwcAIJfLmUxm1JSgSA84HE5qaipBEBwOJ6yAz+ebzWabzVZbWxvLZU/1jYW8eIqKiqJGicX+/5oDAHj//n1fX9+PHz/oOv4GCaRYqrriV5QAAAAASUVORK5CYII=" x="47" y="318" width="34" height="42" preserveAspectRatio="xMidYMid meet" /></g>
     <text data-id="lbl_pose_1" id="lbl_pose_1" data-class="text_node" data-parent="panel_a" x="64" y="372" class="label-reg" text-anchor="middle" fill="#000000">1</text>
 
@@ -450,69 +410,55 @@
     <g id="pose_2d_t" data-id="pose_2d_t" data-class="raster_node"><image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB8AAAAyCAIAAAAr/peGAAAFGUlEQVR4nOVYX0habxj+tGBnA7Wwwv6hVFtFjLpREodNdJYsFiu6a1vg6CYDwQYOtkEQ3Xg7CSJoEEVtESyiMliysblWRFnbEsz+DPs/p2cuz1GP59vFgX7O9OgZ7ur3XB2P7/vw+Lzv936fH4ApwGQyKZXKcDicSnA02CAFEAQRCoVSiYxBZipBUqk0OzubzU5JSjRYEELmmlIFYzn/hD0UCvl8vn/CjqKoVqvVaDSfPn1iRp9KYy0uLlLB3d3d6e/Iqqqq9vb2S5cuqVSq9GuHEO7s7JSXl9tstvRrJ0lyYGDA7Xa/ffs2/dp9Pt/ly5cBAA0NDenXzuPxdDodm81++PAhI+kpse/t7YXDYaFQeOfOHUbsyZ0hCKKlpQUAUFBQgOM4I2fis0ciERRFIYShUOjVq1d5eXmUFL1ev7+/DyE8Pj6mAugRZ4oFg0Gj0bi8vKzRaD58+LC+vi6TyWZnZ3U6ndVqDQQCra2tU1NThYWFZrO5oKCAmTMul4vFYgEAuFxuZ2fn9va2yWSSSCR+v//Xr19PnjzhcDhU7ps3bxg7g2GYVqvNyMh4/fo1hBBFUbFY3NfXdx4wMzNTWVmpUqm8Xi9jdgjh+Pj41atXI5EIhHBiYiI/P//w8DA6wGAw3L17N/qN2+2OiYGJ+t3hcJSVlbHZbI/H09/f39raKhAIogPYbHY4HD7/uLGxcfv27ebmZofDER0Wf+f7+vVrTU3N9vZ2U1PT58+fOzo6qPcHBweRSCQ7O3ttbc1ut1ssltLSUpfLNTg4aLfbKVkVFRV07ARBbG5utrS0HB4efvnyhcViHR0dnZ2d2e12nU4HANBqtUtLSyiK3rt3Ly8vz+PxiMXiBw8e5OTkyOVyOu0kST5//nxjY2NhYUEoFAoEAq/XazabTSZTIBD48eMHACAcDnd1db1//14mk6lUqurqah6Px2KxqE6LRmy/+/1+hUKxsrICAFAoFEKhcGJiorOzUy6Xczic6elpHMefPXvG5/NxHEcQJK6x/yGmyiRJDg8PKxSKoaEhgiAIgqitrTWbzfSdx6wjo+fJ06dP1Wp1OtmjYbFYuFxuT0/PyclJ2tgJgqAerFYr5e/Nmzdfvny5v7/vcDgmJycxDEvKHmeKQQhHR0fHxsbq6+v39vYsFsvJyQmO49evX8cw7ODgAEVRHMcfP37c29vLrKoQQgzDhEIh9W1jY+OLFy9sNtvHjx8p6tnZWWog379//2+ciUQier0+MzPTaDRSoyYGS0tLUqm0ubn53D0G7BDC+fn53Nzc09PTRGlWq7WkpMThcNCzx59iNputurqaz+cn8lMmk125cuXdu3f0tsdnX1hYUCqVF1f2ObxeL7XuMAyjo7/4c1wuF5/Pp993zrtlbm6OgTNer9dgMPh8vtXVVRpNN27cQBDk2rVr0fM2ufatrS2RSAQAaGtrI0kykahQKCQSiUZGRmiLekG7SCRSq9XFxcVdXV00vn///p06P9EJv1jVjIyMnz9/qtVqiURCk7a5uZmVlRWzHSZnPz09dTqddXV19Gnr6+s5OTlJDjPggu+Li4uFhYXfvn2jcdNisRQVFSmVyqSD7A/23d3dW7dulZeXB4PBRAkkSVLHyqKioqRr9Q/29vZ2AACCIDs7OzQ5k5OTEonk0aNHzLQPDAwgCCKXy30+H32ax+NJ5dogdr47nc7c3NysrKwk5UoN/4d/8n+HhDcoJElS5w5qHlAPCIIwukf5DUAMVU/kn1czAAAAAElFTkSuQmCC" x="428" y="318" width="34" height="42" preserveAspectRatio="xMidYMid meet" /></g>
     <text data-id="lbl_pose_t" id="lbl_pose_t" data-class="text_node" data-parent="panel_a" x="445" y="372" class="label-reg" text-anchor="middle" fill="#000000">T</text>
 
-    <!-- Legend at bottom of panel (a) -->
     <g data-id="legend_group" id="legend_group" data-class="block" data-parent="panel_a">
-      <!-- Reshape icon + label -->
       <circle data-id="leg_res_circ" id="leg_res_circ" data-class="composite_part" data-parent="legend_group" cx="98" cy="384" r="5" fill="#000000" />
       <path data-id="leg_res_grid" id="leg_res_grid" data-class="composite_part" data-parent="legend_group" d="M 95.5 381.5 h 5 v 5 h -5 z M 95.5 383.5 h 5 M 95.5 385 h 5 M 97.5 381.5 v 5 M 99 381.5 v 5" stroke="#ffffff" stroke-width="0.5" fill="none" />
       <text data-id="text_leg_reshape" id="text_leg_reshape" data-class="text_node" data-parent="legend_group" x="108" y="388" class="label-sm" fill="#000000">Reshape</text>
 
-      <!-- Adaptive fusion icon + label -->
       <circle data-id="leg_af_circ" id="leg_af_circ" data-class="composite_part" data-parent="legend_group" cx="187" cy="384" r="5" fill="#000000" />
       <path data-id="leg_af_plus" id="leg_af_plus" data-class="composite_part" data-parent="legend_group" d="M 184.5 384 h 5 M 187 381.5 v 5" stroke="#ffffff" stroke-width="1" />
       <text data-id="text_leg_af" id="text_leg_af" data-class="text_node" data-parent="legend_group" x="197" y="388" class="label-sm" fill="#000000">Adaptive Fusion</text>
 
-      <!-- SPE icon + label -->
       <rect data-id="leg_spe_rect" id="leg_spe_rect" data-class="composite_part" data-parent="legend_group" x="296" y="377" width="22" height="13" fill="#678d96" rx="1" />
       <text data-id="leg_spe_txt" id="leg_spe_txt" data-class="composite_part" data-parent="legend_group" x="307" y="386" class="label-xs" text-anchor="middle" fill="#ffffff" font-weight="bold">SPE</text>
       <text data-id="text_leg_spe" id="text_leg_spe" data-class="text_node" data-parent="legend_group" x="323" y="388" class="label-sm" fill="#000000">Spatial Position Embedding</text>
     </g>
   </g>
 
-  <!-- ========================================================================= -->
-  <!-- PANEL (b) SPATIAL TOKEN MIXER BLOCK                                       -->
-  <!-- ========================================================================= -->
   <g data-id="panel_b" id="panel_b" data-class="block" data-parent="root">
     <rect x="495" y="5" width="300" height="208" rx="3" fill="#ffffff" stroke="#f48045" stroke-width="1.5" stroke-dasharray="4,3" />
     <text data-id="text_panel_b" id="text_panel_b" data-class="text_node" data-parent="panel_b" x="502" y="24" class="label-panel" fill="#f48045">(b)</text>
 
-    <!-- Top Addition Circle -->
     <g data-id="add_node_b2" id="add_node_b2" data-class="composite_whole" data-parent="panel_b">
       <circle data-id="add_circ_b2" id="add_circ_b2" data-class="composite_part" data-parent="add_node_b2" cx="665" cy="27" r="5" fill="#ffffff" stroke="#000000" stroke-width="1" />
       <path data-id="add_plus_b2" id="add_plus_b2" data-class="composite_part" data-parent="add_node_b2" d="M 662.5 27 h 5 M 665 24.5 v 5" stroke="#000000" stroke-width="1" />
     </g>
 
-    <!-- Channel MLP -->
     <g data-id="mlp_block_b" id="mlp_block_b" data-class="child_node" data-parent="panel_b">
       <rect x="550" y="37" width="220" height="17" fill="#d6e4fc" stroke="#333333" stroke-width="1" />
       <text x="660" y="49.5" class="label-reg" text-anchor="middle" fill="#000000">Channel MLP</text>
     </g>
 
-    <!-- Layer Norm Top -->
     <g data-id="ln_top_b" id="ln_top_b" data-class="child_node" data-parent="panel_b">
       <rect x="550" y="58" width="220" height="17" fill="#faecc3" stroke="#333333" stroke-width="1" />
       <text x="660" y="70.5" class="label-reg" text-anchor="middle" fill="#000000">Layer Normalization</text>
     </g>
 
-    <!-- Mid Addition Circle -->
     <g data-id="add_node_b1" id="add_node_b1" data-class="composite_whole" data-parent="panel_b">
       <circle data-id="add_circ_b1" id="add_circ_b1" data-class="composite_part" data-parent="add_node_b1" cx="665" cy="87" r="5" fill="#ffffff" stroke="#000000" stroke-width="1" />
       <path data-id="add_plus_b1" id="add_plus_b1" data-class="composite_part" data-parent="add_node_b1" d="M 662.5 87 h 5 M 665 84.5 v 5" stroke="#000000" stroke-width="1" />
     </g>
 
-    <!-- Spatial Token Mixer -->
     <g data-id="spatial_mixer_b" id="spatial_mixer_b" data-class="child_node" data-parent="panel_b">
       <rect x="550" y="97" width="220" height="17" fill="#ffffff" stroke="#000000" stroke-width="1.2" stroke-dasharray="3,2" />
       <text x="660" y="109.5" class="label-reg" text-anchor="middle" fill="#000000">Spatial Token Mixer</text>
     </g>
 
-    <!-- Layer Norm Bottom -->
     <g data-id="ln_bot_b" id="ln_bot_b" data-class="child_node" data-parent="panel_b">
       <rect x="550" y="118" width="220" height="17" fill="#faecc3" stroke="#333333" stroke-width="1" />
       <text x="660" y="130.5" class="label-reg" text-anchor="middle" fill="#000000">Layer Normalization</text>
     </g>
 
-    <!-- Input Skeleton Joints with red dots (Placeholders) -->
     <g id="joint_pose_1" data-id="joint_pose_1" data-class="raster_node"><image href="data:image/png;base64,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" x="552" y="152" width="25" height="35" preserveAspectRatio="xMidYMid meet" /></g>
     <text data-id="lbl_joint_1" id="lbl_joint_1" data-class="text_node" data-parent="panel_b" x="564.5" y="198" class="label-reg" text-anchor="middle" fill="#000000">1</text>
 
@@ -531,50 +477,40 @@
     <text data-id="lbl_joint_j" id="lbl_joint_j" data-class="text_node" data-parent="panel_b" x="745.5" y="198" class="label-reg" text-anchor="middle" fill="#000000" font-style="italic">J</text>
   </g>
 
-  <!-- ========================================================================= -->
-  <!-- PANEL (c) TEMPORAL TOKEN MIXER BLOCK                                     -->
-  <!-- ========================================================================= -->
   <g data-id="panel_c" id="panel_c" data-class="block" data-parent="root">
     <rect x="495" y="218" width="300" height="177" rx="3" fill="#ffffff" stroke="#48c998" stroke-width="1.5" stroke-dasharray="4,3" />
     <text data-id="text_panel_c" id="text_panel_c" data-class="text_node" data-parent="panel_c" x="502" y="237" class="label-panel" fill="#48c998">(c)</text>
 
-    <!-- Top Addition Circle -->
     <g data-id="add_node_c2" id="add_node_c2" data-class="composite_whole" data-parent="panel_c">
       <circle data-id="add_circ_c2" id="add_circ_c2" data-class="composite_part" data-parent="add_node_c2" cx="665" cy="237" r="5" fill="#ffffff" stroke="#000000" stroke-width="1" />
       <path data-id="add_plus_c2" id="add_plus_c2" data-class="composite_part" data-parent="add_node_c2" d="M 662.5 237 h 5 M 665 234.5 v 5" stroke="#000000" stroke-width="1" />
     </g>
 
-    <!-- Channel MLP -->
     <g data-id="mlp_block_c" id="mlp_block_c" data-class="child_node" data-parent="panel_c">
       <rect x="565" y="247" width="205" height="17" fill="#d6e4fc" stroke="#333333" stroke-width="1" />
       <text x="667.5" y="259.5" class="label-reg" text-anchor="middle" fill="#000000">Channel MLP</text>
     </g>
 
-    <!-- Layer Norm Top -->
     <g data-id="ln_top_c" id="ln_top_c" data-class="child_node" data-parent="panel_c">
       <rect x="565" y="268" width="205" height="17" fill="#faecc3" stroke="#333333" stroke-width="1" />
       <text x="667.5" y="280.5" class="label-reg" text-anchor="middle" fill="#000000">Layer Normalization</text>
     </g>
 
-    <!-- Mid Addition Circle -->
     <g data-id="add_node_c1" id="add_node_c1" data-class="composite_whole" data-parent="panel_c">
       <circle data-id="add_circ_c1" id="add_circ_c1" data-class="composite_part" data-parent="add_node_c1" cx="665" cy="297" r="5" fill="#ffffff" stroke="#000000" stroke-width="1" />
       <path data-id="add_plus_c1" id="add_plus_c1" data-class="composite_part" data-parent="add_node_c1" d="M 662.5 297 h 5 M 665 294.5 v 5" stroke="#000000" stroke-width="1" />
     </g>
 
-    <!-- Temporal Token Mixer -->
     <g data-id="temp_mixer_c" id="temp_mixer_c" data-class="child_node" data-parent="panel_c">
       <rect x="565" y="307" width="205" height="17" fill="#ffffff" stroke="#000000" stroke-width="1.2" stroke-dasharray="3,2" />
       <text x="667.5" y="319.5" class="label-reg" text-anchor="middle" fill="#000000">Temporal Token Mixer</text>
     </g>
 
-    <!-- Layer Norm Bottom -->
     <g data-id="ln_bot_c" id="ln_bot_c" data-class="child_node" data-parent="panel_c">
       <rect x="565" y="328" width="205" height="17" fill="#faecc3" stroke="#333333" stroke-width="1" />
       <text x="667.5" y="340.5" class="label-reg" text-anchor="middle" fill="#000000">Layer Normalization</text>
     </g>
 
-    <!-- Input Temporal Skeletons (Placeholders) -->
     <g id="temp_pose_1" data-id="temp_pose_1" data-class="raster_node"><image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACUAAAAvCAIAAADrZ5QyAAAEsklEQVR4nNVXXSh7bxw/cywzk2LLmNiUo5kRGtmSorwmK412obyUWikXLohygVyM7MZLblwISUkuhCTKuxZLbQs7eZs2JLTNcZztPL8LJdnY2eav/t+r0/N5Pp/P832e73leaAAAyC1IkkRRFMdxdyjAoHn0++8iKED+zs7O2dmZDwQQQGAYVlRU1NDQ4HK5KFIC8ltZWQkJCWGz2cfHxxQpwVqt9ofsSZKMi4uLjY11h1wul0ajwXEcx/GxsbGhoSFK88n8MUJCQnp7ez2OdHl5+UOExWLp9XpK+ZWVlf0wGpfLhSCIR4hGo6lUqomJCRaLVV9fb7fbKeVHda08xd3dHZ/Pz83NpU4J6H8gCILL5XI4HOo7Q0D/O0EQKIoGBwcnJiYGBVEa+v9tf/kjP6fTeXBwcH197TPTv8rc2tpisVjV1dU4jvtE9DO/qKgoiUSyu7t7eHj4F/kBAB4fHzMyMtrb231iBfuXHwRBJpNJr9czGAyCIOh0OkWW//VJp9NdLldubi4Mwz7Q/J5PtVotlUqfnp7cIRzHURT1yPLTb2FhgcPhVFRUWCwWkiQJgviMDg8PIwgyOzvrTvRh/QAAVqvVaDROTk7Ozs5iGKbT6bKzs7OyshwOR2NjY01NzXtPs9l8enpKEERA87m0tJSWlsblchUKxdzcXGZmZnd39+rqanl5OQRBIpHIYDAAAEiSrKysVCqVHi8ZPvipVCoIgnp6egAAb29veXl54+PjAAAMw5aXlxUKRWJi4t7e3traGpfLPTo68iji3Y8kyefn566urujo6P7+fgzDAABPT09SqXRiYuKjm81ma25ujo+PT0pKampq+u4G5d1PrVbHxMSkpKQsLS19NKIoKhQKZ2ZmPvc8PT19XyOj0fidmvd6OTk5sVgsg4ODJSUlH41jY2NGo/Hu7u5zTx6P19nZGRYWlpSU9J2ad7+oqKiCgoKqqqrPjQKBgMVihYeHf25kMpm9vb0/q3nfX/R6fWZm5pcdSy6XIwgSERHhle6bn9lsvri4yM/P/0oLCoJhGPh+N/jJjyTJgYEBs9mcnJz8BXp5eXl9faXRaO/fPhj/UJk4jmdlZTGZTIPBYLfbp6amNjc39/f3p6enCwsLIQgqLi6uq6vj8Xh9fX1e6/w9vPwPBoNhY2MDALCwsABBkEAg4PP5CILIZDKBQNDa2iqXy2EYTk9Pt9vtv+D3EZeXl2KxuLq6+vz8HMMwgiDep5EkyYODA6FQODIy8pt+AIC+vr7S0lKPUEdHh1QqtdlsXkV8OG8TEhIuLi48XqVVKtXV1dXi4qJXER/8QkND7+/vPZ4yMTExCQkJbW1tKIr+jp/T6dRoNI+PjyaTyR0FANDpdIvF8vDw8Dt+NBotJycHhmGHw+ERfX19bWlpkUgkXoSo18vq6iqXy729vXWHdDodj8fTarW/WS/b29sikYjNZruPeHJyEkGQ1NRU7yoUk7u5uRGLxRqN5ku73W6vra1lMBijo6NUdCj5EQShVCohCJqfn/8CWa3WyMhIDodjNpupSFG6n8EwzOfzZTKZ+1s+Ojp6fX0dAMDj8ahIUX1vOp1Oh8Phx4Hnp99vxV+/b/8BSdIt7TDMXyYAAAAASUVORK5CYII=" x="568" y="356" width="20" height="24" preserveAspectRatio="xMidYMid meet" /></g>
     <text data-id="lbl_temp_1" id="lbl_temp_1" data-class="text_node" data-parent="panel_c" x="578" y="388" class="label-sm" text-anchor="middle" fill="#000000">1</text>
 
@@ -593,11 +529,7 @@
     <text data-id="lbl_temp_t" id="lbl_temp_t" data-class="text_node" data-parent="panel_c" x="746" y="388" class="label-sm" text-anchor="middle" fill="#000000">T</text>
   </g>
 
-  <!-- ========================================================================= -->
-  <!-- EDGES / CONNECTIONS                                                       -->
-  <!-- ========================================================================= -->
   <g>
-    <!-- Panel A: Top 3D output arrows -->
     <path data-id="edge_reg_to_3d_1" id="edge_reg_to_3d_1" data-class="edge" data-source="regression_head" data-target="pose_3d_1" d="M 63 66 L 63 51" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)" />
     <path data-id="edge_reg_to_3d_2" id="edge_reg_to_3d_2" data-class="edge" data-source="regression_head" data-target="pose_3d_2" d="M 131 66 L 131 51" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)" />
     <path data-id="edge_reg_to_3d_3" id="edge_reg_to_3d_3" data-class="edge" data-source="regression_head" data-target="pose_3d_3" d="M 201 66 L 201 51" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)" />
@@ -605,32 +537,23 @@
     <path data-id="edge_reg_to_3d_t1" id="edge_reg_to_3d_t1" data-class="edge" data-source="regression_head" data-target="pose_3d_t1" d="M 381 66 L 381 51" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)" />
     <path data-id="edge_reg_to_3d_t" id="edge_reg_to_3d_t" data-class="edge" data-source="regression_head" data-target="pose_3d_t" d="M 449 66 L 449 51" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)" />
 
-    <!-- Panel A: Between FC Top and Regression Head -->
     <path data-id="edge_fc_to_reg" id="edge_fc_to_reg" data-class="edge" data-source="fc_layer_top" data-target="regression_head" d="M 247 93 L 247 87" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)" />
 
-    <!-- Panel A: Inside AGFormer -->
-    <!-- From F_GF and F_TF into AF node -->
     <path data-id="edge_fgf_to_af" id="edge_fgf_to_af" data-class="edge" data-source="temporal_gcnformer" data-target="af_fusion_agformer" d="M 140 152 L 140 130 L 239 130" stroke="#000000" stroke-width="1.2" fill="none" />
     <path data-id="edge_ftf_to_af" id="edge_ftf_to_af" data-class="edge" data-source="temporal_transformer" data-target="af_fusion_agformer" d="M 350 152 L 350 130 L 251 130" stroke="#000000" stroke-width="1.2" fill="none" />
-    <!-- From AF node out of AGFormer to Top FC -->
     <path data-id="edge_af_to_fctop" id="edge_af_to_fctop" data-class="edge" data-source="af_fusion_agformer" data-target="fc_layer_top" d="M 245 124 L 245 114" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)" />
 
-    <!-- Left branch: Spatial GCNFormer -> Reshape -> Temporal GCNFormer -->
     <path data-id="edge_sgc_to_resl" id="edge_sgc_to_resl" data-class="edge" data-source="spatial_gcnformer" data-target="reshape_icon_left" d="M 140 208 L 140 199" stroke="#000000" stroke-width="1.2" />
     <path data-id="edge_resl_to_tgc" id="edge_resl_to_tgc" data-class="edge" data-source="reshape_icon_left" data-target="temporal_gcnformer" d="M 140 185 L 140 181" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)" />
 
-    <!-- Right branch: Spatial Transformer -> Reshape -> Temporal Transformer -->
     <path data-id="edge_str_to_resr" id="edge_str_to_resr" data-class="edge" data-source="spatial_transformer" data-target="reshape_icon_right" d="M 350 208 L 350 199" stroke="#000000" stroke-width="1.2" />
     <path data-id="edge_resr_to_ttr" id="edge_resr_to_ttr" data-class="edge" data-source="reshape_icon_right" data-target="temporal_transformer" d="M 350 185 L 350 181" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)" />
 
-    <!-- SPE branch and split into Spatial GCN / Spatial Trans -->
     <path data-id="edge_fcbot_to_split" id="edge_fcbot_to_split" data-class="edge" data-source="fc_layer_bottom" data-target="agformer_block" d="M 245 278 L 245 240" stroke="#000000" stroke-width="1.2" fill="none" />
     <path data-id="edge_split_left" id="edge_split_left" data-class="edge" data-source="fc_layer_bottom" data-target="spatial_gcnformer" d="M 245 240 L 140 240 L 140 237" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)" fill="none" />
     <path data-id="edge_split_right" id="edge_split_right" data-class="edge" data-source="fc_layer_bottom" data-target="spatial_transformer" d="M 245 240 L 350 240 L 350 237" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)" fill="none" />
-    <!-- SPE edge into main trunk -->
     <path data-id="edge_spe_to_trunk" id="edge_spe_to_trunk" data-class="edge" data-source="spe_node" data-target="fc_layer_bottom" d="M 225 266 L 245 266" stroke="#000000" stroke-width="1.2" />
 
-    <!-- Bottom 2D input arrows to Bottom FC Layer -->
     <path data-id="edge_2d_1_to_fc" id="edge_2d_1_to_fc" data-class="edge" data-source="pose_2d_1" data-target="fc_layer_bottom" d="M 64 318 L 64 299" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)" />
     <path data-id="edge_2d_2_to_fc" id="edge_2d_2_to_fc" data-class="edge" data-source="pose_2d_2" data-target="fc_layer_bottom" d="M 131 318 L 131 299" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)" />
     <path data-id="edge_2d_3_to_fc" id="edge_2d_3_to_fc" data-class="edge" data-source="pose_2d_3" data-target="fc_layer_bottom" d="M 199 318 L 199 299" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)" />
@@ -638,66 +561,39 @@
     <path data-id="edge_2d_t1_to_fc" id="edge_2d_t1_to_fc" data-class="edge" data-source="pose_2d_t1" data-target="fc_layer_bottom" d="M 379 318 L 379 299" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)" />
     <path data-id="edge_2d_t_to_fc" id="edge_2d_t_to_fc" data-class="edge" data-source="pose_2d_t" data-target="fc_layer_bottom" d="M 445 318 L 445 299" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)" />
 
-    <!-- ========================================== -->
-    <!-- Panel B Edges                              -->
-    <!-- ========================================== -->
-    <!-- Inputs to LN bottom -->
     <path data-id="edge_b_in1" id="edge_b_in1" data-class="edge" data-source="joint_pose_1" data-target="ln_bot_b" d="M 564.5 152 L 564.5 138" stroke="#000000" stroke-width="1" marker-end="url(#arrow-sm)" />
     <path data-id="edge_b_in2" id="edge_b_in2" data-class="edge" data-source="joint_pose_2" data-target="ln_bot_b" d="M 599.5 152 L 599.5 138" stroke="#000000" stroke-width="1" marker-end="url(#arrow-sm)" />
     <path data-id="edge_b_in3" id="edge_b_in3" data-class="edge" data-source="joint_pose_3" data-target="ln_bot_b" d="M 634.5 152 L 634.5 138" stroke="#000000" stroke-width="1" marker-end="url(#arrow-sm)" />
     <path data-id="edge_b_in16" id="edge_b_in16" data-class="edge" data-source="joint_pose_16" data-target="ln_bot_b" d="M 710.5 152 L 710.5 138" stroke="#000000" stroke-width="1" marker-end="url(#arrow-sm)" />
     <path data-id="edge_b_inj" id="edge_b_inj" data-class="edge" data-source="joint_pose_j" data-target="ln_bot_b" d="M 745.5 152 L 745.5 138" stroke="#000000" stroke-width="1" marker-end="url(#arrow-sm)" />
 
-    <!-- LN bot to Spatial Token Mixer -->
     <path data-id="edge_lnbot_to_smixer" id="edge_lnbot_to_smixer" data-class="edge" data-source="ln_bot_b" data-target="spatial_mixer_b" d="M 665 118 L 665 114" stroke="#000000" stroke-width="1" />
-    <!-- Spatial Token Mixer to Add1 -->
     <path data-id="edge_smixer_to_add1" id="edge_smixer_to_add1" data-class="edge" data-source="spatial_mixer_b" data-target="add_node_b1" d="M 665 97 L 665 92" stroke="#000000" stroke-width="1" />
-    <!-- Lower Residual Connection around Spatial Mixer -->
     <path data-id="edge_res_b1" id="edge_res_b1" data-class="edge" data-source="joint_pose_1" data-target="add_node_b1" d="M 545 142 L 535 142 L 535 87 L 660 87" stroke="#000000" stroke-width="1.2" fill="none" marker-end="url(#arrow-sm)" />
     
-    <!-- Add1 to LN top -->
     <path data-id="edge_add1_to_lntop" id="edge_add1_to_lntop" data-class="edge" data-source="add_node_b1" data-target="ln_top_b" d="M 665 82 L 665 75" stroke="#000000" stroke-width="1" />
-    <!-- LN top to Channel MLP -->
     <path data-id="edge_lntop_to_mlp_b" id="edge_lntop_to_mlp_b" data-class="edge" data-source="ln_top_b" data-target="mlp_block_b" d="M 665 58 L 665 54" stroke="#000000" stroke-width="1" />
-    <!-- Channel MLP to Add2 -->
     <path data-id="edge_mlp_to_add2_b" id="edge_mlp_to_add2_b" data-class="edge" data-source="mlp_block_b" data-target="add_node_b2" d="M 665 37 L 665 32" stroke="#000000" stroke-width="1" />
-    <!-- Upper Residual Connection around MLP -->
     <path data-id="edge_res_b2" id="edge_res_b2" data-class="edge" data-source="add_node_b1" data-target="add_node_b2" d="M 535 87 L 535 27 L 660 27" stroke="#000000" stroke-width="1.2" fill="none" marker-end="url(#arrow-sm)" />
-    <!-- Add2 Out -->
     <path data-id="edge_add2_out_b" id="edge_add2_out_b" data-class="edge" data-source="add_node_b2" data-target="panel_b" d="M 665 22 L 665 14" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow-sm)" />
 
-    <!-- ========================================== -->
-    <!-- Panel C Edges                              -->
-    <!-- ========================================== -->
-    <!-- Inputs to LN bottom -->
     <path data-id="edge_c_in1" id="edge_c_in1" data-class="edge" data-source="temp_pose_1" data-target="ln_bot_c" d="M 578 356 L 578 348" stroke="#000000" stroke-width="1" marker-end="url(#arrow-sm)" />
     <path data-id="edge_c_in2" id="edge_c_in2" data-class="edge" data-source="temp_pose_2" data-target="ln_bot_c" d="M 607 356 L 607 348" stroke="#000000" stroke-width="1" marker-end="url(#arrow-sm)" />
     <path data-id="edge_c_in3" id="edge_c_in3" data-class="edge" data-source="temp_pose_3" data-target="ln_bot_c" d="M 636 356 L 636 348" stroke="#000000" stroke-width="1" marker-end="url(#arrow-sm)" />
     <path data-id="edge_c_int1" id="edge_c_int1" data-class="edge" data-source="temp_pose_t1" data-target="ln_bot_c" d="M 709 356 L 709 348" stroke="#000000" stroke-width="1" marker-end="url(#arrow-sm)" />
     <path data-id="edge_c_int" id="edge_c_int" data-class="edge" data-source="temp_pose_t" data-target="ln_bot_c" d="M 746 356 L 746 348" stroke="#000000" stroke-width="1" marker-end="url(#arrow-sm)" />
 
-    <!-- LN bot to Temporal Token Mixer -->
     <path data-id="edge_lnbot_to_tmixer" id="edge_lnbot_to_tmixer" data-class="edge" data-source="ln_bot_c" data-target="temp_mixer_c" d="M 665 328 L 665 324" stroke="#000000" stroke-width="1" />
-    <!-- Temporal Token Mixer to Add1 -->
     <path data-id="edge_tmixer_to_add1" id="edge_tmixer_to_add1" data-class="edge" data-source="temp_mixer_c" data-target="add_node_c1" d="M 665 307 L 665 302" stroke="#000000" stroke-width="1" />
-    <!-- Lower Residual Connection around Temporal Mixer -->
     <path data-id="edge_res_c1" id="edge_res_c1" data-class="edge" data-source="temp_pose_1" data-target="add_node_c1" d="M 552 350 L 542 350 L 542 297 L 660 297" stroke="#000000" stroke-width="1.2" fill="none" marker-end="url(#arrow-sm)" />
 
-    <!-- Add1 to LN top -->
     <path data-id="edge_add1_to_lntop_c" id="edge_add1_to_lntop_c" data-class="edge" data-source="add_node_c1" data-target="ln_top_c" d="M 665 292 L 665 285" stroke="#000000" stroke-width="1" />
-    <!-- LN top to Channel MLP -->
     <path data-id="edge_lntop_to_mlp_c" id="edge_lntop_to_mlp_c" data-class="edge" data-source="ln_top_c" data-target="mlp_block_c" d="M 665 268 L 665 264" stroke="#000000" stroke-width="1" />
-    <!-- Channel MLP to Add2 -->
     <path data-id="edge_mlp_to_add2_c" id="edge_mlp_to_add2_c" data-class="edge" data-source="mlp_block_c" data-target="add_node_c2" d="M 665 247 L 665 242" stroke="#000000" stroke-width="1" />
-    <!-- Upper Residual Connection around MLP -->
     <path data-id="edge_res_c2" id="edge_res_c2" data-class="edge" data-source="add_node_c1" data-target="add_node_c2" d="M 542 297 L 542 237 L 660 237" stroke="#000000" stroke-width="1.2" fill="none" marker-end="url(#arrow-sm)" />
-    <!-- Add2 Out -->
     <path data-id="edge_add2_out_c" id="edge_add2_out_c" data-class="edge" data-source="add_node_c2" data-target="panel_c" d="M 665 232 L 665 224" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow-sm)" />
   </g>
 
-  <!-- ========================================================================= -->
-  <!-- NARRATION BANNER CONTAINER                                                -->
-  <!-- ========================================================================= -->
 </svg>
   </div>
 
@@ -752,10 +648,6 @@
 
   var at = -1, swap = null, rate = 3, paused = false, scrubbing = false;
 
-  // THE CLOCK. The drawing is hundreds of short animations that each stop when
-  // they are done, so none of them can be asked what time it is. This one runs
-  // the length of the whole piece, does nothing visible, and is driven by the
-  // same controls - so the caption, the bar and the picture cannot disagree.
   var master = null;
   try {
     master = document.documentElement.animate(
@@ -788,7 +680,6 @@
 
   play.addEventListener('click', function () {
     paused = !paused;
-    // Restarting a finished piece rather than leaving Play doing nothing
     if (!paused && REPEATS === 1 && clock() >= LOOP - 0.05) each(function (a) { a.currentTime = 0; });
     each(function (a) { paused ? a.pause() : a.play(); });
     if (!paused) t0 = performance.now() - clock() * 1000;
@@ -846,10 +737,6 @@
     }
   }
 
-  // Two ways round, on purpose. requestAnimationFrame gives a smooth bar while
-  // the page is on screen, and stops dead in a background tab or an embed the
-  // browser considers hidden - where the animation itself keeps running, so the
-  // caption would be left behind. The slow timer covers exactly that case.
   function frame() { paint(); requestAnimationFrame(frame); }
 
   totalEl.textContent = clip(LOOP);

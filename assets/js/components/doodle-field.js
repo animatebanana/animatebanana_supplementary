@@ -1,17 +1,6 @@
 import { DOODLES, GLYPHS } from '../lib/doodles.js';
 
-/**
- * <doodle-field></doodle-field>                  — full hero backdrop
- * <doodle-field density="sparse"></doodle-field> — lighter, for page heads
- *
- * Floats hand-drawn AI/biology figure doodles and faint notation behind
- * its parent (which must be position: relative). Items sit on three depth
- * layers that move at different rates with the pointer and scroll, while
- * each bobs on its own CSS loop. Placement is hand-tuned, not random, and
- * keeps clear of the centre column where the heading sits.
- */
 const HERO_LAYOUT = [
-  // [kind, x%, y%, size px, rotation°, depth 0-2]
   ['neuralnet', 6, 14, 86, -8, 2], ['cell', 14, 66, 78, 6, 1], ['dna', 3, 42, 58, 12, 0],
   ['transformer', 89, 12, 72, 6, 2], ['neuron', 94, 47, 76, -12, 1], ['heatmap', 84, 74, 62, 10, 0],
   ['attention', 25, 8, 58, -4, 0], ['sparkle', 73, 21, 30, 0, 1], ['flowchart', 8, 89, 70, -6, 2],

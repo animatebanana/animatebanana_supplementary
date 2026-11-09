@@ -1,26 +1,8 @@
-/*
-  DIAGRAM DENSITY pane — the red one.
 
-  Two columns: on the left the method rail (dropdown + axis), the strata
-  and the figure's shares; on the right a large example stage. When the
-  pane is narrow the stage moves above the controls.
-
-  Owns `.bd-*` only.
-*/
-
-/* The pane, not the body, is the size container: a container query cannot
-   restyle the container itself, so the body's column rule has to live one
-   level down from it. */
 .bd { container-type: inline-size; container-name: bd; }
 .bd-body {
   --bx-stage-h: clamp(300px, 34vw, 540px);
-  /* Container queries, not media queries: in the page's two-up grid a
-     pane is ~700px wide on a 1560px screen, so a viewport breakpoint
-     would never fire when the pane actually needs to reflow. */
   display: grid;
-  /* The right-hand column is the pane's control surface — it is what you
-     read the numbers off and what you click — so it gets real width
-     rather than whatever the stage leaves over. */
   grid-template-columns: minmax(280px, 0.78fr) minmax(0, 2.2fr);
   gap: clamp(16px, 2.2vw, 34px);
   align-items: start;
@@ -36,7 +18,6 @@
   .bd-stage { order: -1; }
 }
 
-/* ---- Left rail ---- */
 .bd-blurb {
   margin: 12px 0 0;
   font-size: var(--fs-xs);
@@ -76,7 +57,6 @@
 }
 .bd-axis-to { color: var(--a); }
 
-/* ---- Stage ---- */
 .bd-stage {
   margin: 0;
   min-width: 0;
@@ -85,21 +65,8 @@
 }
 .bd-stage-frame {
   position: relative;
-  /* A FIXED height, not one derived from the media.
-     Letting the box take the shape of its content meant the whole pane —
-     and everything below it on the page — jumped every time you picked a
-     different stratum, because the benchmark's figures run from 4:1
-     strips to near-square panels. A constant box that the media is
-     contained inside costs a little white space on the widest figures
-     and buys a page that never moves under the cursor. */
   height: var(--bx-stage-h);
   display: grid;
-  /* ONE cell, sized by the frame and not by what is in it.
-     `place-items: center` alone leaves the row auto-sized, and a
-     percentage max-height against an auto row resolves to no constraint
-     at all — which is how a tall figure grew past the frame and had its
-     bottom clipped by `overflow: hidden`. Pinning the track to the
-     frame's own height is what makes the contain below mean anything. */
   grid-template: minmax(0, 1fr) / minmax(0, 1fr);
   place-items: stretch;
   overflow: hidden;
@@ -108,8 +75,6 @@
   border-color: var(--ink);
 }
 .bd-stage-img {
-  /* Fill the cell and letterbox inside it: the figure is never cropped,
-     and whatever aspect ratio it has, the leftover is white paper. */
   width: 100%;
   height: 100%;
   min-width: 0;
@@ -132,16 +97,11 @@
 }
 .bd-skel .bx-skel-tag { border-color: var(--a-line); color: var(--a); }
 
-/* The cross-fade between two strata: the stage dips rather than cuts. */
 .bd-stage.is-swapping .bd-stage-frame > * { opacity: 0; }
 
-/* ---- Left column: the strata ---- */
 .bd-list { list-style: none; margin: 0; padding: 0; }
 .bd-list li + li { margin-top: 9px; }
 
-/* An axis with more entries than the stage is tall wraps rather than
-   stretching the pane past every other axis. The point of the fixed stage is
-   that the pane keeps one height whatever you select. */
 .bd-list[data-many] {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -154,16 +114,9 @@
   .bd-stage-img, .bd-skel { transition: none; }
 }
 
-/* `hidden` has to beat the flex display above: a method with no ordered
-   axis (Layout Organization) must not show a Sparse to Dense rule. */
 .bd-axis[hidden] { display: none; }
 
 
-/* ---- The stratum row, after the numbers came off ----
-   A name and a marker for the one showing. The bar and the percentage that
-   used to sit here were a judgement dressed as a measurement (see the note at
-   the top of panel-density.js), and with them gone the row is one line, so it
-   is laid out as one rather than as a two-line card. */
 .bd-item {
   display: flex;
   align-items: center;
@@ -207,23 +160,11 @@
   .bd-item, .bd-item-dot { transition: none; }
 }
 
-/* ---- A MEDIA FRAME IS WHITE PAPER, NOT DOTTED PAPER ----
-   `.frame-paper` gives every framed slot the site's dotted ground, which is
-   right for an empty slot: it reads as paper waiting for something. Once a
-   figure is in it the dots are the only thing behind a letterboxed image, and
-   a diagram sitting in a field of dots looks like it failed to load rather
-   than like it is being shown whole. Each pane used to switch the dots off
-   per state, which meant every new state had to remember to. These slots are
-   simply white, always. The empty state keeps its own labelled skeleton on
-   top, so nothing is lost by it. */
 .bd-stage-frame {
   background-image: none;
   background-color: #fff;
 }
 
-/* ---- The figure's shares, under the strata ----
-   Real numbers from the AnimateBench figure, largest first as the figure
-   lists them. The row for the stratum on the stage is lit. */
 .bd-stats[hidden] { display: none; }
 .bd-stat-list {
   list-style: none;
@@ -268,10 +209,6 @@
 .bd-stat.is-on .bd-stat-bar i { opacity: 1; }
 .bd-stat.is-on .bd-stat-label { color: var(--ink); }
 
-/* ---- The magnifier is the only way in, so it is always there ----
-   Same rule as the blue pane: the still is not a button. The magnifier is
-   larger here because it opens the narrated clip, and the doodle above the
-   frame points straight at it. */
 .bd-stage-frame { cursor: default; }
 .bd-zoom {
   position: absolute;
@@ -298,7 +235,6 @@
 .bd-zoom:focus-visible { outline: none; border-radius: 50%; box-shadow: var(--ring); }
 @keyframes bd-nudge { 0%, 100% { transform: none; } 50% { transform: scale(1.08) rotate(-6deg); } }
 
-/* ---- "click here to play full video", drawn on ---- */
 .bd-doodle {
   justify-self: end;
   display: flex;
@@ -325,7 +261,5 @@
   .bd-stat-bar i { transition: none; }
 }
 
-/* In the left column the list is one item per row: two narrow columns
-   wrapped every label and crowded the clip flag. */
 .bd-side .bd-list[data-many] { grid-template-columns: minmax(0, 1fr); gap: 8px; }
 .bd-side .bd-item { padding: 11px 14px; }

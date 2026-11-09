@@ -28,7 +28,6 @@
   }
   h1,h2,h3,p{margin:0;}
 
-  /* ============ header ============ */
   header{
     flex:0 0 auto;display:flex;align-items:center;gap:14px;flex-wrap:wrap;
     padding:10px 18px;background:var(--panel);border-bottom:1px solid var(--line);
@@ -74,7 +73,6 @@
   }
   .divider{width:1px;height:22px;background:var(--line);}
 
-  /* ============ timeline scrubber ============ */
   .timeline{
     flex:0 0 auto;position:relative;z-index:19;background:var(--panel);
     border-bottom:1px solid var(--line);padding:17px 38px 6px;
@@ -93,8 +91,6 @@
     box-shadow:0 2px 6px rgba(15,23,42,.3);transition:left .12s linear;pointer-events:none;z-index:4;
   }
   .tl-marks{position:relative;height:28px;}
-  /* every marker, whatever its tier, is centred on the track's centre line:
-     the track is 6px tall and sits directly above .tl-marks, so that line is -3px */
   .tl-mark{
     position:absolute;top:-3px;transform:translate(-50%,-50%);display:grid;place-items:center;
     cursor:pointer;background:none;border:0;padding:0;
@@ -108,7 +104,6 @@
     position:absolute;left:50%;transform:translateX(-50%);pointer-events:none;white-space:nowrap;
   }
 
-  /* tier 1 — the stages */
   .tl-mark.stage{width:28px;height:28px;z-index:3;}
   .tl-mark.stage .dot{width:26px;height:26px;font-size:12px;border-width:3px;
     background:color-mix(in srgb, var(--sc) 34%, #E2E8F0);}
@@ -120,18 +115,15 @@
   .tl-mark.stage.future{cursor:not-allowed;}
   .tl-mark.stage.future .dot{background:#E2E8F0;color:#94A3B8;}
   .tl-mark.stage.future .lbl{color:#B6C2D2;}
-  /* stage 1 is yellow: its number and label take a darker gold so they stay legible */
   .tl-mark.s1.stage .dot{color:#713F12;}
   .tl-mark.s1.stage.past .lbl{color:#CA8A04;}
 
-  /* tier 2 — the agents */
   .tl-mark.agent{width:15px;height:15px;z-index:2;}
   .tl-mark.agent .dot{width:12px;height:12px;border-width:2px;}
   .tl-mark.agent.past .dot{background:var(--sc,#64748B);}
   .tl-mark.agent .lbl{display:none;}
   .tl-mark.agent.past .lbl{color:var(--ink2);}
 
-  /* tier 3 — unlabelled scrub points */
   .tl-mark.tick{width:10px;height:10px;z-index:4;}
   .tl-mark.tick .dot{width:7px;height:7px;border-width:2px;}
   .tl-mark.tick.past .dot{background:#94A3B8;}
@@ -141,7 +133,6 @@
   @media (max-width:1180px){ .tl-mark.agent .lbl{display:none;} }
   @media (max-width:900px){ .tl-mark.stage .lbl{display:none;} .tl-marks{height:12px;} }
 
-  /* ============ pipeline map panel ============ */
   .panel-map{background:var(--panel);}
   .map-head{
     flex:0 0 auto;display:flex;align-items:center;gap:12px;flex-wrap:wrap;
@@ -174,22 +165,18 @@
     border:1px solid #FDE68A;color:#92400E;white-space:nowrap;
   }
 
-  /* the pipeline canvas is unbounded — no card, no border, no backdrop */
   .map-frame{position:relative;flex:1 1 auto;min-height:0;padding:2px 4px;}
   #pipeSvg{display:block;width:100%;height:100%;}
   #pipeSvg [data-id]{opacity:0;transition:opacity .6s cubic-bezier(.3,.8,.4,1);}
   #pipeSvg [data-id].shown{opacity:1;}
   #pipeSvg .narr-text{display:none;}
 
-  /* ============ panels ============ */
   main{
     --top-h:clamp(340px,60vh,820px);
     flex:1 1 auto;display:grid;min-height:0;
     grid-template-rows:var(--top-h) 1fr;
     transition:grid-template-rows .65s cubic-bezier(.3,.8,.3,1);
   }
-  /* auto-expand: while the lower row is being drawn into it takes the whole
-     walkthrough; the next pipeline-map beat hands the space back */
   main.focus-bottom{--top-h:0px;}
   main.focus-bottom .row-top{border-bottom-color:transparent;}
   .row{display:grid;min-height:0;min-width:0;}
@@ -209,7 +196,6 @@
   .mini{font-size:11px;color:var(--faint);font-weight:600;}
   .iconbtn{padding:4px 8px;font-size:11px;border-radius:7px;}
 
-  /* ---- col 1: source + narration ---- */
   .src-wrap{flex:0 0 auto;padding:11px 13px 0;}
   .src-card{
     position:relative;border:1px solid var(--line);border-radius:10px;overflow:hidden;
@@ -266,7 +252,6 @@
   .legend .chip u{text-decoration:none;margin-left:auto;font-variant-numeric:tabular-nums;
     color:var(--faint);font-weight:600;font-size:10.5px;}
 
-  /* ---- col 2: canvas ---- */
   .stage-wrap{flex:1 1 auto;position:relative;min-height:0;padding:9px 12px;}
   .stage-inner{
     position:absolute;inset:9px 12px;border:1px solid var(--line);border-radius:var(--radius);
@@ -290,7 +275,6 @@
   }
   .canvas-foot .sp{margin-left:auto;}
 
-  /* ---- col 3: code ---- */
   .code-wrap{
     flex:1 1 auto;min-height:0;overflow:auto;background:var(--code-bg);
     scrollbar-width:thin;scrollbar-color:#CBD5E1 var(--code-bg);
@@ -313,18 +297,14 @@
     background:#F59E0B;border-radius:1px;animation:blink 1s steps(1) infinite;}
   @keyframes blink{50%{opacity:0;}}
   #code.done #caret{display:none;}
-  /* The diagram code is here to be read, not lifted: see assets/js/lib/no-copy.js
-     for the same guard on the rest of the site. */
   pre#code{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;}
 
-  /* ---- semantic index badges ---- */
   .ix{
     flex:0 0 auto;width:14px;height:14px;border-radius:50%;display:grid;place-items:center;
     background:#94A3B8;color:#fff;font-style:normal;font-weight:800;font-size:8.5px;
     font-family:-apple-system,'Segoe UI',sans-serif;line-height:1;
   }
 
-  /* ---- parsed XML panel ---- */
   #xmlWrap{
     flex:1 1 auto;min-height:0;overflow:auto;background:#FBFCFD;display:none;
     scrollbar-width:thin;scrollbar-color:#CBD5E1 #FBFCFD;
@@ -362,7 +342,6 @@
   .xid.flash{animation:xidflash .5s ease-in-out 2;}
   @keyframes xidflash{0%,100%{background:transparent;}50%{background:color-mix(in srgb, currentColor 26%, transparent);}}
 
-  /* ---- animation-sequence panel ---- */
   #seqWrap{
     flex:1 1 auto;min-height:0;overflow:auto;background:#FFFFFF;display:none;
     scrollbar-width:thin;scrollbar-color:#CBD5E1 #FFFFFF;
@@ -425,11 +404,8 @@
   .tsitem u{text-decoration:none;color:#B6C2D2;font-size:9px;}
   .tsnone{font-size:10px;color:#CBD5E1;font-family:ui-monospace,Menlo,monospace;padding-top:2px;}
 
-  /* the finished narration-synced animation, boxed in the right panel */
   #videoWrap{display:none;flex:1 1 auto;min-height:0;flex-direction:column;background:#F8FAFC;}
   #videoWrap.on{display:flex;}
-  /* the frame is centred and takes the video's own 1264x704 shape, so the
-     picture fills it edge to edge and there is never a black band */
   .vstage{
     flex:1 1 auto;min-height:0;display:flex;align-items:center;justify-content:center;
     padding:10px 12px 6px;
@@ -451,7 +427,6 @@
   }
   .vbox.failed .vnote{display:block;}
 
-  /* fullscreen: the whole wrap goes fullscreen so the controls travel with it */
   #videoWrap:fullscreen{display:flex;background:#0B1220;}
   #videoWrap:fullscreen{background:#000;}
   #videoWrap:fullscreen .vstage{padding:0;}
@@ -477,9 +452,6 @@
   .vbar button:hover{background:#F1F5F9;border-color:#CBD5E1;color:var(--ink);}
   .vbar button.hot{background:var(--amber);border-color:var(--amber);color:#fff;}
   .vb-play{min-width:34px;font-size:13px;}
-  /* The narration is half of what the finished video is showing off, so the
-     control for it is a labelled button rather than a speaker glyph among the
-     zoom controls - and it reads as on, because it starts on. */
   .vb-sound{
     display:inline-flex;align-items:center;gap:6px;padding:6px 12px !important;
     font-size:11.5px !important;letter-spacing:.02em;
@@ -513,7 +485,6 @@
   .vseg button[aria-pressed="true"]{background:var(--brand);color:#fff;}
   .zl{font-variant-numeric:tabular-nums;min-width:38px;text-align:center;color:var(--faint);font-size:10.5px;}
 
-  /* narration captions, YouTube-style */
   #capWrap{
     display:none;flex:1 1 auto;min-height:0;overflow:auto;background:#fff;
     scrollbar-width:thin;scrollbar-color:#CBD5E1 #fff;
@@ -538,7 +509,6 @@
   .caprow.on .ctx{color:var(--ink);font-weight:550;}
   .caprow.on .cts{color:#B45309;}
 
-  /* stage 3: the emitted animation code */
   #animWrap{
     flex:1 1 auto;min-height:0;overflow:auto;background:var(--code-bg);display:none;
     scrollbar-width:thin;scrollbar-color:#CBD5E1 var(--code-bg);
@@ -570,7 +540,6 @@
   .a-sel{color:#0F766E;font-weight:600;}
   .a-prop{color:#C2410C;}
 
-  /* narration panel */
   #narrWrap{
     flex:1 1 auto;min-height:0;overflow:auto;background:#FFFFFF;display:none;
     scrollbar-width:thin;scrollbar-color:#CBD5E1 #FFFFFF;
@@ -590,8 +559,6 @@
   .tsblock.narr .tsgrid{padding-top:6px;}
   .tsblock.narr .tsitem{font-size:9.5px;opacity:.85;}
 
-  /* narration caption under the rendered diagram */
-  /* the caption sits BELOW the canvas so it never covers the diagram */
   #capBar{
     display:none;flex:0 0 auto;margin:0 12px 9px;
     padding:8px 13px;border-radius:9px;min-height:38px;
@@ -609,7 +576,6 @@
   }
   #capBar.on span, #capBar.on b{opacity:1;}
 
-  /* timestamp chip over the rendered diagram */
   #tsChip{
     position:absolute;top:12px;left:12px;z-index:5;display:none;align-items:center;gap:8px;
     padding:6px 12px 6px 7px;border-radius:999px;background:rgba(255,255,255,.94);
@@ -628,20 +594,16 @@
     100%{transform:scale(1);}
   }
 
-  /* the thin veil the Sequencer lifts, timestamp by timestamp */
   #canvas .masked{opacity:.10;transition:opacity .55s ease;}
 
-  /* ---- greyscale / colourise on the rendered canvas ---- */
   #canvas .greyed{filter:grayscale(1) contrast(.72);opacity:.34;transition:filter .5s ease,opacity .5s ease;}
 
-  /* flying index badge */
   .flybadge{
     position:absolute;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;
     color:#fff;font-weight:800;font-size:11px;font-family:-apple-system,'Segoe UI',sans-serif;
     box-shadow:0 3px 10px rgba(15,23,42,.3);z-index:61;
   }
 
-  /* ---- raster-integration effects overlay ---- */
   #fx{position:fixed;inset:0;pointer-events:none;z-index:60;}
   #fxSvg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;}
   .fx-map{fill:none;stroke:#B91C1C;stroke-width:2.6;stroke-dasharray:10 7;opacity:0;
@@ -661,12 +623,10 @@
     position:absolute;opacity:0;border-radius:2px;
     box-shadow:0 10px 30px rgba(15,23,42,.35);outline:2px solid #B91C1C;
   }
-  /* code-panel highlighting */
   .cstep{display:inline;}
   .cstep.hot{background:rgba(217,119,6,.16);box-shadow:0 0 0 1px rgba(217,119,6,.35);border-radius:3px;}
   .cstep.added{background:rgba(22,163,74,.18);box-shadow:0 0 0 1px rgba(22,163,74,.4);border-radius:3px;}
 
-  /* ---- lightbox ---- */
   .lb{
     position:fixed;inset:0;background:rgba(15,23,42,.82);display:none;
     align-items:center;justify-content:center;z-index:60;padding:32px;cursor:zoom-out;
@@ -686,14 +646,8 @@
   }
 </style>
 <style>
-  /* Guide captions (pipeline/captions.json): the walkthrough's narration, in
-     the space under the class tags. The small note card that used to carry it
-     is hidden rather than removed - the player still writes to it. */
   .narr-card{display:none;}
 
-  /* Drag the boundary between the two rows: up until the lower panels fill the
-     walkthrough, down until the upper row does. A size set by hand replaces
-     the default; auto-expand still collapses the top row when it is on. */
   main{--top-h:var(--top-user, clamp(340px,60vh,820px));}
   main.dragging{transition:none;}
   .row-bottom{position:relative;}
@@ -726,7 +680,6 @@
     background:color-mix(in srgb, var(--gc) 22%, #fff);
   }
   .g-count{margin-left:auto;font:500 10.5px ui-monospace,'JetBrains Mono',monospace;color:#8A8577;}
-  /* author mode (?author): where the playhead is, to write `at` values against */
   .g-pos{
     font:700 11px ui-monospace,'JetBrains Mono',monospace;color:#fff;background:#1A1815;
     padding:3px 7px;border-radius:6px;
@@ -736,8 +689,6 @@
   .guide.is-blank .g-head, .guide.is-blank .g-title, .guide.is-blank .g-text{visibility:hidden;}
   .g-title{margin:2px 0 0;font-size:14.5px;font-weight:700;color:#1A1815;}
   .g-text{margin:0;font-size:13.5px;line-height:1.62;color:#1A1815;}
-  /* Only the words move. The card never re-animates, so a caption that carries
-     on simply stays; when the words really change they cross-fade in place. */
   .g-title,.g-text{transition:opacity .2s ease;}
   .guide.is-swapping .g-title,.guide.is-swapping .g-text{opacity:0;}
   @media (prefers-reduced-motion: reduce){.g-title,.g-text{transition:none;}}
@@ -781,7 +732,6 @@
 </div>
 
 <main>
-  <!-- ================= upper row ================= -->
   <section class="row row-top">
 
     <section class="panel panel-src">
@@ -862,7 +812,6 @@
     
       <rect id="canvas_bg" data-id="canvas_bg" data-class="block" data-parent="root" x="0" y="0" width="1840" height="770" fill="#ffffff"/>
     
-      <!-- ============================ STAGE SHELLS ============================ -->
       <g id="block_stage1" data-id="block_stage1" data-class="block" data-parent="root">
         <rect id="stage1_bg" class="stage" x="20" y="30" width="560" height="390" rx="22" fill="#fff9df" stroke="#2b2b2b" stroke-width="1.6"/>
       </g>
@@ -873,30 +822,25 @@
         <rect id="stage3_bg" class="stage" x="1250" y="30" width="560" height="390" rx="22" fill="#e7feff" stroke="#2b2b2b" stroke-width="1.6"/>
       </g>
     
-      <!-- ============================ EDGES ============================ -->
       <g>
-        <!-- Stage 1 Edges -->
         <line id="edge_s1_1" data-id="edge_s1_1" data-class="edge" data-source="node_s1_diagram" data-target="node_s1_d2c" class="edge" x1="98" y1="274" x2="126" y2="274"/>
         <line id="edge_s1_2" data-id="edge_s1_2" data-class="edge" data-source="node_s1_d2c" data-target="node_s1_code" class="edge" x1="264" y1="274" x2="291" y2="274"/>
         <path id="edge_s1_3" data-id="edge_s1_3" data-class="edge" data-source="node_s1_code" data-target="node_s1_critic" class="edge" d="M 330 232 C 358 198 388 172 414 158"/>
         <path id="edge_s1_4" data-id="edge_s1_4" data-class="edge" data-source="node_s1_critic" data-target="node_s1_code" class="edge" d="M 436 214 C 430 250 398 268 357 268"/>
         <path id="edge_s1_5" data-id="edge_s1_5" data-class="edge" data-source="node_s1_code" data-target="node_s1_raster" class="edge" d="M 352 302 C 366 314 381 323 396 331"/>
     
-        <!-- Stage 2 Edges -->
         <path id="edge_s2_1" data-id="edge_s2_1" data-class="edge" data-source="node_s2_critic" data-target="node_s2_seq" class="edge" d="M 1058 170 C 1000 108 850 108 789 168"/>
         <path id="edge_s2_2" data-id="edge_s2_2" data-class="edge" data-source="node_s2_seq" data-target="node_s2_critic" class="edge" d="M 787 198 C 850 250 1000 250 1056 202"/>
         <line id="edge_s2_3" data-id="edge_s2_3" data-class="edge" data-source="node_s2_parser" data-target="node_s2_xml" class="edge" x1="777" y1="320" x2="796" y2="320"/>
         <path id="edge_s2_4" data-id="edge_s2_4" data-class="edge" data-source="node_s2_xml" data-target="node_s2_seq" class="edge" d="M 814 288 C 800 276 788 262 776 250"/>
          <path id="edge_s2_5" data-id="edge_s2_5" data-class="edge" data-source="node_s2_seq" data-target="node_s2_drafter" class="edgedash" d="M 785 237 C 950 220, 850 355, 1082 355"/>
     
-        <!-- Stage 3 Edges -->
         <path id="edge_s3_1" data-id="edge_s3_1" data-class="edge" data-source="node_s3_critic" data-target="node_s3_designer" class="edge" d="M 1322 208 C 1308 245 1306 285 1320 310"/>
         <path id="edge_s3_2" data-id="edge_s3_2" data-class="edge" data-source="node_s3_designer" data-target="node_s3_critic" class="edge" d="M 1340 310 C 1360 280 1362 240 1344 208"/>
         <path id="edge_s3_3" data-id="edge_s3_3" data-class="edge" data-source="node_s3_designer" data-target="node_s3_exporter" class="edge" d="M 1452 370 C 1500 396 1550 392 1592 374"/>
         <path id="edge_s3_4" data-id="edge_s3_4" data-class="edge" data-source="node_s3_exporter" data-target="node_s3_narr_int" class="edge" d="M 1648 288 C 1632 252 1636 220 1652 198"/>
         <path id="edge_s3_5" data-id="edge_s3_5" data-class="edge" data-source="node_s3_narr_int" data-target="node_s3_exporter" class="edge" d="M 1750 200 C 1774 234 1758 268 1706 286"/>
     
-        <!-- Global IO Edges -->
         <line id="edge_io_1" data-id="edge_io_1" data-class="edge" data-source="node_in_d" data-target="node_s1_diagram" class="edgeio" x1="115" y1="458" x2="115" y2="424"/>
         <line id="edge_io_2" data-id="edge_io_2" data-class="edge" data-source="node_s1_code" data-target="node_out_c" class="edgeio" x1="433" y1="424" x2="433" y2="458"/>
         <line id="edge_io_3" data-id="edge_io_3" data-class="edge" data-source="node_s2_in_d" data-target="node_s2_parser" class="edgeio" x1="703" y1="458" x2="703" y2="424"/>
@@ -905,9 +849,7 @@
         <line id="edge_io_6" data-id="edge_io_6" data-class="edge" data-source="node_s3_y_card" data-target="node_s3_out_y" class="edgeio" x1="1695" y1="424" x2="1695" y2="466"/>
       </g>
     
-      <!-- ============================== FOREGROUND NODES =============================== -->
     
-      <!-- STAGE 1 NODES -->
       <text id="text_s1_title" data-id="text_s1_title" data-class="text_node" data-parent="block_stage1" class="stitle" x="300" y="64" text-anchor="middle">STAGE 1: DIAGRAM TRANSMUTER</text>
       <text id="text_s1_agent1" data-id="text_s1_agent1" data-class="text_node" data-parent="block_stage1" class="agent" x="195" y="112" text-anchor="middle">Diagram to Animation Aware</text>
       <text id="text_s1_agent2" data-id="text_s1_agent2" data-class="text_node" data-parent="block_stage1" class="agent" x="195" y="134" text-anchor="middle">Code Converter</text>
@@ -934,7 +876,6 @@
       <g id="node_s1_feedback" data-id="node_s1_feedback" data-class="raster_node"><image href="helpers/rasters/crop_node_s1_feedback.png" xlink:href="helpers/rasters/crop_node_s1_feedback.png" x="374" y="206" width="30" height="15" preserveAspectRatio="xMidYMid meet" /></g>
       <text id="text_math_fc" data-id="text_math_fc" data-class="text_node" data-parent="block_stage1" class="math" x="372" y="243">f<tspan font-size="0.65em" baseline-shift="sub">C</tspan><tspan font-size="0.65em" baseline-shift="super">(r)</tspan></text>
     
-      <!-- STAGE 2 NODES -->
       <text id="text_s2_title" data-id="text_s2_title" data-class="text_node" data-parent="block_stage2" class="stitle" x="915" y="64" text-anchor="middle">STAGE 2: ANIMATION PLANNER</text>
       <text id="text_s2_seq" data-id="text_s2_seq" data-class="text_node" data-parent="block_stage2" class="agent" x="634" y="140">Sequencer</text>
       <text id="text_math_aseq" data-id="text_math_aseq" data-class="text_node" data-parent="block_stage2" class="math" x="742" y="140">A<tspan font-size="0.65em" baseline-shift="sub">seq</tspan></text>
@@ -974,7 +915,6 @@
       <g id="node_s2_drafter" data-id="node_s2_drafter" data-class="raster_node"><image href="helpers/rasters/crop_node_s2_drafter.png" xlink:href="helpers/rasters/crop_node_s2_drafter.png" x="1090" y="318" width="125" height="97" preserveAspectRatio="xMidYMid meet" /></g>
       <text id="text_math_anarr" data-id="text_math_anarr" data-class="text_node" data-parent="block_stage2" class="math" x="1060" y="406">A<tspan font-size="0.65em" baseline-shift="sub">narr</tspan></text>
     
-      <!-- STAGE 3 NODES -->
       <text id="text_s3_title" data-id="text_s3_title" data-class="text_node" data-parent="block_stage3" class="stitle" x="1530" y="64" text-anchor="middle">STAGE 3: DIAGRAM ANIMATOR</text>
       
       <text id="text_s3_critic" data-id="text_s3_critic" data-class="text_node" data-parent="block_stage3" class="agent" x="1335" y="102" text-anchor="middle">Critic</text>
@@ -1014,9 +954,7 @@
       <text id="text_s3_sync1" data-id="text_s3_sync1" data-class="text_node" data-parent="block_stage3" class="cap" x="1750" y="362" text-anchor="middle" font-size="12">Narration-synced</text>
       <text id="text_s3_sync2" data-id="text_s3_sync2" data-class="text_node" data-parent="block_stage3" class="cap" x="1750" y="380" text-anchor="middle" font-size="12">animation</text>
     
-      <!-- GLOBAL INPUTS / OUTPUTS -->
       
-      <!-- Stage 1 IO -->
       <g id="node_in_d" data-id="node_in_d" data-class="raster_node"><image href="helpers/rasters/crop_node_in_d.png" xlink:href="helpers/rasters/crop_node_in_d.png" x="75" y="462" width="80" height="95" preserveAspectRatio="xMidYMid meet" /></g>
       <text id="text_io_in1" data-id="text_io_in1" data-class="text_node" data-parent="root" class="iolblb" x="115" y="588" text-anchor="middle">Input</text>
       <text id="text_io_in2" data-id="text_io_in2" data-class="text_node" data-parent="root" class="iolblb" x="115" y="610" text-anchor="middle">Diagram</text>
@@ -1027,7 +965,6 @@
       <text id="text_io_out2" data-id="text_io_out2" data-class="text_node" data-parent="root" class="iolbl" x="433" y="610" text-anchor="middle">Diagram Code</text>
       <text id="text_io_out_c" data-id="text_io_out_c" data-class="text_node" data-parent="root" class="mathbig" x="433" y="652" text-anchor="middle">C</text>
     
-      <!-- Stage 2 IO -->
       <text id="text_io_d1" data-id="text_io_d1" data-class="text_node" data-parent="root" class="iolbl" x="670" y="452" text-anchor="middle">Diagram</text>
       <g id="node_s2_in_d" data-id="node_s2_in_d" data-class="raster_node"><image href="helpers/rasters/crop_node_s2_in_d.png" xlink:href="helpers/rasters/crop_node_s2_in_d.png" x="668" y="462" width="70" height="86" preserveAspectRatio="xMidYMid meet" /></g>
       <text id="text_io_d_math" data-id="text_io_d_math" data-class="text_node" data-parent="root" class="mathbig" x="640" y="512" text-anchor="middle">D</text>
@@ -1051,7 +988,6 @@
       <text id="text_io_s1_lbl2" data-id="text_io_s1_lbl2" data-class="text_node" data-parent="root" class="iolbl" x="1152" y="624" text-anchor="middle">Animation Sequence</text>
       <text id="text_io_s_math" data-id="text_io_s_math" data-class="text_node" data-parent="root" class="mathbig" x="1152" y="664" text-anchor="middle">S</text>
     
-      <!-- Stage 3 IO -->
       <text id="text_io_s3_d" data-id="text_io_s3_d" data-class="text_node" data-parent="root" class="iolbl" x="1292" y="452" text-anchor="middle">Diagram</text>
       <g id="node_s3_in_d" data-id="node_s3_in_d" data-class="raster_node"><image href="helpers/rasters/crop_node_s3_in_d.png" xlink:href="helpers/rasters/crop_node_s3_in_d.png" x="1288" y="462" width="70" height="86" preserveAspectRatio="xMidYMid meet" /></g>
       <text id="text_io_s3_d_math" data-id="text_io_s3_d_math" data-class="text_node" data-parent="root" class="mathbig" x="1262" y="512" text-anchor="middle">D</text>
@@ -1076,7 +1012,6 @@
       <text id="text_io_y_lbl2" data-id="text_io_y_lbl2" data-class="text_node" data-parent="root" class="iolblb" x="1695" y="628" text-anchor="middle">Narrative</text>
       <text id="text_io_y_math" data-id="text_io_y_math" data-class="text_node" data-parent="root" class="mathbig" x="1695" y="668" text-anchor="middle">Y</text>
     
-      <!-- ============================== NARRATION BANNER =============================== -->
       <g id="narration_banner">
         <rect x="20" y="790" width="1800" height="90" rx="15" fill="#f8f9fa" stroke="#e9ecef" stroke-width="1.5"/>
         
@@ -1215,7 +1150,6 @@
 
   </section>
 
-  <!-- ================= lower row ================= -->
   <section class="row row-bottom">
 
     <section class="panel">
@@ -3059,47 +2993,13 @@
     }
   ]
 }</script>
-<script type="application/json" id="anim-lines">["<svg xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1000 830\" width=\"100%\" height=\"100%\">", "  <defs>", "    <!-- Arrow Markers -->", "    <marker id=\"arrow-blue\" viewBox=\"0 0 10 10\" refX=\"6\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto-start-reverse\">", "      <path d=\"M 0 1.5 L 8 5 L 0 8.5 z\" fill=\"#0072B2\" />", "    </marker>", "    <marker id=\"arrow-red\" viewBox=\"0 0 10 10\" refX=\"6\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto-start-reverse\">", "      <path d=\"M 0 1.5 L 8 5 L 0 8.5 z\" fill=\"#B2182B\" />", "    </marker>", "", "    <!-- Drop Shadows for 3D Isometric Blocks -->", "    <filter id=\"shadow\" x=\"-5%\" y=\"-5%\" width=\"110%\" height=\"110%\">", "      <feDropShadow dx=\"1\" dy=\"1\" stdDeviation=\"1.5\" flood-opacity=\"0.15\"/>", "    </filter>", "  </defs>", "", "  <style>", "    .title-text { font-family: 'Times New Roman', serif; font-size: 16px; fill: #000000; }", "    .label-text { font-family: 'Times New Roman', serif; font-size: 14px; fill: #000000; }", "    .bold-label { font-family: 'Arial', sans-serif; font-size: 13px; font-weight: bold; fill: #000000; }", "    .module-text { font-family: 'Arial', sans-serif; font-size: 12.5px; fill: #000000; text-anchor: middle; }", "    .module-title { font-family: 'Arial', sans-serif; font-size: 13px; font-weight: bold; fill: #000000; text-anchor: middle; }", "    .placeholder-text { font-family: 'Arial', sans-serif; font-size: 11px; font-weight: bold; fill: #7F7F7F; text-anchor: middle; }", "", "    /* Centralized Progressive Reveal Animation */", "    @keyframes fadeIn {", "      from { opacity: 0; }", "      to { opacity: 1; }", "    }", "", "    /* Global Selector for all animated elements */", "    [data-id=\"legend_block\"], [data-id=\"legend_c_circle\"], [data-id=\"legend_global_line\"], [data-id=\"legend_local_line\"], [data-id=\"input_image_raster\"], [data-id=\"legend_c_label\"], [data-id=\"legend_global_label\"], [data-id=\"legend_local_label\"], [data-id=\"cnn_stem\"], [data-id=\"cnn_label\"], [data-id=\"arrow_img_to_cnn\"], [data-id=\"dynamic_pos_embedding\"], [data-id=\"arrow_cnn_to_dpe\"], [data-id=\"vit_block\"], [data-id=\"vit_title\"], [data-id=\"arrow_dpe_to_vit\"], [data-id=\"vit_input_stack\"], [data-id=\"transformer_layer_1\"], [data-id=\"arrow_stack1_to_layer1\"], [data-id=\"vit_stack_layer_1\"], [data-id=\"vit_dots\"], [data-id=\"arrow_layer1_to_dots\"], [data-id=\"transformer_layer_L\"], [data-id=\"arrow_dots_to_layerL\"], [data-id=\"vit_stack_layer_L\"], [data-id=\"global_concat_c\"], [data-id=\"cls_features_text\"], [data-id=\"edge_vit_cls_to_junction\"], [data-id=\"edge_junction_to_gconcat\"], [data-id=\"global_branch_block\"], [data-id=\"global_cls_tokens\"], [data-id=\"global_branch_title\"], [data-id=\"edge_gconcat_to_tokens\"], [data-id=\"global_fc\"], [data-id=\"edge_tokens_to_gfc\"], [data-id=\"global_feature\"], [data-id=\"edge_gfc_to_gfeat\"], [data-id=\"local_branch_block\"], [data-id=\"tensor_unfold\"], [data-id=\"local_branch_title\"], [data-id=\"patch_features_text\"], [data-id=\"edge_vit_patches_to_junction\"], [data-id=\"edge_junction_to_unfold\"], [data-id=\"local_concat_c\"], [data-id=\"edge_unfold_to_lconcat\"], [data-id=\"local_3d_cubes\"], [data-id=\"edge_lconcat_to_cubes\"], [data-id=\"conv_1x1\"], [data-id=\"edge_cubes_to_conv\"], [data-id=\"enhanced_locality_module\"], [data-id=\"edge_conv_to_enhanced\"], [data-id=\"fusion_module\"], [data-id=\"edge_enhanced_to_fusion\"], [data-id=\"edge_conv_to_fusion\"], [data-id=\"local_feature\"], [data-id=\"edge_fusion_to_lfeat\"], [data-id=\"final_concat_c\"], [data-id=\"edge_gfeat_to_final_concat\"], [data-id=\"edge_lfeat_to_final_concat\"], [data-id=\"combined_feature_bar\"], [data-id=\"arrow_fconcat_to_bar\"], [data-id=\"final_fc\"], [data-id=\"arrow_bar_to_fc\"], [data-id=\"arcface_text\"], [data-id=\"arrow_fc_to_arcface\"] {", "      opacity: 0;", "      animation-name: fadeIn;", "      animation-duration: 0.5s;", "      animation-fill-mode: forwards;", "    }", "", "    /* Timestamps Delays */", "    [data-id=\"legend_block\"], [data-id=\"legend_c_circle\"], [data-id=\"legend_global_line\"], [data-id=\"legend_local_line\"], [data-id=\"input_image_raster\"], [data-id=\"legend_c_label\"], [data-id=\"legend_global_label\"], [data-id=\"legend_local_label\"] { animation-delay: 0.0s; }", "    [data-id=\"cnn_stem\"], [data-id=\"cnn_label\"], [data-id=\"arrow_img_to_cnn\"] { animation-delay: 0.5s; }", "    [data-id=\"dynamic_pos_embedding\"], [data-id=\"arrow_cnn_to_dpe\"] { animation-delay: 1.0s; }", "    [data-id=\"vit_block\"], [data-id=\"vit_title\"], [data-id=\"arrow_dpe_to_vit\"] { animation-delay: 1.5s; }", "    [data-id=\"vit_input_stack\"] { animation-delay: 2.0s; }", "    [data-id=\"transformer_layer_1\"], [data-id=\"arrow_stack1_to_layer1\"] { animation-delay: 2.5s; }", "    [data-id=\"vit_stack_layer_1\"] { animation-delay: 3.0s; }", "    [data-id=\"vit_dots\"], [data-id=\"arrow_layer1_to_dots\"] { animation-delay: 3.5s; }", "    [data-id=\"transformer_layer_L\"], [data-id=\"arrow_dots_to_layerL\"] { animation-delay: 4.0s; }", "    [data-id=\"vit_stack_layer_L\"] { animation-delay: 4.5s; }", "    [data-id=\"global_concat_c\"], [data-id=\"cls_features_text\"], [data-id=\"edge_vit_cls_to_junction\"], [data-id=\"edge_junction_to_gconcat\"] { animation-delay: 5.0s; }", "    [data-id=\"global_branch_block\"], [data-id=\"global_cls_tokens\"], [data-id=\"global_branch_title\"], [data-id=\"edge_gconcat_to_tokens\"] { animation-delay: 5.5s; }", "    [data-id=\"global_fc\"], [data-id=\"edge_tokens_to_gfc\"] { animation-delay: 6.0s; }", "    [data-id=\"global_feature\"], [data-id=\"edge_gfc_to_gfeat\"] { animation-delay: 6.5s; }", "    [data-id=\"local_branch_block\"], [data-id=\"tensor_unfold\"], [data-id=\"local_branch_title\"], [data-id=\"patch_features_text\"], [data-id=\"edge_vit_patches_to_junction\"], [data-id=\"edge_junction_to_unfold\"] { animation-delay: 7.0s; }", "    [data-id=\"local_concat_c\"], [data-id=\"edge_unfold_to_lconcat\"] { animation-delay: 7.5s; }", "    [data-id=\"local_3d_cubes\"], [data-id=\"edge_lconcat_to_cubes\"] { animation-delay: 8.0s; }", "    [data-id=\"conv_1x1\"], [data-id=\"edge_cubes_to_conv\"] { animation-delay: 8.5s; }", "    [data-id=\"enhanced_locality_module\"], [data-id=\"edge_conv_to_enhanced\"] { animation-delay: 9.0s; }", "    [data-id=\"fusion_module\"], [data-id=\"edge_enhanced_to_fusion\"], [data-id=\"edge_conv_to_fusion\"] { animation-delay: 9.5s; }", "    [data-id=\"local_feature\"], [data-id=\"edge_fusion_to_lfeat\"] { animation-delay: 10.0s; }", "    [data-id=\"final_concat_c\"], [data-id=\"edge_gfeat_to_final_concat\"], [data-id=\"edge_lfeat_to_final_concat\"] { animation-delay: 10.5s; }", "    [data-id=\"combined_feature_bar\"], [data-id=\"arrow_fconcat_to_bar\"] { animation-delay: 11.0s; }", "    [data-id=\"final_fc\"], [data-id=\"arrow_bar_to_fc\"] { animation-delay: 11.5s; }", "    [data-id=\"arcface_text\"], [data-id=\"arrow_fc_to_arcface\"] { animation-delay: 12.0s; }", "", "    /* Narration Banner Styling & Animations */", "    .narrative-text {", "      opacity: 0;", "      font-family: 'Arial', sans-serif;", "      font-size: 14px;", "      font-weight: 500;", "      fill: #1A202C;", "    }", "", "    @keyframes showBanner {", "      0% { opacity: 1; }", "      99.9% { opacity: 1; }", "      100% { opacity: 0; }", "    }", "", "    @keyframes showBannerLast {", "      0% { opacity: 1; }", "      100% { opacity: 1; }", "    }", "", "    #narr_ts1 { animation: showBanner 0.5s linear 0.0s forwards; }", "    #narr_ts2 { animation: showBanner 0.5s linear 0.5s forwards; }", "    #narr_ts3 { animation: showBanner 0.5s linear 1.0s forwards; }", "    #narr_ts4 { animation: showBanner 0.5s linear 1.5s forwards; }", "    #narr_ts5 { animation: showBanner 0.5s linear 2.0s forwards; }", "    #narr_ts6 { animation: showBanner 0.5s linear 2.5s forwards; }", "    #narr_ts7 { animation: showBanner 0.5s linear 3.0s forwards; }", "    #narr_ts8 { animation: showBanner 0.5s linear 3.5s forwards; }", "    #narr_ts9 { animation: showBanner 0.5s linear 4.0s forwards; }", "    #narr_ts10 { animation: showBanner 0.5s linear 4.5s forwards; }", "    #narr_ts11 { animation: showBanner 0.5s linear 5.0s forwards; }", "    #narr_ts12 { animation: showBanner 0.5s linear 5.5s forwards; }", "    #narr_ts13 { animation: showBanner 0.5s linear 6.0s forwards; }", "    #narr_ts14 { animation: showBanner 0.5s linear 6.5s forwards; }", "    #narr_ts15 { animation: showBanner 0.5s linear 7.0s forwards; }", "    #narr_ts16 { animation: showBanner 0.5s linear 7.5s forwards; }", "    #narr_ts17 { animation: showBanner 0.5s linear 8.0s forwards; }", "    #narr_ts18 { animation: showBanner 0.5s linear 8.5s forwards; }", "    #narr_ts19 { animation: showBanner 0.5s linear 9.0s forwards; }", "    #narr_ts20 { animation: showBanner 0.5s linear 9.5s forwards; }", "    #narr_ts21 { animation: showBanner 0.5s linear 10.0s forwards; }", "    #narr_ts22 { animation: showBanner 0.5s linear 10.5s forwards; }", "    #narr_ts23 { animation: showBanner 0.5s linear 11.0s forwards; }", "    #narr_ts24 { animation: showBanner 0.5s linear 11.5s forwards; }", "    #narr_ts25 { animation: showBannerLast 0.5s linear 12.0s forwards; }", "  </style>", "", "  <!-- ========================================================= -->", "  <!-- 1. BACKGROUND CONTAINERS                                   -->", "  <!-- ========================================================= -->", "", "  <!-- Global Branch Container (Top Yellow) -->", "  <g id=\"global_branch_block\" data-id=\"global_branch_block\" data-class=\"block\" data-parent=\"root\">", "    <rect x=\"420\" y=\"20\" width=\"470\" height=\"105\" fill=\"#FEF9D9\" stroke=\"#E5DEB7\" stroke-width=\"1.5\" rx=\"3\" />", "    <text x=\"880\" y=\"15\" class=\"title-text\" text-anchor=\"end\" data-id=\"global_branch_title\" data-class=\"text_node\" data-parent=\"global_branch_block\">global branch</text>", "  </g>", "", "  <!-- ViT Container (Middle Grey) -->", "  <g id=\"vit_block\" data-id=\"vit_block\" data-class=\"block\" data-parent=\"root\">", "    <rect x=\"255\" y=\"185\" width=\"455\" height=\"275\" fill=\"#ECECEC\" stroke=\"#888888\" stroke-width=\"1.5\" rx=\"2\" />", "    <text x=\"265\" y=\"206\" class=\"title-text\" font-weight=\"bold\" font-size=\"18\" data-id=\"vit_title\" data-class=\"text_node\" data-parent=\"vit_block\">ViT</text>", "  </g>", "", "  <!-- Local Branch Container (Bottom Green) -->", "  <g id=\"local_branch_block\" data-id=\"local_branch_block\" data-class=\"block\" data-parent=\"root\">", "    <rect x=\"255\" y=\"495\" width=\"600\" height=\"195\" fill=\"#DCECD7\" stroke=\"#A6C5A2\" stroke-width=\"1.5\" rx=\"3\" />", "    <text x=\"845\" y=\"708\" class=\"title-text\" text-anchor=\"end\" data-id=\"local_branch_title\" data-class=\"text_node\" data-parent=\"local_branch_block\">local branch</text>", "  </g>", "", "", "  <!-- ========================================================= -->", "  <!-- 2. LEFT INPUT PIPELINE                                     -->", "  <!-- ========================================================= -->", "", "  <!-- Input Image (Raster Placeholder) -->", "  <g id=\"input_image_raster\" data-id=\"input_image_raster\" data-class=\"raster_node\"><image href=\"rasters/crop_input_image_raster.png\" xlink:href=\"../../../../rasters/crop_input_image_raster.png\" x=\"42\" y=\"108\" width=\"104\" height=\"104\" preserveAspectRatio=\"xMidYMid meet\" /></g>", "", "  <!-- Down Block Arrow (Image -> CNN Stem) -->", "  <polygon points=\"90,222 90,240 82,240 94,254 106,240 98,240 98,222\" fill=\"#5A6B7C\" data-id=\"arrow_img_to_cnn\" data-class=\"edge\" data-source=\"input_image_raster\" data-target=\"cnn_stem\" />", "", "  <!-- CNN Stem 3D Isometric Green Cube -->", "  <g id=\"cnn_stem\" data-id=\"cnn_stem\" data-class=\"composite_whole\" data-parent=\"root\">", "    <!-- Top Face -->", "    <polygon points=\"80,265 138,265 118,300 60,300\" fill=\"#9CD877\" stroke=\"#4C8533\" stroke-width=\"1.2\" data-id=\"cnn_top\" data-class=\"composite_part\" data-parent=\"cnn_stem\" />", "    <!-- Front Face -->", "    <polygon points=\"60,300 118,300 118,368 60,368\" fill=\"#78BA57\" stroke=\"#4C8533\" stroke-width=\"1.2\" data-id=\"cnn_front\" data-class=\"composite_part\" data-parent=\"cnn_stem\" />", "    <!-- Right Face -->", "    <polygon points=\"118,300 138,265 138,333 118,368\" fill=\"#589B37\" stroke=\"#4C8533\" stroke-width=\"1.2\" data-id=\"cnn_right\" data-class=\"composite_part\" data-parent=\"cnn_stem\" />", "    <text x=\"89\" y=\"388\" class=\"bold-label\" text-anchor=\"middle\" data-id=\"cnn_label\" data-class=\"text_node\" data-parent=\"root\">CNN stem</text>", "  </g>", "", "  <!-- Right Block Arrow (CNN Stem -> Dynamic Pos Emb) -->", "  <polygon points=\"143,322 153,322 153,315 163,326 153,337 153,330 143,330\" fill=\"#5A6B7C\" data-id=\"arrow_cnn_to_dpe\" data-class=\"edge\" data-source=\"cnn_stem\" data-target=\"dynamic_pos_embedding\" />", "", "  <!-- Dynamic Position Embedding (Cyan Pill) -->", "  <g id=\"dynamic_pos_embedding\" data-id=\"dynamic_pos_embedding\" data-class=\"standalone_node\" data-parent=\"root\">", "    <rect x=\"165\" y=\"235\" width=\"58\" height=\"182\" rx=\"14\" fill=\"#71BED5\" stroke=\"#4693AA\" stroke-width=\"1.5\" />", "    <text x=\"187\" y=\"326\" class=\"bold-label\" text-anchor=\"middle\" transform=\"rotate(-90 187 326)\">dynamic position</text>", "    <text x=\"203\" y=\"326\" class=\"bold-label\" text-anchor=\"middle\" transform=\"rotate(-90 203 326)\">embedding</text>", "  </g>", "", "  <!-- Right Block Arrow (Dynamic Pos Emb -> ViT) -->", "  <polygon points=\"228,322 242,322 242,315 252,326 242,337 242,330 228,330\" fill=\"#5A6B7C\" data-id=\"arrow_dpe_to_vit\" data-class=\"edge\" data-source=\"dynamic_pos_embedding\" data-target=\"vit_block\" />", "", "", "  <!-- ========================================================= -->", "  <!-- 3. ViT INTERNAL COMPONENTS                                 -->", "  <!-- ========================================================= -->", "", "  <!-- Input Patch Stack (Stack 1) -->", "  <g id=\"vit_input_stack\" data-id=\"vit_input_stack\" data-class=\"child_node\" data-parent=\"vit_block\">", "    <!-- CLS Token (Red Square) -->", "    <rect x=\"268\" y=\"218\" width=\"32\" height=\"32\" fill=\"#9E3D52\" stroke=\"#7A2839\" stroke-width=\"1.2\" />", "    <rect x=\"272\" y=\"222\" width=\"24\" height=\"24\" fill=\"none\" stroke=\"#D98293\" stroke-width=\"1\" />", "    ", "    <!-- Orange Enclosing Box for Patches -->", "    <rect x=\"264\" y=\"258\" width=\"40\" height=\"166\" fill=\"none\" stroke=\"#EA7C25\" stroke-width=\"1.2\" />", "    <!-- Patch Tokens -->", "    <rect x=\"268\" y=\"262\" width=\"32\" height=\"26\" fill=\"#F99F53\" stroke=\"#EA7C25\" stroke-width=\"1\" />", "    <rect x=\"268\" y=\"293\" width=\"32\" height=\"26\" fill=\"#F99F53\" stroke=\"#EA7C25\" stroke-width=\"1\" />", "    <rect x=\"268\" y=\"324\" width=\"32\" height=\"26\" fill=\"#F99F53\" stroke=\"#EA7C25\" stroke-width=\"1\" />", "    <text x=\"284\" y=\"367\" font-family=\"Arial, sans-serif\" font-size=\"16\" font-weight=\"bold\" fill=\"#000000\" text-anchor=\"middle\">...</text>", "    <rect x=\"268\" y=\"375\" width=\"32\" height=\"44\" fill=\"#F99F53\" stroke=\"#EA7C25\" stroke-width=\"1\" />", "  </g>", "", "  <!-- Right Block Arrow (Stack 1 -> Layer 1) -->", "  <polygon points=\"309,322 327,322 327,315 337,326 327,337 327,330 309,330\" fill=\"#5A6B7C\" data-id=\"arrow_stack1_to_layer1\" data-class=\"edge\" data-source=\"vit_input_stack\" data-target=\"transformer_layer_1\" />", "", "  <!-- Transformer Encoding Layer 1 (Vertical text) -->", "  <g id=\"transformer_layer_1\" data-id=\"transformer_layer_1\" data-class=\"child_node\" data-parent=\"vit_block\">", "    <rect x=\"348\" y=\"215\" width=\"70\" height=\"210\" rx=\"14\" fill=\"#BDD0E6\" stroke=\"#8CA6C5\" stroke-width=\"1.5\" />", "    <text x=\"376\" y=\"320\" class=\"module-text\" transform=\"rotate(-90 376 320)\">transformer</text>", "    <text x=\"392\" y=\"320\" class=\"module-text\" transform=\"rotate(-90 392 320)\">encoding layer</text>", "    <text x=\"383\" y=\"443\" class=\"label-text\" text-anchor=\"middle\">layer 1</text>", "  </g>", "", "  <!-- Layer 1 Output Stack (Stack 2) -->", "  <g id=\"vit_stack_layer_1\" data-id=\"vit_stack_layer_1\" data-class=\"child_node\" data-parent=\"vit_block\">", "    <!-- CLS Token with Outline -->", "    <rect x=\"426\" y=\"214\" width=\"40\" height=\"40\" fill=\"none\" stroke=\"#9E3D52\" stroke-width=\"1.5\" />", "    <rect x=\"430\" y=\"218\" width=\"32\" height=\"32\" fill=\"#9E3D52\" stroke=\"#7A2839\" stroke-width=\"1.2\" />", "    <rect x=\"434\" y=\"222\" width=\"24\" height=\"24\" fill=\"none\" stroke=\"#D98293\" stroke-width=\"1\" />", "    ", "    <!-- Orange Enclosing Box for Patches -->", "    <rect x=\"426\" y=\"258\" width=\"40\" height=\"166\" fill=\"none\" stroke=\"#EA7C25\" stroke-width=\"1.2\" />", "    <!-- Patch Tokens -->", "    <rect x=\"430\" y=\"262\" width=\"32\" height=\"26\" fill=\"#F99F53\" stroke=\"#EA7C25\" stroke-width=\"1\" />", "    <rect x=\"430\" y=\"293\" width=\"32\" height=\"26\" fill=\"#F99F53\" stroke=\"#EA7C25\" stroke-width=\"1\" />", "    <rect x=\"430\" y=\"324\" width=\"32\" height=\"26\" fill=\"#F99F53\" stroke=\"#EA7C25\" stroke-width=\"1\" />", "    <text x=\"446\" y=\"367\" font-family=\"Arial, sans-serif\" font-size=\"16\" font-weight=\"bold\" fill=\"#000000\" text-anchor=\"middle\">...</text>", "    <rect x=\"430\" y=\"375\" width=\"32\" height=\"44\" fill=\"#F99F53\" stroke=\"#EA7C25\" stroke-width=\"1\" />", "  </g>", "", "  <!-- Block Arrow to Dots -->", "  <polygon points=\"471,322 485,322 485,315 495,326 485,337 485,330 471,330\" fill=\"#5A6B7C\" data-id=\"arrow_layer1_to_dots\" data-class=\"edge\" data-source=\"vit_stack_layer_1\" data-target=\"vit_dots\" />", "  <text x=\"522\" y=\"331\" font-family=\"Arial, sans-serif\" font-size=\"22\" font-weight=\"bold\" fill=\"#000000\" text-anchor=\"middle\" id=\"vit_dots\" data-id=\"vit_dots\" data-class=\"text_node\" data-parent=\"vit_block\">...</text>", "  <!-- Block Arrow from Dots to Layer L -->", "  <polygon points=\"545,322 559,322 559,315 569,326 559,337 559,330 545,330\" fill=\"#5A6B7C\" data-id=\"arrow_dots_to_layerL\" data-class=\"edge\" data-source=\"vit_dots\" data-target=\"transformer_layer_L\" />", "", "  <!-- Transformer Encoding Layer L (Vertical text) -->", "  <g id=\"transformer_layer_L\" data-id=\"transformer_layer_L\" data-class=\"child_node\" data-parent=\"vit_block\">", "    <rect x=\"582\" y=\"215\" width=\"70\" height=\"210\" rx=\"14\" fill=\"#BDD0E6\" stroke=\"#8CA6C5\" stroke-width=\"1.5\" />", "    <text x=\"610\" y=\"320\" class=\"module-text\" transform=\"rotate(-90 610 320)\">transformer</text>", "    <text x=\"626\" y=\"320\" class=\"module-text\" transform=\"rotate(-90 626 320)\">encoding layer</text>", "    <text x=\"617\" y=\"443\" class=\"label-text\" text-anchor=\"middle\">layer <tspan font-style=\"italic\">L</tspan></text>", "  </g>", "", "  <!-- Layer L Output Stack (Stack 3) -->", "  <g id=\"vit_stack_layer_L\" data-id=\"vit_stack_layer_L\" data-class=\"child_node\" data-parent=\"vit_block\">", "    <!-- CLS Token with Outline -->", "    <rect x=\"656\" y=\"214\" width=\"40\" height=\"40\" fill=\"none\" stroke=\"#9E3D52\" stroke-width=\"1.5\" />", "    <rect x=\"660\" y=\"218\" width=\"32\" height=\"32\" fill=\"#9E3D52\" stroke=\"#7A2839\" stroke-width=\"1.2\" />", "    <rect x=\"664\" y=\"222\" width=\"24\" height=\"24\" fill=\"none\" stroke=\"#D98293\" stroke-width=\"1\" />", "    ", "    <!-- Orange Enclosing Box for Patches -->", "    <rect x=\"656\" y=\"258\" width=\"40\" height=\"166\" fill=\"none\" stroke=\"#EA7C25\" stroke-width=\"1.2\" />", "    <!-- Patch Tokens -->", "    <rect x=\"660\" y=\"262\" width=\"32\" height=\"26\" fill=\"#F99F53\" stroke=\"#EA7C25\" stroke-width=\"1\" />", "    <rect x=\"660\" y=\"293\" width=\"32\" height=\"26\" fill=\"#F99F53\" stroke=\"#EA7C25\" stroke-width=\"1\" />", "    <rect x=\"660\" y=\"324\" width=\"32\" height=\"26\" fill=\"#F99F53\" stroke=\"#EA7C25\" stroke-width=\"1\" />", "    <text x=\"676\" y=\"367\" font-family=\"Arial, sans-serif\" font-size=\"16\" font-weight=\"bold\" fill=\"#000000\" text-anchor=\"middle\">...</text>", "    <rect x=\"660\" y=\"375\" width=\"32\" height=\"44\" fill=\"#F99F53\" stroke=\"#EA7C25\" stroke-width=\"1\" />", "  </g>", "", "", "  <!-- ========================================================= -->", "  <!-- 4. GLOBAL BRANCH (TOP)                                     -->", "  <!-- ========================================================= -->", "", "  <text x=\"635\" y=\"162\" class=\"label-text\" text-anchor=\"middle\" data-id=\"cls_features_text\" data-class=\"text_node\" data-parent=\"root\">multi-layer [CLS] features</text>", "", "  <!-- Blue lines routing from Layer 1 & Layer L to Circle C -->", "  <path d=\"M 446 214 L 446 175 L 676 175 L 676 214\" fill=\"none\" stroke=\"#0072B2\" stroke-width=\"1.5\" data-id=\"edge_vit_cls_to_junction\" data-class=\"edge\" data-source=\"vit_stack_layer_1\" data-target=\"global_concat_c\" />", "  <line x1=\"500\" y1=\"175\" x2=\"500\" y2=\"152\" stroke=\"#0072B2\" stroke-width=\"1.5\" data-id=\"edge_junction_to_gconcat\" data-class=\"edge\" data-source=\"vit_block\" data-target=\"global_concat_c\" />", "", "  <!-- Global Concat Circle C -->", "  <g id=\"global_concat_c\" data-id=\"global_concat_c\" data-class=\"standalone_node\" data-parent=\"root\">", "    <circle cx=\"500\" cy=\"140\" r=\"11\" fill=\"#4D6A4E\" stroke=\"#354B36\" stroke-width=\"1\" />", "    <text x=\"500\" y=\"144\" font-family=\"Arial, sans-serif\" font-size=\"12\" font-weight=\"bold\" fill=\"#FFFFFF\" text-anchor=\"middle\">C</text>", "  </g>", "", "  <!-- Blue arrow from Circle C into CLS Sequence -->", "  <line x1=\"500\" y1=\"129\" x2=\"500\" y2=\"92\" stroke=\"#0072B2\" stroke-width=\"1.5\" marker-end=\"url(#arrow-blue)\" data-id=\"edge_gconcat_to_tokens\" data-class=\"edge\" data-source=\"global_concat_c\" data-target=\"global_cls_tokens\" />", "", "  <!-- Concatenated CLS Feature Tokens -->", "  <g id=\"global_cls_tokens\" data-id=\"global_cls_tokens\" data-class=\"child_node\" data-parent=\"global_branch_block\">", "    <rect x=\"440\" y=\"58\" width=\"28\" height=\"28\" fill=\"#9E3D52\" stroke=\"#7A2839\" stroke-width=\"1.2\" />", "    <rect x=\"468\" y=\"58\" width=\"28\" height=\"28\" fill=\"#9E3D52\" stroke=\"#7A2839\" stroke-width=\"1.2\" />", "    <text x=\"513\" y=\"76\" font-family=\"Arial, sans-serif\" font-size=\"16\" font-weight=\"bold\" fill=\"#000000\" text-anchor=\"middle\">...</text>", "    <rect x=\"528\" y=\"58\" width=\"28\" height=\"28\" fill=\"#9E3D52\" stroke=\"#7A2839\" stroke-width=\"1.2\" />", "  </g>", "", "  <!-- Blue Arrow (CLS Tokens -> FC) -->", "  <line x1=\"560\" y1=\"72\" x2=\"596\" y2=\"72\" stroke=\"#0072B2\" stroke-width=\"1.5\" marker-end=\"url(#arrow-blue)\" data-id=\"edge_tokens_to_gfc\" data-class=\"edge\" data-source=\"global_cls_tokens\" data-target=\"global_fc\" />", "", "  <!-- FC Box -->", "  <g id=\"global_fc\" data-id=\"global_fc\" data-class=\"child_node\" data-parent=\"global_branch_block\">", "    <rect x=\"602\" y=\"50\" width=\"64\" height=\"44\" rx=\"6\" fill=\"#FEE388\" stroke=\"#D4AC3B\" stroke-width=\"1.2\" />", "    <text x=\"634\" y=\"77\" class=\"label-text\" font-size=\"15\" text-anchor=\"middle\">FC</text>", "  </g>", "", "  <!-- Blue Arrow (FC -> global feature) -->", "  <line x1=\"672\" y1=\"72\" x2=\"706\" y2=\"72\" stroke=\"#0072B2\" stroke-width=\"1.5\" marker-end=\"url(#arrow-blue)\" data-id=\"edge_gfc_to_gfeat\" data-class=\"edge\" data-source=\"global_fc\" data-target=\"global_feature\" />", "", "  <!-- Global Feature Box -->", "  <g id=\"global_feature\" data-id=\"global_feature\" data-class=\"child_node\" data-parent=\"global_branch_block\">", "    <rect x=\"712\" y=\"50\" width=\"162\" height=\"44\" rx=\"2\" fill=\"#FED265\" stroke=\"#D4AC3B\" stroke-width=\"1.2\" />", "    <text x=\"793\" y=\"77\" class=\"label-text\" font-size=\"15\" text-anchor=\"middle\">global feature</text>", "  </g>", "", "  <!-- Blue Line from Global Feature to Final Fusion -->", "  <path d=\"M 793 100 L 793 185 L 752 185 L 752 305\" fill=\"none\" stroke=\"#0072B2\" stroke-width=\"1.5\" marker-end=\"url(#arrow-blue)\" data-id=\"edge_gfeat_to_final_concat\" data-class=\"edge\" data-source=\"global_feature\" data-target=\"final_concat_c\" />", "", "", "  <!-- ========================================================= -->", "  <!-- 5. LOCAL BRANCH (BOTTOM)                                   -->", "  <!-- ========================================================= -->", "", "  <text x=\"600\" y=\"478\" class=\"label-text\" text-anchor=\"middle\" data-id=\"patch_features_text\" data-class=\"text_node\" data-parent=\"root\">multi-layer patch features</text>", "", "  <!-- Red Lines routing from Layer 1 & Layer L to 3D Tensor Unfold -->", "  <path d=\"M 446 424 L 446 465 L 676 465 L 676 424\" fill=\"none\" stroke=\"#B2182B\" stroke-width=\"1.5\" data-id=\"edge_vit_patches_to_junction\" data-class=\"edge\" data-source=\"vit_stack_layer_1\" data-target=\"tensor_unfold\" />", "  <line x1=\"498\" y1=\"465\" x2=\"498\" y2=\"504\" stroke=\"#B2182B\" stroke-width=\"1.5\" data-id=\"edge_junction_to_unfold\" data-class=\"edge\" data-source=\"vit_block\" data-target=\"tensor_unfold\" />", "", "  <!-- 3D Tensor Unfold (Orange Pill) -->", "  <g id=\"tensor_unfold\" data-id=\"tensor_unfold\" data-class=\"child_node\" data-parent=\"local_branch_block\">", "    <rect x=\"375\" y=\"508\" width=\"240\" height=\"30\" rx=\"6\" fill=\"#F99F53\" stroke=\"#DE7D33\" stroke-width=\"1.2\" />", "    <text x=\"495\" y=\"528\" class=\"label-text\" font-size=\"15\" text-anchor=\"middle\">3D tensor unfold</text>", "  </g>", "", "  <!-- Red Line from 3D Tensor Unfold to Circle C -->", "  <path d=\"M 492 538 L 492 555 L 315 555 L 315 565\" fill=\"none\" stroke=\"#B2182B\" stroke-width=\"1.5\" data-id=\"edge_unfold_to_lconcat\" data-class=\"edge\" data-source=\"tensor_unfold\" data-target=\"local_concat_c\" />", "", "  <!-- Local Concat Circle C -->", "  <g id=\"local_concat_c\" data-id=\"local_concat_c\" data-class=\"child_node\" data-parent=\"local_branch_block\">", "    <circle cx=\"315\" cy=\"576\" r=\"11\" fill=\"#4D6A4E\" stroke=\"#354B36\" stroke-width=\"1\" />", "    <text x=\"315\" y=\"580\" font-family=\"Arial, sans-serif\" font-size=\"12\" font-weight=\"bold\" fill=\"#FFFFFF\" text-anchor=\"middle\">C</text>", "  </g>", "", "  <!-- Red Arrow from Circle C into 3D Cubes -->", "  <line x1=\"315\" y1=\"587\" x2=\"315\" y2=\"603\" stroke=\"#B2182B\" stroke-width=\"1.5\" marker-end=\"url(#arrow-red)\" data-id=\"edge_lconcat_to_cubes\" data-class=\"edge\" data-source=\"local_concat_c\" data-target=\"local_3d_cubes\" />", "", "  <!-- 3D Isometric Orange Cubes -->", "  <g id=\"local_3d_cubes\" data-id=\"local_3d_cubes\" data-class=\"composite_whole\" data-parent=\"local_branch_block\">", "    <!-- Double Cube 1 -->", "    <!-- Front Block -->", "    <polygon points=\"266,615 296,615 296,645 266,645\" fill=\"#F99F53\" stroke=\"#DE7D33\" stroke-width=\"1\" data-id=\"cube1_front\" data-class=\"composite_part\" data-parent=\"local_3d_cubes\" />", "    <polygon points=\"266,615 280,603 310,603 296,615\" fill=\"#FBBA7F\" stroke=\"#DE7D33\" stroke-width=\"1\" data-id=\"cube1_top\" data-class=\"composite_part\" data-parent=\"local_3d_cubes\" />", "    <polygon points=\"296,615 310,603 310,633 296,645\" fill=\"#E2843B\" stroke=\"#DE7D33\" stroke-width=\"1\" data-id=\"cube1_right\" data-class=\"composite_part\" data-parent=\"local_3d_cubes\" />", "    <!-- Front Block Attached (Right) -->", "    <polygon points=\"296,615 326,615 326,645 296,645\" fill=\"#F99F53\" stroke=\"#DE7D33\" stroke-width=\"1\" data-id=\"cube2_front\" data-class=\"composite_part\" data-parent=\"local_3d_cubes\" />", "    <polygon points=\"296,615 310,603 340,603 326,615\" fill=\"#FBBA7F\" stroke=\"#DE7D33\" stroke-width=\"1\" data-id=\"cube2_top\" data-class=\"composite_part\" data-parent=\"local_3d_cubes\" />", "    <polygon points=\"326,615 340,603 340,633 326,645\" fill=\"#E2843B\" stroke=\"#DE7D33\" stroke-width=\"1\" data-id=\"cube2_right\" data-class=\"composite_part\" data-parent=\"local_3d_cubes\" />", "", "    <!-- Ellipsis -->", "    <text x=\"355\" y=\"630\" font-family=\"Arial, sans-serif\" font-size=\"15\" font-weight=\"bold\" fill=\"#000000\" text-anchor=\"middle\" data-id=\"cubes_dots\" data-class=\"composite_part\" data-parent=\"local_3d_cubes\">...</text>", "", "    <!-- Single Cube 2 -->", "    <polygon points=\"374,615 404,615 404,645 374,645\" fill=\"#F99F53\" stroke=\"#DE7D33\" stroke-width=\"1\" data-id=\"cube3_front\" data-class=\"composite_part\" data-parent=\"local_3d_cubes\" />", "    <polygon points=\"374,615 388,603 418,603 404,615\" fill=\"#FBBA7F\" stroke=\"#DE7D33\" stroke-width=\"1\" data-id=\"cube3_top\" data-class=\"composite_part\" data-parent=\"local_3d_cubes\" />", "    <polygon points=\"404,615 418,603 418,633 404,645\" fill=\"#E2843B\" stroke=\"#DE7D33\" stroke-width=\"1\" data-id=\"cube3_right\" data-class=\"composite_part\" data-parent=\"local_3d_cubes\" />", "  </g>", "", "  <!-- Red Arrow to 1x1 Conv -->", "  <line x1=\"422\" y1=\"624\" x2=\"447\" y2=\"624\" stroke=\"#B2182B\" stroke-width=\"1.5\" marker-end=\"url(#arrow-red)\" data-id=\"edge_cubes_to_conv\" data-class=\"edge\" data-source=\"local_3d_cubes\" data-target=\"conv_1x1\" />", "", "  <!-- 1x1 Conv Box -->", "  <g id=\"conv_1x1\" data-id=\"conv_1x1\" data-class=\"child_node\" data-parent=\"local_branch_block\">", "    <rect x=\"453\" y=\"594\" width=\"84\" height=\"58\" rx=\"2\" fill=\"#F99F53\" stroke=\"#DE7D33\" stroke-width=\"1.2\" />", "    <text x=\"495\" y=\"618\" class=\"label-text\" font-size=\"15\" text-anchor=\"middle\">1 \u00d7 1</text>", "    <text x=\"495\" y=\"636\" class=\"bold-label\" text-anchor=\"middle\">conv</text>", "  </g>", "", "  <!-- Two Red Branch Arrows from 1x1 Conv -->", "  <!-- Top Branch into Enhanced Locality Module -->", "  <line x1=\"542\" y1=\"605\" x2=\"566\" y2=\"605\" stroke=\"#B2182B\" stroke-width=\"1.5\" marker-end=\"url(#arrow-red)\" data-id=\"edge_conv_to_enhanced\" data-class=\"edge\" data-source=\"conv_1x1\" data-target=\"enhanced_locality_module\" />", "  <!-- Bottom Bypass Branch into Fusion -->", "  <path d=\"M 542 642 L 700 642\" fill=\"none\" stroke=\"#B2182B\" stroke-width=\"1.5\" marker-end=\"url(#arrow-red)\" data-id=\"edge_conv_to_fusion\" data-class=\"edge\" data-source=\"conv_1x1\" data-target=\"fusion_module\" />", "", "  <!-- Enhanced Locality Module -->", "  <g id=\"enhanced_locality_module\" data-id=\"enhanced_locality_module\" data-class=\"child_node\" data-parent=\"local_branch_block\">", "    <rect x=\"572\" y=\"572\" width=\"104\" height=\"72\" rx=\"8\" fill=\"#A4D27F\" stroke=\"#72A848\" stroke-width=\"1.2\" />", "    <text x=\"624\" y=\"598\" class=\"label-text\" font-size=\"15\" text-anchor=\"middle\">enhanced</text>", "    <text x=\"624\" y=\"616\" class=\"label-text\" font-size=\"15\" text-anchor=\"middle\">locality</text>", "    <text x=\"624\" y=\"634\" class=\"label-text\" font-size=\"15\" text-anchor=\"middle\">module</text>", "  </g>", "", "  <!-- Red Arrow from Enhanced Locality to Fusion -->", "  <line x1=\"680\" y1=\"605\" x2=\"700\" y2=\"605\" stroke=\"#B2182B\" stroke-width=\"1.5\" marker-end=\"url(#arrow-red)\" data-id=\"edge_enhanced_to_fusion\" data-class=\"edge\" data-source=\"enhanced_locality_module\" data-target=\"fusion_module\" />", "", "  <!-- Fusion Vertical Pill -->", "  <g id=\"fusion_module\" data-id=\"fusion_module\" data-class=\"child_node\" data-parent=\"local_branch_block\">", "    <rect x=\"708\" y=\"542\" width=\"48\" height=\"135\" rx=\"8\" fill=\"#A4D27F\" stroke=\"#72A848\" stroke-width=\"1.2\" />", "    <text x=\"732\" y=\"610\" class=\"label-text\" font-size=\"15\" text-anchor=\"middle\" transform=\"rotate(-90 732 610)\">fusion</text>", "  </g>", "", "  <!-- Red Arrow from Fusion to Local Feature -->", "  <line x1=\"760\" y1=\"610\" x2=\"780\" y2=\"610\" stroke=\"#B2182B\" stroke-width=\"1.5\" marker-end=\"url(#arrow-red)\" data-id=\"edge_fusion_to_lfeat\" data-class=\"edge\" data-source=\"fusion_module\" data-target=\"local_feature\" />", "", "  <!-- Local Feature Vertical Pill -->", "  <g id=\"local_feature\" data-id=\"local_feature\" data-class=\"child_node\" data-parent=\"local_branch_block\">", "    <rect x=\"788\" y=\"542\" width=\"48\" height=\"135\" rx=\"8\" fill=\"#A4D27F\" stroke=\"#72A848\" stroke-width=\"1.2\" />", "    <text x=\"812\" y=\"610\" class=\"label-text\" font-size=\"15\" text-anchor=\"middle\" transform=\"rotate(-90 812 610)\">local feature</text>", "  </g>", "", "  <!-- Red Line from Local Feature to Final Fusion -->", "  <path d=\"M 812 542 L 812 468 L 752 468 L 752 342\" fill=\"none\" stroke=\"#B2182B\" stroke-width=\"1.5\" marker-end=\"url(#arrow-red)\" data-id=\"edge_lfeat_to_final_concat\" data-class=\"edge\" data-source=\"local_feature\" data-target=\"final_concat_c\" />", "", "", "  <!-- ========================================================= -->", "  <!-- 6. FINAL FUSION & CLASSIFICATION (RIGHT)                   -->", "  <!-- ========================================================= -->", "", "  <!-- Final Concat Circle C -->", "  <g id=\"final_concat_c\" data-id=\"final_concat_c\" data-class=\"standalone_node\" data-parent=\"root\">", "    <circle cx=\"752\" cy=\"324\" r=\"11\" fill=\"#4D6A4E\" stroke=\"#354B36\" stroke-width=\"1\" />", "    <text x=\"752\" y=\"328\" font-family=\"Arial, sans-serif\" font-size=\"12\" font-weight=\"bold\" fill=\"#FFFFFF\" text-anchor=\"middle\">C</text>", "  </g>", "", "  <!-- Thick Grey Block Arrow (Circle C -> Combined Feature Bar) -->", "  <polygon points=\"782,320 796,320 796,313 806,324 796,335 796,328 782,328\" fill=\"#5A6B7C\" data-id=\"arrow_fconcat_to_bar\" data-class=\"edge\" data-source=\"final_concat_c\" data-target=\"combined_feature_bar\" />", "", "  <!-- Combined Feature Vertical Stack Bar -->", "  <g id=\"combined_feature_bar\" data-id=\"combined_feature_bar\" data-class=\"composite_whole\" data-parent=\"root\">", "    <!-- Top Half (Global Feature - Yellow) -->", "    <rect x=\"818\" y=\"235\" width=\"30\" height=\"90\" fill=\"#FED265\" stroke=\"#D4AC3B\" stroke-width=\"1.2\" data-id=\"comb_top\" data-class=\"composite_part\" data-parent=\"combined_feature_bar\" />", "    <!-- Bottom Half (Local Feature - Green) -->", "    <rect x=\"818\" y=\"325\" width=\"30\" height=\"90\" fill=\"#8AC567\" stroke=\"#689F47\" stroke-width=\"1.2\" data-id=\"comb_bot\" data-class=\"composite_part\" data-parent=\"combined_feature_bar\" />", "  </g>", "", "  <!-- Thick Grey Block Arrow (Combined Bar -> FC) -->", "  <polygon points=\"852,320 869,320 869,313 879,324 869,335 869,328 852,328\" fill=\"#5A6B7C\" data-id=\"arrow_bar_to_fc\" data-class=\"edge\" data-source=\"combined_feature_bar\" data-target=\"final_fc\" />", "", "  <!-- Final FC Box -->", "  <g id=\"final_fc\" data-id=\"final_fc\" data-class=\"standalone_node\" data-parent=\"root\">", "    <rect x=\"888\" y=\"295\" width=\"46\" height=\"60\" rx=\"2\" fill=\"#B7C9D9\" stroke=\"#8CAABF\" stroke-width=\"1.2\" />", "    <text x=\"911\" y=\"329\" class=\"label-text\" font-size=\"14\" font-weight=\"bold\" text-anchor=\"middle\">FC</text>", "  </g>", "", "  <!-- Thick Grey Block Arrow (FC -> ArcFace) -->", "  <polygon points=\"938,320 952,320 952,313 962,324 952,335 952,328 938,328\" fill=\"#5A6B7C\" data-id=\"arrow_fc_to_arcface\" data-class=\"edge\" data-source=\"final_fc\" data-target=\"arcface_text\" />", "", "  <!-- ArcFace Vertical Rotated Text -->", "  <text x=\"984\" y=\"326\" class=\"title-text\" font-size=\"17\" text-anchor=\"middle\" transform=\"rotate(-90 984 326)\" id=\"arcface_text\" data-id=\"arcface_text\" data-class=\"standalone_node\" data-parent=\"root\">ArcFace</text>", "", "", "  <!-- ========================================================= -->", "  <!-- 7. LEGEND (BOTTOM LEFT)                                    -->", "  <!-- ========================================================= -->", "  <g id=\"legend_block\" data-id=\"legend_block\" data-class=\"block\" data-parent=\"root\">", "    <!-- Concatenation -->", "    <circle cx=\"26\" cy=\"605\" r=\"11\" fill=\"#4D6A4E\" stroke=\"#354B36\" stroke-width=\"1\" data-id=\"legend_c_circle\" data-class=\"child_node\" data-parent=\"legend_block\" />", "    <text x=\"26\" y=\"609\" font-family=\"Arial, sans-serif\" font-size=\"12\" font-weight=\"bold\" fill=\"#FFFFFF\" text-anchor=\"middle\">C</text>", "    <text x=\"50\" y=\"610\" class=\"label-text\" font-size=\"15\" data-id=\"legend_c_label\" data-class=\"text_node\" data-parent=\"legend_block\">concatenation</text>", "", "    <!-- Global Branch -->", "    <line x1=\"10\" y1=\"644\" x2=\"38\" y2=\"644\" stroke=\"#0072B2\" stroke-width=\"2\" marker-end=\"url(#arrow-blue)\" data-id=\"legend_global_line\" data-class=\"child_node\" data-parent=\"legend_block\" />", "    <text x=\"50\" y=\"648\" class=\"label-text\" font-size=\"15\" data-id=\"legend_global_label\" data-class=\"text_node\" data-parent=\"legend_block\">global branch</text>", "", "    <!-- Local Branch -->", "    <line x1=\"10\" y1=\"680\" x2=\"38\" y2=\"680\" stroke=\"#B2182B\" stroke-width=\"2\" marker-end=\"url(#arrow-red)\" data-id=\"legend_local_line\" data-class=\"child_node\" data-parent=\"legend_block\" />", "    <text x=\"50\" y=\"684\" class=\"label-text\" font-size=\"15\" data-id=\"legend_local_label\" data-class=\"text_node\" data-parent=\"legend_block\">local branch</text>", "  </g>", "", "  <!-- ========================================================= -->", "  <!-- 8. DYNAMIC NARRATION BANNER                                -->", "  <!-- ========================================================= -->", "  <g id=\"narration_banner\">", "    <!-- Background Card -->", "    <rect x=\"50\" y=\"730\" width=\"900\" height=\"80\" fill=\"#F8F9FA\" stroke=\"#E2E8F0\" stroke-width=\"1.5\" rx=\"8\" />", "    ", "    <!-- Narrative Texts -->", "    <text id=\"narr_ts1\" class=\"narrative-text\" x=\"50%\" y=\"758\">", "      <tspan x=\"50%\" dy=\"0\">The framework processes an input image using a hybrid architecture designed to</tspan>", "      <tspan x=\"50%\" dy=\"1.2em\">build a powerful global representation for image retrieval.</tspan>", "    </text>", "    <text id=\"narr_ts2\" class=\"narrative-text\" x=\"50%\" y=\"758\">", "      <tspan x=\"50%\" dy=\"0\">First, a convolutional neural network stem maps the raw input image to a feature tensor,</tspan>", "      <tspan x=\"50%\" dy=\"1.2em\">introducing inductive bias in the early layers.</tspan>", "    </text>", "    <text id=\"narr_ts3\" class=\"narrative-text\" x=\"50%\" y=\"758\">", "      <tspan x=\"50%\" dy=\"0\">A dynamic position embedding module then dynamically resamples fixed-size learned</tspan>", "      <tspan x=\"50%\" dy=\"1.2em\">embeddings to match the size of each mini-batch.</tspan>", "    </text>", "    <text id=\"narr_ts4\" class=\"narrative-text\" x=\"50%\" y=\"758\">", "      <tspan x=\"50%\" dy=\"0.6em\">The sequence is then fed into a Vision Transformer encoder consisting of multiple layers.</tspan>", "    </text>", "    <text id=\"narr_ts5\" class=\"narrative-text\" x=\"50%\" y=\"758\">", "      <tspan x=\"50%\" dy=\"0.6em\">The input sequence consists of a classification token and patch token embeddings.</tspan>", "    </text>", "    <text id=\"narr_ts6\" class=\"narrative-text\" x=\"50%\" y=\"758\">", "      <tspan x=\"50%\" dy=\"0.6em\">The sequence passes through the first transformer encoding layer.</tspan>", "    </text>", "    <text id=\"narr_ts7\" class=\"narrative-text\" x=\"50%\" y=\"758\">", "      <tspan x=\"50%\" dy=\"0.6em\">This layer outputs updated classification and patch token embeddings.</tspan>", "    </text>", "    <text id=\"narr_ts8\" class=\"narrative-text\" x=\"50%\" y=\"758\">", "      <tspan x=\"50%\" dy=\"0.6em\">The tokens continue to propagate through successive intermediate layers of the encoder.</tspan>", "    </text>", "    <text id=\"narr_ts9\" class=\"narrative-text\" x=\"50%\" y=\"758\">", "      <tspan x=\"50%\" dy=\"0.6em\">Finally, they reach the deeper layers of the transformer encoder.</tspan>", "    </text>", "    <text id=\"narr_ts10\" class=\"narrative-text\" x=\"50%\" y=\"758\">", "      <tspan x=\"50%\" dy=\"0.6em\">The final layers produce the final set of classification and patch token embeddings.</tspan>", "    </text>", "    <text id=\"narr_ts11\" class=\"narrative-text\" x=\"50%\" y=\"758\">", "      <tspan x=\"50%\" dy=\"0\">To capture multi-layer classification features, the classification tokens from several</tspan>", "      <tspan x=\"50%\" dy=\"1.2em\">of the last layers are collected and concatenated.</tspan>", "    </text>", "    <text id=\"narr_ts12\" class=\"narrative-text\" x=\"50%\" y=\"758\">", "      <tspan x=\"50%\" dy=\"0.6em\">These concatenated classification tokens form the input to the global branch.</tspan>", "    </text>", "    <text id=\"narr_ts13\" class=\"narrative-text\" x=\"50%\" y=\"758\">", "      <tspan x=\"50%\" dy=\"0\">A fully connected layer projects these multi-layer classification features</tspan>", "      <tspan x=\"50%\" dy=\"1.2em\">into a lower-dimensional space.</tspan>", "    </text>", "    <text id=\"narr_ts14\" class=\"narrative-text\" x=\"50%\" y=\"758\">", "      <tspan x=\"50%\" dy=\"0.6em\">This yields the final global feature representation.</tspan>", "    </text>", "    <text id=\"narr_ts15\" class=\"narrative-text\" x=\"50%\" y=\"758\">", "      <tspan x=\"50%\" dy=\"0\">Simultaneously, the local branch collects multi-layer patch features, unfolding them</tspan>", "      <tspan x=\"50%\" dy=\"1.2em\">into three-dimensional tensors to preserve spatial information.</tspan>", "    </text>", "    <text id=\"narr_ts16\" class=\"narrative-text\" x=\"50%\" y=\"758\">", "      <tspan x=\"50%\" dy=\"0.6em\">These unfolded patch features from multiple layers are then concatenated.</tspan>", "    </text>", "    <text id=\"narr_ts17\" class=\"narrative-text\" x=\"50%\" y=\"758\">", "      <tspan x=\"50%\" dy=\"0.6em\">This forms a multi-layer spatial tensor representation.</tspan>", "    </text>", "    <text id=\"narr_ts18\" class=\"narrative-text\" x=\"50%\" y=\"758\">", "      <tspan x=\"50%\" dy=\"0\">A one-by-one convolution is applied to reduce the channel dimension</tspan>", "      <tspan x=\"50%\" dy=\"1.2em\">of the concatenated features.</tspan>", "    </text>", "    <text id=\"narr_ts19\" class=\"narrative-text\" x=\"50%\" y=\"758\">", "      <tspan x=\"50%\" dy=\"0\">The reduced features are processed by an enhanced locality module to strengthen</tspan>", "      <tspan x=\"50%\" dy=\"1.2em\">local interactions in the deeper layers.</tspan>", "    </text>", "    <text id=\"narr_ts20\" class=\"narrative-text\" x=\"50%\" y=\"758\">", "      <tspan x=\"50%\" dy=\"0.6em\">The enhanced features are then fused with the original reduced features.</tspan>", "    </text>", "    <text id=\"narr_ts21\" class=\"narrative-text\" x=\"50%\" y=\"758\">", "      <tspan x=\"50%\" dy=\"0\">Global average pooling and a fully connected layer are applied</tspan>", "      <tspan x=\"50%\" dy=\"1.2em\">to produce the final local feature.</tspan>", "    </text>", "    <text id=\"narr_ts22\" class=\"narrative-text\" x=\"50%\" y=\"758\">", "      <tspan x=\"50%\" dy=\"0.6em\">The global feature and local feature are concatenated to combine global and local information.</tspan>", "    </text>", "    <text id=\"narr_ts23\" class=\"narrative-text\" x=\"50%\" y=\"758\">", "      <tspan x=\"50%\" dy=\"0.6em\">This forms a unified representation of the image.</tspan>", "    </text>", "    <text id=\"narr_ts24\" class=\"narrative-text\" x=\"50%\" y=\"758\">", "      <tspan x=\"50%\" dy=\"0\">A final fully connected layer with dropout and batch normalization</tspan>", "      <tspan x=\"50%\" dy=\"1.2em\">reduces the dimensionality.</tspan>", "    </text>", "    <text id=\"narr_ts25\" class=\"narrative-text\" x=\"50%\" y=\"758\">", "      <tspan x=\"50%\" dy=\"0.6em\">The resulting representation is passed to the ArcFace loss function for training.</tspan>", "    </text>", "  </g>", "</svg>"]</script>
+<script type="application/json" id="anim-lines">["<svg xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1000 830\" width=\"100%\" height=\"100%\">", "  <defs>", "    <!-- Arrow Markers -->", "    <marker id=\"arrow-blue\" viewBox=\"0 0 10 10\" refX=\"6\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto-start-reverse\">", "      <path d=\"M 0 1.5 L 8 5 L 0 8.5 z\" fill=\"#0072B2\" />", "    </marker>", "    <marker id=\"arrow-red\" viewBox=\"0 0 10 10\" refX=\"6\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto-start-reverse\">", "      <path d=\"M 0 1.5 L 8 5 L 0 8.5 z\" fill=\"#B2182B\" />", "    </marker>", "", "    <!-- Drop Shadows for 3D Isometric Blocks -->", "    <filter id=\"shadow\" x=\"-5%\" y=\"-5%\" width=\"110%\" height=\"110%\">", "      <feDropShadow dx=\"1\" dy=\"1\" stdDeviation=\"1.5\" flood-opacity=\"0.15\"/>", "    </filter>", "  </defs>", "", "  <style>", "    .title-text { font-family: 'Times New Roman', serif; font-size: 16px; fill: #000000; }", "    .label-text { font-family: 'Times New Roman', serif; font-size: 14px; fill: #000000; }", "    .bold-label { font-family: 'Arial', sans-serif; font-size: 13px; font-weight: bold; fill: #000000; }", "    .module-text { font-family: 'Arial', sans-serif; font-size: 12.5px; fill: #000000; text-anchor: middle; }", "    .module-title { font-family: 'Arial', sans-serif; font-size: 13px; font-weight: bold; fill: #000000; text-anchor: middle; }", "    .placeholder-text { font-family: 'Arial', sans-serif; font-size: 11px; font-weight: bold; fill: #7F7F7F; text-anchor: middle; }", "", "    ", "    @keyframes fadeIn {", "      from { opacity: 0; }", "      to { opacity: 1; }", "    }", "", "    ", "    [data-id=\"legend_block\"], [data-id=\"legend_c_circle\"], [data-id=\"legend_global_line\"], [data-id=\"legend_local_line\"], [data-id=\"input_image_raster\"], [data-id=\"legend_c_label\"], [data-id=\"legend_global_label\"], [data-id=\"legend_local_label\"], [data-id=\"cnn_stem\"], [data-id=\"cnn_label\"], [data-id=\"arrow_img_to_cnn\"], [data-id=\"dynamic_pos_embedding\"], [data-id=\"arrow_cnn_to_dpe\"], [data-id=\"vit_block\"], [data-id=\"vit_title\"], [data-id=\"arrow_dpe_to_vit\"], [data-id=\"vit_input_stack\"], [data-id=\"transformer_layer_1\"], [data-id=\"arrow_stack1_to_layer1\"], [data-id=\"vit_stack_layer_1\"], [data-id=\"vit_dots\"], [data-id=\"arrow_layer1_to_dots\"], [data-id=\"transformer_layer_L\"], [data-id=\"arrow_dots_to_layerL\"], [data-id=\"vit_stack_layer_L\"], [data-id=\"global_concat_c\"], [data-id=\"cls_features_text\"], [data-id=\"edge_vit_cls_to_junction\"], [data-id=\"edge_junction_to_gconcat\"], [data-id=\"global_branch_block\"], [data-id=\"global_cls_tokens\"], [data-id=\"global_branch_title\"], [data-id=\"edge_gconcat_to_tokens\"], [data-id=\"global_fc\"], [data-id=\"edge_tokens_to_gfc\"], [data-id=\"global_feature\"], [data-id=\"edge_gfc_to_gfeat\"], [data-id=\"local_branch_block\"], [data-id=\"tensor_unfold\"], [data-id=\"local_branch_title\"], [data-id=\"patch_features_text\"], [data-id=\"edge_vit_patches_to_junction\"], [data-id=\"edge_junction_to_unfold\"], [data-id=\"local_concat_c\"], [data-id=\"edge_unfold_to_lconcat\"], [data-id=\"local_3d_cubes\"], [data-id=\"edge_lconcat_to_cubes\"], [data-id=\"conv_1x1\"], [data-id=\"edge_cubes_to_conv\"], [data-id=\"enhanced_locality_module\"], [data-id=\"edge_conv_to_enhanced\"], [data-id=\"fusion_module\"], [data-id=\"edge_enhanced_to_fusion\"], [data-id=\"edge_conv_to_fusion\"], [data-id=\"local_feature\"], [data-id=\"edge_fusion_to_lfeat\"], [data-id=\"final_concat_c\"], [data-id=\"edge_gfeat_to_final_concat\"], [data-id=\"edge_lfeat_to_final_concat\"], [data-id=\"combined_feature_bar\"], [data-id=\"arrow_fconcat_to_bar\"], [data-id=\"final_fc\"], [data-id=\"arrow_bar_to_fc\"], [data-id=\"arcface_text\"], [data-id=\"arrow_fc_to_arcface\"] {", "      opacity: 0;", "      animation-name: fadeIn;", "      animation-duration: 0.5s;", "      animation-fill-mode: forwards;", "    }", "", "    /* Timestamps Delays */", "    [data-id=\"legend_block\"], [data-id=\"legend_c_circle\"], [data-id=\"legend_global_line\"], [data-id=\"legend_local_line\"], [data-id=\"input_image_raster\"], [data-id=\"legend_c_label\"], [data-id=\"legend_global_label\"], [data-id=\"legend_local_label\"] { animation-delay: 0.0s; }", "    [data-id=\"cnn_stem\"], [data-id=\"cnn_label\"], [data-id=\"arrow_img_to_cnn\"] { animation-delay: 0.5s; }", "    [data-id=\"dynamic_pos_embedding\"], [data-id=\"arrow_cnn_to_dpe\"] { animation-delay: 1.0s; }", "    [data-id=\"vit_block\"], [data-id=\"vit_title\"], [data-id=\"arrow_dpe_to_vit\"] { animation-delay: 1.5s; }", "    [data-id=\"vit_input_stack\"] { animation-delay: 2.0s; }", "    [data-id=\"transformer_layer_1\"], [data-id=\"arrow_stack1_to_layer1\"] { animation-delay: 2.5s; }", "    [data-id=\"vit_stack_layer_1\"] { animation-delay: 3.0s; }", "    [data-id=\"vit_dots\"], [data-id=\"arrow_layer1_to_dots\"] { animation-delay: 3.5s; }", "    [data-id=\"transformer_layer_L\"], [data-id=\"arrow_dots_to_layerL\"] { animation-delay: 4.0s; }", "    [data-id=\"vit_stack_layer_L\"] { animation-delay: 4.5s; }", "    [data-id=\"global_concat_c\"], [data-id=\"cls_features_text\"], [data-id=\"edge_vit_cls_to_junction\"], [data-id=\"edge_junction_to_gconcat\"] { animation-delay: 5.0s; }", "    [data-id=\"global_branch_block\"], [data-id=\"global_cls_tokens\"], [data-id=\"global_branch_title\"], [data-id=\"edge_gconcat_to_tokens\"] { animation-delay: 5.5s; }", "    [data-id=\"global_fc\"], [data-id=\"edge_tokens_to_gfc\"] { animation-delay: 6.0s; }", "    [data-id=\"global_feature\"], [data-id=\"edge_gfc_to_gfeat\"] { animation-delay: 6.5s; }", "    [data-id=\"local_branch_block\"], [data-id=\"tensor_unfold\"], [data-id=\"local_branch_title\"], [data-id=\"patch_features_text\"], [data-id=\"edge_vit_patches_to_junction\"], [data-id=\"edge_junction_to_unfold\"] { animation-delay: 7.0s; }", "    [data-id=\"local_concat_c\"], [data-id=\"edge_unfold_to_lconcat\"] { animation-delay: 7.5s; }", "    [data-id=\"local_3d_cubes\"], [data-id=\"edge_lconcat_to_cubes\"] { animation-delay: 8.0s; }", "    [data-id=\"conv_1x1\"], [data-id=\"edge_cubes_to_conv\"] { animation-delay: 8.5s; }", "    [data-id=\"enhanced_locality_module\"], [data-id=\"edge_conv_to_enhanced\"] { animation-delay: 9.0s; }", "    [data-id=\"fusion_module\"], [data-id=\"edge_enhanced_to_fusion\"], [data-id=\"edge_conv_to_fusion\"] { animation-delay: 9.5s; }", "    [data-id=\"local_feature\"], [data-id=\"edge_fusion_to_lfeat\"] { animation-delay: 10.0s; }", "    [data-id=\"final_concat_c\"], [data-id=\"edge_gfeat_to_final_concat\"], [data-id=\"edge_lfeat_to_final_concat\"] { animation-delay: 10.5s; }", "    [data-id=\"combined_feature_bar\"], [data-id=\"arrow_fconcat_to_bar\"] { animation-delay: 11.0s; }", "    [data-id=\"final_fc\"], [data-id=\"arrow_bar_to_fc\"] { animation-delay: 11.5s; }", "    [data-id=\"arcface_text\"], [data-id=\"arrow_fc_to_arcface\"] { animation-delay: 12.0s; }", "", "    /* Narration Banner Styling & Animations */", "    .narrative-text {", "      opacity: 0;", "      font-family: 'Arial', sans-serif;", "      font-size: 14px;", "      font-weight: 500;", "      fill: #1A202C;", "    }", "", "    @keyframes showBanner {", "      0% { opacity: 1; }", "      99.9% { opacity: 1; }", "      100% { opacity: 0; }", "    }", "", "    @keyframes showBannerLast {", "      0% { opacity: 1; }", "      100% { opacity: 1; }", "    }", "", "    #narr_ts1 { animation: showBanner 0.5s linear 0.0s forwards; }", "    #narr_ts2 { animation: showBanner 0.5s linear 0.5s forwards; }", "    #narr_ts3 { animation: showBanner 0.5s linear 1.0s forwards; }", "    #narr_ts4 { animation: showBanner 0.5s linear 1.5s forwards; }", "    #narr_ts5 { animation: showBanner 0.5s linear 2.0s forwards; }", "    #narr_ts6 { animation: showBanner 0.5s linear 2.5s forwards; }", "    #narr_ts7 { animation: showBanner 0.5s linear 3.0s forwards; }", "    #narr_ts8 { animation: showBanner 0.5s linear 3.5s forwards; }", "    #narr_ts9 { animation: showBanner 0.5s linear 4.0s forwards; }", "    #narr_ts10 { animation: showBanner 0.5s linear 4.5s forwards; }", "    #narr_ts11 { animation: showBanner 0.5s linear 5.0s forwards; }", "    #narr_ts12 { animation: showBanner 0.5s linear 5.5s forwards; }", "    #narr_ts13 { animation: showBanner 0.5s linear 6.0s forwards; }", "    #narr_ts14 { animation: showBanner 0.5s linear 6.5s forwards; }", "    #narr_ts15 { animation: showBanner 0.5s linear 7.0s forwards; }", "    #narr_ts16 { animation: showBanner 0.5s linear 7.5s forwards; }", "    #narr_ts17 { animation: showBanner 0.5s linear 8.0s forwards; }", "    #narr_ts18 { animation: showBanner 0.5s linear 8.5s forwards; }", "    #narr_ts19 { animation: showBanner 0.5s linear 9.0s forwards; }", "    #narr_ts20 { animation: showBanner 0.5s linear 9.5s forwards; }", "    #narr_ts21 { animation: showBanner 0.5s linear 10.0s forwards; }", "    #narr_ts22 { animation: showBanner 0.5s linear 10.5s forwards; }", "    #narr_ts23 { animation: showBanner 0.5s linear 11.0s forwards; }", "    #narr_ts24 { animation: showBanner 0.5s linear 11.5s forwards; }", "    #narr_ts25 { animation: showBannerLast 0.5s linear 12.0s forwards; }", "  </style>", "", "  <!-- ========================================================= -->", "  <!-- 1. BACKGROUND CONTAINERS                                   -->", "  <!-- ========================================================= -->", "", "  <!-- Global Branch Container (Top Yellow) -->", "  <g id=\"global_branch_block\" data-id=\"global_branch_block\" data-class=\"block\" data-parent=\"root\">", "    <rect x=\"420\" y=\"20\" width=\"470\" height=\"105\" fill=\"#FEF9D9\" stroke=\"#E5DEB7\" stroke-width=\"1.5\" rx=\"3\" />", "    <text x=\"880\" y=\"15\" class=\"title-text\" text-anchor=\"end\" data-id=\"global_branch_title\" data-class=\"text_node\" data-parent=\"global_branch_block\">global branch</text>", "  </g>", "", "  <!-- ViT Container (Middle Grey) -->", "  <g id=\"vit_block\" data-id=\"vit_block\" data-class=\"block\" data-parent=\"root\">", "    <rect x=\"255\" y=\"185\" width=\"455\" height=\"275\" fill=\"#ECECEC\" stroke=\"#888888\" stroke-width=\"1.5\" rx=\"2\" />", "    <text x=\"265\" y=\"206\" class=\"title-text\" font-weight=\"bold\" font-size=\"18\" data-id=\"vit_title\" data-class=\"text_node\" data-parent=\"vit_block\">ViT</text>", "  </g>", "", "  <!-- Local Branch Container (Bottom Green) -->", "  <g id=\"local_branch_block\" data-id=\"local_branch_block\" data-class=\"block\" data-parent=\"root\">", "    <rect x=\"255\" y=\"495\" width=\"600\" height=\"195\" fill=\"#DCECD7\" stroke=\"#A6C5A2\" stroke-width=\"1.5\" rx=\"3\" />", "    <text x=\"845\" y=\"708\" class=\"title-text\" text-anchor=\"end\" data-id=\"local_branch_title\" data-class=\"text_node\" data-parent=\"local_branch_block\">local branch</text>", "  </g>", "", "", "  <!-- ========================================================= -->", "  <!-- 2. LEFT INPUT PIPELINE                                     -->", "  <!-- ========================================================= -->", "", "  <!-- Input Image (Raster Placeholder) -->", "  <g id=\"input_image_raster\" data-id=\"input_image_raster\" data-class=\"raster_node\"><image href=\"rasters/crop_input_image_raster.png\" xlink:href=\"../../../../rasters/crop_input_image_raster.png\" x=\"42\" y=\"108\" width=\"104\" height=\"104\" preserveAspectRatio=\"xMidYMid meet\" /></g>", "", "  <!-- Down Block Arrow (Image -> CNN Stem) -->", "  <polygon points=\"90,222 90,240 82,240 94,254 106,240 98,240 98,222\" fill=\"#5A6B7C\" data-id=\"arrow_img_to_cnn\" data-class=\"edge\" data-source=\"input_image_raster\" data-target=\"cnn_stem\" />", "", "  <!-- CNN Stem 3D Isometric Green Cube -->", "  <g id=\"cnn_stem\" data-id=\"cnn_stem\" data-class=\"composite_whole\" data-parent=\"root\">", "    <!-- Top Face -->", "    <polygon points=\"80,265 138,265 118,300 60,300\" fill=\"#9CD877\" stroke=\"#4C8533\" stroke-width=\"1.2\" data-id=\"cnn_top\" data-class=\"composite_part\" data-parent=\"cnn_stem\" />", "    <!-- Front Face -->", "    <polygon points=\"60,300 118,300 118,368 60,368\" fill=\"#78BA57\" stroke=\"#4C8533\" stroke-width=\"1.2\" data-id=\"cnn_front\" data-class=\"composite_part\" data-parent=\"cnn_stem\" />", "    <!-- Right Face -->", "    <polygon points=\"118,300 138,265 138,333 118,368\" fill=\"#589B37\" stroke=\"#4C8533\" stroke-width=\"1.2\" data-id=\"cnn_right\" data-class=\"composite_part\" data-parent=\"cnn_stem\" />", "    <text x=\"89\" y=\"388\" class=\"bold-label\" text-anchor=\"middle\" data-id=\"cnn_label\" data-class=\"text_node\" data-parent=\"root\">CNN stem</text>", "  </g>", "", "  <!-- Right Block Arrow (CNN Stem -> Dynamic Pos Emb) -->", "  <polygon points=\"143,322 153,322 153,315 163,326 153,337 153,330 143,330\" fill=\"#5A6B7C\" data-id=\"arrow_cnn_to_dpe\" data-class=\"edge\" data-source=\"cnn_stem\" data-target=\"dynamic_pos_embedding\" />", "", "  <!-- Dynamic Position Embedding (Cyan Pill) -->", "  <g id=\"dynamic_pos_embedding\" data-id=\"dynamic_pos_embedding\" data-class=\"standalone_node\" data-parent=\"root\">", "    <rect x=\"165\" y=\"235\" width=\"58\" height=\"182\" rx=\"14\" fill=\"#71BED5\" stroke=\"#4693AA\" stroke-width=\"1.5\" />", "    <text x=\"187\" y=\"326\" class=\"bold-label\" text-anchor=\"middle\" transform=\"rotate(-90 187 326)\">dynamic position</text>", "    <text x=\"203\" y=\"326\" class=\"bold-label\" text-anchor=\"middle\" transform=\"rotate(-90 203 326)\">embedding</text>", "  </g>", "", "  <!-- Right Block Arrow (Dynamic Pos Emb -> ViT) -->", "  <polygon points=\"228,322 242,322 242,315 252,326 242,337 242,330 228,330\" fill=\"#5A6B7C\" data-id=\"arrow_dpe_to_vit\" data-class=\"edge\" data-source=\"dynamic_pos_embedding\" data-target=\"vit_block\" />", "", "", "  <!-- ========================================================= -->", "  <!-- 3. ViT INTERNAL COMPONENTS                                 -->", "  <!-- ========================================================= -->", "", "  <!-- Input Patch Stack (Stack 1) -->", "  <g id=\"vit_input_stack\" data-id=\"vit_input_stack\" data-class=\"child_node\" data-parent=\"vit_block\">", "    <!-- CLS Token (Red Square) -->", "    <rect x=\"268\" y=\"218\" width=\"32\" height=\"32\" fill=\"#9E3D52\" stroke=\"#7A2839\" stroke-width=\"1.2\" />", "    <rect x=\"272\" y=\"222\" width=\"24\" height=\"24\" fill=\"none\" stroke=\"#D98293\" stroke-width=\"1\" />", "    ", "    <!-- Orange Enclosing Box for Patches -->", "    <rect x=\"264\" y=\"258\" width=\"40\" height=\"166\" fill=\"none\" stroke=\"#EA7C25\" stroke-width=\"1.2\" />", "    <!-- Patch Tokens -->", "    <rect x=\"268\" y=\"262\" width=\"32\" height=\"26\" fill=\"#F99F53\" stroke=\"#EA7C25\" stroke-width=\"1\" />", "    <rect x=\"268\" y=\"293\" width=\"32\" height=\"26\" fill=\"#F99F53\" stroke=\"#EA7C25\" stroke-width=\"1\" />", "    <rect x=\"268\" y=\"324\" width=\"32\" height=\"26\" fill=\"#F99F53\" stroke=\"#EA7C25\" stroke-width=\"1\" />", "    <text x=\"284\" y=\"367\" font-family=\"Arial, sans-serif\" font-size=\"16\" font-weight=\"bold\" fill=\"#000000\" text-anchor=\"middle\">...</text>", "    <rect x=\"268\" y=\"375\" width=\"32\" height=\"44\" fill=\"#F99F53\" stroke=\"#EA7C25\" stroke-width=\"1\" />", "  </g>", "", "  <!-- Right Block Arrow (Stack 1 -> Layer 1) -->", "  <polygon points=\"309,322 327,322 327,315 337,326 327,337 327,330 309,330\" fill=\"#5A6B7C\" data-id=\"arrow_stack1_to_layer1\" data-class=\"edge\" data-source=\"vit_input_stack\" data-target=\"transformer_layer_1\" />", "", "  <!-- Transformer Encoding Layer 1 (Vertical text) -->", "  <g id=\"transformer_layer_1\" data-id=\"transformer_layer_1\" data-class=\"child_node\" data-parent=\"vit_block\">", "    <rect x=\"348\" y=\"215\" width=\"70\" height=\"210\" rx=\"14\" fill=\"#BDD0E6\" stroke=\"#8CA6C5\" stroke-width=\"1.5\" />", "    <text x=\"376\" y=\"320\" class=\"module-text\" transform=\"rotate(-90 376 320)\">transformer</text>", "    <text x=\"392\" y=\"320\" class=\"module-text\" transform=\"rotate(-90 392 320)\">encoding layer</text>", "    <text x=\"383\" y=\"443\" class=\"label-text\" text-anchor=\"middle\">layer 1</text>", "  </g>", "", "  <!-- Layer 1 Output Stack (Stack 2) -->", "  <g id=\"vit_stack_layer_1\" data-id=\"vit_stack_layer_1\" data-class=\"child_node\" data-parent=\"vit_block\">", "    <!-- CLS Token with Outline -->", "    <rect x=\"426\" y=\"214\" width=\"40\" height=\"40\" fill=\"none\" stroke=\"#9E3D52\" stroke-width=\"1.5\" />", "    <rect x=\"430\" y=\"218\" width=\"32\" height=\"32\" fill=\"#9E3D52\" stroke=\"#7A2839\" stroke-width=\"1.2\" />", "    <rect x=\"434\" y=\"222\" width=\"24\" height=\"24\" fill=\"none\" stroke=\"#D98293\" stroke-width=\"1\" />", "    ", "    <!-- Orange Enclosing Box for Patches -->", "    <rect x=\"426\" y=\"258\" width=\"40\" height=\"166\" fill=\"none\" stroke=\"#EA7C25\" stroke-width=\"1.2\" />", "    <!-- Patch Tokens -->", "    <rect x=\"430\" y=\"262\" width=\"32\" height=\"26\" fill=\"#F99F53\" stroke=\"#EA7C25\" stroke-width=\"1\" />", "    <rect x=\"430\" y=\"293\" width=\"32\" height=\"26\" fill=\"#F99F53\" stroke=\"#EA7C25\" stroke-width=\"1\" />", "    <rect x=\"430\" y=\"324\" width=\"32\" height=\"26\" fill=\"#F99F53\" stroke=\"#EA7C25\" stroke-width=\"1\" />", "    <text x=\"446\" y=\"367\" font-family=\"Arial, sans-serif\" font-size=\"16\" font-weight=\"bold\" fill=\"#000000\" text-anchor=\"middle\">...</text>", "    <rect x=\"430\" y=\"375\" width=\"32\" height=\"44\" fill=\"#F99F53\" stroke=\"#EA7C25\" stroke-width=\"1\" />", "  </g>", "", "  <!-- Block Arrow to Dots -->", "  <polygon points=\"471,322 485,322 485,315 495,326 485,337 485,330 471,330\" fill=\"#5A6B7C\" data-id=\"arrow_layer1_to_dots\" data-class=\"edge\" data-source=\"vit_stack_layer_1\" data-target=\"vit_dots\" />", "  <text x=\"522\" y=\"331\" font-family=\"Arial, sans-serif\" font-size=\"22\" font-weight=\"bold\" fill=\"#000000\" text-anchor=\"middle\" id=\"vit_dots\" data-id=\"vit_dots\" data-class=\"text_node\" data-parent=\"vit_block\">...</text>", "  <!-- Block Arrow from Dots to Layer L -->", "  <polygon points=\"545,322 559,322 559,315 569,326 559,337 559,330 545,330\" fill=\"#5A6B7C\" data-id=\"arrow_dots_to_layerL\" data-class=\"edge\" data-source=\"vit_dots\" data-target=\"transformer_layer_L\" />", "", "  <!-- Transformer Encoding Layer L (Vertical text) -->", "  <g id=\"transformer_layer_L\" data-id=\"transformer_layer_L\" data-class=\"child_node\" data-parent=\"vit_block\">", "    <rect x=\"582\" y=\"215\" width=\"70\" height=\"210\" rx=\"14\" fill=\"#BDD0E6\" stroke=\"#8CA6C5\" stroke-width=\"1.5\" />", "    <text x=\"610\" y=\"320\" class=\"module-text\" transform=\"rotate(-90 610 320)\">transformer</text>", "    <text x=\"626\" y=\"320\" class=\"module-text\" transform=\"rotate(-90 626 320)\">encoding layer</text>", "    <text x=\"617\" y=\"443\" class=\"label-text\" text-anchor=\"middle\">layer <tspan font-style=\"italic\">L</tspan></text>", "  </g>", "", "  <!-- Layer L Output Stack (Stack 3) -->", "  <g id=\"vit_stack_layer_L\" data-id=\"vit_stack_layer_L\" data-class=\"child_node\" data-parent=\"vit_block\">", "    <!-- CLS Token with Outline -->", "    <rect x=\"656\" y=\"214\" width=\"40\" height=\"40\" fill=\"none\" stroke=\"#9E3D52\" stroke-width=\"1.5\" />", "    <rect x=\"660\" y=\"218\" width=\"32\" height=\"32\" fill=\"#9E3D52\" stroke=\"#7A2839\" stroke-width=\"1.2\" />", "    <rect x=\"664\" y=\"222\" width=\"24\" height=\"24\" fill=\"none\" stroke=\"#D98293\" stroke-width=\"1\" />", "    ", "    <!-- Orange Enclosing Box for Patches -->", "    <rect x=\"656\" y=\"258\" width=\"40\" height=\"166\" fill=\"none\" stroke=\"#EA7C25\" stroke-width=\"1.2\" />", "    <!-- Patch Tokens -->", "    <rect x=\"660\" y=\"262\" width=\"32\" height=\"26\" fill=\"#F99F53\" stroke=\"#EA7C25\" stroke-width=\"1\" />", "    <rect x=\"660\" y=\"293\" width=\"32\" height=\"26\" fill=\"#F99F53\" stroke=\"#EA7C25\" stroke-width=\"1\" />", "    <rect x=\"660\" y=\"324\" width=\"32\" height=\"26\" fill=\"#F99F53\" stroke=\"#EA7C25\" stroke-width=\"1\" />", "    <text x=\"676\" y=\"367\" font-family=\"Arial, sans-serif\" font-size=\"16\" font-weight=\"bold\" fill=\"#000000\" text-anchor=\"middle\">...</text>", "    <rect x=\"660\" y=\"375\" width=\"32\" height=\"44\" fill=\"#F99F53\" stroke=\"#EA7C25\" stroke-width=\"1\" />", "  </g>", "", "", "  <!-- ========================================================= -->", "  <!-- 4. GLOBAL BRANCH (TOP)                                     -->", "  <!-- ========================================================= -->", "", "  <text x=\"635\" y=\"162\" class=\"label-text\" text-anchor=\"middle\" data-id=\"cls_features_text\" data-class=\"text_node\" data-parent=\"root\">multi-layer [CLS] features</text>", "", "  <!-- Blue lines routing from Layer 1 & Layer L to Circle C -->", "  <path d=\"M 446 214 L 446 175 L 676 175 L 676 214\" fill=\"none\" stroke=\"#0072B2\" stroke-width=\"1.5\" data-id=\"edge_vit_cls_to_junction\" data-class=\"edge\" data-source=\"vit_stack_layer_1\" data-target=\"global_concat_c\" />", "  <line x1=\"500\" y1=\"175\" x2=\"500\" y2=\"152\" stroke=\"#0072B2\" stroke-width=\"1.5\" data-id=\"edge_junction_to_gconcat\" data-class=\"edge\" data-source=\"vit_block\" data-target=\"global_concat_c\" />", "", "  <!-- Global Concat Circle C -->", "  <g id=\"global_concat_c\" data-id=\"global_concat_c\" data-class=\"standalone_node\" data-parent=\"root\">", "    <circle cx=\"500\" cy=\"140\" r=\"11\" fill=\"#4D6A4E\" stroke=\"#354B36\" stroke-width=\"1\" />", "    <text x=\"500\" y=\"144\" font-family=\"Arial, sans-serif\" font-size=\"12\" font-weight=\"bold\" fill=\"#FFFFFF\" text-anchor=\"middle\">C</text>", "  </g>", "", "  <!-- Blue arrow from Circle C into CLS Sequence -->", "  <line x1=\"500\" y1=\"129\" x2=\"500\" y2=\"92\" stroke=\"#0072B2\" stroke-width=\"1.5\" marker-end=\"url(#arrow-blue)\" data-id=\"edge_gconcat_to_tokens\" data-class=\"edge\" data-source=\"global_concat_c\" data-target=\"global_cls_tokens\" />", "", "  <!-- Concatenated CLS Feature Tokens -->", "  <g id=\"global_cls_tokens\" data-id=\"global_cls_tokens\" data-class=\"child_node\" data-parent=\"global_branch_block\">", "    <rect x=\"440\" y=\"58\" width=\"28\" height=\"28\" fill=\"#9E3D52\" stroke=\"#7A2839\" stroke-width=\"1.2\" />", "    <rect x=\"468\" y=\"58\" width=\"28\" height=\"28\" fill=\"#9E3D52\" stroke=\"#7A2839\" stroke-width=\"1.2\" />", "    <text x=\"513\" y=\"76\" font-family=\"Arial, sans-serif\" font-size=\"16\" font-weight=\"bold\" fill=\"#000000\" text-anchor=\"middle\">...</text>", "    <rect x=\"528\" y=\"58\" width=\"28\" height=\"28\" fill=\"#9E3D52\" stroke=\"#7A2839\" stroke-width=\"1.2\" />", "  </g>", "", "  <!-- Blue Arrow (CLS Tokens -> FC) -->", "  <line x1=\"560\" y1=\"72\" x2=\"596\" y2=\"72\" stroke=\"#0072B2\" stroke-width=\"1.5\" marker-end=\"url(#arrow-blue)\" data-id=\"edge_tokens_to_gfc\" data-class=\"edge\" data-source=\"global_cls_tokens\" data-target=\"global_fc\" />", "", "  <!-- FC Box -->", "  <g id=\"global_fc\" data-id=\"global_fc\" data-class=\"child_node\" data-parent=\"global_branch_block\">", "    <rect x=\"602\" y=\"50\" width=\"64\" height=\"44\" rx=\"6\" fill=\"#FEE388\" stroke=\"#D4AC3B\" stroke-width=\"1.2\" />", "    <text x=\"634\" y=\"77\" class=\"label-text\" font-size=\"15\" text-anchor=\"middle\">FC</text>", "  </g>", "", "  <!-- Blue Arrow (FC -> global feature) -->", "  <line x1=\"672\" y1=\"72\" x2=\"706\" y2=\"72\" stroke=\"#0072B2\" stroke-width=\"1.5\" marker-end=\"url(#arrow-blue)\" data-id=\"edge_gfc_to_gfeat\" data-class=\"edge\" data-source=\"global_fc\" data-target=\"global_feature\" />", "", "  <!-- Global Feature Box -->", "  <g id=\"global_feature\" data-id=\"global_feature\" data-class=\"child_node\" data-parent=\"global_branch_block\">", "    <rect x=\"712\" y=\"50\" width=\"162\" height=\"44\" rx=\"2\" fill=\"#FED265\" stroke=\"#D4AC3B\" stroke-width=\"1.2\" />", "    <text x=\"793\" y=\"77\" class=\"label-text\" font-size=\"15\" text-anchor=\"middle\">global feature</text>", "  </g>", "", "  <!-- Blue Line from Global Feature to Final Fusion -->", "  <path d=\"M 793 100 L 793 185 L 752 185 L 752 305\" fill=\"none\" stroke=\"#0072B2\" stroke-width=\"1.5\" marker-end=\"url(#arrow-blue)\" data-id=\"edge_gfeat_to_final_concat\" data-class=\"edge\" data-source=\"global_feature\" data-target=\"final_concat_c\" />", "", "", "  <!-- ========================================================= -->", "  <!-- 5. LOCAL BRANCH (BOTTOM)                                   -->", "  <!-- ========================================================= -->", "", "  <text x=\"600\" y=\"478\" class=\"label-text\" text-anchor=\"middle\" data-id=\"patch_features_text\" data-class=\"text_node\" data-parent=\"root\">multi-layer patch features</text>", "", "  <!-- Red Lines routing from Layer 1 & Layer L to 3D Tensor Unfold -->", "  <path d=\"M 446 424 L 446 465 L 676 465 L 676 424\" fill=\"none\" stroke=\"#B2182B\" stroke-width=\"1.5\" data-id=\"edge_vit_patches_to_junction\" data-class=\"edge\" data-source=\"vit_stack_layer_1\" data-target=\"tensor_unfold\" />", "  <line x1=\"498\" y1=\"465\" x2=\"498\" y2=\"504\" stroke=\"#B2182B\" stroke-width=\"1.5\" data-id=\"edge_junction_to_unfold\" data-class=\"edge\" data-source=\"vit_block\" data-target=\"tensor_unfold\" />", "", "  <!-- 3D Tensor Unfold (Orange Pill) -->", "  <g id=\"tensor_unfold\" data-id=\"tensor_unfold\" data-class=\"child_node\" data-parent=\"local_branch_block\">", "    <rect x=\"375\" y=\"508\" width=\"240\" height=\"30\" rx=\"6\" fill=\"#F99F53\" stroke=\"#DE7D33\" stroke-width=\"1.2\" />", "    <text x=\"495\" y=\"528\" class=\"label-text\" font-size=\"15\" text-anchor=\"middle\">3D tensor unfold</text>", "  </g>", "", "  <!-- Red Line from 3D Tensor Unfold to Circle C -->", "  <path d=\"M 492 538 L 492 555 L 315 555 L 315 565\" fill=\"none\" stroke=\"#B2182B\" stroke-width=\"1.5\" data-id=\"edge_unfold_to_lconcat\" data-class=\"edge\" data-source=\"tensor_unfold\" data-target=\"local_concat_c\" />", "", "  <!-- Local Concat Circle C -->", "  <g id=\"local_concat_c\" data-id=\"local_concat_c\" data-class=\"child_node\" data-parent=\"local_branch_block\">", "    <circle cx=\"315\" cy=\"576\" r=\"11\" fill=\"#4D6A4E\" stroke=\"#354B36\" stroke-width=\"1\" />", "    <text x=\"315\" y=\"580\" font-family=\"Arial, sans-serif\" font-size=\"12\" font-weight=\"bold\" fill=\"#FFFFFF\" text-anchor=\"middle\">C</text>", "  </g>", "", "  <!-- Red Arrow from Circle C into 3D Cubes -->", "  <line x1=\"315\" y1=\"587\" x2=\"315\" y2=\"603\" stroke=\"#B2182B\" stroke-width=\"1.5\" marker-end=\"url(#arrow-red)\" data-id=\"edge_lconcat_to_cubes\" data-class=\"edge\" data-source=\"local_concat_c\" data-target=\"local_3d_cubes\" />", "", "  <!-- 3D Isometric Orange Cubes -->", "  <g id=\"local_3d_cubes\" data-id=\"local_3d_cubes\" data-class=\"composite_whole\" data-parent=\"local_branch_block\">", "    <!-- Double Cube 1 -->", "    <!-- Front Block -->", "    <polygon points=\"266,615 296,615 296,645 266,645\" fill=\"#F99F53\" stroke=\"#DE7D33\" stroke-width=\"1\" data-id=\"cube1_front\" data-class=\"composite_part\" data-parent=\"local_3d_cubes\" />", "    <polygon points=\"266,615 280,603 310,603 296,615\" fill=\"#FBBA7F\" stroke=\"#DE7D33\" stroke-width=\"1\" data-id=\"cube1_top\" data-class=\"composite_part\" data-parent=\"local_3d_cubes\" />", "    <polygon points=\"296,615 310,603 310,633 296,645\" fill=\"#E2843B\" stroke=\"#DE7D33\" stroke-width=\"1\" data-id=\"cube1_right\" data-class=\"composite_part\" data-parent=\"local_3d_cubes\" />", "    <!-- Front Block Attached (Right) -->", "    <polygon points=\"296,615 326,615 326,645 296,645\" fill=\"#F99F53\" stroke=\"#DE7D33\" stroke-width=\"1\" data-id=\"cube2_front\" data-class=\"composite_part\" data-parent=\"local_3d_cubes\" />", "    <polygon points=\"296,615 310,603 340,603 326,615\" fill=\"#FBBA7F\" stroke=\"#DE7D33\" stroke-width=\"1\" data-id=\"cube2_top\" data-class=\"composite_part\" data-parent=\"local_3d_cubes\" />", "    <polygon points=\"326,615 340,603 340,633 326,645\" fill=\"#E2843B\" stroke=\"#DE7D33\" stroke-width=\"1\" data-id=\"cube2_right\" data-class=\"composite_part\" data-parent=\"local_3d_cubes\" />", "", "    <!-- Ellipsis -->", "    <text x=\"355\" y=\"630\" font-family=\"Arial, sans-serif\" font-size=\"15\" font-weight=\"bold\" fill=\"#000000\" text-anchor=\"middle\" data-id=\"cubes_dots\" data-class=\"composite_part\" data-parent=\"local_3d_cubes\">...</text>", "", "    <!-- Single Cube 2 -->", "    <polygon points=\"374,615 404,615 404,645 374,645\" fill=\"#F99F53\" stroke=\"#DE7D33\" stroke-width=\"1\" data-id=\"cube3_front\" data-class=\"composite_part\" data-parent=\"local_3d_cubes\" />", "    <polygon points=\"374,615 388,603 418,603 404,615\" fill=\"#FBBA7F\" stroke=\"#DE7D33\" stroke-width=\"1\" data-id=\"cube3_top\" data-class=\"composite_part\" data-parent=\"local_3d_cubes\" />", "    <polygon points=\"404,615 418,603 418,633 404,645\" fill=\"#E2843B\" stroke=\"#DE7D33\" stroke-width=\"1\" data-id=\"cube3_right\" data-class=\"composite_part\" data-parent=\"local_3d_cubes\" />", "  </g>", "", "  <!-- Red Arrow to 1x1 Conv -->", "  <line x1=\"422\" y1=\"624\" x2=\"447\" y2=\"624\" stroke=\"#B2182B\" stroke-width=\"1.5\" marker-end=\"url(#arrow-red)\" data-id=\"edge_cubes_to_conv\" data-class=\"edge\" data-source=\"local_3d_cubes\" data-target=\"conv_1x1\" />", "", "  <!-- 1x1 Conv Box -->", "  <g id=\"conv_1x1\" data-id=\"conv_1x1\" data-class=\"child_node\" data-parent=\"local_branch_block\">", "    <rect x=\"453\" y=\"594\" width=\"84\" height=\"58\" rx=\"2\" fill=\"#F99F53\" stroke=\"#DE7D33\" stroke-width=\"1.2\" />", "    <text x=\"495\" y=\"618\" class=\"label-text\" font-size=\"15\" text-anchor=\"middle\">1 \u00d7 1</text>", "    <text x=\"495\" y=\"636\" class=\"bold-label\" text-anchor=\"middle\">conv</text>", "  </g>", "", "  <!-- Two Red Branch Arrows from 1x1 Conv -->", "  <!-- Top Branch into Enhanced Locality Module -->", "  <line x1=\"542\" y1=\"605\" x2=\"566\" y2=\"605\" stroke=\"#B2182B\" stroke-width=\"1.5\" marker-end=\"url(#arrow-red)\" data-id=\"edge_conv_to_enhanced\" data-class=\"edge\" data-source=\"conv_1x1\" data-target=\"enhanced_locality_module\" />", "  <!-- Bottom Bypass Branch into Fusion -->", "  <path d=\"M 542 642 L 700 642\" fill=\"none\" stroke=\"#B2182B\" stroke-width=\"1.5\" marker-end=\"url(#arrow-red)\" data-id=\"edge_conv_to_fusion\" data-class=\"edge\" data-source=\"conv_1x1\" data-target=\"fusion_module\" />", "", "  <!-- Enhanced Locality Module -->", "  <g id=\"enhanced_locality_module\" data-id=\"enhanced_locality_module\" data-class=\"child_node\" data-parent=\"local_branch_block\">", "    <rect x=\"572\" y=\"572\" width=\"104\" height=\"72\" rx=\"8\" fill=\"#A4D27F\" stroke=\"#72A848\" stroke-width=\"1.2\" />", "    <text x=\"624\" y=\"598\" class=\"label-text\" font-size=\"15\" text-anchor=\"middle\">enhanced</text>", "    <text x=\"624\" y=\"616\" class=\"label-text\" font-size=\"15\" text-anchor=\"middle\">locality</text>", "    <text x=\"624\" y=\"634\" class=\"label-text\" font-size=\"15\" text-anchor=\"middle\">module</text>", "  </g>", "", "  <!-- Red Arrow from Enhanced Locality to Fusion -->", "  <line x1=\"680\" y1=\"605\" x2=\"700\" y2=\"605\" stroke=\"#B2182B\" stroke-width=\"1.5\" marker-end=\"url(#arrow-red)\" data-id=\"edge_enhanced_to_fusion\" data-class=\"edge\" data-source=\"enhanced_locality_module\" data-target=\"fusion_module\" />", "", "  <!-- Fusion Vertical Pill -->", "  <g id=\"fusion_module\" data-id=\"fusion_module\" data-class=\"child_node\" data-parent=\"local_branch_block\">", "    <rect x=\"708\" y=\"542\" width=\"48\" height=\"135\" rx=\"8\" fill=\"#A4D27F\" stroke=\"#72A848\" stroke-width=\"1.2\" />", "    <text x=\"732\" y=\"610\" class=\"label-text\" font-size=\"15\" text-anchor=\"middle\" transform=\"rotate(-90 732 610)\">fusion</text>", "  </g>", "", "  <!-- Red Arrow from Fusion to Local Feature -->", "  <line x1=\"760\" y1=\"610\" x2=\"780\" y2=\"610\" stroke=\"#B2182B\" stroke-width=\"1.5\" marker-end=\"url(#arrow-red)\" data-id=\"edge_fusion_to_lfeat\" data-class=\"edge\" data-source=\"fusion_module\" data-target=\"local_feature\" />", "", "  <!-- Local Feature Vertical Pill -->", "  <g id=\"local_feature\" data-id=\"local_feature\" data-class=\"child_node\" data-parent=\"local_branch_block\">", "    <rect x=\"788\" y=\"542\" width=\"48\" height=\"135\" rx=\"8\" fill=\"#A4D27F\" stroke=\"#72A848\" stroke-width=\"1.2\" />", "    <text x=\"812\" y=\"610\" class=\"label-text\" font-size=\"15\" text-anchor=\"middle\" transform=\"rotate(-90 812 610)\">local feature</text>", "  </g>", "", "  <!-- Red Line from Local Feature to Final Fusion -->", "  <path d=\"M 812 542 L 812 468 L 752 468 L 752 342\" fill=\"none\" stroke=\"#B2182B\" stroke-width=\"1.5\" marker-end=\"url(#arrow-red)\" data-id=\"edge_lfeat_to_final_concat\" data-class=\"edge\" data-source=\"local_feature\" data-target=\"final_concat_c\" />", "", "", "  <!-- ========================================================= -->", "  <!-- 6. FINAL FUSION & CLASSIFICATION (RIGHT)                   -->", "  <!-- ========================================================= -->", "", "  <!-- Final Concat Circle C -->", "  <g id=\"final_concat_c\" data-id=\"final_concat_c\" data-class=\"standalone_node\" data-parent=\"root\">", "    <circle cx=\"752\" cy=\"324\" r=\"11\" fill=\"#4D6A4E\" stroke=\"#354B36\" stroke-width=\"1\" />", "    <text x=\"752\" y=\"328\" font-family=\"Arial, sans-serif\" font-size=\"12\" font-weight=\"bold\" fill=\"#FFFFFF\" text-anchor=\"middle\">C</text>", "  </g>", "", "  <!-- Thick Grey Block Arrow (Circle C -> Combined Feature Bar) -->", "  <polygon points=\"782,320 796,320 796,313 806,324 796,335 796,328 782,328\" fill=\"#5A6B7C\" data-id=\"arrow_fconcat_to_bar\" data-class=\"edge\" data-source=\"final_concat_c\" data-target=\"combined_feature_bar\" />", "", "  <!-- Combined Feature Vertical Stack Bar -->", "  <g id=\"combined_feature_bar\" data-id=\"combined_feature_bar\" data-class=\"composite_whole\" data-parent=\"root\">", "    <!-- Top Half (Global Feature - Yellow) -->", "    <rect x=\"818\" y=\"235\" width=\"30\" height=\"90\" fill=\"#FED265\" stroke=\"#D4AC3B\" stroke-width=\"1.2\" data-id=\"comb_top\" data-class=\"composite_part\" data-parent=\"combined_feature_bar\" />", "    <!-- Bottom Half (Local Feature - Green) -->", "    <rect x=\"818\" y=\"325\" width=\"30\" height=\"90\" fill=\"#8AC567\" stroke=\"#689F47\" stroke-width=\"1.2\" data-id=\"comb_bot\" data-class=\"composite_part\" data-parent=\"combined_feature_bar\" />", "  </g>", "", "  <!-- Thick Grey Block Arrow (Combined Bar -> FC) -->", "  <polygon points=\"852,320 869,320 869,313 879,324 869,335 869,328 852,328\" fill=\"#5A6B7C\" data-id=\"arrow_bar_to_fc\" data-class=\"edge\" data-source=\"combined_feature_bar\" data-target=\"final_fc\" />", "", "  <!-- Final FC Box -->", "  <g id=\"final_fc\" data-id=\"final_fc\" data-class=\"standalone_node\" data-parent=\"root\">", "    <rect x=\"888\" y=\"295\" width=\"46\" height=\"60\" rx=\"2\" fill=\"#B7C9D9\" stroke=\"#8CAABF\" stroke-width=\"1.2\" />", "    <text x=\"911\" y=\"329\" class=\"label-text\" font-size=\"14\" font-weight=\"bold\" text-anchor=\"middle\">FC</text>", "  </g>", "", "  <!-- Thick Grey Block Arrow (FC -> ArcFace) -->", "  <polygon points=\"938,320 952,320 952,313 962,324 952,335 952,328 938,328\" fill=\"#5A6B7C\" data-id=\"arrow_fc_to_arcface\" data-class=\"edge\" data-source=\"final_fc\" data-target=\"arcface_text\" />", "", "  <!-- ArcFace Vertical Rotated Text -->", "  <text x=\"984\" y=\"326\" class=\"title-text\" font-size=\"17\" text-anchor=\"middle\" transform=\"rotate(-90 984 326)\" id=\"arcface_text\" data-id=\"arcface_text\" data-class=\"standalone_node\" data-parent=\"root\">ArcFace</text>", "", "", "  <!-- ========================================================= -->", "  <!-- 7. LEGEND (BOTTOM LEFT)                                    -->", "  <!-- ========================================================= -->", "  <g id=\"legend_block\" data-id=\"legend_block\" data-class=\"block\" data-parent=\"root\">", "    <!-- Concatenation -->", "    <circle cx=\"26\" cy=\"605\" r=\"11\" fill=\"#4D6A4E\" stroke=\"#354B36\" stroke-width=\"1\" data-id=\"legend_c_circle\" data-class=\"child_node\" data-parent=\"legend_block\" />", "    <text x=\"26\" y=\"609\" font-family=\"Arial, sans-serif\" font-size=\"12\" font-weight=\"bold\" fill=\"#FFFFFF\" text-anchor=\"middle\">C</text>", "    <text x=\"50\" y=\"610\" class=\"label-text\" font-size=\"15\" data-id=\"legend_c_label\" data-class=\"text_node\" data-parent=\"legend_block\">concatenation</text>", "", "    <!-- Global Branch -->", "    <line x1=\"10\" y1=\"644\" x2=\"38\" y2=\"644\" stroke=\"#0072B2\" stroke-width=\"2\" marker-end=\"url(#arrow-blue)\" data-id=\"legend_global_line\" data-class=\"child_node\" data-parent=\"legend_block\" />", "    <text x=\"50\" y=\"648\" class=\"label-text\" font-size=\"15\" data-id=\"legend_global_label\" data-class=\"text_node\" data-parent=\"legend_block\">global branch</text>", "", "    <!-- Local Branch -->", "    <line x1=\"10\" y1=\"680\" x2=\"38\" y2=\"680\" stroke=\"#B2182B\" stroke-width=\"2\" marker-end=\"url(#arrow-red)\" data-id=\"legend_local_line\" data-class=\"child_node\" data-parent=\"legend_block\" />", "    <text x=\"50\" y=\"684\" class=\"label-text\" font-size=\"15\" data-id=\"legend_local_label\" data-class=\"text_node\" data-parent=\"legend_block\">local branch</text>", "  </g>", "", "  <!-- ========================================================= -->", "  <!-- 8. DYNAMIC NARRATION BANNER                                -->", "  <!-- ========================================================= -->", "  <g id=\"narration_banner\">", "    <!-- Background Card -->", "    <rect x=\"50\" y=\"730\" width=\"900\" height=\"80\" fill=\"#F8F9FA\" stroke=\"#E2E8F0\" stroke-width=\"1.5\" rx=\"8\" />", "    ", "    <!-- Narrative Texts -->", "    <text id=\"narr_ts1\" class=\"narrative-text\" x=\"50%\" y=\"758\">", "      <tspan x=\"50%\" dy=\"0\">The framework processes an input image using a hybrid architecture designed to</tspan>", "      <tspan x=\"50%\" dy=\"1.2em\">build a powerful global representation for image retrieval.</tspan>", "    </text>", "    <text id=\"narr_ts2\" class=\"narrative-text\" x=\"50%\" y=\"758\">", "      <tspan x=\"50%\" dy=\"0\">First, a convolutional neural network stem maps the raw input image to a feature tensor,</tspan>", "      <tspan x=\"50%\" dy=\"1.2em\">introducing inductive bias in the early layers.</tspan>", "    </text>", "    <text id=\"narr_ts3\" class=\"narrative-text\" x=\"50%\" y=\"758\">", "      <tspan x=\"50%\" dy=\"0\">A dynamic position embedding module then dynamically resamples fixed-size learned</tspan>", "      <tspan x=\"50%\" dy=\"1.2em\">embeddings to match the size of each mini-batch.</tspan>", "    </text>", "    <text id=\"narr_ts4\" class=\"narrative-text\" x=\"50%\" y=\"758\">", "      <tspan x=\"50%\" dy=\"0.6em\">The sequence is then fed into a Vision Transformer encoder consisting of multiple layers.</tspan>", "    </text>", "    <text id=\"narr_ts5\" class=\"narrative-text\" x=\"50%\" y=\"758\">", "      <tspan x=\"50%\" dy=\"0.6em\">The input sequence consists of a classification token and patch token embeddings.</tspan>", "    </text>", "    <text id=\"narr_ts6\" class=\"narrative-text\" x=\"50%\" y=\"758\">", "      <tspan x=\"50%\" dy=\"0.6em\">The sequence passes through the first transformer encoding layer.</tspan>", "    </text>", "    <text id=\"narr_ts7\" class=\"narrative-text\" x=\"50%\" y=\"758\">", "      <tspan x=\"50%\" dy=\"0.6em\">This layer outputs updated classification and patch token embeddings.</tspan>", "    </text>", "    <text id=\"narr_ts8\" class=\"narrative-text\" x=\"50%\" y=\"758\">", "      <tspan x=\"50%\" dy=\"0.6em\">The tokens continue to propagate through successive intermediate layers of the encoder.</tspan>", "    </text>", "    <text id=\"narr_ts9\" class=\"narrative-text\" x=\"50%\" y=\"758\">", "      <tspan x=\"50%\" dy=\"0.6em\">Finally, they reach the deeper layers of the transformer encoder.</tspan>", "    </text>", "    <text id=\"narr_ts10\" class=\"narrative-text\" x=\"50%\" y=\"758\">", "      <tspan x=\"50%\" dy=\"0.6em\">The final layers produce the final set of classification and patch token embeddings.</tspan>", "    </text>", "    <text id=\"narr_ts11\" class=\"narrative-text\" x=\"50%\" y=\"758\">", "      <tspan x=\"50%\" dy=\"0\">To capture multi-layer classification features, the classification tokens from several</tspan>", "      <tspan x=\"50%\" dy=\"1.2em\">of the last layers are collected and concatenated.</tspan>", "    </text>", "    <text id=\"narr_ts12\" class=\"narrative-text\" x=\"50%\" y=\"758\">", "      <tspan x=\"50%\" dy=\"0.6em\">These concatenated classification tokens form the input to the global branch.</tspan>", "    </text>", "    <text id=\"narr_ts13\" class=\"narrative-text\" x=\"50%\" y=\"758\">", "      <tspan x=\"50%\" dy=\"0\">A fully connected layer projects these multi-layer classification features</tspan>", "      <tspan x=\"50%\" dy=\"1.2em\">into a lower-dimensional space.</tspan>", "    </text>", "    <text id=\"narr_ts14\" class=\"narrative-text\" x=\"50%\" y=\"758\">", "      <tspan x=\"50%\" dy=\"0.6em\">This yields the final global feature representation.</tspan>", "    </text>", "    <text id=\"narr_ts15\" class=\"narrative-text\" x=\"50%\" y=\"758\">", "      <tspan x=\"50%\" dy=\"0\">Simultaneously, the local branch collects multi-layer patch features, unfolding them</tspan>", "      <tspan x=\"50%\" dy=\"1.2em\">into three-dimensional tensors to preserve spatial information.</tspan>", "    </text>", "    <text id=\"narr_ts16\" class=\"narrative-text\" x=\"50%\" y=\"758\">", "      <tspan x=\"50%\" dy=\"0.6em\">These unfolded patch features from multiple layers are then concatenated.</tspan>", "    </text>", "    <text id=\"narr_ts17\" class=\"narrative-text\" x=\"50%\" y=\"758\">", "      <tspan x=\"50%\" dy=\"0.6em\">This forms a multi-layer spatial tensor representation.</tspan>", "    </text>", "    <text id=\"narr_ts18\" class=\"narrative-text\" x=\"50%\" y=\"758\">", "      <tspan x=\"50%\" dy=\"0\">A one-by-one convolution is applied to reduce the channel dimension</tspan>", "      <tspan x=\"50%\" dy=\"1.2em\">of the concatenated features.</tspan>", "    </text>", "    <text id=\"narr_ts19\" class=\"narrative-text\" x=\"50%\" y=\"758\">", "      <tspan x=\"50%\" dy=\"0\">The reduced features are processed by an enhanced locality module to strengthen</tspan>", "      <tspan x=\"50%\" dy=\"1.2em\">local interactions in the deeper layers.</tspan>", "    </text>", "    <text id=\"narr_ts20\" class=\"narrative-text\" x=\"50%\" y=\"758\">", "      <tspan x=\"50%\" dy=\"0.6em\">The enhanced features are then fused with the original reduced features.</tspan>", "    </text>", "    <text id=\"narr_ts21\" class=\"narrative-text\" x=\"50%\" y=\"758\">", "      <tspan x=\"50%\" dy=\"0\">Global average pooling and a fully connected layer are applied</tspan>", "      <tspan x=\"50%\" dy=\"1.2em\">to produce the final local feature.</tspan>", "    </text>", "    <text id=\"narr_ts22\" class=\"narrative-text\" x=\"50%\" y=\"758\">", "      <tspan x=\"50%\" dy=\"0.6em\">The global feature and local feature are concatenated to combine global and local information.</tspan>", "    </text>", "    <text id=\"narr_ts23\" class=\"narrative-text\" x=\"50%\" y=\"758\">", "      <tspan x=\"50%\" dy=\"0.6em\">This forms a unified representation of the image.</tspan>", "    </text>", "    <text id=\"narr_ts24\" class=\"narrative-text\" x=\"50%\" y=\"758\">", "      <tspan x=\"50%\" dy=\"0\">A final fully connected layer with dropout and batch normalization</tspan>", "      <tspan x=\"50%\" dy=\"1.2em\">reduces the dimensionality.</tspan>", "    </text>", "    <text id=\"narr_ts25\" class=\"narrative-text\" x=\"50%\" y=\"758\">", "      <tspan x=\"50%\" dy=\"0.6em\">The resulting representation is passed to the ArcFace loss function for training.</tspan>", "    </text>", "  </g>", "</svg>"]</script>
 <script type="application/json" id="anim-groups">[{"label": "keyframes", "from": 25, "to": 28, "note": "The keyframe every entity fades in on."}, {"label": "reveal rule", "from": 30, "to": 36, "note": "One rule binds every tagged entity to that keyframe and starts it hidden \u2014 the selector list is the entity set the parse produced."}, {"label": "timestamp delays", "from": 38, "to": 63, "note": "One animation-delay per timestamp. This is where the animation sequence ends up in the code."}, {"label": "narration banner", "from": 65, "to": 109, "note": "And the banner rules that hold each drafted caption on screen for its timestamp."}]</script>
 <script>
 (function(){
 "use strict";
 
-/* =======================================================================
-   WHERE THE WORDS LIVE  --  everything this page says is plain text in
-   this one file. Open it in any editor and change what is between the
-   quotes; never touch the quotes, commas or backslash escapes themselves.
 
-   1. The narration card  (the orange dot + title + paragraph, top left)
-        - search for   key:'   .  Every hit is one beat of the pipeline map:
-            {... key:'input D', note:'The input is an ordinary raster diagram.'}
-          `key` is the small orange title, `note` is the paragraph.
-        - search for   setNote(   .  Same two pieces, written as
-            setNote('raster integration', 'The crop flies into place.')
-          These are the beats inside the drawing / XML / sequence phases.
-
-   2. The grey line under the source-diagram thumbnail (top left)
-        - search for   class="src-note"   -- one <p> in the markup.
-
-   3. The caption slate under the animation (black on pale yellow)
-        - comes straight from  narration_sequence.json  in this folder,
-          the "narrative" field of each timestamp. Edit that file, not this one.
-
-   4. Panel headings ("Animation-aware SVG code", "Parsed diagram XML", ...)
-        - search for   codeTitle   .  Each hit sets one heading, its
-          bracketed qualifier and its single-letter symbol.
-
-   5. Timeline marker names ("Animation Planner", "Parser", ...)
-        - search for   const TIMELINE   .  `lbl` is the printed label,
-          `tip` is the hover tooltip.
-
-   Characters like \u2014 are escapes -- \u2014 is an em dash, \u2019 a
-   curly apostrophe. Leave them as they are or type the real character.
-   ======================================================================= */
-
-/* =======================================================================
-   0. CONSTANTS
-   ===================================================================== */
 const SEMANTIC = {
   block:            {color:'#7C3AED', label:'block'},
   text_node:        {color:'#2563EB', label:'text_node'},
@@ -3120,14 +3020,7 @@ const DESC = {
   composite_part:  'An individual path or shape inside a composite, still addressable on its own for animation.',
   edge:            'Every arrow and line that connects elements, carrying data-source and data-target so the Planner can order traversals.'
 };
-/* ---------------------------------------------------------------------
-   Reveal beats for the pipeline SVG. `at` is the fraction of the emitted
-   code at which the beat fires; `ids` are the SVG entities it un-hides;
-   `frame` is the entity the map camera and the marker ring follow.
-   Only the converter + critic path is animated at this stage.
-   ------------------------------------------------------------------- */
 const BEATS = [
-  /* --- phase A: the map reveals itself up to the converter --- */
   {ids:['block_stage1','text_s1_title'], sym:'Stage 1', txt:'Diagram Transmuter',
    key:'stage 1', note:'The Diagram Transmuter is the first of the three stages: it turns a raster diagram into animation-aware vector code.'},
   {ids:['node_in_d','text_io_in1','text_io_in2','text_io_in_d'], sym:'D', txt:'Input Diagram',
@@ -3142,7 +3035,6 @@ const BEATS = [
    sym:'A<sub>conv</sub>', txt:'Diagram to Animation-Aware Code Converter',
    key:'converter', note:'The converter reads the raster and starts writing SVG \u2014 one tagged entity at a time. Watch the panels below.'},
 
-  /* --- phase C: the critic loop, after the code has been written --- */
   {ids:['edge_s1_2'], sym:'\u2192', txt:'Code leaves the converter',
    key:'converter', note:'With every entity emitted, the finished draft leaves the converter.'},
   {ids:['node_s1_code','text_math_cr1'], sym:'C<sup>(r+1)</sup>', txt:'Animation-aware code draft',
@@ -3154,13 +3046,11 @@ const BEATS = [
   {ids:['edge_s1_4','node_s1_feedback','text_math_fc'], sym:'f<sub>C</sub><sup>(r)</sup>', txt:'Feedback to the converter',
    key:'critic loop', note:'Feedback f_C goes back to the converter, which re-emits until the render matches.'},
 
-  /* --- phase D: raster integration, then the finished output --- */
   {ids:['edge_s1_5'], sym:'\u2192', txt:'Accepted code to the Raster Integrator'},
   {ids:['text_s1_raster','node_s1_raster'], sym:'Raster', txt:'Raster Integrator'},
   {ids:['edge_io_2'], sym:'\u2192', txt:'Stage 1 output'},
   {ids:['node_out_c','text_io_out1','text_io_out2','text_io_out_c'], sym:'C', txt:'Animation-Aware Diagram Code'},
 
-  /* --- phase E: the Animation Planner takes over --- */
   {ids:['block_stage2','text_s2_title'], sym:'Stage 2', txt:'Animation Planner'},
   {ids:['text_io_d1','node_s2_in_d','text_io_d_math'], sym:'D', txt:'Input: the diagram'},
   {ids:['text_io_ctx1','node_s2_in_k','text_io_k_math'], sym:'K', txt:'Input: context (optional) \u2014 caption, abstract, method'},
@@ -3171,7 +3061,6 @@ const BEATS = [
   {ids:['edge_s2_3'], sym:'\u2192', txt:'Emitting the parse'},
   {ids:['node_s2_xml','text_math_p','text_s2_parsed','text_s2_parsed_xml'], sym:'P', txt:'Parsed Diagram XML'},
 
-  /* --- phase F: the Sequencer and its critic loop --- */
   {ids:['edge_s2_4'], sym:'\u2192', txt:'P feeds the Sequencer'},
   {ids:['text_s2_seq','text_math_aseq','node_s2_seq'], sym:'A<sub>seq</sub>', txt:'Sequencer'},
   {ids:['node_s2_q_draft','text_math_qr','text_s2_anim_seq','text_s2_anim_seq_draft'],
@@ -3180,7 +3069,6 @@ const BEATS = [
   {ids:['text_s2_critic','node_s2_critic','text_math_acrit2'], sym:'A<sup>Q</sup><sub>crit</sub>', txt:'Critic'},
   {ids:['node_s2_feedback','text_math_fq','edge_s2_1'], sym:'f<sub>Q</sub><sup>(r)</sup>', txt:'Feedback to the Sequencer'},
 
-  /* --- phase G: the Narration Drafter --- */
   {ids:['edge_s2_5'], sym:'\u21e2', txt:'Sequence passes to the Narration Drafter'},
   {ids:['node_s2_seq_final','text_s2_anim','text_s2_sequence'], sym:'Seq', txt:'Animation Sequence'},
   {ids:['text_math_qr1'], sym:'Q<sup>(r+1)</sup>', txt:'The validated animation sequence'},
@@ -3190,7 +3078,6 @@ const BEATS = [
   {ids:['node_s2_out_s','text_io_s1_lbl1','text_io_s1_lbl2','text_io_s_math'],
    sym:'S', txt:'Narration-infused Animation Sequence'},
 
-  /* --- phase H: Stage 3, the Diagram Animator --- */
   {ids:['block_stage3','text_s3_title'], sym:'Stage 3', txt:'Diagram Animator'},
   {ids:['text_io_s3_d','node_s3_in_d','text_io_s3_d_math'], sym:'D', txt:'Input: the diagram'},
   {ids:['node_s3_in_u','text_io_s3_u','text_io_s3_u_math'], sym:'u', txt:'Input: animation style'},
@@ -3209,7 +3096,6 @@ const BEATS = [
   {ids:['edge_s3_1','node_s3_feedback','text_math_fa'],
    sym:'f<sub>A</sub><sup>(r)</sup>', txt:'Feedback to the Animation Designer'},
 
-  /* --- the finale: export and narration integration --- */
   {ids:['node_s3_anim_final','text_s3_anim_code2','text_math_ar1'],
    sym:'A<sup>(r+1)</sup>', txt:'Accepted animation code'},
   {ids:['edge_s3_3'], sym:'\u2192', txt:'Accepted code to the Animation Exporter'},
@@ -3226,43 +3112,37 @@ const BEATS = [
   {ids:['node_s3_out_y','text_io_y_lbl1','text_io_y_lbl2','text_io_y_math'],
    sym:'Y', txt:'Styled Visual Narrative'}
 ];
-const PHASE_D_END = 14;  // last beat of Stage 1
-const PHASE_E_END = 23;  // last beat of the Parser
-const PHASE_F_END = 29;  // last beat of the Sequencer loop
-const PHASE_G_END = 35;  // last beat of Stage 2
-const PHASE_H_END = 56;  // last beat \u2014 the styled visual narrative
-const PHASE_A_END = 5;   // last beat shown before the code animation
-const PHASE_C_END = 10;  // last beat of the critic loop; the rest is raster integration
+const PHASE_D_END = 14;
+const PHASE_E_END = 23;
+const PHASE_F_END = 29;
+const PHASE_G_END = 35;
+const PHASE_H_END = 56;
+const PHASE_A_END = 5;
+const PHASE_C_END = 10;
 
-/* --- raster integration: bbox from rasters/rasters_state_svg.json --- */
 const RASTER = {
   id: 'input_image_raster',
   src: 'rasters/crop_input_image_raster.png',
-  imageSize: [957, 690],                       // the source diagram's pixel size
-  bbox: [39.237, 104.19, 138.765, 204.93],     // x0,y0,x1,y1 in that pixel space
-  svg:  {x:42, y:108, w:104, h:104}            // the placeholder slot in the SVG
+  imageSize: [957, 690],
+  bbox: [39.237, 104.19, 138.765, 204.93],
+  svg:  {x:42, y:108, w:104, h:104}
 };
 
-/* semantic class -> index, as in the schematic XML representation */
 const CLS_NUM = {
   block:1, text_node:2, standalone_node:3, child_node:4,
   raster_node:5, composite_whole:6, composite_part:7, edge:8
 };
 
 const FULL = {x:0, y:0, w:1000, h:715};
-const BASE_CPS   = 1150;   // characters per second at 1x
-const SETUP_MULT = 3.2;    // defs / style boilerplate types faster
-const LEAF_STAGGER = 38;   // ms between sibling leaves of one group
-const DRAW_MS    = 520;    // stroke draw duration
-const STEP_PAUSE = 130;    // ms pause after an element lands
+const BASE_CPS   = 1150;
+const SETUP_MULT = 3.2;
+const LEAF_STAGGER = 38;
+const DRAW_MS    = 520;
+const STEP_PAUSE = 130;
 
-/* =======================================================================
-   1. SOURCE SEGMENTATION  —  split raw SVG text into top-level steps
-   ===================================================================== */
 const RAW = document.getElementById('svg-source').textContent;
 
 function scanOpenTag(s, i){
-  // returns {end, selfClosing, name}  ; i points at '<'
   let j = i + 1, name = '';
   while (j < s.length && /[^\s/>]/.test(s[j])) { name += s[j]; j++; }
   let q = null;
@@ -3336,11 +3216,9 @@ function segment(src){
 
 const PARTS = segment(RAW);
 
-/* Group: consecutive comments attach to the element that follows them. */
 function buildSteps(parts){
   const steps = [];
   let pending = '';
-  // step 0 -> the <svg ...> opening tag itself
   steps.push({code:parts.head, kind:'setup', elIndex:-1});
   let elIndex = -1;
   for (const s of parts.segs){
@@ -3364,16 +3242,11 @@ function buildSteps(parts){
 }
 const STEPS = buildSteps(PARTS);
 
-/* =======================================================================
-   2. BUILD THE LIVE SVG  (hidden, revealed step by step)
-   ===================================================================== */
 const canvas = document.getElementById('canvas');
 const doc    = new DOMParser().parseFromString(RAW, 'image/svg+xml');
 const srcSvg = doc.documentElement;
 
-// carry over defs + style + all children
 const topEls = [];
-// strip bitmap hrefs BEFORE importing so the browser never requests the file
 srcSvg.querySelectorAll('image').forEach(im => {
   im.removeAttribute('href');
   im.removeAttribute('xlink:href');
@@ -3385,7 +3258,6 @@ Array.from(srcSvg.children).forEach(node => {
   topEls.push(imported);
 });
 
-/* --- raster placeholders: never load the real bitmap yet ------------- */
 function makePlaceholder(x, y, w, h){
   const NS = 'http://www.w3.org/2000/svg';
   const g  = document.createElementNS(NS, 'g');
@@ -3444,11 +3316,9 @@ canvas.querySelectorAll('image').forEach(img => {
   img.parentNode.replaceChild(ph, img);
 });
 
-/* --- collect drawable leaves & hide everything ----------------------- */
 const LEAF_TAGS = new Set(['text','image','use','foreignObject']);
 function leaves(node, out){
   out = out || [];
-  /* nodes tagged data-fx are driven by the effects layer, never by the draw loop */
   if (node.getAttribute && node.getAttribute('data-fx')) return out;
   if (LEAF_TAGS.has(node.tagName) || node.children.length === 0){ out.push(node); return out; }
   Array.from(node.children).forEach(c => leaves(c, out));
@@ -3471,9 +3341,6 @@ function hideAll(){
   });
 }
 hideAll();
-/* =======================================================================
-   3. REVEAL ANIMATION
-   ===================================================================== */
 function isStrokeOnly(el){
   const tag = el.tagName;
   if (!(tag === 'path' || tag === 'line' || tag === 'polyline')) return false;
@@ -3523,9 +3390,6 @@ function revealElement(el){
   return Math.max(0, (ls.length - 1) * LEAF_STAGGER) + DRAW_MS;
 }
 
-/* =======================================================================
-   4. CAMERA  (auto-follow + manual pan / zoom)
-   ===================================================================== */
 const canvasBox = document.getElementById('stageInner');
 const zoomLabel = document.getElementById('zoomLabel');
 let cam = Object.assign({}, FULL);
@@ -3590,7 +3454,6 @@ function frameForBB(bb){
   y = Math.min(Math.max(y, -m), FULL.h + m - h);
   return {x:x, y:y, w:w, h:h};
 }
-/* --- manual interaction --- */
 const btnFollow = document.getElementById('btnFollow');
 function setFollow(v){ follow = v; btnFollow.setAttribute('aria-pressed', String(v)); }
 function manual(){ if (follow) setFollow(false); cancelAnimationFrame(camAnim); }
@@ -3623,9 +3486,6 @@ canvasBox.addEventListener('pointermove', e => {
 ['pointerup','pointercancel','pointerleave'].forEach(t =>
   canvasBox.addEventListener(t, () => { drag = null; canvasBox.classList.remove('grabbing'); }));
 
-/* =======================================================================
-   5. PIPELINE-MAP SPOTLIGHT
-   ===================================================================== */
 const mapFrame = document.getElementById('mapFrame');
 const pipe     = document.getElementById('pipeSvg');
 const focusSym = document.getElementById('focusSym');
@@ -3635,7 +3495,6 @@ const PVB = (function(){
   return {x:v[0], y:v[1], w:v[2], h:v[3]};
 })();
 
-/* every tagged entity starts hidden — the map opens completely blank */
 function hidePipe(){ pipe.querySelectorAll('[data-id]').forEach(n => n.classList.remove('shown')); }
 function showId(id, delay){
   const n = pipe.querySelector('#' + CSS.escape(id));
@@ -3651,10 +3510,7 @@ function bboxOf(id){
   return bb;
 }
 
-/* ---- the map is FIXED: one viewBox, framed on the part of the pipeline
-        this page animates, recomputed only when the window resizes ---- */
 function fitMap(){
-  /* frame the entire artwork so no stage or artefact is ever cut off */
   let world = {x:PVB.x, y:PVB.y, w:PVB.w, h:PVB.h};
   const all = Array.prototype.slice.call(pipe.querySelectorAll('[data-id]'));
   let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity, any = false;
@@ -3671,7 +3527,6 @@ function fitMap(){
     world.x.toFixed(1)+' '+world.y.toFixed(1)+' '+world.w.toFixed(1)+' '+world.h.toFixed(1));
 }
 
-/* ---- beats ---- */
 let firedBeats = new Set();
 function runBeat(i, instant){
   instant = instant || FAST;
@@ -3689,7 +3544,6 @@ function runBeat(i, instant){
 function beatsAll(){ for (let i = 0; i <= PHASE_D_END; i++) runBeat(i, true); }
 function beatsReset(){ firedBeats = new Set(); hidePipe(); fitMap(); }
 
-/* ---- a small pausable step sequencer for phases A and C ---- */
 let seq = null, seqTimer = null;
 function seqStart(from, to, gap, done){
   seq = {i:from, to:to, gap:gap, done:done};
@@ -3713,9 +3567,6 @@ function seqStep(){
   return true;
 }
 
-/* =======================================================================
-   6. SYNTAX HIGHLIGHTING
-   ===================================================================== */
 function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 function highlight(src){
   let out = '', i = 0;
@@ -3761,9 +3612,6 @@ function highlight(src){
   return out;
 }
 
-/* =======================================================================
-   7. ENGINE
-   ===================================================================== */
 const elDone=document.getElementById('done'), elCur=document.getElementById('cur');
 const elCode=document.getElementById('code'), elWrap=document.getElementById('codeWrap');
 const elCaret=document.getElementById('caret');
@@ -3782,7 +3630,7 @@ let stepIdx=0, charIdx=0, charsSoFar=0, drawSoFar=0, linesSoFar=0;
 let playing=false, speed=1, rafId=null, lastT=0, holdUntil=0, elapsed=0, ended=false;
 let phase='idle';
 let FAST = false;
-let held = false;   // the transport is paused, even though a step list is pending
+let held = false;
 let doneHTML='';
 const classCounts = {};
 
@@ -3801,7 +3649,6 @@ function estTotal(){
 }
 function tickClock(){ elClock.textContent = fmt(elapsed) + ' / ' + fmt(estTotal()); }
 
-/* ---- narration + legend ---- */
 const elLegend = document.getElementById('legend');
 const tagTotal = document.getElementById('tagTotal');
 Object.keys(SEMANTIC).forEach(k => {
@@ -3940,7 +3787,6 @@ function playTyping(){
   btnPlay.textContent = 'Pause';
   cancelAnimationFrame(rafId); rafId = requestAnimationFrame(frame);
 }
-/* phase A -> the code animation -> phase C */
 function startAll(){
   held = false; phase = 'A';
   btnPlay.textContent = 'Pause';
@@ -4061,9 +3907,6 @@ function reset(){
   tickClock();
 }
 
-/* =======================================================================
-   8. CONTROLS
-   ===================================================================== */
 btnPlay.addEventListener('click', () => { isRunning() ? pause() : play(); });
 document.getElementById('btnStep').addEventListener('click', stepOnce);
 document.getElementById('btnEnd').addEventListener('click', skipEnd);
@@ -4105,9 +3948,6 @@ window.addEventListener('keydown', e => {
   else if (e.key === 'Escape'){ lb.classList.remove('on'); }
 });
 
-/* =======================================================================
-   8b. RASTER INTEGRATION  (phase D)
-   ===================================================================== */
 const RASTER_FINAL = document.getElementById('raster-final').textContent.trim();
 const rasterStepIdx = (function(){
   for (let i = 0; i < STEPS.length; i++)
@@ -4115,7 +3955,6 @@ const rasterStepIdx = (function(){
   return -1;
 })();
 
-/* a real <image> lives beside the placeholder, hidden until the integrator runs */
 const rGroup = canvas.querySelector('#' + RASTER.id);
 const rImage = (function(){
   if (!rGroup) return null;
@@ -4128,15 +3967,11 @@ const rImage = (function(){
   im.setAttribute('data-fx', '1');
   im.style.opacity = '0';
   im.style.transition = 'opacity .45s ease';
-  rGroup.appendChild(im);          // appended AFTER allLeaves was built, so hideAll ignores it
+  rGroup.appendChild(im);
   return im;
 })();
 const rPlaceholderLeaves = rGroup ? Array.from(rGroup.children).filter(n => n !== rImage) : [];
 
-/* The real bitmap only exists on the canvas once the Raster Integrator has cut
-   and flown it in. Before that the slot is the grey named placeholder, so every
-   path that lights entities up (greyAll, colourise, maskAll, unmask) has to ask
-   this first — otherwise the photo shows through from the very first frame. */
 let rasterIntegrated = false;
 function setRasterVisible(op){
   if (!rImage) return;
@@ -4159,7 +3994,6 @@ function fxResize(){
 fxResize();
 window.addEventListener('resize', fxResize);
 
-/* where the source diagram is actually painted (object-fit: contain) */
 function drawnRect(img){
   const r = img.getBoundingClientRect();
   const nat = (img.naturalWidth && img.naturalHeight) ? img.naturalWidth / img.naturalHeight
@@ -4198,7 +4032,6 @@ function clearFx(){
   fxSci.style.transform = '';
 }
 
-/* ---- code panel helpers ---- */
 function codeStepEl(i){ return elDone.querySelector('.cstep[data-si="' + i + '"]'); }
 function scrollToStep(i){
   const el = codeStepEl(i);
@@ -4219,7 +4052,6 @@ function rewriteRasterCode(){
   markStep(rasterStepIdx, 'added');
 }
 
-/* ---- the scissor pass around the crop ---- */
 function runScissors(ms, onDone){
   if (FAST){ if (onDone) onDone(); return; }
   const r = srcRasterRect(), pad = 3;
@@ -4231,7 +4063,7 @@ function runScissors(ms, onDone){
   fxCut.style.strokeDashoffset = per;
   fxSci.style.opacity = '1';
   const x0 = r.x - pad, y0 = r.y - pad, w = r.w + pad*2, h = r.h + pad*2;
-  function pointAt(p){                       // p in [0,1] around the rectangle
+  function pointAt(p){
     const d = p * per;
     if (d < w)             return [x0 + d, y0, 0];
     if (d < w + h)         return [x0 + w, y0 + (d - w), 90];
@@ -4249,7 +4081,6 @@ function runScissors(ms, onDone){
   })(t0);
 }
 
-/* ---- the crop flies into the placeholder ---- */
 function flyCrop(ms, onDone){
   if (FAST){ if (onDone) onDone(); return; }
   const s = srcRasterRect(), d = dstRasterRect();
@@ -4269,14 +4100,13 @@ function flyCrop(ms, onDone){
   setTimeout(function(){ if (onDone) onDone(); }, ms + 30);
 }
 
-/* ---- the step list ---- */
 function dSteps(){
   return [
   [1000, function(){
-    runBeat(PHASE_D_END - 3);             // edge_s1_5 — the arrow to the integrator
+    runBeat(PHASE_D_END - 3);
     setNote('raster integration', 'The accepted code still has an empty slot where a bitmap belongs. It goes to the Raster Integrator.');
   }],
-  [1600, function(){ runBeat(PHASE_D_END - 2); }],   // the Raster Integrator itself
+  [1600, function(){ runBeat(PHASE_D_END - 2); }],
   [1500, function(){
     scrollToStep(rasterStepIdx);
     markStep(rasterStepIdx, 'hot');
@@ -4322,10 +4152,10 @@ function dSteps(){
     setNote('raster integrated', 'The slot now carries the real bitmap and the code references rasters/crop_input_image_raster.png. The diagram is complete.');
   }],
   [1500, function(){
-    runBeat(PHASE_D_END - 1);             // edge_io_2
+    runBeat(PHASE_D_END - 1);
   }],
   [1400, function(){
-    runBeat(PHASE_D_END);                 // the finished code C
+    runBeat(PHASE_D_END);
     setNote('stage 1 complete', 'C is the finished animation-aware diagram code, rasters and all. Stage 2 parses it into an animation sequence.');
     if (follow) fitCam(800);
   }]
@@ -4362,16 +4192,12 @@ function dReset(){
   if (rImage) rImage.style.opacity = '0';
 }
 
-/* =======================================================================
-   8c. ANIMATION PLANNER  (phase E)
-   ===================================================================== */
 const XML_SRC   = document.getElementById('xml-source').textContent.replace(/\r/g, '');
 const XML_LINES = XML_SRC.replace(/^\n+/, '').replace(/\s+$/, '').split('\n');
 const xmlWrap   = document.getElementById('xmlWrap');
 const xmlPre    = document.getElementById('xmlPre');
 const SVGNS     = 'http://www.w3.org/2000/svg';
 
-/* ---- group the XML into reveal steps ---- */
 const XSTEPS = (function(){
   const out = [];
   let i = 0;
@@ -4402,7 +4228,6 @@ const XSTEPS = (function(){
   return out;
 })();
 
-/* ---- XML syntax highlighting ---- */
 function xesc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 function xmlHighlight(line, cls){
   if (line.trim().indexOf('<?') === 0) return '<span class="x-decl">' + xesc(line) + '</span>';
@@ -4435,7 +4260,6 @@ function xrow(lineIdx, cls, num){
   return d;
 }
 
-/* ---- greyscale / colourise the rendered diagram ---- */
 function greyAll(on){
   allLeaves.forEach(function(l){
     l.style.transition = 'filter .5s ease, opacity .5s ease';
@@ -4457,9 +4281,6 @@ function colourise(ids){
   });
 }
 
-/* text_node entities never appear in the parse, so attach each one to the
-   entity it belongs to: its data-parent when that is a real element, else the
-   nearest tagged non-text element by bounding-box centre. */
 const TEXT_OWNER = (function(){
   const map = {};
   function bb(n){ try { return n.getBBox(); } catch(e){ return null; } }
@@ -4485,7 +4306,6 @@ const TEXT_OWNER = (function(){
   return map;
 })();
 
-/* ---- badges ---- */
 function svgBadge(el, cls, small){
   let bb; try { bb = el.getBBox(); } catch(e){ return; }
   const isEdge = (cls === 'edge');
@@ -4535,7 +4355,6 @@ function flyBadge(fromEl, targetEl, cls, ms, onDone){
   setTimeout(function(){ d.remove(); if (onDone) onDone(); }, ms + 20);
 }
 
-/* ---- one XML step ---- */
 let xIdx = 0;
 function runXStep(k, instant){
   instant = instant || FAST;
@@ -4564,7 +4383,6 @@ function runXStep(k, instant){
   if (!s.cls || !s.ids.length) return;
 
   colourise(s.ids);
-  /* every text entity riding on these ids comes out of greyscale too, tagged 2 */
   const texts = [];
   s.ids.forEach(function(id){ (TEXT_OWNER[id] || []).forEach(function(tn){ texts.push(tn); }); });
   texts.forEach(function(tn, n){
@@ -4601,10 +4419,8 @@ function runXStep(k, instant){
   });
 }
 
-/* ---- phase E driver ---- */
 let eList = null, eIdx = 0, eTimer = null, eDone = null;
 function enterPlanner(){
-  /* the code panel is cleared and handed over to the parsed XML */
   elDone.innerHTML = ''; elCur.innerHTML = ''; doneHTML = '';
   elCode.classList.add('done');
   document.getElementById('codeWrap').style.display = 'none';
@@ -4614,11 +4430,9 @@ function enterPlanner(){
   document.getElementById('codeSym').style.visibility = '';
   document.getElementById('lineCount').textContent = '0 / ' + XML_LINES.length + ' lines';
   xmlPre.innerHTML = '';
-  /* the diagram drops to greyscale until the XML names each entity */
   setFollow(true); fitCam(700);
   greyAll(true);
   canvas.querySelectorAll('.idxbadge').forEach(n => n.remove());
-  /* the class -> index mapping appears all at once */
   const lg = document.getElementById('legend');
   lg.classList.add('indexed'); lg.classList.remove('pulse');
   void lg.offsetWidth; lg.classList.add('pulse');
@@ -4699,9 +4513,6 @@ function eReset(){
   });
 }
 
-/* =======================================================================
-   8e. SEQUENCER  (phase F)
-   ===================================================================== */
 const SEQ = JSON.parse(document.getElementById('seq-source').textContent);
 const SEQ_STEPS = SEQ.sequence || [];
 const seqWrap = document.getElementById('seqWrap');
@@ -4788,7 +4599,6 @@ function runFStep(k, instant){
 }
 
 function enterSequencer(){
-  /* the parse panel is cleared and handed over to the animation sequence */
   xmlWrap.classList.remove('on');
   xmlPre.innerHTML = '';
   seqList.innerHTML = '';
@@ -4803,7 +4613,6 @@ function enterSequencer(){
   document.getElementById('codeSym').textContent = 'Q';
   document.getElementById('codeSym').style.visibility = '';
   document.getElementById('lineCount').textContent = '0 / ' + SEQ_STEPS.length + ' timestamps';
-  /* the parse badges have done their job; the diagram drops behind a thin veil */
   canvas.querySelectorAll('.idxbadge').forEach(n => n.remove());
   greyAll(false);
   setFollow(true); fitCam(700);
@@ -4875,9 +4684,6 @@ function fReset(){
   maskAll(false);
 }
 
-/* =======================================================================
-   8f. NARRATION DRAFTER  (phase G)
-   ===================================================================== */
 const NARR = JSON.parse(document.getElementById('narr-source').textContent);
 const NARR_STEPS = NARR.sequence || [];
 const narrWrap = document.getElementById('narrWrap');
@@ -5017,9 +4823,6 @@ function gReset(){
   capBar.classList.remove('on', 'armed');
 }
 
-/* =======================================================================
-   8g. DIAGRAM ANIMATOR  (phase H)
-   ===================================================================== */
 const ANIM_LINES  = JSON.parse(document.getElementById('anim-lines').textContent);
 const ANIM_GROUPS = JSON.parse(document.getElementById('anim-groups').textContent);
 const animWrap   = document.getElementById('animWrap');
@@ -5030,9 +4833,7 @@ function animHighlight(line){
   const s = line.trim();
   if (s.indexOf('<!--') === 0 || s.indexOf('/*') === 0)
     return '<span class="a-com">' + aesc(line) + '</span>';
-  /* markup lines go through the proven single-pass SVG highlighter */
   if (line.indexOf('<') !== -1) return highlight(line);
-  /* CSS: one alternation pass, so nothing re-enters its own output */
   return aesc(line).replace(
     /(\[data-id="[^"]*"\])|(#[\w-]+|\.[A-Za-z][\w-]*)|([A-Za-z-]+)(\s*:\s*)([^;{}]*)(;?)/g,
     function(m, sel1, sel2, prop, colon, val, semi){
@@ -5095,7 +4896,6 @@ function animClearHighlight(){
   animPre.querySelectorAll('.arow').forEach(function(n){ n.classList.remove('hot','dim'); });
 }
 
-/* ---- the finished narration-synced animation ---- */
 const videoWrap = document.getElementById('videoWrap');
 const vbox  = document.getElementById('vbox');
 const video = document.getElementById('finalVideo');
@@ -5110,8 +4910,6 @@ function vApply(){
   video.style.transform = 'translate(' + vX.toFixed(0) + 'px,' + vY.toFixed(0) + 'px) scale(' + vZoom.toFixed(3) + ')';
   vZoomLbl.textContent = Math.round(vZoom * 100) + '%';
 }
-/* size the frame to the video's own aspect ratio so the picture fills it
-   completely — no letterbox bars, no wasted panel */
 function sizeVBox(){
   const st = document.querySelector('.vstage');
   if (!st) return;
@@ -5152,7 +4950,6 @@ function vGoFull(){
 }
 function vExitFull(){ if (document.fullscreenElement) document.exitFullscreen().catch(function(){}); }
 function vToggleFull(){ if (vIsFull()) vExitFull(); else vGoFull(); }
-/* playing the video takes it fullscreen; pausing leaves it there so the user stays in control */
 function vTogglePlay(){
   if (video.paused){ vGoFull(); video.play().catch(function(){}); }
   else video.pause();
@@ -5171,7 +4968,7 @@ document.getElementById('vSpeed').addEventListener('click', function(e){
     x.setAttribute('aria-pressed', String(x === btn));
   });
 });
-var mutedByChoice = false;   /* only a click sets this; autoplay rules do not */
+var mutedByChoice = false;
 vMute.addEventListener('click', function(){
   video.muted = !video.muted;
   mutedByChoice = video.muted;
@@ -5203,7 +5000,6 @@ vbox.addEventListener('pointermove', function(e){
   vX = vdrag.ox + (e.clientX - vdrag.x); vY = vdrag.oy + (e.clientY - vdrag.y); vApply();
 });
 vbox.addEventListener('pointerup', function(){
-  /* a click on the frame itself is play/pause, and playing goes fullscreen */
   if (vdrag && !vdrag.moved) vTogglePlay();
   vdrag = null; vbox.classList.remove('grabbing');
 });
@@ -5219,16 +5015,11 @@ video.addEventListener('loadedmetadata', function(){
 video.addEventListener('volumechange', syncMute);
 video.addEventListener('error', function(){ vbox.classList.add('failed'); });
 
-/* ---- narration captions, timed against the video ---- */
 const capWrap = document.getElementById('capWrap');
 const capList = document.getElementById('capList');
 let CAP_TIMES = [];
-/* The finished video's transcript comes from final_video.captions.json when
-   it is there - [{t, text}], t being the second each line starts - so the video
-   and its transcript can be swapped without touching this file. Without it,
-   the drafted narration and the exporter's hold times below are used. */
 let FV_CAPS = null;
-let FV_DUR = 0;            /* the length those times were written against */
+let FV_DUR = 0;
 fetch('final_video.captions.json', { cache: 'no-cache' })
   .then(function(r){ return r.ok ? r.json() : null; })
   .then(function(d){
@@ -5253,9 +5044,6 @@ function buildCaptions(){
     capList.appendChild(d);
   });
 }
-/* the exporter's own per-frame hold times, one per narration timestamp (seconds).
-   The first three are the pre-roll frames; the rest come straight from the
-   concat manifest the video was rendered from. */
 const FRAME_DUR = [
   5.397, 5.319, 5.084, 5.320, 4.680, 3.320, 4.480, 4.920, 4.160, 4.960,
   7.400, 4.760, 6.040, 3.280, 8.960, 4.320, 3.880, 5.320, 6.600, 4.160,
@@ -5263,12 +5051,6 @@ const FRAME_DUR = [
 ];
 function layoutCaptionTimes(){
   if (FV_CAPS){
-    /* The manifest's times belong to the render it was written against. If the
-       file that actually loaded is a different length - a re-encode, a fresh
-       render - every line would land late and the last would never fire, which
-       is what happened when the closing video was replaced. So the same drift
-       guard the fallback below uses applies here: scale by the ratio, and only
-       when the two disagree by more than a frame. */
     var fvNom = +FV_DUR || 0, fvReal = video.duration;
     var fvK = (isFinite(fvReal) && fvReal > 0 && fvNom > 0 && Math.abs(fvReal - fvNom) > 0.2)
       ? fvReal / fvNom : 1;
@@ -5280,7 +5062,6 @@ function layoutCaptionTimes(){
   }
   const dur = video.duration;
   const nom = FRAME_DUR.reduce(function(a, b){ return a + b; }, 0);
-  /* scale only if the muxed file drifts from the manifest by more than a frame */
   const k = (isFinite(dur) && dur > 0 && Math.abs(dur - nom) > 0.2) ? dur / nom : 1;
   let acc = 0;
   CAP_TIMES = NARR_STEPS.map(function(s, i){
@@ -5310,8 +5091,6 @@ function syncCaptions(){
   }
 }
 
-/* empties the whole lower row — both panels, their headings and their controls.
-   Used from the Animation Exporter beat until the finished video takes over. */
 function clearLowerRow(){
   clearCodePanel();
   capBar.classList.remove('on', 'armed');
@@ -5323,7 +5102,6 @@ function clearLowerRow(){
   document.getElementById('btnRecenter').style.display = 'none';
   document.querySelector('.canvas-foot').style.visibility = 'hidden';
 }
-/* empties the lower-right panel outright — content and headings both */
 function clearCodePanel(){
   animWrap.classList.remove('on');
   animPre.innerHTML = '';
@@ -5336,7 +5114,6 @@ function clearCodePanel(){
   document.getElementById('lineCount').textContent = '';
 }
 function showVideo(instant){
-  /* left pane becomes the player, right pane becomes the caption track */
   document.querySelector('.stage-wrap').style.display = 'none';
   document.querySelector('.canvas-foot').style.display = 'none';
   document.querySelector('.canvas-foot').style.visibility = '';
@@ -5360,11 +5137,6 @@ function showVideo(instant){
   requestAnimationFrame(sizeVBox);
   try { video.currentTime = 0; } catch(e){}
 
-  /* THE NARRATION IS THE POINT OF THIS VIDEO, so it plays with sound unless
-     the viewer has turned it off themselves. Getting here takes clicking
-     through the walkthrough, which is the activation an unmuted autoplay
-     needs; where a browser refuses anyway, the clip starts muted rather than
-     not at all and the button says so, so the sound is one click away. */
   video.muted = mutedByChoice;
   syncMute();
   if (!instant) {
@@ -5401,7 +5173,6 @@ function blankCanvas(){
   if (rImage){ rImage.style.transition = 'opacity .4s ease'; rImage.style.opacity = '0'; }
 }
 function enterAnimator(){
-  /* both sides go blank */
   narrWrap.classList.remove('on'); narrList.innerHTML = '';
   seqWrap.classList.remove('on');  seqList.innerHTML = '';
   xmlWrap.classList.remove('on');  xmlPre.innerHTML = '';
@@ -5410,7 +5181,7 @@ function enterAnimator(){
   hideVideo();
   canvas.querySelectorAll('.idxbadge').forEach(function(n){ n.remove(); });
   greyAll(false);
-  blankCanvas();          /* the left pane starts empty */
+  blankCanvas();
   setFollow(true); fitCam(700);
   capBar.classList.remove('on', 'armed');
   tsChip.classList.remove('on');
@@ -5445,7 +5216,6 @@ function hSteps(){
     setNote('animation designer', 'A_anim edits the diagram code in place \u2014 every entity stays exactly where it was, and the animation is expressed entirely in the stylesheet.');
   }]);
 
-  /* --- the emitted code, all at once --- */
   L.push([1600, function(){
     animRenderAll();
     setNote('animation code', 'A \u2014 the animation code it emits, in full. Same SVG, same entity ids, plus a timeline expressed entirely in the stylesheet.');
@@ -5455,9 +5225,8 @@ function hSteps(){
     setNote('animation attributes', 'Highlighted, and staying highlighted, are the only lines that are new: the keyframe, the rule that hides every tagged entity, the per-timestamp delays and the narration banner.');
   }]);
 
-  /* --- run it on the diagram, exactly as the earlier stages did --- */
   L.push([1400, function(){
-    blankCanvas();          /* progressive reveal: nothing is on screen at all */
+    blankCanvas();
     capBar.classList.add('armed'); capBar.classList.remove('on');
     setNote('rendering', 'Run it \u2014 progressive reveal. Every entity appears on the timestamp its delay names, with the drafted narration underneath.');
   }]);
@@ -5471,7 +5240,6 @@ function hSteps(){
     }]);
   });
 
-  /* --- the critic loop --- */
   L.push([1300, function(){
     capBar.classList.remove('on');
     runBeat(PHASE_G_END + 8);
@@ -5484,7 +5252,6 @@ function hSteps(){
     setNote('critic loop', 'Feedback f_A returns to the Animation Designer, which re-times and re-renders until the Critic accepts it.');
   }]);
 
-  /* --- export and narration integration --- */
   L.push([1400, function(){
     runBeat(PHASE_G_END + 12);
     setNote('accepted code', 'A\u207d\u02b3\u207a\u00b9\u207e \u2014 the animation code the Critic signs off on.');
@@ -5492,7 +5259,7 @@ function hSteps(){
   L.push([1100, function(){ runBeat(PHASE_G_END + 13); }]);
   L.push([1300, function(){
     runBeat(PHASE_G_END + 14);
-    clearLowerRow();                       /* the whole lower row empties here, headings and all */
+    clearLowerRow();
     setNote('animation exporter', 'The Exporter renders the accepted code out to frames.');
   }]);
   L.push([1100, function(){ runBeat(PHASE_G_END + 15); }]);
@@ -5512,7 +5279,7 @@ function hSteps(){
   }]);
   L.push([1300, function(){ runBeat(PHASE_G_END + 20); }]);
   L.push([1600, function(){
-    runBeat(PHASE_G_END + 21);          /* the output leaves the Diagram Animator */
+    runBeat(PHASE_G_END + 21);
     capBar.classList.remove('on', 'armed');
     tsChip.classList.remove('on');
     showVideo();
@@ -5553,9 +5320,6 @@ function hReset(){
   document.getElementById('brandNum').textContent = '1';
 }
 
-/* =======================================================================
-   8d. TIMELINE SCRUBBER
-   ===================================================================== */
 const drawStepIdx = (function(){
   const a = [];
   STEPS.forEach(function(s, i){ if (s.kind === 'draw') a.push(i); });
@@ -5630,8 +5394,6 @@ const TIMELINE = [
 TIMELINE.forEach(function(c){
   if (c.t == null) c.t = Math.min(1, Math.max(0, timeAt(c.p, c.k) / T_ALL));
 });
-/* keep the markers from crowding each other: a scrub tick that lands on top of a
-   stage or agent marker — or on top of another tick — can never be clicked, so drop it */
 (function(){
   TIMELINE.sort(function(a, b){ return a.t - b.t; });
   const GAP_LABELLED = 0.014, GAP_TICK = 0.018;
@@ -5645,8 +5407,6 @@ TIMELINE.forEach(function(c){
     });
     if (clash) TIMELINE.splice(i, 1);
   }
-  /* two real checkpoints can still land almost on top of each other. Nudge only
-     where they are DRAWN — c.t, which drives the fill and the playhead, is untouched. */
   const MIN = 0.011;
   TIMELINE.forEach(function(c){ c.tx = c.t; });
   for (let pass = 0; pass < 6; pass++){
@@ -5682,8 +5442,6 @@ TIMELINE.forEach(function(c, i){
   tlMarks.appendChild(b);
   c.el = b;
 });
-/* keep the labels legible: stages own the first row, agents stack below
-   into whatever row is free, and the end labels tuck inside the track */
 function layoutLabels(){
   const W = tlMarks.clientWidth || 1;
   const rows = [[], [], []];
@@ -5715,9 +5473,6 @@ function layoutLabels(){
 window.addEventListener('resize', layoutLabels);
 
 const STAGE_BOUNDS = null;
-/* the colours belong to the TRACK, not to the filled part: the gradient is
-   sized to the full track width, so the fill changes to green exactly at the
-   Animation Planner marker and to blue exactly at the Diagram Animator one */
 function paintTrackGradient(){
   const s2 = timeAt('E', 0) / T_ALL, s3 = timeAt('H', 0) / T_ALL;
   const pct = function(v){ return (v * 100).toFixed(2) + '%'; };
@@ -5751,7 +5506,6 @@ function playheadNow(){
   else if (phase === 'H') setPlayhead(timeAt('H', hIdx) / T_ALL);
 }
 
-/* ---- jump to any checkpoint: rebuild the state instantly, then play on ---- */
 function jumpTo(i){
   const cp = TIMELINE[i];
   if (!cp || cp.future) return;
@@ -5819,14 +5573,6 @@ tlTrack.addEventListener('click', function(e){
   jumpTo(best);
 });
 
-/* =======================================================================
-   8b. AUTO-EXPAND — whenever the lower row is being drawn into (code,
-       canvas, XML, sequence, narration, the final video) it takes the whole
-       walkthrough; the moment the pipeline map animates again the layout
-       returns to normal. Map-only phases (A, C) and Stage 1's raster step
-       (D, which flies a crop out of the source image in the top row) always
-       keep the normal layout.
-   ===================================================================== */
 const mainEl = document.querySelector('main');
 const rowBottom = document.querySelector('.row-bottom');
 const btnFocus = document.getElementById('btnFocus');
@@ -5848,7 +5594,6 @@ mainEl.addEventListener('transitionend', function(e){
   if (follow && !videoWrap.classList.contains('on')) fitCam(350);
 });
 
-/* a pipeline-map beat hands the space back, and keeps it long enough to be seen */
 const runMapBeat = runBeat;
 runBeat = function(i, instant){
   const before = firedBeats.size;
@@ -5860,16 +5605,12 @@ runBeat = function(i, instant){
   beatQuietUntil = performance.now() + quietMs;
   pendingExpand = false;
   setExpanded(false);
-  /* something new may land below in the same step as the beat (the final
-     video does): expand for it once the beat has had its moment */
   quietTimer = setTimeout(function(){
     if (pendingExpand && !MAP_PHASES[phase]) setExpanded(true);
     pendingExpand = false;
   }, quietMs);
 };
 
-/* anything new shown in the lower row (outside its counters and toolbars)
-   expands it; clearing a panel does not */
 function isShowing(r){
   const el = r.target.nodeType === 1 ? r.target : r.target.parentElement;
   if (!el || el.closest(QUIET_NODES)) return false;
@@ -5880,13 +5621,10 @@ function isShowing(r){
 new MutationObserver(function(records){
   if (MAP_PHASES[phase] || !records.some(isShowing)) return;
   if (performance.now() < beatQuietUntil){
-    /* the finished video arrives in the same step as a map beat: it still gets the room */
     if (videoWrap.classList.contains('on') && records.some(function(r){ return r.target === videoWrap; }))
       pendingExpand = true;
     return;
   }
-  /* settle before expanding, so a panel switched on just before the next map
-     beat never flickers open; steady activity does not keep postponing it */
   if (expandTimer) return;
   expandTimer = setTimeout(function(){
     expandTimer = 0;
@@ -5901,16 +5639,11 @@ btnFocus.addEventListener('click', function(){
 });
 narrowLayout.addEventListener('change', function(){ if (narrowLayout.matches) setExpanded(false); });
 
-/* =======================================================================
-   9. GO
-   ===================================================================== */
 requestAnimationFrame(() => {
   reset();
   setTimeout(startAll, 500);
 });
 
-/* Read-only view of the playhead for the guide captions script at the end of
-   the page. It reads the same counters playheadNow() does, and changes nothing. */
 window.__walkthrough = {
   timeline: TIMELINE,
   stageColour: STAGE_COL,
@@ -5923,11 +5656,6 @@ window.__walkthrough = {
             : phase === 'F' ? fIdx : phase === 'G' ? gIdx : hIdx;
     return { phase: phase, k: k };
   },
-  /* The same position, read from the step counters alone. A jump from the
-     timeline replays every step up to the target without updating `phase`,
-     so position() says 'idle' throughout a replay; the counters do not.
-     Each phase's counter only moves while that phase runs, so the latest one
-     that has moved says where the playhead is. */
   cursor: function(){
     if (hIdx > 0) return { phase: 'H', k: hIdx };
     if (gIdx > 0) return { phase: 'G', k: gIdx };
@@ -5943,16 +5671,6 @@ window.__walkthrough = {
 })();
 </script>
 <script>
-/* Guide captions. Cues come from captions.json and are keyed to the
-   walkthrough's own steps (phase:step), not to seconds - so they stay in step
-   at any speed, after a scrub, and after a jump from the timeline. The caption
-   shows in the panel under the class tags, so only in the normal layout: while
-   the lower row is expanded that panel is out of sight, and so is the caption.
-   A caption stays up until the next cue that says something, or until the
-   walkthrough moves into another module - a stage or an agent on the
-   timeline - where the card goes blank until that module's first caption.
-   Blank cues change nothing on their own.
-   Open the page with ?author to see the live position while writing cues. */
 (function(){
   const box = document.getElementById('guide');
   const W = window.__walkthrough;
@@ -5981,8 +5699,6 @@ window.__walkthrough = {
     return posOf(at.phase, at.k);
   }
 
-  /* the last caption that says something - unless a module has begun since
-     it appeared, in which case that caption belongs to the module before */
   function pick(){
     const at = now();
     if (at < 0) return intro;
@@ -5993,7 +5709,6 @@ window.__walkthrough = {
     return last;
   }
 
-  /* what the card should say for a cue - or for the blank between modules */
   function view(c){
     if (c === BLANK){
       const at = W.position();
@@ -6009,13 +5724,12 @@ window.__walkthrough = {
   function apply(v){
     const title = box.querySelector('[data-g-title]');
     title.textContent = v.title;
-    title.hidden = !v.title.trim();              /* a cue may be text alone */
+    title.hidden = !v.title.trim();
     box.querySelector('[data-g-text]').textContent = v.text;
     const st = box.querySelector('[data-g-stage]');
     st.textContent = v.stage ? 'Stage ' + v.stage : 'Guide';
     st.style.setProperty('--gc', v.stage ? W.stageColour[v.stage] : '#94A3B8');
     box.querySelector('[data-g-count]').textContent = v.count;
-    /* nothing to say: the whole card goes blank, keeping its size */
     box.classList.toggle('is-blank', v.blank);
   }
 
@@ -6026,18 +5740,16 @@ window.__walkthrough = {
     if (!c){ box.hidden = true; shownKey = undefined; return; }
     box.hidden = false;
     const v = view(c);
-    /* compare the words, not the cue: a caption that carries on - or a new cue
-       with the same words - leaves the card exactly as it is */
     const key = v.blank ? 'blank' : [v.stage, v.title, v.text].join('\u0001');
     if (key === shownKey) return;
     const first = shownKey === undefined;
     shownKey = key;
     if (first){ apply(v); return; }
-    box.classList.add('is-swapping');            /* fade the old words out ... */
+    box.classList.add('is-swapping');
     clearTimeout(swapT);
     swapT = setTimeout(function(){
-      apply(v);                                  /* ... swap them ... */
-      box.classList.remove('is-swapping');       /* ... and fade the new ones in */
+      apply(v);
+      box.classList.remove('is-swapping');
     }, 200);
   }
 
@@ -6054,8 +5766,6 @@ window.__walkthrough = {
     .then(r => r.json())
     .then(d => {
       intro = d.intro ? Object.assign({}, d.intro, { stage: null }) : null;
-      /* cues may be grouped by stage for editing; the grouping is only for
-         finding them - where a cue shows is set by its position alone */
       const all = (d.stages || []).reduce((a, g) => a.concat(g.cues || []), []).concat(d.cues || []);
       const cues = all.map(c => {
         const r = resolve(c.at);
@@ -6063,9 +5773,7 @@ window.__walkthrough = {
         const k = r.k + (+c.offset || 0);
         return Object.assign({}, c, { p: r.p, k: k, pos: posOf(r.p, k), stage: stageOf(r.p) });
       }).filter(Boolean).sort((a, b) => a.pos - b.pos);
-      /* blank cues carry nothing: only the ones that say something are shown */
       said = cues.filter(c => !blank(c));
-      /* modules are the stages and agents marked on the timeline */
       bounds = W.timeline.filter(c => c.tier === 'stage' || c.tier === 'agent')
                          .map(c => posOf(c.p, c.k)).sort((a, b) => a - b);
       tick();
@@ -6075,10 +5783,6 @@ window.__walkthrough = {
 })();
 </script>
 <script>
-/* The split between the two rows. Drag it to give the lower panels as much of
-   the walkthrough as you like - all of it, if you drag it to the top; the
-   arrow keys nudge it; double-click puts it back. Dragging takes the layout
-   off auto-expand, which would otherwise snap it back at the next step. */
 (function(){
   const main = document.querySelector('main');
   const top = document.querySelector('.row-top');
@@ -6095,17 +5799,15 @@ window.__walkthrough = {
   grip.title = 'Drag to resize the panels · double-click to reset';
   bottom.appendChild(grip);
 
-  const MIN_BOTTOM = 44;              /* keep the lower row's headers in reach */
+  const MIN_BOTTOM = 44;
   let startY = 0, startH = 0, dragging = false, raf = 0;
 
   const maxTop = () => Math.max(0, main.getBoundingClientRect().height - MIN_BOTTOM);
   function setTop(h){
     main.style.setProperty('--top-user', Math.round(Math.max(0, Math.min(maxTop(), h))) + 'px');
-    /* the map and canvas size themselves on resize; tell them, once a frame */
     if (!raf) raf = requestAnimationFrame(function(){ raf = 0; window.dispatchEvent(new Event('resize')); });
   }
   function takeOver(){
-    /* freeze where the rows are now, then drop auto-expand so it stays put */
     main.classList.add('dragging');
     const h = top.getBoundingClientRect().height;
     main.style.setProperty('--top-user', Math.round(h) + 'px');
@@ -6147,15 +5849,12 @@ window.__walkthrough = {
     main.classList.remove('dragging');
     if (e.key === 'ArrowUp') setTop(h - step);
     else if (e.key === 'ArrowDown') setTop(h + step);
-    else if (e.key === 'Home') setTop(0);           /* lower panels: full screen */
+    else if (e.key === 'Home') setTop(0);
     else setTop(maxTop());
   });
 })();
 </script>
 <script>
-  /* Pipeline intermediates are shown to explain the method. Refuse copy, cut,
-     drag and the context menu over the code pane. A deterrent, not protection:
-     the text still reaches the browser. */
   (function () {
     var pane = document.getElementById('code');
     if (!pane) return;

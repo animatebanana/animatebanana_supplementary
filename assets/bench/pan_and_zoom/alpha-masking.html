@@ -5,83 +5,51 @@
       <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#000000"/>
     </marker>
     <style>
-      /* =========================================
-         LAYER 1: CINEMATIC CAMERA RIG (PAN & ZOOM)
-         Pacing: 36s total (18 distinct steps * 2.0s)
-         Safe Viewport: 960x405 (Top 405px, leaving 75px for banner)
-         Center = X:480, Y:202.5
-         Logic: Camera PANS (0.5s), ARRIVES. 
-         Camera HOLDS perfectly still while element colors up.
-         ========================================= */
       #camera_rig {
         transform-origin: 0 0;
         animation: cameraPan 36s ease-in-out infinite;
       }
 
       @keyframes cameraPan {
-        /* Start Global View */
         0% { transform: translate(0px, 0px) scale(1); }
         
-        /* TS1 (0-2s): INPUT BLOCK */
         1.38%, 5.55% { transform: translate(336px, 31.5px) scale(1.2); }
         
-        /* TS2 (2-4s): RASTERS */
         6.94%, 11.11% { transform: translate(314px, -13px) scale(1.4); }
         
-        /* TS3 (4-6s): STEP 1 OVERVIEW (Macro Reset) */
         12.50%, 16.66% { transform: translate(-180px, 54px) scale(1.1); }
         
-        /* TS4 (6-8s): SUPERPOINT & HISTOGRAM */
         18.05%, 22.22% { transform: translate(-224px, -72.5px) scale(2.2); }
         
-        /* TS5 (8-10s): PIVOT VIEW */
         23.61%, 27.77% { transform: translate(-595px, -228.7px) scale(2.5); }
         
-        /* TS6 (10-12s): SAM 2 SEGMENTATION */
         29.16%, 33.33% { transform: translate(-595px, -2.5px) scale(2.5); }
         
-        /* TS7 (12-14s): 2D MASK PIVOT */
         34.72%, 38.88% { transform: translate(-907.5px, -3.7px) scale(2.5); }
         
-        /* TS8 (14-16s): SAM 2 TRACK & CUES */
         40.27%, 44.44% { transform: translate(-1220px, 18.7px) scale(2.5); }
         
-        /* TS9 (16-18s): BIDIRECTIONAL MASK */
         45.83%, 50.00% { transform: translate(-700px, -5.5px) scale(1.6); }
         
-        /* TS10 (18-20s): STEP 2 OVERVIEW (Macro Reset) */
         51.38%, 55.55% { transform: translate(-240px, -244.5px) scale(1.2); }
         
-        /* TS11 (20-22s): LIFTING */
         56.94%, 61.11% { transform: translate(-1720px, -716.2px) scale(2.5); }
         
-        /* TS12 (22-24s): REFINING */
         62.50%, 66.66% { transform: translate(-1282.5px, -716.2px) scale(2.5); }
         
-        /* TS13 (24-26s): FINAL 3D PROPOSAL */
         68.05%, 72.22% { transform: translate(-882.5px, -716.2px) scale(2.5); }
         
-        /* TS14 (26-28s): CLASS AGNOSTIC */
         73.61%, 77.77% { transform: translate(-181.5px, -504px) scale(1.8); }
         
-        /* TS15 (28-30s): OUTPUT OVERVIEW */
         79.16%, 83.33% { transform: translate(288px, -413.5px) scale(1.6); }
         
-        /* TS16 (30-32s): OUTPUT EDGE TRANSITION */
         84.72%, 88.88% { transform: translate(288px, -413.5px) scale(1.6); }
         
-        /* TS17 (32-34s): OPEN VOCAB & LABELS */
         90.27%, 94.44% { transform: translate(264px, -526.5px) scale(1.8); }
         
-        /* TS18 (34-36s): GRAND FINALE (Global Zoom Out & Hold) */
         95.83%, 100% { transform: translate(0px, 0px) scale(1); }
       }
 
-      /* =========================================
-         LAYER 2: COLOUR POP BASE
-         Logic: The fade triggers ONLY AFTER the camera has completely arrived.
-         It takes 0.5s to color pop, leaving 1.0s of steady reading time before the next pan.
-         ========================================= */
       #block_input, #raster_3d_point_cloud, #raster_rgb_images, #raster_depth_images, #block_step1, #raster_superpoint, #raster_histogram, #edge_3d_to_superpoint, #edge_rgb_to_histogram, #edge_depth_to_histogram, #raster_pivot_view, #edge_histogram_to_pivot, #node_sam2_seg, #edge_superpoint_to_sam2, #edge_pivot_to_sam2, #raster_2d_mask_pivot, #edge_sam2_to_mask, #node_sam2_track, #text_3d_cues, #edge_mask_to_track, #edge_cues_to_track, #raster_bidirectional, #raster_2d_mask_track, #edge_track_to_bidirectional, #edge_track_to_sequence, #block_step2, #node_lifting, #edge_sequence_to_lifting, #node_refining, #edge_lifting_to_refining, #raster_final_3d_proposal, #edge_refining_to_proposal, #raster_class_agnostic, #edge_proposal_to_agnostic, #block_output, #edge_agnostic_to_output, #node_open_vocab, #node_open_ended, #node_clip, #node_llm, #node_output_labels {
         filter: grayscale(100%) opacity(0.4);
         animation-duration: 36s;
@@ -125,15 +93,10 @@
       #edge_agnostic_to_output { animation-name: cp16; }
       #node_open_vocab, #node_open_ended, #node_clip, #node_llm, #node_output_labels { animation-name: cp17; }
 
-      /* =========================================
-         LAYER 3: NARRATION BANNER VISIBILITY TIMING
-         ========================================= */
     </style>
   </defs>
 
-  <!-- ==================== BLOCK: CAMERA RIG ==================== -->
   <g id="camera_rig">
-    <!-- INPUT -->
     <g id="block_input" data-id="block_input" data-class="block" data-parent="root">
       <rect x="5" y="5" width="230" height="275" rx="15" fill="#F2F2F2" stroke="#7F7F7F" stroke-width="2"/>
       <text x="120" y="25" font-family="Arial" font-size="16" font-weight="bold" fill="#000" text-anchor="middle">INPUT</text>
@@ -161,7 +124,6 @@
       </g>
     </g>
 
-    <!-- STEP 1 -->
     <g id="block_step1" data-id="block_step1" data-class="block" data-parent="root">
       <rect x="245" y="5" width="710" height="260" rx="20" fill="#FDF3CD" stroke="#EBC360" stroke-width="2"/>
       <text x="260" y="28" font-family="Arial" font-size="16" font-weight="bold" fill="#000" text-anchor="start">Step 1: 3D-Aware 2D Mask Tracking</text>
@@ -232,7 +194,6 @@
       </g>
     </g>
 
-    <!-- STEP 2 -->
     <g id="block_step2" data-id="block_step2" data-class="block" data-parent="root">
       <rect x="245" y="270" width="710" height="205" rx="20" fill="#E2F0D9" stroke="#70AD47" stroke-width="2"/>
       <text x="260" y="292" font-family="Arial" font-size="16" font-weight="bold" fill="#000" text-anchor="start">Step 2: 3D Proposal Refinement Via Mask Optimization</text>
@@ -267,7 +228,6 @@
       </g>
     </g>
 
-    <!-- OUTPUT -->
     <g id="block_output" data-id="block_output" data-class="block" data-parent="root">
       <rect x="5" y="295" width="230" height="180" rx="15" fill="#F2F2F2" stroke="#7F7F7F" stroke-width="2"/>
       <text x="120" y="315" font-family="Arial" font-size="16" font-weight="bold" fill="#000" text-anchor="middle">OUTPUT</text>
@@ -295,7 +255,6 @@
       <text id="node_output_labels" data-id="node_output_labels" data-class="child_node" data-parent="block_output" x="120" y="455" font-family="Arial" font-size="14" font-weight="bold" fill="#000" text-anchor="middle">Table, TV, Desktop, Monitor, ...</text>
     </g>
 
-    <!-- EDGES -->
     <g>
       <path id="edge_3d_to_superpoint" data-id="edge_3d_to_superpoint" data-class="edge" data-source="raster_3d_point_cloud" data-target="raster_superpoint"
             d="M 222 85 L 264 82" fill="none" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)"/>
@@ -332,6 +291,5 @@
     </g>
   </g>
 
-  <!-- ==================== BLOCK: NARRATION BANNER ==================== -->
   
 </svg>

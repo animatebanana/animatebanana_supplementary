@@ -1,16 +1,4 @@
-/*
-  RICH ANNOTATIONS PER NARRATIVE pane — the green one.
 
-  A four-cell flow with ink arrows between, driven by `[data-stage]` on
-  `.ba-flow`: one attribute is the whole state machine, so a cell can
-  never be lit while the step before it is dark. Below it, the three
-  artifact buttons and the dialog they open.
-
-  Owns `.ba-*` only. Opening an asset fullscreen is the shared viewer's
-  job (`bench-lightbox.css`), not this file's.
-*/
-
-/* ---- Play button, in the pane's header bar ---- */
 .ba-play {
   display: inline-flex;
   align-items: center;
@@ -36,7 +24,6 @@
 
 .ba-cite { display: block; margin-top: 5px; font-size: var(--fs-xs); color: var(--ink-faint); }
 
-/* ---- Progress track ---- */
 .ba-track {
   display: flex;
   flex-wrap: wrap;
@@ -75,23 +62,8 @@
   opacity: 0.5;
 }
 
-/* ---- The flow ---- */
-/* Container queries, not media queries: in the page's two-up grid this
-   pane is ~700px wide on a 1560px screen, and a four-across flow there
-   squeezes a 1000x260 source figure down to a stamp. The pane measures
-   itself and folds to 2x2 — the four steps still read in order, and
-   every cell doubles in width. */
 .ba-body { container-type: inline-size; container-name: ba; }
 
-/* ---- Fixed geometry ----
-   Every cell is the same three rows — label, media, caption — at the
-   same heights, whatever is inside them. The media box does NOT size
-   itself to its content: a 4:1 strip, a 3-row thumbnail grid and a
-   paper skeleton all occupy exactly `--ba-body-h`, so switching
-   examples, loading a clip or folding the flow never moves a box or
-   shifts an arrow. The arrows are pinned to the middle of the media row
-   by the same tokens rather than centred on whatever the tallest cell
-   turned out to be. */
 .ba-flow {
   --ba-head-h: 26px;
   --ba-body-h: clamp(190px, 15.5vw, 244px);
@@ -119,8 +91,6 @@
   margin: 0;
   min-width: 0;
   display: grid;
-  /* The caption row exists in every cell, occupied or not — that is what
-     keeps the four the same height without anything measuring anything. */
   grid-template-rows: var(--ba-head-h) var(--ba-body-h) var(--ba-cap-h);
   opacity: 0.32;
   filter: saturate(0.2);
@@ -163,10 +133,6 @@
   height: 100%;
   min-height: 0;
   display: grid;
-  /* One cell pinned to the frame. Auto-sized tracks make the
-     `height: 100%` on the media below resolve against its own content,
-     which is no constraint at all — the figure then grows past the
-     frame and `overflow: hidden` takes a bite out of it. */
   grid-template: minmax(0, 1fr) / minmax(0, 1fr);
   place-items: stretch;
   align-content: stretch;
@@ -175,9 +141,6 @@
   border-color: var(--ink);
 }
 
-/* Arrows between cells */
-/* Pinned to the middle of the media row, not to the middle of the tallest
-   cell — so the arrow sits at the same height on every row, always. */
 .ba-arrow {
   align-self: start;
   height: calc(var(--ba-head-h) + var(--ba-body-h));
@@ -204,7 +167,6 @@
 .ba-flow[data-stage='4'] .ba-arrow i::after,
 .ba-flow[data-stage='3'] .ba-arrow i::after { border-left-color: var(--a); }
 
-/* 1 · input */
 .ba-input-img {
   width: 100%;
   height: 100%;
@@ -221,7 +183,6 @@
 .ba-skel { position: absolute; inset: 8px; border-color: var(--a-line); background-color: var(--a-soft); transition: opacity var(--dur) var(--ease-out); }
 .ba-skel .bx-skel-tag { border-color: var(--a-line); color: var(--a); }
 
-/* 2 · the frame deal */
 .ba-seq-skel { transition: opacity var(--dur) var(--ease-out); }
 .ba-flow[data-stage='2'] .ba-seq-skel,
 .ba-flow[data-stage='3'] .ba-seq-skel,
@@ -233,8 +194,6 @@
 .ba-frames {
   list-style: none;
   margin: 0;
-  /* Enough that the live frame's 1.06 lift is absorbed by the padding
-     rather than by the scroll edge. */
   padding: 9px;
   width: 100%;
   height: 100%;
@@ -244,7 +203,6 @@
   gap: 6px;
   align-content: start;
 }
-/* Below its own fold the cell is narrower than four legible thumbs. */
 @container ba (max-width: 620px) {
   .ba-frames { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
@@ -260,14 +218,6 @@
   border-radius: 5px;
   cursor: pointer;
   opacity: 0;
-  /* The deal-in is an ANIMATION and the highlight is a TRANSITION, on
-     different properties, because they are different things happening at
-     different times. When both lived on `transition`, the per-frame
-     stagger (`--i * 55ms`) delayed the highlight too — so on beat 8 the
-     ring took half a second to arrive and two frames read as live at
-     once. `transform` belongs to the deal; the independent `scale`
-     property belongs to the highlight, and the two compose without
-     either overriding the other. */
   scale: 1;
   transform: translateY(10px) rotate(-2deg);
   transition: scale 190ms var(--ease-spring),
@@ -285,10 +235,6 @@
   from { opacity: 0; transform: translateY(10px) rotate(-2deg); }
   to { opacity: 1; transform: none; }
 }
-/* Contained, not cropped. `cover` filled the tile by cutting the figure
-   down to its top-left corner, so a beat that lights up on the right of
-   the diagram showed nothing at all. The tile is white, so a figure
-   that does not match 16:10 simply sits smaller inside it. */
 .ba-frame img {
   width: 100%;
   height: 100%;
@@ -307,14 +253,6 @@
   background: rgba(255, 255, 255, 0.88);
   color: var(--ink-soft);
 }
-/* The live beat has to be unmistakable.
-   A thin dark box around a 56px thumbnail reads as "a frame", not as
-   "THIS frame": at that size the border is most of what you can see, so
-   changing its colour changes almost nothing. Instead the live one lifts
-   out of the grid — scaled up, ringed in banana against ink, with its
-   number badge inverted — and every other frame is dimmed and
-   desaturated behind it. Motion plus contrast plus size, not one of the
-   three. */
 .ba-frame.is-seen { border-color: var(--a-line); }
 .ba-frame:hover { border-color: var(--a); }
 
@@ -323,10 +261,6 @@
 .ba-flow[data-stage='4'] .ba-frame:not(.is-on) { filter: opacity(0.55) saturate(0.6); }
 .ba-frame:not(.is-on):hover { filter: none; }
 
-/* Scoped to the revealed states on purpose: `.is-on` is set the moment a
-   beat is scrubbed, and at stage 0 every other frame is still at
-   opacity 0 — so an unscoped rule left exactly one frame floating,
-   scaled up, in an otherwise empty cell before Play was ever pressed. */
 .ba-flow[data-stage='2'] .ba-frame.is-on,
 .ba-flow[data-stage='3'] .ba-frame.is-on,
 .ba-flow[data-stage='4'] .ba-frame.is-on {
@@ -334,11 +268,6 @@
   filter: none;
   border-color: var(--ink);
   border-width: 2px;
-  /* The ring is drawn INSIDE the frame. An outset ring on a thumbnail
-     inside a scroll container is clipped the moment the live beat lands
-     in an edge column — which is most of the time on a 4-wide grid — so
-     the highlight would come and go depending on where in the sequence
-     you were. Inset, it is identical in every cell. */
   box-shadow:
     inset 0 0 0 3px var(--banana),
     inset 0 0 0 4.5px rgba(26, 24, 21, 0.22);
@@ -351,7 +280,6 @@
   color: var(--banana);
   font-weight: 800;
 }
-/* A corner tick, so the live frame is findable even in a screenshot. */
 .ba-flow[data-stage='2'] .ba-frame.is-on::after,
 .ba-flow[data-stage='3'] .ba-frame.is-on::after,
 .ba-flow[data-stage='4'] .ba-frame.is-on::after {
@@ -364,14 +292,6 @@
   border: 1.5px solid var(--ink);
 }
 
-/* 3 · narration */
-/* Rows, not padding: the text needs a bounded region of its own to
-   scroll inside. With the sheet's height fixed, a long beat used to run
-   straight under the waveform and out of the box. */
-/* The narration cell stretches its child rather than centring it:
-   `align-content: center` on the body would content-size the row, and a
-   `height: 100%` sheet inside a content-sized row resolves to auto — so
-   the sheet sat short and floating in the middle of its cell. */
 .ba-narr .ba-cell-body { place-items: stretch; align-content: stretch; }
 
 .ba-narr-sheet {
@@ -399,14 +319,6 @@
   background: var(--a);
   color: #fff;
 }
-/* THE WHOLE LINE, ALWAYS.
-   A beat's narration runs from eight words to thirty, and the sheet is
-   a fixed height because the pane must not grow as the run plays. The
-   long ones used to scroll — which in practice meant they were cut off,
-   since nobody scrolls a box that is retyping itself. So the type size
-   shrinks to fit instead (`--ba-narr-fs`, set by panel-annotations.js
-   once the full text is in), down to a floor that is still comfortably
-   readable. Nothing is ever hidden; a long beat is simply set smaller. */
 .ba-narr-text {
   margin: 0;
   min-height: 0;
@@ -445,10 +357,6 @@
 }
 @keyframes ba-wave { 0%, 100% { height: 22%; } 50% { height: 100%; } }
 
-/* 4 · the finished narrative */
-/* Sized explicitly rather than left to the element's intrinsic size: a
-   <video> reports 300x150 until its metadata arrives, which would make
-   the cell jump the moment the clip loaded. */
 .ba-video {
   width: 100%;
   height: 100%;
@@ -463,10 +371,6 @@
 .ba-out.is-loaded .ba-skel { opacity: 0; }
 .ba-out.is-loaded .ba-cell-body { background-image: none; background-color: #fff; }
 
-/* The narration, under the clip it belongs to.
-   Tracks the playhead once the clip runs (`vt` per beat in the data
-   file); before that it mirrors whichever beat is scrubbed. Two lines
-   deep and reserved, so a long line never shifts the row. */
 .ba-out-cap {
   display: flex;
   gap: 8px;
@@ -490,7 +394,6 @@
 .ba-out-cap-t:empty { display: none; }
 .ba-out-cap-x { display: block; }
 
-/* ---- Additional artifacts ---- */
 .ba-artifacts { margin-top: clamp(16px, 2vw, 24px); padding-top: 16px; border-top: 2px dashed var(--a-line); }
 .ba-artifacts-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
 .ba-artifacts-head .hand {
@@ -540,21 +443,8 @@
   .ba-narr-wave i, .ba-narr-text::after { animation: none; }
 }
 
-/* The narration under the clip is as long as the pipeline's own sentences get,
-   which is longer than the cell below it. `max-height: 100%` let it run past
-   the pane's edge and be cut mid-line; an exact multiple of the line height
-   stops it on a line instead, and it still scrolls to the rest. */
 .ba-out-cap { max-height: 6em; }
 
-/* ---- A MEDIA FRAME IS WHITE PAPER, NOT DOTTED PAPER ----
-   `.frame-paper` gives every framed slot the site's dotted ground, which is
-   right for an empty slot: it reads as paper waiting for something. Once a
-   figure is in it the dots are the only thing behind a letterboxed image, and
-   a diagram sitting in a field of dots looks like it failed to load rather
-   than like it is being shown whole. Each pane used to switch the dots off
-   per state, which meant every new state had to remember to. These slots are
-   simply white, always. The empty state keeps its own labelled skeleton on
-   top, so nothing is lost by it. */
 .ba-cell-body {
   background-image: none;
   background-color: #fff;

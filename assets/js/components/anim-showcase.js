@@ -1,23 +1,6 @@
 import { loadJSON } from '../lib/data-loader.js';
 import { wordmark } from '../lib/wordmark.js';
 
-/**
- * <anim-showcase src="data/showcase.json"></anim-showcase>
- *
- * A self-running loop through the sample library (built by
- * scripts/build_showcase.py), laid out left to right:
- *
- *   [ source diagram ] ─┐
- *                        ├─▶ [ engine chip ] ─▶ [ output animation ]
- *   [ animation style ] ─┘
- *
- * Styles take turns. For each turn a figure is taken from the queue, its
- * style lights up, the figure and a style tag travel into the engine's
- * input pins, the three modules on the engine's rail light up while the
- * frames preload, and the output window — lit in the style's colour —
- * plays the frames in sync with their narration. When a narrative ends
- * the next figure is taken automatically. Viewers only control playback.
- */
 const IMAGE_FLIGHT_MS = 2300;
 const STYLE_DELAY_MS = 1100;
 const STYLE_FLIGHT_MS = 2100;
@@ -55,7 +38,6 @@ const ICON = {
   close: stroke('<path d="M6 6l12 12M18 6L6 18"/>'),
 };
 
-/* Gear drawn like the chip icon: ink outline, white body, accent hub. */
 const GEAR = `<svg class="as-gear" viewBox="0 0 64 64" aria-hidden="true">
   <path class="as-gear-body" d="M27 4h10l1.6 7.2a21 21 0 0 1 5.5 2.3l6.2-4 7 7-4 6.2a21 21 0 0 1 2.3 5.5L63 29.8v10l-7.2 1.6a21 21 0 0 1-2.3 5.5l4 6.2-7 7-6.2-4a21 21 0 0 1-5.5 2.3L37 65.6H27l-1.6-7.2a21 21 0 0 1-5.5-2.3l-6.2 4-7-7 4-6.2a21 21 0 0 1-2.3-5.5L1 39.8v-10l7.4-1.6a21 21 0 0 1 2.3-5.5l-4-6.2 7-7 6.2 4a21 21 0 0 1 5.5-2.3z" transform="translate(0 -1) scale(1 .97)"/>
   <circle class="as-gear-hub" cx="32" cy="33" r="9.5"/>
@@ -106,7 +88,6 @@ class AnimShowcase extends HTMLElement {
     this.cachedSamples = [];
     this.reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // `first` names the sample the demo opens on; the rest cycle as usual.
     const opener = data.samples.find((x) => x.id === data.first);
     if (opener) this.queue.push(opener);
     this.fillQueue();
@@ -129,7 +110,6 @@ class AnimShowcase extends HTMLElement {
     document.removeEventListener('fullscreenchange', this.onFullscreen);
   }
 
-  /* ------------------------------------------------------------ markup */
 
   renderShell() {
     this.innerHTML = `
@@ -278,7 +258,6 @@ class AnimShowcase extends HTMLElement {
     this.r.scrub.setAttribute('aria-valuemax', s.duration.toFixed(1));
   }
 
-  /* ------------------------------------------------------------ queue & flow */
 
   fillQueue() {
     while (this.queue.length < QUEUE_SIZE) {
@@ -428,7 +407,6 @@ class AnimShowcase extends HTMLElement {
     this.resume();
   }
 
-  /* ------------------------------------------------------------ playback */
 
   get speed() { return SPEEDS[this.speedIndex]; }
 
@@ -534,7 +512,6 @@ class AnimShowcase extends HTMLElement {
     this.r.scrub.setAttribute('aria-valuetext', `${fmt(t)} of ${fmt(s.duration)}`);
   }
 
-  /* ------------------------------------------------------------ source & style */
 
   showSource(sample) {
     const view = this.r.sourceView;
@@ -601,7 +578,6 @@ class AnimShowcase extends HTMLElement {
     this.placeNotes();
   }
 
-  /* ------------------------------------------------------------ wires, packets, notes */
 
   drawWires() {
     const svg = this.r.wires;
@@ -611,7 +587,6 @@ class AnimShowcase extends HTMLElement {
       const r = el.getBoundingClientRect();
       return { l: r.left - G.left, r: r.right - G.left, cy: r.top - G.top + r.height / 2 };
     };
-    // Pin terminals sit just beyond the outer end of each lead.
     const port = (name) => {
       const pin = this.r.engine.querySelector(`[data-port="${name}"]`);
       const r = pin.getBoundingClientRect();
@@ -668,12 +643,10 @@ class AnimShowcase extends HTMLElement {
       });
     }
     const anim = el.animate(keyframes, { duration, easing: 'cubic-bezier(.45,.05,.3,1)' });
-    // Animations stall in background tabs; never let the loop wait on one past its duration.
     const timeout = wait(duration + 150);
     return Promise.race([anim.finished.catch(() => {}), timeout]).then(() => el.remove());
   }
 
-  /** Hand-written labels under the playback buttons, each with a drawn arrow. */
   placeNotes() {
     const svg = this.r.noteArrows;
     const notes = [...this.r.notes.children];
@@ -723,7 +696,6 @@ class AnimShowcase extends HTMLElement {
     }).join('');
   }
 
-  /* ------------------------------------------------------------ events */
 
   bind() {
     this.addEventListener('click', (e) => {
@@ -749,7 +721,6 @@ class AnimShowcase extends HTMLElement {
       e.preventDefault();
       this.closeLightbox();
     });
-    // Any other way the dialog closes still resumes playback (idempotent).
     this.r.lightbox.addEventListener('close', () => this.closeLightbox());
 
     this.addEventListener('keydown', (e) => {

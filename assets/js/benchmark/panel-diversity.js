@@ -3,61 +3,6 @@ import {
 } from './bench-core.js';
 import { lightbox, zoomBadge } from './bench-lightbox.js';
 
-/**
- * <bench-diversity src="data/benchmark/diversity.json"></bench-diversity>
- *
- * NARRATIVE DIVERSITY — the figure's blue pane.
- *
- * Same two-column shape as the density pane so the two read as a pair
- * (controls on the left, a large stage on the right), with one deliberate
- * difference: **no numbers anywhere**. The
- * benchmark reports no distribution over these axes, so the right-hand
- * column lists variants with a qualitative hint and nothing else — no
- * percentages, no counts, no bars. Whatever is written in the data file
- * is what appears; the component computes no statistics.
- *
- * The centre is a video stage rather than a still. A variant carrying a
- * clip plays it, muted and looping; one carrying only a poster shows
- * the real final frame; one carrying neither keeps its paper skeleton.
- * Nothing is requested until the pane is on screen, and only the
- * selected variant ever holds a decoder (see MediaSlot).
- *
- * THE STAGE IS NOT A BUTTON HERE. In the other panes the media is a still and
- * clicking it to open it larger is the only thing a click could mean. This one
- * is a running clip with its own controls, and making the whole frame a zoom
- * target meant every click anywhere, the play badge included, threw the viewer
- * open. So fullscreen lives on the magnifier in the corner and nowhere else,
- * and because it is now the only way in, it stays visible rather than fading
- * up on hover.
- *
- * PAN AND ZOOM IS NOT A SIXTH STYLE. It is Layer 2: a camera move that
- * composes on top of whichever Layer 1 style is selected, so it is a toggle
- * and not a tab, and it cannot be reached without a base style under it. The
- * animation it plays is the rendered SVG itself rather than a clip — one per
- * base style, listed in pan-and-zoom.json — and a base style with no pan and
- * zoom render yet disables the toggle and says so instead of offering it.
- *
- * ITS NARRATION IS DATA, NOT PAINT. The renders arrive with the narration
- * drawn into the picture, where it is unreadable at pane size; the build
- * script lifts it out into timed lines and the page shows one at a time in
- * the panel under the animation.
- *
- * AND ON NARRATION LENGTH, THE NARRATION SHOWS. An axis about how much is said
- * per step cannot be demonstrated by a side label reading "a sentence per
- * step": the narration itself is the difference, so each variant carries its
- * own lines timed to its own clip and the line being spoken sits under the
- * stage, following the playhead. The other axes have nothing to read, which is
- * why their clips run at 4x and this one runs at 1x.
- *
- * WHICH MEANS IT NEEDS A WAY THROUGH. The Maximum variant is eighty seconds
- * long and its point is made in the first two lines; reading the ninth by
- * waiting for it is not reading it. So the narration comes with a step
- * control: prev/next, the position, and a tick per step you can click
- * straight to. Stepping seeks the clip and pauses it, because someone moving
- * by hand is reading, not watching, and a clip that keeps rolling would carry
- * them off the line they just chose. The play button in the same row gives the
- * clip back. Arrow keys work anywhere in the row.
- */
 
 class BenchDiversity extends HTMLElement {
   async connectedCallback() {
@@ -81,7 +26,6 @@ class BenchDiversity extends HTMLElement {
       this._paintStage();
     }, { rootMargin: '220px' });
 
-    // Playback follows visibility: scrolled away or tab hidden, nothing runs.
     this._vis = new IntersectionObserver(
       ([e]) => (e.isIntersecting && !document.hidden ? this.media.play() : this.media.pause()),
       { threshold: 0.15 }
@@ -192,8 +136,6 @@ class BenchDiversity extends HTMLElement {
       video: this.video,
     });
 
-    // One listener for the life of the pane; which variant it is painting for
-    // is read off `this._steps`, so switching variants never stacks another.
     this.video.addEventListener('timeupdate', () => this._paintLine());
     for (const ev of ['play', 'pause', 'ended']) {
       this.video.addEventListener(ev, () => this._paintRun());
@@ -218,8 +160,6 @@ class BenchDiversity extends HTMLElement {
     });
     this.list.addEventListener('keydown', (e) => this._listKeys(e));
 
-    // Only the magnifier. A click on the frame, the poster or the play badge
-    // is a click on a playing clip and should do nothing to the page.
     this.querySelector('.bv-zoom').addEventListener('click', () => this._expand());
 
     this._setCategory(0);
@@ -253,13 +193,6 @@ class BenchDiversity extends HTMLElement {
       axis.querySelector('.bv-axis-to').textContent = c.axis.to;
     }
 
-    // A layered category (the five base styles plus the Layer 2 camera
-    // move) is grouped rather than flat, because "Pan and Zoom" is not a
-    // sixth sibling — it composes on top of any of the five.
-    //
-    // Each group is introduced by the one sentence that belongs to it: what
-    // the base styles do, over the base styles; what Layer 2 does, over Layer
-    // 2. The rail's blurb would only say one of them twice, so it stands down.
     const layered = !!c.layered;
     const head = this.querySelector('.bv-variants-head');
     head.textContent = layered ? c.blurb || 'Layer 1' : 'Variants';
@@ -279,7 +212,6 @@ class BenchDiversity extends HTMLElement {
         </button>
       </li>`;
 
-    // Layer 2 is a switch, not a tab: it says "and also", never "instead of".
     const toggle = (v) => `
       <li role="presentation">
         <button type="button" role="switch" aria-checked="false" data-compose="1"
@@ -312,25 +244,22 @@ class BenchDiversity extends HTMLElement {
     this._setVariant(0);
   }
 
-  /** The Layer 2 renders, one per base style. Fetched once, on first sight. */
   async _loadCompose(v) {
     this._composeVar = v;
     if (this._pz || !v?.src) return;
     try {
       this._pz = await loadJSON(v.src);
     } catch {
-      this._pz = { styles: {} };        // the toggle then stays disabled
+      this._pz = { styles: {} };
     }
     this._paintCompose();
   }
 
-  /** The animation for the selected base style, if one has been rendered. */
   _embed() {
     const v = this.category.variants[this.vIndex];
     return (v && this._pz?.styles?.[v.id]) || null;
   }
 
-  /** The switch: on, off, or unavailable for this base style. */
   _paintCompose() {
     const btn = this.list.querySelector('button[data-compose]');
     if (!btn) return;
@@ -341,7 +270,7 @@ class BenchDiversity extends HTMLElement {
     btn.setAttribute('aria-checked', String(this.compose && !!em));
     btn.querySelector('.bv-compose-hint').textContent = em
       ? `on ${base?.label || 'the selected style'}`
-      : `no render on ${base?.label || 'this style'} yet`;
+      : '';
   }
 
   _setCompose(on) {
@@ -359,10 +288,6 @@ class BenchDiversity extends HTMLElement {
       b.setAttribute('aria-selected', String(on));
       b.tabIndex = on ? 0 : -1;
     });
-    // Layer 2 stays on across a change of base style where it can, since the
-    // point of it is to be composed with one style after another; where the
-    // new base style has no render it drops away rather than showing another
-    // style's camera work under this one's name.
     if (this.compose && !this._embed()) this.compose = false;
     this._paintCompose();
     this._paintStage();
@@ -386,16 +311,8 @@ class BenchDiversity extends HTMLElement {
         this.querySelector('.bx-skel-tag').textContent = `${c.label} · ${v.label}`;
         this.querySelector('.bx-skel-note').textContent =
           v.caption || 'No clip in the media set yet.';
-        // A base style is watched, not read about: the clip shows what the
-        // style does and a sentence under it only says the same thing again.
-        // The slot is kept for Layer 2, whose narration does belong there.
         this.cap.textContent = '';
         this.cap.hidden = true;
-        // The clip first: MediaSlot.show() calls load(), and load() is what
-        // returns currentTime to zero. Arming the steps before it meant the
-        // outgoing clip's playhead was still standing when the first
-        // `timeupdate` landed, so a variant opened on step 02 of the one
-        // before it.
         this.media.show({
           key: `${c.id}/${v.id}`,
           poster: v.poster,
@@ -409,14 +326,6 @@ class BenchDiversity extends HTMLElement {
     );
   }
 
-  /**
-   * Play the Layer 2 animation for the selected base style.
-   *
-   * It is an SVG document with its own CSS animation, so it goes in an iframe
-   * of its own: no styles of ours reach into it, none of its ids reach out,
-   * and reloading it is what restarts the loop from the top. Its narration
-   * was lifted out at build time and runs underneath, one line at a time.
-   */
   _showEmbed(c, v) {
     const em = this._embed();
     if (!em) return;
@@ -454,31 +363,15 @@ class BenchDiversity extends HTMLElement {
     this.cap.classList.remove('is-panel');
   }
 
-  /**
-   * The line the animation is on.
-   *
-   * The clip panes read a playhead; there is none here, so the loop's own
-   * position is read from the SVG's running animation where the browser will
-   * give it (exact, and it survives the tab being backgrounded), and from a
-   * wall clock where it will not.
-   */
   _startClock(em) {
     this._stopClock();
     const t0 = performance.now();
     let at = -1;
-    let cand = -1; // index waiting to be confirmed
-    let held = 0; // frames it has held for
-    let anim = null; // the latched animation clock
+    let cand = -1;
+    let held = 0;
+    let anim = null;
     let lastT = 0;
 
-    /* The clock has to be the SAME clock every frame. The embedded SVG's
-       animations all run in lockstep, so which one is picked does not
-       matter — but whether there is one does: `getAnimations()` comes back
-       empty while the document is loading and again whenever the run is
-       rebuilt, and the old code quietly fell back to the wall clock for
-       those frames. The two clocks have different phases, so every lapse
-       jumped the position and flipped the cue index. Latch an animation
-       once one exists and hold the last good position through any gap. */
     const readClock = () => {
       const dur = em.duration || 1;
       try {
@@ -491,9 +384,8 @@ class BenchDiversity extends HTMLElement {
           return lastT;
         }
       } catch {
-        /* the document is not readable yet */
       }
-      if (anim) return lastT; // hold the last good position rather than jump
+      if (anim) return lastT;
       lastT = ((performance.now() - t0) / 1000) % dur;
       return lastT;
     };
@@ -504,8 +396,6 @@ class BenchDiversity extends HTMLElement {
       em.cues.forEach((cue, i) => {
         if (t >= cue.start - 0.05) k = i;
       });
-      // One stray frame must not swap the caption: a new index has to hold
-      // for two frames running before it is committed.
       if (k === at) {
         cand = k;
         held = 0;
@@ -523,14 +413,6 @@ class BenchDiversity extends HTMLElement {
     this._raf = requestAnimationFrame(tick);
   }
 
-  /**
-   * Swap the caption to `text`, running at most one fade at a time.
-   *
-   * Comparing against what is already queued — not just against the DOM —
-   * is what keeps this stable: re-targeting the same text is a no-op, so a
-   * burst of cue changes can no longer cancel and restart the fade-out over
-   * and over and leave the caption sitting at opacity 0.
-   */
   _setCap(text) {
     if (this.cap.textContent === text) {
       this._capWant = text;
@@ -538,7 +420,7 @@ class BenchDiversity extends HTMLElement {
       this.cap.classList.remove('is-swap');
       return;
     }
-    if (this._capWant === text) return; // already fading toward it
+    if (this._capWant === text) return;
     this._capWant = text;
     this.cap.classList.add('is-swap');
     clearTimeout(this._capT);
@@ -556,26 +438,15 @@ class BenchDiversity extends HTMLElement {
     this.cap?.classList.remove('is-swap');
   }
 
-  /**
-   * Arm the narration line for a variant, or put it away.
-   *
-   * A variant with `beats` is one whose narration the page is showing; the
-   * line takes over the caption's slot for it, because a static sentence about
-   * the variant and the sentence being spoken in it cannot both live there.
-   */
   _setSteps(v) {
     this._steps = v?.beats?.length ? v.beats : null;
     this._lineAt = -1;
     this.narr.hidden = !this._steps;
-    // The caption slot belongs to Layer 2 now: a variant with narration shows
-    // it in the step rail instead, and a base style shows nothing there.
     this.cap.hidden = !!this._steps || !this.compose;
     if (!this._steps) {
       this.ticks.innerHTML = '';
       return;
     }
-    // One tick per step, wide enough to hit and narrow enough that twenty of
-    // them still read as a rail rather than as twenty buttons.
     this.ticks.innerHTML = this._steps
       .map(
         (b, i) => `<li><button type="button" class="bv-tick" data-i="${i}"
@@ -583,25 +454,16 @@ class BenchDiversity extends HTMLElement {
                      title="${esc(b.text)}"></button></li>`
       )
       .join('');
-    // Start this variant at its own first line. `load()` is supposed to return
-    // the playhead to zero, but it only does so once the load algorithm
-    // actually runs, and a `timeupdate` carrying the previous clip's position
-    // can land before then, which opened a variant partway into the one
-    // before it. Saying so outright costs nothing and cannot race.
     try {
       this.video.currentTime = 0;
     } catch {
-      /* no media to seek yet; the paint below still sets the line */
     }
     this._lineAt = -1;
     this._paintStep(0);
     this._paintRun();
   }
 
-  /** The line being spoken now, from the clip's own playhead. */
   _paintLine() {
-    // No source yet means no playhead worth reading: a `timeupdate` can still
-    // arrive from the clip being torn down.
     if (!this._steps || !this.video?.childElementCount) return;
     const t = this.video.currentTime;
     let at = 0;
@@ -611,7 +473,6 @@ class BenchDiversity extends HTMLElement {
     this._paintStep(at);
   }
 
-  /** Paint step `at` as the live one. Cheap and idempotent. */
   _paintStep(at) {
     if (!this._steps || at === this._lineAt) return;
     this._lineAt = at;
@@ -633,13 +494,6 @@ class BenchDiversity extends HTMLElement {
     this._goStep(Math.max(0, Math.min(this._steps.length - 1, this._lineAt + d)));
   }
 
-  /**
-   * Jump to a step.
-   *
-   * The clip is paused as well as seeked: moving by hand is reading, and a
-   * clip still rolling would take the reader off the line they just asked for
-   * within a second or two.
-   */
   _goStep(i) {
     const b = this._steps?.[i];
     if (!b || !this.video) return;
@@ -647,7 +501,6 @@ class BenchDiversity extends HTMLElement {
     try {
       this.video.currentTime = b.t;
     } catch {
-      /* metadata not in yet; the line below still moves */
     }
     this._paintStep(i);
   }
@@ -664,13 +517,6 @@ class BenchDiversity extends HTMLElement {
     if (b) b.setAttribute('aria-label', this.video?.paused ? 'Play' : 'Pause');
   }
 
-  /**
-   * The selected variant's clip, on its own.
-   *
-   * The variant list beside the stage is already the way to move between
-   * styles; adding prev/next inside the viewer would be a second, competing
-   * one. The viewer opens what was clicked, and closes back to the pane.
-   */
   _asset() {
     const c = this.category;
     const v = c.variants[this.vIndex];
@@ -709,7 +555,6 @@ class BenchDiversity extends HTMLElement {
         .filter(Boolean)
         .join(' · '),
       caption: v.caption,
-      // The times are the clip's own, so the viewer does not re-derive them.
       captionsFixed: !!v.beats?.length,
       captions: v.beats?.length
         ? v.beats.map((b, i) => ({

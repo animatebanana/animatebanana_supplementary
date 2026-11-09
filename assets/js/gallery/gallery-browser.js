@@ -1,27 +1,3 @@
-/**
- * <gallery-browser src="data/gallery/gallery_items.json"></gallery-browser>
- *
- * The full gallery on gallery.html. Style is the only axis it stratifies
- * by: a chip row over the five animation styles, then a full-bleed grid
- * of previews. Cards carry the style and nothing else — no titles, no
- * fields, no complexity — so the figures themselves are what you read.
- *
- * The chosen style is mirrored into the query string, so a filtered view
- * is shareable (the overview rail links straight into one) and the back
- * button walks the filter history.
- *
- * Cards are plain PNGs and nothing else — the source diagram as it was
- * published, not a frame of the animation. The animation is what the
- * fullscreen view is for, so the grid stays a sheet of figures you can scan
- * rather than a wall of competing motion.
- *
- * They load strictly on demand: nothing is requested until a card nears the
- * viewport, and nothing at all until the feed's `mediaReady` switch is on. A
- * card dispatches `galleryselect` rather than opening anything itself.
- *
- * Part of the self-contained gallery module (assets/{css,js}/gallery/,
- * data/gallery/); it owns no other component's files.
- */
 import { loadJSON } from '../lib/data-loader.js';
 import { onVisible } from '../lib/lazy-load.js';
 
@@ -73,7 +49,6 @@ class GalleryBrowser extends HTMLElement {
     this._observers = [];
   }
 
-  // ---- filter state --------------------------------------------------
 
   get filtered() {
     return this._style === ALL ? this._items : this._items.filter((it) => it.style === this._style);
@@ -96,7 +71,6 @@ class GalleryBrowser extends HTMLElement {
     history.pushState(null, '', query || location.pathname);
   }
 
-  // ---- rendering -----------------------------------------------------
 
   renderShell() {
     this.innerHTML = `
@@ -120,10 +94,6 @@ class GalleryBrowser extends HTMLElement {
     });
   }
 
-  /**
-   * Chips are built once and only re-synced — rebuilding their markup on
-   * every change would yank focus out of the chip just clicked.
-   */
   buildChips() {
     this._stylesRow.innerHTML = [ALL, ...this._styles.map((s) => s.label)]
       .map(
@@ -155,7 +125,6 @@ class GalleryBrowser extends HTMLElement {
     this._wirePreviews(cards);
   }
 
-  /** The card's image. `preview` is the pre-rename spelling; both are honoured. */
   thumbOf(item) {
     return item.thumb || item.preview || '';
   }
@@ -183,13 +152,6 @@ class GalleryBrowser extends HTMLElement {
       </article>`;
   }
 
-  /**
-   * One image per card, requested as that card nears the viewport — a
-   * 144-card grid therefore costs nothing above the fold and never
-   * fetches a preview nobody scrolled to. The whole mechanism stays
-   * dormant until the feed's `mediaReady` switch is on, which keeps the
-   * page 404-free while previews are still being produced.
-   */
   _wirePreviews(cards) {
     for (const item of cards) {
       if (!(this._mediaReady || item.ready === true) || !this.thumbOf(item)) continue;
@@ -199,7 +161,6 @@ class GalleryBrowser extends HTMLElement {
 
       img.addEventListener('load', () => { card.dataset.media = 'image'; });
       img.addEventListener('error', () => {
-        // Preview not produced yet — keep the paper skeleton, no retry.
         img.removeAttribute('src');
         card.dataset.media = 'skeleton';
       });

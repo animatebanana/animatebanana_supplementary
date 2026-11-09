@@ -1,29 +1,7 @@
-/*
-  Benchmark module — page shell, hero equation row, and the panel chrome
-  every pane shares.
-
-  Self-contained: this file and its four siblings own every `.bx-*`,
-  `.bh-*`, `.bs-*`, `.bd-*`, `.bv-*`, `.ba-*` and `.br-*` class on the
-  page.
-  Colour, type, spacing and motion all come from `tokens.css`; the
-  generic `.kicker`, `.hl`, `.btn`, `.chip`, `.hand`, `.sketch`,
-  `.frame-paper` and `.reveal` classes come from `base.css`. Nothing
-  here overrides another component.
-
-  The one thing it adds on top of the tokens is a set of FOUR PANE
-  ACCENTS, one per pane, mirroring the coloured header bars of the
-  figure this page reconstructs. They are deliberately deeper and more
-  saturated than the site's pastels — the pastels are categorical
-  confetti, these are wayfinding: at a glance you can tell which pane a
-  chip, a bar or a popup belongs to. Banana stays what it always was,
-  the single loud accent, and is reserved here for the top equation row
-  and for "you are looking at this one" states.
-*/
 
 .bx {
   --bx-ink: var(--ink);
 
-  /* Pane accents — deep enough to carry a white label. */
   --bx-density: #A4232F;   --bx-density-soft: #FBEEEF;   --bx-density-line: #E9C6C9;
   --bx-diversity: #1D4E79; --bx-diversity-soft: #EDF3F9; --bx-diversity-line: #C3D7E7;
   --bx-annot: #1E6B41;     --bx-annot-soft: #ECF7F0;     --bx-annot-line: #C3E2CF;
@@ -36,23 +14,11 @@
   padding-block: 0 clamp(48px, 6vw, 88px);
 }
 
-/* Per-pane accent binding: one class sets the three variables every
-   `.bx-*` rule reads, so a pane's chrome can never drift out of key. */
 .bx-pane[data-accent='density']   { --a: var(--bx-density);   --a-soft: var(--bx-density-soft);   --a-line: var(--bx-density-line); }
 .bx-pane[data-accent='diversity'] { --a: var(--bx-diversity); --a-soft: var(--bx-diversity-soft); --a-line: var(--bx-diversity-line); }
 .bx-pane[data-accent='annotations'] { --a: var(--bx-annot);   --a-soft: var(--bx-annot-soft);     --a-line: var(--bx-annot-line); }
 .bx-pane[data-accent='reference'] { --a: var(--bx-ref);       --a-soft: var(--bx-ref-soft);       --a-line: var(--bx-ref-line); }
 
-/* ============================================================ *
- *  Figure sources — <bench-sources>
- * ============================================================ *
-
-   The figure that opens the page, beside the four bodies of work it
-   names. Two columns on a wide screen, the text first; stacked below
-   900px, still text first, because the venues are readable as text and
-   the figure at page scale is not. The stage follows the same rule as
-   every other on this page: the picture is not a button, the magnifier
-   in its corner is. */
 
 .bs {
   display: grid;
@@ -137,10 +103,6 @@
   height: auto;
   border-radius: var(--radius-sm);
 }
-/* The magnifier is the only way into the full-resolution figure, so it is
-   always on screen rather than hover-revealed: the badge ships absolute,
-   invisible and click-through (it expects a `.bx-zoomable` parent), which
-   would collapse this button to 0x0. Same override the density pane uses. */
 .bs-zoom {
   position: absolute;
   top: 14px;
@@ -171,31 +133,6 @@
   .bs { grid-template-columns: minmax(0, 1fr); }
 }
 
-/* ============================================================ *
- *  The scale row — <bench-hero>
- * ============================================================ *
-
-   This is the page the AnimateBench band on the overview links to, and
-   the band is a wall of counted-up display numerals with drawn glyphs.
-   Arriving here used to be a step down: the same four numbers, set at
-   1rem in a thin dashed rule. So the row is built at the band's scale
-   and with the band's parts — same glyphs, same hatched numerals, same
-   count-up — and adds only what the band has no use for: the operators,
-   because here the numbers are one argument rather than four facts.
-
-   TWO RULES HOLD THE ROW TOGETHER.
-
-   One: every term stacks glyph / numeral / label in that order, and the
-   glyph slot is a FIXED height that the term without a drawing still
-   reserves. A reserved slot means the numerals share one baseline
-   whatever art any of them carries.
-
-   Two: human verification is the third term and carries no count — a
-   check mark sits in its numeral slot, at the numeral's own height, so
-   the row keeps its rhythm without inventing a number.
-
-   Sizes track the band's clamps deliberately. If the band's numerals
-   change, these should change with them. */
 
 .bh {
   position: relative;
@@ -205,9 +142,6 @@
   gap: clamp(14px, 1.8vw, 22px);
   margin-bottom: clamp(22px, 3vw, 40px);
   padding: clamp(16px, 2vw, 26px) clamp(14px, 2vw, 26px) clamp(20px, 2.4vw, 30px);
-  /* Banana is the page's single loud accent and this card is where it is
-     spent: a warm wash that lifts at the two corners, over the paper dots
-     the rest of the page is printed on. */
   background:
     radial-gradient(var(--dot) 1px, transparent 1.2px) 0 0 / 26px 26px,
     radial-gradient(120% 90% at 8% -20%, rgba(255, 212, 59, 0.5), transparent 60%),
@@ -218,9 +152,6 @@
   box-shadow: var(--shadow-hard);
   overflow: hidden;
 }
-/* A hatched disc tucked into the top-right corner, behind everything —
-   the same hatch the numerals are filled with, so the card reads as one
-   drawing rather than a box with art in it. */
 .bh::after {
   content: '';
   position: absolute;
@@ -234,7 +165,6 @@
   pointer-events: none;
 }
 
-/* The card's own line: what it is, and an aside in the corner. */
 .bh-head {
   position: relative;
   z-index: 1;
@@ -258,7 +188,6 @@
   position: relative;
   z-index: 1;
   display: grid;
-  /* three equal terms, sharing the row evenly */
   grid-template-columns: repeat(3, minmax(0, 1fr));
   align-items: stretch;
   gap: clamp(10px, 1.4vw, 20px);
@@ -269,12 +198,6 @@
 
 .bh-term {
   display: grid;
-  /* glyph · numeral · label, as three rows of a FIXED shape. Both the
-     glyph row and the numeral row are reserved at a constant height, so
-     a term with no drawing still holds the glyph's space and the total —
-     set larger than the two factors — does not push its own label below
-     theirs. Numerals sit on the bottom of their row; labels then start
-     on one line across all three. */
   grid-template-rows: var(--bh-glyph-h) var(--bh-num-h) auto auto;
   justify-items: center;
   align-content: start;
@@ -288,7 +211,6 @@
   box-shadow: 3px 3px 0 var(--ink);
   transition: transform var(--dur) var(--ease-out), box-shadow var(--dur) var(--ease-out);
 }
-/* a soft disc behind the drawing, so each glyph sits on something */
 .bh-term::before {
   content: '';
   position: absolute;
@@ -308,8 +230,6 @@
 }
 
 .bh {
-  /* The two reserved heights, read by the terms and by the operators, so
-     nothing has to guess where the numerals' line is. */
   --bh-glyph-h: clamp(46px, 4.6vw, 64px);
   --bh-num-h: clamp(2.4rem, 1.3rem + 3.7vw, 4.7rem);
 }
@@ -359,10 +279,6 @@
 }
 
 .bh-op {
-  /* Sits on the numerals' line, not the glyphs' — the glyph stack above
-     is decoration and the operator belongs to the arithmetic. It reads
-     the same two reserved heights the terms do, so the three can never
-     drift apart. */
   align-self: start;
   display: flex;
   align-items: center;
@@ -375,7 +291,6 @@
   color: var(--ink-faint);
 }
 
-/* ---- The verified count: a footnote on the same line, not a slab ---- */
 .bh-verified {
   display: flex;
   align-items: center;
@@ -425,18 +340,9 @@
 }
 .bh-check { flex: 0 0 auto; width: 12px; height: 12px; color: var(--banana-deep); }
 
-/* One line holds to about 1040px. Below that the verified pill drops
-   under the equation rather than squeezing the three numerals — the
-   equation is the thing that must stay on one line. */
-/* The term with no numeral still reserves the numeral's row, empty. That is
-   what keeps all three labels on one line now that nothing is drawn in it —
-   the row's rhythm is the point, not what fills it. Its label and note have
-   to be placed by hand, or they slide up into the empty row and the card
-   stops matching the two beside it. */
 .bh-term--mark .bh-lab { grid-row: 3; }
 .bh-term--mark .bh-sub { grid-row: 4; }
 
-/* ---- The term that carries a check mark instead of a numeral ---- */
 .bh-mark {
   display: flex;
   align-self: end;
@@ -457,8 +363,6 @@
 @media (max-width: 460px) {
   .bh-eq { grid-template-columns: minmax(0, 1fr); gap: 22px; }
   .bh-eq .bh-op { display: none; }
-  /* Stacked, there is no row for the reserved slots to align across, and
-     an empty glyph row is just a hole above the total. */
   .bh-term { grid-template-rows: auto auto auto; }
   .bh-glyph:empty { display: none; }
   .bh-term--hero { margin-top: 0; }
@@ -466,16 +370,7 @@
   .bh-verified-top, .bh-verified-note { justify-content: center; }
 }
 
-/* ============================================================ *
- *  The 2x2 pane grid
- * ============================================================ */
 
-/* One pane per row, all four.
-   Every pane is a left-to-right reading: an axis and its example, or the
-   four steps of a flow. Two-up halves that width and forces each of
-   them to fold into stacked pairs — legible, but no longer the
-   horizontal progression the figure is about. A full row keeps all four
-   reading the same way, and gives the media inside room to be judged. */
 .bx-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
@@ -493,7 +388,6 @@
   overflow: hidden;
 }
 
-/* ---- Shared pane header: the figure's coloured title bar ---- */
 .bx-head {
   display: flex;
   align-items: baseline;
@@ -527,15 +421,11 @@
   font-size: var(--fs-sm);
   line-height: 1.55;
   color: var(--ink-soft);
-  /* Runs the full width of its pane rather than stopping at a measure:
-     these sit above a three-column flow, and a short column of text over
-     a wide diagram read as two different layouts. */
   max-width: none;
 }
 
 .bx-ic { width: 18px; height: 18px; flex: 0 0 auto; }
 
-/* ---- Sub-label used above each column inside a pane ---- */
 .bx-eyebrow {
   display: block;
   margin-bottom: 8px;
@@ -547,9 +437,6 @@
   color: var(--ink-faint);
 }
 
-/* ============================================================ *
- *  The dropdown (BenchSelect)
- * ============================================================ */
 
 .bx-select { position: relative; }
 
@@ -614,9 +501,6 @@
   border-radius: var(--radius-sm);
   cursor: pointer;
 }
-/* Options carry their label and nothing else — the glyph and the unit
-   line describe the axis you have chosen, so they live on the button. A
-   marker dot, filled only on the current option, does the rest. */
 .bx-select-list li::before {
   content: '';
   flex: 0 0 auto;
@@ -639,9 +523,6 @@
 .bx-select-list li.is-sel::before { background: var(--a, var(--ink)); border-color: var(--a, var(--ink)); }
 .bx-select-list li.is-sel .bx-select-opt { color: var(--ink); font-weight: 700; }
 
-/* ============================================================ *
- *  Paper skeleton — what a not-yet-wired slot shows
- * ============================================================ */
 
 .bx-skel {
   position: relative;
@@ -671,9 +552,6 @@
 }
 .bx-skel-note { font-size: var(--fs-xs); max-width: 34ch; line-height: 1.45; }
 
-/* ============================================================ *
- *  Page head — the module's own, so it does not touch `.page-head`
- * ============================================================ */
 
 .bx-pagehead {
   position: relative;
@@ -684,9 +562,6 @@
   isolation: isolate;
 }
 .bx-pagehead .kicker { margin-bottom: 14px; }
-/* Deliberately a step down from the site's --fs-h1: this page's content
-   is four dense panes, and a display-scale title pushes all of it below
-   the fold for no gain. */
 .bx-pagehead h1 {
   font-size: clamp(1.75rem, 1.1rem + 2.2vw, 3rem);
   max-width: 26ch;
@@ -700,7 +575,6 @@
   margin: 0 auto;
 }
 
-/* A legend so the four accents are readable as a system, not decoration. */
 .bx-legend {
   display: flex;
   justify-content: center;
@@ -727,10 +601,8 @@
   background: var(--c);
 }
 
-/* ---- Footer sits back inside the site's normal page width ---- */
 .bx-foot { max-width: var(--page-max); margin: 0 auto; padding: 0 var(--gap-page) 72px; }
 
-/* ---- Deep-link landing: a pane someone was sent to announces itself ---- */
 .bx-pane.is-called {
   animation: bx-called 1.6s var(--ease-out);
 }

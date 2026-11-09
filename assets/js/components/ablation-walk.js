@@ -1,17 +1,5 @@
 import { loadJSON } from '../lib/data-loader.js';
 
-/**
- * <ablation-walk src="data/ablation_runs.json" insights="data/ablation_insights.json">
- *
- * One ablation on one sample. The pipeline diagram loops on its own, striking
- * out the part this experiment removed; below it the full system and the
- * ablated run sit side by side, each panel carrying its own diagram/animation
- * switch, its own transport, and its own caption.
- *
- * The animation SVGs burn their narration into a banner inside the picture.
- * That banner is hidden and the live caption mirrored out beneath the panel it
- * belongs to, so the figure keeps its height and the text stays legible.
- */
 
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, c =>
   ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -90,7 +78,6 @@ class AblationWalk extends HTMLElement {
     return ((slot[sid] || '').trim() || (slot._overall || '').trim());
   }
 
-  /* ───────────── render ───────────── */
 
   async render() {
     this.stopCaptions();
@@ -145,9 +132,7 @@ class AblationWalk extends HTMLElement {
         <div>
           <div class="abl-kicker">Insight</div>
           ${insight ? `<p>${esc(insight)}</p>`
-                    : `<p class="abl-todo">Nothing written for this sample yet — add it on the
-                        <code>${esc(e.key)} › ${esc(s.id)}</code> row of
-                        <code>data/ablation_insights.csv</code>.</p>`}
+                    : ''}
         </div>
       </section>`;
 
@@ -155,7 +140,6 @@ class AblationWalk extends HTMLElement {
     this.mountMedia();
   }
 
-  /** one output panel: its own switch, its own transport, its own caption */
   panelMarkup(side, label, e, s) {
     return `
       <figure class="abl-panel is-${side}">
@@ -175,16 +159,12 @@ class AblationWalk extends HTMLElement {
       </figure>`;
   }
 
-  /* ───────────── scores, in the cost-card style ───────────── */
 
   scoresMarkup(e, s) {
     const rows = e.metrics.map(m => {
       const full = s.scores[m]?.full, abl = s.scores[m]?.ablated;
       const d = this.deltaOf(full, abl);
       const gated = full?.kind === 'band' || abl?.kind === 'band';
-      // whichever side scores higher reads green and whichever scores lower reads
-      // red: an ablation is not always a loss, and the full system is not always
-      // the winner, so neither side gets a fixed colour
       const win = d.dir === 'up' ? ['lose', 'win']
                 : d.dir === 'down' ? ['win', 'lose'] : ['tie', 'tie'];
       return `<div class="abl-mrow is-${METRIC_GROUP[m] || 'quality'} is-${d.dir}">
@@ -204,7 +184,6 @@ class AblationWalk extends HTMLElement {
       </section>`;
   }
 
-  /** a gated metric reads as milestones; a continuous one as a slider */
   scoreCell(metric, mine, other, side, gated) {
     if (!mine) return `<span class="abl-nodata">no row</span>`;
     if (gated) {
@@ -224,8 +203,6 @@ class AblationWalk extends HTMLElement {
       <span class="abl-mval">${esc(mine.text)}</span>`;
   }
 
-  /** A gated metric is ordinal, not continuous: D–C–B–A as milestones, with the
-   *  drop drawn between where the full system landed and where the ablation did. */
   bandTrack(full, abl, mineBand, otherBand, side) {
     const order = ['D', 'C', 'B', 'A'];
     const pos = (b) => (order.indexOf(b) / (order.length - 1)) * 92 + 4;
@@ -236,7 +213,6 @@ class AblationWalk extends HTMLElement {
     }).join('')}</div>`;
   }
 
-  /** how far it moved, as a signed label plus a 0–100 bar length */
   deltaOf(full, abl) {
     if (!full || !abl) return { dir: 'flat', label: '', pct: 0 };
     if (full.kind === 'band' && abl.kind === 'band') {
@@ -255,7 +231,6 @@ class AblationWalk extends HTMLElement {
     return { dir: 'flat', label: '', pct: 0 };
   }
 
-  /* ───────────── pipeline, looping on its own ───────────── */
 
   async mountPipeline() {
     const host = this.querySelector('[data-pipe]');
@@ -303,7 +278,6 @@ class AblationWalk extends HTMLElement {
     }
   }
 
-  /* ───────────── the two outputs ───────────── */
 
   mountMedia() {
     const e = this.exp, s = this.sample;
@@ -341,22 +315,15 @@ class AblationWalk extends HTMLElement {
     }
   }
 
-  /**
-   * A clip built by build_ablation_videos.py plays through the same transport as
-   * a live SVG. The splitter wrote `<name>.captions.json` beside it — the same
-   * narration steps with the timestamps they fire at — so the caption pane can
-   * follow the video without loading (and animating) the SVG it came from.
-   */
   async mountClip(el, media, side) {
     if (!el) return;
     this.vid = this.vid || {};
     this.vid[side] = { el, caps: [], last: -1 };
     this.querySelector(`[data-cap="${side}"]`)?.classList.remove('is-note');
     el.playbackRate = this.speed[side];
-    el.play().catch(() => {});          // muted, so autoplay is allowed
+    el.play().catch(() => {});
     this.startCaptions();
     if (!media.captions) {
-      // a clip the run shipped ready-made, with no SVG to read a step list from
       const cap = this.querySelector(`[data-cap="${side}"]`);
       if (cap) {
         cap.textContent = 'narration is burned into this clip — no animation SVG '
@@ -368,28 +335,16 @@ class AblationWalk extends HTMLElement {
     try {
       const caps = await (await fetch(media.captions, { cache: 'force-cache' })).json();
       if (this.vid[side]?.el === el) this.vid[side].caps = caps;
-    } catch { /* no timeline: the narration is still burned into the frames */ }
+    } catch {  }
   }
 
-  /**
-   * An SVG loaded through <img> is sandboxed: the browser refuses to fetch any
-   * external resource from it, so every raster crop inside one of these files
-   * would be missing however its path was written. And the paths are wrong
-   * anyway — authored as `../rasters/` or `../../rasters/` when the crops sit
-   * in a `rasters/` folder beside the file itself. So the markup is fetched,
-   * the crops repointed at absolute URLs, and the result handed to an <object>
-   * as a blob: the crops load, and the file's own CSS stays out of the page.
-   */
   async blobSvg(src) {
     const abs = new URL(src, document.baseURI);
     const res = await fetch(abs, { cache: 'no-cache' });
     let markup = (await res.text()).replace(
       /((?:xlink:)?href=")((?:\.\.\/)*)rasters\//g,
       (_m, attr) => `${attr}${abs.href.slice(0, abs.href.lastIndexOf('/') + 1)}rasters/`);
-    // a bare & in a CSS comment makes the file invalid XML, which a browser
-    // refuses outright; escaping it costs nothing and renders them all
     markup = markup.replace(/&(?!#?\w+;)/g, '&amp;');
-    // some exports are SVG markup saved as .html, so trust the content
     const type = /^\s*(<\?xml|<svg)/i.test(markup) ? 'image/svg+xml' : 'text/html';
     const url = URL.createObjectURL(new Blob([markup], { type }));
     (this._blobs = this._blobs || []).push(url);
@@ -406,7 +361,6 @@ class AblationWalk extends HTMLElement {
     this.hookAnimation(host.querySelector('object'), side);
   }
 
-  /** the Stage-1 diagram exports, which carry raster crops of their own */
   async mountDiagram(host, src) {
     let url;
     try { url = await this.blobSvg(src); }
@@ -416,20 +370,15 @@ class AblationWalk extends HTMLElement {
     host.setAttribute('data-zoomkind', 'svg');
   }
 
-  /** hide the burned-in banner, take hold of the clock, mirror the caption out */
   hookAnimation(obj, side) {
     if (!obj) return;
     obj.addEventListener('load', () => {
       const doc = obj.contentDocument;
       if (!doc) return;
-      // must be namespaced: an HTML <style> appended into an SVG document is ignored
       const style = doc.createElementNS('http://www.w3.org/2000/svg', 'style');
-      // visibility, not display: display:none would stop the animations we read
       style.textContent = '#narration_banner{visibility:hidden!important}';
       doc.documentElement.appendChild(style);
 
-      // the caption class differs between runs (`narr-text` vs `narr_txt`);
-      // the id pattern is the one thing both conventions share
       const nodes = [...doc.querySelectorAll('[id^="narr_ts"]')].sort((a, b) =>
         (+(a.id.match(/\d+/) || [0])[0]) - (+(b.id.match(/\d+/) || [0])[0]));
       this.anim = this.anim || {};
@@ -485,7 +434,7 @@ class AblationWalk extends HTMLElement {
   startCaptions() {
     if (this.capTimer) return;
     this.capTimer = setInterval(() => {
-      if (document.hidden) return;          // a hidden tab freezes the SVGs' own clocks
+      if (document.hidden) return;
       for (const side of ['full', 'ablated']) {
         const clip = this.vid?.[side];
         if (clip && clip.el.isConnected) { this.tickClip(side, clip); continue; }
@@ -509,7 +458,6 @@ class AblationWalk extends HTMLElement {
     }, 120);
   }
 
-  /** the clip's own currentTime picks the narration step and moves the scrubber */
   tickClip(side, clip) {
     const t = clip.el.currentTime || 0;
     const out = this.querySelector(`[data-cap="${side}"]`);
@@ -536,7 +484,6 @@ class AblationWalk extends HTMLElement {
     this._blobs = [];
   }
 
-  /* ───────────── zoom ───────────── */
 
   openZoom(src, kind) {
     const lb = this.querySelector('[data-lightbox]');

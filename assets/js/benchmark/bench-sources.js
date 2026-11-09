@@ -1,23 +1,6 @@
 import { loadJSON, onVisible, esc } from './bench-core.js';
 import { lightbox, zoomBadge } from './bench-lightbox.js';
 
-/**
- * <bench-sources src="data/benchmark/sources.json"></bench-sources>
- *
- * FIGURE SOURCES — the figure that opens the benchmark page.
- *
- * It sits above the four panes because it answers the question they all
- * assume: where 5,000 process diagrams came from. The four quadrants of the
- * figure are repeated beside it as a list, tinted to match, so the venues are
- * readable as text at any size — the figure itself is 4000px wide and only
- * legible zoomed.
- *
- * TWO COPIES OF THE FIGURE, ON PURPOSE. The page loads a web-sized copy
- * (`display`, with `displaySmall` for narrow screens); the magnifier opens the
- * full-resolution original, which is the one worth zooming into. Same rule as
- * every other stage on this page: the picture is not a button, the magnifier
- * is.
- */
 
 class BenchSources extends HTMLElement {
   async connectedCallback() {
@@ -27,7 +10,7 @@ class BenchSources extends HTMLElement {
     try {
       d = await loadJSON(src);
     } catch {
-      this.remove(); // decoration for the panes below; never block them
+      this.remove();
       return;
     }
     this.data = d;
@@ -69,15 +52,10 @@ class BenchSources extends HTMLElement {
       lightbox.open({
         title: d.kicker || 'Figure sources',
         accent: 'diversity',
-        // No label and no caption: the figure carries its own headings, and
-        // the page repeats them beside it, so a title and a description
-        // under the enlarged copy would only say it a third time. `alt`
-        // still describes the picture for anyone who cannot see it.
         items: [{ kind: 'image', src: d.image || d.display, alt: d.alt || d.title || '' }],
       });
     });
 
-    // A 4000px figure is not worth fetching before it is anywhere near view.
     const img = this.querySelector('.bs-img');
     onVisible(this, () => {
       img.src = d.display || d.image;

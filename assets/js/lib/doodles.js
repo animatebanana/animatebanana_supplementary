@@ -1,9 +1,3 @@
-/**
- * Hand-drawn doodle library for the floating backdrop — the kind of
- * things that show up inside real AI and biology figures. Each entry is
- * the inner markup of a 64×64 SVG, stroked by <doodle-field>.
- * `fill="url(#dd-hatch)"` gives the banana cross-hatch.
- */
 export const DOODLES = {
   neuralnet: `
     <path stroke-width="1.2" opacity=".7" d="M12 16L32 10M12 16L32 24M12 16L32 40M12 16L32 54M12 32L32 10M12 32L32 24M12 32L32 40M12 32L32 54M12 48L32 10M12 48L32 24M12 48L32 40M12 48L32 54M32 10L52 24M32 10L52 40M32 24L52 24M32 24L52 40M32 40L52 24M32 40L52 40M32 54L52 24M32 54L52 40"/>
@@ -77,5 +71,4 @@ export const DOODLES = {
     <path d="M32 7c2 14 10.5 22.5 25 25-14.5 2.5-23 11-25 25-2-14-10.5-22.5-25-25 14.5-2.5 23-11 25-25z" fill="url(#dd-hatch)"/>`,
 };
 
-/** Notation from ML and biology figures, floated large and faint. */
 export const GLYPHS = ['∑', '∇θ', 'σ(·)', '∂ℒ', 'λ', 'p(y|x)', 'α', 'softmax', 'ATCG', '∫'];

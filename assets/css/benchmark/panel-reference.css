@@ -1,15 +1,3 @@
-/*
-  EXTERNAL REFERENCE pane — the purple one.
-
-  One state machine, `[data-step]` on `.br-body`, drives four scripted
-  beats: the talk plays, the scissors cut it down to the figure window,
-  the extracted frames fly up and flip like the leaves of a book, and
-  the narration is scribed line by line. Because every rule below keys
-  off that one attribute rather than off a class added per element, a
-  replay rewinds exactly — there is no half-finished transform to undo.
-
-  Owns `.br-*` only.
-*/
 
 .br-steps {
   display: grid;
@@ -63,7 +51,6 @@
 .br-step.is-on .br-step-t b { color: var(--ink); }
 .br-step.is-now .br-step-n { box-shadow: 0 0 0 3px var(--a-soft); }
 
-/* ---- Play Annotation button in the header bar ---- */
 .br-replay {
   display: inline-flex;
   align-items: center;
@@ -85,15 +72,8 @@
 .br-replay:hover { background: rgba(255, 255, 255, 0.26); }
 .br-replay svg { width: 13px; height: 13px; }
 
-/* ---- Flow ---- */
-/* As in the annotations pane, the breakpoints are the pane's own width,
-   not the viewport's — this pane is half the grid on a wide screen. */
 .br-body { container-type: inline-size; container-name: br; }
 
-/* ---- Fixed geometry, as in the annotations pane ----
-   Three columns, three rows each — label, body, footnote — at the same
-   heights whatever they hold, so the two arrows sit at one fixed height
-   and nothing moves as the run plays through its four steps. */
 .br-flow {
   --br-head-h: 24px;
   --br-body-h: clamp(196px, 15.5vw, 238px);
@@ -106,9 +86,6 @@
 @container br (max-width: 780px) {
   .br-flow { grid-template-columns: minmax(0, 1.1fr) 22px minmax(0, 1fr); row-gap: 18px;
              --br-body-h: clamp(190px, 26vw, 240px); }
-  /* The second arrow would be stranded in an empty cell once the
-     transcript wraps to its own row — the numbered steps carry the
-     order from there. */
   .br-arrow:nth-of-type(2) { display: none; }
   .br-script-col { grid-column: 1 / -1; }
   .br-script { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
@@ -146,10 +123,6 @@
   border-bottom: 4px solid transparent;
   transition: border-left-color var(--dur) var(--ease-out);
 }
-/* Each arrow belongs to the column it points INTO, and lights up only once
-   that column actually holds something: the first when the frames have been
-   extracted (step 3), the second when the narration has been scribed (step
-   4). Lighting both at step 3 pointed at an empty transcript column. */
 .br-body[data-step='3'] .br-arrow:nth-of-type(1) i,
 .br-body[data-step='4'] .br-arrow:nth-of-type(1) i,
 .br-body[data-step='4'] .br-arrow:nth-of-type(2) i { background: var(--a); }
@@ -157,8 +130,6 @@
 .br-body[data-step='4'] .br-arrow:nth-of-type(1) i::after,
 .br-body[data-step='4'] .br-arrow:nth-of-type(2) i::after { border-left-color: var(--a); }
 
-/* The travel is on `i`, which carries the head as its own ::after, so shaft
-   and head move together and the head keeps its shape. */
 .br-body[data-step='3'] .br-arrow:nth-of-type(1) i,
 .br-body[data-step='4'] .br-arrow:nth-of-type(2) i {
   animation: br-arrow-go var(--dur, 320ms) var(--ease-out) both;
@@ -173,14 +144,8 @@
   .br-body[data-step='4'] .br-arrow:nth-of-type(2) i { animation: none; }
 }
 
-/* ============ 1 · the talk ============ */
 .br-talk {
   position: relative;
-  /* Fills the fixed body row; capped in width so the drawn stand-in does
-     not become a poster across a full-row pane. `width: 100%` is
-     explicit because `margin-inline: auto` stops a grid item stretching,
-     and this box's only content is absolutely positioned — so left to
-     shrink-to-fit it collapses to nothing. */
   width: 100%;
   height: 100%;
   max-width: 336px;
@@ -188,8 +153,6 @@
   overflow: hidden;
   border-color: var(--ink);
 }
-/* A drawn stand-in for the recording: the figure on the slide, and the
-   speaker beside it. Explicitly an illustration, never a borrowed still. */
 .br-talk-art { position: absolute; inset: 9px; display: flex; gap: 6px; }
 .br-talk-figure {
   flex: 1;
@@ -230,7 +193,6 @@
 .br-body[data-step='0'] .br-skel { opacity: 1; }
 .br-body:not([data-step='0']) .br-skel { opacity: 0; }
 
-/* ---- The timeline and the cut ---- */
 .br-timeline { position: relative; max-width: 336px; margin: 10px auto 0; padding-top: 16px; padding-bottom: 20px; }
 .br-tl-bar {
   position: relative;
@@ -248,7 +210,6 @@
               background 400ms var(--ease-out), border-color 400ms var(--ease-out);
 }
 
-/* The playhead runs the bar during step 1. */
 .br-tl-head {
   left: 0; width: 2px;
   background: var(--ink);
@@ -258,7 +219,6 @@
 .br-body[data-step='1'] .br-tl-head { opacity: 1; animation: br-play 1.4s var(--ease-io) forwards; }
 @keyframes br-play { from { left: 0; } to { left: var(--to); } }
 
-/* Step 2: the scissors travel in, and the discarded ends drop away. */
 .br-scissors {
   position: absolute;
   top: -2px;
@@ -308,7 +268,6 @@
 .br-trim-note { margin: 6px 0 0; font-size: 1.05rem; color: var(--ink-faint); opacity: 0; transition: opacity var(--dur) var(--ease-out) 400ms; }
 .br-body:not([data-step='0']):not([data-step='1']) .br-trim-note { opacity: 1; color: var(--a); }
 
-/* ============ 3 · frames flying out, flipping like a book ============ */
 .br-deck {
   position: relative;
   display: flex;
@@ -324,8 +283,6 @@
   max-width: 128px;
   aspect-ratio: 4 / 3;
   opacity: 0;
-  /* Before the extraction they sit low, stacked and squashed — as if
-     still inside the clip on the left. */
   transform: translate(-46%, 28px) scale(0.55);
   transition: opacity 520ms var(--ease-out), transform 640ms var(--ease-spring);
   transition-delay: calc(var(--i) * 170ms);
@@ -350,10 +307,6 @@
   position: absolute;
   inset: 0;
   display: grid;
-  /* One cell pinned to the leaf. Centring in an auto track lets the
-     image's own `height: 100%` resolve against its own content, so a
-     tall frame grew to three times the leaf and lost two-thirds of
-     itself to `overflow: hidden`. */
   grid-template: minmax(0, 1fr) / minmax(0, 1fr);
   place-items: stretch;
   overflow: hidden;
@@ -364,10 +317,6 @@
   background: var(--surface);
   box-shadow: 2px 2px 0 rgba(26, 24, 21, 0.16);
 }
-/* The extracted frame, whole. `cover` cropped each leaf to its centre,
-   which on a wide slide meant the figure region — the entire point of
-   the extraction — was the part thrown away. White fills whatever the
-   aspect ratio leaves over. */
 .br-leaf-front img {
   width: 100%;
   height: 100%;
@@ -407,7 +356,6 @@
 }
 .br-body[data-step='3'] .br-extract-note, .br-body[data-step='4'] .br-extract-note { opacity: 1; }
 
-/* ============ 4 · the narration, scribed ============ */
 .br-wave {
   display: flex;
   align-items: center;
@@ -479,10 +427,6 @@
 }
 
 
-/* ---- The drawn stand-ins, at viewer scale ----
-   The same illustrations the pane draws, scaled up: the viewer shows
-   what exists rather than an empty frame, and its caption says plainly
-   that the real asset is not wired in yet. */
 .bl[data-accent='reference'] .br-art-big {
   width: min(100%, 900px);
   aspect-ratio: 16 / 9;
@@ -507,15 +451,7 @@
     repeating-linear-gradient(90deg, var(--a-line) 0 5px, transparent 5px 11px) 0 50%/100% 62% no-repeat;
 }
 
-/* ============ Real media, added when the pane was wired up ============
-   The talk is a still frame of the excerpt rather than the drawn stand-in,
-   and the extracted deck now carries six frames instead of three. Both are
-   additive: the stand-in rules above still apply whenever `poster` or a
-   frame's `src` is null. */
 
-/* The talk still, whole. It was cropped to fill the card, which cut the
-   slide the excerpt is about; the card is white, so a 16:9 still inside
-   a squarer card just sits smaller. */
 .br-talk-still {
   position: absolute;
   inset: 0;
@@ -526,9 +462,6 @@
   background: #fff;
 }
 
-/* A flex row sized at 30% each only ever fitted three leaves. A grid wraps
-   any count onto as many rows as it needs and keeps every leaf the same
-   size, so adding a seventh frame is a data change and not a layout one. */
 .br-deck {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -538,21 +471,8 @@
   perspective: 900px;
 }
 .br-deck .br-leaf { width: 100%; max-width: 128px; }
-/* Two rows have to share the body slot the single row used to own, so the
-   leaves get shallower rather than the pane getting taller. */
 .br-deck:has(> :nth-child(4)) .br-leaf { aspect-ratio: 16 / 9; max-width: 116px; }
 
-/* The talk's own transcript runs to full sentences — six of them now, one per
-   extracted frame, where the placeholder was three short lines. The column is
-   a fixed height so the four columns stay level, so the list scrolls inside it
-   rather than growing the pane, and the last-line stagger no longer runs off
-   the bottom edge.
-
-   The bottom edge is FADED rather than cut. A list that simply stops mid-line
-   at a hard border reads as a layout that broke; the same list dissolving into
-   the paper reads as one that continues, which is what it does. The fade is
-   only there while there is more to reach — the mask is on the scroller, so a
-   list short enough to fit is not dimmed for nothing. */
 .br-script-col .br-body-slot {
   display: grid;
   grid-template-rows: auto minmax(0, 1fr);
@@ -571,15 +491,6 @@
 }
 .br-script-x { text-wrap: pretty; }
 
-/* ---- A MEDIA FRAME IS WHITE PAPER, NOT DOTTED PAPER ----
-   `.frame-paper` gives every framed slot the site's dotted ground, which is
-   right for an empty slot: it reads as paper waiting for something. Once a
-   figure is in it the dots are the only thing behind a letterboxed image, and
-   a diagram sitting in a field of dots looks like it failed to load rather
-   than like it is being shown whole. Each pane used to switch the dots off
-   per state, which meant every new state had to remember to. These slots are
-   simply white, always. The empty state keeps its own labelled skeleton on
-   top, so nothing is lost by it. */
 .br-talk,
 .br-leaf-face,
 .br-deck {

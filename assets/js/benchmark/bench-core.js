@@ -1,57 +1,16 @@
-/**
- * Shared plumbing for the benchmark module
- * (assets/{css,js}/benchmark/, data/benchmark/, assets/bench/).
- *
- * Nothing here touches another component. The only files the module
- * reads from outside its own folders are the site's two generic
- * helpers — `lib/data-loader.js` and `lib/lazy-load.js` — plus the
- * generic classes in `base.css` and the tokens in `tokens.css`, exactly
- * as the root README's "Adding a component" rule prescribes.
- */
 
 export { loadJSON } from '../lib/data-loader.js';
 export { onVisible } from '../lib/lazy-load.js';
 
-/** Escape a string for interpolation into a template literal. */
 export const esc = (s) =>
   String(s ?? '').replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
 
-/** `prefers-reduced-motion: reduce` — checked live, not cached at load. */
 export const reducedMotion = () =>
   window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
 
-/** Promise that resolves after `ms`, or immediately under reduced motion. */
 export const wait = (ms) =>
   new Promise((r) => setTimeout(r, reducedMotion() ? 0 : ms));
 
-/**
- * Where each narration line starts in a clip.
- *
- * Nothing in the pipeline records when a line is spoken, so every timing on
- * this page is derived, and the honest derivation depends on what kind of clip
- * it is.
- *
- * A PREVIEW of the animation gives every state the same frame budget and then
- * holds the finished figure for whatever is left. Pass its animated span as
- * `active` (measured at build time, carried in the data file) and the lines
- * divide that span evenly, so the last one lands as the picture completes and
- * holds through the still tail. Spreading them across the whole duration
- * instead is what left the caption reading 05 under a finished diagram.
- *
- * A NARRATED render is paced by the voice, and speech takes about as long as
- * its text is long. With no `active` span the lines are weighted by their own
- * length instead. Characters rather than words: a line naming "Spatial Pyramid
- * Matching" takes longer to say than three short ones. A floor per line keeps
- * a very short one from flashing past.
- *
- * Feed it the clip's MEASURED duration (`video.duration`) wherever one is
- * available; a figure from a data file is a fallback, not the truth.
- *
- * @param {{text?:string}[]} lines
- * @param {number} duration seconds
- * @param {number} [active] seconds of animation, for a preview clip
- * @returns {number[]} one start time per line, ascending, first at 0
- */
 export function frameTrack(lines, duration, active) {
   const n = lines?.length ?? 0;
   if (!n || !(duration > 0)) return new Array(n).fill(0);
@@ -61,7 +20,7 @@ export function frameTrack(lines, duration, active) {
     return lines.map((_, i) => Number((i * step).toFixed(3)));
   }
 
-  const FLOOR = 8; // ~ two words' worth
+  const FLOOR = 8;
   const weights = lines.map((b) => Math.max(FLOOR, (b.text || '').trim().length));
   const total = weights.reduce((a, w) => a + w, 0);
   const out = [];
@@ -73,11 +32,6 @@ export function frameTrack(lines, duration, active) {
   return out;
 }
 
-/**
- * Small line-art icon set, drawn in the site's ink-outline register so
- * the panes read as part of the same sketchbook rather than as a
- * pasted-in icon font. 24x24, stroke-only, `currentColor`.
- */
 const PATHS = {
   clock: '<circle cx="12" cy="12" r="8.4"/><path d="M12 7.2V12l3.2 2"/>',
   mic: '<rect x="9" y="3.2" width="6" height="10" rx="3"/><path d="M5.4 11.4a6.6 6.6 0 0 0 13.2 0M12 18v2.8"/>',
@@ -96,7 +50,6 @@ const PATHS = {
   check: '<circle cx="12" cy="12" r="8.6"/><path d="M8.2 12.2l2.6 2.6 5-5.4"/>',
 };
 
-/** `icon('clock')` → an inline <svg>, or '' for an unknown name. */
 export const icon = (name, cls = 'bx-ic') =>
   PATHS[name]
     ? `<svg class="${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -104,24 +57,7 @@ export const icon = (name, cls = 'bx-ic') =>
          aria-hidden="true">${PATHS[name]}</svg>`
     : '';
 
-/**
- * The panes' accessible dropdown.
- *
- * A native <select> cannot carry an icon, a description line and the
- * accent the pane keys off, and the figure this page reconstructs shows
- * each stratification axis with its own glyph — so this is a
- * listbox-pattern button + popup instead, with the full keyboard
- * contract (Enter/Space/Down to open, arrows and Home/End to move,
- * Enter to choose, Escape to dismiss) and roving `aria-activedescendant`
- * so screen readers announce the option, not the button.
- */
 export class BenchSelect {
-  /**
-   * @param {object} o
-   * @param {{id:string,label:string,sub?:string,icon?:string}[]} o.items
-   * @param {(id:string, index:number)=>void} o.onChange
-   * @param {string} [o.labelledBy]  id of the visible label element
-   */
   constructor({ items, onChange, labelledBy = '' }) {
     this.items = items;
     this.onChange = onChange;
@@ -180,8 +116,6 @@ export class BenchSelect {
       if (li) this.select(Number(li.dataset.i));
     });
     this.list.addEventListener('keydown', (e) => this._key(e));
-    // Pointer-down, not click: a click elsewhere that also opens another
-    // popup would otherwise leave two open for a frame.
     this._away = (e) => {
       if (this.open && !this.el.contains(e.target)) this.toggle(false);
     };
@@ -241,9 +175,6 @@ export class BenchSelect {
       li.setAttribute('aria-selected', String(k === i));
       li.classList.toggle('is-sel', k === i);
     });
-    // The list is deliberately label-only: the glyph and the unit line
-    // describe the *chosen* axis, so repeating them on every row turns a
-    // five-item menu into a wall and buries the one that is selected.
     this.toggle(false);
     this.btn.focus();
     this.onChange?.(cur.id, i);
@@ -254,15 +185,6 @@ export class BenchSelect {
   }
 }
 
-/**
- * The module's one media rule: a frame requests its bytes only once it
- * is both on screen and actually selected, and a source that 404s or
- * fails to decode is remembered and never asked for again — a slot
- * whose clip has not been produced yet simply keeps its paper skeleton.
- *
- * `stage` is any element carrying `[data-media]`; the stylesheet keys
- * every visual state off that one attribute.
- */
 export class MediaSlot {
   constructor(stage, { img, video }) {
     this.stage = stage;
@@ -285,7 +207,6 @@ export class MediaSlot {
     this.stage.dataset.media = 'missing';
   }
 
-  /** @param {{key:string, poster?:string|null, mp4?:string|null, webm?:string|null}} src */
   show(src) {
     this._pending = src;
     if (!this.armed) return;
@@ -342,7 +263,6 @@ export class MediaSlot {
     }
   }
 
-  /** Detach sources and re-load() — the only thing that frees the decoder. */
   clear() {
     if (this.video) {
       this.video.pause();
@@ -362,10 +282,6 @@ export class MediaSlot {
   }
 }
 
-/**
- * Panel chrome shared by all four panes: the ruled header bar in the
- * pane's own accent, with an optional right-hand slot.
- */
 export const panelHead = (title, sub = '', right = '') => `
   <header class="bx-head">
     <h3 class="bx-head-title">${esc(title)}</h3>

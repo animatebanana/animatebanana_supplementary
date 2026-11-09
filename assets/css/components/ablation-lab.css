@@ -1,5 +1,3 @@
-/* Ablations: every ablation against every metric, tinted by stage.
-   Owns .ab-* only. */
 
 ablation-lab {
   display: block;
@@ -56,7 +54,6 @@ ablation-lab {
 }
 body.ab-noscroll { overflow: hidden; }
 
-/* ---------- the grid ---------- */
 
 .ab-heatscroll { overflow-x: auto; }
 .ab-heat { width: 100%; border-collapse: separate; border-spacing: 6px 7px; }
@@ -78,7 +75,6 @@ body.ab-noscroll { overflow: hidden; }
   letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft); font-weight: 600;
 }
 
-/* the row label: big, and carrying its stage colour */
 .ab-rowname { text-align: left; min-width: 290px; padding: 4px 10px 4px 0; vertical-align: middle; }
 .ab-rowlbl {
   display: block; font-size: 15.5px; font-weight: 700; line-height: 1.3;
@@ -116,7 +112,6 @@ body.ab-noscroll { overflow: hidden; }
 .ab-cell.is-gain { background: #F1F8F3; border-color: #BCDBC7; }
 .ab-cell.is-gain em { color: var(--ab-best); }
 .ab-cell.is-flat em { color: var(--ink-faint); }
-/* the winner in the column */
 .ab-cell.is-best {
   background: #DFF3E6; border: 2px solid var(--ab-best);
   box-shadow: 0 0 0 3px #EFF9F2;

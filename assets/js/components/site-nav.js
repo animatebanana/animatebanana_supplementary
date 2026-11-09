@@ -7,19 +7,6 @@ const brand = () => `
     ${wordmark()}
   </a>`;
 
-/**
- * <site-nav current="examples"></site-nav>
- * A slim bar with the brand and a Menu button that opens a slide-in
- * drawer listing every section (from nav-config.js), on all screen sizes.
- *
- * <site-nav current="pipeline" back="index.html#pipeline" back-label="Overview">
- * adds a way back beside the Menu button, styled to match it - for a page
- * reached from a section of another one.
- *
- * The drawer is appended to <body>, not rendered inside the nav: the
- * nav's backdrop-filter would otherwise become the containing block for
- * the drawer's position: fixed.
- */
 class SiteNav extends HTMLElement {
   connectedCallback() {
     const current = this.getAttribute('current') || '';

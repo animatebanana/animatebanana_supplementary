@@ -1,36 +1,3 @@
-/**
- * <ood-gallery src="data/ood/ood_items.json"></ood-gallery>
- *
- * The gallery at the top of the Generalization page: the published figure for
- * each out-of-domain diagram, filtered by subject, and a viewer that plays the
- * animation the pipeline produced for it.
- *
- * IT PLAYS FRAMES, NOT A VIDEO. Every other animated thing on this site is an
- * MP4; these are not. What the pipeline emitted here is a sequence of step
- * frames with a caption against each, and that is what is shown — one <img>
- * whose source is swapped on a clock, with the caption underneath. Encoding
- * them into clips would have cost a few megabytes the distribution build does
- * not have, and would have thrown away the one thing that makes this page
- * legible: a step is a discrete thing you can land on, step through, and read.
- * The MP4s that exist alongside the frames in the source tree are deliberately
- * not shipped.
- *
- * EVERY FRAME IS PRELOADED BEFORE PLAY. Swapping an <img> src to a file the
- * browser has not fetched shows nothing for a moment, so a sequence played
- * straight through would flicker on every step. Opening a diagram therefore
- * decodes the whole sequence first — they are a few tens of kilobytes each —
- * and the play button waits on that. The grid loads nothing until a card is
- * near the viewport, so the page itself stays cheap.
- *
- * THE CLOCK IS THE FEED'S. Each beat carries `t`, its start, and `hold`, how
- * long it stays. Those come from narration.json, extended per step where the
- * caption could not be read in the time the file gave it; see the note in
- * build_ood.py. A diagram whose timings had to be stretched says so in the
- * viewer rather than presenting the result as measured.
- *
- * Part of the self-contained OOD module (assets/{css,js}/ood/, data/ood/);
- * it owns `.ood-*` and nothing else.
- */
 import { loadJSON } from '../lib/data-loader.js';
 import { onVisible } from '../lib/lazy-load.js';
 import { escapeHtml, formatTime } from '../lib/format.js';
@@ -141,7 +108,6 @@ class OodGallery extends HTMLElement {
     }
   }
 
-  /* ---------- the viewer ---------- */
 
   _openViewer(id) {
     const item = this._items.find((i) => i.id === id);
@@ -222,7 +188,6 @@ class OodGallery extends HTMLElement {
       const stage = e.target.closest('.ood-stage');
       if (stage) return this._zoom(stage.closest('.ood-pane'));
     });
-    // The stages are buttons, so they answer the keyboard too.
     el.addEventListener('keydown', (e) => {
       if (e.key !== 'Enter' && e.key !== ' ') return;
       const stage = e.target.closest('.ood-stage');
@@ -235,7 +200,6 @@ class OodGallery extends HTMLElement {
       this._show(Number(this._seek.value));
     });
     this._keys = (e) => {
-      // Zoomed in, Escape steps back out rather than closing the whole viewer.
       if (e.key === 'Escape' && this._el?.classList.contains('is-zoomed')) {
         return this._zoom(null);
       }
@@ -258,7 +222,6 @@ class OodGallery extends HTMLElement {
     el.querySelector('.ood-back')?.focus();
   }
 
-  /** Decode every frame up front, so a step never lands on an empty <img>. */
   _preload() {
     return Promise.all(
       this._item.frames.map(
@@ -272,19 +235,6 @@ class OodGallery extends HTMLElement {
     );
   }
 
-  /**
-   * Put step `n` on screen, dissolving into it from the step before.
-   *
-   * The incoming frame goes into whichever layer is idle, is stacked above the
-   * outgoing one, and is brought up from transparent. The outgoing layer is
-   * left fully opaque throughout and only switched off once it is completely
-   * hidden — see the note in the stylesheet for why fading both at once is
-   * what made this look like a blink.
-   *
-   * The dissolve runs for about half the step, between a third of a second and
-   * a second, so it occupies a real part of the step rather than snapping at
-   * the start of a long hold.
-   */
   _show(n) {
     const item = this._item;
     if (!item) return;
@@ -293,7 +243,6 @@ class OodGallery extends HTMLElement {
     const live = this._layers[this._live];
 
     if (!live.getAttribute('src')) {
-      // Opening: there is nothing to dissolve from, so show it outright.
       live.src = src;
       live.classList.add('is-on');
     } else if (live.getAttribute('src') !== src) {
@@ -307,16 +256,12 @@ class OodGallery extends HTMLElement {
       idle.style.zIndex = '2';
       live.style.zIndex = '1';
       idle.src = src;
-      // Start from transparent with no transition, then let the class change
-      // animate: without the reflow both writes coalesce and nothing moves.
       idle.classList.add('is-under');
       idle.classList.remove('is-on');
       void idle.offsetWidth;
       idle.classList.remove('is-under');
       idle.classList.add('is-on');
 
-      // The outgoing layer holds at full opacity until it is covered, then is
-      // switched off instantly so it is ready to be the next incoming one.
       clearTimeout(this._fade);
       this._fade = setTimeout(() => {
         live.classList.add('is-under');
@@ -330,13 +275,6 @@ class OodGallery extends HTMLElement {
     if (this._seek.value !== String(this._i)) this._seek.value = String(this._i);
   }
 
-  /**
-   * Give one pane the whole sheet, or hand the sheet back to both.
-   *
-   * Passing the pane that is already zoomed toggles it off, so a second click
-   * on the same figure restores the pair. The player is untouched: the frame
-   * <img> only changes size, so an animation mid-sequence keeps going.
-   */
   _zoom(pane) {
     if (!this._el) return;
     const current = this._el.querySelector('.ood-pane.is-zoomed');
@@ -371,7 +309,7 @@ class OodGallery extends HTMLElement {
     const hold = (this._item.beats[this._i]?.hold || 3) * 1000 / this._rate;
     this._timer = setTimeout(() => {
       if (!this._playing) return;
-      if (this._i >= this._item.frames.length - 1) return this._pause(); // hold the last step
+      if (this._i >= this._item.frames.length - 1) return this._pause();
       this._show(this._i + 1);
       this._tick();
     }, hold);

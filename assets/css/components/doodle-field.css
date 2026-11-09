@@ -4,8 +4,6 @@ doodle-field {
   z-index: -1;
   pointer-events: none;
   overflow: hidden;
-  /* Fade the doodles out toward the centre column and the bottom edge
-     so the heading always reads first. */
   -webkit-mask-image: radial-gradient(ellipse 36% 46% at 50% 44%, transparent 0 55%, #000 100%),
                       linear-gradient(#000 78%, transparent);
   -webkit-mask-composite: source-in;
@@ -61,7 +59,6 @@ doodle-field[density="sparse"] {
   50%      { transform: translate(-50%, -50%) rotate(calc(var(--rot) + 4deg)) translateY(7px); }
 }
 
-/* Doodles fade in once, staggered by their bob delay, then settle. */
 doodle-field .df-item { animation-name: df-bob; }
 doodle-field .df-doodle, doodle-field .df-glyph { transition: opacity 1.2s var(--ease-out); }
 

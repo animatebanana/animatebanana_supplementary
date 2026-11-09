@@ -1,51 +1,6 @@
 import { loadJSON, onVisible, esc, icon, panelHead, reducedMotion, frameTrack } from './bench-core.js';
 import { lightbox, zoomBadge } from './bench-lightbox.js';
 
-/**
- * <bench-annotations src="data/benchmark/annotations.json"></bench-annotations>
- *
- * RICH ANNOTATIONS PER NARRATIVE — the figure's green pane.
- *
- * A play/show mechanism rather than a static strip. Pressing Play runs
- * the four stages of the figure in order, and each one populates:
- *
- *   1  Input Diagram      the source figure lands
- *   2  Animation Sequence its frames deal out, one per beat
- *   3  Step-wise Narration the line for the current beat types itself in
- *   4  Animated Narrative  the finished clip plays
- *
- * Beats 2 and 3 advance together and stay linked afterwards: hovering
- * or clicking a frame scrubs the narration to that beat, so the pane is
- * a scrubber once the run has finished rather than a dead diagram. The
- * run is reversible, interruptible, and skipped entirely under
- * `prefers-reduced-motion`, which jumps straight to the finished state.
- *
- * Below the flow, the three additional artifacts open in a dialog:
- * the hierarchy-aware XML, the animation-aware diagram code, and the
- * executable animation code — the last of which is not a listing but
- * the SVG itself, playing.
- *
- * Each thing opens as its own compartment. The beat frames page through the
- * beat frames; the input figure, the clip and each artifact open on their own
- * with nowhere to page to. See bench-lightbox.js for why.
- *
- * TWO THINGS ABOUT THE NARRATION.
- *
- * It is never truncated. The typing rate is derived from how long the beat
- * actually lasts, so a thirty-word line types faster rather than being cut off
- * when the next beat lands, and the sheet shrinks its type to whatever size
- * fits the finished line rather than hiding the tail behind a scrollbar
- * nobody will find. Sped up and complete beats slowed down and clipped.
- *
- * And under the finished clip it follows the picture. This clip is a preview
- * of the animation, not the narrated render: it gives every state the same
- * frame budget, runs out of animation at 4.8s of its 9.7s, and holds the
- * finished figure for the rest. Spreading ten lines across the whole 9.7s is
- * why the caption still read 05 while the figure was plainly complete. So the
- * track is laid across the clip's ANIMATED span, measured at build time and
- * carried in the data file as `clipActive`, and the last line then holds
- * through the still tail. See `frameTrack` in bench-core.js.
- */
 
 const BEAT_MS = 1150;
 
@@ -67,9 +22,6 @@ class BenchAnnotations extends HTMLElement {
     this._timers = [];
     this._render();
 
-    // The input figure is fetched as soon as the pane is in reach; the
-    // beat frames and the clip wait for Play (or for reduced motion,
-    // which has nothing to animate and so shows the end state at once).
     onVisible(this, () => (reducedMotion() ? this._finish() : this._loadInput()), {
       rootMargin: '240px',
     });
@@ -226,10 +178,6 @@ class BenchAnnotations extends HTMLElement {
       .join('');
 
     this.playBtn.addEventListener('click', () => (this._running ? this._reset() : this._run()));
-    // A single click opens the beat at full size — the frames are 56px
-    // here, which is enough to follow the sequence and not enough to read
-    // anything in it. Hovering still scrubs, so the pane stays browsable
-    // without opening anything.
     this.framesEl.addEventListener('click', (e) => {
       const b = e.target.closest('button[data-beat]');
       if (!b) return;
@@ -258,7 +206,6 @@ class BenchAnnotations extends HTMLElement {
       if (b) this._openArtifact(Number(b.dataset.art));
     });
 
-    // The input figure and the finished clip open the same way.
     const open = (e) => {
       const host = e.target.closest('[data-open]');
       if (!host) return;
@@ -273,7 +220,6 @@ class BenchAnnotations extends HTMLElement {
     }
   }
 
-  /** Idempotent: the first caller wins, later ones are no-ops. */
   _loadInput() {
     const img = this.querySelector('.ba-input-img');
     if (img.getAttribute('src')) return;
@@ -283,22 +229,8 @@ class BenchAnnotations extends HTMLElement {
     img.src = this.ex.input;
   }
 
-  /* ---------- the scripted run ---------- */
 
-  /**
-   * The beats are scheduled, not awaited.
-   *
-   * An `await`-chain spanning the whole run needs its own cancel flag,
-   * and a second press landing while the first run is mid-flight can
-   * leave that flag set for the run still in progress — stranding the
-   * flow half-lit. A monotonic token removes the shared state: each
-   * timer only acts if the token it was issued under is still current,
-   * so Play/Stop/Play is always exactly one live run.
-   */
   _run() {
-    // Pressing Play before the visibility observer has fired must still
-    // work — the button is the explicit request the observer was only
-    // guessing at — so arm on demand rather than returning silently.
     this._loadInput();
     const token = ++this._token;
     this._clearTimers();
@@ -313,18 +245,18 @@ class BenchAnnotations extends HTMLElement {
     const at = (ms, fn) =>
       this._timers.push(setTimeout(() => token === this._token && fn(), ms));
 
-    at(0, () => this._setStage(1)); // the input lands
-    at(700, () => this._setStage(2)); // its frames deal out
+    at(0, () => this._setStage(1));
+    at(700, () => this._setStage(2));
 
     this.ex.beats.forEach((_, i) => {
       at(700 + i * BEAT_MS, () => {
         this._scrub(i);
-        if (i === 0) this._setStage(3); // the narration starts writing
+        if (i === 0) this._setStage(3);
       });
     });
 
     at(700 + this.ex.beats.length * BEAT_MS, () => {
-      this._setStage(4); // the finished clip
+      this._setStage(4);
       this._playVideo();
       this._running = false;
       this._setPlay(false, true);
@@ -336,7 +268,6 @@ class BenchAnnotations extends HTMLElement {
     this._timers = [];
   }
 
-  /** Straight to the end state: everything populated, nothing animated. */
   _finish() {
     this._loadInput();
     this._setStage(4);
@@ -378,7 +309,6 @@ class BenchAnnotations extends HTMLElement {
       s.classList.toggle('is-now', i === n - 1);
     });
     if (n >= 2) {
-      // Beat thumbnails only fetch their bytes once stage 2 is reached.
       this.framesEl.querySelectorAll('img[data-src]').forEach((im) => {
         im.src = im.dataset.src;
         im.removeAttribute('data-src');
@@ -398,18 +328,9 @@ class BenchAnnotations extends HTMLElement {
     this.narrBeat.textContent = `frame ${String(i + 1).padStart(2, '0')} of ${String(beats.length).padStart(2, '0')}`;
     this._type(beats[i].text, soft);
     this._fitNarration(beats[i].text);
-    if (this.video.paused) this._capture(i); // the clip owns the caption once it runs
+    if (this.video.paused) this._capture(i);
   }
 
-  /**
-   * Type the narration in; a hover scrub sets it outright instead.
-   *
-   * The rate comes from the beat's own budget rather than being a constant, so
-   * every line — eight words or thirty — is fully written before the next beat
-   * arrives. A long line simply types faster. The previous fixed 18ms tick
-   * could not finish the longest lines inside a beat, and they were replaced
-   * mid-sentence by the following one.
-   */
   _type(text, instant) {
     clearTimeout(this._typeT);
     if (instant || reducedMotion()) {
@@ -417,8 +338,6 @@ class BenchAnnotations extends HTMLElement {
       return;
     }
     const TICK = 18;
-    // Leave a quarter of the beat on the end so the finished line can be read
-    // rather than being completed exactly as it is replaced.
     const ticks = Math.max(1, Math.floor((BEAT_MS * 0.75) / TICK));
     const step = Math.max(1, Math.ceil(text.length / ticks));
     this.narrText.textContent = '';
@@ -431,18 +350,6 @@ class BenchAnnotations extends HTMLElement {
     tick();
   }
 
-  /**
-   * Set the sheet's type to whatever size shows the WHOLE line.
-   *
-   * The sheet is a fixed height on purpose — the pane must not grow as the run
-   * plays — and the narration is the one thing in it whose length is not under
-   * anyone's control. Scrolling it, which is what it used to do, hides the end
-   * of every long beat: the box is retyping itself, so no one scrolls it.
-   * Shrinking the type instead keeps every word on screen, and the measure is
-   * taken against the FULL text rather than whatever has been typed so far,
-   * so the size is settled before the line grows into it and does not jump
-   * halfway through.
-   */
   _fitNarration(full) {
     const el = this.narrText;
     if (!el) return;
@@ -457,15 +364,11 @@ class BenchAnnotations extends HTMLElement {
     })());
     if (probe.parentElement !== box) box.appendChild(probe);
 
-    const MAX = 0.82; // rem — the comfortable size, used whenever it fits
-    const MIN = 0.58; // rem — the floor; below this it stops being readable
+    const MAX = 0.82;
+    const MIN = 0.58;
     const room = el.clientHeight || box.clientHeight;
     const width = el.clientWidth;
     if (!room || !width) return;
-    // Measured at the paragraph's own width, not the sheet's: the probe is
-    // absolutely positioned, so its containing block is the sheet's padding
-    // box and it would otherwise be a couple of dozen pixels wider — enough
-    // to under-count the lines and pick a size that does not quite fit.
     probe.style.width = `${width}px`;
     probe.textContent = full;
     let size = MAX;
@@ -476,13 +379,6 @@ class BenchAnnotations extends HTMLElement {
     el.style.setProperty('--ba-narr-fs', `${Math.max(MIN, size).toFixed(2)}rem`);
   }
 
-  /**
-   * The clip's caption is the narration, and each beat's position in the
-   * rendered video is known (`vt` in the data file — the pipeline's own
-   * frame durations divided by the 4x preview speed), so it follows the
-   * playhead rather than sitting static. Before the clip is playing it
-   * mirrors whatever beat is scrubbed.
-   */
   _capture(i) {
     const b = this.ex.beats[i];
     if (!b || !this.outCapX) return;
@@ -490,14 +386,6 @@ class BenchAnnotations extends HTMLElement {
     this.outCapX.textContent = b.text;
   }
 
-  /**
-   * Tie the caption under the finished clip to the clip's own playhead.
-   *
-   * The track is computed from the clip's MEASURED duration rather than read
-   * out of the data file: `vt` there is an even division, and an even division
-   * of a narration whose lines run from eight words to thirty puts the caption
-   * a sentence ahead of the voice long before the end. See `beatTrack`.
-   */
   _syncCaption() {
     const v = this.video;
     const beats = this.ex.beats;
@@ -550,7 +438,6 @@ class BenchAnnotations extends HTMLElement {
     this.video.load();
   }
 
-  /* ---------- the viewer, one compartment per thing ---------- */
 
   _openInput() {
     this._loadInput();
@@ -567,13 +454,6 @@ class BenchAnnotations extends HTMLElement {
     });
   }
 
-  /**
-   * The beat frames, and only the frames.
-   *
-   * No narration underneath: at pane scale these are 56px wide, and what the
-   * viewer is for here is seeing what the frame actually shows. The narration
-   * belongs to the clip, where it can follow a playhead.
-   */
   _openFrames(index = 0) {
     const beats = this.ex.beats;
     lightbox.open({
@@ -592,13 +472,8 @@ class BenchAnnotations extends HTMLElement {
     });
   }
 
-  /** The finished clip, with the whole narration timed to its playhead. */
   _openClip() {
     const ex = this.ex;
-    // The same length-weighted track the pane uses, so the viewer and the pane
-    // never disagree about which line is being spoken. If the clip is already
-    // loaded here its real duration is the better number; otherwise the data
-    // file's own figure stands in until the viewer measures it.
     const track =
       this._capTrack?.length === ex.beats.length
         ? this._capTrack
@@ -633,8 +508,6 @@ class BenchAnnotations extends HTMLElement {
         kind: a.kind === 'text' ? 'code' : 'svg',
         src: a.file,
         lang: a.lang,
-        // The XML names nodes in a figure; read on its own it is a list of
-        // ids. So it opens beside the figure it describes.
         beside: a.beside || null,
         besideLabel: a.beside ? this.ex.title : '',
         label: `${a.label} (${a.sub})`,

@@ -1,11 +1,3 @@
-/**
- * Scroll reveal: any element carrying `.reveal` fades and lifts into
- * place once when it first enters the viewport. Children of a
- * `[data-reveal-group]` are staggered by their index.
- *
- * Import this once per page; it wires itself up on load and watches for
- * nodes added later (gallery cards, viewer panels) via MutationObserver.
- */
 const STAGGER_MS = 80;
 
 const observer = new IntersectionObserver(

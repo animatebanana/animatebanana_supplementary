@@ -1,4 +1,3 @@
-/* Failure cases: one window, a stage at a time. Owns .fw-* only. */
 
 failure-walk {
   display: block;
@@ -18,7 +17,6 @@ failure-walk {
   box-shadow: var(--shadow-hard);
 }
 
-/* ─────────── the maroon console ─────────── */
 
 .fw-bar {
   position: sticky; top: 56px; z-index: 6;
@@ -42,7 +40,6 @@ failure-walk {
 
 .fw-body { padding: 18px; display: grid; gap: 16px; }
 
-/* ─────────── cards ─────────── */
 
 .fw-card {
   border: 1.5px solid var(--line); border-radius: 16px; padding: 15px 17px; background: #FCFCFA;
@@ -67,14 +64,12 @@ failure-walk {
   display: grid; place-items: center; min-height: 80px;
 }
 
-/* ─────────── the masked pipeline ─────────── */
 
 .fw-pipewrap {
   border: 1.5px solid var(--line); border-radius: 12px; background: #fff;
   padding: 10px; overflow: hidden;
 }
 .fw-pipe { display: block; width: 100%; height: auto; }
-/* alpha masking: the rest of the pipeline stays visible but recedes */
 .fw-dim { opacity: .13; transition: opacity .45s ease; }
 .fw-lit { opacity: 1; transition: opacity .45s ease; }
 .fw-lit { animation: fw-pulse 3.6s ease-in-out infinite; }
@@ -87,7 +82,6 @@ failure-walk {
   .fw-dim, .fw-lit { transition: none; }
 }
 
-/* ─────────── source vs output ─────────── */
 
 .fw-pair { display: grid; grid-template-columns: 1fr 1.6fr; gap: 16px; align-items: start; }
 @media (max-width: 900px) { .fw-pair { grid-template-columns: 1fr; } }
@@ -109,14 +103,6 @@ failure-walk {
 .fw-frame img, .fw-frame object { width: 100%; height: 100%; object-fit: contain; }
 .fw-frame object { pointer-events: none; }
 .fw-frame .fw-ph { border: 0; background: transparent; }
-/* A clip fits the panel by its own shape rather than being letterboxed into a
-   fixed box, so a portrait diagram is not reduced to a sliver. Block, not the
-   centring grid the other frames use, so the video takes the full width; and a
-   px cap rather than vh, which resolves to nothing in an offscreen layout. */
-/* The clip is bounded by height, not stretched to the column: a landscape
-   diagram blown up to full width dwarfs the source beside it, while a portrait
-   one needs the height. Either way it keeps its own proportions and sits
-   centred in the frame. */
 .fw-frame.is-video {
   display: grid; place-items: center; aspect-ratio: auto;
   min-height: 240px; max-height: 470px; padding: 6px;
@@ -126,7 +112,6 @@ failure-walk {
   max-width: 100%; max-height: 458px;
 }
 
-/* ─────────── transport and caption ─────────── */
 
 .fw-transport { display: flex; align-items: center; gap: 10px; margin-top: 9px; }
 .fw-transport[hidden] { display: none; }
@@ -149,7 +134,6 @@ failure-walk {
 }
 .fw-cap.is-note { font-style: italic; color: #6B5312; }
 
-/* ─────────── scores ─────────── */
 
 .fw-scores { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 9px; }
 .fw-mrow {
@@ -159,11 +143,9 @@ failure-walk {
 .fw-mrow b { font-family: var(--font-display); font-size: 17px; font-weight: 600; line-height: 1; }
 .fw-mrow i { font-style: normal; font-size: 10.5px; color: var(--ink-soft); }
 .fw-mval { margin-top: 5px; font-family: var(--font-mono); font-size: 14px; font-weight: 700; }
-/* a run that produced nothing at all scores zero: worth spotting immediately */
 .fw-mrow.is-dead { background: #FDF0F4; border-color: var(--fw-out-line); }
 .fw-mrow.is-dead .fw-mval { color: var(--fw-warn); }
 
-/* ─────────── what went wrong ─────────── */
 
 .fw-note {
   display: flex; gap: 14px; align-items: flex-start;
@@ -187,7 +169,6 @@ failure-walk {
   background: #F3F0E8; padding: 1px 5px; border-radius: 5px;
 }
 
-/* ─────────── zoom ─────────── */
 
 .fw-lightbox {
   position: fixed; inset: 0; z-index: 70; display: grid; place-items: center;
@@ -206,7 +187,6 @@ failure-walk {
 }
 body.fw-noscroll { overflow: hidden; }
 
-/* ─────────── the evidence panel, outside the window ─────────── */
 
 .fw-evidence {
   background: #fff; border: 2px solid var(--ink); border-radius: 20px;
@@ -228,7 +208,6 @@ body.fw-noscroll { overflow: hidden; }
 .fw-evtable td.is-worst { background: #FDF0F4; border-color: var(--fw-out-line); color: var(--fw-warn); font-weight: 700; }
 .fw-evnote { margin: 14px 0 0; font-size: 13px; line-height: 1.65; color: var(--ink-soft); }
 
-/* ─────────── the shared observation ─────────── */
 
 .fw-obs {
   display: flex; gap: 14px; align-items: flex-start; margin-top: 16px;
@@ -244,7 +223,6 @@ body.fw-noscroll { overflow: hidden; }
   stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; position: relative; z-index: 1;
 }
 .fw-obs.is-empty .fw-bulb svg { stroke: var(--ink-faint); }
-/* the bulb gives off light while there is something to read */
 .fw-rays {
   position: absolute; inset: -6px; border-radius: 50%;
   background: radial-gradient(circle, rgba(242, 178, 0, .45) 0%, rgba(242, 178, 0, 0) 68%);
@@ -257,7 +235,6 @@ body.fw-noscroll { overflow: hidden; }
 }
 @media (prefers-reduced-motion: reduce) { .fw-rays { animation: none; } }
 
-/* ─────────── the critic comparison ─────────── */
 
 .fw-runs { margin: 18px 0 20px; }
 .fw-runhead {
@@ -296,7 +273,6 @@ body.fw-noscroll { overflow: hidden; }
 .fw-paren, .fw-comma { color: var(--ink-faint); font-weight: 400; }
 .fw-comma { margin-right: 3px; }
 .fw-tup { color: var(--ink); }
-/* anything that fell behind the full system is called out in red */
 .fw-tup.is-worse {
   color: var(--fw-warn); background: #FDF0F4; border-radius: 6px;
   padding: 1px 5px; box-shadow: inset 0 -2px 0 rgba(179, 86, 79, .45);
@@ -305,19 +281,12 @@ body.fw-noscroll { overflow: hidden; }
   font-family: var(--font-mono); font-size: 11px; color: var(--ink-faint); font-weight: 600;
 }
 
-/* the aggregate table keeps its observation, but it should not compete with the
-   insight above it */
 .fw-obs.is-quiet { background: #FCFCFA; border-color: var(--line); }
 .fw-obs.is-quiet .fw-rays { display: none; }
 .fw-obs.is-quiet .fw-bulb svg { stroke: var(--ink-soft); }
 
-/* the text block inside a flex panel has to be told to take the rest of the row,
-   otherwise it wraps at its own content width and leaves the panel half empty */
 .fw-note > div:last-child, .fw-obs > div:last-child { flex: 1 1 auto; min-width: 0; }
 
-/* One colour per run, so a column is recognisable before its label is read:
-   the full system in pink, then yellow, green and blue as each critic is
-   removed in turn. */
 .fw-col.is-full .fw-colcap { background: #FDF0F4; border-color: #F0C2D0; }
 .fw-col.is-minus_stage1_critic .fw-colcap { background: #FFF8D6; border-color: #E8D48A; }
 .fw-col.is-minus_stage2_critic .fw-colcap { background: #E9F6EE; border-color: #A9CDB7; }
@@ -327,10 +296,8 @@ body.fw-noscroll { overflow: hidden; }
 .fw-col.is-minus_stage1_critic { border-color: #E8D48A; background: #FFFDF5; }
 .fw-col.is-minus_stage2_critic { border-color: #A9CDB7; background: #FAFDFB; }
 .fw-col.is-minus_stage3_critic { border-color: #A8C4E0; background: #FAFCFE; }
-/* the original diagram is the input, not a run: no caption pane at all */
 .fw-col.is-src .fw-colcap { display: none; }
 
-/* a column's own transport, scaled down to sit under a narrow frame */
 .fw-coltransport { display: flex; align-items: center; gap: 7px; margin-top: 9px; }
 .fw-coltransport[hidden] { display: none; }
 .fw-pp.is-sm { width: 26px; height: 26px; box-shadow: 1.5px 1.5px 0 var(--ink); }

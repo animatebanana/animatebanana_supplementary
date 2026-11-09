@@ -1,4 +1,3 @@
-/* <anim-showcase>: source + style → engine chip → output, on a self-running loop. */
 
 @property --ac {
   syntax: '<color>';
@@ -19,7 +18,6 @@ anim-showcase { display: block; }
   transition: --ac 900ms var(--ease-out);
 }
 
-/* ================= layout: left to right ================= */
 .as-grid {
   position: relative;
   display: grid;
@@ -32,7 +30,6 @@ anim-showcase { display: block; }
 .as-out-wrap { padding-bottom: 104px; }
 .as-col-in, .as-engine-slot, .as-out-wrap { position: relative; z-index: 1; min-width: 0; }
 
-/* ================= wires & packets ================= */
 .as-wires {
   position: absolute;
   inset: 0;
@@ -95,7 +92,6 @@ anim-showcase { display: block; }
   box-shadow: 0 0 0 6px color-mix(in srgb, var(--ac) 28%, transparent), 0 0 24px var(--ac);
 }
 
-/* ================= shared card bits ================= */
 .as-card {
   background: #FFFFFF;
   border: 1.5px solid var(--ink);
@@ -152,7 +148,6 @@ anim-showcase { display: block; }
 .as-icon-btn svg { width: 17px; height: 17px; }
 .as-icon-btn:hover { border-color: var(--ink); background: var(--ac-soft); }
 
-/* ================= source window ================= */
 .as-source-view {
   position: relative;
   display: block;
@@ -231,7 +226,6 @@ anim-showcase { display: block; }
   box-shadow: 0 0 0 1.5px #FFFFFF;
 }
 
-/* ================= animation style (indicator only) ================= */
 .as-auto {
   margin-left: auto;
   display: inline-flex;
@@ -332,7 +326,6 @@ anim-showcase { display: block; }
   to { box-shadow: 0 0 0 8px transparent; }
 }
 
-/* ================= engine: a white chip with pins ================= */
 .as-engine {
   --pin: 22px;
   position: relative;
@@ -347,7 +340,6 @@ anim-showcase { display: block; }
     0 30px 60px -30px rgba(26, 24, 21, 0.35);
   transition: box-shadow 900ms var(--ease-out);
 }
-/* Soft accent glow behind the chip */
 .as-engine::before {
   content: '';
   position: absolute;
@@ -361,7 +353,6 @@ anim-showcase { display: block; }
 .as.is-busy .as-engine::before { opacity: 1; animation: as-glow 1.1s var(--ease-io) infinite alternate; }
 @keyframes as-glow { to { transform: scale(1.06); } }
 
-/* Pins: short leads with ring terminals, like a chip icon */
 .as-pins { position: absolute; z-index: -1; display: flex; justify-content: space-between; pointer-events: none; }
 .as-pins i { position: relative; display: block; background: var(--ink); border-radius: 2px; }
 .as-pins i::before {
@@ -385,11 +376,9 @@ anim-showcase { display: block; }
 .as-pins-t i, .as-pins-b i { width: 2.5px; height: 100%; }
 .as-pins-t i::before { top: -9px; left: 50%; transform: translateX(-50%); }
 .as-pins-b i::before { bottom: -9px; left: 50%; transform: translateX(-50%); }
-/* Connected ports take the style colour */
 .as-pins i[data-port] { background: var(--ac); }
 .as-pins i[data-port]::before { background: var(--ac); border-color: var(--ink); box-shadow: 0 0 0 4px color-mix(in srgb, var(--ac) 25%, transparent); }
 
-/* Inner die, echoing the chip icon's inner square */
 .as-chip {
   position: relative;
   padding: 6px 10px 14px;
@@ -411,7 +400,6 @@ anim-showcase { display: block; }
 @keyframes as-bounce { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-6px) rotate(-2deg); } }
 .as-eng-name { font-size: 1.7rem; }
 
-/* Straight rail with the three modules at their stations */
 .as-track { position: relative; height: 90px; margin: 16px 0 4px; }
 .as-rail {
   position: absolute;
@@ -483,7 +471,6 @@ anim-showcase { display: block; }
 .as-eng-led { flex: 0 0 auto; width: 8px; height: 8px; border-radius: 50%; background: var(--ac); }
 .as.is-busy .as-eng-led { animation: as-pulse 1s var(--ease-out) infinite; }
 
-/* Gear on the corner, like the chip icon */
 .as-gear {
   position: absolute;
   right: -24px;
@@ -499,7 +486,6 @@ anim-showcase { display: block; }
 .as.is-paused .as-gear { animation-play-state: paused; }
 @keyframes as-spin { to { transform: rotate(360deg); } }
 
-/* ================= output window ================= */
 .as-output {
   position: relative;
   overflow: hidden;
@@ -712,7 +698,6 @@ anim-showcase { display: block; }
 .as-pill:hover { transform: translate(-1px, -1px); box-shadow: 3px 3px 0 var(--ink); }
 .as-pill.is-fast { background: var(--ac-soft); }
 
-/* Hand-written control labels with drawn arrows (positioned in JS) */
 .as-note-arrows {
   position: absolute;
   inset: 0;
@@ -735,7 +720,6 @@ anim-showcase { display: block; }
   transform: rotate(var(--tilt, 0deg));
 }
 
-/* ---------------- full screen ---------------- */
 .as-output:fullscreen, .as-output.is-pseudo-full {
   display: flex;
   flex-direction: column;
@@ -747,7 +731,6 @@ anim-showcase { display: block; }
 .as-output.is-pseudo-full { position: fixed; inset: 0; z-index: 200; }
 .as-output:fullscreen .as-stage, .as-output.is-pseudo-full .as-stage { flex: 1; height: auto; }
 
-/* ---------------- source lightbox ---------------- */
 .as-lightbox {
   width: min(96vw, 1500px);
   max-width: none;
@@ -778,7 +761,6 @@ anim-showcase { display: block; }
 }
 .as-lb-body img { max-width: 100%; max-height: calc(94vh - 116px); object-fit: contain; }
 
-/* ================= responsive ================= */
 @media (max-width: 1180px) {
   .as-grid {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);

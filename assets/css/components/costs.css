@@ -1,21 +1,3 @@
-/*
-  costs.html — calls and throughput time of the pipeline, on a sample
-  set of 91 diagrams. Every chart is drawn by assets/js/pages/costs.js
-  from data/latency.json.
-
-  Stage colours are fixed across the site:
-    Stage 1 · Diagram Transmuter  yellow
-    Stage 2 · Animation Planner   green
-    Stage 3 · Diagram Animator    light blue
-  The washes are the stage panel fills of pipeline_animated.html; the
-  mark colours are deeper steps of the same hues, checked with the
-  dataviz palette validator for colour-blind separation. Every mark is
-  ink-outlined and named beside it, so identity never rests on colour.
-  Generators are circles or solid fills; critics are diamonds or hatched.
-
-  Because yellow, green and blue belong to the stages, anything that is
-  not a stage uses lavender (magnitudes) or coral (a single highlight).
-*/
 
 .cl-page {
   --st1: #F0BE2A;  --st1-wash: #FFF9DF;
@@ -37,9 +19,6 @@
 
 .cl-icon { width: 24px; height: 24px; flex: none; }
 
-/* ================================================================
-   Intro and headline tiles
-   ================================================================ */
 .cl-intro {
   max-width: 72ch;
   margin: 0 auto;
@@ -50,9 +29,6 @@
 }
 .cl-intro b { color: var(--ink); }
 
-/* ================================================================
-   Section symbols
-   ================================================================ */
 .cl-glyph { display: block; width: 100%; height: 100%; color: var(--ink-mid); overflow: visible; }
 .cl-glyph .g-fill { fill: var(--banana-soft); }
 [data-glyph='signal']    { --g-wash: var(--tan-soft); }
@@ -82,9 +58,6 @@
 .g-b3 { animation-delay: 0.4s; }
 @keyframes g-grow { 0% { transform: scaleY(0.2); } 35%, 80% { transform: scaleY(1); } 100% { transform: scaleY(0.2); } }
 
-/* ================================================================
-   Sections and cards
-   ================================================================ */
 .cl-section { margin-top: clamp(64px, 9vw, 120px); }
 .cl-section-head { display: flex; align-items: flex-end; gap: clamp(14px, 2vw, 22px); margin-bottom: 16px; }
 .cl-section-num {
@@ -178,9 +151,6 @@
 .cl-strip-note, .cl-scatter-r { font-size: var(--fs-sm); color: var(--ink-soft); }
 .cl-strip-note b, .cl-scatter-r b { color: var(--ink); }
 
-/* ================================================================
-   Chart furniture
-   ================================================================ */
 .cl-legend { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-bottom: 12px; }
 .cl-legend-item { display: inline-flex; align-items: center; gap: 7px; font-size: var(--fs-xs); color: var(--ink-soft); }
 .cl-swatch {
@@ -254,7 +224,6 @@
 
 .cl-reset, .cl-reset * { transition: none !important; }
 
-/* ---- Insight cards ---- */
 .cl-insights {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
@@ -275,9 +244,6 @@
 .cl-insight-k { margin-top: 5px; font-family: var(--font-mono); font-size: var(--fs-micro); letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-mid); line-height: 1.4; }
 .cl-insight p { margin: 8px 0 0; font-size: var(--fs-sm); color: var(--ink-soft); line-height: 1.55; }
 
-/* ================================================================
-   SVG charts: shared text and grid
-   ================================================================ */
 .cl-svgbox { width: 100%; }
 .cl-svg { display: block; overflow: visible; font-family: var(--font-body); }
 .cl-svg .fl-tick { font-family: var(--font-mono); font-size: 11px; fill: var(--ink-faint); }
@@ -285,7 +251,6 @@
 .fl-grid line, .st-grid { stroke: var(--line-strong); stroke-dasharray: 3 4; }
 .fl-base { stroke: var(--ink); stroke-width: 1.5; }
 
-/* ---- The flow chart ---- */
 .fl-band { fill: var(--st-wash); }
 .fl-divider { stroke: var(--line-strong); stroke-width: 1.5; }
 .fl-band-title { font-family: var(--font-display); font-size: 14px; font-weight: 750; fill: var(--ink); }
@@ -322,7 +287,6 @@
 .cl-chart:not(.is-in) .fl-area, .cl-chart:not(.is-in) .fl-crit-line { opacity: 0; }
 .cl-chart:not(.is-in) .fl-pt, .cl-chart:not(.is-in) .fl-crit { transform: scale(0); }
 
-/* ---- Critic call histograms ---- */
 .cl-hists { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
 .cl-hist {
   border: 1.5px solid var(--ink);
@@ -355,7 +319,6 @@
 .cl-hist-x { margin-top: 24px; text-align: center; font-family: var(--font-mono); font-size: var(--fs-micro); color: var(--ink-faint); }
 .cl-chart:not(.is-in) .cl-hbar { transform: scaleY(0); }
 
-/* ---- Style × critic heatmap ---- */
 .cl-heat { display: grid; grid-template-columns: minmax(130px, 1.3fr) repeat(var(--cols), minmax(0, 1fr)); gap: 5px; }
 .cl-heat-corner, .cl-heat-col {
   display: flex;
@@ -389,7 +352,6 @@
 .cl-heat-cell:hover { box-shadow: 3px 3px 0 var(--ink); transform: translateY(-2px); transition-delay: 0s; }
 .cl-chart:not(.is-in) .cl-heat-cell { opacity: 0; transform: scale(0.8); }
 
-/* ---- Style explorer (strip plot) ---- */
 .st-row { fill: var(--bg-alt); }
 .st-label { font-size: 13px; font-weight: 600; fill: var(--ink); }
 .st-dot { fill: var(--c, var(--r2)); fill-opacity: 0.75; stroke: var(--ink); stroke-width: 1; transition: r 0.2s, fill-opacity 0.2s, opacity 0.5s; transition-delay: 0s, 0s, calc(var(--i) * 12ms); }
@@ -401,13 +363,11 @@
 .st-enter .st-dot { opacity: 0; transition: none; }
 .cl-chart:not(.is-in) .st-dot { opacity: 0; }
 
-/* ---- Size scatter ---- */
 .sc-dot { fill: #1f4e8c; fill-opacity: 0.7; stroke: #0d2a52; stroke-width: 1.2; transition: r 0.2s, fill-opacity 0.2s, opacity 0.5s; transition-delay: 0s, 0s, calc(var(--i) * 15ms); }
 .sc-dot:hover, .sc-dot:focus-visible { r: 9; fill-opacity: 1; }
 .sc-fit { stroke: var(--accent); stroke-width: 2.5; stroke-dasharray: 8 6; }
 .cl-chart:not(.is-in) .sc-dot { opacity: 0; }
 
-/* ---- Complexity tertiles ---- */
 .cl-tert { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
 .cl-tert-col { border: 1.5px solid var(--ink); border-radius: var(--radius-md); background: var(--bg-alt); padding: 14px; }
 .cl-tert-head { font-family: var(--font-display); font-size: 1.1rem; font-weight: 750; }
@@ -434,7 +394,6 @@
 .cl-tert-bar span { font-family: var(--font-mono); font-size: var(--fs-micro); }
 .cl-chart:not(.is-in) .cl-tert-bar { transform: scaleY(0); }
 
-/* ---- Agent scaling (r per agent) ---- */
 .cl-rbars { display: grid; gap: 8px; }
 .cl-rbar-row { display: grid; grid-template-columns: minmax(120px, 190px) minmax(0, 1fr) 54px; align-items: center; gap: 14px; }
 .cl-rbar-label { display: flex; align-items: center; gap: 7px; font-size: var(--fs-sm); font-weight: 600; }
@@ -455,9 +414,6 @@
 .cl-rbar-val { font-family: var(--font-mono); font-size: var(--fs-sm); font-weight: 700; text-align: right; }
 .cl-chart:not(.is-in) .cl-rbar { transform: scaleX(0); }
 
-/* ================================================================
-   Stratified: one line per class
-   ================================================================ */
 .cl-sx-legend { margin: 4px 0 10px; }
 .cl-sx-chip {
   display: inline-flex;
@@ -515,9 +471,6 @@
 .cl-builder-k { min-width: 96px; font-family: var(--font-mono); font-size: var(--fs-micro); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); }
 .cl-chips { display: flex; flex-wrap: wrap; gap: 6px; }
 
-/* ================================================================
-   Cost on each model
-   ================================================================ */
 .cl-page { --prompt: #8C78C8; --completion: #E36A4E; }
 .cl-swatch-prompt { background: var(--prompt); }
 .cl-swatch-completion { background: var(--completion); }
@@ -548,7 +501,6 @@
 .cl-bc-seg span { font-family: var(--font-mono); font-size: var(--fs-xs); font-weight: 700; white-space: nowrap; }
 .cl-bc-seg.is-tight { justify-content: center; padding: 0 2px; }
 .cl-bc-seg.is-tight span { font-size: 0.66rem; letter-spacing: -0.02em; }
-/* Figures for a row whose segments are too narrow: tags just past the bar. */
 .cl-bc-out { position: absolute; top: 50%; transform: translateY(-50%); display: flex; gap: 6px; white-space: nowrap; transition: opacity 0.4s 0.8s; }
 .cl-bc-tag {
   display: inline-flex;
@@ -588,12 +540,7 @@
   .cl-bc-val { font-size: 1.1rem; }
 }
 
-/* ================================================================
-   Revision: contents bar, accents, error bars, new charts
-   ================================================================ */
 
-/* ---- Accents: each chart card has its own colour, which its controls,
-   rule and replay button pick up. None is a stage hue. ---- */
 .cl-acc-violet   { --acc: #6a4fc4; --acc-wash: #F1EDFB; }
 .cl-acc-vermilion{ --acc: #d9481f; --acc-wash: #FDEDE6; }
 .cl-acc-plum     { --acc: #9b2c6a; --acc-wash: #F8E9F1; }
@@ -610,7 +557,6 @@
 .cl-card[class*='cl-acc-'] .cl-toggle button[aria-pressed='true'] { background: var(--acc); color: #fff; box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.18); }
 .cl-card[class*='cl-acc-'] .cl-replay:hover { background: var(--acc-wash); }
 .cl-card[class*='cl-acc-'] .cl-builder-k { color: var(--acc); font-weight: 700; }
-/* A different toggle group, a different shade of the card's accent. */
 .cl-card[class*='cl-acc-'] .cl-toggle[data-group='metric'] button[aria-pressed='true'],
 .cl-card[class*='cl-acc-'] .cl-toggle[data-group='view'] button[aria-pressed='true'],
 .cl-card[class*='cl-acc-'] .cl-toggle[data-group='stat'] button[aria-pressed='true'] { background: color-mix(in srgb, var(--acc) 70%, #1A1815); }
@@ -618,7 +564,6 @@
 .cl-card[class*='cl-acc-'] .cl-toggle[data-group='adj'] button[aria-pressed='true'],
 .cl-card[class*='cl-acc-'] .cl-toggle[data-group='split'] button[aria-pressed='true'] { background: #E36A4E; }
 
-/* ---- Insight cards: one wash each, unless the card names a stage ---- */
 .cl-wash-0 { --st: #6a4fc4; --st-wash: #F1EDFB; }
 .cl-wash-1 { --st: #d9481f; --st-wash: #FDEDE6; }
 .cl-wash-2 { --st: #1c7c7d; --st-wash: #E6F4F3; }
@@ -626,7 +571,6 @@
 .cl-wash-4 { --st: #1f4e8c; --st-wash: #EAF0F8; }
 .cl-wash-5 { --st: #b3471d; --st-wash: #FBEDE3; }
 
-/* ---- One figure per stage, as chips ---- */
 .cl-trio { display: inline-flex; flex-wrap: wrap; gap: 4px; font-size: 0.98rem; }
 .cl-trio-i {
   display: inline-flex;
@@ -649,7 +593,6 @@
   border: 1px solid var(--ink);
 }
 
-/* ---- The contents bar ---- */
 .cl-toc-sentinel { height: 1px; }
 .cl-toc {
   position: sticky;
@@ -708,15 +651,12 @@
 }
 .cl-toc-list a.is-active { background: var(--banana-soft); color: var(--ink); font-weight: 600; }
 .cl-toc-list a.is-active b { background: var(--banana); }
-/* A long word (a model or product name) must break rather than run past
-   the cell's edge: the last item in the bar was being clipped. */
 .cl-toc-list a span { min-width: 0; overflow-wrap: anywhere; }
 .cl-toc-list a { padding-right: 16px; }
 .cl-toc-bar { display: block; height: 5px; background: var(--bg-sunk); }
 .cl-toc-bar i { display: block; height: 100%; background: linear-gradient(90deg, #6a4fc4, #d9481f, #1c7c7d); transform-origin: 0 50%; transform: scaleX(0); transition: transform 0.15s linear; }
 .cl-section { scroll-margin-top: 150px; }
 
-/* ---- Two more section symbols ---- */
 [data-glyph='layers'] { --g-wash: #F8E9F1; }
 [data-glyph='wallet'] { --g-wash: #FBEDE3; }
 .g-l { transform-box: fill-box; transform-origin: center; animation: g-float 3.2s ease-in-out infinite; }
@@ -725,7 +665,6 @@
 @keyframes g-float { 50% { transform: translateY(-2px); } }
 .g-coin { animation: g-wave 2s ease-in-out infinite; }
 
-/* ---- Error bars (± 1 SD) and critic value labels ---- */
 .fl-err { fill: none; stroke: var(--st, var(--ink)); stroke-width: 2; stroke-linecap: round; opacity: 0.9; filter: brightness(0.75); transition: opacity 0.6s 0.9s; }
 .fl-err-crit { stroke: var(--accent); filter: none; stroke-dasharray: 3 2; }
 .fl-crit-val { fill: var(--accent); font-size: 12px; }
@@ -735,7 +674,6 @@
 .sx-series.is-small .sx-err { opacity: 0.35; }
 .cl-sx-trow b small { display: block; font-size: var(--fs-micro); font-weight: 400; color: var(--ink-faint); }
 
-/* ---- Heatmap: red-orange cells, a key on the side ---- */
 .cl-heat-wrap { display: grid; grid-template-columns: minmax(0, 1fr) 86px; gap: 18px; align-items: stretch; }
 .cl-heat-cell { color: var(--ink); }
 .cl-heat-key { display: grid; grid-template-rows: auto 1fr auto auto; justify-items: center; gap: 6px; padding-top: 28px; }
@@ -743,7 +681,6 @@
 .cl-heat-key span { font-family: var(--font-mono); font-size: var(--fs-xs); font-weight: 700; }
 .cl-heat-key small { font-family: var(--font-mono); font-size: var(--fs-micro); color: var(--ink-faint); text-align: center; line-height: 1.3; }
 
-/* ---- Butterfly: share of calls against share of time ---- */
 .cl-bf { display: grid; gap: 7px; margin-bottom: 14px; }
 .cl-bf-row { display: grid; grid-template-columns: minmax(0, 1fr) 170px minmax(0, 1fr); align-items: center; }
 .cl-bf-head { font-family: var(--font-mono); font-size: var(--fs-micro); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); }
@@ -760,7 +697,6 @@
   transition: transform 0.9s var(--ease-out);
   transition-delay: calc(var(--i) * 60ms);
 }
-/* Calls in a lighter tint of the stage colour, time in the full colour. */
 .cl-bf-side.is-left i { border-radius: 7px 0 0 7px; transform-origin: 100% 50%; background-color: color-mix(in srgb, var(--st) 50%, #fff); }
 .cl-bf-side.is-right i { border-radius: 0 7px 7px 0; transform-origin: 0 50%; }
 .cl-bf-row.is-critic .cl-bf-side i { background-image: var(--critic-hatch); }
@@ -768,7 +704,6 @@
 .cl-bf-row:not(.cl-bf-head):hover { background: var(--st-wash); border-radius: 8px; }
 .cl-chart:not(.is-in) .cl-bf-side i { transform: scaleX(0); }
 
-/* ---- Style explorer: a colour per style ---- */
 .st-key { fill: var(--c); stroke: var(--ink); stroke-width: 1.2; }
 .st-dot:hover, .st-dot:focus-visible { fill-opacity: 1; }
 
@@ -783,9 +718,6 @@
   .cl-bf-name { font-size: var(--fs-xs); }
 }
 
-/* ================================================================
-   Responsive + reduced motion
-   ================================================================ */
 @media (max-width: 900px) {
   .cl-hists, .cl-tert { grid-template-columns: minmax(0, 1fr); }
   .cl-hbars { height: 130px; }
@@ -815,16 +747,10 @@
   .cl-page *, .cl-page *::before, .cl-page *::after { transition: none !important; }
 }
 
-/* Scrolling: the site's dotted paper is fixed to the viewport, which makes
-   the browser repaint the whole background on every scroll frame. On this
-   long, chart-heavy page it scrolls with the content instead. */
 body:has(.cl-page) { background-attachment: scroll; }
 .cl-card { contain: layout paint; }
 .cl-toc { will-change: transform; }
 
-/* Closed-source models we did not evaluate: a prominent block under the chart.
-   Our own backbone sits below a horizontal rule, so the block reads as "these,
-   against what we actually ran on". */
 .cl-bc-extra {
   margin-top: 28px;
   padding: 18px 20px 14px;
@@ -847,10 +773,7 @@ body:has(.cl-page) { background-attachment: scroll; }
 .cl-bc-extra-sub { margin: 0 0 14px; max-width: 70ch; font-size: var(--fs-sm); color: var(--ink-soft); line-height: 1.5; }
 .cl-bc-extra-chart { display: grid; gap: 12px; margin: 10px 0 8px; }
 .cl-bc-extra-legend { margin-bottom: 10px; }
-/* The bars here are a static comparison, not a reveal: they must be visible
-   whether or not the chart above has been scrolled into view. */
 .cl-chart:not(.is-in) .cl-bc-extra .cl-bc-bar { transform: none; }
-/* The demarcator: our backbone, ruled off from the models we did not run. */
 .cl-bc-xrow.is-ref { position: relative; margin-top: 12px; padding-top: 14px; }
 .cl-bc-xrow.is-ref::before {
   content: '';

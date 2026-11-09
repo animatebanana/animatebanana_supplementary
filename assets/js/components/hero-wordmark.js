@@ -1,12 +1,3 @@
-/**
- * <hero-wordmark text="AnimateBanana" split="7"></hero-wordmark>
- *
- * Two segments: the first in solid ink, the second as an ink outline
- * with banana cross-hatch and a hard yellow offset shadow. Every letter
- * is its own span with an `--i` index so hero.css can stagger the entry.
- * The outlined letters carry a separate shadow span (rather than
- * text-shadow) because text-shadow would paint over the clipped hatch.
- */
 class HeroWordmark extends HTMLElement {
   connectedCallback() {
     const text = this.getAttribute('text') || 'AnimateBanana';

@@ -1,5 +1,3 @@
-/* Prompt text, laid out for reading (assets/js/lib/prompt-format.js).
-   Shared by every page that shows a prompt; wrap the formatted text in .pt. Uses only the base design tokens. */
 .pt p { margin: 0 0 10px; }
 .pd-h { margin: 20px 0 8px; padding-bottom: 4px; font-family: var(--font-mono); font-size: 0.74rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); border-bottom: 1.5px solid var(--line); }
 .pt > section:first-child .pd-h:first-child, .pt > .pd-h:first-child { margin-top: 0; }
@@ -27,12 +25,10 @@
 .pd-chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 6px; padding: 0; list-style: none; counter-reset: c; }
 .pd-chips li { counter-increment: c; padding: 4px 10px; font-size: 0.82rem; background: var(--surface); border: 1.5px solid var(--line-strong); border-radius: 999px; }
 .pd-chips li::before { content: counter(c) '. '; font-family: var(--font-mono); font-weight: 800; }
-/* a style-specific part shown in place */
 .pd-filled { margin: 6px 0 14px; padding: 8px 14px 4px; background: #FFFCF0; border-left: 4px solid var(--banana-deep); border-radius: 0 10px 10px 0; }
 .pd-filled > .pd-slot-tag { display: block; margin-bottom: 4px; }
 .pd-filled .pd-h:first-of-type { margin-top: 6px; }
 .pd-srow.is-adapted { background: #FFFCF0; box-shadow: inset 3px 0 0 var(--banana-deep); }
-/* a style switch and a list of per-style parts under a prompt */
 .pd-adapters { margin-top: 26px; padding: 14px 16px 6px; background: var(--surface); border: 2px solid var(--ink); border-radius: 12px; }
 .pd-adapters .pd-h { margin-top: 0; }
 .pd-note { font-size: 0.85rem; color: var(--ink-soft); }
@@ -42,7 +38,6 @@
 .pd-apart { margin-bottom: 12px; }
 .pd-alabel { margin-bottom: 4px; font-family: var(--font-mono); font-size: 10px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--banana-ink); }
 .pd-pending { color: var(--ink-soft); }
-/* a prompt shown whole for one style: its style-specific parts, in place */
 .pd-filled.is-quiet { margin: 0 0 10px; padding: 2px 0 2px 12px; background: none; border-left: 3px solid var(--banana); border-radius: 0; }
 .pd-stylename { padding: 0 3px; background: var(--banana-soft); border-radius: 4px; }
 .pd-filled.is-swapped, .pd-srow.is-swapped, .pd-stylename.is-swapped { animation: pd-swap 0.9s ease-out; }

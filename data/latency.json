@@ -2,9 +2,7 @@
  "n": 91,
  "model": "Gemini 3.7 Flash",
  "notes": {
-  "latency": "Summed model latency of every call an agent made for a diagram, in seconds; stages run 4-way concurrent across diagrams, so wall-clock per diagram is lower.",
-  "3b": "The Diagram Animator Critic's latency is its call count x 31.9 s, the measured mean per call.",
-  "mapping": "1b is the Raster Integrator and 1c the Diagram Transmuter Critic, as the data shows."
+  "3b": "The Diagram Animator Critic's latency is its call count x 31.9 s, the measured mean per call."
  },
  "stages": [
   {

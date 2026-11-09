@@ -1,24 +1,11 @@
 import { loadJSON } from '../lib/data-loader.js';
 
-/**
- * <ablation-lab src="data/ablations.json">
- *
- * Every ablation against every metric. Each row is tinted by the stage it cuts
- * into — Stage 1 yellow, Stage 2 green, Stage 3 blue — and the best run in each
- * column is picked out in green. The numbers come from the paper table; the
- * shading, the deltas and the per-column winner are derived here.
- */
 
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, c =>
   ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-/* Three decimals, because three is what the paper's table prints and what
-   data/ablations.json holds. A fourth would be a zero this data never
-   measured, dressed up as precision. */
 const score = (v) => (v == null ? '—' : Number(v).toFixed(3));
 
-/** the paper's short metric names, whatever the data file calls them */
 const SHORT = { VF: 'VF', ASC: 'ASC', SSS: 'SS', GPS: 'GP', NAS: 'NA', AANS: 'AN' };
-/** which stage each ablation cuts into, for the row tint */
 const STAGE_OF = { stage1: 1, stage2: 2, sequencer: 2, narration: 2, designer: 3, all: 0 };
 const STAGE_LABEL = { 1: 'Stage 1', 2: 'Stage 2', 3: 'Stage 3', 0: 'All stages' };
 
@@ -60,7 +47,6 @@ class AblationLab extends HTMLElement {
     ];
     const worst = Math.max(...d.ablations.flatMap(a =>
       d.metrics.map(m => Math.abs((a.scores[m.key] ?? 0) - (full[m.key] ?? 0)))), 1e-4);
-    // the winner in each column, so "best" is stated rather than assumed
     const best = {};
     for (const m of d.metrics) best[m.key] = Math.max(...rows.map(r => r.scores[m.key] ?? -Infinity));
 

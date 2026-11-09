@@ -1,47 +1,5 @@
 import { esc, icon, reducedMotion, frameTrack } from './bench-core.js';
 
-/**
- * The benchmark module's fullscreen viewer.
- *
- * Each pane holds assets that are too small to judge at pane scale — a 56px
- * beat thumbnail, a 260px-tall clip, an XML listing. This opens any of them at
- * window size.
- *
- * **One set at a time.** A pane never hands over everything it owns; it hands
- * over the one compartment the viewer was opened from. Click a frame and you
- * page through frames; click the XML and you get the XML, beside the figure it
- * describes, with nowhere to page to. That is deliberate: a viewer that walks
- * from a beat frame into a code listing invites you to read a set that was
- * never a set, and it makes "what am I looking at" a question.
- *
- * So `open()` takes `paging`, and only a genuine sequence sets it. With paging
- * off there is no prev/next, no thumbnail rail and no counter — just the asset.
- *
- *   { kind: 'image',  src, caption?, label?, meta? }
- *   { kind: 'video',  mp4, webm, poster, captions?: [{t, text, vt}] }
- *   { kind: 'embed', src, duration, cues } an animation that is a document of
- *                                          its own (an SVG with its own CSS),
- *                                          played in an iframe with its lines
- *                                          under it
- *   { kind: 'clip', src, poster, vtt }  a silent animation that loops,
- *                                          its line of narration shown in a
- *                                          panel under it, read from a
- *                                          from WebVTT; `mp4` is tried first
- *                                          and `preview` (silent) second
- *   { kind: 'svg',    src }                rendered live, source beside it
- *   { kind: 'code',   src, lang, beside? } a listing; `beside` puts an image
- *                                          on the left, the code on the right
- *   { kind: 'art',    html, caption? }     a drawn placeholder, for an asset
- *                                          that does not exist yet
- *
- * Captions are the item's business, not the viewer's: a frame passes none and
- * gets none. Only the finished clip carries `captions`, because there the
- * narration is the point and follows the playhead.
- *
- * Accessibility: a real modal — `role="dialog" aria-modal="true"`, focus moved
- * in and restored on close, Tab cycled inside, Escape closes, and
- * Left/Right/Home/End move through a set when there is one.
- */
 
 const codeCache = new Map();
 
@@ -65,14 +23,6 @@ class BenchLightbox {
     this.i = 0;
   }
 
-  /**
-   * @param {object} o
-   * @param {string} o.title
-   * @param {string} o.accent
-   * @param {object[]} o.items
-   * @param {number} [o.index]
-   * @param {boolean} [o.paging]  true only for a real sequence (frames)
-   */
   open({ title, accent, items, index = 0, paging = false }) {
     this.close(true);
     this.items = items.filter(Boolean);
@@ -188,7 +138,6 @@ class BenchLightbox {
     el.querySelector('.bl-close').focus();
   }
 
-  /** Keep Tab inside the dialog — it is modal, so nothing behind it is reachable. */
   _trap(e) {
     const f = [
       ...this.el.querySelectorAll(
@@ -225,11 +174,7 @@ class BenchLightbox {
 
     this.stage.dataset.kind = it.kind;
     this.zoomer.innerHTML = this._render(it);
-    // Trimmed, so an item with nothing to say leaves the node genuinely
-    // empty: `.bl-cap:empty` hides the box, and whitespace would defeat it.
     this.cap.innerHTML = this._caption(it).trim();
-    // Only pixels are worth zooming; a code listing has its own scroll
-    // and an SVG artifact is already vector-sharp at any size.
     this._zoomable =
       it.kind === 'image' || it.kind === 'video' || it.kind === 'art' ||
       it.kind === 'clip' || it.kind === 'embed';
@@ -253,14 +198,9 @@ class BenchLightbox {
                   ${it.mp4 ? `<source src="${esc(it.mp4)}" type="video/mp4">` : ''}
                 </video>`;
       case 'embed':
-        // Its own document, with its own stylesheet and its own animation:
-        // an iframe keeps the two from reaching into each other.
         return `<iframe class="bl-embed" src="${esc(it.src)}" title="${esc(it.label || 'Animation')}"
                   scrolling="no"></iframe>`;
       case 'clip':
-        // Silent by construction: these animations were never narrated, so
-        // the element is muted and loops, and the words live in the caption
-        // track below rather than in an audio channel.
         return `<video class="bl-video bl-nv-video" playsinline preload="auto" muted loop
                   ${it.poster ? `poster="${esc(it.poster)}"` : ''}>
                   ${it.src ? `<source src="${esc(it.src)}" type="video/mp4">` : ''}
@@ -272,8 +212,6 @@ class BenchLightbox {
                   <pre class="bl-code"><code>loading…</code></pre>
                 </div>`;
       case 'code':
-        // A structural artifact is unreadable on its own: the XML names
-        // nodes in a figure, so the figure belongs on the page with it.
         return it.beside
           ? `<div class="bl-split">
                <figure class="bl-render bl-render--img">
@@ -332,26 +270,13 @@ class BenchLightbox {
       ${lines}`;
   }
 
-  /* ---------- click to zoom ---------- */
 
-  /**
-   * Zoom is the reason the viewer exists: a beat frame at pane scale is 56px
-   * wide, and even filling the stage a 1000px-wide process diagram is
-   * unreadable at its labels. So the stage is a fixed window onto a
-   * `transform: scale()`d layer.
-   *
-   * The interaction is the one people already expect from an image viewer:
-   * click to zoom in on the point you clicked, click again to fit, scroll to
-   * scale continuously, drag to pan once zoomed. The transform origin follows
-   * the pointer so the thing under the cursor stays under the cursor.
-   */
   _wireZoom() {
     const st = this.stage;
 
     st.addEventListener('click', (e) => {
       if (!this._zoomable) return;
-      if (this._dragged) return; // a pan is not a click
-      // A <video> owns its own controls; zoom it from the bar instead.
+      if (this._dragged) return;
       if (e.target.tagName === 'VIDEO') return;
       const { x, y } = this._point(e);
       this._setZoom(this._z > 1 ? 1 : 2.5, x, y);
@@ -394,7 +319,6 @@ class BenchLightbox {
     st.addEventListener('pointercancel', end);
   }
 
-  /** Pointer position inside the stage, as a 0..1 fraction. */
   _point(e) {
     const r = this.stage.getBoundingClientRect();
     return {
@@ -440,12 +364,6 @@ class BenchLightbox {
     }
   }
 
-  /**
-   * The narration under the clip is not decoration — it is the beat's own line,
-   * and each beat's position in the clip is known, so the caption follows the
-   * playhead rather than sitting static. Only the clip gets this; frames pass
-   * no captions at all.
-   */
   _wireVideo(it) {
     const v = this.stage.querySelector('video');
     if (!v || !it.captions?.length) return;
@@ -454,13 +372,6 @@ class BenchLightbox {
     let marks = it.captions.map((c) => (typeof c.vt === 'number' ? c.vt : null));
     if (marks.every((m) => m === null)) return;
 
-    // The caller's times were computed against whatever duration it knew.
-    // Here the file itself is loaded, so its measured length is the better
-    // number and the track is rebuilt from it, by the same rule the pane used,
-    // so the viewer and the pane it opened from stay in step.
-    // `captionsFixed` means the caller measured these against this very file
-    // and there is nothing better to compute; anything else is an estimate the
-    // real duration improves on.
     if (!it.captionsFixed) {
       v.addEventListener('loadedmetadata', () => {
         if (Number.isFinite(v.duration) && v.duration > 0) {
@@ -485,16 +396,6 @@ class BenchLightbox {
     paint();
   }
 
-  /**
-   * The animation, on its own: silent, looping, and captioned.
-   *
-   * These clips were rendered from a diagram's own animation frames and have
-   * no audio, so there is nothing to unmute. What the narration says lives in
-   * the WebVTT file beside the clip, and exactly one line of it is on screen
-   * at a time, in the panel under the animation. No caption burned over the
-   * picture, and no scrolling transcript beside it: the animation is the
-   * thing being watched, and the panel says what is happening in it.
-   */
   _wireClip(it) {
     const v = this.stage.querySelector('video');
     const bar = this.cap.querySelector('.bl-nv-bar');
@@ -527,8 +428,6 @@ class BenchLightbox {
       fill.style.width = `${p * 100}%`;
       if (!scrubbing) range.value = String(Math.round(p * 1000));
     };
-    // One line at a time, and the panel keeps its height between lines so
-    // the picture above it never moves as the words change.
     const paintLine = (force) => {
       if (!cues.length) return;
       const t = v.currentTime;
@@ -568,8 +467,6 @@ class BenchLightbox {
 
     const fallBack = () => {
       if (this.stage.querySelector('video') !== v) return;
-      // Only when nothing could be loaded at all. A <source> error can also
-      // arrive after a clip is already playing; that is not a missing video.
       if (v.readyState > 0 || v.networkState !== HTMLMediaElement.NETWORK_NO_SOURCE) return;
       this.zoomer.innerHTML = it.poster
         ? `<img class="bl-img" src="${esc(it.poster)}" alt="${esc(it.label || '')}" decoding="async">`
@@ -577,7 +474,7 @@ class BenchLightbox {
       line.hidden = true;
       bar.dataset.mode = 'none';
       status.hidden = false;
-      status.textContent = 'Animation not uploaded yet';
+      status.textContent = 'Animation unavailable';
       playBtn.disabled = true;
       range.disabled = true;
     };
@@ -586,7 +483,7 @@ class BenchLightbox {
     sources[sources.length - 1]?.addEventListener('error', fallBack);
     if (!sources.length) fallBack();
 
-    v.muted = true;                       // silent clips; nothing to unmute
+    v.muted = true;
     v.addEventListener('loadedmetadata', onLoaded, { once: true });
     v.addEventListener('timeupdate', () => {
       paintLine(false);
@@ -600,7 +497,6 @@ class BenchLightbox {
 
     v.play().catch(() => {});
 
-    // A click on the picture plays or pauses, as on any player.
     v.addEventListener('click', () => (v.paused ? v.play().catch(() => {}) : v.pause()));
     playBtn.addEventListener('click', () => (v.paused ? v.play().catch(() => {}) : v.pause()));
 
@@ -621,15 +517,6 @@ class BenchLightbox {
     paintTime();
   }
 
-  /**
-   * The embedded animation's narration, one line at a time.
-   *
-   * There is no playhead to read: the animation is CSS inside another
-   * document, so its position comes from that document's own running
-   * animation where the browser exposes it, and from a wall clock where it
-   * does not. Either way the caption is the only thing being driven — the
-   * picture runs itself.
-   */
   _wireEmbed(it) {
     const frame = this.stage.querySelector('iframe');
     const line = this.cap.querySelector('.bl-nv-caption');
@@ -637,20 +524,12 @@ class BenchLightbox {
 
     const t0 = performance.now();
     let at = -1;
-    let cand = -1; // index waiting to be confirmed
-    let held = 0; // frames it has held for
-    let anim = null; // the latched animation clock
+    let cand = -1;
+    let held = 0;
+    let anim = null;
     let lastT = 0;
     this._capWant = null;
 
-    /* The clock has to be the SAME clock every frame. The embedded SVG's
-       animations all run in lockstep, so which one is picked does not
-       matter — but whether there is one does: `getAnimations()` comes back
-       empty while the document is loading and again whenever the run is
-       rebuilt, and the old code quietly fell back to the wall clock for
-       those frames. The two clocks have different phases, so every lapse
-       jumped the position and flipped the cue index. Latch an animation
-       once one exists and hold the last good position through any gap. */
     const readClock = () => {
       const dur = it.duration || 1;
       try {
@@ -663,16 +542,12 @@ class BenchLightbox {
           return lastT;
         }
       } catch {
-        /* not ready, or not readable */
       }
-      if (anim) return lastT; // hold the last good position rather than jump
+      if (anim) return lastT;
       lastT = ((performance.now() - t0) / 1000) % dur;
       return lastT;
     };
 
-    /* One fade at a time: comparing against the queued text, not just the
-       DOM, stops a burst of cue changes restarting the fade-out repeatedly
-       and leaving the line stuck at opacity 0. */
     const setLine = (text) => {
       if (line.textContent === text) {
         this._capWant = text;
@@ -691,14 +566,12 @@ class BenchLightbox {
     };
 
     const tick = () => {
-      if (!this.el || !line.isConnected) return;       // the viewer has closed
+      if (!this.el || !line.isConnected) return;
       const t = readClock();
       let k = -1;
       it.cues.forEach((c, i) => {
         if (t >= c.start - 0.05) k = i;
       });
-      // One stray frame must not swap the line: a new index has to hold for
-      // two frames running before it is committed.
       if (k === at) {
         cand = k;
         held = 0;
@@ -723,8 +596,6 @@ class BenchLightbox {
     const el = this.el;
     if (!el) return;
     this.el = null;
-    // A narrated clip must fall silent the moment the viewer closes, not when
-    // its node is finally removed after the exit transition.
     el.querySelectorAll('video').forEach((v) => v.pause());
     document.body.classList.remove('bl-locked');
     el.classList.remove('is-in');
@@ -735,16 +606,6 @@ class BenchLightbox {
   }
 }
 
-/**
- * Colour the markup of an XML or SVG artifact.
- *
- * These files are the point of the pane — a hierarchy-aware XML tree, a
- * diagram redrawn as addressable SVG, that SVG with its animation compiled in
- * — and read as one grey slab none of that is visible. So the tags, the
- * attributes they carry and the values on them are told apart, which is
- * enough to see the structure at a glance. No library: one pass, and anything
- * it does not recognise stays plain text.
- */
 function markup(text) {
   const out = [];
   const re = /<!--[\s\S]*?-->|<\/?[A-Za-z_][\w:.-]*(?:"[^"]*"|'[^']*'|[^<>])*\/?>/g;
@@ -759,7 +620,6 @@ function markup(text) {
       out.push(`<i class="tk-com">${esc(tag)}</i>`);
       continue;
     }
-    // <name  attr="value" …  />  — the name, then each attribute in turn
     const head = tag.match(/^<\/?[A-Za-z_][\w:.-]*/)[0];
     const tail = tag.endsWith('/>') ? '/>' : '>';
     const body = tag.slice(head.length, tag.length - tail.length);
@@ -778,7 +638,6 @@ function markup(text) {
   return out.join('');
 }
 
-/** Minimal WebVTT reader: cue timings and text, nothing else. */
 function parseVTT(text) {
   const toSec = (s) => {
     const p = s.trim().replace(',', '.').split(':').map(Number);
@@ -799,14 +658,8 @@ function parseVTT(text) {
     .filter(Boolean);
 }
 
-/** One viewer for the whole page — two open dialogs is never the answer. */
 export const lightbox = new BenchLightbox();
 
-/**
- * The affordance every zoomable thing in a pane carries: a magnifier that fades
- * in on hover, so "this opens bigger" is visible rather than something you have
- * to discover by clicking.
- */
 export const zoomBadge = () => `
   <span class="bx-zoom" aria-hidden="true">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -815,20 +668,6 @@ export const zoomBadge = () => `
     </svg>
   </span>`;
 
-/**
- * No longer used, and deliberately.
- *
- * Every panel header used to carry a Fullscreen button, which is a second
- * control for something the pane already offers in the better place: the media
- * itself is the button (`.bx-zoomable`, with the magnifier that fades in on
- * hover), so the header's copy was a duplicate that also had to guess which of
- * a pane's several assets "the" one was. Clicking the figure, the clip, a
- * frame or an artifact still opens it; the header just no longer says so
- * twice.
- *
- * Kept exported so a pane that genuinely needs a header action can be written
- * without reinventing the styling, but nothing calls it today.
- */
 export const expandButton = (label = 'Open fullscreen') => `
   <button type="button" class="bx-expand" aria-label="${esc(label)}">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"

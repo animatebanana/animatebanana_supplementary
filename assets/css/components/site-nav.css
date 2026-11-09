@@ -30,7 +30,6 @@ site-nav .nav {
   margin: 0 auto;
 }
 
-/* ---- Brand (nav + drawer) ---- */
 :is(site-nav, .nav-drawer) .brand {
   display: inline-flex;
   align-items: center;
@@ -40,8 +39,6 @@ site-nav .nav {
 }
 :is(site-nav, .nav-drawer) .brand:hover { color: var(--ink); }
 :is(site-nav, .nav-drawer) .brand .wordmark { transform: translateY(-1px); }
-/* Transparent logo, unframed; negative margins let the illustration's
-   own whitespace overlap the padding so it reads at a useful size. */
 :is(site-nav, .nav-drawer) .brand { gap: 4px; }
 :is(site-nav, .nav-drawer) .brand-logo {
   flex: 0 0 auto;
@@ -74,7 +71,6 @@ site-nav .nav-toggle {
 site-nav .nav-toggle:hover { transform: translate(-1px, -1px); box-shadow: 5px 5px 0 var(--ink); }
 site-nav .nav-toggle svg { width: 22px; height: 17px; }
 
-/* ================= Slide-in drawer ================= */
 html.nd-lock { overflow: hidden; }
 
 .nav-drawer {
@@ -178,7 +174,6 @@ html.nd-lock { overflow: hidden; }
   .nd-panel, .nd-links a, .nd-backdrop { transition: none; }
 }
 
-/* the optional way back, beside Menu and dressed the same */
 site-nav .nav-back {
   display: inline-flex;
   align-items: center;
@@ -196,16 +191,14 @@ site-nav .nav-back {
   border-radius: 999px;
   box-shadow: 3px 3px 0 var(--ink);
   padding: 12px 22px;
-  line-height: normal;          /* a link inherits the body's taller line; the button does not */
+  line-height: normal;
   transition: transform var(--dur, .18s) var(--ease-out, ease), box-shadow var(--dur, .18s) var(--ease-out, ease);
 }
 site-nav .nav-back:hover { transform: translate(-1px, -1px); box-shadow: 5px 5px 0 var(--ink); }
 site-nav .nav-back svg { width: 17px; height: 14px; }
 site-nav .nav-back:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
-site-nav .nav-back + .nav-toggle { margin-left: -14px; }   /* the bar's 24px gap, brought in to 10px */
+site-nav .nav-back + .nav-toggle { margin-left: -14px; }
 
-/* A 68px logo and a padded pill fill a phone's bar between them; both come
-   down enough to leave the wordmark room, and no further. */
 @media (max-width: 560px) {
   :is(site-nav, .nav-drawer) .brand { font-size: 1.6rem; }
   :is(site-nav, .nav-drawer) .brand-logo { height: 54px; margin: -11px -2px -11px -9px; }

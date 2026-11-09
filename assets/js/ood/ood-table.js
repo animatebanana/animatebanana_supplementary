@@ -1,32 +1,3 @@
-/**
- * <ood-table src="data/ood/ood_runs.json"></ood-table>
- *
- * Per-diagram results under the gallery on the Generalization page: one row per
- * out-of-domain figure, filtered by the same subjects the gallery filters by,
- * with a summary that re-averages over whatever is on screen. Filtering to
- * Chemistry and reading the mean off the bottom is the point of the table, so
- * the mean is computed from the filtered rows rather than printed once.
- *
- * TWO KINDS OF COLUMN. VF and ASC are gates — a figure either passes or it does
- * not — so a row shows a mark and the summary shows the pass rate. SS, GP, NA
- * and AN are scores, so a row shows the number and the summary the mean. A gate
- * averaged like a score, or a score counted like a gate, would be a different
- * claim; the feed says which each is and this follows it.
- *
- * THE COMPARISON ROW IS ONLY SHOWN UNFILTERED. Underneath the unfiltered
- * summary sits AnimateBanana's in-domain result on AnimateBench, which is the
- * number these are worth reading against. It is withheld once a subject is
- * selected: four chemistry figures set beside a full benchmark run invites a
- * like-for-like reading that four figures cannot carry.
- *
- * SCORES MAY BE ABSENT, AND ABSENT IS NOT ZERO. The judge has not been run over
- * these figures yet. A missing value renders as a dash and is left out of its
- * column entirely — averaging nulls as zeros would invent a bad result, and
- * averaging them as the column mean would invent a typical one. The summary
- * says how many figures it actually counted.
- *
- * Part of the self-contained OOD module (assets/{css,js}/ood/, data/ood/).
- */
 import { loadJSON } from '../lib/data-loader.js';
 import { escapeHtml } from '../lib/format.js';
 
@@ -82,10 +53,9 @@ class OodTable extends HTMLElement {
       const va = key in (a.scores || {}) ? a.scores[key] : a[key];
       const vb = key in (b.scores || {}) ? b.scores[key] : b[key];
       if (va == null && vb == null) return 0;
-      if (va == null) return 1;            // unscored rows sink, whichever way you sort
+      if (va == null) return 1;
       if (vb == null) return -1;
       return (typeof va === 'string' ? va.localeCompare(vb) : va - vb) * dir;
-      // Band letters happen to sort A < B < C < D, which is already worst-last.
     });
   }
 
@@ -131,20 +101,16 @@ class OodTable extends HTMLElement {
     this.paint();
   }
 
-  /** A gate carries the band the judge gave; A and B accept, C and D reject. */
   _passed(band) {
     return band === 'A' || band === 'B';
   }
 
-  /** One body cell: the band for a gate, a number for a score, a dash for absent. */
   _cell(metric, value) {
     if (value == null) {
-      return '<td class="ood-num ood-pending"><span aria-label="not yet scored">—</span></td>';
+      return '<td class="ood-num ood-pending"><span aria-label="not scored">—</span></td>';
     }
     if (metric.kind === 'gate') {
       const ok = this._passed(value);
-      // The letter, not a tick: a B is a pass with a noted flaw, and flattening
-      // it to the same mark as an A throws away the thing worth reading.
       return `<td class="ood-num"><span class="ood-band ${ok ? 'is-pass' : 'is-fail'}"
                  title="${ok ? 'accepted' : 'rejected'}">${escapeHtml(value)}</span></td>`;
     }
@@ -175,8 +141,6 @@ class OodTable extends HTMLElement {
           .join('')
       : `<tr><td colspan="${2 + this._metrics.length}" class="ood-empty">No diagrams in this subject.</td></tr>`;
 
-    // A gate summarises as the share that passed; a score as the mean of the
-    // ones that have one.
     const cells = this._metrics.map((m) => {
       const vals = rows.map((r) => (r.scores || {})[m.id]).filter((v) => v != null);
       if (!vals.length) return { html: '<td class="ood-num ood-pending">—</td>', n: 0 };
@@ -195,9 +159,6 @@ class OodTable extends HTMLElement {
         }</td>`,
       };
     });
-    // "Mean" plus what it is a mean over, set against the comparison row's
-    // "On AnimateBench" underneath it — the two captions are what tell a reader
-    // that these are two different sets, not two runs of the same one.
     const summary = `
       <tr class="ood-sum">
         <th scope="row" class="ood-th-name">Mean</th>

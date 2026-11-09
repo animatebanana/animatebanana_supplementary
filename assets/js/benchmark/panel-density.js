@@ -1,30 +1,6 @@
 import { loadJSON, onVisible, esc, BenchSelect, panelHead, reducedMotion } from './bench-core.js';
 import { lightbox, zoomBadge } from './bench-lightbox.js';
 
-/**
- * <bench-density src="data/benchmark/density.json"></bench-density>
- *
- * DIAGRAM DIVERSITY, the figure's red pane.
- *
- * Two columns:
- *
- *   [ method + strata + shares ]   [ example stage ]
- *          left column                  right, large
- *
- * Picking a method in the dropdown swaps the axis, the blurb, the stratum
- * list and the share chart; clicking a stratum swaps the still on the stage.
- * The stage is a fixed-height box, so nothing below the pane ever jumps.
- *
- * NAMES AND SHARES ARE THE FIGURE'S. Each stratum's label and `share` are
- * copied verbatim from the AnimateBench figure. Layout Organization reports
- * no shares there, so it shows none here; no number is computed or invented.
- *
- * THE STAGE IS NOT A BUTTON. The still is there to be looked at; the only way
- * into the viewer is the magnifier in the corner (same rule as the blue pane).
- * The viewer opens the stratum's animation - silent, looping, and captioned
- * from the `captions.vtt` beside it. A stratum whose animation has not been
- * built yet opens on its still instead.
- */
 
 const METHOD_ICONS = {
   'element-density': 'grid',
@@ -34,10 +10,6 @@ const METHOD_ICONS = {
   'layout-organization': 'layout',
 };
 
-/**
- * The hand-drawn "click here" note above the stage: a looping arrow that lands
- * on the magnifier, because that button is the only way to the full clip.
- */
 const PLAY_DOODLE = `
   <span class="bd-doodle" aria-hidden="true">
     <span class="hand bd-doodle-text">click here to play the animation</span>
@@ -51,14 +23,6 @@ const PLAY_DOODLE = `
 
 const fmtShare = (v) => `${Number(v).toFixed(1)}%`;
 
-/**
- * Stamp a media URL with the data file's `version`.
- *
- * The examples are replaced in place - the same `diagram.png` and
- * `preview.mp4` under the same stratum folder - so a browser that has been
- * here before will happily show yesterday's figure. Bumping `version` in
- * density.json when the media changes is what makes the new files appear.
- */
 const stamped = (url, v) => (url && v ? `${url}${url.includes('?') ? '&' : '?'}v=${encodeURIComponent(v)}` : url);
 
 class BenchDensity extends HTMLElement {
@@ -76,7 +40,6 @@ class BenchDensity extends HTMLElement {
     this.mIndex = 0;
     this.sIndex = 0;
     this._render();
-    // The stage holds images; nothing is requested until the pane is seen.
     onVisible(this, () => {
       this._armed = true;
       this._paintStage();
@@ -157,7 +120,6 @@ class BenchDensity extends HTMLElement {
     });
     this.list.addEventListener('keydown', (e) => this._listKeys(e));
 
-    // Only the magnifier opens the viewer. A click on the still does nothing.
     this.querySelector('.bd-zoom').addEventListener('click', () => this._expand());
 
     this._setMethod(0);
@@ -183,9 +145,6 @@ class BenchDensity extends HTMLElement {
     this.sIndex = 0;
     const m = this.method;
 
-    // The axis's name, its unit and its ends say what it is; the paragraph
-    // under them restated it. `blurb` stays in the data as the axis's
-    // definition of record — it is simply not printed here.
     this.querySelector('.bd-blurb').hidden = true;
     const axis = this.querySelector('.bd-axis');
     axis.hidden = !m.axis;
@@ -213,11 +172,6 @@ class BenchDensity extends HTMLElement {
     this._setStratum(0);
   }
 
-  /**
-   * The figure's shares for this axis, largest first (the figure's order).
-   * Only strata that carry a `share` are listed; an axis with none hides the
-   * block entirely rather than showing an empty chart.
-   */
   _paintStats() {
     const rows = this.method.strata
       .map((s, k) => ({ s, k }))
@@ -249,7 +203,6 @@ class BenchDensity extends HTMLElement {
     this._paintStage();
   }
 
-  /** Cross-fade the stage to the selected stratum's still. */
   _paintStage() {
     if (!this._armed) return;
     const m = this.method;
@@ -264,7 +217,7 @@ class BenchDensity extends HTMLElement {
         const label = `${m.label} · ${s.label}`;
         this.querySelector('.bx-skel-tag').textContent = label;
         this.querySelector('.bx-skel-note').textContent =
-          'No example figure for this stratum yet.';
+          '';
 
         if (image) {
           this.img.alt = `${label}, example diagram`;
@@ -283,12 +236,6 @@ class BenchDensity extends HTMLElement {
     );
   }
 
-  /**
-   * The selected stratum's animation, on its own: `preview` is the clip built
-   * from the diagram's own animation frames and `captions` is its script. A
-   * stratum with no clip yet opens on the still, which is the honest thing to
-   * show rather than an empty player.
-   */
   _asset() {
     const m = this.method;
     const st = m.strata[this.sIndex];
@@ -303,12 +250,12 @@ class BenchDensity extends HTMLElement {
         kind: 'art',
         html: `<div class="bx-skel bd-skel-big"><span class="bx-skel-tag">${esc(label)}</span></div>`,
         label,
-        caption: 'No example figure for this stratum yet.',
+        caption: '',
       };
     }
     const v = this.data.version;
     if (!ex.preview) {
-      return { kind: 'image', src: stamped(ex.image, v), label, meta, caption: 'Animation not built yet.' };
+      return { kind: 'image', src: stamped(ex.image, v), label, meta, caption: '' };
     }
     return {
       kind: 'clip',

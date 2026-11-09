@@ -4,194 +4,125 @@
       <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#000000"/>
     </marker>
     <style>
-      /* =========================================
-         LAYER 1: CINEMATIC CAMERA RIG (PAN & ZOOM)
-         Pacing: 52s total (25 distinct steps * 2.0s + 2s Final Zoom Out)
-         Logic: Camera starts at global view, PANS (0.5s), ARRIVES. 
-         Camera HOLDS for 1.5s of reading time.
-         Safe Viewport: 960x400 (Top 400px, leaving 80px for the banner)
-         Center: X=480, Y=200
-         ========================================= */
       #camera_rig {
         transform-origin: 0 0;
         animation: cameraPan 52s ease-in-out infinite;
       }
 
       @keyframes cameraPan {
-        /* 0s: Start Full View */
         0% { transform: translate(0px, 0px) scale(1); }
         
-        /* TS1 (0s-2s): INPUT BLOCK */
         0.96%, 3.84% { transform: translate(360px, 57.5px) scale(1.0); }
         
-        /* TS2 (2s-4s): 3D Point Cloud */
         4.81%, 7.69% { transform: translate(216px, -2.4px) scale(2.2); }
         
-        /* TS3 (4s-6s): RGB Images */
         8.66%, 11.53% { transform: translate(317.5px, -263.75px) scale(2.5); }
         
-        /* TS4 (6s-8s): Depth Images */
         12.50%, 15.38% { transform: translate(223.75px, -428.75px) scale(2.5); }
         
-        /* TS5 (8s-10s): STEP 1 OVERVIEW (MACRO RESET) */
         16.35%, 19.23% { transform: translate(-120px, 65px) scale(1.0); }
         
-        /* TS6 (10s-12s): Superpoint */
         20.19%, 23.07% { transform: translate(-295px, 12.5px) scale(2.5); }
         
-        /* TS7 (12s-14s): Histogram */
         24.04%, 26.92% { transform: translate(-320px, -233.75px) scale(2.5); }
         
-        /* TS8 (14s-16s): Pivot View */
         27.88%, 30.76% { transform: translate(-595px, -265px) scale(2.5); }
         
-        /* TS9 (16s-18s): SAM 2 Segmentation */
         31.73%, 34.61% { transform: translate(-595px, -5px) scale(2.5); }
         
-        /* TS10 (18s-20s): 2D Mask Pivot */
         35.58%, 38.46% { transform: translate(-907.5px, -40px) scale(2.5); }
         
-        /* TS11 (20s-22s): SAM 2 Tracking */
         39.42%, 42.30% { transform: translate(-1220px, -5px) scale(2.5); }
         
-        /* TS12 (22s-24s): 3D Cues */
         43.27%, 46.15% { transform: translate(-1220px, 93.75px) scale(2.5); }
         
-        /* TS13 (24s-26s): Bidirectional Tracking */
         47.11%, 50.00% { transform: translate(-1310px, -15.25px) scale(2.1); }
         
-        /* TS14 (26s-28s): 2D Mask Track */
         50.96%, 53.84% { transform: translate(-831px, -184.75px) scale(1.9); }
         
-        /* TS15 (28s-30s): STEP 2 OVERVIEW (MACRO RESET) */
         54.81%, 57.69% { transform: translate(-120px, -172.5px) scale(1.0); }
         
-        /* TS16 (30s-32s): Lifting */
         58.65%, 61.53% { transform: translate(-1720px, -718.75px) scale(2.5); }
         
-        /* TS17 (32s-34s): Refining */
         62.50%, 65.38% { transform: translate(-1282.5px, -718.75px) scale(2.5); }
         
-        /* TS18 (34s-36s): Final 3D Proposal */
         66.35%, 69.23% { transform: translate(-882.5px, -693.75px) scale(2.5); }
         
-        /* TS19 (36s-38s): Class-Agnostic Segmentation */
         70.19%, 73.07% { transform: translate(-181.5px, -503.8px) scale(1.8); }
         
-        /* TS20 (38s-40s): OUTPUT OVERVIEW (MACRO RESET) */
         74.04%, 76.92% { transform: translate(312px, -339px) scale(1.4); }
         
-        /* TS21 (40s-42s): Open-Vocab */
         77.88%, 80.76% { transform: translate(180px, -643.75px) scale(2.5); }
         
-        /* TS22 (42s-44s): Open-Ended */
         81.73%, 84.61% { transform: translate(180px, -731.25px) scale(2.5); }
         
-        /* TS23 (44s-46s): CLIP */
         85.58%, 88.46% { transform: translate(292.5px, -825px) scale(2.5); }
         
-        /* TS24 (46s-48s): LLM */
         89.42%, 92.30% { transform: translate(92.5px, -825px) scale(2.5); }
         
-        /* TS25 (48s-50s): Labels */
         93.27%, 96.15% { transform: translate(180px, -930px) scale(2.5); }
         
-        /* GRAND FINALE (50s-52s): Global Zoom Out & Hold */
         97.11%, 100% { transform: translate(0px, 0px) scale(1); }
       }
 
-      /* =========================================
-         LAYER 2: HOPPING BOUNDING BOX
-         Logic: The box is invisible (opacity:0) during the 0.5s pan, 
-         and POPS into existence (opacity:1) at the EXACT moment the camera arrives.
-         ========================================= */
       #focus_box {
         animation: hop 52s step-end infinite;
       }
 
       @keyframes hop {
-        /* TS1 */
         0%, 0.95% { opacity: 0; x: 1px; y: 1px; width: 238px; height: 283px; }
         0.96%, 3.84% { opacity: 1; x: 1px; y: 1px; width: 238px; height: 283px; }
-        /* TS2 */
         3.85%, 4.80% { opacity: 0; x: 14px; y: 34px; width: 212px; height: 116px; }
         4.81%, 7.69% { opacity: 1; x: 14px; y: 34px; width: 212px; height: 116px; }
-        /* TS3 */
         7.70%, 8.65% { opacity: 0; x: 11px; y: 151px; width: 108px; height: 69px; }
         8.66%, 11.53% { opacity: 1; x: 11px; y: 151px; width: 108px; height: 69px; }
-        /* TS4 */
         11.54%, 12.50% { opacity: 0; x: 11px; y: 221px; width: 183px; height: 61px; }
         12.51%, 15.38% { opacity: 1; x: 11px; y: 221px; width: 183px; height: 61px; }
-        /* TS5 */
         15.39%, 16.34% { opacity: 0; x: 241px; y: 1px; width: 718px; height: 268px; }
         16.35%, 19.23% { opacity: 1; x: 241px; y: 1px; width: 718px; height: 268px; }
-        /* TS6 */
         19.24%, 20.19% { opacity: 0; x: 256px; y: 36px; width: 108px; height: 78px; }
         20.20%, 23.07% { opacity: 1; x: 256px; y: 36px; width: 108px; height: 78px; }
-        /* TS7 */
         23.08%, 24.03% { opacity: 0; x: 266px; y: 121px; width: 108px; height: 105px; }
         24.04%, 26.92% { opacity: 1; x: 266px; y: 121px; width: 108px; height: 105px; }
-        /* TS8 */
         26.93%, 27.88% { opacity: 0; x: 386px; y: 141px; width: 88px; height: 90px; }
         27.89%, 30.76% { opacity: 1; x: 386px; y: 141px; width: 88px; height: 90px; }
-        /* TS9 */
         30.77%, 31.73% { opacity: 0; x: 376px; y: 58px; width: 108px; height: 48px; }
         31.74%, 34.61% { opacity: 1; x: 376px; y: 58px; width: 108px; height: 48px; }
-        /* TS10 */
         34.62%, 35.57% { opacity: 0; x: 511px; y: 51px; width: 88px; height: 90px; }
         35.58%, 38.46% { opacity: 1; x: 511px; y: 51px; width: 88px; height: 90px; }
-        /* TS11 */
         38.47%, 39.42% { opacity: 0; x: 626px; y: 58px; width: 108px; height: 48px; }
         39.43%, 42.30% { opacity: 1; x: 626px; y: 58px; width: 108px; height: 48px; }
-        /* TS12 */
         42.31%, 43.26% { opacity: 0; x: 653px; y: 31px; width: 54px; height: 23px; }
         43.27%, 46.15% { opacity: 1; x: 653px; y: 31px; width: 54px; height: 23px; }
-        /* TS13 */
         46.16%, 47.11% { opacity: 0; x: 756px; y: 41px; width: 193px; height: 123px; }
         47.12%, 50.00% { opacity: 1; x: 756px; y: 41px; width: 193px; height: 123px; }
-        /* TS14 */
         50.01%, 50.96% { opacity: 0; x: 526px; y: 171px; width: 328px; height: 63px; }
         50.97%, 53.84% { opacity: 1; x: 526px; y: 171px; width: 328px; height: 63px; }
-        /* TS15 */
         53.85%, 54.80% { opacity: 0; x: 241px; y: 266px; width: 718px; height: 213px; }
         54.81%, 57.69% { opacity: 1; x: 241px; y: 266px; width: 718px; height: 213px; }
-        /* TS16 */
         57.70%, 58.65% { opacity: 0; x: 811px; y: 331px; width: 138px; height: 73px; }
         58.66%, 61.53% { opacity: 1; x: 811px; y: 331px; width: 138px; height: 73px; }
-        /* TS17 */
         61.54%, 62.50% { opacity: 0; x: 611px; y: 331px; width: 188px; height: 73px; }
         62.51%, 65.38% { opacity: 1; x: 611px; y: 331px; width: 188px; height: 73px; }
-        /* TS18 */
         65.39%, 66.34% { opacity: 0; x: 491px; y: 311px; width: 108px; height: 93px; }
         66.35%, 69.23% { opacity: 1; x: 491px; y: 311px; width: 108px; height: 93px; }
-        /* TS19 */
         69.24%, 70.19% { opacity: 0; x: 256px; y: 316px; width: 223px; height: 150px; }
         70.20%, 73.07% { opacity: 1; x: 256px; y: 316px; width: 223px; height: 150px; }
-        /* TS20 */
         73.08%, 74.03% { opacity: 0; x: 1px; y: 291px; width: 238px; height: 188px; }
         74.04%, 76.92% { opacity: 1; x: 1px; y: 291px; width: 238px; height: 188px; }
-        /* TS21 */
         76.93%, 77.88% { opacity: 0; x: 11px; y: 321px; width: 218px; height: 33px; }
         77.89%, 80.76% { opacity: 1; x: 11px; y: 321px; width: 218px; height: 33px; }
-        /* TS22 */
         80.77%, 81.73% { opacity: 0; x: 11px; y: 356px; width: 218px; height: 33px; }
         81.74%, 84.61% { opacity: 1; x: 11px; y: 356px; width: 218px; height: 33px; }
-        /* TS23 */
         84.62%, 85.57% { opacity: 0; x: 41px; y: 391px; width: 68px; height: 38px; }
         85.58%, 88.46% { opacity: 1; x: 41px; y: 391px; width: 68px; height: 38px; }
-        /* TS24 */
         88.47%, 89.42% { opacity: 0; x: 121px; y: 391px; width: 68px; height: 38px; }
         89.43%, 92.30% { opacity: 1; x: 121px; y: 391px; width: 68px; height: 38px; }
-        /* TS25 */
         92.31%, 93.26% { opacity: 0; x: 26px; y: 438px; width: 188px; height: 28px; }
         93.27%, 96.15% { opacity: 1; x: 26px; y: 438px; width: 188px; height: 28px; }
-        /* Grand Finale Zoom Out */
         96.16%, 100% { opacity: 0; }
       }
 
-      /* =========================================
-         LAYER 3: NARRATION BANNER VISIBILITY TIMING
-         ========================================= */
       .narrative_text {
         opacity: 0;
         font-family: Arial, sans-serif;
@@ -260,9 +191,7 @@
     </style>
   </defs>
 
-  <!-- ==================== BLOCK: CAMERA RIG ==================== -->
   <g id="camera_rig">
-    <!-- INPUT -->
     <g id="block_input" data-id="block_input" data-class="block" data-parent="root">
       <rect x="5" y="5" width="230" height="275" rx="15" fill="#F2F2F2" stroke="#7F7F7F" stroke-width="2"/>
       <text x="120" y="25" font-family="Arial" font-size="16" font-weight="bold" fill="#000" text-anchor="middle">INPUT</text>
@@ -290,7 +219,6 @@
       </g>
     </g>
 
-    <!-- STEP 1 -->
     <g id="block_step1" data-id="block_step1" data-class="block" data-parent="root">
       <rect x="245" y="5" width="710" height="260" rx="20" fill="#FDF3CD" stroke="#EBC360" stroke-width="2"/>
       <text x="260" y="28" font-family="Arial" font-size="16" font-weight="bold" fill="#000" text-anchor="start">Step 1: 3D-Aware 2D Mask Tracking</text>
@@ -361,7 +289,6 @@
       </g>
     </g>
 
-    <!-- STEP 2 -->
     <g id="block_step2" data-id="block_step2" data-class="block" data-parent="root">
       <rect x="245" y="270" width="710" height="205" rx="20" fill="#E2F0D9" stroke="#70AD47" stroke-width="2"/>
       <text x="260" y="292" font-family="Arial" font-size="16" font-weight="bold" fill="#000" text-anchor="start">Step 2: 3D Proposal Refinement Via Mask Optimization</text>
@@ -396,7 +323,6 @@
       </g>
     </g>
 
-    <!-- OUTPUT -->
     <g id="block_output" data-id="block_output" data-class="block" data-parent="root">
       <rect x="5" y="295" width="230" height="180" rx="15" fill="#F2F2F2" stroke="#7F7F7F" stroke-width="2"/>
       <text x="120" y="315" font-family="Arial" font-size="16" font-weight="bold" fill="#000" text-anchor="middle">OUTPUT</text>
@@ -424,7 +350,6 @@
       <text id="node_output_labels" data-id="node_output_labels" data-class="child_node" data-parent="block_output" x="120" y="455" font-family="Arial" font-size="14" font-weight="bold" fill="#000" text-anchor="middle">Table, TV, Desktop, Monitor, ...</text>
     </g>
 
-    <!-- EDGES -->
     <g>
       <path id="edge_3d_to_superpoint" data-id="edge_3d_to_superpoint" data-class="edge" data-source="raster_3d_point_cloud" data-target="raster_superpoint"
             d="M 222 85 L 264 82" fill="none" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)"/>
@@ -460,15 +385,10 @@
             d="M 260 392 L 241 392" fill="none" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)"/>
     </g>
 
-    <!-- THE FOCUS BOX -->
     <rect id="focus_box" fill="none" stroke="#FF0000" stroke-width="4" stroke-dasharray="8,4" rx="6" />
 
   </g>
-  <!-- End Camera Rig -->
 
-  <!-- =========================================
-       DYNAMIC NARRATION BANNER
-       ========================================= -->
   <g id="narration_banner">
     <rect x="20" y="405" width="920" height="70" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5" rx="8" />
     <text id="narr_ts1" class="narrative_text" x="480" y="445">
@@ -547,7 +467,6 @@
       <tspan x="480" dy="0">Output labels are finally attached to the components.</tspan>
     </text>
     <text id="narr_ts26" class="narrative_text" x="480" y="445">
-      <!--[cite: 1] -->
       <tspan x="480" dy="0">Grand Finale: Complete architectural overview of the pipeline[cite: 1].</tspan>
     </text>
   </g>

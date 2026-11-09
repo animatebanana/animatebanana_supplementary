@@ -1,4 +1,3 @@
-/* <ablation-walk> — one ablation on one sample. Owns .abl-* only. */
 
 ablation-walk {
   display: block;
@@ -16,7 +15,6 @@ ablation-walk {
   background: #FFF8E1; border: 1px dashed #E3C97A; color: #6B5312; font-size: 13px;
 }
 
-/* ─────────── console ─────────── */
 
 .abl-bar {
   position: sticky; top: 56px; z-index: 6;
@@ -38,14 +36,10 @@ ablation-walk {
   box-shadow: 2px 2px 0 rgba(0,0,0,.28);
 }
 
-/* ─────────── cards ─────────── */
 
-/* everything happens inside one window, the maroon console at its top */
 .abl-window {
   border: 2px solid var(--ink); border-radius: 20px; background: #fff;
   box-shadow: var(--shadow-hard);
-  /* deliberately NOT overflow:hidden — that would trap the sticky console
-     below and collapse it to a sliver. The bar rounds its own top corners. */
 }
 .abl-window .abl-bar {
   position: sticky; top: 56px; z-index: 6; margin: 0;
@@ -83,7 +77,6 @@ ablation-walk {
   border: 1px dashed var(--line); background: #FAFAF8; color: #9A958C; font-size: 12px;
 }
 
-/* ─────────── pipeline, cut on a loop ─────────── */
 
 .abl-pipewrap { overflow-x: auto; border-radius: 12px; background: #FCFDFE; border: 1.5px solid var(--line); }
 .abl-pipesvg { display: block; width: 100%; height: auto; min-width: 960px; }
@@ -115,7 +108,6 @@ ablation-walk {
   93%, 100% { opacity: 0; }
 }
 
-/* ─────────── visual examples ─────────── */
 
 .abl-trio { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; align-items: start; }
 @media (max-width: 1000px) { .abl-trio { grid-template-columns: 1fr; } }
@@ -131,7 +123,6 @@ ablation-walk {
 .abl-panel.is-full figcaption b { color: var(--abl-full-ink); }
 .abl-panel.is-ablated figcaption b { color: var(--abl-abl-ink); }
 
-/* fixed stage: the frame never resizes with its caption, so nothing jitters */
 .abl-frame {
   border-radius: 13px; border: 1.5px solid var(--line); background: #fff;
   overflow: hidden; aspect-ratio: 5 / 3; display: grid; place-items: stretch;
@@ -143,8 +134,6 @@ ablation-walk {
   display: block; width: 100%; height: 100%; object-fit: contain; background: #fff; border: 0;
 }
 .abl-frame .abl-ph { display: grid; place-items: center; border: 0; background: transparent; }
-/* the diagram is inside its own document, so let the click through to the
-   frame that opens the lightbox */
 .abl-frame object { pointer-events: none; }
 
 .abl-toggle { display: inline-flex; border: 1.5px solid var(--ink); border-radius: 9px; overflow: hidden; }
@@ -155,9 +144,7 @@ ablation-walk {
 .abl-toggle button + button { border-left: 1.5px solid var(--ink); }
 .abl-toggle button.is-on { background: var(--banana); color: var(--ink); }
 
-/* transport */
 .abl-transport { display: flex; align-items: center; gap: 9px; margin-top: 9px; }
-/* an author display: rule outranks the hidden attribute, so say it explicitly */
 .abl-transport[hidden] { display: none; }
 .abl-pp {
   width: 30px; height: 30px; flex: none; border-radius: 9px; cursor: pointer;
@@ -173,7 +160,6 @@ ablation-walk {
   border: 1.5px solid var(--line); border-radius: 8px; background: #fff;
 }
 
-/* the caption, in its own coloured panel of fixed height */
 .abl-cap {
   margin: 10px 0 0; padding: 11px 13px; border-radius: 12px;
   font-size: 12.5px; line-height: 1.55; min-height: 74px;
@@ -182,12 +168,9 @@ ablation-walk {
 .abl-panel.is-full .abl-cap { background: #F2F9FC; border-color: var(--abl-full-line); }
 .abl-panel.is-ablated .abl-cap { background: var(--abl-abl); border-color: var(--abl-abl-line); }
 .abl-panel.is-source .abl-cap { display: none; }
-/* no SVG on this side, so there is no narration to mirror out */
 .abl-cap.is-note { font-style: italic; color: var(--ink-faint); }
 
-/* ─────────── metrics ─────────── */
 
-/* a gated metric is not continuous: milestones, not a smooth bar */
 .abl-track {
   position: relative; margin: 4px 0 2px; height: 26px;
 }
@@ -217,7 +200,6 @@ ablation-walk {
   background: repeating-linear-gradient(90deg, var(--abl-final) 0 5px, transparent 5px 9px);
 }
 
-/* ─────────── critic ─────────── */
 
 .abl-crow { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 13px; }
 .abl-cstat {
@@ -249,7 +231,6 @@ ablation-walk {
 }
 .abl-bditem span { color: var(--ink-soft); }
 .abl-sbar { height: 9px; border-radius: 999px; background: #EDEAE3; overflow: hidden; }
-/* warm at the bottom of the scale, green at the top */
 .abl-sbar i {
   display: block; height: 100%; border-radius: 999px;
   background: linear-gradient(90deg, #E0A33C, #7FB069 75%);
@@ -267,7 +248,6 @@ ablation-walk {
 .abl-findings li b { display: block; font-weight: 600; line-height: 1.5; }
 .abl-findings li span { display: block; margin-top: 3px; color: var(--ink-soft); line-height: 1.5; }
 
-/* ─────────── insight, lit ─────────── */
 
 .abl-insight {
   display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 16px; align-items: start;
@@ -280,7 +260,6 @@ ablation-walk {
   background: var(--banana-soft, #FFF2B8); border: 2px solid var(--ink);
 }
 .abl-bulb svg { width: 23px; height: 23px; fill: none; stroke: var(--ink); stroke-width: 1.7; stroke-linecap: round; position: relative; z-index: 1; }
-/* the glow, and the rays coming off it */
 .abl-insight:not(.is-empty) .abl-bulb { animation: abl-glow 2.6s ease-in-out infinite; }
 @keyframes abl-glow {
   0%, 100% { box-shadow: 0 0 0 0 rgba(255,212,59,.55), 2px 2px 0 var(--ink); background: var(--banana-soft, #FFF2B8); }
@@ -303,7 +282,6 @@ ablation-walk {
 .abl-todo { color: var(--ink-soft); font-size: 12.5px; }
 .abl-todo code { font-family: var(--font-mono); font-size: 11.5px; background: #F1EFEA; padding: 2px 6px; border-radius: 5px; }
 
-/* ─────────── zoom ─────────── */
 
 .abl-lightbox {
   position: fixed; inset: 0; z-index: 70; display: grid; place-items: center;
@@ -332,7 +310,6 @@ body.abl-noscroll { overflow: hidden; }
 }
 
 
-/* ─────────── metrics, aligned to the example columns ─────────── */
 
 .abl-mrows { display: grid; gap: 10px; }
 .abl-mrow {
@@ -361,7 +338,6 @@ body.abl-noscroll { overflow: hidden; }
 .abl-mval.is-na { color: var(--ink-faint); font-weight: 500; }
 .abl-nodata { font-family: var(--font-mono); font-size: 12px; color: var(--ink-faint); }
 
-/* the continuous metrics: a slider read-out */
 .abl-slider { position: relative; height: 10px; border-radius: 999px; background: #E7E3DA; }
 .abl-slider i {
   display: block; height: 100%; border-radius: 999px;
@@ -372,12 +348,8 @@ body.abl-noscroll { overflow: hidden; }
   background: #fff; border: 2.5px solid var(--ink); transform: translate(-50%, -50%);
 }
 
-/* the gated metric keeps its milestones */
 .abl-track .abl-tick.is-on i { transform: scale(1.25); }
 
-/* Whichever side scores higher reads green and whichever scores lower reads red,
-   on the band milestones and the sliders alike. Neither side owns a colour: the
-   full system loses some of these, and a tie should look like neither. */
 .abl-mcell.is-win  { background: #F1F8F3; border-color: #A9CDB7; }
 .abl-mcell.is-lose { background: #FDF0F4; border-color: var(--abl-abl-line); }
 .abl-mcell.is-tie  { background: #FAFAF8; border-color: var(--line); }
@@ -396,11 +368,9 @@ body.abl-noscroll { overflow: hidden; }
 .abl-mcell.is-tie  .abl-tick.is-on i { border-color: var(--ink-soft); background: var(--ink-soft); }
 .abl-mcell.is-tie  .abl-tick.is-on span { color: var(--ink-soft); }
 
-/* ─────────── seek ─────────── */
 
 .abl-seek { flex: 1 1 auto; height: 8px; accent-color: var(--banana-deep, #F2B200); cursor: pointer; }
 
-/* ─────────── insight, inside the window ─────────── */
 
 .abl-insight {
   background: linear-gradient(135deg, #FFFBEA 0%, #FFF6F8 100%) !important;

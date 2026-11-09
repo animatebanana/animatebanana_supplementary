@@ -1,5 +1,3 @@
-/* Sticky contents bar (same design as costs.html), shared by Ablations and Evaluation. */
-/* ---- The contents bar ---- */
 .pg-toc-sentinel { height: 1px; }
 .pg-toc {
   position: sticky;
@@ -58,8 +56,6 @@
 }
 .pg-toc-list a.is-active { background: var(--banana-soft); color: var(--ink); font-weight: 600; }
 .pg-toc-list a.is-active b { background: var(--banana); }
-/* A long word (a model or product name) must break rather than run past
-   the cell's edge: the last item in the bar was being clipped. */
 .pg-toc-list a span { min-width: 0; overflow-wrap: anywhere; }
 .pg-toc-list a { padding-right: 16px; }
 .pg-toc-bar { display: block; height: 5px; background: var(--bg-sunk); }
@@ -73,8 +69,6 @@
   .pg-toc-list a { flex: 0 0 150px; }
 }
 
-/* Keep the bar slim, tucked up under the heading, and clear of the
-   table below it. */
 .pg-toc { margin: -18px 0 22px; }
 .pg-toc-title { padding: 6px 16px; }
 .pg-toc-list a { align-items: center; padding: 6px 14px; }

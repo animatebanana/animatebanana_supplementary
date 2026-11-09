@@ -4,22 +4,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AnimateBanana — Hopping Bbox — Paper2Fig_pipe_diff_000000490</title>
-<!--
-  AnimateBanana — Hopping Bbox — Paper2Fig_pipe_diff_000000490
-  An animated visual narrative produced by the AnimateBanana pipeline.
-
-  This file is self-contained: the animation, its images, its narration and its
-  controls are all inside it. Drop it on a server, open it from a disk, or put
-  it in an <iframe> - it needs nothing else and fetches nothing.
-
-  The animation is CSS. The controls drive it through the browser's animation
-  API - pause holds every keyframe at once, the bar scrubs them all to the same
-  moment, speed sets their rate together - and the caption is read from a clock
-  of the page's own that is driven alongside them. It has to be its own clock:
-  the drawing is made of hundreds of short animations that each stop when they
-  are done, so reading the time off any one of them gives a watch that stopped
-  half a second in.
--->
 <style>
   :root {
     --ink: #1A1815;
@@ -45,9 +29,6 @@
   }
   .ab-stage svg { display: block; width: 100%; height: auto; }
 
-  /* ---- Transport ----
-     Every control is the same height and centred on the same line, so the bar
-     reads as one object rather than a row of parts that happen to be adjacent. */
   .ab-bar {
     --h: 40px;
     display: flex;
@@ -89,7 +70,6 @@
   .ab.is-paused .ab-play .ab-ic-play { display: block; }
   .ab.is-paused .ab-play .ab-ic-pause { display: none; }
 
-  /* the rail is drawn; the range input laid over it is what you actually grab */
   .ab-scrub { position: relative; flex: 1 1 180px !important; min-width: 120px;
               display: flex; align-items: center; }
   .ab-rail {
@@ -162,7 +142,6 @@
   }
   .ab.is-fast .ab-rate { background: var(--banana); }
 
-  /* Captions on or off, said in words rather than left to be inferred */
   .ab-toggle .ab-led {
     width: 11px; height: 11px; border-radius: 50%;
     border: 2px solid var(--ink); background: var(--banana);
@@ -170,7 +149,6 @@
   .ab-toggle[aria-pressed="false"] { color: var(--mute); }
   .ab-toggle[aria-pressed="false"] .ab-led { background: #fff; }
 
-  /* ---- The line being narrated ---- */
   .ab-cap {
     display: flex;
     align-items: center;
@@ -191,8 +169,6 @@
   .ab.is-off .ab-cap { display: none; }
   @media (prefers-reduced-motion: reduce) { .ab-cap { transition: none; } }
 
-  /* Narrow: the bar wraps to two rows and squares off, rather than squeezing
-     the scrub bar down to nothing. */
   @media (max-width: 720px) {
     .ab-bar { flex-wrap: wrap; border-radius: 20px; }
     .ab-scrub { order: 3; flex-basis: 100% !important; }
@@ -205,7 +181,6 @@
   <div class="ab-stage">
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1544 410">
   <defs>
-    <!-- Arrowhead markers -->
     <marker id="arrow-vert" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
       <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#555555" />
     </marker>
@@ -263,12 +238,10 @@
     </style>
   </defs>
 
-  <!-- ================= BLOCK 1: Filter & Clean Data ================= -->
   <g id="block_filter_clean" data-id="block_filter_clean" data-class="block" data-parent="root">
     <rect id="bg_filter_clean" data-id="bg_filter_clean" data-class="composite_part" data-parent="block_filter_clean" x="10" y="5" width="330" height="295" rx="30" ry="30" fill="#dce8d6" stroke="#555555" stroke-width="2" />
     <text id="title_filter_clean" data-id="title_filter_clean" data-class="text_node" data-parent="block_filter_clean" x="175" y="38" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Filter &amp; Clean Data</text>
 
-    <!-- Node 1: All Tweets -->
     <g id="node_all_tweets" data-id="node_all_tweets" data-class="child_node" data-parent="block_filter_clean">
       <rect id="rect_all_tweets" data-id="rect_all_tweets" data-class="composite_part" data-parent="node_all_tweets" x="40" y="54" width="270" height="68" rx="10" ry="10" fill="#ffffff" stroke="#555555" stroke-width="1.5" />
       <text id="text_all_tweets_1" data-id="text_all_tweets_1" data-class="composite_part" data-parent="node_all_tweets" x="175" y="74" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#000000" text-anchor="middle">All Tweets with Los</text>
@@ -276,134 +249,108 @@
       <text id="text_all_tweets_3" data-id="text_all_tweets_3" data-class="composite_part" data-parent="node_all_tweets" x="175" y="112" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#000000" text-anchor="middle">Geography-Tag</text>
     </g>
 
-    <!-- Node 2: Filter COVID -->
     <g id="node_filter_covid" data-id="node_filter_covid" data-class="child_node" data-parent="block_filter_clean">
       <rect id="rect_filter_covid" data-id="rect_filter_covid" data-class="composite_part" data-parent="node_filter_covid" x="40" y="145" width="270" height="52" rx="10" ry="10" fill="#ffffff" stroke="#555555" stroke-width="1.5" />
       <text id="text_filter_covid_1" data-id="text_filter_covid_1" data-class="composite_part" data-parent="node_filter_covid" x="175" y="167" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#000000" text-anchor="middle">Filter for COVID-19</text>
       <text id="text_filter_covid_2" data-id="text_filter_covid_2" data-class="composite_part" data-parent="node_filter_covid" x="175" y="186" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#000000" text-anchor="middle">Keywords</text>
     </g>
 
-    <!-- Node 3: Pre-process Text -->
     <g id="node_preprocess_text" data-id="node_preprocess_text" data-class="child_node" data-parent="block_filter_clean">
       <rect id="rect_preprocess_text" data-id="rect_preprocess_text" data-class="composite_part" data-parent="node_preprocess_text" x="40" y="225" width="270" height="52" rx="10" ry="10" fill="#ffffff" stroke="#555555" stroke-width="1.5" />
       <text id="text_preprocess_text" data-id="text_preprocess_text" data-class="composite_part" data-parent="node_preprocess_text" x="175" y="256" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#000000" text-anchor="middle">Pre-process Text</text>
     </g>
   </g>
 
-  <!-- ================= BLOCK 2: Entity & Relation Extraction ================= -->
   <g id="block_entity_relation" data-id="block_entity_relation" data-class="block" data-parent="root">
     <rect id="bg_entity_relation" data-id="bg_entity_relation" data-class="composite_part" data-parent="block_entity_relation" x="402" y="5" width="330" height="295" rx="30" ry="30" fill="#fae5cf" stroke="#555555" stroke-width="2" />
     <text id="title_entity_relation_1" data-id="title_entity_relation_1" data-class="text_node" data-parent="block_entity_relation" x="567" y="28" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Entity &amp; Relation</text>
     <text id="title_entity_relation_2" data-id="title_entity_relation_2" data-class="text_node" data-parent="block_entity_relation" x="567" y="52" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Extraction</text>
 
-    <!-- Node 4: Sentiment Analysis -->
     <g id="node_sentiment_analysis" data-id="node_sentiment_analysis" data-class="child_node" data-parent="block_entity_relation">
       <rect id="rect_sentiment_analysis" data-id="rect_sentiment_analysis" data-class="composite_part" data-parent="node_sentiment_analysis" x="430" y="74" width="274" height="24" rx="6" ry="6" fill="#ffffff" stroke="#555555" stroke-width="1.5" />
       <text id="text_sentiment_analysis" data-id="text_sentiment_analysis" data-class="composite_part" data-parent="node_sentiment_analysis" x="567" y="91" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#000000" text-anchor="middle">Sentiment Analysis</text>
     </g>
 
-    <!-- Node 5: Topic Modeling -->
     <g id="node_topic_modeling" data-id="node_topic_modeling" data-class="child_node" data-parent="block_entity_relation">
       <rect id="rect_topic_modeling" data-id="rect_topic_modeling" data-class="composite_part" data-parent="node_topic_modeling" x="430" y="126" width="274" height="48" rx="10" ry="10" fill="#ffffff" stroke="#555555" stroke-width="1.5" />
       <text id="text_topic_modeling_1" data-id="text_topic_modeling_1" data-class="composite_part" data-parent="node_topic_modeling" x="567" y="146" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#000000" text-anchor="middle">NMF &amp; NCPD Topic</text>
       <text id="text_topic_modeling_2" data-id="text_topic_modeling_2" data-class="composite_part" data-parent="node_topic_modeling" x="567" y="165" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#000000" text-anchor="middle">Modeling</text>
     </g>
 
-    <!-- Node 6: Time Series Analysis -->
     <g id="node_time_series" data-id="node_time_series" data-class="child_node" data-parent="block_entity_relation">
       <rect id="rect_time_series" data-id="rect_time_series" data-class="composite_part" data-parent="node_time_series" x="430" y="200" width="274" height="26" rx="6" ry="6" fill="#ffffff" stroke="#555555" stroke-width="1.5" />
       <text id="text_time_series" data-id="text_time_series" data-class="composite_part" data-parent="node_time_series" x="567" y="218" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#000000" text-anchor="middle">Time Series Analysis</text>
     </g>
 
-    <!-- Node 7: Word Embedding -->
     <g id="node_word_embedding" data-id="node_word_embedding" data-class="child_node" data-parent="block_entity_relation">
       <rect id="rect_word_embedding" data-id="rect_word_embedding" data-class="composite_part" data-parent="node_word_embedding" x="430" y="250" width="274" height="26" rx="6" ry="6" fill="#ffffff" stroke="#555555" stroke-width="1.5" />
       <text id="text_word_embedding" data-id="text_word_embedding" data-class="composite_part" data-parent="node_word_embedding" x="567" y="268" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#000000" text-anchor="middle">Word Embedding</text>
     </g>
   </g>
 
-  <!-- ================= BLOCK 3: Graph Construction ================= -->
   <g id="block_graph_construction" data-id="block_graph_construction" data-class="block" data-parent="root">
     <rect id="bg_graph_construction" data-id="bg_graph_construction" data-class="composite_part" data-parent="block_graph_construction" x="794" y="5" width="330" height="295" rx="30" ry="30" fill="#ded6ea" stroke="#555555" stroke-width="2" />
     <text id="title_graph_construction_1" data-id="title_graph_construction_1" data-class="text_node" data-parent="block_graph_construction" x="959" y="28" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Graph</text>
     <text id="title_graph_construction_2" data-id="title_graph_construction_2" data-class="text_node" data-parent="block_graph_construction" x="959" y="52" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Construction</text>
 
-    <!-- Node 8: Definite Entities & Relations -->
     <g id="node_definite_entities" data-id="node_definite_entities" data-class="child_node" data-parent="block_graph_construction">
       <rect id="rect_definite_entities" data-id="rect_definite_entities" data-class="composite_part" data-parent="node_definite_entities" x="824" y="64" width="270" height="50" rx="10" ry="10" fill="#ffffff" stroke="#555555" stroke-width="1.5" />
       <text id="text_definite_entities_1" data-id="text_definite_entities_1" data-class="composite_part" data-parent="node_definite_entities" x="959" y="86" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#000000" text-anchor="middle">Definite Entities &amp;</text>
       <text id="text_definite_entities_2" data-id="text_definite_entities_2" data-class="composite_part" data-parent="node_definite_entities" x="959" y="105" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#000000" text-anchor="middle">Relations</text>
     </g>
 
-    <!-- Node 9: Graph Query & Visualization -->
     <g id="node_graph_query" data-id="node_graph_query" data-class="child_node" data-parent="block_graph_construction">
       <rect id="rect_graph_query" data-id="rect_graph_query" data-class="composite_part" data-parent="node_graph_query" x="824" y="145" width="270" height="50" rx="10" ry="10" fill="#ffffff" stroke="#555555" stroke-width="1.5" />
       <text id="text_graph_query_1" data-id="text_graph_query_1" data-class="composite_part" data-parent="node_graph_query" x="959" y="167" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#000000" text-anchor="middle">Graph Query &amp;</text>
       <text id="text_graph_query_2" data-id="text_graph_query_2" data-class="composite_part" data-parent="node_graph_query" x="959" y="186" font-family="Arial, Helvetica, font-size:15" fill="#000000" text-anchor="middle">Visualization</text>
     </g>
 
-    <!-- Node 10: Embed Graph -->
     <g id="node_embed_graph" data-id="node_embed_graph" data-class="child_node" data-parent="block_graph_construction">
       <rect id="rect_embed_graph" data-id="rect_embed_graph" data-class="composite_part" data-parent="node_embed_graph" x="824" y="225" width="270" height="52" rx="10" ry="10" fill="#ffffff" stroke="#555555" stroke-width="1.5" />
       <text id="text_embed_graph" data-id="text_embed_graph" data-class="composite_part" data-parent="node_embed_graph" x="959" y="256" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#000000" text-anchor="middle">Embed Graph</text>
     </g>
   </g>
 
-  <!-- ================= BLOCK 4: Graph Analysis ================= -->
   <g id="block_graph_analysis" data-id="block_graph_analysis" data-class="block" data-parent="root">
     <rect id="bg_graph_analysis" data-id="bg_graph_analysis" data-class="composite_part" data-parent="block_graph_analysis" x="1186" y="5" width="338" height="295" rx="30" ry="30" fill="#e8beaf" stroke="#555555" stroke-width="2" />
     <text id="title_graph_analysis" data-id="title_graph_analysis" data-class="text_node" data-parent="block_graph_analysis" x="1355" y="38" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Graph Analysis</text>
 
-    <!-- Node 11: Community Detection -->
     <g id="node_community_detection" data-id="node_community_detection" data-class="child_node" data-parent="block_graph_analysis">
       <rect id="rect_community_detection" data-id="rect_community_detection" data-class="composite_part" data-parent="node_community_detection" x="1210" y="69" width="290" height="36" rx="8" ry="8" fill="#ffffff" stroke="#555555" stroke-width="1.5" />
       <text id="text_community_detection" data-id="text_community_detection" data-class="composite_part" data-parent="node_community_detection" x="1355" y="92" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#000000" text-anchor="middle">Community Detection</text>
     </g>
 
-    <!-- Node 12: Node Similarity -->
     <g id="node_node_similarity" data-id="node_node_similarity" data-class="child_node" data-parent="block_graph_analysis">
       <rect id="rect_node_similarity" data-id="rect_node_similarity" data-class="composite_part" data-parent="node_node_similarity" x="1210" y="142" width="290" height="36" rx="8" ry="8" fill="#ffffff" stroke="#555555" stroke-width="1.5" />
       <text id="text_node_similarity" data-id="text_node_similarity" data-class="composite_part" data-parent="node_node_similarity" x="1355" y="165" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#000000" text-anchor="middle">Node Similarity</text>
     </g>
 
-    <!-- Node 13: Link Prediction -->
     <g id="node_link_prediction" data-id="node_link_prediction" data-class="child_node" data-parent="block_graph_analysis">
       <rect id="rect_link_prediction" data-id="rect_link_prediction" data-class="composite_part" data-parent="node_link_prediction" x="1210" y="215" width="290" height="36" rx="8" ry="8" fill="#ffffff" stroke="#555555" stroke-width="1.5" />
       <text id="text_link_prediction" data-id="text_link_prediction" data-class="composite_part" data-parent="node_link_prediction" x="1355" y="238" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#000000" text-anchor="middle">Link Prediction</text>
     </g>
   </g>
 
-  <!-- ================= EDGES (Straight Internal Arrows) ================= -->
-  <!-- Block 1 Internal -->
   <path id="edge_all_to_filter" data-id="edge_all_to_filter" data-class="edge" data-source="node_all_tweets" data-target="node_filter_covid" d="M 175 122 L 175 143" stroke="#555555" stroke-width="2.5" fill="none" marker-end="url(#arrow-vert)" />
   <path id="edge_filter_to_preprocess" data-id="edge_filter_to_preprocess" data-class="edge" data-source="node_filter_covid" data-target="node_preprocess_text" d="M 175 197 L 175 223" stroke="#555555" stroke-width="2.5" fill="none" marker-end="url(#arrow-vert)" />
 
-  <!-- Block 2 Internal -->
   <path id="edge_sentiment_to_topic" data-id="edge_sentiment_to_topic" data-class="edge" data-source="node_sentiment_analysis" data-target="node_topic_modeling" d="M 567 98 L 567 124" stroke="#555555" stroke-width="2.5" fill="none" marker-end="url(#arrow-vert)" />
   <path id="edge_topic_to_timeseries" data-id="edge_topic_to_timeseries" data-class="edge" data-source="node_topic_modeling" data-target="node_time_series" d="M 567 174 L 567 198" stroke="#555555" stroke-width="2.5" fill="none" marker-end="url(#arrow-vert)" />
   <path id="edge_timeseries_to_wordemb" data-id="edge_timeseries_to_wordemb" data-class="edge" data-source="node_time_series" data-target="node_word_embedding" d="M 567 226 L 567 248" stroke="#555555" stroke-width="2.5" fill="none" marker-end="url(#arrow-vert)" />
 
-  <!-- Block 3 Internal -->
   <path id="edge_definite_to_query" data-id="edge_definite_to_query" data-class="edge" data-source="node_definite_entities" data-target="node_graph_query" d="M 959 114 L 959 143" stroke="#555555" stroke-width="2.5" fill="none" marker-end="url(#arrow-vert)" />
   <path id="edge_query_to_embed" data-id="edge_query_to_embed" data-class="edge" data-source="node_graph_query" data-target="node_embed_graph" d="M 959 195 L 959 223" stroke="#555555" stroke-width="2.5" fill="none" marker-end="url(#arrow-vert)" />
 
-  <!-- Block 4 Internal -->
   <path id="edge_comm_to_similarity" data-id="edge_comm_to_similarity" data-class="edge" data-source="node_community_detection" data-target="node_node_similarity" d="M 1355 105 L 1355 140" stroke="#555555" stroke-width="2.5" fill="none" marker-end="url(#arrow-vert)" />
   <path id="edge_similarity_to_link" data-id="edge_similarity_to_link" data-class="edge" data-source="node_node_similarity" data-target="node_link_prediction" d="M 1355 178 L 1355 213" stroke="#555555" stroke-width="2.5" fill="none" marker-end="url(#arrow-vert)" />
 
-  <!-- ================= EDGES (Curved Inter-block Connectors) ================= -->
-  <!-- Block 1 to Block 2 -->
   <path id="edge_preprocess_to_sentiment" data-id="edge_preprocess_to_sentiment" data-class="edge" data-source="node_preprocess_text" data-target="node_sentiment_analysis" d="M 310 251 C 365 251, 370 86, 427 86" stroke="#555555" stroke-width="3.5" fill="none" marker-end="url(#arrow-curve)" />
 
-  <!-- Block 2 to Block 3 -->
   <path id="edge_wordemb_to_definite" data-id="edge_wordemb_to_definite" data-class="edge" data-source="node_word_embedding" data-target="node_definite_entities" d="M 704 263 C 760 263, 765 89, 821 89" stroke="#555555" stroke-width="3.5" fill="none" marker-end="url(#arrow-curve)" />
 
-  <!-- Block 3 to Block 4 -->
   <path id="edge_embed_to_comm" data-id="edge_embed_to_comm" data-class="edge" data-source="node_embed_graph" data-target="node_community_detection" d="M 1094 251 C 1150 251, 1150 87, 1207 87" stroke="#555555" stroke-width="3.5" fill="none" marker-end="url(#arrow-curve)" />
 
-  <!-- ================= NARRATION BANNER ================= -->
 
-  <!-- ================= FOCUS BOX ================= -->
   <rect id="focus_box" fill="none" stroke="#FF0000" stroke-width="4" stroke-dasharray="8,4" rx="6" />
 </svg>
   </div>
@@ -459,10 +406,6 @@
 
   var at = -1, swap = null, rate = 3, paused = false, scrubbing = false;
 
-  // THE CLOCK. The drawing is hundreds of short animations that each stop when
-  // they are done, so none of them can be asked what time it is. This one runs
-  // the length of the whole piece, does nothing visible, and is driven by the
-  // same controls - so the caption, the bar and the picture cannot disagree.
   var master = null;
   try {
     master = document.documentElement.animate(
@@ -495,7 +438,6 @@
 
   play.addEventListener('click', function () {
     paused = !paused;
-    // Restarting a finished piece rather than leaving Play doing nothing
     if (!paused && REPEATS === 1 && clock() >= LOOP - 0.05) each(function (a) { a.currentTime = 0; });
     each(function (a) { paused ? a.pause() : a.play(); });
     if (!paused) t0 = performance.now() - clock() * 1000;
@@ -553,10 +495,6 @@
     }
   }
 
-  // Two ways round, on purpose. requestAnimationFrame gives a smooth bar while
-  // the page is on screen, and stops dead in a background tab or an embed the
-  // browser considers hidden - where the animation itself keeps running, so the
-  // caption would be left behind. The slow timer covers exactly that case.
   function frame() { paint(); requestAnimationFrame(frame); }
 
   totalEl.textContent = clip(LOOP);

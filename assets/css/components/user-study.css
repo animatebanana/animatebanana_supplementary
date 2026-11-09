@@ -1,15 +1,4 @@
-/*
-  user-study.html — who took part, and the protocol they worked through.
 
-  Results are not repeated here; they are in the paper. The page pairs
-  writing with screenshots of the study portal, so a card is a column of
-  prose beside the frame it describes.
-*/
-
-/* This page runs wider than the site default: its cards pair a column of
-   writing with a screenshot, and both need room. The screenshots are
-   dense captures of a two-pane study portal, so they take the larger
-   share and the writing takes a newspaper measure beside them. */
 .page.us-widepage { max-width: 1380px; }
 
 .us-section { margin-top: clamp(38px, 5.5vw, 72px); }
@@ -17,18 +6,12 @@
 .us-section > p,
 .us-lede { max-width: 92ch; margin: 0 0 20px; color: var(--ink-soft); line-height: 1.65; }
 
-/* ---- Accents ----
-   One place to say what each colour is, so a tile only has to name it. */
 .us-a-pink   { --us-fill: var(--pink);   --us-wash: var(--pink-soft);   --us-deep: var(--pink-ink); }
 .us-a-blue   { --us-fill: var(--blue);   --us-wash: var(--blue-soft);   --us-deep: var(--blue-ink); }
 .us-a-mint   { --us-fill: var(--mint);   --us-wash: var(--mint-soft);   --us-deep: var(--mint-ink); }
 .us-a-tan    { --us-fill: var(--tan);    --us-wash: var(--tan-soft);    --us-deep: var(--tan-ink); }
 .us-a-banana { --us-fill: var(--banana); --us-wash: var(--banana-soft); --us-deep: var(--banana-ink); }
 
-/* ---- The headline panel ----
-   One block, four cards, each carrying its own colour. The panel is the
-   loud thing on the page, so it gets the paper-and-ink treatment: heavy
-   border, hard shadow, hatched ground behind the cards. */
 .us-headline {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -41,8 +24,6 @@
   background-image: var(--hatch-ink);
   box-shadow: 7px 7px 0 var(--ink);
 }
-/* Wide cards: the glyph sits beside the number rather than above it, so
-   each card reads along its length instead of stacking into a square. */
 .us-head-stat {
   position: relative;
   overflow: hidden;
@@ -89,7 +70,6 @@
 .us-head-sub { font-size: var(--fs-xs); color: var(--ink-soft); margin-top: 4px; }
 @keyframes us-pop { from { opacity: 0; transform: translateY(14px); } }
 
-/* ---- The cohort card: who they were, and how the sessions ran ---- */
 .us-cohort {
   margin-top: 18px;
   border: 2px solid var(--ink);
@@ -120,7 +100,6 @@
   grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
   gap: 12px;
 }
-/* Same wide shape as the headline cards, one step quieter. */
 .us-tile {
   position: relative;
   display: grid;
@@ -172,7 +151,6 @@
 .us-tile-pending { border-style: dashed; }
 .us-tile-pending .us-tile-value { color: var(--ink-faint); }
 
-/* ---- How the sessions ran ---- */
 .us-setting {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
@@ -199,9 +177,6 @@
   .us-tile, .us-tile::after { transition: none; }
 }
 
-/* ---- Step cards ----
-   One per stage of a session: a number, a title, the writing, and the
-   screenshot of that stage beside it. */
 .us-step {
   border: 2px solid var(--ink);
   border-radius: var(--radius-lg);
@@ -223,16 +198,12 @@
 }
 .us-step h3 { margin: 0; font-size: 1.36rem; letter-spacing: -0.02em; }
 
-/* Writing left, screenshots right. The writing keeps a readable measure
-   while the pair together fills the card's width. */
 .us-step-grid { display: grid; grid-template-columns: minmax(0, 0.74fr) minmax(0, 1.26fr); gap: clamp(20px, 2.6vw, 36px); align-items: start; }
 .us-step-copy > p { margin: 0 0 14px; color: var(--ink-soft); line-height: 1.68; }
 .us-step-copy > p:last-child { margin-bottom: 0; }
 .us-step-copy-wide { max-width: 92ch; }
 
 .us-shots { display: flex; flex-direction: column; gap: 16px; }
-/* Four stages of one tournament, read as a 2×2 contact sheet rather
-   than a column you have to scroll to compare. */
 .us-shots-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -240,7 +211,6 @@
   margin-top: 18px;
 }
 
-/* A footnote to a card: the normalisation note, the anonymity line. */
 .us-caption {
   font-size: var(--fs-xs);
   color: var(--ink-faint);
@@ -250,10 +220,6 @@
 }
 .us-anon-note { text-align: center; margin: 40px auto 0; }
 
-/* ---- Sub-steps ----
-   A stage of one experiment: its own small heading, its own writing, its
-   own screenshots. Ruled off rather than boxed, so a step card does not
-   turn into a stack of nested boxes. */
 .us-sub { margin-top: 26px; padding-top: 22px; border-top: 1.5px solid var(--line); }
 .us-sub-title {
   margin: 0 0 14px;
@@ -275,7 +241,6 @@
 }
 .us-sub .us-q { margin: 14px 0; }
 
-/* ---- Screenshot windows ---- */
 .us-shot { margin: 0; }
 .us-shot-link { display: block; }
 .us-shot-frame {
@@ -284,8 +249,6 @@
   background: var(--bg-alt);
   overflow: hidden;
 }
-/* A title bar, so a screenshot reads as a window rather than a floating
-   rectangle — three dots and the stage's name. */
 .us-shot-bar {
   display: flex;
   align-items: center;
@@ -325,8 +288,6 @@
   font-size: var(--fs-micro);
   color: var(--ink-faint);
   line-height: 1.7;
-  /* The path it names has no spaces to break on — let it break anywhere
-     rather than push the figure past the viewport on a phone. */
   overflow-wrap: anywhere;
 }
 .us-shot-zoom {
@@ -337,10 +298,6 @@
 
 .us-meta { display: flex; gap: 8px; flex-wrap: wrap; margin: 14px 0 0; }
 
-/* ---- The questions, as the participant met them ----
-   A question is quoted material, so it gets the treatment a pull-quote
-   would: a banana rule down its left edge, the metric's initials set in
-   a chip on that rule, and the answer options as the buttons they were. */
 .us-q {
   position: relative;
   border: 1.5px solid var(--line-strong);
@@ -374,7 +331,6 @@
   max-width: 62ch;
 }
 .us-q-answers { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
-/* The options as the participant saw them: pill buttons, hard shadow. */
 .us-answer {
   font-family: var(--font-mono);
   font-size: var(--fs-micro);
@@ -388,7 +344,6 @@
 .us-anchor { font-size: var(--fs-xs); color: var(--ink-faint); line-height: 1.45; }
 
 
-/* ---- Tournament ---- */
 .us-bracket { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 16px; }
 .us-seat {
   border: 2px solid var(--ink);
@@ -402,7 +357,6 @@
 .us-seat-win { background: var(--banana-soft); }
 .us-arrow { font-size: 1.1rem; color: var(--ink-faint); }
 
-/* ---- The contents bar ---- */
 .us-toc-sentinel { height: 1px; }
 .us-toc {
   position: sticky;
@@ -461,8 +415,6 @@
 }
 .us-toc-list a.is-active { background: var(--banana-soft); color: var(--ink); font-weight: 600; }
 .us-toc-list a.is-active b { background: var(--banana); }
-/* A long word (a model or product name) must break rather than run past
-   the cell's edge: the last item in the bar was being clipped. */
 .us-toc-list a span { min-width: 0; overflow-wrap: anywhere; }
 .us-toc-list a { padding-right: 16px; }
 .us-toc-bar { display: block; height: 5px; background: var(--bg-sunk); }

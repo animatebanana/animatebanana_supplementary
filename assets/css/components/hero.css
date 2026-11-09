@@ -1,6 +1,4 @@
-/* Overview page: hero, demo band, stats, how-it-works, contents. */
 
-/* ================= HERO ================= */
 .hero {
   position: relative;
   isolation: isolate;
@@ -17,7 +15,6 @@
 }
 .hero-inner > .kicker { animation: hero-fade 700ms var(--ease-out) both; }
 
-/* The transparent logo sits directly on the page — no frame. */
 .hero-logo {
   display: block;
   width: clamp(260px, 34vw, 480px);
@@ -28,7 +25,6 @@
 @keyframes logo-in { from { opacity: 0; transform: translateX(-56px) rotate(-4deg) scale(0.94); } }
 @keyframes logo-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
 
-/* ---------- Wordmark ---------- */
 .wm-wrap { position: relative; display: inline-block; max-width: 100%; }
 hero-wordmark { display: block; }
 .wm {
@@ -112,7 +108,6 @@ hero-wordmark { display: block; }
 .wm-note path { fill: none; stroke: var(--ink); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 @media (max-width: 900px) { .wm-note { display: none; } }
 
-/* ---------- Supporting copy ---------- */
 .hero-title {
   font-family: var(--font-display);
   font-size: clamp(1.6rem, 0.9rem + 2.7vw, 3.25rem);
@@ -145,17 +140,11 @@ hero-wordmark { display: block; }
   .hero-title .hl::before, .hero-logo, .wm-spark { animation: none; }
 }
 
-/* ================= PAPER ZONE (from the demo down) =================
-   The overview used to go flat white below the hero. It now keeps the same
-   dotted-paper ground the hero has, so the page reads as one sheet; the
-   bands that want their own ground (the gallery's warm paper, the
-   benchmark's white slab) still set it themselves. */
 .white-zone { position: relative; background: transparent; }
 
 .try-band { padding: clamp(40px, 5vw, 72px) 0 0; scroll-margin-top: var(--anchor-offset, 86px); }
 .try-wrap { max-width: 1720px; margin: 0 auto; padding: 0 clamp(14px, 2vw, 40px); }
 
-/* ================= STATS ================= */
 .stats {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -179,7 +168,6 @@ hero-wordmark { display: block; }
   color: var(--ink-soft);
 }
 
-/* ================= HOW IT WORKS ================= */
 .how { margin-top: var(--section-gap); }
 .steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 3vw, 44px); }
 @media (max-width: 860px) { .steps { grid-template-columns: 1fr; } }
@@ -205,7 +193,6 @@ hero-wordmark { display: block; }
 }
 @media (max-width: 860px) { .step:not(:last-child)::after { display: none; } }
 
-/* ================= CONTENTS ================= */
 .contents { margin-top: var(--section-gap); }
 .contents-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 18px; }
 .content-card {
@@ -239,7 +226,6 @@ hero-wordmark { display: block; }
 .content-card:hover .content-card-go { transform: rotate(-45deg); background: var(--banana); }
 
 
-/* ---- Centred section head (merged in with the gallery + benchmark bands) ---- */
 .section-head-center { text-align: center; margin-bottom: clamp(36px, 5vw, 64px); }
 .section-head-center h2, .section-head-center p { margin-left: auto; margin-right: auto; }
 .section-head-center .kicker::before { display: block; }

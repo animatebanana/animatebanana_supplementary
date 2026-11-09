@@ -1,24 +1,9 @@
 import { loadJSON, onVisible, esc, reducedMotion } from './bench-core.js';
 import { GLYPH } from './bench-glyphs.js';
 
-/**
- * <bench-band src="data/benchmark/hero.json"></bench-band>
- *
- * The AnimateBench band on the overview page: the benchmark's four
- * headline figures, counted up as they scroll into view, and the route
- * into the full benchmark page.
- *
- * It reads the same `data/benchmark/hero.json` the benchmark page's
- * equation row reads, so the two can never disagree — correcting a
- * count is one edit in one file.
- *
- * The count-up runs for 1400ms with an ease-out-quart curve, starts at 40%
- * visibility and groups digits with `toLocaleString`.
- */
 
 const DURATION = 1400;
 
-/** Stands in for a numeral on the tile that deliberately has none. */
 const CHECK = `
   <span class="bb-mark-ghost" aria-hidden="true">0</span>
   <svg class="bb-mark-svg" viewBox="0 0 64 64" fill="none" aria-hidden="true">
@@ -35,7 +20,7 @@ class BenchBand extends HTMLElement {
     try {
       data = await loadJSON(src);
     } catch {
-      this.remove(); // the band is an appendix teaser; never block the page
+      this.remove();
       return;
     }
 
@@ -97,7 +82,6 @@ class BenchBand extends HTMLElement {
     }
   }
 
-  /** Same curve as the site's existing stats band: ease-out-quart over 1.4s. */
   _count(el) {
     const end = Number(el.dataset.to) || 0;
     const suffix = el.dataset.suffix || '';

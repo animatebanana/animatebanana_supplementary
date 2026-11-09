@@ -1,21 +1,3 @@
-/**
- * <prompt-library src="#element-id" [kind="judge"]>
- *
- * A shelf of prompts: a list on the left, the chosen prompt on the right in a
- * scrollable reading panel. The prompt text is embedded in the page itself (a
- * <script type="application/json"> element named by `src`); there is no
- * separate prompt file. Prompts are laid out by lib/prompt-format.js (headings
- * and lists, without Markdown marks); the wording is exactly what is embedded.
- *
- *   generation (default)  one instruction per animation style, plus the rules
- *                         every style's prompt ends with.
- *   judge                 one prompt per metric; a style-adapter toggle beside
- *                         it shows the complete prompt for the chosen style.
- *
- * The chosen item is mirrored into the hash (#prompt-alpha-masking,
- * #prompt-VF) so a single prompt can be linked to. Copying from the panel is
- * refused (a deterrent only).
- */
 import { escapeHtml as esc } from '../lib/format.js';
 import { formatPrompt, inPlacePromptHTML } from '../lib/prompt-format.js';
 
@@ -65,7 +47,6 @@ class PromptLibrary extends HTMLElement {
       if (it) { this.show(it.dataset.item, true); return; }
       const st = e.target.closest('[data-style]');
       if (st) {
-        // the style-specific parts change in place: same prompt, same scroll position
         this.promptStyle = st.dataset.style;
         const y = this.body.scrollTop;
         this.render();
@@ -116,7 +97,6 @@ class PromptLibrary extends HTMLElement {
     const s = this.data.styles[it.index];
     kicker.textContent = 'Generation prompt';
     title.textContent = s.style;
-    // The rules' own first line ("CRITICAL SYNCHRONIZATION RULES:") is shown as their heading.
     const rules = this.data.rules.replace(/^CRITICAL SYNCHRONIZATION RULES:/, '*** CRITICAL SYNCHRONIZATION RULES ***');
     this.body.innerHTML = `
       <section class="pl-instr">${formatPrompt(s.instruction)}</section>

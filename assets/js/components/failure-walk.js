@@ -1,22 +1,9 @@
 import { loadJSON } from '../lib/data-loader.js';
 
-/**
- * <failure-walk src="data/failure_runs.json">
- *
- * One window: pick a stage from the maroon bar and the pipeline diagram
- * unmasks that stage, leaving the rest of the pipeline faded behind it. Below
- * it sits the run that went wrong at that stage - the source diagram it was
- * given, the animation it produced, its scores, and what went wrong.
- *
- * The failure files render as live SVG rather than as clips: a failure is
- * usually visible standing still, and several of them are exactly the kind of
- * broken output that would not survive being re-rendered through a pipeline.
- */
 
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, c =>
   ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
-// playbackRate is capped at 16 by the browser, so that is the top of the list
 const SPEEDS = [0.5, 1, 2, 4, 8, 16];
 
 const METRIC_NAME = {
@@ -135,9 +122,7 @@ class FailureWalk extends HTMLElement {
         <div>
           <div class="fw-kicker">Failure observation</div>
           ${s.note ? `<p>${esc(s.note)}</p>`
-                   : `<p class="fw-todo">Nothing written for this one yet — add it on the
-                       <code>${esc(g.key)} › ${esc(s.id)}</code> row of
-                       <code>data/failure_notes.csv</code>.</p>`}
+                   : ''}
         </div>
       </section>` : `
       <section class="fw-card">
@@ -149,7 +134,6 @@ class FailureWalk extends HTMLElement {
     if (s) this.mountFailure();
   }
 
-  /* ───────────── the pipeline, masked down to one stage ───────────── */
 
   async mountPipeline() {
     const host = this.querySelector('[data-pipe]');
@@ -171,18 +155,7 @@ class FailureWalk extends HTMLElement {
     this.maskTo(svg, this.stage.num);
   }
 
-  /**
-   * Alpha masking: everything fades back except the stage in question, which
-   * keeps full opacity. The diagram names its parts by stage - `node_s2_…`,
-   * `edge_s2_…`, `text_s2_…`, `text_io_s2_…` and `block_stage2` - and the
-   * blocks are siblings rather than containers, so the labels have to be
-   * matched too. Leaving them dimmed under a lit block was what made the
-   * unmasked stage look half-drawn.
-   */
   maskTo(svg, num) {
-    // the block, its nodes, its edges and its labels - but not the inputs and
-    // outputs sitting around it (`node_s2_in_d`, `text_io_s2_…`), which belong
-    // to the pipeline between the stages rather than to the stage itself
     const mine = new RegExp(`^(node|edge|text)_s${num}_|^block_stage${num}$`);
     const io = new RegExp(`^node_s${num}_(in|out)_`);
     for (const el of svg.querySelectorAll('[data-id]')) {
@@ -194,15 +167,7 @@ class FailureWalk extends HTMLElement {
     }
   }
 
-  /* ───────────── the failing output ───────────── */
 
-  /**
-   * The failure files point at their crops as `../../rasters/<sample>/…` while
-   * the crops sit in a `rasters/` folder beside the file, and an SVG loaded
-   * through <img> may not fetch external images at all - so the markup is
-   * fetched, the crops repointed absolutely, and the result handed to an
-   * <object> as a blob.
-   */
   async mountFailure() {
     const host = this.querySelector('[data-media]');
     const s = this.sample;
@@ -220,8 +185,6 @@ class FailureWalk extends HTMLElement {
     const dir = abs.href.slice(0, abs.href.lastIndexOf('/') + 1);
     markup = markup.replace(/((?:xlink:)?href=")((?:\.\.\/)*)rasters\//g,
                             (_m, attr) => `${attr}${dir}rasters/`);
-    // a bare & in a CSS comment makes the file invalid XML, which a browser
-    // refuses outright; escaping it costs nothing and renders them all
     markup = markup.replace(/&(?!#?\w+;)/g, '&amp;');
     const type = /^\s*(<\?xml|<svg)/i.test(markup) ? 'image/svg+xml' : 'text/html';
     const url = URL.createObjectURL(new Blob([markup], { type }));
@@ -231,11 +194,6 @@ class FailureWalk extends HTMLElement {
     host.setAttribute('data-zoomable', url);
   }
 
-  /**
-   * A clip built from the animation, played through the panel's own transport
-   * with its narration in the pane below rather than burned into the picture.
-   * The timeline beside the clip says which line belongs to which moment.
-   */
   async mountClip(host, s) {
     host.innerHTML = `<video src="${esc(s.media.src)}" muted loop playsinline preload="metadata"></video>`;
     host.setAttribute('data-zoomable', s.media.src);
@@ -257,7 +215,7 @@ class FailureWalk extends HTMLElement {
     try {
       const caps = await (await fetch(s.media.captions, { cache: 'force-cache' })).json();
       if (this.clip?.el === el) this.clip.caps = caps;
-    } catch { /* the clip still plays; there is just nothing to mirror out */ }
+    } catch {  }
   }
 
   startCaptions() {
@@ -298,7 +256,6 @@ class FailureWalk extends HTMLElement {
     if (this.clip) this.clip.el.playbackRate = rate;
   }
 
-  /* ───────────── zoom ───────────── */
 
   openZoom(src) {
     const lb = this.querySelector('[data-lightbox]');
@@ -330,16 +287,6 @@ class FailureWalk extends HTMLElement {
 customElements.define('failure-walk', FailureWalk);
 
 
-/**
- * <failure-evidence src="data/failure_runs.json">
- *
- * The claim the page is making, with the numbers behind it. Removing a critic
- * costs progressively less the later in the pipeline it sits - but the cost is
- * not graded quality. Among the runs that produced anything at all, the mean AN
- * hardly moves; what changes is how often a run collapses to nothing. So both
- * columns are shown, because reporting only the overall mean would credit the
- * critics with something the data does not say.
- */
 class FailureEvidence extends HTMLElement {
   async connectedCallback() {
     const src = this.getAttribute('src') || 'data/failure_runs.json';
@@ -368,12 +315,6 @@ class FailureEvidence extends HTMLElement {
     this.mountRuns(table);
   }
 
-  /**
-   * One sample, the full system and each critic removed in turn, side by side.
-   * Every column plays its own clip with its narration underneath and closes
-   * with the (VF, ASC, AN) tuple - the two gates and the score they gate - so a
-   * band falling or a score dropping is visible without reading the numbers.
-   */
   tableMarkup(t) {
     const base = t.runs.find(r => r.key === 'full')?.scores || {};
     const cols = t.runs.map((r, i) => {
@@ -419,7 +360,6 @@ class FailureEvidence extends HTMLElement {
     </div>`;
   }
 
-  /** did this run do worse than the full system on this metric? */
   worse(base, v) {
     if (!base || !v) return false;
     if (v.kind === 'na') return true;
@@ -431,7 +371,6 @@ class FailureEvidence extends HTMLElement {
     return false;
   }
 
-  /** every column plays its clip, captioned from its own timeline */
   mountRuns(t) {
     if (!t) return;
     this.clips = [];
@@ -440,8 +379,6 @@ class FailureEvidence extends HTMLElement {
       const host = this.querySelector(`[data-run="${i}"]`);
       if (!host || !r.media) return;
       if (r.media.kind !== 'video') {
-        // a run that produced a static diagram has nothing to play, and no
-        // narration of its own to caption it with
         this.blobInto(host, r.media.src);
         const bar = this.querySelector(`[data-runbar="${i}"]`);
         if (bar) bar.hidden = true;
@@ -449,7 +386,7 @@ class FailureEvidence extends HTMLElement {
         if (out) {
           out.textContent = r.media.kind === 'still'
             ? 'this run produced a static diagram - no animation, so no narration'
-            : 'animation not rendered yet';
+            : 'no animation';
           out.classList.add('is-note');
         }
         return;
@@ -490,11 +427,6 @@ class FailureEvidence extends HTMLElement {
     }
   }
 
-  /**
-   * One transport per column rather than one for the row: the clips are
-   * different lengths, so a shared scrubber would mean different moments in
-   * each. Bound once, on the host, so re-rendering the row costs nothing.
-   */
   bindTransport() {
     if (this._bound) return;
     this._bound = true;
@@ -529,7 +461,6 @@ class FailureEvidence extends HTMLElement {
     });
   }
 
-  /** render an SVG through a blob so its raster crops resolve and load */
   async blobInto(host, src) {
     const abs = new URL(src, document.baseURI);
     let markup;

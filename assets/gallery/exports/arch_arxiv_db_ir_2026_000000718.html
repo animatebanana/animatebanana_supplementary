@@ -4,22 +4,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AnimateBanana — Progressive Reveal — arch_arxiv_db_ir_2026_000000718</title>
-<!--
-  AnimateBanana — Progressive Reveal — arch_arxiv_db_ir_2026_000000718
-  An animated visual narrative produced by the AnimateBanana pipeline.
-
-  This file is self-contained: the animation, its images, its narration and its
-  controls are all inside it. Drop it on a server, open it from a disk, or put
-  it in an <iframe> - it needs nothing else and fetches nothing.
-
-  The animation is CSS. The controls drive it through the browser's animation
-  API - pause holds every keyframe at once, the bar scrubs them all to the same
-  moment, speed sets their rate together - and the caption is read from a clock
-  of the page's own that is driven alongside them. It has to be its own clock:
-  the drawing is made of hundreds of short animations that each stop when they
-  are done, so reading the time off any one of them gives a watch that stopped
-  half a second in.
--->
 <style>
   :root {
     --ink: #1A1815;
@@ -45,9 +29,6 @@
   }
   .ab-stage svg { display: block; width: 100%; height: auto; }
 
-  /* ---- Transport ----
-     Every control is the same height and centred on the same line, so the bar
-     reads as one object rather than a row of parts that happen to be adjacent. */
   .ab-bar {
     --h: 40px;
     display: flex;
@@ -89,7 +70,6 @@
   .ab.is-paused .ab-play .ab-ic-play { display: block; }
   .ab.is-paused .ab-play .ab-ic-pause { display: none; }
 
-  /* the rail is drawn; the range input laid over it is what you actually grab */
   .ab-scrub { position: relative; flex: 1 1 180px !important; min-width: 120px;
               display: flex; align-items: center; }
   .ab-rail {
@@ -162,7 +142,6 @@
   }
   .ab.is-fast .ab-rate { background: var(--banana); }
 
-  /* Captions on or off, said in words rather than left to be inferred */
   .ab-toggle .ab-led {
     width: 11px; height: 11px; border-radius: 50%;
     border: 2px solid var(--ink); background: var(--banana);
@@ -170,7 +149,6 @@
   .ab-toggle[aria-pressed="false"] { color: var(--mute); }
   .ab-toggle[aria-pressed="false"] .ab-led { background: #fff; }
 
-  /* ---- The line being narrated ---- */
   .ab-cap {
     display: flex;
     align-items: center;
@@ -191,8 +169,6 @@
   .ab.is-off .ab-cap { display: none; }
   @media (prefers-reduced-motion: reduce) { .ab-cap { transition: none; } }
 
-  /* Narrow: the bar wraps to two rows and squares off, rather than squeezing
-     the scrub bar down to nothing. */
   @media (max-width: 720px) {
     .ab-bar { flex-wrap: wrap; border-radius: 20px; }
     .ab-scrub { order: 3; flex-basis: 100% !important; }
@@ -509,10 +485,6 @@ animation-fill-mode: forwards;
 
   var at = -1, swap = null, rate = 3, paused = false, scrubbing = false;
 
-  // THE CLOCK. The drawing is hundreds of short animations that each stop when
-  // they are done, so none of them can be asked what time it is. This one runs
-  // the length of the whole piece, does nothing visible, and is driven by the
-  // same controls - so the caption, the bar and the picture cannot disagree.
   var master = null;
   try {
     master = document.documentElement.animate(
@@ -545,7 +517,6 @@ animation-fill-mode: forwards;
 
   play.addEventListener('click', function () {
     paused = !paused;
-    // Restarting a finished piece rather than leaving Play doing nothing
     if (!paused && REPEATS === 1 && clock() >= LOOP - 0.05) each(function (a) { a.currentTime = 0; });
     each(function (a) { paused ? a.pause() : a.play(); });
     if (!paused) t0 = performance.now() - clock() * 1000;
@@ -603,10 +574,6 @@ animation-fill-mode: forwards;
     }
   }
 
-  // Two ways round, on purpose. requestAnimationFrame gives a smooth bar while
-  // the page is on screen, and stops dead in a background tab or an embed the
-  // browser considers hidden - where the animation itself keeps running, so the
-  // caption would be left behind. The slow timer covers exactly that case.
   function frame() { paint(); requestAnimationFrame(frame); }
 
   totalEl.textContent = clip(LOOP);
