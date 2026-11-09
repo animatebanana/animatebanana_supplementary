@@ -163,7 +163,7 @@ Every page is reachable from the **Menu** button (top right).
 
 ## 4. Notes
 
-- **Size:** about 120 MB (1,937 files), mostly MP4 and PNG media.
+- **Size:** about 124 MB (2,082 files), mostly MP4 and PNG media.
 - **Last updated:** the footer of each page shows when that page or the data it
   loads last changed, in AOE (UTC−12).
 - **Anonymity:** the site carries no author, affiliation, contact or repository
