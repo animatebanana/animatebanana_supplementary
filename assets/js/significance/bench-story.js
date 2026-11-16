@@ -24,6 +24,7 @@ const RUNS = {
         cap: 'This produces the final Trained Policy as a TF SavedModel ready for deployment.' },
     ],
     scores: { SS: ['0.733', 'ADBAA'], GP: ['1.0', 'AAAAA'], NA: ['0.733', 'ACCAA'] },
+    an: '0.822',
   },
   bench: {
     src: 'assets/significance/bench_animation.svg',
@@ -43,6 +44,7 @@ const RUNS = {
         cap: 'This establishes the final trained policy, saved for deployment and downstream tasks.' },
     ],
     scores: { SS: ['1.0', 'AAAAAA'], GP: ['1.0', 'AAAAAA'], NA: ['1.0', 'AAAAAA'] },
+    an: '1.0',
   },
 };
 
@@ -280,21 +282,28 @@ class BsCompare extends HTMLElement {
     const cell = (key, j) => {
       const run = RUNS[key];
       if (j >= run.steps.length) return '<li class="bs-cframe is-none" aria-hidden="true"></li>';
-      const err = key === 'method' && j === ERR_STEP;
+      const bad = SEQ.filter((k) => !ok(run.scores[k][1][j])).map((k) => [k, run.scores[k][1][j]]);
+      const flag = key === 'method' && j === ERR_STEP;
       const fix = key === 'bench' && j === 3;
       return `
-        <li class="bs-cframe${j === ERR_STEP ? ' is-focus' : ''}${err ? ' is-err' : ''}${fix ? ' is-fix' : ''}">
+        <li class="bs-cframe${j === ERR_STEP ? ' is-focus' : ''}${bad.length ? ' is-err' : ''}${fix ? ' is-fix' : ''}">
           <span class="bs-stepn">Step ${j + 1}</span>
-          <div class="bs-shot"><img data-frame="${key}:${j}${err ? ':flag' : ''}" alt="${esc(`${run.alt}, step ${j + 1}`)}" title="${esc(run.steps[j].cap)}">
-            ${err ? `<i class="bs-mark is-bad">${ICON.cross}</i>` : ''}</div>
-          ${err ? '<span class="bs-errtags"><span class="g-D">SS D</span><span class="g-C">NA C</span></span>' : ''}
-          ${fix ? '<span class="bs-fixtag">training data</span>' : ''}
+          <div class="bs-shot"><img data-frame="${key}:${j}${flag ? ':flag' : ''}" alt="${esc(`${run.alt}, step ${j + 1}`)}" title="${esc(run.steps[j].cap)}">
+            <i class="bs-mark ${bad.length ? 'is-bad' : 'is-ok'}" aria-label="${bad.length ? 'incorrect' : 'correct'}">${bad.length ? ICON.cross : ICON.tick}</i></div>
+          ${bad.length ? `<span class="bs-errtags">${bad.map(([k, g]) => `<span class="g-${g}">${k} ${g}</span>`).join('')}</span>` : ''}
+          ${fix ? '<span class="bs-fixtag">training data backward arrow shown here</span>' : ''}
         </li>`;
     };
+    const pills = (key) => [...SEQ.map((k) => [k, NAMES[k], RUNS[key].scores[k][0]]), ['AN', 'Animation quality score', RUNS[key].an]]
+      .map(([k, n, v]) => `<span class="bs-cpill${k === 'AN' ? ' is-an' : ''}" title="${esc(n)}"><i>${k}</i><b>${v}</b></span>`).join('');
     const row = (key, title, sub) => `
       <div class="bs-crow is-${key}">
         <div class="bs-clabel"><b>${title}</b><small>${sub}</small></div>
         <ol class="bs-cframes" style="--n:${cols}">${Array.from({ length: cols }, (_, j) => cell(key, j)).join('')}</ol>
+      </div>
+      <div class="bs-crow bs-cscore is-${key}">
+        <div class="bs-clabel"><small>Scores</small></div>
+        <div class="bs-cpills">${pills(key)}</div>
       </div>`;
     const card = (key, title, flag) => `
       <figure class="bs-dcard is-${key}">
