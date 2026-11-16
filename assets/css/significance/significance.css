@@ -121,19 +121,19 @@
   color: #1E6B34; background: #E9F6EC; border: 1.5px solid #9FD4AC; border-radius: 9px;
 }
 .bs-mark.is-ok { background: var(--go); box-shadow: 0 0 0 1.5px var(--go); }
-.bs-cscore { margin-top: -6px; }
-.bs-cscore .bs-clabel small { font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
-.bs-cpills { display: flex; flex-wrap: wrap; gap: 8px; padding-left: 6px; }
-.bs-cpill {
-  display: inline-flex; align-items: baseline; gap: 8px; padding: 5px 12px;
-  background: #fff; border: 1.5px solid var(--line-strong); border-radius: 10px;
-}
-.bs-cpill i { font-style: normal; font-family: var(--font-mono); font-size: var(--fs-micro); font-weight: 700; letter-spacing: 0.06em; }
-.bs-cpill b { font-family: var(--font-mono); font-size: 1rem; font-weight: 800; }
-.bs-cscore.is-bench .bs-cpill { border-color: var(--b-line); background: var(--b-soft); color: var(--b); }
-.bs-cscore.is-method .bs-cpill { border-color: var(--m-line); background: var(--m-soft); color: var(--m); }
-.bs-cpill.is-an { border-width: 2px; box-shadow: 2px 2px 0 currentColor; }
-.bs-cscore.is-bench { margin-bottom: 10px; padding-bottom: 16px; border-bottom: 1.5px dashed var(--line-strong); }
+.bs-cscore { margin-top: -8px; }
+.bs-cscore .bs-clabel small { font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint); }
+.bs-cpills { display: flex; flex-wrap: wrap; align-items: baseline; row-gap: 6px; padding-left: 6px; }
+.bs-cpill { display: inline-flex; align-items: baseline; gap: 7px; padding: 0 18px; border-left: 1px solid var(--line); }
+.bs-cpill:first-child { padding-left: 0; border-left: 0; }
+.bs-cpill i { font-style: normal; font-family: var(--font-mono); font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; color: var(--ink-soft); }
+.bs-cpill b { font-family: var(--font-mono); font-size: 0.98rem; font-weight: 700; }
+.bs-cscore.is-bench .bs-cpill b { color: var(--b); }
+.bs-cscore.is-method .bs-cpill b { color: var(--m); }
+.bs-cpill.is-an { margin-left: 6px; border-left: 0; padding: 2px 12px; border-radius: 999px; }
+.bs-cscore.is-bench .bs-cpill.is-an { background: var(--b-soft); box-shadow: inset 0 0 0 1px var(--b-line); }
+.bs-cscore.is-method .bs-cpill.is-an { background: var(--m-soft); box-shadow: inset 0 0 0 1px var(--m-line); }
+.bs-cscore.is-bench { margin-bottom: 8px; padding-bottom: 18px; border-bottom: 1px dashed var(--line); }
 
 .bs-detail { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 18px; }
 .bs-dcard { margin: 0; padding: 12px 14px 14px; background: #fff; border: 2px solid; border-radius: var(--radius-md); }
