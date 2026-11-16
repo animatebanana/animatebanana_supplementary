@@ -8,6 +8,7 @@ export const NAV_SECTIONS = [
   { id: 'evaluation',   label: 'Evaluation',   href: 'evaluation.html' },
   { id: 'baseline-outputs', label: 'Downloadable Baseline Outputs', href: 'baseline-outputs.html' },
   { id: 'metrics',      label: 'Metrics and Evaluation Strategy', href: 'metrics.html' },
+  { id: 'bench-significance', label: 'Significance of Bench', href: 'bench-significance.html' },
   { id: 'prompts',      label: 'Prompts',      href: 'prompts.html' },
   { id: 'ablations',    label: 'Ablations',    href: 'ablations.html' },
   { id: 'failures',     label: 'Failure cases', href: 'failures.html' },

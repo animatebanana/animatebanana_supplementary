@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+  <title>Significance of Bench — AnimateBanana</title>
+  <link rel="stylesheet" href="assets/fonts/fonts.css">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css?v=3">
+  <link rel="stylesheet" href="assets/css/components/site-nav.css?v=5">
+  <link rel="stylesheet" href="assets/css/components/doodle-field.css">
+  <link rel="stylesheet" href="assets/css/components/page-toc.css?v=4">
+  <link rel="stylesheet" href="assets/css/metrics/metrics-page.css?v=16">
+  <link rel="stylesheet" href="assets/css/significance/significance.css?v=3">
+</head>
+<body>
+  <site-nav current="bench-significance" back="index.html" back-label="Overview"></site-nav>
+
+  <div class="page mx-page bs-page">
+    <div class="page-head">
+      <doodle-field density="sparse"></doodle-field>
+      <h1>Significance of Bench</h1>
+    </div>
+
+    <nav class="pg-toc" id="pg-toc" aria-label="Contents">
+      <div class="pg-toc-inner">
+        <span class="pg-toc-title">Contents<small>Jump to a section</small></span>
+        <div class="pg-toc-list">
+          <a href="#bs-example" data-toc="bs-example"><b>1</b><span>An example diagram and method</span></a>
+          <a href="#bs-scores" data-toc="bs-scores"><b>2</b><span>Scoring the generated sequence</span></a>
+          <a href="#bs-reference" data-toc="bs-reference"><b>3</b><span>The AnimateBench reference</span></a>
+          <a href="#bs-diagnosis" data-toc="bs-diagnosis"><b>4</b><span>Diagnosing the error</span></a>
+        </div>
+      </div>
+      <i class="pg-toc-bar"><i></i></i>
+    </nav>
+
+    <section class="mx-section pg-target" id="bs-example">
+      <h2>An example diagram and method</h2>
+      <p class="bs-text">Take the example of this diagram <i>D</i>.</p>
+      <figure class="bs-diagram">
+        <div class="jm-media"><img src="assets/significance/Paper2Fig_pipe_easy_000000517.png" alt="A pipeline diagram: a Trainer sends the policy (TF SavedModel) to a Parallel Data Collector of several Data Collectors, which receives IR files from a Pre-Inlining IR Corpus and returns training data to the Trainer; the Trainer exports the Trained Policy (TF SavedModel)." width="735" height="411"></div>
+        <figcaption>Diagram <i>D</i></figcaption>
+      </figure>
+      <p class="bs-text">Let <i>M</i> be an end-to-end animation method. Given the diagram <i>D</i> and style <i>S</i> as input, <i>M</i> outputs an animation sequence.</p>
+      <bs-setup></bs-setup>
+    </section>
+
+    <section class="mx-section mx-section--far pg-target" id="bs-scores">
+      <h2>Scoring the generated sequence</h2>
+      <p class="bs-text">When this generated animation sequence is sent to our evaluation system, the validity gates are passed and the SS, GP and NA metrics provide the following scores.</p>
+      <div class="bs-group is-method">
+        <div class="bs-ghead">
+          <span class="bs-gtitle"><img src="assets/significance/method-m.png" alt="" width="256" height="256">Animation sequence from <i>M</i></span>
+          <span class="bs-gates">Validity gates <span class="bs-gate">VF &middot; A &#10003;</span><span class="bs-gate">ASC &middot; A &#10003;</span></span>
+        </div>
+        <bs-scores run="method"></bs-scores>
+      </div>
+      <div class="bs-question">
+        <span class="bs-qmark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#C2283C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2.8 19.4h18.4z"/><path d="M12 10v4.4M12 17.2v.1"/></svg></span>
+        <p>The sequence-level scores simply tell us that something must have been wrong at a particular step of the animation, but they do not give us details of <em>what</em> is wrong and <em>why</em> it is wrong.</p>
+      </div>
+    </section>
+
+    <section class="mx-section mx-section--far pg-target" id="bs-reference">
+      <h2>The AnimateBench reference</h2>
+      <p class="bs-text">AnimateBench, with its human-verified animated narratives, provides us with a cue as to what went wrong.</p>
+      <div class="bs-group is-bench">
+        <div class="bs-ghead">
+          <span class="bs-gtitle">AnimateBench human-verified sequence</span>
+          <span class="bs-gates">Validity gates <span class="bs-gate">VF &middot; A &#10003;</span><span class="bs-gate">ASC &middot; A &#10003;</span></span>
+        </div>
+        <bs-scores run="bench"></bs-scores>
+      </div>
+    </section>
+
+    <section class="mx-section mx-section--far pg-target" id="bs-diagnosis">
+      <h2>Diagnosing the error</h2>
+      <p class="bs-text">Comparing the animated narrative produced from <i>M</i> with the human-verified animated narrative from AnimateBench points us to the source of the error.</p>
+      <bs-compare></bs-compare>
+      <p class="bs-text bs-effect">This affects the Selection Sensibility (SS) score, and the subsequent change in narration affects the Narration Alignment (NA) score.</p>
+      <div class="bs-conclude">
+        <p>This was diagnosable only after examining the verified narrative from AnimateBench. The exact source of the error could not be understood by simply looking at the sequence-level scores.</p>
+      </div>
+      <aside class="mx-insight">
+        <span class="mx-bulb" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#A87A00" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.6 1.1 1.4 1.1 2.2V17h5v-1c0-.8.4-1.6 1.1-2.2A6 6 0 0 0 12 3z"/></svg></span>
+        <div><span class="mx-insight-k">Takeaway</span>
+          <p>The reference narratives make the quantitative evaluation more interpretable by contextualizing the deviations responsible for the scores. Therefore, each component of AnimateBench serves a distinct purpose: the verified diagram XML supports the evaluation process, while the human-verified sequences and narratives provide a means to understand the errors underlying the scores.</p>
+        </div>
+      </aside>
+    </section>
+
+    <footer class="site-footer">
+      <span data-updated>Last updated 16 November 2026, 06:20 (AOE)</span>
+    </footer>
+  </div>
+
+  <script type="module" src="assets/js/components/site-nav.js?v=7"></script>
+  <script type="module" src="assets/js/components/doodle-field.js"></script>
+  <script type="module" src="assets/js/significance/bench-story.js?v=1"></script>
+  <script type="module" src="assets/js/components/page-toc.js?v=3"></script>
+  <script type="module" src="assets/js/lib/reveal.js"></script>
+  <script type="module" src="assets/js/components/last-updated.js?v=1"></script>
+</body>
+</html>

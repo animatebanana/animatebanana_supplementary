@@ -1,4 +1,4 @@
-import { NAV_SECTIONS } from '../nav-config.js?v=5';
+import { NAV_SECTIONS } from '../nav-config.js?v=6';
 import { wordmark } from '../lib/wordmark.js';
 
 const brand = () => `
