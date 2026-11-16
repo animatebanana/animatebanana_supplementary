@@ -1,0 +1,177 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 541 400" width="541" height="400">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#000" />
+    </marker>
+    <style>
+      .block-rect { fill: #f3f4f6; stroke: #000; stroke-width: 2; stroke-dasharray: 8 4; rx: 16; }
+      .node-rect { fill: #e5e7eb; stroke: #000; stroke-width: 1; rx: 8; }
+      .trainer-rect { fill: #f8cdd1; stroke: #000; stroke-width: 1; rx: 12; }
+      .db-rect { fill: #dcfce7; stroke: #000; stroke-width: 1; }
+      .collector-rect { fill: #dbeafe; stroke: #000; stroke-width: 1; rx: 8; }
+      text { font-family: Arial, sans-serif; font-size: 16px; fill: #000; text-anchor: middle; dominant-baseline: middle; }
+      .text-small { font-size: 14px; }
+      .edge-path { fill: none; stroke: #000; stroke-width: 1.5; }
+
+      /* Animation CSS Injection */
+      #trainer,
+      #pre_inlining_ir_corpus,
+      #edge_policy, #text_policy, #text_tf_savedmodel,
+      #edge_ir_files, #text_ir_files,
+      #parallel_data_collector_block,
+      #edge_training_data, #text_training_data,
+      #edge_export, #text_export,
+      #trained_policy {
+        opacity: 0;
+        animation-name: fadeIn;
+        animation-duration: 0.5s;
+        animation-fill-mode: forwards;
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+
+      /* Step 1: Trainer block and pre-inlining corpus block */
+      #trainer, #pre_inlining_ir_corpus { 
+        animation-delay: 0.0s; 
+      }
+      
+      /* Step 2: Policy Arrow and IR files Arrow with labels */
+      #edge_policy, #text_policy, #text_tf_savedmodel, 
+      #edge_ir_files, #text_ir_files { 
+        animation-delay: 1.5s; 
+      }
+      
+      /* Step 3: Parallel Data Collector whole block (includes blue blocks & text) */
+      #parallel_data_collector_block { 
+        animation-delay: 3.0s; 
+      }
+      
+      /* Step 4: Backward Training Data arrow with label */
+      #edge_training_data, #text_training_data { 
+        animation-delay: 4.5s; 
+      }
+      
+      /* Step 5: Export arrow with label */
+      #edge_export, #text_export { 
+        animation-delay: 6.0s; 
+      }
+      
+      /* Step 6: Trained policy */
+      #trained_policy {
+        animation-delay: 7.5s;
+      }
+
+      /* Narration Banner Styles */
+      .narrative-text {
+        opacity: 0;
+        font-family: sans-serif;
+        font-size: 15px;
+        fill: #333;
+        text-anchor: middle;
+      }
+      
+      @keyframes pop {
+        0% { opacity: 0; }
+        10% { opacity: 1; }
+        90% { opacity: 1; }
+        100% { opacity: 0; }
+      }
+      
+      @keyframes popLast {
+        0% { opacity: 0; }
+        10% { opacity: 1; }
+        100% { opacity: 1; }
+      }
+
+      #narr_1 { animation: pop 1.5s 0.0s forwards; }
+      #narr_2 { animation: pop 1.5s 1.5s forwards; }
+      #narr_3 { animation: pop 1.5s 3.0s forwards; }
+      #narr_4 { animation: pop 1.5s 4.5s forwards; }
+      #narr_5 { animation: pop 1.5s 6.0s forwards; }
+      #narr_6 { animation: popLast 2.0s 7.5s forwards; }
+    </style>
+  </defs>
+
+  <g id="parallel_data_collector_block">
+    <rect x="307" y="11" width="223" height="139" class="block-rect" />
+    <text id="parallel_data_collector_text" x="419" y="133" class="text-small">Parallel Data Collector</text>
+    
+    <g id="data_collector_4">
+      <rect x="348" y="27" width="98" height="60" class="collector-rect" />
+    </g>
+    <g id="data_collector_3">
+      <rect x="360" y="37" width="98" height="60" class="collector-rect" />
+    </g>
+    <g id="data_collector_2">
+      <rect x="375" y="48" width="98" height="60" class="collector-rect" />
+    </g>
+    <g id="data_collector_1">
+      <rect x="388" y="60" width="98" height="60" class="collector-rect" />
+      <text x="437" y="80">Data</text>
+      <text x="437" y="100">Collector</text>
+    </g>
+  </g>
+
+  <g id="trainer">
+    <rect x="34" y="39" width="104" height="82" class="trainer-rect" />
+    <text x="86" y="80">Trainer</text>
+  </g>
+
+  <g id="trained_policy">
+    <text x="86" y="226">Trained Policy</text>
+    <text x="86" y="246">(TF SavedModel)</text>
+  </g>
+
+  <g id="pre_inlining_ir_corpus">
+    <path d="M 360 220 C 360 210, 472 210, 472 220 L 472 278 C 472 288, 360 288, 360 278 Z" class="db-rect" />
+    <path d="M 360 220 C 360 230, 472 230, 472 220" class="edge-path" />
+    <text x="416" y="247">Pre-Inlining</text>
+    <text x="416" y="267">IR Corpus</text>
+  </g>
+
+  <g>
+    <line id="edge_policy" x1="138" y1="58" x2="299" y2="58" class="edge-path" marker-end="url(#arrow)" />
+    <text id="text_policy" x="219" y="24" class="text-small">policy</text>
+    <text id="text_tf_savedmodel" x="219" y="44" class="text-small">(TF SavedModel)</text>
+
+    <line id="edge_training_data" x1="299" y1="102" x2="146" y2="102" class="edge-path" marker-end="url(#arrow)" />
+    <text id="text_training_data" x="216" y="123" class="text-small">training data</text>
+
+    <line id="edge_export" x1="86" y1="121" x2="86" y2="201" class="edge-path" marker-end="url(#arrow)" />
+    <text id="text_export" x="52" y="162" class="text-small">export</text>
+
+    <line id="edge_ir_files" x1="416" y1="210" x2="416" y2="158" class="edge-path" marker-end="url(#arrow)" />
+    <text id="text_ir_files" x="444" y="177" class="text-small">IR files</text>
+  </g>
+
+  <!-- Narration Banners -->
+  <g id="narration_banner">
+    <text id="narr_1" class="narrative-text" x="50%" y="340">
+      <tspan x="50%" dy="0">The pipeline begins with a centralized trainer module</tspan>
+      <tspan x="50%" dy="1.2em">and a database containing a corpus of IR files.</tspan>
+    </text>
+    <text id="narr_2" class="narrative-text" x="50%" y="340">
+      <tspan x="50%" dy="0">The trainer distributes the current behavioral policy,</tspan>
+      <tspan x="50%" dy="1.2em">while IR files are concurrently supplied.</tspan>
+    </text>
+    <text id="narr_3" class="narrative-text" x="50%" y="340">
+      <tspan x="50%" dy="0">Both are received by a parallel data collection framework</tspan>
+      <tspan x="50%" dy="1.2em">operating multiple independent instances.</tspan>
+    </text>
+    <text id="narr_4" class="narrative-text" x="50%" y="340">
+      <tspan x="50%" dy="0">The collectors generate training data from these interactions</tspan>
+      <tspan x="50%" dy="1.2em">and send it back to optimize the trainer.</tspan>
+    </text>
+    <text id="narr_5" class="narrative-text" x="50%" y="340">
+      <tspan x="50%" dy="0">Once the learning objectives are met,</tspan>
+      <tspan x="50%" dy="1.2em">the trainer exports the optimized model.</tspan>
+    </text>
+    <text id="narr_6" class="narrative-text" x="50%" y="340">
+      <tspan x="50%" dy="0">This establishes the final trained policy,</tspan>
+      <tspan x="50%" dy="1.2em">saved for deployment and downstream tasks.</tspan>
+    </text>
+  </g>
+</svg>

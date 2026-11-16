@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="assets/css/components/doodle-field.css">
   <link rel="stylesheet" href="assets/css/components/page-toc.css?v=4">
   <link rel="stylesheet" href="assets/css/metrics/metrics-page.css?v=16">
+  <link rel="stylesheet" href="assets/css/metrics/seq-compare.css?v=3">
 </head>
 <body>
   <site-nav current="metrics" back="index.html" back-label="Overview"></site-nav>
@@ -30,6 +31,7 @@
           <a href="#metrics-validity" data-toc="metrics-validity"><b>1</b><span>Validity Gates</span></a>
           <a href="#metrics-narrative" data-toc="metrics-narrative"><b>2</b><span>Sequence level assessment of the visual narratives</span></a>
           <a href="#metrics-reference-free" data-toc="metrics-reference-free"><b>3</b><span>Rationale for a reference-free evaluation design</span></a>
+          <a href="#bench-narratives" data-toc="bench-narratives"><b>4</b><span>Significance of bench narratives</span></a>
         </div>
       </div>
       <i class="pg-toc-bar"><i></i></i>
@@ -64,6 +66,28 @@
       </aside>
     </section>
 
+    <section class="mx-section mx-section--far pg-target" id="bench-narratives">
+      <h2>Significance of bench narratives</h2>
+      <div class="sq-intro">
+        <p>Consider the AnimateBench reference narrative on the left and the synthetically generated output on the right.</p>
+        <p>Both the animations pass the validity gates with band A, yet the narrative sequence carries a logical error that is not interpretable from the scores alone.</p>
+      </div>
+      <seq-compare></seq-compare>
+      <div class="sq-explain-wrap">
+      <span class="sq-explain-tab">Explanation</span>
+      <div class="sq-explain">
+        <p>At step 2, the generated animation introduces the policy, training data, and IR files simultaneously. Consequently, the training data edge emerges before its source node, the Parallel Data Collector, exists. This incorrect selection receives a low SS score (grade D), also affecting NA (grade C) as the narration is tied to the elements shown at each step. The resulting animation quality score is 0.822, compared with 1.0 for the human-verified AnimateBench output.</p>
+        <p>Aggregate scores alone cannot identify the source of these errors. Comparing the generated and reference sequences enables frame-level diagnosis, revealing the structural and narrative deviations underlying the scores, even when the aggregate animation quality score appears reasonable.</p>
+      </div>
+      </div>
+      <aside class="mx-insight">
+        <span class="mx-bulb" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#A87A00" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.6 1.1 1.4 1.1 2.2V17h5v-1c0-.8.4-1.6 1.1-2.2A6 6 0 0 0 12 3z"/></svg></span>
+        <div><span class="mx-insight-k">Insight</span>
+          <p>Reference sequences complement reference-free evaluation by enabling post-evaluation, frame-level diagnosis. Comparing generated and benchmark sequences at corresponding timesteps reveals where and why deviations occur, contextualising low scores in metrics such as SS and NA. Thus, they make aggregate scores interpretable by exposing the underlying animation errors.</p>
+        </div>
+      </aside>
+    </section>
+
     <footer class="site-footer">
       <span data-updated>Last updated 25 September 2026, 06:20 (AOE)</span>
     </footer>
@@ -72,6 +96,7 @@
   <script type="module" src="assets/js/components/site-nav.js?v=6"></script>
   <script type="module" src="assets/js/components/doodle-field.js"></script>
   <script type="module" src="assets/js/metrics/judge-machine.js?v=15"></script>
+  <script type="module" src="assets/js/metrics/seq-compare.js?v=2"></script>
   <script type="module" src="assets/js/components/page-toc.js?v=3"></script>
   <script type="module" src="assets/js/lib/reveal.js"></script>
   <script type="module" src="assets/js/components/last-updated.js?v=1"></script>
