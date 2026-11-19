@@ -28,7 +28,7 @@ export function styleDrawer(data, style) {
       <span class="hx-badge ${s.forbids_image_background ? 'is-yes' : 'is-no'}">Forbids using the image as a background: <b>${s.forbids_image_background ? 'yes' : 'no'}</b></span>
       <div class="hx-label">Exact A0 prompt given to the agent</div>
       <blockquote class="hx-prompt" data-copyroot><p data-copysrc>${esc(s.a0_prompt)}</p>
-        <button type="button" class="hx-mini" data-copy>Copy</button></blockquote>
+        </blockquote>
       ${s.forbids_image_background ? '' : '<p class="hx-quiet">This is the only style whose prompt does not say “Do not use the image as a background”. Six of the seven outputs that reveal the source PNG use this style (see Failure modes).</p>'}`,
   });
 }
@@ -44,7 +44,7 @@ export function instructDrawer(data, item, budget) {
       <div class="hx-label">Launch message, pasted as the only message of a fresh session</div>
       <div class="hx-bubble">${esc(budget ? item.msg_budget : item.msg_no_budget)}</div>
       <div class="hx-codecard" data-copyroot>
-        <div class="hx-codehead"><b>instruct/${esc(item.style)}.md</b><button type="button" class="hx-mini" data-copy>Copy</button></div>
+        <div class="hx-codehead"><b>instruct/${esc(item.style)}.md</b></div>
         <pre class="hx-md" data-copysrc data-raw="${esc(text)}">${mdMono(text, budget ? diffInserted(ins.no_budget, ins.budget) : null)}</pre>
       </div>`,
   });

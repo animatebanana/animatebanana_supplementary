@@ -4,8 +4,8 @@ import {
 
 const AB_KEY = 'animatebanana';
 const COLS = [['source', 'Source PNG'], [AB_KEY, 'AnimateBanana'], ...CONDS.map((c) => [c, condLabel(c)])];
-const EXCLUDE = new Set(['WACV_2024_set5_000041', 'WACV_2024_set5_000010', 'ICCV_2023_set5_000003', 'CVPR_2025_pipe00041', 'Paper2Fig_pipe_diff_000000517', 'ICCV_2023_set5_000035', 'CVPR_2025_arch01871', 'CVPR_2025_arch03005']);
-const ORDER = ['CVPR_2025_arch00855', 'CVPR_2025_arch01051', 'ICCV_2023_set5_000059', 'CVPR_2025_pipe00004', 'CVPR_2025_arch02298', 'CVPR_2025_pipe00011', 'CVPR_SET2_000042', 'Paper2Fig_pipe_diff_000000517', 'ICCV_2023_set5_000035'];
+const EXCLUDE = new Set(['WACV_2024_set5_000010', 'ICCV_2023_set5_000003', 'CVPR_2025_pipe00041', 'Paper2Fig_pipe_diff_000000517', 'ICCV_2023_set5_000035', 'CVPR_2025_arch01871', 'CVPR_2025_arch03005']);
+const ORDER = ['CVPR_2025_arch00855', 'CVPR_2025_arch01051', 'ICCV_2023_set5_000059', 'CVPR_2025_pipe00004', 'CVPR_2025_arch02298', 'CVPR_2025_pipe00011', 'CVPR_SET2_000042', 'WACV_2024_set5_000041', 'Paper2Fig_pipe_diff_000000517', 'ICCV_2023_set5_000035'];
 const rank = (dg) => { const i = ORDER.indexOf(dg); return i < 0 ? ORDER.length : i; };
 
 class HxGallery extends HTMLElement {

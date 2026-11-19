@@ -6,7 +6,7 @@ export { esc };
 export const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 let dataP;
-export const getData = () => (dataP ||= loadJSON('data/harness/harness.json?v=11'));
+export const getData = () => (dataP ||= loadJSON('data/harness/harness.json?v=12'));
 export const hasFile = (data, kind, d) => !!data.items.find((i) => i.diagram === d)?.[kind === 'ab' ? 'has_ab' : 'has_source'];
 
 export const AGENTS = {
@@ -295,7 +295,7 @@ export function openDrawer({ kicker = '', title, sub = '', html, wide = false })
     drawer.className = 'hx-drawer';
     drawer.innerHTML = `
       <div class="hx-drawer-back" data-close></div>
-      <aside class="hx-drawer-panel" role="dialog" aria-modal="true" aria-labelledby="hx-drawer-title" tabindex="-1">
+      <aside class="hx-drawer-panel" role="dialog" aria-modal="false" aria-labelledby="hx-drawer-title" tabindex="-1">
         <header class="hx-drawer-head">
           <div><span class="hx-kicker" data-dk></span><h3 id="hx-drawer-title" data-dt></h3><p data-ds></p></div>
           <button type="button" class="hx-x" data-close aria-label="Close">
@@ -315,28 +315,13 @@ export function openDrawer({ kicker = '', title, sub = '', html, wide = false })
   drawer.classList.toggle('is-wide', wide);
   drawer.__return = document.activeElement;
   drawer.classList.add('is-open');
-  document.documentElement.classList.add('hx-lock');
   drawer.querySelector('.hx-drawer-panel').focus({ preventScroll: true });
-  wireCopy(drawer);
   return drawer.querySelector('[data-db]');
 }
 export function closeDrawer() {
   if (!drawer) return;
   drawer.classList.remove('is-open');
-  document.documentElement.classList.remove('hx-lock');
   drawer.__return?.focus?.({ preventScroll: true });
-}
-
-export function wireCopy(root) {
-  for (const b of root.querySelectorAll('[data-copy]:not([data-wired])')) {
-    b.dataset.wired = '1';
-    b.addEventListener('click', async () => {
-      const src = root.querySelector(b.dataset.copy) || b.closest('[data-copyroot]')?.querySelector('[data-copysrc]');
-      const text = src?.dataset.raw ?? src?.textContent ?? '';
-      try { await navigator.clipboard.writeText(text); b.textContent = 'Copied'; } catch { b.textContent = 'Select and copy'; }
-      setTimeout(() => { b.textContent = 'Copy'; }, 1400);
-    });
-  }
 }
 
 export function skillDrawer(data, name) {
@@ -344,12 +329,12 @@ export function skillDrawer(data, name) {
   const tool = TOOLS.has(name);
   const html = `
     <div class="hx-codecard" data-copyroot>
-      <div class="hx-codehead"><b>.claude/skills/${esc(name)}/SKILL.md</b><button type="button" class="hx-mini" data-copy>Copy</button></div>
+      <div class="hx-codehead"><b>.claude/skills/${esc(name)}/SKILL.md</b></div>
       <pre class="hx-md" data-copysrc data-raw="${esc(s.md)}">${mdMono(s.md)}</pre>
     </div>
     ${tool ? `<details class="hx-script" data-copyroot>
       <summary><span>scripts/${esc(s.script_name)}</span><em>⚙ script given to the agent</em></summary>
-      <div class="hx-codehead"><b>${esc(s.script_name)}</b><button type="button" class="hx-mini" data-copy>Copy</button></div>
+      <div class="hx-codehead"><b>${esc(s.script_name)}</b></div>
       <pre class="hx-md hx-py" data-copysrc data-raw="${esc(s.script)}">${esc(s.script)}</pre>
     </details>` : ''}
     <p class="hx-quiet">The same files were given to both harnesses (<code>.claude/skills</code> and <code>.agents/skills</code> are identical). No order, schemas, rubrics, thresholds or examples.</p>`;

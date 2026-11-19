@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="assets/css/components/doodle-field.css">
   <link rel="stylesheet" href="assets/css/components/page-toc.css?v=4">
   <link rel="stylesheet" href="assets/css/metrics/metrics-page.css?v=16">
-  <link rel="stylesheet" href="assets/css/harness/harness.css?v=34">
+  <link rel="stylesheet" href="assets/css/harness/harness.css?v=41">
 </head>
 <body>
   <site-nav current="harness" back="index.html" back-label="Overview"></site-nav>
@@ -27,27 +27,82 @@
       <div class="pg-toc-inner">
         <span class="pg-toc-title">Contents<small>Jump to a section</small></span>
         <div class="pg-toc-list">
-          <a href="#hx-setup" data-toc="hx-setup"><b>1</b><span>Setup</span></a>
-          <a href="#hx-paths" data-toc="hx-paths"><b>2</b><span>Skills invoked</span></a>
-          <a href="#hx-skills" data-toc="hx-skills"><b>3</b><span>Skill usage</span></a>
-          <a href="#hx-time" data-toc="hx-time"><b>4</b><span>Time</span></a>
-          <a href="#hx-where" data-toc="hx-where"><b>5</b><span>Time split</span></a>
-          <a href="#hx-failures" data-toc="hx-failures"><b>6</b><span>Failures</span></a>
-          <a href="#hx-scores" data-toc="hx-scores"><b>7</b><span>Scores</span></a>
-          <a href="#hx-gallery" data-toc="hx-gallery"><b>8</b><span>Gallery</span></a>
-          <a href="#hx-meaning" data-toc="hx-meaning"><b>9</b><span>Conclusion</span></a>
+          <a href="#hx-meaning" data-toc="hx-meaning"><b>1</b><span>Findings</span></a>
+          <a href="#hx-scores" data-toc="hx-scores"><b>2</b><span>Scores</span></a>
+          <a href="#hx-setup" data-toc="hx-setup"><b>3</b><span>Setup</span></a>
+          <a href="#hx-paths" data-toc="hx-paths"><b>4</b><span>Skills invoked</span></a>
+          <a href="#hx-skills" data-toc="hx-skills"><b>5</b><span>Skill usage</span></a>
+          <a href="#hx-time" data-toc="hx-time"><b>6</b><span>Time</span></a>
+          <a href="#hx-where" data-toc="hx-where"><b>7</b><span>Time split</span></a>
+          <a href="#hx-failures" data-toc="hx-failures"><b>8</b><span>Failures</span></a>
+          <a href="#hx-gallery" data-toc="hx-gallery"><b>9</b><span>Gallery</span></a>
         </div>
       </div>
       <i class="pg-toc-bar"><i></i></i>
     </nav>
 
-    <section class="mx-section pg-target" id="hx-setup">
-      <div class="kicker">The experiment</div>
+    <section class="mx-section hx-keywrap" id="hx-key" aria-label="What we discover">
+      <div class="hx-keybanner">
+        <span class="hx-keyicon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.6 1.1 1.3 1.1 2.2h5c0-.9.4-1.6 1.1-2.2A6 6 0 0 0 12 3z"/><path d="M12 7.5a2.5 2.5 0 0 0-2.5 2.5"/></svg></span>
+        <div class="hx-keybody">
+        <span class="hx-kicker">What we discover</span>
+        <p>Our experiment shows that stage descriptions alone are not sufficient to reproduce AnimateBanana. While agents can recover parts of the broad task ordering, they do not independently reconstruct the structured representations and information dependencies connecting the stages, nor reproduce their benefits within the same time budget. <span class="hx-keyhl">This suggests that AnimateBanana's contribution lies not simply in task decomposition, but in the representation-driven workflow that makes the pipeline effective.</span></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="mx-section pg-target" id="hx-question">
+      <div class="kicker">Our experiment</div>
       <h2>Is AnimateBanana's workflow self-discoverable by an agent having only our stage descriptions as skills and tools?</h2>
       <div class="hx-intro">
-        <p>We use the closed-source models Opus 5 and Gemini 3.8 Flash (Gemini 3.7 is deprecated and no longer available) as the agent. The agent has AnimateBanana's stage descriptions as skills, and the raster-cropping and frame-rendering tools as callable tools, and it decides on its own how to use them. We wish to test how the agent makes use of these skills and tools, and whether, in doing so, it self-discovers our pipeline.</p>
+        <p>We use the closed-source models Opus 5 and Gemini 3.8 Flash as the agent. The agent has AnimateBanana's stage descriptions as skills, and the raster-cropping and frame-rendering tools as callable tools, and it decides on its own how to use them. We wish to test how the agent makes use of these skills and tools, and whether, in doing so, it self-discovers our pipeline.</p>
         <p>We test it under two conditions. In one, the agent is given a time budget based on the time our pipeline took to animate that diagram. In the other, there is no time limit. We observe the performance under both conditions.</p>
       </div>
+    </section>
+
+    <section class="mx-section pg-target hx-near" id="hx-meaning">
+      <div class="kicker">The answer</div>
+      <h2>Key findings</h2>
+      <div class="hx-concl">
+        <ol class="hx-insights">
+          <li class="is-1">
+            <span class="hx-insn">1</span>
+            <h3>Recovering the order is not the same as reconstructing the workflow</h3>
+            <p>Without a time limit, both agents could work out much of the broad sequence: understand the diagram first, then decide how to present it. But following this order was not enough. The agent rarely turned the reconstructed diagram into a structured representation that could be reused by the later stages. This took them <mark>1.4–2.9× longer</mark> than AnimateBanana.</p>
+          </li>
+          <li class="is-2">
+            <span class="hx-insn">2</span>
+            <h3>Under a time constraint, they took shortcuts</h3>
+            <p>Given the same time as AnimateBanana, both agents moved away from the stage-wise process and favoured direct authoring. Their AN scores were <mark>0.577 (Claude)</mark> and <mark>0.446 (Gemini)</mark>, compared with <mark class="is-ab">0.952 for AnimateBanana</mark>.</p>
+          </li>
+          <li class="is-3">
+            <span class="hx-insn">3</span>
+            <h3>Much of their effort went into understanding the image again</h3>
+            <p>Repeated image inspection took <mark>32–58% of agent time</mark>. AnimateBanana reconstructs the diagram once and carries its structure forward through SVG and XML, so later stages can work with that representation rather than repeatedly recovering information from pixels. The agents, meanwhile, largely confined their checks to the final animation.</p>
+          </li>
+          <li class="is-4">
+            <span class="hx-insn">4</span>
+            <h3>The shortcuts came at a cost to fidelity</h3>
+            <p>Under time pressure, agents <mark>replaced embedded photographs with simplified drawings</mark> or <mark>animated the source image through cropping</mark> rather than reconstructing its elements. They finished faster, but with less faithful and less editable outputs.</p>
+          </li>
+        </ol>
+        <div class="hx-conclfinal">
+          <span class="hx-kicker">Conclusion</span>
+          <p>This experiment suggests that stage descriptions are not enough to reproduce AnimateBanana. What matters is <b>how the diagram is represented</b>, <b>how that representation is passed from one stage to the next</b>, and <b>how intermediate results are checked and refined</b>. These choices are what make the workflow reliable within a practical time budget.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="mx-section pg-target hx-near" id="hx-scores">
+      <div class="kicker">Results · scores</div>
+      <h2>Evaluation scores</h2>
+      <p class="hx-sub is-lead">The scores are reported over 15 diagrams from AnimateBench.</p>
+      <hx-table></hx-table>
+    </section>
+
+    <section class="mx-section mx-section--far pg-target" id="hx-setup">
+      <div class="kicker">Details · setup</div>
+      <h2>Details of the experimental setup</h2>
       <div class="hx-facts5">
         <div class="hx-fact">
           <span class="hx-factico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M7 9l3 2-3 2M12 13h4M8 21h8M12 17v4"/></svg></span>
@@ -84,7 +139,7 @@
 
     <section class="mx-section mx-section--far pg-target" id="hx-paths">
       <div class="kicker">Results · process</div>
-      <h2>Analysis of skills invoked</h2>
+      <h2>Analysis of the skills invoked by the autonomous agent</h2>
       <p class="hx-sub is-lead">Pick a diagram and a run. On the left is the fixed orchestration path that AnimateBanana follows, in a fixed linear order. On the right are the decisions the agent chose autonomously, in the run with a time budget or the run without one, depending on what is selected. Alongside, we include the agent's decision file, which shows how its calls were distributed across the different skills and tools, and at which point each one was made.</p>
       <hx-run-picker></hx-run-picker>
       <hx-trajectory></hx-trajectory>
@@ -177,13 +232,6 @@
       </article>
     </section>
 
-    <section class="mx-section mx-section--far pg-target" id="hx-scores">
-      <div class="kicker">Results · every run</div>
-      <h2>Evaluation scores</h2>
-      <p class="hx-sub is-lead">The scores are reported over 15 diagrams from AnimateBench.</p>
-      <hx-table></hx-table>
-    </section>
-
     <section class="mx-section mx-section--far pg-target" id="hx-gallery">
       <div class="kicker">Results · outputs</div>
       <h2>Gallery</h2>
@@ -191,38 +239,6 @@
       <p class="hx-gnote">The time shown in grey above each sample is the time taken to generate that particular output, in min:sec. Compare it with AnimateBanana's time and the time budget given beside each diagram on the left.</p>
     </section>
 
-    <section class="mx-section mx-section--far pg-target" id="hx-meaning">
-      <div class="kicker">Conclusion</div>
-      <h2>What we conclude from this</h2>
-      <div class="hx-concl">
-        <ol class="hx-insights">
-          <li class="is-1">
-            <span class="hx-insn">1</span>
-            <h3>Recovering the order is not the same as reconstructing the workflow</h3>
-            <p>Without a time limit, both agents could work out much of the broad sequence: understand the diagram first, then decide how to present it. But following this order was not enough. The agent rarely turned the reconstructed diagram into a structured representation that could be reused by the later stages. This took them <mark>1.4–2.9× longer</mark> than AnimateBanana.</p>
-          </li>
-          <li class="is-2">
-            <span class="hx-insn">2</span>
-            <h3>Under a time constraint, they took shortcuts</h3>
-            <p>Given the same time as AnimateBanana, both agents moved away from the stage-wise process and favoured direct authoring. Their AN scores were <mark>0.577 (Claude)</mark> and <mark>0.446 (Gemini)</mark>, compared with <mark class="is-ab">0.952 for AnimateBanana</mark>.</p>
-          </li>
-          <li class="is-3">
-            <span class="hx-insn">3</span>
-            <h3>Much of their effort went into understanding the image again</h3>
-            <p>Repeated image inspection took <mark>32–58% of agent time</mark>. AnimateBanana reconstructs the diagram once and carries its structure forward through SVG and XML, so later stages can work with that representation rather than repeatedly recovering information from pixels. The agents, meanwhile, largely confined their checks to the final animation.</p>
-          </li>
-          <li class="is-4">
-            <span class="hx-insn">4</span>
-            <h3>The shortcuts came at a cost to fidelity</h3>
-            <p>Under time pressure, agents <mark>replaced embedded photographs with simplified drawings</mark> or <mark>animated the source image through cropping</mark> rather than reconstructing its elements. They finished faster, but with less faithful and less editable outputs.</p>
-          </li>
-        </ol>
-        <div class="hx-conclfinal">
-          <span class="hx-kicker">Conclusion</span>
-          <p>This experiment suggests that stage descriptions are not enough to reproduce AnimateBanana. What matters is <b>how the diagram is represented</b>, <b>how that representation is passed from one stage to the next</b>, and <b>how intermediate results are checked and refined</b>. These choices are what make the workflow reliable within a practical time budget.</p>
-        </div>
-      </div>
-    </section>
 
     <footer class="site-footer">
       <span data-updated>Last updated 18 November 2026</span>
@@ -231,7 +247,7 @@
 
   <script type="module" src="assets/js/components/site-nav.js?v=8"></script>
   <script type="module" src="assets/js/components/doodle-field.js"></script>
-  <script type="module" src="assets/js/harness/hx-page.js?v=37"></script>
+  <script type="module" src="assets/js/harness/hx-page.js?v=38"></script>
   <script type="module" src="assets/js/components/page-toc.js?v=3"></script>
   <script type="module" src="assets/js/lib/reveal.js"></script>
   <script type="module" src="assets/js/components/last-updated.js?v=1"></script>
