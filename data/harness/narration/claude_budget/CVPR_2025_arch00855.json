@@ -1,0 +1,11 @@
+[
+  {"step": 1, "start": 0.0, "end": 3.0, "narration": "The pipeline starts with the input image. A frozen CLIP visual encoder turns it into the visual feature map F_v."},
+  {"step": 2, "start": 3.0, "end": 6.0, "narration": "In parallel, class prompts such as 'A photo of a person, bicycle, road' go through the CLIP language encoder to give the text embedding F_t."},
+  {"step": 3, "start": 6.0, "end": 9.0, "narration": "Vision-language correlation compares F_v with F_t, producing the correlation volume C of vision-and-language similarity maps."},
+  {"step": 4, "start": 9.0, "end": 12.0, "narration": "Everything inside the purple panel is one ESC-Block, and the block is stacked and repeated N times."},
+  {"step": 5, "start": 12.0, "end": 15.0, "narration": "Inside the block, the SAM Block refines the visual features, yielding the enhanced feature map F_v prime."},
+  {"step": 6, "start": 15.0, "end": 18.0, "narration": "The correlation volume is also fed to PPG, the pseudo prompt generator."},
+  {"step": 7, "start": 18.0, "end": 21.0, "narration": "PPG emits pseudo prompts: candidate point locations and coarse mask proposals for the target classes."},
+  {"step": 8, "start": 21.0, "end": 24.0, "narration": "The VLF Block fuses the refined visual features, the pseudo prompts and the text features, updating the correlation volume to C prime."},
+  {"step": 9, "start": 24.0, "end": 27.0, "narration": "After N iterations, the decoder maps the refined correlations to the final predicted segmentation mask M."}
+]

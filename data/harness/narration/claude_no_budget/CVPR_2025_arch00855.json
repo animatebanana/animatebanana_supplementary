@@ -1,0 +1,12 @@
+[
+  {"step": 1, "start": 0.0, "end": 4.0, "narration": "Two inputs: the image I, and a text prompt listing candidate categories."},
+  {"step": 2, "start": 4.0, "end": 8.0, "narration": "Each passes through its own frozen CLIP encoder, visual and language."},
+  {"step": 3, "start": 8.0, "end": 12.0, "narration": "CLIP gives a visual feature map F-v and a text embedding F-l."},
+  {"step": 4, "start": 12.0, "end": 16.0, "narration": "V-L Correlation matches every visual location against the text embedding."},
+  {"step": 5, "start": 16.0, "end": 20.0, "narration": "That yields the correlation volume C-v-and-l, which enters the ESC-Block."},
+  {"step": 6, "start": 20.0, "end": 24.0, "narration": "Inside, PPG converts the correlation into pseudo prompts: point clicks and candidate masks."},
+  {"step": 7, "start": 24.0, "end": 28.0, "narration": "The SAM Block refines the visual features using those prompts, producing F-v-prime."},
+  {"step": 8, "start": 28.0, "end": 32.0, "narration": "The VLF Block fuses them with the text embedding and the earlier correlation."},
+  {"step": 9, "start": 32.0, "end": 36.0, "narration": "Out comes a sharpened correlation volume; the ESC-Block repeats N times."},
+  {"step": 10, "start": 36.0, "end": 40.0, "narration": "The Decoder turns the final correlation volume into the predicted mask M."}
+]

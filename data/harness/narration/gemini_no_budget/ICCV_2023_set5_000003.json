@@ -1,0 +1,38 @@
+[
+  {
+    "step": 1,
+    "start": 0.0,
+    "end": 5.0,
+    "narration": "Given multi-temporal inputs x-tau and x-tau-prime, a shared-weight Patch Feature Extractor with a Deformable Transformer Encoder extracts structured patch representations z-s-tau and z-s-tau-prime."
+  },
+  {
+    "step": 2,
+    "start": 5.0,
+    "end": 10.0,
+    "narration": "In parallel, the Patch Matching Network processes both temporal frames to estimate cross-temporal correspondences and guide patch matching."
+  },
+  {
+    "step": 3,
+    "start": 10.0,
+    "end": 15.0,
+    "narration": "The Multi-Temporal Patch Matching module aligns feature tokens across time frames, establishing semantic correspondences between matching patches."
+  },
+  {
+    "step": 4,
+    "start": 15.0,
+    "end": 20.0,
+    "narration": "Based on matching scores, the model selects positive and negative patch sets z-tau-plus, z-tau-prime-plus, and z-tau-prime-minus to form contrastive pairs."
+  },
+  {
+    "step": 5,
+    "start": 20.0,
+    "end": 25.0,
+    "narration": "The Object Residual Module subtracts learned object prototypes phi-k from patch representations to isolate fine-grained view and scale variations."
+  },
+  {
+    "step": 6,
+    "start": 25.0,
+    "end": 30.0,
+    "narration": "Finally, the computed residual representations are supervised jointly by multi-view loss and scale-regression loss to optimize multi-temporal representation learning."
+  }
+]

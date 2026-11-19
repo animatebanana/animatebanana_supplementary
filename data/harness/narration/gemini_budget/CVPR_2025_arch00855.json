@@ -1,0 +1,44 @@
+[
+  {
+    "step": 1,
+    "start": 0.0,
+    "end": 4.0,
+    "narration": "First, the input image I is fed into the visual encoder CLIP V to extract spatial visual feature map F_v."
+  },
+  {
+    "step": 2,
+    "start": 4.0,
+    "end": 8.0,
+    "narration": "Concurrently, the input prompt text T containing target categories is encoded by CLIP L into text feature vector F_l."
+  },
+  {
+    "step": 3,
+    "start": 8.0,
+    "end": 12.0,
+    "narration": "The visual features F_v and linguistic features F_l are correlated to generate multi-channel visual-linguistic correlation maps C_{v&l}."
+  },
+  {
+    "step": 4,
+    "start": 12.0,
+    "end": 16.0,
+    "narration": "Inside the ESC-Block, the correlation maps enter the Pseudo Prompt Generator (PPG) to produce candidate point and mask pseudo-prompts."
+  },
+  {
+    "step": 5,
+    "start": 16.0,
+    "end": 20.0,
+    "narration": "The Segment Anything Model (SAM) Block processes the visual feature map F_v guided by the pseudo-prompts to produce refined visual features F prime v."
+  },
+  {
+    "step": 6,
+    "start": 20.0,
+    "end": 24.0,
+    "narration": "The Vision-Language Fusion (VLF) Block combines the refined visual features, original correlation maps, and text embeddings into refined correlation maps C prime v&l."
+  },
+  {
+    "step": 7,
+    "start": 24.0,
+    "end": 28.0,
+    "narration": "Across N recurring ESC-Blocks, the refined features pass to the decoder to produce the final segmented prediction mask M."
+  }
+]

@@ -1,0 +1,38 @@
+[
+  {
+    "step": 1,
+    "start": 0.0,
+    "end": 3.5,
+    "narration": "First, reference video frames undergo head extraction, feeding into Depth Net and Pose Net to estimate 3D facial depth and head poses."
+  },
+  {
+    "step": 2,
+    "start": 3.5,
+    "end": 7.0,
+    "narration": "Next, flow computed from 3D geometry warps encoded features into canonical space, where a ConvLSTM aggregates them to generate a neutral canonical head."
+  },
+  {
+    "step": 3,
+    "start": 7.0,
+    "end": 10.5,
+    "narration": "In the fusion stage, the canonical head is transformed by the target pose alongside the driving and reference video frames."
+  },
+  {
+    "step": 4,
+    "start": 10.5,
+    "end": 14.0,
+    "narration": "A central predictor takes all three representations to jointly estimate optical flow fields and attention weight maps."
+  },
+  {
+    "step": 5,
+    "start": 14.0,
+    "end": 17.5,
+    "narration": "Features from both branches are encoded, warped with the predicted flow fields, and modulated by their respective attention maps."
+  },
+  {
+    "step": 6,
+    "start": 17.5,
+    "end": 21.0,
+    "narration": "Finally, the decoder combines the attention-weighted features to synthesize the photorealistic driving frame."
+  }
+]

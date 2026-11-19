@@ -1,0 +1,50 @@
+[
+  {
+    "step": 1,
+    "start": 0.0,
+    "end": 3.0,
+    "narration": "In the initializing process, a pre-trained 3D Gaussian Splatting model with frozen parameters undergoes Frequency Guided Densification."
+  },
+  {
+    "step": 2,
+    "start": 3.0,
+    "end": 6.0,
+    "narration": "In Phase 1 of densification, the rendering quality contribution of each Gaussian is evaluated, and unneeded Gaussians are pruned and removed."
+  },
+  {
+    "step": 3,
+    "start": 6.0,
+    "end": 9.0,
+    "narration": "In Phase 2, multi-view patches are transformed via Discrete Fourier Transform with a quadratic mask to detect high frequencies and split Gaussians in detailed areas."
+  },
+  {
+    "step": 4,
+    "start": 9.0,
+    "end": 12.0,
+    "narration": "After densification, the resulting 3D Gaussian model is frozen, and its parameters are used to construct gradient masks for position, color, opacity, rotation, and scale."
+  },
+  {
+    "step": 5,
+    "start": 12.0,
+    "end": 15.0,
+    "narration": "During the fine-tuning process, the watermarked Gaussian model is unfrozen and differentiable rendering generates 2D scene views."
+  },
+  {
+    "step": 6,
+    "start": 15.0,
+    "end": 18.0,
+    "narration": "The rendered view is decomposed by Discrete Wavelet Transform, sending low frequencies to a pre-trained decoder to extract the embedded watermark and compute message loss L_m."
+  },
+  {
+    "step": 7,
+    "start": 18.0,
+    "end": 21.0,
+    "narration": "High-frequency wavelet components are regularized by loss L_w against the ground truth, alongside spatial reconstruction and perceptual LPIPS losses."
+  },
+  {
+    "step": 8,
+    "start": 21.0,
+    "end": 24.0,
+    "narration": "All losses are combined into total loss L_total, driving the optimizer via a Hadamard product with the gradient mask to selectively update the watermarked Gaussians."
+  }
+]

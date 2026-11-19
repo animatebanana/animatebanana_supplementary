@@ -1,0 +1,44 @@
+[
+  {
+    "step": 1,
+    "start": 0.0,
+    "end": 4.5,
+    "narration": "The framework takes two synchronized input streams over time: RGB video frames of human motion and spatial pressure maps from the floor."
+  },
+  {
+    "step": 2,
+    "start": 4.5,
+    "end": 9.0,
+    "narration": "Each stream is processed by a dedicated feature encoder and a local-spatial attention module, LSAM, extracting rich modality-specific features."
+  },
+  {
+    "step": 3,
+    "start": 9.0,
+    "end": 13.5,
+    "narration": "The features enter the Fusion Cross-Attention Module, or FCAM, effectively fusing visual and pressure cues before passing to the motion regressor."
+  },
+  {
+    "step": 4,
+    "start": 13.5,
+    "end": 18.0,
+    "narration": "The regressor predicts parametric SMPL body pose theta and root translation T, supervised by targeted pose and translation loss functions."
+  },
+  {
+    "step": 5,
+    "start": 18.0,
+    "end": 23.5,
+    "narration": "From pose and translation, 3D joints and orthographic 2D projections are derived, supervised by 3D joint, 2D reprojection, and physical contact losses."
+  },
+  {
+    "step": 6,
+    "start": 23.5,
+    "end": 29.5,
+    "narration": "This produces physically plausible 3D motion on the ground plane, with accurate surface contact regions highlighted on the body mesh."
+  },
+  {
+    "step": 7,
+    "start": 29.5,
+    "end": 36.0,
+    "narration": "Inside FCAM, pressure queries cross-attend to visual keys and values, incorporating residual connections and feed-forward refinement for robust multimodal fusion."
+  }
+]

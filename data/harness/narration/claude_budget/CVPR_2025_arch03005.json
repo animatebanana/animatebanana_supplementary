@@ -1,0 +1,12 @@
+[
+  {"step": 1, "start": 0.0, "end": 3.0, "narration": "We start at the left with Q_map, the stack of BEV query embeddings that drives the whole module. These queries fan out along two parallel branches."},
+  {"step": 2, "start": 3.0, "end": 6.0, "narration": "The upper branch feeds the queries into the offset network theta_offset, which predicts a learned spatial offset for each query."},
+  {"step": 3, "start": 6.0, "end": 9.0, "narration": "That offset is added to the reference points P_ref at the summation node, shifting each reference location to where the query actually wants to look."},
+  {"step": 4, "start": 9.0, "end": 12.0, "narration": "The shifted points are used for sampling on the bird's-eye-view feature map F_bev, picking out the individual grid cells highlighted in color."},
+  {"step": 5, "start": 12.0, "end": 15.0, "narration": "Sampling yields the sampled features: one feature vector gathered from F_bev per query and per offset location."},
+  {"step": 6, "start": 15.0, "end": 18.0, "narration": "Back at the lower branch, the same queries also pass through a small MLP, which is the head that parameterises the sampling uncertainty."},
+  {"step": 7, "start": 18.0, "end": 21.0, "narration": "The MLP outputs a mean mu_i and a variance sigma_i squared, defining a Gaussian used for dynamic resampling rather than a fixed weight."},
+  {"step": 8, "start": 21.0, "end": 24.0, "narration": "Using the reparameterisation trick, alpha_i equals mu_i plus sigma_i times epsilon, giving stochastic attention weights that are sent up to the aggregation stage."},
+  {"step": 9, "start": 24.0, "end": 27.0, "narration": "Aggregate combines the sampled features under those attention weights, a linear layer projects the result, and the output is the query update delta Q_map."},
+  {"step": 10, "start": 27.0, "end": 30.0, "narration": "With the mask fully lifted, the complete pipeline is visible: queries produce offsets and uncertainties, sampling reads F_bev, and weighted aggregation returns the refined query residual."}
+]

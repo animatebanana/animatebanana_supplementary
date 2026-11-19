@@ -1,0 +1,38 @@
+[
+  {
+    "step": 1,
+    "start": 0.0,
+    "end": 4.5,
+    "narration": "Data preparation extracts reference frames, isolates replacement objects, and performs box detection and hand mesh augmentation."
+  },
+  {
+    "step": 2,
+    "start": 4.5,
+    "end": 9.0,
+    "narration": "The training pipeline uses a Reference U-Net for appearance identity and ControlNet for three-dimensional hand pose guidance."
+  },
+  {
+    "step": 3,
+    "start": 9.0,
+    "end": 13.5,
+    "narration": "Spatial layout guidance is encoded and combined with random noise to initialize the diffusion process."
+  },
+  {
+    "step": 4,
+    "start": 13.5,
+    "end": 18.5,
+    "narration": "The Denoising U-Net processes the latents with reference self-attention, specialized interaction attention, and temporal consistency layers."
+  },
+  {
+    "step": 5,
+    "start": 18.5,
+    "end": 23.5,
+    "narration": "The HOI Restoration Module preserves detailed hand and object textures using dedicated memory banks and spatial masks."
+  },
+  {
+    "step": 6,
+    "start": 23.5,
+    "end": 28.0,
+    "narration": "Finally, the frozen VAE decoder reconstructs the video frames, producing realistic hand-object interactions."
+  }
+]

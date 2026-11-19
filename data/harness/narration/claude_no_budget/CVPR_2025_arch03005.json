@@ -1,0 +1,12 @@
+[
+  {"step": 1, "start": 0.0, "end": 3.0, "narration": "The module starts from Q_map, the set of BEV query embeddings. Each query is one map element waiting to be refined."},
+  {"step": 2, "start": 3.0, "end": 6.0, "narration": "Every query is fed to theta_offset, a learned projection that predicts where around the query the model should look."},
+  {"step": 3, "start": 6.0, "end": 9.0, "narration": "Those predicted offsets are added to the reference points P_ref, so each query ends up with its own set of absolute sampling locations."},
+  {"step": 4, "start": 9.0, "end": 12.0, "narration": "The resulting locations are used to sample the bird's-eye-view feature map F_bev, picking out a few cells instead of attending to the whole grid."},
+  {"step": 5, "start": 12.0, "end": 15.0, "narration": "Bilinear sampling at those locations yields the sampled features, one feature vector per sampling point."},
+  {"step": 6, "start": 15.0, "end": 18.0, "narration": "In parallel, the same queries pass through a small MLP that predicts a distribution rather than a fixed value."},
+  {"step": 7, "start": 18.0, "end": 21.0, "narration": "The MLP outputs the mean and variance of a Gaussian, and dynamic resampling draws from that distribution at every forward pass."},
+  {"step": 8, "start": 21.0, "end": 24.0, "narration": "The reparameterisation alpha_i equals mu_i plus sigma_i times epsilon turns the sample into the attention weight for each sampling point, keeping the step differentiable."},
+  {"step": 9, "start": 24.0, "end": 27.0, "narration": "The sampled features are aggregated using those attention weights and the result is passed through a linear layer."},
+  {"step": 10, "start": 27.0, "end": 30.0, "narration": "The output is delta Q_map, the residual update that is added back to the query embeddings to refine the map representation."}
+]

@@ -1,0 +1,32 @@
+[
+  {
+    "step": 1,
+    "start": 0.0,
+    "end": 4.0,
+    "narration": "The pipeline begins with multi-view images and masks of the original scene to construct 3D Gaussians with the bear statue and render scene depth maps."
+  },
+  {
+    "step": 2,
+    "start": 4.0,
+    "end": 8.0,
+    "narration": "Next, the depth maps guide the projection and warping of background views to infer a refined depth-guided inpainting mask for the object region."
+  },
+  {
+    "step": 3,
+    "start": 8.0,
+    "end": 12.0,
+    "narration": "Using the refined mask, reference view inpainting is unprojected into a 3D point cloud P1, initializing the edited 3D Gaussian scene without the bear."
+  },
+  {
+    "step": 4,
+    "start": 12.0,
+    "end": 16.0,
+    "narration": "The 3D point cloud is projected to other views, enforcing cross-view appearance consistency via the cross-view loss against rendered novel views."
+  },
+  {
+    "step": 5,
+    "start": 16.0,
+    "end": 20.0,
+    "narration": "Finally, reference view RGB and depth renderings are supervised with the inpainting-guided rendering loss to complete 3D Gaussian refinement."
+  }
+]

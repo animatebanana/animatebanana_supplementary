@@ -1,0 +1,68 @@
+[
+  {
+    "step": 1,
+    "start": 0.0,
+    "end": 4.0,
+    "narration": "Two views of the same scene, captured at time tau and at time tau prime, enter the pipeline as the raw inputs."
+  },
+  {
+    "step": 2,
+    "start": 4.0,
+    "end": 8.5,
+    "narration": "Both views pass through the Patch Feature Extractor: one convolutional backbone E applied twice with shared weights, so the two timestamps are embedded in a common space."
+  },
+  {
+    "step": 3,
+    "start": 8.5,
+    "end": 13.0,
+    "narration": "Each backbone feeds a Deformable Transformer Encoder. Dashed skip links carry the earlier multi-scale feature maps forward, and the two encoders also share their weights."
+  },
+  {
+    "step": 4,
+    "start": 13.0,
+    "end": 17.0,
+    "narration": "The encoders emit two sequences of patch tokens, z s at time tau and z s at time tau prime, one coloured token per spatial patch."
+  },
+  {
+    "step": 5,
+    "start": 17.0,
+    "end": 21.0,
+    "narration": "A separate Patch Matching Network reads both views directly and produces the matching features used to relate patches across the two timestamps."
+  },
+  {
+    "step": 6,
+    "start": 21.0,
+    "end": 25.5,
+    "narration": "In Multi-Temporal Patch Matching the two token sequences are compared. The dashed links show which patch at time tau corresponds to which patch at time tau prime."
+  },
+  {
+    "step": 7,
+    "start": 25.5,
+    "end": 30.0,
+    "narration": "From those correspondences the model selects patches: matched positives for each timestamp, and unmatched patches that act as negatives."
+  },
+  {
+    "step": 8,
+    "start": 30.0,
+    "end": 33.5,
+    "narration": "The selected patches are pooled into three sets: the positives at tau, the positives at tau prime, and the negatives at tau prime."
+  },
+  {
+    "step": 9,
+    "start": 33.5,
+    "end": 38.0,
+    "narration": "The Object Residual Module subtracts a learned object prototype phi k from every patch embedding, giving a residual vector r for each sign q, each timestamp t and each scale s."
+  },
+  {
+    "step": 10,
+    "start": 38.0,
+    "end": 42.5,
+    "narration": "Those residuals drive two objectives: a multi-view loss that aligns the two timestamps, and a scale-regression loss that keeps the representation consistent across scales."
+  },
+  {
+    "step": 11,
+    "start": 42.5,
+    "end": 47.0,
+    "narration": "With the mask lifted, the whole pipeline is visible: shared patch encoding, cross-time patch matching, positive and negative selection, residual computation, and the two training losses."
+  }
+]

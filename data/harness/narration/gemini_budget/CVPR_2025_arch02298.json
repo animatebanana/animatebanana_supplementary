@@ -1,0 +1,38 @@
+[
+  {
+    "step": 1,
+    "start": 0.0,
+    "end": 4.5,
+    "narration": "In the data preparation stage, reference frames and replacement objects are extracted alongside bounding boxes and augmented 3D hand meshes."
+  },
+  {
+    "step": 2,
+    "start": 4.5,
+    "end": 9.0,
+    "narration": "The reference image is processed by a frozen VAE encoder into the Reference U-Net to extract multi-scale visual features."
+  },
+  {
+    "step": 3,
+    "start": 9.0,
+    "end": 13.5,
+    "narration": "Bounding box layout guidance is encoded and combined with Gaussian noise to provide spatial conditioning for generation."
+  },
+  {
+    "step": 4,
+    "start": 13.5,
+    "end": 18.0,
+    "narration": "ControlNet extracts structural pose constraints from the 3D hand mesh sequence and feeds them into the denoising backbone."
+  },
+  {
+    "step": 5,
+    "start": 18.0,
+    "end": 22.5,
+    "narration": "The Denoising U-Net fuses all conditioning via specialized attention layers, decoded into realistic video frames by the frozen VAE."
+  },
+  {
+    "step": 6,
+    "start": 22.5,
+    "end": 27.0,
+    "narration": "Finally, the HOI Restoration Module utilizes dedicated memory banks and spatial masks to restore intricate hand and object textures."
+  }
+]

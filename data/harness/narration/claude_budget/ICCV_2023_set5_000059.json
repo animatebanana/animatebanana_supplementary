@@ -1,0 +1,12 @@
+[
+  {"step": 1, "start": 0.0, "end": 3.0, "narration": "We start with the input scene view. A camera ray is cast from the viewpoint and a sample point p is picked along it inside the room."},
+  {"step": 2, "start": 3.0, "end": 6.0, "narration": "The point p is looked up in a multi-resolution feature grid: coarse and fine voxel grids each give an interpolated feature at that location."},
+  {"step": 3, "start": 6.0, "end": 9.0, "narration": "The concatenated multi-resolution features are passed through a small MLP decoder."},
+  {"step": 4, "start": 9.0, "end": 12.0, "narration": "The decoder outputs a vector of signed distance values, one per object in the scene, so every object gets its own SDF at this point."},
+  {"step": 5, "start": 12.0, "end": 15.0, "narration": "Taking the minimum across all per-object SDFs gives the scene SDF, the distance to the nearest surface of any object."},
+  {"step": 6, "start": 15.0, "end": 18.0, "narration": "Each per-object SDF is converted into an object density profile along the ray."},
+  {"step": 7, "start": 18.0, "end": 21.0, "narration": "Multiplying object density by scene transmittance yields the occlusion-aware object opacity, which is supervised against the instance masks by the opacity loss."},
+  {"step": 8, "start": 21.0, "end": 24.0, "narration": "The scene SDF also drives scene transmittance, which combined with scene density forms the volume rendering weight function along the ray."},
+  {"step": 9, "start": 24.0, "end": 27.0, "narration": "Those weights render depth, normal and colour images. Depth and normal losses use pretrained-model cues, and the reconstruction loss compares the rendered image with the input view."},
+  {"step": 10, "start": 27.0, "end": 30.0, "narration": "Finally, two regularisers act on the SDF vector: an Eikonal loss on the gradient norm, and a ReLU regulariser keeping the scene SDF consistent with the per-object SDFs."}
+]

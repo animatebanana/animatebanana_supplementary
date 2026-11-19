@@ -1,0 +1,116 @@
+[
+  {
+    "step": 1,
+    "start": 0.0,
+    "end": 3.5,
+    "narration": "We start with the INPUT block: the raw data the method consumes for a single indoor scene."
+  },
+  {
+    "step": 2,
+    "start": 3.5,
+    "end": 7.0,
+    "narration": "First input: the reconstructed 3D point cloud of the whole room."
+  },
+  {
+    "step": 3,
+    "start": 7.0,
+    "end": 10.5,
+    "narration": "Second input: the posed RGB frames of the same scene, captured as the camera moves through it."
+  },
+  {
+    "step": 4,
+    "start": 10.5,
+    "end": 14.0,
+    "narration": "Third input: the matching depth maps and camera poses, which link every pixel back to a 3D location."
+  },
+  {
+    "step": 5,
+    "start": 14.0,
+    "end": 17.5,
+    "narration": "Step one of the pipeline is 3D-aware two-D mask tracking, carried out inside this yellow block."
+  },
+  {
+    "step": 6,
+    "start": 17.5,
+    "end": 21.0,
+    "narration": "A superpoint is selected on the point cloud: a small cluster of points marking the object to segment."
+  },
+  {
+    "step": 7,
+    "start": 21.0,
+    "end": 24.5,
+    "narration": "The superpoint is projected into every camera, and a histogram of the projected points is built over the views."
+  },
+  {
+    "step": 8,
+    "start": 24.5,
+    "end": 28.0,
+    "narration": "The peak of the histogram gives the pivot view: the single frame in which the object is seen best."
+  },
+  {
+    "step": 9,
+    "start": 28.0,
+    "end": 31.5,
+    "narration": "The pivot view and the projected superpoint are handed to SAM two for segmentation."
+  },
+  {
+    "step": 10,
+    "start": 31.5,
+    "end": 35.0,
+    "narration": "SAM two returns a two-D mask of the object in the pivot view."
+  },
+  {
+    "step": 11,
+    "start": 35.0,
+    "end": 38.5,
+    "narration": "That mask, together with the 3D cues, seeds SAM two tracking across the rest of the video."
+  },
+  {
+    "step": 12,
+    "start": 38.5,
+    "end": 42.0,
+    "narration": "Tracking runs in both directions from the pivot frame: a backward pass and a forward pass over the sequence."
+  },
+  {
+    "step": 13,
+    "start": 42.0,
+    "end": 45.5,
+    "narration": "The result is a two-D mask track: a consistent mask for the object in every frame of the scene."
+  },
+  {
+    "step": 14,
+    "start": 45.5,
+    "end": 49.0,
+    "narration": "The mask track flows down into step two: 3D proposal refinement via mask optimisation."
+  },
+  {
+    "step": 15,
+    "start": 49.0,
+    "end": 52.5,
+    "narration": "The two-D mask track is first lifted back into 3D, giving a rough 3D mask candidate."
+  },
+  {
+    "step": 16,
+    "start": 52.5,
+    "end": 56.0,
+    "narration": "That candidate is then refined by an optimisation procedure, Algorithm one, which cleans up the 3D mask."
+  },
+  {
+    "step": 17,
+    "start": 56.0,
+    "end": 59.5,
+    "narration": "Optimisation yields the final 3D proposal for this object instance."
+  },
+  {
+    "step": 18,
+    "start": 59.5,
+    "end": 63.0,
+    "narration": "Repeating the whole process over all superpoints produces a class-agnostic 3D instance segmentation of the scene."
+  },
+  {
+    "step": 19,
+    "start": 63.0,
+    "end": 66.5,
+    "narration": "Finally, CLIP and a large language model label those instances, giving open-vocabulary and open-ended 3D instance segmentation: table, TV, desktop, monitor, and more."
+  }
+]

@@ -1,0 +1,11 @@
+[
+  {"step": 1, "start": 0.0, "end": 3.0, "narration": "We start with the visual input: an image together with its candidate object proposals, numbered one through four, drawn as blue boxes over the people, the hat and the glass."},
+  {"step": 2, "start": 3.0, "end": 6.0, "narration": "The second input is the sentence: 'There is a woman who is carrying hat and is holding a beverage.' The highlighted word 'carrying' is the relation the model will later be asked to re-rank."},
+  {"step": 3, "start": 6.0, "end": 9.0, "narration": "The sentence is parsed into a language graph. Entity nodes 'woman', 'hat' and 'beverage' become ellipses, and the predicates 'carry' and 'hold' become the rectangular edge nodes that link them."},
+  {"step": 4, "start": 9.0, "end": 12.0, "narration": "That graph is lifted into message propagation. In the initialization block each entity gets a local belief over the four proposals, and each predicate gets an affinity matrix, A-carry and A-hold, scoring every pair of regions."},
+  {"step": 5, "start": 12.0, "end": 15.0, "narration": "The legend fixes the notation: green arrows pointing up are bottom-up propagation, yellow arrows pointing down are top-down propagation, S circles select beliefs and G circles gate them."},
+  {"step": 6, "start": 15.0, "end": 18.0, "narration": "Bottom-up aggregation runs first. Child beliefs for hat and beverage are selected through the S units, pushed up through the predicate nodes, and gated by G into the updated bottom-up belief for woman."},
+  {"step": 7, "start": 18.0, "end": 21.0, "narration": "Top-down aggregation mirrors it. The belief at woman is selected by S, sent down through the predicate nodes, and gated by G to refine the top-down beliefs of hat and beverage."},
+  {"step": 8, "start": 21.0, "end": 24.0, "narration": "The readout head converts the fused bottom-up and top-down beliefs into per-node matching probabilities. Taking the minimum over the graph gives the image-text matching prediction, and an MLP feeds the result back into propagation."},
+  {"step": 9, "start": 24.0, "end": 27.0, "narration": "Finally, the difference between the full graph and the graph with the 'carry' relation perturbed isolates that relation's contribution, producing the MRR prediction for relation re-ranking."}
+]

@@ -1,0 +1,9 @@
+[
+  {"step": 1, "start": 0.0, "end": 3.0, "narration": "We begin with the motion frames: a short sequence of video frames showing the speaker's head pose and movement."},
+  {"step": 2, "start": 3.0, "end": 5.8, "narration": "Next comes the identity frame, a single reference image that fixes who the person is."},
+  {"step": 3, "start": 5.8, "end": 8.6, "narration": "Third is the noisy target, the corrupted version of the frame the model must learn to denoise."},
+  {"step": 4, "start": 8.6, "end": 12.0, "narration": "These three visual inputs are routed together and combined at a summation junction into one conditioning signal."},
+  {"step": 5, "start": 12.0, "end": 15.4, "narration": "In parallel, the speech waveform is passed through an audio encoder, producing the audio conditioning features."},
+  {"step": 6, "start": 15.4, "end": 19.2, "narration": "Both the combined visual input and the audio features feed the diffusion model, which also receives a time encoding for the current denoising step."},
+  {"step": 7, "start": 19.2, "end": 24.0, "narration": "The diffusion model outputs the target frame: the same identity, driven by the motion and synchronized to the speech."}
+]

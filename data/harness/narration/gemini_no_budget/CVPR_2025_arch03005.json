@@ -1,0 +1,38 @@
+[
+  {
+    "step": 1,
+    "start": 0.0,
+    "end": 3.5,
+    "narration": "The pipeline begins with input map queries, representing prior knowledge and positions of map elements."
+  },
+  {
+    "step": 2,
+    "start": 3.5,
+    "end": 7.0,
+    "narration": "An offset prediction module estimates spatial displacements, which are added to reference points to define precise sampling locations."
+  },
+  {
+    "step": 3,
+    "start": 7.0,
+    "end": 10.5,
+    "narration": "At these predicted coordinates, multi-scale features are sampled from the Bird's Eye View feature grid."
+  },
+  {
+    "step": 4,
+    "start": 10.5,
+    "end": 14.5,
+    "narration": "Concurrently, an MLP predicts distribution parameters to dynamically sample adaptive attention weights via dynamic resampling."
+  },
+  {
+    "step": 5,
+    "start": 14.5,
+    "end": 18.0,
+    "narration": "The sampled features and attention weights enter the aggregation module, followed by a linear projection layer."
+  },
+  {
+    "step": 6,
+    "start": 18.0,
+    "end": 21.5,
+    "narration": "Finally, the updated map query residual is produced to iteratively refine the map representation."
+  }
+]

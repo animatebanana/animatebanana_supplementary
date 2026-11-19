@@ -1,0 +1,50 @@
+[
+  {
+    "step": 1,
+    "start": 0.0,
+    "end": 3.0,
+    "narration": "We start with the input image. Four candidate regions have been proposed and boxed: region 1 covers the woman, region 2 her hat, region 3 the glass she is holding, and region 4 the second person."
+  },
+  {
+    "step": 2,
+    "start": 3.0,
+    "end": 6.0,
+    "narration": "The second input is the sentence: there is a woman who is carrying hat and is holding a beverage. The word carrying is highlighted because it is the relation we will later have to recover."
+  },
+  {
+    "step": 3,
+    "start": 6.0,
+    "end": 9.0,
+    "narration": "The sentence is parsed into a language graph. Woman is the subject node, carry and hold are relation nodes, and hat and beverage are the object nodes hanging off them."
+  },
+  {
+    "step": 4,
+    "start": 9.0,
+    "end": 12.0,
+    "narration": "Initialization maps that graph onto the image. Every node gets a local belief vector over the four regions, shown as a blue heat strip, and every relation gets a compatibility matrix, A-carry and A-hold, scoring each pair of regions."
+  },
+  {
+    "step": 5,
+    "start": 12.0,
+    "end": 15.0,
+    "narration": "Message propagation then refines the beliefs. Green arrows push bottom-up messages from hat and beverage through selecting and gating units up to woman, while yellow arrows send the top-down messages back down. An MLP carries the updated beliefs to the readout head."
+  },
+  {
+    "step": 6,
+    "start": 15.0,
+    "end": 18.0,
+    "narration": "In the readout head, each node ends up with a paired bottom-up and top-down score. Taking the minimum over the nodes gives the image-text matching prediction, how well the sentence as a whole fits the image."
+  },
+  {
+    "step": 7,
+    "start": 18.0,
+    "end": 21.0,
+    "narration": "Taking the difference between those paired scores instead isolates each relation. The edge that changes most, drawn in red, is the one labelled carry, and that gives the missing relation recovery prediction."
+  },
+  {
+    "step": 8,
+    "start": 21.0,
+    "end": 24.0,
+    "narration": "The legend ties it together: green arrows are bottom-up propagation, yellow arrows are top-down, S circles select beliefs, and G circles gate them."
+  }
+]

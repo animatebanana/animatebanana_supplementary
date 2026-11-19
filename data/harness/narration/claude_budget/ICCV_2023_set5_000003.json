@@ -1,0 +1,11 @@
+[
+  {"step": 1, "start": 0.0, "end": 3.0, "narration": "The pipeline takes two views of the same scene: an image at time tau and a second image at time tau prime. Both enter the network as inputs."},
+  {"step": 2, "start": 3.0, "end": 6.0, "narration": "Each image passes through the Patch Feature Extractor. A convolutional encoder E feeds a Deformable Transformer Encoder, and the two branches share weights, so both time steps are embedded in a common feature space."},
+  {"step": 3, "start": 6.0, "end": 9.0, "narration": "The extractor outputs two sequences of patch tokens, z-s-tau and z-s-tau-prime, one coloured token per spatial patch of each view."},
+  {"step": 4, "start": 9.0, "end": 12.0, "narration": "In parallel, the Patch Matching Network takes the same pair of images and learns, with its own deformable transformer encoder, how patches correspond across time."},
+  {"step": 5, "start": 12.0, "end": 15.0, "narration": "Multi-Temporal Patch Matching uses those correspondences to link tokens of the tau sequence to their counterparts in the tau prime sequence, pairing patches that depict the same object content."},
+  {"step": 6, "start": 15.0, "end": 18.0, "narration": "From the matched tokens the model selects positive and negative patches: patches that agree across views, and patches that do not."},
+  {"step": 7, "start": 18.0, "end": 21.0, "narration": "This yields three embedding sets: positives from time tau, positives from time tau prime, and negatives from time tau prime, drawn in green, purple and red."},
+  {"step": 8, "start": 21.0, "end": 24.0, "narration": "The Object Residual Module subtracts a learned object prototype phi-k from each selected token, producing residuals r for every combination of polarity q, time step t, and scale s."},
+  {"step": 9, "start": 24.0, "end": 27.0, "narration": "Those residuals drive two objectives: the multi-view loss, which aligns positives across the two views against negatives, and the scale-regress loss, which enforces consistency across scales."}
+]

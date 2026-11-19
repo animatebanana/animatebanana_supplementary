@@ -1,0 +1,50 @@
+[
+  {
+    "step": 1,
+    "start": 0.0,
+    "end": 3.5,
+    "narration": "In the first stage, 3D Head Geometry Learning begins with a multi-view reference video sequence S-ref, from which the subject's head region X-ref is extracted."
+  },
+  {
+    "step": 2,
+    "start": 3.5,
+    "end": 7.0,
+    "narration": "The extracted head is processed by Depth Net to predict dense depth maps, while Pose Net estimates the rotational and translational camera poses for each frame."
+  },
+  {
+    "step": 3,
+    "start": 7.0,
+    "end": 10.5,
+    "narration": "Flow computation derives motion fields from the 3D geometry, which are used to warp encoded reference features into an aligned canonical feature representation h-c."
+  },
+  {
+    "step": 4,
+    "start": 10.5,
+    "end": 14.0,
+    "narration": "A recurrent ConvLSTM temporally aggregates the warped canonical features before a decoder reconstructs a temporally consistent canonical head x-hat-c."
+  },
+  {
+    "step": 5,
+    "start": 14.0,
+    "end": 17.5,
+    "narration": "In the fusion mechanism, the canonical head is transformed by the driving pose parameters into x-hat-dri, paired alongside the driving frame s-dri and reference frame s-ref."
+  },
+  {
+    "step": 6,
+    "start": 17.5,
+    "end": 21.0,
+    "narration": "A joint Flow and Attention Map Predictor generates bidirectional motion flow fields and attention weighting heatmaps for both the transformed and reference sources."
+  },
+  {
+    "step": 7,
+    "start": 21.0,
+    "end": 24.5,
+    "narration": "Features from both sources are warped by the predicted flow fields and modulated by their respective attention maps to isolate trustworthy facial regions."
+  },
+  {
+    "step": 8,
+    "start": 24.5,
+    "end": 28.0,
+    "narration": "Finally, the decoder blends the attention-modulated features to synthesize the photorealistic animated driving frame s-hat-dri matching the desired pose."
+  }
+]

@@ -1,0 +1,32 @@
+[
+  {
+    "step": 1,
+    "start": 0.0,
+    "end": 3.5,
+    "narration": "In existing methods, the first stage feeds the input image into a diffusion model to generate a reconstructed image."
+  },
+  {
+    "step": 2,
+    "start": 3.5,
+    "end": 7.0,
+    "narration": "A brick wall separates the stages without interaction, where the second stage computes the absolute difference reconstruction error to classify real versus generated images."
+  },
+  {
+    "step": 3,
+    "start": 7.0,
+    "end": 10.5,
+    "narration": "In our proposed method, the input image is processed through the FMRE module to generate an aligned pseudo sample alongside the original image."
+  },
+  {
+    "step": 4,
+    "start": 10.5,
+    "end": 14.0,
+    "narration": "Both streams pass jointly through the diffusion model, producing reconstructions and corresponding residual maps via absolute difference operations."
+  },
+  {
+    "step": 5,
+    "start": 14.0,
+    "end": 18.0,
+    "narration": "The residuals are concatenated and fed into the classifier with end-to-end training, achieving better alignment between diffusion reconstruction and classification."
+  }
+]

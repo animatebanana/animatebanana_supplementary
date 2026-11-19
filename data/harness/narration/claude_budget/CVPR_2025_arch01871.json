@@ -1,0 +1,14 @@
+[
+  {"step": 1, "start": 0.0, "end": 2.6, "narration": "The pipeline starts with the first input: a sequence of RGB video frames of a person moving, captured over time."},
+  {"step": 2, "start": 2.6, "end": 5.2, "narration": "The second input arrives below it: the matching sequence of pressure maps recorded from the floor over the same time window."},
+  {"step": 3, "start": 5.2, "end": 7.6, "narration": "Each modality goes into its own encoder. The image encoder is frozen, marked by the snowflake, while the pressure encoder is trained."},
+  {"step": 4, "start": 7.6, "end": 9.8, "narration": "The encoded features then pass through an LSAM block on each branch, which refines the per-modality representation."},
+  {"step": 5, "start": 9.8, "end": 12.2, "narration": "Both streams meet in FCAM, the Fusion Cross-Attention Module, where image and pressure information are combined."},
+  {"step": 6, "start": 12.2, "end": 16.0, "narration": "Inside FCAM, image features become value and key, pressure features become the query. Query and key are multiplied and softmaxed into attention weights, applied to the value, added back through a residual, passed through a position-wise feed-forward layer, and finally concatenated with the original features."},
+  {"step": 7, "start": 16.0, "end": 18.2, "narration": "The fused representation flows into the regressor, which maps it to human body parameters."},
+  {"step": 8, "start": 18.2, "end": 20.6, "narration": "The regressor predicts pose parameters theta and global translation T, supervised by the pose loss and the translation loss."},
+  {"step": 9, "start": 20.6, "end": 23.0, "narration": "From theta and T, the 3D joint positions J of theta and T are computed and supervised by the 3D loss."},
+  {"step": 10, "start": 23.0, "end": 25.2, "narration": "Those 3D joints are then orthographically projected to the image plane, where the 2D loss is applied."},
+  {"step": 11, "start": 25.2, "end": 28.2, "narration": "The result is the reconstructed 3D motion sequence, with a contact loss that keeps the predicted body in agreement with the measured foot pressure contacts."},
+  {"step": 12, "start": 28.2, "end": 30.0, "narration": "Finally, the legend: the crossed circle is matrix multiplication, the plus is addition, and C is concatenation. That completes the full architecture."}
+]

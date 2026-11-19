@@ -1,0 +1,26 @@
+[
+  {
+    "step": 1,
+    "start": 0.0,
+    "end": 4.0,
+    "narration": "First, consecutive point clouds P_t and P_{t+1} undergo geometry-aware point sampling through eigen feature computation, thresholding, and random sampling."
+  },
+  {
+    "step": 2,
+    "start": 4.0,
+    "end": 8.0,
+    "narration": "Next, the sampled points are partitioned based on their azimuthal angles into four directional views: front, left, right, and rear."
+  },
+  {
+    "step": 3,
+    "start": 8.0,
+    "end": 12.0,
+    "narration": "Then, local geometric features are extracted using PointHop++ and matched across corresponding views."
+  },
+  {
+    "step": 4,
+    "start": 12.0,
+    "end": 16.0,
+    "narration": "Finally, rotation and translation are estimated to update the trajectory, and the time step advances to process the next frame."
+  }
+]

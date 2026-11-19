@@ -1,0 +1,32 @@
+[
+  {
+    "step": 1,
+    "start": 0.0,
+    "end": 3.5,
+    "narration": "The architecture begins with visual conditioning: past motion frames capture head pose dynamics, while an identity frame provides the subject's facial appearance."
+  },
+  {
+    "step": 2,
+    "start": 3.5,
+    "end": 7.0,
+    "narration": "A noise-corrupted target frame is combined with the motion and identity frames through a channel concatenation operator."
+  },
+  {
+    "step": 3,
+    "start": 7.0,
+    "end": 10.5,
+    "narration": "Concurrently, the input speech waveform is windowed and processed by an audio encoder to extract acoustic and phonetic features."
+  },
+  {
+    "step": 4,
+    "start": 10.5,
+    "end": 14.0,
+    "narration": "The central diffusion model receives the concatenated visual features, audio representations, and diffusion time encoding to perform iterative denoising."
+  },
+  {
+    "step": 5,
+    "start": 14.0,
+    "end": 18.0,
+    "narration": "Finally, the diffusion process synthesizes the clear, audio-synchronized target frame of the speaking subject."
+  }
+]

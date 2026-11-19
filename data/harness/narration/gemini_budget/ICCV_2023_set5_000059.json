@@ -1,0 +1,38 @@
+[
+  {
+    "step": 1,
+    "start": 0.0,
+    "end": 3.0,
+    "narration": "A camera casts a ray into the 3D scene to sample a query point p on an object surface."
+  },
+  {
+    "step": 2,
+    "start": 3.0,
+    "end": 6.0,
+    "narration": "Query point p extracts features from multi-resolution grids, and an MLP predicts signed distance functions for each object."
+  },
+  {
+    "step": 3,
+    "start": 6.0,
+    "end": 9.0,
+    "narration": "The scene signed distance function is obtained by taking the minimum over all object SDFs, determining scene transmittance."
+  },
+  {
+    "step": 4,
+    "start": 9.0,
+    "end": 12.0,
+    "narration": "Object densities are modulated by scene transmittance to produce occlusion-aware opacities, supervised by 2D instance masks."
+  },
+  {
+    "step": 5,
+    "start": 12.0,
+    "end": 15.0,
+    "narration": "Geometric regularization enforces the Eikonal gradient constraint on SDFs and prevents interpenetration between objects."
+  },
+  {
+    "step": 6,
+    "start": 15.0,
+    "end": 18.0,
+    "narration": "Finally, volume rendering synthesizes depth, surface normals, and RGB appearance, jointly optimized with multi-modal supervision."
+  }
+]

@@ -1,0 +1,282 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1911" height="902" viewBox="0 0 1911 902">
+<title>Geometry-aware point-cloud odometry pipeline</title>
+<rect width="1911" height="902" fill="#FFFFFF"/>
+<g id="diagram">
+
+  
+  <g id="u-loop-left">
+    <path d="M82,700 L33,700 L33,259 L45,259" fill="none" stroke="#AD4D17" stroke-width="22" stroke-linejoin="miter"/>
+    <polygon points="45,238 45,280 85,259" fill="#AD4D17"/>
+    <text x="44" y="204" font-family="Times New Roman, Times, serif" font-size="46" font-weight="bold" fill="#C00000">P<tspan font-size="31" dy="9">t</tspan></text>
+    <text x="39" y="331" font-family="Times New Roman, Times, serif" font-size="46" font-weight="bold" fill="#C00000">P<tspan font-size="31" dy="9">t+1</tspan></text>
+  </g>
+
+  <g id="u-arrow-top">
+    <line x1="927" y1="239.5" x2="1021" y2="239.5" stroke="#AD4D17" stroke-width="22"/>
+    <polygon points="1019,219 1019,260 1059,239.5" fill="#AD4D17"/>
+  </g>
+
+  <g id="u-loop-right">
+    <path d="M1830,257 L1887,257 L1887,701 L1868,701" fill="none" stroke="#AD4D17" stroke-width="22" stroke-linejoin="miter"/>
+    <polygon points="1868,680 1868,722 1828,701" fill="#AD4D17"/>
+  </g>
+
+  <g id="u-arrow-bottom">
+    <line x1="1013" y1="698" x2="919" y2="698" stroke="#AD4D17" stroke-width="22"/>
+    <polygon points="921,677 921,719 881,698" fill="#AD4D17"/>
+  </g>
+
+  
+  <g id="u-p1-frame">
+    <rect x="133" y="11" width="812" height="415" rx="46" ry="46" fill="#FFFFFF" stroke="#002060" stroke-width="6"/>
+    <text x="532" y="72" text-anchor="middle" font-family="Times New Roman, Times, serif" font-size="46" font-style="italic" font-weight="bold" fill="#000000">Geometry-aware point sampling</text>
+  </g>
+  <g id="u-p1-b1">
+    <rect x="166" y="158" width="220" height="175" fill="#D6DCE5" stroke="#002060" stroke-width="4"/>
+    <text x="276" y="214" text-anchor="middle" font-family="Times New Roman, Times, serif" font-size="37" fill="#000000">Eigen</text>
+    <text x="276" y="258" text-anchor="middle" font-family="Times New Roman, Times, serif" font-size="37" fill="#000000">feature</text>
+    <text x="276" y="302" text-anchor="middle" font-family="Times New Roman, Times, serif" font-size="37" fill="#000000">computation</text>
+  </g>
+  <g id="u-p1-b2">
+    <line x1="388" y1="245" x2="419" y2="245" stroke="#002060" stroke-width="7"/>
+    <polygon points="418,236 418,254 431,245" fill="#002060"/>
+    <rect x="429" y="158" width="220" height="175" fill="#D6DCE5" stroke="#002060" stroke-width="4"/>
+    <text x="539" y="258" text-anchor="middle" font-family="Times New Roman, Times, serif" font-size="37" fill="#000000">Threshold</text>
+  </g>
+  <g id="u-p1-b3">
+    <line x1="651" y1="245" x2="676" y2="245" stroke="#002060" stroke-width="7"/>
+    <polygon points="675,236 675,254 688,245" fill="#002060"/>
+    <rect x="686" y="158" width="220" height="175" fill="#D6DCE5" stroke="#002060" stroke-width="4"/>
+    <text x="796" y="236" text-anchor="middle" font-family="Times New Roman, Times, serif" font-size="37" fill="#000000">Random</text>
+    <text x="796" y="280" text-anchor="middle" font-family="Times New Roman, Times, serif" font-size="37" fill="#000000">sampling</text>
+  </g>
+
+  
+  <g id="u-p2-frame">
+    <rect x="995" y="10" width="812" height="415" rx="46" ry="46" fill="#FFFFFF" stroke="#7F6000" stroke-width="6"/>
+    <text x="1315" y="72" text-anchor="middle" font-family="Times New Roman, Times, serif" font-size="46" font-style="italic" font-weight="bold" fill="#000000">View-based partitioning</text>
+  </g>
+  <g id="u-p2-azim">
+    <rect x="1080" y="110" width="347" height="281" rx="42" ry="42" fill="#FFF2CC" stroke="#FFE699" stroke-width="4"/>
+    <text x="1253" y="165" text-anchor="middle" font-family="Times New Roman, Times, serif" font-size="43" fill="#000000">Azimuthal</text>
+    <text x="1253" y="218" text-anchor="middle" font-family="Times New Roman, Times, serif" font-size="43" fill="#000000">angle</text>
+    <line x1="1175" y1="250" x2="1335" y2="365" stroke="#000000" stroke-width="2"/>
+    <line x1="1175" y1="365" x2="1335" y2="250" stroke="#000000" stroke-width="2"/>
+    <rect x="1245" y="285" width="13" height="50" fill="#002060"/>
+    <text x="1251" y="278" text-anchor="middle" font-family="Times New Roman, Times, serif" font-size="31" fill="#C00000">F</text>
+    <text x="1196" y="319" text-anchor="middle" font-family="Times New Roman, Times, serif" font-size="31" fill="#C00000">LS</text>
+    <text x="1305" y="319" text-anchor="middle" font-family="Times New Roman, Times, serif" font-size="31" fill="#C00000">RS</text>
+    <text x="1251" y="371" text-anchor="middle" font-family="Times New Roman, Times, serif" font-size="31" fill="#C00000">R</text>
+  </g>
+  <g id="u-p2-views">
+    <g stroke="#7F6000" stroke-width="7" fill="#7F6000">
+      <line x1="1445" y1="137" x2="1513" y2="137"/><polygon points="1512,128 1512,146 1530,137" stroke="none"/>
+      <line x1="1445" y1="207" x2="1513" y2="207"/><polygon points="1512,198 1512,216 1530,207" stroke="none"/>
+      <line x1="1445" y1="287" x2="1513" y2="287"/><polygon points="1512,278 1512,296 1530,287" stroke="none"/>
+      <line x1="1445" y1="356" x2="1513" y2="356"/><polygon points="1512,347 1512,365 1530,356" stroke="none"/>
+    </g>
+    <g fill="#FFF2CC" stroke="#FFE699" stroke-width="4">
+      <rect x="1538" y="98" width="205" height="63"/>
+      <rect x="1538" y="175" width="205" height="63"/>
+      <rect x="1538" y="251" width="205" height="63"/>
+      <rect x="1538" y="327" width="205" height="62"/>
+    </g>
+    <g text-anchor="middle" font-family="Times New Roman, Times, serif" font-size="37" fill="#000000">
+      <text x="1640" y="142">Front view</text>
+      <text x="1640" y="219">Left view</text>
+      <text x="1640" y="295">Right view</text>
+      <text x="1640" y="371">Rear view</text>
+    </g>
+  </g>
+
+  
+  <g id="u-p3-frame">
+    <rect x="995" y="479" width="812" height="415" rx="46" ry="46" fill="#FFFFFF" stroke="#385723" stroke-width="6"/>
+    <text x="1400" y="540" text-anchor="middle" font-family="Times New Roman, Times, serif" font-size="46" font-style="italic" font-weight="bold" fill="#000000">Feature extraction and matching</text>
+  </g>
+  <g id="u-p3-php">
+    <rect x="1375" y="562" width="381" height="277" rx="38" ry="38" fill="#E2F0D9" stroke="#C5E0B4" stroke-width="5"/>
+    <text x="1400" y="611" font-family="Times New Roman, Times, serif" font-size="40" font-weight="bold" fill="#000000">PointHop++</text>
+    <g fill="#BF8F00" stroke="#7F6000" stroke-width="2.5">
+      <polygon points="1489,644 1499,644 1471,702 1461,702"/>
+      <polygon points="1522,644 1532,644 1504,702 1494,702"/>
+      <polygon points="1533,644 1543,644 1515,702 1505,702"/>
+      <polygon points="1544,644 1554,644 1526,702 1516,702"/>
+      <polygon points="1489,734 1499,734 1471,792 1461,792"/>
+      <polygon points="1522,734 1532,734 1504,792 1494,792"/>
+      <polygon points="1533,734 1543,734 1515,792 1505,792"/>
+      <polygon points="1544,734 1554,734 1526,792 1516,792"/>
+    </g>
+    <circle cx="1491" cy="673" r="3.5" fill="#C00000"/>
+    <circle cx="1501" cy="673" r="3.5" fill="#C00000"/>
+    <circle cx="1491" cy="763" r="3.5" fill="#002060"/>
+    <circle cx="1501" cy="763" r="3.5" fill="#002060"/>
+    <polygon points="1605,650 1677,681 1677,760 1605,790" fill="#A9D18E" stroke="#385723" stroke-width="5"/>
+  </g>
+  <g id="u-p3-match">
+    <line x1="1368" y1="699.5" x2="1317" y2="699.5" stroke="#385723" stroke-width="7"/>
+    <polygon points="1318,691 1318,708 1300,699.5" fill="#385723"/>
+    <rect x="1069" y="580" width="223" height="242" fill="#E2F0D9" stroke="#385723" stroke-width="4"/>
+    <g text-anchor="middle" font-family="Times New Roman, Times, serif" font-size="37" fill="#000000">
+      <text x="1180" y="648">Feature</text>
+      <text x="1180" y="692">matching</text>
+      <text x="1180" y="736">in each</text>
+      <text x="1180" y="780">view</text>
+    </g>
+  </g>
+
+  
+  <g id="u-p4-frame">
+    <rect x="133" y="481" width="812" height="415" rx="46" ry="46" fill="#FFFFFF" stroke="#600000" stroke-width="6"/>
+    <text x="500" y="540" text-anchor="middle" font-family="Times New Roman, Times, serif" font-size="46" font-style="italic" font-weight="bold" fill="#000000">Motion estimation and update</text>
+  </g>
+  <g id="u-p4-est">
+    <rect x="648" y="609" width="220" height="177" fill="#F4C8C8" stroke="#600000" stroke-width="4"/>
+    <g text-anchor="middle" font-family="Times New Roman, Times, serif" font-size="37" fill="#000000">
+      <text x="758" y="666">Estimate</text>
+      <text x="758" y="710">rotation &amp;</text>
+      <text x="758" y="754">translation</text>
+    </g>
+  </g>
+  <g id="u-p4-upd">
+    <line x1="637" y1="690.5" x2="611" y2="690.5" stroke="#600000" stroke-width="7"/>
+    <polygon points="613,682 613,699 595,690.5" fill="#600000"/>
+    <rect x="360" y="611" width="222" height="178" fill="#F4C8C8" stroke="#600000" stroke-width="4"/>
+    <g text-anchor="middle" font-family="Times New Roman, Times, serif" font-size="37" fill="#000000">
+      <text x="471" y="690">Update</text>
+      <text x="471" y="734">trajectory</text>
+    </g>
+  </g>
+  <g id="u-p4-t">
+    <line x1="354" y1="690.5" x2="328" y2="690.5" stroke="#600000" stroke-width="7"/>
+    <polygon points="330,682 330,699 312,690.5" fill="#600000"/>
+    <rect x="207" y="611" width="98" height="178" fill="#F4C8C8" stroke="#600000" stroke-width="4"/>
+    <text x="256" y="713" text-anchor="middle" transform="rotate(-90 256 700)" font-family="Times New Roman, Times, serif" font-size="37" fill="#000000">t&#8592;t+1</text>
+  </g>
+
+</g>
+
+  <defs>
+    <mask id="veil" maskUnits="userSpaceOnUse" x="0" y="0" width="1911" height="902">
+      
+      <rect x="0" y="0" width="1911" height="902" fill="#ffffff"/>
+      <g fill="#000000" class="hole">
+
+        
+        <g class="h1" fill-opacity="0">
+          <rect x="0" y="146" width="126" height="588" rx="12"/>
+          <animate attributeName="fill-opacity" from="0" to="1" begin="0.2s" dur="0.7s" fill="freeze"/>
+        </g>
+
+        
+        <g class="h2" fill-opacity="0">
+          <rect x="128" y="6" width="822" height="84" rx="10"/>
+          <rect x="128" y="6" width="40" height="425" rx="10"/>
+          <rect x="910" y="6" width="40" height="425" rx="10"/>
+          <rect x="128" y="391" width="822" height="40" rx="10"/>
+          <animate attributeName="fill-opacity" from="0" to="1" begin="3.5s" dur="0.7s" fill="freeze"/>
+        </g>
+
+        
+        <g class="h3" fill-opacity="0">
+          <rect x="156" y="148" width="240" height="195" rx="10"/>
+          <animate attributeName="fill-opacity" from="0" to="1" begin="7s" dur="0.7s" fill="freeze"/>
+        </g>
+
+        
+        <g class="h4" fill-opacity="0">
+          <rect x="382" y="148" width="280" height="195" rx="10"/>
+          <animate attributeName="fill-opacity" from="0" to="1" begin="10.5s" dur="0.7s" fill="freeze"/>
+        </g>
+
+        
+        <g class="h5" fill-opacity="0">
+          <rect x="645" y="148" width="273" height="195" rx="10"/>
+          <animate attributeName="fill-opacity" from="0" to="1" begin="14s" dur="0.7s" fill="freeze"/>
+        </g>
+
+        
+        <g class="h6" fill-opacity="0">
+          <rect x="918" y="210" width="145" height="60" rx="10"/>
+          <rect x="990" y="5" width="822" height="84" rx="10"/>
+          <rect x="990" y="5" width="40" height="425" rx="10"/>
+          <rect x="1772" y="5" width="40" height="425" rx="10"/>
+          <rect x="990" y="390" width="822" height="40" rx="10"/>
+          <animate attributeName="fill-opacity" from="0" to="1" begin="17.5s" dur="0.7s" fill="freeze"/>
+        </g>
+
+        
+        <g class="h7" fill-opacity="0">
+          <rect x="1070" y="100" width="370" height="302" rx="20"/>
+          <animate attributeName="fill-opacity" from="0" to="1" begin="21s" dur="0.7s" fill="freeze"/>
+        </g>
+
+        
+        <g class="h8" fill-opacity="0">
+          <rect x="1438" y="88" width="318" height="312" rx="12"/>
+          <animate attributeName="fill-opacity" from="0" to="1" begin="25s" dur="0.7s" fill="freeze"/>
+        </g>
+
+        
+        <g class="h9" fill-opacity="0">
+          <rect x="1818" y="236" width="93" height="496" rx="12"/>
+          <rect x="990" y="474" width="822" height="84" rx="10"/>
+          <rect x="990" y="474" width="40" height="425" rx="10"/>
+          <rect x="1772" y="474" width="40" height="425" rx="10"/>
+          <rect x="990" y="859" width="822" height="40" rx="10"/>
+          <animate attributeName="fill-opacity" from="0" to="1" begin="29s" dur="0.7s" fill="freeze"/>
+        </g>
+
+        
+        <g class="h10" fill-opacity="0">
+          <rect x="1365" y="552" width="402" height="297" rx="20"/>
+          <animate attributeName="fill-opacity" from="0" to="1" begin="32.5s" dur="0.7s" fill="freeze"/>
+        </g>
+
+        
+        <g class="h11" fill-opacity="0">
+          <rect x="1058" y="570" width="322" height="262" rx="12"/>
+          <animate attributeName="fill-opacity" from="0" to="1" begin="36.5s" dur="0.7s" fill="freeze"/>
+        </g>
+
+        
+        <g class="h12" fill-opacity="0">
+          <rect x="870" y="666" width="152" height="64" rx="10"/>
+          <rect x="128" y="476" width="822" height="84" rx="10"/>
+          <rect x="128" y="476" width="40" height="425" rx="10"/>
+          <rect x="910" y="476" width="40" height="425" rx="10"/>
+          <rect x="128" y="861" width="822" height="40" rx="10"/>
+          <animate attributeName="fill-opacity" from="0" to="1" begin="40s" dur="0.7s" fill="freeze"/>
+        </g>
+
+        
+        <g class="h13" fill-opacity="0">
+          <rect x="636" y="598" width="246" height="200" rx="10"/>
+          <animate attributeName="fill-opacity" from="0" to="1" begin="43.5s" dur="0.7s" fill="freeze"/>
+        </g>
+
+        
+        <g class="h14" fill-opacity="0">
+          <rect x="348" y="598" width="294" height="200" rx="10"/>
+          <animate attributeName="fill-opacity" from="0" to="1" begin="47s" dur="0.7s" fill="freeze"/>
+        </g>
+
+        
+        <g class="h15" fill-opacity="0">
+          <rect x="196" y="598" width="162" height="200" rx="10"/>
+          <animate attributeName="fill-opacity" from="0" to="1" begin="50.5s" dur="0.7s" fill="freeze"/>
+        </g>
+
+        
+        <g class="h16" fill-opacity="0">
+          <rect x="0" y="0" width="1911" height="902"/>
+          <animate attributeName="fill-opacity" from="0" to="1" begin="54.5s" dur="1s" fill="freeze"/>
+        </g>
+
+      </g>
+    </mask>
+  </defs>
+
+  <rect id="alpha-veil" x="0" y="0" width="1911" height="902" fill="#FFFFFF" opacity="0.66" mask="url(#veil)" pointer-events="none"/>
+
+</svg>

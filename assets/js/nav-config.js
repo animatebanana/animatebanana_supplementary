@@ -10,6 +10,7 @@ export const NAV_SECTIONS = [
   { id: 'metrics',      label: 'Metrics and Evaluation Strategy', href: 'metrics.html' },
   { id: 'bench-significance', label: 'Significance of Bench', href: 'bench-significance.html' },
   { id: 'prompts',      label: 'Prompts',      href: 'prompts.html' },
+  { id: 'harness',      label: 'Harness Experiments', href: 'harness-experiments.html' },
   { id: 'ablations',    label: 'Ablations',    href: 'ablations.html' },
   { id: 'failures',     label: 'Failure cases', href: 'failures.html' },
   { id: 'user-study',   label: 'User study',   href: 'user-study.html' },

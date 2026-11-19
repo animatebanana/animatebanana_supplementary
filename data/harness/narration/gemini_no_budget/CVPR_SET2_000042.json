@@ -1,0 +1,38 @@
+[
+  {
+    "step": 1,
+    "start": 0.0,
+    "end": 3.5,
+    "narration": "The input content image of the cat is processed through the Content LoRA low-rank decomposition matrices."
+  },
+  {
+    "step": 2,
+    "start": 3.5,
+    "end": 7.0,
+    "narration": "Simultaneously, the reference style painting is mapped through the Style LoRA decomposition matrices."
+  },
+  {
+    "step": 3,
+    "start": 7.0,
+    "end": 11.0,
+    "narration": "Within K-LoRA, top-K salient elements are extracted from both branches, with style features scaled before summation."
+  },
+  {
+    "step": 4,
+    "start": 11.0,
+    "end": 15.0,
+    "narration": "The Judge module evaluates the combined signals to identify and route features to the attention layer with a larger top-K capacity."
+  },
+  {
+    "step": 5,
+    "start": 15.0,
+    "end": 19.0,
+    "narration": "These modulated attention features are added directly into the corresponding target layer of the diffusion backbone network."
+  },
+  {
+    "step": 6,
+    "start": 19.0,
+    "end": 23.0,
+    "narration": "The diffusion model synthesizes the final image, seamlessly blending the cat's content with the artistic painterly style."
+  }
+]

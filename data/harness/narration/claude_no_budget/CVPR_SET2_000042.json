@@ -1,0 +1,14 @@
+[
+  {"step": 1, "start": 0.0, "end": 2.8, "narration": "We begin with the content reference. A photo of a cat is handled by the Content LoRA, a pair of low-rank matrices B and A."},
+  {"step": 2, "start": 2.8, "end": 5.6, "narration": "Below it, the style reference, a Van Gogh style painting, has its own Style LoRA with the same B and A structure."},
+  {"step": 3, "start": 5.6, "end": 8.4, "narration": "Each branch collapses into its low-rank product, B times A, and both products are fed forward into the fusion module."},
+  {"step": 4, "start": 8.4, "end": 11.2, "narration": "That module is K-LoRA. Layer by layer, it decides whether content or style should take the lead."},
+  {"step": 5, "start": 11.2, "end": 14.0, "narration": "Inside, it looks at the content branch's attention map and sums its Top-K largest elements."},
+  {"step": 6, "start": 14.0, "end": 16.8, "narration": "It does exactly the same for the style branch, summing the Top-K elements of the style attention map."},
+  {"step": 7, "start": 16.8, "end": 19.6, "narration": "The style sum is first multiplied by a scale factor, which tunes how strongly style competes against content."},
+  {"step": 8, "start": 19.6, "end": 22.4, "narration": "The Judge then compares the two sums and selects whichever branch has the bigger Top-K response at this layer."},
+  {"step": 9, "start": 22.4, "end": 25.2, "narration": "The winner becomes the attention layer that is actually used: the one with the bigger Top-K."},
+  {"step": 10, "start": 25.2, "end": 28.0, "narration": "Its output is added to the current latent feature map at the add node."},
+  {"step": 11, "start": 28.0, "end": 30.8, "narration": "The merged features go back into the diffusion UNet, where the selected attention layer is applied during denoising."},
+  {"step": 12, "start": 30.8, "end": 33.6, "narration": "The result is the content cat rendered in the style of the reference painting."}
+]

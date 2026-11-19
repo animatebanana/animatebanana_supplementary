@@ -1,0 +1,32 @@
+[
+  {
+    "step": 1,
+    "start": 0.0,
+    "end": 4.0,
+    "narration": "The model receives an input image with bounding box proposals alongside a natural language query describing a woman carrying a hat and holding a beverage."
+  },
+  {
+    "step": 2,
+    "start": 4.0,
+    "end": 8.0,
+    "narration": "The query sentence is parsed into a language graph, explicitly linking the woman node through carry and hold relation predicates to the target objects."
+  },
+  {
+    "step": 3,
+    "start": 8.0,
+    "end": 12.0,
+    "narration": "In the initialization stage, object proposals and language graph nodes are aligned into initial location heatmaps and relationship affinity matrices."
+  },
+  {
+    "step": 4,
+    "start": 12.0,
+    "end": 16.0,
+    "narration": "Bidirectional message propagation then executes, performing bottom-up and top-down message passing via belief selection and gating units."
+  },
+  {
+    "step": 5,
+    "start": 16.0,
+    "end": 20.0,
+    "narration": "Finally, the readout head pools refined multimodal representations to compute image-text matching and masked relationship reasoning predictions."
+  }
+]

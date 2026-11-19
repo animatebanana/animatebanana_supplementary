@@ -1,0 +1,14 @@
+[
+  {"step": 1, "start": 0.0, "end": 3.0, "narration": "Here is the whole framework in greyscale: a data preparation stage on the left, the training pipeline across the top, and the HOI restoration module along the bottom. We will bring it back to colour piece by piece."},
+  {"step": 2, "start": 3.0, "end": 6.5, "narration": "First, the data preparation stage. This is where the training pairs for hand-object interaction video generation are built."},
+  {"step": 3, "start": 6.5, "end": 10.5, "narration": "It starts from a reference frame. The object held in that frame is swapped for a new one, giving the object replacement image that defines the target appearance."},
+  {"step": 4, "start": 10.5, "end": 14.5, "narration": "The resulting input frame is then annotated: box detection marks the hand and object regions, and hand mesh augmentation adds articulated hand geometry with motion cues."},
+  {"step": 5, "start": 14.5, "end": 18.0, "narration": "Next, the training pipeline itself, which turns those prepared frames into generated video."},
+  {"step": 6, "start": 18.0, "end": 22.0, "narration": "The reference image is encoded by a frozen VAE encoder and passed through the reference U-Net, whose self-attention layers capture the appearance to be preserved."},
+  {"step": 7, "start": 22.0, "end": 26.0, "narration": "In parallel, the layout guidance frames go through the layout encoder and are added to sampled noise, forming the latent that will be denoised."},
+  {"step": 8, "start": 26.0, "end": 30.5, "narration": "The denoising U-Net consumes that latent. Its blocks interleave self attention, temporal attention, and the new hand and object attention layers, with reference features injected from above."},
+  {"step": 9, "start": 30.5, "end": 34.5, "narration": "A ControlNet branch encodes the hand mesh sequence and feeds the hand attention layers, so generated motion follows the intended articulation."},
+  {"step": 10, "start": 34.5, "end": 38.5, "narration": "Zooming into the HOI restoration module: hand attention queries a hand texture memory bank through cross attention, and the result is gated by the hand mask before being merged back."},
+  {"step": 11, "start": 38.5, "end": 42.0, "narration": "Object attention works the same way, reading an object texture memory bank and masking with the object mask, so object appearance stays faithful across frames."},
+  {"step": 12, "start": 42.0, "end": 46.0, "narration": "Finally, the frozen VAE decoder turns the denoised latents into the generated frames, completing the pipeline now shown in full colour."}
+]

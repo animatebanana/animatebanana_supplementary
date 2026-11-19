@@ -1,0 +1,273 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="982" height="483" viewBox="0 0 982 483" font-family="Arial, Helvetica, sans-serif">
+<style>
+  .pop{filter:grayscale(1);animation:pop 1.1s ease-out forwards}
+  @keyframes pop{from{filter:grayscale(1)}to{filter:grayscale(0)}}
+  .s1{animation-delay:.6s}.s2{animation-delay:3.6s}.s3{animation-delay:6.6s}
+  .s4{animation-delay:9.6s}.s5{animation-delay:12.6s}.s6{animation-delay:15.6s}
+  .s7{animation-delay:18.6s}.s8{animation-delay:21.6s}.s9{animation-delay:24.6s}
+  text{font-size:9px;font-weight:bold;fill:#000}
+  .lbl{font-size:10px}.tiny{font-size:7px}
+</style>
+<defs>
+  <symbol id="scene" viewBox="0 0 120 110" preserveAspectRatio="none">
+    <rect width="120" height="110" fill="#1d4a37"/>
+    <rect y="78" width="120" height="32" fill="#c89f74"/>
+    <path d="M38 36 q22-14 44 0 l8 46 H30 Z" fill="#f2f2f2"/>
+    <circle cx="60" cy="22" r="13" fill="#e0b48e"/>
+    <rect x="28" y="52" width="14" height="30" rx="6" fill="#e0b48e"/>
+    <rect x="78" y="52" width="14" height="30" rx="6" fill="#e0b48e"/>
+    <rect x="54" y="40" width="13" height="46" rx="4" fill="#5fae4a"/>
+    <rect x="56" y="34" width="9" height="8" fill="#e8e8e8"/>
+    <rect x="54" y="56" width="13" height="10" fill="#e23b2e"/>
+  </symbol>
+  <symbol id="mesh" viewBox="0 0 110 90" preserveAspectRatio="none">
+    <rect width="110" height="90" fill="#000"/>
+    <path d="M22 40 q10-16 22-6 q12-8 14 6 q6 10-6 18 q-16 8-28-2 Z" fill="#dcdcdc"/>
+    <path d="M66 42 q10-14 22-4 q10 10 0 20 q-14 8-24-2 Z" fill="#dcdcdc"/>
+  </symbol>
+  <symbol id="bottle" viewBox="0 0 110 95" preserveAspectRatio="none">
+    <rect width="110" height="95" fill="#000"/>
+    <rect x="48" y="14" width="16" height="66" rx="5" fill="#5fae4a"/>
+    <rect x="51" y="6" width="10" height="10" fill="#e8e8e8"/>
+    <rect x="48" y="38" width="16" height="13" fill="#e23b2e"/>
+  </symbol>
+  <symbol id="layout" viewBox="0 0 100 110" preserveAspectRatio="none">
+    <rect width="100" height="110" fill="#000"/>
+    <rect x="10" y="34" width="22" height="18" fill="none" stroke="#2fa3e3" stroke-width="3"/>
+    <rect x="44" y="40" width="26" height="34" fill="none" stroke="#e23b2e" stroke-width="3"/>
+    <rect x="66" y="42" width="22" height="26" fill="none" stroke="#3fb84a" stroke-width="3"/>
+  </symbol>
+  <marker id="ag" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0 0 L7 3 L0 6 Z" fill="#4a9a3a"/></marker>
+  <marker id="ay" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0 0 L7 3 L0 6 Z" fill="#e8a317"/></marker>
+  <marker id="ak" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0 0 L7 3 L0 6 Z" fill="#111"/></marker>
+  <marker id="ar" markerWidth="8" markerHeight="8" refX="7" refY="3.5" orient="auto"><path d="M0 0 L8 3.5 L0 7 Z" fill="#c0251c"/></marker>
+</defs>
+
+<rect width="982" height="483" fill="#fff"/>
+
+
+<g class="pop s1">
+  <rect x="3" y="3" width="266" height="477" rx="4" fill="#fdeee8" stroke="#c0251c" stroke-width="2" stroke-dasharray="7 4"/>
+  <rect x="10" y="6" width="112" height="19" fill="#c0251c"/>
+  <text x="66" y="20" text-anchor="middle" fill="#fff" font-size="11">Data Preparation</text>
+  <use href="#scene" x="14" y="31" width="120" height="110"/>
+  <rect x="32" y="60" width="22" height="16" fill="none" stroke="#2fa3e3" stroke-width="2"/>
+  <rect x="62" y="56" width="22" height="48" fill="none" stroke="#e23b2e" stroke-width="2"/>
+  <rect x="88" y="62" width="22" height="20" fill="none" stroke="#3fb84a" stroke-width="2"/>
+  <text x="74" y="154" text-anchor="middle" class="lbl">Reference Frame</text>
+</g>
+
+
+<g class="pop s2">
+  <text x="208" y="25" text-anchor="middle" class="lbl">Object</text>
+  <text x="208" y="37" text-anchor="middle" class="lbl">Replacement</text>
+  <rect x="150" y="44" width="112" height="97" fill="none" stroke="#333" stroke-width="1.5" stroke-dasharray="5 3"/>
+  <use href="#bottle" x="152" y="46" width="108" height="93"/>
+  <rect x="8" y="160" width="256" height="314" rx="3" fill="#e4e4e4" stroke="#555" stroke-width="1.5" stroke-dasharray="5 3"/>
+  <use href="#scene" x="14" y="166" width="120" height="110"/>
+  <rect x="32" y="196" width="22" height="16" fill="none" stroke="#2fa3e3" stroke-width="2"/>
+  <rect x="58" y="188" width="26" height="54" fill="none" stroke="#e23b2e" stroke-width="2"/>
+  <text x="74" y="290" text-anchor="middle" class="lbl">Input Frame</text>
+  <path d="M212 134 C196 178 140 170 112 196" fill="none" stroke="#c0251c" stroke-width="3" marker-end="url(#ar)"/>
+  <text x="208" y="172" text-anchor="middle" class="lbl">Box</text>
+  <text x="208" y="184" text-anchor="middle" class="lbl">Detection</text>
+  <rect x="150" y="190" width="110" height="90" fill="none" stroke="#333" stroke-width="1.5" stroke-dasharray="5 3"/>
+  <rect x="152" y="192" width="106" height="86" fill="#000"/>
+  <rect x="162" y="208" width="24" height="18" fill="none" stroke="#2fa3e3" stroke-width="2.5"/>
+  <rect x="196" y="214" width="28" height="36" fill="none" stroke="#e23b2e" stroke-width="2.5"/>
+  <rect x="218" y="216" width="24" height="28" fill="none" stroke="#3fb84a" stroke-width="2.5"/>
+  <text x="208" y="300" text-anchor="middle" class="lbl">Hand Mesh</text>
+  <text x="208" y="312" text-anchor="middle" class="lbl">Augmentation</text>
+  <use href="#scene" x="14" y="300" width="120" height="120"/>
+  <rect x="150" y="350" width="110" height="90" fill="none" stroke="#333" stroke-width="1.5" stroke-dasharray="5 3"/>
+  <use href="#mesh" x="152" y="352" width="106" height="86"/>
+  <path d="M196 418 L186 378" stroke="#c0251c" stroke-width="2.5" marker-end="url(#ar)"/>
+  <path d="M236 414 L226 380" stroke="#c0251c" stroke-width="2.5" marker-end="url(#ar)"/>
+</g>
+
+
+<g class="pop s3">
+  <rect x="274" y="3" width="704" height="477" rx="4" fill="none" stroke="#1a4fa0" stroke-width="2" stroke-dasharray="7 4"/>
+  <rect x="281" y="6" width="116" height="19" fill="#1a4fa0"/>
+  <text x="339" y="20" text-anchor="middle" fill="#fff" font-size="11" font-style="italic">Training Pipeline</text>
+  <use href="#scene" x="300" y="40" width="104" height="112"/>
+  <text x="352" y="165" text-anchor="middle" class="lbl">Reference Image</text>
+  <rect x="412" y="52" width="74" height="80" rx="9" fill="#cfe7f7" stroke="#7fb4d8"/>
+  <text x="449" y="92" text-anchor="middle" class="lbl">VAE</text>
+  <text x="449" y="105" text-anchor="middle" class="lbl">Encoder</text>
+  <path d="M449 58 v14 M443 61 l12 8 M455 61 l-12 8" stroke="#49a7e0" stroke-width="2"/>
+  <path d="M404 96 H410" stroke="#111" stroke-width="2" marker-end="url(#ak)"/>
+  <path d="M488 92 H512" stroke="#111" stroke-width="2" marker-end="url(#ak)"/>
+</g>
+
+
+<g class="pop s4">
+  <text x="595" y="20" text-anchor="middle" font-size="11">Reference U-Net</text>
+  <path d="M516 28 H676 L656 152 H536 Z" fill="#d8ecd2" stroke="#8cc07e"/>
+  <rect x="531" y="36" width="22" height="104" rx="3" fill="#6cb356" stroke="#4a8c3a"/>
+  <rect x="586" y="36" width="22" height="104" rx="3" fill="#6cb356" stroke="#4a8c3a"/>
+  <rect x="640" y="36" width="22" height="104" rx="3" fill="#6cb356" stroke="#4a8c3a"/>
+  <text transform="translate(546,132) rotate(-90)" fill="#fff" font-size="8.5">Self Attention</text>
+  <text transform="translate(601,132) rotate(-90)" fill="#fff" font-size="8.5">Self Attention</text>
+  <text transform="translate(655,132) rotate(-90)" fill="#fff" font-size="8.5">Self Attention</text>
+  <text x="570" y="92" text-anchor="middle" font-size="12">...</text>
+  <text x="624" y="92" text-anchor="middle" font-size="12">...</text>
+  <path d="M540 142 V206" fill="none" stroke="#4a9a3a" stroke-width="2" marker-end="url(#ag)"/>
+  <path d="M597 142 V206" fill="none" stroke="#4a9a3a" stroke-width="2" marker-end="url(#ag)"/>
+  <path d="M651 142 V206" fill="none" stroke="#4a9a3a" stroke-width="2" marker-end="url(#ag)"/>
+</g>
+
+
+<g class="pop s5">
+  <rect x="294" y="176" width="100" height="110" fill="#111"/>
+  <rect x="291" y="180" width="100" height="110" fill="#222"/>
+  <use href="#layout" x="288" y="184" width="100" height="110"/>
+  <text x="338" y="302" text-anchor="middle" class="lbl">Layout Guidance</text>
+  <rect x="404" y="206" width="82" height="58" rx="9" fill="#dcdcd2" stroke="#9a9a8c"/>
+  <text x="445" y="230" text-anchor="middle" class="lbl">Layout</text>
+  <text x="445" y="243" text-anchor="middle" class="lbl">Encoder</text>
+  <path d="M390 235 H402" stroke="#111" stroke-width="2" marker-end="url(#ak)"/>
+  <circle cx="512" cy="235" r="11" fill="#fff" stroke="#111" stroke-width="2"/>
+  <path d="M505 235 h14 M512 228 v14" stroke="#111" stroke-width="2"/>
+  <path d="M488 235 H499" stroke="#111" stroke-width="2" marker-end="url(#ak)"/>
+  <path d="M524 235 H548" stroke="#111" stroke-width="2" marker-end="url(#ak)"/>
+  <rect x="490" y="258" width="38" height="30" fill="#9a9a9a" stroke="#555"/>
+  <rect x="486" y="262" width="38" height="30" fill="#b0b0b0" stroke="#555"/>
+  <rect x="482" y="266" width="38" height="30" fill="#c6c6c6" stroke="#555"/>
+  <path d="M512 256 V246" stroke="#111" stroke-width="2" marker-end="url(#ak)"/>
+  <text x="501" y="308" text-anchor="middle" class="lbl">Noise</text>
+</g>
+
+
+<g class="pop s6">
+  <path d="M520 182 H762 L742 296 H540 Z" fill="#d6e9f7" stroke="#8fbede"/>
+  <g fill="#5aa74e" stroke="#3d7f33">
+    <rect x="530" y="196" width="20" height="90" rx="3"/>
+    <rect x="588" y="196" width="20" height="90" rx="3"/>
+    <rect x="677" y="196" width="20" height="90" rx="3"/>
+  </g>
+  <g fill="#fff" font-size="8">
+    <text transform="translate(544,280) rotate(-90)">Self Attention</text>
+    <text transform="translate(602,280) rotate(-90)">Self Attention</text>
+    <text transform="translate(691,280) rotate(-90)">Self Attention</text>
+  </g>
+  <g fill="#4e9ad4" stroke="#36739f">
+    <rect x="556" y="196" width="20" height="90" rx="3"/>
+    <rect x="645" y="196" width="20" height="90" rx="3"/>
+    <rect x="733" y="196" width="20" height="90" rx="3"/>
+  </g>
+  <g fill="#fff" font-size="8">
+    <text transform="translate(570,282) rotate(-90)">Temp Attention</text>
+    <text transform="translate(659,282) rotate(-90)">Temp Attention</text>
+    <text transform="translate(747,282) rotate(-90)">Temp Attention</text>
+  </g>
+</g>
+
+
+<g class="pop s7">
+  <text x="780" y="35" text-anchor="middle" font-size="11">ControlNet</text>
+  <path d="M736 46 H828 L812 140 H752 Z" fill="#f7e2a8" stroke="#d9b445"/>
+  <rect x="752" y="56" width="16" height="74" rx="3" fill="#eeb411" stroke="#b88a09"/>
+  <rect x="774" y="56" width="16" height="74" rx="3" fill="#eeb411" stroke="#b88a09"/>
+  <rect x="796" y="56" width="16" height="74" rx="3" fill="#eeb411" stroke="#b88a09"/>
+  <rect x="872" y="14" width="104" height="118" fill="#111"/>
+  <rect x="866" y="20" width="104" height="118" fill="#1c1c1c"/>
+  <use href="#mesh" x="860" y="26" width="104" height="112"/>
+  <text x="912" y="152" text-anchor="middle" class="lbl">Hand Mesh</text>
+  <path d="M858 86 H832" stroke="#111" stroke-width="2" marker-end="url(#ak)"/>
+  <path d="M740 96 H706 V214" fill="none" stroke="#e8a317" stroke-width="2.5" marker-end="url(#ay)"/>
+  <path d="M706 140 H678 V196" fill="none" stroke="#e8a317" stroke-width="2.5" marker-end="url(#ay)"/>
+</g>
+
+
+<g class="pop s8">
+  <g fill="#f0902f" stroke="#c06a12">
+    <rect x="612" y="196" width="20" height="90" rx="3"/>
+    <rect x="701" y="196" width="20" height="90" rx="3"/>
+  </g>
+  <g fill="#fff" font-size="8">
+    <text transform="translate(626,282) rotate(-90)">Hand Attention</text>
+    <text transform="translate(715,282) rotate(-90)">Obj Attention</text>
+  </g>
+  <path d="M612 288 L472 340 L760 340 L721 288 Z" fill="#fdf4d2" opacity=".85"/>
+  <rect x="280" y="336" width="690" height="140" rx="4" fill="none" stroke="#1a4fa0" stroke-width="1.6" stroke-dasharray="6 4"/>
+  <rect x="290" y="346" width="98" height="120" rx="8" fill="#e0a21a" stroke="#b07c08"/>
+  <text x="339" y="388" text-anchor="middle" fill="#fff" font-size="11">HOI</text>
+  <text x="339" y="403" text-anchor="middle" fill="#fff" font-size="11">Restoration</text>
+  <text x="339" y="418" text-anchor="middle" fill="#fff" font-size="11">Module</text>
+  <rect x="396" y="344" width="272" height="128" rx="4" fill="#fdf4d2"/>
+  <rect x="404" y="350" width="94" height="17" rx="3" fill="#eeb411"/>
+  <text x="451" y="363" text-anchor="middle" fill="#fff">Hand Attention</text>
+  <g fill="#f3d58a" stroke="#c99a1a">
+    <rect x="414" y="376" width="11" height="46"/><rect x="428" y="376" width="11" height="46"/>
+    <rect x="442" y="376" width="11" height="46"/><rect x="470" y="376" width="11" height="46"/>
+  </g>
+  <text x="461" y="403" text-anchor="middle" font-size="11">...</text>
+  <rect x="408" y="370" width="78" height="58" fill="none" stroke="#555" stroke-dasharray="4 3"/>
+  <text x="447" y="441" text-anchor="middle" class="tiny">Hand Texture</text>
+  <text x="447" y="451" text-anchor="middle" class="tiny">Memory Bank</text>
+  <path d="M488 399 H524" stroke="#111" stroke-width="1.6" marker-end="url(#ak)"/>
+  <text x="506" y="392" text-anchor="middle" class="tiny">Key</text>
+  <text x="506" y="412" text-anchor="middle" class="tiny">Value</text>
+  <rect x="526" y="386" width="72" height="30" rx="5" fill="#eeb411" stroke="#b88a09"/>
+  <text x="562" y="399" text-anchor="middle" fill="#fff" class="tiny">Cross</text>
+  <text x="562" y="410" text-anchor="middle" fill="#fff" class="tiny">Attention</text>
+  <path d="M562 362 V384" stroke="#e8a317" stroke-width="2.5" marker-end="url(#ay)"/>
+  <text x="562" y="358" text-anchor="middle" class="tiny">Query</text>
+  <rect x="608" y="378" width="42" height="34" fill="#000"/>
+  <rect x="620" y="388" width="16" height="14" fill="#fff"/>
+  <text x="629" y="364" text-anchor="middle" class="tiny">Hand</text>
+  <text x="629" y="373" text-anchor="middle" class="tiny">Mask</text>
+  <path d="M562 418 V424" stroke="#111"/>
+  <path d="M629 414 V432 H582" fill="none" stroke="#111" stroke-width="1.2"/>
+  <circle cx="574" cy="432" r="7" fill="#fff" stroke="#c0251c" stroke-width="1.5"/>
+  <path d="M569 427 l10 10 M579 427 l-10 10" stroke="#c0251c" stroke-width="1.5"/>
+  <rect x="676" y="344" width="286" height="128" rx="4" fill="#fdeadd"/>
+  <rect x="684" y="350" width="100" height="17" rx="3" fill="#f0902f"/>
+  <text x="734" y="363" text-anchor="middle" fill="#fff">Object Attention</text>
+  <g fill="#f3b98a" stroke="#c96a1a">
+    <rect x="694" y="376" width="11" height="46"/><rect x="708" y="376" width="11" height="46"/>
+    <rect x="722" y="376" width="11" height="46"/><rect x="752" y="376" width="11" height="46"/>
+  </g>
+  <text x="742" y="403" text-anchor="middle" font-size="11">...</text>
+  <rect x="688" y="370" width="80" height="58" fill="none" stroke="#555" stroke-dasharray="4 3"/>
+  <text x="728" y="441" text-anchor="middle" class="tiny">Object Texture</text>
+  <text x="728" y="451" text-anchor="middle" class="tiny">Memory Bank</text>
+  <path d="M770 399 H808" stroke="#111" stroke-width="1.6" marker-end="url(#ak)"/>
+  <text x="789" y="392" text-anchor="middle" class="tiny">Key</text>
+  <text x="789" y="412" text-anchor="middle" class="tiny">Value</text>
+  <rect x="812" y="386" width="72" height="30" rx="5" fill="#f0902f" stroke="#c06a12"/>
+  <text x="848" y="399" text-anchor="middle" fill="#fff" class="tiny">Cross</text>
+  <text x="848" y="410" text-anchor="middle" fill="#fff" class="tiny">Attention</text>
+  <path d="M848 362 V384" stroke="#f0902f" stroke-width="2.5" marker-end="url(#ay)"/>
+  <text x="848" y="358" text-anchor="middle" class="tiny">Query</text>
+  <rect x="908" y="378" width="42" height="34" fill="#000"/>
+  <rect x="924" y="384" width="11" height="22" fill="#fff"/>
+  <text x="929" y="364" text-anchor="middle" class="tiny">Object</text>
+  <text x="929" y="373" text-anchor="middle" class="tiny">Mask</text>
+  <path d="M848 418 V424" stroke="#111"/>
+  <path d="M929 414 V432 H868" fill="none" stroke="#111" stroke-width="1.2"/>
+  <circle cx="860" cy="432" r="7" fill="#fff" stroke="#c0251c" stroke-width="1.5"/>
+  <path d="M855 427 l10 10 M865 427 l-10 10" stroke="#c0251c" stroke-width="1.5"/>
+</g>
+
+
+<g class="pop s9">
+  <rect x="764" y="202" width="74" height="76" rx="9" fill="#cfe7f7" stroke="#7fb4d8"/>
+  <text x="801" y="240" text-anchor="middle" class="lbl">VAE</text>
+  <text x="801" y="253" text-anchor="middle" class="lbl">Decoder</text>
+  <path d="M801 208 v14 M795 211 l12 8 M807 211 l-12 8" stroke="#49a7e0" stroke-width="2"/>
+  <path d="M752 240 H762" stroke="#111" stroke-width="2" marker-end="url(#ak)"/>
+  <path d="M840 240 H852" stroke="#111" stroke-width="2" marker-end="url(#ak)"/>
+  <rect x="866" y="174" width="106" height="114" fill="#2a5c45"/>
+  <rect x="861" y="179" width="106" height="114" fill="#24533d"/>
+  <use href="#scene" x="856" y="184" width="106" height="114"/>
+  <text x="909" y="312" text-anchor="middle" class="lbl">Generated Frames</text>
+</g>
+
+
+<g class="pop s6">
+  <text x="668" y="310" text-anchor="middle" font-size="11">Denoising</text>
+  <text x="668" y="323" text-anchor="middle" font-size="11">U-Net</text>
+</g>
+</svg>

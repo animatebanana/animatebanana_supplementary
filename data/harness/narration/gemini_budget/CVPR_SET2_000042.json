@@ -1,0 +1,44 @@
+[
+  {
+    "step": 1,
+    "start": 0.0,
+    "end": 3.0,
+    "narration": "The content branch takes an input image and extracts low-rank feature adaptations using the Content LoRA."
+  },
+  {
+    "step": 2,
+    "start": 3.0,
+    "end": 6.0,
+    "narration": "Simultaneously, the style reference image is processed through the Style LoRA to capture target aesthetic features."
+  },
+  {
+    "step": 3,
+    "start": 6.0,
+    "end": 9.0,
+    "narration": "Within K-LoRA, key content activation elements are identified and summed based on top-K scores."
+  },
+  {
+    "step": 4,
+    "start": 9.0,
+    "end": 12.0,
+    "narration": "The style top-K elements are scaled and multiplied to calibrate their relative influence against content."
+  },
+  {
+    "step": 5,
+    "start": 12.0,
+    "end": 15.0,
+    "narration": "A Judge module arbitrates between content and style weights, producing an integrated attention layer with a larger Top-K."
+  },
+  {
+    "step": 6,
+    "start": 15.0,
+    "end": 18.0,
+    "narration": "The refined attention features are added back into the target layer of the generative diffusion backbone."
+  },
+  {
+    "step": 7,
+    "start": 18.0,
+    "end": 21.0,
+    "narration": "Finally, the model generates the synthesized output, seamlessly fusing the original content with the target style."
+  }
+]

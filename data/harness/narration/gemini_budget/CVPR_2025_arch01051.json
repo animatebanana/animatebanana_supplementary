@@ -1,0 +1,32 @@
+[
+  {
+    "step": 1,
+    "start": 0.0,
+    "end": 3.0,
+    "narration": "In the existing method's first stage, the input image x passes through an isolated diffusion model to produce a reconstructed output x-prime."
+  },
+  {
+    "step": 2,
+    "start": 3.0,
+    "end": 6.0,
+    "narration": "In the second stage, separated without interaction, the absolute difference between x and x-prime forms residual x-rec, classified as real or generated."
+  },
+  {
+    "step": 3,
+    "start": 6.0,
+    "end": 9.0,
+    "narration": "In contrast, our proposed method first processes input x through the Feature-guided Multimodal Representation Enhancement module, creating pseudo sample x-pse."
+  },
+  {
+    "step": 4,
+    "start": 9.0,
+    "end": 12.0,
+    "narration": "Both original and pseudo samples are reconstructed through a shared diffusion model, extracting residual difference representations x-rec and x-pse-rec."
+  },
+  {
+    "step": 5,
+    "start": 12.0,
+    "end": 16.0,
+    "narration": "Finally, concatenated residuals are classified in an end-to-end training pipeline, providing direct feedback for better feature alignment."
+  }
+]

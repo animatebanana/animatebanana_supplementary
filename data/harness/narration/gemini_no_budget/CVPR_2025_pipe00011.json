@@ -1,0 +1,50 @@
+[
+  {
+    "step": 1,
+    "start": 0.0,
+    "end": 4.5,
+    "narration": "The pipeline begins with a pre-trained 3D Gaussian Splatting scene model, whose initial parameters remain frozen."
+  },
+  {
+    "step": 2,
+    "start": 4.5,
+    "end": 8.5,
+    "narration": "Next, Frequency Guided Densification, or FGD, is introduced to adapt the Gaussian primitives based on spatial frequency."
+  },
+  {
+    "step": 3,
+    "start": 8.5,
+    "end": 13.5,
+    "narration": "In Phase 1 of FGD, the contribution of each 3D Gaussian to rendering quality is assessed, pruning low-impact Gaussians to reduce redundancy."
+  },
+  {
+    "step": 4,
+    "start": 13.5,
+    "end": 19.0,
+    "narration": "In Phase 2, multi-view renders are patchified and analyzed via Discrete Fourier Transform with a quadratic mask, splitting Gaussians located in high-frequency regions."
+  },
+  {
+    "step": 5,
+    "start": 19.0,
+    "end": 23.5,
+    "narration": "The densified representation G prime o is obtained, and parameter-specific gradient masks are constructed to guide subsequent learning."
+  },
+  {
+    "step": 6,
+    "start": 23.5,
+    "end": 28.0,
+    "narration": "Parameters are unfrozen to form the fine-tuned model G w, which is rendered differentiably into 2D viewpoints."
+  },
+  {
+    "step": 7,
+    "start": 28.0,
+    "end": 33.5,
+    "narration": "A Discrete Wavelet Transform separates the rendered view, passing low-frequency components into a pre-trained decoder to recover the embedded message under message loss L m."
+  },
+  {
+    "step": 8,
+    "start": 33.5,
+    "end": 39.0,
+    "narration": "Finally, high-frequency wavelet loss and image reconstruction losses combine into the total loss, directing the masked optimizer to update the watermarked 3D Gaussians."
+  }
+]

@@ -1,0 +1,185 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="476" height="356" viewBox="0 0 476 356" font-family="Arial, Helvetica, sans-serif">
+<defs>
+  <linearGradient id="phA" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#9ec5e8"/><stop offset="0.45" stop-color="#cfe0ef"/>
+    <stop offset="0.46" stop-color="#7c8f5a"/><stop offset="1" stop-color="#4a5c33"/>
+  </linearGradient>
+  <linearGradient id="phB" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#b8743f"/><stop offset="0.5" stop-color="#e0b58a"/><stop offset="1" stop-color="#6d4426"/>
+  </linearGradient>
+  <linearGradient id="strip" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#c8743a"/><stop offset="0.35" stop-color="#e3b27f"/>
+    <stop offset="0.7" stop-color="#8c5a33"/><stop offset="1" stop-color="#3f2d1e"/>
+  </linearGradient>
+  <radialGradient id="res" cx="0.5" cy="0.45" r="0.6">
+    <stop offset="0" stop-color="#3a3a3a"/><stop offset="1" stop-color="#0a0a0a"/>
+  </radialGradient>
+
+  <g id="photo">
+    <rect width="56" height="52" fill="url(#phA)"/>
+    <ellipse cx="34" cy="30" rx="13" ry="17" fill="url(#phB)"/>
+    <circle cx="34" cy="18" r="7" fill="#e8c6a4"/>
+    <path d="M0 40 L14 26 L26 40 L40 30 L56 44 L56 52 L0 52 Z" fill="#53632f" opacity="0.8"/>
+    <rect width="56" height="52" fill="none" stroke="#5b5b5b" stroke-width="1"/>
+  </g>
+  <g id="resid">
+    <rect width="56" height="52" fill="url(#res)"/>
+    <ellipse cx="34" cy="26" rx="11" ry="15" fill="#5a5a5a" opacity="0.35"/>
+    <circle cx="34" cy="16" r="6" fill="#8a8a8a" opacity="0.4"/>
+    <rect width="56" height="52" fill="none" stroke="#444" stroke-width="1"/>
+  </g>
+
+  <style><![CDATA[
+    .stp { opacity: 0.3; animation-duration: 30s; animation-timing-function: linear;
+           animation-fill-mode: forwards; animation-iteration-count: infinite; }
+    @keyframes k1  {0%,0%{opacity:.3}  3.33%,100%{opacity:1}}
+    @keyframes k2  {0%,10%{opacity:.3} 13.33%,100%{opacity:1}}
+    @keyframes k3  {0%,20%{opacity:.3} 23.33%,100%{opacity:1}}
+    @keyframes k4  {0%,30%{opacity:.3} 33.33%,100%{opacity:1}}
+    @keyframes k5  {0%,40%{opacity:.3} 43.33%,100%{opacity:1}}
+    @keyframes k6  {0%,50%{opacity:.3} 53.33%,100%{opacity:1}}
+    @keyframes k7  {0%,60%{opacity:.3} 63.33%,100%{opacity:1}}
+    @keyframes k8  {0%,70%{opacity:.3} 73.33%,100%{opacity:1}}
+    @keyframes k9  {0%,80%{opacity:.3} 83.33%,100%{opacity:1}}
+    @keyframes k10 {0%,90%{opacity:.3} 93.33%,100%{opacity:1}}
+    .s1{animation-name:k1}  .s2{animation-name:k2}  .s3{animation-name:k3}
+    .s4{animation-name:k4}  .s5{animation-name:k5}  .s6{animation-name:k6}
+    .s7{animation-name:k7}  .s8{animation-name:k8}  .s9{animation-name:k9}
+    .s10{animation-name:k10}
+    text{font-size:9px;fill:#111}
+    .lbl{font-style:italic;font-size:10px}
+    .bold{font-weight:bold}
+    .ar{stroke:#111;stroke-width:1.4;fill:none;marker-end:url(#arw)}
+  ]]></style>
+  <marker id="arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+    <path d="M0 0 L10 5 L0 10 z" fill="#111"/>
+  </marker>
+</defs>
+
+<rect width="476" height="356" fill="#ffffff"/>
+
+
+<g class="stp s1">
+  <rect x="4" y="6" width="468" height="155" rx="4" fill="#eaf2fc" stroke="#3b6fb6" stroke-width="1.5"/>
+  <rect x="4" y="6" width="112" height="16" fill="#cfe0f6" stroke="#3b6fb6" stroke-width="1.5"/>
+  <text x="10" y="18" class="bold" font-size="10">Existing Method</text>
+  <rect x="352" y="10" width="116" height="30" fill="#ffffff" stroke="#8aa8cc"/>
+  <circle cx="361" cy="19" r="4.5" fill="none" stroke="#111"/><path d="M358.5 19h5" stroke="#111"/>
+  <text x="370" y="22" font-size="7.5">absolute operation</text>
+  <circle cx="361" cy="32" r="4.5" fill="none" stroke="#111"/><circle cx="361" cy="32" r="2" fill="none" stroke="#111"/>
+  <text x="370" y="35" font-size="7.5">concat operation</text>
+</g>
+
+
+<g class="stp s2">
+  <g transform="translate(14,30)"><use href="#photo"/></g>
+  <text x="38" y="100" class="lbl">x</text>
+  <path class="ar" d="M74 56 H96"/>
+  <path d="M100 32 L124 48 L124 64 L100 80 L100 32 Z" fill="#f0a882" stroke="#c4714a"/>
+  <path d="M124 48 L148 32 L148 80 L124 64 Z" fill="#f0a882" stroke="#c4714a"/>
+  <text x="96" y="92" font-size="7.5" font-weight="bold" fill="#c4521f">Diffusion Model</text>
+  <path class="ar" d="M150 56 H166"/>
+  <g transform="translate(168,30)"><use href="#photo"/></g>
+  <text x="192" y="100" class="lbl">x'</text>
+  <text x="40" y="146" class="bold" font-size="9.5">First Stage</text>
+</g>
+
+
+<g class="stp s3">
+  <rect x="228" y="12" width="14" height="110" fill="url(#strip)" stroke="#6b4a2c"/>
+  <text x="178" y="146" class="bold" font-size="9.5" fill="#2e8b3a">w/o interaction</text>
+</g>
+
+
+<g class="stp s4">
+  <g transform="translate(250,16)" ><use href="#photo" transform="scale(0.78)"/></g>
+  <text x="272" y="68" class="lbl">x</text>
+  <g transform="translate(250,74)"><use href="#photo" transform="scale(0.78)"/></g>
+  <text x="272" y="126" class="lbl">x'</text>
+  <path class="ar" d="M295 36 H306 V62"/>
+  <path class="ar" d="M295 94 H306 V72"/>
+  <circle cx="310" cy="67" r="6" fill="#fff" stroke="#111"/><path d="M307 67h6" stroke="#111"/>
+  <path class="ar" d="M317 67 H326"/>
+  <g transform="translate(328,42)"><use href="#resid" transform="scale(0.85)"/></g>
+  <text x="338" y="106" class="lbl">x</text><text x="344" y="109" font-size="6.5" font-style="italic">rec</text>
+  <text x="300" y="146" class="bold" font-size="9.5">Second Stage</text>
+</g>
+
+
+<g class="stp s5">
+  <path class="ar" d="M377 67 H386"/>
+  <path d="M389 46 L411 54 L411 82 L389 90 Z" fill="#3f78c4" stroke="#2a5590"/>
+  <text x="381" y="100" font-size="7.5" font-weight="bold" fill="#2a5590">Classifier</text>
+  <path class="ar" d="M413 67 H428"/>
+  <text x="430" y="64" class="bold" font-size="8">Real/</text>
+  <text x="430" y="74" class="bold" font-size="8">Generated</text>
+</g>
+
+
+<g class="stp s6">
+  <rect x="4" y="170" width="468" height="182" rx="4" fill="#fffbe8" stroke="#e0a21a" stroke-width="1.5"/>
+  <rect x="4" y="170" width="92" height="16" fill="#fdeeb8" stroke="#e0a21a" stroke-width="1.5"/>
+  <text x="10" y="182" class="bold" font-size="10">Our Method</text>
+  <text x="168" y="349" class="bold" font-size="9.5">End-to-end Training</text>
+</g>
+
+
+<g class="stp s7">
+  <g transform="translate(50,206)"><use href="#photo" transform="scale(0.8)"/></g>
+  <text x="38" y="230" class="lbl">x</text>
+  <g transform="translate(50,282)"><use href="#photo" transform="scale(0.8)"/></g>
+  <text x="20" y="306" class="lbl">x</text><text x="27" y="309" font-size="6.5" font-style="italic">pse</text>
+  <rect x="60" y="256" width="44" height="18" rx="4" fill="#b7e6a8" stroke="#4a9c3a"/>
+  <text x="69" y="269" font-size="8.5" font-weight="bold" fill="#1f6e18">FMRE</text>
+  <path class="ar" d="M96 227 H128"/>
+  <path class="ar" d="M96 303 H128"/>
+  <path class="ar" d="M106 265 H128"/>
+  <path d="M132 238 L156 254 L156 272 L132 290 Z" fill="#f0a882" stroke="#c4714a"/>
+  <path d="M156 254 L180 238 L180 290 L156 272 Z" fill="#f0a882" stroke="#c4714a"/>
+  <text x="126" y="304" font-size="7.5" font-weight="bold" fill="#c4521f">Diffusion Model</text>
+</g>
+
+
+<g class="stp s8">
+  <path class="ar" d="M182 248 H198"/>
+  <path class="ar" d="M182 282 H198"/>
+  <g transform="translate(200,216)"><use href="#photo" transform="scale(0.8)"/></g>
+  <text x="222" y="272" class="lbl">x'</text>
+  <g transform="translate(200,282)"><use href="#photo" transform="scale(0.8)"/></g>
+  <text x="214" y="337" class="lbl">x'</text><text x="222" y="340" font-size="6.5" font-style="italic">pse</text>
+  <path d="M160 196 H295" stroke="#d13a2a" stroke-width="1.3" stroke-dasharray="5 3" fill="none"/>
+  <path d="M160 196 V236" stroke="#d13a2a" stroke-width="1.3" stroke-dasharray="5 3" fill="none"/>
+  <path d="M295 196 V216" stroke="#d13a2a" stroke-width="1.3" stroke-dasharray="5 3" fill="none"/>
+  <text x="228" y="193" class="bold" font-size="9.5" fill="#d13a2a">better alignment</text>
+</g>
+
+
+<g class="stp s9">
+  <path class="ar" d="M78 206 V200 H262 V238"/>
+  <path class="ar" d="M78 326 V334 H262 V296"/>
+  <path class="ar" d="M246 242 H258"/>
+  <path class="ar" d="M246 308 H258"/>
+  <circle cx="266" cy="242" r="6" fill="#fff" stroke="#111"/><path d="M263 242h6" stroke="#111"/>
+  <circle cx="266" cy="292" r="6" fill="#fff" stroke="#111"/><path d="M263 292h6" stroke="#111"/>
+  <path class="ar" d="M273 242 H284"/>
+  <path class="ar" d="M273 292 H284"/>
+  <g transform="translate(286,220)"><use href="#resid" transform="scale(0.78)"/></g>
+  <text x="290" y="276" class="lbl">x</text><text x="297" y="279" font-size="6.5" font-style="italic">rec</text>
+  <g transform="translate(286,286)"><use href="#resid" transform="scale(0.78)"/></g>
+  <text x="283" y="342" class="lbl">x</text><text x="290" y="345" font-size="6.5" font-style="italic">pse_rec</text>
+</g>
+
+
+<g class="stp s10">
+  <path class="ar" d="M332 246 H344 V258"/>
+  <path class="ar" d="M332 312 H344 V272"/>
+  <circle cx="348" cy="265" r="6.5" fill="#fff" stroke="#111"/>
+  <circle cx="348" cy="265" r="2.8" fill="none" stroke="#111"/>
+  <path class="ar" d="M356 265 H366"/>
+  <path d="M370 242 L394 252 L394 280 L370 290 Z" fill="#3f78c4" stroke="#2a5590"/>
+  <text x="362" y="302" font-size="7.5" font-weight="bold" fill="#2a5590">Classifier</text>
+  <path class="ar" d="M396 265 H412"/>
+  <text x="414" y="262" class="bold" font-size="8">Real/</text>
+  <text x="414" y="272" class="bold" font-size="8">Generated</text>
+</g>
+</svg>

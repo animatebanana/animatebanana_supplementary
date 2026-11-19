@@ -1,0 +1,134 @@
+[
+  {
+    "step": 1,
+    "start": 0.0,
+    "end": 3.0,
+    "narration": "We start from a pre-trained 3D Gaussian Splatting model with frozen parameters."
+  },
+  {
+    "step": 2,
+    "start": 3.0,
+    "end": 6.0,
+    "narration": "Frequency Guided Densification decides where the scene needs more Gaussians."
+  },
+  {
+    "step": 3,
+    "start": 6.0,
+    "end": 9.0,
+    "narration": "The result is the densified model G-o-prime, ready for fine-tuning."
+  },
+  {
+    "step": 4,
+    "start": 9.0,
+    "end": 12.0,
+    "narration": "Inside FGD, Phase 1 ranks every Gaussian by its contribution to rendering quality."
+  },
+  {
+    "step": 5,
+    "start": 12.0,
+    "end": 15.0,
+    "narration": "The lowest-contributing Gaussians are removed from the cloud."
+  },
+  {
+    "step": 6,
+    "start": 15.0,
+    "end": 18.0,
+    "narration": "Phase 2 begins by rendering the scene from several viewpoints."
+  },
+  {
+    "step": 7,
+    "start": 18.0,
+    "end": 21.0,
+    "narration": "Each rendered view is patchified into a regular grid of patches."
+  },
+  {
+    "step": 8,
+    "start": 21.0,
+    "end": 24.0,
+    "narration": "A Discrete Fourier Transform maps every patch into frequency space."
+  },
+  {
+    "step": 9,
+    "start": 24.0,
+    "end": 27.0,
+    "narration": "Each spectrum is multiplied by a quadratic mask to detect high frequency energy."
+  },
+  {
+    "step": 10,
+    "start": 27.0,
+    "end": 30.0,
+    "narration": "The patches with the strongest high-frequency response are selected."
+  },
+  {
+    "step": 11,
+    "start": 30.0,
+    "end": 33.0,
+    "narration": "Gaussians covering those regions are split, adding capacity for fine detail."
+  },
+  {
+    "step": 12,
+    "start": 33.0,
+    "end": 36.0,
+    "narration": "Back in the main pipeline, a gradient mask chooses which attributes may change."
+  },
+  {
+    "step": 13,
+    "start": 36.0,
+    "end": 39.0,
+    "narration": "Applying it gives the fine-tuned, unfrozen watermarked model G-w."
+  },
+  {
+    "step": 14,
+    "start": 39.0,
+    "end": 42.0,
+    "narration": "Rendering that model produces the watermarked image."
+  },
+  {
+    "step": 15,
+    "start": 42.0,
+    "end": 45.0,
+    "narration": "A Discrete Wavelet Transform separates the render by frequency."
+  },
+  {
+    "step": 16,
+    "start": 45.0,
+    "end": 48.0,
+    "narration": "This yields a low-frequency band and the high-frequency details."
+  },
+  {
+    "step": 17,
+    "start": 48.0,
+    "end": 51.0,
+    "narration": "The frozen pre-trained decoder reads the low-frequency band."
+  },
+  {
+    "step": 18,
+    "start": 51.0,
+    "end": 54.0,
+    "narration": "It outputs the decoded message hidden in the rendering."
+  },
+  {
+    "step": 19,
+    "start": 54.0,
+    "end": 57.0,
+    "narration": "The ground-truth view passes through the same wavelet transform for comparison."
+  },
+  {
+    "step": 20,
+    "start": 57.0,
+    "end": 60.0,
+    "narration": "Three losses compare the image, the wavelet bands, and the message."
+  },
+  {
+    "step": 21,
+    "start": 60.0,
+    "end": 63.0,
+    "narration": "They are summed into the total loss."
+  },
+  {
+    "step": 22,
+    "start": 63.0,
+    "end": 66.0,
+    "narration": "The optimizer back-propagates it through the mask, updating the Gaussians."
+  }
+]

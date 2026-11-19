@@ -1,0 +1,32 @@
+[
+  {
+    "step": 1,
+    "start": 0.0,
+    "end": 3.0,
+    "narration": "First, the system takes three visual inputs: reference motion frames, a reference identity frame, and a noisy target frame."
+  },
+  {
+    "step": 2,
+    "start": 3.0,
+    "end": 5.5,
+    "narration": "These visual frames are concatenated together to form a fused spatial conditioning representation."
+  },
+  {
+    "step": 3,
+    "start": 5.5,
+    "end": 8.5,
+    "narration": "Simultaneously, the driving audio waveform is encoded by an audio encoder into acoustic speech features."
+  },
+  {
+    "step": 4,
+    "start": 8.5,
+    "end": 11.5,
+    "narration": "The central diffusion model receives the combined visual features, the audio features, and the diffusion time encoding."
+  },
+  {
+    "step": 5,
+    "start": 11.5,
+    "end": 15.0,
+    "narration": "Finally, the diffusion network generates the denoised target frame synchronized with the speech."
+  }
+]

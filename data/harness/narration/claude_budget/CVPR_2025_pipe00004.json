@@ -1,0 +1,74 @@
+[
+  {
+    "step": 1,
+    "start": 0.0,
+    "end": 2.6,
+    "narration": "Multi-view input images I-one-to-K and their object masks M-one-to-K define the capture of the scene containing the bear statue."
+  },
+  {
+    "step": 2,
+    "start": 2.6,
+    "end": 5.2,
+    "narration": "These views are fit into a 3D Gaussian splatting representation G-one-to-N of the full scene."
+  },
+  {
+    "step": 3,
+    "start": 5.2,
+    "end": 7.8,
+    "narration": "Rendering depth from the Gaussians yields the per-view depth maps D-one-to-K, completing the Gaussians-with-bear-statue stage."
+  },
+  {
+    "step": 4,
+    "start": 7.8,
+    "end": 10.4,
+    "narration": "Two reference views are selected: image I-two with mask M-two, and image I-one with mask M-one."
+  },
+  {
+    "step": 5,
+    "start": 10.4,
+    "end": 13.0,
+    "narration": "Masking each image by its object mask produces the background-only images I-B-two and I-B-one."
+  },
+  {
+    "step": 6,
+    "start": 13.0,
+    "end": 15.6,
+    "narration": "Using depth D-two, view two is projected into view one and merged, giving the combined background image I-B-one-two."
+  },
+  {
+    "step": 7,
+    "start": 15.6,
+    "end": 18.2,
+    "narration": "Where the merged background is still unknown, the refined inpainting mask M-prime-one is derived."
+  },
+  {
+    "step": 8,
+    "start": 18.2,
+    "end": 20.8,
+    "narration": "Guided by M-prime-one, the reference view is inpainted to give the inpainted image I-In-one and its depth D-In-one."
+  },
+  {
+    "step": 9,
+    "start": 20.8,
+    "end": 23.4,
+    "narration": "The refined depth D-prime-one and image I-prime-one are compared with the inpainted pair through the render loss L-render."
+  },
+  {
+    "step": 10,
+    "start": 23.4,
+    "end": 26.0,
+    "narration": "Rendering the reference view xi-one back from the refined Gaussians G-prime-one-to-N-prime closes the single-view loop."
+  },
+  {
+    "step": 11,
+    "start": 26.0,
+    "end": 28.6,
+    "narration": "A depth-guided projection builds the point cloud P-one, which initializes the refined Gaussian field G-prime."
+  },
+  {
+    "step": 12,
+    "start": 28.6,
+    "end": 31.2,
+    "narration": "Projecting to other views and rendering views xi-two-to-K lets the cross loss L-cross align I-P-two-to-K with I-prime-two-to-K, finishing the inpainting-guided 3DGS refinement."
+  }
+]

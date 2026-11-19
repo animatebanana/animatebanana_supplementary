@@ -1,0 +1,50 @@
+[
+  {
+    "step": 1,
+    "start": 0.0,
+    "end": 3.0,
+    "narration": "We start with the first conditioning input: a short stack of motion frames, consecutive green-screen video frames that carry the speaker's recent head pose and movement."
+  },
+  {
+    "step": 2,
+    "start": 3.0,
+    "end": 6.0,
+    "narration": "Below it comes the identity frame, a single reference image of the same person that fixes who the generated face should look like."
+  },
+  {
+    "step": 3,
+    "start": 6.0,
+    "end": 9.0,
+    "narration": "The third input is the noisy target: the frame we actually want to produce, corrupted with random noise. This is what the diffusion process will learn to clean up."
+  },
+  {
+    "step": 4,
+    "start": 9.0,
+    "end": 12.5,
+    "narration": "All three are routed to the same meeting point. The motion frames and the noisy target feed in along a shared bus, the identity frame comes straight across, and they are combined at the sum node into a single conditioned input."
+  },
+  {
+    "step": 5,
+    "start": 12.5,
+    "end": 15.5,
+    "narration": "That combined tensor enters the diffusion model, the network at the heart of the pipeline that predicts and removes the noise."
+  },
+  {
+    "step": 6,
+    "start": 15.5,
+    "end": 19.5,
+    "narration": "Now the audio branch arrives from above. The speech waveform is bracketed around the segment aligned with this frame, that window is passed through the audio encoder, and the resulting embedding is injected into the diffusion model so the mouth matches the speech."
+  },
+  {
+    "step": 7,
+    "start": 19.5,
+    "end": 22.0,
+    "narration": "From below, a time encoding enters the model, telling it which denoising step it is currently on."
+  },
+  {
+    "step": 8,
+    "start": 22.0,
+    "end": 26.0,
+    "narration": "With identity, motion, audio and the timestep all in place, the model outputs the target frame: the same person, in the same pose, now speaking in sync with the audio."
+  }
+]

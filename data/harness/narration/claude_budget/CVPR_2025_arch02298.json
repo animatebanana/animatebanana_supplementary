@@ -1,0 +1,11 @@
+[
+  {"step": 1, "start": 0.0, "end": 3.0, "narration": "Colour returns first to the Data Preparation stage on the left. A reference frame from the video is annotated with coloured boxes marking the hands and the object being held."},
+  {"step": 2, "start": 3.0, "end": 6.0, "narration": "Next, the preparation steps light up: the held object is replaced with a new product image, boxes are detected on the input frame, and the hand mesh is augmented to vary the grasp."},
+  {"step": 3, "start": 6.0, "end": 9.0, "narration": "The Training Pipeline panel takes on colour. The reference image is pushed through a frozen VAE encoder to obtain its latent representation."},
+  {"step": 4, "start": 9.0, "end": 12.0, "narration": "The Reference U-Net appears in green. Its stack of self-attention layers extracts appearance features that are injected downstream into the denoising network."},
+  {"step": 5, "start": 12.0, "end": 15.0, "narration": "On the lower branch, layout guidance frames are encoded by the layout encoder and added to sampled noise, giving the spatial conditioning signal."},
+  {"step": 6, "start": 15.0, "end": 18.0, "narration": "The Denoising U-Net fills in. Green self-attention blocks carry the reference appearance while blue temporal-attention blocks keep the generated frames consistent over time."},
+  {"step": 7, "start": 18.0, "end": 21.0, "narration": "ControlNet turns yellow. It consumes the rendered hand mesh sequence and feeds pose control into the denoising backbone."},
+  {"step": 8, "start": 21.0, "end": 24.0, "narration": "The HOI Restoration Module is revealed. Hand and object attention blocks query hand and object texture memory banks through cross-attention, and the results are masked and added back into the features."},
+  {"step": 9, "start": 24.0, "end": 27.0, "narration": "Finally the output path regains colour: the frozen VAE decoder converts the denoised latents into the generated frames, showing the person holding the replaced object."}
+]

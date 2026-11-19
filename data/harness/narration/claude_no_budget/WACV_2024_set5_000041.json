@@ -1,0 +1,21 @@
+[
+  {"step": 1,  "start": 0.0,  "end": 3.0,  "narration": "We begin with stage one of the pipeline: learning the three-dimensional geometry of a person's head."},
+  {"step": 2,  "start": 3.0,  "end": 6.0,  "narration": "The only input is a small set of reference frames of that person, written S-ref."},
+  {"step": 3,  "start": 6.0,  "end": 9.5,  "narration": "A head-extraction step crops each frame to the head and removes the background, producing the clean head images X-ref."},
+  {"step": 4,  "start": 9.5,  "end": 13.0, "narration": "A depth network reads those heads and predicts a dense depth map for each one."},
+  {"step": 5,  "start": 13.0, "end": 16.5, "narration": "In parallel, a pose network predicts a rotation and translation per frame. Depth and pose together let us compute the optical flow between views."},
+  {"step": 6,  "start": 16.5, "end": 19.5, "narration": "Stage two uses that geometry to build one shared, canonical head, recurrently."},
+  {"step": 7,  "start": 19.5, "end": 23.0, "narration": "Each extracted head is passed through an encoder, and its features are handed to a warping module."},
+  {"step": 8,  "start": 23.0, "end": 26.5, "narration": "The flow field computed from depth and pose is the warp's second input: it says where every feature belongs in canonical space."},
+  {"step": 9,  "start": 26.5, "end": 29.5, "narration": "Warping all the reference frames into that one shared pose gives the canonical feature map h-c."},
+  {"step": 10, "start": 29.5, "end": 33.0, "narration": "A ConvLSTM accumulates these maps frame after frame, and a decoder renders the finished canonical head."},
+  {"step": 11, "start": 33.0, "end": 36.0, "narration": "Stage three is where the canonical head is driven by someone else's pose and expression."},
+  {"step": 12, "start": 36.0, "end": 40.0, "narration": "The canonical head x-hat-c is rotated and translated using the pose read from the driving frame s-dri."},
+  {"step": 13, "start": 40.0, "end": 43.5, "narration": "The result is x-hat-dri: the reference identity, already placed in the driving pose."},
+  {"step": 14, "start": 43.5, "end": 47.5, "narration": "Two encoders now run side by side, one on that posed head and one on the original reference frame."},
+  {"step": 15, "start": 47.5, "end": 51.0, "narration": "A flow and attention map predictor looks at the driving frame together with both of these inputs."},
+  {"step": 16, "start": 51.0, "end": 55.0, "narration": "For each of the two branches it outputs a flow field and an attention map."},
+  {"step": 17, "start": 55.0, "end": 58.5, "narration": "Each set of encoded features is warped by its own predicted flow."},
+  {"step": 18, "start": 58.5, "end": 62.0, "narration": "The attention maps then weight the two warped streams, choosing which source to trust in each region."},
+  {"step": 19, "start": 62.0, "end": 66.0, "narration": "A decoder fuses them into the final output s-hat-dri: the reference person, re-enacted by the driving video."}
+]

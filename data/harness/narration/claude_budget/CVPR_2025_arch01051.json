@@ -1,0 +1,12 @@
+[
+  {"step": 1, "start": 0.0, "end": 3.0, "narration": "We begin with the existing method, shown in the blue panel. The legend defines two operations used throughout: a circled minus for the absolute difference, and a circled dot for concatenation."},
+  {"step": 2, "start": 3.0, "end": 6.0, "narration": "In the first stage, an input image x is passed through a diffusion model, which reconstructs it as x prime."},
+  {"step": 3, "start": 6.0, "end": 9.0, "narration": "Crucially, the two stages are separated. The first stage and the second stage are trained without interaction."},
+  {"step": 4, "start": 9.0, "end": 12.0, "narration": "The second stage takes x and x prime, computes their absolute difference, and produces the reconstruction error map x rec."},
+  {"step": 5, "start": 12.0, "end": 15.0, "narration": "A classifier reads that error map and decides whether the image is real or generated."},
+  {"step": 6, "start": 15.0, "end": 18.0, "narration": "Our method, in the yellow panel, replaces this split pipeline with end-to-end training."},
+  {"step": 7, "start": 18.0, "end": 21.0, "narration": "Two inputs are used: the image x and its pseudo counterpart x pse. An FMRE module fuses their features and conditions a single shared diffusion model."},
+  {"step": 8, "start": 21.0, "end": 24.0, "narration": "The diffusion model emits two reconstructions, x prime and x pse prime. Because the branches share training signal, they achieve better alignment with the inputs."},
+  {"step": 9, "start": 24.0, "end": 27.0, "narration": "Each input is compared with its own reconstruction by absolute difference, yielding two error maps: x rec and x pse rec."},
+  {"step": 10, "start": 27.0, "end": 30.0, "narration": "The two error maps are concatenated and fed to the classifier, which outputs the final real or generated decision, all optimized jointly end to end."}
+]

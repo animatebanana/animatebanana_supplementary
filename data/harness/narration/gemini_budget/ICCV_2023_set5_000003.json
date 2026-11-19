@@ -1,0 +1,38 @@
+[
+  {
+    "step": 1,
+    "start": 0.0,
+    "end": 4.0,
+    "narration": "The framework begins with two input observations, x tau and x tau prime, representing scenes captured at different temporal instances."
+  },
+  {
+    "step": 2,
+    "start": 4.0,
+    "end": 8.0,
+    "narration": "A dual-branch Patch Feature Extractor with shared weights passes the inputs through feature encoders and deformable transformer encoders to generate patch tokens."
+  },
+  {
+    "step": 3,
+    "start": 8.0,
+    "end": 12.0,
+    "narration": "Guided by the Patch Matching Network, the Multi-Temporal Patch Matching block links corresponding patches across the two time steps."
+  },
+  {
+    "step": 4,
+    "start": 12.0,
+    "end": 16.0,
+    "narration": "From the matching results, positive matched pairs and negative distractor patches are categorized into designated patch sets."
+  },
+  {
+    "step": 5,
+    "start": 16.0,
+    "end": 20.0,
+    "narration": "The Object Residual Module subtracts learned prototype vectors to construct robust object residual representations."
+  },
+  {
+    "step": 6,
+    "start": 20.0,
+    "end": 24.0,
+    "narration": "Finally, the resulting residual features are supervised jointly by multi-view and scale-regression loss functions for end-to-end training."
+  }
+]

@@ -1,0 +1,98 @@
+[
+  {
+    "step": 1,
+    "start": 0.0,
+    "end": 3.0,
+    "narration": "We begin with an empty canvas. The figure is built from three stages; the first, outlined in blue, is where the pipeline starts."
+  },
+  {
+    "step": 2,
+    "start": 3.0,
+    "end": 6.0,
+    "narration": "Stage one is 3D head geometry learning: it recovers the shape and pose of the head from the reference video."
+  },
+  {
+    "step": 3,
+    "start": 6.0,
+    "end": 9.0,
+    "narration": "Its input is S-ref, a stack of reference frames showing the same person from slightly different viewpoints."
+  },
+  {
+    "step": 4,
+    "start": 9.0,
+    "end": 12.0,
+    "narration": "A head extraction step crops and masks each frame, producing X-ref, the clean head region without background."
+  },
+  {
+    "step": 5,
+    "start": 12.0,
+    "end": 15.0,
+    "narration": "X-ref is fed to two networks in parallel: a Depth Net that predicts geometry, and a Pose Net that predicts camera pose."
+  },
+  {
+    "step": 6,
+    "start": 15.0,
+    "end": 18.0,
+    "narration": "Depth Net outputs a depth map, Pose Net outputs per-frame rotations and translations, and together they drive the flow computation."
+  },
+  {
+    "step": 7,
+    "start": 18.0,
+    "end": 21.0,
+    "narration": "That geometry feeds the second stage, outlined in pink, directly below."
+  },
+  {
+    "step": 8,
+    "start": 21.0,
+    "end": 24.0,
+    "narration": "Stage two is recurrent canonical head generation: it fuses all reference frames into one canonical representation."
+  },
+  {
+    "step": 9,
+    "start": 24.0,
+    "end": 27.0,
+    "narration": "An encoder embeds X-ref, and the computed flow warps those features into the shared canonical view."
+  },
+  {
+    "step": 10,
+    "start": 27.0,
+    "end": 30.0,
+    "narration": "A ConvLSTM accumulates the warped features across frames into the hidden canonical state h-c, which a decoder turns into the canonical head x-hat-c."
+  },
+  {
+    "step": 11,
+    "start": 30.0,
+    "end": 33.0,
+    "narration": "The third stage, outlined in orange, occupies the right of the figure."
+  },
+  {
+    "step": 12,
+    "start": 33.0,
+    "end": 36.0,
+    "narration": "Stage three is the attention-based fusion mechanism, which renders the final driven frame."
+  },
+  {
+    "step": 13,
+    "start": 36.0,
+    "end": 39.0,
+    "narration": "It takes the canonical head x-hat-c, the driving frame s-dri with its pose, and the reference frame s-ref; the transform block re-poses the canonical head."
+  },
+  {
+    "step": 14,
+    "start": 39.0,
+    "end": 42.0,
+    "narration": "In the top branch, the re-posed head x-hat-dri is encoded and warped by its own flow, then gated by an attention mask."
+  },
+  {
+    "step": 15,
+    "start": 42.0,
+    "end": 45.0,
+    "narration": "A flow and attention map predictor produces both the flow fields and the attention maps that weight each branch."
+  },
+  {
+    "step": 16,
+    "start": 45.0,
+    "end": 48.0,
+    "narration": "In the bottom branch, s-ref is encoded and warped the same way; the two gated streams are summed and decoded into the final driven image s-hat-dri."
+  }
+]

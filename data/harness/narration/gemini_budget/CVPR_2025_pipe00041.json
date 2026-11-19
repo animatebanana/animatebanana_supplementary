@@ -1,0 +1,44 @@
+[
+  {
+    "step": 1,
+    "start": 0.0,
+    "end": 3.5,
+    "narration": "The pipeline begins with multi-modal inputs, including a reconstructed 3D point cloud alongside multi-view RGB images and depth maps with camera poses."
+  },
+  {
+    "step": 2,
+    "start": 3.5,
+    "end": 7.0,
+    "narration": "In Step 1, a 3D superpoint is selected and projected across views via a histogram of projected points to identify the optimal pivot viewpoint."
+  },
+  {
+    "step": 3,
+    "start": 7.0,
+    "end": 10.5,
+    "narration": "SAM 2 performs promptable segmentation on the selected pivot view using the superpoint cue, generating an accurate initial 2D mask."
+  },
+  {
+    "step": 4,
+    "start": 10.5,
+    "end": 14.5,
+    "narration": "Using SAM 2 tracking augmented with 3D cues, the mask is propagated bidirectionally in forward and backward passes to produce a complete 2D mask track."
+  },
+  {
+    "step": 5,
+    "start": 14.5,
+    "end": 18.0,
+    "narration": "In Step 2, the multi-view 2D mask track is lifted into 3D space to form mask candidates, which are refined through geometric mask optimization."
+  },
+  {
+    "step": 6,
+    "start": 18.0,
+    "end": 21.5,
+    "narration": "The refined 3D proposals are aggregated into high-quality, class-agnostic 3D instance segmentations covering all objects in the scene."
+  },
+  {
+    "step": 7,
+    "start": 21.5,
+    "end": 25.0,
+    "narration": "Finally, the output stage integrates CLIP and LLM features to provide both open-vocabulary and open-ended 3D semantic instance labeling."
+  }
+]

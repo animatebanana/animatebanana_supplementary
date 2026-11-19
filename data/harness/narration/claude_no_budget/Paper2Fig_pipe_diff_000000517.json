@@ -1,0 +1,18 @@
+[
+  {"step": 1, "start": 0.0, "end": 3.5, "narration": "The whole pipeline sits behind a thin translucent layer. We start on the left, where the incoming LiDAR scan P t enters the loop, and the orange return path that will later feed back the next scan, P t plus one."},
+  {"step": 2, "start": 3.5, "end": 7.0, "narration": "The first stage comes into focus: geometry-aware point sampling. Instead of using every point in the scan, this block picks a small, well-spread subset to work with."},
+  {"step": 3, "start": 7.0, "end": 10.5, "narration": "Inside it, eigen feature computation runs first. For each point it analyses the local neighbourhood and derives eigenvalue-based descriptors of the surrounding geometry."},
+  {"step": 4, "start": 10.5, "end": 14.0, "narration": "Those descriptors pass through a threshold, which keeps only the points lying on geometrically salient structure and discards flat, uninformative regions."},
+  {"step": 5, "start": 14.0, "end": 17.5, "narration": "Random sampling then thins the surviving points down to a fixed, manageable budget, so the cost of the later stages stays bounded."},
+  {"step": 6, "start": 17.5, "end": 21.0, "narration": "The sampled points travel along the orange arrow into the second stage, view-based partitioning."},
+  {"step": 7, "start": 21.0, "end": 25.0, "narration": "Partitioning is driven by the azimuthal angle of each point around the sensor. The diagram shows the vehicle at the centre, with the surrounding space cut into front, rear, left-side and right-side sectors."},
+  {"step": 8, "start": 25.0, "end": 29.0, "narration": "That gives four separate point sets: front view, left view, right view and rear view. Splitting the scan this way keeps matching local and avoids mixing points from opposite directions."},
+  {"step": 9, "start": 29.0, "end": 32.5, "narration": "The four view sets run down the right-hand loop into the third stage, feature extraction and matching."},
+  {"step": 10, "start": 32.5, "end": 36.5, "narration": "Features are produced by PointHop plus plus, a feed-forward, successive-subspace module that builds a compact descriptor for every point without any back-propagation training."},
+  {"step": 11, "start": 36.5, "end": 40.0, "narration": "Feature matching is then performed independently in each view, pairing points of the current scan with points of the previous one to form the correspondences."},
+  {"step": 12, "start": 40.0, "end": 43.5, "narration": "Those correspondences flow left into the final stage, motion estimation and update."},
+  {"step": 13, "start": 43.5, "end": 47.0, "narration": "From the matched pairs the system estimates the rotation and translation between the two consecutive scans, which is the frame-to-frame motion of the sensor."},
+  {"step": 14, "start": 47.0, "end": 50.5, "narration": "That relative pose is accumulated to update the trajectory, extending the estimated path travelled so far."},
+  {"step": 15, "start": 50.5, "end": 54.5, "narration": "Finally the time index is advanced, t becomes t plus one, and control returns along the orange loop so the next scan enters the pipeline as the new P t."},
+  {"step": 16, "start": 54.5, "end": 59.0, "narration": "The mask lifts completely: geometry-aware sampling, view-based partitioning, PointHop plus plus feature extraction and matching, and motion estimation form one closed odometry loop that runs once per incoming scan."}
+]

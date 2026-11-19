@@ -1,0 +1,10 @@
+[
+  {"step": 1, "start": 0.0, "end": 3.0, "narration": "The pipeline takes a point cloud at time t, labelled P sub t, and carries it along the orange loop on the left into the system; the same loop will later return the updated cloud P sub t plus one."},
+  {"step": 2, "start": 3.0, "end": 6.0, "narration": "First comes geometry-aware point sampling: eigen feature computation describes the local geometry, a threshold keeps only the informative points, and random sampling thins them to a manageable set."},
+  {"step": 3, "start": 6.0, "end": 9.0, "narration": "The sampled points pass to view-based partitioning, where each point's azimuthal angle around the sensor decides which sector of the scene it belongs to."},
+  {"step": 4, "start": 9.0, "end": 12.0, "narration": "That angle splits the cloud into four views - front, left, right and rear - so that matching can later be done separately within each direction."},
+  {"step": 5, "start": 12.0, "end": 15.0, "narration": "The four views travel down the right-hand connector into feature extraction and matching, where a PointHop plus plus module encodes each point's neighbourhood into a compact descriptor."},
+  {"step": 6, "start": 15.0, "end": 18.0, "narration": "Those descriptors drive feature matching in each view, pairing points of the current frame with the previous one inside every sector independently."},
+  {"step": 7, "start": 18.0, "end": 21.0, "narration": "The matched correspondences flow left into motion estimation and update, which estimates the rotation and translation between the two frames."},
+  {"step": 8, "start": 21.0, "end": 24.0, "narration": "The estimated transform updates the trajectory, the time index advances from t to t plus one, and the cycle repeats with the next point cloud."}
+]

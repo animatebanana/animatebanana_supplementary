@@ -88,6 +88,7 @@ Every page is reachable from the **Menu** button (top right).
 | Metrics and Evaluation Strategy | `metrics.html` | The validity gates, the sequence-level assessment of the visual narratives, and the rationale for a reference-free evaluation design. |
 | Significance of Bench | `bench-significance.html` | A worked example in which the human-verified AnimateBench narrative reveals what went wrong, and why, behind a generated animation's sequence-level scores. |
 | Prompts | `prompts.html` | The generation prompts given to the closed-source baselines and the evaluation prompts for the judge. |
+| Harness Experiments | `harness-experiments.html` | Two coding-agent harnesses given AnimateBanana's stages as skills, plus raster-crop and frame-render tools, with and without AnimateBanana's time as a budget: the setup, a replay of every decision log, the results and all 60 outputs. |
 | Ablations | `ablations.html` | Component ablations (critics, context, XML, image input) and results stratified by diagram complexity. |
 | Failure cases | `failures.html` | Representative failures at each pipeline stage, with analysis. |
 | User study | `user-study.html` | Study design, participant pool, interface screenshots, and results. |
@@ -111,6 +112,7 @@ Every page is reachable from the **Menu** button (top right).
 ├── metrics.html             │
 ├── bench-significance.html  │
 ├── prompts.html             │
+├── harness-experiments.html │
 ├── ablations.html           │
 ├── failures.html            │
 ├── user-study.html          │
@@ -129,6 +131,7 @@ Every page is reachable from the **Menu** button (top right).
 │   ├── ablations/           ·  pipeline diagram used by the ablation walkthroughs
 │   ├── evaluation/          ·  evaluation-scheme figure
 │   ├── significance/        ·  example diagram, animations and method icon for the Significance of Bench page
+│   ├── harness/             ·  Harness Experiments: agent outputs, source diagrams and frames
 │   └── shared/              ·  source figures, frames, and clips reused across pages
 │
 ├── data/                    ← JSON content that drives every page (text, results, media manifests)
@@ -166,7 +169,7 @@ Every page is reachable from the **Menu** button (top right).
 
 ## 4. Notes
 
-- **Size:** about 124 MB (2,089 files), mostly MP4 and PNG media.
+- **Size:** about 148 MB (2,588 files), mostly MP4 and PNG media.
 - **Last updated:** the footer of each page shows when that page or the data it
   loads last changed, in AOE (UTC−12).
 - **Anonymity:** the site carries no author, affiliation, contact or repository

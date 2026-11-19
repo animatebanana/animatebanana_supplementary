@@ -1,0 +1,44 @@
+[
+  {
+    "step": 1,
+    "start": 0.0,
+    "end": 4.0,
+    "narration": "First, a camera casts rays into the 3D scene, sampling continuous query points along each ray."
+  },
+  {
+    "step": 2,
+    "start": 4.0,
+    "end": 8.0,
+    "narration": "Next, each sampled point queries multi-resolution 3D feature grids, interpolating coarse and fine geometric features."
+  },
+  {
+    "step": 3,
+    "start": 8.0,
+    "end": 12.0,
+    "narration": "A neural MLP processes the interpolated features to predict signed distance fields for individual scene objects."
+  },
+  {
+    "step": 4,
+    "start": 12.0,
+    "end": 16.0,
+    "narration": "A minimum operation aggregates object SDFs into the overall scene SDF, regularized by Eikonal and interpenetration losses."
+  },
+  {
+    "step": 5,
+    "start": 16.0,
+    "end": 20.0,
+    "narration": "From the scene SDF, transmittance and ray weight distributions are computed to model continuous light attenuation."
+  },
+  {
+    "step": 6,
+    "start": 20.0,
+    "end": 24.0,
+    "narration": "Transmittance modulates object densities into occlusion-aware opacities, which are supervised using 2D instance masks."
+  },
+  {
+    "step": 7,
+    "start": 24.0,
+    "end": 28.0,
+    "narration": "Finally, volume rendering synthesizes depth, surface normals guided by pretrained priors, and RGB color under multi-modal losses."
+  }
+]

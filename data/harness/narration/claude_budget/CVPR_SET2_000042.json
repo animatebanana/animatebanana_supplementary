@@ -1,0 +1,10 @@
+[
+  {"step": 1, "start": 0.0, "end": 2.5, "narration": "We start with the content branch: a reference photo of a cat is encoded by a Content LoRA, whose low-rank factors B and A produce the content update B times A."},
+  {"step": 2, "start": 2.5, "end": 5.0, "narration": "In parallel, a style reference painting goes through a Style LoRA, giving its own low-rank update B times A."},
+  {"step": 3, "start": 5.0, "end": 7.5, "narration": "Inside the K-LoRA module, the content update is viewed as a sparse weight map, and the sum of its Top-K largest elements is computed."},
+  {"step": 4, "start": 7.5, "end": 10.0, "narration": "The same Top-K summation is applied to the style update, giving a comparable measure of how strongly style wants to act in this layer."},
+  {"step": 5, "start": 10.0, "end": 12.5, "narration": "The style sum is multiplied by a scale factor, which lets the method tune the content-style balance over diffusion timesteps."},
+  {"step": 6, "start": 12.5, "end": 15.0, "narration": "A Judge compares the content Top-K sum with the scaled style Top-K sum and decides which LoRA should drive this attention layer."},
+  {"step": 7, "start": 15.0, "end": 17.5, "narration": "The winner is the branch with the bigger Top-K response, and that LoRA is applied to this attention layer."},
+  {"step": 8, "start": 17.5, "end": 20.0, "narration": "The selected update is added back into the base attention features, fed through the diffusion UNet, and the result is the final image fusing the cat's content with the painting's style."}
+]

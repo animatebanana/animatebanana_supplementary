@@ -1,0 +1,32 @@
+[
+  {
+    "step": 1,
+    "start": 0.0,
+    "end": 4.0,
+    "narration": "The multimodal pipeline begins with an input image containing detected bounding boxes for candidate entities, alongside a textual query describing a woman carrying a hat and holding a beverage."
+  },
+  {
+    "step": 2,
+    "start": 4.0,
+    "end": 8.0,
+    "narration": "The textual query is parsed into a structured language graph, identifying the subject entity woman connected via relations carry and hold to the object entities hat and beverage."
+  },
+  {
+    "step": 3,
+    "start": 8.0,
+    "end": 12.0,
+    "narration": "In the message propagation module, entity nodes and relational affinities are initialized by grounding language elements to visual bounding box features and spatial candidate matrices."
+  },
+  {
+    "step": 4,
+    "start": 12.0,
+    "end": 16.0,
+    "narration": "Next, bottom-up and top-down belief propagation iteratively aggregates and updates messages between entity nodes using belief selection and gating units."
+  },
+  {
+    "step": 5,
+    "start": 16.0,
+    "end": 20.0,
+    "narration": "Finally, the readout head processes the updated graph marginals to produce image-text matching predictions and relational difference representations for multihop reasoning."
+  }
+]

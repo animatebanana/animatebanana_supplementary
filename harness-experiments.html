@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+  <title>Harness Experiments — AnimateBanana</title>
+  <link rel="stylesheet" href="assets/fonts/fonts.css">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css?v=3">
+  <link rel="stylesheet" href="assets/css/components/site-nav.css?v=5">
+  <link rel="stylesheet" href="assets/css/components/doodle-field.css">
+  <link rel="stylesheet" href="assets/css/components/page-toc.css?v=4">
+  <link rel="stylesheet" href="assets/css/metrics/metrics-page.css?v=16">
+  <link rel="stylesheet" href="assets/css/harness/harness.css?v=34">
+</head>
+<body>
+  <site-nav current="harness" back="index.html" back-label="Overview"></site-nav>
+
+  <div class="page mx-page hx-page">
+    <div class="page-head">
+      <doodle-field density="sparse"></doodle-field>
+      <h1>Harness Experiments</h1>
+    </div>
+
+    <nav class="pg-toc" id="pg-toc" aria-label="Contents">
+      <div class="pg-toc-inner">
+        <span class="pg-toc-title">Contents<small>Jump to a section</small></span>
+        <div class="pg-toc-list">
+          <a href="#hx-setup" data-toc="hx-setup"><b>1</b><span>Setup</span></a>
+          <a href="#hx-paths" data-toc="hx-paths"><b>2</b><span>Skills invoked</span></a>
+          <a href="#hx-skills" data-toc="hx-skills"><b>3</b><span>Skill usage</span></a>
+          <a href="#hx-time" data-toc="hx-time"><b>4</b><span>Time</span></a>
+          <a href="#hx-where" data-toc="hx-where"><b>5</b><span>Time split</span></a>
+          <a href="#hx-failures" data-toc="hx-failures"><b>6</b><span>Failures</span></a>
+          <a href="#hx-scores" data-toc="hx-scores"><b>7</b><span>Scores</span></a>
+          <a href="#hx-gallery" data-toc="hx-gallery"><b>8</b><span>Gallery</span></a>
+          <a href="#hx-meaning" data-toc="hx-meaning"><b>9</b><span>Conclusion</span></a>
+        </div>
+      </div>
+      <i class="pg-toc-bar"><i></i></i>
+    </nav>
+
+    <section class="mx-section pg-target" id="hx-setup">
+      <div class="kicker">The experiment</div>
+      <h2>Is AnimateBanana's workflow self-discoverable by an agent having only our stage descriptions as skills and tools?</h2>
+      <div class="hx-intro">
+        <p>We use the closed-source models Opus 5 and Gemini 3.8 Flash (Gemini 3.7 is deprecated and no longer available) as the agent. The agent has AnimateBanana's stage descriptions as skills, and the raster-cropping and frame-rendering tools as callable tools, and it decides on its own how to use them. We wish to test how the agent makes use of these skills and tools, and whether, in doing so, it self-discovers our pipeline.</p>
+        <p>We test it under two conditions. In one, the agent is given a time budget based on the time our pipeline took to animate that diagram. In the other, there is no time limit. We observe the performance under both conditions.</p>
+      </div>
+      <div class="hx-facts5">
+        <div class="hx-fact">
+          <span class="hx-factico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M7 9l3 2-3 2M12 13h4M8 21h8M12 17v4"/></svg></span>
+          <b>Two closed-source baselines used as the main agent in a harness</b>
+          <p><span class="hx-tag is-claude">Claude Code · Opus 5</span> <span class="hx-tag is-gemini">Antigravity · Gemini 3.8 Flash</span></p>
+        </div>
+        <div class="hx-fact">
+          <span class="hx-factico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></span>
+          <b>15 AnimateBench diagrams</b>
+          <p>A representative collection of diagrams with and without raster content.</p>
+        </div>
+        <div class="hx-fact">
+          <span class="hx-factico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 7h18v13H3z"/><path d="M3 7l2-3h5l2 3"/><path d="M9 13.5l2 2 4-4"/></svg></span>
+          <b>A neutral, isolated workspace</b>
+          <p>The agent cannot see AnimateBanana's actual stages and has no clue about its representations. It only gets the stage descriptions, as skills and usable tools, and a fresh session per diagram with web access switched off.</p>
+        </div>
+        <div class="hx-fact">
+          <span class="hx-factico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 2.5h8.5L19 7v14.5H6z"/><path d="M14 2.5V7h5M9 12h7M9 15.5h7M9 19h4"/></svg></span>
+          <b>The same prompt as the baselines</b>
+          <p>The prompt from the zero-shot diagram-to-animation task is reused, asking for an animated SVG and a timestamped narration that matches it. No clues are given on formatting, schemas or rubrics, and no examples.</p>
+        </div>
+        <div class="hx-fact">
+          <span class="hx-factico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="13.5" r="7.5"/><path d="M12 9.5v4l2.6 2M9.5 2.5h5M12 2.5V6M18.5 6.5l1.5-1.5"/></svg></span>
+          <b>A time budget per diagram</b>
+          <p>Each diagram's budget is the time AnimateBanana took to produce the animation for that same diagram, rounded up to the next minute.</p>
+        </div>
+      </div>
+      <div class="hx-switchrow">
+        <span class="hx-switchlab">Condition</span>
+        <hx-cond-switch></hx-cond-switch>
+      </div>
+      <hx-setup></hx-setup>
+    </section>
+
+    <section class="mx-section mx-section--far pg-target" id="hx-paths">
+      <div class="kicker">Results · process</div>
+      <h2>Analysis of skills invoked</h2>
+      <p class="hx-sub is-lead">Pick a diagram and a run. On the left is the fixed orchestration path that AnimateBanana follows, in a fixed linear order. On the right are the decisions the agent chose autonomously, in the run with a time budget or the run without one, depending on what is selected. Alongside, we include the agent's decision file, which shows how its calls were distributed across the different skills and tools, and at which point each one was made.</p>
+      <hx-run-picker></hx-run-picker>
+      <hx-trajectory></hx-trajectory>
+
+    </section>
+
+    <section class="mx-section mx-section--far pg-target" id="hx-skills">
+      <div class="kicker">Results · skills</div>
+      <h2>Use of skills / stage hints across all runs</h2>
+      <p class="hx-headline">Without a time budget, the stage hints were used only partly. When the agents were given a time budget equal to the time AnimateBanana took on the same diagram, most of the stage hints were dropped, particularly by Claude, which treats them as optional and skips them.</p>
+      <figure class="hx-card is-chart hx-heatwrap"><figcaption>Runs using each skill <small>out of the 15 runs in each condition. Click a skill to read its SKILL.md.</small></figcaption><hx-heatmap></hx-heatmap></figure>
+      <h3 class="hx-h3">Insights: how the two harnesses used the skills</h3>
+      <div class="hx-insights3">
+        <div class="hx-insight is-gemini"><span class="hx-tag is-gemini">Gemini</span><b>Gemini treats the skills as a checklist.</b><p>It reads every SKILL.md first and works through most of them.</p></div>
+        <div class="hx-insight is-claude"><span class="hx-tag is-claude">Claude</span><b>Claude treats them as optional, and bypasses them under budget.</b><p>For example, it often skips invoking the diagram-structure skill or the diagram-to-svg conversion, and probes the image with custom-generated Python scripts instead.</p></div>
+        <div class="hx-insight is-claude"><span class="hx-tag is-claude">Claude</span><b>region-crop became a magnifier.</b><p>It often uses the region-crop tool as a means of zooming in and reading labels in images, rather than using it to embed rasters in the output.</p></div>
+      </div>
+    </section>
+
+    <section class="mx-section mx-section--far pg-target" id="hx-time">
+      <div class="kicker">Results · time</div>
+      <h2>Time taken by the agents, with and without a budget</h2>
+      <p class="hx-sub is-lead">Without a budget, the agents needed 1.4× (Claude) and 2.9× (Gemini) AnimateBanana's time. With AnimateBanana's time as a budget, both fit roughly inside it, but only by changing how they worked, as the next section shows.</p>
+      <figure class="hx-card is-chart hx-timecard">
+        <figcaption>Without a budget, agents take 1.4–2.9× AnimateBanana's time per diagram<small>Mean wall-clock minutes per diagram over the 15 diagrams. Budgeted runs were given AnimateBanana's own time on each diagram.</small></figcaption>
+        <hx-time-mean></hx-time-mean>
+      </figure>
+    </section>
+
+    <section class="mx-section mx-section--far pg-target" id="hx-where">
+      <div class="kicker">Results · time</div>
+      <h2>How a budget changes what the agents spend their time on</h2>
+      <figure class="hx-card is-chart">
+        <figcaption>Agents spend 32–58% of their time re-reading the image; AnimateBanana spends 42% checking<small>Share of total time per stage group. The agents' shares come from the timestamps in their own decision logs.</small></figcaption>
+        <hx-shares></hx-shares>
+      </figure>
+      <ul class="hx-findings">
+        <li><b>Understanding the image dominates for the agents.</b> The autonomous agents spend most of their time understanding the image, using zoomed crops, grid overlays and NumPy scans, which take up 45–58% of their time. AnimateBanana perceives the image only once, in the converter, where it reconstructs the diagram from the image as SVG, and then parses the structure from its own SVG.</li>
+        <li><b>A budget cuts image understanding first.</b> On introducing a budget, Claude cuts the share of its time spent understanding the image from 58% to 32%.</li>
+        <li><b>The agents check only the final animation.</b> Most of the checks performed by the autonomous agents are on the final animation. They perform no checks on the SVG or on the sequence, as AnimateBanana does with its Stage-1 and Stage-2 critics.</li>
+      </ul>
+    </section>
+
+    <section class="mx-section mx-section--far pg-target" id="hx-failures">
+      <div class="kicker">Results · outputs</div>
+      <h2>Qualitative examples of failure modes of the autonomous agent</h2>
+      <p class="hx-sub is-lead">Under a time budget, the agents prioritise producing the deliverable and sacrifice fidelity. We observe four kinds of patterns, and show examples of each. Click any example to open it large.</p>
+
+      <article class="hx-fail">
+        <header><span class="hx-failn">1</span><h3>Photos replaced by simplified vector stand-ins</h3></header>
+        <p>When given a time budget, Claude Opus 5 replaced every embedded raster/natural image in these four diagrams with simplified vector drawings, just as observed in the zero-shot diagram-to-animation task. In its own reasoning trace, it notes that a small time budget is unfavourable to a multi-skill pipeline, and it prefers to author the animation directly.</p>
+        <hx-pair-grid></hx-pair-grid>
+      </article>
+
+      <article class="hx-fail">
+        <header><span class="hx-failn">2</span><h3>Revealing the source PNG instead of redrawing it</h3></header>
+        <p>In several outputs, instead of redrawing the diagram elements, the agent built the animation by simply clipping regions from the source diagram image. This preserves visual fidelity but takes away from the editability of the results, and Claude states that it does this to save time.</p>
+        <hx-reveal-grid></hx-reveal-grid>
+      </article>
+
+      <article class="hx-fail">
+        <header><span class="hx-failn">3</span><h3>Issues with the alpha masking animation style</h3></header>
+        <p>Alpha masking is the animation style most often rendered unfaithfully. We notice three kinds of errors.</p>
+        <div class="hx-alpha">
+          <figure>
+            <figcaption><b>Misaligned veil rectangles</b><span>The translucent mask is a set of rectangles that do not line up with the elements behind them.</span></figcaption>
+            <hx-scrubber frames="assets/harness/frames/arch00855_cb_t006.0.webp" alt="CVPR_2025_arch00855, Claude, budget"
+              notes='[{"x":44,"y":2,"w":28,"h":40,"label":"veils misaligned","lx":56,"ly":44}]'></hx-scrubber>
+            <small class="hx-runlab">Claude · budget · CVPR_2025_arch00855</small>
+          </figure>
+          <figure>
+            <figcaption><b>Containers emphasised out of turn</b></figcaption>
+            <hx-scrubber frames="assets/harness/frames/arch00855_gb_t006.0.webp" alt="CVPR_2025_arch00855, Gemini, budget"
+              notes='[{"x":24,"y":0,"w":58,"h":100,"label":"container out of turn","lx":60,"ly":4}]'></hx-scrubber>
+            <small class="hx-runlab">Gemini · budget · CVPR_2025_arch00855</small>
+          </figure>
+          <figure class="is-wide">
+            <figcaption><b>Boxes and labels that are not in the source</b><span>A blue bounding box that is not present in the original image is drawn in. This brings the hopping bounding box style into alpha masking, which is incorrect.</span></figcaption>
+            <hx-scrubber frames="assets/harness/frames/pipe00004_gb_t008.0.webp" alt="CVPR_2025_pipe00004, Gemini, budget"
+              notes='[{"x":44,"y":30,"w":56,"h":34,"label":"box not in the source","lx":46,"ly":66}]'></hx-scrubber>
+            <small class="hx-runlab">Gemini · budget · CVPR_2025_pipe00004</small>
+          </figure>
+        </div>
+      </article>
+
+      <article class="hx-fail">
+        <header><span class="hx-failn">4</span><h3>Finishing early rather than improving</h3></header>
+        <p>The agents prioritise finishing early over improving their work. In one example, on ICCV_2023_set5_000003, Claude wrote a single generator script and made one render check, with no review of its work, and stopped after using only 34% of its budget. Across runs, Claude used only 87% of its budget time on average and Gemini 95%, and neither spent the remaining time checking its work. This is why a dedicated, orchestrated pipeline with critics matters, rather than leaving the agent to its own devices.</p>
+        <figure class="hx-card is-chart"><figcaption>Share of the time budget used, for every budgeted run<small>100% is the full budget for that diagram, which is AnimateBanana's own time on it, rounded up.</small></figcaption><hx-budget-use></hx-budget-use></figure>
+      </article>
+    </section>
+
+    <section class="mx-section mx-section--far pg-target" id="hx-scores">
+      <div class="kicker">Results · every run</div>
+      <h2>Evaluation scores</h2>
+      <p class="hx-sub is-lead">The scores are reported over 15 diagrams from AnimateBench.</p>
+      <hx-table></hx-table>
+    </section>
+
+    <section class="mx-section mx-section--far pg-target" id="hx-gallery">
+      <div class="kicker">Results · outputs</div>
+      <h2>Gallery</h2>
+      <hx-gallery></hx-gallery>
+      <p class="hx-gnote">The time shown in grey above each sample is the time taken to generate that particular output, in min:sec. Compare it with AnimateBanana's time and the time budget given beside each diagram on the left.</p>
+    </section>
+
+    <section class="mx-section mx-section--far pg-target" id="hx-meaning">
+      <div class="kicker">Conclusion</div>
+      <h2>What we conclude from this</h2>
+      <div class="hx-concl">
+        <ol class="hx-insights">
+          <li class="is-1">
+            <span class="hx-insn">1</span>
+            <h3>Recovering the order is not the same as reconstructing the workflow</h3>
+            <p>Without a time limit, both agents could work out much of the broad sequence: understand the diagram first, then decide how to present it. But following this order was not enough. The agent rarely turned the reconstructed diagram into a structured representation that could be reused by the later stages. This took them <mark>1.4–2.9× longer</mark> than AnimateBanana.</p>
+          </li>
+          <li class="is-2">
+            <span class="hx-insn">2</span>
+            <h3>Under a time constraint, they took shortcuts</h3>
+            <p>Given the same time as AnimateBanana, both agents moved away from the stage-wise process and favoured direct authoring. Their AN scores were <mark>0.577 (Claude)</mark> and <mark>0.446 (Gemini)</mark>, compared with <mark class="is-ab">0.952 for AnimateBanana</mark>.</p>
+          </li>
+          <li class="is-3">
+            <span class="hx-insn">3</span>
+            <h3>Much of their effort went into understanding the image again</h3>
+            <p>Repeated image inspection took <mark>32–58% of agent time</mark>. AnimateBanana reconstructs the diagram once and carries its structure forward through SVG and XML, so later stages can work with that representation rather than repeatedly recovering information from pixels. The agents, meanwhile, largely confined their checks to the final animation.</p>
+          </li>
+          <li class="is-4">
+            <span class="hx-insn">4</span>
+            <h3>The shortcuts came at a cost to fidelity</h3>
+            <p>Under time pressure, agents <mark>replaced embedded photographs with simplified drawings</mark> or <mark>animated the source image through cropping</mark> rather than reconstructing its elements. They finished faster, but with less faithful and less editable outputs.</p>
+          </li>
+        </ol>
+        <div class="hx-conclfinal">
+          <span class="hx-kicker">Conclusion</span>
+          <p>This experiment suggests that stage descriptions are not enough to reproduce AnimateBanana. What matters is <b>how the diagram is represented</b>, <b>how that representation is passed from one stage to the next</b>, and <b>how intermediate results are checked and refined</b>. These choices are what make the workflow reliable within a practical time budget.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <span data-updated>Last updated 18 November 2026</span>
+    </footer>
+  </div>
+
+  <script type="module" src="assets/js/components/site-nav.js?v=8"></script>
+  <script type="module" src="assets/js/components/doodle-field.js"></script>
+  <script type="module" src="assets/js/harness/hx-page.js?v=37"></script>
+  <script type="module" src="assets/js/components/page-toc.js?v=3"></script>
+  <script type="module" src="assets/js/lib/reveal.js"></script>
+  <script type="module" src="assets/js/components/last-updated.js?v=1"></script>
+</body>
+</html>

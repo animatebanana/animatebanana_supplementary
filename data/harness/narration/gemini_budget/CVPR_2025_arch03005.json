@@ -1,0 +1,32 @@
+[
+  {
+    "step": 1,
+    "start": 0.0,
+    "end": 3.0,
+    "narration": "The process begins with the input query map Q_map, providing initial feature tokens for the pipeline."
+  },
+  {
+    "step": 2,
+    "start": 3.0,
+    "end": 6.0,
+    "narration": "Queries pass to an offset network to predict displacements added to reference points P_ref for adaptive sampling."
+  },
+  {
+    "step": 3,
+    "start": 6.0,
+    "end": 9.0,
+    "narration": "Deformed coordinates sample relevant feature tokens from the bird's-eye-view feature map F_bev."
+  },
+  {
+    "step": 4,
+    "start": 9.0,
+    "end": 12.0,
+    "narration": "Simultaneously, an MLP and dynamic resampling module formulate distribution-based attention weights alpha_i."
+  },
+  {
+    "step": 5,
+    "start": 12.0,
+    "end": 15.0,
+    "narration": "The sampled features and attention weights are aggregated and linearly transformed into the query update delta Q_map."
+  }
+]

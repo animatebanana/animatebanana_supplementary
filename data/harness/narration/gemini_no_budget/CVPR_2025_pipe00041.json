@@ -1,0 +1,44 @@
+[
+  {
+    "step": 1,
+    "start": 0.0,
+    "end": 4.0,
+    "narration": "The framework takes multimodal inputs: a reconstructed 3D point cloud along with RGB images, depth maps, and camera poses."
+  },
+  {
+    "step": 2,
+    "start": 4.0,
+    "end": 8.0,
+    "narration": "In Step 1, a 3D superpoint is selected and projected across views to build a visibility histogram, identifying the optimal pivot view."
+  },
+  {
+    "step": 3,
+    "start": 8.0,
+    "end": 12.0,
+    "narration": "The projected superpoint prompts SAM 2 to segment the object in the pivot view, creating an initial high-quality 2D mask."
+  },
+  {
+    "step": 4,
+    "start": 12.0,
+    "end": 16.5,
+    "narration": "Guided by 3D geometric cues, SAM 2 tracks the mask bidirectionally across forward and backward passes, producing a continuous 2D mask track."
+  },
+  {
+    "step": 5,
+    "start": 16.5,
+    "end": 21.0,
+    "narration": "In Step 2, the 2D mask track is lifted into a 3D candidate mask, then refined through continuous optimization to clean boundary artifacts."
+  },
+  {
+    "step": 6,
+    "start": 21.0,
+    "end": 25.5,
+    "narration": "The optimization yields a clean final 3D proposal for each object, building a comprehensive class-agnostic 3D instance segmentation."
+  },
+  {
+    "step": 7,
+    "start": 25.5,
+    "end": 30.0,
+    "narration": "Finally, the 3D proposals are classified using CLIP and large language models to produce open-vocabulary and open-ended 3D instance segmentations."
+  }
+]

@@ -1,0 +1,17 @@
+[
+  {"step": 1, "start": 0.0, "end": 3.5, "narration": "We start with the first input modality: a stack of RGB video frames showing a person moving over time."},
+  {"step": 2, "start": 3.5, "end": 7.0, "narration": "Below it comes the second modality, a matching stack of pressure-mat frames that record where the body presses on the floor at each moment."},
+  {"step": 3, "start": 7.0, "end": 10.5, "narration": "Each stream is fed to its own encoder. The snowflake on the image encoder marks it as frozen, so only the rest of the network is trained."},
+  {"step": 4, "start": 10.5, "end": 13.5, "narration": "An LSAM block then follows each encoder, aggregating the per-frame features along the time axis within its own modality."},
+  {"step": 5, "start": 13.5, "end": 17.0, "narration": "Both branches meet in the Fusion Cross-Attention Module, or FCAM, which combines the visual and pressure features into one representation."},
+  {"step": 6, "start": 17.0, "end": 20.0, "narration": "The fused features pass to the regressor, the head that turns them into human body parameters."},
+  {"step": 7, "start": 20.0, "end": 23.0, "narration": "It predicts theta, the body pose, and T, the global translation of the body in the scene."},
+  {"step": 8, "start": 23.0, "end": 26.5, "narration": "From pose and translation the model computes the 3D joint positions, J of theta and T, and then projects them to the image plane with an orthographic projection."},
+  {"step": 9, "start": 26.5, "end": 30.0, "narration": "Four losses supervise this chain: pose and translation losses on the parameters, a 3D loss on the joints, and a 2D loss on their projection."},
+  {"step": 10, "start": 30.0, "end": 33.5, "narration": "On the right we see what the model produces: a reconstructed motion sequence running from standing, through crouching, to sitting on the ground."},
+  {"step": 11, "start": 33.5, "end": 37.0, "narration": "A fifth loss, the contact loss, uses the pressure signal. The inset highlights the contact regions on the soles, keeping the predicted body anchored to the floor."},
+  {"step": 12, "start": 37.0, "end": 40.5, "narration": "Now we zoom into the FCAM block. The image feature is projected into a value and a key, while the pressure feature is projected into a query."},
+  {"step": 13, "start": 40.5, "end": 44.0, "narration": "Key and query are multiplied and passed through a softmax to form attention weights, which are then multiplied with the image value."},
+  {"step": 14, "start": 44.0, "end": 47.0, "narration": "The attended result is added to a residual image-feature skip, refined by a position-wise feed-forward layer, and concatenated with the pressure feature on the way out."},
+  {"step": 15, "start": 47.0, "end": 50.0, "narration": "Finally, the legend: the circled cross is a matrix multiplication, the circled plus is an addition, and the circled C is a concatenation."}
+]

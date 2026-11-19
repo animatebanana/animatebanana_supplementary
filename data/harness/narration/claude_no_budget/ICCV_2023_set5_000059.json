@@ -1,0 +1,18 @@
+[
+  {"step": 1, "start": 0.0, "end": 3.0, "narration": "We start at the input. A camera looks into the indoor scene, and a ray is cast through a pixel. Along that ray we take a 3D sample point p, shown as the yellow dot."},
+  {"step": 2, "start": 3.0, "end": 6.0, "narration": "The point p is looked up in a multi-resolution feature grid. Coarse voxels at the top and fine voxels at the bottom each give a trilinearly interpolated feature vector for p."},
+  {"step": 3, "start": 6.0, "end": 9.0, "narration": "The concatenated multi-resolution features, together with the raw coordinate of p, are fed into a small multi-layer perceptron."},
+  {"step": 4, "start": 9.0, "end": 12.0, "narration": "The network outputs one signed distance value per object: an SDF for the floor, an SDF for the lamp, an SDF for the bed, and so on for every instance in the scene."},
+  {"step": 5, "start": 12.0, "end": 15.0, "narration": "Taking the minimum across all those per-object distances gives the scene SDF, d-omega: the distance from p to the nearest surface of any object."},
+  {"step": 6, "start": 15.0, "end": 18.0, "narration": "Each per-object SDF is converted into an object density profile, sigma. Along the ray, every object contributes its own density peak where its surface lies."},
+  {"step": 7, "start": 18.0, "end": 21.0, "narration": "From the scene SDF we also accumulate the scene transmittance, T-omega, which falls off as the ray is blocked by whichever surface it meets first."},
+  {"step": 8, "start": 21.0, "end": 24.0, "narration": "Multiplying each object density by that shared scene transmittance yields the occlusion-aware object opacity, O-hat. Peaks that sit behind another surface are suppressed."},
+  {"step": 9, "start": 24.0, "end": 27.0, "narration": "The object opacities are supervised against the 2D instance masks with the loss L-O, so each object is only held responsible for the pixels where it is actually visible."},
+  {"step": 10, "start": 27.0, "end": 30.0, "narration": "Transmittance multiplied by the scene density gives the volume rendering weight function, which says how much each sample along the ray contributes to the pixel."},
+  {"step": 11, "start": 30.0, "end": 33.0, "narration": "Integrating with those weights renders a depth map, compared against the prior depth with the loss L-depth."},
+  {"step": 12, "start": 33.0, "end": 36.0, "narration": "The same weights render a normal map, supervised by the loss L-normal."},
+  {"step": 13, "start": 36.0, "end": 39.0, "narration": "The depth and normal targets come from a pretrained monocular prediction model, which supplies geometric cues the posed images alone cannot give."},
+  {"step": 14, "start": 39.0, "end": 42.0, "narration": "The weights also render colour, and the reconstruction loss L-rec compares it with the captured RGB image."},
+  {"step": 15, "start": 42.0, "end": 45.0, "narration": "Back on the field itself, the Eikonal loss L-SDF pushes the gradient norm of every per-object signed distance towards one, keeping each field a valid SDF."},
+  {"step": 16, "start": 45.0, "end": 48.0, "narration": "Finally the regularisation loss L-reg penalises any object whose signed distance dips below the scene SDF, stopping objects from growing into the space occupied by their neighbours."}
+]

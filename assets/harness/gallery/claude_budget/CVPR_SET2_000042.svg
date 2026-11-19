@@ -1,0 +1,179 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="894" height="265" viewBox="0 0 894 265" font-family="Helvetica,Arial,sans-serif">
+<defs>
+  <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8a8a8a"/></marker>
+  <marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4472c4"/></marker>
+  <marker id="agr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4a9a4a"/></marker>
+  <linearGradient id="catg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d8d8d8"/><stop offset="1" stop-color="#6b6b6b"/></linearGradient>
+  <linearGradient id="vang" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9fc4e8"/><stop offset="0.35" stop-color="#cfe08a"/><stop offset="1" stop-color="#b9c84f"/></linearGradient>
+  <linearGradient id="outg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a9c6d8"/><stop offset="0.45" stop-color="#8fa86a"/><stop offset="1" stop-color="#7d8a5c"/></linearGradient>
+</defs>
+<rect width="894" height="265" fill="#ffffff"/>
+
+
+<g id="e-content-img">
+  <rect x="6" y="28" width="66" height="66" fill="url(#catg)" stroke="#555"/>
+  <ellipse cx="39" cy="62" rx="18" ry="20" fill="#8e8e8e"/><circle cx="33" cy="55" r="3" fill="#fff"/><circle cx="45" cy="55" r="3" fill="#fff"/>
+  <path d="M26,46 L30,34 L36,44 z M52,46 L48,34 L42,44 z" fill="#8e8e8e"/>
+</g>
+
+<g id="e-style-img">
+  <rect x="6" y="166" width="66" height="66" fill="url(#vang)" stroke="#555"/>
+  <path d="M6,205 q16,-8 33,0 t33,0 v27 h-66 z" fill="#aab84a"/>
+  <circle cx="22" cy="182" r="6" fill="#f2e9a0"/>
+</g>
+
+
+<g id="e-content-lora">
+  <text x="126" y="18" font-size="13" fill="#4472c4" text-anchor="middle" font-style="italic">Content LoRA</text>
+  <path d="M86,26 L166,26 L146,60 L106,60 z" fill="#b9cdeb" stroke="#4472c4"/>
+  <path d="M106,64 L146,64 L166,98 L86,98 z" fill="#b9cdeb" stroke="#4472c4"/>
+  <text x="126" y="48" font-size="14" text-anchor="middle" fill="#1f3864">B</text>
+  <text x="126" y="88" font-size="14" text-anchor="middle" fill="#1f3864">A</text>
+</g>
+
+<g id="e-style-lora">
+  <text x="126" y="156" font-size="13" fill="#4a9a4a" text-anchor="middle" font-style="italic">Style LoRA</text>
+  <path d="M86,164 L166,164 L146,198 L106,198 z" fill="#bfdcbf" stroke="#4a9a4a"/>
+  <path d="M106,202 L146,202 L166,236 L86,236 z" fill="#bfdcbf" stroke="#4a9a4a"/>
+  <text x="126" y="186" font-size="14" text-anchor="middle" fill="#1e4620">B</text>
+  <text x="126" y="226" font-size="14" text-anchor="middle" fill="#1e4620">A</text>
+</g>
+<path d="M74,61 L84,61" stroke="#4472c4" stroke-width="2" marker-end="url(#ab)"/>
+<path d="M74,199 L84,199" stroke="#4a9a4a" stroke-width="2" marker-end="url(#agr)"/>
+<path d="M170,61 L258,61" stroke="#4472c4" stroke-width="1.6" marker-end="url(#ab)"/>
+<path d="M170,199 L258,199" stroke="#4a9a4a" stroke-width="1.6" marker-end="url(#agr)"/>
+<text x="212" y="56" font-size="11" fill="#4472c4" text-anchor="middle">B &#8226; A</text>
+<text x="212" y="194" font-size="11" fill="#4a9a4a" text-anchor="middle">B &#8226; A</text>
+
+
+<rect x="262" y="16" width="438" height="240" rx="14" fill="#f4f4f4" stroke="#cfcfcf"/>
+<text x="481" y="14" font-size="16" text-anchor="middle" fill="#222">K-LoRA</text>
+<path d="M272,30 v212 M279,30 v212" stroke="#555" stroke-width="2"/>
+
+
+<g id="e-blue-mat">
+  <rect x="288" y="36" width="78" height="70" fill="#e8eef9" stroke="#8aa8d8"/>
+  <g fill="#4472c4">
+    <rect x="296" y="44" width="8" height="8"/><rect x="326" y="52" width="8" height="8"/><rect x="348" y="42" width="8" height="8"/>
+    <rect x="304" y="70" width="8" height="8"/><rect x="336" y="76" width="8" height="8"/><rect x="352" y="88" width="8" height="8"/>
+    <rect x="294" y="92" width="8" height="8"/><rect x="318" y="94" width="8" height="8"/>
+  </g>
+</g>
+<text x="388" y="63" font-size="12" fill="#222">Sum <tspan fill="#4472c4" font-style="italic">TopK</tspan> elements</text>
+<path d="M370,100 L540,100 L540,129 L556,129" fill="none" stroke="#8a8a8a" stroke-width="1.6" marker-end="url(#ag)"/>
+
+
+<g id="e-green-mat">
+  <rect x="288" y="166" width="78" height="70" fill="#ececec" stroke="#a8c8a8"/>
+  <g fill="#6aa84f">
+    <rect x="298" y="174" width="8" height="8"/><rect x="330" y="182" width="8" height="8"/><rect x="350" y="172" width="8" height="8"/>
+    <rect x="306" y="200" width="8" height="8"/><rect x="338" y="206" width="8" height="8"/><rect x="352" y="218" width="8" height="8"/>
+    <rect x="294" y="222" width="8" height="8"/><rect x="320" y="224" width="8" height="8"/>
+  </g>
+</g>
+<text x="388" y="238" font-size="12" fill="#222">Sum <tspan fill="#4a9a4a" font-style="italic">TopK</tspan> elements</text>
+
+
+<g id="e-scale">
+  <rect x="418" y="150" width="54" height="24" rx="5" fill="#fdf3dc" stroke="#d9b04a"/>
+  <text x="445" y="167" font-size="13" text-anchor="middle" fill="#222">scale</text>
+</g>
+<path d="M474,162 L492,162 L492,186" fill="none" stroke="#8a8a8a" stroke-width="1.6" marker-end="url(#ag)"/>
+<g id="e-mult">
+  <circle cx="495" cy="205" r="16" fill="#4a7a3a" stroke="#2e5020" stroke-width="2"/>
+  <path d="M488,198 L502,212 M502,198 L488,212" stroke="#fff" stroke-width="2.4"/>
+</g>
+<text x="516" y="186" font-size="12" fill="#4a9a4a" font-style="italic">multiply</text>
+<path d="M370,205 L478,205" fill="none" stroke="#8a8a8a" stroke-width="1.6" marker-end="url(#ag)"/>
+<path d="M512,205 L556,205 L556,150" fill="none" stroke="#8a8a8a" stroke-width="1.6" marker-end="url(#ag)"/>
+
+
+<g id="e-judge">
+  <circle cx="563" cy="136" r="16" fill="#5b8fd6" stroke="#2f5fa8" stroke-width="2"/>
+  <path d="M556,136 h14 M563,129 v14" stroke="#fff" stroke-width="2.4"/>
+</g>
+<text x="534" y="130" font-size="12" fill="#4472c4" text-anchor="end" font-style="italic">Judge</text>
+<path d="M580,128 L596,118" stroke="#8a8a8a" stroke-width="1.6" marker-end="url(#ag)"/>
+
+
+<g id="e-attn">
+  <rect x="600" y="86" width="86" height="80" fill="#eef3ee" stroke="#a8c8a8"/>
+  <g fill="#6aa84f">
+    <rect x="610" y="96" width="11" height="11"/><rect x="646" y="100" width="11" height="11"/><rect x="668" y="92" width="11" height="11"/>
+    <rect x="616" y="124" width="11" height="11"/><rect x="650" y="132" width="11" height="11"/><rect x="666" y="144" width="11" height="11"/>
+    <rect x="606" y="148" width="11" height="11"/><rect x="632" y="150" width="11" height="11"/>
+  </g>
+</g>
+<text x="643" y="187" font-size="12" fill="#4a9a4a" text-anchor="middle">Attention layer with</text>
+<text x="643" y="202" font-size="13" fill="#4a9a4a" text-anchor="middle" font-style="italic" font-weight="bold">bigger TopK</text>
+
+
+<path d="M620,42 L620,84" fill="none" stroke="#8a8a8a" stroke-width="1.6" marker-end="url(#ag)"/>
+<path d="M620,42 L732,42" fill="none" stroke="#8a8a8a" stroke-width="1.6"/>
+<path d="M690,126 L712,126 L712,56" fill="none" stroke="#8a8a8a" stroke-width="1.6" marker-end="url(#ag)"/>
+
+
+<g id="e-add">
+  <circle cx="749" cy="47" r="18" fill="#fff" stroke="#333" stroke-width="2"/>
+  <path d="M731,47 h36 M749,29 v36" stroke="#333" stroke-width="2"/>
+  <text x="749" y="20" font-size="15" text-anchor="middle" fill="#222">add</text>
+</g>
+
+
+<g id="e-orange">
+  <rect x="716" y="82" width="70" height="86" fill="#f8cba6" stroke="#e0a26a"/>
+</g>
+<path d="M749,65 L749,80" stroke="#8a8a8a" stroke-width="1.6" marker-end="url(#ag)"/>
+
+
+<g id="e-unet">
+  <rect x="704" y="182" width="104" height="74" rx="6" fill="none" stroke="#e0a26a" stroke-dasharray="5 4"/>
+  <rect x="712" y="196" width="10" height="46" fill="#f8cba6" stroke="#e0a26a"/>
+  <rect x="726" y="190" width="14" height="58" rx="6" fill="#fff" stroke="#333"/>
+  <rect x="744" y="200" width="10" height="38" fill="#f8cba6" stroke="#e0a26a"/>
+  <rect x="757" y="206" width="10" height="26" fill="#f8cba6" stroke="#e0a26a"/>
+  <rect x="770" y="198" width="10" height="42" fill="#f8cba6" stroke="#e0a26a"/>
+  <rect x="783" y="190" width="10" height="58" fill="#f8cba6" stroke="#e0a26a"/>
+</g>
+<path d="M733,188 L733,172" stroke="#8a8a8a" stroke-width="1.6" marker-end="url(#ag)"/>
+<path d="M786,120 L800,120 L800,214 L795,214" fill="none" stroke="#8a8a8a" stroke-width="1.6" marker-end="url(#ag)"/>
+
+
+<g id="e-out">
+  <rect x="818" y="28" width="70" height="152" fill="url(#outg)" stroke="#555"/>
+  <ellipse cx="853" cy="120" rx="22" ry="30" fill="#6f7a52"/><circle cx="845" cy="108" r="3.5" fill="#f4f0c0"/><circle cx="861" cy="108" r="3.5" fill="#f4f0c0"/>
+  <path d="M836,96 L840,78 L848,92 z M870,96 L866,78 L858,92 z" fill="#6f7a52"/>
+</g>
+<path d="M853,196 L853,184" stroke="#8a8a8a" stroke-width="1.6" marker-end="url(#ag)"/>
+<path d="M812,214 L840,214 L840,198" fill="none" stroke="#8a8a8a" stroke-width="1.6" marker-end="url(#ag)"/>
+
+
+<rect x="2" y="24" width="172" height="76" fill="none" stroke="#ff1a1a" stroke-width="3.5" rx="4">
+  <animate attributeName="x" dur="20s" repeatCount="indefinite" calcMode="spline"
+    keyTimes="0;0.1;0.125;0.225;0.25;0.35;0.375;0.475;0.5;0.6;0.625;0.725;0.75;0.85;0.875;0.975;1"
+    values="2;2;2;2;284;284;284;284;414;414;496;496;596;596;700;700;2"
+    keySplines=".4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1"/>
+  <animate attributeName="y" dur="20s" repeatCount="indefinite" calcMode="spline"
+    keyTimes="0;0.1;0.125;0.225;0.25;0.35;0.375;0.475;0.5;0.6;0.625;0.725;0.75;0.85;0.875;0.975;1"
+    values="4;4;142;142;30;30;160;160;142;142;108;108;80;80;8;8;4"
+    keySplines=".4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1"/>
+  <animate attributeName="width" dur="20s" repeatCount="indefinite" calcMode="spline"
+    keyTimes="0;0.1;0.125;0.225;0.25;0.35;0.375;0.475;0.5;0.6;0.625;0.725;0.75;0.85;0.875;0.975;1"
+    values="172;172;172;172;248;248;248;248;116;116;88;88;96;96;192;192;172"
+    keySplines=".4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1"/>
+  <animate attributeName="height" dur="20s" repeatCount="indefinite" calcMode="spline"
+    keyTimes="0;0.1;0.125;0.225;0.25;0.35;0.375;0.475;0.5;0.6;0.625;0.725;0.75;0.85;0.875;0.975;1"
+    values="98;98;98;98;80;80;84;84;84;84;52;52;130;130;250;250;98"
+    keySplines=".4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1"/>
+</rect>
+<g font-size="12" fill="#ff1a1a" font-weight="bold">
+  <text x="8" y="112" opacity="0"><animate attributeName="opacity" dur="20s" repeatCount="indefinite" keyTimes="0;0.11;0.12;1" values="1;1;0;0"/>1 &#183; Content LoRA branch</text>
+  <text x="8" y="252" opacity="0"><animate attributeName="opacity" dur="20s" repeatCount="indefinite" keyTimes="0;0.124;0.125;0.235;0.245;1" values="0;0;1;1;0;0"/>2 &#183; Style LoRA branch</text>
+  <text x="288" y="124" opacity="0"><animate attributeName="opacity" dur="20s" repeatCount="indefinite" keyTimes="0;0.249;0.25;0.36;0.37;1" values="0;0;1;1;0;0"/>3 &#183; Sum TopK (content)</text>
+  <text x="288" y="252" opacity="0"><animate attributeName="opacity" dur="20s" repeatCount="indefinite" keyTimes="0;0.374;0.375;0.485;0.495;1" values="0;0;1;1;0;0"/>4 &#183; Sum TopK (style)</text>
+  <text x="414" y="236" opacity="0"><animate attributeName="opacity" dur="20s" repeatCount="indefinite" keyTimes="0;0.499;0.5;0.61;0.62;1" values="0;0;1;1;0;0"/>5 &#183; scale &#215; style sum</text>
+  <text x="470" y="100" opacity="0"><animate attributeName="opacity" dur="20s" repeatCount="indefinite" keyTimes="0;0.624;0.625;0.735;0.745;1" values="0;0;1;1;0;0"/>6 &#183; Judge selects</text>
+  <text x="596" y="222" opacity="0"><animate attributeName="opacity" dur="20s" repeatCount="indefinite" keyTimes="0;0.749;0.75;0.86;0.87;1" values="0;0;1;1;0;0"/>7 &#183; Attention, bigger TopK</text>
+  <text x="620" y="264" opacity="0"><animate attributeName="opacity" dur="20s" repeatCount="indefinite" keyTimes="0;0.874;0.875;0.985;0.995;1" values="0;0;1;1;0;0"/>8 &#183; add &#8594; diffusion UNet &#8594; output</text>
+</g>
+</svg>

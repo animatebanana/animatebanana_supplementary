@@ -1,0 +1,38 @@
+[
+  {
+    "step": 1,
+    "start": 0.0,
+    "end": 4.0,
+    "narration": "First, a 3D Gaussian Splatting scene is reconstructed from multi-view images and masks, allowing rendering of multi-view depth maps with the initial bear statue."
+  },
+  {
+    "step": 2,
+    "start": 4.0,
+    "end": 8.5,
+    "narration": "Next, using the rendered depth maps and input masks, background regions from neighboring views are projected into the reference view to geometrically infer an accurate depth-guided inpainting mask."
+  },
+  {
+    "step": 3,
+    "start": 8.5,
+    "end": 13.0,
+    "narration": "Then, the reference view is inpainted and lifted into a 3D point cloud via depth-guided projection, initializing the refined Gaussian splatting model without the bear."
+  },
+  {
+    "step": 4,
+    "start": 13.0,
+    "end": 17.5,
+    "narration": "The 3D point cloud is projected to other viewpoints, and the refined model renders novel views, enforced by a cross-view consistency loss L_cross."
+  },
+  {
+    "step": 5,
+    "start": 17.5,
+    "end": 22.0,
+    "narration": "Finally, reference views and depths are rendered from the model and compared against the inpainted reference using render loss L_render in an iterative refinement loop."
+  },
+  {
+    "step": 6,
+    "start": 22.0,
+    "end": 26.0,
+    "narration": "The entire pipeline synergizes depth-guided mask inference and multi-view consistency to achieve seamless 3D object removal and scene completion."
+  }
+]

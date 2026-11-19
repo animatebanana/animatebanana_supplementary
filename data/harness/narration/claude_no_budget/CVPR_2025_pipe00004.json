@@ -1,0 +1,16 @@
+[
+  {"step": 1, "start": 0.0, "end": 3.5, "narration": "We start with the captured data: K posed views of the scene, the RGB images I one through K, and alongside them the binary masks M one through K that mark the bear statue we want to remove."},
+  {"step": 2, "start": 3.5, "end": 7.0, "narration": "Those views are fitted into a 3D Gaussian Splatting scene, G one through N. At this point the statue is still part of the reconstruction."},
+  {"step": 3, "start": 7.0, "end": 10.5, "narration": "Rendering that scene from every camera gives the depth maps D one through K. This whole first stage is simply the Gaussians with the bear statue still in them."},
+  {"step": 4, "start": 10.5, "end": 14.0, "narration": "The second stage works out where to inpaint. Take two of the views: the reference view, image I one with mask M one, and a neighbouring view, image I two with mask M two."},
+  {"step": 5, "start": 14.0, "end": 17.5, "narration": "Applying each mask blacks the statue out of its own image, giving the background images I-B two and I-B one."},
+  {"step": 6, "start": 17.5, "end": 21.0, "narration": "Using the depth map D two, the blacked-out region of view two is projected into view one and merged with it, producing I-B one-two."},
+  {"step": 7, "start": 21.0, "end": 24.5, "narration": "What survives in both views is the region no camera can see behind the statue. Thresholding it yields M-prime one, the depth-guided inpainting mask."},
+  {"step": 8, "start": 24.5, "end": 28.0, "narration": "That mask is carried into the third stage. A 2D inpainter fills it in, giving the inpainted reference image I-In one and its inpainted depth D-In one."},
+  {"step": 9, "start": 28.0, "end": 31.5, "narration": "Depth-guided projection lifts those inpainted pixels back into 3D, producing the point cloud P one for the hole that the statue left behind."},
+  {"step": 10, "start": 31.5, "end": 35.0, "narration": "Reprojecting that point cloud into the remaining cameras gives the projected views I-P two through K, pseudo-ground-truth for every other viewpoint."},
+  {"step": 11, "start": 35.0, "end": 38.5, "narration": "The same point cloud also initializes new Gaussians, refining the scene into G-prime one through N-prime, now without the statue."},
+  {"step": 12, "start": 38.5, "end": 42.0, "narration": "Rendering the refined scene from the reference camera gives I-prime one and D-prime one, which the render loss compares against the inpainted image and depth."},
+  {"step": 13, "start": 42.0, "end": 45.5, "narration": "Rendering it from the other cameras gives I-prime two through K, which the cross loss compares against the projected views, keeping the fill consistent across viewpoints."},
+  {"step": 14, "start": 45.5, "end": 51.0, "narration": "Together the three stages run end to end: reconstruct the scene with the statue, infer a depth-guided inpainting mask, then refine the Gaussians under inpainting guidance until the statue is gone."}
+]

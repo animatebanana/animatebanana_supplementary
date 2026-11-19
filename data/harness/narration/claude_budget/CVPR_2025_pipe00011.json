@@ -1,0 +1,122 @@
+[
+  {
+    "step": 1,
+    "start": 0.0,
+    "end": 2.8,
+    "narration": "The pipeline has two stages. The Initializing Process, on the left, prepares a pre-trained 3D Gaussian Splatting model for watermarking."
+  },
+  {
+    "step": 2,
+    "start": 2.8,
+    "end": 5.6,
+    "narration": "It starts from the pre-trained 3D-GS model G-o. Its parameters are frozen, shown by the closed padlock in the corner."
+  },
+  {
+    "step": 3,
+    "start": 5.6,
+    "end": 8.4,
+    "narration": "That model is passed into Frequency Guided Densification, or FGD, the module that decides where Gaussians should be removed and where they should be added."
+  },
+  {
+    "step": 4,
+    "start": 8.4,
+    "end": 11.2,
+    "narration": "FGD runs in two phases. Phase 1 removes 3D Gaussians: each Gaussian is scored by its contribution to rendering quality, and the low-contribution ones, outlined with dashes, are pruned."
+  },
+  {
+    "step": 5,
+    "start": 11.2,
+    "end": 14.0,
+    "narration": "Phase 2 splits Gaussians in high frequency areas. Rendered views of the scene are first patchified into a regular grid of image patches."
+  },
+  {
+    "step": 6,
+    "start": 14.0,
+    "end": 16.8,
+    "narration": "Each patch is sent through a Discrete Fourier Transform, producing the frequency magnitude maps shown on the right."
+  },
+  {
+    "step": 7,
+    "start": 16.8,
+    "end": 19.6,
+    "narration": "High frequency content is detected by taking the Hadamard product of the transformed patch P-tilde with a quadratic mask Q that suppresses the low frequency centre."
+  },
+  {
+    "step": 8,
+    "start": 19.6,
+    "end": 22.4,
+    "narration": "The patches with the strongest high frequency response are selected, and the 3D Gaussians covering those regions are split into finer ones."
+  },
+  {
+    "step": 9,
+    "start": 22.4,
+    "end": 25.2,
+    "narration": "The result is the densified model, After FGD 3D-GS G-o-prime, still frozen but now with extra Gaussians concentrated in high frequency areas."
+  },
+  {
+    "step": 10,
+    "start": 25.2,
+    "end": 28.0,
+    "narration": "FGD also yields a gradient mask over the Gaussian attributes: mean, colour, scale, rotation and opacity. It marks which parameters are allowed to change."
+  },
+  {
+    "step": 11,
+    "start": 28.0,
+    "end": 30.8,
+    "narration": "During fine-tuning the mask is applied as a Hadamard product with the optimizer updates, so only the selected attributes of the unfrozen model are modified."
+  },
+  {
+    "step": 12,
+    "start": 30.8,
+    "end": 33.6,
+    "narration": "This produces the fine-tuned watermarked model, 3D-GS G-w. Its padlock is open, marking it as the trainable model."
+  },
+  {
+    "step": 13,
+    "start": 33.6,
+    "end": 36.4,
+    "narration": "The watermarked model is rendered into an image of the scene, shown by the red rendering arrow."
+  },
+  {
+    "step": 14,
+    "start": 36.4,
+    "end": 39.2,
+    "narration": "The rendered image goes through a Discrete Wavelet Transform, which separates it into a low frequency band and several high frequency sub-bands."
+  },
+  {
+    "step": 15,
+    "start": 39.2,
+    "end": 42.0,
+    "narration": "The high frequency sub-bands are where the message is embedded, so they are compared against the high frequency bands of the ground truth."
+  },
+  {
+    "step": 16,
+    "start": 42.0,
+    "end": 44.8,
+    "narration": "The low frequency band is fed to the pre-trained, frozen decoder, which recovers the decoded message."
+  },
+  {
+    "step": 17,
+    "start": 44.8,
+    "end": 47.6,
+    "narration": "Three losses supervise training. The reconstruction and LPIPS losses keep the rendered image close to the ground truth."
+  },
+  {
+    "step": 18,
+    "start": 47.6,
+    "end": 50.4,
+    "narration": "The wavelet loss L-w aligns the high frequency bands of the render with those of the ground truth."
+  },
+  {
+    "step": 19,
+    "start": 50.4,
+    "end": 53.2,
+    "narration": "The message loss L-m compares the decoded message with the fixed message that was supposed to be hidden."
+  },
+  {
+    "step": 20,
+    "start": 53.2,
+    "end": 56.0,
+    "narration": "All three are summed into L-total, which drives the optimizer. Its gradients, filtered by the gradient mask, update the watermarked 3D Gaussians, closing the loop."
+  }
+]

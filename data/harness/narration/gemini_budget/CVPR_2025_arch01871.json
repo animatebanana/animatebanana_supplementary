@@ -1,0 +1,38 @@
+[
+  {
+    "step": 1,
+    "start": 0.0,
+    "end": 4.0,
+    "narration": "The framework takes synchronized multimodal inputs consisting of RGB video frames capturing human motion and pressure sensor mat recordings capturing ground interaction over time."
+  },
+  {
+    "step": 2,
+    "start": 4.0,
+    "end": 8.0,
+    "narration": "Each input modality is processed through dedicated encoders followed by Local Spatio-temporal Attention Modules to extract enriched temporal feature representations."
+  },
+  {
+    "step": 3,
+    "start": 8.0,
+    "end": 12.0,
+    "narration": "Extracted visual and pressure features are integrated by the Fusion Cross-Attention Module, which feeds the fused multimodal representations into a regressor."
+  },
+  {
+    "step": 4,
+    "start": 12.0,
+    "end": 16.0,
+    "narration": "The regressor estimates body pose theta and global translation T to recover 3D joint locations J(theta, T) and 2D orthographic projections, supervised by corresponding pose, translation, 3D, and 2D losses."
+  },
+  {
+    "step": 5,
+    "start": 16.0,
+    "end": 20.0,
+    "narration": "The predicted 3D human meshes reconstruct continuous motion on the ground plane, guided by a contact loss with detailed body contact region modeling."
+  },
+  {
+    "step": 6,
+    "start": 20.0,
+    "end": 24.0,
+    "narration": "Finally, the internal architecture of the Fusion Cross-Attention Module is detailed below, employing pressure queries with image keys and values, followed by feed-forward layers and residual connections."
+  }
+]
